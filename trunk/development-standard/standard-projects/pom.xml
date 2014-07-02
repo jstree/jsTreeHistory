@@ -19,6 +19,7 @@
 	
 	<modules>
 		<module>project-templateWeb</module>
+		<module>project-templateMobile</module>
 	</modules>
 
 	<properties>
