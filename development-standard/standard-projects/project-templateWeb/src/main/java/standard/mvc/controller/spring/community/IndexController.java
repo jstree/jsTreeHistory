@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import standard.mvc.controller.GenericAbstractController;
 import standard.mvc.controller.GenericInterfaceController;
@@ -34,8 +35,20 @@ import standard.mvc.dao.hibernate.SearchSupport;
  *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
+
+/*
+depths => 풀URL ( 특이케이스 ) 규칙에서 어긋난
+depth0 => 사이트명 ( 하나의 컨텍스트에서도 여러사이트를 운용가능 ) ->
+depth1 => Spring,Struts 등 서블릿 컨텍스트 해당 URL
+depth2 => Mybatis, Hibernate 등 ORAM 해당 URL
+depth3 => 대메뉴
+depth4 => 중메뉴 ( 리퀘스트 맵핑에서 대/중/소 ) 구분하여 처리할것.
+depth5 => 소메뉴
+depth6 => 게시판번호 혹은 액션대상.
+depth7 => 액션처리(select,update,delete,insert)
+*/
 @Controller
-@RequestMapping(value = { "/spring" })
+@RequestMapping(value = { "/community/defaultMenuBig/defaultMenuMiddle/defaultMenuSmall/index" })	//siteCode + menu + target
 public class IndexController extends GenericAbstractController implements GenericInterfaceController<Object>{
 
 	/**
@@ -50,6 +63,12 @@ public class IndexController extends GenericAbstractController implements Generi
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public String test(){
+		this.getClass().getAnnotations();
+		
+		return "";
+	}
 
 	
 	/**
@@ -60,10 +79,13 @@ public class IndexController extends GenericAbstractController implements Generi
      * @exception Exception
     */
 	@Override
-	@RequestMapping(value = { "/communityIndex.do" })
+	@RequestMapping(value = { "/select.do" }, method = {RequestMethod.GET, RequestMethod.POST})	//action
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
 		// TODO Auto-generated method stub
-		return "/jsp/index";
+		String viewResolver = "/jsp";
+		String siteName = "/community";
+		String menuString = "/defaultMenuBig/defaultMenuMiddle/defaultMenuSmall";
+		return viewResolver + siteName + menuString + "/index";
 	}
 
 
