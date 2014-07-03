@@ -21,7 +21,7 @@ import standard.mvc.dao.hibernate.SearchSupport;
  * @since 2014.06.30
  */
 @Controller
-@RequestMapping(value = "/introduce", method = RequestMethod.POST)
+@RequestMapping(value = "/community/introduce/06runtime")
 public class RuntimeController extends GenericAbstractController implements GenericInterfaceController<Object> {
 
 	@Override
@@ -31,10 +31,15 @@ public class RuntimeController extends GenericAbstractController implements Gene
 	}
 
 	@Override
-	@RequestMapping(value = "/06runtime.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/select.do", method = RequestMethod.POST)
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
 		
-		return "/thymeleaf/page/06runtime";
+		String viewResolver = "/thymeleaf";
+		String site = "/community";
+		String menu = "/introduce";
+		String target = "/06runtime";
+		
+		return viewResolver + site + menu + target;
 	}
 
 	@Override

@@ -21,7 +21,7 @@ import standard.mvc.dao.hibernate.SearchSupport;
  * @since 2014.06.30
  */
 @Controller
-@RequestMapping(value = "/introduce", method = RequestMethod.POST)
+@RequestMapping(value = "/community/introduce/04version-compose")
 public class VersionComposeController extends GenericAbstractController implements GenericInterfaceController<Object> {
 
 	@Override
@@ -31,10 +31,15 @@ public class VersionComposeController extends GenericAbstractController implemen
 	}
 
 	@Override
-	@RequestMapping(value = "/04version-compose.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/select.do", method = RequestMethod.POST)
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
 		
-		return "/thymeleaf/page/04version-compose";
+		String viewResolver = "/thymeleaf";
+		String site = "/community";
+		String menu = "/introduce";
+		String target = "/04version-compose";
+		
+		return viewResolver + site + menu + target;
 	}
 
 	@Override
