@@ -48,7 +48,9 @@ depth6 => 게시판번호 혹은 액션대상.
 depth7 => 액션처리(select,update,delete,insert)
 */
 @Controller
-@RequestMapping(value = { "/community/defaultMenuBig/defaultMenuMiddle/defaultMenuSmall/index" })	//siteCode + menu + target
+@RequestMapping(value = { "/community/index" })	
+//community   /defaultMenuBig/defaultMenuMiddle/defaultMenuSmall   /index
+//siteCode + menu + targetController
 public class IndexController extends GenericAbstractController implements GenericInterfaceController<Object>{
 
 	/**
@@ -84,7 +86,7 @@ public class IndexController extends GenericAbstractController implements Generi
 		// TODO Auto-generated method stub
 		String viewResolver = "/jsp";
 		String siteName = "/community";
-		String menuString = "/defaultMenuBig/defaultMenuMiddle/defaultMenuSmall";
+		String menuString = "";
 		return viewResolver + siteName + menuString + "/index";
 	}
 
