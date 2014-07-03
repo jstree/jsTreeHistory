@@ -1,5 +1,5 @@
 package standard.mvc.controller.spring.community.introduce;
 
-public class Hardware {
+public class ComponentController {
 
 }

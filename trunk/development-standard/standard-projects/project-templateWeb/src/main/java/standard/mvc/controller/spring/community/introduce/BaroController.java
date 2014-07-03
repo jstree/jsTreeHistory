@@ -16,13 +16,13 @@ import standard.mvc.controller.GenericInterfaceController;
 import standard.mvc.dao.hibernate.SearchSupport;
 
 /**
- * 바로보드 소개 > 버젼별 구성 메뉴에 해당하는 컨트롤러
+ * 바로보드 소개 > 바로보드란? 메뉴에 해당하는 컨트롤러
  * @author 류강하
  * @since 2014.06.30
  */
 @Controller
-@RequestMapping(value = "/introduce", method = RequestMethod.POST)
-public class VersionCompose extends GenericAbstractController implements GenericInterfaceController<Object> {
+@RequestMapping(value = "/community/introduce/baro", method = RequestMethod.POST)
+public class BaroController extends GenericAbstractController implements GenericInterfaceController<Object> {
 
 	@Override
 	public Map<String, Map<String, Object>> bindTypes() {
@@ -31,10 +31,12 @@ public class VersionCompose extends GenericAbstractController implements Generic
 	}
 
 	@Override
-	@RequestMapping(value = "/04version-compose.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/select.do", method = RequestMethod.POST)
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
-		
-		return "/thymeleaf/page/04version-compose";
+		String viewResolver = "/thymeleaf";
+		String siteName = "/community";
+		String menuString = "/introduce";
+		return viewResolver + siteName + menuString + "/baro";
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import standard.mvc.dao.hibernate.SearchSupport;
  */
 @Controller
 @RequestMapping(value = "/introduce", method = RequestMethod.POST)
-public class Runtime extends GenericAbstractController implements GenericInterfaceController<Object> {
+public class RuntimeController extends GenericAbstractController implements GenericInterfaceController<Object> {
 
 	@Override
 	public Map<String, Map<String, Object>> bindTypes() {
