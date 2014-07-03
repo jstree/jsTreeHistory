@@ -21,7 +21,7 @@ import standard.mvc.dao.hibernate.SearchSupport;
  * @since 2014.06.30
  */
 @Controller
-@RequestMapping(value = "/community/introduce/baro", method = RequestMethod.POST)
+@RequestMapping(value = "/community/introduce/baro")
 public class BaroController extends GenericAbstractController implements GenericInterfaceController<Object> {
 
 	@Override
@@ -35,10 +35,11 @@ public class BaroController extends GenericAbstractController implements Generic
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
 		
 		String viewResolver = "/thymeleaf";
-		String siteName = "/community";
-		String menuString = "/introduce";
+		String site = "/community";
+		String menu = "/introduce";
+		String target = "/baro";
 		
-		return viewResolver + siteName + menuString + "/baro";
+		return viewResolver + site + menu + target;
 	}
 
 	@Override
