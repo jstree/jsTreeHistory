@@ -17,6 +17,7 @@ import standard.mvc.controller.GenericInterfaceController;
 import standard.mvc.dao.hibernate.SearchSupport;
 import standard.mvc.staticPage.logo.service.LogoService;
 import standard.mvc.staticPage.logo.vo.LogoVO;
+import standard.mvc.staticPage.section.service.SectionService;
 
 /**
  *  Class Name : TemplateMethodResolveViewSupporter.java
@@ -59,6 +60,9 @@ public class IndexController extends GenericAbstractController implements Generi
 	@Resource(name = "LogoService")
 	LogoService logoService;
 	
+	@Resource(name = "SectionService")
+	SectionService sectionService;
+	
 	/**
      * 이 함수는 본 클래스를 확장한 커스텀 뷰 리졸버로부터 값을 주입받는다
      * 이 주입값을 사용하여 컨트롤러로부터 넘어온 값이 확장한 클래스의 뷰 리졸버가 처리해야 하는지의 여부를 구분한다.
@@ -98,6 +102,7 @@ public class IndexController extends GenericAbstractController implements Generi
 		logoVO.setFileType("DEFAULT");
 		
 		modelMap.addAttribute("logo", logoService.getLogo(logoVO));
+		modelMap.addAttribute("section", sectionService.getSection());
 		
 		return viewResolver + siteName + menuString + "/index";
 	}
