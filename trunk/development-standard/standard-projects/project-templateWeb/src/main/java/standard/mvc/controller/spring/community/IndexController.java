@@ -2,6 +2,7 @@ package standard.mvc.controller.spring.community;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import standard.mvc.controller.GenericAbstractController;
 import standard.mvc.controller.GenericInterfaceController;
 import standard.mvc.dao.hibernate.SearchSupport;
+import standard.mvc.staticPage.logo.service.LogoService;
+import standard.mvc.staticPage.logo.vo.LogoVO;
 
 /**
  *  Class Name : TemplateMethodResolveViewSupporter.java
@@ -52,7 +55,10 @@ depth7 => 액션처리(select,update,delete,insert)
 //community   /defaultMenuBig/defaultMenuMiddle/defaultMenuSmall   /index
 //siteCode + menu + targetController
 public class IndexController extends GenericAbstractController implements GenericInterfaceController<Object>{
-
+	
+	@Resource(name = "LogoService")
+	LogoService logoService;
+	
 	/**
      * 이 함수는 본 클래스를 확장한 커스텀 뷰 리졸버로부터 값을 주입받는다
      * 이 주입값을 사용하여 컨트롤러로부터 넘어온 값이 확장한 클래스의 뷰 리졸버가 처리해야 하는지의 여부를 구분한다.
@@ -87,6 +93,12 @@ public class IndexController extends GenericAbstractController implements Generi
 		String viewResolver = "/jsp";
 		String siteName = "/community";
 		String menuString = "";
+		
+		LogoVO logoVO = new LogoVO();
+		logoVO.setFileType("DEFAULT");
+		
+		modelMap.addAttribute("logo", logoService.getLogo(logoVO));
+		
 		return viewResolver + siteName + menuString + "/index";
 	}
 
