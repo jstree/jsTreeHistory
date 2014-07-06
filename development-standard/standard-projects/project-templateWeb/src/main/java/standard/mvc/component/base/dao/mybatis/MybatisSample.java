@@ -1,4 +1,4 @@
-package standard.mvc.dao.mybatis;
+package standard.mvc.component.base.dao.mybatis;
 
 import standard.mvc.dao.GenericInterfaceDao;
 

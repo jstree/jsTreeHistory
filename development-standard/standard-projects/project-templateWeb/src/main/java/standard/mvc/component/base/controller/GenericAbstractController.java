@@ -17,7 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
-import standard.mvc.dao.hibernate.SearchSupport;
+import standard.mvc.component.base.dao.hibernate.SearchSupport;
 import standard.mvc.manager.messageSource.MessageSupport;
 import standard.mvc.util.Paginator;
 import standard.mvc.util.StringUtils;

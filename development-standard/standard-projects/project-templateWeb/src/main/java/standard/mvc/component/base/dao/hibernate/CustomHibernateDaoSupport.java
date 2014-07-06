@@ -1,4 +1,4 @@
-package standard.mvc.dao.hibernate;
+package standard.mvc.component.base.dao.hibernate;
 
 
 import java.io.ByteArrayInputStream;
