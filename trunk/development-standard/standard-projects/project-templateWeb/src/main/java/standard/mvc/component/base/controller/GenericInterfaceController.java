@@ -1,4 +1,4 @@
-package standard.mvc.controller;
+package standard.mvc.component.base.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 
-import standard.mvc.controller.spring.RequestAttribute;
 import standard.mvc.dao.hibernate.SearchSupport;
 
 public interface GenericInterfaceController<T> {

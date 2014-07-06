@@ -1,4 +1,4 @@
-package standard.mvc.controller.spring.community.rss;
+package standard.mvc.component.rss.controller;
 
 import java.io.IOException;
 import java.net.URL;

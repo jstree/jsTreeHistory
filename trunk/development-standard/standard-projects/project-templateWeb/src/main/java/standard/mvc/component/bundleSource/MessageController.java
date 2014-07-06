@@ -1,4 +1,4 @@
-package standard.mvc.controller.bundleSource;
+package standard.mvc.component.bundleSource;
 
 import java.util.Locale;
 
