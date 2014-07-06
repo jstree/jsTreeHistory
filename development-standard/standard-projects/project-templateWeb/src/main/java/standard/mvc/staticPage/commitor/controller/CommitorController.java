@@ -35,11 +35,10 @@ public class CommitorController extends GenericAbstractController implements
 
 		String viewResolver = "/thymeleaf";
 		String site = "/community";
-		String menu = "/introduce";
+		String menu = "/staticPage/commitor";
 		String target = "/15commitor";
 
-		return viewResolver + site + menu + target
-				;
+		return viewResolver + site + menu + target;
 	}
 
 	@Override
