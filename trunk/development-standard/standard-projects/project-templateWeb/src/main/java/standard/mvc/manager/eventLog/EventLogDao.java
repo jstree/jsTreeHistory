@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Repository;
 
-import standard.mvc.dao.hibernate.CustomHibernateDaoSupport;
+import standard.mvc.component.base.dao.hibernate.CustomHibernateDaoSupport;
 
 
 @Repository

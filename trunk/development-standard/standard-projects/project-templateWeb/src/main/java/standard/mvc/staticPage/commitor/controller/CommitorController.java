@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
 import standard.mvc.component.base.controller.GenericInterfaceController;
-import standard.mvc.dao.hibernate.SearchSupport;
+import standard.mvc.component.base.dao.hibernate.SearchSupport;
 
 /**
  * 바로보드 소개 > 커미터 메뉴에 해당하는 컨트롤러
