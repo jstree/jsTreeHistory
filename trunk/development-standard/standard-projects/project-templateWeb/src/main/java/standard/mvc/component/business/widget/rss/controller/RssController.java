@@ -1,4 +1,4 @@
-package standard.mvc.component.rss.controller;
+package standard.mvc.component.business.widget.rss.controller;
 
 import java.io.IOException;
 import java.net.URL;
