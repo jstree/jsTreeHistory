@@ -1,4 +1,4 @@
-package standard.mvc.controller.spring.community;
+package standard.mvc.component.base.controller.spring;
 
 import java.util.Map;
 
@@ -12,8 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import standard.mvc.controller.GenericAbstractController;
-import standard.mvc.controller.GenericInterfaceController;
+import standard.mvc.component.base.controller.GenericAbstractController;
+import standard.mvc.component.base.controller.GenericInterfaceController;
 import standard.mvc.dao.hibernate.SearchSupport;
 import standard.mvc.staticPage.logo.service.LogoService;
 import standard.mvc.staticPage.logo.vo.LogoVO;

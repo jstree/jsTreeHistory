@@ -1,4 +1,4 @@
-package standard.mvc.controller;
+package standard.mvc.component.base.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;

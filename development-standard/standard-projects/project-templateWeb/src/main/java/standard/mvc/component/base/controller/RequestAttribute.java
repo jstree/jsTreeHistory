@@ -1,4 +1,4 @@
-package standard.mvc.controller.spring;
+package standard.mvc.component.base.controller;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

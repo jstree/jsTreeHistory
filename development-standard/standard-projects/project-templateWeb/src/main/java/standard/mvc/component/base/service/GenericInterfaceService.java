@@ -1,4 +1,4 @@
-package standard.mvc.service;
+package standard.mvc.component.base.service;
 
 import java.util.List;
 

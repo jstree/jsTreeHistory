@@ -11,8 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import standard.mvc.controller.GenericAbstractController;
-import standard.mvc.controller.GenericInterfaceController;
+import standard.mvc.component.base.controller.GenericAbstractController;
+import standard.mvc.component.base.controller.GenericInterfaceController;
 import standard.mvc.dao.hibernate.SearchSupport;
 
 @Controller
