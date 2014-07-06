@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import standard.mvc.component.base.dao.hibernate.SearchSupport;
-import standard.mvc.manager.messageSource.MessageSupport;
+import standard.mvc.component.manager.messageSource.MessageSupport;
 import standard.mvc.util.StringUtils;
 
 

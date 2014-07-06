@@ -47,11 +47,11 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.util.ArrayUtils;
 
-import standard.mvc.manager.interceptor.RequestHandlerInterceptor;
-import standard.mvc.manager.viewResolver.CustomFreemarkerViewResolver;
-import standard.mvc.manager.viewResolver.CustomInternalResourceViewResolver;
-import standard.mvc.manager.viewResolver.CustomThymeleafViewResolver;
-import standard.mvc.manager.viewResolver.SpecialPurposeViewResolver;
+import standard.mvc.component.manager.interceptor.RequestHandlerInterceptor;
+import standard.mvc.component.manager.viewResolver.CustomFreemarkerViewResolver;
+import standard.mvc.component.manager.viewResolver.CustomInternalResourceViewResolver;
+import standard.mvc.component.manager.viewResolver.CustomThymeleafViewResolver;
+import standard.mvc.component.manager.viewResolver.SpecialPurposeViewResolver;
 
 /*
 @Configuration : 현재 @Configuration 선언된 클래스 현재 소스상 

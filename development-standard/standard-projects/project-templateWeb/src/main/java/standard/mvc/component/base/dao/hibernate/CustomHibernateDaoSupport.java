@@ -31,9 +31,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import standard.mvc.manager.eventLog.EventLogManager;
-import standard.mvc.manager.eventLog.LogSupport;
-import standard.mvc.manager.eventLog.LogSupportActionType;
+import standard.mvc.component.manager.eventLog.EventLogManager;
+import standard.mvc.component.manager.eventLog.LogSupport;
+import standard.mvc.component.manager.eventLog.LogSupportActionType;
 
 @SuppressWarnings("unchecked")
 public abstract class CustomHibernateDaoSupport<T, ID extends Serializable> extends HibernateDaoSupport {
