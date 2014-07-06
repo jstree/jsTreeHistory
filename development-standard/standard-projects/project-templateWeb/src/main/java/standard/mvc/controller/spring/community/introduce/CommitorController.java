@@ -22,7 +22,7 @@ import standard.mvc.dao.hibernate.SearchSupport;
  * @since 2014.07.04
  */
 
-@Controller
+//@Controller
 @RequestMapping(value = "/community/introduce/15commitor")
 public class CommitorController extends GenericAbstractController implements
 		GenericInterfaceController<Object> {
