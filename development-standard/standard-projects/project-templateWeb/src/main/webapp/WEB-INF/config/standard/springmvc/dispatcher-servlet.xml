@@ -83,7 +83,7 @@
 	</bean>
 
 	<bean id="freemarkerViewResolver"
-		class="standard.mvc.manager.viewResolver.CustomFreemarkerViewResolver">
+		class="standard.mvc.component.manager.viewResolver.CustomFreemarkerViewResolver">
 		<property name="cache" value="true" />
 		<property name="contentType" value="text/html; charset=UTF-8" />
 		<property name="prefix" value="" />
@@ -110,7 +110,7 @@
 	</bean>
 
 	<bean id="velocityViewResolver"
-		class="standard.mvc.manager.viewResolver.CustomVelocityViewResolver">
+		class="standard.mvc.component.manager.viewResolver.CustomVelocityViewResolver">
 		<property name="cache" value="true" />
 		<property name="prefix" value="" />
 		<property name="suffix" value=".vm" />
@@ -121,7 +121,7 @@
 	</bean>
 
 	<bean id="specialPurposeViewResolver"
-		class="standard.mvc.manager.viewResolver.SpecialPurposeViewResolver">
+		class="standard.mvc.component.manager.viewResolver.SpecialPurposeViewResolver">
 		<property name="order" value="2"></property>
 	</bean>
 
@@ -129,7 +129,7 @@
 		class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
 		<property name="order" value="1"></property>
 	</bean>
-	<bean id="urlBasedViewResolver" class="standard.mvc.manager.viewResolver.CustomEgovUrlBasedViewResolver" p:order="0" 
+	<bean id="urlBasedViewResolver" class="standard.mvc.component.manager.viewResolver.CustomEgovUrlBasedViewResolver" p:order="0" 
     p:viewClass="org.springframework.web.servlet.view.JstlView" 
     p:prefix="/WEB-INF/jsp/egovframework/example/" p:suffix=".jsp"/>
 
