@@ -76,7 +76,7 @@
 
 	<!-- interceptor -->
 	<bean id="requestHandlerInterceptor"
-		class="standard.mvc.manager.interceptor.RequestHandlerInterceptor">
+		class="standard.mvc.component.manager.interceptor.RequestHandlerInterceptor">
 	</bean>
 	
 	<!-- for JFile -->	  

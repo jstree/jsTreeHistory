@@ -16,7 +16,7 @@
 		</property>
 	</bean> 
 	-->
-	<bean id="messageSource" class="standard.mvc.manager.messageSource.CustomReloadableResourceBundleMessageSource">
+	<bean id="messageSource" class="standard.mvc.component.manager.messageSource.CustomReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>
             	<value>classpath:/egovframework/message/message-common</value>
