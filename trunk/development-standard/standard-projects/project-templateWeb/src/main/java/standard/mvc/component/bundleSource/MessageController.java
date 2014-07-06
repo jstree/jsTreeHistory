@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.util.WebUtils;
 
-import standard.mvc.manager.messageSource.CustomReloadableResourceBundleMessageSource;
-import standard.mvc.manager.messageSource.MessageSupport;
+import standard.mvc.component.manager.messageSource.CustomReloadableResourceBundleMessageSource;
+import standard.mvc.component.manager.messageSource.MessageSupport;
 
 @Controller
 @RequestMapping(value = { "/bundle" })

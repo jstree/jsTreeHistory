@@ -7,15 +7,15 @@ import org.springframework.core.Ordered;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.AbstractCachingViewResolver;
 
-import standard.mvc.manager.viewResolver.specialPurposeView.CloseDialogView;
-import standard.mvc.manager.viewResolver.specialPurposeView.CsvView;
-import standard.mvc.manager.viewResolver.specialPurposeView.ExitView;
-import standard.mvc.manager.viewResolver.specialPurposeView.FileDownloadView;
-import standard.mvc.manager.viewResolver.specialPurposeView.ImageView;
-import standard.mvc.manager.viewResolver.specialPurposeView.JSONView;
-import standard.mvc.manager.viewResolver.specialPurposeView.MessageShowView;
-import standard.mvc.manager.viewResolver.specialPurposeView.NullView;
-import standard.mvc.manager.viewResolver.specialPurposeView.UploadMaxErrorView;
+import standard.mvc.component.manager.viewResolver.specialPurposeView.CloseDialogView;
+import standard.mvc.component.manager.viewResolver.specialPurposeView.CsvView;
+import standard.mvc.component.manager.viewResolver.specialPurposeView.ExitView;
+import standard.mvc.component.manager.viewResolver.specialPurposeView.FileDownloadView;
+import standard.mvc.component.manager.viewResolver.specialPurposeView.ImageView;
+import standard.mvc.component.manager.viewResolver.specialPurposeView.JSONView;
+import standard.mvc.component.manager.viewResolver.specialPurposeView.MessageShowView;
+import standard.mvc.component.manager.viewResolver.specialPurposeView.NullView;
+import standard.mvc.component.manager.viewResolver.specialPurposeView.UploadMaxErrorView;
 
 public class SpecialPurposeViewResolver extends AbstractCachingViewResolver implements Ordered {
     private int order;

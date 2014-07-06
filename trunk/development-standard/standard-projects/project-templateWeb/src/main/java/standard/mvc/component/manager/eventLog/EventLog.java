@@ -18,7 +18,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.context.ApplicationContext;
 
-import standard.mvc.manager.viewResolver.specialPurposeView.CsvViewForLog;
+import standard.mvc.component.manager.viewResolver.specialPurposeView.CsvViewForLog;
 import standard.mvc.util.Text;
 
 
