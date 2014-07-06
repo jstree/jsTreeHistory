@@ -31,7 +31,7 @@ public class BaroController extends GenericAbstractController implements Generic
 	}
 
 	@Override
-	@RequestMapping(value = "/select.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/select.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
 		
 		String viewResolver = "/thymeleaf";
