@@ -115,6 +115,7 @@
         <error-code>500</error-code>
         <location>/common/error.jsp</location>
     </error-page>
+    <!-- 
 	<filter>
         <filter-name>LoginPolicyFilter</filter-name>
         <filter-class>egovframework.com.uat.uap.filter.EgovLoginPolicyFilter</filter-class>
@@ -155,4 +156,5 @@
 	<listener>
         <listener-class>org.springframework.security.ui.session.HttpSessionEventPublisher</listener-class>
     </listener>
+     -->
 </web-app>
