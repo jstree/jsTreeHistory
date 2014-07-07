@@ -1,4 +1,4 @@
-package standard.mvc.component.bundleSource;
+package standard.mvc.component.business.widget.rss.controller.staticResources.controller;
 
 import java.util.Locale;
 
