@@ -19,7 +19,7 @@ import standard.mvc.component.base.dao.hibernate.SearchSupport;
 @RequestMapping(value = { "/community/introduce/runtime" })	
 public class RuntimeController extends GenericAbstractController implements GenericInterfaceController<Object> {
 	
-	//web -> Source -> Html -> jsp -> comm
+	//nas Directory : web -> Source -> Html -> jsp -> community -> sttaticPage/runtime/(Target 파일)
 	@Override
 	@RequestMapping(value = { "/select.do" }, method = {RequestMethod.GET, RequestMethod.POST})	//action
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
@@ -29,7 +29,9 @@ public class RuntimeController extends GenericAbstractController implements Gene
 		String viewResolver = "/thymeleaf";
 		String siteName = "/community";
 		String menuString = "/staticPage/runtime";
-		return viewResolver + siteName + menuString + "/06runtime";
+		String target = "/runtime";
+		return viewResolver + siteName + menuString + target;
+		//return viewResolver + siteName + menuString + "/06runtime";
 	}
 
 	@Override
