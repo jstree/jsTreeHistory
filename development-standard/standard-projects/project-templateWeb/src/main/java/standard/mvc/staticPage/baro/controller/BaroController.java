@@ -16,9 +16,22 @@ import standard.mvc.component.base.controller.GenericInterfaceController;
 import standard.mvc.component.base.dao.hibernate.SearchSupport;
 
 /**
- * 바로보드 소개 > 바로보드란? 메뉴에 해당하는 컨트롤러
- * @author 류강하
- * @since 2014.06.30
+ *  Class Name : BaroController.java<br />
+ *  Description : 바로보드 소개 > 바로보드란? 메뉴에 해당하는 컨트롤러 클래스<br />
+ *  @author 류강하
+ *  @since 2014.06.30
+ *  @version 1.0
+ *  @see
+ *
+ *  <pre>
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014.07.08    류강하      주석을 형식에 맞게 수정하고...
+ *
+ *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
+ * </pre>
  */
 @Controller
 @RequestMapping(value = "/community/introduce/baro")
@@ -34,12 +47,12 @@ public class BaroController extends GenericAbstractController implements Generic
 	@RequestMapping(value = "/select.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
 		
-		String viewResolver = "/thymeleaf";
-		String site = "/community";
-		String menu = "/staticPage/baro";
-		String target = "/baro";
+		String viewResolverName = "/thymeleaf";
+		String siteName = "/community";
+		String menuName = "/staticPage/baro";
+		String pageName = "/baro";
 		
-		return viewResolver + site + menu + target;
+		return viewResolverName + siteName + menuName + pageName;
 	}
 
 	@Override
