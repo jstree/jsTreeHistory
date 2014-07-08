@@ -1,4 +1,4 @@
-package standard.mvc.util;
+package standard.mvc.component.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

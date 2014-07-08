@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import standard.mvc.component.base.dao.hibernate.SearchSupport;
 import standard.mvc.component.manager.messageSource.MessageSupport;
-import standard.mvc.util.StringUtils;
+import standard.mvc.component.util.StringUtils;
 
 
 @Component

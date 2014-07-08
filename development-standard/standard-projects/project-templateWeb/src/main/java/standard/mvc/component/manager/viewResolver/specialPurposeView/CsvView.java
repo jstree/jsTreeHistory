@@ -15,7 +15,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.util.WebUtils;
 
-import standard.mvc.util.DateUtils;
+import standard.mvc.component.util.DateUtils;
 
 
 public class CsvView extends AbstractView {

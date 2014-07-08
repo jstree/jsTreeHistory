@@ -1,4 +1,4 @@
-package standard.mvc.util;
+package standard.mvc.component.util;
 
 
 import java.text.DateFormat;

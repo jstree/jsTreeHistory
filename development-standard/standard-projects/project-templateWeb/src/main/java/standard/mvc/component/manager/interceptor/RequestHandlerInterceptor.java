@@ -16,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import standard.mvc.util.DateUtils;
-import standard.mvc.util.StringUtils;
+import standard.mvc.component.util.DateUtils;
+import standard.mvc.component.util.StringUtils;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.TemplateHashModel;
 
