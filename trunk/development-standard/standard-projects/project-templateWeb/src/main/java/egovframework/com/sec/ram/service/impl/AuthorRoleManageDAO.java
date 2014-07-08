@@ -46,7 +46,7 @@ public class AuthorRoleManageDAO extends EgovComAbstractDAO {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<AuthorRoleManageVO> selectAuthorRoleList(AuthorRoleManageVO authorRoleManageVO) throws Exception {
-		return list("authorRoleManageDAO.selectAuthorRoleList", authorRoleManageVO);
+		return (List<AuthorRoleManageVO>) list("authorRoleManageDAO.selectAuthorRoleList", authorRoleManageVO);
 	}
 	
 	/**

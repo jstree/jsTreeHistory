@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import egovframework.com.cmm.LoginVO;
-import egovframework.com.sec.security.userdetails.EgovUserDetails;
-import egovframework.com.sec.security.userdetails.jdbc.EgovUsersByUsernameMapping;
+import egovframework.rte.fdl.security.userdetails.EgovUserDetails;
+import egovframework.rte.fdl.security.userdetails.jdbc.EgovUsersByUsernameMapping;
 
 /**
  * mapRow 결과를 사용자 EgovUserDetails Object 에 정의한다.
@@ -47,7 +47,7 @@ public class EgovSessionMapping extends EgovUsersByUsernameMapping {
 	 * @exception SQLException
 	 */
 	@Override
-    protected Object mapRow(ResultSet rs, int rownum) throws SQLException {
+    protected EgovUserDetails mapRow(ResultSet rs, int rownum) throws SQLException {
     	logger.debug("## EgovUsersByUsernameMapping mapRow ##");
 
         String strUserId    = rs.getString("user_id");

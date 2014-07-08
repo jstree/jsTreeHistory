@@ -36,7 +36,7 @@ public class AuthorManageDAO extends EgovComAbstractDAO {
 	 */
     @SuppressWarnings("unchecked")
 	public List<AuthorManageVO> selectAuthorList(AuthorManageVO authorManageVO) throws Exception {
-        return list("authorManageDAO.selectAuthorList", authorManageVO);
+        return (List<AuthorManageVO>) list("authorManageDAO.selectAuthorList", authorManageVO);
     }
 	
 	/**
@@ -94,6 +94,6 @@ public class AuthorManageDAO extends EgovComAbstractDAO {
 	 */
     @SuppressWarnings("unchecked")
 	public List<AuthorManageVO> selectAuthorAllList(AuthorManageVO authorManageVO) throws Exception {
-        return list("authorManageDAO.selectAuthorAllList", authorManageVO);
+        return (List<AuthorManageVO>) list("authorManageDAO.selectAuthorAllList", authorManageVO);
     }    
 }

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
-import egovframework.com.sec.security.userdetails.EgovUserDetails;
 
 /**
  * 개요
@@ -32,7 +31,7 @@ public class EgovLoginSesionCeckUtil {
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		user.setUrl("");
 		user.setUrl(url);
-		new EgovUserDetails(user.getId(), user.getPassword(), true, user);
+		//new EgovUserDetails(user.getId(), user.getPassword(), true, user);
 	}
 
 	/**
