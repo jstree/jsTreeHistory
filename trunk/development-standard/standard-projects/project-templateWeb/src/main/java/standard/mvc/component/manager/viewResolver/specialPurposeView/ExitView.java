@@ -13,7 +13,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.util.WebUtils;
 
-import standard.mvc.util.StringUtils;
+import standard.mvc.component.util.StringUtils;
 
 
 public class ExitView extends AbstractView {

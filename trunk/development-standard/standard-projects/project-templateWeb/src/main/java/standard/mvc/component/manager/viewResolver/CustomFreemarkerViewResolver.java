@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
-import standard.mvc.util.StringUtils;
+import standard.mvc.component.util.StringUtils;
 
 public class CustomFreemarkerViewResolver extends FreeMarkerViewResolver {
 

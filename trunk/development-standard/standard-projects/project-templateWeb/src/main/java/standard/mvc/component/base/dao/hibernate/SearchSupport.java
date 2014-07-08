@@ -13,7 +13,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Restrictions;
 
-import standard.mvc.util.StringUtils;
+import standard.mvc.component.util.StringUtils;
 
 
 public class SearchSupport {
