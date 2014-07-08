@@ -16,10 +16,22 @@ import standard.mvc.component.base.controller.GenericInterfaceController;
 import standard.mvc.component.base.dao.hibernate.SearchSupport;
 
 /**
- * 바로보드 소개 > 커미터 메뉴에 해당하는 컨트롤러
- * 
- * @author 이종렬
- * @since 2014.07.04
+ *  Class Name : BaroController.java<br />
+ *  Description : 바로보드 소개 > 커미터 메뉴에 해당하는 컨트롤러 클래스<br />
+ *  @author 이종렬
+ *  @since 2014.07.08
+ *  @version 1.0
+ *  @see
+ *
+ *  <pre>
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014.07.08     이종렬      		주석 수정, method GET 추가
+ *
+ *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
+ * </pre>
  */
 
 @Controller
@@ -28,17 +40,17 @@ public class CommitorController extends GenericAbstractController implements
 		GenericInterfaceController<Object> {
 
 	@Override
-	@RequestMapping(value = "/select.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/select.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response,
 			BindingResult bindingResult, Object parameterBean) {
 
 		String viewResolver = "/thymeleaf";
-		String site = "/community";
-		String menu = "/staticPage/commitor";
-		String target = "/15commitor";
+		String siteName = "/community";
+		String menuName = "/staticPage/commitor";
+		String targetName = "/15commitor";
 
-		return viewResolver + site + menu + target;
+		return viewResolver + siteName + menuName + targetName;
 	}
 
 	@Override
