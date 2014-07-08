@@ -1,18 +1,10 @@
 package egovframework.com.sec.ram.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.security.Authentication;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.context.SecurityContext;
-import org.springframework.security.context.SecurityContextHolder;
-
 import egovframework.com.cmm.service.EgovUserDetailsService;
-import egovframework.com.sec.security.userdetails.EgovUserDetails;
 import egovframework.rte.fdl.cmmn.AbstractServiceImpl;
-import egovframework.rte.fdl.string.EgovObjectUtil;
-
+import egovframework.rte.fdl.security.userdetails.util.EgovUserDetailsHelper;
 
 
 public class EgovUserDetailsSecurityServiceImpl extends AbstractServiceImpl implements EgovUserDetailsService {
@@ -23,28 +15,15 @@ public class EgovUserDetailsSecurityServiceImpl extends AbstractServiceImpl impl
 	 * @return Object - 사용자 ValueObject
 	 */
 	public Object getAuthenticatedUser() {
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authentication = context.getAuthentication();
 		
-		if (EgovObjectUtil.isNull(authentication)) {
-			// log.debug("## authentication object is null!!");
-			return null;
+		// 이 메소드의 경우 인증이 되지 않더라고 null을 리턴하지 않기 때문에 
+		// 명시적으로 인증되지 않은 경우 null을 리턴하도록 수정함
+		
+		if (EgovUserDetailsHelper.isAuthenticated()) {
+			return EgovUserDetailsHelper.getAuthenticatedUser();	
 		}
 		
-		Object principal = authentication.getPrincipal();
-		
-		if(principal instanceof EgovUserDetails){
-			
-			// log.debug("## EgovUserDetailsHelper.getAuthenticatedUser : AuthenticatedUser is " + details.getUsername());			
-			EgovUserDetails details = (EgovUserDetails)principal;
-			return details.getEgovUserVO();
-			
-		}else{
-			// log.debug("## EgovUserDetailsHelper.getAuthenticatedUser : principal is not type of EgovUserDetails);
-			return null;
-		}
-
-		
+		return null;
 	}
 
 	
@@ -54,25 +33,7 @@ public class EgovUserDetailsSecurityServiceImpl extends AbstractServiceImpl impl
 	 * @return List - 사용자 권한정보 목록
 	 */
 	public List<String> getAuthorities() {
-		List<String> listAuth = new ArrayList<String>();
-		
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authentication = context.getAuthentication();
-		
-		if (EgovObjectUtil.isNull(authentication)) {
-			// log.debug("## authentication object is null!!");
-			return null;
-		}
-		
-		GrantedAuthority[] authorities = authentication.getAuthorities();
-
-		for (int i = 0; i < authorities.length; i++) {
-			listAuth.add(authorities[i].getAuthority());
-
-			// log.debug("## EgovUserDetailsHelper.getAuthorities : Authority is " + authorities[i].getAuthority());
-		}
-
-		return listAuth;
+		return EgovUserDetailsHelper.getAuthorities();
 	}
 	
 	/**
@@ -81,23 +42,7 @@ public class EgovUserDetailsSecurityServiceImpl extends AbstractServiceImpl impl
 	 */
 
 	public Boolean isAuthenticated() {
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authentication = context.getAuthentication();
-		
-		if (EgovObjectUtil.isNull(authentication)) {
-			// log.debug("## authentication object is null!!");
-			return Boolean.FALSE;
-		}
-		
-		String username = authentication.getName();
-		if (username.equals("roleAnonymous")) {
-			// log.debug("## username is " + username);
-			return Boolean.FALSE;
-		}
-
-		Object principal = authentication.getPrincipal();
-		
-		return Boolean.valueOf(!EgovObjectUtil.isNull(principal));
+		return EgovUserDetailsHelper.isAuthenticated();
 	}
 
 }
