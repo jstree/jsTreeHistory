@@ -1,4 +1,4 @@
-package standard.mvc.component.business.widget.rss.controller.staticResources.controller;
+package standard.mvc.component.business.resources.controller;
 
 import java.util.Locale;
 
