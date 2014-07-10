@@ -149,4 +149,6 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 //        modelAndView.addObject("deviceType", deviceType); // VTN
 //        modelAndView.addObject("currentUrl", url.getFile());
     }
+    
+    
 }
