@@ -82,11 +82,12 @@ public class IndexController extends GenericAbstractController implements Generi
      * @exception Exception
     */
 	@Override
-	@RequestMapping(value = { "/select.do" }, method = {RequestMethod.GET, RequestMethod.POST})	//action
+	@RequestMapping(value = { "/select.do" }, 
+	  method = { RequestMethod.GET, RequestMethod.POST })
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean,
-			Object... objects) {
+			BindingResult bindingResult, Object parameterBean) {
+		// TODO Auto-generated method stub
 		String viewResolver = "/jsp";
 		String siteName = "/community";
 		String menuString = "";
@@ -97,8 +98,7 @@ public class IndexController extends GenericAbstractController implements Generi
 	@Override
 	public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean,
-			Object... objects) {
+			BindingResult bindingResult, Object parameterBean) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -106,8 +106,7 @@ public class IndexController extends GenericAbstractController implements Generi
 	@Override
 	public String invokeUpdate(SearchSupport searchSupport, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean,
-			Object... objects) {
+			BindingResult bindingResult, Object parameterBean) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -115,8 +114,7 @@ public class IndexController extends GenericAbstractController implements Generi
 	@Override
 	public String invokeDelete(SearchSupport searchSupport, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean,
-			Object... objects) {
+			BindingResult bindingResult, Object parameterBean) {
 		// TODO Auto-generated method stub
 		return null;
 	}

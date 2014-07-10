@@ -12,8 +12,8 @@ import standard.mvc.component.base.dao.hibernate.SearchSupport;
 public interface GenericInterfaceController<T> {
 
 	
-	public String invokeSelect(@RequestAttribute("searchSupport") SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, T parameterBean, @PathVariable Object... objects );
-	public String invokeInsert(@RequestAttribute("searchSupport") SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, T parameterBean, @PathVariable Object... objects);
-	public String invokeUpdate(@RequestAttribute("searchSupport") SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, T parameterBean, @PathVariable Object... objects);
-	public String invokeDelete(@RequestAttribute("searchSupport") SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, T parameterBean, @PathVariable Object... objects);
+	public String invokeSelect(@RequestAttribute("searchSupport") SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, T parameterBean);
+	public String invokeInsert(@RequestAttribute("searchSupport") SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, T parameterBean);
+	public String invokeUpdate(@RequestAttribute("searchSupport") SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, T parameterBean);
+	public String invokeDelete(@RequestAttribute("searchSupport") SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, T parameterBean);
 }

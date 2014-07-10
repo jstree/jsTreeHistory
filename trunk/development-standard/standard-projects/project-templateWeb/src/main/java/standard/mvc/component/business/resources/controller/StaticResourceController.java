@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -45,8 +46,7 @@ import standard.mvc.component.base.dao.hibernate.SearchSupport;
 @RequestMapping(value = { "/static" })
 // community /defaultMenuBig/defaultMenuMiddle/defaultMenuSmall /index
 // siteCode + menu + targetController
-public class StaticResourceController extends GenericAbstractController
-		implements GenericInterfaceController<Object> {
+public class StaticResourceController extends GenericAbstractController {
 
 	/**
 	 * 이 함수는 본 클래스를 확장한 커스텀 뷰 리졸버로부터 값을 주입받는다 이 주입값을 사용하여 컨트롤러로부터 넘어온 값이 확장한
@@ -70,105 +70,27 @@ public class StaticResourceController extends GenericAbstractController
 		return "";
 	}
 
-	@RequestMapping(value = { "/{viewResolver}/{siteCode}/{defaultMenuBig}/{defaultMenuMiddle}/{defaultMenuSmall}/{target}" }, 
+	@RequestMapping(value = { "/{viewResolver}/{siteCode}/{defaultMenuBig}/{defaultMenuMiddle}/{defaultMenuSmall}/{target}.do" }, 
 									  method = { RequestMethod.GET, RequestMethod.POST })
-	@Override
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean,
-			Object... objects) {
-		
-		String viewResolver = "";
-		String siteCode = "";
-		String defaultMenuBig = "";
-		String defaultMenuMiddle = "";
-		String defaultMenuSmall = "";
-		String target = "";
-		
-		if(objects.length != 6){
-			throw new RuntimeException();
-		}
-		for (int i = 0; i < objects.length; i++) {
-			Object object = objects[i];
-			if(object instanceof String){
-				switch (i) {
-				case 0:
-					viewResolver = (String) object;
-					break;
-				case 1:
-					siteCode = (String) object;
-					break;
-				case 2:
-					defaultMenuBig = (String) object;
-					break;
-				case 3:
-					defaultMenuMiddle = (String) object;
-					break;
-				case 4:
-					defaultMenuSmall = (String) object;
-					break;
-				case 5:
-					target = (String) object;
-					break;
-
-				default:
-					break;
-				}
-			}else{
-				throw new RuntimeException();
-			}
-		}
+			BindingResult bindingResult, Object parameterBean, @PathVariable String viewResolver,
+			@PathVariable String siteCode, @PathVariable String defaultMenuBig,
+			@PathVariable String defaultMenuMiddle, @PathVariable String defaultMenuSmall,
+			@PathVariable String target) {
+	
 
 		String menuString = "";
-		if(null == defaultMenuBig || defaultMenuBig.equals("defaultMenuBig")){
-			menuString = menuString + defaultMenuBig;
+		if(null != defaultMenuBig && !defaultMenuBig.equals("defaultMenuBig")){
+			menuString = menuString + defaultMenuBig + "/";
 		}
-		if(null == defaultMenuMiddle || defaultMenuMiddle.equals("defaultMenuMiddle")){
-			menuString = menuString + defaultMenuMiddle;
+		if(null != defaultMenuMiddle && !defaultMenuMiddle.equals("defaultMenuMiddle")){
+			menuString = menuString + defaultMenuMiddle + "/";
 		}
-		if(null == defaultMenuSmall || defaultMenuSmall.equals("defaultMenuBig")){
-			menuString = menuString + defaultMenuSmall;
+		if(null != defaultMenuSmall && !defaultMenuSmall.equals("defaultMenuSmall")){
+			menuString = menuString + defaultMenuSmall + "/";
 		}
-		return viewResolver + siteCode + menuString + target;
+		return "/" + viewResolver  + "/" + siteCode  + "/" + menuString + target;
 	}
-
-	@Override
-	public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap,
-			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean,
-			Object... objects) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String invokeUpdate(SearchSupport searchSupport, ModelMap modelMap,
-			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean,
-			Object... objects) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String invokeDelete(SearchSupport searchSupport, ModelMap modelMap,
-			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean,
-			Object... objects) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * XML스키마를 자바클래스(임의)로 생성
-	 * 
-	 * @param String
-	 *            xml XML스키마
-	 * @param String
-	 *            ja 생성될JAR파일의 위치
-	 * @return boolean result 생성여부 True/False
-	 * @exception Exception
-	 */
-	
 
 }
