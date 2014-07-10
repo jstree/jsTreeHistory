@@ -29,7 +29,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         
-    	logger.debug("{} start {}", new Object[]{"============================================", this.getClass().getName()});
+    	logger.info("{} preHandle start {}", new Object[]{"============================================", this.getClass().getName()});
 		
     	Method[] methods = HttpServletRequest.class.getMethods();
 		
@@ -55,7 +55,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 		
 		}
 		
-		logger.debug("{} end {}", new Object[]{"============================================", this.getClass().getName()});
+		logger.info("{} end {}", new Object[]{"============================================", this.getClass().getName()});
 		
 		return true;
     }
@@ -63,6 +63,34 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         
+    	logger.info("{} postHandle start {}", new Object[]{"============================================", this.getClass().getName()});
+		
+    	Method[] methods = HttpServletRequest.class.getMethods();
+		
+		for (Method method : methods) {
+
+			String methodName = method.getName();
+			String returnType = method.getReturnType().getName();
+			Class<?>[] parameterType = method.getParameterTypes();
+
+			if (!"void".equals(returnType) && 0 == parameterType.length) {
+
+				try {
+					
+					logger.debug("{} {} : {}", new Object[]{"success", methodName, method.invoke(request).toString()});
+					
+				} catch (Exception e) {
+					
+					logger.debug("{} {} : {}", new Object[]{"fail", methodName, e.getMessage()});
+					
+				}
+								
+			}
+		
+		}
+		
+		logger.info("{} end {}", new Object[]{"============================================", this.getClass().getName()});
+    	
         if (null == modelAndView) {
             return;
         }
