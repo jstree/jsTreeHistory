@@ -240,13 +240,13 @@ public class CoreController {
 		
 		model.addAttribute("alayzeResult", "");
 		
-		return "egovframework/com/ext/jstree/analyzeResult";
+		return "/jsp/egovframework/com/ext/jstree/analyzeResult";
 	}
 	
 	
 	@RequestMapping("/egovframework/com/etc/jstree/main.do")
 	public String jstreeMain() {
 		
-		return "egovframework/com/ext/jstree/jstreeSolutionStrutsVersion";
+		return "/jsp/egovframework/com/ext/jstree/jstreeSolutionStrutsVersion";
 	}
 }

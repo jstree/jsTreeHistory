@@ -2,11 +2,11 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"       %>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"      %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"       %>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="x"   uri="http://java.sun.com/jsp/jstl/xml"       %>
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 
@@ -26,47 +26,35 @@
 
 <!--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jquery/plugIns/bootstrapVersion2.3.0/css/bootstrap.css" media="screen"/> -->
 
-<customTags:nasCSS theRestOfFileName="/scriptPool/jQueryPlugIns/jquery-mega-drop-down-menu.1.3.3/css/skins/www313cokr.css"></customTags:nasCSS>
-<customTags:nasCSS theRestOfFileName="/scriptPool/jQueryPlugIns/jQuery CN Plugins/Styles/Base.css"></customTags:nasCSS>
-<customTags:nasCSS theRestOfFileName="/scriptPool/jQueryPlugIns/jQuery CN Plugins/Styles/BreadCrumb.css"></customTags:nasCSS>
-<customTags:nasCSS theRestOfFileName="/scriptPool/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.css"></customTags:nasCSS>
+<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery-mega-drop-down-menu.1.3.3/css/skins/www313cokr.css" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jQuery CN Plugins/Styles/Base.css" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jQuery CN Plugins/Styles/BreadCrumb.css" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.css" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQuery/jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.css" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery.jqGrid-4.4.3/css/ui.jqgrid.css" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/niceforms-master/niceforms-default.css" media="screen"/>
+ <!-- Default JQuery Setting -->
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQuery/jquery.com/jquery-1.9.1.min.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQuery/jquery.com/jquery-migrate-1.1.0.min.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQuery/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery-mega-drop-down-menu.1.3.3/js/jquery.hoverIntent.minified.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery-mega-drop-down-menu.1.3.3/js/jquery.dcmegamenu.1.3.3.min.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jQuery CN Plugins/js/jquery.jBreadCrumb.1.1.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/malsup.com/jquery/form/jquery.form.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/masonry-site/jquery.masonry.js' charset="utf-8"></script>
+	
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/design/css/common.css" media="screen"/>
-<customTags:nasCSS theRestOfFileName="/scriptPool/jQuery/jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.css"></customTags:nasCSS>
-<customTags:nasCSS theRestOfFileName="/scriptPool/jQueryPlugIns/jquery.jqGrid-4.4.3/css/ui.jqgrid.css"></customTags:nasCSS>
-<customTags:nasCSS theRestOfFileName="/scriptPool/jQueryPlugIns/niceforms-master/niceforms-default.css"></customTags:nasCSS>
-
-<!-- Default JQuery Setting -->
-<customTags:nasScript theRestOfFileName="/scriptPool/jQuery/jquery.com/jquery-1.9.1.min.js"></customTags:nasScript>
-<customTags:nasScript theRestOfFileName="/scriptPool/jQuery/jquery.com/jquery-migrate-1.1.0.min.js"></customTags:nasScript>
-<customTags:nasScript theRestOfFileName="/scriptPool/jQuery/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></customTags:nasScript>
-
-<!--<customTags:nasScript theRestOfFileName="/scriptPool/Bootstrap/bootstrap2.3.2/js/bootstrap.min.js"></customTags:nasScript>-->
-<!--<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/css3-mediaqueries.js"></customTags:nasScript>-->
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/javascript/plugIns/css_browser_selector/css_browser_selector.min.js" charset="utf-8"></script> 
-
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/jquery-mega-drop-down-menu.1.3.3/js/jquery.hoverIntent.minified.js"></customTags:nasScript>
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/jquery-mega-drop-down-menu.1.3.3/js/jquery.dcmegamenu.1.3.3.min.js"></customTags:nasScript>
-
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/jQuery CN Plugins/js/jquery.jBreadCrumb.1.1.js"></customTags:nasScript>
-
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/malsup.com/jquery/form/jquery.form.js"></customTags:nasScript>
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.js"></customTags:nasScript>
-
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/masonry-site/jquery.masonry.js"></customTags:nasScript>
 <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<!--[if IE]><customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/excanvas_r3/excanvas.compiled.js"></customTags:nasScript>
-
+<!--[if IE]>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/excanvas_r3/excanvas.compiled.js' charset="utf-8"></script>
 <!-- JSTREE -->
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:nasScript>
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:nasScript>
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/jstree-v.pre1.0/jquery.jstree.js"></customTags:nasScript>
-
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jstree-v.pre1.0/_lib/jquery.cookie.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jstree-v.pre1.0/_lib/jquery.hotkeys.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jstree-v.pre1.0/jquery.jstree.js' charset="utf-8"></script>
 <!-- JQGRID -->
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/jquery.jqGrid-4.4.3/src/i18n/grid.locale-en.js"></customTags:nasScript>
-<customTags:nasScript theRestOfFileName="/scriptPool/jQueryPlugIns/jquery.jqGrid-4.4.3/js/jquery.jqGrid.min.js"></customTags:nasScript>
-
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery.jqGrid-4.4.3/src/i18n/grid.locale-en.js' charset="utf-8"></script>
+		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery.jqGrid-4.4.3/js/jquery.jqGrid.min.js' charset="utf-8"></script>
 
 <!-- Style Setting -->
 <style type="text/css">
@@ -89,6 +77,7 @@
 <script type="text/javascript">
 
     function getGrid() {
+    	alert("afdafaadf");
         var jqDataUrl = '/egovframework/com/etc/jstree/monitor/list.do';
         // Set up the jquery grid
         $("#jqTable").jqGrid({
