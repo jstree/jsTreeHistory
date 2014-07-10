@@ -106,29 +106,29 @@ public abstract class GenericAbstractController {
 		modelMap.addAttribute("list", lists);
 	}
 
-	@ExceptionHandler(Exception.class)
-	public void CliException(Exception ex, HttpServletResponse response, HttpServletRequest request) throws IOException {
-
-		response.setHeader("Expires", "-1");
-		response.setHeader("Cache-Control", "must-revalidate, no-store, no-cache");
-		response.addHeader("Cache-Control", "post-check=0, pre-check=0");
-		response.setHeader("Pragma", "no-cache");
-
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-
-		out.println("<!DOCTYPE html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></head><body>");
-		out.println("<script type=\"text/javascript\" src=\"/ajaxpm/string.js\"></script>");
-		out.println("<script type=\"text/javascript\" src=\"/files/js/jquery.js\"></script>");
-		out.println("<script type=\"text/javascript\" src=\"/files/js/jquery-ui.min.js\"></script>");
-		out.println("<script type=\"text/javascript\" src=\"/files/js/jquery.sprintf.js\"></script>");
-		out.println("<script type=\"text/javascript\" src=\"/files/js/underscore.js\"></script>");
-		out.println("<script type=\"text/javascript\">");
-
-		out.println("parent.tmWaringCloseDialog(getMessage(\"" + ex.getMessage() + "\"))");
-
-		out.println("</script></body></html>");
-	}
+//	@ExceptionHandler(Exception.class)
+//	public void CliException(Exception ex, HttpServletResponse response, HttpServletRequest request) throws IOException {
+//
+//		response.setHeader("Expires", "-1");
+//		response.setHeader("Cache-Control", "must-revalidate, no-store, no-cache");
+//		response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+//		response.setHeader("Pragma", "no-cache");
+//
+//		response.setContentType("text/html; charset=utf-8");
+//		PrintWriter out = response.getWriter();
+//
+//		out.println("<!DOCTYPE html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></head><body>");
+//		out.println("<script type=\"text/javascript\" src=\"/ajaxpm/string.js\"></script>");
+//		out.println("<script type=\"text/javascript\" src=\"/files/js/jquery.js\"></script>");
+//		out.println("<script type=\"text/javascript\" src=\"/files/js/jquery-ui.min.js\"></script>");
+//		out.println("<script type=\"text/javascript\" src=\"/files/js/jquery.sprintf.js\"></script>");
+//		out.println("<script type=\"text/javascript\" src=\"/files/js/underscore.js\"></script>");
+//		out.println("<script type=\"text/javascript\">");
+//
+//		out.println("parent.tmWaringCloseDialog(getMessage(\"" + ex.getMessage() + "\"))");
+//
+//		out.println("</script></body></html>");
+//	}
 
 	@ExceptionHandler(Exception.class)
 	public void cliValidationException(Exception ex, HttpServletResponse response, HttpServletRequest request) throws IOException {
