@@ -1,4 +1,4 @@
-package standard.mvc.security.contoller;
+package standard.mvc.component.security.controller;
 
 
 
@@ -16,7 +16,7 @@ import standard.mvc.security.service.OAuth1Service;
 @Controller
 public class OAuth1Controller {
 	
-	@Autowired(required=false)
+	@Autowired
 	private OAuth1Service googleService;
 
 	@RequestMapping(value={"/google/picasa.do","/oauth1"})

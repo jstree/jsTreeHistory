@@ -1,4 +1,4 @@
-package standard.mvc.security.custom;
+package standard.mvc.component.security.custom;
 
 import java.util.ArrayList;
 import java.util.List;

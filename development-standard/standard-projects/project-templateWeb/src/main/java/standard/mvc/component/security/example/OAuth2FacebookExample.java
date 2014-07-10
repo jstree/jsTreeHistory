@@ -1,4 +1,4 @@
-package standard.mvc.security.example.oauth;
+package standard.mvc.component.security.example;
 
 
 

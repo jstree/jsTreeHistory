@@ -1,4 +1,4 @@
-package standard.mvc.security.service;
+package standard.mvc.component.security.service;
 
 
 
@@ -14,14 +14,11 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.springframework.security.oauth.consumer.client.OAuthRestTemplate;
+import org.springframework.stereotype.Service;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-
-/**
- * @author Ryan Heaton
- */
+@Service
 public class OAuth1ServiceImpl implements OAuth1Service {
 
   private OAuthRestTemplate googleRestTemplate;

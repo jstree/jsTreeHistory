@@ -1,4 +1,4 @@
-package standard.mvc.security.contoller;
+package standard.mvc.component.security.controller;
 
 import java.io.IOException;
 import java.util.Locale;

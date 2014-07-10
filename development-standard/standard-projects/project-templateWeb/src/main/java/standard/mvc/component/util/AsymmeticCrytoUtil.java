@@ -1,4 +1,4 @@
-package standard.mvc.security.util.cryto;
+package standard.mvc.component.util;
 
 import java.security.MessageDigest;
 
