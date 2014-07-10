@@ -1,4 +1,4 @@
-package standard.mvc.security.util.cryto;
+package standard.mvc.component.util;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
