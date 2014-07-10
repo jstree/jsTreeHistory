@@ -63,22 +63,6 @@
 	<!-- IP 정보 기록 -->
 	<bean id="IpObtainInterceptor" class="egovframework.com.cmm.interceptor.IpObtainInterceptor" />
 	
-	<!-- 언어 설정 -->
-	<bean id="localeResolver"
-		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-		<property name="defaultLocale" value="ko"></property>
-	</bean>
-	
-	<bean id="localeChangeInterceptor"
-		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-		<property name="paramName" value="lang" />
-	</bean>
-
-	<!-- interceptor -->
-	<bean id="requestHandlerInterceptor"
-		class="standard.mvc.component.manager.interceptor.RequestHandlerInterceptor">
-	</bean>
-	
 	<!-- for JFile -->	  
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/>
 

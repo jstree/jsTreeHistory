@@ -39,7 +39,6 @@
     </bean>
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
     
-
     <!--
         - This bean resolves specific types of exceptions to corresponding logical 
         - view names for error views. The default behaviour of DispatcherServlet 
@@ -160,7 +159,6 @@
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
 		<property name="defaultLocale" value="ko"></property>
 	</bean>
-
 	
 	<!-- bean id="maxUploadSizeExceededExceptionHandler" class="com.ahnlab.tm.cli.global.MaxUploadSizeExceededExceptionHandler"/ -->
 	<bean id="multipartResolver"
