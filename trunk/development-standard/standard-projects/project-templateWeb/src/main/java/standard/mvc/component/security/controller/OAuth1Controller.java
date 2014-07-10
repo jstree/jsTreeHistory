@@ -2,13 +2,13 @@ package standard.mvc.component.security.controller;
 
 
 
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import standard.mvc.security.service.OAuth1Service;
+import standard.mvc.component.security.service.OAuth1Service;
+
 
 
 
