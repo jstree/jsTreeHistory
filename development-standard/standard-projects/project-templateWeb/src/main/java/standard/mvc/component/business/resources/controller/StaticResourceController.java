@@ -2,23 +2,18 @@ package standard.mvc.component.business.resources.controller;
 
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
 import standard.mvc.component.base.controller.GenericInterfaceController;
 import standard.mvc.component.base.dao.hibernate.SearchSupport;
-import standard.mvc.staticPage.logo.service.LogoService;
-import standard.mvc.staticPage.logo.vo.LogoVO;
-import standard.mvc.staticPage.section.service.SectionService;
 
 /**
  * Class Name : TemplateMethodResolveViewSupporter.java Description : WEBDAV를
@@ -53,12 +48,6 @@ import standard.mvc.staticPage.section.service.SectionService;
 public class StaticResourceController extends GenericAbstractController
 		implements GenericInterfaceController<Object> {
 
-	@Resource(name = "LogoService")
-	LogoService logoService;
-
-	@Resource(name = "SectionService")
-	SectionService sectionService;
-
 	/**
 	 * 이 함수는 본 클래스를 확장한 커스텀 뷰 리졸버로부터 값을 주입받는다 이 주입값을 사용하여 컨트롤러로부터 넘어온 값이 확장한
 	 * 클래스의 뷰 리졸버가 처리해야 하는지의 여부를 구분한다. ex1> (컨트롤러)/freemarker/page =>
@@ -83,14 +72,53 @@ public class StaticResourceController extends GenericAbstractController
 
 	@RequestMapping(value = { "/{viewResolver}/{siteCode}/{defaultMenuBig}/{defaultMenuMiddle}/{defaultMenuSmall}/{target}" }, 
 									  method = { RequestMethod.GET, RequestMethod.POST })
-	// action
-	public String invokeStatic(SearchSupport searchSupport, ModelMap modelMap,
+	@Override
+	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean, 
-			@PathVariable String viewResolver, @PathVariable String siteCode,
-			@PathVariable String defaultMenuBig, @PathVariable String defaultMenuMiddle,
-			@PathVariable String defaultMenuSmall, @PathVariable String target) {
+			BindingResult bindingResult, Object parameterBean,
+			Object... objects) {
 		
+		String viewResolver = "";
+		String siteCode = "";
+		String defaultMenuBig = "";
+		String defaultMenuMiddle = "";
+		String defaultMenuSmall = "";
+		String target = "";
+		
+		if(objects.length != 6){
+			throw new RuntimeException();
+		}
+		for (int i = 0; i < objects.length; i++) {
+			Object object = objects[i];
+			if(object instanceof String){
+				switch (i) {
+				case 0:
+					viewResolver = (String) object;
+					break;
+				case 1:
+					siteCode = (String) object;
+					break;
+				case 2:
+					defaultMenuBig = (String) object;
+					break;
+				case 3:
+					defaultMenuMiddle = (String) object;
+					break;
+				case 4:
+					defaultMenuSmall = (String) object;
+					break;
+				case 5:
+					target = (String) object;
+					break;
+
+				default:
+					break;
+				}
+			}else{
+				throw new RuntimeException();
+			}
+		}
+
 		String menuString = "";
 		if(null == defaultMenuBig || defaultMenuBig.equals("defaultMenuBig")){
 			menuString = menuString + defaultMenuBig;
@@ -104,6 +132,33 @@ public class StaticResourceController extends GenericAbstractController
 		return viewResolver + siteCode + menuString + target;
 	}
 
+	@Override
+	public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response,
+			BindingResult bindingResult, Object parameterBean,
+			Object... objects) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String invokeUpdate(SearchSupport searchSupport, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response,
+			BindingResult bindingResult, Object parameterBean,
+			Object... objects) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String invokeDelete(SearchSupport searchSupport, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response,
+			BindingResult bindingResult, Object parameterBean,
+			Object... objects) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * XML스키마를 자바클래스(임의)로 생성
 	 * 
@@ -114,36 +169,6 @@ public class StaticResourceController extends GenericAbstractController
 	 * @return boolean result 생성여부 True/False
 	 * @exception Exception
 	 */
-	@Override
-	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
-			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap,
-			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String invokeUpdate(SearchSupport searchSupport, ModelMap modelMap,
-			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String invokeDelete(SearchSupport searchSupport, ModelMap modelMap,
-			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }
