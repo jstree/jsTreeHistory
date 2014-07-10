@@ -9,23 +9,35 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import egovframework.com.cmm.LoginVO;
+import egovframework.com.cmm.annotation.IncludedInfo;
+import egovframework.com.cmm.util.EgovUserDetailsHelper;
+import egovframework.com.dam.app.service.KnoAppraisalVO;
 import egovframework.com.ext.jstree.core.service.CoreService;
 import egovframework.com.ext.jstree.core.util.Util_SwapNode;
 import egovframework.com.ext.jstree.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.core.vo.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.core.vo.T_ComprehensiveTree;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
 public class CoreController {
 
 	@Resource(name = "CoreService")
 	CoreService coreService;
+	
+	@IncludedInfo(name="JSTREE", listUrl="/jstree/getTree.do", order = 7313 ,gid = 313)
+	@RequestMapping("/jstree/getTree.do")
+	public String jsTreeCoreIndex() {
+		return "egovframework/com/ext/jstree/jstreeSolutionStrutsVersion";
+	}
 	
 	
 	@ResponseBody
