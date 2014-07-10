@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import standard.mvc.component.base.controller.GenericAbstractController;
 import standard.mvc.component.base.controller.GenericInterfaceController;
 import standard.mvc.component.base.dao.hibernate.SearchSupport;
-import standard.mvc.staticPage.logo.service.LogoService;
-import standard.mvc.staticPage.logo.vo.LogoVO;
-import standard.mvc.staticPage.section.service.SectionService;
 
 /**
  *  Class Name : TemplateMethodResolveViewSupporter.java
@@ -57,12 +54,6 @@ depth7 => 액션처리(select,update,delete,insert)
 //siteCode + menu + targetController
 public class IndexController extends GenericAbstractController implements GenericInterfaceController<Object>{
 	
-	@Resource(name = "LogoService")
-	LogoService logoService;
-	
-	@Resource(name = "SectionService")
-	SectionService sectionService;
-	
 	/**
      * 이 함수는 본 클래스를 확장한 커스텀 뷰 리졸버로부터 값을 주입받는다
      * 이 주입값을 사용하여 컨트롤러로부터 넘어온 값이 확장한 클래스의 뷰 리졸버가 처리해야 하는지의 여부를 구분한다.
@@ -92,38 +83,40 @@ public class IndexController extends GenericAbstractController implements Generi
     */
 	@Override
 	@RequestMapping(value = { "/select.do" }, method = {RequestMethod.GET, RequestMethod.POST})	//action
-	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
-		// TODO Auto-generated method stub
+	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response,
+			BindingResult bindingResult, Object parameterBean,
+			Object... objects) {
 		String viewResolver = "/jsp";
 		String siteName = "/community";
 		String menuString = "";
 		
-		LogoVO logoVO = new LogoVO();
-		logoVO.setFileType("DEFAULT");
-		
-		modelMap.addAttribute("logo", logoService.getLogo(logoVO));
-		modelMap.addAttribute("section", sectionService.getSection());
-		
 		return viewResolver + siteName + menuString + "/index";
 	}
 
-
 	@Override
-	public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
+	public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response,
+			BindingResult bindingResult, Object parameterBean,
+			Object... objects) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
-	public String invokeUpdate(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
+	public String invokeUpdate(SearchSupport searchSupport, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response,
+			BindingResult bindingResult, Object parameterBean,
+			Object... objects) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
-	public String invokeDelete(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
+	public String invokeDelete(SearchSupport searchSupport, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response,
+			BindingResult bindingResult, Object parameterBean,
+			Object... objects) {
 		// TODO Auto-generated method stub
 		return null;
 	}
