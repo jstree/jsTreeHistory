@@ -253,7 +253,7 @@
 				<artifactId>spring-data-redis</artifactId>
 				<version>1.0.6.RELEASE</version>
 			</dependency>
-			<!-- spring security 라이브러리 시작 -->
+			<!-- spring security 라이브러리 시작
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-core</artifactId>
@@ -274,11 +274,12 @@
 				<artifactId>spring-security-core-tiger</artifactId>
 				<version>2.0.4</version>
 			</dependency>
+			 -->
 			<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId> 
 				<version>3.1.4.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
 				<artifactId>spring-security-config</artifactId> <version>3.1.4.RELEASE</version> 
 				</dependency> -->
-
+			<!-- 
 			<dependency>
 				<groupId>org.springframework.ldap</groupId>
 				<artifactId>spring-ldap-core</artifactId>
@@ -289,7 +290,7 @@
 				<artifactId>spring-ldap-core-tiger</artifactId>
 				<version>1.3.2.RELEASE</version>
 			</dependency>
-			<!-- spring security 라이브러리 끝 -->
+			spring security 라이브러리 끝 -->
 		</dependencies>
 	</dependencyManagement>
 </project>
