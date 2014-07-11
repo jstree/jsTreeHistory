@@ -8,18 +8,33 @@ import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Component;
 
 /**
- * 대칭 암호화 관련된 부분을 해당 클래스에서 사용 한다. : AES, ARIA, SEED, MASK
- * @author choedaeyeol
- *	http://jo.centis1504.net/?p=137
+ *  Class Name : CrytoSymmeticUtil.java
+ *  Description :  대칭 암호화 관련된 부분을 해당 클래스에서 사용 한다. : AES, ARIA, SEED, MASK(http://jo.centis1504.net/?p=137)
+ *  Modification Information
+ * 
+ *  @author 최대열
+ *  @since 2014.07.10
+ *  @version 1.0
+ *  @see
+ *
+ *  <pre>
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014.07.10                 최대열		   최초 생성
+ *
+ *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
+ * </pre>
  */
 @Component
-public class SymmeticCrytoUtil{
+public class CrytoSymmeticUtil{
 	private static String aesKey = "바로보드 aes key1";//aes 사용될 key  
 
 	private Cipher cipher;
 	SecretKeySpec aesSpec;
 	
-	public SymmeticCrytoUtil() {
+	public CrytoSymmeticUtil() {
 		if(aesKey.length()%16!=0){
 			aesKey = StringUtils.rightPad(aesKey, 16*(aesKey.length()/16+1), "\0");
 		}
@@ -47,7 +62,7 @@ public class SymmeticCrytoUtil{
 	
 	public static void main(String[] args) throws Exception {
 
-		SymmeticCrytoUtil symmeticCrytoUtil = new SymmeticCrytoUtil();
+		CrytoSymmeticUtil symmeticCrytoUtil = new CrytoSymmeticUtil();
 		System.out.println(symmeticCrytoUtil.encodeAes128("test"));
 		System.out.println(symmeticCrytoUtil.decodeAes128(symmeticCrytoUtil.encodeAes128("test")));
 

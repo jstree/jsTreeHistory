@@ -18,11 +18,12 @@ import org.springframework.stereotype.Service;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
 @Service
 public class OAuth1ServiceImpl implements OAuth1Service {
 
   private OAuthRestTemplate googleRestTemplate;
-  
+
   private OAuthRestTemplate twitterRestTemplate;
   
   public String getTwiterRestTemplate(){
