@@ -10,20 +10,35 @@ import org.springframework.stereotype.Component;
 
 
 /**
- * 비대칭 암호화(공개키 암호화) 관련된 부분을 해당 클래스에서 사용 한다. : sha, bcryt, RSA
- * @author choedaeyeol
+ *  Class Name : CrytoAsymmeticUtil.java
+ *  Description :  비대칭 암호화(공개키 암호화) 관련된 부분을 해당 클래스에서 사용 한다. : sha, bcryt, RSA
+ *  Modification Information
  * 
+ *  @author 최대열
+ *  @since 2014.07.10
+ *  @version 1.0
+ *  @see
+ *
+ *  <pre>
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014.07.10                 최대열		   최초 생성
+ *
+ *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
+ * </pre>
  */
 @Component
-public class AsymmeticCrytoUtil{
+public class CrytoAsymmeticUtil{
 	private PasswordEncoder passwordEncoder;	//로그인 시 사용되는 password  암호화(Bcryto, SHA) 
 	private static final String SHA_1 = "SHA-1";
 	
-	public AsymmeticCrytoUtil(PasswordEncoder passwordEncoder) {
+	public CrytoAsymmeticUtil(PasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	public AsymmeticCrytoUtil() {
+	public CrytoAsymmeticUtil() {
 		this(new BCryptPasswordEncoder());
 	}
 	
@@ -60,7 +75,7 @@ public class AsymmeticCrytoUtil{
 
 	//test
 	public static void  main(String[] arg){
-		AsymmeticCrytoUtil asymmeticCrytoUtil = new AsymmeticCrytoUtil();
+		CrytoAsymmeticUtil asymmeticCrytoUtil = new CrytoAsymmeticUtil();
 		System.out.println(asymmeticCrytoUtil.encodePassword("1111"));//$2a$10$HT/3DoS1u4LVfKUMVJdtC.J5mMn2ItG7eq35ITL2jyXUxPQw2WUX6
 		System.out.println(asymmeticCrytoUtil.encodeSha1("1111"));//ARyUXzDOLLr8RS85hA8CVpMznEI=
 

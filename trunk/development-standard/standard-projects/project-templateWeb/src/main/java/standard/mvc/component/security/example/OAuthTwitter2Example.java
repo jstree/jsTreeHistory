@@ -18,6 +18,26 @@ import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
 
+/**
+ *  Class Name : OAuthTwitter2Example.java
+ *  Description : OAuth1 -> twitter 연동 흐름을 확인하기 위한 샘플 코드
+ *  Modification Information
+ * 
+ *  @author 최대열
+ *  @since 2014.07.10
+ *  @version 1.0
+ *  @see
+ *
+ *  <pre>
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014.07.10                 최대열		   최초 생성
+ *
+ *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
 public class OAuthTwitter2Example {
 	//static final String REQUEST_TOKEN_URL = "https://nid.naver.com/naver.oauth?mode=req_req_token";
 	static final String REQUEST_TOKEN_URL ="https://api.twitter.com/oauth/request_token";
@@ -37,7 +57,8 @@ public class OAuthTwitter2Example {
     // Consumer 객체 생성
     static OAuthConsumer consumer = new DefaultOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET);
     
-    public static void main(String[] args) throws OAuthMessageSignerException, OAuthNotAuthorizedException, OAuthExpectationFailedException, OAuthCommunicationException, IOException, URISyntaxException {         
+    @SuppressWarnings("resource")
+	public static void main(String[] args) throws OAuthMessageSignerException, OAuthNotAuthorizedException, OAuthExpectationFailedException, OAuthCommunicationException, IOException, URISyntaxException {         
 
             // request token 요청 
             //String authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);

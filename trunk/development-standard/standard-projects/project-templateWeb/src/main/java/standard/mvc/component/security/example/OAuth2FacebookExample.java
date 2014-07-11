@@ -13,12 +13,33 @@ import org.scribe.model.Verb;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
+/**
+ *  Class Name : OAuth2FacebookExample.java
+ *  Description : OAuth2 -> Facebook 연동 흐름을 확인하기 위한 샘플 코드
+ *  Modification Information
+ * 
+ *  @author 최대열
+ *  @since 2014.07.10
+ *  @version 1.0
+ *  @see
+ *
+ *  <pre>
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014.07.10                 최대열		   최초 생성
+ *
+ *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
 public class OAuth2FacebookExample {
 	private static final String NETWORK_NAME = "Facebook";
 	  private static final String PROTECTED_RESOURCE_URL = "https://graph.facebook.com/me";
 	  private static final Token EMPTY_TOKEN = null;
 
-	  public static void main(String[] args)
+	  @SuppressWarnings("resource")
+	public static void main(String[] args)
 	  {
 	    // Replace these with your own api key and secret
 	    String apiKey = "798769150163664";
@@ -29,7 +50,7 @@ public class OAuth2FacebookExample {
 	                                  .apiSecret(apiSecret)
 	                                  .callback("http://localhost:8080/security/SnsApiSample/start")
 	                                  .build();
-	    Scanner in = new Scanner(System.in);
+	    Scanner inputText = new Scanner(System.in);
 
 	    System.out.println("=== " + NETWORK_NAME + "'s OAuth Workflow ===");
 	    System.out.println();
@@ -42,7 +63,7 @@ public class OAuth2FacebookExample {
 	    System.out.println(authorizationUrl);
 	    System.out.println("And paste the authorization code here");
 	    System.out.print(">>");
-	    Verifier verifier = new Verifier(in.nextLine());
+	    Verifier verifier = new Verifier(inputText.nextLine());
 	    System.out.println();
 	    
 	    // Trade the Request Token and Verfier for the Access Token
