@@ -1,4 +1,5 @@
 <%@ page isELIgnored="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
 
@@ -10,13 +11,12 @@
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 
-<!DOCTYPE html> 
-<!--[if lt IE 7 ]> <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie6 older"> <![endif]-->
-<!--[if IE 7 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie7 older"> <![endif]-->
-<!--[if IE 8 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie9"> <![endif]-->
+<!--[if lt IE 7 ]> <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie6 older" style="width:100%;height:100%;margin:0;padding:0;"> <![endif]-->
+<!--[if IE 7 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie7 older" style="width:100%;height:100%;margin:0;padding:0;"> <![endif]-->
+<!--[if IE 8 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie8" style="width:100%;height:100%;margin:0;padding:0;"> <![endif]-->
+<!--[if IE 9 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie9" style="width:100%;height:100%;margin:0;padding:0;"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
-<html lang="ko-KR">
+<html lang="ko-KR" style="width:100%;height:100%;margin:0;padding:0;">
 <!--<![endif]-->
 <head>
 <c:choose>
@@ -46,7 +46,7 @@ $(document).ready(function($){
 
 </head> 
 
-<body>
+<body style="width:100%; height:100%;margin:0;padding:0;">
 
 <decorator:body />
 

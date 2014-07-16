@@ -158,11 +158,13 @@
     </filter-mapping>
    	<filter>
 		<filter-name>sitemesh</filter-name>
-		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
 	</filter>
     <filter-mapping>
 		<filter-name>sitemesh</filter-name>
 		<url-pattern>/sitemesh/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher> 
 	</filter-mapping>
 	<!-- 0. 로그인 정책 컴포넌트용 필터 -->
 	<!--
