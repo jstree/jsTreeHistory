@@ -70,27 +70,29 @@ public class StaticResourceController extends GenericAbstractController {
 		return "";
 	}
 
-	@RequestMapping(value = { "/{viewResolver}/{siteCode}/{defaultMenuBig}/{defaultMenuMiddle}/{defaultMenuSmall}/{target}.do" }, 
-									  method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(	value = { "/{templateEngine}/{viewResolver}/{siteCode}/{largeMenu}/{middleMenu}/{smallMenu}/{componentCode}/{action}.do" }, 
+							method = { RequestMethod.GET, RequestMethod.POST })
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response,
-			BindingResult bindingResult, Object parameterBean, @PathVariable String viewResolver,
-			@PathVariable String siteCode, @PathVariable String defaultMenuBig,
-			@PathVariable String defaultMenuMiddle, @PathVariable String defaultMenuSmall,
-			@PathVariable String target) {
-	
+			BindingResult bindingResult, Object parameterBean, 
+			@PathVariable String templateEngine, @PathVariable String viewResolver, 
+			@PathVariable String siteCode, @PathVariable String largeMenu,
+			@PathVariable String middleMenu, @PathVariable String smallMenu,
+			@PathVariable String componentCode, @PathVariable String action) {
 
-		String menuString = "";
-		if(null != defaultMenuBig && !defaultMenuBig.equals("defaultMenuBig")){
-			menuString = menuString + defaultMenuBig + "/";
+		String menuCodes = "";
+		if(null != largeMenu && !largeMenu.equals("largeMenu")){
+			menuCodes = menuCodes + largeMenu + "/";
 		}
-		if(null != defaultMenuMiddle && !defaultMenuMiddle.equals("defaultMenuMiddle")){
-			menuString = menuString + defaultMenuMiddle + "/";
+		if(null != middleMenu && !middleMenu.equals("middleMenu")){
+			menuCodes = menuCodes + middleMenu + "/";
 		}
-		if(null != defaultMenuSmall && !defaultMenuSmall.equals("defaultMenuSmall")){
-			menuString = menuString + defaultMenuSmall + "/";
+		if(null != smallMenu && !smallMenu.equals("smallMenu")){
+			menuCodes = menuCodes + smallMenu + "/";
 		}
-		return "/" + viewResolver  + "/" + siteCode  + "/" + menuString + target;
+		
+		//templateEngine not use external view url.
+		return "/" + viewResolver  + "/" + siteCode  + "/" + menuCodes + componentCode + "/" + action;
 	}
 
 }
