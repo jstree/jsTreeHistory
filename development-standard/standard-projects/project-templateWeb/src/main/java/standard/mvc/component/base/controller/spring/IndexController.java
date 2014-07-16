@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -49,7 +50,7 @@ depth6 => 게시판번호 혹은 액션대상.
 depth7 => 액션처리(select,update,delete,insert)
 */
 @Controller
-@RequestMapping(value = { "/community/index" })	
+@RequestMapping(value = { "**/community" })	
 //community   /defaultMenuBig/defaultMenuMiddle/defaultMenuSmall   /index
 //siteCode + menu + targetController
 public class IndexController extends GenericAbstractController implements GenericInterfaceController<Object>{
@@ -82,17 +83,20 @@ public class IndexController extends GenericAbstractController implements Generi
      * @exception Exception
     */
 	@Override
-	@RequestMapping(value = { "/select.do" }, 
-	  method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(	value = { "/largeMenu/middleMenu/smallMenu/index/invokeSelect.do" }, 
+							method = { RequestMethod.GET, RequestMethod.POST })
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response,
 			BindingResult bindingResult, Object parameterBean) {
-		// TODO Auto-generated method stub
-		String viewResolver = "/jsp";
-		String siteName = "/community";
-		String menuString = "";
 		
-		return viewResolver + siteName + menuString + "/index";
+		String viewResolver = "/jsp";
+		String siteCode = "/community";
+		String menuCodes = "";
+		String componentCode = "/index";
+		String targetPage = "/index";
+		//templateEngine not use external view url.
+		return viewResolver + siteCode + menuCodes + componentCode + targetPage;
+	
 	}
 
 	@Override

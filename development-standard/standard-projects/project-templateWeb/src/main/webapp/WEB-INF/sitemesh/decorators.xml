@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<decorators defaultdir="/sitemesh/www313cokr/decorators">
+	<!-- Any urls that are excluded will never be decorated by Sitemesh -->
+	<excludes>
+		<pattern>/exclude.jsp</pattern>
+		<pattern>/exclude/*</pattern>
+	</excludes>
+
+	<decorator name="index"
+			   page="indexDeco.jsp">
+		<pattern>/index.jsp</pattern>
+	</decorator>
+
+	<decorator name="menu"
+			   page="layerDeco.jsp">
+		<pattern>/jsp/www313cokr/index/*</pattern>
+		<pattern>/jsp/wwwkhldcokr/index/*</pattern>
+	</decorator>
+
+</decorators>
