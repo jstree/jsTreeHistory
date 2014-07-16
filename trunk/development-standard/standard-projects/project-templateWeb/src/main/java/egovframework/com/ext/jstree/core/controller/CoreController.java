@@ -1,31 +1,21 @@
 package egovframework.com.ext.jstree.core.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.cmm.util.EgovUserDetailsHelper;
-import egovframework.com.dam.app.service.KnoAppraisalVO;
 import egovframework.com.ext.jstree.core.service.CoreService;
-import egovframework.com.ext.jstree.core.util.Util_SwapNode;
 import egovframework.com.ext.jstree.core.util.Util_TitleChecker;
-import egovframework.com.ext.jstree.core.vo.P_ComprehensiveTree;
-import egovframework.com.ext.jstree.core.vo.T_ComprehensiveTree;
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import egovframework.com.ext.jstree.core.vo.ComprehensiveTree;
 
 @Controller
 public class CoreController {
@@ -36,47 +26,41 @@ public class CoreController {
 	@IncludedInfo(name="JSTREE", listUrl="/jstree/getTree.do", order = 7313 ,gid = 313)
 	@RequestMapping("/jstree/getTree.do")
 	public String jsTreeCoreIndex() {
-		return "egovframework/com/ext/jstree/jstreeSolutionStrutsVersion";
+		return "/jsp/egovframework/example/egovframework/com/ext/jstree/jstreeSolutionStrutsVersion";
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping("/egovframework/com/etc/jstree/core/getChildNode.do")
-	public String getChildNode( P_ComprehensiveTree p_ComprehensiveTree
-			                  , ModelMap            model
-			                  , HttpServletRequest  request) throws JsonProcessingException {
+	public String getChildNode( ComprehensiveTree  comprehensiveTree
+			                  , ModelMap           model
+			                  , HttpServletRequest request) throws JsonProcessingException {
 		
-		if( p_ComprehensiveTree.getC_id() == 0 ) {
+		if( comprehensiveTree.getC_id() == 0 ) {
 			throw new RuntimeException();
 		}
 		
-		List<T_ComprehensiveTree> t_GetChildNodes = new ArrayList<T_ComprehensiveTree>();
-		t_GetChildNodes.addAll( coreService.getChildNode(p_ComprehensiveTree) );
-		
-		return new ObjectMapper().writeValueAsString(t_GetChildNodes);
+		return new ObjectMapper().writeValueAsString( coreService.getChildNode(comprehensiveTree) );
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping("/egovframework/com/etc/jstree/core/searchNode.do")
-	public String searchNode( P_ComprehensiveTree p_ComprehensiveTree
-			                , ModelMap            model
-			                , HttpServletRequest  request) throws JsonProcessingException {
+	public String searchNode( ComprehensiveTree  comprehensiveTree
+			                , ModelMap           model
+			                , HttpServletRequest request) throws JsonProcessingException {
 		
-		if( !StringUtils.hasText(p_ComprehensiveTree.getSearchStr()) ) {
+		if( !StringUtils.hasText(comprehensiveTree.getSearchStr()) ) {
 			throw new RuntimeException();
 		}
 		
-		List<String> searchNodeResults = new ArrayList<String>();
-		searchNodeResults.addAll( coreService.searchNode(p_ComprehensiveTree) );
-		
-		return new ObjectMapper().writeValueAsString(searchNodeResults);
+		return new ObjectMapper().writeValueAsString( coreService.searchNode(comprehensiveTree) );
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping("/egovframework/com/etc/jstree/core/addNode.do")
-	public String addNode( T_ComprehensiveTree t_ComprehensiveTree
+	public String addNode( ComprehensiveTree   comprehensiveTree
 			             , ModelMap            model
 			             , HttpServletRequest  request) throws JsonProcessingException {
 		
@@ -104,16 +88,16 @@ public class CoreController {
 				}
 			}
 		}
-		t_ComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(t_ComprehensiveTree.getC_title()));
-		Util_SwapNode.copyTtoT(coreService.addNode(Util_SwapNode.swapTtoP(t_ComprehensiveTree)), t_ComprehensiveTree);
+		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
+		coreService.addNode( comprehensiveTree );
 		
-		return new ObjectMapper().writeValueAsString(t_ComprehensiveTree);
+		return new ObjectMapper().writeValueAsString(comprehensiveTree);
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping("/egovframework/com/etc/jstree/core/removeNode.do")
-	public String removeNode( T_ComprehensiveTree t_ComprehensiveTree
+	public String removeNode( ComprehensiveTree comprehensiveTree
 			                , ModelMap            model
 			                , HttpServletRequest  request) throws JsonProcessingException {
 		
@@ -121,15 +105,15 @@ public class CoreController {
 			throw new RuntimeException();
 		}
 		
-		t_ComprehensiveTree.setStatus(coreService.executeRemoveNode(Util_SwapNode.swapTtoP(t_ComprehensiveTree)));
+		comprehensiveTree.setStatus(coreService.executeRemoveNode(comprehensiveTree));
 		
-		return new ObjectMapper().writeValueAsString(t_ComprehensiveTree);
+		return new ObjectMapper().writeValueAsString(comprehensiveTree);
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping("/egovframework/com/etc/jstree/core/alterNode.do")
-	public String alterNode( T_ComprehensiveTree t_ComprehensiveTree
+	public String alterNode( ComprehensiveTree comprehensiveTree
 			               , ModelMap            model
 			               , HttpServletRequest  request) throws JsonProcessingException {
 		
@@ -158,16 +142,16 @@ public class CoreController {
 			}
 		}
 		
-		t_ComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(t_ComprehensiveTree.getC_title()));
-		t_ComprehensiveTree.setStatus( coreService.alterNode(Util_SwapNode.swapTtoP(t_ComprehensiveTree)) );
+		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
+		comprehensiveTree.setStatus( coreService.alterNode(comprehensiveTree) );
 		
-		return new ObjectMapper().writeValueAsString(t_ComprehensiveTree);
+		return new ObjectMapper().writeValueAsString(comprehensiveTree);
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping("/egovframework/com/etc/jstree/core/alterNodeType.do")
-	public String alterNodeType( T_ComprehensiveTree t_ComprehensiveTree
+	public String alterNodeType( ComprehensiveTree comprehensiveTree
 			                   , ModelMap            model
 			                   , HttpServletRequest  request) throws JsonProcessingException {
 		
@@ -195,17 +179,17 @@ public class CoreController {
 			}
 		}
 		
-		coreService.alterNodeType(Util_SwapNode.swapTtoP(t_ComprehensiveTree));
+		coreService.alterNodeType(comprehensiveTree);
 		
-		return new ObjectMapper().writeValueAsString(t_ComprehensiveTree);
+		return new ObjectMapper().writeValueAsString(comprehensiveTree);
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping("/egovframework/com/etc/jstree/core/moveNode.do")
-	public String moveNode( T_ComprehensiveTree t_ComprehensiveTree
-			              , ModelMap            model
-			              , HttpServletRequest  request) throws JsonProcessingException {
+	public String moveNode( ComprehensiveTree  comprehensiveTree
+			              , ModelMap           model
+			              , HttpServletRequest request) throws JsonProcessingException {
 		
 		if (request.getParameter("c_id") == null
 				|| request.getParameter("c_position") == null
@@ -240,9 +224,9 @@ public class CoreController {
 			}
 		}
 		
-		Util_SwapNode.copyTtoT(coreService.moveNode(Util_SwapNode.swapTtoP(t_ComprehensiveTree)), t_ComprehensiveTree);
+		coreService.moveNode(comprehensiveTree);
 		
-		return new ObjectMapper().writeValueAsString(t_ComprehensiveTree);
+		return new ObjectMapper().writeValueAsString(comprehensiveTree);
 	}
 	
 	
@@ -250,15 +234,15 @@ public class CoreController {
 	@RequestMapping("/egovframework/com/etc/jstree/core/analyzeNode.do")
 	public String getChildNode(ModelMap model) {
 		
-		model.addAttribute("alayzeResult", "");
+		model.addAttribute("analyzeResult", "");
 		
-		return "/jsp/egovframework/com/ext/jstree/analyzeResult";
+		return "/jsp/egovframework/example/egovframework/com/ext/jstree/analyzeResult";
 	}
 	
 	
 	@RequestMapping("/egovframework/com/etc/jstree/main.do")
 	public String jstreeMain() {
 		
-		return "/jsp/egovframework/com/ext/jstree/jstreeSolutionStrutsVersion";
+		return "/jsp/egovframework/example/egovframework/com/ext/jstree/jstreeSolutionStrutsVersion";
 	}
 }
