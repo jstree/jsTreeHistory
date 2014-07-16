@@ -2,29 +2,28 @@ package egovframework.com.ext.jstree.core.service;
 
 import java.util.List;
 
-import egovframework.com.ext.jstree.core.vo.P_ComprehensiveTree;
-import egovframework.com.ext.jstree.core.vo.T_ComprehensiveTree;
+import egovframework.com.ext.jstree.core.vo.ComprehensiveTree;
 
 public interface CoreService {
 
 	
-	public List<T_ComprehensiveTree> getChildNode(P_ComprehensiveTree p_ComprehensiveTree);
+	public List<ComprehensiveTree> getChildNode( ComprehensiveTree comprehensiveTree );
 	
 	
-	public List<String> searchNode(P_ComprehensiveTree p_ComprehensiveTree);
+	public List<String> searchNode( ComprehensiveTree comprehensiveTree );
 	
 	
-	public T_ComprehensiveTree addNode(P_ComprehensiveTree p_ComprehensiveTree);
+	public ComprehensiveTree addNode( ComprehensiveTree comprehensiveTree );
 	
 	
-	public int executeRemoveNode(P_ComprehensiveTree p_ComprehensiveTree);
+	public int executeRemoveNode( ComprehensiveTree comprehensiveTree );
 	
 	
-	public int alterNode(P_ComprehensiveTree p_ComprehensiveTree);
+	public int alterNode( ComprehensiveTree comprehensiveTree );
 	
 	
-	public int alterNodeType(P_ComprehensiveTree p_ComprehensiveTree);
+	public int alterNodeType( ComprehensiveTree comprehensiveTree );
 	
 	
-	public T_ComprehensiveTree moveNode(P_ComprehensiveTree p_ComprehensiveTree);
+	public ComprehensiveTree moveNode( ComprehensiveTree comprehensiveTree );
 }

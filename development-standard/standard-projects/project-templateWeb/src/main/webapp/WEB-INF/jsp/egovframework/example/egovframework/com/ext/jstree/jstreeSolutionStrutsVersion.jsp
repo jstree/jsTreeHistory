@@ -77,7 +77,6 @@
 <script type="text/javascript">
 
     function getGrid() {
-    	alert("afdafaadf");
         var jqDataUrl = '/egovframework/com/etc/jstree/monitor/list.do';
         // Set up the jquery grid
         $("#jqTable").jqGrid({
@@ -137,7 +136,7 @@
 <body id="demo_body" onload="getGrid();">
 <div id="jsTreeContainer">
 
-<h2>JAVA &amp; Oracle ( struts2 + Spring2.5 + Ibatis ) demo + event order</h2>
+<h2>JAVA &amp; Oracle ( Spring + Ibatis ) demo + event order</h2>
 <div id="description">
 <div id="mmenu" style="height:50px; overflow:auto;">
 <form class="niceform" style="overflow: hidden;">

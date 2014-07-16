@@ -1,8 +1,9 @@
 package egovframework.com.ext.jstree.core.vo;
 
 import java.util.Collection;
+import java.util.HashMap;
 
-public class P_ComprehensiveTree {
+public class ComprehensiveTree {
 
 	private int c_id;
 	private int c_parentid;
@@ -10,18 +11,18 @@ public class P_ComprehensiveTree {
 	private int c_left;
 	private int c_right;
 	private int c_level;
-	private String c_title;
-	private String c_type;
 
 	private int ref;
 	private int copy;
 	private int multiCounter;
 
 	private int status;
-
+	
+	private String c_title;
+	private String c_type;
 	private String childcount;
-
 	private String searchStr;
+	
 	private int idif;
 	private int ldif;
 	private int spaceOfTargetNode;
@@ -31,12 +32,29 @@ public class P_ComprehensiveTree {
 	private int fixCopyPosition;
 
 	private int rightPositionFromNodeByRef;
-	private T_ComprehensiveTree nodeById;
+	private ComprehensiveTree nodeById;
 
 	private int idifLeft;
 	private int idifRight;
 	private Boolean copyBooleanValue;
+	
+	private int id; // moveNode
+	private final HashMap<String, String> attr;
+	
+	
+	
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public ComprehensiveTree() {
+		attr = new HashMap<String, String>();
+	}
+	
 	public void setCopyBooleanValue(Boolean copyBooleanValue) {
 		this.copyBooleanValue = copyBooleanValue;
 	}
@@ -233,11 +251,11 @@ public class P_ComprehensiveTree {
 		this.rightPositionFromNodeByRef = rightPositionFromNodeByRef;
 	}
 
-	public T_ComprehensiveTree getNodeById() {
+	public ComprehensiveTree getNodeById() {
 		return nodeById;
 	}
 
-	public void setNodeById(T_ComprehensiveTree nodeById) {
+	public void setNodeById(ComprehensiveTree nodeById) {
 		this.nodeById = nodeById;
 	}
 
@@ -256,5 +274,14 @@ public class P_ComprehensiveTree {
 	public void setIdifRight(int idifRight) {
 		this.idifRight = idifRight;
 	}
+	
+	public String getData() {
+		return c_title;
+	}
 
+	public HashMap<String, String> getAttr() {
+		attr.put("id", "node_" + c_id);
+		attr.put("rel", c_type);
+		return attr;
+	}
 }

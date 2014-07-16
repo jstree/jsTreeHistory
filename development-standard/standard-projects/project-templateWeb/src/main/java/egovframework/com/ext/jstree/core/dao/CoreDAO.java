@@ -5,104 +5,103 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
-import egovframework.com.ext.jstree.core.vo.P_ComprehensiveTree;
-import egovframework.com.ext.jstree.core.vo.T_ComprehensiveTree;
+import egovframework.com.ext.jstree.core.vo.ComprehensiveTree;
 
 @Repository("CoreDAO")
 public class CoreDAO extends EgovComAbstractDAO {
 
 	@SuppressWarnings("unchecked")
-	public List<T_ComprehensiveTree> getChildNode(P_ComprehensiveTree p_ComprehensiveTree){
+	public List<ComprehensiveTree> getChildNode( ComprehensiveTree comprehensiveTree ){
 		
-		return list("core.getChildNode", p_ComprehensiveTree );
+		return list("core.getChildNode", comprehensiveTree );
 	}
 
 	
 	@SuppressWarnings("unchecked")
-	public List<T_ComprehensiveTree> searchNodeByString(P_ComprehensiveTree p_ComprehensiveTree){
+	public List<ComprehensiveTree> searchNodeByString( ComprehensiveTree comprehensiveTree ){
 		
-		return list("core.searchNodeByString", p_ComprehensiveTree );
+		return list("core.searchNodeByString", comprehensiveTree );
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<String> searchNodeByPosition(List<P_ComprehensiveTree> p_SearchNodeByPositions){
+	public List<String> searchNodeByPosition(List<ComprehensiveTree> searchNodeByPositions){
 		
-		return list("core.searchNodeByPosition", p_SearchNodeByPositions );
+		return list("core.searchNodeByPosition", searchNodeByPositions );
 	}
 	
 	
-	public T_ComprehensiveTree getNode(P_ComprehensiveTree p_ComprehensiveTree){
-		return (T_ComprehensiveTree)selectByPk("core.getNode", p_ComprehensiveTree);
+	public ComprehensiveTree getNode( ComprehensiveTree comprehensiveTree ){
+		return (ComprehensiveTree)selectByPk("core.getNode", comprehensiveTree);
 	}
 	
-	public T_ComprehensiveTree getNodeByRef(P_ComprehensiveTree p_ComprehensiveTree){
-		return (T_ComprehensiveTree)selectByPk("core.getNodeByRef", p_ComprehensiveTree);
+	public ComprehensiveTree getNodeByRef( ComprehensiveTree comprehensiveTree ){
+		return (ComprehensiveTree)selectByPk("core.getNodeByRef", comprehensiveTree);
 	}
 	
-	public void cutMyself(P_ComprehensiveTree p_OnlyCutMyselfFromJstree){
+	public void cutMyself(ComprehensiveTree p_OnlyCutMyselfFromJstree){
 		update("core.cutMyselfPositionFix", p_OnlyCutMyselfFromJstree);
 		update("core.cutMyselfLeftFix",     p_OnlyCutMyselfFromJstree);
 		update("core.cutMyselfRightFix",    p_OnlyCutMyselfFromJstree);
 	}
 	
-	public void stretchPositionForMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree){
-		update("core.stretchPositionForMyself", p_ComprehensiveTree);
+	public void stretchPositionForMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+		update("core.stretchPositionForMyself", comprehensiveTree);
 	}
 	
-	public void stretchLeftRightForMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree){
-		update("core.stretchLeftForMyselfFromJstree",  p_ComprehensiveTree);
-		update("core.stretchRightForMyselfFromJstree", p_ComprehensiveTree);
+	public void stretchLeftRightForMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+		update("core.stretchLeftForMyselfFromJstree",  comprehensiveTree);
+		update("core.stretchRightForMyselfFromJstree", comprehensiveTree);
 	}
 	
-	public int pasteMyselfFromJstree(P_ComprehensiveTree p_OnlyPasteMyselfFromJstree){
+	public int pasteMyselfFromJstree(ComprehensiveTree p_OnlyPasteMyselfFromJstree){
 		return (Integer)insert("core.pasteMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T_ComprehensiveTree> getChildNodeByLeftRight(P_ComprehensiveTree p_ComprehensiveTree){
+	public List<ComprehensiveTree> getChildNodeByLeftRight( ComprehensiveTree comprehensiveTree ){
 		
-		return list("core.getChildNodeByLeftRight", p_ComprehensiveTree );
+		return list("core.getChildNodeByLeftRight", comprehensiveTree );
 	}
 	
-	public void fixCopy(T_ComprehensiveTree t_ComprehensiveTree){
-		update("core.fixCopy", t_ComprehensiveTree);
+	public void fixCopy(ComprehensiveTree comprehensiveTree){
+		update("core.fixCopy", comprehensiveTree);
 	}
 
-	public void fixCopyIF(P_ComprehensiveTree p_ComprehensiveTree){
-		update("core.fixCopyIF", p_ComprehensiveTree);
+	public void fixCopyIF( ComprehensiveTree comprehensiveTree ){
+		update("core.fixCopyIF", comprehensiveTree);
 	}
 	
-	public void enterMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree){
-		insert("core.enterMyselfFromJstree", p_ComprehensiveTree);
+	public void enterMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+		insert("core.enterMyselfFromJstree", comprehensiveTree);
 	}
 	
-	public int addMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree){
-		return (Integer)insert("core.addMyselfFromJstree", p_ComprehensiveTree);
+	public int addMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+		return (Integer)insert("core.addMyselfFromJstree", comprehensiveTree);
 	}
 	
-	public int alterNode(P_ComprehensiveTree p_ComprehensiveTree){
-		return (Integer)update("core.alterNode", p_ComprehensiveTree);
+	public int alterNode( ComprehensiveTree comprehensiveTree ){
+		return (Integer)update("core.alterNode", comprehensiveTree);
 	}
 	
-	public int removeNode(P_ComprehensiveTree p_ComprehensiveTree){
+	public int removeNode( ComprehensiveTree comprehensiveTree ){
 		
-		delete("core.removeNode",              p_ComprehensiveTree);
-		update("core.removedAfterLeftFix",     p_ComprehensiveTree);
-		delete("core.removedAfterRightFix",    p_ComprehensiveTree);
-		delete("core.removedAfterPositionFix", p_ComprehensiveTree);
+		delete("core.removeNode",              comprehensiveTree);
+		update("core.removedAfterLeftFix",     comprehensiveTree);
+		delete("core.removedAfterRightFix",    comprehensiveTree);
+		delete("core.removedAfterPositionFix", comprehensiveTree);
 		
 		return 0;
 	}
 	
-	public int alterNodeType(P_ComprehensiveTree p_ComprehensiveTree){
-		return (Integer)update("core.alterNodeType", p_ComprehensiveTree);
+	public int alterNodeType( ComprehensiveTree comprehensiveTree ){
+		return (Integer)update("core.alterNodeType", comprehensiveTree);
 	}
 	
-	public void stretchLeftForMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree){
-		update("core.stretchLeftForMyselfFromJstree", p_ComprehensiveTree);
+	public void stretchLeftForMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+		update("core.stretchLeftForMyselfFromJstree", comprehensiveTree);
 	}
 	
-	public void stretchRightForMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree){
-		update("core.stretchRightForMyselfFromJstree", p_ComprehensiveTree);
+	public void stretchRightForMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+		update("core.stretchRightForMyselfFromJstree", comprehensiveTree);
 	}
 }

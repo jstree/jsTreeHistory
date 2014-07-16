@@ -18,9 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.opensymphony.xwork2.ActionContext;
 
 import egovframework.com.ext.jstree.core.dao.CoreDAO;
-import egovframework.com.ext.jstree.core.util.Util_SwapNode;
-import egovframework.com.ext.jstree.core.vo.P_ComprehensiveTree;
-import egovframework.com.ext.jstree.core.vo.T_ComprehensiveTree;
+import egovframework.com.ext.jstree.core.vo.ComprehensiveTree;
 
 @Service("CoreService")
 public class CoreServiceImpl implements CoreService {
@@ -31,26 +29,20 @@ public class CoreServiceImpl implements CoreService {
 	private CoreDAO coreDAO;
 	
 	
-	public List<T_ComprehensiveTree> getChildNode(P_ComprehensiveTree p_ComprehensiveTree){
+	public List<ComprehensiveTree> getChildNode( ComprehensiveTree comprehensiveTree ){
 		
-		return coreDAO.getChildNode( p_ComprehensiveTree );
+		return coreDAO.getChildNode( comprehensiveTree );
 	}
 	
 	
-	public List<String> searchNode(P_ComprehensiveTree p_ComprehensiveTree) {
+	public List<String> searchNode( ComprehensiveTree comprehensiveTree ) {
 		
-		List<T_ComprehensiveTree> t_SearchNodeByStrings   = new ArrayList<T_ComprehensiveTree>();
-		List<P_ComprehensiveTree> p_SearchNodeByPositions = new ArrayList<P_ComprehensiveTree>();
-		
-		t_SearchNodeByStrings.addAll(coreDAO.searchNodeByString(p_ComprehensiveTree));
-
-		for (T_ComprehensiveTree nodeByString : t_SearchNodeByStrings) {
-			p_SearchNodeByPositions.add(Util_SwapNode.swapTtoP(nodeByString));
-		}
+		List<ComprehensiveTree> searchNodeByStrings = coreDAO.searchNodeByString(   comprehensiveTree   );
+		List<String>            rowDatas            = coreDAO.searchNodeByPosition( searchNodeByStrings );
 		
 		List<String> returnList = new ArrayList<String>();
 		
-		for( String rowData : coreDAO.searchNodeByPosition(p_SearchNodeByPositions) ){
+		for( String rowData : rowDatas ){
 			rowData = "#node_" + rowData;
 			returnList.add(rowData);
 		}
@@ -58,52 +50,52 @@ public class CoreServiceImpl implements CoreService {
 	}
 	
 	@Transactional
-	public T_ComprehensiveTree addNode(P_ComprehensiveTree p_ComprehensiveTree) {
+	public ComprehensiveTree addNode( ComprehensiveTree comprehensiveTree ) {
 
-		T_ComprehensiveTree nodeById  = coreDAO.getNode(     p_ComprehensiveTree);
-		T_ComprehensiveTree nodeByRef = coreDAO.getNodeByRef(p_ComprehensiveTree);
+		ComprehensiveTree nodeById  = coreDAO.getNode(      comprehensiveTree );
+		ComprehensiveTree nodeByRef = coreDAO.getNodeByRef( comprehensiveTree );
 
-		List<T_ComprehensiveTree> childNodesFromNodeByRef = coreDAO.getChildNode(Util_SwapNode.swapTtoP(nodeByRef));
+		List<ComprehensiveTree> childNodesFromNodeByRef = coreDAO.getChildNode( nodeByRef );
 		
-		T_ComprehensiveTree t_ComprehensiveTree = new T_ComprehensiveTree();
+		ComprehensiveTree t_ComprehensiveTree = new ComprehensiveTree();
 		
 		int spaceOfTargetNode = 2;
 		Collection<Integer> c_idsByChildNodeFromNodeById = null;
 
-		if (nodeById != null && p_ComprehensiveTree.getCopy() == 0) {
-			this.cutMyself(nodeById, spaceOfTargetNode,	c_idsByChildNodeFromNodeById);
+		if( nodeById != null && comprehensiveTree.getCopy() == 0 ) {
+			
+			this.cutMyself( nodeById, spaceOfTargetNode, c_idsByChildNodeFromNodeById );
 		}
 
-		this.stretchPositionForMyselfFromJstree(
-				c_idsByChildNodeFromNodeById, nodeById, p_ComprehensiveTree);
+		this.stretchPositionForMyselfFromJstree( c_idsByChildNodeFromNodeById, nodeById, comprehensiveTree );
 
 		int rightPositionFromNodeByRef = nodeByRef.getC_right();
 		rightPositionFromNodeByRef = Math.max(rightPositionFromNodeByRef, 1);
 
 		int self = ( nodeById != null
-				  && !p_ComprehensiveTree.getCopyBooleanValue()
-				  && nodeById.getC_parentid() == p_ComprehensiveTree.getRef() 
-				  && p_ComprehensiveTree.getC_position() > nodeById.getC_position() ) ? 1 : 0;
+				  && !comprehensiveTree.getCopyBooleanValue()
+				  && nodeById.getC_parentid() == comprehensiveTree.getRef() 
+				  && comprehensiveTree.getC_position() > nodeById.getC_position() ) ? 1 : 0;
 
-		for (T_ComprehensiveTree child : childNodesFromNodeByRef) {
+		for (ComprehensiveTree child : childNodesFromNodeByRef) {
 			
-			if (child.getC_position() - self == p_ComprehensiveTree.getC_position()) {
+			if (child.getC_position() - self == comprehensiveTree.getC_position()) {
 				rightPositionFromNodeByRef = child.getC_left();
 				break;
 			}
 		}
 
-		if (nodeById != null && !p_ComprehensiveTree.getCopyBooleanValue()
+		if (nodeById != null && !comprehensiveTree.getCopyBooleanValue()
 				&& nodeById.getC_left() < rightPositionFromNodeByRef) {
 			rightPositionFromNodeByRef -= spaceOfTargetNode;
 		}
 
 		this.stretchLeftRightForMyselfFromJstree( spaceOfTargetNode
 				                                , rightPositionFromNodeByRef
-				                                , p_ComprehensiveTree.getCopy()
+				                                , comprehensiveTree.getCopy()
 				                                , c_idsByChildNodeFromNodeById );
 
-		int targetNodeLevel = p_ComprehensiveTree.getRef() == 0 ? 0	: nodeByRef.getC_level() + 1;
+		int targetNodeLevel = comprehensiveTree.getRef() == 0 ? 0	: nodeByRef.getC_level() + 1;
 		int comparePosition = rightPositionFromNodeByRef;
 		
 		if (nodeById != null) {
@@ -111,8 +103,8 @@ public class CoreServiceImpl implements CoreService {
 			targetNodeLevel = nodeById.getC_level()	- (nodeByRef.getC_level() + 1);
 			comparePosition = nodeById.getC_left()	- rightPositionFromNodeByRef;
 			
-			if (p_ComprehensiveTree.getCopyBooleanValue()) {
-				int ind = this.pasteMyselfFromJstree( p_ComprehensiveTree.getRef()
+			if (comprehensiveTree.getCopyBooleanValue()) {
+				int ind = this.pasteMyselfFromJstree( comprehensiveTree.getRef()
 						                            , comparePosition
 						                            , spaceOfTargetNode
 						                            , targetNodeLevel
@@ -120,26 +112,26 @@ public class CoreServiceImpl implements CoreService {
 						                            , c_idsByChildNodeFromNodeById
 						                            , nodeById );
 				t_ComprehensiveTree.setId(ind);
-				this.fixCopy( ind, p_ComprehensiveTree.getC_position() );
+				this.fixCopy( ind, comprehensiveTree.getC_position() );
 			} else {
-				this.enterMyselfFromJstree( p_ComprehensiveTree.getRef()
-						                  , p_ComprehensiveTree.getC_position()
-						                  ,	p_ComprehensiveTree.getC_id()
+				this.enterMyselfFromJstree( comprehensiveTree.getRef()
+						                  , comprehensiveTree.getC_position()
+						                  ,	comprehensiveTree.getC_id()
 						                  , comparePosition
 						                  ,	targetNodeLevel
 						                  , c_idsByChildNodeFromNodeById );
 			}
 		} else {
-			p_ComprehensiveTree.setC_parentid(p_ComprehensiveTree.getRef());
-			p_ComprehensiveTree.setC_left(comparePosition);
-			p_ComprehensiveTree.setC_right(comparePosition + 1);
-			p_ComprehensiveTree.setC_level(targetNodeLevel);
+			comprehensiveTree.setC_parentid(comprehensiveTree.getRef());
+			comprehensiveTree.setC_left(comparePosition);
+			comprehensiveTree.setC_right(comparePosition + 1);
+			comprehensiveTree.setC_level(targetNodeLevel);
 
-			int insertSeqResult = coreDAO.addMyselfFromJstree(p_ComprehensiveTree);
+			int insertSeqResult = coreDAO.addMyselfFromJstree(comprehensiveTree);
 
 			t_ComprehensiveTree.setId(insertSeqResult);
-			p_ComprehensiveTree.setC_id(insertSeqResult);
-			int alterCountResult = coreDAO.alterNode(p_ComprehensiveTree);
+			comprehensiveTree.setC_id(insertSeqResult);
+			int alterCountResult = coreDAO.alterNode(comprehensiveTree);
 
 			if (insertSeqResult > 0 && alterCountResult == 1) {
 				t_ComprehensiveTree.setStatus(1);
@@ -148,33 +140,30 @@ public class CoreServiceImpl implements CoreService {
 			}
 		}
 
-		if (p_ComprehensiveTree.getCopyBooleanValue()) {
-			this.fixCopy( p_ComprehensiveTree.getC_id(), p_ComprehensiveTree.getC_position() );
+		if (comprehensiveTree.getCopyBooleanValue()) {
+			this.fixCopy( comprehensiveTree.getC_id(), comprehensiveTree.getC_position() );
 		}
 		return t_ComprehensiveTree;
 	}
 	
-	private void cutMyself( T_ComprehensiveTree nodeById
+	private void cutMyself( ComprehensiveTree   nodeById
 			              , int                 spaceOfTargetNode
 			              , Collection<Integer> c_idsByChildNodeFromNodeById ) {
 
-		P_ComprehensiveTree p_OnlyCutMyselfFromJstree = new P_ComprehensiveTree();
-		p_OnlyCutMyselfFromJstree = Util_SwapNode.swapTtoP(nodeById);
-		p_OnlyCutMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
-		p_OnlyCutMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
+		nodeById.setSpaceOfTargetNode(spaceOfTargetNode);
+		nodeById.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
 
-		coreDAO.cutMyself(p_OnlyCutMyselfFromJstree);
+		coreDAO.cutMyself(nodeById);
 	}
 	
 	private void stretchPositionForMyselfFromJstree( Collection<Integer> c_idsByChildNodeFromNodeById
-			                                       , T_ComprehensiveTree nodeById
-			                                       , P_ComprehensiveTree p_ComprehensiveTree ) {
+			                                       , ComprehensiveTree   nodeById
+			                                       , ComprehensiveTree   comprehensiveTree ) {
 		
-		p_ComprehensiveTree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
-		p_ComprehensiveTree.setNodeById( nodeById );
+		comprehensiveTree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
+		comprehensiveTree.setNodeById( nodeById );
 
-		coreDAO.stretchPositionForMyselfFromJstree( p_ComprehensiveTree );
-
+		coreDAO.stretchPositionForMyselfFromJstree( comprehensiveTree );
 	}
 	
 	private void stretchLeftRightForMyselfFromJstree( int spaceOfTargetNode
@@ -182,14 +171,14 @@ public class CoreServiceImpl implements CoreService {
 			                                        , int copy
 			                                        , Collection<Integer> c_idsByChildNodeFromNodeById ) {
 
-		P_ComprehensiveTree p_OnlyStretchLeftRightForMyselfFromJstree = new P_ComprehensiveTree();
+		ComprehensiveTree onlyStretchLeftRightForMyselfFromJstree = new ComprehensiveTree();
 
-		p_OnlyStretchLeftRightForMyselfFromJstree.setSpaceOfTargetNode(            spaceOfTargetNode            );
-		p_OnlyStretchLeftRightForMyselfFromJstree.setRightPositionFromNodeByRef(   rightPositionFromNodeByRef   );
-		p_OnlyStretchLeftRightForMyselfFromJstree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
-		p_OnlyStretchLeftRightForMyselfFromJstree.setCopy(copy);
+		onlyStretchLeftRightForMyselfFromJstree.setSpaceOfTargetNode(            spaceOfTargetNode            );
+		onlyStretchLeftRightForMyselfFromJstree.setRightPositionFromNodeByRef(   rightPositionFromNodeByRef   );
+		onlyStretchLeftRightForMyselfFromJstree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
+		onlyStretchLeftRightForMyselfFromJstree.setCopy(copy);
 		
-		coreDAO.stretchLeftRightForMyselfFromJstree(p_OnlyStretchLeftRightForMyselfFromJstree);
+		coreDAO.stretchLeftRightForMyselfFromJstree(onlyStretchLeftRightForMyselfFromJstree);
 	}
 	
 	private int pasteMyselfFromJstree( int ref
@@ -198,32 +187,32 @@ public class CoreServiceImpl implements CoreService {
 			                         , int ldif
 			                         , int rightPositionFromNodeByRef
 			                         , Collection<Integer> c_idsByChildNodeFromNodeById
-			                         , T_ComprehensiveTree nodeById) {
+			                         , ComprehensiveTree   nodeById) {
 
-		P_ComprehensiveTree p_OnlyPasteMyselfFromJstree = new P_ComprehensiveTree();
+		ComprehensiveTree onlyPasteMyselfFromJstree = new ComprehensiveTree();
 
-		p_OnlyPasteMyselfFromJstree.setRef(ref);
-		p_OnlyPasteMyselfFromJstree.setIdif(idif);
-		p_OnlyPasteMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
-		p_OnlyPasteMyselfFromJstree.setLdif(ldif);
-		p_OnlyPasteMyselfFromJstree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
-		p_OnlyPasteMyselfFromJstree.setRightPositionFromNodeByRef(   rightPositionFromNodeByRef   );
-		p_OnlyPasteMyselfFromJstree.setNodeById(nodeById);
+		onlyPasteMyselfFromJstree.setRef(ref);
+		onlyPasteMyselfFromJstree.setIdif(idif);
+		onlyPasteMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
+		onlyPasteMyselfFromJstree.setLdif(ldif);
+		onlyPasteMyselfFromJstree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
+		onlyPasteMyselfFromJstree.setRightPositionFromNodeByRef(   rightPositionFromNodeByRef   );
+		onlyPasteMyselfFromJstree.setNodeById(nodeById);
 
-		p_OnlyPasteMyselfFromJstree.setIdifLeft( idif + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode	: 0) );
-		p_OnlyPasteMyselfFromJstree.setIdifRight(idif + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode	: 0) );
+		onlyPasteMyselfFromJstree.setIdifLeft( idif + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode	: 0) );
+		onlyPasteMyselfFromJstree.setIdifRight(idif + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode	: 0) );
 
-		return coreDAO.pasteMyselfFromJstree(p_OnlyPasteMyselfFromJstree);
+		return coreDAO.pasteMyselfFromJstree(onlyPasteMyselfFromJstree);
 	}
 	
 	private void fixCopy( int ind, int ref ) {
 		
-		P_ComprehensiveTree p_ComprehensiveTree = new P_ComprehensiveTree();
-		p_ComprehensiveTree.setC_id(ind);
+		ComprehensiveTree comprehensiveTree = new ComprehensiveTree();
+		comprehensiveTree.setC_id(ind);
 
-		T_ComprehensiveTree node = coreDAO.getNode(p_ComprehensiveTree);
+		ComprehensiveTree node = coreDAO.getNode(comprehensiveTree);
 
-		List<T_ComprehensiveTree> children = coreDAO.getChildNodeByLeftRight(Util_SwapNode.swapTtoP(node));
+		List<ComprehensiveTree> children = coreDAO.getChildNodeByLeftRight(node);
 
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 		for (int i = node.getC_left() + 1; i < node.getC_right(); i++) {
@@ -232,7 +221,7 @@ public class CoreServiceImpl implements CoreService {
 
 		for (int i = 0; i < children.size(); i++) {
 
-			T_ComprehensiveTree child = children.get(i);
+			ComprehensiveTree child = children.get(i);
 
 			if (child.getC_id() == ind) {
 				logger.debug(">>>>>>>>>>>>>>>>> 기준노드가 잡혔음.");
@@ -240,11 +229,11 @@ public class CoreServiceImpl implements CoreService {
 				logger.debug("C_ID       = " + ind);
 				logger.debug("C_POSITION = " + ref);
 				
-				P_ComprehensiveTree p_OnlyFixCopyFromJstree = new P_ComprehensiveTree();
-				p_OnlyFixCopyFromJstree.setFixCopyId(ind);
-				p_OnlyFixCopyFromJstree.setFixCopyPosition(ref);
+				ComprehensiveTree onlyFixCopyFromJstree = new ComprehensiveTree();
+				onlyFixCopyFromJstree.setFixCopyId(ind);
+				onlyFixCopyFromJstree.setFixCopyPosition(ref);
 				
-				coreDAO.fixCopyIF(p_OnlyFixCopyFromJstree);
+				coreDAO.fixCopyIF(onlyFixCopyFromJstree);
 				continue;
 			}
 			logger.debug(">>>>>>>>>>>>>>>>> 기준노드 아래 있는 녀석임");
@@ -270,22 +259,22 @@ public class CoreServiceImpl implements CoreService {
 			                          , int ldif
 			                          , Collection<Integer> c_idsByChildNodeFromNodeById ) {
 
-		P_ComprehensiveTree p_OnlyPasteMyselfFromJstree = new P_ComprehensiveTree();
-		p_OnlyPasteMyselfFromJstree.setRef(ref);
-		p_OnlyPasteMyselfFromJstree.setC_position(c_position);
-		p_OnlyPasteMyselfFromJstree.setC_id(c_id);
-		p_OnlyPasteMyselfFromJstree.setIdif(idif);
-		p_OnlyPasteMyselfFromJstree.setLdif(ldif);
-		p_OnlyPasteMyselfFromJstree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
+		ComprehensiveTree onlyPasteMyselfFromJstree = new ComprehensiveTree();
+		onlyPasteMyselfFromJstree.setRef(ref);
+		onlyPasteMyselfFromJstree.setC_position(c_position);
+		onlyPasteMyselfFromJstree.setC_id(c_id);
+		onlyPasteMyselfFromJstree.setIdif(idif);
+		onlyPasteMyselfFromJstree.setLdif(ldif);
+		onlyPasteMyselfFromJstree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
 
-		coreDAO.enterMyselfFromJstree(p_OnlyPasteMyselfFromJstree);
+		coreDAO.enterMyselfFromJstree(onlyPasteMyselfFromJstree);
 	}
 	
 	
 	@Transactional
-	public int executeRemoveNode(P_ComprehensiveTree p_ComprehensiveTree) {
+	public int executeRemoveNode( ComprehensiveTree comprehensiveTree) {
 		
-		P_ComprehensiveTree removeNode = Util_SwapNode.swapTtoP( coreDAO.getNode(p_ComprehensiveTree) );
+		ComprehensiveTree removeNode = coreDAO.getNode(comprehensiveTree);
 		
 		coreDAO.removeNode(removeNode);
 		
@@ -293,28 +282,28 @@ public class CoreServiceImpl implements CoreService {
 	}
 	
 	
-	public int alterNode(P_ComprehensiveTree p_ComprehensiveTree) {
+	public int alterNode( ComprehensiveTree comprehensiveTree ) {
 
-		return coreDAO.alterNode(p_ComprehensiveTree);
+		return coreDAO.alterNode(comprehensiveTree);
 	}
 	
 	
 	@Transactional
-	public int alterNodeType(P_ComprehensiveTree p_ComprehensiveTree) {
+	public int alterNodeType( ComprehensiveTree comprehensiveTree ) {
 
-		List<T_ComprehensiveTree> childNodesFromNodeById = coreDAO.getChildNode(p_ComprehensiveTree);
+		List<ComprehensiveTree> childNodesFromNodeById = coreDAO.getChildNode(comprehensiveTree);
 
-		T_ComprehensiveTree nodeById = coreDAO.getNode(p_ComprehensiveTree);
+		ComprehensiveTree nodeById = coreDAO.getNode(comprehensiveTree);
 
 		int returnStatus = 0;
-		if (p_ComprehensiveTree.getC_type().equals("default")) {
+		if (comprehensiveTree.getC_type().equals("default")) {
 
 			if (childNodesFromNodeById.size() > 0) {
 				throw new RuntimeException("하위에 노드가 있는데 디폴트로 바꾸려고 함");
 
 			} else {
-				p_ComprehensiveTree.setC_type("default");
-				int temp = coreDAO.alterNodeType(p_ComprehensiveTree);
+				comprehensiveTree.setC_type("default");
+				int temp = coreDAO.alterNodeType(comprehensiveTree);
 
 				if (temp == 1) {
 					returnStatus = 1;
@@ -326,7 +315,7 @@ public class CoreServiceImpl implements CoreService {
 			if (nodeById.getC_type().equals("folder")) {
 				returnStatus = 1;
 			} else {
-				returnStatus = coreDAO.alterNodeType(p_ComprehensiveTree);
+				returnStatus = coreDAO.alterNodeType(comprehensiveTree);
 			}
 		}
 		return returnStatus;
@@ -334,15 +323,15 @@ public class CoreServiceImpl implements CoreService {
 	
 	
 	@Transactional
-	public T_ComprehensiveTree moveNode(P_ComprehensiveTree p_ComprehensiveTree) {
+	public ComprehensiveTree moveNode( ComprehensiveTree comprehensiveTree ) {
 
-		T_ComprehensiveTree nodeById = coreDAO.getNode(p_ComprehensiveTree);
-		List<T_ComprehensiveTree> childNodesFromNodeById = coreDAO.getChildNodeByLeftRight(Util_SwapNode.swapTtoP(nodeById));
+		ComprehensiveTree nodeById = coreDAO.getNode(comprehensiveTree);
+		List<ComprehensiveTree> childNodesFromNodeById = coreDAO.getChildNodeByLeftRight( nodeById );
 
-		T_ComprehensiveTree nodeByRef = coreDAO.getNodeByRef(p_ComprehensiveTree);
-		List<T_ComprehensiveTree> childNodesFromNodeByRef = coreDAO.getChildNode(Util_SwapNode.swapTtoP(nodeByRef));
+		ComprehensiveTree nodeByRef = coreDAO.getNodeByRef(comprehensiveTree);
+		List<ComprehensiveTree> childNodesFromNodeByRef = coreDAO.getChildNode(nodeByRef);
 
-		T_ComprehensiveTree t_ComprehensiveTree = new T_ComprehensiveTree();
+		ComprehensiveTree t_ComprehensiveTree = new ComprehensiveTree();
 		
 		int spaceOfTargetNode = 2;
 		Collection<Integer> c_idsByChildNodeFromNodeById = null;
@@ -352,15 +341,15 @@ public class CoreServiceImpl implements CoreService {
 		} else {
 			c_idsByChildNodeFromNodeById = CollectionUtils.collect(
 					childNodesFromNodeById,
-					new Transformer<T_ComprehensiveTree, Integer>() {
+					new Transformer<ComprehensiveTree, Integer>() {
 						@Override
 						public Integer transform(
-								T_ComprehensiveTree childNodePerNodeById) {
+								ComprehensiveTree childNodePerNodeById) {
 							return childNodePerNodeById.getC_id();
 						}
 					});
 
-			if (c_idsByChildNodeFromNodeById.contains(p_ComprehensiveTree
+			if (c_idsByChildNodeFromNodeById.contains(comprehensiveTree
 					.getRef())) {
 				throw new RuntimeException(
 						"myself contains already refTargetNode");
@@ -371,42 +360,42 @@ public class CoreServiceImpl implements CoreService {
 		}
 
 		if (nodeById != null
-				&& p_ComprehensiveTree.getCopyBooleanValue() == false) {
+				&& comprehensiveTree.getCopyBooleanValue() == false) {
 			this.cutMyself(nodeById, spaceOfTargetNode,
 					c_idsByChildNodeFromNodeById);
 		}
 
-		calculatePostion(p_ComprehensiveTree, nodeById,
+		calculatePostion(comprehensiveTree, nodeById,
 				childNodesFromNodeByRef);
 
 		this.stretchPositionForMyselfFromJstree(
-				c_idsByChildNodeFromNodeById, nodeById, p_ComprehensiveTree);
+				c_idsByChildNodeFromNodeById, nodeById, comprehensiveTree);
 
 		int rightPositionFromNodeByRef = nodeByRef.getC_right();
 		rightPositionFromNodeByRef = Math
 				.max(rightPositionFromNodeByRef, 1);
 
 		int self = (nodeById != null
-				&& !p_ComprehensiveTree.getCopyBooleanValue()
-				&& nodeById.getC_parentid() == p_ComprehensiveTree.getRef() && p_ComprehensiveTree
+				&& !comprehensiveTree.getCopyBooleanValue()
+				&& nodeById.getC_parentid() == comprehensiveTree.getRef() && comprehensiveTree
 				.getC_position() > nodeById.getC_position()) ? 1 : 0;
 
-		for (T_ComprehensiveTree child : childNodesFromNodeByRef) {
-			if (child.getC_position() - self == p_ComprehensiveTree
+		for (ComprehensiveTree child : childNodesFromNodeByRef) {
+			if (child.getC_position() - self == comprehensiveTree
 					.getC_position()) {
 				rightPositionFromNodeByRef = child.getC_left();
 				break;
 			}
 		}
 
-		if (nodeById != null && !p_ComprehensiveTree.getCopyBooleanValue()
+		if (nodeById != null && !comprehensiveTree.getCopyBooleanValue()
 				&& nodeById.getC_left() < rightPositionFromNodeByRef) {
 			rightPositionFromNodeByRef -= spaceOfTargetNode;
 		}
 
 		this.stretchLeftRightForMyselfFromJstree(spaceOfTargetNode,
 				rightPositionFromNodeByRef, c_idsByChildNodeFromNodeById,
-				p_ComprehensiveTree.getCopy());
+				comprehensiveTree.getCopy());
 
 		logger.debug(">>>>>>>>>>>>>>>>>>>>"
 				+ rightPositionFromNodeByRef);
@@ -416,9 +405,9 @@ public class CoreServiceImpl implements CoreService {
 				- rightPositionFromNodeByRef;
 		logger.debug(">>>>>>>>>>>>>>>>>>>>" + comparePosition);
 
-		if (p_ComprehensiveTree.getCopyBooleanValue()) {
+		if (comprehensiveTree.getCopyBooleanValue()) {
 
-			int ind = this.pasteMyselfFromJstree( p_ComprehensiveTree.getRef()
+			int ind = this.pasteMyselfFromJstree( comprehensiveTree.getRef()
 					                            , comparePosition
 					                            , spaceOfTargetNode
 					                            , targetNodeLevel
@@ -426,12 +415,12 @@ public class CoreServiceImpl implements CoreService {
 					                            , rightPositionFromNodeByRef
 					                            , nodeById );
 			t_ComprehensiveTree.setId(ind);
-			this.fixCopy(ind, p_ComprehensiveTree.getC_position());
+			this.fixCopy(ind, comprehensiveTree.getC_position());
 
 		} else {
-			this.enterMyselfFromJstree( p_ComprehensiveTree.getRef()
-					                  ,	p_ComprehensiveTree.getC_position()
-					                  ,	p_ComprehensiveTree.getC_id()
+			this.enterMyselfFromJstree( comprehensiveTree.getRef()
+					                  ,	comprehensiveTree.getC_position()
+					                  ,	comprehensiveTree.getC_id()
 					                  , comparePosition
 					                  ,	targetNodeLevel
 					                  , c_idsByChildNodeFromNodeById );
@@ -440,45 +429,45 @@ public class CoreServiceImpl implements CoreService {
 		return t_ComprehensiveTree;
 	}
 	
-	private void calculatePostion( P_ComprehensiveTree p_ComprehensiveTree
-			                     , T_ComprehensiveTree nodeById
-			                     , List<T_ComprehensiveTree> childNodesFromNodeByRef ) {
+	private void calculatePostion( ComprehensiveTree comprehensiveTree
+			                     , ComprehensiveTree nodeById
+			                     , List<ComprehensiveTree> childNodesFromNodeByRef ) {
 
 		ActionContext actionContext = ActionContext.getContext();
 		Map<String, Object> session = actionContext.getSession();
 
-		if (p_ComprehensiveTree.getRef() == nodeById.getC_parentid()) {
+		if (comprehensiveTree.getRef() == nodeById.getC_parentid()) {
 			logger.debug(">>>>>>>>>>>>>>>이동할 노드가 내 부모안에서 움직일때");
 
-			if (p_ComprehensiveTree.getMultiCounter() == 0) {
+			if (comprehensiveTree.getMultiCounter() == 0) {
 				logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 일때");
 				session.put("settedPosition",
-						p_ComprehensiveTree.getC_position());
+						comprehensiveTree.getC_position());
 
-				if (p_ComprehensiveTree.getC_position() > nodeById
+				if (comprehensiveTree.getC_position() > nodeById
 						.getC_position()) {
 					logger.debug(">>>>>>>>>>>>>>>이동 할 노드가 현재보다 뒤일때");
 					logger.debug("노드값=" + nodeById.getC_title());
 					logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
 					logger.debug("노드의 요청받은 위치값="
-							+ p_ComprehensiveTree.getC_position());
+							+ comprehensiveTree.getC_position());
 					logger.debug("노드의 요청받은 멀티카운터="
-							+ p_ComprehensiveTree.getMultiCounter());
+							+ comprehensiveTree.getMultiCounter());
 
-					if (p_ComprehensiveTree.getC_position() > childNodesFromNodeByRef
+					if (comprehensiveTree.getC_position() > childNodesFromNodeByRef
 							.size()) {
 						logger.debug("노드 이동시 폴더를 대상으로 했을때 생기는 버그 발생 ="
-								+ p_ComprehensiveTree.getC_position());
-						p_ComprehensiveTree
+								+ comprehensiveTree.getC_position());
+						comprehensiveTree
 								.setC_position(childNodesFromNodeByRef.size());
 					}
-					p_ComprehensiveTree.setC_position(p_ComprehensiveTree
+					comprehensiveTree.setC_position(comprehensiveTree
 							.getC_position() - 1);
 
 					logger.debug("노드의 최종 위치값="
-							+ p_ComprehensiveTree.getC_position());
+							+ comprehensiveTree.getC_position());
 					session.put("settedPosition",
-							p_ComprehensiveTree.getC_position());
+							comprehensiveTree.getC_position());
 				}
 
 			} else {
@@ -486,9 +475,9 @@ public class CoreServiceImpl implements CoreService {
 				logger.debug("노드값=" + nodeById.getC_title());
 				logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
 				logger.debug("노드의 요청받은 위치값="
-						+ p_ComprehensiveTree.getC_position());
+						+ comprehensiveTree.getC_position());
 				logger.debug("노드의 요청받은 멀티카운터="
-						+ p_ComprehensiveTree.getMultiCounter());
+						+ comprehensiveTree.getMultiCounter());
 				logger.debug("0번 노드의 위치값=" + session.get("settedPosition"));
 
 				int increasePosition = 0;
@@ -503,51 +492,51 @@ public class CoreServiceImpl implements CoreService {
 				}
 				session.put("settedPosition", increasePosition);
 
-				p_ComprehensiveTree.setC_position(increasePosition);
+				comprehensiveTree.setC_position(increasePosition);
 
-				if (nodeById.getC_position() == p_ComprehensiveTree
+				if (nodeById.getC_position() == comprehensiveTree
 						.getC_position()) {
 					logger.debug(">>>>>>>>>>>>>>>원래 노드 위치값과 최종 계산된 노드의 위치값이 동일한 경우");
 					session.put("settedPosition", increasePosition - 1);
 				}
 				logger.debug("노드의 최종 위치값="
-						+ p_ComprehensiveTree.getC_position());
+						+ comprehensiveTree.getC_position());
 			}
 		} else {
 			logger.debug(">>>>>>>>>>>>>>>이동할 노드가 내 부모밖으로 움직일때");
 
-			if (p_ComprehensiveTree.getMultiCounter() == 0) {
+			if (comprehensiveTree.getMultiCounter() == 0) {
 				logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 일때");
 				logger.debug("노드값=" + nodeById.getC_title());
 				logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
 				logger.debug("노드의 요청받은 위치값="
-						+ p_ComprehensiveTree.getC_position());
+						+ comprehensiveTree.getC_position());
 				logger.debug("노드의 요청받은 멀티카운터="
-						+ p_ComprehensiveTree.getMultiCounter());
-				p_ComprehensiveTree.setC_position(p_ComprehensiveTree
+						+ comprehensiveTree.getMultiCounter());
+				comprehensiveTree.setC_position(comprehensiveTree
 						.getC_position());
 				logger.debug("노드의 최종 위치값="
-						+ p_ComprehensiveTree.getC_position());
+						+ comprehensiveTree.getC_position());
 				session.put("settedPosition",
-						p_ComprehensiveTree.getC_position());
+						comprehensiveTree.getC_position());
 			} else {
 				logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 이 아닐때");
 				logger.debug("노드값=" + nodeById.getC_title());
 				logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
 				logger.debug("노드의 요청받은 위치값="
-						+ p_ComprehensiveTree.getC_position());
+						+ comprehensiveTree.getC_position());
 				logger.debug("노드의 요청받은 멀티카운터="
-						+ p_ComprehensiveTree.getMultiCounter());
+						+ comprehensiveTree.getMultiCounter());
 
 				int increasePosition = 0;
 				increasePosition = (Integer) session.get("settedPosition") + 1;
 				session.put("settedPosition", increasePosition);
 
-				p_ComprehensiveTree.setC_position(increasePosition);
+				comprehensiveTree.setC_position(increasePosition);
 				logger.debug("노드의 최종 위치값="
-						+ p_ComprehensiveTree.getC_position());
+						+ comprehensiveTree.getC_position());
 				session.put("settedPosition",
-						p_ComprehensiveTree.getC_position());
+						comprehensiveTree.getC_position());
 			}
 		}
 	}
@@ -557,15 +546,15 @@ public class CoreServiceImpl implements CoreService {
 			                                        , Collection<Integer> c_idsByChildNodeFromNodeById
 			                                        , int copy ) {
 
-		P_ComprehensiveTree p_OnlyStretchLeftRightForMyselfFromJstree = new P_ComprehensiveTree();
+		ComprehensiveTree onlyStretchLeftRightForMyselfFromJstree = new ComprehensiveTree();
 
-		p_OnlyStretchLeftRightForMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
-		p_OnlyStretchLeftRightForMyselfFromJstree.setRightPositionFromNodeByRef(rightPositionFromNodeByRef);
-		p_OnlyStretchLeftRightForMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
-		p_OnlyStretchLeftRightForMyselfFromJstree.setCopy(copy);
+		onlyStretchLeftRightForMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
+		onlyStretchLeftRightForMyselfFromJstree.setRightPositionFromNodeByRef(rightPositionFromNodeByRef);
+		onlyStretchLeftRightForMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
+		onlyStretchLeftRightForMyselfFromJstree.setCopy(copy);
 		
-		coreDAO.stretchLeftForMyselfFromJstree( p_OnlyStretchLeftRightForMyselfFromJstree);
-		coreDAO.stretchRightForMyselfFromJstree(p_OnlyStretchLeftRightForMyselfFromJstree);
+		coreDAO.stretchLeftForMyselfFromJstree( onlyStretchLeftRightForMyselfFromJstree);
+		coreDAO.stretchRightForMyselfFromJstree(onlyStretchLeftRightForMyselfFromJstree);
 	}
 	
 	private int pasteMyselfFromJstree( int ref
@@ -574,21 +563,21 @@ public class CoreServiceImpl implements CoreService {
 			                         , int ldif
 			                         , Collection<Integer> c_idsByChildNodeFromNodeById
 			                         , int rightPositionFromNodeByRef
-			                         , T_ComprehensiveTree nodeById ) {
+			                         , ComprehensiveTree nodeById ) {
 
-		P_ComprehensiveTree p_OnlyPasteMyselfFromJstree = new P_ComprehensiveTree();
+		ComprehensiveTree onlyPasteMyselfFromJstree = new ComprehensiveTree();
 
-		p_OnlyPasteMyselfFromJstree.setRef(ref);
-		p_OnlyPasteMyselfFromJstree.setIdif(idif);
-		p_OnlyPasteMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
-		p_OnlyPasteMyselfFromJstree.setLdif(ldif);
-		p_OnlyPasteMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
-		p_OnlyPasteMyselfFromJstree.setRightPositionFromNodeByRef(rightPositionFromNodeByRef);
-		p_OnlyPasteMyselfFromJstree.setNodeById(nodeById);
+		onlyPasteMyselfFromJstree.setRef(ref);
+		onlyPasteMyselfFromJstree.setIdif(idif);
+		onlyPasteMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
+		onlyPasteMyselfFromJstree.setLdif(ldif);
+		onlyPasteMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
+		onlyPasteMyselfFromJstree.setRightPositionFromNodeByRef(rightPositionFromNodeByRef);
+		onlyPasteMyselfFromJstree.setNodeById(nodeById);
 
-		p_OnlyPasteMyselfFromJstree.setIdifLeft( idif + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode : 0));
-		p_OnlyPasteMyselfFromJstree.setIdifRight(idif + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode	: 0));
+		onlyPasteMyselfFromJstree.setIdifLeft( idif + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode : 0));
+		onlyPasteMyselfFromJstree.setIdifRight(idif + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode	: 0));
 
-		return coreDAO.pasteMyselfFromJstree(p_OnlyPasteMyselfFromJstree);
+		return coreDAO.pasteMyselfFromJstree(onlyPasteMyselfFromJstree);
 	}
 }
