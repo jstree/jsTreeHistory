@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+/* for only notebook or desktop */
+@media only screen and (min-width: 980px) {
+	
+}
+
+/* for only tablet */
+@media only screen and (min-width:768px) and (max-width: 979px) {
+	
+}
+
+/* for only mobile landscape */
+@media only screen and (max-width: 767px) {
+	
+}
+
+/* for only mobile portrait */
+@media only screen and (max-width: 480px) {
+	img {display:none}
+	.aligncenter {text-align:left}
+}
