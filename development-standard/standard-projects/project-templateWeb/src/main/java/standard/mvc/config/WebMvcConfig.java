@@ -268,6 +268,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		if (!ArrayUtils.contains(applicationContext.getEnvironment().getActiveProfiles(), "live")) {
 			thymeleafViewResolver.setCache(false);
 		}
+		thymeleafViewResolver.setExcludedViewNames(new String[] { "/jsp/*" });
 		return thymeleafViewResolver;
 	}
     
