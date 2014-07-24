@@ -77,7 +77,7 @@ public class CrytoAsymmeticUtil{
 	public static void  main(String[] arg){
 		CrytoAsymmeticUtil asymmeticCrytoUtil = new CrytoAsymmeticUtil();
 		System.out.println(asymmeticCrytoUtil.encodePassword("1111"));//$2a$10$HT/3DoS1u4LVfKUMVJdtC.J5mMn2ItG7eq35ITL2jyXUxPQw2WUX6
-		System.out.println(asymmeticCrytoUtil.encodeSha1("1111"));//ARyUXzDOLLr8RS85hA8CVpMznEI=
+		System.out.println(asymmeticCrytoUtil.encodeSha1("공통12"));//ARyUXzDOLLr8RS85hA8CVpMznEI=
 
 		
 	}

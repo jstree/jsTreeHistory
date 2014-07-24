@@ -18,14 +18,14 @@
 2014.06.13		Vincent Han		표준프레임워크 3.0 적용 (간소화 설정 사용)
 2014.07.10		최대열                            OAuth1 sample 적용
 -->
-
+<!-- 
 	<security:http pattern="/css/**" security="none"/>
 	<security:http pattern="/html/**" security="none"/>
     <security:http pattern="/images/**" security="none"/>
  	<security:http pattern="/js/**" security="none"/>
  	<security:http pattern="/resource/**" security="none"/>
  	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none"/>
-
+ -->
 <egov-security:config id="securityConfig"
 		loginUrl="/uat/uia/egovLoginUsr.do"
 		logoutSuccessUrl="/EgovContent.do"
@@ -88,24 +88,23 @@
 ================================================(s)oauth1=================================================
 -->	
 
-	<!-- (s) oauth consumer(사용자 셋팅) -->
+	<!-- (s) OAuth1 consumer -->
+	<!-- 1. oauth 서비스를 사용하는 리소스 들을 등록함 -->
 	<oauth:consumer resource-details-service-ref="resourceDetails" oauth-failure-page="/oauth_error.jsp">
-		<!-- 
-	 <oauth:url pattern="/sparklr/**" resources="sparklrPhotos"/>
-	  -->
+	  <oauth:url pattern="/oauth1/sparklr/**" resources="sparklrPhotos"/>
 	  <oauth:url pattern="/oauth1/google/**" resources="google"/>
 	  <oauth:url pattern="/oauth1/twitter/**" resources="twitter"/>
 	</oauth:consumer>
 
+	<!-- 2. oauth 서비스를 사용하는 리소스 상세 정보들( provider 정보 ) -->
 	<oauth:resource-details-service id="resourceDetails">
-		<!-- 
+	  <!-- local provider info -->
 	  <oauth:resource id="sparklrPhotos"
 	                  key="tonr-consumer-key"
 	                  secret="SHHHHH!!!!!!!!!!"
 	                  request-token-url="http://localhost:8080/sparklr/oauth/request_token"
 	                  user-authorization-url="http://localhost:8080/sparklr/oauth/confirm_access"
 	                  access-token-url="http://localhost:8080/sparklr/oauth/access_token"/>
-	    -->
 	  <!--see http://code.google.com/apis/accounts/docs/OAuth_ref.html-->
 	  <oauth:resource id="google" key="anonymous" secret="anonymous"
 	                  request-token-url="https://www.google.com/accounts/OAuthGetRequestToken"
@@ -128,7 +127,8 @@
 	  </oauth:resource>
 	</oauth:resource-details-service>
  
-	<bean id="oauth1Service" class="standard.mvc.component.security.service.OAuth1ServiceImpl">
+ 	<!-- 3. oauth 원격지 provider service 등록(REST TEMPLATE 를 사용하기 위하여 리소스 등록) -->
+	<bean id="oauth1Service" class="standard.mvc.component.sec.oauth1.consumer.service.OAuth1ServiceImpl">
 		<property name="googleRestTemplate">
 			<bean class="org.springframework.security.oauth.consumer.client.OAuthRestTemplate">
 				<constructor-arg ref="google" />
@@ -141,11 +141,21 @@
 		</property>
 	</bean>
 	
-	<!-- (e)oauth setting -->
+	<!-- 3. oauth 로컬  provider service 등록(REST TEMPLATE 를 사용하기 위하여 리소스 등록) -->
+	<bean id="sparklrService" class="standard.mvc.component.sec.oauth1.consumer.service.SparklrServiceImpl">
+		<property name="sparklrPhotoListURL" value="http://localhost:8080/sparklr/photos?format=xml" />
+		<property name="sparklrPhotoURLPattern" value="http://localhost:8080/sparklr/photos/%s" />
+		<property name="sparklrRestTemplate">
+			<bean class="org.springframework.security.oauth.consumer.client.OAuthRestTemplate">
+				<constructor-arg ref="sparklrPhotos" />
+			</bean>
+		</property>
 
+	</bean>
+	
+	<!-- (e)OAuth1 consumer setting -->
 <!--
 ================================================(e) oauth1=================================================
 -->	
-
 
 </beans>
