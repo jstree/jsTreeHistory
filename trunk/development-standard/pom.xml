@@ -212,7 +212,7 @@
 	<repositories>
 		<repository>
 			<id>central</id>
-			<url>http://www.egovframe.go.kr/maven</url>
+			<url>http://www.313.co.kr:8080/nexus/content/groups/public</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -245,7 +245,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central</id>
-			<url>http://www.egovframe.go.kr/maven</url>
+			<url>http://www.313.co.kr:8080/nexus/content/groups/public</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
