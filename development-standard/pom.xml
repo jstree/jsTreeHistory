@@ -212,7 +212,7 @@
 	<repositories>
 		<repository>
 			<id>central</id>
-			<url>http://www.313.co.kr:8080/nexus/content/groups/public</url>
+			<url>http://www.egovframe.go.kr/maven</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -228,7 +228,7 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<url>http://www.313.co.kr:8080/nexus/content/groups/public</url>
+			<url>http://www.313.co.kr/nexus/content/groups/public</url>
 		</repository>
 		<repository>
 			<id>StandardProject-Snapshot</id>
@@ -238,14 +238,14 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
-			<url>http://www.313.co.kr:8080/nexus/content/groups/public-snapshots</url>
+			<url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
 		</repository>
 	</repositories>
 
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central</id>
-			<url>http://www.313.co.kr:8080/nexus/content/groups/public</url>
+			<url>http://www.egovframe.go.kr/maven</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -261,7 +261,7 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<url>http://www.313.co.kr:8080/nexus/content/groups/public</url>
+			<url>http://www.313.co.kr/nexus/content/groups/public</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>StandardProject-Snapshot</id>
@@ -272,18 +272,18 @@
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
 			</snapshots>
-			<url>http://www.313.co.kr:8080/nexus/content/groups/public-snapshots</url>
+			<url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
 		</pluginRepository>
 	</pluginRepositories>
 
 	<distributionManagement>
 		<repository>
 			<id>StandardProject-Public</id>
-			<url>http://www.313.co.kr:8080/nexus/content/repositories/StandardProject-Releases</url>
+			<url>http://www.313.co.kr/nexus/content/repositories/StandardProject-Releases</url>
 		</repository>
 		<snapshotRepository>
 			<id>StandardProject-Snapshot</id>
-			<url>http://www.313.co.kr:8080/nexus/content/repositories/StandardProject-SnapShots</url>
+			<url>http://www.313.co.kr/nexus/content/repositories/StandardProject-SnapShots</url>
 		</snapshotRepository>
 		<site>
 			<id>StandardProject-Site-Public</id>
