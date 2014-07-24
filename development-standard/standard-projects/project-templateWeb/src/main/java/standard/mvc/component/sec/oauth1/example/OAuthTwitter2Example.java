@@ -1,4 +1,4 @@
-package standard.mvc.component.security.example;
+package standard.mvc.component.sec.oauth1.example;
 
 
 import java.io.BufferedReader;
