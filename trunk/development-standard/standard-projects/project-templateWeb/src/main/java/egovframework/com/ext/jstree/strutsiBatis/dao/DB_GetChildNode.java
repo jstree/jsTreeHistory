@@ -23,7 +23,7 @@ public class DB_GetChildNode extends EgovComAbstractDAO implements I_DB_GetChild
 		List<T_ComprehensiveTree> t_ComprehensiveTrees = new ArrayList<T_ComprehensiveTree>();
 		try {
 			t_ComprehensiveTrees = getSqlMapClientTemplate().getSqlMapClient()
-					.queryForList(determineDBSetting, p_ComprehensiveTree);
+											.queryForList(determineDBSetting, p_ComprehensiveTree);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

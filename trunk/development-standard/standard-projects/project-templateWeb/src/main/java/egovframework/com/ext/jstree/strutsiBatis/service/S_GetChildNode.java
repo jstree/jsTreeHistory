@@ -50,27 +50,27 @@ public class S_GetChildNode implements I_S_GetChildNode {
 		// TODO : 리퀘스트에 따라서 DB 설정파일을 불러와서 선택적 리턴을 해야 함.
 		String returnStr = "";
 		if (request.getRequestURI().equals(
-				"/war/struts/www313cokr/index/menu/num3/getChildNode.action")
+				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/getChildNode.action")
 				&& flag.equals("byID")) {
 			returnStr = "jstreeStrtusiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
-				"/war/struts/www313cokr/index/menu/num3/alterNodeType.action")
+				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action")
 				&& flag.equals("byID")) {
 			returnStr = "jstreeStrtusiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
-				"/war/struts/www313cokr/index/menu/num3/moveNode.action")
+				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action")
 				&& flag.equals("byID")) {
 			returnStr = "jstreeStrtusiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
-				"/war/struts/www313cokr/index/menu/num3/moveNode.action")
+				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action")
 				&& flag.equals("byLeftRight")) {
 			returnStr = "jstreeStrtusiBatis.getChildNodeByLeftRight";
 		} else if (request.getRequestURI().equals(
-				"/war/struts/www313cokr/index/menu/num3/addNode.action")
+				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action")
 				&& flag.equals("byID")) {
 			returnStr = "jstreeStrtusiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
-				"/war/struts/www313cokr/index/menu/num3/addNode.action")
+				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action")
 				&& flag.equals("byLeftRight")) {
 			returnStr = "jstreeStrtusiBatis.getChildNodeByLeftRight";
 		} else {
