@@ -37,7 +37,7 @@ public class S_AlterNode implements I_S_AlterNode {
 		String returnStr = "";
 		if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNode.action")) {
-			returnStr = "jstreeStrtusiBatis.alterNode";
+			returnStr = "jstreeStrutsiBatis.alterNode";
 		} else {
 			logger.debug(request.getRequestURI());
 		}

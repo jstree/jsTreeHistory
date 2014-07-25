@@ -21,14 +21,14 @@ public class DB_RemoveNode extends EgovComAbstractDAO implements I_DB_RemoveNode
 
 		try {
 			getSqlMapClientTemplate().getSqlMapClient().startTransaction();
-			getSqlMapClientTemplate().getSqlMapClient().delete("jstreeStrtusiBatis.removeNode",
+			getSqlMapClientTemplate().getSqlMapClient().delete("jstreeStrutsiBatis.removeNode",
 					p_RemoveNode);
 			getSqlMapClientTemplate().getSqlMapClient().update(
-					"jstreeStrtusiBatis.removedAfterLeftFix", p_RemoveNode);
+					"jstreeStrutsiBatis.removedAfterLeftFix", p_RemoveNode);
 			getSqlMapClientTemplate().getSqlMapClient().delete(
-					"jstreeStrtusiBatis.removedAfterRightFix", p_RemoveNode);
+					"jstreeStrutsiBatis.removedAfterRightFix", p_RemoveNode);
 			getSqlMapClientTemplate().getSqlMapClient().delete(
-					"jstreeStrtusiBatis.removedAfterPositionFix", p_RemoveNode);
+					"jstreeStrutsiBatis.removedAfterPositionFix", p_RemoveNode);
 			getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
 		} catch (SQLException e) {
 			e.printStackTrace();

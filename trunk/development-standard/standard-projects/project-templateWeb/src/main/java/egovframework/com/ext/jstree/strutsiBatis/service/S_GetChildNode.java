@@ -52,27 +52,27 @@ public class S_GetChildNode implements I_S_GetChildNode {
 		if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/getChildNode.action")
 				&& flag.equals("byID")) {
-			returnStr = "jstreeStrtusiBatis.getChildNode";
+			returnStr = "jstreeStrutsiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action")
 				&& flag.equals("byID")) {
-			returnStr = "jstreeStrtusiBatis.getChildNode";
+			returnStr = "jstreeStrutsiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action")
 				&& flag.equals("byID")) {
-			returnStr = "jstreeStrtusiBatis.getChildNode";
+			returnStr = "jstreeStrutsiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action")
 				&& flag.equals("byLeftRight")) {
-			returnStr = "jstreeStrtusiBatis.getChildNodeByLeftRight";
+			returnStr = "jstreeStrutsiBatis.getChildNodeByLeftRight";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action")
 				&& flag.equals("byID")) {
-			returnStr = "jstreeStrtusiBatis.getChildNode";
+			returnStr = "jstreeStrutsiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action")
 				&& flag.equals("byLeftRight")) {
-			returnStr = "jstreeStrtusiBatis.getChildNodeByLeftRight";
+			returnStr = "jstreeStrutsiBatis.getChildNodeByLeftRight";
 		} else {
 			logger.debug(request.getRequestURI());
 		}

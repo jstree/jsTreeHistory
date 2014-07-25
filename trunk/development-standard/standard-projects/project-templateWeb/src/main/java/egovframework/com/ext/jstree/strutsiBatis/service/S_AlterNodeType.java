@@ -81,7 +81,7 @@ public class S_AlterNodeType implements I_S_AlterNodeType {
 		String returnStr = "";
 		if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action")) {
-			returnStr = "jstreeStrtusiBatis.alterNodeType";
+			returnStr = "jstreeStrutsiBatis.alterNodeType";
 		} else {
 			logger.debug(request.getRequestURI());
 		}

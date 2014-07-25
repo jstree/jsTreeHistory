@@ -162,7 +162,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 	private int alterNode(P_ComprehensiveTree p_ComprehensiveTree)
 			throws SQLException {
 
-		return getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrtusiBatis.alterNode",
+		return getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.alterNode",
 				p_ComprehensiveTree);
 	}
 
@@ -170,7 +170,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 	private int addMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree)
 			throws SQLException {
 		return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert(
-				"jstreeStrtusiBatis.addMyselfFromJstree", p_ComprehensiveTree);
+				"jstreeStrutsiBatis.addMyselfFromJstree", p_ComprehensiveTree);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -185,10 +185,10 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 				.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
 
 		getSqlMapClientTemplate().getSqlMapClient().update(
-				"jstreeStrtusiBatis.cutMyselfPositionFix", p_OnlyCutMyselfFromJstree);
-		getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrtusiBatis.cutMyselfLeftFix",
+				"jstreeStrutsiBatis.cutMyselfPositionFix", p_OnlyCutMyselfFromJstree);
+		getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.cutMyselfLeftFix",
 				p_OnlyCutMyselfFromJstree);
-		getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrtusiBatis.cutMyselfRightFix",
+		getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.cutMyselfRightFix",
 				p_OnlyCutMyselfFromJstree);
 	}
 
@@ -308,7 +308,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		p_ComprehensiveTree.setNodeById(nodeById);
 
 		getSqlMapClientTemplate().getSqlMapClient().update(
-				"jstreeStrtusiBatis.stretchPositionForMyself", p_ComprehensiveTree);
+				"jstreeStrutsiBatis.stretchPositionForMyself", p_ComprehensiveTree);
 
 	}
 
@@ -328,10 +328,10 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 				.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
 		p_OnlyStretchLeftRightForMyselfFromJstree.setCopy(copy);
 		getSqlMapClientTemplate().getSqlMapClient().update(
-				"jstreeStrtusiBatis.stretchLeftForMyselfFromJstree",
+				"jstreeStrutsiBatis.stretchLeftForMyselfFromJstree",
 				p_OnlyStretchLeftRightForMyselfFromJstree);
 		getSqlMapClientTemplate().getSqlMapClient().update(
-				"jstreeStrtusiBatis.stretchRightForMyselfFromJstree",
+				"jstreeStrutsiBatis.stretchRightForMyselfFromJstree",
 				p_OnlyStretchLeftRightForMyselfFromJstree);
 	}
 
@@ -363,7 +363,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 								: 0));
 
 		return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert(
-				"jstreeStrtusiBatis.pasteMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
+				"jstreeStrutsiBatis.pasteMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -381,7 +381,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 				.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
 
 		getSqlMapClientTemplate().getSqlMapClient().insert(
-				"jstreeStrtusiBatis.enterMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
+				"jstreeStrutsiBatis.enterMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
 
 	}
 
@@ -417,7 +417,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 				P_ComprehensiveTree p_OnlyFixCopyFromJstree = new P_ComprehensiveTree();
 				p_OnlyFixCopyFromJstree.setFixCopyId(ind);
 				p_OnlyFixCopyFromJstree.setFixCopyPosition(ref);
-				getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrtusiBatis.fixCopyIF",
+				getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.fixCopyIF",
 						p_OnlyFixCopyFromJstree);
 				continue;
 			}
@@ -428,7 +428,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 			logger.debug("부모아이디값 = " + map.get(child.getC_left()));
 			child.setFixCopyId(map.get(child.getC_left()));
 			getSqlMapClientTemplate().getSqlMapClient()
-					.update("jstreeStrtusiBatis.fixCopy", child);
+					.update("jstreeStrutsiBatis.fixCopy", child);
 			for (int j = child.getC_left() + 1; j < child.getC_right(); j++) {
 				map.put(j, child.getC_id());
 			}
