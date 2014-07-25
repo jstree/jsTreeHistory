@@ -19,61 +19,63 @@
 	<properties>
 		<struts.maven.artifact.version>2.3.16</struts.maven.artifact.version>
 	</properties>
-	
+
 	<dependencies>
 
-			<!-- Struts 2(s) -->
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-core</artifactId>
-			</dependency>
+		<!-- Struts 2(s) -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-dojo-plugin</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-dojo-plugin</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-config-browser-plugin</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-config-browser-plugin</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-sitemesh-plugin</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-sitemesh-plugin</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-dwr-plugin</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-dwr-plugin</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-spring-plugin</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-spring-plugin</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-json-plugin</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-convention-plugin</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-convention-plugin</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-junit-plugin</artifactId>
-			</dependency>
-
-			<dependency>
-				<groupId>com.jgeppert.struts2.jquery</groupId>
-				<artifactId>struts2-jquery-plugin</artifactId>
-			</dependency>
-			<!-- Struts 2(e) -->
-		</dependencies>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-junit-plugin</artifactId>
+		</dependency>
+		<!-- <dependency> <groupId>com.jgeppert.struts2.jquery</groupId> <artifactId>struts2-jquery-plugin</artifactId> 
+			</dependency> -->
+		<!-- Struts 2(e) 에서 필요한 라이브러리-->
+		<dependency>
+			<groupId>ognl</groupId>
+			<artifactId>ognl</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
