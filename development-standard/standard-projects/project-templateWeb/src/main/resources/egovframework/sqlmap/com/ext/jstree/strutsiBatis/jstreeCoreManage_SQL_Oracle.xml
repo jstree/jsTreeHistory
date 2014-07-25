@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd"><sqlMap namespace="solution">
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd"><sqlMap namespace="jstreeStrtusiBatis">
 
 	<select id="getChildNode"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree"
-			resultClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.vo.T_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree"
+			resultClass="egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree">
 		/* { jsTree - getChildNode } */
 			SELECT 	A.c_id ,
 						A.c_parentid ,
@@ -26,8 +26,8 @@
 	</select>
 
 	<select id="getChildNodeByLeftRight"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree"
-			resultClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.vo.T_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree"
+			resultClass="egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree">
 				/* { jsTree - getChildNodeByLeftRight } */
 				SELECT C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE 
 				FROM T_COMPREHENSIVETREE 
@@ -38,8 +38,8 @@
 	</select>
 
 	<select id="searchNodeByString"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree"
-			resultClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.vo.T_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree"
+			resultClass="egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree">
 				/* { jsTree - searchNodeByString } */
 				SELECT c_left, c_right
 				FROM T_COMPREHENSIVETREE 
@@ -61,7 +61,7 @@
 	</select>
 
 	<update id="alterNode"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 				/* { jsTree - alterNode } */
 				UPDATE T_COMPREHENSIVETREE 
 				SET 
@@ -72,8 +72,8 @@
 	</update>
 
 	<select id="getNode"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree"
-			resultClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.vo.T_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree"
+			resultClass="egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree">
 				/* { jsTree - getNode } */
 	            SELECT C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
 	            FROM T_COMPREHENSIVETREE 
@@ -81,8 +81,8 @@
     </select>
 
 	<select id="getNodeByRef"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree"
-			resultClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.vo.T_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree"
+			resultClass="egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree">
 				/* { jsTree - getNodeByRef } */
 	            SELECT C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
 	            FROM T_COMPREHENSIVETREE 
@@ -90,7 +90,7 @@
     </select>
 
 	<delete id="removeNode"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 				/* { jsTree - removeNode } */
             	DELETE 
             	FROM T_COMPREHENSIVETREE 
@@ -98,21 +98,21 @@
             	AND C_RIGHT &lt;= #c_right#
 	</delete>
 	<update id="removedAfterLeftFix"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 				/* { jsTree - "removedAfterLeftFix" } */
             	UPDATE T_COMPREHENSIVETREE 
        			SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
        			WHERE C_LEFT &gt; #c_right#
 	</update>
 	<update id="removedAfterRightFix"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 				/* { jsTree - "removedAfterRightFix" } */
        			UPDATE T_COMPREHENSIVETREE 
        			SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
        			WHERE C_RIGHT &gt; #c_left#
 	</update>
 	<update id="removedAfterPositionFix"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 				/* { jsTree - "removedAfterPositionFix" } */
        			UPDATE T_COMPREHENSIVETREE 
        			SET C_POSITION = C_POSITION - 1 
@@ -121,7 +121,7 @@
 	</update>
 
 	<select id="analyzeRootNode"
-			resultClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.vo.T_ComprehensiveTree">
+			resultClass="egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree">
 				/* { jsTree - searchNodeByString } */
 	            SELECT C_LEFT 
 		        FROM T_COMPREHENSIVETREE 
@@ -129,7 +129,7 @@
     </select>
 
 	<update id="cutMyselfPositionFix"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 			/* { jsTree - cutMyselfPositionFix } */
        			UPDATE T_COMPREHENSIVETREE 
        			SET C_POSITION = C_POSITION - 1 
@@ -137,14 +137,14 @@
        			      AND C_POSITION &gt; #c_position#
     </update>
 	<update id="cutMyselfLeftFix"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 			/* { jsTree - cutMyselfLeftFix } */
        			UPDATE T_COMPREHENSIVETREE 
        			SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
        			WHERE C_LEFT &gt; #c_right#
     </update>
 	<update id="cutMyselfRightFix"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 			/* { jsTree - cutMyselfRightFix } */
        			UPDATE T_COMPREHENSIVETREE 
        			SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -160,7 +160,7 @@
 
 
 	<update id="stretchPositionForMyself"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 		/* { jsTree - stretchPositionForMyselfFromJstree } */
         UPDATE T_COMPREHENSIVETREE SET C_POSITION = C_POSITION + 1
         <dynamic prepend="WHERE">
@@ -185,7 +185,7 @@
 	</update>
 
 	<update id="stretchLeftForMyselfFromJstree"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 		/* { jsTree - stretchLeftForMyselfFromJstree } */
        			 UPDATE T_COMPREHENSIVETREE 
        			 SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
@@ -205,7 +205,7 @@
 	</update>
 
 	<update id="stretchRightForMyselfFromJstree"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 		/* { jsTree - stretchRightForMyselfFromJstree } */
         		UPDATE T_COMPREHENSIVETREE 
         		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
@@ -225,7 +225,7 @@
 	</update>
 
 	<insert id="pasteMyselfFromJstree"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 		/* { jsTree - pasteMyselfFromJstree } */
         INSERT INTO T_COMPREHENSIVETREE 
         ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE ) 
@@ -259,7 +259,7 @@
 	</insert>
 
 	<update id="enterMyselfFixPosition"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 		/* { jsTree - enterMyselfFixPosition } */
         		UPDATE 	T_COMPREHENSIVETREE 
         		SET 		C_PARENTID = #ref#,
@@ -267,7 +267,7 @@
         		WHERE 	C_ID = #c_id#
     </update>
 	<update id="enterMyselfFixLeftRight"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 		/* { jsTree - enterMyselfFixLeftRight } */
         		UPDATE 	T_COMPREHENSIVETREE 
         		SET 		C_LEFT = C_LEFT - (#idif#), 
@@ -283,7 +283,7 @@
 	</update>
 
 	<insert id="addMyselfFromJstree"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 		/* { jsTree - addMyselfFromJstree } */
         INSERT 	INTO 	T_COMPREHENSIVETREE (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL)
         VALUES 	(S_COMPREHENSIVETREE.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#)
@@ -295,7 +295,7 @@
 	</insert>
 
 	<update id="alterNodeType"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
 				/* { jsTree - alterNodeType } */
 				UPDATE T_COMPREHENSIVETREE 
 				SET 
@@ -306,7 +306,7 @@
 
 
 	<update id="fixCopyIF"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.dto.P_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree">
         /* { jsTree - fixCopyIF } */
         UPDATE T_COMPREHENSIVETREE 
         SET C_POSITION = #fixCopyPosition# 
@@ -314,7 +314,7 @@
 	</update>
 
 	<update id="fixCopy"
-			parameterClass="ibatis.www313cokr.index.menu.num3.JstreeSolutionStrutsVersion.vo.T_ComprehensiveTree">
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree">
 		/* { jsTree - fixCopy } */
 		UPDATE T_COMPREHENSIVETREE 
 		SET C_PARENTID = #fixCopyId# 
