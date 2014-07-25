@@ -72,11 +72,11 @@ public class S_SearchNode implements I_S_SearchNode {
 		if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/searchNode.action")
 				&& step.equals("step1")) {
-			returnStr = "solution.searchNodeByString";
+			returnStr = "jstreeStrtusiBatis.searchNodeByString";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/searchNode.action")
 				&& step.equals("step2")) {
-			returnStr = "solution.searchNodeByPosition";
+			returnStr = "jstreeStrtusiBatis.searchNodeByPosition";
 		} else {
 			logger.debug(request.getRequestURI());
 		}

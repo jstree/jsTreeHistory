@@ -49,7 +49,7 @@ public class S_RemoveNode implements I_S_RemoveNode {
 		String returnStr = "";
 		if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/removeNode.action")) {
-			returnStr = "solution.removeNode";
+			returnStr = "jstreeStrtusiBatis.removeNode";
 		} else {
 			logger.debug(request.getRequestURI());
 			throw new RuntimeException();

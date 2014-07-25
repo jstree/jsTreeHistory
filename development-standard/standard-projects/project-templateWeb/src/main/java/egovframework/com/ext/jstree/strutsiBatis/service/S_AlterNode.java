@@ -37,7 +37,7 @@ public class S_AlterNode implements I_S_AlterNode {
 		String returnStr = "";
 		if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/alterNode.action")) {
-			returnStr = "solution.alterNode";
+			returnStr = "jstreeStrtusiBatis.alterNode";
 		} else {
 			logger.debug(request.getRequestURI());
 		}

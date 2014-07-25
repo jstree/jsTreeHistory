@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import egovframework.com.ext.jstree.strutsiBatis.service.I_S_GetChildNode;
 import egovframework.com.ext.jstree.strutsiBatis.service.I_S_GetNode;
@@ -22,6 +23,7 @@ import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
 
 import com.opensymphony.xwork2.ActionContext;
 
+@Repository("DB_AddNode")
 public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 
 	static Logger logger = Logger.getLogger(DB_AddNode.class);
@@ -44,6 +46,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public T_ComprehensiveTree addNode(P_ComprehensiveTree p_ComprehensiveTree,
 			T_ComprehensiveTree nodeById, T_ComprehensiveTree nodeByRef,
@@ -52,7 +55,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		T_ComprehensiveTree t_ComprehensiveTree = new T_ComprehensiveTree();
 
 		try {
-			Single_SqlMapClient.getSqlMapper().startTransaction();
+			getSqlMapClientTemplate().getSqlMapClient().startTransaction();
 
 			int spaceOfTargetNode = 2;
 			Collection<Integer> c_idsByChildNodeFromNodeById = null;
@@ -141,12 +144,12 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 						p_ComprehensiveTree.getC_position());
 			}
 
-			Single_SqlMapClient.getSqlMapper().commitTransaction();
+			getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				Single_SqlMapClient.getSqlMapper().endTransaction();
+				getSqlMapClientTemplate().getSqlMapClient().endTransaction();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -155,19 +158,22 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private int alterNode(P_ComprehensiveTree p_ComprehensiveTree)
 			throws SQLException {
 
-		return Single_SqlMapClient.getSqlMapper().update("solution.alterNode",
+		return getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrtusiBatis.alterNode",
 				p_ComprehensiveTree);
 	}
 
+	@SuppressWarnings("deprecation")
 	private int addMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree)
 			throws SQLException {
-		return (Integer) Single_SqlMapClient.getSqlMapper().insert(
-				"solution.addMyselfFromJstree", p_ComprehensiveTree);
+		return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert(
+				"jstreeStrtusiBatis.addMyselfFromJstree", p_ComprehensiveTree);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void cutMyself(T_ComprehensiveTree nodeById, int spaceOfTargetNode,
 			Collection<Integer> c_idsByChildNodeFromNodeById)
 			throws SQLException {
@@ -178,11 +184,11 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		p_OnlyCutMyselfFromJstree
 				.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
 
-		Single_SqlMapClient.getSqlMapper().update(
-				"solution.cutMyselfPositionFix", p_OnlyCutMyselfFromJstree);
-		Single_SqlMapClient.getSqlMapper().update("solution.cutMyselfLeftFix",
+		getSqlMapClientTemplate().getSqlMapClient().update(
+				"jstreeStrtusiBatis.cutMyselfPositionFix", p_OnlyCutMyselfFromJstree);
+		getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrtusiBatis.cutMyselfLeftFix",
 				p_OnlyCutMyselfFromJstree);
-		Single_SqlMapClient.getSqlMapper().update("solution.cutMyselfRightFix",
+		getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrtusiBatis.cutMyselfRightFix",
 				p_OnlyCutMyselfFromJstree);
 	}
 
@@ -291,6 +297,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public void stretchPositionForMyselfFromJstree(
 			Collection<Integer> c_idsByChildNodeFromNodeById,
 			T_ComprehensiveTree nodeById,
@@ -300,11 +307,12 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 				.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
 		p_ComprehensiveTree.setNodeById(nodeById);
 
-		Single_SqlMapClient.getSqlMapper().update(
-				"solution.stretchPositionForMyself", p_ComprehensiveTree);
+		getSqlMapClientTemplate().getSqlMapClient().update(
+				"jstreeStrtusiBatis.stretchPositionForMyself", p_ComprehensiveTree);
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public void stretchLeftRightForMyselfFromJstree(int spaceOfTargetNode,
 			int rightPositionFromNodeByRef,
 			Collection<Integer> c_idsByChildNodeFromNodeById, int copy)
@@ -319,14 +327,15 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		p_OnlyStretchLeftRightForMyselfFromJstree
 				.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
 		p_OnlyStretchLeftRightForMyselfFromJstree.setCopy(copy);
-		Single_SqlMapClient.getSqlMapper().update(
-				"solution.stretchLeftForMyselfFromJstree",
+		getSqlMapClientTemplate().getSqlMapClient().update(
+				"jstreeStrtusiBatis.stretchLeftForMyselfFromJstree",
 				p_OnlyStretchLeftRightForMyselfFromJstree);
-		Single_SqlMapClient.getSqlMapper().update(
-				"solution.stretchRightForMyselfFromJstree",
+		getSqlMapClientTemplate().getSqlMapClient().update(
+				"jstreeStrtusiBatis.stretchRightForMyselfFromJstree",
 				p_OnlyStretchLeftRightForMyselfFromJstree);
 	}
 
+	@SuppressWarnings("deprecation")
 	public int pasteMyselfFromJstree(int ref, int idif, int spaceOfTargetNode,
 			int ldif, Collection<Integer> c_idsByChildNodeFromNodeById,
 			int rightPositionFromNodeByRef, T_ComprehensiveTree nodeById)
@@ -353,10 +362,11 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 						+ (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode
 								: 0));
 
-		return (Integer) Single_SqlMapClient.getSqlMapper().insert(
-				"solution.pasteMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
+		return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert(
+				"jstreeStrtusiBatis.pasteMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void enterMyselfFromJstree(int ref, int c_position, int c_id,
 			int idif, int ldif, Collection<Integer> c_idsByChildNodeFromNodeById)
 			throws SQLException {
@@ -370,11 +380,12 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		p_OnlyPasteMyselfFromJstree
 				.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
 
-		Single_SqlMapClient.getSqlMapper().insert(
-				"solution.enterMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
+		getSqlMapClientTemplate().getSqlMapClient().insert(
+				"jstreeStrtusiBatis.enterMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public void fixCopy(int ind, int ref) throws SQLException {
 		logger.debug("SUDO : 카피뜬 녀석의 하위 노드들에 대한 고민.");
 		P_ComprehensiveTree p_ComprehensiveTree = new P_ComprehensiveTree();
@@ -406,7 +417,7 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 				P_ComprehensiveTree p_OnlyFixCopyFromJstree = new P_ComprehensiveTree();
 				p_OnlyFixCopyFromJstree.setFixCopyId(ind);
 				p_OnlyFixCopyFromJstree.setFixCopyPosition(ref);
-				Single_SqlMapClient.getSqlMapper().update("solution.fixCopyIF",
+				getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrtusiBatis.fixCopyIF",
 						p_OnlyFixCopyFromJstree);
 				continue;
 			}
@@ -416,8 +427,8 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 			logger.debug("C_POSITION = " + ref);
 			logger.debug("부모아이디값 = " + map.get(child.getC_left()));
 			child.setFixCopyId(map.get(child.getC_left()));
-			Single_SqlMapClient.getSqlMapper()
-					.update("solution.fixCopy", child);
+			getSqlMapClientTemplate().getSqlMapClient()
+					.update("jstreeStrtusiBatis.fixCopy", child);
 			for (int j = child.getC_left() + 1; j < child.getC_right(); j++) {
 				map.put(j, child.getC_id());
 			}
