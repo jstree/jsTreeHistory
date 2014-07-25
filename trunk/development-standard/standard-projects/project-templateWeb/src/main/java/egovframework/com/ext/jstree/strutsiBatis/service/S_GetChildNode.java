@@ -52,27 +52,27 @@ public class S_GetChildNode implements I_S_GetChildNode {
 		if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/getChildNode.action")
 				&& flag.equals("byID")) {
-			returnStr = "solution.getChildNode";
+			returnStr = "jstreeStrtusiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/alterNodeType.action")
 				&& flag.equals("byID")) {
-			returnStr = "solution.getChildNode";
+			returnStr = "jstreeStrtusiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/moveNode.action")
 				&& flag.equals("byID")) {
-			returnStr = "solution.getChildNode";
+			returnStr = "jstreeStrtusiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/moveNode.action")
 				&& flag.equals("byLeftRight")) {
-			returnStr = "solution.getChildNodeByLeftRight";
+			returnStr = "jstreeStrtusiBatis.getChildNodeByLeftRight";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/addNode.action")
 				&& flag.equals("byID")) {
-			returnStr = "solution.getChildNode";
+			returnStr = "jstreeStrtusiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/addNode.action")
 				&& flag.equals("byLeftRight")) {
-			returnStr = "solution.getChildNodeByLeftRight";
+			returnStr = "jstreeStrtusiBatis.getChildNodeByLeftRight";
 		} else {
 			logger.debug(request.getRequestURI());
 		}

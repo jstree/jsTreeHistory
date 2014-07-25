@@ -81,7 +81,7 @@ public class S_AlterNodeType implements I_S_AlterNodeType {
 		String returnStr = "";
 		if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/alterNodeType.action")) {
-			returnStr = "solution.alterNodeType";
+			returnStr = "jstreeStrtusiBatis.alterNodeType";
 		} else {
 			logger.debug(request.getRequestURI());
 		}

@@ -1,29 +1,33 @@
 package egovframework.com.ext.jstree.strutsiBatis.dao;
 
+import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
-public class DB_AlterNodeType implements I_DB_AlterNodeType {
+@Repository("DB_AlterNodeType")
+public class DB_AlterNodeType extends EgovComAbstractDAO implements I_DB_AlterNodeType {
 
 	static Logger logger = Logger.getLogger(DB_AlterNodeType.class);
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public int alterNodeType(P_ComprehensiveTree p_ComprehensiveTree,
 			String determineDBSetting) {
 		Integer returnInt = 0;
 		try {
-			Single_SqlMapClient.getSqlMapper().startTransaction();
-			returnInt = Single_SqlMapClient.getSqlMapper().update(
+			getSqlMapClientTemplate().getSqlMapClient().startTransaction();
+			returnInt = getSqlMapClientTemplate().getSqlMapClient().update(
 					determineDBSetting, p_ComprehensiveTree);
-			Single_SqlMapClient.getSqlMapper().commitTransaction();
+			getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				Single_SqlMapClient.getSqlMapper().endTransaction();
+				getSqlMapClientTemplate().getSqlMapClient().endTransaction();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

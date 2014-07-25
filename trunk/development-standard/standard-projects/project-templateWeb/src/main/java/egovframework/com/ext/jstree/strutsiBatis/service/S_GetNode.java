@@ -48,27 +48,27 @@ public class S_GetNode implements I_S_GetNode {
 		if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/removeNode.action")
 				&& flag.equals("remove")) {
-			returnStr = "solution.getNode";
+			returnStr = "jstreeStrtusiBatis.getNode";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/moveNode.action")
 				&& flag.equals("getNode")) {
-			returnStr = "solution.getNode";
+			returnStr = "jstreeStrtusiBatis.getNode";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/moveNode.action")
 				&& flag.equals("getNodeByRef")) {
-			returnStr = "solution.getNodeByRef";
+			returnStr = "jstreeStrtusiBatis.getNodeByRef";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/addNode.action")
 				&& flag.equals("getNode")) {
-			returnStr = "solution.getNode";
+			returnStr = "jstreeStrtusiBatis.getNode";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/addNode.action")
 				&& flag.equals("getNodeByRef")) {
-			returnStr = "solution.getNodeByRef";
+			returnStr = "jstreeStrtusiBatis.getNodeByRef";
 		} else if (request.getRequestURI().equals(
 				"/war/struts/www313cokr/index/menu/num3/alterNodeType.action")
 				&& flag.equals("getNode")) {
-			returnStr = "solution.getNode";
+			returnStr = "jstreeStrtusiBatis.getNode";
 		} else {
 			logger.debug(request.getRequestURI());
 			throw new RuntimeException();
