@@ -48,27 +48,27 @@ public class S_GetNode implements I_S_GetNode {
 		if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action")
 				&& flag.equals("remove")) {
-			returnStr = "jstreeStrtusiBatis.getNode";
+			returnStr = "jstreeStrutsiBatis.getNode";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action")
 				&& flag.equals("getNode")) {
-			returnStr = "jstreeStrtusiBatis.getNode";
+			returnStr = "jstreeStrutsiBatis.getNode";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action")
 				&& flag.equals("getNodeByRef")) {
-			returnStr = "jstreeStrtusiBatis.getNodeByRef";
+			returnStr = "jstreeStrutsiBatis.getNodeByRef";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action")
 				&& flag.equals("getNode")) {
-			returnStr = "jstreeStrtusiBatis.getNode";
+			returnStr = "jstreeStrutsiBatis.getNode";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action")
 				&& flag.equals("getNodeByRef")) {
-			returnStr = "jstreeStrtusiBatis.getNodeByRef";
+			returnStr = "jstreeStrutsiBatis.getNodeByRef";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action")
 				&& flag.equals("getNode")) {
-			returnStr = "jstreeStrtusiBatis.getNode";
+			returnStr = "jstreeStrutsiBatis.getNode";
 		} else {
 			logger.debug(request.getRequestURI());
 			throw new RuntimeException();

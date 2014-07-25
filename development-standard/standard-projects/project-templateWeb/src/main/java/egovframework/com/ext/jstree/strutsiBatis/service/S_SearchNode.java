@@ -72,11 +72,11 @@ public class S_SearchNode implements I_S_SearchNode {
 		if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/searchNode.action")
 				&& step.equals("step1")) {
-			returnStr = "jstreeStrtusiBatis.searchNodeByString";
+			returnStr = "jstreeStrutsiBatis.searchNodeByString";
 		} else if (request.getRequestURI().equals(
 				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/searchNode.action")
 				&& step.equals("step2")) {
-			returnStr = "jstreeStrtusiBatis.searchNodeByPosition";
+			returnStr = "jstreeStrutsiBatis.searchNodeByPosition";
 		} else {
 			logger.debug(request.getRequestURI());
 		}
