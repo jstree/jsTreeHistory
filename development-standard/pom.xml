@@ -54,34 +54,12 @@
 			</roles>
 		</developer>
 		<developer>
-			<name>Gim Gyung Jin</name>
-			<id>GimGyungJin</id>
-			<email>stepping1st@gmail.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<name>Kim Yun Hee</name>
-			<id>okeydokey</id>
-			<email>yunkim28@gmail.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
 			<name>Oh Gweon Woo</name>
 			<id>OhGweonWoo</id>
 			<email>today226@nate.com</email>
 			<organization>Developer Group</organization>
 			<roles>
-				<role>Project Manager</role>
 				<role>Java Developer</role>
-				<role>Flex Developer</role>
-				<role>System Admin</role>
-				<role>DataBase Admin</role>
 			</roles>
 		</developer>
 		<developer>
@@ -113,15 +91,6 @@
 			</roles>
 		</developer>
 		<developer>
-			<name>Kim Dae Hoon</name>
-			<id>dragond7</id>
-			<email>dragond7@naver.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
 			<name>Ryu Kangha</name>
 			<id>RyuKangha</id>
 			<email>venatus@naver.com</email>
@@ -131,29 +100,9 @@
 			</roles>
 		</developer>
 		<developer>
-			<name>Hong Sung Nam</name>
-			<id>magnet</id>
-			<email>aromainthewoods@gmail.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-				<role>Flex Developer</role>
-				<role>GWT Develper</role>
-			</roles>
-		</developer>
-		<developer>
 			<name>Choi Dea Yul</name>
 			<id>cdy212</id>
 			<email>cdy212@naver.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<name>Oh Se Heon</name>
-			<id>diffth</id>
-			<email>diffth@nate.com</email>
 			<organization>Developer Group</organization>
 			<roles>
 				<role>Java Developer</role>
