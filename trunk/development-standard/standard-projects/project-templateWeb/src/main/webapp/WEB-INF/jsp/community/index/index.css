@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+/* Common */
+body,p,h1,h2,h3,h4,h5,h6,menu,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select,hr{margin:0;padding:0;}
+body,input,textarea,select,button {font-family:Tahoma, '굴림',Gulim, verdana;font-size:9pt;line-height:16px; vertical-align: middle;}
+textarea {border:1px solid #FFFFFF; resize: none;}
+input, select, textarea {outline-style: none;}
+img,fieldset{border:0} 
+menu,ul,ol{list-style:none}
+
+input, textarea {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+input:-ms-input-placeholder {
+    color: #ababab;
+}
+
+table,tr,td {border-collapse:collapse; border-spacing: 0; table-layout: fixed; vertical-align: top;}
+
+html {height: 100%; margin:0; padding:0; vertical-align: top;}
+body {
+    text-align: left; height: 100%; margin:0; padding:0; vertical-align: top;
+}
+
+A:link {color: #505661; text-decoration: none}
+A:visited {color: #505661; text-decoration: none}
+A:hover {color: #0060ff; text-decoration: none}
