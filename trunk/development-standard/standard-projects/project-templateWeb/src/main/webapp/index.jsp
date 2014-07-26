@@ -1,2 +1,2 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<jsp:forward page="/sitemesh/jsp/community/largeMenu/middleMenu/smallMenu/index/invokeSelect.do"/>
+<jsp:forward page="/sitemesh/jsp/community/largeMenu/middleMenu/smallMenu/index/invokeSelect1.do"/>
