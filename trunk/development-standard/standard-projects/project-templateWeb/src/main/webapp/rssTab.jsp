@@ -7,66 +7,7 @@
 	<script src="http://nas.313.co.kr:5002/Source/Script/ajax/ajax.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="http://nas.313.co.kr:5002/Source/Script/jQuery/jquery.com/jquery-1.7.2.js"></script> 
 	<script type="text/javascript" src="http://nas.313.co.kr:5002/Source/Script/jQuery/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.js"></script>
-	
-	
-	<style type="text/css"> 
-		/* 링크에서 밑줄 없애기 */
-		a {
-			text-decoration:none
-		}
-		ul.tabs { 
-			margin: 0; 
-			padding: 0; 
-			float: left; 
-			list-style: none; 
-			height: 30px; 
-			border-bottom: 1px solid #eee; 
-			border-left: 1px solid #eee; 
-			width: auto; 
-			font-family:"dotum"; 
-			font-size:12px; 
-		} 
-		ul.tabs li { 
-			float: left; 
-			        text-align:center; 
-			cursor: pointer; 
-			width:105px; 
-			height: 31px; 
-			line-height: 31px; 
-			border: 1px solid #eee; 
-			border-left: none; 
-			font-weight: bold; 
-			background: #fafafa; 
-			overflow: hidden; 
-			position: relative; 
-		} 		
-		
-		ul.tabs li.active{ 
-			background: #FFFFFF; 
-			border-bottom: 1px solid #FFFFFF; 
-		} 
-		.tab_container { 
-			border: 1px solid #eee; 
-			border-top: none; 
-			clear: both; 
-			float: left; 
-			width: 317px;
-			height: 140px; 
-			background: #FFFFFF; 
-		
-		} 
-		.tab_content { 
-			padding: 5px; 
-			font-size: 12px; 
-			display: none; 
-		} 
-		.tab_container .tab_content ul {width:100%; margin:0px; padding:0px;} 
-		.tab_container .tab_content ul li{padding:5px; list-style:none}; 
-		#container {width: 299px; margin: 0 auto;	
-		} 
-	</style> 
-
-
+	<link rel="stylesheet" href="http://nas.313.co.kr:5002/Source/Css/widget/style.css" media="screen" />
 </head>
 <body>
 	<div id="container"> 
