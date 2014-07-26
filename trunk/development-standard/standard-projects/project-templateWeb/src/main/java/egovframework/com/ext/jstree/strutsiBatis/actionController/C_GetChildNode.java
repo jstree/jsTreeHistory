@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -33,6 +34,7 @@ public class C_GetChildNode extends ActionSupport implements Preparable,
 	P_ComprehensiveTree p_ComprehensiveTree;
 	List<T_ComprehensiveTree> t_GetChildNodes;
 
+	@Resource(name="S_GetChildNode")
 	I_S_GetChildNode i_S_GetChildNode;
 
 	HttpServletRequest request;
@@ -49,7 +51,7 @@ public class C_GetChildNode extends ActionSupport implements Preparable,
 		p_ComprehensiveTree = new P_ComprehensiveTree();
 		t_GetChildNodes = new ArrayList<T_ComprehensiveTree>();
 
-		i_S_GetChildNode = new S_GetChildNode();
+		//i_S_GetChildNode = new S_GetChildNode();
 	}
 
 	@Override

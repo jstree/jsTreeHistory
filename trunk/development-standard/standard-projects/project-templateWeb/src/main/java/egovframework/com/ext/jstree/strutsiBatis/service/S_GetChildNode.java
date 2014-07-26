@@ -7,19 +7,23 @@ import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
+@Service("S_GetChildNode")
 public class S_GetChildNode implements I_S_GetChildNode {
 
 	static Logger logger = Logger.getLogger(S_GetChildNode.class);
 
+	@Resource(name="DB_GetChildNode")
 	I_DB_GetChildNode i_DB_GetChildNode;
 	HttpServletRequest request;
 
 	public S_GetChildNode() {
-		i_DB_GetChildNode = new DB_GetChildNode();
+		//i_DB_GetChildNode = new DB_GetChildNode();
 	}
 
 	@Override
