@@ -5,6 +5,7 @@ import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -33,6 +34,7 @@ public class C_AddNode extends ActionSupport implements Preparable,
 	P_ComprehensiveTree p_ComprehensiveTree;
 	T_ComprehensiveTree t_ComprehensiveTree;
 
+	@Resource(name="S_AddNode")
 	I_S_AddNode i_S_AddNode;
 
 	HttpServletRequest request;
@@ -49,7 +51,7 @@ public class C_AddNode extends ActionSupport implements Preparable,
 		p_ComprehensiveTree = new P_ComprehensiveTree();
 		t_ComprehensiveTree = new T_ComprehensiveTree();
 
-		i_S_AddNode = new S_AddNode();
+		//i_S_AddNode = new S_AddNode();
 	}
 
 	@Override
