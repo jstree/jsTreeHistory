@@ -1,9 +1,8 @@
 package egovframework.com.ext.jstree.strutsiBatis.actionController;
 
-import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
-
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -11,14 +10,14 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import egovframework.com.ext.jstree.strutsiBatis.service.I_S_RemoveNode;
-import egovframework.com.ext.jstree.strutsiBatis.service.S_RemoveNode;
-import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
-
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+
+import egovframework.com.ext.jstree.strutsiBatis.service.I_S_RemoveNode;
+import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
+import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
 @SuppressWarnings("rawtypes")
 public class C_RemoveNode extends ActionSupport implements Preparable,
@@ -30,6 +29,7 @@ public class C_RemoveNode extends ActionSupport implements Preparable,
 
 	T_ComprehensiveTree t_ComprehensiveTree;
 
+	@Resource(name="S_RemoveNode")
 	I_S_RemoveNode i_S_RemoveNode;
 
 	HttpServletRequest request;
@@ -60,7 +60,7 @@ public class C_RemoveNode extends ActionSupport implements Preparable,
 	public void prepare() throws Exception {
 		t_ComprehensiveTree = new T_ComprehensiveTree();
 
-		i_S_RemoveNode = new S_RemoveNode();
+		//i_S_RemoveNode = new S_RemoveNode();
 	}
 
 	@Override

@@ -1,10 +1,5 @@
 package egovframework.com.ext.jstree.strutsiBatis.service;
 
-import egovframework.com.ext.jstree.strutsiBatis.dao.DB_GetChildNode;
-import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_GetChildNode;
-import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
-import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
-
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,14 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_GetChildNode;
+import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
+import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
+
 @Service("S_GetChildNode")
 public class S_GetChildNode implements I_S_GetChildNode {
 
 	static Logger logger = Logger.getLogger(S_GetChildNode.class);
 
+	HttpServletRequest request;
+	
 	@Resource(name="DB_GetChildNode")
 	I_DB_GetChildNode i_DB_GetChildNode;
-	HttpServletRequest request;
 
 	public S_GetChildNode() {
 		//i_DB_GetChildNode = new DB_GetChildNode();

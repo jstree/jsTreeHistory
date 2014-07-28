@@ -1,10 +1,8 @@
 package egovframework.com.ext.jstree.strutsiBatis.actionController;
 
-import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
-import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
-
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -12,14 +10,15 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import egovframework.com.ext.jstree.strutsiBatis.service.I_S_MoveNode;
-import egovframework.com.ext.jstree.strutsiBatis.service.S_MoveNode;
-import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
-
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+
+import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
+import egovframework.com.ext.jstree.strutsiBatis.service.I_S_MoveNode;
+import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
+import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
 @SuppressWarnings("rawtypes")
 public class C_MoveNode extends ActionSupport implements Preparable,
@@ -32,6 +31,7 @@ public class C_MoveNode extends ActionSupport implements Preparable,
 	P_ComprehensiveTree p_ComprehensiveTree;
 	T_ComprehensiveTree t_ComprehensiveTree;
 
+	@Resource(name="S_MoveNode")
 	I_S_MoveNode i_S_MoveNode;
 
 	HttpServletRequest request;
@@ -63,7 +63,7 @@ public class C_MoveNode extends ActionSupport implements Preparable,
 		p_ComprehensiveTree = new P_ComprehensiveTree();
 		t_ComprehensiveTree = new T_ComprehensiveTree();
 
-		i_S_MoveNode = new S_MoveNode();
+		//i_S_MoveNode = new S_MoveNode();
 	}
 
 	@Override

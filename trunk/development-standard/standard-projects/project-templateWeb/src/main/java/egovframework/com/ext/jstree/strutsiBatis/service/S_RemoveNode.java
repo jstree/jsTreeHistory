@@ -1,18 +1,26 @@
 package egovframework.com.ext.jstree.strutsiBatis.service;
 
-import egovframework.com.ext.jstree.strutsiBatis.dao.DB_RemoveNode;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Service;
+
 import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_RemoveNode;
 import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 
-import javax.servlet.http.HttpServletRequest;
-
+@Service("S_RemoveNode")
 public class S_RemoveNode implements I_S_RemoveNode {
 
-	I_DB_RemoveNode i_DB_RemoveNode;
 	HttpServletRequest request;
 
+	@Resource(name="DB_RemoveNode")
+	I_DB_RemoveNode i_DB_RemoveNode;
+	
+	@Resource(name="S_GetNode")
+	I_S_GetNode i_s_GetNode;
+
 	public S_RemoveNode() {
-		i_DB_RemoveNode = new DB_RemoveNode();
+		//i_DB_RemoveNode = new DB_RemoveNode();
 	}
 
 	@Override
@@ -24,7 +32,6 @@ public class S_RemoveNode implements I_S_RemoveNode {
 	@Override
 	public int executeRemoveNode(P_ComprehensiveTree p_ComprehensiveTree) {
 
-		I_S_GetNode i_s_GetNode = new S_GetNode();
 		i_s_GetNode.setRequest(request);
 		return removeNode(Util_SwapNode.swapTtoP(i_s_GetNode.getNode(
 				p_ComprehensiveTree, "remove")));

@@ -1,23 +1,28 @@
 package egovframework.com.ext.jstree.strutsiBatis.service;
 
-import egovframework.com.ext.jstree.strutsiBatis.dao.DB_GetNode;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
 import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_GetNode;
 import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-
+@Service("S_GetNode")
 public class S_GetNode implements I_S_GetNode {
 
 	static Logger logger = Logger.getLogger(S_GetChildNode.class);
 
-	I_DB_GetNode i_DB_GetNode;
 	HttpServletRequest request;
+	
+	@Resource(name="DB_GetNode")
+	I_DB_GetNode i_DB_GetNode;
+	
 
 	public S_GetNode() {
-		i_DB_GetNode = new DB_GetNode();
+		//i_DB_GetNode = new DB_GetNode();
 	}
 
 	@Override

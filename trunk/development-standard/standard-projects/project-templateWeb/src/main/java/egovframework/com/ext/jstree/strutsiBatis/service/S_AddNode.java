@@ -1,30 +1,38 @@
 package egovframework.com.ext.jstree.strutsiBatis.service;
 
-import egovframework.com.ext.jstree.strutsiBatis.dao.DB_AddNode;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
 import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_AddNode;
 import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-
+@Service("S_AddNode")
 public class S_AddNode implements I_S_AddNode {
 
 	static Logger logger = Logger.getLogger(S_AddNode.class);
 
 	HttpServletRequest request;
+	
+	@Resource(name="S_GetNode")
 	I_S_GetNode i_S_GetNode;
+	
+	@Resource(name="S_GetChildNode")
 	I_S_GetChildNode i_S_GetChildNode;
+	
+	@Resource(name="DB_AddNode")
 	I_DB_AddNode i_DB_AddNode;
 
 	public S_AddNode() {
 
-		i_S_GetNode = new S_GetNode();
-		i_S_GetChildNode = new S_GetChildNode();
-		i_DB_AddNode = new DB_AddNode();
+		//i_S_GetNode = new S_GetNode();
+		//i_S_GetChildNode = new S_GetChildNode();
+		//i_DB_AddNode = new DB_AddNode();
 	}
 
 	@Override

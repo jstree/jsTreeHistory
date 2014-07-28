@@ -1,30 +1,37 @@
 package egovframework.com.ext.jstree.strutsiBatis.service;
 
-import egovframework.com.ext.jstree.strutsiBatis.dao.DB_AlterNodeType;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
 import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_AlterNodeType;
 import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-
+@Service("S_AlterNodeType")
 public class S_AlterNodeType implements I_S_AlterNodeType {
 
 	static Logger logger = Logger.getLogger(S_AlterNodeType.class);
 
 	HttpServletRequest request;
+	
+	@Resource(name="S_GetChildNode")
 	I_S_GetChildNode i_S_GetChildNode;
+	
+	@Resource(name="S_GetNode")
 	I_S_GetNode i_S_GetNode;
 
+	@Resource(name="DB_AlterNodeType")
 	I_DB_AlterNodeType i_DB_AlterNodeType;
 
 	public S_AlterNodeType() {
-		i_S_GetChildNode = new S_GetChildNode();
-		i_S_GetNode = new S_GetNode();
-		i_DB_AlterNodeType = new DB_AlterNodeType();
+		//i_S_GetChildNode = new S_GetChildNode();
+		//i_S_GetNode = new S_GetNode();
+		//i_DB_AlterNodeType = new DB_AlterNodeType();
 	}
 
 	@Override

@@ -1,29 +1,37 @@
 package egovframework.com.ext.jstree.strutsiBatis.service;
 
-import egovframework.com.ext.jstree.strutsiBatis.dao.DB_MoveNode;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
 import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_MoveNode;
 import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-
+@Service("S_MoveNode")
 public class S_MoveNode implements I_S_MoveNode {
 
 	static Logger logger = Logger.getLogger(S_MoveNode.class);
 
-	I_DB_MoveNode i_DB_MoveNode;
-	I_S_GetNode i_S_GetNode;
-	I_S_GetChildNode i_S_GetChildNode;
 	HttpServletRequest request;
 
+	@Resource(name="DB_MoveNode")
+	I_DB_MoveNode i_DB_MoveNode;
+	
+	@Resource(name="S_GetNode")
+	I_S_GetNode i_S_GetNode;
+	
+	@Resource(name="S_GetChildNode")
+	I_S_GetChildNode i_S_GetChildNode;
+
 	public S_MoveNode() {
-		i_DB_MoveNode = new DB_MoveNode();
-		i_S_GetNode = new S_GetNode();
-		i_S_GetChildNode = new S_GetChildNode();
+		//i_DB_MoveNode = new DB_MoveNode();
+		//i_S_GetNode = new S_GetNode();
+		//i_S_GetChildNode = new S_GetChildNode();
 	}
 
 	@Override
