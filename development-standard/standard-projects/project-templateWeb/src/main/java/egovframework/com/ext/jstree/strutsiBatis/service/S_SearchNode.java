@@ -1,23 +1,28 @@
 package egovframework.com.ext.jstree.strutsiBatis.service;
 
-import egovframework.com.ext.jstree.strutsiBatis.dao.DB_SearchNode;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Service;
+
 import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_SearchNode;
 import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+@Service("S_SearchNode")
 public class S_SearchNode implements I_S_SearchNode {
+
+	HttpServletRequest request;
 
 	P_ComprehensiveTree p_SearchNodeByPosition;
 	List<T_ComprehensiveTree> t_SearchNodeByStrings;
 	List<P_ComprehensiveTree> p_SearchNodeByPositions;
 
+	@Resource(name="DB_SearchNode")
 	I_DB_SearchNode i_DB_SearchNode;
-	HttpServletRequest request;
 
 	public S_SearchNode() {
 
@@ -26,7 +31,7 @@ public class S_SearchNode implements I_S_SearchNode {
 		t_SearchNodeByStrings = new ArrayList<T_ComprehensiveTree>();
 		p_SearchNodeByPositions = new ArrayList<P_ComprehensiveTree>();
 
-		i_DB_SearchNode = new DB_SearchNode();
+		//i_DB_SearchNode = new DB_SearchNode();
 	}
 
 	@Override

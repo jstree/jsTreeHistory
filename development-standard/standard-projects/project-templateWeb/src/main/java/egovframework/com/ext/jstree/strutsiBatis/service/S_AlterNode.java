@@ -1,22 +1,25 @@
 package egovframework.com.ext.jstree.strutsiBatis.service;
 
-import egovframework.com.ext.jstree.strutsiBatis.dao.DB_AlterNode;
-import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_AlterNode;
-import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
-
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
+import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_AlterNode;
+import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
+
+@Service("S_AlterNode")
 public class S_AlterNode implements I_S_AlterNode {
 
 	static Logger logger = Logger.getLogger(S_AlterNode.class);
 
+	@Resource(name="DB_AlterNode")
 	I_DB_AlterNode i_DB_AlterNode;
 	HttpServletRequest request;
 
 	public S_AlterNode() {
-		i_DB_AlterNode = new DB_AlterNode();
+		//i_DB_AlterNode = new DB_AlterNode();
 	}
 
 	@Override

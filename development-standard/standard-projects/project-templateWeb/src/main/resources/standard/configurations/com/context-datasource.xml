@@ -31,7 +31,7 @@
 		<property name="validationQuery" value="select 1 from dual" />
 		<property name="testWhileIdle" value="true" />
 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
-		<property name="defaultAutoCommit" value="false" />
+		<property name="defaultAutoCommit" value="true" />
         <property name="initialSize" value="10" />
         <property name="maxActive" value="30" />
         <property name="testOnBorrow" value="true" />
