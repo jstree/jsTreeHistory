@@ -53,6 +53,26 @@ import standard.mvc.component.manager.viewResolver.CustomInternalResourceViewRes
 import standard.mvc.component.manager.viewResolver.CustomThymeleafViewResolver;
 import standard.mvc.component.manager.viewResolver.SpecialPurposeViewResolver;
 
+/**
+ *  Class Name : WebMvcConfig.java
+ *  Description : 스프링 서블릿 웹 애플리케이션 컨텍스트 설정을 위한 자바 클래스
+ *  @author Dongmin.Lee
+ *  @since 2014.07.02
+ *  @version 1.0
+ *  @see
+ *
+ *  <pre>
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014.07.02    Dongmin.Lee      최초 생성
+ *  2014.07.29	  류강하		   표준 프레임워크 내 urlfilename-servlet.xml 파일 변경에 따른 백업 파일 생성 및 바로보드 프로젝트 패키지로 이동에 따른 수정
+ *
+ *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
+
 /*
 @Configuration : 현재 @Configuration 선언된 클래스 현재 소스상 
 WebMvcConfig.java 클래스는 spring의 환경설정과 관련된 파일이라고 
@@ -101,7 +121,7 @@ XML base였다면 <mvc:annotation-driven/>과 같다
 */
 @ImportResource({	"/WEB-INF/config/standard/springmvc/dispatcher-servlet.xml",
 						"/WEB-INF/config/standard/springmvc/egov-com-*.xml",
-						"/WEB-INF/config/egovframework/springmvc/urlfilename-servlet.xml",
+						"/WEB-INF/config/standard/springmvc/urlfilename-servlet.xml",
 						"/WEB-INF/config/egovframework/springmvc/egov-com-*.xml"})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 //WebMvcConfig 클래스는 Application Root Context를 설정하는 클래스 
