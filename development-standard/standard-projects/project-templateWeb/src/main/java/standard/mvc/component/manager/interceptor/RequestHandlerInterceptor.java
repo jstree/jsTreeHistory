@@ -1,6 +1,7 @@
 package standard.mvc.component.manager.interceptor;
 
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import java.util.Properties;
@@ -8,65 +9,144 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import standard.mvc.component.base.dao.hibernate.SearchSupport;
 import standard.mvc.component.util.DateUtils;
+import standard.mvc.component.util.ParameterParser;
 import standard.mvc.component.util.StringUtils;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.TemplateHashModel;
 
 public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
-    @Autowired
-    private Properties configFile;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        
-    	logger.info("{} preHandle start {}", new Object[]{"============================================", this.getClass().getName()});
-		
-    	Method[] methods = HttpServletRequest.class.getMethods();
-		
-		for (Method method : methods) {
 
-			String methodName = method.getName();
-			String returnType = method.getReturnType().getName();
-			Class<?>[] parameterType = method.getParameterTypes();
+	@Autowired
+	private Properties configFile;
 
-			if (!"void".equals(returnType) && 0 == parameterType.length) {
+	// set private localVariable
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-				try {
-					
-					logger.debug("{} {} : {}", new Object[]{"success", methodName, method.invoke(request).toString()});
-					
-				} catch (Exception e) {
-					
-					logger.debug("{} {} : {}", new Object[]{"fail", methodName, e.getMessage()});
-					
-				}
-								
-			}
-		
-		}
-		
-		logger.info("{} end {}", new Object[]{"============================================", this.getClass().getName()});
-		
+	@Override
+	public boolean preHandle(HttpServletRequest request,
+			HttpServletResponse response, Object handler) throws Exception {
+
+		setLogging(request);
+		ParameterParser parameterParser = setUrlVariable(request);
+		setSearchSupport(request, parameterParser);
+
 		return true;
-    }
-    
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        
-    	logger.info("{} postHandle start {}", new Object[]{"============================================", this.getClass().getName()});
-		
-    	Method[] methods = HttpServletRequest.class.getMethods();
-		
+	}
+
+	/**
+	 * @param request
+	 * @return
+	 * @throws MalformedURLException
+	 * @see <pre>
+	 * 	depths => 풀URL
+	 * 	depth0 => 템플릿엔진 선택 ex) /sitemesh , /tiles , /none
+	 * 	depth1 => 사이트명 ( 하나의 컨텍스트에서도 여러사이트를 운용가능 )
+	 * 	depth2 => Spring,Struts 등 서블릿 컨텍스트 해당 URL
+	 * 	depth3 => Mybatis, Hibernate 등 ORAM 해당 URL
+	 * 	depth4 => 대메뉴
+	 * 	depth5 => 중메뉴 ( 리퀘스트 맵핑에서 대/중/소 ) 구분하여 처리할것.
+	 * 	depth6 => 소메뉴
+	 * 	depth7 => 게시판번호 혹은 액션대상.
+	 * 	depth8 => 액션처리(select,update,delete,insert)
+	 * </pre>
+	 */
+	private ParameterParser setUrlVariable(HttpServletRequest request)
+			throws MalformedURLException {
+
+		ParameterParser parameterParser = new ParameterParser(request);
+		URL url = new URL(request.getRequestURL().toString());
+		String hostUrl = url.getProtocol() + "://" + url.getHost();
+		String depths = url.getPath();
+		String[] depthArray = StringUtils.split(depths, "/");
+
+		String contextRootPath = request.getContextPath();
+		String depth0 = new StringBuilder().append(depthArray[0]).toString();
+		String depth1 = new StringBuilder().append(depthArray[1]).toString();
+		String depth2 = new StringBuilder().append(depthArray[2]).toString();
+		String depth3 = new StringBuilder().append(depthArray[3]).toString();
+		String depth4 = new StringBuilder().append(depthArray[4]).toString();
+		String depth5 = new StringBuilder().append(depthArray[5]).toString();
+		String depth6 = new StringBuilder().append(depthArray[6]).toString();
+		String depth7 = new StringBuilder().append(depthArray[7]).toString();
+		String depth8 = new StringBuilder().append(depthArray[8]).toString();
+
+		request.setAttribute("hostUrl", hostUrl);
+		request.setAttribute("contextRootPath", contextRootPath);
+		request.setAttribute("depth0", depth0);
+		request.setAttribute("depth1", depth1);
+		request.setAttribute("depth2", depth2);
+		request.setAttribute("depth3", depth3);
+		request.setAttribute("depth4", depth4);
+		request.setAttribute("depth5", depth5);
+		request.setAttribute("depth6", depth6);
+		request.setAttribute("depth7", depth7);
+		request.setAttribute("depth8", depth8);
+		return parameterParser;
+	}
+
+	/**
+	 * @param request
+	 */
+	private void setLogging(HttpServletRequest request) {
+		logger.info("{} preHandle start {}", new Object[] {
+				"========================", this.getClass().getName() });
+		Method[] methods = HttpServletRequest.class.getMethods();
+		for (Method method : methods) {
+			String methodName = method.getName();
+			String returnType = method.getReturnType().getName();
+			Class<?>[] parameterType = method.getParameterTypes();
+			if (!"void".equals(returnType) && 0 == parameterType.length) {
+				try {
+					logger.debug("{} {} : {}", new Object[] { "success",
+							methodName, method.invoke(request).toString() });
+				} catch (Exception e) {
+					logger.debug("{} {} : {}", new Object[] { "fail",
+							methodName, e.getMessage() });
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param request
+	 * @param parameterParser
+	 */
+	private void setSearchSupport(HttpServletRequest request,
+			ParameterParser parameterParser) {
+
+		SearchSupport searchSupport = new SearchSupport();
+		searchSupport.setPageNo(parameterParser.getInt("page", 1));
+		searchSupport.setPageSize(parameterParser.getInt("rows", 50));
+
+		if (StringUtils.isEmpty(parameterParser.get("order"))) {
+			searchSupport.setOrder(Order.desc("c_id"));
+		} else {
+			searchSupport.setOrder(Order.desc(parameterParser.get("order")));
+		}
+		request.setAttribute("searchSupport", searchSupport);
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request,
+			HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+
+		logger.info("{} postHandle start {}", new Object[] {
+				"============================================",
+				this.getClass().getName() });
+
+		Method[] methods = HttpServletRequest.class.getMethods();
+
 		for (Method method : methods) {
 
 			String methodName = method.getName();
@@ -76,107 +156,80 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 			if (!"void".equals(returnType) && 0 == parameterType.length) {
 
 				try {
-					
-					logger.debug("{} {} : {}", new Object[]{"success", methodName, method.invoke(request).toString()});
-					
+
+					logger.debug("{} {} : {}", new Object[] { "success",
+							methodName, method.invoke(request).toString() });
+
 				} catch (Exception e) {
-					
-					logger.debug("{} {} : {}", new Object[]{"fail", methodName, e.getMessage()});
-					
+
+					logger.debug("{} {} : {}", new Object[] { "fail",
+							methodName, e.getMessage() });
+
 				}
-								
+
 			}
-		
+
 		}
-		
-		logger.info("{} end {}", new Object[]{"============================================", this.getClass().getName()});
-    	
-        if (null == modelAndView) {
-            return;
-        }
-        
-        View view = modelAndView.getView();
-        String viewName = modelAndView.getViewName();
-        if (view instanceof org.springframework.web.servlet.view.RedirectView || (null != viewName && viewName.startsWith("redirect:")) || (null != viewName && viewName.equals(":move")) || (null != viewName && viewName.equals(":exit"))) {
-            return;
-        }
-        
-        URL url = new URL(request.getRequestURL().toString());
-        String depths = url.getPath();
-        
-        String hostUrl = url.getProtocol() + "://" + url.getHost();
-        
-        BeansWrapper wrapper = BeansWrapper.getDefaultInstance();
-        TemplateHashModel staticModel = wrapper.getStaticModels();
-        modelAndView.addObject("StringEscapeUtils", staticModel.get("org.apache.commons.lang.StringEscapeUtils"));
-        
-        // 잡다한 값들
-        Date now = new Date();
-        modelAndView.addObject("hostUrl", hostUrl);
-        modelAndView.addObject("prevWeek", DateUtils.addWeeks(now, -1));
-        modelAndView.addObject("yesterday", DateUtils.addDays(now, -1));
-        modelAndView.addObject("today", now);
-        modelAndView.addObject("tommorow", DateUtils.addDays(now, 1));
-        modelAndView.addObject("nextWeek", DateUtils.addWeeks(now, 1));
-        modelAndView.addObject("nextMonth", DateUtils.addMonths(now, 1));
-        
-        //modelAndView.addObject("imageHost", configFile.get("imageHost"));
-        modelAndView.addObject("queryString", request.getQueryString());
-        
-        // 장비의 기본정보들 넣어줌
-        modelAndView.addObject("platform", "");
-        modelAndView.addObject("language", "KOREAN");
-        modelAndView.addObject("applyCount", "");
-        
-        // 로그인인경우 하위메뉴 불필요.
-        if (StringUtils.isEmpty(depths) || StringUtils.equals(depths, "/") 
-                || StringUtils.startsWith(depths, "/login") || StringUtils.startsWith(depths, "/login") || StringUtils.startsWith(depths, "/ajax") || StringUtils.startsWith(depths, "/bundle") 
-                || StringUtils.startsWith(depths, "/rest") || StringUtils.startsWith(depths, "/rest") || StringUtils.startsWith(depths, "/error") || StringUtils.startsWith(depths, "/pm/error")
-                || StringUtils.startsWith(depths, "/data")) {
-            return;
-        }
-        
-        // URL 패턴 => /policy/TG/그룹번호 or 장비번호/system/admin/user
-        //String[] depthArray = StringUtils.split(depths, "/");   //[policy, VTN, 1573605, 1, separateNetworkProfile, manageNetwork, exception]
-      
-//        String depth0 = new StringBuilder().append(depthArray[0]).append("/").append(depthArray[1]).append("/").append(depthArray[2]).append("/").append(depthArray[3]).toString();
-//        String depthFirst = depthArray[0];
-//        String depthMiddle = new StringBuilder().append(depthArray[1]).append("/").append(depthArray[2]).append("/").append(depthArray[3]).toString();
-//        String depth1 = "";
-//        String depth2 = "";
-//        String depth3 = "";
-//        String depth4 = "";
-//        String deviceType = depthArray[1];
-//        
-//        if (depthArray.length > 4) {
-//            depth1 = depthArray[4];
-//        }
-//        
-//        if (depthArray.length > 5) {
-//            depth2 = depthArray[5];
-//        }
-//        
-//        if (depthArray.length > 6) {
-//            depth3 = depthArray[6];
-//        }
-//        
-//        if (depthArray.length > 7) {
-//            depth4 = depthArray[7];
-//        }
-        
-        
-        // url parser
-//        modelAndView.addObject("depthFirst", depthFirst); // policy
-//        modelAndView.addObject("depthMiddle", depthMiddle); // VTN/G1/0
-//        modelAndView.addObject("depths", depths);
-//        modelAndView.addObject("depth0", depth0); // policy/VTN/G1/0
-//        modelAndView.addObject("depth1", depth1);
-//        modelAndView.addObject("depth2", depth2);
-//        modelAndView.addObject("depth3", depth3);
-//        modelAndView.addObject("depth4", depth4);
-//        modelAndView.addObject("deviceType", deviceType); // VTN
-//        modelAndView.addObject("currentUrl", url.getFile());
-    }
-    
-    
+
+		logger.info("{} end {}", new Object[] {
+				"============================================",
+				this.getClass().getName() });
+
+		if (null == modelAndView) {
+			return;
+		}
+
+		View view = modelAndView.getView();
+		String viewName = modelAndView.getViewName();
+		if (view instanceof org.springframework.web.servlet.view.RedirectView
+				|| (null != viewName && viewName.startsWith("redirect:"))
+				|| (null != viewName && viewName.equals(":move"))
+				|| (null != viewName && viewName.equals(":exit"))) {
+			return;
+		}
+
+		URL url = new URL(request.getRequestURL().toString());
+		String depths = url.getPath();
+
+		String hostUrl = url.getProtocol() + "://" + url.getHost();
+
+		BeansWrapper wrapper = BeansWrapper.getDefaultInstance();
+		TemplateHashModel staticModel = wrapper.getStaticModels();
+		modelAndView.addObject("StringEscapeUtils",
+				staticModel.get("org.apache.commons.lang.StringEscapeUtils"));
+
+		// 잡다한 값들
+		Date now = new Date();
+		modelAndView.addObject("hostUrl", hostUrl);
+		modelAndView.addObject("prevWeek", DateUtils.addWeeks(now, -1));
+		modelAndView.addObject("yesterday", DateUtils.addDays(now, -1));
+		modelAndView.addObject("today", now);
+		modelAndView.addObject("tommorow", DateUtils.addDays(now, 1));
+		modelAndView.addObject("nextWeek", DateUtils.addWeeks(now, 1));
+		modelAndView.addObject("nextMonth", DateUtils.addMonths(now, 1));
+
+		// modelAndView.addObject("imageHost", configFile.get("imageHost"));
+		modelAndView.addObject("queryString", request.getQueryString());
+
+		// 장비의 기본정보들 넣어줌
+		modelAndView.addObject("platform", "");
+		modelAndView.addObject("language", "KOREAN");
+		modelAndView.addObject("applyCount", "");
+
+		// 로그인인경우 하위메뉴 불필요.
+		if (StringUtils.isEmpty(depths) || StringUtils.equals(depths, "/")
+				|| StringUtils.startsWith(depths, "/login")
+				|| StringUtils.startsWith(depths, "/login")
+				|| StringUtils.startsWith(depths, "/ajax")
+				|| StringUtils.startsWith(depths, "/bundle")
+				|| StringUtils.startsWith(depths, "/rest")
+				|| StringUtils.startsWith(depths, "/rest")
+				|| StringUtils.startsWith(depths, "/error")
+				|| StringUtils.startsWith(depths, "/pm/error")
+				|| StringUtils.startsWith(depths, "/data")) {
+			return;
+		}
+
+	}
+
 }
