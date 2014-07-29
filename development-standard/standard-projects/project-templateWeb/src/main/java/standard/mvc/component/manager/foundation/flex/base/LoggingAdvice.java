@@ -1,4 +1,4 @@
-package standard.mvc.component.manager.flex.base;
+package standard.mvc.component.manager.foundation.flex.base;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;

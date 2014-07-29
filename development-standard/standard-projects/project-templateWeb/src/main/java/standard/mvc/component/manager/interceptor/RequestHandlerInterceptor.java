@@ -13,6 +13,7 @@ import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -36,8 +37,9 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 
-		setLogging(request);
-		ParameterParser parameterParser = setUrlVariable(request);
+		setLogging(request, true);
+		ParameterParser parameterParser = setUrlVariable(request,
+				new ModelAndView(), true);
 		setSearchSupport(request, parameterParser);
 
 		return true;
@@ -60,7 +62,8 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 	 * 	depth8 => 액션처리(select,update,delete,insert)
 	 * </pre>
 	 */
-	private ParameterParser setUrlVariable(HttpServletRequest request)
+	private ParameterParser setUrlVariable(HttpServletRequest request,
+			ModelAndView modelAndView, Boolean checkPreHandle)
 			throws MalformedURLException {
 
 		ParameterParser parameterParser = new ParameterParser(request);
@@ -80,26 +83,45 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 		String depth7 = new StringBuilder().append(depthArray[7]).toString();
 		String depth8 = new StringBuilder().append(depthArray[8]).toString();
 
-		request.setAttribute("hostUrl", hostUrl);
-		request.setAttribute("contextRootPath", contextRootPath);
-		request.setAttribute("depth0", depth0);
-		request.setAttribute("depth1", depth1);
-		request.setAttribute("depth2", depth2);
-		request.setAttribute("depth3", depth3);
-		request.setAttribute("depth4", depth4);
-		request.setAttribute("depth5", depth5);
-		request.setAttribute("depth6", depth6);
-		request.setAttribute("depth7", depth7);
-		request.setAttribute("depth8", depth8);
+		if (checkPreHandle) {
+			request.setAttribute("hostUrl", hostUrl);
+			request.setAttribute("contextRootPath", contextRootPath);
+			request.setAttribute("depth0", depth0);
+			request.setAttribute("depth1", depth1);
+			request.setAttribute("depth2", depth2);
+			request.setAttribute("depth3", depth3);
+			request.setAttribute("depth4", depth4);
+			request.setAttribute("depth5", depth5);
+			request.setAttribute("depth6", depth6);
+			request.setAttribute("depth7", depth7);
+			request.setAttribute("depth8", depth8);
+		} else {
+			modelAndView.addObject("hostUrl", hostUrl);
+			modelAndView.addObject("contextRootPath", contextRootPath);
+			modelAndView.addObject("depth0", depth0);
+			modelAndView.addObject("depth1", depth1);
+			modelAndView.addObject("depth2", depth2);
+			modelAndView.addObject("depth3", depth3);
+			modelAndView.addObject("depth4", depth4);
+			modelAndView.addObject("depth5", depth5);
+			modelAndView.addObject("depth6", depth6);
+			modelAndView.addObject("depth7", depth7);
+			modelAndView.addObject("depth8", depth8);
+		}
 		return parameterParser;
 	}
 
 	/**
 	 * @param request
 	 */
-	private void setLogging(HttpServletRequest request) {
-		logger.info("{} preHandle start {}", new Object[] {
-				"========================", this.getClass().getName() });
+	private void setLogging(HttpServletRequest request, Boolean checkPreHandle) {
+		if (checkPreHandle) {
+			logger.info("{} preHandle start {}", new Object[] {
+					"========================", this.getClass().getName() });
+		} else {
+			logger.info("{} postHandle start {}", new Object[] {
+					"========================", this.getClass().getName() });
+		}
 		Method[] methods = HttpServletRequest.class.getMethods();
 		for (Method method : methods) {
 			String methodName = method.getName();
@@ -124,7 +146,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 	private void setSearchSupport(HttpServletRequest request,
 			ParameterParser parameterParser) {
 
-		SearchSupport searchSupport = new SearchSupport();
+		SearchSupport searchSupport = SearchSupport.getInstance();
 		searchSupport.setPageNo(parameterParser.getInt("page", 1));
 		searchSupport.setPageSize(parameterParser.getInt("rows", 50));
 
@@ -141,44 +163,11 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 
-		logger.info("{} postHandle start {}", new Object[] {
-				"============================================",
-				this.getClass().getName() });
-
-		Method[] methods = HttpServletRequest.class.getMethods();
-
-		for (Method method : methods) {
-
-			String methodName = method.getName();
-			String returnType = method.getReturnType().getName();
-			Class<?>[] parameterType = method.getParameterTypes();
-
-			if (!"void".equals(returnType) && 0 == parameterType.length) {
-
-				try {
-
-					logger.debug("{} {} : {}", new Object[] { "success",
-							methodName, method.invoke(request).toString() });
-
-				} catch (Exception e) {
-
-					logger.debug("{} {} : {}", new Object[] { "fail",
-							methodName, e.getMessage() });
-
-				}
-
-			}
-
-		}
-
-		logger.info("{} end {}", new Object[] {
-				"============================================",
-				this.getClass().getName() });
+		setLogging(request, true);
 
 		if (null == modelAndView) {
 			return;
 		}
-
 		View view = modelAndView.getView();
 		String viewName = modelAndView.getViewName();
 		if (view instanceof org.springframework.web.servlet.view.RedirectView
@@ -188,10 +177,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 			return;
 		}
 
-		URL url = new URL(request.getRequestURL().toString());
-		String depths = url.getPath();
-
-		String hostUrl = url.getProtocol() + "://" + url.getHost();
+		setUrlVariable(request, new ModelAndView(), true);
 
 		BeansWrapper wrapper = BeansWrapper.getDefaultInstance();
 		TemplateHashModel staticModel = wrapper.getStaticModels();
@@ -200,35 +186,14 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 
 		// 잡다한 값들
 		Date now = new Date();
-		modelAndView.addObject("hostUrl", hostUrl);
 		modelAndView.addObject("prevWeek", DateUtils.addWeeks(now, -1));
 		modelAndView.addObject("yesterday", DateUtils.addDays(now, -1));
 		modelAndView.addObject("today", now);
 		modelAndView.addObject("tommorow", DateUtils.addDays(now, 1));
 		modelAndView.addObject("nextWeek", DateUtils.addWeeks(now, 1));
 		modelAndView.addObject("nextMonth", DateUtils.addMonths(now, 1));
-
-		// modelAndView.addObject("imageHost", configFile.get("imageHost"));
 		modelAndView.addObject("queryString", request.getQueryString());
-
-		// 장비의 기본정보들 넣어줌
-		modelAndView.addObject("platform", "");
-		modelAndView.addObject("language", "KOREAN");
-		modelAndView.addObject("applyCount", "");
-
-		// 로그인인경우 하위메뉴 불필요.
-		if (StringUtils.isEmpty(depths) || StringUtils.equals(depths, "/")
-				|| StringUtils.startsWith(depths, "/login")
-				|| StringUtils.startsWith(depths, "/login")
-				|| StringUtils.startsWith(depths, "/ajax")
-				|| StringUtils.startsWith(depths, "/bundle")
-				|| StringUtils.startsWith(depths, "/rest")
-				|| StringUtils.startsWith(depths, "/rest")
-				|| StringUtils.startsWith(depths, "/error")
-				|| StringUtils.startsWith(depths, "/pm/error")
-				|| StringUtils.startsWith(depths, "/data")) {
-			return;
-		}
+		modelAndView.addObject("language", LocaleContextHolder.getLocale());
 
 	}
 

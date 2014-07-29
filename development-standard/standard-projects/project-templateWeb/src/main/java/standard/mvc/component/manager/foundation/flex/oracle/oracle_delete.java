@@ -4,12 +4,12 @@
  * @Date        : 2010. 01. 22
  * @작성자      	: Administrator
  * @변경이력 	:
- * @프로그램 설명 :
+ * @File 설명 	:
  * ----------------------------------------------
  * 수정일      수정자  수정내용
  * ----------------------------------------------
  */
-package standard.mvc.component.manager.flex.oracle;
+package standard.mvc.component.manager.foundation.flex.oracle;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,9 +22,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class oracle_insert {
+public class oracle_delete {
 	/**
-	 * @Class Name : oracle_insert
+	 * @Class Name : oracle_delete
 	 * @작성일 : 2010. 01. 22
 	 * @작성자 : 이동민
 	 * @변경이력 :

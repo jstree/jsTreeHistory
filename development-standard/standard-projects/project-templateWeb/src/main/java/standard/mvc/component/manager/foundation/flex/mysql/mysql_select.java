@@ -1,7 +1,7 @@
 /**
  *
  */
-package standard.mvc.component.manager.flex.mysql;
+package standard.mvc.component.manager.foundation.flex.mysql;
 
 /**
  * @author Administrator

@@ -9,11 +9,10 @@
  * 수정일      수정자  수정내용
  * ----------------------------------------------
  */
-package standard.mvc.component.manager.flex.oracle;
+package standard.mvc.component.manager.foundation.flex.oracle;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Hashtable;
@@ -23,9 +22,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class oracle_select {
+public class oracle_insert {
 	/**
-	 * @Class Name : oracle_select
+	 * @Class Name : oracle_insert
 	 * @작성일 : 2010. 01. 22
 	 * @작성자 : 이동민
 	 * @변경이력 :
@@ -33,18 +32,19 @@ public class oracle_select {
 	 * @특이사항 :
 	 */
 
-	public Vector<Hashtable<String, String>> getElements(String v_sql) {
+	public Vector<Hashtable<String, Integer>> getElements(String v_sql) {
 
 		/***************************************************/
 		long startTime = System.currentTimeMillis(); // 어플리케이션 시작 시간
 		ResultSet rs = null; // 결과셋 객체 rs 선언
 		Connection con = null; // 커넥션 객체 con 선언
-		Vector<Hashtable<String, String>> vc = new Vector<Hashtable<String, String>>(); // 벡터
-																						// 객체
-																						// vc
-																						// 선언
-		Hashtable<String, String> ht = null; // 헤쉬테이블 row_data 선언
+		Vector<Hashtable<String, Integer>> vc = new Vector<Hashtable<String, Integer>>(); // 벡터
+																							// 객체
+																							// vc
+																							// 선언
+		Hashtable<String, Integer> ht = null; // 헤쉬테이블 row_data 선언
 		Statement stmt = null; // 스테이트 객체 stmt 선언
+		int iResult = 0; // 몇개의 업데이트가 이루어졌는지 확인 하는 갯수
 		/***************************************************/
 
 		try {
@@ -59,30 +59,23 @@ public class oracle_select {
 			/***************************************************/
 			con = ds.getConnection(); // 커넥션 셋팅
 			stmt = con.createStatement(); // 스테이트 셋팅
-			rs = stmt.executeQuery(v_sql); // 파라미터로 넘겨받은 v_sql 쿼리 빌링
-			ResultSetMetaData rsmd = rs.getMetaData(); // 결과셋 메타데이터 메소드 수행
-			int numberOfColumns = rsmd.getColumnCount(); // 결과셋 로우갯수 확인
+			iResult = stmt.executeUpdate(v_sql); // 쿼리 실행후 결과값 로우를 인트형으로 리턴하여
+													// iResult 선언
 			/***************************************************/
 
 			/***************************************************/
-			while (rs.next()) {
-				ht = new Hashtable<String, String>(); // 해쉬테이블 초기화
-				for (int i = 1; i <= numberOfColumns; i++) {
-					if (rs.getString(rsmd.getColumnName(i)) != "null"
-							&& rs.getString(rsmd.getColumnName(i)) != null) { // value
-																				// 가
-																				// null
-																				// 이
-																				// 아닌경우의
-																				// 설정
-						ht.put(rsmd.getColumnName(i),
-								rs.getString(rsmd.getColumnName(i))); // 헤쉬
-																		// 데이터셋팅
-					}
-				}
-				vc.add(ht); // 벡터에 헤쉬데이터 add
+			if (iResult > 0) // 결과값이 한개 이상이 있으면 성공 송출
+			{
+				ht = new Hashtable<String, Integer>(); // 해쉬테이블 초기화
+				ht.put("result", iResult); // 헤쉬 데이터셋팅
+			} else // 결과값이 한개 미만이면 실패 송출
+			{
+				ht = new Hashtable<String, Integer>(); // 해쉬테이블 초기화
+				ht.put("result", iResult); // 헤쉬 데이터셋팅
 			}
 			/***************************************************/
+			vc.add(ht); // 벡터에 헤쉬데이터 add
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,6 +103,7 @@ public class oracle_select {
 					+ (System.currentTimeMillis() - startTime));
 			System.out
 					.println("-----------------------------------------------------------------------");
+
 		}
 
 		return vc;

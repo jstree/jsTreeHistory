@@ -25,6 +25,10 @@ public class SearchSupport {
 	    private Map<String, Object> whereMap = new HashMap<>();
 	    private int whereCount = 0;
 	    
+	    private SearchSupport() {
+			//singleton
+		}
+	    
 	    public int getPageNo() {
 	        return pageNo;
 	    }
