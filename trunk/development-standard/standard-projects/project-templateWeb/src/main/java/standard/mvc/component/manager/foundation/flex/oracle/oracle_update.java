@@ -9,7 +9,7 @@
  * 수정일      수정자  수정내용
  * ----------------------------------------------
  */
-package standard.mvc.component.manager.flex.oracle;
+package standard.mvc.component.manager.foundation.flex.oracle;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -1,4 +1,4 @@
-package standard.mvc.component.manager.flex.oracle;
+package standard.mvc.component.manager.foundation.flex.oracle;
 
 import java.util.*;
 import java.sql.*;

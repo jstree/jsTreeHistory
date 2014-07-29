@@ -1,4 +1,4 @@
-package standard.mvc.component.manager.flex.base;
+package standard.mvc.component.manager.foundation.flex.base;
 
 public class FlexException extends RuntimeException {
 
