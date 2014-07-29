@@ -1,5 +1,8 @@
 package standard.mvc.component.base.dao;
 
-public abstract class GenericAbstractDao {
+import org.apache.ibatis.session.ResultHandler;
 
+public abstract class GenericAbstractDao {
+	public void invokeSelect(String statementName, Object parameterBean, ResultHandler resulthandler) {
+	}
 }
