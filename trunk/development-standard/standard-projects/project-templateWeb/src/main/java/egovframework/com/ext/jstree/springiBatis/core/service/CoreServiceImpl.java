@@ -20,6 +20,26 @@ import com.opensymphony.xwork2.ActionContext;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDAO;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
+/**
+ * Modification Information
+ * 
+ * @author ?
+ * @since 2014. 7. 31.
+ * @version 1.0
+ * @see <pre>
+ * 	Class Name 	: CoreServiceImpl.java
+ * 	Description : jstree Spring + iBatis 버젼의 서비스 구현체
+ * 	Infomation	: CoreService.java 를 구현한 클래스 로 실제 작업이 이루어지는 클래스
+ *  
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014. 7. 31.      ?        최초 생성
+ * 
+ *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
 @Service("CoreService")
 public class CoreServiceImpl implements CoreService {
 	
@@ -29,12 +49,18 @@ public class CoreServiceImpl implements CoreService {
 	private CoreDAO coreDAO;
 	
 	
+	/* (non-Javadoc)
+	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#getChildNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+	 */
 	public List<ComprehensiveTree> getChildNode( ComprehensiveTree comprehensiveTree ){
 		
 		return coreDAO.getChildNode( comprehensiveTree );
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#searchNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+	 */
 	public List<String> searchNode( ComprehensiveTree comprehensiveTree ) {
 		
 		List<ComprehensiveTree> searchNodeByStrings = coreDAO.searchNodeByString(   comprehensiveTree   );
@@ -49,6 +75,9 @@ public class CoreServiceImpl implements CoreService {
 		return returnList;
 	}
 	
+	/* (non-Javadoc)
+	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#addNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+	 */
 	@Transactional
 	public ComprehensiveTree addNode( ComprehensiveTree comprehensiveTree ) {
 
@@ -271,6 +300,9 @@ public class CoreServiceImpl implements CoreService {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#executeRemoveNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+	 */
 	@Transactional
 	public int executeRemoveNode( ComprehensiveTree comprehensiveTree) {
 		
@@ -282,6 +314,9 @@ public class CoreServiceImpl implements CoreService {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+	 */
 	@Transactional
 	public int alterNode( ComprehensiveTree comprehensiveTree ) {
 
@@ -289,6 +324,9 @@ public class CoreServiceImpl implements CoreService {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNodeType(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+	 */
 	@Transactional
 	public int alterNodeType( ComprehensiveTree comprehensiveTree ) {
 
@@ -323,6 +361,9 @@ public class CoreServiceImpl implements CoreService {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#moveNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+	 */
 	@Transactional
 	public ComprehensiveTree moveNode( ComprehensiveTree comprehensiveTree ) {
 

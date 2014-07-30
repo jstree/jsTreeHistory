@@ -3,6 +3,26 @@ package egovframework.com.ext.jstree.springiBatis.core.vo;
 import java.util.Collection;
 import java.util.HashMap;
 
+/**
+ * Modification Information
+ * 
+ * @author ?
+ * @since 2014. 7. 31.
+ * @version 1.0
+ * @see <pre>
+ * 	Class Name 	: ComprehensiveTree.java
+ * 	Description : jstree에서 사용되는 VO 
+ * 	Infomation	: jstree에서 사용되는 VO
+ *  
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014. 7. 31.      ?        최초 생성
+ * 
+ *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
 public class ComprehensiveTree {
 
 	private int c_id;
