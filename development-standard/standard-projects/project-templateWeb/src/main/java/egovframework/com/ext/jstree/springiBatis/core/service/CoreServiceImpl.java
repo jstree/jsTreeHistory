@@ -282,6 +282,7 @@ public class CoreServiceImpl implements CoreService {
 	}
 	
 	
+	@Transactional
 	public int alterNode( ComprehensiveTree comprehensiveTree ) {
 
 		return coreDAO.alterNode(comprehensiveTree);
