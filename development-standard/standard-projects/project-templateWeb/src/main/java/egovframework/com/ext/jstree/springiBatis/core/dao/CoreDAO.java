@@ -7,9 +7,35 @@ import org.springframework.stereotype.Repository;
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
+/**
+ * Modification Information
+ * 
+ * @author ?
+ * @since 2014. 7. 31.
+ * @version 1.0
+ * @see <pre>
+ * 	Class Name 	: CoreDAO.java
+ * 	Description : jsTree Spring + iBatis 버젼의 DAO 클래스
+ * 	Infomation	: Dao의 역할을 하는 클래스
+ *  
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014. 7. 31.      ?         최초 생성
+ * 
+ *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
 @Repository("CoreDAO")
 public class CoreDAO extends EgovComAbstractDAO {
 
+	/**
+	 * 자식노드를 요청한다.
+	 * 
+	 * @param comprehensiveTree
+	 * @return List<ComprehensiveTree>
+	 */
 	@SuppressWarnings("unchecked")
 	public List<ComprehensiveTree> getChildNode( ComprehensiveTree comprehensiveTree ){
 		
