@@ -19,12 +19,12 @@
         <property name="dataSource" ref="jndiDataSource" />
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
                 <prop key="hibernate.hbm2ddl.auto">validate</prop>
-                <prop key="hibernate.show_sql">none</prop>
+                <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">false</prop>
                 <prop key="hibernate.max_fetch_depth">1</prop>
-                <prop key="hibernate.default_schema">public</prop>
+                <prop key="hibernate.default_schema">STANDARD_DB</prop>
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
                 <prop key="hibernate.cache.use_query_cache">true</prop>
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
@@ -34,6 +34,7 @@
         <property name="packagesToScan">
             <list>
                  <value>standard.mvc</value>
+                 <value>egovframework.com.ext.jstree.springHibernate</value>
             </list>
         </property>
     </bean>
