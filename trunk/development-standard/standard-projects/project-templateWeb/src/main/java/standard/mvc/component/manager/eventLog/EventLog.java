@@ -23,10 +23,10 @@ import standard.mvc.component.util.Text;
 
 
 
-@Entity
-@Table(name = "event_log", schema = "config")
-@org.hibernate.annotations.Entity(selectBeforeUpdate = true, dynamicUpdate = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Entity
+//@Table(name = "event_log", schema = "config")
+//@org.hibernate.annotations.Entity(selectBeforeUpdate = true, dynamicUpdate = true)
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class EventLog implements CsvViewForLog{
     private long id;
     private String eventLogType;    // @see LogginType.java
