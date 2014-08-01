@@ -6,6 +6,11 @@ import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
 import org.apache.log4j.Logger;
 
+
+/**
+ * node 수정 interface
+ * 
+ * */
 public interface I_DB_AlterNode extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 

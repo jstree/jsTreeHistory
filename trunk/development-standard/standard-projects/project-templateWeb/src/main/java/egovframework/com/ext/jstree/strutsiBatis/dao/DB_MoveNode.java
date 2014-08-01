@@ -25,6 +25,10 @@ import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
 
 import com.opensymphony.xwork2.ActionContext;
 
+/**
+ * node 이동
+ * 
+ * */
 @Repository("DB_MoveNode")
 public class DB_MoveNode extends EgovComAbstractDAO implements I_DB_MoveNode {
 
@@ -38,7 +42,10 @@ public class DB_MoveNode extends EgovComAbstractDAO implements I_DB_MoveNode {
 		this.request = request;
 
 	}
-
+	
+	/**
+	 * node 이동 
+	 * */
 	@SuppressWarnings({ "unused", "deprecation" })
 	@Override
 	public T_ComprehensiveTree moveNode(

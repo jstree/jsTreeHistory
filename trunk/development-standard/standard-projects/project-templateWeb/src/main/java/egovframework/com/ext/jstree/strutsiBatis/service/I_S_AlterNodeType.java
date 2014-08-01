@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
+/**
+ * node type 수정 interface
+ * */
 public interface I_S_AlterNodeType extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 

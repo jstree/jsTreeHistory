@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
+/**
+ * node 제거
+ * 
+ * node를 제거하고 left와 right를 좁히고 position값을 수정하여 node가 있던 빈 공간을 매꾼다.
+ * */
 @Repository("DB_RemoveNode")
 public class DB_RemoveNode extends EgovComAbstractDAO implements I_DB_RemoveNode {
 

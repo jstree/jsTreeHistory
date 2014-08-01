@@ -12,6 +12,9 @@ import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_AddNode;
 import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
+/**
+ * node 추가 service
+ * */
 @Service("S_AddNode")
 public class S_AddNode implements I_S_AddNode {
 

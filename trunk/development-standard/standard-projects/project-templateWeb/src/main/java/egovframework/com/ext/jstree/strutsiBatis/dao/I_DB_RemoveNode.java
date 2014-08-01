@@ -6,6 +6,10 @@ import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
 import org.apache.log4j.Logger;
 
+/**
+ * node를 제거하는 interface
+ * 
+ * */
 public interface I_DB_RemoveNode extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 

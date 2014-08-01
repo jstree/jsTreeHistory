@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+/**
+ * node검색 interface
+ * */
 public interface I_DB_SearchNode extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 

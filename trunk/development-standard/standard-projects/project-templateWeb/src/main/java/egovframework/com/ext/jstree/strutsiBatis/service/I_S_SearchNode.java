@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
+/**
+ * node 검색 interface
+ * */
 public interface I_S_SearchNode extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 

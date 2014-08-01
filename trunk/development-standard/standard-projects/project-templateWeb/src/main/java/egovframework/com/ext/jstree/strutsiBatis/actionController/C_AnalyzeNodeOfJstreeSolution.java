@@ -14,6 +14,14 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
+/**
+ * Jstree의 이벤트를 보여주는 분석 화면
+ * 
+ * @author 이동민
+ * @since 2014.07.28
+ * @version 1.0.0
+ * 
+ * */
 @SuppressWarnings("rawtypes")
 public class C_AnalyzeNodeOfJstreeSolution extends ActionSupport implements
 		Preparable, ModelDriven, ServletRequestAware, SessionAware,
