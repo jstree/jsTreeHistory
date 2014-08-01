@@ -6,13 +6,11 @@ import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * node를 이동하는 interface
- * */
 public interface I_S_MoveNode extends
-		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
-
-	public void setRequest(HttpServletRequest request);
-
-	public T_ComprehensiveTree moveNode(P_ComprehensiveTree p_ComprehensiveTree);
+        I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree>
+{
+    
+    public void setRequest(HttpServletRequest request);
+    
+    public T_ComprehensiveTree moveNode(P_ComprehensiveTree p_ComprehensiveTree);
 }

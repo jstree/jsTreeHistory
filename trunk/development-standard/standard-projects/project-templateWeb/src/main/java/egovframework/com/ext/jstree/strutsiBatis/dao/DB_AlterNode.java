@@ -8,39 +8,41 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-
-/**
- * node를 수정하는 class
- * */
 @Repository("DB_AlterNode")
-public class DB_AlterNode extends EgovComAbstractDAO implements I_DB_AlterNode {
-
-	static Logger logger = Logger.getLogger(DB_AlterNode.class);
-	
-	
-	/**
-	 * node를 수정하는 메소드
-	 * */
-	@SuppressWarnings("deprecation")
-	@Override
-	public int alterNode(P_ComprehensiveTree p_AlterNode,
-			String determineDBSetting) {
-		Integer returnInt = 0;
-		try {
-			getSqlMapClientTemplate().getSqlMapClient().startTransaction();
-			returnInt = getSqlMapClientTemplate().getSqlMapClient().update(
-					determineDBSetting, p_AlterNode);
-			getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				getSqlMapClientTemplate().getSqlMapClient().endTransaction();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return returnInt;
-	}
-
+public class DB_AlterNode extends EgovComAbstractDAO implements I_DB_AlterNode
+{
+    
+    static Logger logger = Logger.getLogger(DB_AlterNode.class);
+    
+    @SuppressWarnings("deprecation")
+    @Override
+    public int alterNode(P_ComprehensiveTree p_AlterNode,
+            String determineDBSetting)
+    {
+        Integer returnInt = 0;
+        try
+        {
+            getSqlMapClientTemplate().getSqlMapClient().startTransaction();
+            returnInt = getSqlMapClientTemplate().getSqlMapClient()
+                    .update(determineDBSetting, p_AlterNode);
+            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                getSqlMapClientTemplate().getSqlMapClient().endTransaction();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return returnInt;
+    }
+    
 }

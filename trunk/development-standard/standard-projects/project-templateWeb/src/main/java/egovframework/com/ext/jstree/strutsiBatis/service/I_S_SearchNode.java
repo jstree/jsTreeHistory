@@ -10,22 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
-/**
- * node 검색 interface
- * */
 public interface I_S_SearchNode extends
-		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
-
-	static Logger logger = Logger.getLogger(I_S_SearchNode.class);
-
-	public void setRequest(HttpServletRequest request);
-
-	public List<String> searchNode(P_ComprehensiveTree p_ComprehensiveTree);
-
-	public List<T_ComprehensiveTree> searchNodeByString(
-			P_ComprehensiveTree p_SearchNodeByString);
-
-	public List<String> searchNodeByPosition(
-			List<P_ComprehensiveTree> p_SearchNodeByPositions);
-
+        I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree>
+{
+    
+    static Logger logger = Logger.getLogger(I_S_SearchNode.class);
+    
+    public void setRequest(HttpServletRequest request);
+    
+    public List<String> searchNode(P_ComprehensiveTree p_ComprehensiveTree);
+    
+    public List<T_ComprehensiveTree> searchNodeByString(
+            P_ComprehensiveTree p_SearchNodeByString);
+    
+    public List<String> searchNodeByPosition(
+            List<P_ComprehensiveTree> p_SearchNodeByPositions);
+    
 }

@@ -8,37 +8,42 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-/**
- * node type 수정 class
- * */
 @Repository("DB_AlterNodeType")
-public class DB_AlterNodeType extends EgovComAbstractDAO implements I_DB_AlterNodeType {
-
-	static Logger logger = Logger.getLogger(DB_AlterNodeType.class);
-	
-	/**
-	 * node type 수정 메소드
-	 * */
-	@SuppressWarnings("deprecation")
-	@Override
-	public int alterNodeType(P_ComprehensiveTree p_ComprehensiveTree,
-			String determineDBSetting) {
-		Integer returnInt = 0;
-		try {
-			getSqlMapClientTemplate().getSqlMapClient().startTransaction();
-			returnInt = getSqlMapClientTemplate().getSqlMapClient().update(
-					determineDBSetting, p_ComprehensiveTree);
-			getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				getSqlMapClientTemplate().getSqlMapClient().endTransaction();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return returnInt;
-	}
-
+public class DB_AlterNodeType extends EgovComAbstractDAO implements
+        I_DB_AlterNodeType
+{
+    
+    static Logger logger = Logger.getLogger(DB_AlterNodeType.class);
+    
+    @SuppressWarnings("deprecation")
+    @Override
+    public int alterNodeType(P_ComprehensiveTree p_ComprehensiveTree,
+            String determineDBSetting)
+    {
+        Integer returnInt = 0;
+        try
+        {
+            getSqlMapClientTemplate().getSqlMapClient().startTransaction();
+            returnInt = getSqlMapClientTemplate().getSqlMapClient()
+                    .update(determineDBSetting, p_ComprehensiveTree);
+            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                getSqlMapClientTemplate().getSqlMapClient().endTransaction();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return returnInt;
+    }
+    
 }
