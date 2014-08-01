@@ -1,9 +1,12 @@
 package standard.mvc.component.manager.foundation.flex.oracle;
 
-import java.util.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import javax.naming.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class oracle_array_insert
