@@ -20,6 +20,17 @@ import egovframework.com.ext.jstree.strutsiBatis.service.I_S_MoveNode;
 import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
+
+/**
+ * move node,
+ * 
+ * @author 이동민
+ * @since 2014.07.28
+ * @version 1.0.0
+ * 
+ * node의 이동
+ * 
+ * */
 @SuppressWarnings("rawtypes")
 public class C_MoveNode extends ActionSupport implements Preparable,
 		ModelDriven, ServletRequestAware, SessionAware, RequestAware {

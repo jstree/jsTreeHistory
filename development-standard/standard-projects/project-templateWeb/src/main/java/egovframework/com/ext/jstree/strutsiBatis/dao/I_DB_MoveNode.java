@@ -7,6 +7,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * move node
+ * 
+ */
 public interface I_DB_MoveNode {
 
 	public void setRequest(HttpServletRequest request);

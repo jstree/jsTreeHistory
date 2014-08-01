@@ -16,7 +16,10 @@ public interface I_S_RemoveNode extends
 	public void setRequest(HttpServletRequest request);
 
 	public int executeRemoveNode(P_ComprehensiveTree p_ComprehensiveTree);
-
+	
+	/**
+	 * node의 제거 
+	 * */
 	public int removeNode(P_ComprehensiveTree p_RemoveNode);
 
 }

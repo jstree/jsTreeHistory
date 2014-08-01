@@ -12,6 +12,9 @@ import egovframework.com.ext.jstree.strutsiBatis.dao.I_DB_GetChildNode;
 import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
+/**
+ * 자식(하위) node를 가지고 오는 service class 
+ * */
 @Service("S_GetChildNode")
 public class S_GetChildNode implements I_S_GetChildNode {
 

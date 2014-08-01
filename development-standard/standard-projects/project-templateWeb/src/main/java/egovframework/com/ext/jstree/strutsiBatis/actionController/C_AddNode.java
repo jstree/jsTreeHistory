@@ -21,6 +21,25 @@ import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
 import egovframework.com.ext.jstree.strutsiBatis.service.Util_TitleChecker;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
+
+/**
+ * node를 추가한다
+ * 
+ *  @author 이동민
+ *  @since 2014.07.28
+ *  @version 1.0.0
+ *  
+ * P_ComprehensiveTree 와 T_ComprehensiveTree는 거의 동일한 형태의 dto(Data transfer object), vo (Value Object) 이다
+ * 비슷하지만 따로 나눈것은 parameter 와 signature 의 차이를 명확히 하기 위해 선언하였다.
+ * parameter는 dto로서 데이터가 포함된 객체를  한 시스템에서 다른 시스템으로 전달하는 작업을 처리하는 객체로 레이어간의 통신용도로 사용된다.
+ * signature는 vo로서 특정한 비지니스 값이 담겨있는 객체이다.
+ * 즉 메소드 입장에서 넘겨주는값은 parameter 넘겨받은 값은 signature라고 할수있다.
+ * vo 와 dto 의 차이점은 vo는 read only이다.
+ * 
+ * 
+ * Util_TitleChecker.
+ * 
+ * */
 @SuppressWarnings("rawtypes")
 public class C_AddNode extends ActionSupport implements Preparable,
 		ModelDriven, ServletRequestAware, SessionAware, RequestAware {

@@ -21,6 +21,16 @@ import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.service.I_S_SearchNode;
 import egovframework.com.ext.jstree.strutsiBatis.service.Util_TitleChecker;
 
+/**
+ * node 찾기 class
+ * 
+ *  @author 이동민      
+ *  @since 2014.07.28
+ *  @version 1.0.0   
+ *  
+ * 검색한 searchString 에 해당하는 노드들을 찾는 class
+ * 
+ * */
 @SuppressWarnings("rawtypes")
 public class C_SearchNode extends ActionSupport implements Preparable,
 		ModelDriven, ServletRequestAware, SessionAware, RequestAware {

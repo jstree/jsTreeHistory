@@ -6,6 +6,12 @@ import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
 import org.apache.log4j.Logger;
 
+/**
+ * node type 수정 interface
+ * 
+ * nodetype은 drive /  folder /default (file) 이렇게 3종류로 현재는 구성되어있다
+ * 
+ * */
 public interface I_DB_AlterNodeType extends
 		I_GenericDao<T_ComprehensiveTree, P_ComprehensiveTree> {
 

@@ -21,6 +21,13 @@ import egovframework.com.ext.jstree.strutsiBatis.dto.P_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.service.I_S_GetChildNode;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
+/**
+ * 해당 node의 하위 node 정보를 가져오는 class
+ * 
+ * @author 이동민
+ * @since 2014.07.28
+ * @version 1.0.0
+ * */
 @SuppressWarnings("rawtypes")
 public class C_GetChildNode extends ActionSupport implements Preparable,
 		ModelDriven, ServletRequestAware, SessionAware, RequestAware {

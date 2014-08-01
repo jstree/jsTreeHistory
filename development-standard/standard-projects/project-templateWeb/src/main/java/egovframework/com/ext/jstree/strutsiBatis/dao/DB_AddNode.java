@@ -23,6 +23,14 @@ import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
 
 import com.opensymphony.xwork2.ActionContext;
 
+
+/**
+ * 
+ * @author 이동민      
+ * @since 2014.07.25
+ * @version 1.0.0   
+ * 
+ * */
 @Repository("DB_AddNode")
 public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 
@@ -45,7 +53,14 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		this.request = request;
 
 	}
-
+	
+	
+	/**
+	 * node 추가
+	 * 
+	 * @return t_ComprehensiveTree
+	 * 
+	 * */
 	@SuppressWarnings("deprecation")
 	@Override
 	public T_ComprehensiveTree addNode(P_ComprehensiveTree p_ComprehensiveTree,
@@ -157,7 +172,13 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		return t_ComprehensiveTree;
 
 	}
-
+	
+	
+	/**
+	 * node 수정하기
+	 * 
+	 * node의 type(UI  종류로는 drive/ folder/ default(file) ) / title(사용자 지정 node 명칭) 등을 수정한다. 
+	 * */
 	@SuppressWarnings("deprecation")
 	private int alterNode(P_ComprehensiveTree p_ComprehensiveTree)
 			throws SQLException {
@@ -165,14 +186,24 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		return getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.alterNode",
 				p_ComprehensiveTree);
 	}
-
+	/**
+	 * node 값 추가하기 
+	 * 
+	 * */
 	@SuppressWarnings("deprecation")
 	private int addMyselfFromJstree(P_ComprehensiveTree p_ComprehensiveTree)
 			throws SQLException {
 		return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert(
 				"jstreeStrutsiBatis.addMyselfFromJstree", p_ComprehensiveTree);
 	}
-
+	
+	
+	/**
+	 * node 잘라내기
+	 * 
+	 * 잘라낸 node가 차지하고 있던 공간의 position값과 left/right 값을 줄인다.  
+	 * 
+	 * */
 	@SuppressWarnings("deprecation")
 	public void cutMyself(T_ComprehensiveTree nodeById, int spaceOfTargetNode,
 			Collection<Integer> c_idsByChildNodeFromNodeById)
@@ -191,7 +222,17 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		getSqlMapClientTemplate().getSqlMapClient().update("jstreeStrutsiBatis.cutMyselfRightFix",
 				p_OnlyCutMyselfFromJstree);
 	}
-
+	
+	
+	/**
+	 * position값 계산하기
+	 * 
+	 * 조건은 
+	 * 이동할 노드가 동일 부모에서 움직이는지 외부로 움직이는지
+	 * 멀티 카운터(움직이는 node의 갯수 0은 하나)가 0인지 아닌지
+	 * 현재의 positon값보다 앞인지/ 뒤인지 / 현재 위치인지
+	 * 
+	 * */
 	public void calculatePostion(P_ComprehensiveTree p_ComprehensiveTree,
 			T_ComprehensiveTree nodeById,
 			List<T_ComprehensiveTree> childNodesFromNodeByRef) {
@@ -296,7 +337,11 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		}
 
 	}
-
+	
+	/**
+	 * node 추가를 위해서 node가 들어갈 공간을 만듬 (postion)
+	 * 
+	 * */
 	@SuppressWarnings("deprecation")
 	public void stretchPositionForMyselfFromJstree(
 			Collection<Integer> c_idsByChildNodeFromNodeById,
@@ -311,7 +356,12 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 				"jstreeStrutsiBatis.stretchPositionForMyself", p_ComprehensiveTree);
 
 	}
-
+	
+	/**
+	 * node 추가를 위해 left값과 right 값의 공간을 만듬
+	 * 
+	 * 들어갈 node들의 크기 만큼 left와 right값을 늘린다
+	 * */
 	@SuppressWarnings("deprecation")
 	public void stretchLeftRightForMyselfFromJstree(int spaceOfTargetNode,
 			int rightPositionFromNodeByRef,
@@ -334,7 +384,12 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 				"jstreeStrutsiBatis.stretchRightForMyselfFromJstree",
 				p_OnlyStretchLeftRightForMyselfFromJstree);
 	}
-
+	
+	
+	/**
+	 * node를 붙여넣는다.
+	 * 
+	 * */
 	@SuppressWarnings("deprecation")
 	public int pasteMyselfFromJstree(int ref, int idif, int spaceOfTargetNode,
 			int ldif, Collection<Integer> c_idsByChildNodeFromNodeById,
@@ -365,7 +420,10 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 		return (Integer) getSqlMapClientTemplate().getSqlMapClient().insert(
 				"jstreeStrutsiBatis.pasteMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
 	}
-
+	
+	/**
+	 * 쿼리가 없다....현재는 사용을 안하는건가;;
+	 * */
 	@SuppressWarnings("deprecation")
 	public void enterMyselfFromJstree(int ref, int c_position, int c_id,
 			int idif, int ldif, Collection<Integer> c_idsByChildNodeFromNodeById)
@@ -384,7 +442,11 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode {
 				"jstreeStrutsiBatis.enterMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
 
 	}
-
+	
+	/**
+	 * node의 position 값과 parentId 값을 수정한다.
+	 * 
+	 * */
 	@SuppressWarnings("deprecation")
 	public void fixCopy(int ind, int ref) throws SQLException {
 		logger.debug("SUDO : 카피뜬 녀석의 하위 노드들에 대한 고민.");

@@ -11,11 +11,20 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
+/**
+ * node 검색 class
+ * 
+ * */
 @Repository("DB_SearchNode")
 public class DB_SearchNode extends EgovComAbstractDAO implements I_DB_SearchNode {
 
 	static Logger logger = Logger.getLogger(DB_GetChildNode.class);
-
+	
+	
+	/**
+	 * String을 통한 node 검색
+	 * 
+	 * */
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<T_ComprehensiveTree> searchNodeByString(
@@ -33,7 +42,11 @@ public class DB_SearchNode extends EgovComAbstractDAO implements I_DB_SearchNode
 		}
 		return t_ComprehensiveTrees;
 	}
-
+	
+	/**
+	 * position 검색
+	 * 
+	 * */
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<String> searchNodeByPosition(

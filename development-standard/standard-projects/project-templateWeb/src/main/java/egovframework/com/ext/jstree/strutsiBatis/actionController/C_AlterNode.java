@@ -21,6 +21,14 @@ import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
 import egovframework.com.ext.jstree.strutsiBatis.service.Util_TitleChecker;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
+/**
+ * node를 수정한다. 
+ * 
+ * @author 이동민
+ * @since 2014.07.28
+ * @version 1.0.0
+ * 
+ * */
 @SuppressWarnings("rawtypes")
 public class C_AlterNode extends ActionSupport implements Preparable,
 		ModelDriven, ServletRequestAware, SessionAware, RequestAware {
