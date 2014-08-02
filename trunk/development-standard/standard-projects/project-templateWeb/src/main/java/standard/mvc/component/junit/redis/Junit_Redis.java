@@ -95,6 +95,9 @@ public class Junit_Redis extends Junit_Redis_Abstract {
 		//result test
 		log.info("redisGet ValueTest====>" + this.redisService.getKeyValue("test1"));
 		
+		
+		log.info("redis db size====>" + this.redisService.getDbSize(0));
+		
 	}
 	
 }

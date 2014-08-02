@@ -27,10 +27,6 @@
 		<level value="debug" />
 	</logger>
 		
-	<!-- Application Loggers -->
-	<logger name="standard.mvc.component.junit.redis">
-		<level value="info" />
-	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
@@ -53,9 +49,9 @@
 		<level value="debug" />
 	</logger>
 	
-		<logger name="org.springframework.data.redis.dao">
-		<level value="debug" />
-	</logger>
+	
+
+	
 	
 	
 	<!--
