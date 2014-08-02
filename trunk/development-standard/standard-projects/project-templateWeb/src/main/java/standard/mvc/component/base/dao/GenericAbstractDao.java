@@ -1,8 +1,10 @@
 package standard.mvc.component.base.dao;
 
-import org.apache.ibatis.session.ResultHandler;
+import org.springframework.dao.DataAccessException;
 
 public abstract class GenericAbstractDao {
-	public void invokeSelect(String statementName, Object parameterBean, ResultHandler resulthandler) {
+
+	public void invokeSelect(String statementName, Object parameterBean, Object resultHandler) throws DataAccessException {
 	}
+	
 }
