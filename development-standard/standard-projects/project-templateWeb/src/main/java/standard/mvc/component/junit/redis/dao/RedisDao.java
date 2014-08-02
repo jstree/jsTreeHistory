@@ -42,7 +42,7 @@ public class RedisDao {
 		//log.info("=============DI class=================>" + this.template.getClass().getName());
 		String ping = this.template.getConnectionFactory().getConnection().ping();
 		//System.out.println("redisPingTest========>" + ping);
-		log.debug("redisPingTest========>" + ping);
+		log.debug("redisPingTest========>" + ping);    
 		valueOps = this.template.opsForValue();
 		users = new DefaultRedisList<String>(KeyUtils.users(), this.template);
 		timeline = new DefaultRedisList<String>(KeyUtils.timeline(), this.template);
