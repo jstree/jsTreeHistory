@@ -6,7 +6,7 @@ import org.springframework.dao.DataAccessException;
 
 import standard.mvc.component.base.dao.GenericInterfaceDao;
 
-public class MybatisSample implements GenericInterfaceDao {
+public class MybatisSample implements GenericInterfaceDao<Object, Object, Object, Object> {
 
 	@Override
 	public Object invokeSelectOne(String statementName, Object parameterBean)
