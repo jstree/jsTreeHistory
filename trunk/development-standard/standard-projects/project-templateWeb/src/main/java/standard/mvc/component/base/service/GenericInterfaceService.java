@@ -2,10 +2,9 @@ package standard.mvc.component.base.service;
 
 import java.util.List;
 
+import standard.mvc.component.base.exception.GenericServiceRuntimeException;
+
 public interface GenericInterfaceService<T> {
-
-	public List<T> getResults(T VO_model);
-
-	abstract void validate(T VO_model);
-
+	List<T> getResults(T modelVO) throws GenericServiceRuntimeException;
+	void validate(T modelVO) throws GenericServiceRuntimeException;
 }
