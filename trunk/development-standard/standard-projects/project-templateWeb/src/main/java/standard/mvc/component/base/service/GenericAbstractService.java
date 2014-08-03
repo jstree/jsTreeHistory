@@ -1,6 +1,5 @@
 package standard.mvc.component.base.service;
 
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -13,7 +12,7 @@ import standard.mvc.component.util.CrytoAsymmeticUtil;
 import standard.mvc.component.util.CrytoSymmeticUtil;
 import standard.mvc.component.util.DateUtils;
 
-public abstract class GenericAbstractService<T> {
+public abstract class GenericAbstractService<T, P> {
 
 	@Autowired
 	private CrytoSymmeticUtil crytoSymmeticUtil;
@@ -21,7 +20,8 @@ public abstract class GenericAbstractService<T> {
 	private CrytoAsymmeticUtil crytoAsymmeticUtil;
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	public String encrypt(String plain) throws GenericServiceRuntimeException {
+	protected String encodeBothWay(String plain) throws GenericServiceRuntimeException {
+//		TODO Override
 		try {
 			return crytoSymmeticUtil.encodeAes128(plain);
 		} catch (Exception e) {
@@ -31,7 +31,8 @@ public abstract class GenericAbstractService<T> {
 		}
 	}
 
-	public String decrypt(String encrypt) throws GenericServiceRuntimeException {
+	protected String decodeBothWay(String encrypt) throws GenericServiceRuntimeException {
+//		TODO Override
 		try {
 			return crytoSymmeticUtil.decodeAes128(encrypt);
 		} catch (Exception e) {
@@ -41,15 +42,16 @@ public abstract class GenericAbstractService<T> {
 		}
 	}
 	
-	public String encode(String plain) throws GenericServiceRuntimeException {
+	protected String encodeOneWay(String plain) throws GenericServiceRuntimeException {
+//		TODO Override		
 		return crytoAsymmeticUtil.encodeSha1(plain);
 	}
 	
-	public String getDateFormat(String pattern, Date date) {
+	protected String getDateFormat(String pattern, Date date) {
 		DateFormat df = DateUtils.getDateFormat(pattern);
 		return df.format(date);
 	}
 	
-	public abstract T externalResourceGet();
+	protected abstract T getExternalUriResource(P properties) throws GenericServiceRuntimeException;
 
 }
