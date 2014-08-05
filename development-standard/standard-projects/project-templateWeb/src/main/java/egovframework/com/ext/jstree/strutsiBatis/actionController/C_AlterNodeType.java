@@ -21,13 +21,27 @@ import egovframework.com.ext.jstree.strutsiBatis.service.Util_SwapNode;
 import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
 /**
- * node type을 수정한다.
- * node 의 타입은 drive / folder /default(file) 이있다
+ * Modification Information
  * 
  * @author 이동민
  * @since 2014.07.28
- * @version 1.0.0
+ * @version 1.0
+ * @see <pre>
  * 
+ * Class Name 	: C_AlterNodeType.java
+ * Description 	: JSTree의 node type을 수정하는 actionController 클래스
+ * Infomation	: 
+ *
+ * node type 수정
+ * 
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014.07.28    Dongmin.Lee      최초 생성 
+ * 
+ *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
+ * </pre>
  * */
 @SuppressWarnings("rawtypes")
 public class C_AlterNodeType extends ActionSupport implements Preparable,
