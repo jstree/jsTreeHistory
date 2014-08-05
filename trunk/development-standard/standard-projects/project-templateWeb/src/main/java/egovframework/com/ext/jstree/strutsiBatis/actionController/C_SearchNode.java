@@ -22,14 +22,27 @@ import egovframework.com.ext.jstree.strutsiBatis.service.I_S_SearchNode;
 import egovframework.com.ext.jstree.strutsiBatis.service.Util_TitleChecker;
 
 /**
- * node 찾기 class
+ * Modification Information
  * 
- *  @author 이동민      
- *  @since 2014.07.28
- *  @version 1.0.0   
+ * @author 이동민
+ * @since 2014.07.28
+ * @version 1.0
+ * @see <pre>
+ * 
+ * Class Name 	: C_SearchNode.java
+ * Description 	: JSTree의 node의 정보를 조회하는  actionController 클래스
+ * Infomation	: 
+ *
+ * jstree의 정보를 조회한다.
+ * 
+ *  << 개정이력(Modification Information) >>
  *  
- * 검색한 searchString 에 해당하는 노드들을 찾는 class
+ *  수정일         수정자             수정내용
+ *  -------      ------------   -----------------------
+ *  2014.07.28    Dongmin.Lee      최초 생성 
  * 
+ *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
+ * </pre>
  * */
 @SuppressWarnings("rawtypes")
 public class C_SearchNode extends ActionSupport implements Preparable,
