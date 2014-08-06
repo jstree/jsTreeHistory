@@ -94,6 +94,9 @@ public class IndexController extends GenericAbstractController implements
     }
     
     @Override
+    @RequestMapping(
+            value = { "/largeMenu/middleMenu/smallMenu/index/invokeInsert.do" },
+            method = { RequestMethod.GET, RequestMethod.POST })
     public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap,
             HttpServletRequest request, HttpServletResponse response,
             BindingResult bindingResult, Object parameterBean)
@@ -103,6 +106,9 @@ public class IndexController extends GenericAbstractController implements
     }
     
     @Override
+    @RequestMapping(
+            value = { "/largeMenu/middleMenu/smallMenu/index/invokeUpdate.do" },
+            method = { RequestMethod.GET, RequestMethod.POST })
     public String invokeUpdate(SearchSupport searchSupport, ModelMap modelMap,
             HttpServletRequest request, HttpServletResponse response,
             BindingResult bindingResult, Object parameterBean)
@@ -112,6 +118,9 @@ public class IndexController extends GenericAbstractController implements
     }
     
     @Override
+    @RequestMapping(
+            value = { "/largeMenu/middleMenu/smallMenu/index/invokeDelete.do" },
+            method = { RequestMethod.GET, RequestMethod.POST })
     public String invokeDelete(SearchSupport searchSupport, ModelMap modelMap,
             HttpServletRequest request, HttpServletResponse response,
             BindingResult bindingResult, Object parameterBean)
