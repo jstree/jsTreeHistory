@@ -192,7 +192,7 @@
   
     <dwr:configuration />
     
-    <bean id="dwrAjaxService" class="standard.mvc.component.dwr.exam.service.AjaxService">
+    <bean id="dwrAjaxService" class="standard.mvc.component.dwr.sample.service.AjaxService">
         <dwr:remote javascript="DwrAjaxService">
             <dwr:include method="getOptions" />
         </dwr:remote>
