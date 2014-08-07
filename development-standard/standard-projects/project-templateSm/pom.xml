@@ -610,7 +610,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>templateWeb</finalName>
+		<finalName>templateSm</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
