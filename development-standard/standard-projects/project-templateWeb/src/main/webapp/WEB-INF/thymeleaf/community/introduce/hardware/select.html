@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="ko"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="ko"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="ko"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ko"> <!--<![endif]-->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<title>HardWare Spec</title>
+<link rel="stylesheet" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/css/main.css" media="screen" />
+<link rel="stylesheet" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/css/normalize.css" media="screen" />
+</head>
+<body>
+<div class="page-wrap">
+<article class="widget">
+	<h1>하드웨어 구성도</h1>
+	<h2>SPEC</h2>
+	<table class="tb">
+		<tr>
+			<td class="tb_head tb_left" >Proccessor / Chipset</td>
+			<td>Intel(R) Core(TM)2 Quad CPU Q9650(3.00GHz, 6MB)<a class="btn" href = "#" onclick="$('#g1').mbGallery({maskBgnd:'#ccc',minWidth: 50, minHeight: 50, overlayOpacity:.9,startFrom: 1,addRaster:false, printOutThumbs:false,galleryTitle:'Spec Images'});"><img src ="image/baro_intro/server/glasses.png" width="20" height="20" /></a></td>
+		</tr> 
+		<tr>
+			<td class="tb_head tb_left" >MainBoard</td>
+			<td>ASUSTeK Computer INC MODEL  P5Q<a class="btn" href = "#" onclick="$('#g1').mbGallery({maskBgnd:'#ccc',minWidth: 50, minHeight: 50, overlayOpacity:.9,startFrom: 1,addRaster:false, printOutThumbs:false,galleryTitle:'Spec Images'});"><img src ="image/baro_intro/server/glasses.png" width="20" height="20"/></a></td>
+		</tr> 
+		<tr>
+			<td class="tb_head tb_left">Memory</td>
+			<td>4GB X 4EA, DDR2<a class="btn" href = "#" onclick="$('#g1').mbGallery({maskBgnd:'#ccc',minWidth: 50, minHeight: 50, overlayOpacity:.9,startFrom: 1,addRaster:false, printOutThumbs:false,galleryTitle:'Spec Images'});"><img src ="image/baro_intro/server/glasses.png" width="20" height="20"/></a></td>
+		</tr>
+		<tr>
+			<td class="tb_head tb_left">Graphic</td>
+			<td>Radeon HD 5870<a class="btn" href = "#" onclick="$('#g1').mbGallery({maskBgnd:'#ccc',minWidth: 50, minHeight: 50, overlayOpacity:.9,startFrom: 1,addRaster:false, printOutThumbs:false,galleryTitle:'Spec Images'});"><img src ="image/baro_intro/server/glasses.png" width="20" height="20"/></a></td>
+		</tr>
+	</table>
+	<h2>디스크 메모리 할당 내역</h2>
+	<table class="tb">
+		<tr>
+			<th class="tb_left">업무명</th>
+			<th class="tb_left">할당량</th>
+			<th class="tb_left">메모리 할당량</th>
+		</tr>
+		<tr>
+			<td>313 커뮤니티</td>
+			<td>SSD(4EA) : 512GB</td>
+			<td>4GB</td>
+		</tr>
+		<tr>
+			<td>GitLab</td>
+			<td>SSD(3EA) : 64GB</td>
+			<td>2GB</td>
+		</tr>
+		<tr>
+			<td>NAS</td>
+			<td>HDD(3EA) : 1.5TB</td>
+			<td>2GB</td>
+		</tr>
+		<tr>
+			<td>BackUp</td>
+			<td>HDD(2EA) : 2T<br />
+			RAID0(HARD RAID)</td>
+			<td>6GB</td>
+		</tr>
+	</table>
+	<h2>하드웨어 구성도</h2>
+	<p>
+		<canvas id="can" width="685" height="460" style="border:solid 2px #000;" ></canvas>
+	</p>
+	<h2>Server Images</h2>
+	 <div id="galleria">
+		<img src="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/server1_img.jpg"/>
+		<img src="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/server2_img.jpg"/>
+	</div>
+	<div  id="g1" class="galleryCont" style = "display:none;">
+		<a class="imgThumb" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img1.png"></a>
+		<a class="imgFull" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img1.png"></a>
+		<div class="imgDesc">CPU</div>
+
+		<a class="imgThumb" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img2.png"></a>
+		<a class="imgFull" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img2.png"></a>
+		<div class="imgDesc">Caches</div>
+
+		<a class="imgThumb" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img3.png"></a>
+		<a class="imgFull" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img3.png"></a>
+		<div class="imgDesc">Mainboard</div>
+
+		<a class="imgThumb" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img4.png"></a>
+		<a class="imgFull" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img4.png"></a>
+		<div class="imgDesc">Memory</div>
+
+		<a class="imgThumb" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img5.png"></a>
+		<a class="imgFull" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img5.png"></a>
+		<div class="imgDesc">SPC</div>
+
+		<a class="imgThumb" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img6.png"></a>
+		<a class="imgFull" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img6.png"></a>
+		<div class="imgDesc">Graphic</div>
+
+		<a class="imgThumb" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img11.png"></a>
+		<a class="imgFull" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img11.png"></a>
+		<div class="imgDesc">CrystalDiskMark1</div>
+
+		<a class="imgThumb" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img22.png"></a>
+		<a class="imgFull" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img22.png"></a>
+		<div class="imgDesc">CrystalDiskMark2</div>
+
+		<a class="imgThumb" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img33.png"></a>
+		<a class="imgFull" href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/hardware/img/img33.png"></a>
+		<div class="imgDesc">CrystalDiskMark3</div>
+	  </div>
+	  <span id="goto" class="btn" style="display:none;" onclick="$('#g2').mb_gotoIDX(1)">go to photo n. 5</span>  
+	  <div id="containment" style="width:100%;height:600px;padding-top:50px; display:none"></div>  
+</article>
+</div>
+</body>
+</html>
