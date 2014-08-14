@@ -355,21 +355,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     //addViewControllers : URL 패턴을 그대로 뷰 이름으로 돌려주는 간단한 컨트롤러를 등록하는 메소드
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-    	// TODO Auto-generated method stub
-//    	registry.addViewController("/introduce/02release-note.do"   ).setViewName("page/02release-note");
-//    	registry.addViewController("/introduce/03compose-detail.do" ).setViewName("page/03compose-detail");
-//    	registry.addViewController("/introduce/04version-compose.do").setViewName("page/04version-compose");
-//    	registry.addViewController("/introduce/05open_sw.do"        ).setViewName("page/05open_sw");
-//    	registry.addViewController("/introduce/06runtime.do"        ).setViewName("page/06runtime");
-//    	registry.addViewController("/introduce/07dev.do"            ).setViewName("page/07dev");
-//    	registry.addViewController("/introduce/08operation.do"      ).setViewName("page/08operation");
-//    	registry.addViewController("/introduce/09manage.do"         ).setViewName("page/09manage");
-//    	registry.addViewController("/introduce/10component.do"      ).setViewName("page/10component");
-//    	registry.addViewController("/introduce/11mobile-api.do"     ).setViewName("page/11mobile-api");
-//    	registry.addViewController("/introduce/12hardware.do"       ).setViewName("page/12hardware");
-//    	registry.addViewController("/introduce/13software.do"       ).setViewName("page/13software");
-//    	registry.addViewController("/introduce/14network.do"        ).setViewName("page/14network");
-//    	registry.addViewController("/introduce/15commitor.do"       ).setViewName("page/15commitor");
-//    	registry.addViewController("/introduce/16license.do"        ).setViewName("page/16license");
+
     }
 }

@@ -51,7 +51,7 @@ import standard.mvc.component.base.dao.hibernate.SearchSupport;
  * </pre>
  */
 @Controller
-@RequestMapping(value = { "**/community" })
+@RequestMapping(value = { "**/**/community" })
 public class IndexController extends GenericAbstractController implements
         GenericInterfaceController<Object>
 {
