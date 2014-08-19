@@ -1,0 +1,29 @@
+body{margine:0;}
+ul li {margin-bottom:5px;}
+ul li div {display:inline-table;}
+.logoDiv{width:75px;text-align: center; font-size:11.05px;}
+.logoDiv2{width:140px;text-align: center; font-size:11.05px;}
+.logoDiv2 img{ margin:0 33px 0 32px;}
+.toolLogo{	width: 68px; height: 26px;}
+
+@CHARSET "UTF-8";
+
+/* for only notebook or desktop */
+@media only screen and (min-width: 980px) {
+}
+
+/* for only tablet */
+@media only screen and (min-width:768px) and (max-width: 979px) {	
+}
+
+/* for only mobile landscape */
+@media only screen and (max-width: 767px) {
+}
+
+/* for only mobile portrait */
+@media only screen and (max-width: 480px) {
+	img {display:none} 
+	ul li div {display:inline;}
+	.logoDiv{width:auto; margin-right:4px;}
+	.aligncenter{text-align:left}
+}

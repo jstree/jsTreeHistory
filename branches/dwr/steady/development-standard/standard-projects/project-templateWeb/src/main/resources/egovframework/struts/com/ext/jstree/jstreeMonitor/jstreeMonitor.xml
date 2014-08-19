@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd"><struts>
+
+
+	<!-- www.313.co.kr -->
+
+
+	<package name="www313cokrMenuJstreeMonitorDefault"
+			 extends="www313cokrDefaultPkg"
+			 namespace="/struts/www313cokr/index/menu/jstreeMonitor">
+
+		<action name="www313cokrMenuJstreeMonitorStrutsDefaultAction"
+				class="struts.book.action.DefaultAction">
+			<result>/struts/book/strutsDefaultAction.jsp</result>
+		</action>
+
+	</package>
+
+
+	<package name="www313cokrJstreeMonitor"
+			 namespace="/struts/www313cokr/index/menu/jstreeMonitor"
+			 extends="www313cokrMenuJstreeMonitorDefault">
+
+		<interceptors>
+			<interceptor name="timer"
+						 class="com.opensymphony.xwork2.interceptor.TimerInterceptor"/>
+			<interceptor name="logger"
+						 class="com.opensymphony.xwork2.interceptor.LoggingInterceptor"/>
+
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="profiling"/>
+				<interceptor-ref name="timer"/>
+				<interceptor-ref name="logger"/>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="defaultStack"/>
+		<default-action-ref name="www313cokrMenuJstreeMonitorStrutsDefaultAction"/>
+
+		<action name="getJstreeMonitorView">
+			<interceptor-ref name="myStack"/>
+			<result>/struts/www313cokr/index/menu/num3/jsTreeMonitor.jsp</result>
+		</action>
+
+		<action name="getJstreeMonitor"
+				class="struts.www313cokr.index.menu.jstreeMonitor.actionController.C_GetJstreeMonitor">
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="myStack"/>
+			<result type="json"/>
+		</action>
+
+	</package>
+
+</struts>
