@@ -15,11 +15,11 @@
 
 	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>		
 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="alwaysUseFullPath" value="true" />
+        <property name="alwaysUseFullPath" value="true" /> <!-- for DWR -->
 		<property name="mappings">
 			<props>
                 <prop key="/cmmn/validator.do">urlFilenameViewController</prop>
-                <prop key="/dwr/**">dwrController</prop>
+                <prop key="/dwr/**">dwrController</prop> <!-- for DWR -->
 			</props>
 		</property>
 	</bean>

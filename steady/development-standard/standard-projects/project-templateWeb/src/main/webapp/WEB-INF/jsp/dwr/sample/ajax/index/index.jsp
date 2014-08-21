@@ -11,8 +11,8 @@
 <meta name="description" content="DWR Ajax 샘플 페이지입니다." />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="author" content="류강하" />
-<link rel="stylesheet" href="css/normalize.css" media="screen" />
-<link rel="stylesheet" href="css/main.css" media="screen" />
+<link rel="stylesheet" href="http://nas.313.co.kr:5002/Component/jsp/dwr/sample/ajax/index/css/normalize.css" media="screen" />
+<link rel="stylesheet" href="http://nas.313.co.kr:5002/Component/jsp/dwr/sample/ajax/index/css/main.css" media="screen" />
 </head>
 <body>
 <div class="pageWrap">
