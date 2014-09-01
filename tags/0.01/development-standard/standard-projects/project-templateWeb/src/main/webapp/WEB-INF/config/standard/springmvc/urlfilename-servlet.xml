@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+    <!--
+    수정일          수성자                          수정내용
+    ==========      ========      =================================================
+    2014.7.29       류강하        DWR이 사용하는 자원에 대한 요청 URL과 DWR 컨트롤러의 매핑  
+    -->
+
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>		
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="alwaysUseFullPath" value="true" />
+		<property name="mappings">
+			<props>
+                <prop key="/cmmn/validator.do">urlFilenameViewController</prop>
+                <prop key="/dwr/**">dwrController</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="urlFilenameViewController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+	
+    <dwr:controller id="dwrController" debug="true" />
+  
+</beans>

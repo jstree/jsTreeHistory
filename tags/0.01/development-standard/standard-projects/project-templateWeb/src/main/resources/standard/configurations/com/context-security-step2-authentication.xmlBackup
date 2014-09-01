@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url"
+			value="jdbc:mysql://127.0.0.1:3306/egov27" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="root" />
+	</beans:bean>
+    
+	<global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
+	
+	<!-- TODO : 리소스 시큐리티 제외 -->
+    <http pattern="/css/**" security="none"/>    
+    <http pattern="/images/**" security="none"/>
+    
+	<http auto-config="true">
+		<intercept-url pattern="/user/**" access="ROLE_USER" />
+		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/all/**" access="ROLE_ANOMYOUS" />
+		<intercept-url pattern="/sample/delete*" access="ROLE_ADMIN" />
+		<!-- 기본 로그인 팝업 제공 (restful service 등에 사용) 
+		<http-basic />
+		--> 
+		
+		<!--(s) 로그인 페이지 
+			* id, password  파라미터에 맞추어 username-parameter, password-parameter 부분 수정 필요
+			* authentication-success-handler-ref, authentication-failure-handler-ref : 인증 결과를 ajax로 처리 하기 위하여 인증 성공 실패 시 핸들러 등록 
+		-->
+		<form-login
+		login-page="/login" login-processing-url="/login/process" authentication-failure-url="/fail"
+		username-parameter="username" password-parameter="password" 
+		authentication-success-handler-ref="customAuthenticationSuccessHandler"
+		authentication-failure-handler-ref="customAuthenticationFailureHandler"
+		 
+		/>
+		<logout logout-url="/logout" />
+
+		<access-denied-handler error-page="/access_denied" />
+		<!--(e) 로그인 페이지-->
+	</http>
+
+	<!--(s) 인증 부분 db 이관 작업 -->
+	<authentication-manager>
+		<!-- 기본 설정 -->
+		<authentication-provider>
+			<user-service>
+				<user name="user" password="user" authorities="ROLE_USER" />
+				<user name="baro" password="baro1234" authorities="ROLE_USER, ROLE_ADMIN" />
+			</user-service>
+			<!-- 
+			<password-encoder hash="sha-256"></password-encoder>
+			 -->
+		</authentication-provider>
+		<!-- db 이관 -->
+		<authentication-provider user-service-ref="customjdbcUserDetailsManager">
+			<!-- <password-encoder hash="sha-256" /> -->
+		</authentication-provider>
+	</authentication-manager>
+	<!--(e) 인증 부분 db 이관 작업 -->
+	
+	<!--(s) 인증 관리자 -->
+	<beans:bean id="customjdbcUserDetailsManager"
+			class="standard.security.custom.CustomUserDetailsManager" >
+		<beans:property name="usersByUsernameQuery" value="SELECT USER_ID, PASSWORD, ENABLED, USER_NAME FROM USERS WHERE USER_ID = ? "/>
+		<beans:property name="authoritiesByUsernameQuery" value="SELECT USER_ID, AUTHORITY FROM AUTHORITIES WHERE USER_ID = ? "/>
+		<beans:property name="dataSource" ref="dataSource" />
+		<!-- 
+		<beans:property name="roleHierarchy" ref="roleHierarchy" />
+		<beans:property name="mapClass" value="egovframework.rte.cmmn.security.EgovUserDetailsMapping" />
+		 -->
+	</beans:bean>
+	<!--(s) 인증 관리자 -->
+	
+	<!-- 인증 성공 시 실행되는 핸들러 : ajax return 값 추가 -->
+	<beans:bean id="customAuthenticationSuccessHandler" class="standard.security.custom.CustomAuthenticationSuccessHandler">
+		<beans:property name="targetUrlParameter" value="spring-security-redirect" />
+		<beans:property name="defaultTargetUrl" value="/login/success" />
+		<beans:property name="alwaysUseDefaultTargetUrl" value="true" />
+	</beans:bean>
+
+	<!-- 인증 실패 시 실행되는 핸들러 : ajax return 값 추가 -->
+	<beans:bean id="customAuthenticationFailureHandler" class="standard.security.custom.CustomAuthenticationFailureHandler">
+		<beans:property name="defaultFailureUrl" value="/login/fail"></beans:property>
+	</beans:bean>
+	
+	<!-- 인증 관련 로그 확인 용도 : -->
+	<beans:bean id="loggerListener" class="standard.security.custom.CustomLoginLogger" />
+</beans:beans>
