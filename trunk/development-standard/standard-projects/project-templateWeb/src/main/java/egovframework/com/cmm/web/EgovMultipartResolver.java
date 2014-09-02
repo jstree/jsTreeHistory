@@ -129,6 +129,6 @@ public class EgovMultipartResolver extends CommonsMultipartResolver {
 	    }
 	}
 	
-	return new MultipartParsingResult(multipartFiles, multipartParameters);
+	return new MultipartParsingResult(multipartFiles, multipartParameters, null);
     }	
 }
