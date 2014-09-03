@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:oauth="http://www.springframework.org/schema/security/oauth"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd
+    http://www.springframework.org/schema/security/oauth
+    http://www.springframework.org/schema/security/spring-security-oauth-1.0.xsd
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+    ">     
+  
+<!--
+==========================================(s) 기본 설정==================================================
+-->
+	<global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
+
+	<!-- TODO : 리소스 시큐리티 제외 -->
+	<http pattern="/css/**" security="none"/>
+	<http pattern="/html/**" security="none"/>
+    <http pattern="/images/**" security="none"/>
+ 	<http pattern="/js/**" security="none"/>
+ 	<http pattern="/resource/**" security="none"/>
+ 	<http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none"/>
+    
+	<http auto-config="true" path-type="regex" use-expressions="true">
+		<!--(s) 로그인 페이지 
+			* id, password  파라미터에 맞추어 username-parameter, password-parameter 부분 수정 필요
+			* authentication-success-handler-ref, authentication-failure-handler-ref : 인증 결과를 ajax로 처리 하기 위하여 인증 성공 실패 시 핸들러 등록 
+		-->
+		
+		<form-login
+		login-page="/uat/uia/egovLoginUsr.do" login-processing-url="/j_spring_security_check" authentication-failure-url="/user/fail.do"
+		authentication-success-handler-ref="customAuthenticationSuccessHandler"
+		authentication-failure-handler-ref="customAuthenticationFailureHandler"
+		/>
+		<logout logout-url="/user/logout.do" />
+
+		<access-denied-handler error-page="/sec/ram/accessDenied.do" />
+		<!--(e) 로그인 페이지-->
+		
+		 
+		<!-- (check authorization) 권한 체크 인트셉터 커스터 마이징 -->
+		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="customFilterSecurityInterceptor"/>
+
+	</http>
+
+<!--
+==========================================(e) 기본 설정====================================================
+-->
+<!--
+==========================================(s) 인증 관련 설정================================================== 
+-->
+
+	<!--(s) 인증 정보 추출 : 3개의 인증 제공자(provider)를 통하여 (xml, db, custom) 인증 정보-(사용자 정보 체크 후 토큰 리턴)를 제공 받는다. -->
+	<authentication-manager>
+		<!-- 
+		<authentication-provider>
+			<user-service>
+				<user name="user" password="ARyUXzDOLLr8RS85hA8CVpMznEI=" authorities="ROLE_USER" />
+				<user name="baro" password="ARyUXzDOLLr8RS85hA8CVpMznEI=" authorities="ROLE_ADMIN" />
+			</user-service>
+			<password-encoder hash="plaintext"></password-encoder>
+		</authentication-provider>
+		 -->
+		<authentication-provider user-service-ref="customjdbcUserDetailsManager">
+			<password-encoder  hash="plaintext"></password-encoder>
+		</authentication-provider>
+		<!-- 
+		<authentication-provider  ref="customAuthenticationProvider"></authentication-provider>
+		 -->
+	</authentication-manager>
+	<!--(e)  인증 정보 추출 -->
+	
+	<!-- TODO : 3dr part 인증 확인용( ldap 등 )-->
+	<beans:bean id='customAuthenticationProvider' class="standard.mvc.component.sec.security.custom.CustomAuthenticationProvider"/> 
+	 
+	
+	<!--(s)*** 인증 관리자 - 사용자 정보 조회 및 등록, 그룹정보 조회 등을 인증 단계에서 사용 한다. ***-->
+	
+	<beans:bean id="customjdbcUserDetailsManager" class="egovframework.rte.fdl.security.userdetails.jdbc.EgovJdbcUserDetailsManager" >
+		<beans:property name="usersByUsernameQuery" value="SELECT USER_ID, ESNTL_ID AS PASSWORD, 1 ENABLED, USER_NM, USER_ZIP,
+                                                              USER_ADRES, USER_EMAIL, USER_SE, ORGNZT_ID, ESNTL_ID,
+                                                              (select a.ORGNZT_NM from COMTNORGNZTINFO a where a.ORGNZT_ID = m.ORGNZT_ID) ORGNZT_NM
+                                                       FROM COMVNUSERMASTER m WHERE CONCAT(USER_SE, USER_ID) = ?"/>
+                                                                                                              
+		<beans:property name="authoritiesByUsernameQuery" value="SELECT A.SCRTY_DTRMN_TRGET_ID USER_ID, A.AUTHOR_CODE AUTHORITY
+                                                             FROM COMTNEMPLYRSCRTYESTBS A, COMVNUSERMASTER B
+                                                             WHERE A.SCRTY_DTRMN_TRGET_ID = B.ESNTL_ID AND B.USER_ID = ?  "/>
+		<beans:property name="dataSource" ref="egov.dataSource" />
+		<beans:property name="roleHierarchy" ref="roleHierarchy" />
+		<beans:property name="mapClass" value="egovframework.com.sec.security.common.EgovSessionMapping" />
+	</beans:bean>
+	<!--(e)*** 인증 관리자 ***-->
+	
+	<!-- (s) roleHierarchy 설정 -->
+	<beans:bean id="userDetailsServiceWrapper" class="org.springframework.security.access.hierarchicalroles.UserDetailsServiceWrapper" >
+        <beans:property name="roleHierarchy" ref="roleHierarchy"/>
+        <beans:property name="userDetailsService" ref="customjdbcUserDetailsManager"/>
+    </beans:bean>
+    
+    <beans:bean id="roleHierarchy" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl" >
+        <beans:property name="hierarchy" ref="hierarchyStrings"/>
+    </beans:bean>
+
+    <beans:bean id="hierarchyStrings" class="egovframework.rte.fdl.security.userdetails.hierarchicalroles.HierarchyStringsFactoryBean" init-method="init">
+        <beans:property name="securedObjectService" ref="securedObjectService"/>
+    </beans:bean>
+    <!-- (e) roleHierarchy 설정 -->
+    
+	<!-- (s) 인증 성공 시 실행 핸들러 : ajax 호출 시 정상 코드(200) -->
+	<beans:bean id="customAuthenticationSuccessHandler" class="standard.mvc.component.sec.security.custom.CustomAuthenticationSuccessHandler">
+		<beans:property name="targetUrlParameter" value="spring-security-redirect" />
+		<beans:property name="defaultTargetUrl" value="/EgovContent.do" />
+		<beans:property name="alwaysUseDefaultTargetUrl" value="true" />
+	</beans:bean>
+	<!-- (e) 인증 성공 시 실행 핸들러 -->
+	
+	<!-- (s) 인증 실패 시 실행 핸들러 : ajax 호출 시 실패 코드(401,403) -->
+	<beans:bean id="customAuthenticationFailureHandler" class="standard.mvc.component.sec.security.custom.CustomAuthenticationFailureHandler">
+		<beans:property name="defaultFailureUrl" value="/uat/uia/egovLoginUsr.do?login_error=1"></beans:property>
+	</beans:bean>
+	<!-- (e) 인증 실패 시 실행 핸들러 -->
+	
+	<!-- 인증 관련 로깅 -->
+	<beans:bean id="loggerListener" class="standard.mvc.component.sec.security.custom.CustomLoginLogger" />
+
+<!--
+================================================(e) 인증 관련 설정=================================================
+-->	
+
+<!--
+================================================(s) 권한 관련 설정=================================================
+-->	
+	<!-- (s)권한정보 검색 쿼리 -->
+	<beans:bean id="securedObjectDAO" class="egovframework.rte.fdl.security.securedobject.impl.SecuredObjectDAO" >
+		<beans:property name="dataSource" ref="egov.dataSource"/>
+		<beans:property name="sqlHierarchicalRoles" value="SELECT a.CHLDRN_ROLE child, a.PARNTS_ROLE parent
+			FROM COMTNROLES_HIERARCHY a LEFT JOIN COMTNROLES_HIERARCHY b on (a.CHLDRN_ROLE = b.PARNTS_ROLE)"/>
+		
+		<beans:property name="sqlRolesAndUrl" value="SELECT a.ROLE_PTTRN url, b.AUTHOR_CODE authority
+			FROM COMTNROLEINFO a, COMTNAUTHORROLERELATE b
+			WHERE a.ROLE_CODE = b.ROLE_CODE
+				AND a.ROLE_TY = 'url'  ORDER BY a.ROLE_SORT"/>
+		
+		<beans:property name="sqlRolesAndMethod" value="SELECT a.ROLE_PTTRN method, b.AUTHOR_CODE authority
+			FROM COMTNROLEINFO a, COMTNAUTHORROLERELATE b
+			WHERE a.ROLE_CODE = b.ROLE_CODE
+				AND a.ROLE_TY = 'method'  ORDER BY a.ROLE_SORT"/>
+
+		<beans:property name="sqlRolesAndPointcut" value="SELECT a.ROLE_PTTRN pointcut, b.AUTHOR_CODE authority
+			FROM COMTNROLEINFO a, COMTNAUTHORROLERELATE b
+			WHERE a.ROLE_CODE = b.ROLE_CODE
+				AND a.ROLE_TY = 'pointcut'  ORDER BY a.ROLE_SORT"/>				
+
+		<beans:property name="sqlRegexMatchedRequestMapping" value="SELECT a.resource_pattern uri, b.authority authority
+			FROM COMTNSECURED_RESOURCES a, COMTNSECURED_RESOURCES_ROLE b
+			WHERE a.resource_id = b.resource_id
+				AND a.resource_type = 'url'"/>				
+	</beans:bean>
+	<!-- (e)권한정보 검색 쿼리 -->
+	
+	<!-- (s)1. 접근 url 체크 (check authorization) 권한 체크 인트셉터 커스터 마이징 -->
+	<beans:bean id="customFilterSecurityInterceptor"
+		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<beans:property name="authenticationManager" ref="org.springframework.security.authenticationManager" />
+		<beans:property name="accessDecisionManager" ref="accessDecisionManager" />
+		<beans:property name="securityMetadataSource" ref="databaseSecurityMetadataSource" />
+	</beans:bean>
+	
+	 <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+	 	<beans:constructor-arg>
+		 	<beans:list>
+	        	<beans:bean class="org.springframework.security.access.vote.RoleVoter" >
+	        		<beans:property name="rolePrefix" value=""></beans:property>
+	        	</beans:bean>
+	        	<beans:bean class="org.springframework.security.web.access.expression.WebExpressionVoter" />
+	            <beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+	        </beans:list>
+	 	</beans:constructor-arg>	
+    </beans:bean>
+	 
+	 <beans:bean id="accessDecisionManagerForMethod" class="org.springframework.security.access.vote.AffirmativeBased">
+	 	<beans:constructor-arg>
+		 	<beans:list>
+	        	<beans:bean class="org.springframework.security.access.vote.RoleVoter" >
+	        		<beans:property name="rolePrefix" value=""></beans:property>
+	        	</beans:bean>
+	        	<beans:bean class="org.springframework.security.access.prepost.PreInvocationAuthorizationAdviceVoter" >
+	        	<beans:constructor-arg ref="expressionBasedPreInvocationAdvice" ></beans:constructor-arg>
+	        	</beans:bean>
+	            <beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+	        </beans:list>
+	 	</beans:constructor-arg>	
+    </beans:bean>
+        
+    <beans:bean id="expressionBasedPreInvocationAdvice"
+		class="org.springframework.security.access.expression.method.ExpressionBasedPreInvocationAdvice">
+	</beans:bean>
+	
+        
+	<beans:bean id="databaseSecurityMetadataSource"
+		class="egovframework.rte.fdl.security.intercept.EgovReloadableFilterInvocationSecurityMetadataSource">
+		<beans:constructor-arg ref="requestMap" />	
+		<beans:property name="securedObjectService" ref="securedObjectService"/>
+
+	</beans:bean>
+	
+	<!--  UrlResourcesMapFactoryBean 내에서 securityObjectService를 사용하여 리소스를 등록한다. TODO ** : reload 시점 및 실행 방법 확인 -->
+	<beans:bean id="requestMap"
+		class="egovframework.rte.fdl.security.intercept.UrlResourcesMapFactoryBean"
+		init-method="init">
+		<beans:property name="securedObjectService" ref="securedObjectService"/>
+	</beans:bean>
+	
+	
+	<beans:bean id="securedObjectService"
+		class="egovframework.rte.fdl.security.securedobject.impl.SecuredObjectServiceImpl">
+		<beans:property name="securedObjectDAO" ref="securedObjectDAO"/>
+	</beans:bean>
+	
+	<!-- (e)1. 접근 url 체크 (check authorization) 권한 체크 인트셉터 커스터 마이징 -->
+	
+	<!-- (s) 2. method 메소드 단위 권한 체크 할 시 db 설정 (secured_resources - resource_pattern) 에 맞지 않으면 로드 시 오류난다.-->
+	<beans:bean id="methodSecurityMetadataSourceAdvisor" class="org.springframework.security.access.intercept.aopalliance.MethodSecurityMetadataSourceAdvisor">
+		<beans:constructor-arg value="methodSecurityInterceptor" />
+		<beans:constructor-arg ref="delegatingMethodSecurityMetadataSource" />
+		<beans:constructor-arg value="delegatingMethodSecurityMetadataSource" />
+	</beans:bean>
+	
+	<beans:bean id="methodSecurityInterceptor" class="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor">
+		<beans:property name="validateConfigAttributes" value="false" />
+		<beans:property name="authenticationManager" ref="org.springframework.security.authenticationManager"/>
+		<beans:property name="accessDecisionManager" ref="accessDecisionManagerForMethod"/>
+		<beans:property name="securityMetadataSource" ref="delegatingMethodSecurityMetadataSource" />
+	</beans:bean>
+
+    <beans:bean id="delegatingMethodSecurityMetadataSource" class="org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource">
+        <beans:constructor-arg>
+            <beans:list>
+                <beans:ref bean="methodSecurityMetadataSources" />
+                <beans:bean class="org.springframework.security.access.annotation.SecuredAnnotationSecurityMetadataSource" />
+                <beans:bean class="org.springframework.security.access.annotation.Jsr250MethodSecurityMetadataSource" />
+                <beans:bean class="org.springframework.security.access.method.MapBasedMethodSecurityMetadataSource" />
+            </beans:list>
+        </beans:constructor-arg>
+    </beans:bean>
+	
+	<beans:bean id="methodSecurityMetadataSources"
+		class="org.springframework.security.access.method.MapBasedMethodSecurityMetadataSource">
+		<beans:constructor-arg ref="methodMap" />
+	</beans:bean>
+	
+	<beans:bean id="methodMap"
+		class="egovframework.rte.fdl.security.intercept.MethodResourcesMapFactoryBean"
+		init-method="init">
+		<beans:property name="securedObjectService" ref="securedObjectService"/>
+		<beans:property name="resourceType" value="method"/>
+	</beans:bean>
+	
+	<!-- (e) 2. method 메소드 단위 권한 체크 할 시 오류 확인 불가(콘솔 확인 뿐) -->
+	
+<!--
+================================================(e) 권한 관련 설정=================================================
+-->
+
+
+<!--
+================================================(s) oauth1 - consumer =================================================
+-->	
+	<beans:import resource="security-step5-oauth1-consumer.xml"/> 
+<!--
+================================================(e) oauth1 - consumer =================================================
+-->
+
+</beans:beans>
