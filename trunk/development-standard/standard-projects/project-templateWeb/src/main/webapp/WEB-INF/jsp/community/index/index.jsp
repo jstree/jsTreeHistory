@@ -284,7 +284,8 @@ $("#demo")
 			// All the options are almost the same as jQuery's AJAX (read the docs)
 			"ajax" : {
 				// the URL to fetch the data
-				"url" : "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/getChildNode.action",
+				/* "url" : "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/getChildNode.action", */
+				"url" : "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/getChildNode.do",
 				// the `data` function is executed in the instance's scope
 				// the parameter is the node being loaded 
 				// (may be -1, 0, or undefined when loading the root nodes)
@@ -301,7 +302,8 @@ $("#demo")
 			// As this has been a common question - async search
 			// Same as above - the `ajax` config option is actually jQuery's AJAX object
 			"ajax" : {
-				"url" : "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/searchNode.action",
+				/* "url" : "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/searchNode.action", */
+				"url" : "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/searchNode.do",
 				// You get the search string as a parameter
 				"data" : function (str) {
 					return { 
@@ -374,7 +376,8 @@ $("#demo")
 	})
 	.bind("create.jstree", function (e, data) {
 		$.post(
-			"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action", 
+			/* "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action", */
+			"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/addNode.do",
 			{ 
 				"ref" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""), 
 				"c_position" : data.rslt.position,
@@ -398,7 +401,8 @@ $("#demo")
 			$.ajax({
 				async : false,
 				type: 'POST',
-				url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action",
+				/* url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action", */
+				url: "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/removeNode.do",
 				data : { 
 					"c_id" : this.id.replace("node_","").replace("copy_","")
 				}, 
@@ -411,7 +415,8 @@ $("#demo")
 	})
 	.bind("rename.jstree", function (e, data) {
 		$.post(
-				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNode.action", 
+				/* "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNode.action", */
+				"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/alterNode.do",
 			{ 
 					"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
 					"c_title" : data.rslt.new_name,
@@ -428,7 +433,8 @@ $("#demo")
 	})
 	.bind("set_type.jstree", function (e, data) {
 		$.post(
-				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action", 
+				/* "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action", */
+				"${pageContext.request.contextPath}/egovframework/com/etc/jstree/core/springiBatis/alterNodeType.do",
 			{ 
 					"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
 					"c_title" : data.rslt.new_name,
@@ -445,7 +451,8 @@ $("#demo")
 			$.ajax({
 				async : false,
 				type: 'POST',
-				url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action",
+				/* url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action", */
+				url: "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/moveNode.do",
 				data : { 
 					"c_id" : $(this).attr("id").replace("node_","").replace("copy_",""), 
 					"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_",""), 
