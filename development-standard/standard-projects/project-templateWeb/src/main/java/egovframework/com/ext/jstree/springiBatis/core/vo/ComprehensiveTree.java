@@ -18,19 +18,19 @@ import java.util.HashMap;
  *  
  *  수정일         수정자             수정내용
  *  -------      ------------   -----------------------
- *  2014. 7. 31.      ?        최초 생성
- * 
+ *  2014. 7. 31.      ?         최초 생성
+ * 	2014. 9.  4. JeonKyunghun   주석 추가
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 public class ComprehensiveTree {
 
-	private int c_id;
-	private int c_parentid;
-	private int c_position;
-	private int c_left;
-	private int c_right;
-	private int c_level;
+	private int c_id;			// Node 의 고유 ID
+	private int c_parentid;		// Node 의 부모 ID
+	private int c_position;		// Parent 밑으로 몇번째 위치인지를 나타냄
+	private int c_left;  		// Node 의 Left 위치
+	private int c_right; 		// Node 의 Right 위치
+	private int c_level; 		// Node 의 Depth
 
 	private int ref;
 	private int copy;
@@ -38,10 +38,10 @@ public class ComprehensiveTree {
 
 	private int status;
 	
-	private String c_title;
-	private String c_type;
+	private String c_title;		// Node 의 Title
+	private String c_type;		// Node 의 Type ( Drive, Folder, File )
 	private String childcount;
-	private String searchStr;
+	private String searchStr;	// 검색시 Keyword
 	
 	private int idif;
 	private int ldif;
