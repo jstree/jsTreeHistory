@@ -112,7 +112,7 @@
 			<artifactId>ibatis-sqlmap</artifactId>
 			<version>2.3.4.726</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.ibm.icu</groupId>
 			<artifactId>icu4j</artifactId>
@@ -123,13 +123,13 @@
 			<artifactId>ldapsdk</artifactId>
 			<version>4.1</version>
 		</dependency>
-		
+
 		<!-- Twitter -->
-			<dependency>
-				<groupId>org.twitter4j</groupId>
-				<artifactId>twitter4j-core</artifactId>
-			</dependency>
-		
+		<dependency>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-core</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -184,12 +184,24 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 		</dependency>
-		<!--  RSS Library -->
+		<!-- RSS Library -->
 		<dependency>
 			<groupId>rome</groupId>
 			<artifactId>rome</artifactId>
 		</dependency>
 
+
+		<!-- JSR-303 & Hibernate Validator -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -263,8 +275,8 @@
 				<artifactId>aspectjweaver</artifactId>
 				<version>1.7.4</version>
 			</dependency>
-			
-					<!-- Twitter -->
+
+			<!-- Twitter -->
 			<dependency>
 				<groupId>org.twitter4j</groupId>
 				<artifactId>twitter4j-core</artifactId>
@@ -275,8 +287,7 @@
 				<artifactId>rome</artifactId>
 				<version>1.0</version>
 			</dependency>
-			
-			
+
 		</dependencies>
 	</dependencyManagement>
 
