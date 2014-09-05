@@ -17,7 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.opensymphony.xwork2.ActionContext;
 
-import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDAO;
+import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
+import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDaoImpl;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
@@ -46,7 +47,7 @@ public class CoreServiceImpl implements CoreService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Resource(name="CoreDAO")
-	private CoreDAO coreDAO;
+	private CoreDao coreDAO;
 	
 	
 	/* (non-Javadoc)
