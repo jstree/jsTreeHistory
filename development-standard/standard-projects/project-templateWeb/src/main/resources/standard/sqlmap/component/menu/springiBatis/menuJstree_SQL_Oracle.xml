@@ -13,6 +13,7 @@
 		     , A.c_level
 		     , A.c_title
 		     , A.c_type
+		     , A.url
 		     , ( SELECT CASE
 		                    WHEN COUNT(*) &gt; 0 THEN 'InChild'
            		 			ELSE 'NoChild'
