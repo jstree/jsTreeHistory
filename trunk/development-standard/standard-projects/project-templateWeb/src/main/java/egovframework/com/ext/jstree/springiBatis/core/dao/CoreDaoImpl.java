@@ -28,7 +28,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 @Repository("CoreDAO")
-public class CoreDAO extends EgovComAbstractDAO {
+public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 
 	/**
 	 * 자식노드를 요청한다.

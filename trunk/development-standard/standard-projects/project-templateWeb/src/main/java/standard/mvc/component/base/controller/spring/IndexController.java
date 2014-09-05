@@ -52,81 +52,66 @@ import standard.mvc.component.base.dao.hibernate.SearchSupport;
  */
 @Controller
 @RequestMapping(value = { "**/**/community" })
-public class IndexController extends GenericAbstractController implements
-        GenericInterfaceController<Object>
-{
-    
-    @Override
-    public Map<String, Map<String, Object>> bindTypes()
-    {
-        return null;
-    }
-    
-    /**
-     * indexPage 요청을 처리한다.
-     * 
-     * @param SearchSupport
-     * @param ModelMap
-     * @param HttpServletRequest
-     * @param HttpServletResponse
-     * @param BindingResult
-     * @param Object
-     * @return String ViewResolver에 넘겨주는 URL String 객체
-     * @exception none
-     */
-    @Override
-    @RequestMapping(
-            value = { "/largeMenu/middleMenu/smallMenu/index/invokeSelect.do" },
-            method = { RequestMethod.GET, RequestMethod.POST })
-    public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
-            HttpServletRequest request, HttpServletResponse response,
-            BindingResult bindingResult, Object parameterBean)
-    {
-        
-        String viewResolver = "/jsp";
-        String siteCode = "/community";
-        String menuCodes = "";
-        String componentCode = "/index";
-        String targetPage = "/index";
-        // templateEngine not use external view url.
-        return viewResolver + siteCode + menuCodes + componentCode + targetPage;
-        
-    }
-    
-    @Override
-    @RequestMapping(
-            value = { "/largeMenu/middleMenu/smallMenu/index/invokeInsert.do" },
-            method = { RequestMethod.GET, RequestMethod.POST })
-    public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap,
-            HttpServletRequest request, HttpServletResponse response,
-            BindingResult bindingResult, Object parameterBean)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
-    @Override
-    @RequestMapping(
-            value = { "/largeMenu/middleMenu/smallMenu/index/invokeUpdate.do" },
-            method = { RequestMethod.GET, RequestMethod.POST })
-    public String invokeUpdate(SearchSupport searchSupport, ModelMap modelMap,
-            HttpServletRequest request, HttpServletResponse response,
-            BindingResult bindingResult, Object parameterBean)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
-    @Override
-    @RequestMapping(
-            value = { "/largeMenu/middleMenu/smallMenu/index/invokeDelete.do" },
-            method = { RequestMethod.GET, RequestMethod.POST })
-    public String invokeDelete(SearchSupport searchSupport, ModelMap modelMap,
-            HttpServletRequest request, HttpServletResponse response,
-            BindingResult bindingResult, Object parameterBean)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
+public class IndexController extends GenericAbstractController implements GenericInterfaceController<Object> {
+
+	@Override
+	public Map<String, Map<String, Object>> bindTypes() {
+		return null;
+	}
+
+	/**
+	 * indexPage 요청을 처리한다.
+	 * 
+	 * @param SearchSupport
+	 * @param ModelMap
+	 * @param HttpServletRequest
+	 * @param HttpServletResponse
+	 * @param BindingResult
+	 * @param Object
+	 * @return String ViewResolver에 넘겨주는 URL String 객체
+	 * @exception none
+	 */
+	@Override
+	@RequestMapping(value = { "/largeMenu/middleMenu/smallMenu/index/invokeSelect.do" }, method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
+			HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
+
+		String viewResolver = "/jsp";
+		String siteCode = "/community";
+		String menuCodes = "";
+		String componentCode = "/index";
+		String targetPage = "/index";
+		// templateEngine not use external view url.
+		return viewResolver + siteCode + menuCodes + componentCode + targetPage;
+
+	}
+
+	@Override
+	@RequestMapping(value = { "/largeMenu/middleMenu/smallMenu/index/invokeInsert.do" }, method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
+			HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	@RequestMapping(value = { "/largeMenu/middleMenu/smallMenu/index/invokeUpdate.do" }, method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String invokeUpdate(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
+			HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	@RequestMapping(value = { "/largeMenu/middleMenu/smallMenu/index/invokeDelete.do" }, method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String invokeDelete(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
+			HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
