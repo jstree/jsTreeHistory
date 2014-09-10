@@ -1,5 +1,7 @@
 package egovframework.com.ext.jstree.springiBatis.core.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
@@ -66,14 +67,14 @@ public class CoreController {
 	 */
 	@ResponseBody
 	@RequestMapping("/getChildNode.do")
-	public String getChildNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
+	public List<ComprehensiveTree> getChildNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
-
+		
 		if (comprehensiveTree.getC_id() == 0) {
 			throw new RuntimeException();
 		}
 
-		return new ObjectMapper().writeValueAsString(coreService.getChildNode(comprehensiveTree));
+		return coreService.getChildNode(comprehensiveTree);
 	}
 
 	/**
@@ -87,14 +88,14 @@ public class CoreController {
 	 */
 	@ResponseBody
 	@RequestMapping("/searchNode.do")
-	public String searchNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
+	public List<String> searchNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
 		if (!StringUtils.hasText(comprehensiveTree.getSearchStr())) {
 			throw new RuntimeException();
 		}
 
-		return new ObjectMapper().writeValueAsString(coreService.searchNode(comprehensiveTree));
+		return coreService.searchNode(comprehensiveTree);
 	}
 
 	/**
@@ -108,7 +109,7 @@ public class CoreController {
 	 */
 	@ResponseBody
 	@RequestMapping("/addNode.do")
-	public String addNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ComprehensiveTree addNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
 		if (request.getParameter("ref") == null || request.getParameter("c_position") == null
@@ -135,7 +136,7 @@ public class CoreController {
 		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
 		coreService.addNode(comprehensiveTree);
 
-		return new ObjectMapper().writeValueAsString(comprehensiveTree);
+		return comprehensiveTree;
 	}
 
 	/**
@@ -149,7 +150,7 @@ public class CoreController {
 	 */
 	@ResponseBody
 	@RequestMapping("/removeNode.do")
-	public String removeNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ComprehensiveTree removeNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_id").equals("0")
@@ -159,7 +160,7 @@ public class CoreController {
 
 		comprehensiveTree.setStatus(coreService.executeRemoveNode(comprehensiveTree));
 
-		return new ObjectMapper().writeValueAsString(comprehensiveTree);
+		return comprehensiveTree;
 	}
 
 	/**
@@ -173,7 +174,7 @@ public class CoreController {
 	 */
 	@ResponseBody
 	@RequestMapping("/alterNode.do")
-	public String alterNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ComprehensiveTree alterNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_title") == null
@@ -200,7 +201,7 @@ public class CoreController {
 		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
 		comprehensiveTree.setStatus(coreService.alterNode(comprehensiveTree));
 
-		return new ObjectMapper().writeValueAsString(comprehensiveTree);
+		return comprehensiveTree;
 	}
 
 	/**
@@ -214,7 +215,7 @@ public class CoreController {
 	 */
 	@ResponseBody
 	@RequestMapping("/alterNodeType.do")
-	public String alterNodeType(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ComprehensiveTree alterNodeType(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_type") == null) {
@@ -239,7 +240,7 @@ public class CoreController {
 
 		coreService.alterNodeType(comprehensiveTree);
 
-		return new ObjectMapper().writeValueAsString(comprehensiveTree);
+		return comprehensiveTree;
 	}
 
 	/**
@@ -253,7 +254,7 @@ public class CoreController {
 	 */
 	@ResponseBody
 	@RequestMapping("/moveNode.do")
-	public String moveNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ComprehensiveTree moveNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_position") == null
@@ -288,7 +289,7 @@ public class CoreController {
 
 		coreService.moveNode(comprehensiveTree);
 
-		return new ObjectMapper().writeValueAsString(comprehensiveTree);
+		return comprehensiveTree;
 	}
 
 	// 뭔지 알 수가 없다.
