@@ -77,7 +77,7 @@
 <script type="text/javascript">
 
     function getGrid() {
-        var jqDataUrl = '/egovframework/com/etc/jstree/springiBatis/monitor/list.do';
+        var jqDataUrl = '${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/monitor/list.do';
         // Set up the jquery grid
         $("#jqTable").jqGrid({
             // Ajax related configurations
@@ -167,7 +167,7 @@
 </div>
 <div style="height:30px; text-align:center; float: left">
 	<input type="button" style='width:170px; height:24px; margin:5px auto;' value="reconstruct" onclick="javascript:alert('not supprt')" />
-	<input type="button" style='width:170px; height:24px; margin:5px auto;' id="analyze" value="analyze" onclick="$('#alog').load('/egovframework/com/etc/jstree/core/analyzeNode.do');" />
+	<input type="button" style='width:170px; height:24px; margin:5px auto;' id="analyze" value="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/egovframework/com/etc/jstree/core/analyzeNode.do');" />
 	<input type="button" style='width:170px; height:24px; margin:5px auto;' value="refresh" onclick="$('#demo').jstree('refresh',-1);" />
 </div>
 <div id='alog' style="float:left; border:1px solid gray; padding:5px; height:150px; margin-top:15px; overflow:auto; width: 100%"></div>
@@ -295,7 +295,7 @@ $("#demo")
 			// All the options are almost the same as jQuery's AJAX (read the docs)
 			"ajax" : {
 				// the URL to fetch the data
-				"url" : "/egovframework/com/etc/jstree/springiBatis/core/getChildNode.do",
+				"url" : "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/getChildNode.do",
 				// the `data` function is executed in the instance's scope
 				// the parameter is the node being loaded 
 				// (may be -1, 0, or undefined when loading the root nodes)
@@ -312,7 +312,7 @@ $("#demo")
 			// As this has been a common question - async search
 			// Same as above - the `ajax` config option is actually jQuery's AJAX object
 			"ajax" : {
-				"url" : "/egovframework/com/etc/jstree/springiBatis/core/searchNode.do",
+				"url" : "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/searchNode.do",
 				// You get the search string as a parameter
 				"data" : function (str) {
 					return { 
@@ -382,7 +382,7 @@ $("#demo")
 	})
 	.bind("create.jstree", function (e, data) {
 		$.post(
-			"/egovframework/com/etc/jstree/springiBatis/core/addNode.do", 
+			"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/addNode.do", 
 			{ 
 				"ref" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""), 
 				"c_position" : data.rslt.position,
@@ -406,7 +406,7 @@ $("#demo")
 			$.ajax({
 				async : false,
 				type: 'POST',
-				url: "/egovframework/com/etc/jstree/springiBatis/core/removeNode.do",
+				url: "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/removeNode.do",
 				data : { 
 					"c_id" : this.id.replace("node_","").replace("copy_","")
 				}, 
@@ -419,7 +419,7 @@ $("#demo")
 	})
 	.bind("rename.jstree", function (e, data) {
 		$.post(
-				"/egovframework/com/etc/jstree/springiBatis/core/alterNode.do", 
+				"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/alterNode.do", 
 			{ 
 					"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
 					"c_title" : data.rslt.new_name,
@@ -436,7 +436,7 @@ $("#demo")
 	})
 	.bind("set_type.jstree", function (e, data) {
 		$.post(
-				"/egovframework/com/etc/jstree/core/springiBatis/alterNodeType.do", 
+				"${pageContext.request.contextPath}/egovframework/com/etc/jstree/core/springiBatis/alterNodeType.do", 
 			{ 
 					"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
 					"c_title" : data.rslt.new_name,
@@ -453,7 +453,7 @@ $("#demo")
 			$.ajax({
 				async : false,
 				type: 'POST',
-				url: "/egovframework/com/etc/jstree/springiBatis/core/moveNode.do",
+				url: "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/moveNode.do",
 				data : { 
 					"c_id" : $(this).attr("id").replace("node_","").replace("copy_",""), 
 					"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_",""), 
