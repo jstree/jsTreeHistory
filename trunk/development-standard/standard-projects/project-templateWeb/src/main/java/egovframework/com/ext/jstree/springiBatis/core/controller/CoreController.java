@@ -38,6 +38,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 @Controller
+@RequestMapping(value = { "/egovframework/com/etc/jstree/springiBatis/core" })
 public class CoreController {
 
 	@Resource(name = "CoreService")
@@ -49,9 +50,9 @@ public class CoreController {
 	 * @return String jstreeSolutionSpringVersion 페이지를
 	 */
 	@IncludedInfo(name = "JSTREE", listUrl = "/jstree/getTree.do", order = 7313, gid = 313)
-	@RequestMapping("/jstree/getTree.do")
+	@RequestMapping("/getTree.do")
 	public String jsTreeCoreIndex() {
-		return "/jsp/egovframework/example/egovframework/com/ext/jstree/jstreeSolutionSpringVersion";
+		return "/jsp/egovframework/com/ext/jstree/jstreeSolutionSpringVersion";
 	}
 
 	/**
@@ -64,7 +65,7 @@ public class CoreController {
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/egovframework/com/etc/jstree/springiBatis/core/getChildNode.do")
+	@RequestMapping("/getChildNode.do")
 	public String getChildNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
@@ -85,7 +86,7 @@ public class CoreController {
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/egovframework/com/etc/jstree/springiBatis/core/searchNode.do")
+	@RequestMapping("/searchNode.do")
 	public String searchNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
@@ -106,7 +107,7 @@ public class CoreController {
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/egovframework/com/etc/jstree/springiBatis/core/addNode.do")
+	@RequestMapping("/addNode.do")
 	public String addNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
@@ -147,7 +148,7 @@ public class CoreController {
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/egovframework/com/etc/jstree/springiBatis/core/removeNode.do")
+	@RequestMapping("/removeNode.do")
 	public String removeNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
@@ -171,7 +172,7 @@ public class CoreController {
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/egovframework/com/etc/jstree/springiBatis/core/alterNode.do")
+	@RequestMapping("/alterNode.do")
 	public String alterNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
@@ -212,7 +213,7 @@ public class CoreController {
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/egovframework/com/etc/jstree/springiBatis/core/alterNodeType.do")
+	@RequestMapping("/alterNodeType.do")
 	public String alterNodeType(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
@@ -251,7 +252,7 @@ public class CoreController {
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/egovframework/com/etc/jstree/springiBatis/core/moveNode.do")
+	@RequestMapping("/moveNode.do")
 	public String moveNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws JsonProcessingException {
 
@@ -291,7 +292,7 @@ public class CoreController {
 	}
 
 	// 뭔지 알 수가 없다.
-	@RequestMapping("/egovframework/com/etc/jstree/springiBatis/core/analyzeNode.do")
+	@RequestMapping("/analyzeNode.do")
 	public String getChildNode(ModelMap model) {
 
 		model.addAttribute("analyzeResult", "");
