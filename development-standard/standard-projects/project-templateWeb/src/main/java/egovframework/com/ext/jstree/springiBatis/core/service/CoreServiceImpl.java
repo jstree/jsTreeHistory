@@ -64,12 +64,12 @@ public class CoreServiceImpl implements CoreService {
 	 */
 	public List<String> searchNode( ComprehensiveTree comprehensiveTree ) {
 		
-		List<ComprehensiveTree> searchNodeByStrings = coreDAO.searchNodeByString(   comprehensiveTree   );
+		List<ComprehensiveTree> searchNodeByStrings = coreDAO.searchNodeByString( comprehensiveTree );
 		
 		if(searchNodeByStrings.isEmpty()){
 			return new ArrayList<String>();
 		}else{
-			List<String>            rowDatas            = coreDAO.searchNodeByPosition( searchNodeByStrings );
+			List<String> rowDatas   = coreDAO.searchNodeByPosition( searchNodeByStrings );
 			List<String> returnList = new ArrayList<String>();
 			
 			for( String rowData : rowDatas ){
