@@ -2,6 +2,7 @@ package standard.mvc.component.business.menu.service;
 
 import java.util.List;
 
+import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 
 /**
@@ -27,5 +28,7 @@ import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 
 public interface MenuService{
 
-	public List<MenuComprehensiveTree> getChildNode(MenuComprehensiveTree comprehensiveTree);
+	public List<MenuComprehensiveTree> getChildNode(MenuComprehensiveTree menuComprehensiveTree);
+	
+	public List<String> searchNode( MenuComprehensiveTree menuComprehensiveTree );
 }
