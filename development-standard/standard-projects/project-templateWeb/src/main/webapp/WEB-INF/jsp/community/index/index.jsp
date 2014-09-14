@@ -168,6 +168,21 @@ $("#demo")
 		$("li:not([rel='drive']).jstree-open > a > .jstree-icon").css('background-image','url(http://nas.313.co.kr:5002/Design/icon/miniCon/313/toolbar_open.png)');
 		$("li:not([rel='drive']).jstree-closed > a > .jstree-icon").css('background-image','url(http://nas.313.co.kr:5002/Design/icon/miniCon/313/ic_explorer.png)');
 	})
+	// listen for event
+  	.bind('select_node.jstree', function(e) {
+	    // gather ids of selected nodes
+	    var selected_ids = [];
+	    $("#demo").jstree('get_selected').each(function () { 
+	    	if(typeof($(this).attr('href')) === "undefined"){
+		        selected_ids.push(this.id + ", href empty"); 
+	    	}else{
+	    		selected_ids.push(this.id + $(this).attr('href')); 
+	    	}
+	    }); 
+	    // do summit with them
+	    alert(selected_ids);
+	})
+	
 	.jstree({ 
 		// List of active plugins
 		"plugins" : [ 
@@ -285,7 +300,7 @@ $("#demo")
 			"ajax" : {
 				// the URL to fetch the data
 				/* "url" : "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/getChildNode.action", */
-				"url" : "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/getChildNode.do",
+				"url" : "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/invokeSelect.do",
 				// the `data` function is executed in the instance's scope
 				// the parameter is the node being loaded 
 				// (may be -1, 0, or undefined when loading the root nodes)
