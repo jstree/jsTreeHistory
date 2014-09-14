@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +44,7 @@ public class MenuController {
 
 	@Resource(name = "MenuService")
 	MenuService menuService;
-	
+
 	/**
 	 * 자식노드를 요청한다.
 	 * 
@@ -63,5 +64,17 @@ public class MenuController {
 		}
 
 		return new ObjectMapper().writeValueAsString(menuService.getChildNode(menuComprehensiveTree));
+	}
+
+	@ResponseBody
+	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/searchNode.do")
+	public String searchNode(MenuComprehensiveTree menuComprehensiveTree, ModelMap model, HttpServletRequest request)
+			throws JsonProcessingException {
+
+		if (!StringUtils.hasText(menuComprehensiveTree.getSearchStr())) {
+			throw new RuntimeException();
+		}
+
+		return new ObjectMapper().writeValueAsString(menuService.searchNode(menuComprehensiveTree));
 	}
 }
