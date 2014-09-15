@@ -7,7 +7,7 @@ import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 /**
  * Modification Information
  * 
- * @author ?
+ * @author 이동민
  * @since 2014. 9. 05.
  * @version 1.0
  * @see <pre>
@@ -25,7 +25,6 @@ import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-
 public interface MenuService {
 
     /**
@@ -43,4 +42,6 @@ public interface MenuService {
      * @return MenuComprehensiveTree
      */
     public MenuComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree);
+    
+//  public List<String> searchNode(MenuComprehensiveTree menuComprehensiveTree);
 }

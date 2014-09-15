@@ -112,4 +112,15 @@ public class MenuController {
 		return menuComprehensiveTree;
 	}
 	
+//    @ResponseBody
+//    @RequestMapping("/largeMenu/middleMenu/smallMenu/menu/searchNode.do")
+//    public String searchNode(MenuComprehensiveTree menuComprehensiveTree, ModelMap model, HttpServletRequest request)
+//            throws JsonProcessingException {
+//
+//        if (!StringUtils.hasText(menuComprehensiveTree.getSearchStr())) {
+//            throw new RuntimeException();
+//        }
+//
+//        return new ObjectMapper().writeValueAsString(menuService.searchNode(menuComprehensiveTree));
+//    }
 }
