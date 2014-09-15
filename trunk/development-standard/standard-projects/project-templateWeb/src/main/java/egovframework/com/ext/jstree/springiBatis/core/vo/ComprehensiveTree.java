@@ -20,17 +20,29 @@ import java.util.HashMap;
  *  -------      ------------   -----------------------
  *  2014. 7. 31.      ?         최초 생성
  * 	2014. 9.  4. JeonKyunghun   주석 추가
+ *  2014. 9. 16. 류강하                 주석 추가
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 public class ComprehensiveTree {
 
-	private int c_id;			// Node 의 고유 ID
-	private int c_parentid;		// Node 의 부모 ID
-	private int c_position;		// Parent 밑으로 몇번째 위치인지를 나타냄
-	private int c_left;  		// Node 의 Left 위치
-	private int c_right; 		// Node 의 Right 위치
-	private int c_level; 		// Node 의 Depth
+	/** Node 의 고유 ID, 1부터 시작 */
+	private int c_id;
+	
+	/** Node 의 부모 ID, 0부터 시작(Root Node) */
+	private int c_parentid;
+	
+	/** Parent의 몇 번째 자식인지를 나타냄. 0부터 시작 */
+	private int c_position;
+	
+	/** Node의 Left 위치, 1부터 시작 */
+	private int c_left;
+	
+	/** Node의 Right 위치, 자식이 없다면 Left + 1의 값을 가진다. */
+	private int c_right;
+	
+	/** Node 의 Depth, 0부터 시작 */
+	private int c_level;
 
 	private int ref;
 	private int copy;
@@ -38,10 +50,22 @@ public class ComprehensiveTree {
 
 	private int status;
 	
-	private String c_title;		// Node 의 Title
-	private String c_type;		// Node 의 Type ( Drive, Folder, File )
+	/** Node 의 Title */
+	private String c_title;
+	
+	/**<pre>
+	 * Node 의 Type
+	 * null : Root Node
+	 * drive : First Child Node
+	 * folder : 자식(Folder 또는 File)을 가질 수 있다.
+	 * file : 자식을 가질 수 없다.
+	 * </pre>
+	 */
+	private String c_type;
 	private String childcount;
-	private String searchStr;	// 검색시 Keyword
+	
+	/** 검색시 Keyword */
+	private String searchStr;
 	
 	private int idif;
 	private int ldif;

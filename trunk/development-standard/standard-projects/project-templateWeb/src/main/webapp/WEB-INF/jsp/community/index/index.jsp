@@ -176,7 +176,7 @@ $("#demo")
 	    	if(typeof($(this).attr('href')) === "undefined"){
 		        selected_ids.push(this.id + ", href empty"); 
 	    	}else{
-	    		selected_ids.push(this.id + $(this).attr('href')); 
+	    		selected_ids.push(this.id + ', ' + $(this).attr('href')); 
 	    	}
 	    }); 
 	    // do summit with them
@@ -390,9 +390,14 @@ $("#demo")
 		}
 	})
 	.bind("create.jstree", function (e, data) {
-		$.post(
-			/* "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action", */
-			"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/addNode.do",
+		/* console.log(data.rslt);
+		console.log('c_parentid : ' + data.rslt.parent.attr("id").replace("node_","").replace("copy_",""));
+		console.log('c_position : ' + data.rslt.position);
+		console.log('c_title : ' + data.rslt.name);
+		console.log('c_type : ' + data.rslt.obj.attr("rel")); */
+		
+		/* $.post(
+			"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/addNode.do",
 			{ 
 				"ref" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""), 
 				"c_position" : data.rslt.position,
@@ -409,7 +414,7 @@ $("#demo")
 				$("#analyze").click();
 				$("span.ui-icon-refresh").click();
 			}
-		);
+		); */
 	})
 	.bind("remove.jstree", function (e, data) {
 		data.rslt.obj.each(function () {
