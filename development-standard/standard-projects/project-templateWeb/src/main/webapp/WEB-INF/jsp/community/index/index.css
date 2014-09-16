@@ -24,8 +24,21 @@ table.layout {table-layout:fixed; display:table; border:0px; width:100%; height:
 .asideSectionHeight {
 	height: 500px;
 }
-.asideSectionHeightTest {
-	height: 800px;
+.asideSectionSearchHeight {
+	height: 31px;
+}
+.asideSectionMenuHeight {
+	height: 100%;
+}
+.jstreeSearchLeft {
+	width: 8px;
+}
+.jstreeSearchMiddle {
+	width: 1px;
+	background-image:url(http://nas.313.co.kr:5002/Component/jsp/community/index/image/gnbAsideDot.jpg);
+}
+.jstreeSearchRight {
+	width: 171px;
 }
 .logoBackColor {
 	background-color: #d9d9d9
@@ -51,11 +64,17 @@ table.layout {table-layout:fixed; display:table; border:0px; width:100%; height:
 .sectionOuterBackColor {
 	background-color: #fafafa;
 }
-.logoRightGapImg {
+.logoRightGapImgOver {
 	background-image:url(http://nas.313.co.kr:5002/Component/jsp/community/index/image/logoRight.jpg);
 }
-.logoBottomGapImg {
+.logoRightGapImg {
+	background-image:url(http://nas.313.co.kr:5002/Component/jsp/community/index/image/logo7Right.jpg);
+}
+.logoBottomGapImgOver {
 	background-image:url(http://nas.313.co.kr:5002/Component/jsp/community/index/image/logoBottom.jpg);
+}
+.logoBottomGapImg {
+	background-image:url(http://nas.313.co.kr:5002/Component/jsp/community/index/image/logo7Bottom.jpg);
 }
 .logoCrossGapImg {
 	background-image:url(http://nas.313.co.kr:5002/Component/jsp/community/index/image/logoCross.jpg);
