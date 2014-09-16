@@ -14,14 +14,14 @@
 <script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/jquery.jstree.js"></script>
 <!-- JavaScript -->
 <script language='javascript'>
-	function fn_ClassChange()
-	{
-		$(".asideSectionHeight").attr('class','asideSectionHeightTest');
-	}
-	function fn_ClassOriginal()
-	{
-		$(".asideSectionHeightTest").attr('class','asideSectionHeight');
-	}
+function fn_ClassChange()
+{
+	$(".asideSectionHeight").height("300px");
+}
+function fn_ClassOriginal()
+{
+	$(".asideSectionHeight").height("700px");
+}
 </script>
 </head>
 
