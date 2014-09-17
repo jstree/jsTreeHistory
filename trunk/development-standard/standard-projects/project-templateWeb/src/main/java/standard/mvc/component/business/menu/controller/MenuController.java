@@ -1,21 +1,19 @@
 package standard.mvc.component.business.menu.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import standard.mvc.component.business.menu.service.MenuService;
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -58,14 +56,14 @@ public class MenuController {
 	 */
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/invokeSelect.do")
-	public String getChildNode(MenuComprehensiveTree menuComprehensiveTree)
+	public List<MenuComprehensiveTree> getChildNode(MenuComprehensiveTree menuComprehensiveTree)
 			throws JsonProcessingException {
 
 		if (menuComprehensiveTree.getC_id() == 0) {
 			throw new RuntimeException();
 		}
 
-		return new ObjectMapper().writeValueAsString(menuService.getChildNode(menuComprehensiveTree));
+		return menuService.getChildNode(menuComprehensiveTree);
 	}
 
 	/**
