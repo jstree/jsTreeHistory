@@ -2,8 +2,12 @@ package standard.mvc.component.business.menu.vo;
 
 import java.util.HashMap;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
+@JsonInclude(Include.NON_EMPTY)
 public class MenuComprehensiveTree extends ComprehensiveTree{
 
 	private String url;
