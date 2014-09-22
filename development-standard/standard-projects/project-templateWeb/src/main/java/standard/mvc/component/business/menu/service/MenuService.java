@@ -21,6 +21,7 @@ import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
  *  -------      ------------   -----------------------
  *  2014. 9. 05.  이동민               최초 생성
  *  2014. 9. 15.  류강하               노드 추가 메서드 추가 및 주석
+ *  2014. 9. 21.  김대근               removeNode 메소드 추가
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -43,5 +44,11 @@ public interface MenuService {
      */
     public MenuComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree);
     
+    /**
+     * 노드를 삭제한다.
+     * @param menuComprehensiveTree
+     * @return
+     */
+    public int removeNode(MenuComprehensiveTree menuComprehensiveTree);
 //  public List<String> searchNode(MenuComprehensiveTree menuComprehensiveTree);
 }

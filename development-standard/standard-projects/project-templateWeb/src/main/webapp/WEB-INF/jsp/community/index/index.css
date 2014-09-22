@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-/* Common */
+/* Common */ 
 html {width:100%; height: 100%; margin:0; padding:0; vertical-align: top;}
 body {text-align: left; height: 100%; margin:0; padding:0; vertical-align: top;}
 html,body,input,textarea,select,button {font-family:Tahoma; font-size:9pt;line-height:16px; vertical-align: middle;}
@@ -25,7 +25,7 @@ table.layout {table-layout:fixed; display:table; border:0px; width:100%; height:
 	height: 500px;
 }
 .asideSectionSearchHeight {
-	height: 31px;
+	height: 31px; 
 }
 .asideSectionMenuHeight {
 	height: 100%;

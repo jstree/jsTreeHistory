@@ -2,7 +2,6 @@ package standard.mvc.component.business.menu.dao;
 
 import java.util.List;
 
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 
 /**
@@ -22,7 +21,7 @@ import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
  *  -------      ------------   -----------------------
  *  2014. 9. 05.  이동민               최초 생성
  *  2014. 9. 15.  류강하               메서드 추가 및 주석
- * 
+ *  2014. 9. 21.  김대근               removeNode 메소드 추가
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -43,6 +42,24 @@ public interface MenuDao {
     public int addMyselfFromJstree(MenuComprehensiveTree menuComprehensiveTree);
     
     public int alterNode(MenuComprehensiveTree menuComprehensiveTree);
+    
+    public void cutMyself(MenuComprehensiveTree p_OnlyCutMyselfFromJstree);
+    
+    public void stretchPositionForMyselfFromJstree(MenuComprehensiveTree comprehensiveTree);
+    
+    public void stretchLeftRightForMyselfFromJstree(MenuComprehensiveTree comprehensiveTree);
+    
+    public int pasteMyselfFromJstree(MenuComprehensiveTree p_OnlyPasteMyselfFromJstree);
+    
+    public List<MenuComprehensiveTree> getChildNodeByLeftRight(MenuComprehensiveTree comprehensiveTree);
+    
+    public void enterMyselfFromJstree(MenuComprehensiveTree comprehensiveTree);
+    
+    public void fixCopy(MenuComprehensiveTree comprehensiveTree);
+
+    public void fixCopyIF(MenuComprehensiveTree comprehensiveTree);
+    
+    public int removeNode(MenuComprehensiveTree comprehensiveTree);
     
 //	public List<MenuComprehensiveTree> searchNodeByString(MenuComprehensiveTree menuComprehensiveTree);
 	

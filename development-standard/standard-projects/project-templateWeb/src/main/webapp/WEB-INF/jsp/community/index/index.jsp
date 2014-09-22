@@ -1,36 +1,41 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head> 
 <link rel="stylesheet" type="text/css" href="http://nas.313.co.kr:5002/Component/jsp/community/index/reset.css">
 <link rel="stylesheet" type="text/css" href="http://nas.313.co.kr:5002/Component/jsp/community/index/index.css">
 <style type="text/css">
 </style>
 <!-- jQuery -->
 <script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/index/jquery-1.11.1.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+<!--[if lt IE 9]>
 <script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/index/debug.js"></script>
+<![endif]-->
 <!-- JSTREE -->
 <script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/_lib/jquery.cookie.js"></script>
 <script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></script>
 <script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/jquery.jstree.js"></script>
 <!-- JavaScript -->
+<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/Script/ajax/ajax.js" charset="UTF-8"></script>
 <script language='javascript'>
-function fn_ClassChange()
-{
-	$(".asideSectionHeight").height("300px");
-}
-function fn_ClassOriginal()
-{
-	$(".asideSectionHeight").height("700px");
-}
+	function fn_ClassChange()
+	{
+		$(".asideSectionHeight").height("300px");
+	}
+	function fn_ClassOriginal()
+	{
+		$(".asideSectionHeight").height("700px");
+	}
 </script>
 </head>
 
 <body>
-	<table class="layout">
+	<table class="layout"> 
     	<tr>
         	<td class="logoBackColor"></td>
 			<td class="logoAsideWidth logoBackColor"></td>
-			<td class="gapWidth logoRightGapImg"></td>
+			<td class="gapWidth logoRightGapImgOver"></td>
 			<td class="sectionWidth gnbAsideBackColor"></td>
 			<td class="gapWidth gnbAsideBackColor"></td>
 		<td class="gnbAsideBackColor"></td>
@@ -42,7 +47,7 @@ function fn_ClassOriginal()
         	</td>
 			<td class="logoAsideWidth logoGnbHeight">
 	           	<div class="logoBackColor logoGnbHeight">
-	           		<img src="http://nas.313.co.kr:5002/Component/jsp/community/index/image/logo3.jpg"/>
+	           		<img src="http://nas.313.co.kr:5002/Component/jsp/community/index/image/logo7.jpg"/>
 				</div>
 			</td>
 			<td class="gapWidth logoGnbHeight">
@@ -51,10 +56,6 @@ function fn_ClassOriginal()
 			</td>
 			<td class="sectionWidth logoGnbHeight">
 				<div class="gnbAsideBackColor logoGnbHeight">
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;BaroBoard
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DevTools
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Committers
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Knowledge
 				</div>
 			</td>
 			<td class="gapWidth logoGnbHeight">
@@ -68,7 +69,7 @@ function fn_ClassOriginal()
 	</tr>
 	<tr> <!-- 중간 디자인-->
         	<td class="gapHeight">
-        		<div class="gapHeight logoBottomGapImg">
+        		<div class="gapHeight logoBottomGapImgOver">
 			</div>
         	</td>
 			<td class="logoAsideWidth gapHeight">
@@ -99,13 +100,21 @@ function fn_ClassOriginal()
             	</div>
         	</td>
 			<td class="logoAsideWidth asideSectionHeight">
-	            	<div id="demo" class="asideSectionHeight gnbAsideBackColor">
-					
-	            	</div>
+				<div id="jstreeSearch" class="asideSectionSearchHeight gnbAsideBackColor">
+					<table class="logoAsideWidth asideSectionSearchHeight ">
+						<tr>
+							<td class="jstreeSearchLeft"></td>
+							<td class="jstreeSearchMiddle"></td>
+							<td class="jstreeSearchRight"></td>
+						</tr>
+					</table>
+				</div>
+	            <div id="demo" class="asideSectionMenuHeight gnbAsideBackColor">	
+	            </div>
 			</td>
 			<td class="gapWidth asideSectionHeight">
-	            	<div class="asideSectionHeight asideRightGapImg">
-	            	</div>
+	            <div class="asideSectionHeight asideRightGapImg">
+	            </div>
 			</td>
 			<td class="sectionWidth asideSectionHeight">
             		<div id="section" class="asideSectionHeight" style="background-color:#fffff">
@@ -158,10 +167,23 @@ function fn_ClassOriginal()
 		<td class="sectionOuterBackColor"></td>
 	</tr>
     </table>
+    
+    <div id="nodeForm" style="display:none;">
+    	<ul>
+    		<li>노드제목 : <input type="text" id="nodeTitle"   /></li>
+    		<li>노드URL : <input type="text" id="nodeLinkUrl" /></li>
+    	</ul>
+    </div>
 <!-- JavaScript neccessary for the tree -->
 <script type="text/javascript">
 $(function () {
-
+	
+	$("#nodeForm").dialog({
+		height   : 200
+	  , modal    : true
+	  , autoOpen : false
+	});
+	
 $("#demo")
 	.bind("before.jstree", function (e, data) {
 		//$("#section").append(data.func + "<br />");
@@ -180,7 +202,11 @@ $("#demo")
 	    	}
 	    }); 
 	    // do summit with them
-	    alert(selected_ids);
+	    // alert(selected_ids);
+	    
+	    // TODO 다중 선택을 막아야 함!
+		
+	    
 	})
 	
 	.jstree({ 
@@ -208,7 +234,7 @@ $("#demo")
 							"seperator_after" : false,                         
 							"label" : "File",                         
 							action : function (obj) 
-							{                             
+							{
 								this.create(obj, "last", {"attr" : {"rel" : "default"}});                         
 							}                     
 						},                     
@@ -362,7 +388,7 @@ $("#demo")
 					// can have files and folders inside, but NOT other `drive` nodes
 					"valid_children" : [ "default", "folder" ],
 					"icon" : {
-						"image" : "http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/db.png"
+						"image" : "http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/Database-Search.png"
 						//Design/icon/IconSet/Aeon/PNG/Misc/Misc-Stuff.png
 						//Component/jsp/community/jstree-v.pre1.0/db.png
 					},
@@ -389,49 +415,65 @@ $("#demo")
 			"initially_open" : [ "node_2" , "node_3" ] 
 		}
 	})
+	.bind("loaded.jstree", function (e, data) {
+		
+		$(document).on('click', '#demo a', function(e) {
+			
+			var url = $(this).parent().attr('href');
+			
+			if (typeof(href) === 'undefined') { alert('href 값이 정의되지 않았습니다.'); }
+			
+			callAjax(null, url, '#section', 'GET', 'html');
+			
+			return false;
+		});
+	})
 	.bind("create.jstree", function (e, data) {
-		/* console.log(data.rslt);
-		console.log('c_parentid : ' + data.rslt.parent.attr("id").replace("node_","").replace("copy_",""));
+		console.log(data.rslt);
+		console.log('ref : ' + data.rslt.parent.attr("id").replace("node_","").replace("copy_",""));
 		console.log('c_position : ' + data.rslt.position);
 		console.log('c_title : ' + data.rslt.name);
-		console.log('c_type : ' + data.rslt.obj.attr("rel")); */
+		console.log('c_type : ' + data.rslt.obj.attr("rel"));
 		
-		/* $.post(
-			"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/addNode.do",
-			{ 
-				"ref" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""), 
-				"c_position" : data.rslt.position,
-				"c_title" : data.rslt.name,
-				"c_type" : data.rslt.obj.attr("rel")
-			}, 
-			function (r) {
-				if(r.status) {
-					$(data.rslt.obj).attr("id", "node_" + r.id);
-				}
-				else {
-					$.jstree.rollback(data.rlbk);
-				}
-				$("#analyze").click();
-				$("span.ui-icon-refresh").click();
-			}
-		); */
+		$("#nodeForm").dialog({
+			title  : "새 노드 생성"
+		  ,	buttons: {
+		        Ok    : function() {
+		        	excuteAddNode( data );
+		        },
+		        Cancel: function() {
+		            $( "#nodeForm" ).dialog( "close" );
+		        }
+		    }
+		});
+		$("#nodeForm").dialog("open");
 	})
 	.bind("remove.jstree", function (e, data) {
-		data.rslt.obj.each(function () {
-			$.ajax({
-				async : false,
-				type: 'POST',
-				/* url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action", */
-				url: "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/removeNode.do",
-				data : { 
-					"c_id" : this.id.replace("node_","").replace("copy_","")
-				}, 
-				success : function (r) {
-					$("#analyze").click();
-					$("span.ui-icon-refresh").click();
-				}
+		//$.jstree.rollback(data.rlbk);
+		if(confirm("삭제하시겠습니까?")){
+			data.rslt.obj.each(function () {
+				$.ajax({
+					 async : false
+					,type: 'POST'
+					//,url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action"
+					,url: "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/removeNode.do"
+					,data : { 
+						 "c_id"       : this.id.replace("node_","").replace("copy_","")
+						,"c_type"     : data.rslt.obj.attr("rel")						
+						/*,"c_parentid" : data.rslt.parentid
+						,"c_position" : data.rslt.position
+						,"c_left"     : data.rslt.left
+					    ,"c_right"    : data.rslt.right*/
+					}
+					,success : function (r) {
+						$("#analyze").click();
+						$("span.ui-icon-refresh").click();
+					}
+				});
 			});
-		});
+		}else{
+			$.jstree.rollback(data.rlbk);
+		}
 	})
 	.bind("rename.jstree", function (e, data) {
 		$.post(
@@ -499,6 +541,31 @@ $("#demo")
 	});
 
 });
+
+	function excuteAddNode( data ){
+		$.post(
+			"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/addNode.do",
+			{ 
+				"ref" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""), 
+				"c_position" : data.rslt.position,
+				"c_title" : $("#nodeTitle").val(),
+				"c_type" : data.rslt.obj.attr("rel"),
+				"url" : $("#nodeLinkUrl").val()
+			}, 
+			function (r) {
+				console.log(r);
+				if(r.status) {
+ 					$(data.rslt.obj).attr("id", "node_" + r.id);
+				}
+				else {
+					$.jstree.rollback(data.rlbk);
+				}
+				$("#nodeForm").dialog("close");
+ 				$("#analyze").click();
+ 				$("span.ui-icon-refresh").click();
+			}
+		);
+	}
 </script>
 </body>
 </html>
