@@ -4,6 +4,7 @@
 	<typeAlias alias="MenuComprehensiveTree" type="standard.mvc.component.business.menu.vo.MenuComprehensiveTree"/>
 
 	<select id="menu.getChildNode" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
+		/* getChildNode */
 		SELECT A.c_id
 		     , A.c_parentid
 		     , A.c_position
@@ -18,28 +19,29 @@
            		 			ELSE 'NoChild'
            		 		END AS YesNo
          		   FROM T_MenuComprehensiveTree B
-       			  WHERE B.c_parentid = A.c_id
+       			  WHERE B.C_PARENTID = A.C_ID
      		   ) AS childcount
 		  FROM T_MenuComprehensiveTree A
-		 WHERE A.c_parentid = #c_id# 
-	  ORDER BY A.c_position ASC
+		 WHERE A.C_PARENTID = #c_id# 
+	  ORDER BY A.C_POSITION ASC
 	</select>
 
 
 	<select id="menu.getChildNodeByLeftRight" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
-		SELECT c_id
-		     , c_parentid
-		     , c_position
-		     , c_left
-		     , c_right
-		     , c_level
-		     , c_title
-		     , c_type
+		/* getChildNodeByLeftRight */
+		SELECT C_ID
+		     , C_PARENTID
+		     , C_POSITION
+		     , C_LEFT
+		     , C_RIGHT
+		     , C_LEVEL
+		     , C_TITLE
+		     , C_TYPE
 		     , url
 		  FROM T_MenuComprehensiveTree 
-		 WHERE c_left &gt;= #c_left# 
-		   AND c_right &lt;= #c_right# 
-	  ORDER BY c_left ASC
+		 WHERE C_LEFT &gt;= #c_left# 
+		   AND C_RIGHT &lt;= #c_right# 
+	  ORDER BY C_LEFT ASC
 	</select>
 
 
@@ -64,40 +66,43 @@
 
 
 	<update id="menu.alterNode" parameterClass="MenuComprehensiveTree">
+		/* alterNode */
 		UPDATE T_MenuComprehensiveTree 
-		   SET c_type = #c_type#
-		     , c_title = #c_title# 
-		 WHERE c_id = #c_id#
+		   SET C_TYPE = #c_type#
+		     , C_TITLE = #c_title# 
+		 WHERE C_ID = #c_id#
 	</update>
 
 
 	<select id="menu.getNode" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
-        SELECT c_id
-             , c_parentid
-             , c_position
-             , c_left
-             , c_right
-             , c_level
-             , c_title
-             , c_type
+		/* getNode */
+        SELECT C_ID
+             , C_PARENTID
+             , C_POSITION
+             , C_LEFT
+             , C_RIGHT
+             , C_LEVEL
+             , C_TITLE
+             , C_TYPE
              , url
           FROM T_MenuComprehensiveTree 
-         WHERE c_id = #c_id#
+         WHERE C_ID = #c_id#
     </select>
 
 
 	<select id="menu.getNodeByRef" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
-        SELECT c_id
-             , c_parentid
-             , c_position
-             , c_left
-             , c_right
-             , c_level
-             , c_title
-             , c_type
+		/* getNodeByRef */
+        SELECT C_ID
+             , C_PARENTID
+             , C_POSITION
+             , C_LEFT
+             , C_RIGHT
+             , C_LEVEL
+             , C_TITLE
+             , C_TYPE
              , url
           FROM T_MenuComprehensiveTree 
-         WHERE c_id = #ref#
+         WHERE C_ID = #ref#
     </select>
 
 
@@ -141,26 +146,29 @@
 		 WHERE C_PARENTID = 0
     </select>
 
-	<!-- 같은 부모를 가진 자식들 중 내 뒤에 있는 놈들의 포지션을 하나씩 당김. -->
+
 	<update id="menu.cutMyselfPositionFix" parameterClass="MenuComprehensiveTree">
+		/* cutMyselfPositionFix */
        	UPDATE T_MenuComprehensiveTree 
-       	   SET c_position = c_position - 1 
-       	 WHERE c_parentid = #c_parentid# 
-           AND c_position &gt; #c_position#
+       	   SET C_POSITION = C_POSITION - 1 
+       	 WHERE C_PARENTID = #c_parentid# 
+           AND C_POSITION &gt; #c_position#
     </update>
 
 
 	<update id="menu.cutMyselfLeftFix" parameterClass="MenuComprehensiveTree">
+		/* cutMyselfLeftFix */
        	UPDATE T_MenuComprehensiveTree 
-       	   SET c_left = c_left - #spaceOfTargetNode# 
-         WHERE c_left &gt; #c_right#
+       	   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
+         WHERE C_LEFT &gt; #c_right#
     </update>
     
     
 	<update id="menu.cutMyselfRightFix" parameterClass="MenuComprehensiveTree">
+		/* cutMyselfRightFix */
        	UPDATE T_MenuComprehensiveTree 
-       	   SET c_right = c_right - #spaceOfTargetNode# 
-       	 WHERE c_right &gt; #c_left#
+       	   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
+       	 WHERE C_RIGHT &gt; #c_left#
 		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
 		       #c_idsByChildNodeFromNodeById[]#
 		</iterate>
@@ -168,11 +176,12 @@
 
 
 	<update id="menu.stretchPositionForMyself" parameterClass="MenuComprehensiveTree">
+		/* stretchPositionForMyselfFromJstree */
         UPDATE T_MenuComprehensiveTree
-           SET c_position = c_position + 1
-         WHERE c_parentid = #ref# AND c_position &gt;= #c_position#
+           SET C_POSITION = C_POSITION + 1
+         WHERE C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
 		<isEqual property="copy" compareValue="0">
-           AND c_id NOT IN
+           AND C_ID NOT IN
 			<isEmpty property="c_idsByChildNodeFromNodeById">
 						   (-1)
 			</isEmpty>
@@ -186,12 +195,13 @@
 
 
 	<update id="menu.stretchLeftForMyselfFromJstree" parameterClass="MenuComprehensiveTree">
+		/* stretchLeftForMyselfFromJstree */
        	UPDATE T_MenuComprehensiveTree 
-       	   SET c_left = c_left + #spaceOfTargetNode# 
-       	 WHERE c_left &gt;= #rightPositionFromNodeByRef#
+       	   SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
+       	 WHERE C_LEFT &gt;= #rightPositionFromNodeByRef#
 		<isEqual property="copyBooleanValue" compareValue="false">
 			<isNotEmpty property="c_idsByChildNodeFromNodeById">
-				<iterate prepend="AND c_id NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
 					#c_idsByChildNodeFromNodeById[]#
 				</iterate>
 			</isNotEmpty>
@@ -200,12 +210,13 @@
 
 
 	<update id="menu.stretchRightForMyselfFromJstree" parameterClass="MenuComprehensiveTree">
+		/* stretchRightForMyselfFromJstree */
         UPDATE T_MenuComprehensiveTree 
-           SET c_right = c_right + #spaceOfTargetNode# 
-         WHERE c_right &gt;= #rightPositionFromNodeByRef#
+           SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
+         WHERE C_RIGHT &gt;= #rightPositionFromNodeByRef#
 		<isEqual property="copyBooleanValue" compareValue="false">
 			<isNotEmpty property="c_idsByChildNodeFromNodeById">
-				<iterate prepend="AND c_id NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
 			   #c_idsByChildNodeFromNodeById[]#
 				</iterate>
 			</isNotEmpty>
@@ -262,11 +273,13 @@
 
 
 	<insert id="menu.addMyselfFromJstree" parameterClass="MenuComprehensiveTree">
-        INSERT INTO T_MenuComprehensiveTree (c_id, c_parentid, c_position, c_left, c_right, c_level, url)
-        VALUES (S_MenuComprehensiveTree.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #url#)
+		/* addMyselfFromJstree */
+        INSERT INTO T_MenuComprehensiveTree ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, url )
+                                 VALUES ( S_MenuComprehensiveTree.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #url# )
         <selectKey resultClass="java.lang.Integer">
-            SELECT S_MenuComprehensiveTree.CURRVAL AS seq 
-            FROM DUAL
+        	/* addMyselfFromJstree SEQ */
+            SELECT S_MenuComprehensiveTree.CURRVAL AS SEQ 
+              FROM DUAL
         </selectKey>
 	</insert>
 
@@ -280,15 +293,17 @@
 
 
 	<update id="menu.fixCopyIF" parameterClass="MenuComprehensiveTree">
+        /* fixCopyIF */
         UPDATE T_MenuComprehensiveTree 
-           SET c_position = #fixCopyPosition# 
-         WHERE c_id = #fixCopyId#
+           SET C_POSITION = #fixCopyPosition# 
+         WHERE C_ID = #fixCopyId#
 	</update>
 
 
 	<update id="menu.fixCopy" parameterClass="MenuComprehensiveTree">
+		/* fixCopy */
 		UPDATE T_MenuComprehensiveTree 
-		   SET c_parentid = #fixCopyId# 
-		 WHERE c_id = #c_id#
+		   SET C_PARENTID = #fixCopyId# 
+		 WHERE C_ID = #c_id#
 	</update>
 </sqlMap>
