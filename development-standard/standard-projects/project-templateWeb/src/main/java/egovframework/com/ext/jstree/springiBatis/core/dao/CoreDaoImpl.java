@@ -37,79 +37,81 @@ public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 	 * @return List<ComprehensiveTree>
 	 */
 	@SuppressWarnings("unchecked")
-	public List<ComprehensiveTree> getChildNode( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree ){
 		
 		return list("core.getChildNode", comprehensiveTree );
 	}
 
 	
 	@SuppressWarnings("unchecked")
-	public List<ComprehensiveTree> searchNodeByString( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> List<T> searchNodeByString( T comprehensiveTree ){
 		
 		return list("core.searchNodeByString", comprehensiveTree );
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<String> searchNodeByPosition(List<ComprehensiveTree> searchNodeByPositions){
+	public <T extends ComprehensiveTree>List<String> searchNodeByPosition(List<T> searchNodeByPositions){
 		
 		return list("core.searchNodeByPosition", searchNodeByPositions );
 	}
 	
 	
-	public ComprehensiveTree getNode( ComprehensiveTree comprehensiveTree ){
-		return (ComprehensiveTree)selectByPk("core.getNode", comprehensiveTree);
+	@SuppressWarnings("unchecked")
+	public <T extends ComprehensiveTree> T getNode( T comprehensiveTree ){
+		return ((T)selectByPk("core.getNode", comprehensiveTree));
 	}
 	
-	public ComprehensiveTree getNodeByRef( ComprehensiveTree comprehensiveTree ){
-		return (ComprehensiveTree)selectByPk("core.getNodeByRef", comprehensiveTree);
+	@SuppressWarnings("unchecked")
+	public <T extends ComprehensiveTree> T getNodeByRef( T comprehensiveTree ){
+		return ((T)selectByPk("core.getNodeByRef", comprehensiveTree));
 	}
 	
-	public void cutMyself(ComprehensiveTree p_OnlyCutMyselfFromJstree){
+	public <T extends ComprehensiveTree> void cutMyself(T p_OnlyCutMyselfFromJstree){
 		update("core.cutMyselfPositionFix", p_OnlyCutMyselfFromJstree);
 		update("core.cutMyselfLeftFix",     p_OnlyCutMyselfFromJstree);
 		update("core.cutMyselfRightFix",    p_OnlyCutMyselfFromJstree);
 	}
 	
-	public void stretchPositionForMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree>void stretchPositionForMyselfFromJstree( T comprehensiveTree ){
 		update("core.stretchPositionForMyself", comprehensiveTree);
 	}
 	
-	public void stretchLeftRightForMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> void stretchLeftRightForMyselfFromJstree( T comprehensiveTree ){
 		update("core.stretchLeftForMyselfFromJstree",  comprehensiveTree);
 		update("core.stretchRightForMyselfFromJstree", comprehensiveTree);
 	}
 	
-	public int pasteMyselfFromJstree(ComprehensiveTree p_OnlyPasteMyselfFromJstree){
+	public <T extends ComprehensiveTree> int pasteMyselfFromJstree(T p_OnlyPasteMyselfFromJstree){
 		return (Integer)insert("core.pasteMyselfFromJstree", p_OnlyPasteMyselfFromJstree);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<ComprehensiveTree> getChildNodeByLeftRight( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> List<T> getChildNodeByLeftRight( T comprehensiveTree ){
 		
 		return list("core.getChildNodeByLeftRight", comprehensiveTree );
 	}
 	
-	public void fixCopy(ComprehensiveTree comprehensiveTree){
+	public <T extends ComprehensiveTree> void fixCopy( T comprehensiveTree){
 		update("core.fixCopy", comprehensiveTree);
 	}
 
-	public void fixCopyIF( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> void fixCopyIF( T comprehensiveTree ){
 		update("core.fixCopyIF", comprehensiveTree);
 	}
 	
-	public void enterMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> void enterMyselfFromJstree( T comprehensiveTree ){
 		insert("core.enterMyselfFromJstree", comprehensiveTree);
 	}
 	
-	public int addMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> int addMyselfFromJstree( T comprehensiveTree ){
 		return (Integer)insert("core.addMyselfFromJstree", comprehensiveTree);
 	}
 	
-	public int alterNode( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> int alterNode( T comprehensiveTree ){
 		return (Integer)update("core.alterNode", comprehensiveTree);
 	}
 	
-	public int removeNode( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> int removeNode( T comprehensiveTree ){
 		
 		delete("core.removeNode",              comprehensiveTree);
 		update("core.removedAfterLeftFix",     comprehensiveTree);
@@ -119,15 +121,15 @@ public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 		return 0;
 	}
 	
-	public int alterNodeType( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree ){
 		return (Integer)update("core.alterNodeType", comprehensiveTree);
 	}
 	
-	public void stretchLeftForMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> void stretchLeftForMyselfFromJstree( T comprehensiveTree ){
 		update("core.stretchLeftForMyselfFromJstree", comprehensiveTree);
 	}
 	
-	public void stretchRightForMyselfFromJstree( ComprehensiveTree comprehensiveTree ){
+	public <T extends ComprehensiveTree> void stretchRightForMyselfFromJstree( T comprehensiveTree ){
 		update("core.stretchRightForMyselfFromJstree", comprehensiveTree);
 	}
 }

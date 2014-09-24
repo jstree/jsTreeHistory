@@ -12,41 +12,41 @@ public interface CoreDao {
 	 * @param comprehensiveTree
 	 * @return List<ComprehensiveTree>
 	 */
-	public List<ComprehensiveTree> getChildNode( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree );
 	
-	public List<ComprehensiveTree> searchNodeByString( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> List<T> searchNodeByString( T comprehensiveTree );
 	
-	public List<String> searchNodeByPosition(List<ComprehensiveTree> searchNodeByPositions);
+	public <T extends ComprehensiveTree> List<String> searchNodeByPosition(List<T> searchNodeByPositions);
 	
-	public ComprehensiveTree getNode( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> T getNode( T comprehensiveTree );
 	
-	public ComprehensiveTree getNodeByRef( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> T getNodeByRef( T comprehensiveTree );
 	
-	public void cutMyself(ComprehensiveTree p_OnlyCutMyselfFromJstree);
+	public <T extends ComprehensiveTree> void cutMyself(T p_OnlyCutMyselfFromJstree);
 	
-	public void stretchPositionForMyselfFromJstree( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> void stretchPositionForMyselfFromJstree( T comprehensiveTree );
 	
-	public void stretchLeftRightForMyselfFromJstree( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> void stretchLeftRightForMyselfFromJstree( T comprehensiveTree );
 	
-	public int pasteMyselfFromJstree(ComprehensiveTree p_OnlyPasteMyselfFromJstree);
+	public <T extends ComprehensiveTree> int pasteMyselfFromJstree(T p_OnlyPasteMyselfFromJstree);
 	
-	public List<ComprehensiveTree> getChildNodeByLeftRight( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> List<T> getChildNodeByLeftRight( T comprehensiveTree );
 	
-	public void fixCopy(ComprehensiveTree comprehensiveTree);
+	public <T extends ComprehensiveTree> void fixCopy(T comprehensiveTree);
 
-	public void fixCopyIF( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> void fixCopyIF( T comprehensiveTree );
 	
-	public void enterMyselfFromJstree( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> void enterMyselfFromJstree( T comprehensiveTree );
 	
-	public int addMyselfFromJstree( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> int addMyselfFromJstree( T comprehensiveTree );
 	
-	public int alterNode( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> int alterNode( T comprehensiveTree );
 	
-	public int removeNode( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> int removeNode( T comprehensiveTree );
 	
-	public int alterNodeType( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree );
 	
-	public void stretchLeftForMyselfFromJstree( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> void stretchLeftForMyselfFromJstree( T comprehensiveTree );
 	
-	public void stretchRightForMyselfFromJstree( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> void stretchRightForMyselfFromJstree( T comprehensiveTree );
 }
