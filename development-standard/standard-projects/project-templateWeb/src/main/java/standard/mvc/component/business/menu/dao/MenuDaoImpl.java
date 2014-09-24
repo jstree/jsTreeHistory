@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
  * Modification Information

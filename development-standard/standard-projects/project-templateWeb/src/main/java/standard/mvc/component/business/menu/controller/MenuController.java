@@ -75,12 +75,11 @@ public class MenuController {
 	 * @param model
 	 * @param request
 	 * @return
-	 * @throws JsonProcessingException
+	 * @throws Exception 
 	 */
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/addNode.do")
-	public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request)
-			throws JsonProcessingException {
+	public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) {
 		
 	    // TODO 공통적 파라미터 값 검증 적용
 	    
