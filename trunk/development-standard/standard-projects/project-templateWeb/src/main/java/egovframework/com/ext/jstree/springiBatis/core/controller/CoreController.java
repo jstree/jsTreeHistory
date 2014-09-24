@@ -106,11 +106,13 @@ public class CoreController {
 	 * @param request
 	 * @return
 	 * @throws JsonProcessingException
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
 	@ResponseBody
 	@RequestMapping("/addNode.do")
 	public ComprehensiveTree addNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-			throws JsonProcessingException {
+			throws JsonProcessingException, InstantiationException, IllegalAccessException {
 
 		if (request.getParameter("ref") == null || request.getParameter("c_position") == null
 				|| request.getParameter("c_title") == null || request.getParameter("c_type") == null) {
@@ -251,11 +253,14 @@ public class CoreController {
 	 * @param request
 	 * @return
 	 * @throws JsonProcessingException
+	 * @throws ReflectiveOperationException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
 	@ResponseBody
 	@RequestMapping("/moveNode.do")
 	public ComprehensiveTree moveNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-			throws JsonProcessingException {
+			throws JsonProcessingException, InstantiationException, IllegalAccessException, ReflectiveOperationException {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_position") == null
 				|| request.getParameter("copy") == null || request.getParameter("multiCounter") == null

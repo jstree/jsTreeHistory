@@ -29,11 +29,12 @@ public interface CoreService {
 	
 	/**
 	 * 자식노드를 요청한다.
+	 * @param <T>
 	 * 
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO
 	 * @return List<ComprehensiveTree> 자식 노드들
 	 */
-	public List<ComprehensiveTree> getChildNode( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree );
 	
 	
 	/**
@@ -42,7 +43,7 @@ public interface CoreService {
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return List<String> - 검색된 노드들
 	 */
-	public List<String> searchNode( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> List<String> searchNode( T comprehensiveTree );
 	
 	
 	/**
@@ -50,8 +51,10 @@ public interface CoreService {
 	 * 
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return ComprehensiveTree
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public ComprehensiveTree addNode( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree ) throws InstantiationException, IllegalAccessException;
 	
 	
 	/**
@@ -60,7 +63,7 @@ public interface CoreService {
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return int
 	 */
-	public int executeRemoveNode( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> int executeRemoveNode( T comprehensiveTree );
 	
 	
 	/**
@@ -69,7 +72,7 @@ public interface CoreService {
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return int
 	 */
-	public int alterNode( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> int alterNode( T comprehensiveTree );
 	
 	
 	/**
@@ -78,7 +81,7 @@ public interface CoreService {
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return int
 	 */
-	public int alterNodeType( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree );
 	
 	
 	/**
@@ -86,6 +89,9 @@ public interface CoreService {
 	 * 
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return ComprehensiveTree
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws ReflectiveOperationException 
 	 */
-	public ComprehensiveTree moveNode( ComprehensiveTree comprehensiveTree );
+	public <T extends ComprehensiveTree> T moveNode( T comprehensiveTree ) throws InstantiationException, IllegalAccessException, ReflectiveOperationException;
 }
