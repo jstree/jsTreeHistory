@@ -40,7 +40,7 @@
 			<td class="gapWidth gnbAsideBackColor"></td>
 		<td class="gnbAsideBackColor"></td>
 	</tr>
-	<tr> <!-- 탑 영역 -->
+	<tr> <!-- í ìì­ -->
         	<td class="logoGnbHeight">
         		<div class="logoBackColor logoGnbHeight">
 			</div>
@@ -67,7 +67,7 @@
 	            </div>
 		</td>
 	</tr>
-	<tr> <!-- 중간 디자인-->
+	<tr> <!-- ì¤ê° ëìì¸-->
         	<td class="gapHeight">
         		<div class="gapHeight logoBottomGapImgOver">
 			</div>
@@ -132,7 +132,7 @@
 	            </div>
 		</td>
 	</tr>
-	<tr> <!-- 하단 디자인-->
+	<tr> <!-- íë¨ ëìì¸-->
         	<td height="20px">
         		<div class="gnbAsideBackColor gapHeight">
 			</div>
@@ -170,8 +170,8 @@
     
     <div id="nodeForm" style="display:none;">
     	<ul>
-    		<li>노드제목 : <input type="text" id="nodeTitle"   /></li>
-    		<li>노드URL : <input type="text" id="nodeLinkUrl" /></li>
+    		<li>노드명 : <input type="text" id="nodeTitle"   /></li>
+    		<li>URL   : <input type="text" id="nodeLinkUrl" /></li>
     	</ul>
     </div>
 <!-- JavaScript neccessary for the tree -->
@@ -204,7 +204,7 @@ $("#demo")
 	    // do summit with them
 	    // alert(selected_ids);
 	    
-	    // TODO 다중 선택을 막아야 함!
+	    // TODO ë¤ì¤ ì íì ë§ìì¼ í¨!
 		
 	    
 	})
@@ -235,7 +235,26 @@ $("#demo")
 							"label" : "File",                         
 							action : function (obj) 
 							{
-								this.create(obj, "last", {"attr" : {"rel" : "default"}});                         
+								console.log(obj);
+								console.log( "ref c_id   : " + $(obj).attr("id").replace("node_","").replace("copy_","") );
+								console.log( "c_position : " + $(obj).children().filter("ul").children().length );
+								
+								// 파일인 경우에 실행하지 않는다
+								if( $(obj).attr("rel") != 'default' ){
+									
+									$("#nodeForm").dialog({
+										title  : "새 노드 추가"
+									  ,	buttons: {
+									        Ok    : function() {
+									        	excuteAddNode( obj, "default" );
+									        },
+									        Cancel: function() {
+									            $( "#nodeForm" ).dialog( "close" );
+									        }
+									    }
+									});
+									$("#nodeForm").dialog("open");
+								}
 							}                     
 						},                     
 						"create_folder" :  
@@ -244,8 +263,24 @@ $("#demo")
 							"seperator_after" : false,                         
 							"label" : "Folder",                          
 							action : function (obj)  
-							{                                                            
-								this.create(obj, "last", {"attr" : { "rel" : "folder"}});                         
+							{
+								// 파일인 경우에 실행하지 않는다
+								if( $(obj).attr("rel") != 'default' ){
+									
+									$("#nodeForm").dialog({
+										title  : "새 노드 추가"
+									  ,	buttons: {
+									        Ok    : function() {
+									        	excuteAddNode( obj, "folder" );
+									        },
+									        Cancel: function() {
+									            $( "#nodeForm" ).dialog( "close" );
+									        }
+									    }
+									});
+									$("#nodeForm").dialog("open");
+								}
+								// this.create(obj, "last", {"attr" : { "rel" : "folder"}});                         
 							}                      
 						}
 						
@@ -421,36 +456,16 @@ $("#demo")
 			
 			var url = $(this).parent().attr('href');
 			
-			if (typeof(href) === 'undefined') { alert('href 값이 정의되지 않았습니다.'); }
+			if (typeof(href) === 'undefined') { alert('href ê°ì´ ì ìëì§ ìììµëë¤.'); }
 			
 			callAjax(null, url, '#section', 'GET', 'html');
 			
 			return false;
 		});
 	})
-	.bind("create.jstree", function (e, data) {
-		console.log(data.rslt);
-		console.log('ref : ' + data.rslt.parent.attr("id").replace("node_","").replace("copy_",""));
-		console.log('c_position : ' + data.rslt.position);
-		console.log('c_title : ' + data.rslt.name);
-		console.log('c_type : ' + data.rslt.obj.attr("rel"));
-		
-		$("#nodeForm").dialog({
-			title  : "새 노드 생성"
-		  ,	buttons: {
-		        Ok    : function() {
-		        	excuteAddNode( data );
-		        },
-		        Cancel: function() {
-		            $( "#nodeForm" ).dialog( "close" );
-		        }
-		    }
-		});
-		$("#nodeForm").dialog("open");
-	})
 	.bind("remove.jstree", function (e, data) {
 		//$.jstree.rollback(data.rlbk);
-		if(confirm("삭제하시겠습니까?")){
+		if(confirm("ì­ì íìê² ìµëê¹?")){
 			data.rslt.obj.each(function () {
 				$.ajax({
 					 async : false
@@ -542,26 +557,21 @@ $("#demo")
 
 });
 
-	function excuteAddNode( data ){
+	function excuteAddNode( obj, type ){
 		$.post(
 			"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/addNode.do",
 			{ 
-				"ref" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""), 
-				"c_position" : data.rslt.position,
+				"ref" : $(obj).attr("id").replace("node_","").replace("copy_",""), 
+				"c_position" : $(obj).children().filter("ul").children().length,
 				"c_title" : $("#nodeTitle").val(),
-				"c_type" : data.rslt.obj.attr("rel"),
+				"c_type" : type,
 				"url" : $("#nodeLinkUrl").val()
 			}, 
 			function (r) {
 				console.log(r);
-				if(r.status) {
- 					$(data.rslt.obj).attr("id", "node_" + r.id);
-				}
-				else {
-					$.jstree.rollback(data.rlbk);
-				}
+				$("#nodeTitle").val("");
+				$("#nodeLinkUrl").val("");
 				$("#nodeForm").dialog("close");
- 				$("#analyze").click();
  				$("span.ui-icon-refresh").click();
 			}
 		);
