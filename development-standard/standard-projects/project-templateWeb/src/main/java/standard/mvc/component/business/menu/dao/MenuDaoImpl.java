@@ -96,7 +96,12 @@ public class MenuDaoImpl extends EgovComAbstractDAO implements MenuDao {
 
 	@Override
 	public int removeNode(MenuComprehensiveTree comprehensiveTree) {
-		return super.delete("menu.removeNode", comprehensiveTree);
+		delete("menu.removeNode",              comprehensiveTree);
+		update("menu.removedAfterLeftFix",     comprehensiveTree);
+		update("menu.removedAfterRightFix",    comprehensiveTree);
+		update("menu.removedAfterPositionFix", comprehensiveTree);
+		
+		return 1;
 	}    
     
 //	@Override
