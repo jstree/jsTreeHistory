@@ -40,7 +40,7 @@
 			<td class="gapWidth gnbAsideBackColor"></td>
 		<td class="gnbAsideBackColor"></td>
 	</tr>
-	<tr> <!-- í ìì­ -->
+	<tr> <!-- 탑 영역 -->
         	<td class="logoGnbHeight">
         		<div class="logoBackColor logoGnbHeight">
 			</div>
@@ -67,7 +67,7 @@
 	            </div>
 		</td>
 	</tr>
-	<tr> <!-- ì¤ê° ëìì¸-->
+	<tr> <!-- 중간 디자인 -->
         	<td class="gapHeight">
         		<div class="gapHeight logoBottomGapImgOver">
 			</div>
@@ -132,7 +132,7 @@
 	            </div>
 		</td>
 	</tr>
-	<tr> <!-- íë¨ ëìì¸-->
+	<tr> <!-- 하단 디자인 -->
         	<td height="20px">
         		<div class="gnbAsideBackColor gapHeight">
 			</div>
@@ -174,6 +174,8 @@
     		<li>URL   : <input type="text" id="nodeLinkUrl" /></li>
     	</ul>
     </div>
+    <div id="nodeConfirm" title="확인"></div>
+    
 <!-- JavaScript neccessary for the tree -->
 <script type="text/javascript">
 $(function () {
@@ -204,7 +206,7 @@ $("#demo")
 	    // do summit with them
 	    // alert(selected_ids);
 	    
-	    // TODO ë¤ì¤ ì íì ë§ìì¼ í¨!
+	    // TODO 다중 선택을 막아야 함!
 		
 	    
 	})
@@ -456,7 +458,7 @@ $("#demo")
 			
 			var url = $(this).parent().attr('href');
 			
-			if (typeof(href) === 'undefined') { alert('href ê°ì´ ì ìëì§ ìììµëë¤.'); }
+			if (typeof(href) === 'undefined') { alert('href 값이 정의되지 않았습니다.'); }
 			
 			callAjax(null, url, '#section', 'GET', 'html');
 			
@@ -464,31 +466,49 @@ $("#demo")
 		});
 	})
 	.bind("remove.jstree", function (e, data) {
-		//$.jstree.rollback(data.rlbk);
-		if(confirm("ì­ì íìê² ìµëê¹?")){
-			data.rslt.obj.each(function () {
-				$.ajax({
-					 async : false
-					,type: 'POST'
-					//,url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action"
-					,url: "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/removeNode.do"
-					,data : { 
-						 "c_id"       : this.id.replace("node_","").replace("copy_","")
-						,"c_type"     : data.rslt.obj.attr("rel")						
-						/*,"c_parentid" : data.rslt.parentid
-						,"c_position" : data.rslt.position
-						,"c_left"     : data.rslt.left
-					    ,"c_right"    : data.rslt.right*/
-					}
-					,success : function (r) {
-						$("#analyze").click();
-						$("span.ui-icon-refresh").click();
-					}
-				});
-			});
-		}else{
-			$.jstree.rollback(data.rlbk);
-		}
+		$("#nodeConfirm").html("삭제하시겠습니까?");
+		$("#nodeConfirm").dialog({
+			 resizable : false
+			,height : 140
+			,modal : true
+			,close : function(){
+				$.jstree.rollback(data.rlbk);
+		    	$(this).dialog("close");
+			}
+			,buttons : {
+				 "확인" : function(){
+					data.rslt.obj.each(function () {
+						$.ajax({
+							 async : false
+							,type: 'POST'
+							//,url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action"
+							,url: "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/removeNode.do"
+							,data : { 
+								 "c_id"       : this.id.replace("node_","").replace("copy_","")
+								,"c_type"     : data.rslt.obj.attr("rel")						
+								,"c_position" : data.rslt.obj.attr("position")
+								,"c_left"     : data.rslt.obj.attr("left")
+							    ,"c_right"    : data.rslt.obj.attr("right")
+							}
+							,success : function (r) {
+								//$("#analyze").click();
+								//$("span.ui-icon-refresh").click();
+								data.inst.refresh();
+							}
+							,error : function(){
+								$.jstree.rollback(data.rlbk);
+							}
+						});
+					});
+					$(this).dialog("close");
+				 }
+			    ,"취소" : function(){
+			    	$.jstree.rollback(data.rlbk);
+			    	//data.inst.refresh();
+			    	$(this).dialog("close");
+			    }
+			}
+		});
 	})
 	.bind("rename.jstree", function (e, data) {
 		$.post(

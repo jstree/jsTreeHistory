@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import standard.mvc.component.business.menu.dao.MenuDao;
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 
@@ -260,7 +259,12 @@ public class MenuServiceImpl implements MenuService{
 
 	@Override
 	public int removeNode(MenuComprehensiveTree menuComprehensiveTree) {
-		return menuDao.removeNode(menuComprehensiveTree);
+		MenuComprehensiveTree removeNode = menuDao.getNode(menuComprehensiveTree);
+		
+		int nSpaceOfTargetNode = removeNode.getC_right() - removeNode.getC_left() + 1;
+		removeNode.setSpaceOfTargetNode(nSpaceOfTargetNode);
+        
+		return menuDao.removeNode(removeNode);
 	}
     
   

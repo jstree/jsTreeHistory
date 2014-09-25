@@ -23,8 +23,11 @@ public class MenuComprehensiveTree extends ComprehensiveTree{
 	@Override
 	public HashMap<String, String> getAttr() {
 		HashMap<String, String> temp = super.getAttr();
-		temp.put("href", getUrl());
-		temp.put("test", "jkw");
+		temp.put("href"    , getUrl());
+		temp.put("left"    , String.valueOf(super.getC_left()));
+		temp.put("right"   , String.valueOf(super.getC_right()));
+		temp.put("position", String.valueOf(super.getC_position()));
+		
 		return temp;
 	}
 	
