@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.opensymphony.xwork2.ActionContext;
 
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
-import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDaoImpl;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
@@ -53,7 +52,6 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#getChildNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree ){
 		
 		return (List<T>) coreDAO.getChildNode( comprehensiveTree );
@@ -63,7 +61,6 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#searchNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree> List<String> searchNode( T comprehensiveTree ) {
 		
 		List<T> searchNodeByStrings = (List<T>) coreDAO.searchNodeByString( comprehensiveTree );
@@ -86,7 +83,7 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#addNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	@SuppressWarnings({ "unchecked", "null" })
+	@SuppressWarnings({ "null" })
 	@Transactional
 	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree ) throws InstantiationException, IllegalAccessException {
 
@@ -247,7 +244,7 @@ public class CoreServiceImpl implements CoreService {
 		return coreDAO.pasteMyselfFromJstree(onlyPasteMyselfFromJstree);
 	}
 	
-	@SuppressWarnings({ "unchecked", "null" })
+	@SuppressWarnings({ "null" })
 	private <T extends ComprehensiveTree> void fixCopy( int ind, int ref ) throws InstantiationException, IllegalAccessException {
 		
 		Class<T> target = null;
@@ -320,7 +317,6 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#executeRemoveNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public <T extends ComprehensiveTree> int executeRemoveNode( T comprehensiveTree) {
 		
@@ -345,7 +341,6 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNodeType(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree ) {
 
@@ -383,7 +378,7 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#moveNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	@SuppressWarnings({ "null", "unchecked" })
+	@SuppressWarnings({ "null" })
 	@Transactional
 	public <T extends ComprehensiveTree> T moveNode( T comprehensiveTree ) throws ReflectiveOperationException {
 

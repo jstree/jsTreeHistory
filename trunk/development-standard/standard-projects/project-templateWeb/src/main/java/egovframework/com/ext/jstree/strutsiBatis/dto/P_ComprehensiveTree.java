@@ -1,72 +1,65 @@
-package egovframework.com.ext.jstree.springiBatis.core.vo;
+package egovframework.com.ext.jstree.strutsiBatis.dto;
+
+import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
 
 import java.util.Collection;
-import java.util.HashMap;
 
 /**
  * Modification Information
  * 
- * @author ?
- * @since 2014. 7. 31.
+ * @author 이동민
+ * @since 2014.07.25
  * @version 1.0
  * @see <pre>
- * 	Class Name 	: ComprehensiveTree.java
- * 	Description : jstree에서 사용되는 VO 
- * 	Infomation	: jstree에서 사용되는 VO
- *  
+ * 
+ * Class Name 	: P_ComprehensiveTree.java
+ * Description 	: JSTree의 dto Model
+ * Infomation	: 
+ * 
+ * jstree는 정렬하면 일렬로 정렬이 된다.
+ * node의 위치를 c_parentid , c_position , c_left , c_right , c_level 5가지의 값을 가지고 표현한다.
+ * 동일 c_parentid값을 가지는 node는 동일 c_level을 가진다. 
+ * c_position값은 0부터 시작하며 현재 동일 c_parentid를 가지는 node들 사이의 순서를 정해준다.
+ * c_positon값이 적으면 c_left와 c_right값 또한 적은 값을 가지게 된다.
+ * c_left와 c_right값은 현재 node의 위치를 가리키며 node의 c_right - c_left 값이 1인것은 해당 node는 leaf node(자식 node가 없는 node)라는 의미  
+ * c_right - c_left -1 값이 0이 아닌 2의 배수일 경우 해당값 /2 만큼의 node를 가지는 parent node(자식 node를 가지는 node)라는 의미
+ * 
+ * P_ComprehensiveTree 와 T_ComprehensiveTree는 거의 동일한 형태의 dto(Data transfer object), vo (Value Object) 이다
+ * 비슷하지만 따로 나눈것은 parameter 와 signature 의 차이를 명확히 하기 위해 선언하였다.
+ * P_ComprehensiveTree는 parameter 즉, dto로서 데이터가 포함된 객체를  한 시스템에서 다른 시스템으로 전달하는 작업을 처리하는 객체로 레이어간의 통신용도로 사용된다.
+ * T_ComprehensiveTree는 signature 즉, vo로서 특정한 비지니스 값이 담겨있는 객체이다.
+ * 즉 메소드 입장에서 넘겨주는값은 parameter 넘겨받은 값은 signature라고 할수있다.
+ * vo 와 dto 의 차이점은 vo는 read only이다.
+ * 
  *  << 개정이력(Modification Information) >>
  *  
  *  수정일         수정자             수정내용
  *  -------      ------------   -----------------------
- *  2014. 7. 31.      ?         최초 생성
- * 	2014. 9.  4. JeonKyunghun   주석 추가
- *  2014. 9. 16. 류강하                 주석 추가
- *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
+ *  2014.07.25    Dongmin.Lee      최초 생성 
+ * 
+ *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
  * </pre>
- */
-public class ComprehensiveTree {
+ * */
+public class P_ComprehensiveTree {
 
-	/** Node 의 고유 ID, 1부터 시작 */
-	private int c_id;
-	
-	/** Node 의 부모 ID, 0부터 시작(Root Node) */
-	private int c_parentid;
-	
-	/** Parent의 몇 번째 자식인지를 나타냄. 0부터 시작 */
-	private int c_position;
-	
-	/** Node의 Left 위치, 1부터 시작 */
-	private int c_left;
-	
-	/** Node의 Right 위치, 자식이 없다면 Left + 1의 값을 가진다. */
-	private int c_right;
-	
-	/** Node 의 Depth, 0부터 시작 */
-	private int c_level;
+	private int c_id;				//jstree의 pk ,jstree node의 고유값                                                    
+	private int c_parentid;         //현재 나(node)의 부모 node의 c_id값, 0은 root node만이 가질수 있음                               
+	private int c_position;         //node의 위치 0번부터 시작                                                                
+	private int c_left;             //node의 왼쪽값, 1부터 시작                                                               
+	private int c_right;            //node의 오른쪽값, max값은 현재 총 node의 갯수 * 2                                             
+	private int c_level;            //node의 deth에 따른 level 0부터 시작                                                     
+	private String c_title;         //node의 명칭 , 사용자에게 보여지는 node의 이름                                                  
+	private String c_type;          //node의 type  drive/ folder / default(file) 현재 3종류가 있음 c_type에 따라 node의 UI가 변경됨   
 
 	private int ref;
 	private int copy;
 	private int multiCounter;
 
 	private int status;
-	
-	/** Node 의 Title */
-	private String c_title;
-	
-	/**<pre>
-	 * Node 의 Type
-	 * null : Root Node
-	 * drive : First Child Node
-	 * folder : 자식(Folder 또는 File)을 가질 수 있다.
-	 * file : 자식을 가질 수 없다.
-	 * </pre>
-	 */
-	private String c_type;
+
 	private String childcount;
-	
-	/** 검색시 Keyword */
+
 	private String searchStr;
-	
 	private int idif;
 	private int ldif;
 	private int spaceOfTargetNode;
@@ -76,30 +69,12 @@ public class ComprehensiveTree {
 	private int fixCopyPosition;
 
 	private int rightPositionFromNodeByRef;
-	private ComprehensiveTree nodeById;
+	private T_ComprehensiveTree nodeById;
 
 	private int idifLeft;
 	private int idifRight;
 	private Boolean copyBooleanValue;
-	
-	private int id; // moveNode
-	private final HashMap<String, String> attr;
-	
-	//ibatis 사용시에 쓸 map지정 필드.
-	private String sqlMapSelector;
-	
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public ComprehensiveTree() {
-		attr = new HashMap<String, String>();
-	}
-	
 	public void setCopyBooleanValue(Boolean copyBooleanValue) {
 		this.copyBooleanValue = copyBooleanValue;
 	}
@@ -296,11 +271,11 @@ public class ComprehensiveTree {
 		this.rightPositionFromNodeByRef = rightPositionFromNodeByRef;
 	}
 
-	public ComprehensiveTree getNodeById() {
+	public T_ComprehensiveTree getNodeById() {
 		return nodeById;
 	}
 
-	public void setNodeById(ComprehensiveTree nodeById) {
+	public void setNodeById(T_ComprehensiveTree nodeById) {
 		this.nodeById = nodeById;
 	}
 
@@ -319,28 +294,5 @@ public class ComprehensiveTree {
 	public void setIdifRight(int idifRight) {
 		this.idifRight = idifRight;
 	}
-	
-	public String getData() {
-		return c_title;
-	}
 
-	public HashMap<String, String> getAttr() {
-		attr.put("id", "node_" + c_id);
-		attr.put("rel", c_type);
-		return attr;
-	}
-
-	public String getSqlMapSelector() {
-		if(this.sqlMapSelector.isEmpty()){
-			return "core";
-		}else{
-			return sqlMapSelector;
-		}
-	}
-
-	public void setSqlMapSelector(String sqlMapSelector) {
-		this.sqlMapSelector = sqlMapSelector;
-	}
-	
-	
 }
