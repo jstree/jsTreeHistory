@@ -31,4 +31,9 @@ public class MenuComprehensiveTree extends ComprehensiveTree{
 		return temp;
 	}
 	
+	@Override
+	public String getSqlMapSelector(){
+		return "menu";
+	}
+	
 }

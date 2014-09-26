@@ -9,11 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import standard.mvc.component.business.menu.service.MenuService;
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -43,9 +43,9 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 @Controller
 @RequestMapping(value = { "**/**/community" })
 public class MenuController {
-
-	@Resource(name = "MenuService")
-	MenuService menuService;
+	
+	@Resource(name = "CoreService")
+	CoreService coreService;
 
 	/**
 	 * 자식노드를 요청한다.
@@ -65,7 +65,7 @@ public class MenuController {
 			throw new RuntimeException();
 		}
 
-		return menuService.getChildNode(menuComprehensiveTree);
+		return coreService.getChildNode(menuComprehensiveTree);
 	}
 
 	/**
@@ -75,11 +75,13 @@ public class MenuController {
 	 * @param model
 	 * @param request
 	 * @return
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 * @throws Exception 
 	 */
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/addNode.do")
-	public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) {
+	public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) throws InstantiationException, IllegalAccessException {
 		
 	    // TODO 공통적 파라미터 값 검증 적용
 	    
@@ -108,7 +110,7 @@ public class MenuController {
 		}
 		
 		menuComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(menuComprehensiveTree.getC_title()));
-		menuService.addNode(menuComprehensiveTree);
+		coreService.addNode(menuComprehensiveTree);
 
 		return menuComprehensiveTree;
 	}
@@ -116,7 +118,7 @@ public class MenuController {
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/removeNode.do")
 	public int removeNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request){
-		return menuService.removeNode(menuComprehensiveTree);
+		return coreService.executeRemoveNode(menuComprehensiveTree);
 	}
 	
 //    @ResponseBody
