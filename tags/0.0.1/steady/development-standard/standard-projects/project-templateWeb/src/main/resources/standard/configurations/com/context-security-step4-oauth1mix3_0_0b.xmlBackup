@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:egov-security="http://www.egovframe.go.kr/schema/egov-security"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:oauth="http://www.springframework.org/schema/security/oauth"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.egovframe.go.kr/schema/egov-security http://www.egovframe.go.kr/schema/egov-security/egov-security-3.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/security/oauth
+    	http://www.springframework.org/schema/security/spring-security-oauth-1.0.xsd">
+
+<!--
+수정일      			수정자				수정내용
+=========	======= 		=================================================
+2011.09.07		서준식				일반, 업무사용자의 경우 조직아이디가 없어 로그인이 안되던 문제 수정(SQL 수정)
+2011.09.25		서준식				usersByUsernameQuery 쿼리의 조직 아이디 비교 부분  오류 수정 > alias 추가
+2014.06.13		Vincent Han		표준프레임워크 3.0 적용 (간소화 설정 사용)
+2014.07.10		최대열                            OAuth1 sample 적용
+-->
+<!-- 
+	<security:http pattern="/css/**" security="none"/>
+	<security:http pattern="/html/**" security="none"/>
+    <security:http pattern="/images/**" security="none"/>
+ 	<security:http pattern="/js/**" security="none"/>
+ 	<security:http pattern="/resource/**" security="none"/>
+ 	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none"/>
+ -->
+<egov-security:config id="securityConfig"
+		loginUrl="/uat/uia/egovLoginUsr.do"
+		logoutSuccessUrl="/EgovContent.do"
+		loginFailureUrl="/uat/uia/egovLoginUsr.do?login_error=1"
+		accessDeniedUrl="/sec/ram/accessDenied.do"
+
+		dataSource="egov.dataSource"
+		jdbcUsersByUsernameQuery="SELECT USER_ID, ESNTL_ID AS PASSWORD, 1 ENABLED, USER_NM, USER_ZIP,
+                                                              USER_ADRES, USER_EMAIL, USER_SE, ORGNZT_ID, ESNTL_ID,
+                                                              (select a.ORGNZT_NM from COMTNORGNZTINFO a where a.ORGNZT_ID = m.ORGNZT_ID) ORGNZT_NM
+                                                       FROM COMVNUSERMASTER m WHERE CONCAT(USER_SE, USER_ID) = ?"
+		jdbcAuthoritiesByUsernameQuery="SELECT A.SCRTY_DTRMN_TRGET_ID USER_ID, A.AUTHOR_CODE AUTHORITY
+                                                             FROM COMTNEMPLYRSCRTYESTBS A, COMVNUSERMASTER B
+                                                             WHERE A.SCRTY_DTRMN_TRGET_ID = B.ESNTL_ID AND B.USER_ID = ?"
+		jdbcMapClass="egovframework.com.sec.security.common.EgovSessionMapping"
+
+		requestMatcherType="regex"
+		hash="plaintext"
+		hashBase64="false"
+
+		concurrentMaxSessons="1"
+		concurrentExpiredUrl="/EgovContent.do"
+
+		defaultTargetUrl="/EgovContent.do"
+	/>
+
+	<egov-security:secured-object-config id="securedObjectConfig"
+		sqlHierarchicalRoles="
+			SELECT a.CHLDRN_ROLE child, a.PARNTS_ROLE parent
+			FROM COMTNROLES_HIERARCHY a LEFT JOIN COMTNROLES_HIERARCHY b on (a.CHLDRN_ROLE = b.PARNTS_ROLE)"
+		sqlRolesAndUrl="
+			SELECT a.ROLE_PTTRN url, b.AUTHOR_CODE authority
+			FROM COMTNROLEINFO a, COMTNAUTHORROLERELATE b
+			WHERE a.ROLE_CODE = b.ROLE_CODE
+				AND a.ROLE_TY = 'url'  ORDER BY a.ROLE_SORT"
+		sqlRolesAndMethod="
+			SELECT a.ROLE_PTTRN method, b.AUTHOR_CODE authority
+			FROM COMTNROLEINFO a, COMTNAUTHORROLERELATE b
+			WHERE a.ROLE_CODE = b.ROLE_CODE
+				AND a.ROLE_TY = 'method'  ORDER BY a.ROLE_SORT"
+		sqlRolesAndPointcut="
+			SELECT a.ROLE_PTTRN pointcut, b.AUTHOR_CODE authority
+			FROM COMTNROLEINFO a, COMTNAUTHORROLERELATE b
+			WHERE a.ROLE_CODE = b.ROLE_CODE
+				AND a.ROLE_TY = 'pointcut'  ORDER BY a.ROLE_SORT"
+		sqlRegexMatchedRequestMapping="
+			SELECT a.resource_pattern uri, b.authority authority
+			FROM COMTNSECURED_RESOURCES a, COMTNSECURED_RESOURCES_ROLE b
+			WHERE a.resource_id = b.resource_id
+				AND a.resource_type = 'url'"
+	/>
+
+	<egov-security:initializer id="initializer"
+		supportMethod="true"
+		supportPointcut="false"
+	/>
+
+
+<!--
+================================================(s)oauth1=================================================
+-->	
+
+	<!-- (s) OAuth1 consumer -->
+	<!-- 1. oauth 서비스를 사용하는 리소스 들을 등록함 -->
+	<oauth:consumer resource-details-service-ref="resourceDetails" oauth-failure-page="/oauth_error.jsp">
+	  <oauth:url pattern="/oauth1/sparklr/**" resources="sparklrPhotos"/>
+	  <oauth:url pattern="/oauth1/google/**" resources="google"/>
+	  <oauth:url pattern="/oauth1/twitter/**" resources="twitter"/>
+	</oauth:consumer>
+
+	<!-- 2. oauth 서비스를 사용하는 리소스 상세 정보들( provider 정보 ) -->
+	<oauth:resource-details-service id="resourceDetails">
+	  <!-- local provider info -->
+	  <oauth:resource id="sparklrPhotos"
+	                  key="tonr-consumer-key"
+	                  secret="SHHHHH!!!!!!!!!!"
+	                  request-token-url="http://localhost:8080/sparklr/oauth/request_token"
+	                  user-authorization-url="http://localhost:8080/sparklr/oauth/confirm_access"
+	                  access-token-url="http://localhost:8080/sparklr/oauth/access_token"/>
+	  <!--see http://code.google.com/apis/accounts/docs/OAuth_ref.html-->
+	  <oauth:resource id="google" key="anonymous" secret="anonymous"
+	                  request-token-url="https://www.google.com/accounts/OAuthGetRequestToken"
+	                  user-authorization-url="https://www.google.com/accounts/OAuthAuthorizeToken"
+	                  access-token-url="https://www.google.com/accounts/OAuthGetAccessToken"
+	                  request-token-method="GET"
+	                  access-token-method="GET">
+	    <oauth:addtionalParameter name="scope" value="https://picasaweb.google.com/data/"/>
+	    <oauth:addtionalParameter name="xoauth_displayname" value="Tonr Example Application"/>
+	  </oauth:resource>
+	  
+	  <oauth:resource id="twitter" key="HG4CVP4xGFfw3RAaSLn8voxRM" secret="GScpVLuLZDgJyawo762UQLMoJi8FpY0Qzhs1W5e8hMBIxsSaeM"
+	                  request-token-url="https://api.twitter.com/oauth/request_token"
+	                  user-authorization-url="https://api.twitter.com/oauth/authorize"
+	                  access-token-url="https://api.twitter.com/oauth/access_token"
+	                  user-authorization-callback-param="http://127.0.0.1/twitter"
+	                  request-token-method="GET"
+	                  access-token-method="GET"
+	                  >
+	  </oauth:resource>
+	</oauth:resource-details-service>
+ 
+ 	<!-- 3. oauth 원격지 provider service 등록(REST TEMPLATE 를 사용하기 위하여 리소스 등록) -->
+	<bean id="oauth1Service" class="standard.mvc.component.sec.oauth1.consumer.service.OAuth1ServiceImpl">
+		<property name="googleRestTemplate">
+			<bean class="org.springframework.security.oauth.consumer.client.OAuthRestTemplate">
+				<constructor-arg ref="google" />
+			</bean>
+		</property>
+		<property name="twitterRestTemplate">
+			<bean class="org.springframework.security.oauth.consumer.client.OAuthRestTemplate">
+				<constructor-arg ref="twitter" />
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 3. oauth 로컬  provider service 등록(REST TEMPLATE 를 사용하기 위하여 리소스 등록) -->
+	<bean id="sparklrService" class="standard.mvc.component.sec.oauth1.consumer.service.SparklrServiceImpl">
+		<property name="sparklrPhotoListURL" value="http://localhost:8080/sparklr/photos?format=xml" />
+		<property name="sparklrPhotoURLPattern" value="http://localhost:8080/sparklr/photos/%s" />
+		<property name="sparklrRestTemplate">
+			<bean class="org.springframework.security.oauth.consumer.client.OAuthRestTemplate">
+				<constructor-arg ref="sparklrPhotos" />
+			</bean>
+		</property>
+
+	</bean>
+	
+	<!-- (e)OAuth1 consumer setting -->
+<!--
+================================================(e) oauth1=================================================
+-->	
+
+</beans>
