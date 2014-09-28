@@ -1,6 +1,7 @@
 package standard.mvc.component.business.menu.service;
 
-import org.cometd.java.annotation.Service;
+
+import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreCallBackService;

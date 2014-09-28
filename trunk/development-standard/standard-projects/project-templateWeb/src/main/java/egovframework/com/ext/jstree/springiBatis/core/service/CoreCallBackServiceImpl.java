@@ -1,6 +1,7 @@
 package egovframework.com.ext.jstree.springiBatis.core.service;
 
-import org.cometd.java.annotation.Service;
+
+import org.springframework.stereotype.Service;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
