@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - DispatcherServlet application context for Application's web tier. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+	<!-- 수정일 수정자 수정내용 ========== ======== ================================================= 
+		2014.7.29 류강하 DWR 설정 태그 추가 -->
+
+	<context:property-placeholder
+		location="classpath:standard/properties/${profile.active.mode}-spring-viewResolver.properties" />
+	<!-- - The controllers are autodetected POJOs labeled with the @Controller 
+		annotation. -->
+	<context:component-scan base-package="egovframework, standard.mvc">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+
+	<!-- - The form-based controllers within this application provide @RequestMapping 
+		- annotations at the type level for path mapping URLs and @RequestMapping 
+		- at the method level for request type mappings (e.g., GET and POST). - In 
+		contrast, ClinicController - which is not form-based - provides - @RequestMapping 
+		only at the method level for path mapping URLs. - - DefaultAnnotationHandlerMapping 
+		is driven by these annotations and is - enabled by default with Java 5+. -->
+
+	<!-- - This bean processes annotated handler methods, applying Application-specific 
+		PropertyEditors - for request parameter binding. It overrides the default 
+		AnnotationMethodHandlerAdapter. -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean class="egovframework.example.cmmn.web.EgovBindingInitializer" />
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+
+	<!-- - This bean resolves specific types of exceptions to corresponding 
+		logical - view names for error views. The default behaviour of DispatcherServlet 
+		- is to propagate all exceptions to the servlet container: this will happen 
+		- here with all other types of exceptions. -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="cmmn/bizError" />
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.dao.DataAccessException">cmmn/dataAccessFailure</prop>
+				<prop key="org.springframework.transaction.TransactionException">cmmn/transactionFailure</prop>
+				<prop key="egovframework.rte.fdl.cmmn.exception.EgovBizException">cmmn/bizError</prop>
+				<prop key="org.springframework.security.AccessDeniedException">cmmn/accessDenied</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- - This bean configures the 'prefix' and 'suffix' properties of - InternalResourceViewResolver, 
+		which resolves logical view names - returned by Controllers. For example, 
+		a logical view name of "vets" - will be mapped to "/WEB-INF/jsp/vets.jsp". -->
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="default_encoding">UTF-8</prop>
+				<prop key="template_update_delay">0</prop>
+				<prop key="cache_storage">strong:30, soft</prop>
+				<prop key="template_exception_handler">ignore</prop>
+				<prop key="output_encoding">UTF-8</prop>
+				<prop key="number_format">0.##</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="time_format">HH:mm:ss</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="freemarkerViewResolver"
+		class="standard.mvc.component.manager.viewResolver.CustomFreemarkerViewResolver">
+		<property name="cache" value="true" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".ftl" />
+		<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="true" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="requestContextAttribute" value="rc" />
+		<property name="order" value="3" />
+	</bean>
+
+	<bean id="velocityConfigurer"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF" />
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+				<prop key="velocimacro.library.autoreload">true</prop>
+				<prop key="file.resource.loader.cache">true</prop>
+				<prop key="file.resource.loader.modificationCheckInterval">0</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="velocityViewResolver"
+		class="standard.mvc.component.manager.viewResolver.CustomVelocityViewResolver">
+		<property name="cache" value="true" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".vm" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<!-- if you want to use the Spring Velocity macros, set this property to 
+			true -->
+		<property name="exposeSpringMacroHelpers" value="true" />
+	</bean>
+
+	<bean id="specialPurposeViewResolver"
+		class="standard.mvc.component.manager.viewResolver.SpecialPurposeViewResolver">
+		<property name="order" value="2"></property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
+		<property name="order" value="1"></property>
+	</bean>
+	<bean id="urlBasedViewResolver"
+		class="standard.mvc.component.manager.viewResolver.CustomEgovUrlBasedViewResolver"
+		p:order="0" p:viewClass="org.springframework.web.servlet.view.JstlView"
+		p:prefix="/WEB-INF/jsp/egovframework/example/" p:suffix=".jsp" />
+
+	<!-- - Message source for this context, loaded from localized "messages_xx" 
+		files. - Could also reside in the root application context, as it is generic, 
+		- but is currently just used within Application's web tier. <bean id="messageSource" 
+		class="org.springframework.context.support.ResourceBundleMessageSource" p:basename="messages"/> -->
+
+
+	<!-- For Pagination Tag -->
+	<bean id="imageRenderer"
+		class="egovframework.example.cmmn.web.EgovImgPaginationRenderer" />
+
+	<bean id="paginationManager"
+		class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+		<property name="rendererType">
+			<map>
+				<entry key="image" value-ref="imageRenderer" />
+			</map>
+		</property>
+	</bean>
+	<!-- /For Pagination Tag -->
+
+	<!-- 언어 설정 -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="ko"></property>
+	</bean>
+
+	<!-- bean id="maxUploadSizeExceededExceptionHandler" class="com.ahnlab.tm.cli.global.MaxUploadSizeExceededExceptionHandler"/ -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- bean id="multipartResolver" class="com.ahnlab.tm.cli.global.CustomMultipartResolver" -->
+		<property name="maxUploadSize" value="500000000" />
+		<property name="uploadTempDir" value="${upload.dir}" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="resolveLazily" value="false" />
+	</bean>
+
+	<bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop
+					key="org.springframework.web.multipart.MaxUploadSizeExceededException">
+					:uploadMaxError
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<dwr:configuration />
+
+	<bean id="dwrAjaxService" class="standard.mvc.component.dwr.sample.service.AjaxService">
+		<dwr:remote javascript="DwrAjaxService">
+			<dwr:include method="getOptions" />
+		</dwr:remote>
+	</bean>
+
+</beans>
