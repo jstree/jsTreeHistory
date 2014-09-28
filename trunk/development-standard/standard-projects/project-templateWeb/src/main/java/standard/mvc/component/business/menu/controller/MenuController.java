@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import standard.mvc.component.business.menu.service.MenuCallBackService;
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -46,6 +47,10 @@ public class MenuController {
 	
 	@Resource(name = "CoreService")
 	CoreService coreService;
+	
+	@Resource(name = "MenuCallBackService")
+	MenuCallBackService menuCallBackService;
+    
 
 	/**
 	 * 자식노드를 요청한다.
@@ -65,7 +70,8 @@ public class MenuController {
 			throw new RuntimeException();
 		}
 
-		return coreService.getChildNode(menuComprehensiveTree);
+		
+		return coreService.getChildNode(menuComprehensiveTree,menuCallBackService);
 	}
 
 	/**
@@ -110,7 +116,7 @@ public class MenuController {
 		}
 		
 		menuComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(menuComprehensiveTree.getC_title()));
-		coreService.addNode(menuComprehensiveTree);
+		coreService.addNode(menuComprehensiveTree, menuCallBackService);
 
 		return menuComprehensiveTree;
 	}
@@ -118,7 +124,7 @@ public class MenuController {
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/removeNode.do")
 	public int removeNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request){
-		return coreService.executeRemoveNode(menuComprehensiveTree);
+		return coreService.executeRemoveNode(menuComprehensiveTree, menuCallBackService);
 	}
 	
 //    @ResponseBody

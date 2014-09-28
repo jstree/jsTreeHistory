@@ -1,6 +1,7 @@
 package egovframework.com.ext.jstree.springiBatis.core.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +12,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import standard.mvc.component.base.controller.GenericAbstractController;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreCallBackService;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -40,11 +44,14 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 @Controller
 @RequestMapping(value = { "/egovframework/com/etc/jstree/springiBatis/core" })
-public class CoreController {
+public class CoreController extends GenericAbstractController{
 
 	@Resource(name = "CoreService")
 	CoreService coreService;
 
+	@Resource(name = "CoreCallBackService")
+	CoreCallBackService coreCallBackService;
+	
 	/**
 	 * jstree Spring + iBatis 버전의 첫페이지를 요청한다.
 	 * 
@@ -74,7 +81,7 @@ public class CoreController {
 			throw new RuntimeException();
 		}
 
-		return coreService.getChildNode(comprehensiveTree);
+		return coreService.getChildNode(comprehensiveTree, coreCallBackService);
 	}
 
 	/**
@@ -95,7 +102,7 @@ public class CoreController {
 			throw new RuntimeException();
 		}
 
-		return coreService.searchNode(comprehensiveTree);
+		return coreService.searchNode(comprehensiveTree, coreCallBackService);
 	}
 
 	/**
@@ -136,7 +143,7 @@ public class CoreController {
 			}
 		}
 		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
-		coreService.addNode(comprehensiveTree);
+		coreService.addNode(comprehensiveTree, coreCallBackService);
 
 		return comprehensiveTree;
 	}
@@ -160,7 +167,7 @@ public class CoreController {
 			throw new RuntimeException();
 		}
 
-		comprehensiveTree.setStatus(coreService.executeRemoveNode(comprehensiveTree));
+		comprehensiveTree.setStatus(coreService.executeRemoveNode(comprehensiveTree, coreCallBackService));
 
 		return comprehensiveTree;
 	}
@@ -201,7 +208,7 @@ public class CoreController {
 		}
 
 		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
-		comprehensiveTree.setStatus(coreService.alterNode(comprehensiveTree));
+		comprehensiveTree.setStatus(coreService.alterNode(comprehensiveTree, coreCallBackService));
 
 		return comprehensiveTree;
 	}
@@ -240,7 +247,7 @@ public class CoreController {
 			}
 		}
 
-		coreService.alterNodeType(comprehensiveTree);
+		coreService.alterNodeType(comprehensiveTree, coreCallBackService);
 
 		return comprehensiveTree;
 	}
@@ -292,7 +299,7 @@ public class CoreController {
 			}
 		}
 
-		coreService.moveNode(comprehensiveTree);
+		coreService.moveNode(comprehensiveTree, coreCallBackService);
 
 		return comprehensiveTree;
 	}
@@ -316,4 +323,10 @@ public class CoreController {
 
 		return "/jsp/egovframework/example/egovframework/com/ext/jstree/jstreeSolutionSpringVersion";
 	}
+
+    @Override
+    public Map<String, Map<String, Object>> bindTypes() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
