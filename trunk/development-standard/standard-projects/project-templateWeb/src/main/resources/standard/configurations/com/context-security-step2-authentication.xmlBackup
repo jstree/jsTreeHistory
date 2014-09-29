@@ -68,7 +68,7 @@
 	
 	<!--(s) 인증 관리자 -->
 	<beans:bean id="customjdbcUserDetailsManager"
-			class="standard.security.custom.CustomUserDetailsManager" >
+			class="standard.mvc.component.sec.security.custom.CustomUserDetailsManager" >
 		<beans:property name="usersByUsernameQuery" value="SELECT USER_ID, PASSWORD, ENABLED, USER_NAME FROM USERS WHERE USER_ID = ? "/>
 		<beans:property name="authoritiesByUsernameQuery" value="SELECT USER_ID, AUTHORITY FROM AUTHORITIES WHERE USER_ID = ? "/>
 		<beans:property name="dataSource" ref="dataSource" />
@@ -80,17 +80,17 @@
 	<!--(s) 인증 관리자 -->
 	
 	<!-- 인증 성공 시 실행되는 핸들러 : ajax return 값 추가 -->
-	<beans:bean id="customAuthenticationSuccessHandler" class="standard.security.custom.CustomAuthenticationSuccessHandler">
+	<beans:bean id="customAuthenticationSuccessHandler" class="standard.mvc.component.sec.security.custom.CustomAuthenticationSuccessHandler">
 		<beans:property name="targetUrlParameter" value="spring-security-redirect" />
 		<beans:property name="defaultTargetUrl" value="/login/success" />
 		<beans:property name="alwaysUseDefaultTargetUrl" value="true" />
 	</beans:bean>
 
 	<!-- 인증 실패 시 실행되는 핸들러 : ajax return 값 추가 -->
-	<beans:bean id="customAuthenticationFailureHandler" class="standard.security.custom.CustomAuthenticationFailureHandler">
+	<beans:bean id="customAuthenticationFailureHandler" class="standard.mvc.component.sec.security.custom.CustomAuthenticationFailureHandler">
 		<beans:property name="defaultFailureUrl" value="/login/fail"></beans:property>
 	</beans:bean>
 	
 	<!-- 인증 관련 로그 확인 용도 : -->
-	<beans:bean id="loggerListener" class="standard.security.custom.CustomLoginLogger" />
+	<beans:bean id="loggerListener" class="standard.mvc.component.sec.security.custom.CustomLoginLogger" />
 </beans:beans>

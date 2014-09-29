@@ -81,7 +81,7 @@
 	
 	<!--(s)*** 인증 관리자 - 사용자 정보 조회 및 등록, 그룹정보 조회 등을 인증 단계에서 사용 한다. ***-->
 	
-	<beans:bean id="customjdbcUserDetailsManager" class="egovframework.rte.fdl.security.userdetails.jdbc.EgovJdbcUserDetailsManager" >
+	<beans:bean id="customjdbcUserDetailsManager" class="egovframework.com.sec.security.userdetails.jdbc.EgovJdbcUserDetailsManager" >
 		<beans:property name="usersByUsernameQuery" value="SELECT USER_ID, ESNTL_ID AS PASSWORD, 1 ENABLED, USER_NM, USER_ZIP,
                                                               USER_ADRES, USER_EMAIL, USER_SE, ORGNZT_ID, ESNTL_ID,
                                                               (select a.ORGNZT_NM from COMTNORGNZTINFO a where a.ORGNZT_ID = m.ORGNZT_ID) ORGNZT_NM
@@ -271,7 +271,7 @@
 <!--
 ================================================(s) oauth1 - consumer =================================================
 -->	
-	<beans:import resource="security-step5-oauth1-consumer.xml"/> 
+	<!-- <beans:import resource="security-step5-oauth1-consumer.xml"/> --> 
 <!--
 ================================================(e) oauth1 - consumer =================================================
 -->

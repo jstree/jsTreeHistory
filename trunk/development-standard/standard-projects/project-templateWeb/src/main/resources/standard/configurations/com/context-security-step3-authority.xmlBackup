@@ -68,12 +68,12 @@
 	<!--(e)  인증 정보 추출 -->
 	
 	<!-- TODO : 3dr part 인증 확인용( ldap 등 )-->
-	<beans:bean id='customAuthenticationProvider' class="standard.security.custom.CustomAuthenticationProvider"/> 
+	<beans:bean id='customAuthenticationProvider' class="standard.mvc.component.sec.security.custom.CustomAuthenticationProvider"/> 
 	 
 	
 	<!--(s)*** 인증 관리자 - 사용자 정보 조회 및 등록, 그룹정보 조회 등을 인증 단계에서 사용 한다. ***-->
 	
-	<beans:bean id="customjdbcUserDetailsManager" class="standard.security.custom.CustomUserDetailsManager" >
+	<beans:bean id="customjdbcUserDetailsManager" class="standard.mvc.component.sec.security.custom.CustomUserDetailsManager" >
 		<!-- 313 user sql 
 		<beans:property name="usersByUsernameQuery" value="SELECT USER_ID, PASSWORD, ENABLED, USER_NAME FROM USERS WHERE USER_ID = ? "/>
 		<beans:property name="authoritiesByUsernameQuery" value="SELECT USER_ID, AUTHORITY FROM AUTHORITIES WHERE USER_ID = ? "/>
@@ -116,7 +116,7 @@
     <!-- (e) roleHierarchy 설정 -->
     
 	<!-- (s) 인증 성공 시 실행 핸들러 : ajax 호출 시 정상 코드(200) -->
-	<beans:bean id="customAuthenticationSuccessHandler" class="standard.security.custom.CustomAuthenticationSuccessHandler">
+	<beans:bean id="customAuthenticationSuccessHandler" class="standard.mvc.component.sec.security.custom.CustomAuthenticationSuccessHandler">
 		<beans:property name="targetUrlParameter" value="spring-security-redirect" />
 		<beans:property name="defaultTargetUrl" value="/login/success.do" />
 		<beans:property name="alwaysUseDefaultTargetUrl" value="true" />
@@ -124,13 +124,13 @@
 	<!-- (e) 인증 성공 시 실행 핸들러 -->
 	
 	<!-- (s) 인증 실패 시 실행 핸들러 : ajax 호출 시 실패 코드(401,403) -->
-	<beans:bean id="customAuthenticationFailureHandler" class="standard.security.custom.CustomAuthenticationFailureHandler">
+	<beans:bean id="customAuthenticationFailureHandler" class="standard.mvc.component.sec.security.custom.CustomAuthenticationFailureHandler">
 		<beans:property name="defaultFailureUrl" value="/login/fail.do"></beans:property>
 	</beans:bean>
 	<!-- (e) 인증 실패 시 실행 핸들러 -->
 	
 	<!-- 인증 관련 로깅 -->
-	<beans:bean id="loggerListener" class="standard.security.custom.CustomLoginLogger" />
+	<beans:bean id="loggerListener" class="standard.mvc.component.sec.security.custom.CustomLoginLogger" />
 
 <!--
 ================================================(e) 인증 관련 설정=================================================
