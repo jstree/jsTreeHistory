@@ -1,6 +1,7 @@
 package standard.mvc.component.business.menu.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import standard.mvc.component.base.controller.GenericAbstractController;
 import standard.mvc.component.business.menu.service.MenuCallBackService;
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 
@@ -43,7 +45,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 @Controller
 @RequestMapping(value = { "**/**/community" })
-public class MenuController {
+public class MenuController extends GenericAbstractController{
 	
 	@Resource(name = "CoreService")
 	CoreService coreService;
@@ -125,6 +127,12 @@ public class MenuController {
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/removeNode.do")
 	public int removeNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request){
 		return coreService.executeRemoveNode(menuComprehensiveTree, menuCallBackService);
+	}
+
+	@Override
+	public Map<String, Map<String, Object>> bindTypes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 //    @ResponseBody

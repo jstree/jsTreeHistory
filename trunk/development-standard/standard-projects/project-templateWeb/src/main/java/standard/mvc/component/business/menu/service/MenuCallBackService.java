@@ -17,7 +17,7 @@ public class MenuCallBackService implements CoreCallBackService {
             //형변환을 해서. url 을 가져올수있다.
         }
         
-        return false;
+        return true;
     }
 
 }
