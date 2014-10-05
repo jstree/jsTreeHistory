@@ -244,6 +244,10 @@ $("#demo")
 								// 파일인 경우에 실행하지 않는다
 								if( $(obj).attr("rel") != 'default' ){
 									
+									$("#nodeTitle").val("");
+									$("#nodeLinkUrl").val("");
+									$("#nodeLinkUrl").attr("readonly", false);
+									
 									$("#nodeForm").dialog({
 										title  : "새 노드 추가"
 									  ,	buttons: {
@@ -269,8 +273,12 @@ $("#demo")
 								// 파일인 경우에 실행하지 않는다
 								if( $(obj).attr("rel") != 'default' ){
 									
+									$("#nodeTitle").val("");
+									$("#nodeLinkUrl").val("");
+									$("#nodeLinkUrl").attr("readonly", true);
+									
 									$("#nodeForm").dialog({
-										title  : "새 노드 추가"
+										title  : "새 폴더 추가"
 									  ,	buttons: {
 									        Ok    : function() {
 									        	excuteAddNode( obj, "folder" );
@@ -288,8 +296,43 @@ $("#demo")
 						
 					}             
 				}
-			
-				
+				,"rename" :
+				{
+					"seperator_before" : false,                         
+					"seperator_after" : false,                         
+					"label" : "Rename",                         
+					action : function (obj) 
+					{
+						console.log("c_id    : " + $(obj).attr("id").replace("node_","").replace("copy_",""));
+						console.log("c_title : " + $(obj).find("a").text());
+						console.log("c_type  : " + $(obj).attr("rel"));
+						
+						$("#nodeTitle"  ).val( $(obj).find("a").text() );
+						
+						if( "folder" == $(obj).attr("rel") ){
+							
+							$("#nodeLinkUrl").val("");
+							$("#nodeLinkUrl").attr("readonly", true);
+						}
+						else{
+							// url의 경우 어디로 잡히는지 보고 처리하도록 함.
+							$("#nodeLinkUrl").val("");
+							$("#nodeLinkUrl").attr("readonly", false);
+						}
+						$("#nodeForm").dialog({
+							title  : "노드 업데이트"
+						  ,	buttons: {
+						        Ok    : function() {
+						        	excuteUpdateNode( obj );
+						        },
+						        Cancel: function() {
+						            $( "#nodeForm" ).dialog( "close" );
+						        }
+						    }
+						});
+						$("#nodeForm").dialog("open");
+					}                    
+				}
 				,"ccp" :  
 				{                 
 					"separator_before"  : false,                 
@@ -576,7 +619,8 @@ $("#demo")
 	});
 
 });
-
+	
+	// 노드추가
 	function excuteAddNode( obj, type ){
 		$.post(
 			"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/addNode.do",
@@ -589,8 +633,24 @@ $("#demo")
 			}, 
 			function (r) {
 				console.log(r);
-				$("#nodeTitle").val("");
-				$("#nodeLinkUrl").val("");
+				$("#nodeForm").dialog("close");
+ 				$("span.ui-icon-refresh").click();
+			}
+		);
+	}
+	
+	// 노드수정
+	function excuteUpdateNode( obj ){
+		$.post(
+			"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/alterNode.do",
+			{ 
+				"c_id"    : $(obj).attr("id").replace("node_","").replace("copy_",""),
+				"c_title" : $("#nodeTitle").val(),
+				"url" : $("#nodeLinkUrl").val(),
+				"c_type"  : $(obj).attr("rel")
+			}, 
+			function (r) {
+				console.log(r);
 				$("#nodeForm").dialog("close");
  				$("span.ui-icon-refresh").click();
 			}
