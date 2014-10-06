@@ -385,7 +385,7 @@
 				<configuration>
 					<charset>UTF-8</charset>
 					<uriEncoding>UTF-8</uriEncoding>
-					<url>http://192.168.0.101:8313/manager/text</url>
+					<url>http://ubuntu.313.co.kr:8313/manager/text</url>
 					<server>StandardProject-Snapshot</server>
 					<path>/templateWeb</path>
 				</configuration>
