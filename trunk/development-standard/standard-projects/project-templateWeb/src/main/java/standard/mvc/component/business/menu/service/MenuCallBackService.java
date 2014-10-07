@@ -11,7 +11,7 @@ import egovframework.com.ext.jstree.springiBatis.core.service.ExecutionAfterServ
 import egovframework.com.ext.jstree.springiBatis.core.service.ExecutionBeforeService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
-@ExecutionSwitching(order = "executeBefore")
+@ExecutionSwitching(order = "executeAround")
 @Service(value = "MenuCallBackService")
 public class MenuCallBackService implements CoreCallBackService,
 		ExecutionBeforeService, ExecutionAfterService {
@@ -30,14 +30,14 @@ public class MenuCallBackService implements CoreCallBackService,
 	}
 
 	@Override
-	public <T extends ComprehensiveTree> boolean executeBefore(T ComprehensiveTree) {
+	public <T extends ComprehensiveTree> boolean executeBefore(T comprehensiveTree) {
 		// TODO Auto-generated method stub
 		logger.info("{} > {}", new Object[] { "MenuCallBackService", "executeBefore" });
 		return true;
 	}
 
 	@Override
-	public <T extends ComprehensiveTree> boolean executeAfter(T ComprehensiveTree) {
+	public <T extends ComprehensiveTree> boolean executeAfter(T comprehensiveTree) {
 		// TODO Auto-generated method stub
 		logger.info("{} > {}", new Object[] { "MenuCallBackService", "executeAfter" });
 		return true;

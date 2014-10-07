@@ -1,6 +1,5 @@
 package egovframework.com.ext.jstree.springiBatis.core.service;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,12 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import standard.mvc.component.base.exception.GenericServiceRuntimeException;
-
 import com.opensymphony.xwork2.ActionContext;
 
-import egovframework.com.ext.jstree.springiBatis.core.annotation.ExecutionSwitching;
-import egovframework.com.ext.jstree.springiBatis.core.constant.ExecutionOrder;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -57,56 +52,6 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#getChildNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree, CoreCallBackService coreCallBackService ){
-		
-		try {
-			Class<? extends CoreCallBackService> clazz = coreCallBackService.getClass();
-			if (clazz.isAnnotationPresent(ExecutionSwitching.class)) {
-				String order = clazz.getAnnotation(ExecutionSwitching.class).order();
-
-//				무한루프 발생. 수정중
-				if (ExecutionOrder.AROUND.value().equals(order)) {
-//					Method before = clazz.getMethod(order, ComprehensiveTree.class);
-//					before.invoke(coreCallBackService, comprehensiveTree);
-//					
-//					if (!coreCallBackService.excute(comprehensiveTree)) {
-//						throw new RuntimeException();
-//					}
-//
-//					List<T> childNode = (List<T>) coreDAO.getChildNode(comprehensiveTree);
-//					
-//					Method after = clazz.getMethod(order, ComprehensiveTree.class);
-//					after.invoke(coreCallBackService, comprehensiveTree);
-//					
-//					return childNode;
-				}
-				
-//				로그가 두번씩 찍힘
-//				감시절처리에 문제가 없는 지 확인 필요
-				if (ExecutionOrder.BEFORE.value().equals(order)) {
-					Method method = clazz.getMethod(order, ComprehensiveTree.class);
-					method.invoke(coreCallBackService, comprehensiveTree);
-				}
-
-				if (!coreCallBackService.excute(comprehensiveTree)) {
-					throw new RuntimeException();
-				}
-
-				List<T> childNode = (List<T>) coreDAO.getChildNode(comprehensiveTree);
-
-				if (ExecutionOrder.AFTER.value().equals(order)) {
-					Method method = clazz.getMethod(order, ComprehensiveTree.class);
-					method.invoke(coreCallBackService, comprehensiveTree);
-				}
-
-				return childNode;
-			}
-		} catch (Exception e) {
-			throw new GenericServiceRuntimeException(e.getMessage(), e);
-		}
-		
-		if( ! coreCallBackService.excute(comprehensiveTree) ){
-			throw new RuntimeException();
-		}
 		
 		List<T> childNode = (List<T>) coreDAO.getChildNode(comprehensiveTree);
 		
