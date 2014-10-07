@@ -70,6 +70,7 @@
 		UPDATE T_MenuComprehensiveTree 
 		   SET C_TYPE = #c_type#
 		     , C_TITLE = #c_title# 
+		     , URL = #url# 
 		 WHERE C_ID = #c_id#
 	</update>
 

@@ -306,8 +306,8 @@ $("#demo")
 						console.log("c_id    : " + $(obj).attr("id").replace("node_","").replace("copy_",""));
 						console.log("c_title : " + $(obj).find("a").text());
 						console.log("c_type  : " + $(obj).attr("rel"));
-						
-						$("#nodeTitle"  ).val( $(obj).find("a").text() );
+						console.log("url     : " + $(obj).attr("href"));
+						$("#nodeTitle"  ).val( $(obj).find("a").clone().children().remove().end().text() );
 						
 						if( "folder" == $(obj).attr("rel") ){
 							
@@ -316,7 +316,7 @@ $("#demo")
 						}
 						else{
 							// url의 경우 어디로 잡히는지 보고 처리하도록 함.
-							$("#nodeLinkUrl").val("");
+							$("#nodeLinkUrl").val($(obj).attr("href"));
 							$("#nodeLinkUrl").attr("readonly", false);
 						}
 						$("#nodeForm").dialog({
@@ -500,7 +500,6 @@ $("#demo")
 		$(document).on('click', '#demo a', function(e) {
 			
 			var url = $(this).parent().attr('href');
-			
 			if (typeof(href) === 'undefined') { alert('href 값이 정의되지 않았습니다.'); }
 			
 			callAjax(null, url, '#section', 'GET', 'html');
@@ -552,24 +551,6 @@ $("#demo")
 			    }
 			}
 		});
-	})
-	.bind("rename.jstree", function (e, data) {
-		$.post(
-				/* "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNode.action", */
-				"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/alterNode.do",
-			{ 
-					"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
-					"c_title" : data.rslt.new_name,
-					"c_type" : data.rslt.obj.attr("rel")
-			}, 
-			function (r) {
-				if(!r.status) {
-					$.jstree.rollback(data.rlbk);
-				}
-				$("#analyze").click();
-				$("span.ui-icon-refresh").click();
-			}
-		);
 	})
 	.bind("set_type.jstree", function (e, data) {
 		$.post(
@@ -642,7 +623,8 @@ $("#demo")
 	// 노드수정
 	function excuteUpdateNode( obj ){
 		$.post(
-			"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/alterNode.do",
+			//"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/alterNode.do",
+			"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/alterNode.do",
 			{ 
 				"c_id"    : $(obj).attr("id").replace("node_","").replace("copy_",""),
 				"c_title" : $("#nodeTitle").val(),
@@ -651,8 +633,10 @@ $("#demo")
 			}, 
 			function (r) {
 				console.log(r);
+				obj = $("#demo").find("#node_" + r.c_id);
+				obj.attr("href",r.url);
+				obj.find("a").html(obj.find("a>ins").wrapAll('<div></div>').parent().html()+r.c_title);
 				$("#nodeForm").dialog("close");
- 				$("span.ui-icon-refresh").click();
 			}
 		);
 	}

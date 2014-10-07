@@ -135,6 +135,38 @@ public class MenuController extends GenericAbstractController{
 		return null;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/alterNode.do")
+	public ComprehensiveTree alterNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request)
+			throws JsonProcessingException {
+
+		if (request.getParameter("c_id") == null || request.getParameter("c_title") == null
+				|| request.getParameter("c_type") == null) {
+			throw new RuntimeException("alterNode parameter null");
+		} else {
+			if (request.getParameter("c_id").equals("0")) {
+				throw new RuntimeException("alterNode ref value is 0");
+			}
+			if (request.getParameter("c_id").equals("1")) {
+				throw new RuntimeException("alterNode ref value is 1");
+			}
+
+			if (request.getParameter("c_type").equals("default") || request.getParameter("c_type").equals("folder")) {
+			} else {
+				if (request.getParameter("c_type").equals("drive")) {
+					throw new RuntimeException("alterNode c_position value is drive");
+				} else {
+					throw new RuntimeException("alterNode c_position value is another");
+				}
+			}
+		}
+
+		menuComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(menuComprehensiveTree.getC_title()));
+		menuComprehensiveTree.setUrl(menuComprehensiveTree.getUrl());
+		menuComprehensiveTree.setStatus(coreService.alterNode(menuComprehensiveTree, menuCallBackService));
+
+		return menuComprehensiveTree;
+	}
 //    @ResponseBody
 //    @RequestMapping("/largeMenu/middleMenu/smallMenu/menu/searchNode.do")
 //    public String searchNode(MenuComprehensiveTree menuComprehensiveTree, ModelMap model, HttpServletRequest request)
