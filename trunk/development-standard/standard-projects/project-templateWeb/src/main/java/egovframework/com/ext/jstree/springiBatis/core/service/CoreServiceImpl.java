@@ -91,10 +91,20 @@ public class CoreServiceImpl implements CoreService {
 
 		List<T> childNodesFromNodeByRef = ((List<T>) coreDAO.getChildNode( nodeByRef ));
 		
-		Class<T> target = null;
-		T t_ComprehensiveTree = target.newInstance();
+		// 이전 소스
+//		Class<T> target = null;
+//		T t_ComprehensiveTree = target.newInstance();
 		
-		int spaceOfTargetNode = 2;
+		// TODO 일시적으로 처리함.
+		Class<T> target = null;
+        try {
+            target = (Class<T>) Class.forName(comprehensiveTree.getClass().getCanonicalName());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("리플렉션 실패");
+        }
+        T t_ComprehensiveTree = target.newInstance();
+		
+        int spaceOfTargetNode = 2;
 		Collection<Integer> c_idsByChildNodeFromNodeById = null;
 
 		if( nodeById != null && comprehensiveTree.getCopy() == 0 ) {
@@ -206,7 +216,8 @@ public class CoreServiceImpl implements CoreService {
 			                                        , int rightPositionFromNodeByRef
 			                                        , int copy
 			                                        , Collection<Integer> c_idsByChildNodeFromNodeById ) throws InstantiationException, IllegalAccessException {
-		Class<T> target = null;
+		// TODO 어떻게 처리할지에 대해 생각해야함.
+	    Class<T> target = null;
 		T onlyStretchLeftRightForMyselfFromJstree = target.newInstance();
 
 		onlyStretchLeftRightForMyselfFromJstree.setSpaceOfTargetNode(            spaceOfTargetNode            );
