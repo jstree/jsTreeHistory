@@ -91,9 +91,10 @@ public class MenuCallBackAspect {
 	
 	private void executeAdvice(JoinPoint thisJoinPoint, String executionOrder) {
 		Object[] signatures = thisJoinPoint.getArgs();
-        for (Object signature : signatures) {
+		Object parameter = null;
 
-        	Object parameter = null;
+		for (Object signature : signatures) {
+
         	if (signature instanceof ComprehensiveTree) {
         		parameter = signature;
 				continue;

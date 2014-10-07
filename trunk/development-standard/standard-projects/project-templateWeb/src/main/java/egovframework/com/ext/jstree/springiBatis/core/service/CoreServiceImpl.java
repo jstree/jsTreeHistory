@@ -52,9 +52,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#getChildNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree, CoreCallBackService coreCallBackService ){
-		
 		List<T> childNode = (List<T>) coreDAO.getChildNode(comprehensiveTree);
-		
 		return childNode;
 	}
 	

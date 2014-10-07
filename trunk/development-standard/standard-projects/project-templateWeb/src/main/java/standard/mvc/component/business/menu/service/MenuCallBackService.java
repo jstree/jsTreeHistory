@@ -20,7 +20,7 @@ public class MenuCallBackService implements CoreCallBackService,
 
 	@Override
 	public <T extends ComprehensiveTree> boolean excute(T comprehensiveTree) {
-		logger.info("{} > {}", new Object[] { "MenuCallBackService", "excute" });
+		logger.info("{} >> {}", new Object[] { "MenuCallBackService", "excute" });
 		
 		if (comprehensiveTree instanceof MenuComprehensiveTree) {
 			// 형변환을 해서. url 을 가져올수있다.
@@ -32,14 +32,14 @@ public class MenuCallBackService implements CoreCallBackService,
 	@Override
 	public <T extends ComprehensiveTree> boolean executeBefore(T comprehensiveTree) {
 		// TODO Auto-generated method stub
-		logger.info("{} > {}", new Object[] { "MenuCallBackService", "executeBefore" });
+		logger.info("{} >> {}", new Object[] { "MenuCallBackService", "executeBefore" });
 		return true;
 	}
 
 	@Override
 	public <T extends ComprehensiveTree> boolean executeAfter(T comprehensiveTree) {
 		// TODO Auto-generated method stub
-		logger.info("{} > {}", new Object[] { "MenuCallBackService", "executeAfter" });
+		logger.info("{} >> {}", new Object[] { "MenuCallBackService", "executeAfter" });
 		return true;
 	}
 
