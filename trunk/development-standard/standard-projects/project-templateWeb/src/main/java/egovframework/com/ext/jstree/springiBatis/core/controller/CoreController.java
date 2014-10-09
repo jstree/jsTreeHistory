@@ -167,7 +167,7 @@ public class CoreController extends GenericAbstractController{
 			throw new RuntimeException();
 		}
 
-		comprehensiveTree.setStatus(coreService.executeRemoveNode(comprehensiveTree, coreCallBackService));
+		comprehensiveTree.setStatus(coreService.removeNode(comprehensiveTree, coreCallBackService));
 
 		return comprehensiveTree;
 	}

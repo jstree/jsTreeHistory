@@ -328,7 +328,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#executeRemoveNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	@Transactional
-	public <T extends ComprehensiveTree> int executeRemoveNode( T comprehensiveTree , CoreCallBackService coreCallBackService) {
+	public <T extends ComprehensiveTree> int removeNode( T comprehensiveTree , CoreCallBackService coreCallBackService) {
 		
 		T removeNode = ((T) coreDAO.getNode(comprehensiveTree));
 		

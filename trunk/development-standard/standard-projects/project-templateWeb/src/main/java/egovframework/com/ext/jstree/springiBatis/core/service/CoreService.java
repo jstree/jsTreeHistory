@@ -63,7 +63,7 @@ public interface CoreService {
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return int
 	 */
-	public <T extends ComprehensiveTree> int executeRemoveNode( T comprehensiveTree, CoreCallBackService callBack );
+	public <T extends ComprehensiveTree> int removeNode( T comprehensiveTree, CoreCallBackService callBack );
 	
 	
 	/**

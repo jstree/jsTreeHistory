@@ -126,7 +126,7 @@ public class MenuController extends GenericAbstractController{
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/removeNode.do")
 	public int removeNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request){
-		return coreService.executeRemoveNode(menuComprehensiveTree, menuCallBackService);
+		return coreService.removeNode(menuComprehensiveTree, menuCallBackService);
 	}
 
 	@Override
