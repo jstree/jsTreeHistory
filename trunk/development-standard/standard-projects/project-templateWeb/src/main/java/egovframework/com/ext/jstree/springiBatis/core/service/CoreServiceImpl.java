@@ -82,7 +82,7 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#addNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	@SuppressWarnings({ "null" })
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree, CoreCallBackService coreCallBackService ) throws InstantiationException, IllegalAccessException {
 
