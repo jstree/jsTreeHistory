@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
-import standard.mvc.component.business.menu.service.MenuCallBackService;
+import standard.mvc.component.business.menu.service.MenuServiceImpl;
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -47,12 +46,8 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 @RequestMapping(value = { "**/**/community" })
 public class MenuController extends GenericAbstractController{
 	
-	@Resource(name = "CoreService")
-	CoreService coreService;
-	
-	@Resource(name = "MenuCallBackService")
-	MenuCallBackService menuCallBackService;
-    
+	@Resource(name = "MenuService")
+	MenuServiceImpl menuService;
 
 	/**
 	 * 자식노드를 요청한다.
@@ -73,7 +68,7 @@ public class MenuController extends GenericAbstractController{
 		}
 
 		
-		return coreService.getChildNode(menuComprehensiveTree,menuCallBackService);
+		return menuService.getChildNode(menuComprehensiveTree);
 	}
 
 	/**
@@ -118,7 +113,7 @@ public class MenuController extends GenericAbstractController{
 		}
 		
 		menuComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(menuComprehensiveTree.getC_title()));
-		coreService.addNode(menuComprehensiveTree, menuCallBackService);
+		menuService.addNode(menuComprehensiveTree);
 
 		return menuComprehensiveTree;
 	}
@@ -126,7 +121,7 @@ public class MenuController extends GenericAbstractController{
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/removeNode.do")
 	public int removeNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request){
-		return coreService.removeNode(menuComprehensiveTree, menuCallBackService);
+		return menuService.removeNode(menuComprehensiveTree);
 	}
 
 	@Override
@@ -163,7 +158,7 @@ public class MenuController extends GenericAbstractController{
 
 		menuComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(menuComprehensiveTree.getC_title()));
 		menuComprehensiveTree.setUrl(menuComprehensiveTree.getUrl());
-		menuComprehensiveTree.setStatus(coreService.alterNode(menuComprehensiveTree, menuCallBackService));
+		menuComprehensiveTree.setStatus(menuService.alterNode(menuComprehensiveTree));
 
 		return menuComprehensiveTree;
 	}

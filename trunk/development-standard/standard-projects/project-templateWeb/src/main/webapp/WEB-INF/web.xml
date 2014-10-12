@@ -40,7 +40,6 @@
 	3. Spring Security 로그인/로그아웃 설정을 위한 필터 설정 : 사용
 	4. 2.7 version security -> 3.0.1 version security 로 변경 
   	************************************************************************************************
-    2014.7.29       류강하          DispatcherServlet에 DWR 사용을 위한 URL 매핑
 	-->
 	
 	<display-name>Standard Development Project</display-name>
