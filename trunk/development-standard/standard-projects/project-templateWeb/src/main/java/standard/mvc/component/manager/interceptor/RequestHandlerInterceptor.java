@@ -93,7 +93,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
             middleMenu = new StringBuilder().append(urlArray[5]).toString();
             smallMenu = new StringBuilder().append(urlArray[6]).toString();
             componentCode = new StringBuilder().append(urlArray[7]).toString();
-            actionTarget = new StringBuilder().append(urlArray[8]).toString();
+            actionTarget = new StringBuilder().append(urlArray[8].replace(".do", "")).toString();
         }
         else
         {

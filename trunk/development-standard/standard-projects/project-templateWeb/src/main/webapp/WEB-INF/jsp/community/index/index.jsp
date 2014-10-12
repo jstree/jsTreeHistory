@@ -193,7 +193,7 @@ $("#demo")
 		$("li:not([rel='drive']).jstree-closed > a > .jstree-icon").css('background-image','url(http://nas.313.co.kr:5002/Design/icon/miniCon/313/ic_explorer.png)');
 	})
 	// listen for event
-  	.bind('select_node.jstree', function(e) {
+  	.bind('select_node.jstree', function(e, data) {
 	    // gather ids of selected nodes
 	    var selected_ids = [];
 	    $("#demo").jstree('get_selected').each(function () { 
@@ -208,6 +208,16 @@ $("#demo")
 	    
 	    // TODO 다중 선택을 막아야 함!
 		
+	    if (data.rslt.obj.attr('rel') == 'default') {
+	    	var url = '${pageContext.request.contextPath}/' + data.rslt.obj.attr('href');
+		    
+	        if (typeof(url) === "undefined") {
+	        	alert('메뉴의 URL이 입력되지 않았습니다.');
+	        	return;
+	        }
+	        
+	        callAjax(null, url, '#section', 'GET', 'html');
+	    }
 	    
 	})
 	
@@ -496,16 +506,6 @@ $("#demo")
 		}
 	})
 	.bind("loaded.jstree", function (e, data) {
-		
-		$(document).on('click', '#demo a', function(e) {
-			
-			var url = $(this).parent().attr('href');
-			if (typeof(href) === 'undefined') { alert('href 값이 정의되지 않았습니다.'); }
-			
-			callAjax(null, url, '#section', 'GET', 'html');
-			
-			return false;
-		});
 	})
 	.bind("remove.jstree", function (e, data) {
 		$("#nodeConfirm").html("삭제하시겠습니까?");

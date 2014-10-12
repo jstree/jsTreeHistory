@@ -29,6 +29,7 @@ import standard.mvc.component.base.dao.hibernate.SearchSupport;
  *  수정일         수정자             수정내용
  *  -------      ------------   -----------------------
  *  2014.06.18    Dongmin.Lee      최초 생성
+ *  2014.10.12    류강하                    invokeSelect 메서드의 URL 매핑 변경
  * 
  *  Copyright (C) 2007 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -54,7 +55,7 @@ public class StaticResourceController extends GenericAbstractController
     }
     
     @RequestMapping(
-            value = { "/{templateEngine}/{viewResolver}/{siteCode}/{largeMenu}/{middleMenu}/{smallMenu}/{componentCode}/{action}.do" },
+            value = { "/{viewResolver}/{siteCode}/{largeMenu}/{middleMenu}/{smallMenu}/{componentCode}/{action}.do" },
             method = { RequestMethod.GET, RequestMethod.POST })
     public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap,
             HttpServletRequest request, HttpServletResponse response,

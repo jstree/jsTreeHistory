@@ -18,7 +18,6 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import standard.mvc.component.base.dao.hibernate.SearchSupport;
 import standard.mvc.component.manager.messageSource.MessageSupport;
-import standard.mvc.component.util.ParameterParser;
 import standard.mvc.component.util.StringUtils;
 
 import com.google.gson.Gson;
@@ -54,14 +53,13 @@ public abstract class GenericAbstractController
         invokeBeanValidate(parameterBean, bindingResult);
         modelMap.addAllAttributes(bindTypes());
         
-        ParameterParser parameterParser = new ParameterParser(request);
-        String viewResolver = parameterParser.get("viewResolver","jsp");
-        String siteCode = parameterParser.get("siteCode","community");
-        String largeMenu = parameterParser.get("largeMenu","largeMenu");
-        String middleMenu = parameterParser.get("middleMenu","middleMenu");
-        String smallMenu = parameterParser.get("smallMenu","smallMenu");
-        String componentCode = parameterParser.get("componentCode","componentCode");
-        String action = parameterParser.get("actionTarget","actionTarget");
+        String viewResolver = (String) request.getAttribute("viewResolver");
+        String siteCode = (String) request.getAttribute("siteCode");
+        String largeMenu = (String) request.getAttribute("largeMenu");
+        String middleMenu = (String) request.getAttribute("middleMenu");
+        String smallMenu = (String) request.getAttribute("smallMenu");
+        String componentCode = (String) request.getAttribute("componentCode");
+        String action = (String) request.getAttribute("actionTarget");
         
         String menuCodes = "";
         if (null != largeMenu && !largeMenu.equals("largeMenu"))
