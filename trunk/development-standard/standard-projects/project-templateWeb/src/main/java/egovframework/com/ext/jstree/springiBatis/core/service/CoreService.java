@@ -34,7 +34,7 @@ public interface CoreService {
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO
 	 * @return List<ComprehensiveTree> 자식 노드들
 	 */
-	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree, CoreCallBackService callBack );
+	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree );
 	
 	
 	/**
@@ -43,7 +43,7 @@ public interface CoreService {
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return List<String> - 검색된 노드들
 	 */
-	public <T extends ComprehensiveTree> List<String> searchNode( T comprehensiveTree, CoreCallBackService callBack );
+	public <T extends ComprehensiveTree> List<String> searchNode( T comprehensiveTree );
 	
 	
 	/**
@@ -54,7 +54,7 @@ public interface CoreService {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree, CoreCallBackService callBack ) throws InstantiationException, IllegalAccessException;
+	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree ) throws InstantiationException, IllegalAccessException;
 	
 	
 	/**
@@ -63,7 +63,7 @@ public interface CoreService {
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return int
 	 */
-	public <T extends ComprehensiveTree> int removeNode( T comprehensiveTree, CoreCallBackService callBack );
+	public <T extends ComprehensiveTree> int removeNode( T comprehensiveTree );
 	
 	
 	/**
@@ -72,7 +72,7 @@ public interface CoreService {
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return int
 	 */
-	public <T extends ComprehensiveTree> int alterNode( T comprehensiveTree, CoreCallBackService callBack );
+	public <T extends ComprehensiveTree> int alterNode( T comprehensiveTree );
 	
 	
 	/**
@@ -81,7 +81,7 @@ public interface CoreService {
 	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
 	 * @return int
 	 */
-	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree, CoreCallBackService callBack );
+	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree );
 	
 	
 	/**
@@ -93,5 +93,5 @@ public interface CoreService {
 	 * @throws InstantiationException 
 	 * @throws ReflectiveOperationException 
 	 */
-	public <T extends ComprehensiveTree> T moveNode( T comprehensiveTree, CoreCallBackService callBack ) throws InstantiationException, IllegalAccessException, ReflectiveOperationException;
+	public <T extends ComprehensiveTree> T moveNode( T comprehensiveTree ) throws InstantiationException, IllegalAccessException, ReflectiveOperationException;
 }

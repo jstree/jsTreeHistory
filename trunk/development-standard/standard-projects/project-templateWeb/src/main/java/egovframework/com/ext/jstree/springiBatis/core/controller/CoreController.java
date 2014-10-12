@@ -17,7 +17,6 @@ import standard.mvc.component.base.controller.GenericAbstractController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreCallBackService;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -49,9 +48,6 @@ public class CoreController extends GenericAbstractController{
 	@Resource(name = "CoreService")
 	CoreService coreService;
 
-	@Resource(name = "CoreCallBackService")
-	CoreCallBackService coreCallBackService;
-	
 	/**
 	 * jstree Spring + iBatis 버전의 첫페이지를 요청한다.
 	 * 
@@ -81,7 +77,7 @@ public class CoreController extends GenericAbstractController{
 			throw new RuntimeException();
 		}
 
-		return coreService.getChildNode(comprehensiveTree, coreCallBackService);
+		return coreService.getChildNode(comprehensiveTree);
 	}
 
 	/**
@@ -102,7 +98,7 @@ public class CoreController extends GenericAbstractController{
 			throw new RuntimeException();
 		}
 
-		return coreService.searchNode(comprehensiveTree, coreCallBackService);
+		return coreService.searchNode(comprehensiveTree);
 	}
 
 	/**
@@ -143,7 +139,7 @@ public class CoreController extends GenericAbstractController{
 			}
 		}
 		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
-		coreService.addNode(comprehensiveTree, coreCallBackService);
+		coreService.addNode(comprehensiveTree);
 
 		return comprehensiveTree;
 	}
@@ -167,7 +163,7 @@ public class CoreController extends GenericAbstractController{
 			throw new RuntimeException();
 		}
 
-		comprehensiveTree.setStatus(coreService.removeNode(comprehensiveTree, coreCallBackService));
+		comprehensiveTree.setStatus(coreService.removeNode(comprehensiveTree));
 
 		return comprehensiveTree;
 	}
@@ -208,7 +204,7 @@ public class CoreController extends GenericAbstractController{
 		}
 
 		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
-		comprehensiveTree.setStatus(coreService.alterNode(comprehensiveTree, coreCallBackService));
+		comprehensiveTree.setStatus(coreService.alterNode(comprehensiveTree));
 
 		return comprehensiveTree;
 	}
@@ -247,7 +243,7 @@ public class CoreController extends GenericAbstractController{
 			}
 		}
 
-		coreService.alterNodeType(comprehensiveTree, coreCallBackService);
+		coreService.alterNodeType(comprehensiveTree);
 
 		return comprehensiveTree;
 	}
@@ -299,7 +295,7 @@ public class CoreController extends GenericAbstractController{
 			}
 		}
 
-		coreService.moveNode(comprehensiveTree, coreCallBackService);
+		coreService.moveNode(comprehensiveTree);
 
 		return comprehensiveTree;
 	}

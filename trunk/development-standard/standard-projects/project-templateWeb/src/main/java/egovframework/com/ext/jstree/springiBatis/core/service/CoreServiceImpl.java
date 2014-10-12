@@ -51,7 +51,7 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#getChildNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree, CoreCallBackService coreCallBackService ){
+	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree ){
 		List<T> childNode = (List<T>) coreDAO.getChildNode(comprehensiveTree);
 		return childNode;
 	}
@@ -60,7 +60,7 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#searchNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	public <T extends ComprehensiveTree> List<String> searchNode( T comprehensiveTree, CoreCallBackService coreCallBackService ) {
+	public <T extends ComprehensiveTree> List<String> searchNode( T comprehensiveTree ) {
 		
 		List<T> searchNodeByStrings = (List<T>) coreDAO.searchNodeByString( comprehensiveTree );
 		
@@ -84,7 +84,7 @@ public class CoreServiceImpl implements CoreService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree, CoreCallBackService coreCallBackService ) throws InstantiationException, IllegalAccessException {
+	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree ) throws InstantiationException, IllegalAccessException {
 
 		T nodeById  = ((T) coreDAO.getNode(      comprehensiveTree ));
 		T nodeByRef = ((T) coreDAO.getNodeByRef( comprehensiveTree ));
@@ -216,10 +216,16 @@ public class CoreServiceImpl implements CoreService {
 			                                        , int rightPositionFromNodeByRef
 			                                        , int copy
 			                                        , Collection<Integer> c_idsByChildNodeFromNodeById ) throws InstantiationException, IllegalAccessException {
-		// TODO 어떻게 처리할지에 대해 생각해야함.
-	    Class<T> target = null;
-		T onlyStretchLeftRightForMyselfFromJstree = target.newInstance();
-
+		
+        // 이전 소스
+//      Class<T> target = null;
+//      T onlyStretchLeftRightForMyselfFromJstree = target.newInstance();
+        
+        // TODO 저네릭스 및 리플렉션을 사용할 수 있도록 T 타입의 정보를 얻어낼 수 있는 방법이 필요함.
+        // ---------------------------- 추후 삭제될 코드 --------------------------------------
+        ComprehensiveTree onlyStretchLeftRightForMyselfFromJstree = new ComprehensiveTree(); // 하드 코딩함.
+        // ---------------------------- 추후 삭제될 코드 --------------------------------------
+        
 		onlyStretchLeftRightForMyselfFromJstree.setSpaceOfTargetNode(            spaceOfTargetNode            );
 		onlyStretchLeftRightForMyselfFromJstree.setRightPositionFromNodeByRef(   rightPositionFromNodeByRef   );
 		onlyStretchLeftRightForMyselfFromJstree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
@@ -328,7 +334,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#executeRemoveNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	@Transactional
-	public <T extends ComprehensiveTree> int removeNode( T comprehensiveTree , CoreCallBackService coreCallBackService) {
+	public <T extends ComprehensiveTree> int removeNode( T comprehensiveTree ) {
 		
 		T removeNode = ((T) coreDAO.getNode(comprehensiveTree));
 		
@@ -342,7 +348,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	@Transactional
-	public <T extends ComprehensiveTree> int alterNode( T comprehensiveTree, CoreCallBackService coreCallBackService ) {
+	public <T extends ComprehensiveTree> int alterNode( T comprehensiveTree ) {
 
 		return coreDAO.alterNode(comprehensiveTree);
 	}
@@ -352,7 +358,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNodeType(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	@Transactional
-	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree, CoreCallBackService coreCallBackService ) {
+	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree ) {
 
 		List<T> childNodesFromNodeById = ((List<T>) coreDAO.getChildNode(comprehensiveTree));
 
@@ -390,7 +396,7 @@ public class CoreServiceImpl implements CoreService {
 	 */
 	@SuppressWarnings({ "null" })
 	@Transactional
-	public <T extends ComprehensiveTree> T moveNode( T comprehensiveTree, CoreCallBackService coreCallBackService ) throws ReflectiveOperationException {
+	public <T extends ComprehensiveTree> T moveNode( T comprehensiveTree ) throws ReflectiveOperationException {
 
 		T nodeById = (T) coreDAO.getNode(comprehensiveTree);
 		List<T> childNodesFromNodeById = ((List<T>) coreDAO.getChildNodeByLeftRight( nodeById ));
