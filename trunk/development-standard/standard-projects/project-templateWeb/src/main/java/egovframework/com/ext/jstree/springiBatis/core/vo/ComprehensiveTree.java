@@ -18,9 +18,10 @@ import java.util.HashMap;
  *  
  *  수정일         수정자             수정내용
  *  -------      ------------   -----------------------
- *  2014. 7. 31.      ?         최초 생성
- * 	2014. 9.  4. JeonKyunghun   주석 추가
- *  2014. 9. 16. 류강하                 주석 추가
+ *  2014.  7. 31. 이동민                 최초 생성
+ * 	2014.  9.  4. JeonKyunghun   주석 추가
+ *  2014.  9. 16. 류강하                 주석 추가
+ *  2014. 10. 12. 류강하                 getSqlMapSelector 메서드의 null 체크 추가
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -331,9 +332,9 @@ public class ComprehensiveTree {
 	}
 
 	public String getSqlMapSelector() {
-		if(this.sqlMapSelector.isEmpty()){
+		if (sqlMapSelector == null || sqlMapSelector.isEmpty()) {
 			return "core";
-		}else{
+		} else {
 			return sqlMapSelector;
 		}
 	}

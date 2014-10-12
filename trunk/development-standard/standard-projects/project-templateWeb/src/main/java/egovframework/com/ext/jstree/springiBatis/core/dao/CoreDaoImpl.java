@@ -10,7 +10,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 /**
  * Modification Information
  * 
- * @author ?
+ * @author 이동민
  * @since 2014. 7. 31.
  * @version 1.0
  * @see <pre>
@@ -22,26 +22,19 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  
  *  수정일         수정자             수정내용
  *  -------      ------------   -----------------------
- *  2014. 7. 31.      ?         최초 생성
+ *  2014. 7. 31.      이동민         최초 생성
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-@Repository("CoreDAO")
+@Repository("CoreDao")
 public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 
-	/**
-	 * 자식노드를 요청한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @return List<ComprehensiveTree>
-	 */
 	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree ){
 		
 		return list(comprehensiveTree.getSqlMapSelector() + "." + "getChildNode", comprehensiveTree );
 	}
-
 	
 	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree> List<T> searchNodeByString( T comprehensiveTree ){

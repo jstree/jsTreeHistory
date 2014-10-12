@@ -115,7 +115,7 @@ public class CoreController extends GenericAbstractController{
 	@ResponseBody
 	@RequestMapping("/addNode.do")
 	public ComprehensiveTree addNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-			throws JsonProcessingException, InstantiationException, IllegalAccessException {
+			throws JsonProcessingException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
 		if (request.getParameter("ref") == null || request.getParameter("c_position") == null
 				|| request.getParameter("c_title") == null || request.getParameter("c_type") == null) {

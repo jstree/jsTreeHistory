@@ -54,7 +54,7 @@ public interface CoreService {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree ) throws InstantiationException, IllegalAccessException;
+	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree ) throws ClassNotFoundException, InstantiationException, IllegalAccessException;
 	
 	
 	/**

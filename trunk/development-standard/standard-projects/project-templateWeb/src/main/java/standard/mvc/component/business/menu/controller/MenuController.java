@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
-import standard.mvc.component.business.menu.service.MenuServiceImpl;
 import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -44,18 +44,22 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 @Controller
 @RequestMapping(value = { "**/**/community" })
-public class MenuController extends GenericAbstractController{
+public class MenuController extends GenericAbstractController {
 	
-	@Resource(name = "MenuService")
-	MenuServiceImpl menuService;
+    @Override
+    public Map<String, Map<String, Object>> bindTypes() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
+    @Resource(name = "MenuService")
+	CoreService menuService;
 
 	/**
 	 * 자식노드를 요청한다.
 	 * 
 	 * @param menuComprehensiveTree
-	 * @param model
-	 * @param request
-	 * @return String
+	 * @return List<MenuComprehensiveTree>
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
@@ -66,7 +70,6 @@ public class MenuController extends GenericAbstractController{
 		if (menuComprehensiveTree.getC_id() == 0) {
 			throw new RuntimeException();
 		}
-
 		
 		return menuService.getChildNode(menuComprehensiveTree);
 	}
@@ -74,17 +77,15 @@ public class MenuController extends GenericAbstractController{
 	/**
 	 * 노드를 추가한다.
 	 * 
-	 * @param comprehensiveTree
-	 * @param model
+	 * @param menuComprehensiveTree
 	 * @param request
 	 * @return
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws Exception 
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
 	 */
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/addNode.do")
-	public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) throws InstantiationException, IllegalAccessException {
+	public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) throws ClassNotFoundException, InstantiationException, IllegalAccessException { // TODO Exception으로 변경
 		
 	    // TODO 공통적 파라미터 값 검증 적용
 	    
@@ -124,12 +125,6 @@ public class MenuController extends GenericAbstractController{
 		return menuService.removeNode(menuComprehensiveTree);
 	}
 
-	@Override
-	public Map<String, Map<String, Object>> bindTypes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/alterNode.do")
 	public ComprehensiveTree alterNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request)
