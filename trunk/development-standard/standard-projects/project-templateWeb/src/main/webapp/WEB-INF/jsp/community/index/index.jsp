@@ -211,16 +211,15 @@ $("#demo")
 	    // TODO 다중 선택을 막아야 함!
 		
 	    if (data.rslt.obj.attr('rel') == 'default') {
-	    	var url = '${pageContext.request.contextPath}/' + data.rslt.obj.attr('href');
+	    	var url = data.rslt.obj.attr('href');
 		    
 	        if (typeof(url) === "undefined") {
 	        	alert('메뉴의 URL이 입력되지 않았습니다.');
 	        	return;
 	        }
 	        
-	        callAjax(null, url, '#section', 'GET', 'html');
+	        callAjax(null, '${pageContext.request.contextPath}/' + url, '#section', 'GET', 'html');
 	    }
-	    
 	})
 	
 	.jstree({ 
