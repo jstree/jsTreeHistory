@@ -624,7 +624,6 @@ $("#demo")
 	// 노드수정
 	function excuteUpdateNode( obj ){
 		$.post(
-			//"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/alterNode.do",
 			"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/alterNode.do",
 			{ 
 				"c_id"    : $(obj).attr("id").replace("node_","").replace("copy_",""),
@@ -634,10 +633,8 @@ $("#demo")
 			}, 
 			function (r) {
 				console.log(r);
-				obj = $("#demo").find("#node_" + r.c_id);
-				obj.attr("href",r.url);
-				obj.find("a").html(obj.find("a>ins").wrapAll('<div></div>').parent().html()+r.c_title);
 				$("#nodeForm").dialog("close");
+				$("#demo").jstree("refresh");
 			}
 		);
 	}
