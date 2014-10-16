@@ -1,15 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head> 
-<link rel="stylesheet" type="text/css" href="http://nas.313.co.kr:5002/Component/jsp/community/index/reset.css">
-<link rel="stylesheet" type="text/css" href="http://nas.313.co.kr:5002/Component/jsp/community/index/index.css">
+<link rel="stylesheet" type="text/css" href="http://nas.313.co.kr:5002/Component/jsp/community/index/reset.css" />
+<link rel="stylesheet" type="text/css" href="http://nas.313.co.kr:5002/Component/jsp/community/index/index.css" />
 <style type="text/css">
 </style>
 <!-- jQuery -->
 <script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/index/jquery-1.11.1.js"></script>
 <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="http://nas.313.co.kr:5002/Source/Script/jQuery/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="http://nas.313.co.kr:5002/Source/Script/jQuery/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.css" />
 <!--[if lt IE 9]>
 <script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/index/debug.js"></script>
 <![endif]-->
@@ -120,8 +120,8 @@
 			</td>
 			<td class="sectionWidth asideSectionHeight">
             		<div id="section" class="asideSectionHeight" style="background-color:#fffff">
-					<input type="button" value="change" onClick="fn_ClassChange();" />
-					<input type="button" value="origin" onClick="fn_ClassOriginal();" />
+					<input type="button" value="change" onclick="fn_ClassChange();" />
+					<input type="button" value="origin" onclick="fn_ClassOriginal();" />
 					&copy; 2013-2014 Developer Group 313, Inc. All rights reserved.
             		</div>
 			</td>
@@ -534,8 +534,6 @@ $("#demo")
 							    ,"c_right"    : data.rslt.obj.attr("right")
 							}
 							,success : function (r) {
-								//$("#analyze").click();
-								//$("span.ui-icon-refresh").click();
 								data.inst.refresh();
 							}
 							,error : function(){
@@ -563,8 +561,6 @@ $("#demo")
 					"c_type" : data.rslt.obj.attr("rel")
 			}, 
 			function (r) {
-				$("#analyze").click();
-				$("span.ui-icon-refresh").click();
 			}
 		);
 	})
@@ -593,8 +589,6 @@ $("#demo")
 							data.inst.refresh(data.inst._get_parent(data.rslt.oc));
 						}
 					}
-					$("#analyze").click();
-					$("span.ui-icon-refresh").click();
 				}
 			});
 		});
@@ -616,7 +610,7 @@ $("#demo")
 			function (r) {
 				console.log(r);
 				$("#nodeForm").dialog("close");
- 				$("span.ui-icon-refresh").click();
+				$("#demo").jstree("refresh");
 			}
 		);
 	}
