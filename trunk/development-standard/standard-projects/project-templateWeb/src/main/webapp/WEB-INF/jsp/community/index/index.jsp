@@ -344,6 +344,53 @@ $("#demo")
 						$("#nodeForm").dialog("open");
 					}                    
 				}
+				,"remove" :
+				{
+					"seperator_before" : false                         
+					,"seperator_after" : false                         
+					,"label" : "Remove"
+					,action : function(obj){
+						$("#nodeConfirm").html("삭제하시겠습니까?");
+						$("#nodeConfirm").dialog({
+							 resizable : false
+							,height : 140
+							,modal : true
+							,close : function(){
+						    	$("#nodeConfirm").dialog("close");
+							}
+							,buttons : {
+								 "확인" : function(){
+									 $.ajax({
+										 async : false
+										,type: 'POST'
+										//,url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action"
+										,url: "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/removeNode.do"
+										,data : { 
+											 "c_id"       : $(obj).attr("id").replace("node_","").replace("copy_","")
+											,"c_type"     : $(obj).attr("rel")						
+											,"c_position" : $(obj).attr("position")
+											,"c_left"     : $(obj).attr("left")
+										    ,"c_right"    : $(obj).attr("right")
+										}
+										,success : function (r) {
+											$("#demo").jstree("remove",$(obj));
+											$("#nodeConfirm").dialog("close");
+
+										}
+										,error : function(){
+											//$.jstree.rollback(data.rlbk);
+											//data.inst.refresh();
+											$("#nodeConfirm").dialog("close");
+										}
+									});
+								 }
+							    ,"취소" : function(){
+							    	$("#nodeConfirm").dialog("close");
+							    }
+							}
+						});
+					}
+				}
 				,"ccp" :  
 				{                 
 					"separator_before"  : false,                 
@@ -508,49 +555,6 @@ $("#demo")
 	})
 	.bind("loaded.jstree", function (e, data) {
 	})
-	.bind("remove.jstree", function (e, data) {
-		$("#nodeConfirm").html("삭제하시겠습니까?");
-		$("#nodeConfirm").dialog({
-			 resizable : false
-			,height : 140
-			,modal : true
-			,close : function(){
-				$.jstree.rollback(data.rlbk);
-		    	$(this).dialog("close");
-			}
-			,buttons : {
-				 "확인" : function(){
-					data.rslt.obj.each(function () {
-						$.ajax({
-							 async : false
-							,type: 'POST'
-							//,url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action"
-							,url: "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/removeNode.do"
-							,data : { 
-								 "c_id"       : this.id.replace("node_","").replace("copy_","")
-								,"c_type"     : data.rslt.obj.attr("rel")						
-								,"c_position" : data.rslt.obj.attr("position")
-								,"c_left"     : data.rslt.obj.attr("left")
-							    ,"c_right"    : data.rslt.obj.attr("right")
-							}
-							,success : function (r) {
-								data.inst.refresh();
-							}
-							,error : function(){
-								$.jstree.rollback(data.rlbk);
-							}
-						});
-					});
-					$(this).dialog("close");
-				 }
-			    ,"취소" : function(){
-			    	$.jstree.rollback(data.rlbk);
-			    	//data.inst.refresh();
-			    	$(this).dialog("close");
-			    }
-			}
-		});
-	})
 	.bind("set_type.jstree", function (e, data) {
 		$.post(
 				/* "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action", */
@@ -593,7 +597,6 @@ $("#demo")
 			});
 		});
 	});
-
 });
 	
 	// 노드추가
