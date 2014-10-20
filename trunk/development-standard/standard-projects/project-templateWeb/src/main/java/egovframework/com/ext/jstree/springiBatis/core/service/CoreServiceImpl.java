@@ -321,6 +321,10 @@ public class CoreServiceImpl implements CoreService {
 		
 		T removeNode = ((T) coreDao.getNode(comprehensiveTree));
 		
+		int spaceOfTargetNode = removeNode.getC_right() - removeNode.getC_left() + 1;
+		
+		removeNode.setSpaceOfTargetNode(spaceOfTargetNode);
+		
 		coreDao.removeNode(removeNode);
 		
 		return 0;
