@@ -71,7 +71,7 @@ public class CoreController extends GenericAbstractController{
 	@ResponseBody
 	@RequestMapping("/getChildNode.do")
 	public List<ComprehensiveTree> getChildNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-			throws JsonProcessingException {
+			 throws Exception {
 		
 		if (comprehensiveTree.getC_id() == 0) {
 			throw new RuntimeException();
@@ -92,7 +92,7 @@ public class CoreController extends GenericAbstractController{
 	@ResponseBody
 	@RequestMapping("/searchNode.do")
 	public List<String> searchNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-			throws JsonProcessingException {
+			 throws Exception {
 
 		if (!StringUtils.hasText(comprehensiveTree.getSearchStr())) {
 			throw new RuntimeException();
@@ -115,7 +115,7 @@ public class CoreController extends GenericAbstractController{
 	@ResponseBody
 	@RequestMapping("/addNode.do")
 	public ComprehensiveTree addNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-			throws JsonProcessingException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+			 throws Exception {
 
 		if (request.getParameter("ref") == null || request.getParameter("c_position") == null
 				|| request.getParameter("c_title") == null || request.getParameter("c_type") == null) {
@@ -156,7 +156,7 @@ public class CoreController extends GenericAbstractController{
 	@ResponseBody
 	@RequestMapping("/removeNode.do")
 	public ComprehensiveTree removeNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-			throws JsonProcessingException {
+			 throws Exception {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_id").equals("0")
 				|| request.getParameter("c_id").equals("1")) {
@@ -180,7 +180,7 @@ public class CoreController extends GenericAbstractController{
 	@ResponseBody
 	@RequestMapping("/alterNode.do")
 	public ComprehensiveTree alterNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-			throws JsonProcessingException {
+			 throws Exception {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_title") == null
 				|| request.getParameter("c_type") == null) {
@@ -221,7 +221,7 @@ public class CoreController extends GenericAbstractController{
 	@ResponseBody
 	@RequestMapping("/alterNodeType.do")
 	public ComprehensiveTree alterNodeType(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-			throws JsonProcessingException {
+			 throws Exception {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_type") == null) {
 			throw new RuntimeException();
@@ -263,7 +263,7 @@ public class CoreController extends GenericAbstractController{
 	@ResponseBody
 	@RequestMapping("/moveNode.do")
 	public ComprehensiveTree moveNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-			throws JsonProcessingException, InstantiationException, IllegalAccessException, ReflectiveOperationException {
+			 throws Exception {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_position") == null
 				|| request.getParameter("copy") == null || request.getParameter("multiCounter") == null

@@ -52,7 +52,7 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#getChildNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree ){
+	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree ) throws Exception{
 		List<T> childNode = (List<T>) coreDao.getChildNode(comprehensiveTree);
 		return childNode;
 	}
@@ -61,7 +61,7 @@ public class CoreServiceImpl implements CoreService {
 	/* (non-Javadoc)
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#searchNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
-	public <T extends ComprehensiveTree> List<String> searchNode( T comprehensiveTree ) {
+	public <T extends ComprehensiveTree> List<String> searchNode( T comprehensiveTree ) throws Exception {
 		
 		List<T> searchNodeByStrings = (List<T>) coreDao.searchNodeByString( comprehensiveTree );
 		
@@ -84,7 +84,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#addNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	@Transactional
-	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree ) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public <T extends ComprehensiveTree> T addNode( T comprehensiveTree ) throws Exception {
 
 		T nodeById  = ((T) coreDao.getNode(      comprehensiveTree ));
 		T nodeByRef = ((T) coreDao.getNodeByRef( comprehensiveTree ));
@@ -184,7 +184,7 @@ public class CoreServiceImpl implements CoreService {
 
 	private <T extends ComprehensiveTree> void cutMyself( T   nodeById
 			              , int                 spaceOfTargetNode
-			              , Collection<Integer> c_idsByChildNodeFromNodeById ) {
+			              , Collection<Integer> c_idsByChildNodeFromNodeById ) throws Exception {
 
 		nodeById.setSpaceOfTargetNode(spaceOfTargetNode);
 		nodeById.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
@@ -194,7 +194,7 @@ public class CoreServiceImpl implements CoreService {
 	
 	private <T extends ComprehensiveTree> void stretchPositionForMyselfFromJstree( Collection<Integer> c_idsByChildNodeFromNodeById
 			                                       , T   nodeById
-			                                       , T   comprehensiveTree ) {
+			                                       , T   comprehensiveTree ) throws Exception {
 		
 		comprehensiveTree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
 		comprehensiveTree.setNodeById( nodeById );
@@ -206,7 +206,7 @@ public class CoreServiceImpl implements CoreService {
 			                                        , int rightPositionFromNodeByRef
 			                                        , int copy
 			                                        , Collection<Integer> c_idsByChildNodeFromNodeById 
-			                                        , T comprehensiveTree ) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+			                                        , T comprehensiveTree ) throws Exception {
 		
 	    T onlyStretchLeftRightForMyselfFromJstree = newInstance(comprehensiveTree);
         
@@ -224,7 +224,7 @@ public class CoreServiceImpl implements CoreService {
 			                         , int ldif
 			                         , int rightPositionFromNodeByRef
 			                         , Collection<Integer> c_idsByChildNodeFromNodeById
-			                         , T nodeById ) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+			                         , T nodeById ) throws Exception {
 	    
 		T onlyPasteMyselfFromJstree = newInstance(nodeById);
 
@@ -243,8 +243,7 @@ public class CoreServiceImpl implements CoreService {
 	}
 	
 	@SuppressWarnings({ "null" })
-	private <T extends ComprehensiveTree> void fixCopy( int ind, int ref, T t_comprehensiveTree ) 
-	        throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	private <T extends ComprehensiveTree> void fixCopy( int ind, int ref, T t_comprehensiveTree ) throws Exception {
 		
 		T comprehensiveTree = newInstance(t_comprehensiveTree);
 		comprehensiveTree.setC_id(ind);
@@ -298,7 +297,7 @@ public class CoreServiceImpl implements CoreService {
 			                          , int idif
 			                          , int ldif
 			                          , Collection<Integer> c_idsByChildNodeFromNodeById
-			                          , T comprehensiveTree ) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+			                          , T comprehensiveTree ) throws Exception {
 		
 		T onlyPasteMyselfFromJstree = newInstance(comprehensiveTree);
 		
@@ -317,7 +316,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#executeRemoveNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	@Transactional
-	public <T extends ComprehensiveTree> int removeNode( T comprehensiveTree ) {
+	public <T extends ComprehensiveTree> int removeNode( T comprehensiveTree ) throws Exception {
 		
 		T removeNode = ((T) coreDao.getNode(comprehensiveTree));
 		
@@ -335,7 +334,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	@Transactional
-	public <T extends ComprehensiveTree> int alterNode( T comprehensiveTree ) {
+	public <T extends ComprehensiveTree> int alterNode( T comprehensiveTree ) throws Exception {
 
 		return coreDao.alterNode(comprehensiveTree);
 	}
@@ -345,7 +344,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNodeType(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	@Transactional
-	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree ) {
+	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree ) throws Exception {
 
 		List<T> childNodesFromNodeById = ((List<T>) coreDao.getChildNode(comprehensiveTree));
 
@@ -382,7 +381,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#moveNode(egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
 	 */
 	@Transactional
-	public <T extends ComprehensiveTree> T moveNode( T comprehensiveTree ) throws ReflectiveOperationException {
+	public <T extends ComprehensiveTree> T moveNode( T comprehensiveTree ) throws Exception {
 
 		T nodeById = (T) coreDao.getNode(comprehensiveTree);
 		List<T> childNodesFromNodeById = ((List<T>) coreDao.getChildNodeByLeftRight( nodeById ));
@@ -491,7 +490,7 @@ public class CoreServiceImpl implements CoreService {
 	
 	private <T extends ComprehensiveTree> void calculatePostion( T comprehensiveTree
 			                     , T nodeById
-			                     , List<T> childNodesFromNodeByRef ) {
+			                     , List<T> childNodesFromNodeByRef ) throws Exception {
 
 		ActionContext actionContext = ActionContext.getContext();
 		Map<String, Object> session = actionContext.getSession();
@@ -605,7 +604,7 @@ public class CoreServiceImpl implements CoreService {
 			                                        , int rightPositionFromNodeByRef
 			                                        , Collection<Integer> c_idsByChildNodeFromNodeById
 			                                        , int copy
-			                                        , T comprehensiveTree ) throws ClassNotFoundException, InstantiationException, ReflectiveOperationException {
+			                                        , T comprehensiveTree ) throws Exception {
 		
 		T onlyStretchLeftRightForMyselfFromJstree = newInstance(comprehensiveTree);
 
@@ -624,7 +623,7 @@ public class CoreServiceImpl implements CoreService {
 			                         , int ldif
 			                         , Collection<Integer> c_idsByChildNodeFromNodeById
 			                         , int rightPositionFromNodeByRef
-			                         , T nodeById ) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+			                         , T nodeById ) throws Exception {
 
 		T onlyPasteMyselfFromJstree = newInstance(nodeById);
 
@@ -652,9 +651,7 @@ public class CoreServiceImpl implements CoreService {
 	 * @throws IllegalAccessException
 	 */
     @SuppressWarnings("unchecked")
-    private <T extends ComprehensiveTree> T newInstance(T comprehensiveTree)
-            throws ClassNotFoundException, InstantiationException,
-            IllegalAccessException {
+    private <T extends ComprehensiveTree> T newInstance(T comprehensiveTree) throws Exception {
         
         Class<T> target = (Class<T>) Class.forName(comprehensiveTree.getClass().getCanonicalName());
         return target.newInstance();

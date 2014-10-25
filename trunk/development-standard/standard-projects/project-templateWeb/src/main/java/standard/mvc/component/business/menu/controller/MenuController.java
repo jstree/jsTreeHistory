@@ -65,7 +65,7 @@ public class MenuController extends GenericAbstractController {
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/invokeSelect.do")
 	public List<MenuComprehensiveTree> getChildNode(MenuComprehensiveTree menuComprehensiveTree)
-			throws JsonProcessingException {
+			 throws Exception {
 
 		if (menuComprehensiveTree.getC_id() == 0) {
 			throw new RuntimeException();
@@ -85,7 +85,7 @@ public class MenuController extends GenericAbstractController {
 	 */
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/addNode.do")
-	public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) throws ClassNotFoundException, InstantiationException, IllegalAccessException { // TODO Exception으로 변경
+	public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) throws Exception { // TODO Exception으로 변경
 		
 	    // TODO 공통적 파라미터 값 검증 적용
 	    
@@ -121,14 +121,14 @@ public class MenuController extends GenericAbstractController {
 	
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/removeNode.do")
-	public int removeNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request){
+	public int removeNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) throws Exception {
 		return menuService.removeNode(menuComprehensiveTree);
 	}
 
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/alterNode.do")
 	public ComprehensiveTree alterNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request)
-			throws JsonProcessingException {
+			 throws Exception {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_title") == null
 				|| request.getParameter("c_type") == null) {

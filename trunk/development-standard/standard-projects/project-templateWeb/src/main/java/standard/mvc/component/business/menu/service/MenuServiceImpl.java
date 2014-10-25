@@ -37,7 +37,7 @@ public class MenuServiceImpl implements CoreService {
     
     @Override
     public <T extends ComprehensiveTree> List<T> getChildNode(
-            T comprehensiveTree) {
+            T comprehensiveTree) throws Exception {
         
         List<T> childNodes = coreService.getChildNode(comprehensiveTree);
         
@@ -53,33 +53,32 @@ public class MenuServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree)
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    		 throws Exception {
 
         return coreService.addNode(comprehensiveTree);
     }
 
     @Override
-    public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree) {
+    public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree) throws Exception {
         
         return coreService.removeNode(comprehensiveTree);
     }
 
     @Override
-    public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree) {
+    public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree) throws Exception {
         
         return coreService.alterNode(comprehensiveTree);
     }
 
     @Override
-    public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree) {
+    public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree) throws Exception {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree)
-            throws InstantiationException, IllegalAccessException,
-            ReflectiveOperationException {
+    		 throws Exception {
         // TODO Auto-generated method stub
         return null;
     }
