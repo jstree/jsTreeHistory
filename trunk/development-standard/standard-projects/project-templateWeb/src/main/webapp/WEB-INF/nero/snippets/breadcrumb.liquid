@@ -1,0 +1,123 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% if settings.breadcrumb_separator == '' %}
+			{% assign breadcrumb_separator = '&raquo;' %}
+		{% else %}
+			{% assign breadcrumb_separator = settings.breadcrumb_separator %}
+		{% endif %}
+
+
+	{% comment %} Breadcrumb {% endcomment %}
+
+		<div class="no-display">{{ template }}</div>
+
+		<div class="{{ settings.breadcrumb_alignment }}">
+			<h1 class="bm-remove">{% include 'page-title' with 'breadcrumb' %}</h1>
+			
+			<p class="bm-remove">
+				<a href="/" target="_self">Home</a>
+				&nbsp;{{ breadcrumb_separator }}&nbsp;
+
+				{% if template == "collection" %}
+					
+					<a href="/collections" target="_self">Collections</a>
+					&nbsp;{{ breadcrumb_separator }}&nbsp;
+
+					{% if current_tags %}
+						Tagged: "{{ current_tags.first | capitalize }}"
+					{% else %}
+						{{ page_title }}
+					{% endif %}
+
+				{% elsif template == "product" %}
+
+					<a href="/collections" target="_self">Collections</a>
+					&nbsp;{{ breadcrumb_separator }}&nbsp;
+
+					{% if collection %}
+						{% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+						<a href="{{ url }}" target="_self">{{ collection.title }}</a>
+						&nbsp;{{ breadcrumb_separator }}&nbsp;
+					{% endif %}
+
+					{{ page_title }}
+
+				{% elsif template == "search" %}
+
+					Search: "{% unless page_title == 'Search' %}{{ page_title }}{% endunless %}"
+
+				{% elsif template == "blog" %}
+
+					{% if current_tags %}
+						<a href="{{ blog.url }}" target="_self">Blog - {{ blog.title }}</a> <small>[ <a href="/blogs/{{ blog.title }}.atom" target="_blank">RSS</a> ]</small>
+						&nbsp;{{ breadcrumb_separator }}&nbsp;
+
+						Tagged: "{{ current_tags.first | capitalize }}"
+					{% else %}
+						Blog - {{ page_title }} <small>[ <a href="/blogs/{{ blog.title }}.atom" target="_blank">RSS</a> ]</small>
+					{% endif %}
+
+				{% elsif template == "article" %}
+
+					<a href="{{ blog.url }}" target="_self">Blog - {{ blog.title }}</a> <small>[ <a href="/blogs/{{ blog.title }}.atom" target="_blank">RSS</a> ]</small>
+					&nbsp;{{ breadcrumb_separator }}&nbsp;
+
+					{{ page_title }}
+
+				{% elsif template == "cart" %}
+
+					Cart: <span id="ajax-breadcrumb-cart-item-count">{{ cart.item_count }}</span> <span id="ajax-breadcrumb-cart-item-text">{{ cart.item_count | pluralize: 'item', 'items' }}</span> - <span id="ajax-breadcrumb-cart-total-price">{{ cart.total_price | money }}</span>
+
+				{% elsif template == "404" %}
+
+					404 Error
+
+				{% elsif template contains "customers" %}
+
+					<a href="/account" target="_self">Account</a>
+					&nbsp;{{ breadcrumb_separator }}&nbsp;
+
+					{% if template contains "register" %}
+
+						Create
+
+					{% elsif template contains "login" %}
+
+						<span id="customer-login-breadcrumb">Login</span>
+						<span id="customer-recover-breadcrumb" class="no-display">Recovery</span>
+
+					{% elsif template contains "activate_account" %}
+
+						Activate
+
+					{% elsif template contains "reset_password" %}
+
+						Reset
+
+					{% elsif template contains "addresses" %}
+
+						Addresses
+
+					{% elsif template contains "order" %}
+
+						<a href="/account" target="_self">Order History</a>
+						&nbsp;{{ breadcrumb_separator }}&nbsp;
+
+						{{ order.name }}
+
+					{% else %}
+
+						Order History
+
+					{% endif %}
+
+				{% else %}
+
+					{{ page_title }}
+
+				{% endif %}
+			</p>
+		</div>

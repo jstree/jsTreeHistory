@@ -1,0 +1,60 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Social {% endcomment %}
+
+		<div id="social">
+			<h4 class="title"><span>{{ settings.footer_social_title }}</span></h4>
+
+			<div class="content">
+				<p class="text">{{ settings.footer_social_text }}</p>
+
+				<div id="social-icons">
+					{% if settings.footer_facebook != blank %}
+						<span class="tip-t-fade" data-tooltip="Facebook"><a href="{{ settings.footer_facebook }}" target="_self"><i class="fa fa-facebook fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_twitter != blank %}
+						<span class="tip-t-fade" data-tooltip="Twitter"><a href="{{ settings.footer_twitter }}" target="_self"><i class="fa fa-twitter fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_google_plus != blank %}
+						<span class="tip-t-fade" data-tooltip="Google+"><a href="{{ settings.footer_google_plus }}" target="_self"><i class="fa fa-google-plus fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_vk != blank %}
+						<span class="tip-t-fade" data-tooltip="VK"><a href="{{ settings.footer_vk }}" target="_self"><i class="fa fa-vk fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_pinterest != blank %}
+						<span class="tip-t-fade" data-tooltip="Pinterest"><a href="{{ settings.footer_pinterest }}" target="_self"><i class="fa fa-pinterest fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_instagram != blank %}
+						<span class="tip-t-fade" data-tooltip="Instagram"><a href="{{ settings.footer_instagram }}" target="_self"><i class="fa fa-instagram fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_flickr != blank %}
+						<span class="tip-t-fade" data-tooltip="Flickr"><a href="{{ settings.footer_flickr }}" target="_self"><i class="fa fa-flickr fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_youtube != blank %}
+						<span class="tip-t-fade" data-tooltip="YouTube"><a href="{{ settings.footer_youtube }}" target="_self"><i class="fa fa-youtube fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_vimeo != blank %}
+						<span class="tip-t-fade" data-tooltip="Vimeo"><a href="{{ settings.footer_vimeo }}" target="_self"><i class="fa fa-vimeo-square fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_vine != blank %}
+						<span class="tip-t-fade" data-tooltip="Vine"><a href="{{ settings.footer_vine }}" target="_self"><i class="fa fa-vine fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_tumblr != blank %}
+						<span class="tip-t-fade" data-tooltip="Tumblr"><a href="{{ settings.footer_tumblr }}" target="_self"><i class="fa fa-tumblr fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_foursquare != blank %}
+						<span class="tip-t-fade" data-tooltip="FourSquare"><a href="{{ settings.footer_foursquare }}" target="_self"><i class="fa fa-foursquare fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_dribbble != blank %}
+						<span class="tip-t-fade" data-tooltip="Dribbble"><a href="{{ settings.footer_dribbble }}" target="_self"><i class="fa fa-dribbble fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_linkedin != blank %}
+						<span class="tip-t-fade" data-tooltip="LinkedIn"><a href="{{ settings.footer_linkedin }}" target="_self"><i class="fa fa-linkedin fa-fw"></i></a></span>
+					{% endif %}
+					{% if settings.footer_skype != blank %}
+						<span class="tip-t-fade" data-tooltip="Skype"><a href="{{ settings.footer_skype }}" target="_self"><i class="fa fa-skype fa-fw"></i></a></span>
+					{% endif %}
+				</div>
+			</div>
+		</div>

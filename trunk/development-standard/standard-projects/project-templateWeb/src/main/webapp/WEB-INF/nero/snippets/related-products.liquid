@@ -1,0 +1,54 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Grid Span {% endcomment %}
+
+			{% capture related_products_x_per_row %}{{ related-products }}{% endcapture %}
+
+
+		{% comment %} Product Amount {% endcomment %}
+
+			{% assign related_products_amount = settings.related_products_return_amount | plus: 1 %}
+
+
+	{% comment %} Related Products {% endcomment %}
+
+		{% if collection == null or collection.handle == 'all' %}
+			{% assign found_a_collection = false %}
+
+			{% for c in product.collections %}
+				{% if found_a_collection == false and c.handle != 'all' and c.all_products_count > 1 %}
+					{% assign found_a_collection = true %}
+					{% assign collection = c %}
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+
+		{% if collection and collection.products_count > 1 %}
+			{% assign current_product = product %}
+			{% assign current_product_found = false %}
+
+			<div class="clearfix">
+				<div class="container tm-medium">
+					<div class="one-whole">
+						{% if settings.related_products_title != blank %}
+							<p class="special-header {{ extras_animate }} clearfix" data-anim-type="{{ extras_animation_type }}" data-anim-delay="{{ extras_animation_delay }}">{{ settings.related_products_title }}</p>
+						{% endif %}
+
+						{% for product in collection.products limit: related_products_amount %}
+							{% if product.handle == current_product.handle %}
+								{% assign current_product_found = true %}
+							{% else %}
+								{% unless current_product_found == false and forloop.last %}
+									{% assign this_collection = collection.title | handle %}
+
+									{% include 'product-loop' with related_products_x_per_row %}
+								{% endunless %}
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		{% endif %}

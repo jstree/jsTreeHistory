@@ -1,0 +1,87 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Alt Tags {% endcomment %}
+
+			{% if settings.slide_1_alt == blank %}
+				{% assign slide_1_alt = 'Image One' %}
+			{% else %}
+				{% assign slide_1_alt = settings.slide_1_alt %}
+			{% endif %}
+
+			{% if settings.slide_2_alt == blank %}
+				{% assign slide_2_alt = 'Image Two' %}
+			{% else %}
+				{% assign slide_2_alt = settings.slide_2_alt %}
+			{% endif %}
+
+			{% if settings.slide_3_alt == blank %}
+				{% assign slide_3_alt = 'Image Three' %}
+			{% else %}
+				{% assign slide_3_alt = settings.slide_3_alt %}
+			{% endif %}
+
+			{% if settings.slide_4_alt == blank %}
+				{% assign slide_4_alt = 'Image Four' %}
+			{% else %}
+				{% assign slide_4_alt = settings.slide_4_alt %}
+			{% endif %}
+
+			{% if settings.slide_5_alt == blank %}
+				{% assign slide_5_alt = 'Image Five' %}
+			{% else %}
+				{% assign slide_5_alt = settings.slide_5_alt %}
+			{% endif %}
+
+
+	{% comment %} Slider {% endcomment %}
+
+		{% unless settings.image_slider_full_width %}
+			<div class="container">
+		{% endunless %}
+				<div class="one-whole bm-larger">
+					<div id="index-image-slider-container" class="clearfix">
+						<div id="index-image-slider" class="owl-carousel owl-theme">
+							{% if settings.show_slide_1 %}<div class="item">{% if settings.slide_1_link != blank %}<a href="{{ settings.slide_1_link }}" target="_self">{% endif %}<img src="{{ 'slide-1.jpg' | asset_url }}" alt="{{ slide_1_alt }}" />{% if settings.slide_1_link != blank %}</a>{% endif %}</div>{% endif %}
+							{% if settings.show_slide_2 %}<div class="item">{% if settings.slide_2_link != blank %}<a href="{{ settings.slide_2_link }}" target="_self">{% endif %}<img src="{{ 'slide-2.jpg' | asset_url }}" alt="{{ slide_2_alt }}" />{% if settings.slide_2_link != blank %}</a>{% endif %}</div>{% endif %}
+							{% if settings.show_slide_3 %}<div class="item">{% if settings.slide_3_link != blank %}<a href="{{ settings.slide_3_link }}" target="_self">{% endif %}<img src="{{ 'slide-3.jpg' | asset_url }}" alt="{{ slide_3_alt }}" />{% if settings.slide_3_link != blank %}</a>{% endif %}</div>{% endif %}
+							{% if settings.show_slide_4 %}<div class="item">{% if settings.slide_4_link != blank %}<a href="{{ settings.slide_4_link }}" target="_self">{% endif %}<img src="{{ 'slide-4.jpg' | asset_url }}" alt="{{ slide_4_alt }}" />{% if settings.slide_4_link != blank %}</a>{% endif %}</div>{% endif %}
+							{% if settings.show_slide_5 %}<div class="item">{% if settings.slide_5_link != blank %}<a href="{{ settings.slide_5_link }}" target="_self">{% endif %}<img src="{{ 'slide-5.jpg' | asset_url }}" alt="{{ slide_5_alt }}" />{% if settings.slide_5_link != blank %}</a>{% endif %}</div>{% endif %}
+						</div>
+
+						<div class="prev tip-t-fade" data-tooltip="Previous"></div>
+						<div class="next tip-t-fade" data-tooltip="Next"></div>
+					</div>
+				</div>
+		{% unless settings.image_slider_full_width %}
+			</div>
+		{% endunless %}
+
+
+	{% comment %} Scripts {% endcomment %}
+
+	<script>
+		$(document).ready(function() {
+			var $indexSlider = $('#index-image-slider');
+
+			$indexSlider.owlCarousel({
+				{% if settings.image_slider_transition != blank %}
+					transitionStyle: '{{ settings.image_slider_transition }}',
+				{% endif %}
+				autoPlay: {{ settings.image_slider_pause_time }},
+				paginationSpeed: {{ settings.image_slider_transition_speed }},
+				singleItem: true,
+				stopOnHover: true
+			});
+
+			$('#index-image-slider-container .prev').on('click', function() {
+				$indexSlider.trigger('owl.prev');
+			});
+
+			$('#index-image-slider-container .next').on('click', function() {
+				$indexSlider.trigger('owl.next');
+			});
+		});
+	</script>

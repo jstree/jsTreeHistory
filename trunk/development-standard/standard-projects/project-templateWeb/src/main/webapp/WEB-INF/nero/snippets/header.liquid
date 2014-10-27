@@ -1,0 +1,259 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Header {% endcomment %}
+
+		<header class="clearfix">
+			<div id="header" class="container">
+
+				{% comment %} Search {% endcomment %}
+
+					<div id="header-search" class="one-third bm-remove">
+						{% include 'search-form' %}
+					</div>
+
+
+				{% comment %} Logo {% endcomment %}
+
+					<div id="header-logo" class="one-third bm-remove">
+						<a href="/" target="_self">
+							{% if settings.use_logo %}
+								{{ 'logo.png' | asset_url | img_tag }}
+							{% else %}
+								<div id="logo-text">{{ shop.name }}</div>
+							{% endif %}
+						</a>
+					</div>
+
+
+				{% comment %} Cart {% endcomment %}
+
+					<div id="header-cart" class="one-third bm-remove last">
+						<a href="/cart" target="_self"><i class="fa fa-shopping-cart fa-fw"></i> Cart (<span id="ajax-header-cart-item-count">{{ cart.item_count }}</span> <span id="ajax-header-cart-item-text">{{ cart.item_count | pluralize: 'item', 'items' }}</span> - <span id="ajax-header-cart-total-price">{{ cart.total_price | money }}</span>)</a>
+					</div>
+
+			</div>
+		</header>
+
+
+	{% comment %} Navigation {% endcomment %}
+
+		<nav class="clearfix">
+			<div class="{% unless settings.navigation_full_width %}container {% endunless %}{% unless settings.navigation_full_width and settings.image_slider_full_width %}bm-larger{% endunless %}">
+
+				{% comment %} Main {% endcomment %}
+
+					<div id="navigation" class="clearfix">
+
+						{% comment %} Desktop Navigation {% endcomment %}
+
+							<div id="click-nav" class="clearfix">
+
+								{% for link in linklists.main-menu.links %}
+									{% assign has_sub_menu			=	false %}
+									{% assign has_sub_categories	=	false %}
+									{% assign parent_link_active	=	false %}
+									{% assign child_list_handle		=	link.title	|	handle %}
+
+									{% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+
+										{% assign has_sub_menu = true %}
+
+										{% for l in linklists[child_list_handle].links %}
+
+											{% if page_title == l.title %}
+												{% assign parent_link_active = true %}
+											{% endif %}
+
+										{% endfor %}
+
+									{% elsif link.type == 'collection_link' and link.object.all_tags.size > 0 %}
+
+										{% assign has_sub_categories = true %}
+
+									{% endif %}
+
+									<a href="{{ link.url }}" target="_self" class="nav-item{% if forloop.first %} first{% elsif forloop.last %} last{% endif %}{% if link.active or parent_link_active %} active{% endif %}{% if has_sub_menu or has_sub_categories %} has-dropdown{% endif %}" data-sub-nav="{{ link.title | handleize }}-nav-links">
+										{{ link.title }}
+										
+										{% if has_sub_menu or has_sub_categories %}
+											<span class="has-dropdown-icon">+</span>
+										{% endif %}
+									</a>
+								{% endfor %}
+
+								{% if shop.customer_accounts_enabled %}
+									<a href="/account" target="_self" class="nav-item has-dropdown" data-sub-nav="account-nav-links">
+										Account <span class="has-dropdown-icon">+</span>
+									</a>
+								{% endif %}
+
+							</div>
+
+
+						{% comment %} Touch Navigation {% endcomment %}
+
+							<div id="touch-nav">
+								<a href="#" target="_self" class="toggle-icon text-center"><i class="fa fa-bars fa-fw"></i></a>
+								
+								<div class="slide-menu">
+									<hr class="bm-small" />
+
+										{% comment %} Search {% endcomment %}
+
+											<div id="touch-nav-search">
+												{% include 'search-form' %}
+											</div>
+
+											<hr class="bm-smaller tm-small" />
+
+
+										{% comment %} Links {% endcomment %}
+
+										<ul class="nav unstyled bm-remove clearfix">
+											{% for link in linklists.main-menu.links %}
+												{% assign has_sub_menu			=	false %}
+												{% assign has_sub_categories	=	false %}
+												{% assign parent_link_active	=	false %}
+												{% assign child_list_handle		=	link.title	|	handle %}
+
+												{% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+
+													{% assign has_sub_menu = true %}
+
+													{% for l in linklists[child_list_handle].links %}
+
+														{% if page_title == l.title %}
+															{% assign parent_link_active = true %}
+														{% endif %}
+
+													{% endfor %}
+
+												{% elsif link.type == 'collection_link' and link.object.all_tags.size > 0 %}
+
+													{% assign has_sub_categories = true %}
+
+												{% endif %}
+
+												<li class="nav-item {% if forloop.first %} first{% elsif forloop.last %} last{% endif %}{% if link.active or parent_link_active %} active{% endif %}{% if has_sub_menu or has_sub_categories %} has-dropdown{% endif %}">
+													<a href="{{ link.url }}" target="_self" class="{% if has_sub_menu or has_sub_categories %}parent-link{% endif %}{% if forloop.first %} first{% elsif forloop.last %} last{% endif %}{% if link.active or parent_link_active %} active{% endif %}">
+														{{ link.title }}
+														
+														{% if has_sub_menu or has_sub_categories %}
+															<span class="has-dropdown-icon float-right">+</span>
+														{% endif %}
+													</a>
+
+													{% if has_sub_menu or has_sub_categories %}
+														<ul class="sub-nav unstyled bm-remove">
+															{% if has_sub_menu %}
+																{% for l in linklists[child_list_handle].links %}
+																	<li class="sub-nav-item{% if forloop.first %} first{% elsif forloop.last %} last{% endif %}{% if l.active %} active{% endif %}">
+																		<a href="{{ l.url }}" target="_self" class="{% if forloop.first %}first{% elsif forloop.last %}last{% endif %}{% if l.active %} active{% endif %}">&raquo; &nbsp;{{ l.title }}</a>
+																	</li>
+																{% endfor %}
+															{% elsif has_sub_categories %}
+																{% for tag in link.object.all_tags %}
+																	<li class="sub-nav-item{% if forloop.first %} first{% elsif forloop.last %} last{% endif %}{% if current_tags contains tag %} active{% endif %}">
+																		<a href="{{ link.url }}/{{ tag | handle }}" target="_self" class="{% if forloop.first %}first{% elsif forloop.last %}last{% endif %}{% if current_tags contains tag %} active{% endif %}">&raquo; &nbsp;{{ tag }}</a>
+																	</li>
+																{% endfor %}
+															{% endif %}
+														</ul>
+													{% endif %}
+												</li>
+											{% endfor %}
+
+											<hr class="bm-smaller" />
+
+											{% if shop.customer_accounts_enabled %}
+
+												{% if settings.use_wishlist %}
+													{% comment %}
+														This is still experimental and will be available once tested more thoroughly
+
+														{% include 'wishlist-item-count' %}
+													{% endcomment %}
+
+													<li class="nav-item first"><a href="/pages/wishlist" target="_self">Wishlist{% comment %}{% if show_wishlist_item_count %}: {{ wishlist_item_count }} {{ wishlist_item_count | pluralize: 'item', 'items' }}{% endif %}{% endcomment %}</a></li>
+												{% endif %}
+
+												{% if customer %}
+													<li class="nav-item{% unless settings.use_wishlist %} first{% endunless %}"><a href="/account" target="_self">My Account</a></li>
+													<li class="nav-item last"><a href="/account/logout" target="_self">Log Out</a></li>
+												{% else %}
+													<li class="nav-item{% unless settings.use_wishlist %} first{% endunless %}"><a href="/account/login" target="_self">Log In</a></li>
+													<li class="nav-item last"><a href="/account/register" target="_self">Register</a></li>
+												{% endif %}
+
+											{% endif %}
+										</ul>
+
+								</div>
+							</div>
+					</div>
+
+
+				{% comment %} Secondary {% endcomment %}
+
+					<div id="secondary-navigation" class="clearfix">
+						{% for link in linklists.main-menu.links %}
+							{% assign has_sub_menu			=	false %}
+							{% assign has_sub_categories	=	false %}
+							{% assign parent_link_active	=	false %}
+							{% assign child_list_handle		=	link.title	|	handle %}
+
+							{% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+
+								{% assign has_sub_menu = true %}
+
+								{% for l in linklists[child_list_handle].links %}
+
+									{% if page_title == l.title %}
+										{% assign parent_link_active = true %}
+									{% endif %}
+
+								{% endfor %}
+
+							{% elsif link.type == 'collection_link' and link.object.all_tags.size > 0 %}
+
+								{% assign has_sub_categories = true %}
+
+							{% endif %}
+
+							{% if has_sub_menu or has_sub_categories %}
+								<div id="{{ link.title | handleize }}-nav-links" class="sub-nav">
+									{% if has_sub_menu %}
+										{% for l in linklists[child_list_handle].links %}
+											<a href="{{ l.url }}" target="_self" class="sub-nav-item{% if forloop.first %} first{% elsif forloop.last %} last{% endif %}{% if l.active %} active{% endif %}">{{ l.title }}</a>
+										{% endfor %}
+									{% elsif has_sub_categories %}
+										{% for tag in link.object.all_tags %}
+											<a href="{{ link.url }}/{{ tag | handle }}" target="_self" class="sub-nav-item{% if forloop.first %} first{% elsif forloop.last %} last{% endif %}{% if current_tags contains tag %} active{% endif %}">{{ tag }}</a>
+										{% endfor %}
+									{% endif %}
+								</div>
+							{% endif %}
+						{% endfor %}
+
+						{% if shop.customer_accounts_enabled %}
+							<div id="account-nav-links" class="sub-nav">
+
+								{% if settings.use_wishlist %}
+									<a href="/pages/wishlist" target="_self" class="sub-nav-item first">Wishlist{% comment %}{% if show_wishlist_item_count %}: {{ wishlist_item_count }} {{ wishlist_item_count | pluralize: 'item', 'items' }}{% endif %}{% endcomment %}</a>
+								{% endif %}
+
+								{% if customer %}
+									<a href="/account" target="_self" class="sub-nav-item{% unless settings.use_wishlist %} first{% endunless %}">My Account</a>
+									<a href="/account/logout" target="_self" class="sub-nav-item last">Log Out</a>
+								{% else %}
+									<a href="/account/login" target="_self" class="sub-nav-item{% unless settings.use_wishlist %} first{% endunless %}">Log In</a>
+									<a href="/account/register" target="_self" class="sub-nav-item last">Register</a>
+								{% endif %}
+
+							</div>
+						{% endif %}
+					</div>
+
+			</div>
+		</nav>

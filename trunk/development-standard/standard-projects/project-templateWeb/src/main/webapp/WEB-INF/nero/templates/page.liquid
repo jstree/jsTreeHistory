@@ -1,0 +1,50 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Animate {% endcomment %}
+					
+			{% include 'animations' with 'page' %}
+			{% include 'animations' with 'extras' %}
+
+
+		{% assign page_content = false %}
+
+		{% if page.content.size > 0 %}
+			{% assign page_content = true %}
+		{% endif %}
+		
+
+	{% comment %} Page {% endcomment %}
+
+		<main id="template-page-liquid" class="clearfix" role="main">
+
+			{% comment %} Breadcrumb {% endcomment %}
+
+				<nav>
+					<div class="container bm-medium">
+						<div class="one-whole">
+							{% include 'breadcrumb' %}
+						</div>
+					</div>
+				</nav>
+
+
+			{% comment %} Content {% endcomment %}
+
+				<div class="clearfix">
+					<div class="container bm-medium">
+						<div class="one-whole boxed {{ settings.grid_boxed_padding }} {{ page_animate }} clearfix" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">
+							{% if page_content %}
+								<div id="page-content" class="rte">
+									{{ page.content }}
+								</div>
+							{% else %}
+								<p class="bm-larger tm-larger text-center">No Content Found</p>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+
+		</main>

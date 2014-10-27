@@ -1,0 +1,122 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Animate {% endcomment %}
+					
+			{% include 'animations' with 'footer' %}
+
+
+	{% comment %} Footer {% endcomment %}
+
+		<footer>
+			<div id="footer" class="tm-larger {{ footer_animate }} clearfix" data-anim-type="{{ footer_animation_type }}" data-anim-delay="{{ footer_animation_delay }}">
+				<div class="container">
+
+					{% comment %} Columns {% endcomment %}
+
+						<div id="columns" class="container">
+							<div class="clearfix">
+
+								{% comment %} Module 1 {% endcomment %}
+
+									<div class="{{ settings.footer_module_columns }} bm-larger tm-larger">
+										{% if settings.footer_module_1 != blank %}
+											{% include settings.footer_module_1 %}
+										{% endif %}
+									</div>
+
+
+								{% comment %} Module 2 {% endcomment %}
+
+									<div class="{{ settings.footer_module_columns }} bm-larger tm-larger{% if settings.footer_module_columns == 'one-half' %} last{% endif %}">
+										{% if settings.footer_module_2 != blank %}
+											{% include settings.footer_module_2 %}
+										{% endif %}
+									</div>
+
+
+								{% comment %} Module 3 {% endcomment %}
+
+									{% if settings.footer_module_columns == 'one-third' or settings.footer_module_columns == 'one-quarter' %}
+										<div class="{{ settings.footer_module_columns }} bm-larger tm-larger{% if settings.footer_module_columns == 'one-third' %} last{% endif %}">
+											{% if settings.footer_module_3 != blank %}
+												{% include settings.footer_module_3 %}
+											{% endif %}
+										</div>
+									{% endif %}
+
+
+								{% comment %} Module 4 {% endcomment %}
+
+									{% if settings.footer_module_columns == 'one-quarter' %}
+										<div class="{{ settings.footer_module_columns }} bm-larger tm-larger last">
+											{% if settings.footer_module_4 != blank %}
+												{% include settings.footer_module_4 %}
+											{% endif %}
+										</div>
+									{% endif %}
+
+							</div>
+						</div>
+
+					{% comment %} Copyright {% endcomment %}
+
+						<div id="copyright" class="one-half-percent desktop-tablet bm-remove">
+							Copyright &copy; <a href="/" target="_self">{{ shop.name }}</a> 2014. Design by <a href="http://www.cloud-eight.com/" target="_blank">Cloud Eight</a>. Powered by <a href="http://www.shopify.com/?ref=cloudeight" target="_blank">Shopify</a>.
+						</div>
+						
+
+					{% comment %} Card Payments {% endcomment %}
+
+						<div id="accepted-cards" class="one-half-percent desktop-tablet bm-remove last">
+							{% if settings.card_visa %}
+								<span class="cursor-pointer"><img src="{{ 'cc-visa.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="Visa" /></span>
+							{% endif %}
+							{% if settings.card_mastercard %}
+								<span class="cursor-pointer"><img src="{{ 'cc-mastercard.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="MasterCard" /></span>
+							{% endif %}
+							{% if settings.card_american_express %}
+								<span class="cursor-pointer"><img src="{{ 'cc-american-express.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="American Express" /></span>
+							{% endif %}
+							{% if settings.card_maestro %}
+								<span class="cursor-pointer"><img src="{{ 'cc-maestro.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="Maestro" /></span>
+							{% endif %}
+							{% if settings.card_cirrus %}
+								<span class="cursor-pointer"><img src="{{ 'cc-cirrus.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="Cirrus" /></span>
+							{% endif %}
+							{% if settings.card_switch %}
+								<span class="cursor-pointer"><img src="{{ 'cc-switch.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="Switch" /></span>
+							{% endif %}
+							{% if settings.card_solo %}
+								<span class="cursor-pointer"><img src="{{ 'cc-solo.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="Solo" /></span>
+							{% endif %}
+							{% if settings.card_western_union %}
+								<span class="cursor-pointer"><img src="{{ 'cc-western-union.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="Western Union" /></span>
+							{% endif %}
+							{% if settings.card_discover %}
+								<span class="cursor-pointer"><img src="{{ 'cc-discover.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="Discover" /></span>
+							{% endif %}
+							{% if settings.card_delta %}
+								<span class="cursor-pointer"><img src="{{ 'cc-delta.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="Delta" /></span>
+							{% endif %}
+							{% if settings.card_2co %}
+								<span class="cursor-pointer"><img src="{{ 'cc-2co.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="2Co" /></span>
+							{% endif %}
+							{% if settings.card_moneybookers %}
+								<span class="cursor-pointer"><img src="{{ 'cc-moneybookers.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="Moneybookers" /></span>
+							{% endif %}
+							{% if settings.card_paypal %}
+								<span class="cursor-pointer"><img src="{{ 'cc-paypal.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="PayPal" /></span>
+							{% endif %}
+							{% if settings.card_google_wallet %}
+								<span class="cursor-pointer"><img src="{{ 'cc-google-wallet.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="Google Wallet" /></span>
+							{% endif %}
+							{% if settings.card_bitcoin %}
+								<span class="cursor-pointer"><img src="{{ 'cc-bitcoin.png' | asset_url }}" alt="Visa" class="tip-t-fade" data-tooltip="BitCoin" /></span>
+							{% endif %}
+						</div>
+				</div>
+			</div>
+		</footer>

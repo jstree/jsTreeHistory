@@ -1,0 +1,74 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Animations {% endcomment %}
+
+			{% include 'animations' with 'product-loop' %}
+
+
+		{% comment %} Odd/Even {% endcomment %}
+
+			{% capture product_loop_odd_even %}{% cycle 'odd', 'even' %}{% endcapture %}
+
+
+		{% comment %} First/Last Loop {% endcomment %}
+
+			{% capture product_loop_first_last %}{% if forloop.first %}loop-first{% endif %}{% if forloop.last %}loop-last{% endif %}{% endcapture %}
+
+
+		{% comment %} Item On Sale {% endcomment %}
+
+			{% assign on_sale = false %}
+
+			{% if product.compare_at_price > product.price %}
+				{% assign on_sale = true %}
+			{% endif %}
+
+
+		{% comment %} Item Sold Out {% endcomment %}
+
+			{% assign sold_out = false %}
+
+			{% if product.available == false %}
+				{% assign sold_out = true %}
+			{% endif %}
+
+
+	{% comment %} Loop {% endcomment %}
+
+		<div class="{{ product_loop_grid_span }} product-item boxed p-ten text-center {{ product_loop_odd_even }} {{ product_loop_first_last }} {% if on_sale %}on-sale{% endif %} {% if sold_out %}sold-out{% endif %} {{ product_loop_grid_span_last }} {{ product_loop_animate }} clearfix" data-anim-type="{{ product_loop_animation_type }}" data-anim-delay="{{ product_loop_animation_delay }}">
+			<div class="image-and-overlay-container bm-small">
+				<div class="image">
+					<a href="{{ product.url | within: collection }}" target="_self">
+						<img src="{{ product.featured_image.src | product_img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}" class="block" />
+					</a>
+				</div>
+
+				<a href="{{ product.url | within: collection }}" target="_self" class="overlay"></a>
+
+				{% if settings.use_quick_look %}
+					<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="{{ product.handle }}"><i class="fa fa-search fa-fw"></i></a></span>
+				{% endif %}
+			</div>
+
+			<p class="bm-remove no-text-overflow">
+				<a href="{{ product.url | within: collection }}" target="_self"><strong>{{ product.title }}</strong></a>
+			</p>
+
+			<p class="bm-remove no-text-overflow">{% if product.price_varies %}From {% endif %}{{ product.price | money }}{% if on_sale %} <small><s>{{ product.compare_at_price | money }}</s></small>{% endif %}</p>
+
+			{% if on_sale %}
+				<span class="on-sale">On<br />Sale</span>
+			{% endif %}
+
+			{% if sold_out %}
+				<span class="sold-out{% if on_sale %} with-on-sale{% endif %}">Sold<br />Out</span>
+			{% endif %}
+		</div>
+
+
+	{% comment %} Clearing {% endcomment %}
+
+		{{ product_loop_clear_div }}

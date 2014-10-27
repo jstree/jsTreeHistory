@@ -1,0 +1,26 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Products {% endcomment %}
+
+		{% if settings.show_frontpage_products %}
+
+			<div class="container">
+				<div class="one-whole">
+					{% if settings.frontpage_products_title != blank %}
+						<p class="special-header {{ extras_animate }} clearfix" data-anim-type="{{ extras_animation_type }}" data-anim-delay="{{ extras_animation_delay }}">{{ settings.frontpage_products_title }}</p>
+					{% endif %}
+
+					{% if settings.frontpage_products_collection != blank %}
+						{% for product in collections[settings.frontpage_products_collection].products limit:settings.frontpage_products_return_amount %}
+							{% include 'product-loop' with settings.frontpage_products_x_per_row %}
+						{% endfor %}
+					{% else %}
+						<div class="one-whole bm-larger boxed {{ settings.grid_boxed_padding }} {{ page_animate }} clearfix" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">
+							<p class="bm-larger tm-larger text-center">No Products Selected</p>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+
+		{% endif %}

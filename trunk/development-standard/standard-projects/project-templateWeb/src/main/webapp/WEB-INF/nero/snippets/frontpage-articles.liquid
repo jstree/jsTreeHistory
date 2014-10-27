@@ -1,0 +1,26 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Articles {% endcomment %}
+	
+		{% if settings.show_frontpage_articles %}
+
+			<div class="container">
+				<div class="one-whole">
+					{% if settings.frontpage_articles_title != blank %}
+						<p class="special-header {{ extras_animate }} clearfix" data-anim-type="{{ extras_animation_type }}" data-anim-delay="{{ extras_animation_delay }}">{{ settings.frontpage_articles_title }}</p>
+					{% endif %}
+
+					{% if settings.frontpage_articles_blog != blank %}
+						{% for article in blogs[settings.frontpage_articles_blog].articles limit: settings.frontpage_articles_return_amount %}
+							{% include 'article-loop' with settings.frontpage_articles_x_per_row %}
+						{% endfor %}
+					{% else %}
+						<div class="one-whole bm-larger boxed {{ settings.grid_boxed_padding }} {{ page_animate }} clearfix" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">
+							<p class="bm-larger tm-larger text-center">No Blog Selected</p>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+			
+		{% endif %}

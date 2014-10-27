@@ -1,0 +1,58 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Meta Tags {% endcomment %}
+
+		<meta charset="utf-8">
+		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		{% if template == 'list-collections' %}
+
+			<meta name="description" content="Product collections by {{ shop.name | strip_html | escape }}" />
+			<meta name="keywords" content="collections{% for collection in collections %}, {{ collection.title | downcase | strip_html | escape }}{% endfor %}" />
+
+		{% elsif template == 'collection' %}
+
+			{% if collection.description.size > 0 %}
+				<meta name="description" content="{{ collection.description | strip_html | escape }}" />
+			{% else %}
+				<meta name="description" content="{{ collection.title | strip_html | escape }} by {{ shop.name | strip_html | escape }}" />
+			{% endif %}
+
+			<meta name="keywords" content="collection{% for tag in collection.tags %}, {{ tag }}{% endfor %}" />
+
+		{% elsif template == 'product' %}
+
+			{% if product.description.size > 0 %}
+				<meta name="description" content="{{ product.description | strip_html | escape }}" />
+			{% else %}
+				<meta name="description" content="{{ product.title | strip_html | escape }} by {{ shop.name | strip_html | escape }}" />
+			{% endif %}
+
+			<meta name="keywords" content="product{% for tag in product.tags %}, {{ tag }}{% endfor %}" />
+
+		{% elsif template == 'blog' %}
+
+			<meta name="description" content="{{ page_title }} Blog archive written by {{ shop.name | strip_html | escape }}" />
+			<meta name="keywords" content="{{ page_title }}, blog{% for tag in blog.tags %}, {{ tag }}{% endfor %}" />
+
+		{% elsif template contains 'article' %}
+
+			<meta name="description" content="{{ article.excerpt_or_content | strip_html | escape }}" />
+			<meta name="keywords" content="article{% for tag in article.tags %}, {{ tag }}{% endfor %}" />
+
+		{% else %}
+
+			{% if page_description.size > 0 %}
+				<meta name="description" content="{{ page_description | strip_html | escape }}" />
+			{% else %}
+				<meta name="description" content="{{ shop.name | strip_html | escape }} online shopping" />
+			{% endif %}
+
+			<meta name="keywords" content="{{ page.meta_keywords | strip_html | escape }}" />
+
+		{% endif %}
+
+		<meta name="HandheldFriendly" content="True" />
+		<meta name="MobileOptimized" content="320" />

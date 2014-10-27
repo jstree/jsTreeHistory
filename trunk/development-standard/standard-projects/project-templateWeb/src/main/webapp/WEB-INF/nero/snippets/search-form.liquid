@@ -1,0 +1,21 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Search Placeholder {% endcomment %}
+
+			{% assign search_bar_placeholder_text = false %}
+
+			{% if settings.search_bar_placeholder_text != blank %}
+				{% assign search_bar_placeholder_text = true %}
+			{% endif %}
+
+
+	{% comment %} Form {% endcomment %}
+
+		<form action="/search" method="get" class="clearfix" novalidate>
+			<input type="hidden" name="type" value="product">
+			<input type="text" name="q" class="inline-block w-small bm-remove tip-r-fade" placeholder="{% if search_bar_placeholder_text %}{{ settings.search_bar_placeholder_text }}{% else %}Search for a product...{% endif %}" autocomplete="off" value="{{ search.terms | escape }}" data-tooltip="Press Enter To Search" />
+			<button type="submit" class="tablet-mobile bm-remove tip-r-fade" data-tooltip="Search"><i class="fa fa-search"></i></button>
+		</form>

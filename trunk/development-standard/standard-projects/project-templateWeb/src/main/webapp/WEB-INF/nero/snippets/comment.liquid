@@ -1,0 +1,32 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+
+		{% comment %} Odd/Even {% endcomment %}
+
+			{% capture comment_loop_odd_even %}{% cycle ' odd', ' even' %}{% endcapture %}
+
+
+		{% comment %} First/Last Loop {% endcomment %}
+
+			{% capture comment_loop_first_last %}{% if forloop.first %} loop-first{% endif %}{% if forloop.last %} loop-last{% endif %}{% endcapture %}
+
+
+	{% comment %} Comment {% endcomment %}
+
+		<div class="clearfix">
+			<div class="article-comment{{ comment_loop_odd_even }}{{ comment_loop_first_last }} clearfix">
+				<div class="article-comment-user-image">
+					<img src="http://www.gravatar.com/avatar/{{ comment.email | remove: ' ' | strip_newlines | downcase | md5 }}?s=500" alt="{{ comment.author | escape }}'s Gravatar Image" class="block" />
+				</div>
+
+				<div class="article-comment-user-comment rte">
+					<p class="bm-small"><strong>{{ comment.author }}</strong><span class="article-comment-date-bull"> <small>&nbsp;&bull;&nbsp;</small> </span><br class="article-comment-user-date-br" />{{ comment.created_at | date: "%b %d, %Y" }}</p>
+					{{ comment.content }}
+				</div>
+
+				<hr class="tm-medium" />
+			</div>
+		</div>

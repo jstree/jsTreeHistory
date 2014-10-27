@@ -1,0 +1,76 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Animate {% endcomment %}
+					
+			{% include 'animations' with 'page' %}
+			{% include 'animations' with 'extras' %}
+
+
+	{% comment %} Activate {% endcomment %}
+
+		<main id="template-customer-activate-liquid" class="clearfix" role="main">
+
+			{% comment %} Breadcrumb {% endcomment %}
+
+				<nav>
+					<div class="container bm-medium">
+						<div class="one-whole">
+							{% include 'breadcrumb' %}
+						</div>
+					</div>
+				</nav>
+
+
+			{% comment %} Form {% endcomment %}
+
+				<div class="container bm-medium">
+					<div class="one-whole boxed {{ settings.grid_boxed_padding }} {{ page_animate }} clearfix" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">
+						<div class="one-half-percent desktop-tablet omega bm-remove">
+							<p>
+								You've been invited to activate an account on {{ shop.name }}.<br />
+								Your account has already been created, just set a password.
+							</p>
+						</div>
+
+						<div class="one-half-percent desktop-tablet alpha bm-remove last">
+							{% form 'activate_customer_password' %}
+								<script>
+									$(document).ready(function() {
+										$('#create_customer').attr('novalidate', '');
+									});
+								</script>
+
+								{% if form.errors %}
+									<div id="form-error" class="no-display">
+										{{ form.errors | default_errors }}
+									</div>
+
+									<script>
+										var error_message = $('#form-error li:first').html();
+
+										$('body').edgeAlerts({
+											title: 'Form Error',
+											message: error_message
+										});
+									</script>
+								{% endif %}
+
+								<input type="text" class="w-full fake-password" placeholder="Password" />
+								<input type="password" name="customer[password]" id="activate-password" class="w-full true-password no-display" />
+
+								<input type="text" class="w-full fake-password bm-remove" placeholder="Confirm Password" />
+								<input type="password" name="customer[password_confirmation]" id="activate-password-confirmation" class="w-full true-password bm-remove no-display" />
+
+								<div class="text-right">
+									<input type="submit" name="decline" class="inline-block disabled bm-remove tm-medium" value="Decline" />
+									<input type="submit" class="inline-block bm-remove tm-medium" value="Activate" />
+								</div>
+							{% endform %}
+						</div>
+					</div>
+				</div>
+
+		</main>

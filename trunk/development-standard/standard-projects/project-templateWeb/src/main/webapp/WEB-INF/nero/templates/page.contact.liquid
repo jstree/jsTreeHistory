@@ -1,0 +1,119 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Animate {% endcomment %}
+					
+			{% include 'animations' with 'page' %}
+			{% include 'animations' with 'extras' %}
+			
+
+		{% comment %} Page Content {% endcomment %}
+
+			{% assign page_content = false %}
+
+			{% if page.content.size > 0 %}
+				{% assign page_content = true %}
+			{% endif %}
+
+
+	{% comment %} Contact Us {% endcomment %}
+
+		<main id="template-page-contact-liquid" class="clearfix" role="main">
+
+			{% comment %} Breadcrumb {% endcomment %}
+
+				<nav>
+					<div class="container bm-medium">
+						<div class="one-whole">
+							{% include 'breadcrumb' %}
+						</div>
+					</div>
+				</nav>
+
+
+			{% comment %} Contact Form {% endcomment %}
+
+				<div class="clearfix">
+					<div class="container bm-medium">
+						<div id="page-contact" class="one-whole boxed {{ settings.grid_boxed_padding }} {{ page_animate }} clearfix" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">
+
+							{% comment %} Google Maps {% endcomment %}
+
+								{% if settings.show_google_maps and settings.google_maps_code != blank %}
+									{{ settings.google_maps_code }}
+								{% endif %}
+
+
+							{% comment %} Page Content {% endcomment %}
+
+								<div class="one-half-percent tablet-mobile omega">
+									<div id="page-contact-content" class="rte">
+										{{ page.content }}
+									</div>
+								</div>
+
+
+							{% comment %} Form {% endcomment %}
+
+								<div id="contact-post" class="{% if page_content %}one-half-percent tablet-mobile alpha last{% else %}one-whole-percent{% endif%} bm-remove">
+									{% form 'contact' %}
+										<script>
+											$(document).ready(function() {
+												$('.contact-form').attr('novalidate', '');
+											});
+										</script>
+
+										{% unless page_content %}<div class="one-third-percent tablet-mobile omega bm-remove">{% endunless %}
+											<input type="text" name="contact[name]" id="contactFormName" class="w-full" placeholder="Name" value="{% if form.name %}{{ form.name }}{% elsif customer.name %}{{ customer.name }}{% endif %}" />
+										{% unless page_content %}</div>{% endunless %}
+
+										{% unless page_content %}<div class="one-third-percent tablet-mobile alpha omega bm-remove">{% endunless %}
+											<input type="email" name="contact[email]" id="contactFormEmail" class="w-full" placeholder="Email Address" value="{% if form.email %}{{ form.email }}{% elsif customer.email %}{{ customer.email }}{% endif %}" />
+										{% unless page_content %}</div>{% endunless %}
+
+										{% unless page_content %}<div class="one-third-percent tablet-mobile alpha bm-remove last">{% endunless %}
+											<input type="tel" name="contact[phone]" id="contactFormTelephone" class="w-full" placeholder="Telephone Number" value="{% if form.phone %}{{ form.phone }}{% elsif customer.default_address.phone %}{{ customer.default_address.phone }}{% endif %}" />
+										{% unless page_content %}</div>{% endunless %}
+
+										<textarea name="contact[body]" id="contactFormMessage" class="w-full" placeholder="Your Message...">{{ form.body }}</textarea>
+
+										<div class="clearfix">
+											<button type="submit" id="contactFormSubmit" class="bm-remove float-right">Send</button>
+										</div>
+
+										{% if form.errors %}
+											<div id="form-error" class="no-display">
+												{{ form.errors | default_errors | replace: 'Email can&#39;t be blank and must be a valid email address.', 'You forgot to tell us your email address.' | replace: 'Body can&#39;t be blank.', 'You forgot to write anything in your message.' | replace: 'Email must be a valid email address.', 'That does&#39;t seem like a valid email address.' }}
+											</div>
+
+											<script>
+												window.location.hash = '#contact-post';
+
+												var error_message = $('#form-error li:first').html();
+
+												$('body').edgeAlerts({
+													title: 'Contact Error',
+													message: error_message
+												});
+											</script>
+										{% endif %}
+
+										{% if form.posted_successfully? %}
+											<script>
+												window.location.hash = '#contact-post';
+
+												$('body').edgeAlerts({
+													title: 'Message Sent',
+													message: 'Thank you for your message, will reply as soon as possible.'
+												});
+											</script>
+										{% endif %}
+									{% endform %}
+								</div>
+						</div>
+					</div>
+				</div>
+
+		</main>

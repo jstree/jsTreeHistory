@@ -1,0 +1,67 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Collections {% endcomment %}
+
+		{% if settings.show_frontpage_collections and linklists[settings.frontpage_collections_link_list].links.size > 0 %}
+
+			{% comment %} Loop {% endcomment %}
+
+				<div class="container">
+					<div class="one-whole">
+						{% if linklists[settings.frontpage_collections_link_list].links.size > 0 %}
+
+							{% if settings.frontpage_collections_title != blank %}
+								<p class="special-header {{ extras_animate }} clearfix" data-anim-type="{{ extras_animation_type }}" data-anim-delay="{{ extras_animation_delay }}">{{ settings.frontpage_collections_title }}</p>
+							{% endif %}
+
+							{% for link in linklists[settings.frontpage_collections_link_list].links limit:settings.frontpage_collections_return_amount %}
+
+								{% comment %} Odd/Even {% endcomment %}
+
+									{% capture collection_loop_odd_even %}{% cycle 'odd', 'even' %}{% endcapture %}
+
+
+								{% comment %} First/Last Loop {% endcomment %}
+
+									{% capture collection_loop_first_last %}{% if forloop.first %}loop-first{% endif %}{% if forloop.last %}loop-last{% endif %}{% endcapture %}
+
+									{% include 'animations' with 'frontpage-collection-loop' %}
+
+									<div class="{{ collection_loop_grid_span }} collection-item boxed p-ten text-center {{ collection_loop_odd_even }} {{ collection_loop_first_last }} {{ collection_loop_grid_span_last }} {{ collection_loop_animate }} clearfix" data-anim-type="{{ collection_loop_animation_type }}" data-anim-delay="{{ collection_loop_animation_delay }}">
+										<div class="image-and-overlay-container bm-small">
+											<div class="image">
+												<a href="{{ link.object.url }}" target="_self">
+													{% if link.object.image %}
+														<img src="{{ link.object.image.src | collection_img_url: 'master' }}" alt="{{ link.object.title | escape }}" class="block" />
+													{% else %}
+														<img src="{{ link.object.products.first.featured_image.src | product_img_url: 'master' }}" alt="{{ link.object.title | escape }}" class="block" />
+													{% endif %}
+												</a>
+											</div>
+
+											<a href="{{ link.object.url }}" target="_self" class="overlay"></a>
+										</div>
+
+										<p class="bm-remove no-text-overflow">
+											<a href="{{ link.object.url }}" target="_self"><strong>{{ link.object.title }}</strong></a>
+										</p>
+
+										<p class="bm-remove no-text-overflow">{{ link.object.all_products_count }} {{ link.object.all_products_count | pluralize: 'item', 'items' }}</p>
+									</div>
+
+									{{ collection_loop_clear_div }}
+
+							{% endfor %}
+
+						{% else %}
+
+							<div class="one-whole bm-larger boxed {{ settings.grid_boxed_padding }} {{ page_animate }} clearfix" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">
+								<p class="bm-larger tm-larger text-center">No Collections Selected</p>
+							</div>
+
+						{% endif %}
+					</div>
+				</div>
+
+		{% endif %}

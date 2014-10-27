@@ -1,0 +1,445 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Animate {% endcomment %}
+					
+			{% include 'animations' with 'page' %}
+			{% include 'animations' with 'extras' %}
+
+
+		{% comment %} On Sale {% endcomment %}
+
+			{% assign on_sale = false %}
+
+			{% if product.compare_at_price > product.price %}
+				{% assign on_sale = true %}
+			{% endif %}
+
+
+	{% comment %} Product {% endcomment %}
+
+		<main id="template-product-liquid" class="clearfix" role="main" itemscope itemtype="http://schema.org/Product">
+
+			{% comment %} Breadcrumb {% endcomment %}
+
+				<nav>
+					<div class="container bm-medium">
+						<div class="one-whole">
+							{% include 'breadcrumb' %}
+						</div>
+					</div>
+				</nav>
+
+
+			{% comment %} Details {% endcomment %}
+
+				<div class="clearfix">
+					<div class="container">
+						<meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+						<meta itemprop="image" content="{{ product.featured_image.src | img_url: 'master' }}" />
+
+						<div class="one-whole boxed {{ settings.grid_boxed_padding }} {{ page_animate }} clearfix" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">
+
+							{% comment %} Images {% endcomment %}
+
+								<div id="images" class="one-half-percent tablet-mobile bm-remove omega">
+									<div id="product-image" class="bm-small clearfix">
+										{% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+
+										<a href="{{ product.featured_image.src | product_img_url: 'master' }}" target="_self" id="featured-image-link" class="text-center {% if settings.use_product_click_lightbox %} litebox{% else %} void-link{% endif %}" data-litebox-group="product-images">
+											<img src="{{ featured_image | img_url: 'master' }}" alt="{{ featured_image.alt | escape }}" id="featured-image" class="block" />
+										</a>
+
+										{% if product.images.size > 1 %}
+											{% for image in product.images offset:1 %}
+												<a href="{{ image.src | product_img_url: 'master' }}" target="_self" data-litebox-group="product-images"></a>
+											{% endfor %}
+										{% endif %}
+									</div>
+
+									{% if product.images.size > 1 %}
+										<div id="product-thumbnail-carousel-container" class="clearfix">
+											<div id="product-thumbnail-carousel" class="owl-carousel owl-theme">
+												{% for image in product.images %}
+													<div class="item"><img src="{{ image.src | product_img_url: 'master' }}" alt="{{ product.title | escape }} Thumbnail" class="thumbnail-image block cursor-pointer" /></div>
+												{% endfor %}
+											</div>
+
+											<div class="prev tip-t-fade" data-tooltip="Previous"></div>
+											<div class="next tip-t-fade" data-tooltip="Next"></div>
+										</div>
+									{% endif %}
+								</div>
+
+
+							{% comment %} Buying Options {% endcomment %}
+
+								<div class="one-half-percent tablet-mobile alpha bm-remove last">
+									<div class="clearfix">
+
+										{% comment %} Price {% endcomment %}
+
+											<h1 id="prices" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+												<meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+
+												<link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}" />													
+
+												<span id="price" class="font-xx-large">
+													{% if on_sale %}
+														<small><s>{{ product.compare_at_price_max | money }}</s></small> &nbsp;<span itemprop="price">{{ product.price | money }}</span>
+													{% else %}
+														<span itemprop="price">{{ product.price | money }}</span>
+													{% endif %}
+												</span>
+											</h1>
+
+
+										{% comment %} Details {% endcomment %}
+
+											<meta itemprop="name" content="{{ product.title }}" />
+											<span class="no-display" itemprop="brand" itemscope itemtype="http://schema.org/Brand"><span itemprop="name">{{ product.vendor }}</span></span>
+
+											<div id="product-description" class="rte" itemprop="description">{{ product.description }}</div>
+
+											{% if settings.show_product_sharing_icons %}
+												<div id="social-sharing" class="bm-medium tm-medium">
+													{% if settings.show_product_sharing_facebook %}<span class="sharing-icon facebook tip-t-fade" data-tooltip="Share this on Facebook"><a href="http://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ product.url }}" target="_blank"><i class="fa fa-facebook"></i></a></span>{% endif %}
+													{% if settings.show_product_sharing_twitter %}<span class="sharing-icon twitter tip-t-fade" data-tooltip="Share this on Twitter"><a href="https://twitter.com/intent/tweet?text={{ shop.name | escape }}:%20{{ product.title }}%20-%20{{ shop.url }}{{ product.url }}{% if settings.twitter_card_site_handle.size > 0 %}%20@{{ settings.twitter_card_site_handle }}{% endif %}" target="_blank"><i class="fa fa-twitter"></i></a></span>{% endif %}
+													{% if settings.show_product_sharing_google_plus %}<span class="sharing-icon google-plus tip-t-fade" data-tooltip="Share this on Google+"><a href="https://plus.google.com/share?url={{ shop.url }}{{ product.url }}" target="_blank"><i class="fa fa-google-plus"></i></a></span>{% endif %}
+													{% if settings.show_product_sharing_pinterest %}<span class="sharing-icon pinterest tip-t-fade" data-tooltip="Share this on Pinterest"><a href="//pinterest.com/pin/create/button/?url={{ shop.url }}{{ product.url }}&amp;media={{ product.featured_image.src | product_img_url: 'master' }}&amp;description={{ product.description | strip_html }}" target="_blank"><i class="fa fa-pinterest"></i></a></span>{% endif %}
+													{% if settings.show_product_sharing_email %}<span class="sharing-icon mail tip-t-fade" data-tooltip="Email this to a friend"><a href="mailto:?subject={{ product.title }}&amp;body=Hey,%20while%20browsing%20{{ shop.name }}%20I%20found%20a%20great%20product%20that%20I%20thought%20you%20might%20like.%0D%0A%0D%0A{{ product.title }}%0D%0A{{ shop.url }}{{ product.url }}" target="_blank"><i class="fa fa-envelope"></i></a></span>{% endif %}
+												</div>
+											{% endif %}
+
+											{% if shop.customer_accounts_enabled and settings.use_wishlist %}
+												<div id="wishlist-options" class="bm-small tm-medium">
+													{% if customer %} 
+														{% assign wishlist_value = product.id %}
+
+														{% capture wishlist_productID %}{{ product.id }}{% endcapture %}
+
+														{% for tag in customer.tags %}
+															{% capture wishlist_tagID %}{{ tag }}{% endcapture %}
+
+															{% if wishlist_tagID contains wishlist_productID %}
+																{% capture wishlist_value %}x{{ wishlist_tagID | replace: '-ce-wishlist', '' }}{% endcapture %}
+															{% endif %}
+
+															{% if wishlist_value.size == 0 %}
+																{% assign wishlist_value = wishlist_productID %}
+															{% endif %}
+														{% endfor %}
+
+														{% unless wishlist_value.size == 0 %}
+															{% capture wishlist_check %}{{ wishlist_value.size | minus:wishlist_productID.size | money_without_currency | times:100 | divided_by:2 }}{% endcapture %}
+
+															{% assign wishlist_check = wishlist_check | split:'.' %}
+
+															{% if wishlist_check[1] contains "5" %}
+																{% assign wishlist_display = false %}
+															{% else %}
+																{% assign wishlist_display = true %}
+															{% endif %}
+														{% endunless %}
+
+														{% if wishlist_display %}
+															{% form 'customer' %}
+																<input type="hidden" name="contact[email]" value="{{ customer.email }}"/>
+																<input type="hidden" name="contact[tags]" value="{{ wishlist_value }}-ce-wishlist" />
+																<button type="submit" id="product-page-real-add-to-wishlist" class="no-display"></button>
+
+																<span class="font-large"><i class="fa fa-heart"></i> <a href="#add-to-wishlist" target="_self" id="product-page-add-to-wishlist">Add Item To Your Wishlist</a></span>
+															{% endform %}
+														{% else %}
+															<span class="font-large"><i class="fa fa-heart"></i> <a href="/pages/wishlist" target="_self">This Item Is In Your Wishlist</a></span>
+														{% endif %}
+													{% else %}
+														<span class="font-large"><i class="fa fa-heart"></i> <a href="/pages/wishlist" target="_self">Add Item To Your Wishlist</a></span>
+													{% endif %}
+												</div>
+											{% endif %}
+
+											{% if settings.show_product_type or settings.show_product_vendor or settings.show_product_tags %}
+												<div class="bm-medium">
+													{% if settings.show_product_type or settings.show_product_vendor %}
+														<div id="product-type-vendor" class="text-right">
+															<small>
+																{% if settings.show_product_type and product.type %}
+																	<strong>Type: </strong>{{ product.type | link_to_type }}{% if settings.show_product_vendor and product.vendor %} &nbsp;/&nbsp; {% endif %}
+																{% endif %}
+
+																{% if settings.show_product_vendor and product.vendor %}
+																	<strong>Vendor: </strong>{{ product.vendor | link_to_vendor }}
+																{% endif %}
+															</small>
+														</div>
+													{% endif %}
+
+													{% if settings.show_product_tags and product.tags.size > 0 %}
+														<div id="product-tags" class="text-right">
+															<small>
+																<i class="fa fa-tags fa-fw"></i> Tagged:
+																{% for tag in product.tags %}
+																	<a href="/collections/all/{{ tag | handleize }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+																{% endfor %}
+															</small>
+														</div>
+													{% endif %}
+												</div>
+											{% endif %}
+
+
+										{% comment %} Buying Options {% endcomment %}
+
+											<div id="buying-options">
+												<form action="/cart/add" method="post" enctype="multipart/form-data" novalidate>
+													<div id="product-variants">
+														<select id="product-select" name="id" class="tall full-width no-display">
+															{% for variant in product.variants %}
+																<option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+															{% endfor %}
+														</select>
+													</div>
+
+													{% if settings.show_quantity_inputs %}
+														<div class="one-third-percent bm-remove omega tablet-mobile">
+															<p class="bm-remove" style="line-height: 40px;"><label for="product-quantity" class="bm-remove">Quantity</label></p>
+														</div>
+														<div class="two-third-percent bm-remove alpha tablet-mobile last">
+															<div class="input-quantity-container clearfix">
+																<a href="#" target="_self" class="input-quantity-minus tip-t-fade" data-tooltip="Decrease"><i class="fa fa-minus fa-fw"></i></a>
+																<input type="text" name="quantity" id="quantity" class="input-quantity" value="1" class="w-full" />
+																<a href="#" target="_self" class="input-quantity-plus tip-t-fade" data-tooltip="Increase"><i class="fa fa-plus fa-fw"></i></a>
+															</div>
+														</div>
+													{% endif %}
+
+													<div class="text-right">
+														<button type="submit" id="add" class="product-add-to-cart bm-remove">Add To Cart</button>
+													</div>
+												</form>
+											</div>
+
+											<div id="backorder" class="text-right tm-medium no-display">
+												<p class="bm-remove">{{ '"%s" is currently out of stock but you can back-order the product.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
+											</div>
+									</div>
+								</div>
+
+						</div>
+					</div>
+				</div>
+
+
+			{% comment %} Navigation {% endcomment %}
+
+				{% if collection and settings.show_product_pagination %}
+					{% if collection.previous_product or collection.next_product %}
+						<div class="clearfix">
+							<div class="container">
+								<div class="one-whole bm-remove {{ extras_animate }} clearfix" data-anim-type="{{ extras_animation_type }}" data-anim-delay="{{ extras_animation_delay }}">
+									{% if collection.previous_product %}
+										<a href="{{ collection.previous_product }}" target="_self" class="button float-left">Previous</a>
+									{% endif %}
+
+									{% if collection.next_product %}
+										<a href="{{ collection.next_product }}" target="_self" class="button float-right">Next</a>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endif %}
+
+
+			{% comment %} Reviews {% endcomment %}
+
+				{% if settings.show_product_reviews %}
+					<div class="clearfix">
+						<div class="container bm-medium tm-medium">
+							<div id="shopify-product-reviews" class="{{ page_animate }} clearfix" data-id="{{product.id}}" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">{{ product.metafields.spr.reviews }}</div>
+						</div>
+					</div>
+				{% endif %}
+
+
+			{% comment %} Related Products {% endcomment %}
+
+				{% if settings.show_related_products %}
+					{% include 'related-products' with settings.related_products_x_per_row %}
+				{% endif %}
+
+		</main>
+
+
+	{% comment %} Scripts {% endcomment %}
+
+		<script>
+			// Featured Image
+				{% if settings.use_product_hover_zoom %}
+					function initZoom() {
+						$('.zoomContainer').remove();
+
+						if ($(window).width() > 768) {
+							$('#featured-image').elevateZoom({
+								zoomType: '{{ settings.product_hover_zoom_type }}',
+								{% if settings.use_product_click_lightbox %}
+									cursor: 'pointer',
+								{% else %}
+									cursor: 'crosshair',
+								{% endif %}
+								zoomWindowFadeIn: 750,
+								zoomWindowFadeOut: 750,
+								lensFadeIn: 750,
+								lensFadeOut: 750,
+								easing: true,
+								borderColor: '#222222',
+
+								{% if settings.product_hover_zoom_type == 'window' %}
+									zoomWindowWidth: 350,
+									zoomWindowHeight: 350,
+									zoomWindowOffetx: 20,
+									borderSize: 0,
+									scrollZoom: true,
+									tint: true,
+									zoomTintFadeIn: 750,
+									zoomTintFadeOut: 750,
+									tintOpacity: 0.6,
+								{% else if settings.product_hover_zoom_type == 'lens' %}
+									containLensZoom: true,
+									lensShape: 'round',
+									lensBorder: 0,
+								{% endif %}
+
+								responsive: true
+							});
+						}
+					}
+
+					$(document).ready(function() { initZoom(); });
+					$(window).resize(function() { initZoom(); });
+				{% endif %}
+
+			// Thumbnail
+				$(document).ready(function() {
+					var $productThumbnailCarousel = $('#product-thumbnail-carousel');
+
+					$productThumbnailCarousel.owlCarousel({
+						slideSpeed: 500,
+						pagination: false,
+						paginationSpeed: 500,
+						autoPlay: false,
+						items: 3,
+						itemsCustom: [[0, 3], [1600, 3]]
+					});
+
+					$('#product-thumbnail-carousel-container .prev').on('click', function() {
+						$productThumbnailCarousel.trigger('owl.prev');
+					});
+
+					$('#product-thumbnail-carousel-container .next').on('click', function() {
+						$productThumbnailCarousel.trigger('owl.next');
+					});
+
+					$('.thumbnail-image').on('click', function() {
+						var	img	= $(this).attr('src');
+
+						$('#featured-image').attr('src', img);
+
+						{% if settings.use_product_hover_zoom %}
+							initZoom();
+						{% endif %}
+					});
+				});
+
+			// Variants
+				$(function($) {
+					var selectCallback = function(variant, selector) {
+						var	$addToCart = $('#add'),
+							$backorder = $('#backorder'),
+							$price = $('#price');
+
+						var	addText = 'Add To Cart',
+							backorderText = 'Back Order',
+							soldOutText = 'Sold Out',
+							unavailableText = 'Unavailable';
+
+						var	$featuredImage = $('#featured-image');
+
+						var switchImage = function(newImageSrc, newImage, mainImageDomEl) {
+							$(mainImageDomEl).attr('src', newImageSrc);
+						};
+
+						if (variant.featured_image) {
+							var	newImg = variant.featured_image,
+								el = $featuredImage[0];
+							
+							Shopify.Image.switchImage(newImg, el, function (src, imgObject, el) { var $el = $(el); $el.attr('src', src); });
+
+							{% if settings.use_product_hover_zoom %}
+								initZoom();
+							{% endif %}
+						}
+
+						if (variant) {
+							if (variant.available) {
+								// Selected a valid variant that is available
+									$addToCart.removeClass('disabled').removeAttr('disabled').html(addText);
+
+								// If item is backordered
+									if (variant.inventory_management && variant.inventory_quantity <= 0) {
+										$('#selected-variant').html({{ product.title | json }});
+										$backorder.removeClass('no-display');
+										$addToCart.removeClass('disabled').removeAttr('disabled').html(backorderText);
+									} else {
+										$backorder.addClass("no-display");
+									}
+
+							} else {
+								// Variant is sold out
+									$backorder.addClass('no-display');
+									$addToCart.addClass('disabled').attr('disabled', 'disabled').html(soldOutText);
+							}
+
+							// Whether the variant is in stock or not, we can update the price and compare at price
+								if (variant.compare_at_price > variant.price) {
+									$price.html('<small><s>' + Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}") + '</s></small> &nbsp;<span itemprop="price">' + Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>');
+								} else {
+									$price.html('<span itemprop="price">' + Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>');
+								}
+						} else {
+							// Variant doesn't exist
+								$backorder.addClass('no-display');
+								$addToCart.addClass('disabled').attr('disabled', 'disabled').html(unavailableText);
+						}
+					};
+
+					new Shopify.OptionSelectors('product-select', { product: {{ product | json }}, onVariantSelected: selectCallback });
+
+					// Add label to variant option and style them
+						{% if product.options.size == 1 %}
+							$('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first }}</label>');
+						{% endif %}
+							
+							$('.selector-wrapper label').addClass('bm-remove').wrap('<div class="one-third-percent omega bm-remove tablet-mobile"></div>').css({ 'line-height': '40px' });
+							$('.single-option-selector').addClass('w-full').wrap('<div class="two-third-percent alpha bm-remove tablet-mobile"></div>');
+
+							{% if product.variants.size == 1 %}
+								$('#product-variants').hide();
+							{% endif %}
+
+					// Auto-select first available variant on page load
+						{% assign found_one_in_stock = false %}
+
+						{% for variant in product.variants %}
+							{% if variant.available and found_one_in_stock == false %}
+								{% assign found_one_in_stock = true %}
+								{% for option in product.options %}
+									$('.single-option-selector:eq({{ forloop.index0 }})').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+								{% endfor %}
+							{% endif %}
+						{% endfor %}
+				});
+		</script>

@@ -1,0 +1,200 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Animate {% endcomment %}
+					
+			{% include 'animations' with 'page' %}
+			{% include 'animations' with 'extras' %}
+
+
+	{% comment %} Account {% endcomment %}
+
+		<main id="template-customer-account-liquid" class="clearfix" role="main">
+
+			{% comment %} Breadcrumb {% endcomment %}
+
+				<nav>
+					<div class="container bm-medium">
+						<div class="one-whole">
+							{% include 'breadcrumb' %}
+						</div>
+					</div>
+				</nav>
+
+
+			{% comment %} Account {% endcomment %}
+
+				<div class="container bm-medium">
+
+					{% comment %} Profile {% endcomment %}
+
+						<div class="one-quarter boxed {{ settings.grid_boxed_padding }} {{ page_animate }} clearfix" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">
+							<a href="https://gravatar.com/" target="_self" id="gravatar" class="bm-small tip-t-fade" data-tooltip="{{ customer.email }}"><img src="http://www.gravatar.com/avatar/{{ customer.email | remove: ' ' | strip_newlines | downcase | md5 }}?s=500" class="block" /></a>
+
+							<p class="bm-small"><strong>{{ customer.name }}</strong></p>
+
+							{% if customer.default_address != nil %}
+								<span class="font-small">
+									<p>
+										{{ customer.default_address.address1 }},
+										{% if customer.default_address.address2 != blank %}
+											{{ customer.default_address.address2 }},
+										{% endif %}
+										{{ customer.default_address.city}},
+										{% if address.province_code %}
+											{{ customer.default_address.province_code }},
+										{% endif %}
+										{{ customer.default_address.country }},
+										{{ customer.default_address.zip }},
+										{{ customer.default_address.phone }}
+									</p>
+								</span>
+							{% endif %}
+
+							<a href="/account/addresses" target="_self" class="button w-full bm-remove">Manage Addresses ({{ customer.addresses_count }})</a>
+						</div>
+
+
+					{% comment %} Order History {% endcomment %}
+
+						<div id="orders" class="three-quarter boxed {{ settings.grid_boxed_padding }} last {{ page_animate }} clearfix" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">
+							{% if customer.orders.size > 0 %}
+
+								{% comment %} Headers {% endcomment %}
+
+									<div id="orders-head" class="clearfix">
+										<div class="two-quarter-percent omega bm-remove">
+											<h6>Order</h6>
+										</div>
+										<div class="one-quarter-percent alpha omega bm-remove text-center">
+											<h6>Payment</h6>
+										</div>
+										<div class="one-quarter-percent alpha omega bm-remove text-center last">
+											<h6>Fulfilled</h6>
+										</div>
+
+										<hr />
+									</div>
+
+
+								{% comment %} Loop {% endcomment %}
+
+									{% for order in customer.orders %}
+
+										{% comment%} Financial Status {% endcomment %}
+
+											{% if order.financial_status == 'paid' %}
+
+												{% assign financial_button = 'success' %}
+												{% assign financial_tooltip = 'Payment Complete' %}
+												{% assign financial_text = 'Complete' %}
+
+											{% elsif order.financial_status == 'partially_paid' %}
+
+												{% assign financial_button = 'warning' %}
+												{% assign financial_tooltip = 'Payment Partially Paid' %}
+												{% assign financial_text = '#####' %}
+
+											{% elsif order.financial_status == 'pending' %}
+
+												{% assign financial_button = 'warning' %}
+												{% assign financial_tooltip = 'Payment Pending' %}
+												{% assign financial_text = 'Pending' %}
+
+											{% elsif order.financial_status == 'authorized' %}
+
+												{% assign financial_button = 'warning' %}
+												{% assign financial_tooltip = 'Payment Authorized' %}
+												{% assign financial_text = 'Authorized' %}
+
+											{% elsif order.financial_status == 'abandoned' %}
+
+												{% assign financial_button = 'error' %}
+												{% assign financial_tooltip = 'Order Abandoned' %}
+												{% assign financial_text = 'Abandoned' %}
+
+											{% elsif order.financial_status == 'refunded' %}
+
+												{% assign financial_button = 'error' %}
+												{% assign financial_tooltip = 'Payment Refunded' %}
+												{% assign financial_text = 'Refunded' %}
+
+											{% elsif order.financial_status == 'partially_refunded' %}
+
+												{% assign financial_button = 'error' %}
+												{% assign financial_tooltip = 'Payment Partially Refunded' %}
+												{% assign financial_text = '#####' %}
+
+											{% elsif order.financial_status == 'voided' %}
+
+												{% assign financial_button = 'neutral' %}
+												{% assign financial_tooltip = 'Transaction Void' %}
+												{% assign financial_text = 'Voided' %}
+
+											{% endif %}
+
+
+										{% comment%} Fulfillment Status {% endcomment %}
+
+											{% if order.fulfillment_status == 'fulfilled' %}
+
+												{% assign fulfillment_button = 'success' %}
+												{% assign fulfillment_tooltip = 'All Items Dispatched' %}
+												{% assign fulfillment_text = 'Complete' %}
+
+											{% elsif order.fulfillment_status == 'partial' %}
+
+												{% assign fulfillment_button = 'warning' %}
+												{% assign fulfillment_tooltip = 'Some Items Dispatched' %}
+												{% assign fulfillment_text = 'Processing' %}
+
+											{% elsif order.fulfillment_status == 'unfulfilled' %}
+
+												{% assign fulfillment_button = 'warning' %}
+												{% assign fulfillment_tooltip = 'Preparing Items' %}
+												{% assign fulfillment_text = 'Pending' %}
+
+											{% elsif order.fulfillment_status == 'restocked' %}
+
+												{% assign fulfillment_button = 'neutral' %}
+												{% assign fulfillment_tooltip = 'Awaiting Stock' %}
+												{% assign fulfillment_text = 'Voided' %}
+
+											{% endif %}
+
+										<div class="{% cycle 'odd', 'even' %}{% if forloop.first %} loop-first{% endif %}{% if forloop.last %} loop-last{% endif %} clearfix">
+											<div class="two-quarter-percent omega">
+												<a href="{{ order.customer_url }}" target="_self">{{ order.name }} &nbsp;/&nbsp; {{ order.created_at | date: "%b %d, %Y" }} &nbsp;/&nbsp; {{ order.total_price | money }}</a>
+											</div>
+											<div class="one-quarter-percent alpha omega text-center">
+												<button type="button" class="bm-remove w-small h-small tip-t-fade text-uppercase status {{ financial_button }}" data-tooltip="{{ financial_tooltip }}" data-status="{{ order.financial_status }}">
+													<span class="order-button-text">Payment:&nbsp;</span>{{ financial_text }}
+												</button>
+											</div>
+											<div class="one-quarter-percent alpha omega text-center last">
+												<button type="button" class="bm-remove w-small h-small tip-t-fade text-uppercase status {{ fulfillment_button }}" data-tooltip="{{ fulfillment_tooltip }}" data-status="{{ order.fulfillment_status }}">
+													<span class="order-button-text">Fulfilled:&nbsp;</span>{{ fulfillment_text }}
+												</button>
+											</div>
+										</div>
+
+										<hr class="orders-separator" />
+									{% endfor %}
+
+									<p class="bm-remove text-right"><a href="/collections" target="_self">Go Shopping!</a></p>
+
+							{% else %}
+
+								<p class="bm-larger tm-larger text-center">
+									You haven't placed any orders.<br />
+									<a href="/collections" target="_self">Start Shopping.</a>
+								</p>
+
+							{% endif %}
+						</div>
+
+				</div>
+
+		</main>

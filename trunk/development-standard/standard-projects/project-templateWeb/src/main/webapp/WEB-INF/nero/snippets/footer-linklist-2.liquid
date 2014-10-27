@@ -1,0 +1,16 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Link List 2 {% endcomment %}
+
+		<div id="link-list">
+			<h4 class="title"><span>{{ settings.footer_link_list_title_2 }}</span></h4>
+
+			<div class="content">
+				<ul class="unstyled bm-remove">
+					{% for link in linklists[settings.footer_link_list_2].links %}
+						<li><a href="{{ link.url }}" target="_self"><i class="fa fa-caret-right fw"></i><span>{{ link.title }}</span></a></li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>

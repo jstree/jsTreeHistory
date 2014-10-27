@@ -1,0 +1,61 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Animate {% endcomment %}
+					
+			{% include 'animations' with 'article-loop' %}
+
+
+		{% comment %} Odd/Even {% endcomment %}
+
+			{% capture article_loop_odd_even %}{% cycle 'odd', 'even' %}{% endcapture %}
+
+
+		{% comment %} First/Last Loop {% endcomment %}
+
+			{% capture article_loop_first_last %}{% if forloop.first %}loop-first{% endif %}{% if forloop.last %}loop-last{% endif %}{% endcapture %}
+
+
+		{% comment %} Excerpt {% endcomment %}
+
+			{% if template contains 'index' %}
+				{% assign truncate_amount = settings.frontpage_article_truncate %}
+			{% else %}
+				{% assign truncate_amount = settings.article_truncate %}
+			{% endif %}
+
+
+	{% comment %} Loop {% endcomment %}
+
+		<article>
+			<div class="{{ article_loop_grid_span }} article-loop boxed {{ settings.grid_boxed_padding }} {{ article_loop_odd_even }} {{ article_loop_first_last }} {{ article_loop_grid_span_last }} {{ article_loop_animate }} clearfix" data-anim-type="{{ article_loop_animation_type }}" data-anim-delay="{{ article_loop_animation_delay }}">
+				<h3 class="article-loop-title"><a href="{{ article.url }}" target="_self">{{ article.title }}</a></h3>
+
+				<hr />
+
+				<div class="article-loop-excerpt rte">
+					{% if article.excerpt.size > 0 %}
+						{{ article.excerpt | truncatewords: truncate_amount }}
+					{% else %}
+						{{ article.content | strip_html | truncatewords: truncate_amount }}
+					{% endif %}
+				</div>
+
+				<hr />
+
+				<p class="article-loop-details bm-remove text-right">
+					By <a href="javascript:void();" target="_self" class="tip-t-fade" data-tooltip="<img src='http://www.gravatar.com/avatar/{{ article.user.email | remove: ' ' | strip_newlines | downcase | md5 }}?s=500' alt='Gravatar Image' class='block' style='width: 100px; height: 100px;' />">{{ article.user.first_name }} {{ article.user.last_name }}</a> on <time pubdate datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %d, %Y' }}</time>
+
+					{% if blog.comments_enabled? %}
+						<strong>&nbsp;&bull;&nbsp;</strong> <a href="{{ article.url }}#article-comments" target="_self"><i class="fa fa-comments fa-fw"></i> {{ article.comments_count }} {{ article.comments_count | pluralize: 'Comment', 'Comments' }}</a>
+					{% endif %}
+				</p>
+			</div>
+		</article>
+
+
+	{% comment %} Clearing {% endcomment %}
+
+		{{ article_loop_clear_div }}

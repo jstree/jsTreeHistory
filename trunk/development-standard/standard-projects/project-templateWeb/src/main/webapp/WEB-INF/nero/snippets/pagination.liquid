@@ -1,0 +1,52 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Animations {% endcomment %}
+
+			{% include 'animations' with 'extras' %}
+
+
+	{% comment %} Pagination {% endcomment %}
+
+		<div class="{{ extras_animate }} clearfix" data-anim-type="{{ extras_animation_type }}" data-anim-delay="{{ extras_animation_delay }}">
+
+			{% comment %} Pagination Links {% endcomment %}
+
+				<div class="pagination">
+					<span class="page-links text-center">
+						{% if paginate.previous %}
+							<a href="{{ paginate.previous.url }}" target="_self" class="page-link prev tip-t-fade" data-tooltip="Previous"><i class="fa fa-angle-double-left"></i></a>
+						{% else %}
+							<span class="page-link void-link prev"><i class="fa fa-angle-double-left"></i></span>
+						{% endif %}
+
+						{% for part in paginate.parts %}
+							{% if part.is_link %}
+								<a href="{{ part.url }}" target="_self" class="page-link tip-t-fade" data-tooltip="Page {{ part.title }}">{{ part.title }}</a>
+							{% else %}
+								{% if part.title == '&hellip;' %}
+									<span class="page-link void-link">{{ part.title }}</span>
+								{% else %}
+									<a href="{{ part.url }}" target="_self" class="page-link active tip-t-fade" data-tooltip="Current Page">{{ part.title }}</a>
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+
+						{% if paginate.next %}
+							<a href="{{ paginate.next.url }}" target="_self" class="page-link next tip-t-fade" data-tooltip="Next"><i class="fa fa-angle-double-right"></i></a>
+						{% else %}
+							<span class="page-link void-link next"><i class="fa fa-angle-double-right"></i></span>
+						{% endif %}
+					</span>
+				</div>
+
+
+			{% comment %} Pagination Details {% endcomment %}
+
+				{% if pagination == 'details' and settings.show_pagination_details %}
+					<p class="page-details bm-remove tm-medium">Page {{ paginate.current_page }} of {{ paginate.pages }}<br />Showing: {{ paginate.current_offset | plus: 1 }}-{% if paginate.next %}{{ paginate.current_offset | plus: paginate.page_size }}{% else %}{{ paginate.items }}{% endif %} of {{ paginate.items }}</p>
+				{% endif %}
+
+		</div>

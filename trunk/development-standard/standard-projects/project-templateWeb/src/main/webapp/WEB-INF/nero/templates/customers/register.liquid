@@ -1,0 +1,78 @@
+{% comment %} Nero v1.1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com {% endcomment %}
+
+
+	{% comment %} Code Block {% endcomment %}
+
+		{% comment %} Animate {% endcomment %}
+					
+			{% include 'animations' with 'page' %}
+			{% include 'animations' with 'extras' %}
+
+
+	{% comment %} Register {% endcomment %}
+
+		<main id="template-customer-register-liquid" class="clearfix" role="main">
+
+			{% comment %} Breadcrumb {% endcomment %}
+
+				<nav>
+					<div class="container bm-medium">
+						<div class="one-whole">
+							{% include 'breadcrumb' %}
+						</div>
+					</div>
+				</nav>
+
+
+			{% comment %} Form {% endcomment %}
+
+				<div class="container bm-medium">
+					<div class="one-whole boxed {{ settings.grid_boxed_padding }} {{ page_animate }} clearfix" data-anim-type="{{ page_animation_type }}" data-anim-delay="{{ page_animation_delay }}">
+						<div class="one-half-percent desktop-tablet omega bm-remove">
+							<p>
+								Simply fill in all the fields to create your account.<br />
+								If you already have an account, you can <a href="/account/login" target="_self">log in here</a>.
+							</p>
+						</div>
+
+						<div class="one-half-percent desktop-tablet alpha bm-remove last">
+							{% form 'create_customer' %}
+								<script>
+									$(document).ready(function() {
+										$('#create_customer').attr('novalidate', '');
+									});
+								</script>
+
+								{% if form.errors %}
+									<div id="form-error" class="no-display">
+										{{ form.errors | default_errors | replace: 'Email is invalid.', 'Email is invalid' }}
+									</div>
+
+									<script>
+										var error_message = $('#form-error li:first').html();
+
+										$('body').edgeAlerts({
+											title: 'Form Error',
+											message: error_message
+										});
+									</script>
+								{% endif %}
+
+								<input type="text" name="customer[first_name]" id="register-first-name" class="w-full" placeholder="First Name" value="{{ form.first_name }}" />
+
+								<input type="text" name="customer[last_name]" id="register-last-name" class="w-full" placeholder="Last Name" value="{{ form.last_name }}" />
+
+								<input type="email" name="customer[email]" id="register-email" class="w-full" placeholder="Email Address" value="{{ form.email }}" />
+
+								<input type="text" class="w-full fake-password" placeholder="Password" />
+								<input type="password" name="customer[password]" id="register-password" class="w-full true-password no-display" />
+
+								<div class="text-right">
+									<button type="submit" class="bm-remove">Create</button>
+								</div>
+							{% endform %}
+						</div>
+					</div>
+				</div>
+
+		</main>
