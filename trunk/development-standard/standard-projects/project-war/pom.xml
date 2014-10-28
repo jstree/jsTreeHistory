@@ -2,12 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>egovframework.template.web</groupId>
-	<artifactId>Simple_Homepage</artifactId>
+	
+	<parent>
+		<groupId>development</groupId>
+		<artifactId>standard-projects</artifactId>
+		<version>${project.version}</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>project-war</artifactId>
 	<packaging>war</packaging>
-	<version>3.1.1</version>
-	<name>Template-Web-Simple_Homepage</name>
-	<url>http://www.egovframe.go.kr</url>
+	<name>project-war</name>
+	<description>
+		전자정부프레임워크입니다.
+	</description>
+	
+	<url>http://www.313.co.kr</url>
 
 	<licenses>
 		<license>
