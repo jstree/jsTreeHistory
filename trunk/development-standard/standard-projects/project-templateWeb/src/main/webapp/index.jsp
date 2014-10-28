@@ -611,7 +611,7 @@
 					<div id="navigation" class="clearfix">
 						<!-- For PC Menu -->
 						<div id="click-nav" class="clearfix">
-							<a href="/" target="_self" class="nav-item first active" data-sub-nav="home-nav-links">
+							<a href="/templateWeb" target="_self" class="nav-item first active" data-sub-nav="home-nav-links">
 							Home </a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="catalog-nav-links"> Catalog <span class="has-dropdown-icon">+</span></a>
 							<a href="./blog.html" target="_self" class="nav-item" data-sub-nav="blog-nav-links"> Blog </a>
@@ -860,7 +860,7 @@
 							</div>
 						</div>
 						<div id="copyright" class="one-half-percent desktop-tablet bm-remove">
-							Copyright &copy; <a href="/" target="_self">dongmin.lee</a> 2014. Design by <a href="http://www.cloud-eight.com/" target="_blank">Cloud
+							Copyright &copy; <a href="/templateWeb" target="_self">dongmin.lee</a> 2014. Design by <a href="http://www.cloud-eight.com/" target="_blank">Cloud
 							Eight</a>. Powered by <a href="http://www.shopify.com/?ref=cloudeight" target="_blank">Shopify</a>.
 						</div>
 						<div id="accepted-cards" class="one-half-percent desktop-tablet bm-remove last">
