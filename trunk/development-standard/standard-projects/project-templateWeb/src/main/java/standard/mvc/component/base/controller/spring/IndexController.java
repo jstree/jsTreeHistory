@@ -77,11 +77,11 @@ public class IndexController extends GenericAbstractController implements Generi
 	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
 			HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
 
-		String viewResolver = "/jsp";
-		String siteCode = "/community";
+		String viewResolver = "";
+		String siteCode = "";
 		String menuCodes = "";
-		String componentCode = "/index";
-		String targetPage = "/index";
+		String componentCode = "";
+		String targetPage = "";
 		// templateEngine not use external view url.
 		return viewResolver + siteCode + menuCodes + componentCode + targetPage;
 
