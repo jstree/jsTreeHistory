@@ -18,10 +18,12 @@
 
 	<repositories>
 		<repository>
-		<id>sardine-google-svn-repo</id>
-		<snapshots> <enabled>true</enabled> </snapshots>
-		<name>Sardine maven repo at Google Code</name>
-		<url>http://sardine.googlecode.com/svn/maven/</url>
+			<id>sardine-google-svn-repo</id>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<name>Sardine maven repo at Google Code</name>
+			<url>http://sardine.googlecode.com/svn/maven/</url>
 		</repository>
 	</repositories>
 
@@ -34,10 +36,10 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
-	    <dependency>
-		    <groupId>com.googlecode.sardine</groupId>
-		    <artifactId>sardine</artifactId>
-	    </dependency>
+		<dependency>
+			<groupId>com.googlecode.sardine</groupId>
+			<artifactId>sardine</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -53,11 +55,13 @@
 				<artifactId>guava</artifactId>
 				<version>15.0</version>
 			</dependency>
+
 			<dependency>
-			    <groupId>com.googlecode.sardine</groupId>
-			    <artifactId>sardine</artifactId>
-			    <version>314</version>
-		    </dependency>
+				<groupId>com.googlecode.sardine</groupId>
+				<artifactId>sardine</artifactId>
+				<version>314</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 </project>
