@@ -1,0 +1,105 @@
+/*	popGrowl v1.3, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+//	================================================================================ */
+
+/*	Table of Contents
+//	==================================================
+//		#Default
+
+
+/*	#Default
+//	================================================== */
+
+	.pop-growl {
+		width: 320px;
+		max-width: 320px;
+		padding: 10px;
+		position: fixed;
+		z-index: 99999999;
+
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	.pop-growl.pop-growl-top-left {
+		top: 0;
+		left: 0;
+	}
+
+	.pop-growl.pop-growl-top-right {
+		top: 0;
+		right: 0;
+	}
+
+	.pop-growl.pop-growl-bottom-right {
+		bottom: -10px;
+		right: 0;
+	}
+
+	.pop-growl.pop-growl-bottom-left {
+		bottom: -10px;
+		left: 0;
+	}
+
+	.pop-growl .pop-growl-notification {
+		display: none;
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 10px;
+		-webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0,.2);
+		-moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0,.2);
+		box-shadow: 0 0 10px 0 rgba(0, 0, 0,.2);
+		border-width: 1px;
+		border-style: solid;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		padding: 10px;
+		font-family: Verdana, Geneva, sans-serif;
+		font-size: .7em;
+		text-shadow: 1px 1px 0 rgba(0, 0, 0, .3);
+		line-height: normal;
+		position: relative;
+		cursor: pointer;
+	}
+
+	.pop-growl .pop-growl-notification.default {
+		border-color: #3B80A0;
+		background: #4EA5CD;
+		color: #FFFFFF;
+	}
+
+	.pop-growl .pop-growl-notification.success {
+		border-color: #49A26E;
+		background: #74BE93;
+		color: #FFFFFF;
+	}
+
+	.pop-growl .pop-growl-notification.warning {
+		border-color: #CC943B;
+		background: #EAAF51;
+		color: #FFFFFF;
+	}
+
+	.pop-growl .pop-growl-notification.error {
+		border-color: #974E47;
+		background: #C3665D;
+		color: #FFFFFF;
+	}
+
+	.pop-growl .pop-growl-notification .pop-growl-notification-title {
+		display: block;
+		margin-bottom: 10px;
+		font-weight: bold;
+	}
+
+	.pop-growl .pop-growl-notification .pop-growl-notification-text {
+		display: block;
+	}
+
+	.pop-growl .pop-growl-notification a {
+		color: #FFFFFF;
+		text-decoration: underline;
+	}
+
+	.pop-growl .pop-growl-notification img { max-width: 100%; }
