@@ -22,13 +22,13 @@ import egovframework.com.cmm.service.FileVO;
 
 /**
  * @Class Name : EgovImageProcessController.java
- * @Description : 
+ * @Description :
  * @Modification Information
  *
- *    수정일       수정자         수정내용
- *    -------        -------     -------------------
- *    2009. 4. 2.     이삼섭
- *    2011.08.31.     JJY        경량환경 템플릿 커스터마이징버전 생성
+ *    수정일       	수정자         수정내용
+ *    ----------   ---------     -------------------
+ *    2009.04.02	이삼섭			최초생성
+ *    2014.03.31	유지보수		fileSn 오류수정
  *
  * @author 공통 서비스 개발팀 이삼섭
  * @since 2009. 4. 2.
@@ -43,11 +43,11 @@ public class EgovImageProcessController extends HttpServlet {
     @Resource(name = "EgovFileMngService")
     private EgovFileMngService fileService;
 
-    Logger log = Logger.getLogger(this.getClass());
+    private static final Logger LOG = Logger.getLogger(EgovImageProcessController.class.getName());
 
     /**
      * 첨부된 이미지에 대한 미리보기 기능을 제공한다.
-     * 
+     *
      * @param atchFileId
      * @param fileSn
      * @param sessionVO
@@ -62,75 +62,90 @@ public class EgovImageProcessController extends HttpServlet {
 		//@RequestParam("fileSn") String fileSn,
 		String atchFileId = (String)commandMap.get("atchFileId");
 		String fileSn = (String)commandMap.get("fileSn");
-	
+
 		FileVO vo = new FileVO();
-	
+
 		vo.setAtchFileId(atchFileId);
 		vo.setFileSn(fileSn);
-	
+
+		//------------------------------------------------------------
+		// fileSn이 없는 경우 마지막 파일 참조
+		//------------------------------------------------------------
+		if (fileSn == null || fileSn.equals("")) {
+			int newMaxFileSN = fileService.getMaxFileSN(vo);
+			vo.setFileSn(Integer.toString(newMaxFileSN - 1));
+		}
+		//------------------------------------------------------------
+
 		FileVO fvo = fileService.selectFileInf(vo);
-	
+
 		//String fileLoaction = fvo.getFileStreCours() + fvo.getStreFileNm();
-	
-		File file = new File(fvo.getFileStreCours(), fvo.getStreFileNm());
-		FileInputStream fis = null; new FileInputStream(file);
-	
+
+		// 2011.10.10 보안점검 후속조치
+		File file = null;
+		FileInputStream fis = null;
+
 		BufferedInputStream in = null;
 		ByteArrayOutputStream bStream = null;
-		try{
-			fis = new FileInputStream(file);
-			in = new BufferedInputStream(fis);
-			bStream = new ByteArrayOutputStream();
-			int imgByte;
-			while ((imgByte = in.read()) != -1) {
-			    bStream.write(imgByte);
-			}
-			
+
+		try {
+		    file = new File(fvo.getFileStreCours(), fvo.getStreFileNm());
+		    fis = new FileInputStream(file);
+
+		    in = new BufferedInputStream(fis);
+		    bStream = new ByteArrayOutputStream();
+
+		    int imgByte;
+		    while ((imgByte = in.read()) != -1) {
+		    	bStream.write(imgByte);
+		    }
+
 			String type = "";
-	
+
 			if (fvo.getFileExtsn() != null && !"".equals(fvo.getFileExtsn())) {
 			    if ("jpg".equals(fvo.getFileExtsn().toLowerCase())) {
-				type = "image/jpeg"; //TODO 정말 이런걸까?
+				type = "image/jpeg";
 			    } else {
-				type = "image/" + fvo.getFileExtsn().toLowerCase();
+			    	type = "image/" + fvo.getFileExtsn().toLowerCase();
 			    }
 			    type = "image/" + fvo.getFileExtsn().toLowerCase();
-	
+
 			} else {
-			    log.debug("Image fileType is null.");
+			    LOG.debug("Image fileType is null.");
 			}
-			
+
 			response.setHeader("Content-Type", type);
 			response.setContentLength(bStream.size());
-			
+
 			bStream.writeTo(response.getOutputStream());
-			
+
 			response.getOutputStream().flush();
 			response.getOutputStream().close();
-	
-		    
-		}catch(Exception e){
-			log.debug(e);//e.printStackTrace();
-		}finally{
+
+			// 2011.10.10 보안점검 후속조치 끝
+		} finally {
 			if (bStream != null) {
 				try {
 					bStream.close();
-				} catch (Exception est) {
-				    log.debug("IGNORED: " + est.getMessage());
+				} catch (Exception ignore) {
+					//System.out.println("IGNORE: " + ignore);
+					LOG.debug("IGNORE: " + ignore.getMessage());
 				}
 			}
 			if (in != null) {
 				try {
 					in.close();
-				} catch (Exception ei) {
-				    log.debug("IGNORED: " + ei.getMessage());
+				} catch (Exception ignore) {
+					//System.out.println("IGNORE: " + ignore);
+					LOG.debug("IGNORE: " + ignore.getMessage());
 				}
 			}
 			if (fis != null) {
 				try {
 					fis.close();
-				} catch (Exception efis) {
-				    log.debug("IGNORED: " + efis.getMessage());
+				} catch (Exception ignore) {
+					//System.out.println("IGNORE: " + ignore);
+					LOG.debug("IGNORE: " + ignore.getMessage());
 				}
 			}
 		}
