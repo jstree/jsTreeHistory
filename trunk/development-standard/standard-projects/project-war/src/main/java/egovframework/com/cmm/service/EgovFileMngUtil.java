@@ -9,10 +9,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-//import java.util.HashMap;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -25,33 +28,30 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import egovframework.let.utl.fcc.service.EgovStringUtil;
+import egovframework.com.cmm.EgovWebUtil;
 import egovframework.rte.fdl.idgnr.EgovIdGnrService;
-import egovframework.rte.fdl.property.EgovPropertyService;
+
 
 /**
  * @Class Name  : EgovFileMngUtil.java
  * @Description : 메시지 처리 관련 유틸리티
  * @Modification Information
- * 
+ *
  *     수정일         수정자                   수정내용
  *     -------          --------        ---------------------------
  *   2009.02.13       이삼섭                  최초 생성
- *   2011.08.31  JJY            경량환경 템플릿 커스터마이징버전 생성
- *
+ *   2011.08.09       서준식                  utl.fcc패키지와 Dependency제거를 위해 getTimeStamp()메서드 추가
  * @author 공통 서비스 개발팀 이삼섭
  * @since 2009. 02. 13
  * @version 1.0
- * @see 
- * 
+ * @see
+ *
  */
 @Component("EgovFileMngUtil")
 public class EgovFileMngUtil {
 
     public static final int BUFF_SIZE = 2048;
 
-    @Resource(name = "propertiesService")
-    protected EgovPropertyService propertyService;
 
     @Resource(name = "egovFileIdGnrService")
     private EgovIdGnrService idgenService;
@@ -60,21 +60,21 @@ public class EgovFileMngUtil {
 
     /**
      * 첨부파일에 대한 목록 정보를 취득한다.
-     * 
+     *
      * @param files
      * @return
      * @throws Exception
      */
     public List<FileVO> parseFileInf(Map<String, MultipartFile> files, String KeyStr, int fileKeyParam, String atchFileId, String storePath) throws Exception {
 	int fileKey = fileKeyParam;
-	
+
 	String storePathString = "";
 	String atchFileIdString = "";
 
 	if ("".equals(storePath) || storePath == null) {
-	    storePathString = propertyService.getString("Globals.fileStorePath");
+	    storePathString = EgovProperties.getProperty("Globals.fileStorePath");
 	} else {
-	    storePathString = propertyService.getString(storePath);
+	    storePathString = EgovProperties.getProperty(storePath);
 	}
 
 	if ("".equals(atchFileId) || atchFileId == null) {
@@ -83,8 +83,8 @@ public class EgovFileMngUtil {
 	    atchFileIdString = atchFileId;
 	}
 
-	File saveFolder = new File(storePathString);
-	
+	File saveFolder = new File(EgovWebUtil.filePathBlackList(storePathString));
+
 	if (!saveFolder.exists() || saveFolder.isFile()) {
 	    saveFolder.mkdirs();
 	}
@@ -100,7 +100,7 @@ public class EgovFileMngUtil {
 
 	    file = entry.getValue();
 	    String orginFileName = file.getOriginalFilename();
-	    
+
 	    //--------------------------------------
 	    // 원 파일명이 없는 경우 처리
 	    // (첨부가 되지 않은 input file type)
@@ -113,12 +113,12 @@ public class EgovFileMngUtil {
 	    int index = orginFileName.lastIndexOf(".");
 	    //String fileName = orginFileName.substring(0, index);
 	    String fileExt = orginFileName.substring(index + 1);
-	    String newName = KeyStr + EgovStringUtil.getTimeStamp() + fileKey;
+	    String newName = KeyStr + getTimeStamp() + fileKey;
 	    long _size = file.getSize();
 
 	    if (!"".equals(orginFileName)) {
 		filePath = storePathString + File.separator + newName;
-		file.transferTo(new File(filePath));
+		file.transferTo(new File(EgovWebUtil.filePathBlackList(filePath)));
 	    }
 	    fvo = new FileVO();
 	    fvo.setFileExtsn(fileExt);
@@ -131,7 +131,7 @@ public class EgovFileMngUtil {
 
 	    //writeFile(file, newName, storePathString);
 	    result.add(fvo);
-	    
+
 	    fileKey++;
 	}
 
@@ -140,7 +140,7 @@ public class EgovFileMngUtil {
 
     /**
      * 첨부파일을 서버에 저장한다.
-     * 
+     *
      * @param file
      * @param newName
      * @param stordFilePath
@@ -149,10 +149,10 @@ public class EgovFileMngUtil {
     protected void writeUploadedFile(MultipartFile file, String newName, String stordFilePath) throws Exception {
 	InputStream stream = null;
 	OutputStream bos = null;
-	String stordFilePathReal = (stordFilePath==null?"":stordFilePath).replaceAll("..","");
+
 	try {
 	    stream = file.getInputStream();
-	    File cFile = new File(stordFilePathReal);
+	    File cFile = new File(stordFilePath);
 
 	    if (!cFile.isDirectory()) {
 		boolean _flag = cFile.mkdir();
@@ -161,7 +161,7 @@ public class EgovFileMngUtil {
 		}
 	    }
 
-	    bos = new FileOutputStream(stordFilePathReal + File.separator + newName);
+	    bos = new FileOutputStream(stordFilePath + File.separator + newName);
 
 	    int bytesRead = 0;
 	    byte[] buffer = new byte[BUFF_SIZE];
@@ -169,55 +169,54 @@ public class EgovFileMngUtil {
 	    while ((bytesRead = stream.read(buffer, 0, BUFF_SIZE)) != -1) {
 		bos.write(buffer, 0, bytesRead);
 	    }
-	} catch (FileNotFoundException fnfe) {
-	    LOG.debug("fnfe:"+fnfe);//fnfe.printStackTrace();
-	} catch (IOException ioe) {
-		LOG.debug("ioe:"+ioe);//ioe.printStackTrace();
 	} catch (Exception e) {
-		LOG.debug("e:"+e);//e.printStackTrace();
+	    //e.printStackTrace();
+	    LOG.error("IGNORE:", e);	// 2011.10.10 보안점검 후속조치
 	} finally {
 	    if (bos != null) {
 		try {
 		    bos.close();
 		} catch (Exception ignore) {
-			LOG.debug("IGNORED: " + ignore.getMessage());
+		    LOG.debug("IGNORED: " + ignore.getMessage());
 		}
 	    }
 	    if (stream != null) {
 		try {
 		    stream.close();
 		} catch (Exception ignore) {
-			LOG.debug("IGNORED: " + ignore.getMessage());
+		    LOG.debug("IGNORED: " + ignore.getMessage());
 		}
 	    }
 	}
-    }	
-	
+    }
+
     /**
      * 서버의 파일을 다운로드한다.
-     * 
+     *
      * @param request
      * @param response
      * @throws Exception
      */
     public static void downFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-    String downFileName = EgovStringUtil.isNullToString(request.getAttribute("downFile")).replaceAll("..","");
-    String orgFileName = EgovStringUtil.isNullToString(request.getAttribute("orgFileName")).replaceAll("..","");
+	String downFileName = "";
+	String orgFileName = "";
 
-	/*if ((String)request.getAttribute("downFile") == null) {
+	if ((String)request.getAttribute("downFile") == null) {
 	    downFileName = "";
 	} else {
-	    downFileName = EgovStringUtil.isNullToString(request.getAttribute("downFile"));
-	}*/
+	    downFileName = (String)request.getAttribute("downFile");
+	}
 
-	/*if ((String)request.getAttribute("orgFileName") == null) {
+	if ((String)request.getAttribute("orgFileName") == null) {
 	    orgFileName = "";
 	} else {
 	    orgFileName = (String)request.getAttribute("orginFile");
-	}*/
+	}
 
-	File file = new File(downFileName);
+	orgFileName = orgFileName.replaceAll("\r", "").replaceAll("\n", "");
+
+	File file = new File(EgovWebUtil.filePathBlackList(downFileName));
 
 	if (!file.exists()) {
 	    throw new FileNotFoundException(downFileName);
@@ -228,9 +227,9 @@ public class EgovFileMngUtil {
 	}
 
 	byte[] b = new byte[BUFF_SIZE]; //buffer size 2K.
-    String fName = (new String(orgFileName.getBytes(), "UTF-8")).replaceAll("\r\n","");
+
 	response.setContentType("application/x-msdownload");
-	response.setHeader("Content-Disposition:", "attachment; filename=" + fName);
+	response.setHeader("Content-Disposition:", "attachment; filename=" + new String(orgFileName.getBytes(), "UTF-8"));
 	response.setHeader("Content-Transfer-Encoding", "binary");
 	response.setHeader("Pragma", "no-cache");
 	response.setHeader("Expires", "0");
@@ -252,7 +251,7 @@ public class EgovFileMngUtil {
 			    outs.close();
 			} catch (Exception ignore) {
 			    //System.out.println("IGNORED: " + ignore.getMessage());
-				LOG.debug("IGNORED: " + ignore.getMessage());
+			    LOG.debug("IGNORED: " + ignore.getMessage());
 			}
 		    }
 		    if (fin != null) {
@@ -260,7 +259,7 @@ public class EgovFileMngUtil {
 			    fin.close();
 			} catch (Exception ignore) {
 			    //System.out.println("IGNORED: " + ignore.getMessage());
-				LOG.debug("IGNORED: " + ignore.getMessage());
+			    LOG.debug("IGNORED: " + ignore.getMessage());
 			}
 		    }
 		}
@@ -268,11 +267,11 @@ public class EgovFileMngUtil {
 
     /**
      * 첨부로 등록된 파일을 서버에 업로드한다.
-     * 
+     *
      * @param file
      * @return
      * @throws Exception
-     
+     */
     public static HashMap<String, String> uploadFile(MultipartFile file) throws Exception {
 
 	HashMap<String, String> map = new HashMap<String, String>();
@@ -287,9 +286,9 @@ public class EgovFileMngUtil {
 	long size = file.getSize();
 
 	//newName 은 Naming Convention에 의해서 생성
-	newName = EgovStringUtil.getTimeStamp() + "." + fileExt;
+	newName = getTimeStamp();	// 2012.11 KISA 보안조치
 	writeFile(file, newName, stordFilePath);
-	//storedFilePath는 지정		
+	//storedFilePath는 지정
 	map.put(Globals.ORIGIN_FILE_NM, orginFileName);
 	map.put(Globals.UPLOAD_FILE_NM, newName);
 	map.put(Globals.FILE_EXT, fileExt);
@@ -298,10 +297,10 @@ public class EgovFileMngUtil {
 
 	return map;
     }
-*/
+
     /**
      * 파일을 실제 물리적인 경로에 생성한다.
-     * 
+     *
      * @param file
      * @param newName
      * @param stordFilePath
@@ -310,16 +309,15 @@ public class EgovFileMngUtil {
     protected static void writeFile(MultipartFile file, String newName, String stordFilePath) throws Exception {
 	InputStream stream = null;
 	OutputStream bos = null;
-	newName = EgovStringUtil.isNullToString(newName).replaceAll("..", "");
-	stordFilePath = EgovStringUtil.isNullToString(stordFilePath).replaceAll("..", "");
+
 	try {
 	    stream = file.getInputStream();
-	    File cFile = new File(stordFilePath);
+	    File cFile = new File(EgovWebUtil.filePathBlackList(stordFilePath));
 
 	    if (!cFile.isDirectory())
 		cFile.mkdir();
 
-	    bos = new FileOutputStream(stordFilePath + File.separator + newName);
+	    bos = new FileOutputStream(EgovWebUtil.filePathBlackList(stordFilePath + File.separator + newName));
 
 	    int bytesRead = 0;
 	    byte[] buffer = new byte[BUFF_SIZE];
@@ -327,12 +325,10 @@ public class EgovFileMngUtil {
 	    while ((bytesRead = stream.read(buffer, 0, BUFF_SIZE)) != -1) {
 		bos.write(buffer, 0, bytesRead);
 	    }
-	} catch (FileNotFoundException fnfe) {
-		LOG.debug("fnfe: " + fnfe);//fnfe.printStackTrace();
-	} catch (IOException ioe) {
-		LOG.debug("ioe: " + ioe);//ioe.printStackTrace();
 	} catch (Exception e) {
-		LOG.debug("e: " + e);//e.printStackTrace();
+	    //e.printStackTrace();
+	    //throw new RuntimeException(e);	// 보안점검 후속조치
+		Logger.getLogger(EgovFileMngUtil.class).debug("IGNORED: " + e.getMessage());
 	} finally {
 	    if (bos != null) {
 		try {
@@ -353,7 +349,7 @@ public class EgovFileMngUtil {
 
     /**
      * 서버 파일에 대하여 다운로드를 처리한다.
-     * 
+     *
      * @param response
      * @param streFileNm
      *            : 파일저장 경로가 포함된 형태
@@ -361,10 +357,8 @@ public class EgovFileMngUtil {
      * @throws Exception
      */
     public void downFile(HttpServletResponse response, String streFileNm, String orignFileNm) throws Exception {
-    //	String downFileName = EgovStringUtil.isNullToString(request.getAttribute("downFile")).replaceAll("..","");
-    //	String orgFileName = EgovStringUtil.isNullToString(request.getAttribute("orgFileName")).replaceAll("..","");
-    String downFileName = EgovStringUtil.isNullToString(streFileNm).replaceAll("..","");
-	String orgFileName = EgovStringUtil.isNullToString(orignFileNm).replaceAll("..","");
+	String downFileName = streFileNm;
+	String orgFileName = orignFileNm;
 
 	File file = new File(downFileName);
 	//log.debug(this.getClass().getName()+" downFile downFileName "+downFileName);
@@ -409,7 +403,7 @@ public class EgovFileMngUtil {
 	    response.getOutputStream().flush();
 	    response.getOutputStream().close();
 	}
-		
+
 	/*
 	String uploadPath = propertiesService.getString("fileDir");
 
@@ -443,10 +437,10 @@ public class EgovFileMngUtil {
 	    printwriter.close();
 	}
 	//*/
-		
-		
-	/*		
-	response.setContentType("application/x-msdownload");	        
+
+
+	/*
+	response.setContentType("application/x-msdownload");
 	response.setHeader("Content-Disposition:", "attachment; filename=" + new String(orgFileName.getBytes(),"UTF-8" ));
 	response.setHeader("Content-Transfer-Encoding","binary");
 	response.setHeader("Pragma","no-cache");
@@ -455,14 +449,46 @@ public class EgovFileMngUtil {
 	BufferedInputStream fin = new BufferedInputStream(new FileInputStream(file));
 	BufferedOutputStream outs = new BufferedOutputStream(response.getOutputStream());
 	int read = 0;
-	
+
 	while ((read = fin.read(b)) != -1) {
 	    outs.write(b,0,read);
-	}	
+	}
 	log.debug(this.getClass().getName()+" BufferedOutputStream Write Complete!!! ");
-		
+
 	outs.close();
-    	fin.close();		
+    	fin.close();
 	//*/
+    }
+
+    /**
+     * 2011.08.09
+     * 공통 컴포넌트 utl.fcc 패키지와 Dependency제거를 위해 내부 메서드로 추가 정의함
+     * 응용어플리케이션에서 고유값을 사용하기 위해 시스템에서17자리의TIMESTAMP값을 구하는 기능
+     *
+     * @param
+     * @return Timestamp 값
+     * @exception MyException
+     * @see
+     */
+    private static String getTimeStamp() {
+
+	String rtnStr = null;
+
+	// 문자열로 변환하기 위한 패턴 설정(년도-월-일 시:분:초:초(자정이후 초))
+	String pattern = "yyyyMMddhhmmssSSS";
+
+	try {
+	    SimpleDateFormat sdfCurrent = new SimpleDateFormat(pattern, Locale.KOREA);
+	    Timestamp ts = new Timestamp(System.currentTimeMillis());
+
+	    rtnStr = sdfCurrent.format(ts.getTime());
+	} catch (Exception e) {
+	    //e.printStackTrace();
+		
+	    //throw new RuntimeException(e);	// 보안점검 후속조치
+	    LOG.debug("IGNORED: " + e.getMessage());
+	}
+
+	return rtnStr;
     }
 }
