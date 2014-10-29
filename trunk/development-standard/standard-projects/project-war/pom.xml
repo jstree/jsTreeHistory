@@ -428,7 +428,7 @@
 					<uriEncoding>UTF-8</uriEncoding>
 					<url>http://ubuntu.313.co.kr:8313/manager/text</url>
 					<server>StandardProject-Snapshot</server>
-					<path>/ROOT</path>
+					<path>/</path>
 				</configuration>
 			</plugin>
 			<plugin>
