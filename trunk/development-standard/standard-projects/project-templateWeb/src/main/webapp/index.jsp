@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <!-- Nero v1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com -->
 
