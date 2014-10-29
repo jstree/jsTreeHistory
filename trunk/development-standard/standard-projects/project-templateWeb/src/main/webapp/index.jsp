@@ -171,11 +171,9 @@
 							<a href="./" target="_self" class="nav-item first active" data-sub-nav="home-nav-links"> Home </a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="jstree-nav-links"> Jstree <span class="has-dropdown-icon">+</span></a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="baroboard-nav-links"> Baro Board <span class="has-dropdown-icon">+</span></a>
-							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="egovframework-nav-links"> Egov Framework <span class="has-dropdown-icon">+</span></a>
-							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="anyframework-nav-links"> AnyFramework <span class="has-dropdown-icon">+</span></a>
+							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="framework-nav-links"> Framework <span class="has-dropdown-icon">+</span></a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="devtools-nav-links"> Dev Tools <span class="has-dropdown-icon">+</span></a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="aboutus-nav-links"> About Us <span class="has-dropdown-icon">+</span></a>
-							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="contactus-nav-links"> Contact Us <span class="has-dropdown-icon">+</span></a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="community-nav-links"> Community <span class="has-dropdown-icon">+</span></a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="account-nav-links"> Account <span class="has-dropdown-icon">+</span></a>
 						</div>
@@ -200,6 +198,7 @@
 									<li class="nav-item  first active">
 										<a href="./" target="_self" class=" first active"> Home </a>
 									</li>
+									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> Jstree 
 										<span class="has-dropdown-icon float-right">+</span>
@@ -231,6 +230,7 @@
 											</li>
 										</ul>
 									</li>
+									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> Baro Board 
 										<span class="has-dropdown-icon float-right">+</span>
@@ -256,29 +256,24 @@
 											</li>
 										</ul>
 									</li>
+									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
-										<a href="#" target="_self" class="parent-link"> Egov Framework 
-										<span class="has-dropdown-icon float-right">+</span>
-										</a>
-										<ul class="sub-nav unstyled bm-remove">
-											<li class="sub-nav-item first active">
-												<a href="./egovFramePortal.html" target="_self" class="first active">&raquo; &nbsp;표준프레임워크 포탈</a>
-											</li>
-											<li class="sub-nav-item last">
-												<a href="./egovFrameCommunity.html" target="_self" class="last">&raquo; &nbsp;표준프레임워크 오픈커뮤니티</a>
-											</li>
-										</ul>
-									</li>
-									<li class="nav-item has-dropdown">
-										<a href="#" target="_self" class="parent-link"> Any Framework 
+										<a href="#" target="_self" class="parent-link"> Framework 
 										<span class="has-dropdown-icon float-right">+</span>
 										</a>
 										<ul class="sub-nav unstyled bm-remove">
 											<li class="sub-nav-item first active">
 												<a href="./anyFramePortal.html" target="_self" class="first active">&raquo; &nbsp;애니 프레임워크 포탈</a>
 											</li>
+											<li class="sub-nav-item">
+												<a href="./egovFramePortal.html" target="_self" class="">&raquo; &nbsp;표준프레임워크 포탈</a>
+											</li>
+											<li class="sub-nav-item last">
+												<a href="./egovFrameCommunity.html" target="_self" class="last">&raquo; &nbsp;표준프레임워크 오픈커뮤니티</a>
+											</li>
 										</ul>
 									</li>
+									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> Dev Tools 
 										<span class="has-dropdown-icon float-right">+</span>
@@ -304,20 +299,24 @@
 											</li>
 										</ul>
 									</li>
+									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> About Us
 										<span class="has-dropdown-icon float-right">+</span>
 										</a>
 										<ul class="sub-nav unstyled bm-remove">
 											<li class="sub-nav-item first active">
-												<a href="./committer.html" target="_self" class="first active">&raquo; &nbsp;Committer</a>
+												<a href="./committer.html" target="_self" class="first active">&raquo; &nbsp;커미터</a>
+											</li>
+											<li class="sub-nav-item">
+												<a href="./committerSchedule.html" target="_self" class="">&raquo; &nbsp;커미터 일정관리</a>
 											</li>
 											<li class="sub-nav-item last">
-												<a href="./committerSchedule.html" target="_self" class="last">&raquo; &nbsp;일정관리</a>
+												<a href="./committerSchedule.html" target="_self" class="last">&raquo; &nbsp;Contact Us</a>
 											</li>
 										</ul>
 									</li>
-									<li class="nav-item  last"><a href="./contactUs.html" target="_self" class=" last"> Contact Us </a></li>
+									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> Community 
 										<span class="has-dropdown-icon float-right">+</span>
@@ -337,6 +336,7 @@
 											</li>
 										</ul>
 									</li>
+									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> Account
 										<span class="has-dropdown-icon float-right">+</span>
@@ -350,7 +350,6 @@
 											</li>
 										</ul>
 									</li>
-									<hr class="bm-smaller" />
 								</ul>
 							</div>
 						</div>
@@ -377,12 +376,10 @@
 							<a href="./baroBoardDownload.html" target="_self" class="sub-nav-item">다운로드</a>
 							<a href="#" target="_self" class="sub-nav-item last">라이선스</a>
 						</div>
-						<div id="anyframework-nav-links" class="sub-nav">
+						<div id="framework-nav-links" class="sub-nav">
 							<a href="./anyFramePortal.html" target="_self" class="sub-nav-item first active">애니 프레임워크 포탈</a>
-						</div>
-						<div id="egovframework-nav-links" class="sub-nav">
-							<a href="./egovFramePortal.html" target="_self" class="sub-nav-item first active">표준프레임워크 포탈</a>
-							<a href="./egovFrameCommunity.html" target="_self" class="sub-nav-item last">표준프레임워크 오픈커뮤니티</a>
+							<a href="./egovFramePortal.html" target="_self" class="sub-nav-item">전자 정부 표준프레임워크 포탈</a>
+							<a href="./egovFrameCommunity.html" target="_self" class="sub-nav-item last">전자 정부 표준프레임워크 오픈커뮤니티</a>
 						</div>
 						<div id="devtools-nav-links" class="sub-nav">
 							<a href="./313DevCI.html" target="_self" class="sub-nav-item first active">CI</a>
@@ -394,10 +391,8 @@
 						</div>
 						<div id="aboutus-nav-links" class="sub-nav">
 							<a href="./committer.html" target="_self" class="sub-nav-item first">Comitters</a>
-							<a href="./comitterSchedule.html" target="_self" class="sub-nav-item last">일정관리</a>
-						</div>
-						<div id="contactus-nav-links" class="sub-nav">
-							<a href="./contactus.html" target="_self" class="sub-nav-item first">Contact Us</a>
+							<a href="./comitterSchedule.html" target="_self" class="sub-nav-item">커미터 일정관리</a>
+							<a href="./contactus.html" target="_self" class="sub-nav-item last">Contact Us</a>
 						</div>
 						<div id="community-nav-links" class="sub-nav">
 							<a href="./notice.html" target="_self" class="sub-nav-item">공지사항</a>
