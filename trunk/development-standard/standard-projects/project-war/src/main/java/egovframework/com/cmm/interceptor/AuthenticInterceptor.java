@@ -53,13 +53,14 @@ public class AuthenticInterceptor extends HandlerInterceptorAdapter {
 		
 		LoginVO loginVO = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
 		
-		if(loginVO.getId()!=null){
+		if(loginVO != null){
 			return true;
 		}else{
 			
 			
 			for(Iterator<String> it = this.permittedURL.iterator(); it.hasNext();){
 				String urlPattern = request.getContextPath() + (String) it.next();
+
 				if(Pattern.matches(urlPattern, requestURI)){// 정규표현식을 이용해서 요청 URI가 허용된 URL에 맞는지 점검함.
 					isPermittedURL = true;
 				}
