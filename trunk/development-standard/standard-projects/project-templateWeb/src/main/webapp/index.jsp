@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!-- Nero v1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com -->
 
-<!--[if lt IE 7 ]><html class="no-js ie ie6" lang="en"><![endif]-->
-<!--[if IE 7 ]><html class="no-js ie ie7" lang="en"><![endif]-->
-<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"><![endif]-->
-<!--[if IE 9 ]><html class="no-js ie ie9" lang="en"><![endif]-->
+<!--[if lt IE 7 ]><html class="no-js ie ie6" lang="ko"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie ie7" lang="ko"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="ko"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie ie9" lang="ko"><![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<html lang=ko class="no-js">
+<html lang="ko" class="no-js">
 <!--<![endif]-->
 	<head data-placeholder-focus="false" data-placeholder-live="false">
 		<script>
@@ -168,7 +168,7 @@
 					
 						<!-- For PC Menu -->
 						<div id="click-nav" class="clearfix">
-							<a href="./index.html" target="_self" class="nav-item first active" data-sub-nav="home-nav-links"> Home </a>
+							<a href="./" target="_self" class="nav-item first active" data-sub-nav="home-nav-links"> Home </a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="jstree-nav-links"> Jstree <span class="has-dropdown-icon">+</span></a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="baroboard-nav-links"> Baro Board <span class="has-dropdown-icon">+</span></a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="egovframework-nav-links"> Egov Framework <span class="has-dropdown-icon">+</span></a>
