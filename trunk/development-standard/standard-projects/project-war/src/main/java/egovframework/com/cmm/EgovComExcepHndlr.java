@@ -1,6 +1,7 @@
 package egovframework.com.cmm;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import egovframework.rte.fdl.cmmn.exception.handler.ExceptionHandler;
 
@@ -21,15 +22,25 @@ import egovframework.rte.fdl.cmmn.exception.handler.ExceptionHandler;
  */
 public class EgovComExcepHndlr implements ExceptionHandler {
 
+    protected Log log = LogFactory.getLog(this.getClass());
+
+    /*
+    @Resource(name = "otherSSLMailSender")
+    private SimpleSSLMail mailSender;
+     */
     /**
      * 발생된 Exception을 처리한다.
      */
     public void occur(Exception ex, String packageName) {
-		try {
-		    Logger.getRootLogger().debug("[HANDLER][PACKAGE]:::"+packageName);
-		    Logger.getRootLogger().debug("[HANDLER][Exception]:::"+ex);
-		} catch (Exception e) {
-			Logger.getRootLogger().debug(e);
-		}
+	//log.debug(" EgovServiceExceptionHandler run...............");
+	try {
+	    //mailSender. send(ex, packageName);
+	    //log.debug(" sending a alert mail  is completed ");
+	    log.error(packageName, ex);
+	} catch (Exception e) {
+	    //e.printStackTrace();
+		log.fatal(packageName, ex);// 2011.10.10 보안점검 후속조치
+	    //throw new RuntimeException(ex);	
+	}
     }
 }
