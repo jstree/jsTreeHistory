@@ -39,7 +39,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<![endif]-->
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta name="description" content="dongmin.lee online shopping" />
+		<meta name="description" content="dongmin.lee" />
 		<meta name="keywords" content="" />
 		<meta name="HandheldFriendly" content="True" />
 		<meta name="MobileOptimized" content="320" />
@@ -145,7 +145,7 @@
 					<div id="header-search" class="one-third bm-remove">
 						<form action="/search" method="get" class="clearfix" novalidate>
 							<input type="hidden" name="type" value="product">
-							<input type="text" name="q" class="inline-block w-small bm-remove tip-r-fade" placeholder="SEARCH FOR A PRODUCT" autocomplete="off" value="" data-tooltip="Press Enter To Search" />
+							<input type="text" name="q" class="inline-block w-small bm-remove tip-r-fade" placeholder="KEYWORD SEARCH" autocomplete="off" value="" data-tooltip="Press Enter To Search" />
 							<button type="submit" class="tablet-mobile bm-remove tip-r-fade" data-tooltip="Search">
 							<i class="fa fa-search"></i>
 							</button>
@@ -153,13 +153,6 @@
 					</div>
 					<div id="header-logo" class="one-third bm-remove">
 						<a href="/" target="_self"> dongmin.lee </a>
-					</div>
-					<div id="header-cart" class="one-third bm-remove last">
-						<a href="/cart" target="_self"><i
-							class="fa fa-shopping-cart fa-fw"></i> Cart (<span
-							id="ajax-header-cart-item-count">0</span> <span
-							id="ajax-header-cart-item-text">items</span> - <span
-							id="ajax-header-cart-total-price">&#8361;0</span>)</a>
 					</div>
 				</div>
 			</header>
