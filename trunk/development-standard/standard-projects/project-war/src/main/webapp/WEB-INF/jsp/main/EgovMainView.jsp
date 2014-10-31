@@ -20,7 +20,7 @@
 <head>
 <meta http-equiv="Content-Language" content="ko" >
 <title>표준프레임워크 경량환경 홈페이지 템플릿</title>
-<link href="<c:url value='/'/>css/common.css" rel="stylesheet" type="text/css" >
+<link href="<c:url value='/'/>css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <noscript>자바스크립트를 지원하지 않는 브라우저에서는 일부 기능을 사용하실 수 없습니다.</noscript>	
@@ -139,7 +139,7 @@
 		<!-- //code layer -->		
 	</div>
 	<!-- footer 시작 -->
-	<div id="footer"><c:import url="/EgovPageLink.do?link=main/inc/EgovIncFooter" /></div>
+	<div id="footer"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncFooter" /></div>
 	<!-- //footer 끝 -->
 <!-- //전체 레이어 끝 -->
 </div>
