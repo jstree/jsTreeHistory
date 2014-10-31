@@ -38,9 +38,9 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
     public boolean preHandle(HttpServletRequest request,
             HttpServletResponse response, Object handler) throws Exception
     {
-        setLogging(request, true);
-        setUrlVariable(request, new ModelAndView(), true);
-        setSearchSupport(request);
+        //setLogging(request, true);
+        //setUrlVariable(request, new ModelAndView(), true);
+        //setSearchSupport(request);
         return true;
     }
     
@@ -206,7 +206,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
             HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception
     {
-        
+        /*
         setLogging(request, true);
         
         if (null == modelAndView) { return; }
@@ -234,6 +234,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
         modelAndView.addObject("nextMonth", DateUtils.addMonths(now, 1));
         modelAndView.addObject("queryString", request.getQueryString());
         modelAndView.addObject("language", LocaleContextHolder.getLocale());
+        */
         
     }
     

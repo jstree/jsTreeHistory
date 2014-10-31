@@ -92,8 +92,13 @@ public class IndexController extends GenericAbstractController implements Generi
 			RequestMethod.POST })
 	public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
 			HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
-		// TODO Auto-generated method stub
-		return null;
+		String viewResolver = "/jsp";
+		String siteCode = "/community";
+		String menuCodes = "";
+		String componentCode = "/index";
+		String targetPage = "/index";
+		// templateEngine not use external view url.
+		return viewResolver + siteCode + menuCodes + componentCode + targetPage;
 	}
 
 	@Override

@@ -131,7 +131,7 @@
 	<bean id="urlBasedViewResolver"
 		class="standard.mvc.component.manager.viewResolver.CustomEgovUrlBasedViewResolver"
 		p:order="0" p:viewClass="org.springframework.web.servlet.view.JstlView"
-		p:prefix="/WEB-INF/jsp/egovframework/example/" p:suffix=".jsp" />
+		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
 
 	<!-- - Message source for this context, loaded from localized "messages_xx" 
 		files. - Could also reside in the root application context, as it is generic, 
