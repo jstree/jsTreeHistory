@@ -20,7 +20,6 @@
 	<modules>
 		<module>project-templateWeb</module>
 		<module>project-templateSm</module>
-		<module>project-war</module>
 	</modules>
 
 	<properties>

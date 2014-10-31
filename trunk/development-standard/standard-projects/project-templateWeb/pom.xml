@@ -9,9 +9,9 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>project-templateWeb</artifactId>
+	<artifactId>project-war</artifactId>
 	<packaging>war</packaging>
-	<name>project-templateWeb</name>
+	<name>project-war</name>
 	<description>
 		전자정부프레임워크입니다.
 	</description>
