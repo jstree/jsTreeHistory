@@ -88,27 +88,27 @@ public class S_GetNode implements I_S_GetNode {
 		// TODO : 리퀘스트에 따라서 DB 설정파일을 불러와서 선택적 리턴을 해야 함.
 		String returnStr = "";
 		if (request.getRequestURI().equals(
-				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action")
+				"/egovframework/com/ext/jstree/strutsiBatis/removeNode.action")
 				&& flag.equals("remove")) {
 			returnStr = "jstreeStrutsiBatis.getNode";
 		} else if (request.getRequestURI().equals(
-				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action")
+				"/egovframework/com/ext/jstree/strutsiBatis/moveNode.action")
 				&& flag.equals("getNode")) {
 			returnStr = "jstreeStrutsiBatis.getNode";
 		} else if (request.getRequestURI().equals(
-				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action")
+				"/egovframework/com/ext/jstree/strutsiBatis/moveNode.action")
 				&& flag.equals("getNodeByRef")) {
 			returnStr = "jstreeStrutsiBatis.getNodeByRef";
 		} else if (request.getRequestURI().equals(
-				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action")
+				"/egovframework/com/ext/jstree/strutsiBatis/addNode.action")
 				&& flag.equals("getNode")) {
 			returnStr = "jstreeStrutsiBatis.getNode";
 		} else if (request.getRequestURI().equals(
-				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/addNode.action")
+				"/egovframework/com/ext/jstree/strutsiBatis/addNode.action")
 				&& flag.equals("getNodeByRef")) {
 			returnStr = "jstreeStrutsiBatis.getNodeByRef";
 		} else if (request.getRequestURI().equals(
-				"/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action")
+				"/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action")
 				&& flag.equals("getNode")) {
 			returnStr = "jstreeStrutsiBatis.getNode";
 		} else {

@@ -18,7 +18,7 @@
 	<description>공통 프로젝트 입니다.</description>
 	
 	<modules>
-		<module>project-templateWeb</module>
+		<module>project-war</module>
 		<module>project-templateSm</module>
 	</modules>
 

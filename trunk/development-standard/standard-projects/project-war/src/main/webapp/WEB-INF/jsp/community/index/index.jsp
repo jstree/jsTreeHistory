@@ -363,7 +363,7 @@ $("#demo")
 									 $.ajax({
 										 async : false
 										,type: 'POST'
-										//,url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/removeNode.action"
+										//,url: "/egovframework/com/ext/jstree/strutsiBatis/removeNode.action"
 										,url: "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/removeNode.do"
 										,data : { 
 											 "c_id"       : $(obj).attr("id").replace("node_","").replace("copy_","")
@@ -463,7 +463,7 @@ $("#demo")
 			// All the options are almost the same as jQuery's AJAX (read the docs)
 			"ajax" : {
 				// the URL to fetch the data
-				/* "url" : "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/getChildNode.action", */
+				/* "url" : "/egovframework/com/ext/jstree/strutsiBatis/getChildNode.action", */
 				"url" : "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/invokeSelect.do",
 				// the `data` function is executed in the instance's scope
 				// the parameter is the node being loaded 
@@ -481,7 +481,7 @@ $("#demo")
 			// As this has been a common question - async search
 			// Same as above - the `ajax` config option is actually jQuery's AJAX object
 			"ajax" : {
-				/* "url" : "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/searchNode.action", */
+				/* "url" : "/egovframework/com/ext/jstree/strutsiBatis/searchNode.action", */
 				"url" : "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/searchNode.do",
 				// You get the search string as a parameter
 				"data" : function (str) {
@@ -557,7 +557,7 @@ $("#demo")
 	})
 	.bind("set_type.jstree", function (e, data) {
 		$.post(
-				/* "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action", */
+				/* "/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action", */
 				"${pageContext.request.contextPath}/egovframework/com/etc/jstree/core/springiBatis/alterNodeType.do",
 			{ 
 					"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
@@ -573,7 +573,7 @@ $("#demo")
 			$.ajax({
 				async : false,
 				type: 'POST',
-				/* url: "/templateWeb/egovframework/com/ext/jstree/strutsiBatis/moveNode.action", */
+				/* url: "/egovframework/com/ext/jstree/strutsiBatis/moveNode.action", */
 				url: "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/moveNode.do",
 				data : { 
 					"c_id" : $(this).attr("id").replace("node_","").replace("copy_",""), 
