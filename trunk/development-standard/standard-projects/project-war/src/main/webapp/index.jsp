@@ -70,6 +70,7 @@
 		<link href="./assets/litebox.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="./assets/shopify-quick-look.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="./assets/backbone.scss.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="./assets/section_common.css" rel="stylesheet" type="text/css" media="all" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
 		<script>
@@ -478,6 +479,20 @@
 				<div class="container">
 					<div class="one-whole">
 						<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Featured Products</p>
+						<div class="one-quarter product-item boxed p-ten text-center odd loop-first  sold-out  animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+							<div class="image-and-overlay-container bm-small">
+								<div class="image">
+									<a href="./baroBoardOverView.html" target="_self">
+									<img src="./images/test_img.jpg" alt="Cropped Brown Leather Jacket" class="block" />
+									</a>
+								</div>
+								<a href="./baroBoardOverView.html" target="_self" class="overlay"></a>
+								<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket"><i class="fa fa-search fa-fw"></i></a></span>
+							</div>
+							<p class="bm-remove no-text-overflow">
+								<a href="./baroBoardOverView.html" target="_self"><strong>바로보드 개발중<br />으아아아아악</strong></a>
+							</p>
+						</div>
 						<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
 							<p class="bm-larger tm-larger text-center">No Products Selected</p>
 						</div>
