@@ -34,7 +34,7 @@
 	<!-- container 시작 -->
 	<div id="container">
 		<!-- 좌측메뉴 시작 -->
-		<div id="leftmenu"><c:import url="/EgovPageLink.do?link=main/inc/EgovIncLeftmenu" /></div>
+		<div id="leftmenu"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncLeftmenu" /></div>
 		<!-- //좌측메뉴 끝 -->			
 			<!-- content 시작 -->			
 			<div id="content">
@@ -61,7 +61,7 @@
 									<p>1. 필요한 서비스 확인</p>
 									<p>2. 자료실에서 필요한 서비스 존재여부 확인</p>
 									<p>3. 서비스요청을 통해 필요한 서비스 신청</p>
-									<a href="<c:url value='EgovPageLink.do?link=main/sample_menu/EgovServiceInfo'/>">대표 서비스 자세히 보기</a>
+									<a href="<c:url value='EgovPageLink.do?link=/jsp/main/sample_menu/EgovServiceInfo'/>">대표 서비스 자세히 보기</a>
 							</fieldset>			
 						
 						</div>
@@ -73,7 +73,7 @@
 			<!-- //content 끝 -->
 	<!-- //container 끝 -->
 	<!-- footer 시작 -->
-	<div id="footer"><c:import url="/EgovPageLink.do?link=main/inc/EgovIncFooter" /></div>
+	<div id="footer"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncFooter" /></div>
 	<!-- //footer 끝 -->				
 </div>
 <!-- //전체 레이어 끝 -->

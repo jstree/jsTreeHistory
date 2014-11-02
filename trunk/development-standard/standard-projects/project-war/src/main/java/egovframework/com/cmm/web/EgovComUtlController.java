@@ -17,6 +17,7 @@ import egovframework.rte.fdl.property.EgovPropertyService;
  * @ -------    --------    ---------------------------
  * @ 2009.03.02    조재영          최초 생성
  * @ 2011.10.07    이기하          .action -> .do로 변경하면서 동일 매핑이 되어 삭제처리
+ * @ 2014.11.02    류강하          요청 주소가 ,를 구분자로 여러 개 들어오는 경우에 첫 번째 주소를 사용하도록 수정 (moveToPage)
  *
  *  @author 공통서비스 개발팀 조재영
  *  @since 2009.03.02
@@ -43,7 +44,13 @@ public class EgovComUtlController {
 		// service 사용하여 리턴할 결과값 처리하는 부분은 생략하고 단순 페이지 링크만 처리함
 		if (linkPage==null || linkPage.equals("")){
 			link="egovframework/com/cmm/egovError";
+		} 
+		
+		String params[] = linkPage.split(",");
+		if (params.length > 1) {
+		    link = params[0];
 		}
+		
 		return link;
 	}
 
