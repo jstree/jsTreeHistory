@@ -25,10 +25,10 @@
 <div id="wrap">
 	<!-- header 시작 -->
     <div id="header_mainsize">
-        <c:import url="/EgovPageLink.do?link=main/inc/EgovIncHeader" />
+        <c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncHeader" />
     </div>
     <div id="topnavi">
-        <c:import url="/EgovPageLink.do?link=main/inc/EgovIncTopnav" />
+        <c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncTopnav" />
     </div>
     <!-- //header 끝 -->
 	<!-- container 시작 -->
