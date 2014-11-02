@@ -1,5 +1,7 @@
 package egovframework.com.cmm.web;
 
+import java.util.Iterator;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -47,9 +49,7 @@ public class EgovComUtlController {
 		} 
 		
 		String params[] = linkPage.split(",");
-		if (params.length > 1) {
-		    link = params[0];
-		}
+	    link = params[0].replace(",","");
 		
 		return link;
 	}
