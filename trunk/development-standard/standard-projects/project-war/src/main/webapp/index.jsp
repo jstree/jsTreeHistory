@@ -247,7 +247,7 @@
 												<a href="./baroBoardDemo.html" target="_self" class="">&raquo; &nbsp;데모</a>
 											</li>
 											<li class="sub-nav-item last">
-												<a href="#" target="_self" class="last">&raquo; &nbsp;라이선스</a>
+												<a href="./baroBoardLicence.html" target="_self" class="last">&raquo; &nbsp;라이선스</a>
 											</li>
 										</ul>
 									</li>
@@ -369,7 +369,7 @@
 							<a href="./baroBoardReleaseNote.html" target="_self" class="sub-nav-item">릴리즈노트</a>
 							<a href="./baroBoardDemo.html" target="_self" class="sub-nav-item">데모(Version 2.x)</a>
 							<a href="./baroBoardDownload.html" target="_self" class="sub-nav-item">다운로드</a>
-							<a href="#" target="_self" class="sub-nav-item last">라이선스</a>
+							<a href="./baroBoardLicence.html" target="_self" class="sub-nav-item last">라이선스</a>
 						</div>
 						<div id="framework-nav-links" class="sub-nav">
 							<a href="./anyFramePortal.html" target="_self" class="sub-nav-item first active">애니 프레임워크 포탈</a>
