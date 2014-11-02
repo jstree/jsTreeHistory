@@ -81,7 +81,7 @@ public class EgovBBSLoneMasterController {
     @RequestMapping("/cop/bbs/addBoardMaster.do")
     public String addBoardMaster(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, ModelMap model) throws Exception {
     	
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
     	BoardMaster boardMaster = new BoardMaster();
 
@@ -101,7 +101,7 @@ public class EgovBBSLoneMasterController {
 		model.addAttribute("boardMaster", boardMaster);
 	
 	
-		return "cop/bbs/EgovBBSLoneMstrRegist";
+		return "/jsp/cop/bbs/EgovBBSLoneMstrRegist";
     }
 
     /**
@@ -118,7 +118,7 @@ public class EgovBBSLoneMasterController {
     public String insertBoardMaster(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, @ModelAttribute("boardMaster") BoardMaster boardMaster,
 	    BindingResult bindingResult, SessionStatus status, ModelMap model) throws Exception {
 	
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
@@ -140,7 +140,7 @@ public class EgovBBSLoneMasterController {
 		    
 		    model.addAttribute("attrbList", codeResult);
 	
-		    return "cop/bbs/EgovBBSLoneMstrRegist";
+		    return "/jsp/cop/bbs/EgovBBSLoneMstrRegist";
 		}
 		
 		if (isAuthenticated) {
@@ -164,7 +164,7 @@ public class EgovBBSLoneMasterController {
      */
     @RequestMapping("/cop/bbs/selectBoardMasterList.do")
     public String selectBoardMasterList(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, ModelMap model) throws Exception {
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
     	boardMasterVO.setPageUnit(propertyService.getInt("pageUnit"));
 		boardMasterVO.setPageSize(propertyService.getInt("pageSize"));
@@ -188,7 +188,7 @@ public class EgovBBSLoneMasterController {
 		model.addAttribute("resultCnt", map.get("resultCnt"));	
 		model.addAttribute("paginationInfo", paginationInfo);
 	
-		return "cop/bbs/EgovBBSLoneMstrList";
+		return "/jsp/cop/bbs/EgovBBSLoneMstrList";
     }
 
     /**
@@ -201,7 +201,7 @@ public class EgovBBSLoneMasterController {
      */
     @RequestMapping("/cop/bbs/selectBoardMaster.do")
     public String selectBoardMaster(@ModelAttribute("searchVO") BoardMasterVO searchVO, ModelMap model) throws Exception {
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
     	BoardMasterVO vo = bbsLoneService.selectMaster(searchVO);
 
@@ -209,7 +209,7 @@ public class EgovBBSLoneMasterController {
 		
 		model.addAttribute("provdUrl", "/cop/bbs/selectBoardList.do?bbsId=" + vo.getBbsId());
 		
-		return "cop/bbs/EgovBBSLoneMstrUpdt";
+		return "/jsp/cop/bbs/EgovBBSLoneMstrUpdt";
     }
 
     /**
@@ -225,7 +225,7 @@ public class EgovBBSLoneMasterController {
     public String updateBoardMaster(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, @ModelAttribute("boardMaster") BoardMaster boardMaster,
 	    BindingResult bindingResult, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
@@ -236,7 +236,7 @@ public class EgovBBSLoneMasterController {
 	
 		    model.addAttribute("result", vo);
 		    
-		    return "cop/bbs/EgovBBSLoneMstrUpdt";
+		    return "/jsp/cop/bbs/EgovBBSLoneMstrUpdt";
 		}
 	
 		if (isAuthenticated) {
@@ -260,7 +260,7 @@ public class EgovBBSLoneMasterController {
     public String deleteBoardMaster(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, @ModelAttribute("boardMaster") BoardMaster boardMaster,
 	    ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();

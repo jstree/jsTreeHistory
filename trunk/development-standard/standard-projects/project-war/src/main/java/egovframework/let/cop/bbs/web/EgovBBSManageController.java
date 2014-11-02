@@ -29,7 +29,6 @@ import egovframework.let.cop.bbs.service.BoardMasterVO;
 import egovframework.let.cop.bbs.service.BoardVO;
 import egovframework.let.cop.bbs.service.EgovBBSAttributeManageService;
 import egovframework.let.cop.bbs.service.EgovBBSManageService;
-import egovframework.let.utl.sim.service.EgovFileScrty;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
@@ -184,7 +183,7 @@ public class EgovBBSManageController {
 	model.addAttribute("brdMstrVO", master);
 	model.addAttribute("paginationInfo", paginationInfo);
 
-	return "cop/bbs/EgovNoticeList";
+	return "/jsp/cop/bbs/EgovNoticeList";
     }
 
     /**
@@ -255,7 +254,7 @@ public class EgovBBSManageController {
 		//SHT-CUSTOMIZING//}
 		////--------------------------
 	
-		return "cop/bbs/EgovNoticeInqire";
+		return "/jsp/cop/bbs/EgovNoticeInqire";
     }
 
     /**
@@ -272,7 +271,7 @@ public class EgovBBSManageController {
 	// 사용자권한 처리
 	if(!EgovUserDetailsHelper.isAuthenticated()) {
 		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-    	return "cmm/uat/uia/EgovLoginUsr";
+    	return "/jsp/cmm/uat/uia/EgovLoginUsr";
 	}
     	
     LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -300,7 +299,7 @@ public class EgovBBSManageController {
 	model.addAttribute("brdMstrVO", bdMstr);
 	////-----------------------------
 
-	return "cop/bbs/EgovNoticeRegist";
+	return "/jsp/cop/bbs/EgovNoticeRegist";
     }
 
     /**
@@ -320,7 +319,7 @@ public class EgovBBSManageController {
 	// 사용자권한 처리
 	if(!EgovUserDetailsHelper.isAuthenticated()) {
 		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-    	return "cmm/uat/uia/EgovLoginUsr";
+    	return "/jsp/cmm/uat/uia/EgovLoginUsr";
 	}
 	
 	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -349,7 +348,7 @@ public class EgovBBSManageController {
 	    model.addAttribute("brdMstrVO", master);
 	    ////-----------------------------
 
-	    return "cop/bbs/EgovNoticeRegist";
+	    return "/jsp/cop/bbs/EgovNoticeRegist";
 	}
 	
 	if (isAuthenticated) {
@@ -390,7 +389,7 @@ public class EgovBBSManageController {
     	// 사용자권한 처리
     	if(!EgovUserDetailsHelper.isAuthenticated()) {
     		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "cmm/uat/uia/EgovLoginUsr";
+        	return "/jsp/cmm/uat/uia/EgovLoginUsr";
     	}
     	
     LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -416,7 +415,7 @@ public class EgovBBSManageController {
 	model.addAttribute("brdMstrVO", master);
 	////-----------------------------
 
-	return "cop/bbs/EgovNoticeReply";
+	return "/jsp/cop/bbs/EgovNoticeReply";
     }
 
     /**
@@ -437,7 +436,7 @@ public class EgovBBSManageController {
     	// 사용자권한 처리
     	if(!EgovUserDetailsHelper.isAuthenticated()) {
     		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "cmm/uat/uia/EgovLoginUsr";
+        	return "/jsp/cmm/uat/uia/EgovLoginUsr";
     	}
     	
 	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -466,7 +465,7 @@ public class EgovBBSManageController {
 	    model.addAttribute("brdMstrVO", master);
 	    ////-----------------------------
 
-	    return "cop/bbs/EgovNoticeReply";
+	    return "/jsp/cop/bbs/EgovNoticeReply";
 	}
 
 	if (isAuthenticated) {
@@ -514,7 +513,7 @@ public class EgovBBSManageController {
 	// 사용자권한 처리 (자유게시판에 대한 요청이 아닌 경우는 로긴화면으로 이동)
 	if(!boardVO.getBbsId().equals("BBSMSTR_BBBBBBBBBBBB") && !EgovUserDetailsHelper.isAuthenticated()) {
 		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-    	return "cmm/uat/uia/EgovLoginUsr";
+    	return "/jsp/cmm/uat/uia/EgovLoginUsr";
 	}
 
 	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -549,7 +548,7 @@ public class EgovBBSManageController {
 	model.addAttribute("brdMstrVO", bmvo);
 	////-----------------------------
 	
-	return "cop/bbs/EgovNoticeUpdt";
+	return "/jsp/cop/bbs/EgovNoticeUpdt";
     }
 
     /**
@@ -570,7 +569,7 @@ public class EgovBBSManageController {
     	// 사용자권한 처리
     	if(!EgovUserDetailsHelper.isAuthenticated()) {
     		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "cmm/uat/uia/EgovLoginUsr";
+        	return "/jsp/cmm/uat/uia/EgovLoginUsr";
     	}
     	
 	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -596,7 +595,7 @@ public class EgovBBSManageController {
 	    model.addAttribute("result", bdvo);
 	    model.addAttribute("bdMstr", bmvo);
 
-	    return "cop/bbs/EgovNoticeUpdt";
+	    return "/jsp/cop/bbs/EgovNoticeUpdt";
 	}
 	
 	if (isAuthenticated) {
@@ -644,7 +643,7 @@ public class EgovBBSManageController {
     	// 사용자권한 처리
     	if(!EgovUserDetailsHelper.isAuthenticated()) {
     		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "cmm/uat/uia/EgovLoginUsr";
+        	return "/jsp/cmm/uat/uia/EgovLoginUsr";
     	}
     	
 	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -736,6 +735,6 @@ public class EgovBBSManageController {
 	
 	model.addAttribute("preview", "true");
 
-	return "cop/bbs/EgovNoticeList";
+	return "/jsp/cop/bbs/EgovNoticeList";
     }
 }

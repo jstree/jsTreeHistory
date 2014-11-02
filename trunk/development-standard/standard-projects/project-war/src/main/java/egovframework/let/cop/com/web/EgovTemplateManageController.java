@@ -75,7 +75,7 @@ public class EgovTemplateManageController {
     @RequestMapping("/cop/com/selectTemplateInfs.do")
     public String selectTemplateInfs(@ModelAttribute("searchVO") TemplateInfVO tmplatInfVO, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 	    tmplatInfVO.setPageUnit(propertyService.getInt("pageUnit"));
 		tmplatInfVO.setPageSize(propertyService.getInt("pageSize"));
@@ -99,7 +99,7 @@ public class EgovTemplateManageController {
 		model.addAttribute("resultCnt", map.get("resultCnt"));
 		model.addAttribute("paginationInfo", paginationInfo);
 	
-		return "cop/com/EgovTemplateList";
+		return "/jsp/cop/com/EgovTemplateList";
     }
 
     /**
@@ -114,7 +114,7 @@ public class EgovTemplateManageController {
     @RequestMapping("/cop/com/selectTemplateInf.do")
     public String selectTemplateInf(@ModelAttribute("searchVO") TemplateInfVO tmplatInfVO, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		ComDefaultCodeVO codeVO = new ComDefaultCodeVO();
 		
@@ -126,7 +126,7 @@ public class EgovTemplateManageController {
 		model.addAttribute("TemplateInfVO", vo);
 		model.addAttribute("resultList", result);
 	
-		return "cop/com/EgovTemplateUpdt";
+		return "/jsp/cop/com/EgovTemplateUpdt";
     }
 
     /**
@@ -143,7 +143,7 @@ public class EgovTemplateManageController {
     public String insertTemplateInf(@ModelAttribute("searchVO") TemplateInfVO searchVO, @ModelAttribute("templateInf") TemplateInf templateInf,
 	    BindingResult bindingResult, SessionStatus status, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
@@ -159,7 +159,7 @@ public class EgovTemplateManageController {
 		    
 		    model.addAttribute("resultList", result);
 	
-		    return "cop/com/EgovTemplateRegist";
+		    return "/jsp/cop/com/EgovTemplateRegist";
 		}
 	
 		templateInf.setFrstRegisterId(user.getUniqId());
@@ -183,7 +183,7 @@ public class EgovTemplateManageController {
     @RequestMapping("/cop/com/addTemplateInf.do")
     public String addTemplateInf(@ModelAttribute("searchVO") TemplateInfVO searchVO, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
     	ComDefaultCodeVO vo = new ComDefaultCodeVO();
 	
@@ -193,7 +193,7 @@ public class EgovTemplateManageController {
 		
 		model.addAttribute("resultList", result);
 	
-		return "cop/com/EgovTemplateRegist";
+		return "/jsp/cop/com/EgovTemplateRegist";
     }
 
     /**
@@ -210,7 +210,7 @@ public class EgovTemplateManageController {
     public String updateTemplateInf(@ModelAttribute("searchVO") TemplateInfVO tmplatInfVO, @ModelAttribute("templateInf") TemplateInf templateInf,
 	    BindingResult bindingResult, SessionStatus status, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
@@ -229,7 +229,7 @@ public class EgovTemplateManageController {
 		    model.addAttribute("TemplateInfVO", vo);
 		    model.addAttribute("resultList", result);
 	
-		    return "cop/com/EgovTemplateUpdt";
+		    return "/jsp/cop/com/EgovTemplateUpdt";
 		}
 	
 		templateInf.setLastUpdusrId(user.getUniqId());
@@ -254,7 +254,7 @@ public class EgovTemplateManageController {
     public String deleteTemplateInf(@ModelAttribute("searchVO") TemplateInfVO searchVO, @ModelAttribute("tmplatInf") TemplateInf tmplatInf,
 	    SessionStatus status, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
@@ -280,7 +280,7 @@ public class EgovTemplateManageController {
     public String selectTemplateInfsPop(@ModelAttribute("searchVO") TemplateInfVO tmplatInfVO, Map<String, Object> commandMap, ModelMap model)
 	    throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		String typeFlag = (String)commandMap.get("typeFlag");
 		
@@ -319,7 +319,7 @@ public class EgovTemplateManageController {
 		model.addAttribute("resultCnt", map.get("resultCnt"));
 		model.addAttribute("paginationInfo", paginationInfo);
 	
-		return "cop/com/EgovTemplateInqirePopup";
+		return "/jsp/cop/com/EgovTemplateInqirePopup";
     }
     
     /**
@@ -334,7 +334,7 @@ public class EgovTemplateManageController {
     @RequestMapping("/cop/com/openPopup.do")
     public String openPopupWindow(Map<String, Object> commandMap, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
     	String requestUrl = (String)commandMap.get("requestUrl");
     	String trgetId = (String)commandMap.get("trgetId");
@@ -360,7 +360,7 @@ public class EgovTemplateManageController {
     	model.addAttribute("width", width);
     	model.addAttribute("height", height);
     	
-    	return "/cop/com/EgovModalPopupFrame";
+    	return "/jsp/cop/com/EgovModalPopupFrame";
     }
     
     /**

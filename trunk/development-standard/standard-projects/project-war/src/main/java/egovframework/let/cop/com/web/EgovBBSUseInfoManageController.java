@@ -84,7 +84,7 @@ public class EgovBBSUseInfoManageController {
     public String deleteBBSUseInf(@ModelAttribute("searchVO") BoardUseInfVO bdUseVO, @ModelAttribute("bdUseInf") BoardUseInf bdUseInf,
 	    SessionStatus status, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 	
@@ -107,9 +107,9 @@ public class EgovBBSUseInfoManageController {
     @RequestMapping("/cop/com/addBBSUseInf.do")
     public String addBBSUseInf(@ModelAttribute("searchVO") BoardUseInfVO bdUseVO, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
-    	return "cop/com/EgovBoardUseInfRegist";
+    	return "/jsp/cop/com/EgovBoardUseInfRegist";
     }
 
     /**
@@ -127,7 +127,7 @@ public class EgovBBSUseInfoManageController {
     public String insertBBSUseInf(@ModelAttribute("searchVO") BoardUseInfVO bdUseVO, @ModelAttribute("boardUseInf") BoardUseInf boardUseInf,
 	    BindingResult bindingResult, Map<String, Object> commandMap, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 	    LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 	    Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
@@ -135,7 +135,7 @@ public class EgovBBSUseInfoManageController {
 		beanValidator.validate(boardUseInf, bindingResult);
 	
 		if (bindingResult.hasErrors()) {
-		    return "cop/com/EgovBoardUseInfRegist";
+		    return "/jsp/cop/com/EgovBoardUseInfRegist";
 		}
 	
 		String trgetType = (String)commandMap.get("param_trgetType");
@@ -173,7 +173,7 @@ public class EgovBBSUseInfoManageController {
     @RequestMapping("/cop/com/selectBBSUseInfs.do")
     public String selectBBSUseInfs(@ModelAttribute("searchVO") BoardUseInfVO bdUseVO, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		bdUseVO.setPageUnit(propertyService.getInt("pageUnit"));
 		bdUseVO.setPageSize(propertyService.getInt("pageSize"));
@@ -197,7 +197,7 @@ public class EgovBBSUseInfoManageController {
 		model.addAttribute("resultCnt", map.get("resultCnt"));
 		model.addAttribute("paginationInfo", paginationInfo);
 	
-		return "cop/com/EgovBoardUseInfList";
+		return "/jsp/cop/com/EgovBoardUseInfList";
     }
 
     /**
@@ -215,7 +215,7 @@ public class EgovBBSUseInfoManageController {
     public String updateBBSUseInf(@ModelAttribute("searchVO") BoardUseInfVO bdUseVO, @ModelAttribute("boardUseInf") BoardUseInf boardUseInf,
 	    HttpServletRequest request, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
     	Boolean isAuthenticated = (LoginVO)request.getSession().getAttribute("LoginVO") == null ? false:true;
 	
@@ -239,7 +239,7 @@ public class EgovBBSUseInfoManageController {
     public String selectBBSUseInf(@ModelAttribute("searchVO") BoardUseInfVO bdUseVO, ModelMap model) throws Exception {
 	BoardUseInfVO vo = bbsUseService.selectBBSUseInf(bdUseVO);
 
-	    if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+	    if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
 	
 		// 시스템 사용 게시판의 경우 URL 표시
 		if ("SYSTEM_DEFAULT_BOARD".equals(vo.getTrgetId())) {
@@ -251,7 +251,7 @@ public class EgovBBSUseInfoManageController {
 		}
 	
 		model.addAttribute("bdUseVO", vo);
-		return "cop/com/EgovBoardUseInfInqire";
+		return "/jsp/cop/com/EgovBoardUseInfInqire";
     }
 
     /**
@@ -265,7 +265,7 @@ public class EgovBBSUseInfoManageController {
     @RequestMapping("/cop/com/selectBBSUseInfsByTrget.do")
     public String selectBBSUseInfsByTrget(@ModelAttribute("searchVO") BoardUseInfVO bdUseVO, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		bdUseVO.setPageUnit(propertyService.getInt("pageUnit"));
 		bdUseVO.setPageSize(propertyService.getInt("pageSize"));
@@ -291,7 +291,7 @@ public class EgovBBSUseInfoManageController {
 		model.addAttribute("trgetType", bdUseVO.getTrgetType());
 		model.addAttribute("paginationInfo", paginationInfo);
 	
-		return "cop/com/EgovBdUseInfListByTrget";
+		return "/jsp/cop/com/EgovBdUseInfListByTrget";
     }
 
     /**
@@ -308,7 +308,7 @@ public class EgovBBSUseInfoManageController {
     public String updateBBSUseInfByTrget(@ModelAttribute("searchVO") BoardUseInfVO bdUseVO, @ModelAttribute("boardUseInf") BoardUseInf boardUseInf,
 	    Map<String, Object> commandMap, SessionStatus status, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
 	
 		String param_trgetId = (String)commandMap.get("param_trgetId");
 	
@@ -336,7 +336,7 @@ public class EgovBBSUseInfoManageController {
     public String insertBBSUseInfByTrget(@ModelAttribute("searchVO") BoardUseInfVO bdUseVO, @ModelAttribute("boardUseInf") BoardUseInf boardUseInf,
 	    Map<String, Object> commandMap, SessionStatus status, ModelMap model) throws Exception {
 
-    	if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
 	
 		String paramTrgetId = (String)commandMap.get("param_trgetId");
 		String bbsId = (String)commandMap.get("bbsId");
