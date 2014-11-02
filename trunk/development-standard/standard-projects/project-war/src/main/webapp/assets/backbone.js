@@ -39,8 +39,9 @@
 				$('#click-nav .nav-item.has-dropdown.active').removeClass('active');
 				$(this).addClass('active');
 				$('#secondary-navigation .sub-nav').hide();
-				$('#secondary-navigation .sub-nav#' + subNav).show();
-				$('#secondary-navigation').slideDown(500, 'easeOutQuint');
+				$('#secondary-navigation').slideDown(500, 'easeOutQuint', function(){
+					$('#secondary-navigation .sub-nav#' + subNav).show();
+				});
 			}
 		});
 
