@@ -83,7 +83,7 @@ public class EgovIndvdlSchdulManageController {
 	 * @param commandMap 
 	 * @param indvdlSchdulManageVO 
 	 * @param model 
-	 * @return "/cop/smt/sim/EgovIndvdlSchdulManageDailyList"
+	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageDailyList"
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageDailyList.do")
@@ -137,7 +137,7 @@ public class EgovIndvdlSchdulManageController {
 		
         model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageRetrieve(commandMap));
 
-		return "/cop/smt/sim/EgovIndvdlSchdulManageDailyList"; 
+		return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageDailyList"; 
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class EgovIndvdlSchdulManageController {
 	 * @param commandMap
 	 * @param indvdlSchdulManageVO
 	 * @param model
-	 * @return "/cop/smt/sim/EgovIndvdlSchdulManageWeekList"
+	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageWeekList"
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageWeekList.do")
@@ -273,7 +273,7 @@ public class EgovIndvdlSchdulManageController {
 		
         model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageRetrieve(commandMap));
 
-		return "/cop/smt/sim/EgovIndvdlSchdulManageWeekList"; 
+		return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageWeekList"; 
 	}
 	
 	/**
@@ -282,7 +282,7 @@ public class EgovIndvdlSchdulManageController {
 	 * @param commandMap
 	 * @param indvdlSchdulManageVO
 	 * @param model
-	 * @return "/cop/smt/sim/EgovIndvdlSchdulManageMonthList"
+	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageMonthList"
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageMonthList.do")
@@ -332,7 +332,7 @@ public class EgovIndvdlSchdulManageController {
     	commandMap.put("searchMode", "MONTH");
         model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageRetrieve(commandMap));
 
-		return "/cop/smt/sim/EgovIndvdlSchdulManageMonthList"; 
+		return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageMonthList"; 
 	}
 	
 	/**
@@ -341,7 +341,7 @@ public class EgovIndvdlSchdulManageController {
 	 * @param indvdlSchdulManageVO
 	 * @param commandMap
 	 * @param model
-	 * @return "/cop/smt/sim/EgovIndvdlSchdulManageDetail"
+	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageDetail"
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageDetail.do")
@@ -352,7 +352,7 @@ public class EgovIndvdlSchdulManageController {
     		ModelMap model)
     throws Exception {
 		
-		String sLocationUrl = "/cop/smt/sim/EgovIndvdlSchdulManageDetail";
+		String sLocationUrl = "/jsp/cop/smt/sim/EgovIndvdlSchdulManageDetail";
 		
 		String sCmd = commandMap.get("cmd") == null ? "" : (String)commandMap.get("cmd");
 		
@@ -387,7 +387,7 @@ public class EgovIndvdlSchdulManageController {
 	 * @param indvdlSchdulManageVO
 	 * @param bindingResult
 	 * @param model
-	 * @return "/cop/smt/sim/EgovIndvdlSchdulManageModify"
+	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageModify"
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageModify.do")
@@ -401,7 +401,7 @@ public class EgovIndvdlSchdulManageController {
 
 		if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
-		String sLocationUrl = "/cop/smt/sim/EgovIndvdlSchdulManageModify"; 
+		String sLocationUrl = "/jsp/cop/smt/sim/EgovIndvdlSchdulManageModify"; 
 
      	//공통코드  중요도 조회
     	ComDefaultCodeVO voComCode = new ComDefaultCodeVO();
@@ -459,7 +459,7 @@ public class EgovIndvdlSchdulManageController {
 	 * @param indvdlSchdulManageVO
 	 * @param bindingResult
 	 * @param model
-	 * @return "/cop/smt/sim/EgovIndvdlSchdulManageModifyActor"
+	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageModifyActor"
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageModifyActor.do")
@@ -473,17 +473,17 @@ public class EgovIndvdlSchdulManageController {
     		HttpServletRequest request)
     throws Exception { 
 
-		if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+		if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		//로그인 객체 선언
     	LoginVO user = (LoginVO)request.getSession().getAttribute("LoginVO");
     	Boolean isAuthenticated = (LoginVO)request.getSession().getAttribute("LoginVO") == null ? false:true;
     	if(!isAuthenticated) {
     		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "cmm/uat/uia/EgovLoginUsr";
+        	return "/jsp/cmm/uat/uia/EgovLoginUsr";
     	}
     	
-		String sLocationUrl = "/cop/smt/sim/EgovIndvdlSchdulManageModify"; 
+		String sLocationUrl = "/jsp/cop/smt/sim/EgovIndvdlSchdulManageModify"; 
 
 		String sCmd = commandMap.get("cmd") == null ? "" : (String)commandMap.get("cmd");
 		
@@ -581,7 +581,7 @@ public class EgovIndvdlSchdulManageController {
 
 		if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
 
-		String sLocationUrl = "/cop/smt/sim/EgovIndvdlSchdulManageRegist"; 
+		String sLocationUrl = "/jsp/cop/smt/sim/EgovIndvdlSchdulManageRegist"; 
     	
      	//공통코드  중요도 조회
     	ComDefaultCodeVO voComCode = new ComDefaultCodeVO();
@@ -623,7 +623,7 @@ public class EgovIndvdlSchdulManageController {
 	 * @param indvdlSchdulManageVO
 	 * @param bindingResult
 	 * @param model
-	 * @return "/cop/smt/sim/EgovIndvdlSchdulManageRegistActor"
+	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageRegistActor"
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageRegistActor.do")
@@ -641,7 +641,7 @@ public class EgovIndvdlSchdulManageController {
 		
     	LoginVO user = (LoginVO)request.getSession().getAttribute("LoginVO");
 		
-		String sLocationUrl = "/cop/smt/sim/EgovIndvdlSchdulManageRegist"; 
+		String sLocationUrl = "/jsp/cop/smt/sim/EgovIndvdlSchdulManageRegist"; 
 		
 		String sCmd = commandMap.get("cmd") == null ? "" : (String)commandMap.get("cmd");
 		//log.info("cmd =>" + sCmd);

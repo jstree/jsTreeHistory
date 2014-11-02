@@ -42,20 +42,20 @@ public class EgovCalRestdeManageController {
 	/**
 	 * 일반달력 팝업 메인창을 호출한다.
 	 * @param model
-	 * @return "/cmm/sym/cal/EgovNormalCalPopup"
+	 * @return "/jsp/cmm/sym/cal/EgovNormalCalPopup"
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/sym/cmm/EgovNormalCalPopup.do")
  	public String callNormalCalPopup (ModelMap model
  			) throws Exception {
-		return "/cmm/sym/cal/EgovNormalCalPopup";
+		return "/jsp/cmm/sym/cal/EgovNormalCalPopup";
 	}    
 
 	/**
 	 * 일반달력 팝업 정보를 조회한다.
 	 * @param restde
 	 * @param model
-	 * @return "/cmm/sym/cal/EgovNormalCalendar"
+	 * @return "/jsp/cmm/sym/cal/EgovNormalCalendar"
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/sym/cmm/EgovselectNormalCalendar.do")
@@ -155,7 +155,7 @@ public class EgovCalRestdeManageController {
 		
 		
         model.addAttribute("resultList", CalInfoList);
-		return "/cmm/sym/cal/EgovNormalCalendar";
+		return "/jsp/cmm/sym/cal/EgovNormalCalendar";
 	}
 	
 
