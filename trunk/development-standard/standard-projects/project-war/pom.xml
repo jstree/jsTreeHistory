@@ -13,7 +13,7 @@
 	<packaging>war</packaging>
 	<name>project-war</name>
 	<description>
-		전자정부프레임워크입니다.
+		313 Dev Group 의 BaroBoard Project 입니다.
 	</description>
 
 	<dependencies>
