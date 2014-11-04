@@ -117,6 +117,7 @@
 			};
 			//]]>
 		</script>
+		<!-- CSS for Comitter Profile Section -->
 		<style type="text/css">
 			html {
 			margin-top: 40px;
@@ -124,6 +125,56 @@
 			body {
 			position: relative;
 			}
+			
+			.profile-box {
+				max-width : 258px;
+				display : block;
+			}
+			
+			.profile-box a {
+				display: block;
+				overflow: hidden;
+				position: relative;
+				text-decoration: none;
+				max-width: 100%;
+			}
+			.profile-box .profile-box-title {
+				-webkit-transition : all 0.5s;
+				-moz-transition : all 0.5s;
+				transition : all 0.5s;
+				background : rgba(36, 27, 28, 0.9);
+				height : 50px;
+				bottom : 15%;
+				color : #FFF;
+				font-size : 18px;
+				font-weight : 700;
+				left : 0;
+				padding : 9px 11px 9px;
+				position : absolute;
+				text-shadow : 1px 1px 1px rgba(0, 0, 0, 0.2);
+				text-transform : uppercase;
+				z-index : 1;
+			}
+			
+			.profile-box .profile-box-title .profile-box-name {
+				display : block;
+			}
+			
+			
+			.profile-box .profile-box-title .profile-box-role {
+				background-color: #f45b4f;
+				display : inline-block;
+				float : left;
+				font-size : 12px;
+				font-weight : 400;
+				border-radius : 2px;
+				color : rgb(255,255,255);
+				margin : 7px -2px -10px -2px;
+				padding : 0px 9px;
+				text-transform : none;
+			}
+
+			
 		</style>
 	</head>
 	<body id="dongmin-lee" class="template-index" itemscope itemtype="http://schema.org/WebPage">
@@ -429,70 +480,234 @@
 						<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
 							<p class="bm-larger tm-larger text-center">313 개발그룹 킹왕짱</p>
 						</div>
+						<!-- 요기부터 작업 ! -->
 						<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 							<div class="image-and-overlay-container bm-small">
-								<div class="image">
+								<div class="image profile-box">
 									<a href="#" target="_self">
-									<img src="./images/test_img.jpg" alt="Cropped Brown Leather Jacket" class="block" />
-									<span>
-										<!-- 요기부터 작업 ! -->
-									</span>
+										<img src="./images/test_img.jpg" alt="이동민" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Dongmin Lee</span>
+											<span class="profile-box-role">PM</span>
+										</span>
 									</a>
 								</div>
 							</div>
 							<p class="bm-remove no-text-overflow">
-								<a href="./baroBoardOverView.html" target="_self"><strong>바로보드 개발중<br />으아아아아악</strong></a>
+								<a href="./baroBoardOverView.html" target="_self"><strong>이동민<br />으아아아아악</strong></a>
 							</p>
 						</div>
 						<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 							<div class="image-and-overlay-container bm-small">
-								<div class="image">
+								<div class="image profile-box">
 									<a href="./baroBoardOverView.html" target="_self">
-									<img src="./images/test_img.jpg" alt="Cropped Brown Leather Jacket" class="block" />
+										<img src="./images/test_img.jpg" alt="최민석" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Minseok Choi</span>
+											<span class="profile-box-role">PM</span>
+										</span>
 									</a>
 								</div>
 							</div>
 							<p class="bm-remove no-text-overflow">
-								<a href="./baroBoardOverView.html" target="_self"><strong>바로보드 개발중<br />으아아아아악</strong></a>
+								<a href="./baroBoardOverView.html" target="_self"><strong>최민석<br />으아아아아악</strong></a>
 							</p>
 						</div>
 						<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 							<div class="image-and-overlay-container bm-small">
-								<div class="image">
+								<div class="image profile-box">
 									<a href="./baroBoardOverView.html" target="_self">
-									<img src="./images/test_img.jpg" alt="Cropped Brown Leather Jacket" class="block" />
+										<img src="./images/test_img.jpg" alt="김병우" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Byungwoo Kim</span>
+											<span class="profile-box-role">PM</span>
+										</span>
 									</a>
 								</div>
 							</div>
 							<p class="bm-remove no-text-overflow">
-								<a href="./baroBoardOverView.html" target="_self"><strong>바로보드 개발중<br />으아아아아악</strong></a>
+								<a href="./baroBoardOverView.html" target="_self"><strong>김병우<br />으아아아아악</strong></a>
 							</p>
 						</div>
 						<div class="one-quarter product-item boxed p-ten text-center even last loop-first  sold-out  animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 							<div class="image-and-overlay-container bm-small">
-								<div class="image">
+								<div class="image profile-box">
 									<a href="./baroBoardOverView.html" target="_self">
-									<img src="./images/test_img.jpg" alt="Cropped Brown Leather Jacket" class="block" />
+										<img src="./images/test_img.jpg" alt="김대근" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Daegeun Kim</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
 									</a>
 								</div>
 							</div>
 							<p class="bm-remove no-text-overflow">
-								<a href="./baroBoardOverView.html" target="_self"><strong>바로보드 개발중<br />으아아아아악</strong></a>
+								<a href="./baroBoardOverView.html" target="_self"><strong>김대근<br />으아아아아악</strong></a>
+							</p>
+						</div>
+						<div class="clear"></div>
+						<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+							<div class="image-and-overlay-container bm-small">
+								<div class="image profile-box">
+									<a href="#" target="_self">
+										<img src="./images/test_img.jpg" alt="류강하" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Kangha Ryu</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
+									</a>
+								</div>
+							</div>
+							<p class="bm-remove no-text-overflow">
+								<a href="./baroBoardOverView.html" target="_self"><strong>류강하<br />으아아아아악</strong></a>
+							</p>
+						</div>
+						<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+							<div class="image-and-overlay-container bm-small">
+								<div class="image profile-box">
+									<a href="./baroBoardOverView.html" target="_self">
+										<img src="./images/test_img.jpg" alt="유창근" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Changgeun Yu</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
+									</a>
+								</div>
+							</div>
+							<p class="bm-remove no-text-overflow">
+								<a href="./baroBoardOverView.html" target="_self"><strong>유창근<br />으아아아아악</strong></a>
+							</p>
+						</div>
+						<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+							<div class="image-and-overlay-container bm-small">
+								<div class="image profile-box">
+									<a href="./baroBoardOverView.html" target="_self">
+										<img src="./images/test_img.jpg" alt="손호성" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Hosung Son</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
+									</a>
+								</div>
+							</div>
+							<p class="bm-remove no-text-overflow">
+								<a href="./baroBoardOverView.html" target="_self"><strong>손호성<br />으아아아아악</strong></a>
+							</p>
+						</div>
+						<div class="one-quarter product-item boxed p-ten text-center even last loop-first  sold-out  animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+							<div class="image-and-overlay-container bm-small">
+								<div class="image profile-box">
+									<a href="./baroBoardOverView.html" target="_self">
+										<img src="./images/test_img.jpg" alt="유정우" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Jungwoo Yu</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
+									</a>
+								</div>
+							</div>
+							<p class="bm-remove no-text-overflow">
+								<a href="./baroBoardOverView.html" target="_self"><strong>유정우<br />으아아아아악</strong></a>
+							</p>
+						</div>
+						<div class="clear"></div>
+						<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+							<div class="image-and-overlay-container bm-small">
+								<div class="image profile-box">
+									<a href="#" target="_self">
+										<img src="./images/test_img.jpg" alt="정원기" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Wonki Jung</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
+									</a>
+								</div>
+							</div>
+							<p class="bm-remove no-text-overflow">
+								<a href="./baroBoardOverView.html" target="_self"><strong>정원기<br />으아아아아악</strong></a>
+							</p>
+						</div>
+						<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+							<div class="image-and-overlay-container bm-small">
+								<div class="image profile-box">
+									<a href="./baroBoardOverView.html" target="_self">
+										<img src="./images/test_img.jpg" alt="전경훈" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Kyunghun Jeon</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
+									</a>
+								</div>
+							</div>
+							<p class="bm-remove no-text-overflow">
+								<a href="./baroBoardOverView.html" target="_self"><strong>전경훈<br />으아아아아악</strong></a>
+							</p>
+						</div>
+						<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+							<div class="image-and-overlay-container bm-small">
+								<div class="image profile-box">
+									<a href="./baroBoardOverView.html" target="_self">
+										<img src="./images/test_img.jpg" alt="이종렬" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Jongryul Lee</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
+									</a>
+								</div>
+							</div>
+							<p class="bm-remove no-text-overflow">
+								<a href="./baroBoardOverView.html" target="_self"><strong>이종렬<br />으아아아아악</strong></a>
+							</p>
+						</div>
+						<div class="one-quarter product-item boxed p-ten text-center even last loop-first  sold-out  animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+							<div class="image-and-overlay-container bm-small">
+								<div class="image profile-box">
+									<a href="./baroBoardOverView.html" target="_self">
+										<img src="./images/test_img.jpg" alt="오권우" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Kwonwoo Oh</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
+									</a>
+								</div>
+							</div>
+							<p class="bm-remove no-text-overflow">
+								<a href="./baroBoardOverView.html" target="_self"><strong>오권우<br />으아아아아악</strong></a>
 							</p>
 						</div>
 						<div class="clear"></div>
 						<div class="one-quarter product-item boxed p-ten text-center odd loop-first  sold-out  animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 							<div class="image-and-overlay-container bm-small">
-								<div class="image">
+								<div class="image profile-box">
 									<a href="./baroBoardOverView.html" target="_self">
-									<img src="./images/test_img.jpg" alt="Cropped Brown Leather Jacket" class="block" />
+										<img src="./images/test_img.jpg" alt="최대열" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Daeyeol Choi</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
 									</a>
 								</div>
 							</div>
 							<p class="bm-remove no-text-overflow">
-								<a href="./baroBoardOverView.html" target="_self"><strong>바로보드 개발중<br />으아아아아악</strong></a>
+								<a href="./baroBoardOverView.html" target="_self"><strong>최대열<br />으아아아아악</strong></a>
 							</p>
 						</div>
+						<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+						<div class="image-and-overlay-container bm-small">
+								<div class="image profile-box">
+									<a href="./baroBoardOverView.html" target="_self">
+										<img src="./images/test_img.jpg" alt="이태경" class="block" />
+										<span class="profile-box-title">
+											<span class="profile-box-name">Taekyung Lee</span>
+											<span class="profile-box-role">Developer</span>
+										</span>
+									</a>
+								</div>
+							</div>
+							<p class="bm-remove no-text-overflow">
+								<a href="./baroBoardOverView.html" target="_self"><strong>이태경<br />으아아아아악</strong></a>
+							</p>
+						</div>	
 					</div>
 				</div>
 			</main>
