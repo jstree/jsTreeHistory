@@ -15,7 +15,7 @@
 	<packaging>pom</packaging>
 
 	<name>standard-projects</name>
-	<description>공통 프로젝트 입니다.</description>
+	<description>ROOT Project Repository by 313 DEV GRP</description>
 	
 	<modules>
 		<module>project-war</module>
