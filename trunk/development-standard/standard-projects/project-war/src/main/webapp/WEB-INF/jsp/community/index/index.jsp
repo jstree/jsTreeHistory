@@ -482,7 +482,7 @@ $("#demo")
 			// Same as above - the `ajax` config option is actually jQuery's AJAX object
 			"ajax" : {
 				/* "url" : "/egovframework/com/ext/jstree/strutsiBatis/searchNode.action", */
-				"url" : "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/searchNode.do",
+				"url" : "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/searchNode.do",
 				// You get the search string as a parameter
 				"data" : function (str) {
 					return { 
@@ -558,7 +558,7 @@ $("#demo")
 	.bind("set_type.jstree", function (e, data) {
 		$.post(
 				/* "/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action", */
-				"${pageContext.request.contextPath}/egovframework/com/etc/jstree/core/springiBatis/alterNodeType.do",
+				"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/alterNodeType.do",
 			{ 
 					"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
 					"c_title" : data.rslt.new_name,
@@ -570,11 +570,20 @@ $("#demo")
 	})
 	.bind("move_node.jstree", function (e, data) {
 		data.rslt.o.each(function (i) {
+			
+			console.log("c_id    : " + $(this).attr("id").replace("node_","").replace("copy_",""));
+			console.log("c_title : " + data.rslt.name);
+			console.log("c_position : " + (data.rslt.cp + i));
+			console.log("ref     : " + (data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_","")));
+			console.log("copy    : " + (data.rslt.cy ? 1 : 0));
+			
+			return false;
+			
 			$.ajax({
 				async : false,
 				type: 'POST',
 				/* url: "/egovframework/com/ext/jstree/strutsiBatis/moveNode.action", */
-				url: "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/moveNode.do",
+				url: "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/moveNode.do",
 				data : { 
 					"c_id" : $(this).attr("id").replace("node_","").replace("copy_",""), 
 					"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_",""), 

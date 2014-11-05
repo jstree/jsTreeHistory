@@ -45,10 +45,9 @@ public class MenuServiceImpl implements CoreService {
     }
 
     @Override
-    public <T extends ComprehensiveTree> List<String> searchNode(
-            T comprehensiveTree) {
+    public <T extends ComprehensiveTree> List<String> searchNode( T comprehensiveTree ) throws Exception {
         // TODO Auto-generated method stub
-        return null;
+        return coreService.searchNode(comprehensiveTree);
     }
 
     @Override
@@ -73,14 +72,14 @@ public class MenuServiceImpl implements CoreService {
     @Override
     public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree) throws Exception {
         // TODO Auto-generated method stub
-        return 0;
+        return coreService.alterNodeType(comprehensiveTree);
     }
 
     @Override
     public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree)
     		 throws Exception {
         // TODO Auto-generated method stub
-        return null;
+        return coreService.moveNode(comprehensiveTree);
     }
 
 }

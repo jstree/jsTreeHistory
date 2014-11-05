@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -157,15 +158,90 @@ public class MenuController extends GenericAbstractController {
 
 		return menuComprehensiveTree;
 	}
-//    @ResponseBody
-//    @RequestMapping("/largeMenu/middleMenu/smallMenu/menu/searchNode.do")
-//    public String searchNode(MenuComprehensiveTree menuComprehensiveTree, ModelMap model, HttpServletRequest request)
-//            throws JsonProcessingException {
-//
-//        if (!StringUtils.hasText(menuComprehensiveTree.getSearchStr())) {
-//            throw new RuntimeException();
-//        }
-//
-//        return new ObjectMapper().writeValueAsString(menuService.searchNode(menuComprehensiveTree));
-//    }
+	
+	
+	@ResponseBody
+	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/moveNode.do")
+	public ComprehensiveTree moveNode( MenuComprehensiveTree menuComprehensiveTree
+			                         , HttpServletRequest request )	throws Exception {
+		
+		if (request.getParameter("c_id") == null || request.getParameter("c_position") == null
+				|| request.getParameter("copy") == null || request.getParameter("multiCounter") == null
+				|| request.getParameter("ref") == null) {
+			throw new RuntimeException("invalid parameters Null");
+		} else {
+			if (request.getParameter("ref").equals("0")) {
+				throw new RuntimeException("moveNode ref value is 0");
+			}
+
+			if (request.getParameter("c_id").equals("0") || request.getParameter("c_id").equals("1")) {
+				throw new RuntimeException("invalid parameters c_id is 0 or 1");
+			}
+
+			if (Integer.parseInt(request.getParameter("c_position")) < 0) {
+				throw new RuntimeException("addNode c_postion less 0");
+			}
+
+			if (Integer.parseInt(request.getParameter("copy")) < 0) {
+				throw new RuntimeException("addNode copy less 0");
+			} else {
+				if (Integer.parseInt(request.getParameter("copy")) > 1) {
+					throw new RuntimeException("addNode copy lager 1");
+				}
+			}
+
+			if (Integer.parseInt(request.getParameter("multiCounter")) < 0) {
+				throw new RuntimeException("addNode multiCounter less 0");
+			}
+		}
+		menuService.alterNode(menuComprehensiveTree);
+		
+		return menuComprehensiveTree;
+	}
+	
+    @ResponseBody
+    @RequestMapping("/largeMenu/middleMenu/smallMenu/menu/searchNode.do")
+    public List<String> searchNode( MenuComprehensiveTree menuComprehensiveTree
+    		                      , HttpServletRequest    request ) throws Exception {
+
+    	if (!StringUtils.hasText(menuComprehensiveTree.getSearchStr())) {
+			throw new RuntimeException();
+		}
+		return menuService.searchNode(menuComprehensiveTree);
+    }
+    
+    @ResponseBody
+    @RequestMapping("/largeMenu/middleMenu/smallMenu/menu/alterNodeType.do")
+    public ComprehensiveTree alterNodeType( MenuComprehensiveTree menuComprehensiveTree
+    		                              , HttpServletRequest    request ) throws Exception {
+    	
+    	if (request.getParameter("c_id") == null || request.getParameter("c_type") == null) {
+			throw new RuntimeException();
+		} else {
+			if (request.getParameter("c_id").equals("0")) {
+				throw new RuntimeException("alterNodeType c_id value is 0");
+			}
+			if (request.getParameter("c_id").equals("1")) {
+				throw new RuntimeException("alterNodeType c_id value is 1");
+			}
+
+			if (request.getParameter("c_type").equals("default") || request.getParameter("c_type").equals("folder")) {
+			} else {
+				if (request.getParameter("c_type").equals("drive")) {
+					throw new RuntimeException("alterNodeType c_position value is drive");
+				} else {
+					throw new RuntimeException("alterNodeType c_position value is another");
+				}
+			}
+		}
+    	menuService.alterNodeType(menuComprehensiveTree);
+    	
+    	return menuComprehensiveTree;
+    }
+    
+    @RequestMapping("/index/index.do")
+	public String index() {
+
+		return "/jsp/community/index/index";
+	}
 }
