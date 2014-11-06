@@ -366,25 +366,6 @@ Shopify.theme = {
 //]]>
 
 
-/* */
-//<![CDATA[
-(function() {
-    function asyncLoad() {
-        var urls = ["//cdn.shopify.com/s/javascripts/shopify_stats.js?v=6"];
-        for (var i = 0; i < urls.length; i++) {
-            var s = document.createElement('script');
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = urls[i];
-            var x = document.getElementsByTagName('script')[0];
-            x.parentNode.insertBefore(s, x);
-        }
-    }
-    window.attachEvent ? window.attachEvent('onload', asyncLoad) : window
-        .addEventListener('load', asyncLoad, false);
-})();
-
-//]]>
 
 /* */
 function getStyle(el, styleProp) {
