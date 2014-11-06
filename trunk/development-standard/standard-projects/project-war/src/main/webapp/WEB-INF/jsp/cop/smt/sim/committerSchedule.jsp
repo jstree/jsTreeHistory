@@ -166,7 +166,6 @@
 						$("#contentsBody").html(page);
 					}
 					,error : function(e){
-						$("#nodeConfirm").dialog("close");
 					}
 				});
 			});
