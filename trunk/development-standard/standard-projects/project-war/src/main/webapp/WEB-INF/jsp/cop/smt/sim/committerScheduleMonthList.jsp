@@ -19,14 +19,14 @@
 	            	</c:forEach>                                                   
 	        </select>  
 			<p>
-				<a href="#"><img src="http://localhost/ROOT/assets/btn_prev.gif" alt="이전년도" /></a>
+				<a href="#"><img src="http://localhost/assets/btn_prev.gif" alt="이전년도" /></a>
 				<span>${nYear}년</span>
-				<a href="#"><img src="http://localhost/ROOT/assets/btn_next.gif" alt="다음년도" /></a>
+				<a href="#"><img src="http://localhost/assets/btn_next.gif" alt="다음년도" /></a>
 			</p>
 			<p>
-				<a href="#"><img src="http://localhost/ROOT/assets/btn_prev.gif" alt="이전달" /></a>
+				<a href="#"><img src="http://localhost/assets/btn_prev.gif" alt="이전달" /></a>
 				<span>${nMonth+1}월</span>
-				<a href="#"><img src="http://localhost/ROOT/assets/btn_next.gif" alt="다음달" /></a>
+				<a href="#"><img src="http://localhost/assets/btn_next.gif" alt="다음달" /></a>
 			</p>
 		</div>
 		<table>

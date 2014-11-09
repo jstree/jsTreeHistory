@@ -47,65 +47,65 @@
 		<meta property="og:title" content="dongmin.lee">
 		<meta property="og:url" content="http://dongmin-lee.myshopify.com/">
 		<meta property="og:site_name" content="dongmin.lee">
-		<link href="http://localhost/ROOT/assets/fav-icon.png?20" rel="icon" />
-		<link href="http://localhost/ROOT/assets/apple-icon-60.png?20" rel="apple-touch-icon" />
-		<link href="http://localhost/ROOT/assets/apple-icon-76.png?20" rel="apple-touch-icon" sizes="76x76" />
-		<link href="http://localhost/ROOT/assets/apple-icon-120.png?20" rel="apple-touch-icon" sizes="120x120" />
-		<link href="http://localhost/ROOT/assets/apple-icon-152.png?20" rel="apple-touch-icon" sizes="152x152" />
+		<link href="/assets/fav-icon.png?20" rel="icon" />
+		<link href="/assets/apple-icon-60.png?20" rel="apple-touch-icon" />
+		<link href="/assets/apple-icon-76.png?20" rel="apple-touch-icon" sizes="76x76" />
+		<link href="/assets/apple-icon-120.png?20" rel="apple-touch-icon" sizes="120x120" />
+		<link href="/assets/apple-icon-152.png?20" rel="apple-touch-icon" sizes="152x152" />
 		<link href="/blogs/news.atom" rel="alternate" type="application/rss+xml" title="dongmin.lee | Blog" />
 		<link href="/sitemap.xml" rel="sitemap" type="application/xml" title="Sitemap" />
 		<link href="http://dongmin-lee.myshopify.com/" rel="canonical" />
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="http://fonts.googleapis.com/css?family=Oxygen:400|Alegreya+Sans:400|Alegreya+Sans:400|Alegreya+Sans:400|Alegreya+Sans:400|Alegreya+Sans:400|Alegreya+Sans:400|Alegreya+Sans:400|Oxygen:400|PT+Sans+Narrow:400" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/normalize.min.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/edge-alerts.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/tipsy.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/pop-growl.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/animations.min.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/pro-bars.min.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/responsive-tabs.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/responsive-accordion.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/responsive-toggle.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/owl-carousel.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/litebox.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/shopify-quick-look.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/backbone.scss.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://localhost/ROOT/assets/section_common.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/normalize.min.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/edge-alerts.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/tipsy.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/pop-growl.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/animations.min.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/pro-bars.min.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/responsive-tabs.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/responsive-accordion.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/responsive-toggle.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/owl-carousel.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/litebox.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/shopify-quick-look.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/backbone.scss.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="/assets/section_common.css" rel="stylesheet" type="text/css" media="all" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
 		<script>
-			window.jQuery || document.write('<script src="http://localhost/ROOT/assets/cdn-fallback-jquery.min.js?20"><\/script>');
+			window.jQuery || document.write('<script src="/assets/cdn-fallback-jquery.min.js?20"><\/script>');
 		</script>
 		<script>
-			window.jQuery.ui || document.write('<script src="http://localhost/ROOT/assets/cdn-fallback-jquery-ui.min.js?20"><\/script>');
+			window.jQuery.ui || document.write('<script src="/assets/cdn-fallback-jquery-ui.min.js?20"><\/script>');
 		</script>
 		<script src="//cdn.shopify.com/s/shopify/option_selection.js?993621d378b4e269a9c1b982495e4f466ae58a0c" type="text/javascript"></script>
 		<script src="//cdn.shopify.com/s/shopify/api.jquery.js?993621d378b4e269a9c1b982495e4f466ae58a0c" type="text/javascript"></script>
 		<!--[if lt IE 9]>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" type="text/javascript"></script>
-		<script>window.html5 || document.write('<script src="http://localhost/ROOT/assets/cdn-fallback-html5-shiv.min.js?20"><\/script>');</script>
-		<script>window.respond || document.write('<script src="http://localhost/ROOT/assets/cdn-fallback-respond.min.js?20"><\/script>');</script>
+		<script>window.html5 || document.write('<script src="/assets/cdn-fallback-html5-shiv.min.js?20"><\/script>');</script>
+		<script>window.respond || document.write('<script src="/assets/cdn-fallback-respond.min.js?20"><\/script>');</script>
 		<![endif]-->
-		<script src="http://localhost/ROOT/assets/smoothscroll.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/placeholders.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/images-loaded.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/edge-alerts.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/fitvids.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/tipsy.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/pop-growl.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/appear.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/animations.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/pro-bars.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/responsive-tabs.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/responsive-accordion.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/responsive-toggle.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/elevate-zoom.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/owl-carousel.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/litebox.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/shopify-quick-look.min.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/backbone.js?20" type="text/javascript"></script>
-		<script src="http://localhost/ROOT/assets/common.js" type="text/javascript"></script>
+		<script src="/assets/smoothscroll.min.js?20" type="text/javascript"></script>
+		<script src="/assets/placeholders.min.js?20" type="text/javascript"></script>
+		<script src="/assets/images-loaded.min.js?20" type="text/javascript"></script>
+		<script src="/assets/edge-alerts.min.js?20" type="text/javascript"></script>
+		<script src="/assets/fitvids.min.js?20" type="text/javascript"></script>
+		<script src="/assets/tipsy.min.js?20" type="text/javascript"></script>
+		<script src="/assets/pop-growl.min.js?20" type="text/javascript"></script>
+		<script src="/assets/appear.min.js?20" type="text/javascript"></script>
+		<script src="/assets/animations.js?20" type="text/javascript"></script>
+		<script src="/assets/pro-bars.min.js?20" type="text/javascript"></script>
+		<script src="/assets/responsive-tabs.min.js?20" type="text/javascript"></script>
+		<script src="/assets/responsive-accordion.min.js?20" type="text/javascript"></script>
+		<script src="/assets/responsive-toggle.min.js?20" type="text/javascript"></script>
+		<script src="/assets/elevate-zoom.min.js?20" type="text/javascript"></script>
+		<script src="/assets/owl-carousel.min.js?20" type="text/javascript"></script>
+		<script src="/assets/litebox.min.js?20" type="text/javascript"></script>
+		<script src="/assets/shopify-quick-look.min.js?20" type="text/javascript"></script>
+		<script src="/assets/backbone.js?20" type="text/javascript"></script>
+		<script src="/assets/common.js" type="text/javascript"></script>
 		<script id="__st">
 			//<![CDATA[
 			var __st = {
