@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Nero v1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com -->
 
 <!--[if lt IE 7 ]><html class="no-js ie ie6" lang="ko"><![endif]-->
@@ -134,7 +135,7 @@
 			td {padding:0.5% 2%;}
 
 			/* 달력 */
-			.calendar {margin-top:20px;}
+			/*.calendar {margin-top:3px;}*/
 			.calendar h3 {margin-bottom:10px; font-size:15px; color:#222; font-weight:bold}
 			.calendar_select {padding:16px 14px 12px; border:2px solid #e8d0eb; *zoom:1}
 			.calendar_select:after {display:block; content:""; clear:both}
@@ -156,7 +157,6 @@
 		
 		<script type="text/javascript">
 			$(function(){
-				//callAjax(null, "${pageContext.request.contextPath}/committerScheduleMonthList.do", '#contentsBody', 'GET', 'html');
 				$.ajax({
 					 async : false
 					,type: 'GET'
@@ -476,8 +476,26 @@
 					<div class="clearfix">
 						<div class="container bm-remove">
 							<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
-								<div class="article-body rte" itemprop="articleBody" id="contentsBody">
+								<h5>일별관리 월별 목록조회</h5>
+								<div class="calendar_select">
+									<select name="schdulSe" title="검색조건" class="select" id="schdulSe" onChange="fnEgovSchdulSe(this.form.schdulSe.options[this.form.schdulSe.selectedIndex].value);">
+							        	<option selected value=''>-- 전체 --</option>
+							            	<c:forEach var="result" items="${schdulSe}" varStatus="status">
+							                	<option value='${result.code}' <c:if test="${searchKeyword == result.code}">selected</c:if>>${result.codeNm}</option>
+							            	</c:forEach>                                                   
+							        </select>  
+									<p>
+										<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_prev.gif" alt="이전년도" /></a>
+										<span>${nYear}년</span>
+										<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_next.gif" alt="다음년도" /></a>
+									</p>
+									<p>
+										<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_prev.gif" alt="이전달" /></a>
+										<span>${nMonth+1}월</span>
+										<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_next.gif" alt="다음달" /></a>
+									</p>
 								</div>
+								<div class="article-body rte" id="contentsBody"></div>
 							</div>
 						</div>
 					</div>
