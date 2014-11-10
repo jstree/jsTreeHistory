@@ -1,5 +1,6 @@
 package standard.mvc.component.business.schdulManage.controller;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -69,9 +70,21 @@ public class SchdulManageController extends GenericAbstractController {
         return null;
     }
 
-
 	@RequestMapping("/committerSchedule.do")
-	public String getChildNode() throws Exception {
+	public String getCommitterSchedule(ModelMap model) throws Exception {
+		//공통코드 일정종류
+		ComDefaultCodeVO voComCode = new ComDefaultCodeVO();
+	   	voComCode = new ComDefaultCodeVO();
+    	voComCode.setCodeId("COM030");
+    	model.addAttribute("schdulSe", cmmUseService.selectCmmCodeDetail(voComCode));
+		
+    	Calendar cal = Calendar.getInstance();
+		
+    	//기존 eGov에서 Jsp에서 하던 로직(달력 년과 월을  표시)
+        model.addAttribute("nYear" , cal.get(Calendar.YEAR));
+        model.addAttribute("nMonth", cal.get(Calendar.MONTH));
+        model.addAttribute("nDate" , cal.get(Calendar.DATE));
+        
 		return "/jsp/cop/smt/sim/committerSchedule";
 	}
 	
@@ -88,14 +101,13 @@ public class SchdulManageController extends GenericAbstractController {
         model.addAttribute("searchKeyword", commandMap.get("searchKeyword") == null ? "" : (String)commandMap.get("searchKeyword"));
         model.addAttribute("searchCondition", commandMap.get("searchCondition") == null ? "" : (String)commandMap.get("searchCondition"));
 
-		java.util.Calendar cal = java.util.Calendar.getInstance();
+		Calendar cal = Calendar.getInstance();
 		
 		String sYear = (String)commandMap.get("year");
 		String sMonth = (String)commandMap.get("month");
 
-		int iYear = cal.get(java.util.Calendar.YEAR);
-		int iMonth = cal.get(java.util.Calendar.MONTH);
-		int iDate = cal.get(java.util.Calendar.DATE);
+		int iYear = cal.get(Calendar.YEAR);
+		int iMonth = cal.get(Calendar.MONTH);
 		
         //검색 설정
         String sSearchDate = "";
@@ -109,35 +121,24 @@ public class SchdulManageController extends GenericAbstractController {
                 sSearchDate += Integer.toString(iMonth+1).length() == 1 ? "0" + Integer.toString(iMonth+1) :Integer.toString(iMonth+1); 
         }
 		
-		//공통코드 일정종류
-		ComDefaultCodeVO voComCode = new ComDefaultCodeVO();
-	   	voComCode = new ComDefaultCodeVO();
-    	voComCode.setCodeId("COM030");
-    	model.addAttribute("schdulSe", cmmUseService.selectCmmCodeDetail(voComCode));
-
     	commandMap.put("searchMonth", sSearchDate);
     	commandMap.put("searchMode", "MONTH");
-    	List a = egovIndvdlSchdulManageService.selectIndvdlSchdulManageRetrieve(commandMap);
-        model.addAttribute("resultList", a);
+        model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageRetrieve(commandMap));
 		
-		
-        //기존 eGov에서 Jsp에서 하던 로직을 가져왔다 추후 더 분석후 좀더 이쁘게 만들자
-        model.addAttribute("nYear" , iYear);
-        model.addAttribute("nMonth", iMonth);
-        model.addAttribute("nDate" , iDate);
-        
         //년도/월 셋팅
         cal.set(iYear, iMonth, 1);
         
-        int startDay = cal.getMinimum(java.util.Calendar.DATE);
-        int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
-        int start = cal.get(java.util.Calendar.DAY_OF_WEEK);
-        int newLine = 0;
+        int startDay = cal.getMinimum(Calendar.DATE);
+        int endDay   = cal.getActualMaximum(Calendar.DATE);
+        int start    = cal.get(Calendar.DAY_OF_WEEK);
         
         model.addAttribute("startDay", startDay);
         model.addAttribute("endDay"  , endDay);
         model.addAttribute("start"   , start);
         
+        //말일자가 해당월의 몇 주차인지 구하기
+        cal.set(Calendar.DATE, endDay);
+        model.addAttribute("lastWeek", cal.get(Calendar.WEEK_OF_MONTH));
         
 		return "/jsp/cop/smt/sim/committerScheduleMonthList";
 	}
