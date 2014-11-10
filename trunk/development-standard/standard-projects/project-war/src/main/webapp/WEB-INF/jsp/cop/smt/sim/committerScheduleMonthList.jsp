@@ -19,18 +19,18 @@
 	            	</c:forEach>                                                   
 	        </select>  
 			<p>
-				<a href="#"><img src="http://localhost/assets/btn_prev.gif" alt="이전년도" /></a>
+				<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_prev.gif" alt="이전년도" /></a>
 				<span>${nYear}년</span>
-				<a href="#"><img src="http://localhost/assets/btn_next.gif" alt="다음년도" /></a>
+				<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_next.gif" alt="다음년도" /></a>
 			</p>
 			<p>
-				<a href="#"><img src="http://localhost/assets/btn_prev.gif" alt="이전달" /></a>
+				<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_prev.gif" alt="이전달" /></a>
 				<span>${nMonth+1}월</span>
-				<a href="#"><img src="http://localhost/assets/btn_next.gif" alt="다음달" /></a>
+				<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_next.gif" alt="다음달" /></a>
 			</p>
 		</div>
 		<table>
-			<caption>달력</caption>
+			<caption>일정달력</caption>
 			<colgroup>
 				<col style="width:14.2%" />
 				<col style="width:14.2%" />
@@ -52,123 +52,35 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td class="sun"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>
-						<i>1</i>
-						<div>
-							내용
-						</div>
-					</td>
-					<td class="sat">
-						<i>2</i>
-					</td>
-				</tr>
-				<tr>
-					<td class="sun">
-						<i>3</i>
-						<div>
-							내용
-						</div>
-					</td>
-					<td>
-						<i>4</i>
-					</td>
-					<td>
-						<i>5</i>
-					</td>
-					<td>
-						<i>6</i>
-					</td>
-					<td>
-						<i>7</i>
-					</td>
-					<td>
-						<i>8</i>
-					</td>
-					<td class="sat">
-						<i>9</i>
-					</td>
-				</tr>
-				<tr>
-					<td class="sun">
-						<i>10</i>
-					</td>
-					<td>
-						<i>11</i>
-					</td>
-					<td>
-						<i>12</i>
-					</td>
-					<td>
-						<i>13</i>
-					</td>
-					<td>
-						<i>14</i>
-					</td>
-					<td>
-						<i>15</i>
-					</td>
-					<td class="sat">
-						<i>16</i>
-					</td>
-				</tr>
-				<tr>
-					<td class="sun">
-						<i>17</i>
-						<div>
-							내용
-						</div>
-					</td>
-					<td>
-						<i>18</i>
-					</td>
-					<td>
-						<i>19</i>
-					</td>
-					<td>
-						<i>20</i>
-					</td>
-					<td>
-						<i>21</i>
-					</td>
-					<td>
-						<i>22</i>
-					</td>
-					<td class="sat">
-						<i>23</i>
-					</td>
-				</tr>
-				<tr>
-					<td class="sun">
-						<i>24</i>
-						<div>
-							내용
-						</div>
-					</td>
-					<td>
-						<i>25</i>
-					</td>
-					<td>
-						<i>26</i>
-					</td>
-					<td>
-						<i>27</i>
-					</td>
-					<td>
-						<i>28</i>
-					</td>
-					<td>
-						<i>29</i>
-					</td>
-					<td class="sat">
-						<i>30</i>
-					</td>
-				</tr>
+				<c:set var="blankDay" value="1"/>
+				<c:forEach var="i" begin="1" end="5">
+					<tr>
+						<c:forEach var="j" begin="1" end="7">
+							<c:choose>
+								<c:when test="${blankDay < start }">
+									<c:set var="blankDay" value="${blankDay + 1}"/>
+									<td>&nbsp;</td>
+								</c:when>
+								<c:when test="${startDay <= endDay }">
+									<c:set var="color"  value=""/>
+									<c:choose>
+										<c:when test="${j == 1}">
+											<c:set var="color"  value="sun"/>	
+										</c:when>
+										<c:when test="${j == 7}">
+											<c:set var="color"  value="sat"/>	
+										</c:when>
+									</c:choose>
+									<td class="${color}" bgcolor="#EFEFEF" >${startDay}</td>
+									<c:set var="startDay" value="${startDay+1}"/>	
+								</c:when>
+								<c:otherwise>
+									<td>&nbsp;</td>
+								</c:otherwise>
+							</c:choose>								
+						</c:forEach>		
+					</tr>
+				</c:forEach>				
 			</tbody>
 		</table>
 	</div>
