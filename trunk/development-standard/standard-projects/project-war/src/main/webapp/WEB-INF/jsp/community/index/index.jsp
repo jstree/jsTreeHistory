@@ -571,13 +571,13 @@ $("#demo")
 	.bind("move_node.jstree", function (e, data) {
 		data.rslt.o.each(function (i) {
 			
+			console.log(data);
+			console.log(data.rslt);
+			console.log(data.rslt.o);
 			console.log("c_id    : " + $(this).attr("id").replace("node_","").replace("copy_",""));
-			console.log("c_title : " + data.rslt.name);
 			console.log("c_position : " + (data.rslt.cp + i));
 			console.log("ref     : " + (data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_","")));
 			console.log("copy    : " + (data.rslt.cy ? 1 : 0));
-			
-			return false;
 			
 			$.ajax({
 				async : false,
@@ -588,7 +588,6 @@ $("#demo")
 					"c_id" : $(this).attr("id").replace("node_","").replace("copy_",""), 
 					"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_",""), 
 					"c_position" : data.rslt.cp + i,
-					"c_title" : data.rslt.name, 
 					"copy" : data.rslt.cy ? 1 : 0,
 					"multiCounter"	:	i
 				},

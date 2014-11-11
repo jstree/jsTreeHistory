@@ -262,7 +262,9 @@ public class CoreController extends GenericAbstractController{
 	 */
 	@ResponseBody
 	@RequestMapping("/moveNode.do")
-	public ComprehensiveTree moveNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ComprehensiveTree moveNode( ComprehensiveTree  comprehensiveTree
+			                         , ModelMap           model
+			                         , HttpServletRequest request )
 			 throws Exception {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_position") == null
@@ -294,8 +296,7 @@ public class CoreController extends GenericAbstractController{
 				throw new RuntimeException("addNode multiCounter less 0");
 			}
 		}
-
-		coreService.moveNode(comprehensiveTree);
+		coreService.moveNode(comprehensiveTree, request);
 
 		return comprehensiveTree;
 	}

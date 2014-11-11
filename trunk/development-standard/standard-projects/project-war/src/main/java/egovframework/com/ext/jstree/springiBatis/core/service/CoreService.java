@@ -2,6 +2,8 @@ package egovframework.com.ext.jstree.springiBatis.core.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
@@ -87,11 +89,11 @@ public interface CoreService {
 	/**
 	 * 노드를 이동한다.
 	 * 
-	 * @param comprehensiveTree - jstree에서 사용되는 tree VO 
-	 * @return ComprehensiveTree
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws ReflectiveOperationException 
+	 * @param comprehensiveTree
+	 * @param request
+	 * @return
+	 * @throws Exception
 	 */
-	public <T extends ComprehensiveTree> T moveNode( T comprehensiveTree ) throws Exception;
+	public <T extends ComprehensiveTree> T moveNode( T                  comprehensiveTree
+			                                       , HttpServletRequest request ) throws Exception;
 }

@@ -125,4 +125,12 @@ public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 	public <T extends ComprehensiveTree> void stretchRightForMyselfFromJstree( T comprehensiveTree ) throws Exception{
 		update(comprehensiveTree.getSqlMapSelector() + "." + "stretchRightForMyselfFromJstree", comprehensiveTree);
 	}
+	
+	public <T extends ComprehensiveTree> void enterMyselfFixPosition( T comprehensiveTree ) throws Exception {
+		update(comprehensiveTree.getSqlMapSelector() + ".enterMyselfFixPosition", comprehensiveTree);
+	}
+	
+	public <T extends ComprehensiveTree> void enterMyselfFixLeftRight( T comprehensiveTree ) throws Exception {
+		update(comprehensiveTree.getSqlMapSelector() + ".enterMyselfFixLeftRight", comprehensiveTree);
+	}
 }

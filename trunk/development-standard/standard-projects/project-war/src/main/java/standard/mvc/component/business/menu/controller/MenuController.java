@@ -194,7 +194,7 @@ public class MenuController extends GenericAbstractController {
 				throw new RuntimeException("addNode multiCounter less 0");
 			}
 		}
-		menuService.alterNode(menuComprehensiveTree);
+		menuService.moveNode(menuComprehensiveTree, request);
 		
 		return menuComprehensiveTree;
 	}

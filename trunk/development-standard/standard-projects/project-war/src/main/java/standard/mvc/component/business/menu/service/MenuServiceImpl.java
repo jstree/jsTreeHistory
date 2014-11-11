@@ -3,6 +3,7 @@ package standard.mvc.component.business.menu.service;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -76,10 +77,9 @@ public class MenuServiceImpl implements CoreService {
     }
 
     @Override
-    public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree)
-    		 throws Exception {
+    public <T extends ComprehensiveTree> T moveNode( T                  comprehensiveTree
+                                                   , HttpServletRequest request ) throws Exception{
         // TODO Auto-generated method stub
-        return coreService.moveNode(comprehensiveTree);
+        return coreService.moveNode(comprehensiveTree, request);
     }
-
 }
