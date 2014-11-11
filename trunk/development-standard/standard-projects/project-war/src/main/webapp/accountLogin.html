@@ -455,16 +455,17 @@
 						</div>
 						<div class="one-half-percent desktop-tablet alpha bm-remove last">
 							<div id="customer-login-form">
-								<form accept-charset="UTF-8" action="https://cloudeight-nero.myshopify.com/account/login" id="customer_login" method="post">
+								<form accept-charset="UTF-8" action="./uat/uia/actionLogin.do" id="customer_login" method="post">
+									<input type="hidden" name="userSe"  value="USR"/>
 									<input name="form_type" type="hidden" value="customer_login" /><input name="utf8" type="hidden" value="✓" />
 									<script>
 										$(document).ready(function() {
 											$('#customer_login').attr('novalidate', '');
 										});
 									</script>
-									<input type="email" name="customer[email]" id="login-email" class="w-full" placeholder="Email Address" value="" />
+									<input type="text" name="id" id="id" class="w-full" placeholder="Email Address" value="" />
 									<input type="text" class="w-full fake-password" placeholder="Password" />
-									<input type="password" name="customer[password]" id="login-password" class="w-full true-password no-display" />
+									<input type="password" name="password" id="password" class="w-full true-password no-display" />
 									<div class="text-right">
 										<button type="submit" class="inline-block bm-remove">Log In</button>
 									</div>
