@@ -157,6 +157,110 @@
 		
 		<script type="text/javascript">
 			$(function(){
+				$("a").click(function(event){
+					event.preventDefault();
+				});
+				
+				$("#previousYear").mouseup(function(event){
+					var sYear = $("#calYear").text();
+					var sMonth = $("#calMonth").text();
+					var nYear = parseInt(sYear.replace("년", ""), 10) - 1;
+					var nMonth = sMonth.replace("월", "");
+					
+					$.ajax({
+						 async : false
+						,type: 'GET'
+						,url: "${pageContext.request.contextPath}/committerScheduleMonthList.do"
+						,data : {
+									 year  : nYear
+									,month : nMonth
+							    }
+						,success : function (page) {
+							$("#calYear").text(nYear+"년");
+							$("#contentsBody").html(page);
+						}
+						,error : function(e){
+							$("#calYear").text(sYear);
+							alert(e);
+						}
+					});
+				});
+				
+				$("#previousMonth").mouseup(function(event){
+					var sYear = $("#calYear").text();
+					var sMonth = $("#calMonth").text();
+					var nYear = sYear.replace("년", "");
+					var nMonth = parseInt(sMonth.replace("월", ""), 10) - 1;
+					
+					$.ajax({
+						 async : false
+						,type: 'GET'
+						,url: "${pageContext.request.contextPath}/committerScheduleMonthList.do"
+						,data : {
+									 year  : nYear
+									,month : nMonth
+							    }
+						,success : function (page) {
+							$("#calMonth").text(nMonth+"월");
+							$("#contentsBody").html(page);
+						}
+						,error : function(e){
+							$("#calMonth").text(sMonth);
+							alert(e);
+						}
+					});
+				});
+				
+				$("#nextYear").mouseup(function(event){
+					var sYear = $("#calYear").text();
+					var sMonth = $("#calMonth").text();
+					var nYear = parseInt(sYear.replace("년", ""), 10) + 1;
+					var nMonth = sMonth.replace("월", "");
+					
+					$.ajax({
+						 async : false
+						,type: 'GET'
+						,url: "${pageContext.request.contextPath}/committerScheduleMonthList.do"
+						,data : {
+									 year  : nYear
+									,month : nMonth
+							    }
+						,success : function (page) {
+							$("#calYear").text(nYear+"년");
+							$("#contentsBody").html(page);
+						}
+						,error : function(e){
+							$("#calYear").text(sYear);
+							alert(e);
+						}
+					});
+				});
+				
+				$("#nextMonth").mouseup(function(event){
+					var sYear = $("#calYear").text();
+					var sMonth = $("#calMonth").text();
+					var nYear = sYear.replace("년", "");
+					var nMonth = parseInt(sMonth.replace("월", ""), 10) + 1;
+					
+					$.ajax({
+						 async : false
+						,type: 'GET'
+						,url: "${pageContext.request.contextPath}/committerScheduleMonthList.do"
+						,data : {
+									 year  : nYear
+									,month : nMonth
+							    }
+						,success : function (page) {
+							$("#calMonth").text(nMonth+"월");
+							$("#contentsBody").html(page);
+						}
+						,error : function(e){
+							$("#calMonth").text(sMonth);
+							alert(e);
+						}
+					});
+				});
+				
 				$.ajax({
 					 async : false
 					,type: 'GET'
@@ -485,14 +589,14 @@
 							            	</c:forEach>                                                   
 							        </select>  
 									<p>
-										<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_prev.gif" alt="이전년도" /></a>
-										<span>${nYear}년</span>
-										<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_next.gif" alt="다음년도" /></a>
+										<a id="previousYear" href="#"><img src="${pageContext.request.contextPath}/assets/btn_prev.gif" alt="이전년도" /></a>
+										<span id="calYear" >${nYear}년</span>
+										<a id="nextYear" href="#"><img src="${pageContext.request.contextPath}/assets/btn_next.gif" alt="다음년도" /></a>
 									</p>
 									<p>
-										<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_prev.gif" alt="이전달" /></a>
-										<span>${nMonth+1}월</span>
-										<a href="#"><img src="${pageContext.request.contextPath}/assets/btn_next.gif" alt="다음달" /></a>
+										<a id="previousMonth" href="#"><img src="${pageContext.request.contextPath}/assets/btn_prev.gif" alt="이전달" /></a>
+										<span id="calMonth">${nMonth+1}월</span>
+										<a id="nextMonth" href="#"><img src="${pageContext.request.contextPath}/assets/btn_next.gif" alt="다음달" /></a>
 									</p>
 								</div>
 								<div class="article-body rte" id="contentsBody"></div>
