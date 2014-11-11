@@ -1,34 +1,24 @@
 package standard.mvc.component.business.schdulManage.controller;
 
 import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
-import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.ComDefaultCodeVO;
-import egovframework.com.cmm.ComDefaultVO;
 import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.cmm.service.EgovCmmUseService;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.let.cop.smt.sim.service.EgovIndvdlSchdulManageService;
-import egovframework.let.cop.smt.sim.service.IndvdlSchdulManageVO;
 import egovframework.rte.fdl.cmmn.exception.EgovBizException;
 
 /**
@@ -80,7 +70,7 @@ public class SchdulManageController extends GenericAbstractController {
 		
     	Calendar cal = Calendar.getInstance();
 		
-    	//기존 eGov에서 Jsp에서 하던 로직(달력 년과 월을  표시)
+    	//화면에서 조회 기준 년과 월
         model.addAttribute("nYear" , cal.get(Calendar.YEAR));
         model.addAttribute("nMonth", cal.get(Calendar.MONTH));
         model.addAttribute("nDate" , cal.get(Calendar.DATE));
@@ -89,23 +79,28 @@ public class SchdulManageController extends GenericAbstractController {
 	}
 	
 	@RequestMapping("/committerScheduleMonthList.do")
-	public String getBaroIndvdlSchdulManageMonthList(@ModelAttribute("searchVO") ComDefaultVO searchVO, 
-			Map<String, String> commandMap, 
-			IndvdlSchdulManageVO indvdlSchdulManageVO,
-    		ModelMap model)
+	public String getBaroIndvdlSchdulManageMonthList(
+			 Map<String, Object> commandMap
+    		,@RequestParam(value="year", required=false) String sYear
+    		,@RequestParam(value="month", required=false) String sMonth
+    		,@RequestParam(value="searchKeyword", required=false) String searchKeyword
+    		,@RequestParam(value="searchCondition", required=false) String searchCondition
+    		,ModelMap model)
 			 throws Exception {
 
 		if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		//일정구분 검색 유지
-        model.addAttribute("searchKeyword", commandMap.get("searchKeyword") == null ? "" : (String)commandMap.get("searchKeyword"));
-        model.addAttribute("searchCondition", commandMap.get("searchCondition") == null ? "" : (String)commandMap.get("searchCondition"));
-
+//        model.addAttribute("searchKeyword", commandMap.get("searchKeyword") == null ? "" : (String)commandMap.get("searchKeyword"));
+//        model.addAttribute("searchCondition", commandMap.get("searchCondition") == null ? "" : (String)commandMap.get("searchCondition"));
+        model.addAttribute("searchKeyword", StringUtils.isEmpty(searchKeyword) ? "" : searchKeyword);
+        model.addAttribute("searchCondition", StringUtils.isEmpty(searchCondition) ? "" : searchCondition);
+        
 		Calendar cal = Calendar.getInstance();
 		
-		String sYear = (String)commandMap.get("year");
-		String sMonth = (String)commandMap.get("month");
-
+//		String sYear = (String)commandMap.get("year");
+//		String sMonth = (String)commandMap.get("month");
+        
 		int iYear = cal.get(Calendar.YEAR);
 		int iMonth = cal.get(Calendar.MONTH);
 		
@@ -116,7 +111,7 @@ public class SchdulManageController extends GenericAbstractController {
                 sSearchDate += Integer.toString(iMonth+1).length() == 1 ? "0" + Integer.toString(iMonth+1) : Integer.toString(iMonth+1); 
         }else{
                 iYear = Integer.parseInt(sYear); 
-                iMonth = Integer.parseInt(sMonth);
+                iMonth = Integer.parseInt(sMonth)-1;
                 sSearchDate += sYear;
                 sSearchDate += Integer.toString(iMonth+1).length() == 1 ? "0" + Integer.toString(iMonth+1) :Integer.toString(iMonth+1); 
         }
@@ -132,6 +127,7 @@ public class SchdulManageController extends GenericAbstractController {
         int endDay   = cal.getActualMaximum(Calendar.DATE);
         int start    = cal.get(Calendar.DAY_OF_WEEK);
         
+        //화면에서 조회 기준 년과 월
         model.addAttribute("startDay", startDay);
         model.addAttribute("endDay"  , endDay);
         model.addAttribute("start"   , start);
