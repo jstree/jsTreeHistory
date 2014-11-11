@@ -167,6 +167,10 @@
 					var nYear = parseInt(sYear.replace("년", ""), 10) - 1;
 					var nMonth = sMonth.replace("월", "");
 					
+					if(nYear < 1900){
+						nYear = 1900;	
+					}
+					
 					$.ajax({
 						 async : false
 						,type: 'GET'
@@ -177,6 +181,7 @@
 							    }
 						,success : function (page) {
 							$("#calYear").text(nYear+"년");
+							$("#calMonth").text(nMonth+"월");
 							$("#contentsBody").html(page);
 						}
 						,error : function(e){
@@ -192,6 +197,11 @@
 					var nYear = sYear.replace("년", "");
 					var nMonth = parseInt(sMonth.replace("월", ""), 10) - 1;
 					
+					if(nMonth < 1){
+						nYear--;
+						nMonth = 12;	
+					}
+					
 					$.ajax({
 						 async : false
 						,type: 'GET'
@@ -201,6 +211,7 @@
 									,month : nMonth
 							    }
 						,success : function (page) {
+							$("#calYear").text(nYear+"년");
 							$("#calMonth").text(nMonth+"월");
 							$("#contentsBody").html(page);
 						}
@@ -217,6 +228,10 @@
 					var nYear = parseInt(sYear.replace("년", ""), 10) + 1;
 					var nMonth = sMonth.replace("월", "");
 					
+					if(nYear > 9999){
+						nYear = 9999;
+					}
+					
 					$.ajax({
 						 async : false
 						,type: 'GET'
@@ -227,6 +242,7 @@
 							    }
 						,success : function (page) {
 							$("#calYear").text(nYear+"년");
+							$("#calMonth").text(nMonth+"월");
 							$("#contentsBody").html(page);
 						}
 						,error : function(e){
@@ -242,6 +258,11 @@
 					var nYear = sYear.replace("년", "");
 					var nMonth = parseInt(sMonth.replace("월", ""), 10) + 1;
 					
+					if(nMonth > 12){
+						nYear++;
+						nMonth = 1;	
+					}
+					
 					$.ajax({
 						 async : false
 						,type: 'GET'
@@ -251,6 +272,7 @@
 									,month : nMonth
 							    }
 						,success : function (page) {
+							$("#calYear").text(nYear+"년");
 							$("#calMonth").text(nMonth+"월");
 							$("#contentsBody").html(page);
 						}
