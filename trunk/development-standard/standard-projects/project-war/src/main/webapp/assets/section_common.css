@@ -1,3 +1,13 @@
+/* Logo Image Center Align */
+#header-logo img {
+	/* 
+	display: block;
+	margin: 0 auto;
+	 */
+	vertical-align: middle;
+	
+}
+
 .div_center {
 	text-align: center;
 }

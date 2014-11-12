@@ -2195,6 +2195,8 @@ span.font-xx-large {
 }
 
 #header #header-logo a img {
+	/* 로고 가운데 정렬을 위해 주석처리 */
+	/*
     max-width: 100%;
     max-height: 100%;
     position: absolute;
@@ -2202,6 +2204,7 @@ span.font-xx-large {
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    */
 }
 
 #header #header-cart {
