@@ -153,7 +153,12 @@
 						</form>
 					</div>
 					<div id="header-logo" class="one-third bm-remove">
-						<a href="/" target="_self"> dongmin.lee </a>
+						<a href="/" target="_self">
+							<img src="./assets/logo.jpg" alt="313 developer group logo">
+						</a>
+					</div>
+					<div id="header-cart" class="one-third bm-remove last">
+						<a href="/cart" target="_self"><i class="fa fa-shopping-cart fa-fw"></i> Login (<span id="ajax-header-cart-item-count">0</span> <span id="ajax-header-cart-item-text">items</span> - <span id="ajax-header-cart-total-price">£0.00</span>)</a>
 					</div>
 				</div>
 			</header>
