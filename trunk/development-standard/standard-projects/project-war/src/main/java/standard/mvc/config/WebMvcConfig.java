@@ -344,11 +344,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 									  Spring에서는 "/"에 대한 매핑과 함께 <mvc:default-servlet-handler>라는 태그를 사용하여 
 									   정적인 자원들을 container의 default servlet을 활용할 수 있게 해준다. 
 									  <mvc:default-servlet-handler>를 사용하면, 매치되지 않는 요청에 대해서 Spring에서 
-									  container의 default serviet으로 forwarding 처리한다
+									  container의 default servlet으로 forwarding 처리한다
 	*/
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
+//        configurer.enable();
     }
     
     //addViewControllers : URL 패턴을 그대로 뷰 이름으로 돌려주는 간단한 컨트롤러를 등록하는 메소드
