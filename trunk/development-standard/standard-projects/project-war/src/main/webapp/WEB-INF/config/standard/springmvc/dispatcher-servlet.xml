@@ -36,6 +36,11 @@
 		<property name="webBindingInitializer">
 			<bean class="egovframework.com.cmm.web.EgovBindingInitializer" />
 		</property>
+		<property name="customArgumentResolvers">
+			<list>
+				<bean class="egovframework.rte.ptl.mvc.bind.CommandMapArgumentResolver"/>
+			</list>
+		</property>
 	</bean>
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
