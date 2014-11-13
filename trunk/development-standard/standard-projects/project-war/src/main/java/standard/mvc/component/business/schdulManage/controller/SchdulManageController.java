@@ -42,7 +42,7 @@ import egovframework.rte.fdl.cmmn.exception.EgovBizException;
  * </pre>
  */
 @Controller
-public class SchdulManageController extends GenericAbstractController {
+public class SchdulManageController extends GenericAbstractController{
 	
 	/** EgovMessageSource */
     @Resource(name="egovMessageSource")
@@ -53,13 +53,13 @@ public class SchdulManageController extends GenericAbstractController {
 	
 	@Resource(name = "egovIndvdlSchdulManageService")
 	private EgovIndvdlSchdulManageService egovIndvdlSchdulManageService;
-	
-    @Override
-    public Map<String, Map<String, Object>> bindTypes() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
+	@Override
+	public Map<String, Map<String, Object>> bindTypes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@RequestMapping("/committerSchedule.do")
 	public String getCommitterSchedule(ModelMap model) throws Exception {
 		//공통코드 일정종류
@@ -79,27 +79,19 @@ public class SchdulManageController extends GenericAbstractController {
 	}
 	
 	@RequestMapping("/committerScheduleMonthList.do")
-	public String getBaroIndvdlSchdulManageMonthList(
-			 Map<String, Object> commandMap
-    		,@RequestParam(value="year", required=false) String sYear
-    		,@RequestParam(value="month", required=false) String sMonth
-    		,@RequestParam(value="searchKeyword", required=false) String searchKeyword
-    		,@RequestParam(value="searchCondition", required=false) String searchCondition
-    		,ModelMap model)
+	public String getBaroIndvdlSchdulManageMonthList(ModelMap model,@RequestParam Map<String, Object> commandMap)
 			 throws Exception {
 
 		if (!checkAuthority(model)) return "cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	
 		//일정구분 검색 유지
-//        model.addAttribute("searchKeyword", commandMap.get("searchKeyword") == null ? "" : (String)commandMap.get("searchKeyword"));
-//        model.addAttribute("searchCondition", commandMap.get("searchCondition") == null ? "" : (String)commandMap.get("searchCondition"));
-        model.addAttribute("searchKeyword", StringUtils.isEmpty(searchKeyword) ? "" : searchKeyword);
-        model.addAttribute("searchCondition", StringUtils.isEmpty(searchCondition) ? "" : searchCondition);
+        model.addAttribute("searchKeyword", StringUtils.isEmpty(commandMap.get("searchKeyword")) ? "" : (String)commandMap.get("searchKeyword"));
+        model.addAttribute("searchCondition", StringUtils.isEmpty(commandMap.get("searchCondition")) ? "" : (String)commandMap.get("searchCondition"));
         
 		Calendar cal = Calendar.getInstance();
 		
-//		String sYear = (String)commandMap.get("year");
-//		String sMonth = (String)commandMap.get("month");
+		String sYear = (String)commandMap.get("year");
+		String sMonth = (String)commandMap.get("month");
         
 		int iYear = cal.get(Calendar.YEAR);
 		int iMonth = cal.get(Calendar.MONTH);
