@@ -11,5 +11,9 @@
 			   page="defaultDeco.jsp">
 		<pattern>/*</pattern>
 	</decorator>
+	
+	<decorator name="headerPanel" page="headerPanel.jsp"/>
+	
+	<decorator name="footerPanel" page="footerPanel.jsp"/>
 
 </decorators>
