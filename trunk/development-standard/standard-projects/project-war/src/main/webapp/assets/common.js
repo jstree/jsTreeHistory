@@ -58,7 +58,7 @@ if ((typeof Shopify) === 'undefined')
 			
 			        $quickLookImages.owlCarousel({
 			            slideSpeed: 500,
-			            paginationSpeed: 500,
+			            paginationSpeed: 1500,
 			            singleItem: true,
 			            autoPlay: true,
 			            stopOnHover: true
@@ -87,8 +87,7 @@ if ((typeof Shopify) === 'undefined')
 			    $('.shopify-quick-look-overlay .quick-look-description').html(
 			        description);
 			    $('.shopify-quick-look-overlay .quick-look-price').html(
-			        '<small>From </small>' + Shopify.formatMoney(product.price_min,
-			            '&#8361;{{amount_no_decimals}}'));
+			        '<small>From </small>' + product.price_min);
 			
 			    if (product.available) {
 			        // Show availbility
