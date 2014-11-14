@@ -35,6 +35,7 @@
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 
 <decorator:head/>
+<page:applyDecorator name="headerPanel" page="header.jsp"/>
 
 <script type="text/javascript">
 // <![CDATA[
