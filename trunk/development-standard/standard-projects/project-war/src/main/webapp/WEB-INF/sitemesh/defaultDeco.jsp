@@ -17,6 +17,7 @@
 <!--[if IE 9 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie9" style="width:100%;height:100%;margin:0;padding:0;"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html lang="ko-KR" style="width:100%;height:100%;margin:0;padding:0;">
+<meta charset="utf-8">
 <!--<![endif]-->
 <head>
 <c:choose>
@@ -34,7 +35,6 @@
 <link rel="icon" href="./favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 
-<decorator:head/>
 <page:applyDecorator name="headerPanel" page="header.jsp"/>
 
 <script type="text/javascript">
