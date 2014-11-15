@@ -6,14 +6,17 @@
 		<pattern>/exclude.jsp</pattern>
 		<pattern>/exclude/*</pattern>
 	</excludes>
-
-	<decorator name="default"
-			   page="defaultDeco.jsp">
+	
+<!-- 	<decorator name="default" page="defaultDeco.jsp"> -->
+<!-- 		<pattern>/*</pattern> -->
+<!-- 	</decorator> -->
+	
+	<decorator name="default" page="indexDeco.jsp">
 		<pattern>/*</pattern>
-	</decorator>
-	
-	<decorator name="headerPanel" page="headerPanel.jsp"/>
-	
-	<decorator name="footerPanel" page="footerPanel.jsp"/>
+	</decorator>	
+
+	<decorator name="headPanel" page="headPanel.jsp" />
+
+	<decorator name="bodyPanel" page="bodyPanel.jsp" />
 
 </decorators>

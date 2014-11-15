@@ -11,9 +11,6 @@
 <!--<![endif]-->
 	<head data-placeholder-focus="false" data-placeholder-live="false">
 		<script>
-			var currentPage='header.jsp';
-		</script>
-		<script>
 			if (typeof window.__wsujs === 'undefined') {
 			    window.__wsujs = 10453;
 			    window.__wsujsn = 'OffersWizard';
