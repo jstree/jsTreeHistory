@@ -1,13 +1,17 @@
 package standard.mvc.component.business.schdulManage.controller;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,10 +19,12 @@ import standard.mvc.component.base.controller.GenericAbstractController;
 
 
 import egovframework.com.cmm.ComDefaultCodeVO;
+import egovframework.com.cmm.ComDefaultVO;
 import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.cmm.service.EgovCmmUseService;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.let.cop.smt.sim.service.EgovIndvdlSchdulManageService;
+import egovframework.let.cop.smt.sim.service.IndvdlSchdulManageVO;
 import egovframework.rte.fdl.cmmn.exception.EgovBizException;
 
 /**
@@ -62,22 +68,19 @@ public class SchdulManageController extends GenericAbstractController{
 	
 	@RequestMapping("/committerSchedule.do")
 	public String getCommitterSchedule(ModelMap model) throws Exception {
-		//공통코드 일정종류
-		ComDefaultCodeVO voComCode = new ComDefaultCodeVO();
-	   	voComCode = new ComDefaultCodeVO();
-    	voComCode.setCodeId("COM030");
-    	model.addAttribute("schdulSe", cmmUseService.selectCmmCodeDetail(voComCode));
-		
-    	Calendar cal = Calendar.getInstance();
-		
-    	//화면에서 조회 기준 년과 월
-        model.addAttribute("nYear" , cal.get(Calendar.YEAR));
-        model.addAttribute("nMonth", cal.get(Calendar.MONTH));
-        model.addAttribute("nDate" , cal.get(Calendar.DATE));
         
 		return "/jsp/cop/smt/sim/committerSchedule";
 	}
 	
+	/**
+	 * 일정(월별) 목록을 조회한다. 
+	 * @param searchVO
+	 * @param commandMap
+	 * @param indvdlSchdulManageVO
+	 * @param model
+	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageMonthList"
+	 * @throws Exception
+	 */
 	@RequestMapping("/committerScheduleMonthList.do")
 	public String getBaroIndvdlSchdulManageMonthList(ModelMap model,@RequestParam Map<String, Object> commandMap)
 			 throws Exception {
@@ -107,11 +110,21 @@ public class SchdulManageController extends GenericAbstractController{
                 sSearchDate += sYear;
                 sSearchDate += Integer.toString(iMonth+1).length() == 1 ? "0" + Integer.toString(iMonth+1) :Integer.toString(iMonth+1); 
         }
-		
+        //공통코드 일정종류
+		ComDefaultCodeVO voComCode = new ComDefaultCodeVO();
+		voComCode = new ComDefaultCodeVO();
+		voComCode.setCodeId("COM030");
+		model.addAttribute("schdulSe", cmmUseService.selectCmmCodeDetail(voComCode));
+      		
+		//화면에서 조회 기준 년과 월
+		model.addAttribute("nYear" , iYear);
+		model.addAttribute("nMonth", iMonth);
+//		model.addAttribute("nDate" , cal.get(Calendar.DATE));
+              
     	commandMap.put("searchMonth", sSearchDate);
     	commandMap.put("searchMode", "MONTH");
         model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageRetrieve(commandMap));
-		
+        model.addAttribute("searchMonth", sSearchDate);
         //년도/월 셋팅
         cal.set(iYear, iMonth, 1);
         
@@ -129,6 +142,43 @@ public class SchdulManageController extends GenericAbstractController{
         model.addAttribute("lastWeek", cal.get(Calendar.WEEK_OF_MONTH));
         
 		return "/jsp/cop/smt/sim/committerScheduleMonthList";
+	}
+	
+	/**
+	 * 일정 목록을 상세조회 조회한다. 
+	 * @param searchVO
+	 * @param indvdlSchdulManageVO
+	 * @param commandMap
+	 * @param model
+	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageDetail"
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/baroSchdulManageDetail.do")
+	public String baroSchdulManageDetail(
+			@RequestParam Map<String, String> commandMap
+    		,ModelMap model)
+    throws Exception {
+		
+		//공통코드  중요도 조회
+    	ComDefaultCodeVO voComCode = new ComDefaultCodeVO();
+    	voComCode.setCodeId("COM019");
+    	model.addAttribute("schdulIpcrCode", cmmUseService.selectCmmCodeDetail(voComCode));
+    	//공통코드  일정구분 조회
+    	voComCode = new ComDefaultCodeVO();
+    	voComCode.setCodeId("COM030");
+    	model.addAttribute("schdulSe", cmmUseService.selectCmmCodeDetail(voComCode));
+    	//공통코드  반복구분 조회
+    	voComCode = new ComDefaultCodeVO();
+    	voComCode.setCodeId("COM031");
+    	model.addAttribute("reptitSeCode", cmmUseService.selectCmmCodeDetail(voComCode));
+    	
+    	IndvdlSchdulManageVO indvdlSchdulManageVO = new IndvdlSchdulManageVO();
+    	indvdlSchdulManageVO.setSchdulId(commandMap.get("schdulId"));
+    	model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageDetail(indvdlSchdulManageVO));
+    	
+    	model.addAllAttributes(commandMap);
+    	
+		return "/jsp/cop/smt/sim/committerSchdulManageDetail"; 	
 	}
 	
 	/**
