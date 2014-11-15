@@ -11,6 +11,7 @@
     since    : 2011.08.31 
 --%><%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import = "java.util.HashMap" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String menuNo = ((String)session.getAttribute("menuNo")!=null)?(String)session.getAttribute("menuNo"):"11";
 %>
@@ -19,6 +20,20 @@ String menuNo = ((String)session.getAttribute("menuNo")!=null)?(String)session.g
 	<div class="top"></div>             
 	<div class="nav_style">
 	<ul>
+		<li class="leftmenu_dept01">
+			<c:forEach var="result" items="${ leftMenuList}" varStatus="status">
+				<c:choose>
+					<c:when test="${status.first }">
+						<a href="javascript:fn_main_headPageMove('${result.c_parentid}','${result.url }')">${result.c_title}</a>
+						<ul>
+					</c:when>
+					<c:otherwise>
+						<li class="dept02"><a href="javascript:fn_main_headPageMove('${result.c_parentid}','${result.url }')">${result.c_title}</a></li>					
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			</ul>
+		</li> 
 	    <% if (menuNo.indexOf("1")== 0) {%>
 		<li class="leftmenu_dept01">
 			<a href="javascript:fn_main_headPageMove('11','/jsp/main/sample_menu/EgovAboutSite')">사이트소개</a>

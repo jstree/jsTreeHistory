@@ -4,4 +4,5 @@
 
 <sqlMapConfig>
 	<sqlMap resource="standard/sqlmap/component/menu/springiBatis/menuJstree_SQL_Oracle.xml"/>
+	<sqlMap resource="standard/sqlmap/component/menu/menuMng_SQL_Oracle.xml"/>
 </sqlMapConfig>
