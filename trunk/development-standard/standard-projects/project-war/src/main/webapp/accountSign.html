@@ -125,6 +125,12 @@
 			position: relative;
 			}
 		</style>
+		<!-- CSS for ACCOUNT SIGN -->
+		<style>
+			#account-sign > div > div {
+				height : 300px;
+			}
+		</style>
 	</head>
 	<body id="dongmin-lee" class="template-index" itemscope itemtype="http://schema.org/WebPage">
 		<div id="fb-root"></div>
@@ -422,56 +428,92 @@
 					</div>
 				</div>
 			</noscript>
-			<main id="template-page-contact-liquid" class="clearfix" role="main">
-				<nav>
-					<div class="container bm-medium">
-						<div class="one-whole">
-							<div class="no-display">page.contact</div>
-							<div class="text-center">
-								<h1 class="bm-remove">
-									Contact Us
-								</h1>
-								<p class="bm-remove">
-									<a href="/" target="_self">Home</a>
-									&nbsp;/&nbsp;
-									Contact Us
-								</p>
-							</div>
-						</div>
-					</div>
-				</nav>
-				<div class="clearfix">
-					<div class="container bm-medium">
-						<div id="page-contact" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
-							<iframe width="600" height="450" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=37.400157%2C%20127.110075&key=AIzaSyAyN6J1IpsY7fxxVZI12EsxwzPsjd1jLR8"></iframe>
-							<div class="one-half-percent tablet-mobile omega">
-								<div id="page-contact-content" class="rte">
-									<h1>Lorem Ipsum</h1>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac egestas odio. Quisque nec sem eu nisl ornare interdum. Praesent eget scelerisque lorem. Sed vel nisi aliquet nisl iaculis porttitor ac at massa. Cras tempor, enim sed aliquet posuere, libero sapien adipiscing tortor, id pretium diam mi in nulla. In hac habitasse platea dictumst. Ut dictum nunc ipsum, vel aliquet neque placerat sit amet.</p>
-									<p>Ut dignissim, nisi et adipiscing eleifend, diam orci gravida felis, eu auctor nisi urna vel sem. Maecenas quis cursus turpis, id egestas nulla. Vestibulum facilisis sapien ac turpis consequat, et mattis neque dapibus. Vivamus eleifend ultrices scelerisque.</p>
+			<main id="template-customer-login-liquid" class="clearfix" role="main">
+				<div class="container bm-medium">
+					<nav>
+						<div class="container bm-medium">
+							<div class="one-whole">
+								<div class="no-display">customers/login</div>
+								<div class="text-center">
+									<h1 class="bm-remove">
+										<span id="customer-login-breadcrumb-header">Account Login</span>
+										<span id="customer-recover-breadcrumb-header" class="no-display">Recover Password</span>
+									</h1>
+									<p class="bm-remove">
+										<a href="/" target="_self">Home</a>
+										&nbsp;/&nbsp;
+										<a href="/account" target="_self">Account</a>
+										&nbsp;/&nbsp;
+										<span id="customer-login-breadcrumb">Login</span>
+										<span id="customer-recover-breadcrumb" class="no-display">Recovery</span>
+									</p>
 								</div>
 							</div>
-							<div id="contact-post" class="one-half-percent tablet-mobile alpha last bm-remove">
-								<form accept-charset="UTF-8" action="/contact" class="contact-form" method="post">
-									<input name="form_type" type="hidden" value="contact" /><input name="utf8" type="hidden" value="✓" />
+						</div>
+					</nav>
+					<div class="container bm-medium" id="account-sign">
+						<div class=" p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+							<div class="one-half-percent desktop-tablet alpha boxed bm-remove">
+								<h1 class="bm-small text-center">Log In</h1>
+								<div id="customer-login-form">
+									<form accept-charset="UTF-8" action="./uat/uia/actionLogin.do" id="customer_login" method="post">
+										<input type="hidden" name="userSe"  value="USR"/>
+										<input name="form_type" type="hidden" value="customer_login" /><input name="utf8" type="hidden" value="✓" />
+										<script>
+											$(document).ready(function() {
+												$('#customer_login').attr('novalidate', '');
+											});
+										</script>
+										<input type="text" name="id" id="id" class="w-full" placeholder="Email Address" value="" />
+										<input type="text" class="w-full fake-password" placeholder="Password" />
+										<input type="password" name="password" id="password" class="w-full true-password no-display" />
+										<!-- 
+										<div class="text-left">
+											<a href="#" target="_self" id="recover-show">Forgot your password?</a>
+										</div>
+										 -->
+										<div class="text-right">
+											<button type="submit" class="inline-block bm-remove">Log In</button>
+										</div>
+									</form>
+								</div>
+								<div id="customer-recover-form" class="no-display">
+									<form accept-charset="UTF-8" action="/account/recover" method="post">
+										<input name="form_type" type="hidden" value="recover_customer_password" /><input name="utf8" type="hidden" value="✓" />
+										<script>
+											$(document).ready(function() {
+												$('#customer-recover-password-form form').attr('novalidate', '');
+											});
+										</script>
+										<input type="email" name="email" id="recover-email" class="w-full" placeholder="Email Address" value="" />
+										<div class="text-right">
+											<button type="submit" class="bm-remove">Recover</button>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="one-half-percent desktop-tablet alpha bm-remove boxed last">
+								<h1 class="bm-small text-center">Sign Up</h1>
+								<form accept-charset="UTF-8" action="https://cloudeight-nero.myshopify.com/account" id="create_customer" method="post">
+									<input name="form_type" type="hidden" value="create_customer" /><input name="utf8" type="hidden" value="✓" />
 									<script>
 										$(document).ready(function() {
-											$('.contact-form').attr('novalidate', '');
+											$('#create_customer').attr('novalidate', '');
 										});
 									</script>
-									<input type="text" name="contact[name]" id="contactFormName" class="w-full" placeholder="Name" value="" />
-									<input type="email" name="contact[email]" id="contactFormEmail" class="w-full" placeholder="Email Address" value="" />
-									<input type="tel" name="contact[phone]" id="contactFormTelephone" class="w-full" placeholder="Telephone Number" value="" />
-									<textarea name="contact[body]" id="contactFormMessage" class="w-full" placeholder="Your Message..."></textarea>
-									<div class="clearfix">
-										<button type="submit" id="contactFormSubmit" class="bm-remove float-right">Send</button>
+									<input type="email" name="customer[email]" id="register-email" class="w-full" placeholder="Email Address" value="" />
+									<input type="text" class="w-full fake-password" placeholder="Password" />
+									<input type="password" name="customer[password]" id="register-password" class="w-full true-password no-display" />
+									<input type="text" class="w-full fake-password" placeholder="Re Enter Password" />
+									<input type="password" name="customer[reenter-password]" id="register-reenter-password" class="w-full true-password no-display" />
+									<div class="text-right">
+										<button type="submit" class="bm-remove">Create</button>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
-				</div>
-			</main>
+				</main>
 			<footer>
 				<div id="footer" class="tm-larger animate-in" data-anim-type="fade-in" data-anim-delay="0">
 					<div class="container">

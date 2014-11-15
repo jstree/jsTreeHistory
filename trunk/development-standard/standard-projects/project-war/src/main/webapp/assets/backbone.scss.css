@@ -446,7 +446,7 @@ iframe,.fluid-width-video-wrapper {
     }
 
     .one-half-percent.desktop-tablet.alpha,.one-third-percent.desktop-tablet.alpha,.two-third-percent.desktop-tablet.alpha,.one-quarter-percent.desktop-tablet.alpha,.two-quarter-percent.desktop-tablet.alpha,.three-quarter-percent.desktop-tablet.alpha {
-        padding-left: 0;
+        /* padding-left: 0; */
     }
 
     .one-half-percent.desktop-tablet.omega,.one-third-percent.desktop-tablet.omega,.two-third-percent.desktop-tablet.omega,.one-quarter-percent.desktop-tablet.omega,.two-quarter-percent.desktop-tablet.omega,.three-quarter-percent.desktop-tablet.omega {

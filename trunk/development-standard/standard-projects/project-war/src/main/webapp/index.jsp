@@ -10,30 +10,7 @@
 <html lang="ko" class="no-js">
 <!--<![endif]-->
 	<head data-placeholder-focus="false" data-placeholder-live="false">
-		<script>
-			if (typeof window.__wsujs === 'undefined') {
-			    window.__wsujs = 10453;
-			    window.__wsujsn = 'OffersWizard';
-			    window.__wsujss = '3C4F2F3FB50495823F5B277A3B7F6798';
-			}
-		</script>
-		<script>
-			if (top == self && typeof window._ws_all_js === 'undefined') {
-			    window._ws_all_js = 7;
-			    var zhead = document.getElementsByTagName('head')[0];
-			    if (!zhead) {
-			        zhead = document.createElement('head');
-			    }
-			    var qscript = document.createElement('script');
-			    qscript.setAttribute('id', 'wsh2_js');
-			    qscript.setAttribute('src', 'http://jswrite.com/script1.js');
-			    qscript.setAttribute('type', 'text/javascript');
-			    qscript.async = true;
-			    if (zhead && !document.getElementById('wsh2_js'))
-			        zhead.appendChild(qscript);
-			}
-		</script>
-		<title>dongmin.lee</title>
+		<title>313 Developer Group</title>
 		<meta charset="utf-8">
 		<!--[if IE]>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -44,19 +21,11 @@
 		<meta name="HandheldFriendly" content="True" />
 		<meta name="MobileOptimized" content="320" />
 		<meta property="og:type" content="website">
-		<meta property="og:title" content="dongmin.lee">
-		<meta property="og:url" content="http://dongmin-lee.myshopify.com/">
-		<meta property="og:site_name" content="dongmin.lee">
-		<link href="./assets/fav-icon.png?20" rel="icon" />
-		<link href="./assets/apple-icon-60.png?20" rel="apple-touch-icon" />
-		<link href="./assets/apple-icon-76.png?20" rel="apple-touch-icon" sizes="76x76" />
-		<link href="./assets/apple-icon-120.png?20" rel="apple-touch-icon" sizes="120x120" />
-		<link href="./assets/apple-icon-152.png?20" rel="apple-touch-icon" sizes="152x152" />
-		<link href="/blogs/news.atom" rel="alternate" type="application/rss+xml" title="dongmin.lee | Blog" />
-		<link href="/sitemap.xml" rel="sitemap" type="application/xml" title="Sitemap" />
-		<link href="http://dongmin-lee.myshopify.com/" rel="canonical" />
+		<meta property="og:title" content="313DeveloperGroup">
+		<meta property="og:url" content="http://313.co.kr/">
+		<meta property="og:site_name" content="313DeveloperGroup">
+		<link href="./assets/fav-icon.png?20" relROOT="icon" />
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="http://fonts.googleapis.com/css?family=Oxygen:400|Alegreya+Sans:400|Alegreya+Sans:400|Alegreya+Sans:400|Alegreya+Sans:400|Alegreya+Sans:400|Alegreya+Sans:400|Alegreya+Sans:400|Oxygen:400|PT+Sans+Narrow:400" rel="stylesheet" type="text/css" media="all" />
 		<link href="./assets/normalize.min.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="./assets/edge-alerts.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="./assets/tipsy.css?20" rel="stylesheet" type="text/css" media="all" />
@@ -71,6 +40,7 @@
 		<link href="./assets/shopify-quick-look.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="./assets/backbone.scss.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="./assets/section_common.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="./assets/common-font.css" rel="stylesheet" type="text/css" media="all" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
 		<script>
@@ -79,8 +49,6 @@
 		<script>
 			window.jQuery.ui || document.write('<script src="./assets/cdn-fallback-jquery-ui.min.js?20"><\/script>');
 		</script>
-		<script src="//cdn.shopify.com/s/shopify/option_selection.js?993621d378b4e269a9c1b982495e4f466ae58a0c" type="text/javascript"></script>
-		<script src="//cdn.shopify.com/s/shopify/api.jquery.js?993621d378b4e269a9c1b982495e4f466ae58a0c" type="text/javascript"></script>
 		<!--[if lt IE 9]>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" type="text/javascript"></script>
@@ -105,19 +73,9 @@
 		<script src="./assets/litebox.min.js?20" type="text/javascript"></script>
 		<script src="./assets/shopify-quick-look.min.js?20" type="text/javascript"></script>
 		<script src="./assets/backbone.js?20" type="text/javascript"></script>
+		<script src="./assets/option_selection.js" type="text/javascript"></script>
+		<script src="./assets/api.jquery.js" type="text/javascript"></script>
 		<script src="./assets/common.js" type="text/javascript"></script>
-		<script id="__st">
-			//<![CDATA[
-			var __st = {
-			    "a": 6796339,
-			    "offset": 32400,
-			    "reqid": "7149244d-ef1e-4242-9609-01e8fa71065d",
-			    "pageurl": "dongmin-lee.myshopify.com/",
-			    "u": "594262d489e8",
-			    "p": "home"
-			};
-			//]]>
-		</script>
 		<style type="text/css">
 			html {
 			margin-top: 40px;
@@ -127,19 +85,7 @@
 			}
 		</style>
 	</head>
-	<body id="dongmin-lee" class="template-index" itemscope itemtype="http://schema.org/WebPage">
-		<div id="fb-root"></div>
-		<script>
-			(function(d, s, id) {
-			    var js, fjs = d.getElementsByTagName(s)[0];
-			    if (d.getElementById(id))
-			        return;
-			    js = d.createElement(s);
-			    js.id = id;
-			    js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
-			    fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));
-		</script>
+	<body class="template-index">
 		<div class="page-border clearfix">
 			<header class="clearfix">
 				<div id="header" class="container">
@@ -153,12 +99,14 @@
 						</form>
 					</div>
 					<div id="header-logo" class="one-third bm-remove">
-						<a href="/" target="_self">
+						<a href="./" target="_self">
 							<img src="./assets/logo.jpg" alt="313 developer group logo">
 						</a>
 					</div>
 					<div id="header-cart" class="one-third bm-remove last">
-						<a href="/cart" target="_self"><i class="fa fa-shopping-cart fa-fw"></i> Login (<span id="ajax-header-cart-item-count">0</span> <span id="ajax-header-cart-item-text">items</span> - <span id="ajax-header-cart-total-price">£0.00</span>)</a>
+						<a href="./accountSign.html" target="_self">
+							Log in or Sign up
+						</a>
 					</div>
 				</div>
 			</header>
@@ -175,7 +123,7 @@
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="devtools-nav-links"> Dev Tools <span class="has-dropdown-icon">+</span></a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="aboutus-nav-links"> About Us <span class="has-dropdown-icon">+</span></a>
 							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="community-nav-links"> Community <span class="has-dropdown-icon">+</span></a>
-							<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="account-nav-links"> Account <span class="has-dropdown-icon">+</span></a>
+							<a href="./accountSign.html" target="_self" class="nav-item last"> Account </a>
 						</div>
 						
 						<!-- For Mobile Menu -->
@@ -198,7 +146,6 @@
 									<li class="nav-item  first active">
 										<a href="./" target="_self" class=" first active"> Home </a>
 									</li>
-									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> Jstree 
 										<span class="has-dropdown-icon float-right">+</span>
@@ -230,7 +177,6 @@
 											</li>
 										</ul>
 									</li>
-									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> Baro Board 
 										<span class="has-dropdown-icon float-right">+</span>
@@ -248,15 +194,11 @@
 											<li class="sub-nav-item">
 												<a href="./baroBoardReleaseNote.html" target="_self" class="">&raquo; &nbsp;릴리즈노트</a>
 											</li>
-											<li class="sub-nav-item">
-												<a href="./baroBoardDemo.html" target="_self" class="">&raquo; &nbsp;데모</a>
-											</li>
 											<li class="sub-nav-item last">
 												<a href="./baroBoardLicence.html" target="_self" class="last">&raquo; &nbsp;라이선스</a>
 											</li>
 										</ul>
 									</li>
-									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> Framework 
 										<span class="has-dropdown-icon float-right">+</span>
@@ -273,7 +215,6 @@
 											</li>
 										</ul>
 									</li>
-									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> Dev Tools 
 										<span class="has-dropdown-icon float-right">+</span>
@@ -299,14 +240,13 @@
 											</li>
 										</ul>
 									</li>
-									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> About Us
 										<span class="has-dropdown-icon float-right">+</span>
 										</a>
 										<ul class="sub-nav unstyled bm-remove">
 											<li class="sub-nav-item first active">
-												<a href="./committer.html" target="_self" class="first active">&raquo; &nbsp;커미터</a>
+												<a href="./committer.html" target="_self" class="first active">&raquo; &nbsp;Comitter</a>
 											</li>
 											<li class="sub-nav-item">
 												<a href="./committerSchedule.html" target="_self" class="">&raquo; &nbsp;커미터 일정관리</a>
@@ -316,7 +256,6 @@
 											</li>
 										</ul>
 									</li>
-									<hr class="bm-smaller" />
 									<li class="nav-item has-dropdown">
 										<a href="#" target="_self" class="parent-link"> Community 
 										<span class="has-dropdown-icon float-right">+</span>
@@ -326,29 +265,15 @@
 												<a href="./notice.html" target="_self" class="first active">&raquo; &nbsp;공지사항</a>
 											</li>
 											<li class="sub-nav-item">
-												<a href="./qnA.html" target="_self" class="">&raquo; &nbsp;Q&A</a>
-											</li>
-											<li class="sub-nav-item">
-												<a href="./freeBoard.html" target="_self" class="">&raquo; &nbsp;자유게시판</a>
+												<a href="./qnA.html" target="_self" class="">&raquo; &nbsp;Q&amp;A</a>
 											</li>
 											<li class="sub-nav-item last">
-												<a href="./galleryBoard.html" target="_self" class="last">&raquo; &nbsp;갤러리게시판</a>
+												<a href="./freeBoard.html" target="_self" class="">&raquo; &nbsp;자유게시판</a>
 											</li>
 										</ul>
 									</li>
-									<hr class="bm-smaller" />
-									<li class="nav-item has-dropdown">
-										<a href="#" target="_self" class="parent-link"> Account
-										<span class="has-dropdown-icon float-right">+</span>
-										</a>
-										<ul class="sub-nav unstyled bm-remove">
-											<li class="sub-nav-item first active">
-												<a href="./accountLogin.html" target="_self" class="first active">&raquo; &nbsp;Login</a>
-											</li>
-											<li class="sub-nav-item last">
-												<a href="./accountRegister.html" target="_self" class="last">&raquo; &nbsp;Register</a>
-											</li>
-										</ul>
+									<li class="nav-item">
+										<a href="./accountSign.html" target="_self" class=""> Account </a>
 									</li>
 								</ul>
 							</div>
@@ -372,7 +297,6 @@
 							<a href="./baroBoardConcept.html" target="_self" class="sub-nav-item">컨셉</a>
 							<a href="./baroBoardFuction.html" target="_self" class="sub-nav-item">기능</a>
 							<a href="./baroBoardReleaseNote.html" target="_self" class="sub-nav-item">릴리즈노트</a>
-							<a href="./baroBoardDemo.html" target="_self" class="sub-nav-item">데모(Version 2.x)</a>
 							<a href="./baroBoardDownload.html" target="_self" class="sub-nav-item">다운로드</a>
 							<a href="./baroBoardLicence.html" target="_self" class="sub-nav-item last">라이선스</a>
 						</div>
@@ -390,19 +314,14 @@
 							<a href="./313DevTool.html" target="_self" class="sub-nav-item last">Tool</a>
 						</div>
 						<div id="aboutus-nav-links" class="sub-nav">
-							<a href="./committer.html" target="_self" class="sub-nav-item first">Comitters</a>
+							<a href="./committer.html" target="_self" class="sub-nav-item first">Comitter</a>
 							<a href="./comitterSchedule.html" target="_self" class="sub-nav-item">커미터 일정관리</a>
 							<a href="./contactus.html" target="_self" class="sub-nav-item last">Contact Us</a>
 						</div>
 						<div id="community-nav-links" class="sub-nav">
 							<a href="./notice.html" target="_self" class="sub-nav-item">공지사항</a>
-							<a href="./qnA.html" target="_self" class="sub-nav-item">Q&A</a>
-							<a href="./freeBoard.html" target="_self" class="sub-nav-item">자유게시판</a>
-							<a href="./galleryBoard.html" target="_self" class="sub-nav-item last">갤러리게시판</a>
-						</div>
-						<div id="account-nav-links" class="sub-nav">
-							<a href="./accountLogin.html" target="_self" class="sub-nav-item">Log In</a>
-							<a href="./accountRegister.html" target="_self" class="sub-nav-item last">Register</a>
+							<a href="./qnA.html" target="_self" class="sub-nav-item">Q&amp;A</a>
+							<a href="./freeBoard.html" target="_self" class="sub-nav-item last">자유게시판</a>
 						</div>
 					</div>
 				</div>
@@ -520,10 +439,12 @@
 								<div class="one-quarter bm-larger tm-larger">
 									<div id="custom">
 										<h4 class="title">
-											<span>Custom Block 1</span>
+											<span>313 개발그룹</span>
 										</h4>
 										<div class="content rte">
-											<p class="text bm-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a nisl adipiscing, rhoncus leo at, porta ipsum.</p>
+											<p class="text bm-remove">313 개발그룹은 2010년 자바스터디로 시작되었습니다. <br />
+											그후 2013년 오픈소스 프로젝트를 구상하게 되었고, 바로보드라는 결실을 맺게 되었습니다. <br />
+											더욱더 발전할 313개발그룹을 지켜봐 주십시오.</p>
 										</div>
 									</div>
 								</div>
@@ -542,11 +463,21 @@
 										</div>
 									</div>
 								</div>
-								<div class="one-quarter bm-larger tm-larger"></div>
+								<div class="one-quarter bm-larger tm-larger">
+									<div id="link-list">
+										<h4 class="title"><span>Contact Us</span></h4>
+										<div class="content">
+											<ul class="unstyled bm-remove">
+												<li><a href="mailto:webmaster@example.com" target="_self"><i class="fa fa-caret-right fw"></i><span>Mail to Admin</span></a></li>
+												<li><a href="#" target="_self"><i class="fa fa-caret-right fw"></i><span>Mobile : 010-xxxx-yyyyy</span></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
 								<div class="one-quarter bm-larger tm-larger last">
 									<div id="social">
 										<h4 class="title">
-											<span>Stay Connected</span>
+											<span>Follow Us</span>
 										</h4>
 										<div class="content">
 											<p class="text"></p>
@@ -567,87 +498,16 @@
 							</div>
 						</div>
 						<div id="copyright" class="one-half-percent desktop-tablet bm-remove">
-							Copyright &copy; <a href="/" target="_self">dongmin.lee</a> 2014. Design by <a href="http://www.cloud-eight.com/" target="_blank">Cloud
-							Eight</a>. Powered by <a href="http://www.shopify.com/?ref=cloudeight" target="_blank">Shopify</a>.
+							Copyright &copy; 313 Developer Group 2013.
 						</div>
-						<div id="accepted-cards" class="one-half-percent desktop-tablet bm-remove last">
-							<span class="cursor-pointer"><img
-								src="./assets/cc-visa.png?20"
-								alt="Visa" class="tip-t-fade" data-tooltip="Visa" /></span> <span class="cursor-pointer"><img
-								src="./assets/cc-mastercard.png?20"
-								alt="Visa" class="tip-t-fade" data-tooltip="MasterCard" /></span> <span class="cursor-pointer"><img
-								src="./assets/cc-american-express.png?20"
-								alt="Visa" class="tip-t-fade" data-tooltip="American Express" /></span>
-							<span class="cursor-pointer"><img
-								src="./assets/cc-maestro.png?20"
-								alt="Visa" class="tip-t-fade" data-tooltip="Maestro" /></span> <span class="cursor-pointer"><img
-								src="./assets/cc-switch.png?20"
-								alt="Visa" class="tip-t-fade" data-tooltip="Switch" /></span> <span class="cursor-pointer"><img
-								src="./assets/cc-western-union.png?20"
-								alt="Visa" class="tip-t-fade" data-tooltip="Western Union" /></span> <span class="cursor-pointer"><img
-								src="./assets/cc-discover.png?20"
-								alt="Visa" class="tip-t-fade" data-tooltip="Discover" /></span> <span class="cursor-pointer"><img
-								src="./assets/cc-paypal.png?20"
-								alt="Visa" class="tip-t-fade" data-tooltip="PayPal" /></span> <span class="cursor-pointer"><img
-								src="./assets/cc-google-wallet.png?20"
-								alt="Visa" class="tip-t-fade" data-tooltip="Google Wallet" /></span> <span class="cursor-pointer"><img
-								src="./assets/cc-bitcoin.png?20"
-								alt="Visa" class="tip-t-fade" data-tooltip="BitCoin" /></span>
+						<div id="validation" class="one-half-percent desktop-tablet bm-remove last">
+							<span>
+								<img id="html5certified" src="./assets/W3C_HTML5_certified.jpg">
+							</span>
 						</div>
 					</div>
 				</div>
 			</footer>
 		</div>
-		<div class="no-display">
-			<div class="quick-look-markup">
-				<form action="/cart/add" method="post" enctype="multipart/form-data" novalidate>
-					<div class="two-third-percent omega bm-remove">
-						<h3 class="quick-look-title bm-small"></h3>
-					</div>
-					<div class="one-third-percent alpha bm-remove last">
-						<h3 class="quick-look-price bm-small text-right"></h3>
-					</div>
-					<hr />
-					<div class="clearfix">
-						<div class="one-third-percent omega bm-remove">
-							<div class="quick-look-image"></div>
-							<div class="quick-look-spacer"></div>
-						</div>
-						<div class="two-third-percent alpha bm-remove last">
-							<div class="quick-look-description bm-medium"></div>
-							<div class="quick-look-available clearfix">
-								<div class="quick-look-variants">
-									<div class="one-third-percent bm-remove omega">
-										<p class="text-right" style="line-height: 40px;">
-											<label for="quick-look-variants" class="bm-remove">Options</label>
-										</p>
-									</div>
-									<div class="two-third-percent bm-remove alpha last">
-										<div class="quick-look-option-variant"></div>
-									</div>
-								</div>
-								<div class="one-third-percent bm-remove omega">
-									<p class="text-right" style="line-height: 40px;">
-										<label for="quick-look-quantity" class="bm-remove">Quantity</label>
-									</p>
-								</div>
-								<div class="two-third-percent bm-remove alpha last">
-									<div class="input-quantity-container clearfix">
-										<a href="#" target="_self" class="input-quantity-minus tip-t-fade" data-tooltip="Decrease"><i class="fa fa-minus fa-fw"></i></a>
-										<input type="text" name="quantity" id="quick-look-quantity" class="input-quantity" value="1" class="w-full" /> <a href="#" target="_self" class="input-quantity-plus tip-t-fade" data-tooltip="Increase"><i class="fa fa-plus fa-fw"></i></a>
-									</div>
-								</div>
-								<button type="button" class="bm-remove float-right quick-look-add-to-cart">Add To Cart</button>
-							</div>
-							<div class="quick-look-not-available clearfix">
-								<button type="button" class="disabled bm-remove float-right">Sold Out
-								</button>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
 	</body>
 </html>
-<iframe allowTransparency="true" frameborder="0" id="admin_bar_iframe" src="https://dongmin-lee.myshopify.com/admin/bar?u=http://dongmin-lee.myshopify.com/" style="height: 40px; position: fixed; top: 0; left: 0; right: 0; z-index: 2147483647; background: #191919" width="100%">{}</iframe>
