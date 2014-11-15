@@ -231,7 +231,7 @@
 	</delete>
 	<delete id="IndvdlSchdulManage.deleteIndvdlSchdulManage">
 		<![CDATA[
-			DELETE FROM LETTNSCHDULINFO WHERE SCHDUL_ID = #schdulId#; 
+			DELETE FROM LETTNSCHDULINFO WHERE SCHDUL_ID = #schdulId#
 		]]>
 	</delete>
 

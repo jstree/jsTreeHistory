@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springmodules.validation.commons.DefaultBeanValidator;
@@ -89,7 +90,7 @@ public class EgovIndvdlSchdulManageController {
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageDailyList.do")
 	public String EgovIndvdlSchdulManageDailyList(
 			@ModelAttribute("searchVO") ComDefaultVO searchVO, 
-			Map commandMap, 
+			@RequestParam Map<String, Object> commandMap,   
 			IndvdlSchdulManageVO indvdlSchdulManageVO,
     		ModelMap model)
     throws Exception {
@@ -152,7 +153,7 @@ public class EgovIndvdlSchdulManageController {
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageWeekList.do")
 	public String EgovIndvdlSchdulManageWeekList(
 			@ModelAttribute("searchVO") ComDefaultVO searchVO, 
-			Map commandMap, 
+			@RequestParam Map<String, Object> commandMap,   
 			IndvdlSchdulManageVO indvdlSchdulManageVO,
     		ModelMap model)
     throws Exception {
@@ -288,7 +289,7 @@ public class EgovIndvdlSchdulManageController {
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageMonthList.do")
 	public String EgovIndvdlSchdulManageMonthList(
 			@ModelAttribute("searchVO") ComDefaultVO searchVO, 
-			Map commandMap, 
+			@RequestParam Map<String, Object> commandMap,   
 			IndvdlSchdulManageVO indvdlSchdulManageVO,
     		ModelMap model)
     throws Exception {
@@ -347,8 +348,8 @@ public class EgovIndvdlSchdulManageController {
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageDetail.do")
 	public String EgovIndvdlSchdulManageDetail(
 			@ModelAttribute("searchVO") ComDefaultVO searchVO, 
+			@RequestParam Map<String, Object> commandMap, 
 			IndvdlSchdulManageVO indvdlSchdulManageVO,
-			Map commandMap,
     		ModelMap model)
     throws Exception {
 		
@@ -357,8 +358,8 @@ public class EgovIndvdlSchdulManageController {
 		String sCmd = commandMap.get("cmd") == null ? "" : (String)commandMap.get("cmd");
 		
 		if(sCmd.equals("del")){
-			egovIndvdlSchdulManageService.deleteIndvdlSchdulManage(indvdlSchdulManageVO);
 			sLocationUrl = "redirect:/cop/smt/sim/EgovIndvdlSchdulManageMonthList.do";
+			egovIndvdlSchdulManageService.deleteIndvdlSchdulManage(indvdlSchdulManageVO);
 		}else{
 			
 	     	//공통코드  중요도 조회
@@ -393,7 +394,7 @@ public class EgovIndvdlSchdulManageController {
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageModify.do")
 	public String IndvdlSchdulManageModify(
 			@ModelAttribute("searchVO") ComDefaultVO searchVO, 
-			Map commandMap,
+			@RequestParam Map<String, Object> commandMap,  
 			IndvdlSchdulManageVO indvdlSchdulManageVO,
 			BindingResult bindingResult,
     		ModelMap model)
@@ -465,9 +466,9 @@ public class EgovIndvdlSchdulManageController {
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageModifyActor.do")
 	public String IndvdlSchdulManageModifyActor(
 			final MultipartHttpServletRequest multiRequest,
-			ComDefaultVO searchVO,
-			Map commandMap,
 			@ModelAttribute("indvdlSchdulManageVO") IndvdlSchdulManageVO indvdlSchdulManageVO,
+			@RequestParam Map<String, Object> commandMap,  
+			ComDefaultVO searchVO,
 			BindingResult bindingResult,
     		ModelMap model,
     		HttpServletRequest request)
@@ -572,7 +573,7 @@ public class EgovIndvdlSchdulManageController {
 	@RequestMapping(value="/cop/smt/sim/EgovIndvdlSchdulManageRegist.do")
 	public String IndvdlSchdulManageRegist(
 			@ModelAttribute("searchVO") ComDefaultVO searchVO, 
-			Map commandMap,  
+			@RequestParam Map<String, Object> commandMap,  
 			@ModelAttribute("indvdlSchdulManageVO") IndvdlSchdulManageVO indvdlSchdulManageVO, 
 			BindingResult bindingResult,
     		ModelMap model,
@@ -630,7 +631,7 @@ public class EgovIndvdlSchdulManageController {
 	public String IndvdlSchdulManageRegistActor(
 			final MultipartHttpServletRequest multiRequest,
 			@ModelAttribute("searchVO") ComDefaultVO searchVO, 
-			Map commandMap,  
+			@RequestParam Map<String, Object> commandMap,    
 			@ModelAttribute("indvdlSchdulManageVO") IndvdlSchdulManageVO indvdlSchdulManageVO, 
 			BindingResult bindingResult,
     		ModelMap model,

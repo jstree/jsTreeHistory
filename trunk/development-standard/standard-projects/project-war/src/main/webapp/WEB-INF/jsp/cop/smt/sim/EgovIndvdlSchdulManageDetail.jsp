@@ -67,7 +67,8 @@ function fn_egov_list_IndvdlSchdulManage(){
 function fn_egov_modify_IndvdlSchdulManage(){
     var vFrom = document.IndvdlSchdulManageForm;
     vFrom.cmd.value = '';
-    vFrom.action = "<c:url value='/'/>/cop/smt/sim/EgovIndvdlSchdulManageModify.do";;
+    //vFrom.action = "<c:url value='/'/>/cop/smt/sim/EgovIndvdlSchdulManageModify.do";
+    vFrom.action = "/cop/smt/sim/EgovIndvdlSchdulManageModify.do";
     vFrom.submit();
 
 }
@@ -78,7 +79,8 @@ function fn_egov_delete_IndvdlSchdulManage(){
     var vFrom = document.IndvdlSchdulManageForm;
     if(confirm("삭제 하시겠습니까?")){
         vFrom.cmd.value = 'del';
-        vFrom.action = "<c:url value='/'/>/cop/smt/sim/EgovIndvdlSchdulManageDetail.do";
+        //vFrom.action = "<c:url value='/'/>/cop/smt/sim/EgovIndvdlSchdulManageDetail.do";
+        vFrom.action = "/cop/smt/sim/EgovIndvdlSchdulManageDetail.do";
         vFrom.submit();
     }else{
         vFrom.cmd.value = '';
@@ -173,8 +175,8 @@ function fn_egov_delete_IndvdlSchdulManage(){
 						  <tr> 
 						    <th width="20%" height="23" class="required_text" nowrap >날짜/시간</th>
 						    <td width="80%" >
-						    ${fn:substring(resultList[0].schdulBgnde, 0, 4)}-${fn:substring(resultList[0].schdulBgnde, 4, 6)}-${fn:substring(resultList[0].schdulBgnde, 6, 8)} ${fn:substring(resultList[0].schdulBgnde, 8, 10)}시  ${fn:substring(resultList[0].schdulBgnde, 10, 12)}분 ~      
-						    ${fn:substring(resultList[0].schdulEndde, 0, 4)}-${fn:substring(resultList[0].schdulEndde, 4, 6)}-${fn:substring(resultList[0].schdulEndde, 6, 8)} ${fn:substring(resultList[0].schdulEndde, 8, 10)}시  ${fn:substring(resultList[0].schdulEndde, 10, 12)}분 
+						    ${fn:substring(resultList[0].schdulBgnde, 0, 4)}-${fn:substring(resultList[0].schdulBgnde, 4, 6)}-${fn:substring(resultList[0].schdulBgnde, 6, 8)} &nbsp;${fn:substring(resultList[0].schdulBgnde, 8, 10)}시  ${fn:substring(resultList[0].schdulBgnde, 10, 12)}분 ~      
+						    ${fn:substring(resultList[0].schdulEndde, 0, 4)}-${fn:substring(resultList[0].schdulEndde, 4, 6)}-${fn:substring(resultList[0].schdulEndde, 6, 8)} &nbsp;${fn:substring(resultList[0].schdulEndde, 8, 10)}시  ${fn:substring(resultList[0].schdulEndde, 10, 12)}분 
 						    </td>
 						  </tr>
 						  
