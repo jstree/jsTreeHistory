@@ -185,79 +185,43 @@
 		</style>
 		
 		<script type="text/javascript">
+		function bindSumitNoticeList(){
+			fn_egov_select_noticeList = function(pageNo){
+	        	  	document.frm.pageIndex.value=pageNo;
+		 	    $.ajax({ 
+		 	        data: $("form[name='frm']").serialize(),
+		 	        type: $("form[name='frm']").attr('method'),
+		 	        url: $("form[name='frm']").attr('action'),
+		 	       	success: function(response) {
+		 	            console.log("fn_egov_select_noticeList--> ajax! success");
+		 	           $("#article>div").html($(response).find("div#egovNotice"));
+		 	          bindSumitSelectArticle();
+		 	        }
+		 	    });
+		 	    return false; 
+		 	}
+		}
+		function bindSumitSelectArticle(){
+			$("#article>div").find("form[name='subForm']").submit(function() { 
+		 	    $.ajax({ 
+		 	        data: $(this).serialize(),
+		 	        type: $(this).attr('method'),
+		 	        url: $(this).attr('action'),
+		 	        success: function(response) {
+		 	            console.log("ajax Success!");
+		 	            $("#article>div").html($(response).find("div#egovNotice"));
+		 	           bindSumitNoticeList();
+		 	        }
+		 	    });
+		 	    return false; 
+		 	});
+		}
 		/*
 		 * notice.html 을 최초 호출시 공지사항을 Load 해온다.
 		 */
 		$(document).ready(function() {
-		 	$("#article>div").load("cop/bbs/selectBoardList.do?bbsId=BBSMSTR_BBBBBBBBBBBB #egovNotice",function(){
-		 		fn_egov_select_noticeList = function(pageNo){
- 	        	  	document.frm.pageIndex.value=pageNo;
-			 	    $.ajax({ 
-			 	        data: $("form[name='frm']").serialize(),
-			 	        type: $("form[name='frm']").attr('method'),
-			 	        url: $("form[name='frm']").attr('action'),
-			 	       	success: function(response) {
-			 	            console.log("fn_egov_select_noticeList--> ajax! success");
-			 	           $("#article>div").html($(response).find("div#egovNotice"));
-			 	        }
-			 	    });
-			 	    return false; 
-			 	} 
-		 		$("#article>div").find("form[name='subForm']").submit(function() { 
-			 	    $.ajax({ 
-			 	        data: $(this).serialize(),
-			 	        type: $(this).attr('method'),
-			 	        url: $(this).attr('action'),
-			 	        success: function(response) {
-			 	            console.log("ajax Success!");
-			 	            $("#article>div").html($(response).find("div#egovNotice"));
-			 	            
-			 	            fn_egov_select_noticeList = function(pageNo){
-			 	        	  	document.frm.pageIndex.value=pageNo;
-						 	    $.ajax({ 
-						 	        data: $(this).serialize(),
-						 	        type: $(this).attr('method'),
-						 	        url: $(this).attr('action'),
-						 	       	success: function(response) {
-						 	            console.log("fn_egov_select_noticeList--> ajax! success");
-						 	           $("#article>div").html($(response).find("div#egovNotice"));
-						 	        }
-						 	    });
-						 	    return false; 
-						 	}
-			 	           fn_egov_moveUpdt_notice = function(){
-						 	    $.ajax({ 
-						 	        data: $(document.frm).serialize(),
-						 	        type: $(document.frm).attr('method'),
-						 	        url: "cop/bbs/forUpdateBoardArticle.do",
-						 	        success: function(response) {
-						 	            console.log("fn_egov_moveUpdt_notice--> ajax! success");
-						 	            //debugger;
-						 	           $("#article>div").html($(response).find("div#egovNotice"));
-						 	           fn_egov_regist_notice = function(){
-						 	        	   //debugger;
-							 	         $.ajax({ 
-									 	        data: $(document.board).serialize(),
-									 	        type: $(document.board).attr('method'),
-									 	        url: "cop/bbs/updateBoardArticle.do",
-									 	       	contentType: false,
-									            processData: false,
-									 	        success: function(response) {
-									 	        	debugger;
-									 	            console.log("fn_egov_regist_notice--> ajax! success");
-									 	           $("#article>div").html($(response).find("div#egovNotice"));
-									 	        }
-									 	  });
-						 	           }
-						 	          }
-						 	    });
-						 	    return false; 
-						 	}
-			 	            
-			 	        }
-			 	    });
-			 	    return false; 
-			 	});
+		 	$("#article>div").load("cop/bbs/selectBoardList.do?bbsId=BBSMSTR_000000000001 #egovNotice",function(){
+		 		bindSumitSelectArticle();
 		 	});
 		});
 		</script>

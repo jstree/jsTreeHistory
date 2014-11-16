@@ -112,14 +112,6 @@
                 <!-- 검색 필드 박스 시작 -->
                 <div id="egovNotice">
                 <!-- ddd -->
-                
-                <script type="text/javascript">
-                function(){
-                	
-                	bbsPrefix="<c:out value='${prefix}'/>";
-                	alert(bbsPrefix);
-                }
-                </script>
                 <div id="search_field">
                     <div id="search_field_loc"><h2><strong><c:out value='${brdMstrVO.bbsNm}'/></strong></h2></div>
 					<form name="frm" action ="<c:url value='/cop/bbs${prefix}/selectBoardList.do'/>" method="post">
