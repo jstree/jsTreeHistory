@@ -189,7 +189,7 @@
 		 * notice.html 을 최초 호출시 공지사항을 Load 해온다.
 		 */
 		$(document).ready(function() {
-		 	$("#article>div").load("cop/bbs/selectBoardList.do?bbsId=BBSMSTR_AAAAAAAAAAAA #egovNotice",function(){
+		 	$("#article>div").load("cop/bbs/selectBoardList.do?bbsId=BBSMSTR_BBBBBBBBBBBB #egovNotice",function(){
 		 		fn_egov_select_noticeList = function(pageNo){
  	        	  	document.frm.pageIndex.value=pageNo;
 			 	    $.ajax({ 
@@ -565,7 +565,7 @@
 							<div class="no-display">article</div>
 							<div class="text-center">
 								<h1 class="bm-remove">
-									공지사항
+									자유게시판
 								</h1>
 							</div>
 						</div>

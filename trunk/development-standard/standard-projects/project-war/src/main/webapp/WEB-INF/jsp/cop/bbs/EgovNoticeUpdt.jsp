@@ -39,9 +39,9 @@
     function fn_egov_regist_notice(){
         //document.board.onsubmit();
 
-        if (!validateBoard(document.board)){
-            return;
-        }
+        //if (!validateBoard(document.board)){
+        //    return;
+        //}
         
         if (confirm('<spring:message code="common.update.msg" />')) {
             document.board.action = "<c:url value='/cop/bbs${prefix}/updateBoardArticle.do'/>";
@@ -111,6 +111,7 @@
                 <div id="search_field">
                     <div id="search_field_loc"><h2><strong>게시글 수정</strong></h2></div>
                 </div>
+                <div id="egovNotice">
 				<form:form commandName="board" name="board" method="post" enctype="multipart/form-data" >
 					<input type="hidden" name="pageIndex" value="<c:out value='${searchVO.pageIndex}'/>"/>
 					<input type="hidden" name="returnUrl" value="<c:url value='/cop/bbs/forUpdateBoardArticle.do'/>"/>
@@ -147,7 +148,7 @@
 					        </th>
 					        <td width="80%" nowrap="nowrap" colspan="3">
 					          <input name="nttSj" title="<spring:message code="cop.nttSj" />" type="text" size="60" value='<c:out value="${result.nttSj}" />'  maxlength="60" >
-					           <br/><form:errors path="nttSj" /> 
+					           <form:errors path="nttSj" /> 
 					        </td>
 					      </tr>
 					      <tr> 
@@ -215,7 +216,6 @@
 					      </c:if>
 					    </table>    
                     </div>
-
                     <!-- 버튼 시작(상세지정 style로 div에 지정) -->
                     <div class="buttons" style="padding-top:10px;padding-bottom:10px;">
                       <!-- 목록/저장버튼  -->
@@ -238,6 +238,7 @@
                     <!-- 버튼 끝 -->                           
 
                 </form:form>
+			</div>
 
             </div>  
             <!-- //content 끝 -->    
