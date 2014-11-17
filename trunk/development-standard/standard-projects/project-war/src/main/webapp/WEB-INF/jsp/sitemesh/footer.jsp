@@ -79,7 +79,7 @@
 					</div>
 					<div id="validation" class="one-half-percent desktop-tablet bm-remove last">
 						<span>
-							<img id="html5certified" src="./assets/W3C_HTML5_certified.jpg">
+							<img id="html5certified" src="/assets/W3C_HTML5_certified.jpg">
 						</span>
 					</div>
 				</div>
