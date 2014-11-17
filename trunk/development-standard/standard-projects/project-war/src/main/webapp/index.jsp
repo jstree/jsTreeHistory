@@ -340,7 +340,7 @@
 					</div>
 				</div>
 			</noscript>
-			<main id="template-index-liquid" class="clearfix" role="main">
+			<section class="clearfix" >
 				<div class="container">
 					<div class="one-whole bm-larger">
 						<div id="index-image-slider-container" class="clearfix">
@@ -430,7 +430,7 @@
 						</div>
 					</div>
 				</div>
-			</main>
+			</section>
 			<footer>
 				<div id="footer" class="tm-larger animate-in" data-anim-type="fade-in" data-anim-delay="0">
 					<div class="container">
@@ -454,6 +454,9 @@
 											<span>Newsletter</span>
 										</h4>
 										<div class="content">
+											<p class="text bm-remove">
+												메일링 리스트에 가입하면 바로보드의 소식을 받아보실 수 있습니다.
+											</p>
 											<form action="#" method="post" target="_blank" class="clearfix" novalidate>
 												<input type="email" class="bm-remove" name="EMAIL" placeholder="Email address..." />
 												<button type="submit" name="submit" class="bm-remove">
@@ -468,8 +471,9 @@
 										<h4 class="title"><span>Contact Us</span></h4>
 										<div class="content">
 											<ul class="unstyled bm-remove">
-												<li><a href="mailto:webmaster@example.com" target="_self"><i class="fa fa-caret-right fw"></i><span>Mail to Admin</span></a></li>
-												<li><a href="#" target="_self"><i class="fa fa-caret-right fw"></i><span>Mobile : 010-xxxx-yyyyy</span></a></li>
+												<li><a href="mailto:webmaster@example.com" target="_self"><i class="fa fa-envelope-o fw"></i><span>Mail to Admin</span></a></li>
+												<li><a href="#" target="_self"><i class="fa fa-phone fw"></i><span>010-2531-0470</span></a></li>
+												<li><a href="#" target="_self"><i class="fa fa-map-marker fw"></i><span>서울시 영등포구 문래동5가</span></a></li>
 											</ul>
 										</div>
 									</div>
