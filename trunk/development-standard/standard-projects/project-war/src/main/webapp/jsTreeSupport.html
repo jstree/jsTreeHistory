@@ -596,16 +596,12 @@
 												<li><i class="fa fa-caret-right fw"></i><span> 17. 불량 태그, 아이피 정책, 파일 정책, 로그 정책, 백업 관리, 입력값 검증, 쿠키 암호화, dDos, 버퍼 오버플로우</span></li>
 												
 												
-												<li><a href="#"><span>어플리케이션 레이어별 보안적용</span></a></li>
-												<li><i class="fa fa-caret-right fw"></i><span> 보안적용 포인트 ) Dispatcher 보안</span></li>
-												<li><i class="fa fa-caret-right fw"></i><span> 보안적용 포인트 ) Filter 보안</span></li>
-												<li><i class="fa fa-caret-right fw"></i><span> 보안적용 포인트 ) Interceptor 보안</span></li>
-												<li><i class="fa fa-caret-right fw"></i><span> 보안적용 포인트 ) AOP 보안</span></li>
-												<li><i class="fa fa-caret-right fw"></i><span> 보안적용 포인트 ) Model Object 보안</span></li>
-												<li><i class="fa fa-caret-right fw"></i><span> 보안적용 포인트 ) 컴포넌트 보안</span></li>
-												
-												<li><i class="fa fa-caret-right fw"></i><span> 보안적용 레이어 ) DataBase 보안</span></li>
-												<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="어플리케이션 레이어별 보안적용"><a href="#" target="_self" class="quick-look" data-quick-look-handle="databaseSecurity"><i class="fa fa-caret-right fw">보안적용 레이어 ) DataBase 보안</i></a></span></li>
+												<li><a href="#"><span>어플리케이션 레이어별 제어, 기능, 품질, 성능, 보안 집중 적용</span></a></li>
+												<li><i class="fa fa-caret-right fw"></i><span> 집중적용 레이어 ) Filter</span></li>
+												<li><i class="fa fa-caret-right fw"></i><span> 집중적용 레이어 ) Interceptor</span></li>
+												<li><i class="fa fa-caret-right fw"></i><span> 집중적용 레이어 ) AOP</span></li>
+												<li><i class="fa fa-caret-right fw"></i><span> 집중적용 레이어 ) Model Object</span></li>
+												<li><i class="fa fa-caret-right fw"></i><span> 집중적용 레이어 ) 컴포넌트</span></li>
 											</ul>
 										</p>
 									</div>
@@ -627,27 +623,29 @@
 										</div>
 										<div class="space-20"></div>
 										<div id="link-list">
-											<h4 class="title"><span>어플리케이션 레이어별, 구역별 공격 방법</span></h4>
+											<h4 class="title"><span>어플리케이션 레이어별 제어, 기능, 품질, 성능, 보안 집중 적용</span></h4>
 								
 											<div class="content">
 												<ul class="unstyled bm-remove">
 													
 														
-														<li><a href="#"><span>공격 포인트: View) 1. XSS(크로스 사이트 스크립트 삽입 공격 취약점)</span></a></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 정의 ) XSS라고 불리며, 다른 사용자에게 악성 코드를 보낼 때 사용</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 형태 1) 저장식 공격 : 게시판, 로그정보, 주석 등 서버에 영구적으로 저장된 자료로 공격</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 형태 2) 반향식 공격 : 에러메시지, 검색 결과 등 서버에 요청하여 응답을 받는 과정을 이용하여 공격</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 적용시 ) 웹 애플리케이션이 다른 사용자의 브라우저를 공격하는 도구로 사용</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 형태 세부 ) 1. URL 상의 XSS 공격, 2. 게시판에 대한 XSS 공격</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 성공시 ) 공격이 성공하는 경우 일반 사용자의 세션 토큰이 노출되거나, 사용자의 컴퓨터를 공격하거나, 다른 사용자를 속이기 위해 위조된 컨텐츠를 보여주게 된다.</span></li>
+														<li><a href="#"><span>집중적용 레이어 ) Filter</span></a></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 필터 정의 ) HTTP 요청과 응답을 변경할 수 있는 재사용가능한 코드</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 필터 설명 ) 필터는 객체의 형태로 존재하며 클라이언트로부터 오는 요청(request)과 최종 자원(서블릿/JSP/기타 문서) 사이에 위치하여 클라이언트의 요청 정보를 알맞게 변경할 수 있으며, 또한 필터는 최종 자원과 클라이언트로 가는 응답(response) 사이에 위치하여 최종 자원의 요청 결과를 알맞게 변경할 수 있다.</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 필터 체인 ) 여러 개의 필터가 모여서 하나의 체인을 형성할 때 첫번째 필터가 변경하는 요청 정보는 클라이언트의 요청 정보가 되지만, 체인의 두번째 필터가 변경하는 요청 정보는 첫번째 필터를 통해서 변경된 요청 정보가 된다. 즉, 요청 정보는 변경에 변경에 변경을 거듭하게 되는 것이다. 응답 정보의 경우도 요청 정보와 비슷한 과정을 거치며 차이점이 있다면 필터의 적용 순서가 요청 때와는 반대라는 것이다.</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 필터 세부 ) 필터는 변경된 정보를 변경하는 역할 뿐만 아니라 흐름을 변경하는 역할도 할 수 있다. 즉, 필터는 클라이언트의 요청을 필터 체인의 다음 단계(결과적으로는 클라이언트가 요청한 자원)에 보내는 것이 아니라 다른 자원의 결과를 클라이언트에 전송할 수 있다.</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 필터 구현 ) 필터를 구현하는데 있어 핵심적인 역할을 인터페이스 및 클래스가 3개가 있는 데, 그것들은 바로 javax.servlet.Filter 인터페이스, javax.servlet.ServletRequestWrapper 클래스, javax.servlet.ServletResponseWrapper 클래스이다. 이 중 Filter 인터페이스는 클라이언트와 최종 자원 사이에 위치하는 필터를 나타내는 객체가 구현해야 하는 인터페이스이다. 그리고 ServletRequestWrapper 클래스와 SerlvetResponseWrapper 클래스는 필터가 요청을 변경한 결과 또는 응답을 변경할 결과를 저장할 래퍼 클래스를 나타내며, 개발자는 이 두 클래스를 알맞게 상속하여 요청/응답 정보를 변경하면 된다.</span></li>
 														
-														<li><i class="fa fa-caret-right fw"></i><span> 대응 조치 ) 웹 어플리케이션에 전달되는 인수는 다음의 허용된 값만을 받아들여야 한다.</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 대응 조치 ) 허용된 문자셋, 데이터 유형, NULL 값 허용 여부 정의</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 대응 조치 ) 사용자용 게시판 등과 같은 매개체들에 사용자 입력값 검증루틴을 거친다.</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 대응 조치 ) 어플리케이션 차원에서 HTTP 헤더, HTML, Java/VBScript, Flash, GIF/JPG, 쿠키, 쿼리 스트링, 폼 필드, 히든 필드 등의 모든 인자(Parameter)들에 대해 허용된 유형의 데이터만 입력할 수 있도록 한다.</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 래퍼 클래스 ) 필터가 필터로서의 제기능을 하기 위해서는 클라이언트의 요청을 변경하고, 또한 클라이언트로 가는 응답을 변경할 수 있어야 할 것이다. 이러한 변경을 할 수 있도록 해 주는 것이 바로 ServletRequestWrapper와 ServletResponseWrapper이다. 서블릿 요청/응답 래퍼 클래스를 이용함으로써 클라이언트의 요청 정보를 변경하여 최종 자원인 서블릿/JSP/HTML/기타 자원에 전달할 수 있고, 또한 최종 자원으로부터의 응답 결과를 변경하여 새로운 응답 정보를 클라이언트에 보낼 수 있게 된다.</span></li>
+
+
+														<li><i class="fa fa-caret-right fw"></i><span> 필터 체인의 순서 ) 앞에서 필터는 체인을 형성할 수 있다고 하였다. 체인을 형성한다는 것은 어떤 특정한 순서에 따라 필터가 적용된다는 것을 의미한다. 예를 들면, 여러분은 '인증필터->파라미터 변환 필터->XSL/T 필터->자원->XSL/T 필터->파라미터 변환 필터->인증필터'와 같이 특정 순서대로 필터를 적용하길 원할 것이다. 서블릿2.3 규약은 다음과 같은 규칙에 기반하여 필터 체인 내에서 필터의 적용 순서를 결정한다.</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 필터 체인의 구현 ) 1. url-pattern 매칭은 web.xml 파일에 표기된 순서대로 필터 체인을 형성한다. 2. 그런 후, servlet-name 매칭이 web.xml 파일에 표기된 순서대로 필터 체인을 형성한다.</span></li>
 														
-														<li><a href="#"><span> JsTree Component의 적용 형태 > 모든 요청에 대한 필터 적용 ( xssProtect-0.1.jar )</span></a></li>
-														
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 1. ) 필터 적용 범위 : 제어, 기능, 보안</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 2. ) JsTree 컴포넌트로의 요청 제어 : 일정한 수준이상의 요청이 들어올 경우 ( 요청의 Stack 화 등. )</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 3. ) JsTree 컴포넌트로의 요청 기능 : 다수의 잦은 변경사항이 다수의 접속 사용자에게 BroadCasting 되어야 하는 경우</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 4. ) JsTree 컴포넌트로의 요청 보안 : 컴포넌트로의 공격과 방어의 최초 지점 ( 최소한의 방어벽 - 성능의 이슈와 연계 )</span></li>
 												</ul>
 											</div>
 										</div>
@@ -670,22 +668,23 @@
 										</div>
 										<div class="space-20"></div>
 										<div id="link-list">
-											<h4 class="title"><span>어플리케이션 레이어별, 구역별 공격 방법</span></h4>
+											<h4 class="title"><span>어플리케이션 레이어별 제어, 기능, 품질, 성능, 보안 집중 적용</span></h4>
 								
 											<div class="content">
 												<ul class="unstyled bm-remove">
 													
 														
-														<li><a href="#"><span>공격 포인트: View) 2. CSRF(스크립트 요청 참조)</span></a></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 개요 ) 스크립트 요청 참조(CSRF)는 공격자가 사용자의 Cookie 값이나 Session정보를 의도한 사이트로 보내거나 특정한 동작을 유발하는 스크립트를 글에 삽입하여 사용자가 게시물 등을 클릭할 경우 공격자가 원하는 동작이 실행되는 것이며,</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 대상 ) 공격 대상이 되는 부분 : 글쓰기 시 HTML 태그가 허용된 게시판</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 대상 ) 공격 대상이 되는 태그 : script, embed, object, applet, img 등</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 피해 유형 ) 정보 노출 : 쿠키 또는 세션 정보 노출</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 피해 유형 ) 동일 작업 반복 : 게시물 클릭 시 공격자가 원하는 동작 수행</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 보호 대책 ) CSRF를 예방할 수 있는 최선의 방안은 모든 입력 값을 상세히 검증하는 것으로 헤더, 쿠키, 질의 문, 폼 필드, 숨겨진 필드등과 같은 모든 파라미터들을 엄격한 규칙에 의해서 검증하여 HTML을 사용할 경우 태그 내에 html, ?, & 등이 포함되지 않도록 하여야 한다.</span></li>
+														<li><a href="#"><span>집중적용 레이어 ) Interceptor</span></a></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 인터셉터 정의 ) 액션 처리 전과 후에 추가적인 작업을 지원한다.</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 인터셉터 설명 ) 모든 액션 요청(Action Request)에 대해 공통적으로 적용되어야 하는 공통 기능들을 제공하는 모듈</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 인터셉터 스택 ) 다수의 인터셉터들을 묶어 정의함으로서, 하나 이상의 인터셉터들이 일괄적으로 적용되도록 해준다.</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 인터셉터 세부 ) 인터셉터는 정의된 순서대로 적용 된다. 패키지별 액션별로 적용될 수 있다.</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 인터셉터 구현 ) preHandler,  postHandle,  afterCompletion</span></li>
 														
-														<li><a href="#"><span> JsTree Component의 적용 형태 > 해당 요청 분류에 대한 필터 적용 ( <artifactId>simple-csrf-filter</artifactId> )</span></a></li>
-														
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 1. ) 필터 적용 범위 : 제어, 기능, 보안</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 2. ) JsTree 컴포넌트로의 요청 제어 : 값의 검증</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 3. ) JsTree 컴포넌트로의 요청 기능 : 사용자 인증처리, 복잡한 연산의 감춤, 파라미터 설정 및 변경</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 4. ) JsTree 컴포넌트로의 요청 보안 : 컴포넌트로의 공격을 앞뒤로 처리하여 추적 방어 요충지 ( 최소한의 방어벽 - 성능의 이슈와 연계 )</span></li>
 												</ul>
 											</div>
 										</div>
@@ -708,21 +707,27 @@
 										</div>
 										<div class="space-20"></div>
 										<div id="link-list">
-											<h4 class="title"><span>어플리케이션 레이어별, 구역별 공격 방법</span></h4>
+											<h4 class="title"><span>어플리케이션 레이어별 제어, 기능, 품질, 성능, 보안 집중 적용</span></h4>
 								
 											<div class="content">
 												<ul class="unstyled bm-remove">
 													
 														
-														<li><a href="#"><span>공격 포인트: Network) 1. SSI 인젝션</span></a></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 개요 ) SSI(Server-side Includes)는 서버가 HTML 문서내 변수값으로 입력된 후, 이를 서버가 처리하게 되는데, 이때 인젝션 명령문이 수행되어 서버 데이터 정보가 누출 되는 취약점.</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 대상 ) 공격 대상이 되는 부분 : 글쓰기 시 HTML 태그가 허용된 게시판</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 대상 ) 공격 대상이 되는 태그 : 시스템 명령어 ( exec, ls -al ... )</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 피해 유형 ) 정보 노출 : 시스템 정보 노출</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 보호 대책 ) 웹 방화벽 사용 : 사용자 입력 폼 및 CRUD 시스템을 대상으로 특수문자 필터링 규칙 적용</span></li>
+														<li><a href="#"><span>집중적용 레이어 ) AOP ( Aspect Oriented Programming)</span></a></li>
+														<li><i class="fa fa-caret-right fw"></i><span> AOP 정의 ) 기능을 핵심 비지니스 로직과 공통 모듈로 구분하고, 핵심 로직에 영향을 미치지 않고 사이사이에 공통 모듈을 효과적으로 잘 끼워넣도록 하는 개발 방법이다.</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> AOP 설명 ) 공통 모듈(보안 인증, 로깅 같은 요소등)을 만든 후에 코드 밖에서 이 모듈을 비지니스 로직에 삽입하는 것이 바로 AOP 적인 개발이다. 코드 밖에서 설정된다는 것이 핵심이다.</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> AOP 구성요소 ) 조인포인트(joinPoint) - 횡단 관심 모듈의 기능이 삽입되어 동작할 수 있는 실행 가능한 특정위치</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> AOP 구성요소 ) 포인트컷(pointCut) - 어떤 클래스의 어느 조인포인트를 사용할 것인지를 결정하는 선택 기능</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> AOP 구성요소 ) 어드바이스 - 각 조인포인트에 삽입되어져 동작할 수 있는 코드</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 어드바이스(advise)의 종류 ) Before advice, After returning advice, After throwing advice, Around advice</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 위빙 - 포인트컷에 의해서 결정된 조인포인트에 지정된 어드바이스를 삽입하는 과정 (다른 말로 크로스컷팅)</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 애스팩트 - 포인트컷(어디에서) + 어드바이스(무엇을 할 것인지) + (필요에 따라 인트로덕션도 포함)</span></li>
 														
-														<li><a href="#"><span> JsTree Component의 적용 형태 > 해당 요청 분류에 대한 필터 적용 ( <artifactId>org.apache.catalina.ssi.SSIFilter</artifactId> )</span></a></li>
-														
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 1. ) AOP 적용 범위 : 제어, 기능, 성능, 보안</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 2. ) JsTree 컴포넌트로의 요청 제어 : 트랜잭션 처리</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 3. ) JsTree 컴포넌트로의 요청 기능 : 아키텍쳐 검증, 멀티 쓰레드, 로깅</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 3. ) JsTree 컴포넌트로의 요청 성능 : 메소드 성능 검사</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 4. ) JsTree 컴포넌트로의 요청 보안 : 인증, 권한</span></li>
 												</ul>
 											</div>
 										</div>
@@ -745,20 +750,23 @@
 										</div>
 										<div class="space-20"></div>
 										<div id="link-list">
-											<h4 class="title"><span>어플리케이션 레이어별, 구역별 공격 방법</span></h4>
+											<h4 class="title"><span>어플리케이션 레이어별 제어, 기능, 품질, 성능, 보안 집중 적용</span></h4>
 								
 											<div class="content">
 												<ul class="unstyled bm-remove">
 													
 														
-														<li><a href="#"><span>공격 포인트: Network) 2. HTTP 응답 분할</span></a></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 개요 ) HTTP 요청에 들어 있는 인자값이 HTTP 응답헤더에 포함되어 사용자에게 다시 전달 될 떄 입력값에 CR(Carriage Return)이나 LF(Line Feed)와 같은 개행문자가 존재하면 HTTP응답이 2개 이상으로 분리되어, 공격자는 개행문자를 이용하여 첫 번째 응답을 종룟고, 두 번째 응답에 악의적인 코드를 주입하여 XSS및 캐쉬 훼손(cache poisoning) 공격 등이 가능한 취약점</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 대상 ) 모든 서버 요청</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 피해 유형 ) XSS 시도 및 캐쉬 훼손</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 보호 대책 ) 외부에서 입력된 인자값을 HTTP 응답헤더( Set Cookie 등)에 포함시킬 경우 CR,LF 등이 개행문자를 제거</span></li>
+														<li><a href="#"><span>집중적용 레이어 ) Model Object -> MDD(Model Driven Development)</span></a></li>
+														<li><i class="fa fa-caret-right fw"></i><span> MDD 설명 ) MDA에서 파생 ) MDA는 업무프로세스와 업무규칙을 담고 있는 모델로부터 소스와 문서를 생성하는 기술 구조이며, MDD 는 MDA 기술을 적용한 소프트웨어 개발 또는 방법론을 말합니다. </span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> MDD 장점 1 ) 첫째, 개발이나 유지보수인력이 기술보다 업무에 더 집중할 수 있다는 점 </span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> MDD 장점 2 ) 둘째, 프로그램(컴포넌트)의 가시성을 확보</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> MDD 장점 3 ) 셋째, 설계/코딩/테스트 프로세스가 자동화되고 일관성과 연속성</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> MDD 장점 4 ) 마지막으로, 소스코드의 품질이 높아진다는 장점</span></li>
 														
-														<li><a href="#"><span> JsTree Component의 적용 형태 > 모든 요청에 대한 Interceptor 적용 ( <artifactId>owasp-esapi-java</artifactId> )</span></a></li>
-														
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 1. ) MDD 적용 범위 : 품질, 기능, 제어</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 2. ) JsTree 컴포넌트로의 요청 제어 : 코드의 일관성과 연속성 집중</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 3. ) JsTree 컴포넌트로의 요청 기능 : 기능 확장 집중</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 결론 3. ) JsTree 컴포넌트로의 요청 품질 : 확고한 인터페이스와 Abstract Class로 인한 품질 유지</span></li>
 												</ul>
 											</div>
 										</div>
@@ -781,128 +789,21 @@
 										</div>
 										<div class="space-20"></div>
 										<div id="link-list">
-											<h4 class="title"><span>어플리케이션 레이어별, 구역별 공격 방법</span></h4>
+											<h4 class="title"><span>어플리케이션 레이어별 제어, 기능, 품질, 성능, 보안 집중 적용</span></h4>
 								
 											<div class="content">
 												<ul class="unstyled bm-remove">
 													
 														
-														<li><a href="#"><span>공격 포인트: Server Daemon) 1. System~Server File Access ( 디렉토리 인덱싱 )</span></a></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 개요 ) 공격 서버내의 인덱스 보안설정 미비로 모든 디렉터리 혹은 중요한 정보가 포함된 디렉터리가 외부에서 중요폴더(혹은 파일)이 리스팅되는 취약점</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 대상 ) 리스팅 URL 서버 요청</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 피해 유형 ) 리스팅 파일의 모든 정보 유출</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 보호 대책 ) 톰캣 홈 디렉터리 아래 conf 디렉터리에 존재하는 web.xml 파일에서 listing 파라미터 값을 false로 보안 설정 후 서버 재시작.</span></li>
-														
-														<li><a href="#"><span> JsTree Component의 적용 형태 > 설정 적용 및 탐지</span></a></li>
-														
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</article>
-				
-				<article>
-					<div class="clearfix">
-						<div class="container bm-remove">
-							<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
-								<div class="article-body rte" itemprop="articleBody">
-									
-									<div class="tablet-mobile alpha bm-remove last">
-										<div class="one-third-percent tablet-mobile bm-remove omega alignleft">
-											<img src="http://placehold.it/399x399" alt="" />
-										</div>
-										<div class="space-20"></div>
-										<div id="link-list">
-											<h4 class="title"><span>어플리케이션 레이어별, 구역별 공격 방법</span></h4>
-								
-											<div class="content">
-												<ul class="unstyled bm-remove">
-													
-														
-														<li><a href="#"><span>공격 포인트: Server Daemon) 2. 파일 업로드, 다운로드</span></a></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 개요 ) 서버측에서 실행될 수 있는 스크립트 파일(ASP,JSP,PHP 파일 등)이 업로드가능하고, 이 파일을 공격자가 웹을 통해 직접 실행시킬 수 있는 경우 시스템 내부 명령어를 실행하거나 외부와 연결하여 시스템을 제어할 수 있는 취약점</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 대상 ) 업로드가 가능한 로직을 가지고 있는 서버</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 피해 유형 ) 웹쉘과 같은 악성파일 업로드 후 정보 탈취</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 보호 대책 ) 웹 방화벽 : 사전 정의된 업로드 파일 확장자만 허용( White List 관리)</span></li>
-														
-														<li><a href="#"><span> JsTree Component의 적용 형태 > 규약된 파일 확장자 업로드 라이브러리 ( Apache Common Poi 등.)</span></a></li>
-														
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</article>
-				
-				<article>
-					<div class="clearfix">
-						<div class="container bm-remove">
-							<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
-								<div class="article-body rte" itemprop="articleBody">
-									
-									<div class="tablet-mobile alpha bm-remove last">
-										<div class="one-third-percent tablet-mobile bm-remove omega alignleft">
-											<img src="http://placehold.it/399x399" alt="" />
-										</div>
-										<div class="space-20"></div>
-										<div id="link-list">
-											<h4 class="title"><span>어플리케이션 레이어별, 구역별 공격 방법</span></h4>
-								
-											<div class="content">
-												<ul class="unstyled bm-remove">
-													
-														
-														<li><a href="#"><span>공격 포인트: Server Daemon) 2. 파일 다운로드</span></a></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 개요 ) 외부 입력값에 대해 경로 조작에 사용될 수 있는 문자를 필터링하지 않으면, 예상 밖의 접근 제한 영역에 대한 경로 문자열 구성이 가능해져 시스템 정보누출, 서비스 장애 등을 유발 시킬 수 있는 취약점.</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 대상 ) 다운로드가 가능한 로직을 가지고 있는 서버</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 피해 유형 ) URL에 [../]을 포함하여 상위 디렉터리 이동 후 서버 파일 다운로드</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 보호 대책 ) 웹 방화벽 : 다운로드 파라미터 내에 특수 구문 필터링 규칙 적용</span></li>
-														
-														<li><a href="#"><span> JsTree Component의 적용 형태 > 정규표현식 요청 분석으로 통한 인터셉터 등록 및 라이브러리 사용 ( Apache Common Poi 등.)</span></a></li>
-														
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</article>
-				
-				<article>
-					<div class="clearfix">
-						<div class="container bm-remove">
-							<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
-								<div class="article-body rte" itemprop="articleBody">
-									
-									<div class="tablet-mobile alpha bm-remove last">
-										<div class="one-third-percent tablet-mobile bm-remove omega alignleft">
-											<img src="http://placehold.it/399x399" alt="" />
-										</div>
-										<div class="space-20"></div>
-										<div id="link-list">
-											<h4 class="title"><span>어플리케이션 레이어별, 구역별 공격 방법</span></h4>
-								
-											<div class="content">
-												<ul class="unstyled bm-remove">
-													
-														
-														<li><a href="#"><span>공격 포인트: Server Daemon) 3. 악성 파일 실행</span></a></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 개요 ) 외부 입력값에 대해 경로 조작에 사용될 수 있는 문자를 필터링하지 않으면, 예상 밖의 접근 제한 영역에 대한 경로 문자열 구성이 가능해져 시스템 정보누출, 서비스 장애 등을 유발 시킬 수 있는 취약점.</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 공격 대상 ) 다운로드가 가능한 로직을 가지고 있는 서버</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 피해 유형 ) URL에 [../]을 포함하여 상위 디렉터리 이동 후 서버 파일 다운로드</span></li>
-														<li><i class="fa fa-caret-right fw"></i><span> 보호 대책 ) 웹 방화벽 : 다운로드 파라미터 내에 특수 구문 필터링 규칙 적용</span></li>
-														
-														<li><a href="#"><span> JsTree Component의 적용 형태 > 정규표현식 요청 분석으로 통한 인터셉터 등록 및 라이브러리 사용 ( Apache Common Poi 등.)</span></a></li>
-														
+														<li><a href="#"><span>집중적용 레이어 ) Jstree 컴포넌트</span></a></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 도미노 현상 ) JsTree Engin은 일관된 아키텍쳐를 제공하고,</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 도미노 현상 ) JsTree Engin은 아키텍쳐를 통해서만 저장소에 접근한다는 명제에 한하여</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 도미노 현상 ) JsTree Engin은 제어를 집중하게 되고</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 도미노 현상 ) JsTree Engin은 기능이 집중되 있으므로,</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 도미노 현상 ) JsTree Engin은 성능 향상 포인트를 제공하고,</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 도미노 현상 ) JsTree Engin은 보안 포인트를 제공하며,</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 도미노 현상 ) JsTree Engin은 지속적인 코드 품질을 혁신하며,</span></li>
+														<li><i class="fa fa-caret-right fw"></i><span> 도미노 현상 ) JsTree Engin은 MDD를 통한 확장 포인트를 제공합니다.</span></li>
 												</ul>
 											</div>
 										</div>
