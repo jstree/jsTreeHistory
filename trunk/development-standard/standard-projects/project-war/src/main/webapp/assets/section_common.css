@@ -25,3 +25,16 @@
 	vertical-align: middle;
 }
 
+footer p {
+	font-size : 11px;
+}
+
+#newsletter > div > form {
+	margin-top : 15px;
+}
+
+@media only screen and (max-width: 980px){
+	#validation {
+		text-align : center;
+	}	
+}
