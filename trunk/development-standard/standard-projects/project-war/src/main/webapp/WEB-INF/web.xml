@@ -30,9 +30,10 @@
 	<!--
 	수정일          수성자                          수정내용
    	==========      ========      =================================================
-   	2011.9.19		이기하			filter 정리
-   	2013.5.31		이기하			미사용 filter 정리(.mdo, .action)
-   	2014.7.07		최대열			(security 3.0) egov3.0.0b 이관 cf) http://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3:fdl:server_security:upgrade
+   	2011.09.19		이기하			filter 정리
+   	2013.05.31		이기하			미사용 filter 정리(.mdo, .action)
+   	2014.07.07		최대열			(security 3.0) egov3.0.0b 이관 cf) http://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3:fdl:server_security:upgrade
+   	2014.11.17      손호성          <welcome-file>index.do</welcome-file> 추가후 나머지 주석처리
   	************************************************************************************************
 	0. 로그인 정책 컴포넌트용 필터 : 주석
 	1. 스프링 시큐리티 설정 : 사용
@@ -46,13 +47,14 @@
 	<description>Standard Development Project</description>
 	
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-		<welcome-file>egovDevIndex.jsp</welcome-file>
+		<welcome-file>index.do</welcome-file>
+<!-- 		<welcome-file>index.html</welcome-file> -->
+<!-- 		<welcome-file>index.htm</welcome-file> -->
+<!-- 		<welcome-file>index.jsp</welcome-file> -->
+<!-- 		<welcome-file>default.html</welcome-file> -->
+<!-- 		<welcome-file>default.htm</welcome-file> -->
+<!-- 		<welcome-file>default.jsp</welcome-file> -->
+<!-- 		<welcome-file>egovDevIndex.jsp</welcome-file> -->
 	</welcome-file-list>
 	
 	<session-config>
@@ -65,19 +67,19 @@
 	
 	<error-page>
         <exception-type>java.lang.Throwable</exception-type>
-        <location>/common/error.jsp</location>
+        <location>/WEB-INF/jsp/community/common/error.jsp</location>
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/common/error.jsp</location>
+        <location>/WEB-INF/jsp/community/common/error.jsp</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/common/error.jsp</location>
+        <location>/WEB-INF/jsp/community/common/error.jsp</location>
     </error-page>
     <error-page>
         <error-code>503</error-code>
-        <location>/common/error.jsp</location>
+        <location>/WEB-INF/jsp/community/common/error.jsp</location>
     </error-page>
     
     <!-- 설정 xml 을 Class 로 변경함.
@@ -151,7 +153,7 @@
 	</filter>
     <filter-mapping>
 		<filter-name>sitemesh</filter-name>
-		<url-pattern>/sitemesh/*</url-pattern>
+		<url-pattern>/*</url-pattern>
         <dispatcher>FORWARD</dispatcher>
 		<dispatcher>REQUEST</dispatcher> 
 	</filter-mapping>

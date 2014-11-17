@@ -22,10 +22,10 @@
 	<head data-placeholder-focus="false" data-placeholder-live="false">
 		<c:choose>
 			<c:when test="${pageContext.request.serverName=='localhost'||pageContext.request.serverName=='127.0.0.1'}">
-				<jsp:include page="/jsp/www313cokr/index/meta/script.inc.jsp"></jsp:include>
+				<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
 			</c:when>
 			<c:otherwise>
-				<jsp:include page="/jsp/www313cokr/index/meta/script.inc.jsp"></jsp:include>
+				<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
 			</c:otherwise>
 		</c:choose>
 		<title><decorator:title default="This page has been using the SiteMesh template engine." /></title>	
@@ -38,16 +38,13 @@
 		// ]]>
 		</script>				
 	</head>
-	<body id="dongmin-lee" class="template-index" itemscope itemtype="http://schema.org/WebPage">
-		<div id="fb-root"></div>
-		<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/embededScript.jsp"/>
+	<body class="template-index">
 		<div class="page-border clearfix">
 			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/header.jsp"/>
 			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/navigation.jsp"/>
 			<decorator:body/>
 			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/footer.jsp"/>
 		</div>
-		<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/no_display.jsp"/>
 		<!-- ANALYTICS START -->
 		<!-- https://www.google.com/analytics/settings/home?scid=18527803 web log Analyzer  -->
 		<script type="text/javascript">
@@ -81,4 +78,3 @@
 		<!-- End Piwik Code -->		
 	</body>
 </html>
-<iframe allowTransparency="true" frameborder="0" id="admin_bar_iframe" src="https://dongmin-lee.myshopify.com/admin/bar?u=http://dongmin-lee.myshopify.com/" style="height: 40px; position: fixed; top: 0; left: 0; right: 0; z-index: 2147483647; background: #191919" width="100%">{}</iframe>

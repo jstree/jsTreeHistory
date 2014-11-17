@@ -12,10 +12,12 @@
 							<div class="one-quarter bm-larger tm-larger">
 								<div id="custom">
 									<h4 class="title">
-										<span>Custom Block 1</span>
+										<span>313 개발그룹</span>
 									</h4>
 									<div class="content rte">
-										<p class="text bm-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a nisl adipiscing, rhoncus leo at, porta ipsum.</p>
+										<p class="text bm-remove">313 개발그룹은 2010년 자바스터디로 시작되었습니다. <br />
+										그후 2013년 오픈소스 프로젝트를 구상하게 되었고, 바로보드라는 결실을 맺게 되었습니다. <br />
+										더욱더 발전할 313개발그룹을 지켜봐 주십시오.</p>
 									</div>
 								</div>
 							</div>
@@ -25,6 +27,9 @@
 										<span>Newsletter</span>
 									</h4>
 									<div class="content">
+										<p class="text bm-remove">
+											메일링 리스트에 가입하면 바로보드의 소식을 받아보실 수 있습니다.
+										</p>
 										<form action="#" method="post" target="_blank" class="clearfix" novalidate>
 											<input type="email" class="bm-remove" name="EMAIL" placeholder="Email address..." />
 											<button type="submit" name="submit" class="bm-remove">
@@ -34,11 +39,22 @@
 									</div>
 								</div>
 							</div>
-							<div class="one-quarter bm-larger tm-larger"></div>
+							<div class="one-quarter bm-larger tm-larger">
+								<div id="link-list">
+									<h4 class="title"><span>Contact Us</span></h4>
+									<div class="content">
+										<ul class="unstyled bm-remove">
+											<li><a href="mailto:webmaster@example.com" target="_self"><i class="fa fa-envelope-o fw"></i><span>Mail to Admin</span></a></li>
+											<li><a href="#" target="_self"><i class="fa fa-phone fw"></i><span>010-2531-0470</span></a></li>
+											<li><a href="#" target="_self"><i class="fa fa-map-marker fw"></i><span>서울시 영등포구 문래동5가</span></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
 							<div class="one-quarter bm-larger tm-larger last">
 								<div id="social">
 									<h4 class="title">
-										<span>Stay Connected</span>
+										<span>Follow Us</span>
 									</h4>
 									<div class="content">
 										<p class="text"></p>
@@ -59,32 +75,12 @@
 						</div>
 					</div>
 					<div id="copyright" class="one-half-percent desktop-tablet bm-remove">
-						Copyright &copy; <a href="/" target="_self">dongmin.lee</a> 2014. Design by <a href="http://www.cloud-eight.com/" target="_blank">Cloud
-						Eight</a>. Powered by <a href="http://www.shopify.com/?ref=cloudeight" target="_blank">Shopify</a>.
+						Copyright &copy; 313 Developer Group 2013.
 					</div>
-					<div id="accepted-cards" class="one-half-percent desktop-tablet bm-remove last">
-						<span class="cursor-pointer"><img
-							src="${pageContext.request.contextPath}/assets/cc-visa.png?20"
-							alt="Visa" class="tip-t-fade" data-tooltip="Visa" /></span> <span class="cursor-pointer"><img
-							src="${pageContext.request.contextPath}/assets/cc-mastercard.png?20"
-							alt="Visa" class="tip-t-fade" data-tooltip="MasterCard" /></span> <span class="cursor-pointer"><img
-							src="${pageContext.request.contextPath}/assets/cc-american-express.png?20"
-							alt="Visa" class="tip-t-fade" data-tooltip="American Express" /></span>
-						<span class="cursor-pointer"><img
-							src="${pageContext.request.contextPath}/assets/cc-maestro.png?20"
-							alt="Visa" class="tip-t-fade" data-tooltip="Maestro" /></span> <span class="cursor-pointer"><img
-							src="${pageContext.request.contextPath}/assets/cc-switch.png?20"
-							alt="Visa" class="tip-t-fade" data-tooltip="Switch" /></span> <span class="cursor-pointer"><img
-							src="${pageContext.request.contextPath}/assets/cc-western-union.png?20"
-							alt="Visa" class="tip-t-fade" data-tooltip="Western Union" /></span> <span class="cursor-pointer"><img
-							src="${pageContext.request.contextPath}/assets/cc-discover.png?20"
-							alt="Visa" class="tip-t-fade" data-tooltip="Discover" /></span> <span class="cursor-pointer"><img
-							src="${pageContext.request.contextPath}/assets/cc-paypal.png?20"
-							alt="Visa" class="tip-t-fade" data-tooltip="PayPal" /></span> <span class="cursor-pointer"><img
-							src="${pageContext.request.contextPath}/assets/cc-google-wallet.png?20"
-							alt="Visa" class="tip-t-fade" data-tooltip="Google Wallet" /></span> <span class="cursor-pointer"><img
-							src="${pageContext.request.contextPath}/assets/cc-bitcoin.png?20"
-							alt="Visa" class="tip-t-fade" data-tooltip="BitCoin" /></span>
+					<div id="validation" class="one-half-percent desktop-tablet bm-remove last">
+						<span>
+							<img id="html5certified" src="./assets/W3C_HTML5_certified.jpg">
+						</span>
 					</div>
 				</div>
 			</div>
