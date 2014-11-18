@@ -140,13 +140,13 @@
 									</a>
 									<ul class="sub-nav unstyled bm-remove">
 										<li class="sub-nav-item first active">
-											<a href="./committer.html" target="_self" class="first active">&raquo; &nbsp;Comitter</a>
+											<a href="/aboutUs/committer.do" target="_self" class="first active">&raquo; &nbsp;Comitter</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./committerSchedule.html" target="_self" class="">&raquo; &nbsp;커미터 일정관리</a>
+											<a href="/aboutUs/committerSchedule.do" target="_self" class="">&raquo; &nbsp;커미터 일정관리</a>
 										</li>
 										<li class="sub-nav-item last">
-											<a href="./committerSchedule.html" target="_self" class="last">&raquo; &nbsp;Contact Us</a>
+											<a href="/aboutUs/contactus.do" target="_self" class="last">&raquo; &nbsp;Contact Us</a>
 										</li>
 									</ul>
 								</li>
@@ -208,9 +208,9 @@
 						<a href="/devTool/313DevTool.do" target="_self" class="sub-nav-item last">Tool</a>
 					</div>
 					<div id="aboutus-nav-links" class="sub-nav">
-						<a href="./committer.html" target="_self" class="sub-nav-item first">Comitter</a>
-						<a href="./comitterSchedule.html" target="_self" class="sub-nav-item">커미터 일정관리</a>
-						<a href="./contactus.html" target="_self" class="sub-nav-item last">Contact Us</a>
+						<a href="/aboutUs/committer.do" target="_self" class="sub-nav-item first">Comitter</a>
+						<a href="/aboutUs/committerSchedule.do" target="_self" class="sub-nav-item">커미터 일정관리</a>
+						<a href="/aboutUs/contactus.do" target="_self" class="sub-nav-item last">Contact Us</a>
 					</div>
 					<div id="community-nav-links" class="sub-nav">
 						<a href="./notice.html" target="_self" class="sub-nav-item">공지사항</a>
