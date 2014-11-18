@@ -77,19 +77,19 @@
 									</a>
 									<ul class="sub-nav unstyled bm-remove">
 										<li class="sub-nav-item first active">
-											<a href="./baroBoardOverView.html" target="_self" class="first active">&raquo; &nbsp;개요</a>
+											<a href="/baroBoard/baroBoardOverView.do" target="_self" class="first active">&raquo; &nbsp;개요</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./baroBoardConcept.html" target="_self" class="">&raquo; &nbsp;컨셉</a>
+											<a href="/baroBoard/baroBoardConcept.do" target="_self" class="">&raquo; &nbsp;컨셉</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./baroBoardFuction.html" target="_self" class="">&raquo; &nbsp;기능</a>
+											<a href="/baroBoard/baroBoardFunction.do" target="_self" class="">&raquo; &nbsp;기능</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./baroBoardReleaseNote.html" target="_self" class="">&raquo; &nbsp;릴리즈노트</a>
+											<a href="/baroBoard/baroBoardReleaseNote.do" target="_self" class="">&raquo; &nbsp;릴리즈노트</a>
 										</li>
 										<li class="sub-nav-item last">
-											<a href="./baroBoardLicence.html" target="_self" class="last">&raquo; &nbsp;라이선스</a>
+											<a href="/baroBoard/baroBoardLicence.do" target="_self" class="last">&raquo; &nbsp;라이선스</a>
 										</li>
 									</ul>
 								</li>
@@ -187,12 +187,12 @@
 						<a href="/jsTreeAlg/jsTreeLicense.do" target="_self" class="sub-nav-item last">라이선스</a>
 					</div>
 					<div id="baroboard-nav-links" class="sub-nav">
-						<a href="./baroBoardOverView.html" target="_self" class="sub-nav-item first active">개요</a>
-						<a href="./baroBoardConcept.html" target="_self" class="sub-nav-item">컨셉</a>
-						<a href="./baroBoardFuction.html" target="_self" class="sub-nav-item">기능</a>
-						<a href="./baroBoardReleaseNote.html" target="_self" class="sub-nav-item">릴리즈노트</a>
-						<a href="./baroBoardDownload.html" target="_self" class="sub-nav-item">다운로드</a>
-						<a href="./baroBoardLicence.html" target="_self" class="sub-nav-item last">라이선스</a>
+						<a href="/baroBoard/baroBoardOverView.do" target="_self" class="sub-nav-item first active">개요</a>
+						<a href="/baroBoard/baroBoardConcept.do" target="_self" class="sub-nav-item">컨셉</a>
+						<a href="/baroBoard/baroBoardFunction.do" target="_self" class="sub-nav-item">기능</a>
+						<a href="/baroBoard/baroBoardReleaseNote.do" target="_self" class="sub-nav-item">릴리즈노트</a>
+						<a href="/baroBoard/baroBoardDownload.do" target="_self" class="sub-nav-item">다운로드</a>
+						<a href="/baroBoard/baroBoardLicence.do" target="_self" class="sub-nav-item last">라이선스</a>
 					</div>
 					<div id="framework-nav-links" class="sub-nav">
 						<a href="./anyFramePortal.html" target="_self" class="sub-nav-item first active">애니 프레임워크 포탈</a>

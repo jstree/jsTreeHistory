@@ -16,7 +16,7 @@
 					</form>
 				</div>
 				<div id="header-logo" class="one-third bm-remove">
-					<a href="./" target="_self">
+					<a href="/" target="_self">
 						<img src="/assets/logo.jpg" alt="313 developer group logo">
 					</a>
 				</div>

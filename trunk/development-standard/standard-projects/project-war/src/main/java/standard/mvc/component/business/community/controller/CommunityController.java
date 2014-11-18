@@ -29,6 +29,8 @@ import standard.mvc.component.business.menu.service.MenuMngSerivce;
  *  2014.11.16    Jongryul.Lee           최초 생성
  *  2014.11.17    Hoseong.Son    1. index 메소드 requestMapping "/index.do" => "/menu.do"
  *                               2. @PathVariable("path") 추가
+ *  2014.11.18    Hoseong.Son    1. index.do requestMapping 분리
+ *                               2. requestMapping /{path}.do => /대분류(major)/소분류(minor).do                        
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -50,16 +52,16 @@ public class CommunityController {
 		return "/jsp/community/" + link;
 	}
 
-	@RequestMapping(value = { "/{majorCategory}/{minorCategory}.do" })
-	public String execute(ModelMap model, @PathVariable("majorCategory") String majorCategory,
-			@PathVariable("minorCategory") String minorCategory) throws Exception {
+	@RequestMapping(value = { "/{major}/{minor}.do" })
+	public String execute(ModelMap model, @PathVariable("major") String major,
+			@PathVariable("minor") String minor) throws Exception {
 		StringBuffer sb = new StringBuffer("/jsp/community");
 		sb.append("/");
-		sb.append(majorCategory);
+		sb.append(major);
 		sb.append("/");
-		sb.append(minorCategory);
+		sb.append(minor);
 		sb.append("/");
-		sb.append(minorCategory);
+		sb.append(minor);
 
 		logger.info("path : {}", new Object[] { sb });
 
