@@ -6,7 +6,7 @@
 		<script type="text/javascript">
 			$(function(){
 				$("a").click(function(event){
-					event.preventDefault();
+					//event.preventDefault(); 메뉴 링크가 먹지 않아 주석처리
 				});
 				
 				$.ajax({
