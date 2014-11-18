@@ -111,7 +111,6 @@
                 </div>
                 <!-- 검색 필드 박스 시작 -->
                 <div id="egovNotice">
-                <!-- ddd -->
                 <div id="search_field">
                     <div id="search_field_loc"><h2><strong><c:out value='${brdMstrVO.bbsNm}'/></strong></h2></div>
 					<form name="frm" action ="<c:url value='/cop/bbs${prefix}/selectBoardList.do'/>" method="post">
@@ -132,14 +131,13 @@
 							</select>
 							<input class="inline-block" name="searchWrd" type="text" size="35" value='<c:out value="${searchVO.searchWrd}"/>' maxlength="35" onkeypress="press(event);" title="검색어 입력"> 
 							<a class="button" href="#LINK" onclick="javascript:fn_egov_select_noticeList('1'); return false;">조회</a>
-							<% if(null != session.getAttribute("LoginVO")){ %>
-							<c:if test="${null != session.getAttribute('LoginVO')}" >
 							
+							<c:if test="${not empty LoginVO}" >
 							<c:if test="${brdMstrVO.authFlag == 'Y'}">
-							<a class="button" href="<c:url value='/cop/bbs${prefix}/addBoardArticle.do'/>?bbsId=<c:out value="${boardVO.bbsId}"/>">등록</a>
+<%-- 							<a class="button" href="<c:url value='/cop/bbs${prefix}/addBoardArticle.do'/>?bbsId=<c:out value="${boardVO.bbsId}"/>">등록</a> --%>
+							<a class="button" href="#" onclick="fn_egov_addNotice();">등록</a>
 							</c:if>
 							</c:if>
-							<%} %>
 						</div>
 
                     </form>
@@ -167,17 +165,17 @@
                     </colgroup>
                     <thead>
                     <tr>
-                        <th scope="col" class="f_field" nowrap="nowrap">번호</th>
+                        <th scope="col" class="f_field mobileInvisible" nowrap="nowrap">번호</th>
                         <th scope="col" nowrap="nowrap">제목</th>
                         <c:if test="${brdMstrVO.bbsAttrbCode == 'BBSA01'}">
 	                        <th scope="col" nowrap="nowrap">게시시작일</th>
 	                        <th scope="col" nowrap="nowrap">게시종료일</th>
 	                    </c:if>
 	                    <c:if test="${anonymous != 'true'}">
-	                        <th scope="col" nowrap="nowrap">작성자</th>
+	                        <th scope="col" class="mobileInvisible" nowrap="nowrap">작성자</th>
 	                    </c:if>
-                        <th scope="col" nowrap="nowrap">작성일</th>
-                        <th scope="col" nowrap="nowrap">조회수</th>
+                        <th scope="col" class="mobileInvisible" nowrap="nowrap">작성일</th>
+                        <th scope="col" class="mobileInvisible" nowrap="nowrap">조회수</th>
                     </tr>
                     </thead>
                     <tbody>                 
@@ -186,7 +184,11 @@
                     <!-- loop 시작 -->                                
                       <tr>
 				        <!--td class="lt_text3" nowrap="nowrap"><input type="checkbox" name="check1" class="check2"></td-->
-				        <td><b><c:out value="${paginationInfo.totalRecordCount+1 - ((searchVO.pageIndex-1) * searchVO.pageSize + status.count)}"/></b></td>            
+				        <td class="mobileInvisible" >
+<!-- 				        <b> -->
+				        <c:out value="${paginationInfo.totalRecordCount+1 - ((searchVO.pageIndex-1) * searchVO.pageSize + status.count)}"/>
+<!-- 				        </b> -->
+				        </td>            
 				        <td align="left">
 				            <form name="subForm" method="post" action="<c:url value='/cop/bbs${prefix}/selectBoardArticle.do'/>">
 				            <c:if test="${result.replyLc!=0}">
@@ -216,10 +218,10 @@
 				            <td ><c:out value="${result.ntceEndde}"/></td>
 				        </c:if>
 				        <c:if test="${anonymous != 'true'}">
-				            <td ><c:out value="${result.frstRegisterNm}"/></td>
+				            <td class="mobileInvisible" ><c:out value="${result.frstRegisterNm}"/></td>
 				        </c:if>
-				        <td ><c:out value="${result.frstRegisterPnttm}"/></td>
-				        <td ><c:out value="${result.inqireCo}"/></td>
+				        <td class="mobileInvisible" ><c:out value="${result.frstRegisterPnttm}"/></td>
+				        <td class="mobileInvisible" ><c:out value="${result.inqireCo}"/></td>
 				      </tr>
 				     </c:forEach>     
 				     <c:if test="${fn:length(resultList) == 0}">

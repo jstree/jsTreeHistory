@@ -106,6 +106,7 @@
                     </div>
                 </div>
                 <!-- 검색 필드 박스 시작 -->
+                <div id="egovNotice">
                 <div id="search_field">
                     <div id="search_field_loc"><h2><strong>게시글쓰기</strong></h2></div>
                 </div>
@@ -218,7 +219,7 @@
                     </div>
                     <!-- 버튼 끝 -->                           
                 </form:form>
-
+			</div>
             </div>  
             <!-- //content 끝 -->    
     </div>  
