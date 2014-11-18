@@ -21,7 +21,7 @@
 					</a>
 				</div>
 				<div id="header-cart" class="one-third bm-remove last">
-					<a href="./accountSign.html" target="_self">
+					<a href="/accountSign.html" target="_self">
 						Log in or Sign up
 					</a>
 				</div>

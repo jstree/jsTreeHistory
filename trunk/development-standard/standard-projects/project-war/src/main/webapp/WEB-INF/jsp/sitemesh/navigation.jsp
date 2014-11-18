@@ -99,13 +99,13 @@
 									</a>
 									<ul class="sub-nav unstyled bm-remove">
 										<li class="sub-nav-item first active">
-											<a href="./anyFramePortal.html" target="_self" class="first active">&raquo; &nbsp;애니 프레임워크 포탈</a>
+											<a href="/framework/anyFramePortal.do" target="_self" class="first active">&raquo; &nbsp;애니 프레임워크 포탈</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./egovFramePortal.html" target="_self" class="">&raquo; &nbsp;표준프레임워크 포탈</a>
+											<a href="/framework/egovFramePortal.do" target="_self" class="">&raquo; &nbsp;표준프레임워크 포탈</a>
 										</li>
 										<li class="sub-nav-item last">
-											<a href="./egovFrameCommunity.html" target="_self" class="last">&raquo; &nbsp;표준프레임워크 오픈커뮤니티</a>
+											<a href="/framework/egovFrameCommunity.do" target="_self" class="last">&raquo; &nbsp;표준프레임워크 오픈커뮤니티</a>
 										</li>
 									</ul>
 								</li>
@@ -195,9 +195,9 @@
 						<a href="/baroBoard/baroBoardLicence.do" target="_self" class="sub-nav-item last">라이선스</a>
 					</div>
 					<div id="framework-nav-links" class="sub-nav">
-						<a href="./anyFramePortal.html" target="_self" class="sub-nav-item first active">애니 프레임워크 포탈</a>
-						<a href="./egovFramePortal.html" target="_self" class="sub-nav-item">전자 정부 표준프레임워크 포탈</a>
-						<a href="./egovFrameCommunity.html" target="_self" class="sub-nav-item last">전자 정부 표준프레임워크 오픈커뮤니티</a>
+						<a href="/framework/anyFramePortal.do" target="_self" class="sub-nav-item first active">애니 프레임워크 포탈</a>
+						<a href="/framework/egovFramePortal.do" target="_self" class="sub-nav-item">전자 정부 표준프레임워크 포탈</a>
+						<a href="/framework/egovFrameCommunity.do" target="_self" class="sub-nav-item last">전자 정부 표준프레임워크 오픈커뮤니티</a>
 					</div>
 					<div id="devtools-nav-links" class="sub-nav">
 						<a href="./313DevCI.html" target="_self" class="sub-nav-item first active">CI</a>
