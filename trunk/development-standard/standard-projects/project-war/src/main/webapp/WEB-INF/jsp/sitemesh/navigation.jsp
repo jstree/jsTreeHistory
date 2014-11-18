@@ -115,22 +115,22 @@
 									</a>
 									<ul class="sub-nav unstyled bm-remove">
 										<li class="sub-nav-item first active">
-											<a href="./313DevCI.html" target="_self" class="first active">&raquo; &nbsp;CI</a>
+											<a href="/devTool/313DevCI.do" target="_self" class="first active">&raquo; &nbsp;CI</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./313DevALM.html" target="_self" class="">&raquo; &nbsp;ALM</a>
+											<a href="/devTool/313DevALM.do" target="_self" class="">&raquo; &nbsp;ALM</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./313DevStorage.html" target="_self" class="">&raquo; &nbsp;Storage</a>
+											<a href="/devTool/313DevStorage.do" target="_self" class="">&raquo; &nbsp;Storage</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./313DevMonitor.html" target="_self" class="">&raquo; &nbsp;Monitor</a>
+											<a href="/devTool/313DevMonitor.do" target="_self" class="">&raquo; &nbsp;Monitor</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./313DevAnalysis.html" target="_self" class="">&raquo; &nbsp;Analysis</a>
+											<a href="/devTool/313DevAnalysis.do" target="_self" class="">&raquo; &nbsp;Analysis</a>
 										</li>
 										<li class="sub-nav-item last">
-											<a href="./313DevTool.html" target="_self" class="last">&raquo; &nbsp;Tools</a>
+											<a href="/devTool/313DevTool.do" target="_self" class="last">&raquo; &nbsp;Tools</a>
 										</li>
 									</ul>
 								</li>
@@ -200,12 +200,12 @@
 						<a href="/framework/egovFrameCommunity.do" target="_self" class="sub-nav-item last">전자 정부 표준프레임워크 오픈커뮤니티</a>
 					</div>
 					<div id="devtools-nav-links" class="sub-nav">
-						<a href="./313DevCI.html" target="_self" class="sub-nav-item first active">CI</a>
-						<a href="./313DevALM.html" target="_self" class="sub-nav-item">ALM</a>
-						<a href="./313DevStorage.html" target="_self" class="sub-nav-item">Storage</a>
-						<a href="./313DevMonitor.html" target="_self" class="sub-nav-item">Monitor</a>
-						<a href="./313DevAnalysis.html" target="_self" class="sub-nav-item">Analysis</a>
-						<a href="./313DevTool.html" target="_self" class="sub-nav-item last">Tool</a>
+						<a href="/devTool/313DevCI.do" target="_self" class="sub-nav-item first active">CI</a>
+						<a href="/devTool/313DevALM.do" target="_self" class="sub-nav-item">ALM</a>
+						<a href="/devTool/313DevStorage.do" target="_self" class="sub-nav-item">Storage</a>
+						<a href="/devTool/313DevMonitor.do" target="_self" class="sub-nav-item">Monitor</a>
+						<a href="/devTool/313DevAnalysis.do" target="_self" class="sub-nav-item">Analysis</a>
+						<a href="/devTool/313DevTool.do" target="_self" class="sub-nav-item last">Tool</a>
 					</div>
 					<div id="aboutus-nav-links" class="sub-nav">
 						<a href="./committer.html" target="_self" class="sub-nav-item first">Comitter</a>
