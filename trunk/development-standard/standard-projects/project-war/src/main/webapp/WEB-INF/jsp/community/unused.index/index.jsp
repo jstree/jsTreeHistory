@@ -220,9 +220,7 @@ $("#demo")
 	        
 	        callAjax(null, '${pageContext.request.contextPath}/' + url, '#section', 'GET', 'html');
 	    }
-	})
-	
-	.jstree({ 
+	}).jstree({ 
 		// List of active plugins
 		"plugins" : [ 
 			"themes","json_data","ui","crrm","cookies","dnd","search","types","hotkeys","contextmenu"
@@ -314,10 +312,6 @@ $("#demo")
 					"label" : "Rename",                         
 					action : function (obj) 
 					{
-						console.log("c_id    : " + $(obj).attr("id").replace("node_","").replace("copy_",""));
-						console.log("c_title : " + $(obj).find("a").text());
-						console.log("c_type  : " + $(obj).attr("rel"));
-						console.log("url     : " + $(obj).attr("href"));
 						$("#nodeTitle"  ).val( $(obj).find("a").clone().children().remove().end().text() );
 						
 						if( "folder" == $(obj).attr("rel") ){
@@ -374,13 +368,10 @@ $("#demo")
 										}
 										,success : function (r) {
 											$("#demo").jstree("remove",$(obj));
-											$("#nodeConfirm").dialog("close");
-
 										}
-										,error : function(){
-											//$.jstree.rollback(data.rlbk);
-											//data.inst.refresh();
+										,complete : function(){
 											$("#nodeConfirm").dialog("close");
+											$("#demo").jstree("refresh");
 										}
 									});
 								 }
@@ -570,15 +561,6 @@ $("#demo")
 	})
 	.bind("move_node.jstree", function (e, data) {
 		data.rslt.o.each(function (i) {
-			
-			console.log(data);
-			console.log(data.rslt);
-			console.log(data.rslt.o);
-			console.log("c_id    : " + $(this).attr("id").replace("node_","").replace("copy_",""));
-			console.log("c_position : " + (data.rslt.cp + i));
-			console.log("ref     : " + (data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_","")));
-			console.log("copy    : " + (data.rslt.cy ? 1 : 0));
-			
 			$.ajax({
 				async : false,
 				type: 'POST',

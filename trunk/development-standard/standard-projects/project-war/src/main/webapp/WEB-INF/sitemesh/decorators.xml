@@ -11,6 +11,8 @@
 		<pattern>/uat/*</pattern>
 <!-- 		freeBoard ajax call -->		
 		<pattern>/cop/*</pattern>
+<!-- 		jstree 테스트용 페이지 -->		
+		<pattern>/jsp/community/index/index.do</pattern>		
 	</excludes>
 	
 	<decorator name="default" page="defaultDeco.jsp">

@@ -242,7 +242,7 @@ public class MenuController extends GenericAbstractController {
     @RequestMapping("/index/index.do")
 	public String index() {
 
-		return "/jsp/community/index/index";
+		return "/jsp/community/unused.index/index";
 	}
     
     @RequestMapping("/index/menuManage.do")
