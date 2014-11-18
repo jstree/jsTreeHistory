@@ -29,7 +29,9 @@
 			</c:otherwise>
 		</c:choose>
 		<title><decorator:title default="This page has been using the SiteMesh template engine." /></title>	
-		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/resource.jsp"/>
+		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/meta.jsp"/>
+		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/style.jsp"/>
+		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/script.jsp"/>
 		<script type="text/javascript">
 		// <![CDATA[
 		$(document).ready(function($){
