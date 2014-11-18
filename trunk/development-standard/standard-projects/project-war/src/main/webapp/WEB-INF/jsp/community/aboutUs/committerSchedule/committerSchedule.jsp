@@ -5,10 +5,14 @@
 	<head>
 		<script type="text/javascript">
 			$(function(){
+				$("a").click(function(event){
+					event.preventDefault();
+				});
+				
 				$.ajax({
 					 async : false
 					,type: 'GET'
-					,url: "${pageContext.request.contextPath}/committerScheduleMonthList.do"
+					,url: "${pageContext.request.contextPath}/sub/committerScheduleMonthList.do"
 					,data : {}
 					,success : function (page) {
 						$("#contentsBody").html(page);
@@ -20,7 +24,8 @@
 		</script>	
 	</head>
 	<body>
-		<main id="template-article-liquid" class="clearfix" role="main" itemscope itemtype="http://schema.org/Article"><nav>
+		<section id="template-article-liquid" class="clearfix" role="main" itemscope itemtype="http://schema.org/Article">
+			<nav>
 				<div class="container bm-medium">
 					<div class="one-whole">
 						<div class="no-display">article</div>
@@ -41,6 +46,6 @@
 					</div>
 				</div>
 			</article>
-		</main>
+		</section>
 	</body>
 </html>
