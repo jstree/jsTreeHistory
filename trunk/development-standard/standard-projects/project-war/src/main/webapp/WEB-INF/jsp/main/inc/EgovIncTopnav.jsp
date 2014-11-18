@@ -16,18 +16,21 @@
 <%@ page import ="egovframework.com.cmm.LoginVO" %>
 
 <script type="text/javascript">
-    function fn_main_headPageMove(menuNo, url){
+	function fn_main_headPageMove(menuNo, url){
 	    document.selectOne.menuNo.value=menuNo;
 	    if(url.indexOf(".do") > -1){
 	    	document.selectOne.link.value="";
 	        document.selectOne.action = "<c:url value='/' />"+url;
+	        document.selectOne.method = "post";
+	        document.selectOne.submit();
 	    }else{
 	    	document.selectOne.link.value=url;
 		    document.selectOne.action = "<c:url value='/EgovPageLink.do'/>";
+		    document.selectOne.submit();
 	    }
 	    //alert(document.selectOne.action);
-	    document.selectOne.submit();
-    }
+	}
+	
     function fn_main_headPageAction(menuNo, url){
         document.selectOne.menuNo.value=menuNo;
         document.selectOne.link.value="";

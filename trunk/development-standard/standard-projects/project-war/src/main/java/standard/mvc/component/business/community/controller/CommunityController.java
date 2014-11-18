@@ -64,13 +64,13 @@ public class CommunityController {
 		sb.append(minor);
 
 		logger.info("path : {}", new Object[] { sb });
-
+		model.addAttribute("menuList", menuMngService.getCommunityMenu());
 		return sb.toString();
 	}
 
 	@RequestMapping(value = "/index.do")
-	public String execute() throws Exception {
-
+	public String execute(ModelMap model) throws Exception {
+		model.addAttribute("menuList", menuMngService.getCommunityMenu());
 		return "/jsp/community/index/index";
 	}
 

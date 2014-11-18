@@ -21,7 +21,7 @@ import egovframework.rte.fdl.property.EgovPropertyService;
  * @ -------    --------    ---------------------------
  * @ 2009.03.02    조재영          최초 생성
  * @ 2011.10.07    이기하          .action -> .do로 변경하면서 동일 매핑이 되어 삭제처리
- *
+ * @ 2014.11.16    이종렬          Top메뉴, Left메뉴 JSTREE 연동
  *  @author 공통서비스 개발팀 조재영
  *  @since 2009.03.02
  *  @version 1.0
@@ -53,6 +53,11 @@ public class EgovComUtlController {
 		if (menuNo == null || menuNo.equals("")){
             menuNo = (String) session.getAttribute("menuNo");
         }
+		
+		if (menuNo == null || menuNo.equals("")){
+            menuNo = "7424";
+        }
+		
 		// service 사용하여 리턴할 결과값 처리하는 부분은 생략하고 단순 페이지 링크만 처리함
 		if (linkPage==null || linkPage.equals("")){
 		    link="/jsp/egovframework/com/cmm/egovError";

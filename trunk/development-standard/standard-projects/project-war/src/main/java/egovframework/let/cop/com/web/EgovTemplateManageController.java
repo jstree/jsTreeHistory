@@ -379,4 +379,19 @@ public class EgovTemplateManageController {
     		return true;
     	}
     }
+    
+    /**
+     * 메뉴관리를 호출한다.
+     * 
+     * @param userVO
+     * @param sessionVO
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/cop/com/menuMgr.do")
+    public String menuMgr(ModelMap model) throws Exception {
+    	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
+    	return "/jsp/cop/com/EgovMenuMgr";
+    }
 }

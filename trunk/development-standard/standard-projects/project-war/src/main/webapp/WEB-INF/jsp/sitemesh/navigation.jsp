@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 <!--<![endif]-->
@@ -10,14 +12,23 @@
 				
 					<!-- For PC Menu -->
 					<div id="click-nav" class="clearfix">
-						<a href="/" target="_self" class="nav-item first active" data-sub-nav="home-nav-links"> Home </a>
-						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="jstree-nav-links"> Jstree <span class="has-dropdown-icon">+</span></a>
-						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="baroboard-nav-links"> Baro Board <span class="has-dropdown-icon">+</span></a>
-						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="framework-nav-links"> Framework <span class="has-dropdown-icon">+</span></a>
-						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="devtools-nav-links"> Dev Tools <span class="has-dropdown-icon">+</span></a>
-						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="aboutus-nav-links"> About Us <span class="has-dropdown-icon">+</span></a>
-						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="community-nav-links"> Community <span class="has-dropdown-icon">+</span></a>
-						<a href="/account/accountSign.do" target="_self" class="nav-item last"> Account </a>
+						<c:forEach items="${menuList }" var = "result" varStatus="status">
+								<c:if test="${result.c_level == '2' }">
+									<c:choose>
+										<c:when test="${result.c_type == 'default' }">
+											<c:set var="cssValue" value="first active" />
+										</c:when>
+										<c:otherwise>
+											<c:set var="cssValue" value="has-dropdown" />
+										</c:otherwise>
+									</c:choose>
+									<a href="${result.url }" target="_self" class="nav-item ${cssValue }" data-sub-nav="${fn:replace(result.c_title,' ','') }-nav-links"> ${result.c_title } 
+										<c:if test="${result.c_type == 'folder' }">
+											<span class="has-dropdown-icon">+</span>
+										</c:if>
+									</a>
+								</c:if>
+							</c:forEach>
 					</div>
 					
 					<!-- For Mobile Menu -->
@@ -37,138 +48,61 @@
 							</div>
 							<hr class="bm-smaller tm-small" />
 							<ul class="nav unstyled bm-remove clearfix">
-								<li class="nav-item  first active">
-									<a href="/" target="_self" class=" first active"> Home </a>
-								</li>
-								<li class="nav-item has-dropdown">
-									<a href="#" target="_self" class="parent-link"> Jstree 
-									<span class="has-dropdown-icon float-right">+</span>
-									</a>
-									<ul class="sub-nav unstyled bm-remove">
-										<li class="sub-nav-item first active">
-											<a href="/jsTreeAlg/jsTreeOverView.do" target="_self" class="first active">&raquo; &nbsp;개요</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/jsTreeAlg/jsTreeConcept.do" target="_self" class="">&raquo; &nbsp;컨셉</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/jsTreeAlg/jsTreeApply.do" target="_self" class="">&raquo; &nbsp;적용</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/jsTreeAlg/jsTreeSupport.do" target="_self" class="">&raquo; &nbsp;지원</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/jsTreeAlg/jsTreeResult.do" target="_self" class="">&raquo; &nbsp;결과</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/jsTreeAlg/jsTreeIntegration.do" target="_self" class="">&raquo; &nbsp;통합</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/jsTreeAlg/jsTreeImprovement.do" target="_self" class="">&raquo; &nbsp;개선</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/jsTreeAlg/jsTreeLicense.do" target="_self" class="last">&raquo; &nbsp;라이선스</a>
-										</li>
+								<c:set var = "count" value = "1" />
+									<c:forEach items = "${menuList }" var = "result" varStatus="status">
+										<c:choose>
+										<c:when test="${status.first}">
+											<c:set var="cssValue" value="first active" />
+											<c:set var="cssValue2" value="parent-link" />
+										</c:when>
+										<c:otherwise>
+											<c:set var="cssValue" value="has-dropdown" />
+											<c:set var="cssValue2" value="parent-link" />
+										</c:otherwise>
+										</c:choose>
+										<c:choose>
+										<c:when test="${result.c_level == '2' }">
+											<c:if test = "${count ne '1' }" >
+												<c:if test = "${count ne '0' }">
+												</ul>
+												</c:if>
+												</li>
+											</c:if>
+											<c:set var="subCssCount" value="0" />
+											<c:if test = "${cssValue == 'has-dropdown'}">
+											<hr class="bm-smaller" />
+											</c:if>
+											<li class="nav-item  ${cssValue }">
+												<a href="${result.url }" target="_self" class="${cssValue2 }"> ${result.c_title }
+													<c:if test="${result.c_type == 'folder' }">
+														<span class="has-dropdown-icon float-right">+</span>
+													</c:if>
+												</a>
+												<c:if test="${result.c_type == 'folder' }">
+												<ul class="sub-nav unstyled bm-remove">
+												</c:if>
+												<c:set var="subCssCount" value="0" />
+												<c:set var = "count" value = "0" />
+										</c:when>
+										<c:otherwise>
+											<c:choose>
+											<c:when test = "${subCssCount == 0}">
+												<c:set var = "subCssValue" value = " first active" />
+											</c:when>
+											<c:otherwise>
+												<c:set var = "subCssValue" value = "" />
+											</c:otherwise>
+											</c:choose>
+												<li class="sub-nav-item${subCssValue }">
+													<a href="${result.url }" target="_self" class="${subCssValue }">&raquo; &nbsp;${result.c_title }</a>
+												</li>
+											<c:set var="subCssCount" value="${ subCssCount +1}" />
+											<c:set var = "count" value = "${count +1 }" />
+										</c:otherwise>
+										</c:choose>
+									</c:forEach>
 									</ul>
-								</li>
-								<li class="nav-item has-dropdown">
-									<a href="#" target="_self" class="parent-link"> Baro Board 
-									<span class="has-dropdown-icon float-right">+</span>
-									</a>
-									<ul class="sub-nav unstyled bm-remove">
-										<li class="sub-nav-item first active">
-											<a href="/baroBoard/baroBoardOverView.do" target="_self" class="first active">&raquo; &nbsp;개요</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/baroBoard/baroBoardConcept.do" target="_self" class="">&raquo; &nbsp;컨셉</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/baroBoard/baroBoardFunction.do" target="_self" class="">&raquo; &nbsp;기능</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/baroBoard/baroBoardReleaseNote.do" target="_self" class="">&raquo; &nbsp;릴리즈노트</a>
-										</li>
-										<li class="sub-nav-item last">
-											<a href="/baroBoard/baroBoardLicence.do" target="_self" class="last">&raquo; &nbsp;라이선스</a>
-										</li>
-									</ul>
-								</li>
-								<li class="nav-item has-dropdown">
-									<a href="#" target="_self" class="parent-link"> Framework 
-									<span class="has-dropdown-icon float-right">+</span>
-									</a>
-									<ul class="sub-nav unstyled bm-remove">
-										<li class="sub-nav-item first active">
-											<a href="/framework/anyFramePortal.do" target="_self" class="first active">&raquo; &nbsp;애니 프레임워크 포탈</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/framework/egovFramePortal.do" target="_self" class="">&raquo; &nbsp;표준프레임워크 포탈</a>
-										</li>
-										<li class="sub-nav-item last">
-											<a href="/framework/egovFrameCommunity.do" target="_self" class="last">&raquo; &nbsp;표준프레임워크 오픈커뮤니티</a>
-										</li>
-									</ul>
-								</li>
-								<li class="nav-item has-dropdown">
-									<a href="#" target="_self" class="parent-link"> Dev Tools 
-									<span class="has-dropdown-icon float-right">+</span>
-									</a>
-									<ul class="sub-nav unstyled bm-remove">
-										<li class="sub-nav-item first active">
-											<a href="/devTool/313DevCI.do" target="_self" class="first active">&raquo; &nbsp;CI</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/devTool/313DevALM.do" target="_self" class="">&raquo; &nbsp;ALM</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/devTool/313DevStorage.do" target="_self" class="">&raquo; &nbsp;Storage</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/devTool/313DevMonitor.do" target="_self" class="">&raquo; &nbsp;Monitor</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/devTool/313DevAnalysis.do" target="_self" class="">&raquo; &nbsp;Analysis</a>
-										</li>
-										<li class="sub-nav-item last">
-											<a href="/devTool/313DevTool.do" target="_self" class="last">&raquo; &nbsp;Tools</a>
-										</li>
-									</ul>
-								</li>
-								<li class="nav-item has-dropdown">
-									<a href="#" target="_self" class="parent-link"> About Us
-									<span class="has-dropdown-icon float-right">+</span>
-									</a>
-									<ul class="sub-nav unstyled bm-remove">
-										<li class="sub-nav-item first active">
-											<a href="/aboutUs/committer.do" target="_self" class="first active">&raquo; &nbsp;Comitter</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/aboutUs/committerSchedule.do" target="_self" class="">&raquo; &nbsp;커미터 일정관리</a>
-										</li>
-										<li class="sub-nav-item last">
-											<a href="/aboutUs/contactus.do" target="_self" class="last">&raquo; &nbsp;Contact Us</a>
-										</li>
-									</ul>
-								</li>
-								<li class="nav-item has-dropdown">
-									<a href="#" target="_self" class="parent-link"> Community 
-									<span class="has-dropdown-icon float-right">+</span>
-									</a>
-									<ul class="sub-nav unstyled bm-remove">
-										<li class="sub-nav-item first active">
-											<a href="/community/notice.do" target="_self" class="first active">&raquo; &nbsp;공지사항</a>
-										</li>
-										<li class="sub-nav-item">
-											<a href="/community/qna.do" target="_self" class="">&raquo; &nbsp;Q&amp;A</a>
-										</li>
-										<li class="sub-nav-item last">
-											<a href="/community/freeBoard.do" target="_self" class="">&raquo; &nbsp;자유게시판</a>
-										</li>
-									</ul>
-								</li>
-								<li class="nav-item">
-									<a href="/account/accountSign.do" target="_self" class=""> Account </a>
-								</li>
+									</li>
 							</ul>
 						</div>
 					</div>
@@ -176,47 +110,29 @@
 				
 				<!-- PC Version Submenus -->
 				<div id="secondary-navigation" class="clearfix">
-					<div id="jstree-nav-links" class="sub-nav">
-						<a href="/jsTreeAlg/jsTreeOverView.do" target="_self" class="sub-nav-item first active">개요</a>
-						<a href="/jsTreeAlg/jsTreeConcept.do" target="_self" class="sub-nav-item">컨셉</a>
-						<a href="/jsTreeAlg/jsTreeApply.do" target="_self" class="sub-nav-item">적용</a>
-						<a href="/jsTreeAlg/jsTreeSupport.do" target="_self" class="sub-nav-item">지원</a>
-						<a href="/jsTreeAlg/jsTreeResult.do" target="_self" class="sub-nav-item">결과</a>
-						<a href="/jsTreeAlg/jsTreeIntegration.do" target="_self" class="sub-nav-item">통합</a>
-						<a href="/jsTreeAlg/jsTreeImprovement.do" target="_self" class="sub-nav-item">개선</a>
-						<a href="/jsTreeAlg/jsTreeLicense.do" target="_self" class="sub-nav-item last">라이선스</a>
-					</div>
-					<div id="baroboard-nav-links" class="sub-nav">
-						<a href="/baroBoard/baroBoardOverView.do" target="_self" class="sub-nav-item first active">개요</a>
-						<a href="/baroBoard/baroBoardConcept.do" target="_self" class="sub-nav-item">컨셉</a>
-						<a href="/baroBoard/baroBoardFunction.do" target="_self" class="sub-nav-item">기능</a>
-						<a href="/baroBoard/baroBoardReleaseNote.do" target="_self" class="sub-nav-item">릴리즈노트</a>
-						<a href="/baroBoard/baroBoardDownload.do" target="_self" class="sub-nav-item">다운로드</a>
-						<a href="/baroBoard/baroBoardLicence.do" target="_self" class="sub-nav-item last">라이선스</a>
-					</div>
-					<div id="framework-nav-links" class="sub-nav">
-						<a href="/framework/anyFramePortal.do" target="_self" class="sub-nav-item first active">애니 프레임워크 포탈</a>
-						<a href="/framework/egovFramePortal.do" target="_self" class="sub-nav-item">전자 정부 표준프레임워크 포탈</a>
-						<a href="/framework/egovFrameCommunity.do" target="_self" class="sub-nav-item last">전자 정부 표준프레임워크 오픈커뮤니티</a>
-					</div>
-					<div id="devtools-nav-links" class="sub-nav">
-						<a href="/devTool/313DevCI.do" target="_self" class="sub-nav-item first active">CI</a>
-						<a href="/devTool/313DevALM.do" target="_self" class="sub-nav-item">ALM</a>
-						<a href="/devTool/313DevStorage.do" target="_self" class="sub-nav-item">Storage</a>
-						<a href="/devTool/313DevMonitor.do" target="_self" class="sub-nav-item">Monitor</a>
-						<a href="/devTool/313DevAnalysis.do" target="_self" class="sub-nav-item">Analysis</a>
-						<a href="/devTool/313DevTool.do" target="_self" class="sub-nav-item last">Tool</a>
-					</div>
-					<div id="aboutus-nav-links" class="sub-nav">
-						<a href="/aboutUs/committer.do" target="_self" class="sub-nav-item first">Comitter</a>
-						<a href="/aboutUs/committerSchedule.do" target="_self" class="sub-nav-item">커미터 일정관리</a>
-						<a href="/aboutUs/contactus.do" target="_self" class="sub-nav-item last">Contact Us</a>
-					</div>
-					<div id="community-nav-links" class="sub-nav">
-						<a href="/community/notice.do" target="_self" class="sub-nav-item">공지사항</a>
-						<a href="/community/qna.do" target="_self" class="sub-nav-item">Q&amp;A</a>
-						<a href="/community/freeBoard.do" target="_self" class="sub-nav-item last">자유게시판</a>
-					</div>
+					<c:set var="count" value="1" />
+						<c:forEach items="${menuList }" var = "result" varStatus="status">
+							<c:choose>
+								<c:when test = "${result.c_level == 2 }">
+									<c:if test = "${count ne '1' }" >
+									</div>
+									</c:if>
+									<c:set var="count" value="0" />
+									<div id="${fn:replace(result.c_title,' ','') }-nav-links" class="sub-nav">
+								</c:when>
+							<c:otherwise>
+							<c:choose>
+							<c:when test = "${result.c_position == '0' }" >
+									<a href="${result.url }" target="_self" class="sub-nav-item first active">${result.c_title }</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${result.url }" target="_self" class="sub-nav-item">${result.c_title }</a>
+							</c:otherwise>
+							</c:choose>
+							<c:set var="count" value="${count } +1" />
+							</c:otherwise>
+							</c:choose>
+						</c:forEach>
 				</div>
 			</div>
 		</nav>
