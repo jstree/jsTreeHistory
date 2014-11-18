@@ -22,10 +22,8 @@ import standard.mvc.component.base.dao.hibernate.SearchSupport;
 import egovframework.com.cmm.ComDefaultCodeVO;
 import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.cmm.service.EgovCmmUseService;
-import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.let.cop.smt.sim.service.EgovIndvdlSchdulManageService;
 import egovframework.let.cop.smt.sim.service.IndvdlSchdulManageVO;
-import egovframework.rte.fdl.cmmn.exception.EgovBizException;
 
 /**
  * Modification Information
@@ -100,23 +98,15 @@ public class ScheduleManageController extends GenericAbstractController implemen
 		return null;
 	}
 	
-	@RequestMapping("/committerSchedule.do")
-	public String getCommitterSchedule(ModelMap model) throws Exception {
-        
-		return "/jsp/community/aboutUs/schedule/committerSchedule";
-	}
-	
 	/**
 	 * 일정(월별) 목록을 조회한다. 
-	 * @param searchVO
 	 * @param commandMap
-	 * @param indvdlSchdulManageVO
 	 * @param model
-	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageMonthList"
+	 * @return "/jsp/community/aboutUs/committerSchedule/committerScheduleMonthList"
 	 * @throws Exception
 	 */
-	@RequestMapping("/committerScheduleMonthList.do")
-	public String getBaroIndvdlSchdulManageMonthList(ModelMap model,@RequestParam Map<String, Object> commandMap)
+	@RequestMapping("sub/committerScheduleMonthList.do")
+	public String committerScheduleMonthList(ModelMap model,@RequestParam Map<String, Object> commandMap)
 			 throws Exception {
 
 		//일정구분 검색 유지
@@ -173,21 +163,19 @@ public class ScheduleManageController extends GenericAbstractController implemen
         cal.set(Calendar.DATE, endDay);
         model.addAttribute("lastWeek", cal.get(Calendar.WEEK_OF_MONTH));
         
-		return "/jsp/community/aboutUs/schedule/committerScheduleMonthList";
+		return "/jsp/community/aboutUs/committerSchedule/committerScheduleMonthList";
 	}
 	
 	/**
 	 * 일정 목록을 상세조회 조회한다. 
-	 * @param searchVO
-	 * @param indvdlSchdulManageVO
 	 * @param commandMap
 	 * @param model
-	 * @return "/jsp/cop/smt/sim/EgovIndvdlSchdulManageDetail"
+	 * @return "/jsp/community/aboutUs/committerSchedule/committerScheduleManageDetail
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/baroSchdulManageDetail.do")
-	public String baroSchdulManageDetail(
-			@RequestParam Map<String, String> commandMap
+	@RequestMapping(value="sub/committerSchedulelManageDetail.do")
+	public String committerSchedulelManageDetail(
+			@RequestParam Map<String, Object> commandMap
     		,ModelMap model)
     throws Exception {
 		
@@ -205,11 +193,11 @@ public class ScheduleManageController extends GenericAbstractController implemen
     	model.addAttribute("reptitSeCode", cmmUseService.selectCmmCodeDetail(voComCode));
     	
     	IndvdlSchdulManageVO indvdlSchdulManageVO = new IndvdlSchdulManageVO();
-    	indvdlSchdulManageVO.setSchdulId(commandMap.get("schdulId"));
+    	indvdlSchdulManageVO.setSchdulId((String)commandMap.get("schdulId"));
     	model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageDetail(indvdlSchdulManageVO));
     	
     	model.addAllAttributes(commandMap);
     	
-		return "/jsp/community/aboutUs/schedule/committerScheduleManageDetail"; 	
+		return "/jsp/community/aboutUs/committerSchedule/committerScheduleManageDetail"; 	
 	}
 }
