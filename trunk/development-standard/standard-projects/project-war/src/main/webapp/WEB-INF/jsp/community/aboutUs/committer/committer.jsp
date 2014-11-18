@@ -3,7 +3,7 @@
 <html lang="ko" class="no-js">
 <!--<![endif]-->
 	<head>
-		<!-- CSS for Comitter Profile Section -->
+		<!-- CSS for Committer Profile Section -->
 		<style type="text/css">
 			html {
 			margin-top: 40px;
@@ -134,8 +134,10 @@
 		<section class="clearfix" >
 			<div class="container">
 				<div class="one-whole">
-					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Comitter</p>
+					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Committer</p>
 					<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
+<!-- 						영상 업로더가 일베로 보여서 영상 교체 -->
+<!-- 						<iframe width="560" height="315" src="//www.youtube.com/embed/yNhMfLvQYpA" allowfullscreen></iframe> -->
 						<iframe width="560" height="315" src="//www.youtube.com/embed/bQdxCPSTIw4" frameborder="0" allowfullscreen></iframe>
 						<p class="bm-larger tm-larger text-center">It's not over until we win.</p>
 					</div>

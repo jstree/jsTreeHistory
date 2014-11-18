@@ -156,13 +156,13 @@
 									</a>
 									<ul class="sub-nav unstyled bm-remove">
 										<li class="sub-nav-item first active">
-											<a href="./notice.html" target="_self" class="first active">&raquo; &nbsp;공지사항</a>
+											<a href="/community/notice.do" target="_self" class="first active">&raquo; &nbsp;공지사항</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./qnA.html" target="_self" class="">&raquo; &nbsp;Q&amp;A</a>
+											<a href="/community/qna.do" target="_self" class="">&raquo; &nbsp;Q&amp;A</a>
 										</li>
 										<li class="sub-nav-item last">
-											<a href="./freeBoard.html" target="_self" class="">&raquo; &nbsp;자유게시판</a>
+											<a href="/community/freeBoard.do" target="_self" class="">&raquo; &nbsp;자유게시판</a>
 										</li>
 									</ul>
 								</li>
@@ -213,9 +213,9 @@
 						<a href="/aboutUs/contactus.do" target="_self" class="sub-nav-item last">Contact Us</a>
 					</div>
 					<div id="community-nav-links" class="sub-nav">
-						<a href="./notice.html" target="_self" class="sub-nav-item">공지사항</a>
-						<a href="./qnA.html" target="_self" class="sub-nav-item">Q&amp;A</a>
-						<a href="./freeBoard.html" target="_self" class="sub-nav-item last">자유게시판</a>
+						<a href="/community/notice.do" target="_self" class="sub-nav-item">공지사항</a>
+						<a href="/community/qna.do" target="_self" class="sub-nav-item">Q&amp;A</a>
+						<a href="/community/freeBoard.do" target="_self" class="sub-nav-item last">자유게시판</a>
 					</div>
 				</div>
 			</div>

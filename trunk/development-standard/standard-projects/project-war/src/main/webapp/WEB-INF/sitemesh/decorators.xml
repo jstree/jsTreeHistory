@@ -9,13 +9,11 @@
 		<pattern>/sub/*</pattern>
 <!-- 		login back-end -->
 		<pattern>/uat/*</pattern>
+<!-- 		freeBoard ajax call -->		
+		<pattern>/cop/*</pattern>
 	</excludes>
 	
-<!-- 	<decorator name="default" page="defaultDeco.jsp"> -->
-<!-- 		<pattern>/*</pattern> -->
-<!-- 	</decorator> -->
-	
-	<decorator name="default" page="indexDeco.jsp">
+	<decorator name="default" page="defaultDeco.jsp">
 		<pattern>/*</pattern>
 	</decorator>	
 
