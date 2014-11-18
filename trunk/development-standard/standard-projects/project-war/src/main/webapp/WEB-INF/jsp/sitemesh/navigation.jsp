@@ -46,28 +46,28 @@
 									</a>
 									<ul class="sub-nav unstyled bm-remove">
 										<li class="sub-nav-item first active">
-											<a href="./jsTreeOverView.html" target="_self" class="first active">&raquo; &nbsp;개요</a>
+											<a href="/jsTreeAlg/jsTreeOverView.do" target="_self" class="first active">&raquo; &nbsp;개요</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./jsTreeConcept.html" target="_self" class="">&raquo; &nbsp;컨셉</a>
+											<a href="/jsTreeAlg/jsTreeConcept.do" target="_self" class="">&raquo; &nbsp;컨셉</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./jsTreeApply.html" target="_self" class="">&raquo; &nbsp;적용</a>
+											<a href="/jsTreeAlg/jsTreeApply.do" target="_self" class="">&raquo; &nbsp;적용</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./jsTreeSupport.html" target="_self" class="">&raquo; &nbsp;지원</a>
+											<a href="/jsTreeAlg/jsTreeSupport.do" target="_self" class="">&raquo; &nbsp;지원</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./jsTreeResult.html" target="_self" class="">&raquo; &nbsp;결과</a>
+											<a href="/jsTreeAlg/jsTreeResult.do" target="_self" class="">&raquo; &nbsp;결과</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./jsTreeIntegration.html" target="_self" class="">&raquo; &nbsp;통합</a>
+											<a href="/jsTreeAlg/jsTreeIntegration.do" target="_self" class="">&raquo; &nbsp;통합</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./jsTreeImprovement.html" target="_self" class="">&raquo; &nbsp;개선</a>
+											<a href="/jsTreeAlg/jsTreeImprovement.do" target="_self" class="">&raquo; &nbsp;개선</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="./jsTreeLicense.html" target="_self" class="last">&raquo; &nbsp;라이선스</a>
+											<a href="/jsTreeAlg/jsTreeLicense.do" target="_self" class="last">&raquo; &nbsp;라이선스</a>
 										</li>
 									</ul>
 								</li>
@@ -177,14 +177,14 @@
 				<!-- PC Version Submenus -->
 				<div id="secondary-navigation" class="clearfix">
 					<div id="jstree-nav-links" class="sub-nav">
-						<a href="./jsTreeOverView.html" target="_self" class="sub-nav-item first active">개요</a>
-						<a href="./jsTreeConcept.html" target="_self" class="sub-nav-item">컨셉</a>
-						<a href="./jsTreeApply.html" target="_self" class="sub-nav-item">적용</a>
-						<a href="./jsTreeSupport.html" target="_self" class="sub-nav-item">지원</a>
-						<a href="./jsTreeResult.html" target="_self" class="sub-nav-item">결과</a>
-						<a href="./jsTreeIntegration.html" target="_self" class="sub-nav-item">통합</a>
-						<a href="./jsTreeImprovement.html" target="_self" class="sub-nav-item">개선</a>
-						<a href="./jsTreeLicense.html" target="_self" class="sub-nav-item last">라이선스</a>
+						<a href="/jsTreeAlg/jsTreeOverView.do" target="_self" class="sub-nav-item first active">개요</a>
+						<a href="/jsTreeAlg/jsTreeConcept.do" target="_self" class="sub-nav-item">컨셉</a>
+						<a href="/jsTreeAlg/jsTreeApply.do" target="_self" class="sub-nav-item">적용</a>
+						<a href="/jsTreeAlg/jsTreeSupport.do" target="_self" class="sub-nav-item">지원</a>
+						<a href="/jsTreeAlg/jsTreeResult.do" target="_self" class="sub-nav-item">결과</a>
+						<a href="/jsTreeAlg/jsTreeIntegration.do" target="_self" class="sub-nav-item">통합</a>
+						<a href="/jsTreeAlg/jsTreeImprovement.do" target="_self" class="sub-nav-item">개선</a>
+						<a href="/jsTreeAlg/jsTreeLicense.do" target="_self" class="sub-nav-item last">라이선스</a>
 					</div>
 					<div id="baroboard-nav-links" class="sub-nav">
 						<a href="./baroBoardOverView.html" target="_self" class="sub-nav-item first active">개요</a>

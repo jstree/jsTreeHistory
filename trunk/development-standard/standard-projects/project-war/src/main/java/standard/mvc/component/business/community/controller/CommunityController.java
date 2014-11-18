@@ -50,18 +50,26 @@ public class CommunityController {
 		return "/jsp/community/" + link;
 	}
 
-	@RequestMapping(value = { "/{path}.do" })
-	public String execute(ModelMap model, @PathVariable("path") String path)
-			throws Exception {
+	@RequestMapping(value = { "/{majorCategory}/{minorCategory}.do" })
+	public String execute(ModelMap model, @PathVariable("majorCategory") String majorCategory,
+			@PathVariable("minorCategory") String minorCategory) throws Exception {
 		StringBuffer sb = new StringBuffer("/jsp/community");
 		sb.append("/");
-		sb.append(null == path ? "index" : path);
+		sb.append(majorCategory);
 		sb.append("/");
-		sb.append(null == path ? "index" : path);
+		sb.append(minorCategory);
+		sb.append("/");
+		sb.append(minorCategory);
 
 		logger.info("path : {}", new Object[] { sb });
 
 		return sb.toString();
+	}
+
+	@RequestMapping(value = "/index.do")
+	public String execute() throws Exception {
+
+		return "/jsp/community/index/index";
 	}
 
 	@RequestMapping(value = "/common/error.do")
