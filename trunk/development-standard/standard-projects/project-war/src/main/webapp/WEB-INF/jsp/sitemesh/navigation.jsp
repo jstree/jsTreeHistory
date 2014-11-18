@@ -10,14 +10,14 @@
 				
 					<!-- For PC Menu -->
 					<div id="click-nav" class="clearfix">
-						<a href="./" target="_self" class="nav-item first active" data-sub-nav="home-nav-links"> Home </a>
+						<a href="/" target="_self" class="nav-item first active" data-sub-nav="home-nav-links"> Home </a>
 						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="jstree-nav-links"> Jstree <span class="has-dropdown-icon">+</span></a>
 						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="baroboard-nav-links"> Baro Board <span class="has-dropdown-icon">+</span></a>
 						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="framework-nav-links"> Framework <span class="has-dropdown-icon">+</span></a>
 						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="devtools-nav-links"> Dev Tools <span class="has-dropdown-icon">+</span></a>
 						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="aboutus-nav-links"> About Us <span class="has-dropdown-icon">+</span></a>
 						<a href="#" target="_self" class="nav-item has-dropdown" data-sub-nav="community-nav-links"> Community <span class="has-dropdown-icon">+</span></a>
-						<a href="./accountSign.html" target="_self" class="nav-item last"> Account </a>
+						<a href="/account/accountSign.do" target="_self" class="nav-item last"> Account </a>
 					</div>
 					
 					<!-- For Mobile Menu -->
@@ -38,7 +38,7 @@
 							<hr class="bm-smaller tm-small" />
 							<ul class="nav unstyled bm-remove clearfix">
 								<li class="nav-item  first active">
-									<a href="./" target="_self" class=" first active"> Home </a>
+									<a href="/" target="_self" class=" first active"> Home </a>
 								</li>
 								<li class="nav-item has-dropdown">
 									<a href="#" target="_self" class="parent-link"> Jstree 
@@ -167,7 +167,7 @@
 									</ul>
 								</li>
 								<li class="nav-item">
-									<a href="./accountSign.html" target="_self" class=""> Account </a>
+									<a href="/account/accountSign.do" target="_self" class=""> Account </a>
 								</li>
 							</ul>
 						</div>

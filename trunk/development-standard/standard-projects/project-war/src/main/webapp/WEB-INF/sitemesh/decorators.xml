@@ -7,6 +7,8 @@
 		<pattern>/exclude/*</pattern>
 <!-- 		커미터 일정관리 본문 ajax 통신 용도 -->
 		<pattern>/sub/*</pattern>
+<!-- 		login back-end -->
+		<pattern>/uat/*</pattern>
 	</excludes>
 	
 <!-- 	<decorator name="default" page="defaultDeco.jsp"> -->
