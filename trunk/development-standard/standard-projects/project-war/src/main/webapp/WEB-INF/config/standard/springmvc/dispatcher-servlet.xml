@@ -32,7 +32,7 @@
 		PropertyEditors - for request parameter binding. It overrides the default 
 		AnnotationMethodHandlerAdapter. -->
 	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" p:order="0">
 		<property name="webBindingInitializer">
 			<bean class="egovframework.com.cmm.web.EgovBindingInitializer" />
 		</property>
