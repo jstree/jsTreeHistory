@@ -87,29 +87,38 @@
 		 	    return false; 
 		 	}
 		}
+		
+		
 		function bindModifyArticle(){
+			
 			fn_egov_regist_notice = function(){
-	 	         $.ajax({ 
-			 	        data: $("form[name='board']").serialize(),
-			 	        type: $("form[name='board']").attr('method'),
-			 	        url: "${pageContext.request.contextPath}/cop/bbs/updateBoardArticle.do",
-			 	       	contentType: false,
-			            processData: false,
-			 	        success: function(response) {
-			 	            console.log("fn_egov_regist_notice(업데이트)--> ajax! success");
-			 	           $("#article>div").html($(response).find("div#egovNotice"));
-			 	        }
-			 	  });
+				var formData =  new FormData(document.forms.board);
+		 	    $.ajax({ 
+		 	        data: formData ,
+		 	        type: $("form[name='board']").attr('method'),
+		 	        url: "${pageContext.request.contextPath}/cop/bbs/updateBoardArticle.do",
+		 	       	mimeType:"multipart/form-data",
+		 	        contentType: false,
+		 	      	cache: false,
+		 	        processData:false,
+		 	       	success: function(response) {
+		 	           console.log("fn_egov_regist_notice(업데이트)--> ajax! success");
+		 	           $("#article>div").html($(response).find("div#egovNotice"));
+		 	           //글쓰기완료 ajax성공시 목록으로 돌아가기때문에 최초 로드시와 같음
+		 	     	   doDocumentReady();      
+		 	        }
+		 	    });
+		 	    return false;
 	           }
 		}
+		
+		
 		function bindDeleteArticle(){
 			fn_egov_delete_notice = function(){
 	 	         $.ajax({ 
 			 	        data: $("form[name='frm']").serialize(),
 			 	        type: $("form[name='frm']").attr('method'),
 			 	        url: "${pageContext.request.contextPath}/cop/bbs/deleteBoardArticle.do",
-			 	       	contentType: false,
-			            processData: false,
 			 	        success: function(response) {
 			 	           console.log("fn_egov_delete_notice(삭제)--> ajax! success");
 			 	           $("#article>div").html($(response).find("div#egovNotice"));
@@ -124,13 +133,15 @@
 		/*조회/목록 클릭*/
 		function bindSumitNoticeList(){
 			fn_egov_select_noticeList = function(pageNo){
+				var formNm = "board";
 				if(document.frm != null){
         	  	document.frm.pageIndex.value=pageNo;
+        	  	formNm="frm";
 				}
 		 	    $.ajax({ 
-		 	        data: $("form[name='frm']").serialize(),
-		 	        type: $("form[name='frm']").attr('method'),
-		 	        url: $("form[name='frm']").attr('action'),
+		 	        data: $("form[name='"+formNm+"']").serialize(),
+		 	        type: $("form[name='"+formNm+"']").attr('method'),
+		 	        url: "${pageContext.request.contextPath}/cop/bbs/selectBoardList.do",
 		 	       	success: function(response) {
 		 	           console.log("fn_egov_select_noticeList--> ajax! success");
 		 	           $("#article>div").html($(response).find("div#egovNotice"));
@@ -186,12 +197,16 @@
 		}
 		/*글저장버튼*/
 	 	function bindAddArticle(){
-	 		/*fn_egov_regist_notice = function(){
+	 		fn_egov_regist_notice = function(){
 	 			var formData =  new FormData(document.forms.board);
 		 	    $.ajax({ 
 		 	        data: formData ,
 		 	        type: $("form[name='board']").attr('method'),
 		 	        url: "${pageContext.request.contextPath}/cop/bbs/insertBoardArticle.do",
+		 	       	mimeType:"multipart/form-data",
+		 	        contentType: false,
+		 	      	cache: false,
+		 	        processData:false,
 		 	       	success: function(response) {
 		 	           console.log("fn_egov_regist_notice(글등록완료)--> ajax! success");
 		 	           $("#article>div").html($(response).find("div#egovNotice"));
@@ -200,31 +215,7 @@
 		 	        }
 		 	    });
 		 	    return false; 
-		 	}*/
-	 		$("#article>div").find("form[name='board']").submit(function() { 
-	 			var formData =  new FormData(this);
-		 	    $.ajax({ 
-		 	        data: formData,
-		 	        type: 'POST',
-		 	        url: "${pageContext.request.contextPath}/cop/bbs/insertBoardArticle.do",
-		 	        mimeType:"multipart/form-data",
-		 	        contentType: false,
-		 	      	cache: false,
-		 	        processData:false,
-		 	        success: function(response) {
-		 	            console.log("fn_egov_regist_notice ajax(글쓰기) Success!");
-		 	            $("#article>div").html($(response).find("div#egovNotice"));
-		 	            //게시글 클릭 ajax 성공후 
-		 	            //1.목록 / 2.수정버튼 / 3.삭제버튼 / 4.답글작성
-		 	            console.log("돼??")
-		 	            bindSumitNoticeList();
-		 	            //bindGoModifyArticle();
-		 	            //bindDeleteArticle();
-		 	            
-		 	        }
-		 	    });
-		 	    return false; 
-		 	});
+		 	}
 	 	}
  		/*최초 로딩시 바인딩해야하는 function 
  		1. 조회

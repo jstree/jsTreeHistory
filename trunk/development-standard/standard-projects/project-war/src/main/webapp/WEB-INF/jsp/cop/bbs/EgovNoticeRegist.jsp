@@ -147,7 +147,8 @@
 						        </th>
 						        <td width="80%" nowrap colspan="3">
 						          <input id="nttSj" name="nttSj" type="text" size="60" value=""  maxlength="60" > 
-						          <br/><form:errors path="nttSj" />
+<!-- 						          <br/> -->
+						          <form:errors path="nttSj" />
 						        </td>
 						    </tr>
 						    <tr> 
@@ -210,13 +211,12 @@
                             <tr>
 						      <c:if test="${bdMstr.authFlag == 'Y'}">
 						          <td>
-<%-- 						             <a href="#LINK" onclick="javascript:fn_egov_regist_notice(); return false;"><spring:message code="button.save" /></a>  --%>
-<input id="boardSubmit" type="submit" value="저장"/>
+						             <a href="#LINK" onclick="javascript:fn_egov_regist_notice(); return false;"><spring:message code="button.save" /></a> 
 						          </td>
 						          <td width="10"></td>
 						      </c:if>
 						      <td>
-						          <a href="#LINK" onclick="javascript:fn_egov_select_noticeList(); return fasle;"><spring:message code="button.list" /></a> 
+						          <a href="#LINK" onclick="javascript:fn_egov_select_noticeList(); return false;"><spring:message code="button.list" /></a> 
 						      </td>
                             </tr>   
                         </table>

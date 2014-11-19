@@ -225,12 +225,12 @@
 			                     <a href="#LINK" onclick="javascript:fn_egov_delete_notice(); return false;">삭제</a> 
 			                  </td>
 			             </c:if>    
-			             <c:if test="${result.replyPosblAt == 'Y'}">     
-			                  <td width="10"></td>
-			                  <td>
-			                     <a href="#LINK" onclick="javascript:fn_egov_addReply(); return false;">답글작성</a> 
-			                  </td>
-			              </c:if>
+<%-- 			             <c:if test="${result.replyPosblAt == 'Y'}">      --%>
+<!-- 			                  <td width="10"></td> -->
+<!-- 			                  <td> -->
+<!-- 			                     <a href="#LINK" onclick="javascript:fn_egov_addReply(); return false;">답글작성</a>  -->
+<!-- 			                  </td> -->
+<%-- 			              </c:if> --%>
 			              <% } %>
 			              <td width="10"></td>
                           <td>
