@@ -3,7 +3,12 @@
 <html lang="ko" class="no-js">
 <!--<![endif]-->
 	<head>
-		<style type="text/css">
+<style type="text/css">
+			@media only screen and (max-width: 480px) {
+			    #egovNotice .mobileInvisible{
+			    	display:none;
+			    }
+		    }
 			#egovNotice .invisible{
 				display:none;
 			}
@@ -63,22 +68,91 @@
 		</style>
 		
 		<script type="text/javascript">
-		function bindSumitNoticeList(){
-			fn_egov_select_noticeList = function(pageNo){
-	        	  	document.frm.pageIndex.value=pageNo;
+		function bindGoModifyArticle(){
+			fn_egov_moveUpdt_notice = function(){
 		 	    $.ajax({ 
 		 	        data: $("form[name='frm']").serialize(),
 		 	        type: $("form[name='frm']").attr('method'),
-		 	        url: $("form[name='frm']").attr('action'),
-		 	       	success: function(response) {
-		 	            console.log("fn_egov_select_noticeList--> ajax! success");
+		 	        url: "${pageContext.request.contextPath}/cop/bbs/forUpdateBoardArticle.do",
+		 	        success: function(response) {
+		 	            console.log("fn_egov_moveUpdt_notice--> ajax! success");
 		 	           $("#article>div").html($(response).find("div#egovNotice"));
-		 	          bindSumitSelectArticle();
+		 	     		/* 수정 화면 ajax 성공 후 
+		 	     		1. 수정
+		 	     		2. 목록
+		 	     		*/
+		 	     		bindModifyArticle();
+		 	          }
+		 	    });
+		 	    return false; 
+		 	}
+		}
+		
+		
+		function bindModifyArticle(){
+			
+			fn_egov_regist_notice = function(){
+				var formData =  new FormData(document.forms.board);
+		 	    $.ajax({ 
+		 	        data: formData ,
+		 	        type: $("form[name='board']").attr('method'),
+		 	        url: "${pageContext.request.contextPath}/cop/bbs/updateBoardArticle.do",
+		 	       	mimeType:"multipart/form-data",
+		 	        contentType: false,
+		 	      	cache: false,
+		 	        processData:false,
+		 	       	success: function(response) {
+		 	           console.log("fn_egov_regist_notice(업데이트)--> ajax! success");
+		 	           $("#article>div").html($(response).find("div#egovNotice"));
+		 	           //글쓰기완료 ajax성공시 목록으로 돌아가기때문에 최초 로드시와 같음
+		 	     	   doDocumentReady();      
+		 	        }
+		 	    });
+		 	    return false;
+	           }
+		}
+		
+		
+		function bindDeleteArticle(){
+			fn_egov_delete_notice = function(){
+	 	         $.ajax({ 
+			 	        data: $("form[name='frm']").serialize(),
+			 	        type: $("form[name='frm']").attr('method'),
+			 	        url: "${pageContext.request.contextPath}/cop/bbs/deleteBoardArticle.do",
+			 	        success: function(response) {
+			 	           console.log("fn_egov_delete_notice(삭제)--> ajax! success");
+			 	           $("#article>div").html($(response).find("div#egovNotice"));
+			 	           /*
+			 	           삭제 ajax 성공 후 최초로딩과 같음 
+			 	           */
+			 	           doDocumentReady();    
+			 	        }
+			 	  });
+	           }
+		}
+		/*조회/목록 클릭*/
+		function bindSumitNoticeList(){
+			fn_egov_select_noticeList = function(pageNo){
+				var formNm = "board";
+				if(document.frm != null){
+        	  	document.frm.pageIndex.value=pageNo;
+        	  	formNm="frm";
+				}
+		 	    $.ajax({ 
+		 	        data: $("form[name='"+formNm+"']").serialize(),
+		 	        type: $("form[name='"+formNm+"']").attr('method'),
+		 	        url: "${pageContext.request.contextPath}/cop/bbs/selectBoardList.do",
+		 	       	success: function(response) {
+		 	           console.log("fn_egov_select_noticeList--> ajax! success");
+		 	           $("#article>div").html($(response).find("div#egovNotice"));
+		 	           /* 목록버튼 ajax 성공시는 최초와 같음. */
+		 	           doDocumentReady();
 		 	        }
 		 	    });
 		 	    return false; 
 		 	}
 		}
+		/*게시글 클릭*/
 		function bindSumitSelectArticle(){
 			$("#article>div").find("form[name='subForm']").submit(function() { 
 		 	    $.ajax({ 
@@ -88,11 +162,70 @@
 		 	        success: function(response) {
 		 	            console.log("ajax Success!");
 		 	            $("#article>div").html($(response).find("div#egovNotice"));
-		 	           bindSumitNoticeList();
+		 	            /*게시글 클릭 ajax 성공후 
+		 	            1.목록 / 2.수정버튼 / 3.삭제버튼 / 4.답글작성
+		 	            */
+		 	            bindSumitNoticeList();
+		 	            bindGoModifyArticle();
+		 	            bindDeleteArticle();
+		 	            
 		 	        }
 		 	    });
 		 	    return false; 
 		 	});
+		}
+		/*글쓰기 페이지로 이동*/
+		function bindGoAddArticle(){
+				fn_egov_addNotice  = function(){
+		 	    $.ajax({ 
+		 	        data: $("form[name='frm']").serialize(),
+		 	        type: $("form[name='frm']").attr('method'),
+		 	        url: "${pageContext.request.contextPath}/cop/bbs/addBoardArticle.do",
+		 	       	success: function(response) {
+		 	           console.log("fn_egov_addNotice(글등록)--> ajax! success");
+		 	           $("#article>div").html($(response).find("div#egovNotice"));
+		 	           /*글쓰기 ajax성공시 필요한 function
+		 	           1.저장버튼
+		 	           2.목록버튼
+		 	           */
+		 	           bindAddArticle();
+		 	           bindSumitNoticeList();//목록       
+		 	        }
+		 	    });
+		 	    return false; 
+		 	}
+		}
+		/*글저장버튼*/
+	 	function bindAddArticle(){
+	 		fn_egov_regist_notice = function(){
+	 			var formData =  new FormData(document.forms.board);
+		 	    $.ajax({ 
+		 	        data: formData ,
+		 	        type: $("form[name='board']").attr('method'),
+		 	        url: "${pageContext.request.contextPath}/cop/bbs/insertBoardArticle.do",
+		 	       	mimeType:"multipart/form-data",
+		 	        contentType: false,
+		 	      	cache: false,
+		 	        processData:false,
+		 	       	success: function(response) {
+		 	           console.log("fn_egov_regist_notice(글등록완료)--> ajax! success");
+		 	           $("#article>div").html($(response).find("div#egovNotice"));
+		 	           //글쓰기완료 ajax성공시 목록으로 돌아가기때문에 최초 로드시와 같음
+		 	     	   doDocumentReady();      
+		 	        }
+		 	    });
+		 	    return false; 
+		 	}
+	 	}
+ 		/*최초 로딩시 바인딩해야하는 function 
+ 		1. 조회
+ 		2. 등록
+ 		3. 글읽기
+ 		*/
+		function doDocumentReady(){
+		 		bindSumitSelectArticle();
+		 		bindSumitNoticeList();
+		 		bindGoAddArticle();
 		}
 		/*
 		 * notice.html 을 최초 호출시 공지사항을 Load 해온다.
