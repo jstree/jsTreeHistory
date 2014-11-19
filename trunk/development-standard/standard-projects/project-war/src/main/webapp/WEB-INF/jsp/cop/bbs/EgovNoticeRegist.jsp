@@ -60,6 +60,9 @@
         document.board.action = "<c:url value='/cop/bbs${prefix}/selectBoardList.do'/>"+ "?bbsId=" +"<c:out value='${bdMstr.bbsId}'/>";
         document.board.submit();
     }   
+    window.onload=function(){
+    	
+    }
 </script>
 <style type="text/css">
 .noStyle {background:ButtonFace; BORDER-TOP:0px; BORDER-bottom:0px; BORDER-left:0px; BORDER-right:0px;}
@@ -207,7 +210,8 @@
                             <tr>
 						      <c:if test="${bdMstr.authFlag == 'Y'}">
 						          <td>
-						             <a href="#LINK" onclick="javascript:fn_egov_regist_notice(); return false;"><spring:message code="button.save" /></a> 
+<%-- 						             <a href="#LINK" onclick="javascript:fn_egov_regist_notice(); return false;"><spring:message code="button.save" /></a>  --%>
+<input id="boardSubmit" type="submit" value="저장"/>
 						          </td>
 						          <td width="10"></td>
 						      </c:if>
