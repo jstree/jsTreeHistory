@@ -16,9 +16,9 @@
 									<span id="customer-recover-breadcrumb-header" class="no-display">Recover Password</span>
 								</h1>
 								<p class="bm-remove">
-									<a href="/" target="_self">Home</a>
+									<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 									&nbsp;/&nbsp;
-									<a href="/account/accountSign.do" target="_self">Account</a>
+									<a href="${pageContext.request.contextPath}/account/accountSign.do" target="_self">Account</a>
 									&nbsp;/&nbsp;
 									<span id="customer-login-breadcrumb">Login</span>
 									<span id="customer-recover-breadcrumb" class="no-display">Recovery</span>
@@ -32,7 +32,7 @@
 						<div class="one-half-percent desktop-tablet alpha boxed bm-remove">
 							<h1 class="bm-small text-center">Log In</h1>
 							<div id="customer-login-form">
-								<form accept-charset="UTF-8" action="/uat/uia/actionLogin.do" id="customer_login" method="post">
+								<form accept-charset="UTF-8" action="${pageContext.request.contextPath}/uat/uia/actionLogin.do" id="customer_login" method="post">
 									<input type="hidden" name="userSe"  value="USR"/>
 									<input name="form_type" type="hidden" value="customer_login" /><input name="utf8" type="hidden" value="✓" />
 									<script>
@@ -54,7 +54,7 @@
 								</form>
 							</div>
 							<div id="customer-recover-form" class="no-display">
-								<form accept-charset="UTF-8" action="/account/recover" method="post">
+								<form accept-charset="UTF-8" action="${pageContext.request.contextPath}/account/recover" method="post">
 									<input name="form_type" type="hidden" value="recover_customer_password" /><input name="utf8" type="hidden" value="✓" />
 									<script>
 										$(document).ready(function() {

@@ -22,7 +22,7 @@
 											<c:set var="cssValue" value="has-dropdown" />
 										</c:otherwise>
 									</c:choose>
-									<a href="${result.url }" target="_self" class="nav-item ${cssValue }" data-sub-nav="${fn:replace(result.c_title,' ','') }-nav-links"> ${result.c_title } 
+									<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="nav-item ${cssValue }" data-sub-nav="${fn:replace(result.c_title,' ','') }-nav-links"> ${result.c_title } 
 										<c:if test="${result.c_type == 'folder' }">
 											<span class="has-dropdown-icon">+</span>
 										</c:if>
@@ -38,7 +38,7 @@
 						<div class="slide-menu">
 							<hr class="bm-small" />
 							<div id="touch-nav-search">
-								<form action="/search" method="get" class="clearfix" novalidate>
+								<form action="${pageContext.request.contextPath}/search" method="get" class="clearfix" novalidate>
 									<input type="hidden" name="type" value="product">
 									<input type="text" name="q" class="inline-block w-small bm-remove tip-r-fade" placeholder="SEARCH FOR A PRODUCT" autocomplete="off" value="" data-tooltip="Press Enter To Search" />
 									<button type="submit" class="tablet-mobile bm-remove tip-r-fade" data-tooltip="Search">
@@ -73,7 +73,7 @@
 											<hr class="bm-smaller" />
 											</c:if>
 											<li class="nav-item  ${cssValue }">
-												<a href="${result.url }" target="_self" class="${cssValue2 }"> ${result.c_title }
+												<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${cssValue2 }"> ${result.c_title }
 													<c:if test="${result.c_type == 'folder' }">
 														<span class="has-dropdown-icon float-right">+</span>
 													</c:if>
@@ -94,7 +94,7 @@
 											</c:otherwise>
 											</c:choose>
 												<li class="sub-nav-item${subCssValue }">
-													<a href="${result.url }" target="_self" class="${subCssValue }">&raquo; &nbsp;${result.c_title }</a>
+													<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${subCssValue }">&raquo; &nbsp;${result.c_title }</a>
 												</li>
 											<c:set var="subCssCount" value="${ subCssCount +1}" />
 											<c:set var = "count" value = "${count +1 }" />
@@ -123,10 +123,10 @@
 							<c:otherwise>
 							<c:choose>
 							<c:when test = "${result.c_position == '0' }" >
-									<a href="${result.url }" target="_self" class="sub-nav-item first active">${result.c_title }</a>
+									<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="sub-nav-item first active">${result.c_title }</a>
 							</c:when>
 							<c:otherwise>
-								<a href="${result.url }" target="_self" class="sub-nav-item">${result.c_title }</a>
+								<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="sub-nav-item">${result.c_title }</a>
 							</c:otherwise>
 							</c:choose>
 							<c:set var="count" value="${count } +1" />

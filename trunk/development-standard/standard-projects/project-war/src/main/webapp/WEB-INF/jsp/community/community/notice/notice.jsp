@@ -73,7 +73,7 @@
 		 	    $.ajax({ 
 		 	        data: $("form[name='frm']").serialize(),
 		 	        type: $("form[name='frm']").attr('method'),
-		 	        url: "/cop/bbs/forUpdateBoardArticle.do",
+		 	        url: "${pageContext.request.contextPath}/cop/bbs/forUpdateBoardArticle.do",
 		 	        success: function(response) {
 		 	            console.log("fn_egov_moveUpdt_notice--> ajax! success");
 		 	           $("#article>div").html($(response).find("div#egovNotice"));
@@ -92,7 +92,7 @@
 	 	         $.ajax({ 
 			 	        data: $("form[name='board']").serialize(),
 			 	        type: $("form[name='board']").attr('method'),
-			 	        url: "/cop/bbs/updateBoardArticle.do",
+			 	        url: "${pageContext.request.contextPath}/cop/bbs/updateBoardArticle.do",
 			 	       	contentType: false,
 			            processData: false,
 			 	        success: function(response) {
@@ -107,7 +107,7 @@
 	 	         $.ajax({ 
 			 	        data: $("form[name='frm']").serialize(),
 			 	        type: $("form[name='frm']").attr('method'),
-			 	        url: "/cop/bbs/deleteBoardArticle.do",
+			 	        url: "${pageContext.request.contextPath}/cop/bbs/deleteBoardArticle.do",
 			 	       	contentType: false,
 			            processData: false,
 			 	        success: function(response) {
@@ -167,7 +167,7 @@
 		 	    $.ajax({ 
 		 	        data: $("form[name='frm']").serialize(),
 		 	        type: $("form[name='frm']").attr('method'),
-		 	        url: "/cop/bbs/addBoardArticle.do",
+		 	        url: "${pageContext.request.contextPath}/cop/bbs/addBoardArticle.do",
 		 	       	success: function(response) {
 		 	           console.log("fn_egov_addNotice(글등록)--> ajax! success");
 		 	           $("#article>div").html($(response).find("div#egovNotice"));
@@ -188,7 +188,7 @@
 		 	    $.ajax({ 
 		 	        data: $("form[name='frm']").serialize(),
 		 	        type: $("form[name='frm']").attr('method'),
-		 	        url: "/cop/bbs/insertBoardArticle.do",
+		 	        url: "${pageContext.request.contextPath}/cop/bbs/insertBoardArticle.do",
 		 	       	success: function(response) {
 		 	           console.log("fn_egov_regist_notice(글등록완료)--> ajax! success");
 		 	           $("#article>div").html($(response).find("div#egovNotice"));
@@ -214,7 +214,7 @@
 		 * notice.html 을 최초 호출시 공지사항을 Load 해온다.
 		 */
 		$(document).ready(function() {
-		 	$("#article>div").load("/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_AAAAAAAAAAAA #egovNotice",function(){
+		 	$("#article>div").load("${pageContext.request.contextPath}/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_AAAAAAAAAAAA #egovNotice",function(){
 		 		doDocumentReady();
 		 	});
 		});

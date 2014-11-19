@@ -146,7 +146,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="#" target="_self">
-									<img src="/images/profile/ldm.jpeg" alt="이동민" class="block" />
+									<img src="${pageContext.request.contextPath}/images/profile/ldm.jpeg" alt="이동민" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Dongmin Lee</span>
 										<span class="profile-box-role">PM</span>
@@ -155,7 +155,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>이동민</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>이동민</strong></a>
 							<br />
 							AhnLab
 						</p>
@@ -190,8 +190,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/profile/cms.jpeg" alt="최민석" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/profile/cms.jpeg" alt="최민석" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Minseok Choi</span>
 										<span class="profile-box-role">PM</span>
@@ -200,7 +200,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>최민석</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>최민석</strong></a>
 							<br />
 							쓰리웨어
 						</p>
@@ -235,8 +235,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/profile/kbw.jpeg" alt="김병우" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/profile/kbw.jpeg" alt="김병우" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Byungwoo Kim</span>
 										<span class="profile-box-role">PM</span>
@@ -245,7 +245,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>김병우</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>김병우</strong></a>
 							<br />
 							삼성SDS
 						</p>
@@ -280,8 +280,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center even last loop-first    animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/profile/kdg.jpeg" alt="김대근" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/profile/kdg.jpeg" alt="김대근" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Daegeun Kim</span>
 										<span class="profile-box-role">Developer</span>
@@ -290,7 +290,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>김대근</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>김대근</strong></a>
 							<br />
 							유진시스템즈
 						</p>
@@ -327,7 +327,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="#" target="_self">
-									<img src="/images/profile/rgh.jpeg" alt="류강하" class="block" />
+									<img src="${pageContext.request.contextPath}/images/profile/rgh.jpeg" alt="류강하" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Kangha Ryu</span>
 										<span class="profile-box-role">Developer</span>
@@ -336,7 +336,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>류강하</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>류강하</strong></a>
 							<br />
 							아이지오
 						</p>
@@ -371,8 +371,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/profile/ltk.jpeg" alt="이태경" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/profile/ltk.jpeg" alt="이태경" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Taekyung Lee</span>
 										<span class="profile-box-role">Developer</span>
@@ -381,7 +381,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>이태경</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>이태경</strong></a>
 							<br />
 							Solideos
 						</p>
@@ -416,8 +416,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/profile/shs.jpg" alt="손호성" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/profile/shs.jpg" alt="손호성" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Hoseong Son</span>
 										<span class="profile-box-role">Developer</span>
@@ -426,7 +426,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>손호성</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>손호성</strong></a>
 							<br />
 							-
 						</p>
@@ -461,8 +461,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center even last loop-first    animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/profile/yjw.jpeg" alt="유정우" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/profile/yjw.jpeg" alt="유정우" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Jungwoo Yu</span>
 										<span class="profile-box-role">Developer</span>
@@ -471,7 +471,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>유정우</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>유정우</strong></a>
 							<br />
 							이젠
 						</p>
@@ -508,7 +508,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="#" target="_self">
-									<img src="/images/profile/jwk.jpeg" alt="정원기" class="block" />
+									<img src="${pageContext.request.contextPath}/images/profile/jwk.jpeg" alt="정원기" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Wonki Jung</span>
 										<span class="profile-box-role">Developer</span>
@@ -517,7 +517,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>정원기</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>정원기</strong></a>
 							<br />
 							하나INS
 						</p>
@@ -552,8 +552,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/profile/jkh.jpg" alt="전경훈" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/profile/jkh.jpg" alt="전경훈" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Kyunghun Jeon</span>
 										<span class="profile-box-role">Developer</span>
@@ -562,7 +562,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>전경훈</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>전경훈</strong></a>
 							<br />
 							tsis
 						</p>
@@ -587,8 +587,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/profile/ljr.jpeg" alt="이종렬" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/profile/ljr.jpeg" alt="이종렬" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Jongryul Lee</span>
 										<span class="profile-box-role">Developer</span>
@@ -597,7 +597,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>이종렬</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>이종렬</strong></a>
 							<br />
 							한국상조공제조합
 						</p>
@@ -632,8 +632,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center even last loop-first    animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/profile/okw.jpeg" alt="오권우" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/profile/okw.jpeg" alt="오권우" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Gwonwoo Oh</span>
 										<span class="profile-box-role">Developer</span>
@@ -642,7 +642,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>오권우</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>오권우</strong></a>
 							<br />
 							-
 						</p>
@@ -678,8 +678,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/test_img.jpg" alt="최대열" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/test_img.jpg" alt="최대열" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Daeyeol Choi</span>
 										<span class="profile-box-role">Developer</span>
@@ -688,7 +688,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>최대열</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>최대열</strong></a>
 							<br />
 							위메프
 						</p>
@@ -723,8 +723,8 @@
 					<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
-								<a href="/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="/images/profile/jkw.jpg" alt="조경원" class="block" />
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/images/profile/jkw.jpg" alt="조경원" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Kyungwon Cho</span>
 										<span class="profile-box-role">Publisher</span>
@@ -733,7 +733,7 @@
 							</div>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="/baroBoard/baroBoardOverView.do" target="_self"><strong>조경원</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>조경원</strong></a>
 							<br />
 							디지털웍스
 						</p>

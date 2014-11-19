@@ -10,23 +10,23 @@
 <html lang="ko" class="no-js">
 <!--<![endif]-->
 	<head data-placeholder-focus="false" data-placeholder-live="false">
-		<link href="/assets/fav-icon.png?20" relROOT="icon" />
+		<link href="${pageContext.request.contextPath}/assets/fav-icon.png?20" relROOT="icon" />
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/normalize.min.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/edge-alerts.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/tipsy.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/pop-growl.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/animations.min.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/pro-bars.min.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/responsive-tabs.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/responsive-accordion.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/responsive-toggle.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/owl-carousel.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/litebox.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/shopify-quick-look.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/backbone.scss.css?20" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/section_common.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="/assets/common-font.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/normalize.min.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/edge-alerts.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/tipsy.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/pop-growl.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/animations.min.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/pro-bars.min.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/responsive-tabs.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/responsive-accordion.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/responsive-toggle.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/owl-carousel.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/litebox.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/shopify-quick-look.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/backbone.scss.css?20" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/section_common.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/common-font.css" rel="stylesheet" type="text/css" media="all" />
 	</head>
 	<body></body>
 </html>

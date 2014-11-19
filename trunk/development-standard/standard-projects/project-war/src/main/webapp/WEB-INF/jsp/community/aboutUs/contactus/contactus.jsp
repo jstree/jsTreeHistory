@@ -13,7 +13,7 @@
 							Contact Us
 						</h1>
 						<p class="bm-remove">
-							<a href="/" target="_self">Home</a>
+							<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 							&nbsp;/&nbsp;
 							Contact Us
 						</p>
@@ -32,7 +32,7 @@
 							</div>
 						</div>
 						<div id="contact-post" class="one-half-percent tablet-mobile alpha last bm-remove">
-							<form accept-charset="UTF-8" action="/contact" class="contact-form" method="post">
+							<form accept-charset="UTF-8" action="${pageContext.request.contextPath}/contact" class="contact-form" method="post">
 								<input name="form_type" type="hidden" value="contact" /><input name="utf8" type="hidden" value="✓" />
 								<script>
 									$(document).ready(function() {

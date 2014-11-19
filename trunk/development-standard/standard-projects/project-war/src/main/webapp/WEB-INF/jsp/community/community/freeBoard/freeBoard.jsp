@@ -98,7 +98,7 @@
 		 * notice.html 을 최초 호출시 공지사항을 Load 해온다.
 		 */
 		$(document).ready(function() {
-		 	$("#article>div").load("/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_000000000001 #egovNotice",function(){
+		 	$("#article>div").load("${pageContext.request.contextPath}/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_000000000001 #egovNotice",function(){
 		 		bindSumitSelectArticle();
 		 	});
 		});
