@@ -128,6 +128,32 @@
 			    color: #fff;
 			}
 			
+			#thanksmemebers > div {
+				padding-top: 20px;
+				width : 400px;
+				margin: 0 auto;
+				font-size: 10pt;
+				
+			}
+			
+			#thanksmemebers-table {
+				width: 100%;
+				
+			}
+			
+			table, th, td {
+				border: 1px solid #E8E8E8;
+			    border-collapse: collapse;
+			}
+			
+			th {
+				padding: 4px 0;
+			}
+			
+			td {
+				padding: 4px 0 4px 7px;
+			}
+			
 		</style>	
 	</head>
 	<body>
@@ -138,7 +164,7 @@
 					<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
 <!-- 						영상 업로더가 일베로 보여서 영상 교체 -->
 <!-- 						<iframe width="560" height="315" src="//www.youtube.com/embed/yNhMfLvQYpA" allowfullscreen></iframe> -->
-						<iframe width="560" height="315" src="//www.youtube.com/embed/bQdxCPSTIw4" frameborder="0" allowfullscreen></iframe>
+						<iframe width="560" height="315" src="//www.youtube.com/embed/bQdxCPSTIw4"></iframe>
 						<p class="bm-larger tm-larger text-center">It's not over until we win.</p>
 					</div>
 					<!-- 요기부터 작업 ! -->
@@ -769,23 +795,60 @@
 			</div>
 			<div class="container">
 				<div class="one-whole clearfix" data-anim-type="fade-in" data-anim-delay="fade-in">
-					<div class="one-whole boxed p-twenty">
-						<h1 class="bm-small text-center">Past Members</h1>
+					<div id="thanksmemebers" class="one-whole boxed p-twenty">
+						<h1 class="bm-small text-center">Special Thanks Members</h1>
 						<div class="rte">
-							<p style="text-align: center;">
-								유창근 위메프 <br />
-								민전기 <br />
-								김경진 NC소프트<br />
-								박상진 tsis<br />
-								김윤희 <br />
-								홍성남 <br />
-								김대훈 학생 <br />
-								이동규 학생 <br />
-							</p>
+							<table id="thanksmemebers-table">
+								<tr>
+									<th>이름</th>
+									<th>소속</th>
+									<th>메일</th>
+								</tr>
+								<tr>
+									<td>유창근</td>
+									<td>위메프</td>
+									<td>@</td>
+								</tr>
+								<tr>
+									<td>민전기</td>
+									<td></td>
+									<td>@</td>
+								</tr>
+								<tr>
+									<td>김경진</td>
+									<td>NC소프트</td>
+									<td>@</td>
+								</tr>
+								<tr>
+									<td>김윤희</td>
+									<td></td>
+									<td>@</td>
+								</tr>
+								<tr>
+									<td>박상진</td>
+									<td>티시스</td>
+									<td>@</td>
+								</tr>
+								<tr>
+									<td>홍성남</td>
+									<td></td>
+									<td>@</td>
+								</tr>
+								<tr>
+									<td>김대훈</td>
+									<td>학생</td>
+									<td>dragond7@naver.com</td>
+								</tr>
+								<tr>
+									<td>이동규</td>
+									<td>학생</td>
+									<td>@</td>
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>			
 		</section>
 	</body>
 </html>
