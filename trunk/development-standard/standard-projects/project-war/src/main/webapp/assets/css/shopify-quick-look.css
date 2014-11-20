@@ -34,7 +34,7 @@
 	.shopify-quick-look-overlay .shopify-quick-look-close {
 		width: 40px;
 		height: 40px;
-		background: url('shopify-quick-look-close.png') no-repeat center;
+		background: url('../images/shopify-quick-look-close.png') no-repeat center;
 		opacity: .7;
 		position: fixed;
 		top: 20px;

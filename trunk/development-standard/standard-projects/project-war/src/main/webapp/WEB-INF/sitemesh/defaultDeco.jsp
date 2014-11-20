@@ -45,6 +45,7 @@
 			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/header.jsp"/>
 			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/navigation.jsp"/>
 			<decorator:body/>
+			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/no-display.jsp"/>
 			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/footer.jsp"/>
 		</div>
 		<!-- ANALYTICS START -->

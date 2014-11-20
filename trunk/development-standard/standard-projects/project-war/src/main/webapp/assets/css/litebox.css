@@ -105,7 +105,7 @@
 	.litebox-overlay .litebox-close {
 		width: 40px;
 		height: 40px;
-		background: url('litebox-close.png') no-repeat center;
+		background: url('../images/litebox-close.png') no-repeat center;
 		opacity: .7;
 		position: absolute;
 		top: 20px;
@@ -144,12 +144,12 @@
 	}
 
 	.litebox-overlay .litebox-prev {
-		background: url('litebox-prev.png') no-repeat center;
+		background: url('../images/litebox-prev.png') no-repeat center;
 		left: 20px;
 	}
 
 	.litebox-overlay .litebox-next {
-		background: url('litebox-next.png') no-repeat center;
+		background: url('../images/litebox-next.png') no-repeat center;
 		right: 20px;
 	}
 

@@ -40,7 +40,7 @@
 	.edge-alerts-overlay .edge-alerts-close {
 		width: 40px;
 		height: 40px;
-		background: url('edge-alerts-close.png') no-repeat center;
+		background: url('../images/edge-alerts-close.png') no-repeat center;
 		opacity: .7;
 		position: absolute;
 		top: 20px;
