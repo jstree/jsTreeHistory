@@ -122,15 +122,15 @@
 						<input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
                         <input type="submit" value="실행" onclick="fn_egov_select_noticeList('1'); return false;" id="invisible" class="invisible" />
                         
-                        <legend>조건정보 영역</legend>
+                        <legend class="mobileInvisible">조건정보 영역</legend>
 						<div class="sf_start">
-							<select class="inline-block" name="searchCnd" class="select" title="검색조건 선택">
+							<select class="inline-block bm-remove w-small tip-r-fade clearfix" data-tooltip="검색조건" name="searchCnd" class="select" title="검색조건 선택">
 								<option value="0" <c:if test="${searchVO.searchCnd == '0'}">selected="selected"</c:if> >제목</option>
 								<option value="1" <c:if test="${searchVO.searchCnd == '1'}">selected="selected"</c:if> >내용</option>             
 								<option value="2" <c:if test="${searchVO.searchCnd == '2'}">selected="selected"</c:if> >작성자</option>            
 							</select>
 							<input class="inline-block" name="searchWrd" type="text" size="35" value='<c:out value="${searchVO.searchWrd}"/>' maxlength="35" onkeypress="press(event);" title="검색어 입력"> 
-							<a class="button" href="#LINK" onclick="javascript:fn_egov_select_noticeList('1'); return false;">조회</a>
+							<a class="button inline-block" href="#LINK" onclick="javascript:fn_egov_select_noticeList('1'); return false;">조회</a>
 							
 							<c:if test="${not empty LoginVO}" >
 							<c:if test="${brdMstrVO.authFlag == 'Y'}">
@@ -208,7 +208,7 @@
 				                        <input type="hidden" name="bbsAttrbCode" value="<c:out value='${brdMstrVO.bbsAttrbCode}'/>" />
 				                        <input type="hidden" name="authFlag" value="<c:out value='${brdMstrVO.authFlag}'/>" />
 				                        <input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
-				                        <span class="link"><input type="submit" style="width:320px;border:solid 0px black;text-align:left;" value="<c:out value="${result.nttSj}"/>" ></span>
+				                        <span class="link"><input type="submit" value="<c:out value="${result.nttSj}"/>" ></span>
 				                </c:otherwise>
 				            </c:choose>
 				            </form>

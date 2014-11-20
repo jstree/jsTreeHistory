@@ -3,21 +3,27 @@
 <html lang="ko" class="no-js">
 <!--<![endif]-->
 	<head>
-		<style type="text/css">
+				<style type="text/css">
 			@media only screen and (max-width: 480px) {
 			    #egovNotice .mobileInvisible{
 			    	display:none;
 			    }
+				#egovNotice input[type="text"], input[type="password"], input[type="email"], input[type="search"], input[type="tel"], input[type="url"], input[type="number"], input[type="file"], select, textarea{
+					margin:5px 0px 5px 0px;
+				}
 		    }
+			#paging_div{
+				margin:5px 0px 0px 0px;
+			}  
 			#egovNotice .invisible{
 				display:none;
 			}
 			#egovNotice textarea{
 				max-width:100%;
 			}
-			#egovNotice input[type="text"], input[type="password"], input[type="email"], input[type="search"], input[type="tel"], input[type="url"], input[type="number"], input[type="file"], select, textarea{
-				margin:5px;
-			} 
+			#egovNotice a.button{
+				border:1px solid #e3e3e3;
+			}
 			#egovNotice #search_field_loc,caption{
 				display:none;
 			}
@@ -52,14 +58,14 @@
 			    vertical-align:middle;
 			}
 			table tbody tr td input[type="submit"]{
-				width:320px;
+				max-width: 100%
 				border:solid 0px black;  !important;
 				color: #000; !important;
 				background: #fff; !important; 
 				text-align:left;
 			}
 			table tbody tr td input[type="submit"]:hover {
-				width:320px;
+				max-width: 100%
 				border:solid 0px black;  !important;
 				color: #000; !important;
 				background: #fff; !important; 
@@ -232,7 +238,8 @@
 		 */
 		$(document).ready(function() {
 		 	$("#article>div").load("${pageContext.request.contextPath}/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_000000000011 #egovNotice",function(){
-		 		bindSumitSelectArticle();
+		 		doDocumentReady();
+		 		
 		 	});
 		});
 		</script>	
