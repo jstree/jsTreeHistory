@@ -171,13 +171,6 @@
 			<div class="container">
 				<div class="one-whole">
 					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Committer</p>
-					<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
-<!-- 						영상 업로더가 일베로 보여서 영상 교체 -->
-<!-- 						<iframe width="560" height="315" src="//www.youtube.com/embed/yNhMfLvQYpA" allowfullscreen></iframe> -->
-						<iframe width="560" height="315" src="//www.youtube.com/embed/bQdxCPSTIw4"></iframe>
-						<p class="bm-larger tm-larger text-center">It's not over until we win.</p>
-					</div>
-					<!-- 요기부터 작업 ! -->
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">

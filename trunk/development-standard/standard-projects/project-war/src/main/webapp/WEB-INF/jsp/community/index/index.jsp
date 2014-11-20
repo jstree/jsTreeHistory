@@ -6,57 +6,10 @@
 	<body>
 		<section class="clearfix" >
 			<div class="container">
-				<div class="one-whole bm-larger">
-					<div id="index-image-slider-container" class="clearfix">
-						<div id="index-image-slider" class="owl-carousel owl-theme">
-							<div class="item">
-								<img src="${pageContext.request.contextPath}/assets/images/slide-1.jpg?20" alt="Slide One" />
-							</div>
-							<div class="item">
-								<img src="${pageContext.request.contextPath}/assets/images/slide-2.jpg?20" alt="Slide Two" />
-							</div>
-							<div class="item">
-								<img src="${pageContext.request.contextPath}/assets/images/slide-3.jpg?20" alt="Slide Three" />
-							</div>
-							<div class="item">
-								<img src="${pageContext.request.contextPath}/assets/images/slide-4.jpg?20" alt="Slide Four" />
-							</div>
-							<div class="item">
-								<img src="${pageContext.request.contextPath}/assets/images/slide-5.jpg?20" alt="Slide Five" />
-							</div>
-						</div>
-						<div class="prev tip-t-fade" data-tooltip="Previous"></div>
-						<div class="next tip-t-fade" data-tooltip="Next"></div>
-					</div>
+				<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
+					<iframe width="560" height="315" src="//www.youtube.com/embed/g-jwWYX7Jlo"></iframe>
+					<p class="bm-larger tm-larger text-center">우리는 해낼때까지 절대 멈추지 않을것입니다.</p>
 				</div>
-			</div>
-			<script>
-				$(document).ready(
-				    function() {
-				        var $indexSlider = $('#index-image-slider');
-				
-				        $indexSlider.owlCarousel({
-				
-				            transitionStyle: 'fadeUp',
-				
-				            autoPlay: 5000,
-				            paginationSpeed: 500,
-				            singleItem: true,
-				            stopOnHover: true
-				        });
-				
-				        $('#index-image-slider-container .prev').on('click',
-				            function() {
-				                $indexSlider.trigger('owl.prev');
-				            });
-				
-				        $('#index-image-slider-container .next').on('click',
-				            function() {
-				                $indexSlider.trigger('owl.next');
-				            });
-				    });
-			</script>
-			<div class="container">
 				<div class="one-whole">
 					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Why BaroBoard?</p>
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first  sold-out  animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
