@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import standard.mvc.component.business.menu.service.MenuMngSerivce;
 
@@ -30,7 +29,8 @@ import standard.mvc.component.business.menu.service.MenuMngSerivce;
  *  2014.11.17    Hoseong.Son    1. index 메소드 requestMapping "/index.do" => "/menu.do"
  *                               2. @PathVariable("path") 추가
  *  2014.11.18    Hoseong.Son    1. index.do requestMapping 분리
- *                               2. requestMapping /{path}.do => /대분류(major)/소분류(minor).do                        
+ *                               2. requestMapping /{path}.do => /대분류(major)/소분류(minor).do
+ *  2014.11.20    Hoseong.Son    1. index(..) 메소드 제거                                                     
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -42,15 +42,6 @@ public class CommunityController {
 
 	@Resource(name = "menuMngService")
 	private MenuMngSerivce menuMngService;
-
-	@RequestMapping(value = "/menu.do")
-	public String index(
-			@RequestParam(value = "link", defaultValue = "menu") String link,
-			ModelMap model) {
-
-		model.addAttribute("menuList", menuMngService.getCommunityMenu());
-		return "/jsp/community/" + link;
-	}
 
 	@RequestMapping(value = { "/{major}/{minor}.do" })
 	public String execute(ModelMap model, @PathVariable("major") String major,
