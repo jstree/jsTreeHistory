@@ -57,40 +57,129 @@
 				    });
 			</script>
 			<div class="container">
-				<div class="one-whole  animate-in" data-anim-type="fade-in" data-anim-delay="fade-in">
-					<div class="one-whole boxed p-twenty">
-						<p class="bm-larger tm-larger text-center">No Content Page Selected
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="container">
 				<div class="one-whole">
-					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Featured Products</p>
+					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Why BaroBoard?</p>
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first  sold-out  animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="${pageContext.request.contextPath}/images/test_img.jpg" alt="Cropped Brown Leather Jacket" class="block" />
+								<img src="http://dummyimage.com/500/45e083/fff.jpg&text=500*500+Test+Image" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
 							<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket"><i class="fa fa-search fa-fw"></i></a></span>
 						</div>
 						<p class="bm-remove no-text-overflow">
-							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>바로보드 개발중<br />으아아아아악</strong></a>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>설치형 게시판 솔루션</strong></a>
+						</p>
+					</div>
+					<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+						<div class="image-and-overlay-container bm-small">
+							<div class="image">
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+								<img src="http://dummyimage.com/500/45e083/fff.jpg&text=500*500+Test+Image" alt="" class="block" />
+								</a>
+							</div>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
+							<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket"><i class="fa fa-search fa-fw"></i></a></span>
+						</div>
+						<p class="bm-remove no-text-overflow">
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>기존 PHP게시판 기능 제공</strong></a>
+						</p>
+					</div>
+					<div class="one-quarter product-item boxed p-ten text-center odd loop-first  animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+						<div class="image-and-overlay-container bm-small">
+							<div class="image">
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+								<img src="http://dummyimage.com/500/45e083/fff.jpg&text=500*500+Test+Image" alt="" class="block" />
+								</a>
+							</div>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
+							<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket"><i class="fa fa-search fa-fw"></i></a></span>
+						</div>
+						<p class="bm-remove no-text-overflow">
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>Spring Security 기반의 보안기능</strong></a>
+						</p>
+					</div>
+					<div class="one-quarter product-item boxed p-ten text-center even last loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+						<div class="image-and-overlay-container bm-small">
+							<div class="image">
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+								<img src="http://dummyimage.com/500/45e083/fff.jpg&text=500*500+Test+Image" alt="" class="block" />
+								</a>
+							</div>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
+							<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket"><i class="fa fa-search fa-fw"></i></a></span>
+						</div>
+						<p class="bm-remove no-text-overflow">
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>Java 컴포넌트 기반의 플러그인 제공</strong></a>
 						</p>
 					</div>
 					<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
-						<p class="bm-larger tm-larger text-center">No Products Selected</p>
+						<p class="bm-larger tm-larger text-center">
+						바로보드는 강력한 Java기반 게시판 오픈소스 입니다. 기존 PHP보드들이 지원하는 기능을 제공하며, Spring Security 기반의 보안기능을 제공합니다. <br />
+						쉽게 Java 프로젝트에 쉽게 Embed 할 수 있으며, 단독적으로 설치도 가능합니다.
+						</p>
 					</div>
 				</div>
-			</div>
-			<div class="container">
+				
 				<div class="one-whole">
-					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Latest News</p>
-					<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
-						<p class="bm-larger tm-larger text-center">No Blog Selected</p>
+					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Getting Start BaroBoard</p>
+					<div class="one-quarter product-item boxed p-ten text-center odd loop-first  sold-out  animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+						<div class="image-and-overlay-container bm-small">
+							<div class="image">
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+								<img src="http://dummyimage.com/500/d5faef/000000&text=GettingStart" alt="" class="block" />
+								</a>
+							</div>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
+							<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket"><i class="fa fa-search fa-fw"></i></a></span>
+						</div>
+						<p class="bm-remove no-text-overflow">
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>Getting Start</strong></a>
+						</p>
+					</div>
+					<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+						<div class="image-and-overlay-container bm-small">
+							<div class="image">
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+								<img src="http://dummyimage.com/500/d5faef/000000&text=Download" alt="" class="block" />
+								</a>
+							</div>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
+							<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket"><i class="fa fa-search fa-fw"></i></a></span>
+						</div>
+						<p class="bm-remove no-text-overflow">
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>Download</strong></a>
+						</p>
+					</div>
+					<div class="one-quarter product-item boxed p-ten text-center odd loop-first  animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+						<div class="image-and-overlay-container bm-small">
+							<div class="image">
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+								<img src="http://dummyimage.com/500/d5faef/000000&text=Api List" alt="" class="block" />
+								</a>
+							</div>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
+							<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket"><i class="fa fa-search fa-fw"></i></a></span>
+						</div>
+						<p class="bm-remove no-text-overflow">
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>Api</strong></a>
+						</p>
+					</div>
+					<div class="one-quarter product-item boxed p-ten text-center even last loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+						<div class="image-and-overlay-container bm-small">
+							<div class="image">
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+								<img src="http://dummyimage.com/500/d5faef/000000&text=GitHub" alt="" class="block" />
+								</a>
+							</div>
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
+							<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket"><i class="fa fa-search fa-fw"></i></a></span>
+						</div>
+						<p class="bm-remove no-text-overflow">
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>On GitHub</strong></a>
+						</p>
 					</div>
 				</div>
 			</div>
