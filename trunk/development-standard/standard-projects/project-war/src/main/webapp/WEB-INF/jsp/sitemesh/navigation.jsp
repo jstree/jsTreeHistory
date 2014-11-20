@@ -22,7 +22,7 @@
 											<c:set var="cssValue" value="has-dropdown" />
 										</c:otherwise>
 									</c:choose>
-									<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="nav-item ${cssValue }" data-sub-nav="${fn:replace(result.c_title,' ','') }-nav-links"> ${result.c_title } 
+									<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="nav-item ${cssValue }" data-sub-nav="nav-links-${result.c_id}"> ${result.c_title } 
 										<c:if test="${result.c_type == 'folder' }">
 											<span class="has-dropdown-icon">+</span>
 										</c:if>
@@ -61,44 +61,44 @@
 										</c:otherwise>
 										</c:choose>
 										<c:choose>
-										<c:when test="${result.c_level == '2' }">
-											<c:if test = "${count ne '1' }" >
-												<c:if test = "${count ne '0' }">
-												</ul>
-												</c:if>
-												</li>
-											</c:if>
-											<c:set var="subCssCount" value="0" />
-											<c:if test = "${cssValue == 'has-dropdown'}">
-											<hr class="bm-smaller" />
-											</c:if>
-											<li class="nav-item  ${cssValue }">
-												<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${cssValue2 }"> ${result.c_title }
-													<c:if test="${result.c_type == 'folder' }">
-														<span class="has-dropdown-icon float-right">+</span>
+											<c:when test="${result.c_level == '2' }">
+												<c:if test = "${count ne '1' }" >
+													<c:if test = "${count ne '0' }">
+													</ul>
 													</c:if>
-												</a>
-												<c:if test="${result.c_type == 'folder' }">
-												<ul class="sub-nav unstyled bm-remove">
+													</li>
 												</c:if>
 												<c:set var="subCssCount" value="0" />
-												<c:set var = "count" value = "0" />
-										</c:when>
-										<c:otherwise>
-											<c:choose>
-											<c:when test = "${subCssCount == 0}">
-												<c:set var = "subCssValue" value = " first active" />
+												<c:if test = "${cssValue == 'has-dropdown'}">
+												<hr class="bm-smaller" />
+												</c:if>
+												<li class="nav-item  ${cssValue }">
+													<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${cssValue2 }"> ${result.c_title }
+														<c:if test="${result.c_type == 'folder' }">
+															<span class="has-dropdown-icon float-right">+</span>
+														</c:if>
+													</a>
+													<c:if test="${result.c_type == 'folder' }">
+													<ul class="sub-nav unstyled bm-remove">
+													</c:if>
+													<c:set var="subCssCount" value="0" />
+													<c:set var = "count" value = "0" />
 											</c:when>
 											<c:otherwise>
-												<c:set var = "subCssValue" value = "" />
+												<c:choose>
+												<c:when test = "${subCssCount == 0}">
+													<c:set var = "subCssValue" value = " first active" />
+												</c:when>
+												<c:otherwise>
+													<c:set var = "subCssValue" value = "" />
+												</c:otherwise>
+												</c:choose>
+													<li class="sub-nav-item${subCssValue }">
+														<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${subCssValue }">&raquo; &nbsp;${result.c_title }</a>
+													</li>
+												<c:set var="subCssCount" value="${ subCssCount +1}" />
+												<c:set var = "count" value = "${count +2 }" />
 											</c:otherwise>
-											</c:choose>
-												<li class="sub-nav-item${subCssValue }">
-													<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${subCssValue }">&raquo; &nbsp;${result.c_title }</a>
-												</li>
-											<c:set var="subCssCount" value="${ subCssCount +1}" />
-											<c:set var = "count" value = "${count +1 }" />
-										</c:otherwise>
 										</c:choose>
 									</c:forEach>
 									</ul>
@@ -118,7 +118,7 @@
 									</div>
 									</c:if>
 									<c:set var="count" value="0" />
-									<div id="${fn:replace(result.c_title,' ','') }-nav-links" class="sub-nav">
+									<div id="nav-links-${result.c_id}" class="sub-nav">
 								</c:when>
 							<c:otherwise>
 							<c:choose>
