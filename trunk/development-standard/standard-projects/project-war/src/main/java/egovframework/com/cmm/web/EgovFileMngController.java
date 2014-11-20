@@ -67,7 +67,7 @@ public class EgovFileMngController {
 	model.addAttribute("fileListCnt", result.size());
 	model.addAttribute("atchFileId", atchFileId);
 	
-	return "egovframework/com/cmm/fms/EgovFileList";
+	return "/jsp/egovframework/com/cmm/fms/EgovFileList";
     }
 
     /**
@@ -96,7 +96,7 @@ public class EgovFileMngController {
 	model.addAttribute("fileListCnt", result.size());
 	model.addAttribute("atchFileId", atchFileId);
 	
-	return "egovframework/com/cmm/fms/EgovFileList";
+	return "/jsp/egovframework/com/cmm/fms/EgovFileList";
     }
 
     /**
@@ -150,21 +150,21 @@ public class EgovFileMngController {
      * @throws Exception
      */
     @RequestMapping("/cmm/fms/selectImageFileInfs.do")
-    public String selectImageFileInfs(@ModelAttribute("searchVO") FileVO fileVO, Map<String, Object> commandMap,
+    public String selectImageFileInfs(@ModelAttribute("searchVO") FileVO fileVO, @RequestParam Map<String, Object> commandMap,
 	    //SessionVO sessionVO,
 	    ModelMap model) throws Exception {
     	
 //    	debugCommandMap(commandMap);
+//    	String atchFileId = ((FileVO) commandMap.get("searchVO")).getAtchFileId();
     	
-//		String atchFileId = (String) commandMap.get("atchFileId");
-    	String atchFileId = ((FileVO) commandMap.get("searchVO")).getAtchFileId();
+		String atchFileId = (String) commandMap.get("atchFileId");
 
 	fileVO.setAtchFileId(atchFileId);
 	List<FileVO> result = fileService.selectImageFileList(fileVO);
 	
 	model.addAttribute("fileList", result);
 
-	return "egovframework/com/cmm/fms/EgovImgFileList";
+	return "/jsp/egovframework/com/cmm/fms/EgovImgFileList";
     }
 
 	private void debugCommandMap(Map<String, Object> commandMap) {
