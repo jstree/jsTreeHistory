@@ -42,7 +42,7 @@
 			.calendar .wek{color:#000000}
 			
 			/*달력 내용 링크*/
-			.cal_cont a {overflow:hidden; display:block; height:23px; padding-right:9px; color:#666; background:url('${pageContext.request.contextPath}/assets/ell.gif') no-repeat right center}
+			.cal_cont a {overflow:hidden; display:block; height:23px; padding-right:9px; color:#666; background:url('${pageContext.request.contextPath}/assets/images/ell.gif') no-repeat right center}
 			.cal_cont a:hover {color:#f45b4f}
 		</style>
 		<script type="text/javascript">
@@ -173,14 +173,14 @@
 	            	</c:forEach>                                                   
 	        </select>  
 			<p>
-				<a id="previousYear" href="#"><img src="${pageContext.request.contextPath}/assets/btn_prev.gif" alt="이전년도" /></a>
+				<a id="previousYear" href="#"><img src="${pageContext.request.contextPath}/assets/images/btn_prev.gif" alt="이전년도" /></a>
 				<span id="calYear" >${nYear}년</span>
-				<a id="nextYear" href="#"><img src="${pageContext.request.contextPath}/assets/btn_next.gif" alt="다음년도" /></a>
+				<a id="nextYear" href="#"><img src="${pageContext.request.contextPath}/assets/images/btn_next.gif" alt="다음년도" /></a>
 			</p>
 			<p>
-				<a id="previousMonth" href="#"><img src="${pageContext.request.contextPath}/assets/btn_prev.gif" alt="이전달" /></a>
+				<a id="previousMonth" href="#"><img src="${pageContext.request.contextPath}/assets/images/btn_prev.gif" alt="이전달" /></a>
 				<span id="calMonth">${nMonth+1}월</span>
-				<a id="nextMonth" href="#"><img src="${pageContext.request.contextPath}/assets/btn_next.gif" alt="다음달" /></a>
+				<a id="nextMonth" href="#"><img src="${pageContext.request.contextPath}/assets/images/btn_next.gif" alt="다음달" /></a>
 			</p>
 		</div>
 		<!-- 달력 -->

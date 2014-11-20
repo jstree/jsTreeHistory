@@ -10,19 +10,19 @@
 					<div id="index-image-slider-container" class="clearfix">
 						<div id="index-image-slider" class="owl-carousel owl-theme">
 							<div class="item">
-								<img src="${pageContext.request.contextPath}/assets/slide-1.jpg?20" alt="Slide One" />
+								<img src="${pageContext.request.contextPath}/assets/images/slide-1.jpg?20" alt="Slide One" />
 							</div>
 							<div class="item">
-								<img src="${pageContext.request.contextPath}/assets/slide-2.jpg?20" alt="Slide Two" />
+								<img src="${pageContext.request.contextPath}/assets/images/slide-2.jpg?20" alt="Slide Two" />
 							</div>
 							<div class="item">
-								<img src="${pageContext.request.contextPath}/assets/slide-3.jpg?20" alt="Slide Three" />
+								<img src="${pageContext.request.contextPath}/assets/images/slide-3.jpg?20" alt="Slide Three" />
 							</div>
 							<div class="item">
-								<img src="${pageContext.request.contextPath}/assets/slide-4.jpg?20" alt="Slide Four" />
+								<img src="${pageContext.request.contextPath}/assets/images/slide-4.jpg?20" alt="Slide Four" />
 							</div>
 							<div class="item">
-								<img src="${pageContext.request.contextPath}/assets/slide-5.jpg?20" alt="Slide Five" />
+								<img src="${pageContext.request.contextPath}/assets/images/slide-5.jpg?20" alt="Slide Five" />
 							</div>
 						</div>
 						<div class="prev tip-t-fade" data-tooltip="Previous"></div>

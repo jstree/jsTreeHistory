@@ -42,7 +42,7 @@ if ((typeof Shopify) === 'undefined')
 			    if (product.featured_image === null) {
 			        $('.shopify-quick-look-overlay .quick-look-image')
 			            .html(
-			                "<a href='" + product.url + "' target='_self'><img src='./assets/no-image.png?20' class='block no-image' /></a>");
+			                "<a href='" + product.url + "' target='_self'><img src='./assets/images/no-image.png?20' class='block no-image' /></a>");
 			    } else {
 			        var imageData = '';
 			
