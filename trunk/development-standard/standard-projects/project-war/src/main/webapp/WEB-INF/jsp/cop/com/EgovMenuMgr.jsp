@@ -121,9 +121,7 @@ $("#demo")
 	        
 	        callAjax(null, '${pageContext.request.contextPath}/' + url, '#section', 'GET', 'html');
 	    }
-	})
-	
-	.jstree({ 
+	}).jstree({ 
 		// List of active plugins
 		"plugins" : [ 
 			"themes","json_data","ui","crrm","cookies","dnd","search","types","hotkeys","contextmenu"
@@ -149,9 +147,6 @@ $("#demo")
 							"label" : "File",                         
 							action : function (obj) 
 							{
-								console.log(obj);
-								console.log( "ref c_id   : " + $(obj).attr("id").replace("node_","").replace("copy_","") );
-								console.log( "c_position : " + $(obj).children().filter("ul").children().length );
 								
 								// 파일인 경우에 실행하지 않는다
 								if( $(obj).attr("rel") != 'default' ){
@@ -215,10 +210,6 @@ $("#demo")
 					"label" : "Rename",                         
 					action : function (obj) 
 					{
-						console.log("c_id    : " + $(obj).attr("id").replace("node_","").replace("copy_",""));
-						console.log("c_title : " + $(obj).find("a").text());
-						console.log("c_type  : " + $(obj).attr("rel"));
-						console.log("url     : " + $(obj).attr("href"));
 						$("#nodeTitle"  ).val( $(obj).find("a").clone().children().remove().end().text() );
 						
 						if( "folder" == $(obj).attr("rel") ){
@@ -275,14 +266,10 @@ $("#demo")
 										}
 										,success : function (r) {
 											$("#demo").jstree("remove",$(obj));
-											$("#nodeConfirm").dialog("close");
-											$('#demo').jstree('refresh',-1);
 										}
-										,error : function(){
-											//$.jstree.rollback(data.rlbk);
-											//data.inst.refresh();
+										,complete : function(){
 											$("#nodeConfirm").dialog("close");
-											$('#demo').jstree('refresh',-1);
+											$("#demo").jstree("refresh");
 										}
 									});
 								 }
@@ -472,15 +459,6 @@ $("#demo")
 	})
 	.bind("move_node.jstree", function (e, data) {
 		data.rslt.o.each(function (i) {
-			
-			console.log("c_id    : " + $(this).attr("id").replace("node_","").replace("copy_",""));
-			console.log("c_title : " + data.rslt.name);
-			console.log("c_position : " + (data.rslt.cp + i));
-			console.log("ref     : " + (data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_","")));
-			console.log("copy    : " + (data.rslt.cy ? 1 : 0));
-			
-			return false;
-			
 			$.ajax({
 				async : false,
 				type: 'POST',
@@ -490,7 +468,6 @@ $("#demo")
 					"c_id" : $(this).attr("id").replace("node_","").replace("copy_",""), 
 					"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_",""), 
 					"c_position" : data.rslt.cp + i,
-					"c_title" : data.rslt.name, 
 					"copy" : data.rslt.cy ? 1 : 0,
 					"multiCounter"	:	i
 				},
@@ -522,9 +499,8 @@ $("#demo")
 				"url" : $("#nodeLinkUrl").val()
 			}, 
 			function (r) {
-				console.log(r);
 				$("#nodeForm").dialog("close");
-				$('#demo').jstree('refresh',-1);
+				$("#demo").jstree("refresh");
 			}
 		);
 	}
@@ -540,9 +516,8 @@ $("#demo")
 				"c_type"  : $(obj).attr("rel")
 			}, 
 			function (r) {
-				console.log(r);
 				$("#nodeForm").dialog("close");
-				$('#demo').jstree('refresh',-1);
+				$("#demo").jstree("refresh");
 			}
 		);
 	}
