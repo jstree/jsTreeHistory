@@ -472,15 +472,7 @@ $("#demo")
 					"multiCounter"	:	i
 				},
 				success : function (r) {
-					if(r.status) {
-						$.jstree.rollback(data.rlbk);
-					}
-					else {
-						$(data.rslt.oc).attr("id", "node_" + r.id);
-						if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
-							data.inst.refresh(data.inst._get_parent(data.rslt.oc));
-						}
-					}
+					$("#demo").jstree("refresh");
 				}
 			});
 		});
