@@ -2,7 +2,15 @@
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 <!--<![endif]-->
-	<head></head>
+	<head>
+		<style type="text/css">
+			table {width:40%; border-top:3px solid #ccc; border-collapse:collapse}
+            caption {margin:1% 0 0.5%}
+            th, td {border:1px solid #ccc}
+            th {padding:1% 0.5%; background:#fafafa; font-weight:bold}
+            td {padding:0.5% 2%;}
+		</style>	
+	</head>
 	<body>
 		<section class="clearfix" >
 			<nav>
@@ -24,7 +32,93 @@
 							<div class="article-body rte" itemprop="articleBody">
 								<h4>CI(Continuous Integration) 란?</h4>
 								<p>개발자가 각각 개발한 소스코드를 모아서 한꺼번에 빌드하는 통합 빌드의 과정을 특정 시점이 아니라 매일이나 매주와 같이 아주 잦은 주기로 수행함으로써 통합에서 발생하는 오류와 시간을 줄이기 위한 기법이다.</p>
-								<p>Extreme Programming Community (XP)에서 애자일 방법론의 일부로 Kent Beck에 의해서 고안된 방법으로 다음과 같은 특징을 가지고 있다.</p>
+								<p>과거에 사람이 소스 통합과 빌드를 하던 작업을 313에서는 오픈소스를 기반으로 한 자동화 툴을 사용하여 사람이 작업하는 도중의 실수를  최소화 한다.</p>
+								<div class="div_center">
+									<a href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/dev/img/continuous-integration-img.jpg" data-lightbox="image-1">
+										<img src="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/dev/img/continuous-integration-img.jpg" alt="Continuous Integration" align="left"/>
+									</a>
+									
+									<table summary="313 CI Toll 목록 표입니다.">
+									<caption>『  313 CI Toll 목록  』</caption>
+									<colgroup>
+										<col style="width:10%"/>
+										<col style="width:50%"/>
+										<col style="width:40%"/>
+									</colgroup>
+									<thead>
+										<tr>
+											<th>목록</th>
+											<th>설명</th>
+											<th>Tool</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Source Code</td>
+											<td>Eclipse</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Version Control System</td>
+											<td>SVN (Subversion)</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>Source Code Build</td>
+											<td>JDK</td>
+										</tr>
+										<tr>
+											<td>4</td>
+											<td>Static Code Analysis</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>5</td>
+											<td>Run Automated Unit Tests</td>
+											<td>JUnit</td>
+										</tr>
+										<tr>
+											<td>6</td>
+											<td>Code Coverage Analysis</td>
+											<td>PMD, CPD, Checkstyle, Findbugs</td>
+										</tr>
+										<tr>
+											<td>7</td>
+											<td>Built Artifact</td>
+											<td>Maven</td>
+										</tr>
+										<tr>
+											<td>8</td>
+											<td>Set-Up Test Fixtures</td>
+											<td>Hudson</td>
+										</tr>
+										<tr>
+											<td>9</td>
+											<td>Provision and Deploy to <br>
+											     Test Environment</td>
+											<td>Hudson</td>
+										</tr>
+										<tr>
+											<td>10</td>
+											<td>Run Automates <br>
+											     Functional Tests</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>11</td>
+											<td>Publish Reports</td>
+											<td>Hudson</td>
+										</tr>
+										<tr>
+											<td>12</td>
+											<td>Development Team</td>
+											<td>313 Dev Group</td>
+										</tr>
+									</tbody>	
+								</table>
+								</div>
+								<br></br><br></br>
 								
 								<h4>(1) 소스코드 일관성 유지</h4>
 								<p>313은 Subversion사용한다. </p>
@@ -54,13 +148,6 @@
 								</ol>									
 								<h4>(3) 자동 테스팅</h4>
 								<p>빌드 과정에서 테스트를 포함할 수 있는데, 주기적인 빌드 과정에 테스트를 포함해서 자동 빌드를 통한 Syntax에 대한 검증과 더불어 테스팅을 통한 기능과 비기능적(성능등)에 대한 요건을 매번 검증함으로써 코드의 품질에 대한 무결성을 함께 유지한다.</p>
-																	
-								<h4>CI 프로세스</h4>
-								<div class="div_center">
-									<a href="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/dev/img/continuous-integration-img.jpg" data-lightbox="image-1">
-										<img src="http://nas.313.co.kr:5002/Component/thymeleaf/community/introduce/dev/img/continuous-integration-img.jpg" alt="Continuous Integration" />
-									</a>
-								</div>
 							</div>
 						</div>
 					</div>
