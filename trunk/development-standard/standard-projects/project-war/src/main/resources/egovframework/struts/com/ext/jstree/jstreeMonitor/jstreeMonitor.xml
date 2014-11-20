@@ -11,7 +11,7 @@
 
 		<action name="www313cokrMenuJstreeMonitorStrutsDefaultAction"
 				class="struts.book.action.DefaultAction">
-			<result>/struts/book/strutsDefaultAction.jsp</result>
+			<result>/struts/strutsDefaultAction.jsp</result>
 		</action>
 
 	</package>
@@ -39,7 +39,7 @@
 
 		<action name="getJstreeMonitorView">
 			<interceptor-ref name="myStack"/>
-			<result>/struts/www313cokr/index/menu/num3/jsTreeMonitor.jsp</result>
+			<result>/WEB-INF/jsp/community/jsTreeAlg/jstreeDemo/analyzeResultStrutsVersion.jsp</result>
 		</action>
 
 		<action name="getJstreeMonitor"
