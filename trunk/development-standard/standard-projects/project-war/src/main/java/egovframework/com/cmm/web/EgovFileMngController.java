@@ -1,5 +1,6 @@
 package egovframework.com.cmm.web;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -152,8 +153,11 @@ public class EgovFileMngController {
     public String selectImageFileInfs(@ModelAttribute("searchVO") FileVO fileVO, Map<String, Object> commandMap,
 	    //SessionVO sessionVO,
 	    ModelMap model) throws Exception {
-
-	String atchFileId = (String)commandMap.get("atchFileId");
+    	
+//    	debugCommandMap(commandMap);
+    	
+//		String atchFileId = (String) commandMap.get("atchFileId");
+    	String atchFileId = ((FileVO) commandMap.get("searchVO")).getAtchFileId();
 
 	fileVO.setAtchFileId(atchFileId);
 	List<FileVO> result = fileService.selectImageFileList(fileVO);
@@ -162,4 +166,14 @@ public class EgovFileMngController {
 
 	return "egovframework/com/cmm/fms/EgovImgFileList";
     }
+
+	private void debugCommandMap(Map<String, Object> commandMap) {
+		Iterator<String> it = commandMap.keySet().iterator();
+    	
+    	while (it.hasNext()) {
+			String key = (String) it.next();
+			Object value = commandMap.get(key);
+			LOG.info("key : " + key + " value : " + value);
+		}
+	}
 }
