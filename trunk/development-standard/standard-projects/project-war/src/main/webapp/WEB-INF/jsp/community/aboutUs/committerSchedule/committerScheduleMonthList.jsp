@@ -42,7 +42,14 @@
 			.calendar .wek{color:#000000}
 			
 			/*달력 내용 링크*/
-			.cal_cont a {overflow:hidden; display:block; height:23px; padding-right:9px; color:#666; background:url('${pageContext.request.contextPath}/assets/images/ell.gif') no-repeat right center}
+			.cal_cont a {
+			             overflow:hidden; 
+			             display:block; 
+			             height:23px; 
+			             padding-right:9px; 
+			             color:#666; 
+			             /*background:url('${pageContext.request.contextPath}/assets/images/ell.gif') no-repeat right center;*/
+			            }
 			.cal_cont a:hover {color:#f45b4f}
 		</style>
 		<script type="text/javascript">
