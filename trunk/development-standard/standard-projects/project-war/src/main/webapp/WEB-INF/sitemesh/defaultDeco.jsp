@@ -28,8 +28,7 @@
 				<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
 			</c:otherwise>
 		</c:choose>
-		<title><decorator:title default="This page has been using the SiteMesh template engine." /></title>	
-		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/meta.jsp"/>
+		<title><decorator:title default="313 Developer Group page has been using the SiteMesh template engine." /></title>	
 		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/style.jsp"/>
 		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/script.jsp"/>
 		<decorator:head/>

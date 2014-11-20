@@ -49,4 +49,13 @@ Remove this if you use the .htaccess -->
 <meta name="title" content="이동민, LeeDongMin" />
 <meta name="revisit-after" content="7 days" />
 <meta name="siteinfo" content="http://www.313.co.kr/robots.txt" /> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"> -->
+<!-- <meta name="description" content="dongmin.lee" /> -->
+<!-- <meta name="keywords" content="" /> -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta property="og:type" content="website">
+<meta property="og:title" content="313DeveloperGroup">
+<meta property="og:url" content="http://313.co.kr/">
+<meta property="og:site_name" content="313DeveloperGroup">
