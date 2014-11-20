@@ -130,7 +130,7 @@
 			
 			#thanksmemebers > div {
 				padding-top: 20px;
-				width : 400px;
+				width : 350px;
 				margin: 0 auto;
 				font-size: 10pt;
 				
@@ -151,7 +151,17 @@
 			}
 			
 			td {
-				padding: 4px 0 4px 7px;
+				padding: 4px 0 4px 12px;
+			}
+			
+			@media only screen and (max-width: 500px) {
+				#thanksmemebers > div {
+					width : 100%;
+					
+				}
+				#thanksmemebers-table tr > th:last-child, #thanksmemebers-table tr > td:last-child {
+					display: none;
+				}
 			}
 			
 		</style>	
