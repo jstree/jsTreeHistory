@@ -94,33 +94,6 @@ $("#demo")
 		//$("#section").append(data.func + "<br />");
 		$("li:not([rel='drive']).jstree-open > a > .jstree-icon").css('background-image','url(http://nas.313.co.kr:5002/Design/icon/miniCon/313/toolbar_open.png)');
 		$("li:not([rel='drive']).jstree-closed > a > .jstree-icon").css('background-image','url(http://nas.313.co.kr:5002/Design/icon/miniCon/313/ic_explorer.png)');
-	})
-	// listen for event
-  	.bind('select_node.jstree', function(e, data) {
-	    // gather ids of selected nodes
-	    var selected_ids = [];
-	    $("#demo").jstree('get_selected').each(function () { 
-	    	if(typeof($(this).attr('href')) === "undefined"){
-		        selected_ids.push(this.id + ", href empty"); 
-	    	}else{
-	    		selected_ids.push(this.id + ', ' + $(this).attr('href')); 
-	    	}
-	    }); 
-	    // do summit with them
-	    // alert(selected_ids);
-	    
-	    // TODO 다중 선택을 막아야 함!
-		
-	    if (data.rslt.obj.attr('rel') == 'default') {
-	    	var url = data.rslt.obj.attr('href');
-		    
-	        if (typeof(url) === "undefined") {
-	        	alert('메뉴의 URL이 입력되지 않았습니다.');
-	        	return;
-	        }
-	        
-	        callAjax(null, '${pageContext.request.contextPath}/' + url, '#section', 'GET', 'html');
-	    }
 	}).jstree({ 
 		// List of active plugins
 		"plugins" : [ 
@@ -442,8 +415,6 @@ $("#demo")
 			"initially_open" : [ "node_2" , "node_3" ] 
 		}
 	})
-	.bind("loaded.jstree", function (e, data) {
-	})
 	.bind("set_type.jstree", function (e, data) {
 		$.post(
 				/* "/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action", */
@@ -454,6 +425,7 @@ $("#demo")
 					"c_type" : data.rslt.obj.attr("rel")
 			}, 
 			function (r) {
+				$("#demo").jstree("refresh");
 			}
 		);
 	})
