@@ -35,7 +35,7 @@
 									<p>“전자정부 표준프레임워크”는 공공사업에 적용되는 개발프레임워크의 표준정립으로 응용 SW 표준화, 품질 및 재사용성 향상을 목표로 합니다.</p>
 									<p>이를 통해“전자정부 서비스의 품질향상”및“정보화 투자 효율성 향상”을 달성하고 대ㆍ중소기업이 동일한 개발기반 위에서 공정경쟁이 가능하게 됩니다.</p>
 									<p>
-										<a href="http://www.egovframe.go.kr/"><span>Anyframe 바로가기</span></a><a href="http://www.egovframe.go.kr/"><span> http://www.egovframe.go.kr/</span></a><br/>
+										<a href="http://www.egovframe.go.kr/"><span>eGovFrame 바로가기</span></a><a href="http://www.egovframe.go.kr/"><span> http://www.egovframe.go.kr/</span></a><br/>
 									</p>
 								</div>
 							</div>
