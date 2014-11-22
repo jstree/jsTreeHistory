@@ -11,7 +11,7 @@
 						<div class="no-display">article</div>
 						<div class="text-center">
 							<h1 class="bm-remove">
-								313DevTool
+								313 Server Tools
 							</h1>
 						</div>
 					</div>
@@ -24,7 +24,7 @@
 							<div class="article-body rte" itemprop="articleBody">
 								
 								<div class="tablet-mobile alpha bm-remove last">
-									<div class="one-half-percent tablet-mobile bm-remove omega alignleft">
+									<div class="one-half-percent tablet-mobile bm-remove omega alignleft center-image">
 										<a href="/images/community/delTool/313DevServerTool/9872658.png" data-lightbox="image-1">
 											<img src="/images/community/delTool/313DevServerTool/9872658.png" alt="Server Tools" />
 										</a>
@@ -56,6 +56,7 @@
 						</div>
 					</div>
 				</div>
+			</article>
 		</section>
 	</body>
 </html>

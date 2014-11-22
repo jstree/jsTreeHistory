@@ -7,7 +7,7 @@
 		<section class="clearfix" >
 			<div class="one-whole">
 				<div class="container">
-					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Why BaroBoard?</p>
+					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Our Dream</p>
 					<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
 						<iframe width="560" height="315" src="//www.youtube.com/embed/g-jwWYX7Jlo"></iframe>
 						<p class="bm-larger tm-larger text-center">우리는 해낼때까지 절대 멈추지 않을것입니다.</p>
