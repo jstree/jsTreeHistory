@@ -5,10 +5,13 @@
 	<head></head>
 	<body>
 		<section class="clearfix" >
-			<div class="container">
-				<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
-					<iframe width="560" height="315" src="//www.youtube.com/embed/g-jwWYX7Jlo"></iframe>
-					<p class="bm-larger tm-larger text-center">우리는 해낼때까지 절대 멈추지 않을것입니다.</p>
+			<div class="one-whole">
+				<div class="container">
+					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Why BaroBoard?</p>
+					<div class="one-whole bm-larger boxed p-twenty animate-in" data-anim-type="fade-in" data-anim-delay="0">
+						<iframe width="560" height="315" src="//www.youtube.com/embed/g-jwWYX7Jlo"></iframe>
+						<p class="bm-larger tm-larger text-center">우리는 해낼때까지 절대 멈추지 않을것입니다.</p>
+					</div>
 				</div>
 				<div class="one-whole">
 					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Why BaroBoard?</p>
@@ -16,7 +19,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/45e083/fff.jpg&text=500*500+Test+Image" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=BaroBoard1" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
@@ -30,7 +33,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/45e083/fff.jpg&text=500*500+Test+Image" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=BaroBoard2" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
@@ -44,7 +47,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/45e083/fff.jpg&text=500*500+Test+Image" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=BaroBoard3" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
@@ -58,7 +61,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/45e083/fff.jpg&text=500*500+Test+Image" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=BaroBoard4" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
@@ -82,7 +85,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/d5faef/000000&text=GettingStart" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=GettingStart" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
@@ -96,7 +99,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/d5faef/000000&text=Download" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=Download" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
@@ -110,7 +113,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/d5faef/000000&text=Api List" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=Api List" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
@@ -124,7 +127,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/d5faef/000000&text=GitHub" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=GitHub" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>

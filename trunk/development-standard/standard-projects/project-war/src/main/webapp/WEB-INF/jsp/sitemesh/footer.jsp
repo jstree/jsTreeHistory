@@ -75,7 +75,7 @@
 						</div>
 					</div>
 					<div id="copyright" class="one-half-percent desktop-tablet bm-remove">
-						Copyright &copy; 313 Developer Group 2013.
+						Copyright &copy; 2013-2014 313 Developer Group
 					</div>
 					<div id="validation" class="one-half-percent desktop-tablet bm-remove last">
 						<span>

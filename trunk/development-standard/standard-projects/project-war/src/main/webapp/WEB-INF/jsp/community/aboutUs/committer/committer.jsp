@@ -815,7 +815,7 @@
 								<tr>
 									<td>민전기</td>
 									<td></td>
-									<td>@</td>
+									<td>jack_wam@naver.com</td>
 								</tr>
 								<tr>
 									<td>김경진</td>
