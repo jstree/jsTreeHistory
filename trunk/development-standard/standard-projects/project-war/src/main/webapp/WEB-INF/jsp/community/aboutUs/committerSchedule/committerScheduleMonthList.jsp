@@ -24,17 +24,17 @@
 			/* 달력 */
 			/*.calendar {margin-top:3px;}*/
 			.calendar h3 {margin-bottom:10px; font-size:15px; color:#222; font-weight:bold}
-			.calendar_select {padding:16px 14px 12px; border:2px solid #e8d0eb; *zoom:1}
+			.calendar_select {padding:16px 14px 12px; border:2px solid #ccc; *zoom:1}
 			.calendar_select:after {display:block; content:""; clear:both}
 			.calendar_select select {float:left; width:auto; height:auto; margin:0 20px 0 0}
 			.calendar_select p {float:left; margin:4px 5px 0 0}
 			.calendar_select p span {position:relative; top:-6px; padding:0 8px; font-size:14px}
-			.calendar table {border:none}
+			.calendar table {border:none;table-layout:fixed}
 			.calendar caption {height:1px; text-indent:-9999em}
 			.calendar th {background:#cecece; border:1px solid #fff}
 			.calendar th:first-child {border-left:1px solid #d7d7d7}
 			.calendar th:last-child {border-right:1px solid #d7d7d7}
-			.calendar td {height:100px; padding:0 1% 1%; vertical-align:top; border:1px solid #d7d7d7}
+			.calendar td {height:100px; padding:0 1% 1%; vertical-align:top; border:1px solid #d7d7d7;text-overflow:ellipsis; overflow:hidden }
 			.calendar td i {display:block; color:#000; font-style:normal;}
 			.calendar td div {color:#666}
 			.calendar .sun, .calendar .sun i {color:#ff0000}
@@ -49,6 +49,11 @@
 			             padding-right:9px; 
 			             color:#666; 
 			             /*background:url('${pageContext.request.contextPath}/assets/images/ell.gif') no-repeat right center;*/
+			             white-space:nowrap;
+					     text-overflow:ellipsis;     /* IE, Safari */
+					     /*-o-text-overflow:ellipsis;   Opera under 10.7 */
+					     overflow:hidden;            /* "overflow" value must be different from "visible" */
+					     /*-moz-binding: url('ellipsis.xml#ellipsis');*/
 			            }
 			.cal_cont a:hover {color:#f45b4f}
 		</style>
@@ -245,7 +250,7 @@
 													<c:set var="iBeginDate" value="${fn:substring(item.schdulBgnde, 6, 8)}"/>
 													<c:set var="iBeginEnd" value="${fn:substring(item.schdulEndde, 6, 8)}"/>
 													<c:if test="${startDay >= iBeginDate && startDay <= iBeginEnd}">
-														<a href="#" onclick="fnSchdulManageDetail('${item.schdulId}');" target="_self">${item.schdulNm}</a>
+														<a class="ellipsis" href="#" onclick="fnSchdulManageDetail('${item.schdulId}');" target="_self">${item.schdulNm}</a>
 													</c:if>																            
 											</c:forEach>
 											</div>										
