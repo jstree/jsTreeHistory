@@ -69,8 +69,49 @@
 .NFText{
 	width: 200px;
 }
-</style>
 
+
+input[type="button"] {
+    display: inline-block;
+    min-width: 100px;
+    min-height: 30px;
+    margin: 5px 0 5px 5px;
+    outline: none;
+    border: 1px solid #f45b4f;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    -moz-border-top-left-radius: 0px;
+    -moz-border-top-right-radius: 0px;
+    -moz-border-bottom-right-radius: 0px;
+    -moz-border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding: 10px;
+    background: #f45b4f;
+    color: #fff;
+    font-family: Oxygen,sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    font-variant: normal;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0em;
+    line-height: normal;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+</style>
 
 <script type="text/javascript">
 
@@ -132,13 +173,29 @@
 </head> 
 
 <body id="demo_body" onload="getGrid();">
+<section class="clearfix" >
 <div id="jsTreeContainer">
 
-<h2>JAVA &amp; Oracle ( struts2 + Spring2.5 + Ibatis ) demo + event order</h2>
+<div class="container bm-medium">
+	<div class="one-whole">
+		<div class="no-display">article</div>
+		<div class="text-center">
+			<h1 class="bm-remove">
+				JAVA &amp; Oracle ( struts2 + Spring2.5 + Ibatis ) demo + event order
+			</h1>
+		</div>
+	</div>
+</div>
 <div id="description">
-<div id="mmenu" style="height:50px; overflow:auto;">
-<form class="niceform" style="overflow: hidden;">
-	<fieldset style="float: left;">
+<!--기존 
+<div id="mmenu" style="height:50px; overflow:auto;"> 
+-->
+<div id="mmenu" style="clear:both;" class="clearfix">
+<!-- <form class="niceform" style="overflow: hidden;"> -->
+<form class="niceform">
+<!-- 	<fieldset style="float: left;"> -->
+<!-- <div style="float:left;	max-width:440px;border:2px solid #ccc;"> -->
+<div class="one-half-percent desktop-tablet alpha boxed bm-remove">
 		<input type="button" id="add_folder" value="add folder" />
 		<input type="button" id="add_default" value="add file" />
 		<input type="button" id="rename" value="rename" />
@@ -146,27 +203,32 @@
 		<input type="button" id="cut" value="cut" />
 		<input type="button" id="copy" value="copy" />
 		<input type="button" id="paste" value="paste" />
-	</fieldset>
-	<fieldset style="float: right;">
+</div>
+<!-- 	</fieldset> -->
+<!-- 	<fieldset style="float: right;"> -->
+<div class="one-half-percent desktop-tablet alpha bm-remove boxed last">
 		<input type="button" id="search" value="search"/>
 		<input type="button" id="clear_search" value="clear"/>
 		<div class="textInputVerticalCenter">
-			<input type="text" id="text" value="찾을 노드 이름 입력" />
+			<input type="text" id="text" value="찾을 노드 이름 입력" class="inline-block w-small bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search"/>
 		</div>
-	</fieldset>
+</div>
+<!-- 	</fieldset> -->
 </form>
 </div>
-
+<div class="clearfix">
 <!-- the tree container (notice NOT an UL node) -->
-<div id="demo" class="demo" style="height:500px;width:300px;float: left"></div>
+<div id="demo" class="demo" style="height:500px;width:300px;float: left">
+</div>
 <div style="float: left; padding-left: 10px">
 	<table id="jqTable" class="scroll"></table>
     <div id="jqTablePager"></div>
 </div>
-<div style="height:30px; text-align:center; float: left">
-	<input type="button" style='width:170px; height:24px; margin:5px auto;' value="reconstruct" onclick="javascript:alert('not supprt')" />
-	<input type="button" style='width:170px; height:24px; margin:5px auto;' id="analyze" value="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/analyzeNode.action');" />
-	<input type="button" style='width:170px; height:24px; margin:5px auto;' value="refresh" onclick="$('#demo').jstree('refresh',-1);" />
+</div>
+<div class="clearfix">
+	<input type="button" value="reconstruct" onclick="javascript:alert('not supprt')" />
+	<input type="button"  id="analyze" value="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/analyzeNode.action');" />
+	<input type="button"  value="refresh" onclick="$('#demo').jstree('refresh',-1);" />
 </div>
 <div id='alog' style="float:left; border:1px solid gray; padding:5px; height:150px; margin-top:15px; overflow:auto; width: 100%"></div>
 <!-- JavaScript neccessary for the tree -->
@@ -520,5 +582,6 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 //]]>
 </script>
 <!-- ANALYTICS END -->
+</section>
 </body>
 </html> 

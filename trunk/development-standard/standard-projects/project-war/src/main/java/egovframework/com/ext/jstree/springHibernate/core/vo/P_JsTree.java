@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import egovframework.com.ext.jstree.strutsiBatis.vo.T_ComprehensiveTree;
+import egovframework.com.ext.jstree.strutsiBatis.core.vo.T_ComprehensiveTree;
 
 @Entity
 @Table(name = "T_COMPREHENSIVETREE", schema = "STANDARD_DB")

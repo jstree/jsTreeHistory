@@ -9,7 +9,7 @@
 
 <c:choose>
 	<c:when test="${pageContext.request.serverName=='localhost'}">
-		<script type="text/javascript" src='http://localhost:8080/js${theRestOfFileName}' charset="utf-8"></script>
+		<script type="text/javascript" src='${pageContext.request.contextPath}/js${theRestOfFileName}' charset="utf-8"></script>
 	</c:when>
 	<c:otherwise>
 		<script type="text/javascript" src='http://nas.313.co.kr:5002/js${theRestOfFileName}' charset="utf-8"></script>
