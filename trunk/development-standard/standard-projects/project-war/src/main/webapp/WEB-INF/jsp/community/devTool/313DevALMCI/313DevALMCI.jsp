@@ -37,15 +37,15 @@
 									<p>우리는 개발 자동화를 꿈꾸었고, 그 꿈의 인프라를 구축하여 현재 운용하고 있습니다. 다음은 그 희망의 증거입니다</p>
 									
 									<p>
-										<a href="#"><span>(1) 산출물 관리 및 위키</span></a><a href="http://www.313.co.kr/confluence"><span> : Confluence</span></a><br/>
-										<a href="#"><span>(2) 이슈 관리</span></a><a href="http://www.313.co.kr/jira"><span> : Jira</span></a><br/>		
-										<a href="#"><span>(3) 리뷰</span></a><a href="http://www.313.co.kr/fecru"><span> : Fisheye & Cruclible</span></a><br/>
-										<a href="#"><span>(4) 소스코드 일관성 유지</span></a><a href="http://www.313.co.kr/svnwebclient/"><span> : SvnWebClient</span></a><br/>
-										<a href="#"><span>(5) 자동 빌드</span></a><a href="http://www.313.co.kr/php/www313cokr-maven-site/"><span> : Maven</span></a><br/>		
-										<a href="#"><span>(6) 빌드</span></a><a href="http://www.313.co.kr/hudson"><span> : Hudson</span></a><a href="http://www.313.co.kr/jenkins"><span> : Jenkins</span></a><br/>
-										<a href="#"><span>(7) 라이브러리 관리</span></a><a href="http://www.313.co.kr/nexus"><span> : Nexus</span></a><br/>				
-										<a href="#"><span>(8) 빌드 통합 관리</span></a><a href="http://www.313.co.kr/bamboo"><span> : Bamboo</span></a><br/>
-										<a href="#"><span>(9) 자동 테스팅</span></a><a href="http://www.313.co.kr/sonar/"><span> : Junit</span></a><br/>
+										<a href="#"><span>(1) 산출물 관리 및 위키</span></a><a target="_blank" href="http://www.313.co.kr/confluence"><span> : Confluence</span></a><br/>
+										<a href="#"><span>(2) 이슈 관리</span></a><a target="_blank" href="http://www.313.co.kr/jira"><span> : Jira</span></a><br/>		
+										<a href="#"><span>(3) 리뷰</span></a><a target="_blank" href="http://www.313.co.kr/fecru"><span> : Fisheye & Cruclible</span></a><br/>
+										<a href="#"><span>(4) 소스코드 일관성 유지</span></a><a target="_blank" href="http://www.313.co.kr/svnwebclient/"><span> : SvnWebClient</span></a><br/>
+										<a href="#"><span>(5) 자동 빌드</span></a><a target="_blank" href="http://www.313.co.kr/php/www313cokr-maven-site/"><span> : Maven</span></a><br/>		
+										<a href="#"><span>(6) 빌드</span></a><a target="_blank" href="http://www.313.co.kr/hudson"><span> : Hudson</span></a><a target="_blank" href="http://www.313.co.kr/jenkins"><span> : Jenkins</span></a><br/>
+										<a href="#"><span>(7) 라이브러리 관리</span></a><a target="_blank" href="http://www.313.co.kr/nexus"><span> : Nexus</span></a><br/>				
+										<a href="#"><span>(8) 빌드 통합 관리</span></a><a target="_blank" href="http://www.313.co.kr/bamboo"><span> : Bamboo</span></a><br/>
+										<a href="#"><span>(9) 자동 테스팅</span></a><a target="_blank" href="http://www.313.co.kr/sonar/"><span> : Junit</span></a><br/>
 									</p>
 								</div>
 							</div>

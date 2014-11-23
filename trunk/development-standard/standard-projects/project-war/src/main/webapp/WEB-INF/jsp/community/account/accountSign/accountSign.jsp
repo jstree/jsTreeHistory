@@ -9,10 +9,10 @@
 				<nav>
 					<div class="container bm-medium">
 						<div class="one-whole">
-							<div class="no-display">customers/login</div>
+							<div class="no-display">customers/Sign in</div>
 							<div class="text-center">
 								<h1 class="bm-remove">
-									<span id="customer-login-breadcrumb-header">Account Login</span>
+									<span id="customer-login-breadcrumb-header">Account</span>
 									<span id="customer-recover-breadcrumb-header" class="no-display">Recover Password</span>
 								</h1>
 								<p class="bm-remove">
@@ -20,7 +20,7 @@
 									&nbsp;/&nbsp;
 									<a href="${pageContext.request.contextPath}/account/accountSign.do" target="_self">Account</a>
 									&nbsp;/&nbsp;
-									<span id="customer-login-breadcrumb">Login</span>
+									<span id="customer-login-breadcrumb">Sign in</span>
 									<span id="customer-recover-breadcrumb" class="no-display">Recovery</span>
 								</p>
 							</div>
@@ -30,7 +30,7 @@
 				<div class="container bm-medium" id="account-sign">
 					<div class=" p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="one-half-percent desktop-tablet alpha boxed bm-remove">
-							<h1 class="bm-small text-center">Log In</h1>
+							<h1 class="bm-small text-center">Sign in</h1>
 							<div id="customer-login-form">
 								<form accept-charset="UTF-8" action="${pageContext.request.contextPath}/uat/uia/actionLogin.do" id="customer_login" method="post">
 									<input type="hidden" name="userSe"  value="USR"/>
@@ -49,7 +49,7 @@
 									</div>
 									 -->
 									<div class="text-right">
-										<button type="submit" class="inline-block bm-remove">Log In</button>
+										<button type="submit" class="inline-block bm-remove">Sign in</button>
 									</div>
 								</form>
 							</div>
