@@ -15,7 +15,7 @@
 						<p class="bm-remove">
 							<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 							&nbsp;/&nbsp;
-							Contact Us
+							<a href="${pageContext.request.contextPath}/aboutUs/contactus.do" target="_self">Contact Us</a>
 						</p>
 					</div>
 				</div>
