@@ -2,8 +2,7 @@
 	"id":318800375,
 	"title":"2. 부적절한 인가",
 	"handle":"databaseSecurity",
-	"description":"1. 개요<br>프로그램이 모든 가능한 설행경로에 대해서 접근제어를 검사하지 않거나 불완전하게 검사하는 경우，공격지는 접근 가능한 실행경로를 통해 정보를 유출할 수 있다.
-<br>2.보안대책 <br> 웅용프로그램이 제공하는 정보와 기능을 역할에 따라 배분함으로써 공격자에게 노출되는 공격 노출면(Attack Surface)을 최소화하고, 사용자의 권한에 따른 ACL(Access Control List)을 관리한다. 프레임워크를 사용해서 취약점을 피할 수도 있는데 예를 들면 JAAS Authorzation Framework나 OWASP ESAPI Access Cotrol등이 인증 프레임 워크로 사용가능하다.",
+	"description":"1. 개요<br>프로그램이 모든 가능한 설행경로에 대해서 접근제어를 검사하지 않거나 불완전하게 검사하는 경우，공격지는 접근 가능한 실행경로를 통해 정보를 유출할 수 있다. <br>2.보안대책 <br> 웅용프로그램이 제공하는 정보와 기능을 역할에 따라 배분함으로써 공격자에게 노출되는 공격 노출면(Attack Surface)을 최소화하고, 사용자의 권한에 따른 ACL(Access Control List)을 관리한다. 프레임워크를 사용해서 취약점을 피할 수도 있는데 예를 들면 JAAS Authorzation Framework나 OWASP ESAPI Access Cotrol등이 인증 프레임 워크로 사용가능하다.",
 	"published_at":"2014-07-07T19:14:41+01:00",
 	"created_at":"2014-07-07T19:14:41+01:00",
 	"vendor":"Koko Luxe",
