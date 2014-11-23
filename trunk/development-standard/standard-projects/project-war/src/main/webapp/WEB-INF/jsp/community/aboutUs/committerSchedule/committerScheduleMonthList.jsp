@@ -8,12 +8,14 @@
 		<title>커미터 일정관리</title>
 		<style type="text/css">
 			html {
-			margin-top: 40px;
+				margin-top: 40px;
 			}
 			body {
 			position: relative;
+				}
+			a {
+				cursor:pointer;
 			}
-			
 			/* 테이블 */
 			.calendar table {width:100%; border-top:3px solid #ccc; border-collapse:collapse}
 			.calendar caption {margin:1% 0 0.5%}
@@ -43,7 +45,7 @@
 			
 			/*달력 내용 링크*/
 			.cal_cont a {
-			             overflow:hidden; 
+			             overflow:hidden;
 			             display:block; 
 			             height:23px; 
 			             padding-right:9px; 
@@ -52,7 +54,6 @@
 			             white-space:nowrap;
 					     text-overflow:ellipsis;     /* IE, Safari */
 					     /*-o-text-overflow:ellipsis;   Opera under 10.7 */
-					     overflow:hidden;            /* "overflow" value must be different from "visible" */
 					     /*-moz-binding: url('ellipsis.xml#ellipsis');*/
 			            }
 			.cal_cont a:hover {color:#f45b4f}
@@ -185,14 +186,14 @@
 	            	</c:forEach>                                                   
 	        </select>  
 			<p>
-				<a id="previousYear" href="#"><img src="${pageContext.request.contextPath}/assets/images/btn_prev.gif" alt="이전년도" /></a>
+				<a id="previousYear"><img src="${pageContext.request.contextPath}/assets/images/btn_prev.gif" alt="이전년도" /></a>
 				<span id="calYear" >${nYear}년</span>
-				<a id="nextYear" href="#"><img src="${pageContext.request.contextPath}/assets/images/btn_next.gif" alt="다음년도" /></a>
+				<a id="nextYear"><img src="${pageContext.request.contextPath}/assets/images/btn_next.gif" alt="다음년도" /></a>
 			</p>
 			<p>
-				<a id="previousMonth" href="#"><img src="${pageContext.request.contextPath}/assets/images/btn_prev.gif" alt="이전달" /></a>
+				<a id="previousMonth"><img src="${pageContext.request.contextPath}/assets/images/btn_prev.gif" alt="이전달" /></a>
 				<span id="calMonth">${nMonth+1}월</span>
-				<a id="nextMonth" href="#"><img src="${pageContext.request.contextPath}/assets/images/btn_next.gif" alt="다음달" /></a>
+				<a id="nextMonth"><img src="${pageContext.request.contextPath}/assets/images/btn_next.gif" alt="다음달" /></a>
 			</p>
 		</div>
 		<!-- 달력 -->
@@ -250,7 +251,7 @@
 													<c:set var="iBeginDate" value="${fn:substring(item.schdulBgnde, 6, 8)}"/>
 													<c:set var="iBeginEnd" value="${fn:substring(item.schdulEndde, 6, 8)}"/>
 													<c:if test="${startDay >= iBeginDate && startDay <= iBeginEnd}">
-														<a class="ellipsis" href="#" onclick="fnSchdulManageDetail('${item.schdulId}');" target="_self">${item.schdulNm}</a>
+														<a class="ellipsis" onclick="fnSchdulManageDetail('${item.schdulId}');" target="_self">${item.schdulNm}</a>
 													</c:if>																            
 											</c:forEach>
 											</div>										

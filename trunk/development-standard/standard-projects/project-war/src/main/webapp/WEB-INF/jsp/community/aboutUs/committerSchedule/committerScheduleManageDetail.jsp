@@ -33,7 +33,7 @@
 		.schedule .date em + input + input {margin-right:30px !important}
 		.schedule .btn_center {padding:30px 0; text-align:center}
 		.schedule .btn_gray {background:#f5f5f5; border:1px solid #ddd; color:#666; margin:0}
-		.schedule a.btn_gray {display:inline-block; width:125px; height:40px; padding-top:8px; text-align:center}
+		.schedule a.btn_gray {display:inline-block; width:125px; height:40px; padding-top:8px; text-align:center; cursor:pointer;}
 	</style>
 	<script type="text/javascript">		
 		function fnGetList(year, month, searchKeyword, searchCondition){
@@ -135,7 +135,7 @@
 				</tr>
 			</table>
 			<div class="btn_center">
-				<a onclick="fnGetList('${year}','${month}','${searchKeyword}','${searchCondition}');" href="#" class="btn_gray">목록</a>
+				<a onclick="fnGetList('${year}','${month}','${searchKeyword}','${searchCondition}');" class="btn_gray">목록</a>
 			</div>
 		</div>
 		<!-- // 보기 -->
