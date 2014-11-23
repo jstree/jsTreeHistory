@@ -11,7 +11,7 @@
 						<div class="no-display">article</div>
 						<div class="text-center">
 							<h1 class="bm-remove">
-								anyFramePortal
+								애니프레임워크 포탈
 							</h1>
 						</div>
 					</div>

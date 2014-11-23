@@ -11,7 +11,7 @@
 						<div class="no-display">article</div>
 						<div class="text-center">
 							<h1 class="bm-remove">
-								egovFramePortal
+								전자정부 표준프레임워크
 							</h1>
 						</div>
 					</div>

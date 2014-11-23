@@ -170,7 +170,7 @@
 		<section class="clearfix" >
 			<div class="container">
 				<div class="one-whole">
-					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Committers</p>
+					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Committer</p>
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
