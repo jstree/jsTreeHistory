@@ -25,7 +25,7 @@
 			<interceptor name="logger"
 						 class="com.opensymphony.xwork2.interceptor.LoggingInterceptor"/>
 			<interceptor name="cachingHeadersInterceptor"
-						 class="egovframework.com.ext.jstree.strutsiBatis.interceptor.CachingHeadersInterceptor"/>
+						 class="egovframework.com.ext.jstree.strutsiBatis.core.interceptor.CachingHeadersInterceptor"/>
 
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="profiling"/>
