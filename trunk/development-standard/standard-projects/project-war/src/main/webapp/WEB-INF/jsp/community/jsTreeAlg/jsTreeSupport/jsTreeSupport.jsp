@@ -148,95 +148,98 @@
 											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="4. 운영체제 명령어 삽입"><a href="#" target="_self" class="quick-look" data-quick-look-handle="osCommand"><i class="fa fa-caret-right fw">4. 운영체제 명령어 삽입</i></a></span></li>
 											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="5. 위험한 형식 파일 업로드"><a href="#" target="_self" class="quick-look" data-quick-look-handle="fileUpload"><i class="fa fa-caret-right fw">5. 위험한 형식 파일 업로드</i></a></span></li>
 											
-											<li><i class="fa fa-caret-right fw"></i><span> 6. 신뢰되지 않는 URL 주소로 자동접속연결</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 7. XQuery 삽입</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 8. XPath 삽입</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 9. LDAP 삽입</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 10. 크로스사이트 요청 위조</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="6. 신뢰되지 않는 URL 주소로 자동접속연결"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">6. 신뢰되지 않는 URL 주소로 자동접속연결</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="7. XQuery 삽입"><a href="#" target="_self" class="quick-look" data-quick-look-handle="xqueryIsert"><i class="fa fa-caret-right fw">7. XQuery 삽입</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="8. XPath 삽입"><a href="#" target="_self" class="quick-look" data-quick-look-handle="xPathInsert"><i class="fa fa-caret-right fw">8. XPath 삽입</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="9. LDAP 삽입"><a href="#" target="_self" class="quick-look" data-quick-look-handle="lDAPIsert"><i class="fa fa-caret-right fw">9. LDAP 삽입</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="10. 크로스사이트 요청 위조"><a href="#" target="_self" class="quick-look" data-quick-look-handle="crossSiteRequestForgery"><i class="fa fa-caret-right fw">10. 크로스사이트 요청 위조</i></a></span></li>
 											
-											<li><i class="fa fa-caret-right fw"></i><span> 11. HTTP 응답분할</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 12. 정수형 오버플로우</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 13. 보안기능 결정에 사용되는 부적절한입력값</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 14. 메모리 버퍼 오버플로우</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 15. 포맷 스트링 삽입</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="11. HTTP 응답분할"><a href="#" target="_self" class="quick-look" data-quick-look-handle="hTTPResponseSplitting"><i class="fa fa-caret-right fw">11. HTTP 응답분할</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="12. 정수형 오버플로우"><a href="#" target="_self" class="quick-look" data-quick-look-handle="integerOverflow"><i class="fa fa-caret-right fw">12. 정수형 오버플로우</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="13. 보안기능 결정에 사용되는 부적절한입력값"><a href="#" target="_self" class="quick-look" data-quick-look-handle="improperInput"><i class="fa fa-caret-right fw">13. 보안기능 결정에 사용되는 부적절한입력값</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="14. 메모리 버퍼 오버플로우"><a href="#" target="_self" class="quick-look" data-quick-look-handle="memoryBufferOverflows"><i class="fa fa-caret-right fw">14. 메모리 버퍼 오버플로우</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="15. 포맷 스트링 삽입"><a href="#" target="_self" class="quick-look" data-quick-look-handle="insertFormatString"><i class="fa fa-caret-right fw">15. 포맷 스트링 삽입</i></a></span></li>
 											
-
 											<li><a href="#"><span>보안기능</span></a></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 1. 적절한 인증 없는 중요기능 허용</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 2. 부적절한 인가</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 3. 중요한 자원에 대한 잘못된 권한 설정</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 4. 취약한 암호화 알고리즘 사용</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 5. 중요정보 평문저장</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="1. 적절한 인증 없는 중요기능 허용"><a href="#" target="_self" class="quick-look" data-quick-look-handle="allowNoAuthentication"><i class="fa fa-caret-right fw">1. 적절한 인증 없는 중요기능 허용</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="2. 부적절한 인가"><a href="#" target="_self" class="quick-look" data-quick-look-handle="inappropriate"><i class="fa fa-caret-right fw">2. 부적절한 인가</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="3. 중요한 자원에 대한 잘못된 권한 설정"><a href="#" target="_self" class="quick-look" data-quick-look-handle="wrongPermissionsSetting"><i class="fa fa-caret-right fw">3. 중요한 자원에 대한 잘못된 권한 설정</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="4. 취약한 암호화 알고리즘 사용"><a href="#" target="_self" class="quick-look" data-quick-look-handle="useWeakEncryptionAlgorithm"><i class="fa fa-caret-right fw">4. 취약한 암호화 알고리즘 사용</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="5. 중요정보 평문저장"><a href="#" target="_self" class="quick-look" data-quick-look-handle="informationStorage"><i class="fa fa-caret-right fw">5. 중요정보 평문저장</i></a></span></li>
 											
-											<li><i class="fa fa-caret-right fw"></i><span> 6. 중요정보 평문전송</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 7. 하드코드된 비밀번호</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 8. 충분하지 않은 키 길이 사용</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 9. 적절하지 않은 난수값 사용</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 10. 하드코드된 암호화  키</span></li>
-											
-											<li><i class="fa fa-caret-right fw"></i><span> 11. 취약한 비밀번호 허용</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 12. 사용자 하드디스크에 저장되는 쿠키를 통한정보노출</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 13. 주석문 안에 포함된 시스템 주요정보</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 14. 솔트 없이 일방향 해쉬 함수 사용</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 15. 무결성 검사 없는 코드 다운로드</span></li>
-											
-											<li><i class="fa fa-caret-right fw"></i><span> 16. 반복된 인증시도 제한 기능 부재</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="6. 중요정보 평문전송 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="transferInformation"><i class="fa fa-caret-right fw">6. 중요정보 평문전송 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="7. 하드코드된 비밀번호 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="hardCodedPassword"><i class="fa fa-caret-right fw">7. 하드코드된 비밀번호 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="8. 충분하지 않은 키 길이 사용 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="useNotLongEnoughKey"><i class="fa fa-caret-right fw">8. 충분하지 않은 키 길이 사용 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="9. 적절하지 않은 난수값 사용 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="improperUseRandomNumber"><i class="fa fa-caret-right fw">9. 적절하지 않은 난수값 사용 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="10. 하드코드된 암호화  키 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="hardCodedPasskey"><i class="fa fa-caret-right fw">10. 하드코드된 암호화  키 </i></a></span></li>
+                                                                                                                                                                                                                                                                                                                                               
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="11. 취약한 비밀번호 허용 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="allowingWeakPasswords"><i class="fa fa-caret-right fw">11. 취약한 비밀번호 허용 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="12. 사용자 하드디스크에 저장되는 쿠키를 통한정보노출"><a href="#" target="_self" class="quick-look" data-quick-look-handle="becauseOfCookiesStore"><i class="fa fa-caret-right fw">12. 사용자 하드디스크에 저장되는 쿠키를 통한정보노출</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="13. 주석문 안에 포함된 시스템 주요정보 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">13. 주석문 안에 포함된 시스템 주요정보 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="14. 솔트 없이 일방향 해쉬 함수 사용 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">14. 솔트 없이 일방향 해쉬 함수 사용 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="15. 무결성 검사 없는 코드 다운로드 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">15. 무결성 검사 없는 코드 다운로드 </i></a></span></li>
+                                                                                                                                                                                                                                                                                                                                               
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="16. 반복된 인증시도 제한 기능 부재 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">16. 반복된 인증시도 제한 기능 부재 </i></a></span></li>
 											
 											<li><a href="#"><span>시간 및 상태</span></a></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 1. 경쟁조건 :검사시점과 사용시점(TOCTOU)</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 2  종료되지 않는 반복문 또는 재귀 함수</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="1. 경쟁조건 :검사시점과 사용시점(TOCTOU)"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">1. 경쟁조건 :검사시점과 사용시점(TOCTOU) </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="2  종료되지 않는 반복문 또는 재귀 함수 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">2  종료되지 않는 반복문 또는 재귀 함수</i></a></span></li>
 												
 											<li><a href="#"><span>에러처리</span></a></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 1. 오류메시지를 통한 정보노출</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 2. 오류 상황 대응 부재</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 3. 부적절한 예외 처리</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="1. 오류메시지를 통한 정보노출"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw"> 1. 오류메시지를 통한 정보노출</i></a></span></li><li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="2  종료되지 않는 반복문 또는 재귀 함수 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">2  종료되지 않는 반복문 또는 재귀 함수</i></a></span></li><li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="2  종료되지 않는 반복문 또는 재귀 함수 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">2  종료되지 않는 반복문 또는 재귀 함수</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="2. 오류 상황 대응 부재"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw"> 2. 오류 상황 대응 부재</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="3. 부적절한 예외 처리"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw"> 3. 부적절한 예외 처리</i></a></span></li>
+
 											
 											<li><a href="#"><span>오류</span></a></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 1. Null Poinler 역참조</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 2. 부적절한 자원 해제</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 3. 해제된 자원 사용</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 4. 초기화되지 않은 변수 사용</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="1. Null Poinler 역참조 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">1. Null Poinler 역참조 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="2. 부적절한 자원 해제 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">2. 부적절한 자원 해제 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="3. 해제된 자원 사용 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">3. 해제된 자원 사용 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="4. 초기화되지 않은 변수 사용 "><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">4. 초기화되지 않은 변수 사용 </i></a></span></li>
+
 											
 											<li><a href="#"><span>캡슐화</span></a></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 1. 잘못된 세션에 의한 데이터 정보노출</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 2. 제거되지 않고 남은 디버그 코드</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 3. 시스템 데이터 정보노출</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 4. Public 메소드부터 반환된 Privale 배열</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 5. Privale 배열에 Public 데이터 할당</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="1. 잘못된 세션에 의한 데이터 정보노출"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">1. 잘못된 세션에 의한 데이터 정보노출 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="2. 제거되지 않고 남은 디버그 코드"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">2. 제거되지 않고 남은 디버그 코드 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="3. 시스템 데이터 정보노출"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">3. 시스템 데이터 정보노출 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="4. Public 메소드부터 반환된 Privale 배열"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">4. Public 메소드부터 반환된 Privale 배열 </i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="5. Privale 배열에 Public 데이터 할당"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">5. Privale 배열에 Public 데이터 할당 </i></a></span></li>
+
+
 											
 											<li><a href="#"><span>API 오용</span></a></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 1. DNS lookup에 의존한 보안결정</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 2. 취약한 API 사용</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="1. DNS lookup에 의존한 보안결정"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">1. DNS lookup에 의존한 보안결정</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="2. 취약한 API 사용"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">2. 취약한 API 사용</i></a></span></li>
 											
 											<li><a href="#"><span>그밖의 보안</span></a></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 1. SSI 인젝션</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 2. System~Server File Access ( 디렉토리 인덱싱 )</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 3. 파일 다운로드</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 4. 상대, 절대 디렉토리 조작</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 5. 직접 객체 참조</span></li>
-											
-											<li><i class="fa fa-caret-right fw"></i><span> 6. URL 파라미터 조작</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 7. 훼손된 접근 제어</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 8. URL 강제접속/ 인증우회 ( 취약한 접근 통제 )</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 9. 서비스 메소드 설정 접근 후 웹서비스 메소드 설정 공격</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 10. 불완전한 구성 관리 ( 어플리케이션 구성 ))</span></li>
-											
-											<li><i class="fa fa-caret-right fw"></i><span> 11. 불완전한 암호화 저장 ( 데이터 구성 ))</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 12. FrontEnd View 암호화 Security</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 13. SSL ~ HTTPS</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 14. 암호화 ( Internal Object//분산 객체, Proxy 객체 )</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 15. 환경 설정 보안 ( 보안 모듈 기본 설정 , 사이트 설정 , 보안 모듈 적용대상 설정 )</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="1. SSI 인젝션"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">1. SSI 인젝션</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="2. System~Server File Access ( 디렉토리 인덱싱 )"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">2. System~Server File Access ( 디렉토리 인덱싱 )</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="3. 파일 다운로드"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">3. 파일 다운로드</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="4. 상대, 절대 디렉토리 조작"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">4. 상대, 절대 디렉토리 조작</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="5. 직접 객체 참조"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">5. 직접 객체 참조</i></a></span></li>
+											                                                                                                                                                                                                                                                                                                                                              
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="6. URL 파라미터 조작"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">6. URL 파라미터 조작</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="7. 훼손된 접근 제어"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">7. 훼손된 접근 제어</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="8. URL 강제접속/ 인증우회 ( 취약한 접근 통제 )"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">8. URL 강제접속/ 인증우회 ( 취약한 접근 통제 )</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="9. 서비스 메소드 설정 접근 후 웹서비스 메소드 설정 공격"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">9. 서비스 메소드 설정 접근 후 웹서비스 메소드 설정 공격</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="10. 불완전한 구성 관리 ( 어플리케이션 구성 ))"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">10. 불완전한 구성 관리 ( 어플리케이션 구성 ))</i></a></span></li>
+											                                                                                                                                                                                                                                                                                                                                              
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="11. 불완전한 암호화 저장 ( 데이터 구성 ))"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">11. 불완전한 암호화 저장 ( 데이터 구성 ))</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="12. FrontEnd View 암호화 Security"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">12. FrontEnd View 암호화 Security</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="13. SSL ~ HTTPS"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">13. SSL ~ HTTPS</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="14. 암호화 ( Internal Object//분산 객체, Proxy 객체 )"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">14. 암호화 ( Internal Object//분산 객체, Proxy 객체 )</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="15. 환경 설정 보안 ( 보안 모듈 기본 설정 , 사이트 설정 , 보안 모듈 적용대상 설정 )"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">15. 환경 설정 보안 ( 보안 모듈 기본 설정 , 사이트 설정 , 보안 모듈 적용대상 설정 )</i></a></span></li>
+											                                                                                                                                                                                                                                                                                                                                              
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="16. 검색엔진 정보 노출"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">16. 검색엔진 정보 노출</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="17. 불량 태그, 아이피 정책, 파일 정책, 로그 정책, 백업 관리, 입력값 검증, 쿠키 암호화, dDos, 버퍼 오버플로우"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">17. 불량 태그, 아이피 정책, 파일 정책, 로그 정책, 백업 관리, 입력값 검증, 쿠키 암호화, dDos, 버퍼 오버플로우</i></a></span></li>
 
-											<li><i class="fa fa-caret-right fw"></i><span> 16. 검색엔진 정보 노출</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 17. 불량 태그, 아이피 정책, 파일 정책, 로그 정책, 백업 관리, 입력값 검증, 쿠키 암호화, dDos, 버퍼 오버플로우</span></li>
-											
 											
 											<li><a href="#"><span>어플리케이션 레이어별 제어, 기능, 품질, 성능, 보안 집중 적용</span></a></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 집중적용 레이어 ) Filter</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 집중적용 레이어 ) Interceptor</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 집중적용 레이어 ) AOP</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 집중적용 레이어 ) Model Object</span></li>
-											<li><i class="fa fa-caret-right fw"></i><span> 집중적용 레이어 ) 컴포넌트</span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="집중적용 레이어 ) Filter"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">집중적용 레이어 ) Filter</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="집중적용 레이어 ) Interceptor"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">집중적용 레이어 ) Interceptor</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="집중적용 레이어 ) AOP"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">집중적용 레이어 ) AOP</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="집중적용 레이어 ) Model Object"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">집중적용 레이어 ) Model Object</i></a></span></li>
+											<li><span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="집중적용 레이어 ) 컴포넌트"><a href="#" target="_self" class="quick-look" data-quick-look-handle="doNotTrustUrl"><i class="fa fa-caret-right fw">집중적용 레이어 ) 컴포넌트</i></a></span></li>
 										</ul>
 									</p>
 								</div>
