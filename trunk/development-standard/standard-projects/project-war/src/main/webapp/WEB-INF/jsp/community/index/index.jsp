@@ -15,18 +15,24 @@
 						<div class="space-20"></div>
 						
 						<div id="link-list">
-							<h4 class="title"><span></span></h4>
+							<h4 class="title"><span>우리의 목표</span></h4>
 							<div class="content">
 								<ul class="unstyled bm-remove">
 									<li><strong><span>우리는 더욱더 좋은 개발자가 되기위해 노력합니다.</span></strong></li>
-									<li><i class="fa fa-caret-right fw"></i><span> 안되는걸 가능하게 만듭니다.</span></li>
+									<li><i class="fa fa-caret-right fw"></i><span> 현재에 멈추지 않고 꾸준히 연구하고 공부합니다.</span></li>
+									<li><i class="fa fa-caret-right fw"></i><span> 간결한 코드 &amp; 성능 향상을 지향합니다.</span></li>
+									<li><i class="fa fa-caret-right fw"></i><span> 백마디 말보다 코드로 증명하겠습니다.</span></li>
+								</ul>
+								<ul class="unstyled bm-remove">
+									<li><strong><span>우리에겐 꿈이 있습니다.</span></strong></li>
+									<li><i class="fa fa-caret-right fw"></i><span> 오픈소스를 만들어 무료로 배포하여 GNU정신을 계승하고 싶습니다.</span></li>
 								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="one-whole">
-					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0"></p>
+					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Baroboard</p>
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
@@ -84,7 +90,7 @@
 						</div>
 						<p class="bm-remove">
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>BaroBoard</strong></a><br />
-							이제 우리는 바로보드를 개발할 준비가 되었습니다. 범용적인 Java 설치형 게시판 솔루션, 우리가 만들겠습니다.
+							이제 우리는 모든 준비를 마치고 바로보드 개발을 시작합니다. 범용적인 Java 설치형 게시판 솔루션, 우리가 만들어 내겠습니다.
 						</p>
 					</div>
 				</div>
