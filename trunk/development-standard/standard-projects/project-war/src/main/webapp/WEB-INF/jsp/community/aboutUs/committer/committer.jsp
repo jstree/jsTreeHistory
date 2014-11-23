@@ -102,7 +102,7 @@
 				width : 36px;
 				height : 36px;
 				text-align : center;
-				line-height : 36px;
+				line-height : 34px;
 				display : inline-block;
 			}
 			.contact span a {
@@ -192,26 +192,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:313.co.kr" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="https://www.facebook.com/" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="https://twitter.com/" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -237,26 +232,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="Email">
+										<a href="mailto:icicleg0m@gmail.com" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span>
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="https://www.facebook.com/profile.php?id=100005255539049" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="https://twitter.com/icicleg0m" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -282,26 +272,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:lossboykim@naver.com" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="https://www.facebook.com/byoungwoo.kim.18" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="https://twitter.com/SimpleLifeKBW" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -327,26 +312,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:goldpig21@naver.com" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="https://www.facebook.com/profile.php?id=100004021364173&fref=ts" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -373,26 +353,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:venatus@naver.com" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -418,26 +393,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:2tk.java@gmail.com" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="http://www.facebook.com/nzeltk" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="https://twitter.com/Good2tk" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -457,32 +427,27 @@
 						<p class="bm-remove no-text-overflow">
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>손호성</strong></a>
 							<br />
-							-
+							(주)아이비즈소프트웨어
 						</p>
 						<div>
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="Email">
+										<a href="mailto:pennorix@gmail.com" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span>
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="https://www.facebook.com/pennori" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="http://www.twitter.com/pennoriz" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -508,26 +473,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:dreamsaspire7@gmail.com" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -554,26 +514,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -599,9 +554,19 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:penpen787@gmail.com" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
 										<a href="https://www.facebook.com/kyunghun.jeon" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
+										</a>
+									</span> 
+									<span class="tip-t-fade" data-tooltip="Twitter">
+										<a href="https://twitter.com/penpen7787" target="_blank">
+											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="LinkedIn">
@@ -634,26 +599,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -673,32 +633,27 @@
 						<p class="bm-remove no-text-overflow">
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>오권우</strong></a>
 							<br />
-							-
+							이시스
 						</p>
 						<div>
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:today226@nate.com" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="https://www.facebook.com/profile.php?id=100001797454228&fref=ts" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -725,26 +680,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -771,26 +721,21 @@
 							<div class="content">
 								<p class="text"></p>
 								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="EMail">
+										<a href="mailto:" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="http://www.facebook.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="http://www.twitter.com" target="_blank">
+										<a href="#" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
-									<span class="tip-t-fade" data-tooltip="Google+">
-										<a href="https://plus.google.com" target="_blank">
-											<i class="fa fa-google-plus fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="LinkedIn">
-										<a href="http://www.linkedin.com" target="_blank">
-											<i class="fa fa-linkedin fa-fw"></i>
-										</a>
-									</span>
 								</div>
 							</div>
 						</div>
