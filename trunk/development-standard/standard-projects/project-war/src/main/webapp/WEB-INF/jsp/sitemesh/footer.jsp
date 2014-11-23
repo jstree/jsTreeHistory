@@ -12,10 +12,10 @@
 							<div class="one-quarter bm-larger tm-larger">
 								<div id="custom">
 									<h4 class="title">
-										<span>313 개발그룹</span>
+										<span>313 개발자 그룹</span>
 									</h4>
 									<div class="content rte">
-										<p class="text bm-remove">313 개발그룹은 2010년 자바스터디로 시작되었습니다. <br />
+										<p class="text bm-remove">313 개발자 그룹은 2010년 자바스터디로 시작되었습니다. <br />
 										그후 2013년 오픈소스 프로젝트를 구상하게 되었고, 바로보드라는 결실을 맺게 되었습니다. <br />
 										더욱더 발전할 313개발그룹을 지켜봐 주십시오.</p>
 									</div>
@@ -75,7 +75,7 @@
 						</div>
 					</div>
 					<div id="copyright" class="one-half-percent desktop-tablet bm-remove">
-						Copyright &copy; 2013-2014 313 Developer Group
+						Copyright &copy; 2013-2014, 313 Developer Group
 					</div>
 					<div id="validation" class="one-half-percent desktop-tablet bm-remove last">
 						<span>

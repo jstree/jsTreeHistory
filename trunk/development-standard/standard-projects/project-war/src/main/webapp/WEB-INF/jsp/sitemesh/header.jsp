@@ -22,7 +22,7 @@
 				</div>
 				<div id="header-cart" class="one-third bm-remove last">
 					<a href="${pageContext.request.contextPath}/account/accountSign.do" target="_self">
-						Log in or Sign up
+						Log in
 					</a>
 				</div>
 			</div>
