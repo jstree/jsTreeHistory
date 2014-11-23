@@ -46,7 +46,7 @@
 										<ul class="unstyled bm-remove">
 											<li><a href="mailto:webmaster@example.com" target="_self"><i class="fa fa-envelope-o fw"></i><span>Mail to Admin</span></a></li>
 											<li><a href="#" target="_self"><i class="fa fa-phone fw"></i><span>010-2531-0470</span></a></li>
-											<li><a href="#" target="_self"><i class="fa fa-map-marker fw"></i><span>서울시 영등포구 문래동5가</span></a></li>
+											<!-- <li><a href="#" target="_self"><i class="fa fa-map-marker fw"></i><span>서울시 영등포구 문래동5가</span></a></li> -->
 										</ul>
 									</div>
 								</div>
@@ -59,15 +59,8 @@
 									<div class="content">
 										<p class="text"></p>
 										<div id="social-icons">
-											<span class="tip-t-fade" data-tooltip="Facebook"><a
-												href="http://www.facebook.com" target="_self"><i
-												class="fa fa-facebook fa-fw"></i></a></span> <span class="tip-t-fade" data-tooltip="Twitter"><a
-												href="http://www.twitter.com" target="_self"><i
-												class="fa fa-twitter fa-fw"></i></a></span> <span class="tip-t-fade" data-tooltip="Google+"><a
-												href="https://plus.google.com" target="_self"><i
-												class="fa fa-google-plus fa-fw"></i></a></span> <span class="tip-t-fade" data-tooltip="LinkedIn"><a
-												href="http://www.linkedin.com" target="_self"><i
-												class="fa fa-linkedin fa-fw"></i></a></span>
+											<span class="tip-t-fade" data-tooltip="Facebook"><a	href="https://www.facebook.com/313DevGroup" target="_self"><i class="fa fa-facebook fa-fw"></i></a></span> 
+											<span class="tip-t-fade" data-tooltip="Twitter"><a href="https://twitter.com/313DevGroup" target="_self"><i	class="fa fa-twitter fa-fw"></i></a></span> 
 										</div>
 									</div>
 								</div>
