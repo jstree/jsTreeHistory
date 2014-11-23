@@ -15,14 +15,6 @@
 									<span id="customer-login-breadcrumb-header">Account</span>
 									<span id="customer-recover-breadcrumb-header" class="no-display">Recover Password</span>
 								</h1>
-								<p class="bm-remove">
-									<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
-									&nbsp;/&nbsp;
-									<a href="${pageContext.request.contextPath}/account/accountSign.do" target="_self">Account</a>
-									&nbsp;/&nbsp;
-									<span id="customer-login-breadcrumb"><a href="${pageContext.request.contextPath}/account/accountSign.do" target="_self">Sign in</a></span>
-									<span id="customer-recover-breadcrumb" class="no-display">Recovery</span>
-								</p>
 							</div>
 						</div>
 					</div>

@@ -32,6 +32,9 @@
 		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/style.jsp"/>
 		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/script.jsp"/>
 		<decorator:head/>
+		<!-- CSS Setting -->
+		<link rel="icon" href="${pageContext.request.contextPath}/images/community/common/favicon/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/community/common/favicon/favicon.ico" type="image/x-icon" />
 		<script type="text/javascript">
 		// <![CDATA[
 		$(document).ready(function($){
