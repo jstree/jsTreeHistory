@@ -47,7 +47,7 @@ if ((typeof Shopify) === 'undefined')
 			        var imageData = '';
 			
 			        for (var x = 0, l = product.images.length; x < l; x++) {
-			            imageData += '<div class="item"><a href="' + product.url + '" target="_self" class="quick-look-featured-image text-center block"><img src="' + product.images[x] + '" class="block" /></a></div>';
+			            imageData += '<div class="item"><a href="' + product.url + '" target="_blank" class="quick-look-featured-image text-center block"><img src="' + product.images[x] + '" class="block" /></a></div>';
 			        }
 			
 			        $('.shopify-quick-look-overlay .quick-look-image')

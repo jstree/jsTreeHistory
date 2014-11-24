@@ -27,12 +27,8 @@
 		"options":["Large"],"option1":"Large","option2":null,"option3":null,"price":3000,"weight":0,"compare_at_price":null,
 		"inventory_quantity":0,"inventory_management":"shopify","inventory_policy":"deny","available":false,"sku":"",
 		"requires_shipping":true,"taxable":true,"barcode":null,"featured_image":null}],
-		"images":["//cdn.shopify.com/s/files/1/0522/9261/products/cropped-brown-leather-jacket-001.jpg?v=1404756957",
-		"//cdn.shopify.com/s/files/1/0522/9261/products/cropped-brown-leather-jacket-003.jpg?v=1404757089",
-		"//cdn.shopify.com/s/files/1/0522/9261/products/cropped-brown-leather-jacket-004.jpg?v=1404757089",
-		"//cdn.shopify.com/s/files/1/0522/9261/products/cropped-brown-leather-jacket-005.jpg?v=1404757089",
-		"//cdn.shopify.com/s/files/1/0522/9261/products/cropped-brown-leather-jacket-002.jpg?v=1404757089"],
-	"featured_image":"//cdn.shopify.com/s/files/1/0522/9261/products/cropped-brown-leather-jacket-001.jpg?v=1404756957",
+		"images":["../../assets/explanationImgage/hardCodedPasskey.jpg"],
+	"featured_image":"../../assets/explanationImgage/hardCodedPasskey.jpg",
 	"options":[{"name":"Size","position":1}],
-	"url":"/products/cropped-brown-leather-jacket"
+	"url":"../../assets/explanationImgage/hardCodedPasskey.jpg"
 }
