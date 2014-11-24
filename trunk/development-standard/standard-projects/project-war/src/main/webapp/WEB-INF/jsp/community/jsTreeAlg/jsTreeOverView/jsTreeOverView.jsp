@@ -25,7 +25,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-half-percent tablet-mobile bm-remove omega alignleft">
-										<img src="/images/community/jsTreeAlg/jsTreeOverView/Timeliness.jpg" alt="" />
+										<img src="/images/community/jsTreeAlg/jsTreeOverView/RJCO-Cost-Timeliness-Quality-1v12-500w.jpg" alt="" />
 									</div>
 									<div class="space-20"></div>
 									<h3>(연구필요성) 개발 생산성 vs 비즈니스 적시성</h3>
