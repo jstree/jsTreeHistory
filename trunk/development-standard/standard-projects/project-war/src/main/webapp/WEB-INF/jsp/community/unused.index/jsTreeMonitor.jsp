@@ -19,7 +19,7 @@
 <html lang="ko-KR">
 <!--<![endif]-->
 <head>
-<jsp:include page="/jsp/www313cokr/index/meta/script.inc.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
 <title><decorator:title default="본 페이지는 사이트메쉬 템플릿 엔진을 사용하였습니다." /></title>
 
 <!-- CSS Setting -->

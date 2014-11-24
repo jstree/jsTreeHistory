@@ -20,7 +20,7 @@
 <!--<![endif]-->
 <head>
 <c:choose>
-	<jsp:include page="/jsp/www313cokr/index/meta/script.inc.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
 </c:choose>
 
 <!-- CSS Setting -->
