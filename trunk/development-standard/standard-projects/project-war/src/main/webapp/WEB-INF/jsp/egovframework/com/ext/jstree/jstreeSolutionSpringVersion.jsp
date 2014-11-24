@@ -2,48 +2,11 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
-
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 
 <!DOCTYPE html> 
-<!--[if lt IE 7 ]> <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie6 older"> <![endif]-->
-<!--[if IE 7 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie7 older"> <![endif]-->
-<!--[if IE 8 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
 <html lang="ko-KR">
-<!--<![endif]-->
 <head>
-<c:choose>
-	<c:when test="${pageContext.request.serverName=='localhost'||pageContext.request.serverName=='127.0.0.1'}">
-		<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
-	</c:when>
-	<c:otherwise>
-		<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
-	</c:otherwise>
-</c:choose>
-
-
-<!-- CSS Setting -->
-<link rel="icon" href="./favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
-
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jQuery CN Plugins/Styles/Base.css"></customTags:nasJqueryPlugin>
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jQuery CN Plugins/Styles/BreadCrumb.css"></customTags:nasJqueryPlugin>
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jnotify_v2.1/jquery/jNotify.jquery.css"></customTags:nasJqueryPlugin>
-
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/css/ui.jqgrid.css"></customTags:nasJqueryPlugin>
-
-
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jQuery CN Plugins/js/jquery.jBreadCrumb.1.1.js"></customTags:nasJqueryPlugin>
-
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jnotify_v2.1/jquery/jNotify.jquery.js"></customTags:nasJqueryPlugin>
-
 <!-- JSTREE -->
 <customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:nasJqueryPlugin>
 <customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:nasJqueryPlugin>
@@ -142,8 +105,7 @@ input[type="button"] {
             width      : 600,
             height     : 400,
             // Paging
-            toppager   : true,
-            pager      : $("#jqTablePager"),
+            toppager   : false,
             rowNum     : 100,
             rowList    : [100, 200, 300],
             viewrecords: true, // Specify if "total number of records" is displayed
