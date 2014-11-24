@@ -19,31 +19,6 @@
 <html lang="ko-KR">
 <!--<![endif]-->
 <head>
-<c:choose>
-	<c:when test="${pageContext.request.serverName=='localhost'||pageContext.request.serverName=='127.0.0.1'}">
-		<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
-	</c:when>
-	<c:otherwise>
-		<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
-	</c:otherwise>
-</c:choose>
-
-
-<!-- CSS Setting -->
-<link rel="icon" href="./favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
-
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jQuery CN Plugins/Styles/Base.css"></customTags:nasJqueryPlugin>
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jQuery CN Plugins/Styles/BreadCrumb.css"></customTags:nasJqueryPlugin>
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jnotify_v2.1/jquery/jNotify.jquery.css"></customTags:nasJqueryPlugin>
-
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/css/ui.jqgrid.css"></customTags:nasJqueryPlugin>
-
-
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jQuery CN Plugins/js/jquery.jBreadCrumb.1.1.js"></customTags:nasJqueryPlugin>
-
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jnotify_v2.1/jquery/jNotify.jquery.js"></customTags:nasJqueryPlugin>
-
 <!-- JSTREE -->
 <customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:nasJqueryPlugin>
 <customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:nasJqueryPlugin>
@@ -52,7 +27,6 @@
 <!-- JQGRID -->
 <customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/src/i18n/grid.locale-en.js"></customTags:nasJqueryPlugin>
 <customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/js/jquery.jqGrid.min.js"></customTags:nasJqueryPlugin>
-
 
 <!-- Style Setting -->
 <style type="text/css">
