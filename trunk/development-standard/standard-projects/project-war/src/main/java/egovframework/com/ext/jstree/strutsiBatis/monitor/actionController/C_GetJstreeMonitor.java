@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -35,6 +36,7 @@ public class C_GetJstreeMonitor extends ActionSupport implements Preparable,
 	P_JqGrid p_JqGrid;
 	List<T_JqGridCellData> t_JqGridCellDatas;
 
+	@Resource(name="S_GetJstreeMonitor")
 	I_S_GetJstreeMonitor i_S_GetJstreeMonitor;
 
 	HttpServletRequest request;
@@ -68,7 +70,7 @@ public class C_GetJstreeMonitor extends ActionSupport implements Preparable,
 		p_JqGrid = new P_JqGrid();
 		t_JqGridCellDatas = new ArrayList<T_JqGridCellData>();
 
-		i_S_GetJstreeMonitor = new S_GetJstreeMonitor();
+//		i_S_GetJstreeMonitor = new S_GetJstreeMonitor();
 	}
 
 	@Override

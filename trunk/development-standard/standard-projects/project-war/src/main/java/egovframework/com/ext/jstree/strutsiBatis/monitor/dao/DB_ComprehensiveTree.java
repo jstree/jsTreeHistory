@@ -11,7 +11,7 @@ import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.P_JqGrid;
 import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.T_JqGridCellData;
 
-@Repository
+@Repository("DB_ComprehensiveTree")
 public class DB_ComprehensiveTree extends EgovComAbstractDAO implements
 		I_DB_ComprehensiveTree {
 

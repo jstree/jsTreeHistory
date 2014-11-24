@@ -116,7 +116,7 @@ input[type="button"] {
 <script type="text/javascript">
 
     function getGrid() {
-        var jqDataUrl = '${pageContext.request.contextPath}/struts/www313cokr/index/menu/jstreeMonitor/getJstreeMonitor.action';
+        var jqDataUrl = '${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/jstreeMonitor/getJstreeMonitor.action';
         // Set up the jquery grid
         $("#jqTable").jqGrid({
             // Ajax related configurations
