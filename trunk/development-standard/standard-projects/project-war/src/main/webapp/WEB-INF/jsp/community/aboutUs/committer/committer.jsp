@@ -479,12 +479,12 @@
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="#" target="_blank">
+										<a href="https://www.facebook.com/profile.php?id=100006993108849&ref=ts&fref=ts" target="_blank">
 											<i class="fa fa-facebook fa-fw"></i>
 										</a>
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="#" target="_blank">
+										<a href="https://twitter.com/holicplus" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
@@ -663,7 +663,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/test_img.jpg" alt="최대열" class="block" />
+									<img src="${pageContext.request.contextPath}/images/profile/cdy.jpeg" alt="최대열" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Daeyeol Choi</span>
 										<span class="profile-box-role">Developer</span>

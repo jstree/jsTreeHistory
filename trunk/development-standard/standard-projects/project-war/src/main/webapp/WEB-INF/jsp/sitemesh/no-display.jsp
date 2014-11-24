@@ -26,7 +26,7 @@
 							<div class="quick-look-variants">
 								<div class="one-third-percent bm-remove omega">
 									<p class="text-right" style="line-height: 40px;">
-										<label for="quick-look-variants" class="bm-remove">Options</label>
+										<label for="quick-look-variants" class="bm-remove">-</label>
 									</p>
 								</div>
 								<div class="two-third-percent bm-remove alpha last">
@@ -35,7 +35,7 @@
 							</div>
 							<div class="one-third-percent bm-remove omega">
 								<p class="text-right" style="line-height: 40px;">
-									<label for="quick-look-quantity" class="bm-remove">Quantity</label>
+									<label for="quick-look-quantity" class="bm-remove">-</label>
 								</p>
 							</div>
 							<div class="two-third-percent bm-remove alpha last">
@@ -44,10 +44,10 @@
 									<input type="text" name="quantity" id="quick-look-quantity" class="input-quantity" value="1" class="w-full" /> <a href="#" target="_self" class="input-quantity-plus tip-t-fade" data-tooltip="Increase"><i class="fa fa-plus fa-fw"></i></a>
 								</div>
 							</div>
-							<button type="button" class="bm-remove float-right quick-look-add-to-cart">Add To Cart</button>
+							<button type="button" class="bm-remove float-right quick-look-add-to-cart">-</button>
 						</div>
 						<div class="quick-look-not-available clearfix">
-							<button type="button" class="disabled bm-remove float-right no-display">Sold Out
+							<button type="button" class="disabled bm-remove float-right no-display">-
 							</button>
 						</div>
 					</div>

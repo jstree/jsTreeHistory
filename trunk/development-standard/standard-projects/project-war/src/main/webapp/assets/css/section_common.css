@@ -28,6 +28,13 @@ div.center-image {
 #validation img {
 	height : 30px;
 	vertical-align: middle;
+	padding-right : 20px;
+}
+
+@media only screen and (max-width: 980px){
+	#validation {
+		text-align : center;
+	}	
 }
 
 footer p {
@@ -36,10 +43,4 @@ footer p {
 
 #newsletter > div > form {
 	margin-top : 15px;
-}
-
-@media only screen and (max-width: 980px){
-	#validation {
-		text-align : center;
-	}	
 }

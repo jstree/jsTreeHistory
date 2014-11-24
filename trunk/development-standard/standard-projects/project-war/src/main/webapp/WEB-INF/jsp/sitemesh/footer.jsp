@@ -12,12 +12,12 @@
 							<div class="one-quarter bm-larger tm-larger">
 								<div id="custom">
 									<h4 class="title">
-										<span>313 개발자 그룹</span>
+										<span>313 Developer Group</span>
 									</h4>
 									<div class="content rte">
 										<p class="text bm-remove">313 개발자 그룹은 2010년 자바스터디로 시작되었습니다. <br />
 										그후 2013년 게시판 오픈소스 프로젝트를 구상하게 되었고, 바로보드라는 결실을 맺게 되었습니다. <br />
-										더욱더 발전할 313개발자 그룹을 지켜봐 주십시오.</p>
+										더욱더 발전할 313 개발자 그룹을 지켜봐 주십시오.</p>
 									</div>
 								</div>
 							</div>
@@ -28,7 +28,7 @@
 									</h4>
 									<div class="content">
 										<p class="text bm-remove">
-											메일링 리스트에 가입하면 바로보드의 소식을 받아보실 수 있습니다.
+											메일링 리스트에 가입하면 313 개발자 그룹의 소식을 받아보실 수 있습니다.
 										</p>
 										<form action="#" method="post" target="_blank" class="clearfix" novalidate>
 											<input type="email" class="bm-remove" name="EMAIL" placeholder="Email address..." />
@@ -59,8 +59,9 @@
 									<div class="content">
 										<p class="text"></p>
 										<div id="social-icons">
-											<span class="tip-t-fade" data-tooltip="Facebook"><a	href="https://www.facebook.com/313DevGroup" target="_self"><i class="fa fa-facebook fa-fw"></i></a></span> 
-											<span class="tip-t-fade" data-tooltip="Twitter"><a href="https://twitter.com/313DevGroup" target="_self"><i	class="fa fa-twitter fa-fw"></i></a></span> 
+											<span class="tip-t-fade" data-tooltip="Facebook"><a	href="https://www.facebook.com/313DevGroup" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></span> 
+											<span class="tip-t-fade" data-tooltip="Twitter"><a href="https://twitter.com/313DevGroup" target="_blank"><i	class="fa fa-twitter fa-fw"></i></a></span> 
+											<span class="tip-t-fade" data-tooltip="Google+"><a href="https://plus.google.com/communities/116550874214546756994" target="_blank"><i class="fa fa-google-plus fa-fw"></i></a></span>
 										</div>
 									</div>
 								</div>
@@ -73,6 +74,7 @@
 					<div id="validation" class="one-half-percent desktop-tablet bm-remove last">
 						<span>
 							<img id="html5certified" src="${pageContext.request.contextPath}/assets/images/W3C_HTML5_certified.jpg">
+							<img id="csscertified" src="${pageContext.request.contextPath}/assets/images/W3C_CSS_certified.jpg">
 						</span>
 					</div>
 				</div>
