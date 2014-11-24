@@ -40,7 +40,7 @@
 											$('#customer_login').attr('novalidate', '');
 										});
 									</script>
-									<input type="text" name="id" id="id" class="w-full" placeholder="Email Address" value="" />
+									<input type="text" name="id" id="id" class="w-full" placeholder="ID or Email" value="" />
 									<input type="text" class="w-full fake-password" placeholder="Password" />
 									<input type="password" name="password" id="password" class="w-full true-password no-display" />
 									<!-- 
@@ -77,13 +77,13 @@
 										$('#create_customer').attr('novalidate', '');
 									});
 								</script>
-								<input type="email" name="customer[email]" id="register-email" class="w-full" placeholder="Email Address" value="" />
+								<input type="email" name="customer[email]" id="register-email" class="w-full" placeholder="ID or Email" value="" />
 								<input type="text" class="w-full fake-password" placeholder="Password" />
 								<input type="password" name="customer[password]" id="register-password" class="w-full true-password no-display" />
 								<input type="text" class="w-full fake-password" placeholder="Re Enter Password" />
 								<input type="password" name="customer[reenter-password]" id="register-reenter-password" class="w-full true-password no-display" />
 								<div class="text-right">
-									<button type="submit" class="bm-remove">Create</button>
+									<button type="submit" class="bm-remove">Sign Up</button>
 								</div>
 							</form>
 						</div>
