@@ -21,9 +21,12 @@
 						<iframe width="600" height="450" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=37.400157%2C%20127.110075&key=AIzaSyAyN6J1IpsY7fxxVZI12EsxwzPsjd1jLR8"></iframe>
 						<div class="one-half-percent tablet-mobile omega">
 							<div id="page-contact-content" class="rte">
-								<h1>Lorem Ipsum</h1>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac egestas odio. Quisque nec sem eu nisl ornare interdum. Praesent eget scelerisque lorem. Sed vel nisi aliquet nisl iaculis porttitor ac at massa. Cras tempor, enim sed aliquet posuere, libero sapien adipiscing tortor, id pretium diam mi in nulla. In hac habitasse platea dictumst. Ut dictum nunc ipsum, vel aliquet neque placerat sit amet.</p>
-								<p>Ut dignissim, nisi et adipiscing eleifend, diam orci gravida felis, eu auctor nisi urna vel sem. Maecenas quis cursus turpis, id egestas nulla. Vestibulum facilisis sapien ac turpis consequat, et mattis neque dapibus. Vivamus eleifend ultrices scelerisque.</p>
+								<h1>313 Developer Group은</h1>
+								<p>언제나 모든 분들의 소중한 의견을 기다리고 있습니다.</p>
+								<p>저희 제품이나 기타 궁금한 사항이 있으신 경우, 아래의 연락처 또는 옆의 홈페이지 문의 기능을 사용하여 전달해 주시면 작은 의견이라도 놓치지 않고 귀담아 듣도록 하겠습니다.</p>
+								<p>TEL : <a href="#" target="_self"><i class="fa fa-phone fw"></i><span>010-2531-0470</span></a></p>
+								<p>Email : <a href="mailto:313@313.co.kr" target="_self"><i class="fa fa-envelope-o fw"></i><span>313@313.co.kr</span></a></p>
+								<p>GNU 정신을 잊지 않고 함께 나아가는 313 Developer Group에 많은 관심을 부탁드립니다</p>
 							</div>
 						</div>
 						<div id="contact-post" class="one-half-percent tablet-mobile alpha last bm-remove">
