@@ -5,45 +5,45 @@
 	<!-- www.313.co.kr -->
 
 
-	<package name="www313cokrMenuJstreeMonitorDefault"
-			 extends="www313cokrDefaultPkg"
-			 namespace="/struts/www313cokr/index/menu/jstreeMonitor">
+	<package name="www313cokrDefault"
+		 extends="www313cokrDefaultPkg"
+		 namespace="/egovframework/com/ext/jstree/default">
 
-		<action name="www313cokrMenuJstreeMonitorStrutsDefaultAction"
-				class="struts.book.action.DefaultAction">
-			<result>/struts/strutsDefaultAction.jsp</result>
-		</action>
+	<action name="www313cokrStrutsDefaultAction"
+			class="struts.book.action.DefaultAction">
+		<result>/struts/strutsDefaultAction.jsp</result>
+	</action>
 
 	</package>
 
 
 	<package name="www313cokrJstreeMonitor"
-			 namespace="/struts/www313cokr/index/menu/jstreeMonitor"
-			 extends="www313cokrMenuJstreeMonitorDefault">
+		 namespace="/egovframework/com/ext/jstree/strutsiBatis/jstreeMonitor"
+		 extends="www313cokrDefault">
 
 		<interceptors>
 			<interceptor name="timer"
 						 class="com.opensymphony.xwork2.interceptor.TimerInterceptor"/>
 			<interceptor name="logger"
 						 class="com.opensymphony.xwork2.interceptor.LoggingInterceptor"/>
-
+	
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="profiling"/>
 				<interceptor-ref name="timer"/>
 				<interceptor-ref name="logger"/>
 			</interceptor-stack>
 		</interceptors>
-
+	
 		<default-interceptor-ref name="defaultStack"/>
 		<default-action-ref name="www313cokrMenuJstreeMonitorStrutsDefaultAction"/>
-
+	
 		<action name="getJstreeMonitorView">
 			<interceptor-ref name="myStack"/>
-			<result>/WEB-INF/jsp/community/jsTreeAlg/jstreeDemo/analyzeResultStrutsVersion.jsp</result>
+			<result>/WEB-INF/jsp/community/jsTreeAlg/jstreeDemo/jsTreeMonitor.jsp</result>
 		</action>
-
+	
 		<action name="getJstreeMonitor"
-				class="struts.www313cokr.index.menu.jstreeMonitor.actionController.C_GetJstreeMonitor">
+				class="egovframework.com.ext.jstree.strutsiBatis.monitor.actionController.C_GetJstreeMonitor">
 			<interceptor-ref name="defaultStack"/>
 			<interceptor-ref name="myStack"/>
 			<result type="json"/>

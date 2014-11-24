@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd"><sqlMap namespace="jstreeMonitor">
-<!-- 
-	<select id="getJstreeMonitor"
-			parameterClass="ibatis.www313cokr.index.menu.num3.jstreeMonitor.dto.P_JqGrid"
-			resultClass="ibatis.www313cokr.index.menu.num3.jstreeMonitor.vo.T_JqGridCellData">
+
+	<select id="strutsMonitor.getJstreeMonitor"
+			parameterClass="egovframework.com.ext.jstree.strutsiBatis.monitor.vo.P_JqGrid"
+			resultClass="egovframework.com.ext.jstree.strutsiBatis.monitor.vo.T_JqGridCellData">
 				/* { jsTree - getJstreeMonitor } */
 				SELECT 
 						c_id, 
@@ -17,5 +17,5 @@
 				FROM T_COMPREHENSIVETREE 
 				ORDER BY c_parentid,c_position 
 	</select>
- -->
+ 
 </sqlMap>
