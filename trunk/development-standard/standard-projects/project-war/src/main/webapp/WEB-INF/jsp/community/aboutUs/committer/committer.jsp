@@ -699,7 +699,6 @@
 							</div>
 						</div>
 					</div>
-					<!--
 					<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
@@ -740,7 +739,6 @@
 							</div>
 						</div>
 					</div>
-					-->
 				</div>
 			</div>
 			<div class="container">
