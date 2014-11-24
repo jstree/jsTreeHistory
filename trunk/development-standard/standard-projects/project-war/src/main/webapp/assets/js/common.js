@@ -76,8 +76,8 @@ if ((typeof Shopify) === 'undefined')
 			    }
 			
 			    // General
-			    if (product.description.length > 500)
-			        var description = $.trim(product.description).substring(0, 300)
+			    if (product.description.length > 1000)
+			        var description = $.trim(product.description).substring(0, 800)
 			            .split(' ').slice(0, -1).join(' ') + '...';
 			    else
 			        var description = product.description;
