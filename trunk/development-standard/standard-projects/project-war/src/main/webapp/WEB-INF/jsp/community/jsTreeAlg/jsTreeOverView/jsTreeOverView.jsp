@@ -25,7 +25,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-half-percent tablet-mobile bm-remove omega alignleft">
-										<img src="http://placehold.it/599x599" alt="" />
+										<img src="/images/community/jsTreeAlg/jsTreeOverView/Timeliness.jpg" alt="" />
 									</div>
 									<div class="space-20"></div>
 									<h3>(연구필요성) 개발 생산성 vs 비즈니스 적시성</h3>
@@ -44,27 +44,6 @@
 									<p>우리는 가장 빠르게 그리고 효율적이며, 확장 가능한 시스템임을 증명하기 위하여, 현재 <strong>java version</strong>의 설치형 게시판을 개발하고 있습니다.</p>
 									<p>우리는 우리의 JsTree가 아주 유연한 플랫폼 모듈임을 증명하기 위하여, 행정안전부의 egovFramework와 연계하고 있으며, spring version 3, 4 그리고 struts version 까지 구현하였습니다.</p>
 									<p>우리의 열정과 알고리즘 모듈은 은 비지니스의 적시성을 요하는 global 산업 전체에서 사용가능합니다.</p>
-									<!-- 
-									<div class="space-40"></div>
-									<h3>데이터 구성 항목</h3>
-									<table summary="이벤트 명, 설명, 처리 클래스/뷰 로 구성된 데이터 구성 항목">
-										<caption class="v-hidden">데이터 구성 항목</caption>
-										<thead>
-											<tr>
-												<th>이벤트 명</th>
-												<th>설명</th>
-												<th>처리 클래스/뷰</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>클릭</td>
-												<td>접속을 요청한다.</td>
-												<td><a href="http://www.jstree.com" target="_blank" title="새창">http://www.jstree.com</a></td>
-											</tr>
-										</tbody>
-									</table>
-									 -->
 								</div>
 							</div>
 						</div>

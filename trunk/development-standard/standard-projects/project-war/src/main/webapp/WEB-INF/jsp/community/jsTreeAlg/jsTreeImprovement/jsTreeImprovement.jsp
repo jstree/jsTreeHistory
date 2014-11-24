@@ -25,7 +25,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-half-percent tablet-mobile bm-remove omega alignleft">
-										<img src="http://placehold.it/599x599" alt="" />
+										<img src="/images/community/jsTreeAlg/jsTreeImprovement/Celtra-Mobile-Display-Ad-Performance-Report-Shows-Overall-Improvement.jpg" alt="" />
 									</div>
 									<div class="space-20"></div>
 									

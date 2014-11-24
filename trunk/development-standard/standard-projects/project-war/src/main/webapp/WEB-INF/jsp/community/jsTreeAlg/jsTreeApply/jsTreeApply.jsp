@@ -24,8 +24,8 @@
 							<div class="article-body rte" itemprop="articleBody">
 								
 								<div class="tablet-mobile alpha bm-remove last">
-									<div class="one-half-percent tablet-mobile bm-remove omega alignleft">
-										<img src="http://placehold.it/599x599" alt="" />
+									<div class="one-half-percent tablet-mobile bm-remove omega alignleft" style="text-align:center; vertical-align:middle;">
+										<img src="/images/community/jsTreeAlg/jsTreeApply/kiki.bmp" alt="" />
 									</div>
 									<div class="space-20"></div>
 									
