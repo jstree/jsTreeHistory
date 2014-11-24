@@ -234,7 +234,11 @@ input[type="button"] {
 <!-- JavaScript neccessary for the tree -->
 <script type="text/javascript">
 $(function () {
-
+	
+	$(window).load(function(){
+		getGrid();
+	});
+	
 $("#demo")
 	.bind("before.jstree", function (e, data) {
 		$("#alog").append(data.func + "<br />");

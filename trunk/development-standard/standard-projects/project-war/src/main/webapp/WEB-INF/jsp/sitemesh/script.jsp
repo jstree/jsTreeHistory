@@ -12,6 +12,7 @@
 	<head data-placeholder-focus="false" data-placeholder-live="false">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+		<script src='http://code.jquery.com/jquery-migrate-1.2.1.js' type="text/javascript"></script>
 		<script>
 			window.jQuery || document.write('<script src="${pageContext.request.contextPath}/assets/js/cdn-fallback-jquery.min.js?20"><\/script>');
 		</script>

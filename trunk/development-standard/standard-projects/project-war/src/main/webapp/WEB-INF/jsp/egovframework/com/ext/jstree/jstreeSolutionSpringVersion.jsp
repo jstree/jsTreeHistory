@@ -2,11 +2,11 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"       %>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"      %>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"       %>
-<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="x"   uri="http://java.sun.com/jsp/jstl/xml"       %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 
@@ -19,42 +19,39 @@
 <html lang="ko-KR">
 <!--<![endif]-->
 <head>
+<c:choose>
+	<c:when test="${pageContext.request.serverName=='localhost'||pageContext.request.serverName=='127.0.0.1'}">
+		<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
+	</c:otherwise>
+</c:choose>
+
 
 <!-- CSS Setting -->
 <link rel="icon" href="./favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 
-<!--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jquery/plugIns/bootstrapVersion2.3.0/css/bootstrap.css" media="screen"/> -->
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jQuery CN Plugins/Styles/Base.css"></customTags:nasJqueryPlugin>
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jQuery CN Plugins/Styles/BreadCrumb.css"></customTags:nasJqueryPlugin>
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jnotify_v2.1/jquery/jNotify.jquery.css"></customTags:nasJqueryPlugin>
 
-<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery-mega-drop-down-menu.1.3.3/css/skins/www313cokr.css" media="screen"/>
-		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jQuery CN Plugins/Styles/Base.css" media="screen"/>
-		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jQuery CN Plugins/Styles/BreadCrumb.css" media="screen"/>
-		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.css" media="screen"/>
-		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQuery/jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.css" media="screen"/>
-		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery.jqGrid-4.4.3/css/ui.jqgrid.css" media="screen"/>
-		<link rel="stylesheet" type="text/css" href="http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/niceforms-master/niceforms-default.css" media="screen"/>
- <!-- Default JQuery Setting -->
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQuery/jquery.com/jquery-1.9.1.min.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQuery/jquery.com/jquery-migrate-1.1.0.min.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQuery/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery-mega-drop-down-menu.1.3.3/js/jquery.hoverIntent.minified.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery-mega-drop-down-menu.1.3.3/js/jquery.dcmegamenu.1.3.3.min.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jQuery CN Plugins/js/jquery.jBreadCrumb.1.1.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/malsup.com/jquery/form/jquery.form.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/masonry-site/jquery.masonry.js' charset="utf-8"></script>
-	
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/css/ui.jqgrid.css"></customTags:nasJqueryPlugin>
 
-<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<!--[if IE]>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/excanvas_r3/excanvas.compiled.js' charset="utf-8"></script>
+
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jQuery CN Plugins/js/jquery.jBreadCrumb.1.1.js"></customTags:nasJqueryPlugin>
+
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jnotify_v2.1/jquery/jNotify.jquery.js"></customTags:nasJqueryPlugin>
+
 <!-- JSTREE -->
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jstree-v.pre1.0/_lib/jquery.cookie.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jstree-v.pre1.0/_lib/jquery.hotkeys.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jstree-v.pre1.0/jquery.jstree.js' charset="utf-8"></script>
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:nasJqueryPlugin>
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:nasJqueryPlugin>
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/jquery.jstree.js"></customTags:nasJqueryPlugin>
+
 <!-- JQGRID -->
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery.jqGrid-4.4.3/src/i18n/grid.locale-en.js' charset="utf-8"></script>
-		<script type="text/javascript" src='http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jquery.jqGrid-4.4.3/js/jquery.jqGrid.min.js' charset="utf-8"></script>
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/src/i18n/grid.locale-en.js"></customTags:nasJqueryPlugin>
+<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/js/jquery.jqGrid.min.js"></customTags:nasJqueryPlugin>
 
 <!-- Style Setting -->
 <style type="text/css">
@@ -71,11 +68,52 @@
 .NFText{
 	width: 200px;
 }
+
+
+input[type="button"] {
+    display: inline-block;
+    min-width: 100px;
+    min-height: 30px;
+    margin: 5px 0 5px 5px;
+    outline: none;
+    border: 1px solid #f45b4f;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    -moz-border-top-left-radius: 0px;
+    -moz-border-top-right-radius: 0px;
+    -moz-border-bottom-right-radius: 0px;
+    -moz-border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding: 10px;
+    background: #f45b4f;
+    color: #fff;
+    font-family: Oxygen,sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    font-variant: normal;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0em;
+    line-height: normal;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
 </style>
 
-
 <script type="text/javascript">
-
+	
     function getGrid() {
         var jqDataUrl = '${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/monitor/list.do';
         // Set up the jquery grid
@@ -133,14 +171,27 @@
 
 </head> 
 
-<body id="demo_body" onload="getGrid();">
+<body id="demo_body">
+<section class="clearfix" >
 <div id="jsTreeContainer">
 
-<h2>JAVA &amp; Oracle ( Spring + Ibatis ) demo + event order</h2>
+<div class="container bm-medium">
+	<div class="one-whole">
+		<div class="no-display">article</div>
+		<div class="text-center">
+			<h1 class="bm-remove">
+				JAVA &amp; Oracle ( Spring + Ibatis ) demo + event order
+			</h1>
+		</div>
+	</div>
+</div>
+
 <div id="description">
-<div id="mmenu" style="height:50px; overflow:auto;">
-<form class="niceform" style="overflow: hidden;">
-	<fieldset style="float: left;">
+
+
+<div id="mmenu" style="clear:both;" class="clearfix">
+<form class="niceform">
+<div class="one-half-percent desktop-tablet alpha boxed bm-remove">
 		<input type="button" id="add_folder" value="add folder" />
 		<input type="button" id="add_default" value="add file" />
 		<input type="button" id="rename" value="rename" />
@@ -148,33 +199,39 @@
 		<input type="button" id="cut" value="cut" />
 		<input type="button" id="copy" value="copy" />
 		<input type="button" id="paste" value="paste" />
-	</fieldset>
-	<fieldset style="float: right;">
+</div>		
+<div class="one-half-percent desktop-tablet alpha bm-remove boxed last">
 		<input type="button" id="search" value="search"/>
 		<input type="button" id="clear_search" value="clear"/>
 		<div class="textInputVerticalCenter">
-			<input type="text" id="text" value="찾을 노드 이름 입력" />
+			<input type="text" id="text" value="찾을 노드 이름 입력" class="inline-block w-small bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search"/>
 		</div>
-	</fieldset>
+</div>
 </form>
 </div>
 
+<div class="clearfix">
 <!-- the tree container (notice NOT an UL node) -->
-<div id="demo" class="demo" style="height:500px;width:300px;float: left"></div>
+<div id="demo" class="demo" style="height:500px;width:300px;float: left">
+</div>
 <div style="float: left; padding-left: 10px">
 	<table id="jqTable" class="scroll"></table>
     <div id="jqTablePager"></div>
 </div>
-<div style="height:30px; text-align:center; float: left">
-	<input type="button" style='width:170px; height:24px; margin:5px auto;' value="reconstruct" onclick="javascript:alert('not supprt')" />
-	<input type="button" style='width:170px; height:24px; margin:5px auto;' id="analyze" value="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/egovframework/com/etc/jstree/core/analyzeNode.do');" />
-	<input type="button" style='width:170px; height:24px; margin:5px auto;' value="refresh" onclick="$('#demo').jstree('refresh',-1);" />
+</div>
+<div class="clearfix">
+	<input type="button" value="reconstruct" onclick="javascript:alert('not supprt')" />
+	<input type="button" id="analyze" value="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/egovframework/com/etc/jstree/core/analyzeNode.do');" />
+	<input type="button" value="refresh" onclick="$('#demo').jstree('refresh',-1);" />
 </div>
 <div id='alog' style="float:left; border:1px solid gray; padding:5px; height:150px; margin-top:15px; overflow:auto; width: 100%"></div>
 <!-- JavaScript neccessary for the tree -->
 <script type="text/javascript">
 $(function () {
-
+	$(window).load(function(){
+		getGrid();
+	});
+	
 $("#demo")
 	.bind("before.jstree", function (e, data) {
 		$("#alog").append(data.func + "<br />");
@@ -522,5 +579,6 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 //]]>
 </script>
 <!-- ANALYTICS END -->
+</section>
 </body>
 </html> 

@@ -307,7 +307,7 @@ public class CoreController extends GenericAbstractController{
 
 		model.addAttribute("analyzeResult", "");
 
-		return "/jsp/egovframework/example/egovframework/com/ext/jstree/analyzeResult";
+		return "/jsp/egovframework/com/ext/jstree/analyzeResult";
 	}
 
 	/**
@@ -315,10 +315,10 @@ public class CoreController extends GenericAbstractController{
 	 * 
 	 * @return
 	 */
-	@RequestMapping("/egovframework/com/etc/jstree/springiBatis/main.do")
+	@RequestMapping("/mainTest.do")
 	public String jstreeMain() {
 
-		return "/jsp/egovframework/example/egovframework/com/ext/jstree/jstreeSolutionSpringVersion";
+		return "/jsp/egovframework/com/ext/jstree/jstreeSolutionSpringVersion";
 	}
 
     @Override
