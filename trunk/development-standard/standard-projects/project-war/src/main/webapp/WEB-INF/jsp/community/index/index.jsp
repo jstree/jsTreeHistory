@@ -37,7 +37,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=People" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=They" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/aboutUs/committer.do" target="_self" class="overlay"></a>
@@ -52,14 +52,14 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=DEV ENV" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=Develop" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/devTool/313DevALMCI.do" target="_self" class="overlay"></a>
 							<span class="quick-look-icon cursor-pointer tip-t-fade" data-tooltip="Quick Look"><a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket"><i class="fa fa-search fa-fw"></i></a></span>
 						</div>
 						<p class="bm-remove">
-							<a href="${pageContext.request.contextPath}/devTool/313DevALMCI.do" target="_self"><strong>개발환경</strong></a><br />
+							<a href="${pageContext.request.contextPath}/devTool/313DevALMCI.do" target="_self"><strong>Dev Env</strong></a><br />
 							우리는 ALM, CI에 대한 고민을 지속적으로 해왔습니다. 다양한 tool을 사용하고 테스트 해 보며, 현재의 시스템을 구축하였습니다.
 						</p>
 					</div>
@@ -67,7 +67,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=JsTree" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=New" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
@@ -82,7 +82,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=Baroboard" alt="" class="block" />
+								<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text=Think" alt="" class="block" />
 								</a>
 							</div>
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self" class="overlay"></a>
