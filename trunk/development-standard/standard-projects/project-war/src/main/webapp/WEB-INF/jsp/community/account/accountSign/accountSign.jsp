@@ -12,7 +12,7 @@
 							<div class="no-display">customers/Sign in</div>
 							<div class="text-center">
 								<h1 class="bm-remove">
-									<span id="customer-login-breadcrumb-header">Account</span>
+									<span id="customer-login-breadcrumb-header">Sign in or create new account</span>
 									<span id="customer-recover-breadcrumb-header" class="no-display">Recover Password</span>
 								</h1>
 								<p class="bm-remove">

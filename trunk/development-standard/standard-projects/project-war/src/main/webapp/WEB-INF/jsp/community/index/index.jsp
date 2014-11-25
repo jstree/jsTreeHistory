@@ -20,13 +20,13 @@
 						<div class="space-20"></div>
 						
 						<div id="link-list">
-							<h4 class="title"><span>우리가 꾸는 꿈은, 대한민국 IT에 새로운 생각을 전파하는 것입니다.</span></h4>
+							<h4 class="title"><span>우리의 꿈은 대한민국 IT에 새로운 생각을 전파하는 것입니다.</span></h4>
 							<div class="content">
 								<ul class="unstyled bm-remove">
 									<li><strong><span></span></strong></li>
-									<li><i class="fa fa-caret-right fw"></i><span> 우리가 모범이 되어 표준적이고, 올바른 개발이 무엇인지를 같이 생각하고</span></li>
-									<li><i class="fa fa-caret-right fw"></i><span> 끊임없는 연구 개발을 통한 간결한 코드와 향상된 모듈을 오픈소스로 제공하며</span></li>
-									<li><i class="fa fa-caret-right fw"></i><span> 자동화된 개발환경을 소개하여 좀더 스마트한 개발 방법을 소개하고</span></li>
+									<li><i class="fa fa-caret-right fw"></i><span> 우리가 모범이 되어, '올바르고 표준화된 개발이 무엇인가' 에 대한 화두를 던지는 일을 게을리 하지 않을 것이고</span></li>
+									<li><i class="fa fa-caret-right fw"></i><span> 끊임없는 연구 개발의 산물인, 간결한 코드와 향상된 모듈을 오픈소스로 제공하며</span></li>
+									<li><i class="fa fa-caret-right fw"></i><span> 자동화된 개발환경을 소개하여 좀더 스마트한 개발 방법을 모색하고</span></li>
 									<li><i class="fa fa-caret-right fw"></i><span> 대한민국에도 훌륭한 자바 개발자 그룹이 있음을 알리겠습니다.</span></li>
 								</ul>
 							</div>
