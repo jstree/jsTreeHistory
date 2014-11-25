@@ -307,7 +307,7 @@ public class CoreController extends GenericAbstractController{
 
 		model.addAttribute("analyzeResult", "");
 
-		return "/jsp/community/jsTreeAlg/jsTree/jstreeSpringDemo/analyzeResult";
+		return "jsp/community/jsTreeAlg/jsTreeSpringDemo/analyzeResult";
 	}
 
 	/**

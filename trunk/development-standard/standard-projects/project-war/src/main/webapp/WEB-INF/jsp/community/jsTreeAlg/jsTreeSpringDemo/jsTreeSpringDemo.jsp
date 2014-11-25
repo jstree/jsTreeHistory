@@ -1,18 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
-
 <!DOCTYPE html> 
 <html lang="ko-KR">
 <head>
 <!-- JSTREE -->
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:nasJqueryPlugin>
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:nasJqueryPlugin>
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/jquery.jstree.js"></customTags:nasJqueryPlugin>
+<script src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/jquery.jstree.js?20" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.cookie.js?20" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.hotkeys.js?20" type="text/javascript"></script>
+
 
 <!-- JQGRID -->
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/src/i18n/grid.locale-en.js"></customTags:nasJqueryPlugin>
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/js/jquery.jqGrid.min.js"></customTags:nasJqueryPlugin>
+<script src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/src/i18n/grid.locale-en.js?20" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/js/jquery.jqGrid.min.js?20" type="text/javascript"></script>
 
 <!-- Style Setting -->
 <style type="text/css">
@@ -76,7 +75,11 @@ input[type="button"] {
 <script type="text/javascript">
 	
     function getGrid() {
+    	
+    	$("#jqTable").jqGrid("GridUnload");
+    	
         var jqDataUrl = '${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/monitor/list.do';
+        
         // Set up the jquery grid
         $("#jqTable").jqGrid({
             // Ajax related configurations
@@ -124,7 +127,6 @@ input[type="button"] {
                 {}, // settings for delete
                 {sopt: ["cn"]} // Search options. Some options can be set on column level
         );
-
     }
 </script>
 
@@ -181,7 +183,7 @@ input[type="button"] {
 </div>
 <div class="clearfix">
 	<input type="button" value="reconstruct" onclick="javascript:alert('not supprt')" />
-	<input type="button" id="analyze" value="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/egovframework/com/etc/jstree/core/analyzeNode.do');" />
+	<input type="button" id="analyze" value="analyze" onclick="javascript:getGrid();" />
 	<input type="button" value="refresh" onclick="$('#demo').jstree('refresh',-1);" />
 </div>
 <div id='alog' style="float:left; border:1px solid gray; padding:5px; height:150px; margin-top:15px; overflow:auto; width: 100%"></div>
@@ -414,7 +416,7 @@ $("#demo")
 					$.jstree.rollback(data.rlbk);
 				}
 				$("#analyze").click();
-				$("span.ui-icon-refresh").click();
+				$('#demo').jstree('refresh',-1);
 			}
 		);
 	})
@@ -429,7 +431,7 @@ $("#demo")
 				}, 
 				success : function (r) {
 					$("#analyze").click();
-					$("span.ui-icon-refresh").click();
+					$('#demo').jstree('refresh',-1);
 				}
 			});
 		});
@@ -447,7 +449,7 @@ $("#demo")
 					$.jstree.rollback(data.rlbk);
 				}
 				$("#analyze").click();
-				$("span.ui-icon-refresh").click();
+				$('#demo').jstree('refresh',-1);
 			}
 		);
 	})
@@ -461,7 +463,7 @@ $("#demo")
 			}, 
 			function (r) {
 				$("#analyze").click();
-				$("span.ui-icon-refresh").click();
+				$('#demo').jstree('refresh',-1);
 			}
 		);
 	})
@@ -490,7 +492,7 @@ $("#demo")
 						}
 					}
 					$("#analyze").click();
-					$("span.ui-icon-refresh").click();
+					$('#demo').jstree('refresh',-1);
 				}
 			});
 		});
