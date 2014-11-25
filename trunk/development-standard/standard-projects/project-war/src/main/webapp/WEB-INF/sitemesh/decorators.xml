@@ -16,6 +16,7 @@
 <!-- 		egov 관리자 페이지 -->		
 		<pattern>/cmm/*</pattern>
 		<pattern>/EgovPageLink.do?*</pattern>
+		<pattern>/analyzeNode.action?*</pattern>
 	</excludes>
 	
 	<decorator name="default" page="defaultDeco.jsp">
