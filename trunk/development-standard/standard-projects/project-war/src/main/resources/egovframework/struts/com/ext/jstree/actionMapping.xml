@@ -102,7 +102,8 @@
 				class="egovframework.com.ext.jstree.strutsiBatis.core.actionController.C_AnalyzeNodeOfJstreeSolution">
 			<interceptor-ref name="defaultStack"/>
 			<interceptor-ref name="myStack"/>
-			<result name="success">/WEB-INF/jsp/community/jsTreeAlg/jstreeDemo/analyzeResultStrutsVersion.jsp</result>
+<!-- 			<result name="success">/WEB-INF/jsp/community/jsTreeAlg/jstreeDemo/analyzeResultStrutsVersion.jsp</result> -->
+			<result type="json"/>
 		</action>
 
 		<action name="alterNodeType"
