@@ -2,7 +2,6 @@
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
-<!--<![endif]-->
 <head></head>
 <body>
 	<div class="no-display">

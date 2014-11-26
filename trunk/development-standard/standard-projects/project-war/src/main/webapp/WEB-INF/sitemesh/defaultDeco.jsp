@@ -2,23 +2,15 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!-- 국제화 : 지역별 메세지 및 숫자,날짜 -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!-- Core : 변수, 흐름제어, url처리 -->
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %><!-- DB  -->
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!-- 함수 : collection, String 처리  -->
-<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %><!-- XML처리 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
-<!-- Nero v1.1, Copyright 2014, Cloud Eight, https://www.cloud-eight.com -->
-
-<!--[if lt IE 7 ]><html class="no-js ie ie6" lang="ko"><![endif]-->
-<!--[if IE 7 ]><html class="no-js ie ie7" lang="ko"><![endif]-->
-<!--[if IE 8 ]><html class="no-js ie ie8" lang="ko"><![endif]-->
-<!--[if IE 9 ]><html class="no-js ie ie9" lang="ko"><![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="ko" class="no-js">
-<!--<![endif]-->
 	<head data-placeholder-focus="false" data-placeholder-live="false">
 		<c:choose>
 			<c:when test="${pageContext.request.serverName=='localhost'||pageContext.request.serverName=='127.0.0.1'}">

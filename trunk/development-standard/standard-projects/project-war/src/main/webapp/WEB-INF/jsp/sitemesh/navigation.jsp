@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
-<!--<![endif]-->
 	<head></head>
 	<body>
 		<nav class="clearfix">
