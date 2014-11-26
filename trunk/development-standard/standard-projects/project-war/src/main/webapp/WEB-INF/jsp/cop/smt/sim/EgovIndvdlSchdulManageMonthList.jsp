@@ -101,13 +101,13 @@ int newLine = 0;
 
     function fnEgovSchdulSe(setValue) {
 
-        location.href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year%>&amp;month=<%=month%>&amp;searchCondition=SCHDUL_SE&amp;searchKeyword=" + setValue;
+        location.href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year%>&month=<%=month%>&searchCondition=SCHDUL_SE&searchKeyword=" + setValue;
 
     }
     function fnSchduleSearch(year, month) {
         var setValue = document.IndvdlSchdulManageVO.schdulSe.options[document.IndvdlSchdulManageVO.schdulSe.selectedIndex].value; 
     	location.href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year="+year+
-    	              "&amp;month="+month+"&amp;searchCondition=SCHDUL_SE&amp;searchKeyword=" + setValue;
+    	              "&month="+month+"&searchCondition=SCHDUL_SE&searchKeyword=" + setValue;
     }
     window.onload = function(){
         do_resize();
@@ -191,19 +191,19 @@ A:hover { font-size:9pt; font-family:"돋움";color:red;text-decoration:none;}
 							  			<li>
 
 								            <%--<a href="#" onClick="location.href='/cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year-1%>&amp;month=<%=month%>'"> << </a>--%>
-								            <a href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year-1%>&amp;month=<%=month%>" 
+								            <a href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year-1%>&month=<%=month%>" 
 								               onclick="fnSchduleSearch('<%=year-1%>', '<%=month%>'); return false;"
 								            > 
 								            <img alt="이전년도로 이동" src="<c:url value='/'/><%=sImgUrl %>btn_prev.gif" align="middle" style="margin-right:4px;border:0px;">
 								            </a>
 								            <%=year%>년
-								            <a href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year+1%>&amp;month=<%=month%>" 
+								            <a href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year+1%>&month=<%=month%>" 
 								               onclick="fnSchduleSearch('<%=year+1%>', '<%=month%>'); return false;"
 								            > 
 								            <img alt="다음년도로 이동" src="<c:url value='/'/><%=sImgUrl %>btn_next.gif" align="middle" style="margin-left:4px;border:0px;">
 								            </a>
 								            <%if(month > 0 ){ %>
-								            <a href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year%>&amp;month=<%=month-1%>" 
+								            <a href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year%>&month=<%=month-1%>" 
 								               onclick="fnSchduleSearch('<%=year%>', '<%=month-1%>'); return false;"
 								            > 
                                             <img alt="이전월로 이동" src="<c:url value='/'/><%=sImgUrl %>btn_prev.gif" align="middle" style="margin-right:4px;border:0px;">
@@ -211,7 +211,7 @@ A:hover { font-size:9pt; font-family:"돋움";color:red;text-decoration:none;}
 								            <%}%>
 								            <%=month+1%>월
 								            <%if(month < 11 ){ %>
-								            <a href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year%>&amp;month=<%=month+1%>" 
+								            <a href="<c:url value='/'/>cop/smt/sim/EgovIndvdlSchdulManageMonthList.do?year=<%=year%>&month=<%=month+1%>" 
 								                onclick="fnSchduleSearch('<%=year%>', '<%=month+1%>'); return false;"
 								            > 
                                             <img alt="다음월로 이동" src="<c:url value='/'/><%=sImgUrl %>btn_next.gif" align="middle" style="margin-left:4px;border:0px;">
@@ -282,7 +282,7 @@ A:hover { font-size:9pt; font-family:"돋움";color:red;text-decoration:none;}
 						
 						    out.println("<TD valign='top' align='left' height='92px' bgcolor='#EFEFEF' >");
 						    //out.println("<font color='"+color+"'><a href=\"JavaScript:fn_egov_regist_IndvdlSchdulManage('"+iUseDate+"');\">"+index+"</font></a>");
-						    out.println("<font color='"+color+"'><a href=\"EgovIndvdlSchdulManageRegist.do?schdulBgnde="+iUseDate+"&amp;schdulEndde="+iUseDate+"\" target=\"_top\">"+index+"</a></font>");
+						    out.println("<font color='"+color+"'><a href=\"EgovIndvdlSchdulManageRegist.do?schdulBgnde="+iUseDate+"&schdulEndde="+iUseDate+"\" target=\"_top\">"+index+"</a></font>");
 						
 						    out.println("<BR>");
 						    /*
