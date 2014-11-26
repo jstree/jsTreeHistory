@@ -32,6 +32,10 @@ function fn_egov_NormalCalendar(frm, sDate, vDate) {
 	
 	retVal = window.showModalDialog(url, varParam, openParam);
 
+	otherParameters[0] = fn_egov_NormalCalendar.arguments.length;
+	otherParameters[1] = sDate;
+	otherParameters[2] = vDate;
+	
 	if(retVal) {
 		if(fn_egov_NormalCalendar.arguments.length == 2){
 			sDate.value = retVal.vDate;
@@ -41,3 +45,15 @@ function fn_egov_NormalCalendar(frm, sDate, vDate) {
 		}
 	}
 }
+
+function showModalDialogCallback(retVal) {
+	if (retVal) {
+		if (otherParameters[0] == 2) {
+			otherParameters[1].value = retVal.vDate;
+		} else {
+			otherParameters[1].value = retVal.sDate;
+			otherParameters[2].value = retVal.vDate;
+		}
+	}
+}
+

@@ -25,6 +25,7 @@
 <base target="_self">
 <link type="text/css" rel="stylesheet" href="<c:url value="/css/cal.css"/>" />
 <link href="<c:url value='/'/>css/common.css" rel="stylesheet" type="text/css" >
+<script type="text/javascript" src="<c:url value='/js/showModalDialogCallee.js'/>" ></script>
 <script type="text/javaScript" language="javascript">
 <!--
 
@@ -32,6 +33,8 @@
  * 초기화
  ******************************************************** */
 function fnInit(){
+	getDialogArguments();
+
 	var varParam        = window.dialogArguments;
 	var varForm			= document.all["Form"];
 	var pForm			= parent.document.all["pForm"];
@@ -73,6 +76,9 @@ function fnReturnDay(day){
 	retVal.day   = sDay.substr(sDay.length-2,2);
 	retVal.sDate = retVal.year + retVal.month + retVal.day;
 	retVal.vDate = retVal.year + "-" + retVal.month + "-" + retVal.day;
+	
+	setReturnValue(retVal);
+	
 	parent.window.returnValue = retVal;
 	parent.window.close();
 }	
