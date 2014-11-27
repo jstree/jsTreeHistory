@@ -172,7 +172,7 @@
 				<div class="one-whole">
 					<div class="text-center">
 						<h1 class="bm-remove">
-							Contact Us
+							Committer
 						</h1>
 						<p class="bm-remove">
 							<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
