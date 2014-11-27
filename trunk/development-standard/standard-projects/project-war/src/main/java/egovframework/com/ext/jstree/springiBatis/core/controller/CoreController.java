@@ -93,10 +93,12 @@ public class CoreController extends GenericAbstractController{
 	@RequestMapping("/searchNode.do")
 	public List<String> searchNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			 throws Exception {
-
-		if (!StringUtils.hasText(comprehensiveTree.getSearchStr())) {
+		
+		if (!StringUtils.hasText(request.getParameter("searchString"))) {
 			throw new RuntimeException();
 		}
+		
+		comprehensiveTree.setSearchStr(request.getParameter("searchString"));
 
 		return coreService.searchNode(comprehensiveTree);
 	}

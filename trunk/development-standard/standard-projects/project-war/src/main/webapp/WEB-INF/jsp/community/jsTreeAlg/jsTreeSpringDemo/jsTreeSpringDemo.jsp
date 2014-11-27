@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page isELIgnored="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
 
 <!DOCTYPE html> 
-<html lang="ko-KR">
+<html lang="ko">
 <head>
+<meta http-equiv="Content-Language" content="ko" >
 <!-- JSTREE -->
 <script src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/jquery.jstree.js?20" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.cookie.js?20" type="text/javascript"></script>
