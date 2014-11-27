@@ -171,7 +171,9 @@
 			<div class="container">
 				<div class="one-whole">
 					<div class="text-center">
-						<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Committer</p>
+						<h1 class="bm-remove">
+							Contact Us
+						</h1>
 						<p class="bm-remove">
 							<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 							&nbsp;/&nbsp;

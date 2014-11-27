@@ -52,7 +52,7 @@
 										<img src="/images/community/jsTreeAlg/jsTreeOverView/RJCO-Cost-Timeliness-Quality-1v12-500w.jpg" alt="" />
 									</div>
 									<div class="space-20"></div>
-									<h3>(연구필요성) 개발 생산성 vs 비즈니스 적시성</h3>
+									<h4>(연구필요성) 개발 생산성 vs 비즈니스 적시성</h4>
 									<p><a href="http://jstree.com" target="_blank" title="새창">JsTree</a>는 해외에서 활발히 연구되고 있는 OpenSource 프로젝트입니다. 특히 UI 연구가 빠르게 전개되고 있으며 ( jQuery Script 기반 ), BackEnd Logic은 PHP로 구성돼 있습니다.<p>
 									<p>우리 313 개발자 그룹은 이 BackEnd Logic 의 다음과 같은 문제점을 발견하였습니다.
 										<ul>

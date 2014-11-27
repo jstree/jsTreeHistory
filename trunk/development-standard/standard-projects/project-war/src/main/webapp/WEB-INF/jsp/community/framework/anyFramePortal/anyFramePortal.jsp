@@ -37,7 +37,7 @@
 										</a>
 									</div>
 									<div class="space-20"></div>
-									<a href="https://www.anyframejava.org/"><span>Anyframe 이란?</span></a>
+									<a href="https://www.anyframejava.org/"><span><h4>Anyframe 이란?</h4></span></a>
 									<p>Anyframe은 자바 기반의 어플리케이션을 개발하기 위한 기본 아키텍처, 기술 공통 서비스, 템플릿 등을 제공하는 어플리케이션 프레임워크으로써 업계 표준으로 활용되는 오픈 소스를 활용하여 구성되어 있습니다.</p>
 									<p>해당 사이트는 Anyframe 기반의 어플리케이션 개발에 대해서 개발자의 참여를 통해 다양한 지식을 창출하고, 지속적으로 교류해 나가기 위한 오픈 소스 커뮤니티입니다</p>
 									
