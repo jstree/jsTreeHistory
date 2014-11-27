@@ -254,6 +254,15 @@
 							<h1 class="bm-remove">
 								공지사항
 							</h1>
+							<p class="bm-remove">
+								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/community/notice.do" target="_self">Notice</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/community/qna.do" target="_self">QnA</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/community/freeBoard.do" target="_self">Free Board</a>
+							</p>							
 						</div>
 					</div>
 				</div>

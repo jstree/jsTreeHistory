@@ -14,6 +14,17 @@
 								Apache License<br></br>Version 2.0, January 2004<br></br>
 								<a href="http://www.apache.org/licenses/">http://www.apache.org/licenses/</a>
 							</h1>
+							<p class="bm-remove">
+								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">Overview</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardFunction.do" target="_self">Function</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardLicence.do" target="_self">License</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardReleaseNote.do" target="_self">Release Note</a>
+							</p>							
 						</div>
 					</div>
 				</div>

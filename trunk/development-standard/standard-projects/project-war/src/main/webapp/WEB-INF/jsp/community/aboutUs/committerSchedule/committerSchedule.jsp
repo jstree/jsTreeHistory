@@ -33,6 +33,15 @@
 							<h1 class="bm-remove">
 								커미터 일정관리
 							</h1>
+							<p class="bm-remove">
+								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/aboutUs/committer.do" target="_self">Committer</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/aboutUs/committerSchedule.do" target="_self">Schedule Management</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/aboutUs/contactus.do" target="_self">Contact Us</a>
+							</p>							
 						</div>
 					</div>
 				</div>

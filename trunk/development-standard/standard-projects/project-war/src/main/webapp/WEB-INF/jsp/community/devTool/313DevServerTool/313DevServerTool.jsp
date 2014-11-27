@@ -13,6 +13,13 @@
 							<h1 class="bm-remove">
 								313 Server Tools
 							</h1>
+							<p class="bm-remove">
+								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/devTool/313DevALMCI.do" target="_self">ALM CI</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/devTool/313DevServerTool.do" target="_self">Server TOOL</a>
+							</p>							
 						</div>
 					</div>
 				</div>

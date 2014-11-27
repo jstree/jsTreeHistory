@@ -170,7 +170,19 @@
 		<section class="clearfix" >
 			<div class="container">
 				<div class="one-whole">
-					<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Committer</p>
+					<div class="text-center">
+						<p class="special-header animate-in" data-anim-type="fade-in" data-anim-delay="0">Committer</p>
+						<p class="bm-remove">
+							<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
+							&nbsp;/&nbsp;
+							<a href="${pageContext.request.contextPath}/aboutUs/committer.do" target="_self">Committer</a>
+							&nbsp;/&nbsp;
+							<a href="${pageContext.request.contextPath}/aboutUs/committerSchedule.do" target="_self">Schedule Management</a>
+							&nbsp;/&nbsp;
+							<a href="${pageContext.request.contextPath}/aboutUs/contactus.do" target="_self">Contact Us</a>
+						</p>
+					</div>
+					<p></p>
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">

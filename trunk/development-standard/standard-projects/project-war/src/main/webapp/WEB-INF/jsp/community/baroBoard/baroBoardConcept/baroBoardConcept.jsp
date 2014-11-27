@@ -13,6 +13,17 @@
 							<h1 class="bm-remove">
 								컨셉
 							</h1>
+							<p class="bm-remove">
+								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">Overview</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardFunction.do" target="_self">Function</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardLicence.do" target="_self">License</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardReleaseNote.do" target="_self">Release Note</a>
+							</p>							
 						</div>
 					</div>
 				</div>

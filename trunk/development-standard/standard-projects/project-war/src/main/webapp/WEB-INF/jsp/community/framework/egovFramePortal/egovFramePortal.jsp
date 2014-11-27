@@ -13,6 +13,13 @@
 							<h1 class="bm-remove">
 								전자정부 표준프레임워크
 							</h1>
+							<p class="bm-remove">
+								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/framework/anyFramePortal.do" target="_self">ANY FRAMEWORK PORTAL</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/framework/egovFramePortal.do" target="_self">EGOV FRAMEWORK PORTAL</a>
+							</p>							
 						</div>
 					</div>
 				</div>

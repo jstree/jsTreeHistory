@@ -13,6 +13,13 @@
 							<h1 class="bm-remove">
 								애니프레임워크 포탈
 							</h1>
+							<p class="bm-remove">
+								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/framework/anyFramePortal.do" target="_self">ANY FRAMEWORK PORTAL</a>
+								&nbsp;/&nbsp;
+								<a href="${pageContext.request.contextPath}/framework/egovFramePortal.do" target="_self">EGOV FRAMEWORK PORTAL</a>
+							</p>							
 						</div>
 					</div>
 				</div>
