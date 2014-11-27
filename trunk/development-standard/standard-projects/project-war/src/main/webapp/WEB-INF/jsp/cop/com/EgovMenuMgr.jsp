@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
 <meta http-equiv="Content-Language" content="ko" >
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
 <title>메뉴관리</title>
 <link rel="stylesheet" type="text/css" href="http://nas.313.co.kr:5002/Component/jsp/community/index/reset.css" />
 <link rel="stylesheet" type="text/css" href="http://nas.313.co.kr:5002/Component/jsp/community/index/index.css" />
@@ -82,7 +85,6 @@
 <!-- JavaScript neccessary for the tree -->
 <script type="text/javascript">
 $(function () {
-	
 	$("#nodeForm").dialog({
 		height   : 200
 	  , modal    : true
@@ -333,7 +335,8 @@ $("#demo")
 				"data" : function (n) { 
 					// the result is fed to the AJAX request `data` option
 					return { 
-						"c_id" : n.attr ? n.attr("id").replace("node_","").replace("copy_","") : 1 
+						"c_id" : n.attr ? n.attr("id").replace("node_","").replace("copy_","") : 1 ,
+						"r" : getTimestamp()
 					}; 
 				}
 			}
@@ -348,13 +351,14 @@ $("#demo")
 				// You get the search string as a parameter
 				"data" : function (str) {
 					return { 
+						"r": getTimestamp(),
 						"searchString" : str 
 					}; 
 				}
 			}
 		},
 		// Using types - most of the time this is an overkill
-		// read the docs carefully to decide whether you need types
+		// read the docs carefully to decide whether you need types	
 		"types" : {
 			// I set both options to -2, as I do not need depth and children count checking
 			// Those two checks may slow jstree a lot, so use only when needed
@@ -484,6 +488,10 @@ $("#demo")
 				$("#demo").jstree("refresh");
 			}
 		);
+	}
+	
+	function getTimestamp(){
+		return Math.floor(new Date().getTime());
 	}
 </script>
 <!-- //전체 레이어 끝 -->
