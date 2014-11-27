@@ -18,9 +18,9 @@
 								<p class="bm-remove">
 									<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 									&nbsp;/&nbsp;
-									<a href="${pageContext.request.contextPath}/account/accountSign.do" target="_self">Account</a>
+									<a href="${pageContext.request.contextPath}/account/accountSign.do" target="_self">Sign in</a>
 									&nbsp;/&nbsp;
-									<span id="customer-login-breadcrumb"><a href="${pageContext.request.contextPath}/account/accountSign.do" target="_self">Sign in</a></span>
+									<span id="customer-login-breadcrumb"><a href="${pageContext.request.contextPath}/account/accountSign.do" target="_self">Sign up</a></span>
 									<span id="customer-recover-breadcrumb" class="no-display">Recovery</span>
 								</p>								
 							</div>
