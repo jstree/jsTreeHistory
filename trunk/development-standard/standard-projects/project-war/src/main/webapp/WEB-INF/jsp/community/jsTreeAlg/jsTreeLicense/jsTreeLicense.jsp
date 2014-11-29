@@ -30,7 +30,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeImprovement.do" target="_self">Improvement</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeLicense.do" target="_self">License</a>
+								License
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeSpringDemo.do" target="_self">Spring Demo</a>
 								&nbsp;/&nbsp;

@@ -31,7 +31,7 @@
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">Overview</a>
+								Overview
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardFunction.do" target="_self">Function</a>
 								&nbsp;/&nbsp;

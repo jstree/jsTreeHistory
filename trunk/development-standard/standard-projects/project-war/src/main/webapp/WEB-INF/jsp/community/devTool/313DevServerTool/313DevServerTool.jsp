@@ -18,7 +18,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/devTool/313DevALMCI.do" target="_self">ALM CI</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/devTool/313DevServerTool.do" target="_self">Server TOOL</a>
+								Server TOOL
 							</p>							
 						</div>
 					</div>

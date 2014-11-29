@@ -18,7 +18,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">Overview</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardFunction.do" target="_self">Function</a>
+								Function
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardLicence.do" target="_self">License</a>
 								&nbsp;/&nbsp;

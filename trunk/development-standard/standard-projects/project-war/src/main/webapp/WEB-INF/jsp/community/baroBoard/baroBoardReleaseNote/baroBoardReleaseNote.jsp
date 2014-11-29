@@ -22,7 +22,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardLicence.do" target="_self">License</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardReleaseNote.do" target="_self">Release Note</a>
+								Release Note
 							</p>							
 						</div>
 					</div>

@@ -215,7 +215,7 @@ input[type="button"] {
 					&nbsp;/&nbsp;
 					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeSpringDemo.do" target="_self">Spring Demo</a>
 					&nbsp;/&nbsp;
-					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeStrutsDemo.do" target="_self">Struts Demo</a>
+					Struts Demo
 				</p>							
 				</div>
 			</div>

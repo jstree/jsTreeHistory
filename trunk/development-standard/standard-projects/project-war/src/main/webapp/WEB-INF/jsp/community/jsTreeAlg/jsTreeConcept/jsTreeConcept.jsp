@@ -20,7 +20,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeApply.do" target="_self">Apply</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeConcept.do" target="_self">Concept</a>
+								Concept
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeSupport.do" target="_self">Support</a>
 								&nbsp;/&nbsp;

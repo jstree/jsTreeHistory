@@ -28,7 +28,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeIntegration.do" target="_self">Integration</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeImprovement.do" target="_self">Improvement</a>
+								Improvement
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeLicense.do" target="_self">License</a>
 								&nbsp;/&nbsp;

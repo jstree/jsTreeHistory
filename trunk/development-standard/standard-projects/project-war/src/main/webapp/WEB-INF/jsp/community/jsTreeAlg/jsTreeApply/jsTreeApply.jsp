@@ -18,7 +18,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeOverView.do" target="_self">Overview</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeApply.do" target="_self">Apply</a>
+								Apply
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeConcept.do" target="_self">Concept</a>
 								&nbsp;/&nbsp;

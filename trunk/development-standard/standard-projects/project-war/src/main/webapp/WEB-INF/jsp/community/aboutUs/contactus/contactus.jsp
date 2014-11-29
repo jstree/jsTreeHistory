@@ -19,7 +19,7 @@
 							&nbsp;/&nbsp;
 							<a href="${pageContext.request.contextPath}/aboutUs/committerSchedule.do" target="_self">Schedule Management</a>
 							&nbsp;/&nbsp;
-							<a href="${pageContext.request.contextPath}/aboutUs/contactus.do" target="_self">Contact Us</a>
+							Contact Us
 						</p>
 					</div>
 				</div>

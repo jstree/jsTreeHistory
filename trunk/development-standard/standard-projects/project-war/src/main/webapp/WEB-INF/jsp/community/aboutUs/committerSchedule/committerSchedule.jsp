@@ -38,7 +38,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/aboutUs/committer.do" target="_self">Committer</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/aboutUs/committerSchedule.do" target="_self">Schedule Management</a>
+								Schedule Management
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/aboutUs/contactus.do" target="_self">Contact Us</a>
 							</p>							

@@ -259,7 +259,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/community/notice.do" target="_self">Notice</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/community/qna.do" target="_self">QnA</a>
+								QnA
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/community/freeBoard.do" target="_self">Free Board</a>
 							</p>							

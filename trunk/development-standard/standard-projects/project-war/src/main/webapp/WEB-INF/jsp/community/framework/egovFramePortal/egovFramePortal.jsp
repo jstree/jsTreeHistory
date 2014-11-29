@@ -18,7 +18,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/framework/anyFramePortal.do" target="_self">ANY FRAMEWORK PORTAL</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/framework/egovFramePortal.do" target="_self">EGOV FRAMEWORK PORTAL</a>
+								EGOV FRAMEWORK PORTAL
 							</p>							
 						</div>
 					</div>

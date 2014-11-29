@@ -260,7 +260,7 @@
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/community/qna.do" target="_self">QnA</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/community/freeBoard.do" target="_self">Free Board</a>
+								Free Board
 							</p>							
 						</div>
 					</div>

@@ -17,7 +17,7 @@
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeOverView.do" target="_self">Overview</a>
+								Overview
 								&nbsp;/&nbsp;
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeApply.do" target="_self">Apply</a>
 								&nbsp;/&nbsp;
