@@ -38,12 +38,45 @@
 
 #demo {
 	overflow: scroll;
+	width:300px;
+	height:400px;
+	float: left;
 }
 
 .NFText{
 	width: 200px;
 }
-
+table {
+				width : 100%
+			}
+			table thead tr {
+			    border: 1px solid #e8e8e8;
+			    border-right: 0;
+			    border-left: 0;
+			    background: #f7f7f7;
+			    
+			}
+			table thead tr th {
+			    color: #474747;
+			    line-height: 1.3em;
+			    font-weight: inherit;
+			    vertical-align:middle;
+			    
+			}
+			table tbody tr {
+			    border: 1px solid #e8e8e8;
+			    border-right: 0;
+			    border-left: 0;
+			    line-height: 50px;
+			}
+			table tbody tr td {
+				padding: 0 5px;
+			    color: #474747;
+			    line-height: 1.3em;
+			    font-weight: inherit;
+			    text-align:center;
+			    vertical-align:middle;
+			}
 
 input[type="button"] {
     display: inline-block;
@@ -148,43 +181,52 @@ input[type="button"] {
 </head> 
 
 <body id="demo_body" onload="getGrid();">
+
+
 <section class="clearfix" >
 <div id="jsTreeContainer">
 
-<div class="container bm-medium">
-	<div class="one-whole">
-		<div class="no-display">article</div>
-		<div class="text-center">
-			<h1 class="bm-remove">
-				JAVA &amp; Oracle ( struts2 + Spring2.5 + Ibatis ) demo + event order
-			</h1>
-			<p class="bm-remove">
-				<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
-				&nbsp;/&nbsp;
-				<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeOverView.do" target="_self">Overview</a>
-				&nbsp;/&nbsp;
-				<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeApply.do" target="_self">Apply</a>
-				&nbsp;/&nbsp;
-				<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeConcept.do" target="_self">Concept</a>
-				&nbsp;/&nbsp;
-				<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeSupport.do" target="_self">Support</a>
-				&nbsp;/&nbsp;
-				<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeResult.do" target="_self">Result</a>
-				&nbsp;/&nbsp;
-				<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeIntegration.do" target="_self">Integration</a>
-				&nbsp;/&nbsp;
-				<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeImprovement.do" target="_self">Improvement</a>
-				&nbsp;/&nbsp;
-				<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeLicense.do" target="_self">License</a>
-				&nbsp;/&nbsp;
-				<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeSpringDemo.do" target="_self">Spring Demo</a>
-				&nbsp;/&nbsp;
-				<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeStrutsDemo.do" target="_self">Struts Demo</a>
-			</p>			
+<nav>
+		<div class="container bm-medium">
+			<div class="one-whole">
+				<div class="no-display">article</div>
+				<div class="text-center">
+				<h1 class="bm-remove">
+					JAVA &amp; Oracle ( struts2 + Spring2.5 + Ibatis ) demo + event order
+				</h1>
+				<p class="bm-remove">
+					<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
+					&nbsp;/&nbsp;
+					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeOverView.do" target="_self">Overview</a>
+					&nbsp;/&nbsp;
+					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeApply.do" target="_self">Apply</a>
+					&nbsp;/&nbsp;
+					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeConcept.do" target="_self">Concept</a>
+					&nbsp;/&nbsp;
+					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeSupport.do" target="_self">Support</a>
+					&nbsp;/&nbsp;
+					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeResult.do" target="_self">Result</a>
+					&nbsp;/&nbsp;
+					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeIntegration.do" target="_self">Integration</a>
+					&nbsp;/&nbsp;
+					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeImprovement.do" target="_self">Improvement</a>
+					&nbsp;/&nbsp;
+					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeLicense.do" target="_self">License</a>
+					&nbsp;/&nbsp;
+					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeSpringDemo.do" target="_self">Spring Demo</a>
+					&nbsp;/&nbsp;
+					<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeStrutsDemo.do" target="_self">Struts Demo</a>
+				</p>							
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
-<div id="description">
+	</nav>
+	<article>
+		<div class="clearfix">
+			<div class="container bm-remove">
+				<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
+					<div class="article-body rte" itemprop="articleBody">
+						<div id="description">
 <!--기존 
 <div id="mmenu" style="height:50px; overflow:auto;"> 
 -->
@@ -208,7 +250,7 @@ input[type="button"] {
 		<input type="button" id="search" value="search"/>
 		<input type="button" id="clear_search" value="clear"/>
 		<div class="textInputVerticalCenter">
-			<input type="text" id="text" value="찾을 노드 이름 입력" class="inline-block w-small bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search"/>
+			<input type="text" id="text" placeholder="찾을 노드 이름 입력" class="inline-block w-small bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search"/>
 		</div>
 </div>
 <!-- 	</fieldset> -->
@@ -216,7 +258,8 @@ input[type="button"] {
 </div>
 <div class="clearfix">
 <!-- the tree container (notice NOT an UL node) -->
-<div id="demo" class="demo" style="height:500px;width:300px;float: left">
+<!-- <div id="demo" class="demo" style="height:500px;width:300px;float: left"> -->
+<div id="demo" class="demo">
 </div>
 <div style="float: left; padding-left: 10px">
 	<table id="jqTable" class="scroll"></table>
@@ -228,7 +271,7 @@ input[type="button"] {
 	<input type="button"  id="analyze" value="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/analyzeNode.action');" />
 	<input type="button"  value="refresh" onclick="$('#demo').jstree('refresh',-1);" />
 </div>
-<div id='alog' style="float:left; border:1px solid gray; padding:5px; height:150px; margin-top:15px; overflow:auto; width: 100%"></div>
+<div id='alog' style="float:left; border:1px solid gray; padding:5px; height:150px; margin-top:15px; overflow:auto; width: 100%;max-width:1180px;"></div>
 <!-- JavaScript neccessary for the tree -->
 <script type="text/javascript">
 $(function () {
@@ -564,6 +607,12 @@ $(function () {
 });
 </script>
 </div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</article>
 
 </div>
 
