@@ -4,14 +4,6 @@
 <!--<![endif]-->
 	<head>
 		<style type="text/css">
-			@media only screen and (max-width: 480px) {
-			    #egovNotice .mobileInvisible{
-			    	display:none;
-			    }
-				#egovNotice input[type="text"], input[type="password"], input[type="email"], input[type="search"], input[type="tel"], input[type="url"], input[type="number"], input[type="file"], select, textarea{
-					margin:5px 0px 5px 0px;
-				}
-		    }
 			#paging_div{
 				margin:5px 0px 0px 0px;
 			}  
@@ -56,21 +48,38 @@
 			    font-weight: inherit;
 			    text-align:center;
 			    vertical-align:middle;
+			    
 			}
+			td.egovTdAlignLeft {
+			    text-align:left;
+			    max-width:500px;
+		    }
 			table tbody tr td input[type="submit"]{
-				max-width: 100%
-				border:solid 0px black;  !important;
 				color: #000; !important;
 				background: #fff; !important; 
+				margin: 0 0 0px; !important;
 				text-align:left;
+				text-overflow: ellipsis;
+			    width: 100%;
+			    white-space: nowrap;
+			    overflow: hidden;
 			}
 			table tbody tr td input[type="submit"]:hover {
-				max-width: 100%
-				border:solid 0px black;  !important;
 				color: #000; !important;
 				background: #fff; !important; 
 				text-align:left;
 			}
+			@media only screen and (max-width: 480px) {
+			    #egovNotice .mobileInvisible{
+			    	display:none;
+			    }
+				#egovNotice input[type="text"], input[type="password"], input[type="email"], input[type="search"], input[type="tel"], input[type="url"], input[type="number"], input[type="file"], select, textarea{
+					margin:5px 0px 5px 0px;
+				}
+				td.egovTdAlignLeft {
+				    max-width:350px;
+		   		}
+		    }
 		</style>
 		
 		<script type="text/javascript">
