@@ -55,7 +55,7 @@
 						</div>
 						<p class="bm-remove">
 							<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeOverView.do" target="_self"><strong>JsTree</strong></a><br />
-							'어떻게 하면 다양하게 확장이 가능한, 그러면서도 개발이 용이한 모듈을 단시간 내에 만들 수 있을까?' JsTree는 이 문제를 해결할 우리의 솔루션입니다.
+							'확장이 다양하게 가능하며, 단시간에 쉽게 개발이 가능한 모듈을 만들 수 있을까?' JsTree는 이 문제를 해결할 우리의 솔루션입니다.
 						</p>
 					</div>
 					<div class="one-quarter product-item boxed p-ten text-center even last loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
