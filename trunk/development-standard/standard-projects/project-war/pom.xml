@@ -19,6 +19,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>development</groupId>
+			<artifactId>project-jar</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>development</groupId>
 			<artifactId>support-ajax</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
