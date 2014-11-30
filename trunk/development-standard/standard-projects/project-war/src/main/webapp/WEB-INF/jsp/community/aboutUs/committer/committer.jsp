@@ -677,46 +677,6 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/cdy.jpeg" alt="최대열" class="block" />
-									<span class="profile-box-title">
-										<span class="profile-box-name">Daeyeol Choi</span>
-										<span class="profile-box-role">Developer</span>
-									</span>
-								</a>
-							</div>
-						</div>
-						<p class="bm-remove no-text-overflow">
-							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>최대열</strong></a>
-							<br />
-							위메프
-						</p>
-						<div>
-							<div class="content">
-								<p class="text"></p>
-								<div class="contact">
-									<span class="tip-t-fade" data-tooltip="EMail">
-										<a href="mailto:" target="_blank">
-											<i class="fa fa-envelope-o fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="#" target="_blank">
-											<i class="fa fa-facebook fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="#" target="_blank">
-											<i class="fa fa-twitter fa-fw"></i>
-										</a>
-									</span> 
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
-						<div class="image-and-overlay-container bm-small">
-							<div class="image profile-box">
-								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
 									<img src="${pageContext.request.contextPath}/images/profile/jkw.jpg" alt="조경원" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Kyungwon Cho</span>
@@ -765,6 +725,11 @@
 									<th>이름</th>
 									<th>소속</th>
 									<th>메일</th>
+								</tr>
+								<tr>
+									<td>최대열</td>
+									<td>위메프</td>
+									<td>@</td>
 								</tr>
 								<tr>
 									<td>유창근</td>
