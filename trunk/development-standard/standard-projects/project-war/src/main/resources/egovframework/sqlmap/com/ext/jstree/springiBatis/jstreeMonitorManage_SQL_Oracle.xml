@@ -14,7 +14,7 @@
 		     , c_level
 		     , c_title
 		     , c_type 
-		  FROM T_COMPREHENSIVETREE 
+		  FROM T_COMPREHENSIVETREE_SPRING 
 	  ORDER BY c_parentid, c_position 
 	</select>
 </sqlMap>
