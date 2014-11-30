@@ -122,7 +122,7 @@
 						<input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
                         <input type="submit" value="실행" onclick="fn_egov_select_noticeList('1'); return false;" id="invisible" class="invisible" />
                         
-                        <legend class="mobileInvisible">조건정보 영역</legend>
+                        <legend class="mobileInvisible" style="display:none;">조건정보 영역</legend>
 						<div class="sf_start">
 							<select class="inline-block bm-remove w-small tip-r-fade clearfix" data-tooltip="검색조건" name="searchCnd" class="select" title="검색조건 선택">
 								<option value="0" <c:if test="${searchVO.searchCnd == '0'}">selected="selected"</c:if> >제목</option>
@@ -189,7 +189,7 @@
 				        <c:out value="${paginationInfo.totalRecordCount+1 - ((searchVO.pageIndex-1) * searchVO.pageSize + status.count)}"/>
 <!-- 				        </b> -->
 				        </td>            
-				        <td align="left">
+				        <td align="left" class="egovTdAlignLeft">
 				            <form name="subForm" method="post" action="<c:url value='/cop/bbs${prefix}/selectBoardArticle.do'/>">
 				            <c:if test="${result.replyLc!=0}">
 				                <c:forEach begin="0" end="${result.replyLc}" step="1">
