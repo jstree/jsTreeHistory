@@ -256,9 +256,7 @@
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/community/notice.do" target="_self">Notice</a>
-								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/community/qna.do" target="_self">QnA</a>
+								Community
 								&nbsp;/&nbsp;
 								Free Board
 							</p>							

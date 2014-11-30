@@ -16,7 +16,7 @@
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/devTool/313DevALMCI.do" target="_self">ALM CI</a>
+								Dev Tools
 								&nbsp;/&nbsp;
 								Server TOOL
 							</p>							

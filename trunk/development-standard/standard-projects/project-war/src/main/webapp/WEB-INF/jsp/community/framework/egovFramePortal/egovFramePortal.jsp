@@ -16,7 +16,7 @@
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/framework/anyFramePortal.do" target="_self">ANY FRAMEWORK PORTAL</a>
+								Framework
 								&nbsp;/&nbsp;
 								EGOV FRAMEWORK PORTAL
 							</p>							

@@ -177,11 +177,9 @@
 						<p class="bm-remove">
 							<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 							&nbsp;/&nbsp;
+							About Us
+							&nbsp;/&nbsp;
 							Committer
-							&nbsp;/&nbsp;
-							<a href="${pageContext.request.contextPath}/aboutUs/committerSchedule.do" target="_self">Schedule Management</a>
-							&nbsp;/&nbsp;
-							<a href="${pageContext.request.contextPath}/aboutUs/contactus.do" target="_self">Contact Us</a>
 						</p>
 						<br/><br/>
 					</div>

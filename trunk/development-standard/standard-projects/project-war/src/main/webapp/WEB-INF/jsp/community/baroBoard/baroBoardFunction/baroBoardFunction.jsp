@@ -16,13 +16,9 @@
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">Overview</a>
+								Jstree
 								&nbsp;/&nbsp;
 								Function
-								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardLicence.do" target="_self">License</a>
-								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardReleaseNote.do" target="_self">Release Note</a>
 							</p>							
 						</div>
 					</div>

@@ -18,6 +18,8 @@
 								<p class="bm-remove">
 									<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 									&nbsp;/&nbsp;
+									Account
+									&nbsp;/&nbsp;
 									Sign in or Sign Up
 									<span id="customer-recover-breadcrumb" class="no-display">Recovery</span>
 								</p>								

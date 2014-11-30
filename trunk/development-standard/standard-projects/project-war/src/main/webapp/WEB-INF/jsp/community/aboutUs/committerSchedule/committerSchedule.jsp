@@ -36,11 +36,9 @@
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/aboutUs/committer.do" target="_self">Committer</a>
+								About Us
 								&nbsp;/&nbsp;
 								Schedule Management
-								&nbsp;/&nbsp;
-								<a href="${pageContext.request.contextPath}/aboutUs/contactus.do" target="_self">Contact Us</a>
 							</p>							
 						</div>
 					</div>
