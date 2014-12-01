@@ -43,6 +43,14 @@
 			.calendar .sat, .calendar .sat i {color:#529dbc}
 			.calendar .wek{color:#000000}
 			
+			#mobile-cal {display:none;}
+			
+			@media only screen and (max-width: 980px) {
+				#mobile-cal {display:table;}
+				#pc-cal {display:none;}
+				.calendar td {height:50px; padding:1%; vertical-align:top; border:1px solid #d7d7d7;text-overflow:ellipsis; overflow:hidden }
+			}
+			
 			/*달력 내용 링크*/
 			.cal_cont a {
 			             overflow:hidden;
@@ -50,11 +58,8 @@
 			             height:23px; 
 			             padding-right:9px; 
 			             color:#666; 
-			             /*background:url('${pageContext.request.contextPath}/assets/images/ell.gif') no-repeat right center;*/
 			             white-space:nowrap;
 					     text-overflow:ellipsis;     /* IE, Safari */
-					     /*-o-text-overflow:ellipsis;   Opera under 10.7 */
-					     /*-moz-binding: url('ellipsis.xml#ellipsis');*/
 			            }
 			.cal_cont a:hover {color:#f45b4f}
 		</style>
@@ -198,7 +203,7 @@
 		</div>
 		<!-- 달력 -->
 		<div class="calendar">
-			<table>
+			<table id="pc-cal">
 				<caption>일정달력</caption>
 				<colgroup>
 					<col style="width:14.2%" />
@@ -260,6 +265,38 @@
 									</c:otherwise>
 								</c:choose>								
 							</c:forEach>
+							<!-- // 열 생성 -->
+						</tr>
+						<!-- // 행 생성 -->	
+					</c:forEach>				
+				</tbody>
+			</table>
+			<table id="mobile-cal">
+				<caption>일정달력</caption>
+				<colgroup>
+					<col style="width:10%" />
+					<col style="width:90%" />
+				</colgroup>
+				<tbody>
+					<c:set var="startDay" value="1"/>
+					<c:forEach var="i" begin="1" end="${endDay}">
+						<!-- 행 생성 -->
+						<tr>
+							<!-- 열 생성 -->
+							<c:set var="color" value="wek"/>
+							<td>${startDay}</td>
+							<td class="${color}">
+								<div class="cal_cont">
+									<c:forEach var="item" items="${resultList}">
+										<c:set var="iBeginDate" value="${fn:substring(item.schdulBgnde, 6, 8)}"/>
+										<c:set var="iBeginEnd" value="${fn:substring(item.schdulEndde, 6, 8)}"/>
+										<c:if test="${startDay >= iBeginDate && startDay <= iBeginEnd}">
+											<a class="ellipsis" onclick="fnSchdulManageDetail('${item.schdulId}');" target="_self">${item.schdulNm}</a>
+										</c:if>																            
+								</c:forEach>
+								</div>										
+							</td>
+							<c:set var="startDay" value="${startDay+1}"/>
 							<!-- // 열 생성 -->
 						</tr>
 						<!-- // 행 생성 -->	
