@@ -31,7 +31,7 @@
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
 								&nbsp;/&nbsp;
-								Jstree
+								Baro Board
 								&nbsp;/&nbsp;
 								Overview
 							</p>							
