@@ -30,7 +30,7 @@
 				<div class="container bm-medium" id="account-sign">
 					<div class=" p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="one-half-percent desktop-tablet alpha boxed bm-remove">
-							<h1 class="bm-small text-center">Sign in</h1>
+							<h1 class="bm-small text-center">Sign In</h1>
 							<div id="customer-login-form">
 								<form accept-charset="UTF-8" action="${pageContext.request.contextPath}/uat/uia/actionLogin.do" id="customer_login" method="post">
 									<input type="hidden" name="userSe"  value="USR"/>
