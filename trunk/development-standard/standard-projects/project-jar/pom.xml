@@ -44,6 +44,20 @@
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
+		
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-junit</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>		
+		
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-log</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>		
 
 		<dependency>
 			<groupId>development</groupId>
