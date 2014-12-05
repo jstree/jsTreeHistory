@@ -2,7 +2,23 @@
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 <!--<![endif]-->
-	<head></head>
+	<head>
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css"/>
+  
+	<!-- DataTables -->
+	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready( function () {
+		    $('#table_id').DataTable({
+		    	paging: false,
+		    	searching: false,
+		        ordering:  false,
+		        info: false
+		    });
+		} );
+	</script>
+	</head>
 	<body>
 		<section class="clearfix" >
 			<nav>
@@ -43,16 +59,56 @@
 									<p>313 개발자 그룹의 커미터 전원은 해당 ALM(PMS)교육을 주기적으로 받고 있고, 필요에 따라서 지속적으로 확장하고 있습니다</p>
 									<p>우리는 개발 자동화를 꿈꾸었고, 그 꿈의 인프라를 구축하여 현재 운용하고 있습니다. 다음은 그 희망의 증거입니다</p>
 									
-									<p>
-										<span>(1) 산출물 관리 및 위키  : </span><a target="_blank" href="http://www.313.co.kr/confluence"><span>Confluence</span></a><br/>
-										<span>(2) 이슈 관리 : </span><a target="_blank" href="http://www.313.co.kr/jira"><span>Jira</span></a><br/>		
-										<span>(3) 리뷰 : </span><a target="_blank" href="http://www.313.co.kr/fecru"><span>Fisheye & Cruclible</span></a><br/>
-										<span>(4) 소스코드 일관성 유지 : </span><a target="_blank" href="http://www.313.co.kr/svnwebclient/"><span>SvnWebClient</span></a><br/>
-										<span>(5) 자동 빌드 : </span><a target="_blank" href="http://www.313.co.kr/php/www313cokr-maven-site/"><span>Maven</span></a><br/>		
-										<span>(6) 빌드 : </span><a target="_blank" href="http://www.313.co.kr/hudson"><span>Hudson</span></a><a target="_blank" href="http://www.313.co.kr/jenkins"><span>, Jenkins</span></a><br/>
-										<span>(7) 라이브러리 관리 : </span><a target="_blank" href="http://www.313.co.kr/nexus"><span>Nexus</span></a><br/>				
-										<span>(8) 빌드 통합 관리 : </span><a target="_blank" href="http://www.313.co.kr/bamboo"><span>Bamboo</span></a><br/>
-										<span>(9) 자동 테스팅 : </span><a target="_blank" href="http://www.313.co.kr/sonar/"><span>Junit</span></a><br/>
+									<p> 
+										<table id="table_id" class="display">
+									 	    <thead>
+										        <tr>
+										            <th>목적</th>
+										            <th>이름(링크)</th>
+										        </tr>
+										    </thead>
+										    <tbody>
+										        <tr>
+										            <td>산출물 관리 및 위키</td>
+										            <td><a target="_blank" href="http://www.313.co.kr/confluence"><span>Confluence</span></a></td>
+										        </tr>
+										        <tr>
+										            <td>이슈 관리</td>
+										            <td><a target="_blank" href="http://www.313.co.kr/jira"><span>Jira</span></a></td>
+										        </tr>
+										        <tr>
+										            <td>리뷰</td>
+										            <td><a target="_blank" href="http://www.313.co.kr/fecru"><span>Fisheye & Cruclible</span></a></td>
+										        </tr>
+										        <tr>
+										            <td>소스코드 일관성 유지</td>
+										            <td><a target="_blank" href="http://www.313.co.kr/svnwebclient/"><span>SvnWebClient</span></a></td>
+										        </tr>
+										        <tr>
+										            <td>자동 빌드</td>
+										            <td><a target="_blank" href="http://www.313.co.kr/php/www313cokr-maven-site/"><span>Maven</span></a></td>
+										        </tr>
+										        <tr>
+										            <td>빌드</td>
+										            <td>
+										            	<a target="_blank" href="http://www.313.co.kr/hudson"><span>Hudson</span></a>
+										            	<a target="_blank" href="http://www.313.co.kr/jenkins"><span>, Jenkins</span></a>
+										            </td>
+										        </tr>
+										        <tr>
+										            <td>라이브러리 관리</td>
+										            <td><a target="_blank" href="http://www.313.co.kr/nexus"><span>Nexus</span></a></td>
+										        </tr>
+										        <tr>
+										            <td>빌드 통합 관리</td>
+										            <td><a target="_blank" href="http://www.313.co.kr/bamboo"><span>Bamboo</span></a></td>
+										        </tr>
+										        <tr>
+										            <td>자동 테스팅</td>
+										            <td><a target="_blank" href="http://www.313.co.kr/sonar/"><span>Sonar</span></a></td>
+										        </tr>
+										    </tbody>
+										</table>
 									</p>
 								</div>
 							</div>
