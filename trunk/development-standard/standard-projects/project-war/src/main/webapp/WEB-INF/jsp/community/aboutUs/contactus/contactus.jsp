@@ -4,7 +4,7 @@
 <!--<![endif]-->
 	<head></head>
 	<body>
-		<section class="clearfix" >
+		<section class="clearfix" data-menu="aboutUs" data-submenu="contactUs">
 			<div class="container bm-medium">
 				<div class="one-whole">
 					<div class="no-display">page.contact</div>
@@ -31,7 +31,7 @@
 								<h1>313 Developer Group은</h1>
 								<p>언제나 모든 분들의 소중한 의견을 기다리고 있습니다.</p>
 								<p>저희 제품이나 기타 궁금한 사항이 있으신 경우, 아래의 연락처 또는 옆의 홈페이지 문의 기능을 사용하여 전달해 주시면 작은 의견이라도 놓치지 않고 귀담아 듣도록 하겠습니다.</p>
-								<p>TEL : <a href="tel:010-2531-0470" target="_self"><i class="fa fa-phone fw"></i><span>010-2531-0470</span></a></p>
+								<p>TEL : <a href="tel:010-5093-7313" target="_self"><i class="fa fa-phone fw"></i><span>010-5093-7313</span></a></p>
 								<p>Email : <a href="mailto:313@313.co.kr" target="_self"><i class="fa fa-envelope-o fw"></i><span>313@313.co.kr</span></a></p>
 								<p>GNU 정신을 잊지 않고 함께 나아가는 313 Developer Group에 많은 관심을 부탁드립니다</p>
 							</div>
