@@ -30,7 +30,7 @@
 											메일링 리스트에 가입하면 313 개발자 그룹의 소식을 받아보실 수 있습니다.
 										</p>
 										<form action="#" method="post" target="_blank" class="clearfix" novalidate>
-											<input type="email" class="bm-remove" name="EMAIL" placeholder="Email address..." />
+											<input type="email" class="bm-remove" name="email" placeholder="Email address..." />
 											<button type="submit" name="submit" class="bm-remove">
 											<i class="fa fa-chevron-right"></i>
 											</button>

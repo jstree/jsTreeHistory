@@ -428,7 +428,35 @@ function receiveABMessage(event) {
     }
 }
 
-/* */
 
-			
+/**
+ * 커뮤니티 공통 영역에 대한 자바스크립트
+ */
+$(function() {
+  // HEADER //
+  // MENU
+  // CONTENT //
+   
+  // FOOTER //
+  $("#newsletter button[type=submit]").click(function() {
+   
+    var $email = $("#newsletter input[type=email]");
+    var email = $email.val();
+    
+    // TODO 예외처리 보강
+    if (email.length == 0) {
+      alert('이메일을 입력해주세요.'); // TODO 경고창 라이브러리로 대체
+      $email.focus();
+      return false;
+    }
+    
+    /*
+    var url = 'babo';
+    callAjax($("#newsletter form"), '${pageContext.request.contextPath}/' + url, '#section', 'GET', 'html');
+    */
+    
+    return false;
+  });
+  
+});
 			

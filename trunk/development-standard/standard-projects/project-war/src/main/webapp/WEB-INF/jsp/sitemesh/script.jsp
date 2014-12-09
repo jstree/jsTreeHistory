@@ -37,6 +37,7 @@
 		<script src="${pageContext.request.contextPath}/assets/js/backbone.js?20" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/option_selection.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/api.jquery.js" type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/ajax.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/common.js" type="text/javascript"></script>
 		<style type="text/css">
 			html {
