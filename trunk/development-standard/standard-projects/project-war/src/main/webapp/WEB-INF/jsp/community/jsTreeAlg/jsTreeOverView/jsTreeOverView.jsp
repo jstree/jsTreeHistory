@@ -36,22 +36,25 @@
 										<img src="/images/community/jsTreeAlg/jsTreeOverView/RJCO-Cost-Timeliness-Quality-1v12-500w.jpg" alt="" />
 									</div>
 									<div class="space-20"></div>
-									<h4>(연구필요성) 개발 생산성 vs 비즈니스 적시성</h4>
-									<p><a href="http://jstree.com" target="_blank" title="새창">JsTree</a>는 해외에서 활발히 연구되고 있는 OpenSource 프로젝트입니다. 특히 UI 연구가 빠르게 전개되고 있으며 ( jQuery Script 기반 ), BackEnd Logic은 PHP로 구성돼 있습니다.<p>
-									<p>우리 313 개발자 그룹은 JsTree에 관하여 스터디를 진행하면서 BackEnd Logic 의 다음과 같은 문제점을 발견하였습니다.
+									<h4>개발 생산성 vs 비즈니스 적시성</h4>
+									<p><a href="http://jstree.com" target="_blank" title="새창">JsTree</a>J는 jQuery PlugIn 형태의 Library로 <br />
+										상호 작용하는 트리 형태의 UI를 쉽게 구현할 수 있게 해주는 OpenSource 입니다.<p>
+									<p>저희는 JsTree에 관하여 스터디를 진행하면서 다음과 같은 문제점을 발견하였습니다.
 										<ul>
-											<li>수 회의 move와 copy &amp; paste 후의 데이터 무결성 위배</li>
-											<li>PHP언어의 코드 확장 한계성</li>
-											<li>재활용성(Reusability) 결여</li>
+											<li>수 회의 Node 이동와 Copy & Paste 후의 데이터 무결성 위배</li>
+											<li>PHP의 코드 확장(Extension) 및 재활용성(Reusability) 결여</li>
 										</ul>
-										따라서 우리는 이를 java 언어로 converting 했으며, 이 문제들을 모두 해결했습니다.
+										그래서 저희는 PHP로 구현된 부분을 Java로 전환하는 작업을 진행 하였습니다.
 									</p>
-									<p>로직 및 구조의 변경으로 인하여 우리는 JsTree가 단순히 활용성 있는 plugin 이 아닌 컴포넌트 모듈로 확장및 코드를 활용하다 보니, <strong>하나의 스키마 안에서 데이터 집합간의 구조적 관계</strong>에 집중하기 시작했습니다. </p>
-									<p>이는 우리의 Logic을 알고리즘으로 변경하게되는 중요한 계기가 되었고, 우리는 한번 더 코드를 변경하였습니다. 이제 우리는 알고 있습니다. jsTree 알고리즘 모듈을 사용하면, 매우 쉽게 코드를 생산할 수 있고, 매우 쉽게 집중된 성능 관리와, 향상된 개발 품질을 얻을 수 있다는것을 알게되었습니다. 일관된 설계 구조를 가질 수 있고, 확장에 편한 BackEnd를 구현해 낼 수 있었습니다.</p>
-									<p>우리는 이 개발 생산성을 통하여, 비지니스의 적시성을 보장 할 수 있었습니다. 아주 짧은 시간에 ( 자동화된 개발 환경과, 자동화된 개발 코드 생산이 가능하였습니다 ) 비지니스 코드를 생산할 수 있는 기법을 연구하게 되었고, 우리는 이로 인하여, 시기 적절한 비지니스 시스템을 구축하여 배포할 수 있음을 증명하기 시작했습니다.</p>
-									<p>우리는 가장 빠르게 그리고 효율적이며, 확장 가능한 시스템임을 증명하기 위하여, 현재 <strong>java version</strong>의 설치형 게시판을 개발하고 있습니다.</p>
-									<p>우리는 우리의 JsTree가 아주 유연한 플랫폼 모듈임을 증명하기 위하여, 행정안전부의 egovFramework와 연계하고 있으며, spring version 3, 4 그리고 struts version 까지 구현하였습니다.</p>
-									<p>우리의 열정과 알고리즘 모듈은 은 비지니스의 적시성을 요하는 global 산업 전체에서 사용가능합니다.</p>
+									<p>그리고 JsTree를 단순한 PlugIn 이 아닌 컴포넌트 모듈로 확장하기 위해, <br />
+										<strong>하나의 스키마 안에서 데이터 집합간의 구조적 관계</strong>에 집중하기 시작하였으며, <br />
+										이는 기존 로직을 알고리즘 형태로 변경하게되는 중요한 계기가 되었습니다.
+									</p>
+									<p>이로 인하여 매우 쉽게 코드를 생산할 수 있고, 집중된 성능 관리, 향상된 개발 품질 등 <br />
+										다양한 장점을 추가로 얻을 수 있다는 것을 알게 되었습니다. 
+									</p>
+									<p>지금 저희는 이것을 직접 보여드리고자 기존과 다른 무언가에 도전하고 있습니다.</p>
+									<p>JsTree가 앞으로 IT 시장에서 어떠한 변화를 가지고 오게 될지 많은 관심 부탁드립니다.</p>
 								</div>
 							</div>
 						</div>
