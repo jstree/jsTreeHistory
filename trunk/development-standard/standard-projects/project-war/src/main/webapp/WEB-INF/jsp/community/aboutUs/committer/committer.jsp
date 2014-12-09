@@ -3,6 +3,12 @@
 <html lang="ko" class="no-js">
 <!--<![endif]-->
 	<head>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery.li-scroller.1.0.js" type="text/javascript"></script>		
+		<script>
+	    $(function(){
+	        $("ul#liscroll").liScroll({travelocity: 0.06});
+	        }); 
+		</script>
 		<!-- CSS for Committer Profile Section -->
 		<style type="text/css">
 			html {
@@ -128,46 +134,54 @@
 			    color: #fff;
 			}
 			
-			#thanksmemebers > div {
+			
+			/* Special Thanks Members Section */
+			#liscrollbox {
 				padding-top: 20px;
-				width : 350px;
-				margin: 0 auto;
-				font-size: 10pt;
-				
 			}
+			/* Styles For List Scroll */
 			
-			#thanksmemebers-table {
-				width: 100%;
-				
+			.tickercontainer { /* the outer div with the black border */
+			margin: 0 auto;
+			padding: 0 10px;
+			background: #fff; 
+			max-width: 800px; 
+			height: 50px; 
+			overflow: hidden; 
 			}
-			
-			table, th, td {
-				border: 1px solid #E8E8E8;
-			    border-collapse: collapse;
+			.tickercontainer .mask { /* that serves as a mask. so you get a sort of padding both left and right */
+			position: relative;
+			left: 10px;
+			top: 8px;
+			width: 718px;
+			overflow: hidden;
 			}
+			ul.newsticker { /* that's your list */
+			position: relative;
+			left: 750px;
+			list-style-type: none;
+			margin-bottom: 10px;
+			padding-bottom: 10px;
 			
-			th {
-				padding: 4px 0;
 			}
-			
-			td {
-				padding: 4px 0 4px 12px;
+			ul.newsticker li {
+			float: left; /* important: display inline gives incorrect results when you check for elem's width */
+			margin-right: 30px;
+			padding: 0;
+			background: #fff;
+			font-size: 12pt;
 			}
-			
-			@media only screen and (max-width: 500px) {
-				#thanksmemebers > div {
-					width : 100%;
-					
-				}
-				#thanksmemebers-table tr > th:last-child, #thanksmemebers-table tr > td:last-child {
-					display: none;
-				}
-			}
-			
+			ul.newsticker a {
+			white-space: nowrap;
+			padding: 0;
+			color: #ff0000;
+			font: bold 10px Verdana;
+			margin: 0 50px 0 0;
+			} 
 		</style>	
 	</head>
 	<body>
-		<section class="clearfix" >
+		<section class="clearfix" data-menu="aboutUs" data-submenu="committer">
 			<div class="container">
 				<div class="one-whole">
 					<div class="text-center">
@@ -712,66 +726,25 @@
 							</div>
 						</div>
 					</div>
-					-->
+					 -->
 				</div>
 			</div>
 			<div class="container">
 				<div class="one-whole clearfix" data-anim-type="fade-in" data-anim-delay="fade-in">
 					<div id="thanksmemebers" class="one-whole boxed p-twenty">
 						<h1 class="bm-small text-center">Special Thanks Members</h1>
-						<div class="rte">
-							<table id="thanksmemebers-table">
-								<tr>
-									<th>이름</th>
-									<th>소속</th>
-									<th>메일</th>
-								</tr>
-								<tr>
-									<td>최대열</td>
-									<td>위메프</td>
-									<td>@</td>
-								</tr>
-								<tr>
-									<td>유창근</td>
-									<td>위메프</td>
-									<td>@</td>
-								</tr>
-								<tr>
-									<td>민전기</td>
-									<td></td>
-									<td>jack_wam@naver.com</td>
-								</tr>
-								<tr>
-									<td>김경진</td>
-									<td>NC소프트</td>
-									<td>@</td>
-								</tr>
-								<tr>
-									<td>김윤희</td>
-									<td></td>
-									<td>@</td>
-								</tr>
-								<tr>
-									<td>박상진</td>
-									<td>티시스</td>
-									<td>@</td>
-								</tr>
-								<tr>
-									<td>홍성남</td>
-									<td></td>
-									<td>@</td>
-								</tr>
-								<tr>
-									<td>김대훈</td>
-									<td>학생</td>
-									<td>dragond7@naver.com</td>
-								</tr>
-								<tr>
-									<td>이동규</td>
-									<td>학생</td>
-									<td>@</td>
-								</tr>
-							</table>
+						<div id="liscrollbox" class="rte">
+							<ul id="liscroll">
+								<li>최대열</li>
+								<li>유창근</li>
+								<li>민전기</li>
+								<li>김경진</li>
+								<li>김윤희</li>
+								<li>박상진</li>
+								<li>홍성남</li>
+								<li>김대훈</li>
+								<li>이동규</li>
+							</ul>
 						</div>
 					</div>
 				</div>
