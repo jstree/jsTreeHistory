@@ -24,7 +24,7 @@
 		<name>313 DEV GRP</name>
 		<url>http://www.313.co.kr</url>
 	</organization>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.version>1.0.0-SNAPSHOT</project.version>
@@ -128,7 +128,14 @@
 		</developer>
 	</developers>
 
-
+	<issueManagement>
+		<system>Jira</system>
+		<url>http://www.313.co.kr/jira</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Bamboo</system>
+		<url>http://www.313.co.kr/bamboo</url>
+	</ciManagement>
 
 	<!-- 프로젝트 메일링 리스트 -->
 	<mailingLists>
@@ -161,7 +168,7 @@
 	<repositories>
 		<repository>
 			<id>central</id>
-			<url>http://www.egovframe.go.kr/maven</url>
+			<url>http://www.313.co.kr/nexus/content/repositories/central</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -194,7 +201,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central</id>
-			<url>http://www.egovframe.go.kr/maven</url>
+			<url>http://www.313.co.kr/nexus/content/repositories/central</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
