@@ -168,7 +168,7 @@
 	<repositories>
 		<repository>
 			<id>central</id>
-			<url>http://www.313.co.kr/nexus/content/repositories/central</url>
+			<url>http://www.egovframe.go.kr/maven</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -201,7 +201,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central</id>
-			<url>http://www.313.co.kr/nexus/content/repositories/central</url>
+			<url>http://www.egovframe.go.kr/maven</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
