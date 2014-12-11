@@ -17,15 +17,16 @@ package standard.mvc.component.business.community.newsletter.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
-import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
-import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
+import standard.mvc.component.business.community.newsletter.vo.Newsletter;
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
@@ -49,11 +50,10 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 @Controller
-//@RequestMapping(value = { "**/**/community" })
 public class NewsletterController extends GenericAbstractController {
 
-//    @Resource(name = "MenuService")
-//    private CoreService menuService;
+    @Resource(name = "NewsletterService")
+    private CoreService newsletterService;
     
     @Override
     public Map<String, Map<String, Object>> bindTypes() {
@@ -61,50 +61,23 @@ public class NewsletterController extends GenericAbstractController {
         return null;
     }
     
-//    /**
-//     * 노드를 추가한다.
-//     * 
-//     * @param menuComprehensiveTree
-//     * @param request
-//     * @return
-//     * @throws InstantiationException
-//     * @throws IllegalAccessException
-//     */
-//    @ResponseBody
-//    @RequestMapping("/newsletter/addEmail.do")
-//    public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) throws Exception { // TODO Exception으로 변경
-//        
-//        // TODO 공통적 파라미터 값 검증 적용
-//        
-//        String ref = request.getParameter("ref");
-//        String c_position = request.getParameter("c_position");
-//        String c_title = request.getParameter("c_title");
-//        String c_type = request.getParameter("c_type");
-//        
-//        if (ref == null || c_position == null || c_title == null || c_type == null) {
-//            throw new RuntimeException("addNode parameter null");
-//        } 
-//        
-//        if ("0".equals(ref)) {
-//            throw new RuntimeException("addNode ref value is 0");
-//        }
-//    
-//        if (Integer.parseInt(c_position) < 0) {
-//            throw new RuntimeException("addNode c_postion less 0");
-//        }
-//        
-//        if ("drive".equals(c_type)) {
-//            throw new RuntimeException("addNode c_type value is drive");
-//        } 
-//        else if ( !("default".equals(c_type) || "folder".equals(c_type)) ) {
-//            throw new RuntimeException("addNode c_position value is another");
-//        }
-//        
-//        menuComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(menuComprehensiveTree.getC_title()));
-//        menuService.addNode(menuComprehensiveTree);
-//    
-//        return menuComprehensiveTree;
-//    }
-
-    
+    /**
+     * 이메일을 추가한다.
+     * @param newsletter Newsletter VO
+     * @return Newsletter VO
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping("/newsletter/addEmail.do")
+    public ComprehensiveTree addNode(@ModelAttribute Newsletter newsletter) throws Exception {
+        
+        System.out.println( newsletter.getEmail() ); // TODO delete
+        
+        String email = newsletter.getEmail();
+        // TODO 값 검증
+        
+        newsletterService.addNode(newsletter);
+        
+        return newsletter;
+    }
 }

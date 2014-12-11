@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="newsletter">
+	<typeAlias alias="Newsletter" type="standard.mvc.component.business.community.newsletter.vo.Newsletter"/>
+
+	<select id="newsletter.getChildNode" parameterClass="Newsletter" resultClass="Newsletter">
+		/* getChildNode */
+		SELECT A.c_id
+		     , A.c_parentid
+		     , A.c_position
+		     , A.c_left
+		     , A.c_right
+		     , A.c_level
+		     , A.c_title
+		     , A.c_type
+		     , A.c_email
+		     , ( SELECT CASE
+		                    WHEN COUNT(*) &gt; 0 THEN 'InChild'
+           		 			ELSE 'NoChild'
+           		 		END AS YesNo
+         		   FROM T_Newsletter B
+       			  WHERE B.C_PARENTID = A.C_ID
+     		   ) AS childcount
+		  FROM T_Newsletter A
+		 WHERE A.C_PARENTID = #c_id# 
+	  ORDER BY A.C_POSITION ASC
+	</select>
+
+
+	<select id="newsletter.getChildNodeByLeftRight" parameterClass="Newsletter" resultClass="Newsletter">
+		/* getChildNodeByLeftRight */
+		SELECT C_ID
+		     , C_PARENTID
+		     , C_POSITION
+		     , C_LEFT
+		     , C_RIGHT
+		     , C_LEVEL
+		     , C_TITLE
+		     , C_TYPE
+		     , c_email
+		  FROM T_Newsletter 
+		 WHERE C_LEFT &gt;= #c_left# 
+		   AND C_RIGHT &lt;= #c_right# 
+	  ORDER BY C_LEFT ASC
+	</select>
+
+
+	<select id="newsletter.searchNodeByString" parameterClass="Newsletter" resultClass="Newsletter">
+		/* searchNodeByString */
+		SELECT c_left
+		     , c_right
+		  FROM T_Newsletter 
+		 WHERE C_TITLE LIKE '%'||#searchStr#||'%' 
+	</select>
+
+
+	<select id="newsletter.searchNodeByPosition" parameterClass="java.util.List" resultClass="String">
+		/* searchNodeByPosition */
+        SELECT DISTINCT C_ID
+          FROM T_Newsletter
+         WHERE 1=1
+        <iterate prepend="AND" open="(" close=")" conjunction="OR">
+            ( C_LEFT &lt; #[].c_left# AND C_RIGHT &gt; #[].c_right# )
+        </iterate>
+	</select>
+
+
+	<update id="newsletter.alterNode" parameterClass="Newsletter">
+		/* alterNode */
+		UPDATE T_Newsletter 
+		   SET C_TYPE = #c_type#
+		     , C_TITLE = #c_title# 
+		     , c_email = #email# 
+		 WHERE C_ID = #c_id#
+	</update>
+
+
+	<select id="newsletter.getNode" parameterClass="Newsletter" resultClass="Newsletter">
+		/* getNode */
+        SELECT C_ID
+             , C_PARENTID
+             , C_POSITION
+             , C_LEFT
+             , C_RIGHT
+             , C_LEVEL
+             , C_TITLE
+             , C_TYPE
+             , c_email
+          FROM T_Newsletter 
+         WHERE C_ID = #c_id#
+    </select>
+
+
+	<select id="newsletter.getNodeByRef" parameterClass="Newsletter" resultClass="Newsletter">
+		/* getNodeByRef */
+        SELECT C_ID
+             , C_PARENTID
+             , C_POSITION
+             , C_LEFT
+             , C_RIGHT
+             , C_LEVEL
+             , C_TITLE
+             , C_TYPE
+             , c_email
+          FROM T_Newsletter 
+         WHERE C_ID = #ref#
+    </select>
+
+
+	<delete id="newsletter.removeNode" parameterClass="Newsletter">
+		/* removeNode */
+       	DELETE FROM T_Newsletter 
+       	      WHERE C_LEFT  &gt;= #c_left# 
+       	        AND C_RIGHT &lt;= #c_right#
+	</delete>
+	
+	
+	<update id="newsletter.removedAfterLeftFix" parameterClass="Newsletter">
+		/* removedAfterLeftFix */
+       	UPDATE T_Newsletter 
+  		   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
+   	 	 WHERE C_LEFT &gt; #c_right#
+	</update>
+	
+	
+	<update id="newsletter.removedAfterRightFix" parameterClass="Newsletter">
+		/* removedAfterRightFix */
+		UPDATE T_Newsletter 
+		   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
+		 WHERE C_RIGHT &gt; #c_left#
+	</update>
+	
+	
+	<update id="newsletter.removedAfterPositionFix" parameterClass="Newsletter">
+		/* removedAfterPositionFix */
+     	UPDATE T_Newsletter 
+     	   SET C_POSITION = C_POSITION - 1 
+     	 WHERE C_PARENTID = #c_parentid# 
+     	   AND C_POSITION &gt; #c_position#
+	</update>
+
+
+	<select id="newsletter.analyzeRootNode" resultClass="Newsletter">
+		/* searchNodeByString */
+	    SELECT C_LEFT 
+		  FROM T_Newsletter 
+		 WHERE C_PARENTID = 0
+    </select>
+
+
+	<update id="newsletter.cutMyselfPositionFix" parameterClass="Newsletter">
+		/* cutMyselfPositionFix */
+       	UPDATE T_Newsletter 
+       	   SET C_POSITION = C_POSITION - 1 
+       	 WHERE C_PARENTID = #c_parentid# 
+           AND C_POSITION &gt; #c_position#
+    </update>
+
+
+	<update id="newsletter.cutMyselfLeftFix" parameterClass="Newsletter">
+		/* cutMyselfLeftFix */
+       	UPDATE T_Newsletter 
+       	   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
+         WHERE C_LEFT &gt; #c_right#
+    </update>
+    
+    
+	<update id="newsletter.cutMyselfRightFix" parameterClass="Newsletter">
+		/* cutMyselfRightFix */
+       	UPDATE T_Newsletter 
+       	   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
+       	 WHERE C_RIGHT &gt; #c_left#
+		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
+		       #c_idsByChildNodeFromNodeById[]#
+		</iterate>
+	</update>
+
+
+	<update id="newsletter.stretchPositionForMyself" parameterClass="Newsletter">
+		/* stretchPositionForMyselfFromJstree */
+        UPDATE T_Newsletter
+           SET C_POSITION = C_POSITION + 1
+         WHERE C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
+		<isEqual property="copy" compareValue="0">
+           AND C_ID NOT IN
+			<isEmpty property="c_idsByChildNodeFromNodeById">
+						   (-1)
+			</isEmpty>
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
+		                   #c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<update id="newsletter.stretchLeftForMyselfFromJstree" parameterClass="Newsletter">
+		/* stretchLeftForMyselfFromJstree */
+       	UPDATE T_Newsletter 
+       	   SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
+       	 WHERE C_LEFT &gt;= #rightPositionFromNodeByRef#
+		<isEqual property="copyBooleanValue" compareValue="false">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<update id="newsletter.stretchRightForMyselfFromJstree" parameterClass="Newsletter">
+		/* stretchRightForMyselfFromJstree */
+        UPDATE T_Newsletter 
+           SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
+         WHERE C_RIGHT &gt;= #rightPositionFromNodeByRef#
+		<isEqual property="copyBooleanValue" compareValue="false">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
+			   #c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<insert id="newsletter.pasteMyselfFromJstree" parameterClass="Newsletter">
+		/* pasteMyselfFromJstree */
+        INSERT INTO T_Newsletter ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE ) 
+    	SELECT S_Newsletter.NEXTVAL AS C_ID
+    	     , A.*
+       	  FROM (
+		        SELECT #ref#
+		             , C_POSITION
+		             , C_LEFT  - #idifLeft#  AS C_LEFT
+		             , C_RIGHT - #idifRight# AS C_RIGHT
+		             , C_LEVEL - #ldif#      AS C_LEVEL
+		             , C_TITLE
+		             , C_TYPE 
+		          FROM T_Newsletter 
+	    <iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
+		               #c_idsByChildNodeFromNodeById[]#
+		</iterate>
+		      ORDER BY C_LEVEL DESC
+			   ) A
+		<selectKey resultClass="java.lang.Integer">
+			/* pasteMyselfFromJstree SEQ */
+            SELECT S_Newsletter.CURRVAL AS SEQ 
+              FROM DUAL
+        </selectKey>
+	</insert>
+
+
+	<update id="newsletter.enterMyselfFixPosition" parameterClass="Newsletter">
+		/* enterMyselfFixPosition */
+        UPDATE T_Newsletter 
+           SET C_PARENTID = #ref#
+             , C_POSITION = #c_position# 
+         WHERE C_ID = #c_id#
+    </update>
+    
+    
+	<update id="newsletter.enterMyselfFixLeftRight" parameterClass="Newsletter">
+		/* enterMyselfFixLeftRight */
+        UPDATE T_Newsletter 
+           SET C_LEFT  = C_LEFT  - (#idif#)
+             , C_RIGHT = C_RIGHT - (#idif#)
+             , C_LEVEL = C_LEVEL - (#ldif#)
+		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
+			   #c_idsByChildNodeFromNodeById[]#
+		</iterate>
+	</update>
+
+
+	<insert id="newsletter.addMyselfFromJstree" parameterClass="Newsletter">
+		/* addMyselfFromJstree */
+        INSERT INTO T_Newsletter ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, c_email )
+                                 VALUES ( S_Newsletter.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title#, #email# )
+        <selectKey resultClass="java.lang.Integer">
+        	/* addMyselfFromJstree SEQ */
+            SELECT S_Newsletter.CURRVAL AS SEQ 
+              FROM DUAL
+        </selectKey>
+	</insert>
+
+
+	<update id="newsletter.alterNodeType" parameterClass="Newsletter">
+		/* alterNodeType */
+		UPDATE T_Newsletter 
+		   SET C_TYPE = #c_type#
+		 WHERE C_ID = #c_id#
+	</update>
+
+
+	<update id="newsletter.fixCopyIF" parameterClass="Newsletter">
+        /* fixCopyIF */
+        UPDATE T_Newsletter 
+           SET C_POSITION = #fixCopyPosition# 
+         WHERE C_ID = #fixCopyId#
+	</update>
+
+
+	<update id="newsletter.fixCopy" parameterClass="Newsletter">
+		/* fixCopy */
+		UPDATE T_Newsletter 
+		   SET C_PARENTID = #fixCopyId# 
+		 WHERE C_ID = #c_id#
+	</update>
+</sqlMap>

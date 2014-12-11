@@ -86,10 +86,8 @@ public class MenuController extends GenericAbstractController {
 	 */
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/addNode.do")
-	public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) throws Exception { // TODO Exception으로 변경
+	public ComprehensiveTree addNode(MenuComprehensiveTree menuComprehensiveTree, HttpServletRequest request) throws Exception {
 		
-	    // TODO 공통적 파라미터 값 검증 적용
-	    
 		String ref = request.getParameter("ref");
 		String c_position = request.getParameter("c_position");
 		String c_title = request.getParameter("c_title");

@@ -428,6 +428,19 @@ function receiveABMessage(event) {
     }
 }
 
+/**
+ * 컨텍스트 경로를 추출한다.
+ * @author 류강하
+ */
+function getContextPath() {
+  
+  return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+}
+
+function babo() {
+  
+  alert(11);
+}
 
 /**
  * 커뮤니티 공통 영역에 대한 자바스크립트
@@ -438,6 +451,10 @@ $(function() {
   // CONTENT //
    
   // FOOTER //
+  /**
+   * 뉴스레터 이메일을 등록한다.
+   * @author 류강하
+   */
   $("#newsletter button[type=submit]").click(function() {
    
     var $email = $("#newsletter input[type=email]");
@@ -450,10 +467,10 @@ $(function() {
       return false;
     }
     
-    /*
-    var url = 'babo';
-    callAjax($("#newsletter form"), '${pageContext.request.contextPath}/' + url, '#section', 'GET', 'html');
-    */
+    callAjax($("#newsletter form"), getContextPath() + '/newsletter/addEmail.do', 'null', 'get', 'json', null, function(obj) {
+      alert(obj);
+      console.log(obj);
+    });
     
     return false;
   });

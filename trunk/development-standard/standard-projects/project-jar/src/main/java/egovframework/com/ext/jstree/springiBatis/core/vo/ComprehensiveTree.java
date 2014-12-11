@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * Modification Information
  * 
- * @author ?
+ * @author 이동민
  * @since 2014. 7. 31.
  * @version 1.0
  * @see <pre>
