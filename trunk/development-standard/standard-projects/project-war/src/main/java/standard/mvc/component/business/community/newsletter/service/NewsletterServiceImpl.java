@@ -25,6 +25,28 @@ import org.springframework.stereotype.Service;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
+/**
+ * Modification Information
+ * 
+ * @author 류강하
+ * @since 2014. 12. 09.
+ * @version 1.0
+ * @see <pre>
+ *  Class Name  : NewsletterServiceImpl.java
+ *  Description : Newsletter Service 클래스
+ *  Infomation  : Newsletter Service 클래스
+ *  
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일               수정자                 수정내용
+ *  -------       ------------   -----------------------
+ *  2014. 12. 09.  류강하                 최초 생성
+ *  2014. 12. 13   전경훈            removeNode 구현
+ * 
+ *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
+//@JsonInclude(Include.NON_EMPTY)
 @Service("NewsletterService")
 public class NewsletterServiceImpl implements CoreService {
     
@@ -48,7 +70,6 @@ public class NewsletterServiceImpl implements CoreService {
     @Override
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree)
             throws Exception {
-        
         return coreService.addNode(comprehensiveTree);
     }
 
@@ -56,7 +77,7 @@ public class NewsletterServiceImpl implements CoreService {
     public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree)
             throws Exception {
         
-        return 0;
+        return coreService.removeNode(comprehensiveTree);
     }
 
     @Override

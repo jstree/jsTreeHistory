@@ -20,6 +20,25 @@
 									</div>
 								</div>
 							</div>
+							<script>
+								$(document).ready(function() {
+								    $("#email-list-submit").click(function(e) {
+								    	$.post(
+							    			"${pageContext.request.contextPath}/newsletter/addEmail.do",		
+							    			{
+							    				"email" : $("#email-list-input").val()
+							    			},
+							    			function(r) {
+							    				if(r.status==0) {
+							    					alert("Email 입력 성공");	
+							    				} else {
+							    					alert("Email 입력 실패");
+							    				}
+							    			}
+								    	);
+								    });
+								});
+							</script>
 							<div class="one-quarter bm-larger tm-larger">
 								<div id="newsletter">
 									<h4 class="title">
@@ -29,9 +48,9 @@
 										<p class="text bm-remove">
 											메일링 리스트에 가입하면 313 개발자 그룹의 소식을 받아보실 수 있습니다.
 										</p>
-										<form action="#" method="post" target="_blank" class="clearfix" novalidate>
-											<input type="email" class="bm-remove" name="email" placeholder="Email address..." />
-											<button type="submit" name="submit" class="bm-remove">
+										<form id="email-list-form" accept-charset="UTF-8" method="post">
+											<input id="email-list-input" type="email" class="bm-remove" name="email" placeholder="Email address..." />
+											<button id="email-list-submit" type="submit" name="submit" class="bm-remove">
 											<i class="fa fa-chevron-right"></i>
 											</button>
 										</form>

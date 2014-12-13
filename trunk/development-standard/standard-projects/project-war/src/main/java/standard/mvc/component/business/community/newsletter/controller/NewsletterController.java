@@ -16,6 +16,8 @@
 package standard.mvc.component.business.community.newsletter.controller;
 
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
@@ -25,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
-import standard.mvc.component.business.community.newsletter.vo.Newsletter;
+import standard.mvc.component.business.community.newsletter.vo.NewsletterComprehensiveTree;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -45,6 +47,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  수정일               수정자                 수정내용
  *  -------       ------------   -----------------------
  *  2014. 12. 09.  류강하                 최초 생성
+ *  2014. 12. 13.  전경훈           EMail 검증부분 추가 및 jstree 필수 파라미터 설정
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -53,7 +56,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 public class NewsletterController extends GenericAbstractController {
 
     @Resource(name = "NewsletterService")
-    private CoreService newsletterService;
+    CoreService newsletterService;
     
     @Override
     public Map<String, Map<String, Object>> bindTypes() {
@@ -63,21 +66,30 @@ public class NewsletterController extends GenericAbstractController {
     
     /**
      * 이메일을 추가한다.
-     * @param newsletter Newsletter VO
+     * @param newsletterComprehensiveTree Newsletter VO
      * @return Newsletter VO
      * @throws Exception
      */
     @ResponseBody
     @RequestMapping("/newsletter/addEmail.do")
-    public ComprehensiveTree addNode(@ModelAttribute Newsletter newsletter) throws Exception {
+    public ComprehensiveTree addNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) throws Exception {
         
-        System.out.println( newsletter.getEmail() ); // TODO delete
+        String email = newsletterComprehensiveTree.getEmail();
         
-        String email = newsletter.getEmail();
-        // TODO 값 검증
+        // Email 검증
+        String emailPattern = "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+";
+		Pattern p = java.util.regex.Pattern.compile(emailPattern);
+        Matcher m = p.matcher(email);
+        if(!m.matches()){
+        	throw new RuntimeException("EMail address is not valid");
+        }
+        // addNode를 위한 ComprehensiveTree 필수값 지정
+        newsletterComprehensiveTree.setRef(2);
+        newsletterComprehensiveTree.setC_title("Mail");
+        newsletterComprehensiveTree.setC_type("Mail");
+        	
+        newsletterService.addNode(newsletterComprehensiveTree);
         
-        newsletterService.addNode(newsletter);
-        
-        return newsletter;
+        return newsletterComprehensiveTree;
     }
 }
