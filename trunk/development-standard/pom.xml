@@ -126,6 +126,15 @@
 				<role>Java Developer</role>
 			</roles>
 		</developer>
+		<developer>
+			<name>Han Ji Hun</name>
+			<id>thetis15</id>
+			<email>thetis15@hanmail.net</email>
+			<organization>Developer Group</organization>
+			<roles>
+				<role>Java Developer</role>
+			</roles>
+		</developer>
 	</developers>
 
 	<issueManagement>
