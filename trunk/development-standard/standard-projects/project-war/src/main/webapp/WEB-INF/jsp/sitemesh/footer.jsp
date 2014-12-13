@@ -30,9 +30,10 @@
 							    			},
 							    			function(r) {
 							    				if(r.status==0) {
+							    					$("#email-list-input").val("");
 							    					alert("Email 입력 성공");	
 							    				} else {
-							    					alert("Email 입력 실패");
+							    					alert("Email 입력 실패\n 메일 주소 형식을 확인하세요");
 							    				}
 							    			}
 								    	);
