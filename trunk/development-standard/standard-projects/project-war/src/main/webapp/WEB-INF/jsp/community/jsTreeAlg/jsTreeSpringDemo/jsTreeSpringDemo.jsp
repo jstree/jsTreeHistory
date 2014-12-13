@@ -10,128 +10,100 @@
 <script src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.hotkeys.js?20" type="text/javascript"></script>
 
 
-<!-- JQGRID -->
-<script src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/src/i18n/grid.locale-en.js?20" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jquery.jqGrid-4.4.3/js/jquery.jqGrid.min.js?20" type="text/javascript"></script>
+<!-- dataTable -->
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css" />
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/responsive/1.0.3/css/dataTables.responsive.css" />
+<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/responsive/1.0.3/js/dataTables.responsive.js"></script>
 
-<!-- Style Setting -->
+<!-- Style Setting --> 
 <style type="text/css">
-.textInputVerticalCenter{
-	margin-top: 3px !important;
-	padding-top: 3px !important;
-	display: inline;
-}
+	#demo {
+		overflow:auto;
+		max-height:469px;
+		float: left;background:#fff;
+	}
 
-#demo {
-	overflow: scroll;
-}
-
-.NFText{
-	width: 200px;
-}
+	.NFText{
+		width: 200px;
+	}
 
 
-input[type="button"] {
-    display: inline-block;
-    min-width: 100px;
-    min-height: 30px;
-    margin: 5px 0 5px 5px;
-    outline: none;
-    border: 1px solid #f45b4f;
-    border-top-width: 0px;
-    border-right-width: 0px;
-    border-bottom-width: 0px;
-    border-left-width: 0px;
-    -webkit-border-top-left-radius: 0px;
-    -webkit-border-top-right-radius: 0px;
-    -webkit-border-bottom-right-radius: 0px;
-    -webkit-border-bottom-left-radius: 0px;
-    -moz-border-top-left-radius: 0px;
-    -moz-border-top-right-radius: 0px;
-    -moz-border-bottom-right-radius: 0px;
-    -moz-border-bottom-left-radius: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    padding: 10px;
-    background: #f45b4f;
-    color: #fff;
-    font-family: Oxygen,sans-serif;
-    font-size: 1em;
-    font-weight: 400;
-    font-variant: normal;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0em;
-    line-height: normal;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    -ms-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-}
-</style>
+	input[type="button"] {
+		display: inline-block;
+		min-width: 100px;
+		min-height: 30px;
+		margin: 5px 0 5px 5px;
+		outline: none;
+		border: 1px solid #f45b4f;
+		border-top-width: 0px;
+		border-right-width: 0px;
+		border-bottom-width: 0px;
+		border-left-width: 0px;
+		-webkit-border-top-left-radius: 0px;
+		-webkit-border-top-right-radius: 0px;
+		-webkit-border-bottom-right-radius: 0px;
+		-webkit-border-bottom-left-radius: 0px;
+		-moz-border-top-left-radius: 0px;
+		-moz-border-top-right-radius: 0px;
+		-moz-border-bottom-right-radius: 0px;
+		-moz-border-bottom-left-radius: 0px;
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border-bottom-left-radius: 0px;
+		padding: 10px;
+		background: #f45b4f;
+		color: #fff;
+		font-family: Oxygen,sans-serif;
+		font-size: 1em;
+		font-weight: 400;
+		font-variant: normal;
+		text-align: center;
+		text-transform: uppercase;
+		letter-spacing: 0em;
+		line-height: normal;
+		-webkit-transition: all 0.2s ease-in-out;
+		-moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-ms-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+	}
+	button{text-transform:capitalize;}
+	.btn_wrap01{overflow:hidden;width:74%;float:left;} 
+	.btn_wrap01 button{display;block;float:left;margin:0;padding:0;width:14%;min-width:0;border-left:1px solid #fff;}
+	.btn_wrap01 button:first-child{border-left:0;}
+	.btn_wrap02{width:26%;float:right;}
+	.btn_wrap02 .textInputVerticalCenter{width:69%;float:left;}
+	.btn_wrap02 button{display;block;float:left;margin:0;padding:0;;min-width:0;width:15%;border-left:1px solid #fff;}
+	.btn_wrap02 input[type="text"]{width:100%}
 
-<script type="text/javascript">
-	
-    function getGrid() {
-    	
-    	$("#jqTable").jqGrid("GridUnload");
-    	
-        var jqDataUrl = '${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/monitor/list.do';
-        
-        // Set up the jquery grid
-        $("#jqTable").jqGrid({
-            // Ajax related configurations
-            url        : jqDataUrl,
-            datatype   : "json",
-            mtype: "POST",
-            gridModel  : "gridModel",
-            // Specify the column names
-            colNames   : ["c_id", "c_parentid", "c_position", "c_left", "c_right", "c_level", "c_title", "c_type"],
-            prmNames: {page:"_page",rows:"_rows", sort: "sidx",order: "sord", search:"_search", nd:"nd", id:"id",oper:"oper",editoper:"edit",addoper:"add",deloper:"del", subgridid:"id", npage: null, totalrows:"totalrows"},
-            // Configure the columns
-            colModel   : [
-                { name: "c_id", index: "c_id", width: 100, align: "left" },
-                { name: "c_parentid", index: "c_parentid", width: 100, align: "left" },
-                { name: "c_position", index: "c_position", width: 100, align: "left" },
-                { name: "c_left", index: "c_left", width: 100, align: "left" },
-                { name: "c_right", index: "c_right", width: 100, align: "left" },
-                { name: "c_level", index: "c_level", width: 100, align: "left" },
-                { name: "c_title", index: "c_title", width: 100, align: "left" },
-                { name: "c_type", index: "c_type", width: 100, align: "left" }
-                
-            ],
-            // Grid total width and height
-            width      : 600,
-            height     : 400,
-            // Paging
-            toppager   : false,
-            rowNum     : 100,
-            rowList    : [100, 200, 300],
-            viewrecords: true, // Specify if "total number of records" is displayed
-            // Default sorting
-            sortname   : "Id",
-            sortorder  : "asc",
-            
-            onSelectRow: function(ids) {
-            	alert(ids);
-            },
-            
-            // Grid caption
-            caption    : "JstreeMonitor - T_COMPREHENSIVETREE_Viewer"
-        }).navGrid("#jqTablePager",
-                { refresh: true, add: false, edit: false, del: false },
-                {}, // settings for edit
-                {}, // settings for add
-                {}, // settings for delete
-                {sopt: ["cn"]} // Search options. Some options can be set on column level
-        );
-    }
-</script>
+	.demo_side{width:30%;margin:30px 0;border-top:1px solid #000;}
+	.demo_con{width:68%;float:right;margin:30px 0;border-top:1px solid #000;} 
+	.demo_con table tbody tr td{text-align:center;}
+	.demo_con table tbody tr.child td{text-align:left;}
+	.dataTables_filter, .dataTables_length{display:none}
 
+	table.dataTable.dtr-inline.collapsed tbody td:first-child:before, table.dataTable.dtr-inline.collapsed tbody th:first-child:before {top:50%;margin-top:-10px;}
 
+	@media only screen and (max-width: 768px){ 
+		.btn_wrap01{width:100%}
+		.btn_wrap01 button{border-bottom:1px solid #fff;}
+		.btn_wrap01 button:first-child{width:100%;}
+		.btn_wrap02{width:100%;margin-top:10px}
+		.demo_side{width:100%;}
+		.demo_con{width:100%;}
+	}
+	@media only screen and (min-width:481px) and (max-width: 768px){
+		.btn_wrap01 button{width:33.33%;}
+		.btn_wrap01 button:nth-child(3n-1){border-left:0;}
+	}
+	@media only screen and (max-width: 480px) {
+		.btn_wrap01 button{width:50%;}
+		.btn_wrap01 button:nth-child(2n){border-left:0;}
+		
+	}
+	</style>
 </head> 
 
 <body id="demo_body">
@@ -167,47 +139,100 @@ input[type="button"] {
 				
 				
 				<div id="mmenu" style="clear:both;" class="clearfix">
-				<form class="niceform">
-				<div class="one-half-percent desktop-tablet alpha boxed bm-remove">
-						<input type="button" id="add_folder" value="add folder" />
-						<input type="button" id="add_default" value="add file" />
-						<input type="button" id="rename" value="rename" />
-						<input type="button" id="remove" value="remove" />
-						<input type="button" id="cut" value="cut" />
-						<input type="button" id="copy" value="copy" />
-						<input type="button" id="paste" value="paste" />
-				</div>		
-				<div class="one-half-percent desktop-tablet alpha bm-remove boxed last">
-						<input type="button" id="search" value="search"/>
-						<input type="button" id="clear_search" value="clear"/>
-						<div class="textInputVerticalCenter">
-							<input type="text" id="text" value="찾을 노드 이름 입력" class="inline-block w-small bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search"/>
+					<form class="niceform">
+						<div class="desktop-tablet alpha boxed bm-remove btn_wrap01">
+							<button type="button" id="add_folder"><i class="fa fa-plus"></i> add folder</button>
+							<button type="button" id="add_default"><i class="fa fa-plus"></i> add file</button>
+							<button type="button" id="rename"><i class="fa fa-eraser"></i> rename</button>
+							<button type="button" id="remove"><i class="fa fa-minus"></i> remove</button>
+							<button type="button" id="cut"><i class="fa fa-cut"></i> cut</button>
+							<button type="button" id="copy"><i class="fa fa-copy"></i> copy</button>
+							<button type="button" id="paste"><i class="fa fa-paste"></i> paste</button>
 						</div>
+						<div class="desktop-tablet alpha bm-remove boxed last btn_wrap02">
+							<div class="textInputVerticalCenter">
+								<input type="text" id="text" placeholder="찾을 노드 이름 입력" class="inline-block bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search"/>
+							</div>
+							<button type="button" id="search" title="Search"><i class="fa fa-search"></i></button>
+							<button type="button" id="clear_search" title="Clear"><i class="fa fa-eraser"></i></button>
+						</div>
+					</form>
 				</div>
-				</form>
-				</div>
-				
+
 				<div class="clearfix">
-				<!-- the tree container (notice NOT an UL node) -->
-				<div id="demo" class="demo" style="height:500px;width:300px;float: left">
+					<div id="demo" class="demo demo_side">
+					</div>
+
+					<div class="demo_con">
+						<table id="jstreeTable" class="display responsive no-wrap" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>c_id</th>
+									<th>c_parentid</th>
+									<th>c_position</th>
+									<th>c_left</th>
+									<th>c_right</th>
+									<th>c_level</th>
+									<th>c_title</th>
+									<th>c_type</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
 				</div>
-				<div style="float: left; padding-left: 10px">
-					<table id="jqTable" class="scroll"></table>
-				    <div id="jqTablePager"></div>
-				</div>
-				</div>
+
 				<div class="clearfix">
 					<input type="button" value="reconstruct" onclick="javascript:alert('not supprt')" />
-					<input type="button" id="analyze" value="analyze" onclick="javascript:getGrid();" />
-					<input type="button" value="refresh" onclick="$('#demo').jstree('refresh',-1);" />
+					<input type="button"  id="analyze" value="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/analyzeNode.action');" />
+					<input type="button"  value="refresh" onclick="$('#demo').jstree('refresh',-1);" />
 				</div>
-				<div id='alog' style="float:left; border:1px solid gray; padding:5px; height:150px; margin-top:15px; overflow:auto; width: 100%"></div>
+				<div id='alog' style="float:left; border:1px solid gray; padding:5px; height:150px; margin-top:15px; overflow:auto; width: 100%;max-width:1180px;"></div>
+
 				<!-- JavaScript neccessary for the tree -->
 				<script type="text/javascript">
+				function jstreeDataTableReload() {
+					var jstreeDataTable = $('#jstreeTable').dataTable( {
+						"ajax": {
+							"url": "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/monitor/list.do",
+							"dataSrc": "rows"
+						},
+						"processing": true,
+						"responsive": true,
+						"columns": [
+							{ "data": "cell.0" },
+							{ "data": "cell.1" },
+							{ "data": "cell.2" },
+							{ "data": "cell.3" },
+							{ "data": "cell.4" },
+							{ "data": "cell.5" },
+							{ "data": "cell.6" },
+							{ "data": "cell.7" }
+						]
+					} );
+					jstreeDataTable.api().ajax.reload();
+				}
+
 				$(function () {
-					$(window).load(function(){
-						getGrid();
-					});
+
+				var jstreeDataTable = $('#jstreeTable').dataTable( {
+					"ajax": {
+						"url": "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/monitor/list.do",
+						"dataSrc": "rows"
+					},
+					"processing": true,
+					"responsive": true,
+					"columns": [
+						{ "data": "cell.0" },
+						{ "data": "cell.1" },
+						{ "data": "cell.2" },
+						{ "data": "cell.3" },
+						{ "data": "cell.4" },
+						{ "data": "cell.5" },
+						{ "data": "cell.6" },
+						{ "data": "cell.7" }
+					]
+				} );
+
 					
 				$("#demo")
 					.bind("before.jstree", function (e, data) {
@@ -518,7 +543,7 @@ input[type="button"] {
 				<script type="text/javascript">
 				// Code for the menu buttons
 				$(function () { 
-					$("#mmenu input").click(function () {
+					$("#mmenu input, #mmenu button").click(function () {
 						switch(this.id) {
 							case "add_default":
 							case "add_folder":
@@ -526,6 +551,7 @@ input[type="button"] {
 								break;
 							case "search":
 								$("#demo").jstree("search", document.getElementById("text").value);
+								$('#jstreeTable').DataTable().column(6).search(document.getElementById("text").value).draw();
 								break;
 							case "text": break;
 							default:
@@ -541,24 +567,6 @@ input[type="button"] {
 	</div>
 </div>
 </article>
-
-
-<!-- ANALYTICS START -->
-<!-- https://www.google.com/analytics/settings/home?scid=18527803 web log Analyzer  -->
-<script type="text/javascript">
-//<![CDATA[
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-18527803-1']);
-_gaq.push(['_trackPageview']);
-_gaq.push(['_trackPageLoadTime']);
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-//]]>
-</script>
-<!-- ANALYTICS END -->
 </section>
 </body>
 </html> 
