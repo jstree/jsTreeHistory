@@ -64,7 +64,7 @@
 									<div class="content">
 										<ul class="unstyled bm-remove">
 											<li><a href="mailto:313@313.co.kr" target="_self"><i class="fa fa-envelope-o fw"></i><span>Mail to Admin</span></a></li>
-											<li><a href="tel:010-2531-0470" target="_self"><i class="fa fa-phone fw"></i><span>010-5093-7313</span></a></li>
+											<li><a href="tel:010-5093-7313" target="_self"><i class="fa fa-phone fw"></i><span>010-5093-7313</span></a></li>
 											<!-- <li><a href="#" target="_self"><i class="fa fa-map-marker fw"></i><span>서울시 영등포구 문래동5가</span></a></li> -->
 										</ul>
 									</div>
