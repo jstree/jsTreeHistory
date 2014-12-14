@@ -20,26 +20,6 @@
 									</div>
 								</div>
 							</div>
-							<script>
-								$(document).ready(function() {
-								    $("#email-list-submit").click(function(e) {
-								    	$.post(
-							    			"${pageContext.request.contextPath}/newsletter/addEmail.do",		
-							    			{
-							    				"email" : $("#email-list-input").val()
-							    			},
-							    			function(r) {
-							    				if(r.status==0) {
-							    					$("#email-list-input").val("");
-							    					alert("Email 입력 성공");	
-							    				} else {
-							    					alert("Email 입력 실패\n 메일 주소 형식을 확인하세요");
-							    				}
-							    			}
-								    	);
-								    });
-								});
-							</script>
 							<div class="one-quarter bm-larger tm-larger">
 								<div id="newsletter">
 									<h4 class="title">
@@ -98,6 +78,46 @@
 					</div>
 				</div>
 			</div>
-		</footer>	
+		</footer>
+		<script>
+		$(document).ready(function() {
+		  
+		    $("#email-list-submit").click(function(e) {
+		      
+		        var $email = $("#email-list-input");
+		        var email = $email.val();
+		        
+		        // TODO 예외처리 보강
+		        if (email.length == 0) {
+		          alert('이메일을 입력해주세요.'); // TODO 경고창 라이브러리로 대체
+		          $email.focus();
+		          return false;
+		        }
+		        
+		        callAjax($("#newsletter form"), getContextPath() + '/newsletter/addEmail.do', null, 'get', 'json', null, function(obj) {
+		          alert(obj);
+		          console.log(obj);
+		        });
+		        
+// 		    	$.post(
+// 	    			"${pageContext.request.contextPath}/newsletter/addEmail.do",		
+// 	    			{
+// 	    				"email" : $("#email-list-input").val()
+// 	    			},
+// 	    			function(r) {
+// 	    				if(r.status==0) {
+// 	    					$("#email-list-input").val("");
+// 	    					alert("Email 입력 성공");	
+// 	    				} else {
+// 	    					alert("Email 입력 실패\n 메일 주소 형식을 확인하세요");
+// 	    				}
+// 	    			}
+// 		    	);
+		        
+		        
+		        return false;
+		    });
+		});
+		</script>
 	</body>
 </html>

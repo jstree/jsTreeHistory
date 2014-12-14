@@ -80,13 +80,12 @@ public class NewsletterController extends GenericAbstractController {
         String emailPattern = "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+";
 		Pattern p = java.util.regex.Pattern.compile(emailPattern);
         Matcher m = p.matcher(email);
-        if(!m.matches()){
-        	throw new RuntimeException("EMail address is not valid");
+        if(!m.matches()) {
+        	throw new RuntimeException("Email address is not valid");
         }
-        // addNode를 위한 ComprehensiveTree 필수값 지정
-        newsletterComprehensiveTree.setRef(2);
-        newsletterComprehensiveTree.setC_title("Mail");
-        newsletterComprehensiveTree.setC_type("Mail");
+        
+        newsletterComprehensiveTree.setRef(3); // addNode를 위한 ComprehensiveTree 필수값 지정
+        newsletterComprehensiveTree.setC_type("default");
         	
         newsletterService.addNode(newsletterComprehensiveTree);
         

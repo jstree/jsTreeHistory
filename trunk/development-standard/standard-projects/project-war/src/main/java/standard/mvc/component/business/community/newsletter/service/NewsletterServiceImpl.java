@@ -46,7 +46,6 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-//@JsonInclude(Include.NON_EMPTY)
 @Service("NewsletterService")
 public class NewsletterServiceImpl implements CoreService {
     
@@ -70,6 +69,7 @@ public class NewsletterServiceImpl implements CoreService {
     @Override
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree)
             throws Exception {
+        
         return coreService.addNode(comprehensiveTree);
     }
 

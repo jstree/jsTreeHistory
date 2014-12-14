@@ -23,10 +23,8 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 	
 	var formQueryString;
 	
-	if(form){
-	
+	if (form){
 		formQueryString = $(form).serialize();
-	
 	}
 	
 	/**
@@ -97,6 +95,7 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 		 * 					 크로스도메인(2개의 도메인 사이의 정보교환)과 dataType: "jsonp" 인 경우는 동기방식이 지원되지 않음.
 		 * cache / boolean : 브라우저에 의해 요청되는 페이지 캐시 여부. (dafault 는 true 이나 dataType 이 script 인 경우 false)
 		 * 					 만일 이 값을 false로 하면, 브라우저의 캐쉬사용을 강제적으로 막음. 또한 false 세팅하면 URL 쿼리 스트링에 "_=[TIMESTAMP]" 값이 추가
+		 * beforeSend(jqXHR, settings) : 요청 전 콜백 함수로 jqXHR 객체 변경 가능함. false 반환 시 ajax 요청하지 않음. jQuery 1.5 버젼부터 요청의 type에 상관 없이 호출 가능함.
 		 * success(data, textStatus, jqXHR) / function, array(added 1.5): Http 요청 성공시 이벤트 핸들러.
 		 * error(jqXHR, textStatus, errorThrown) / function : Http 요청 실패시 이벤트 핸들러.
 		 * 													  jqXHR 는 발생한 에러 타입과 추가적인 예외 사항을 포함.
@@ -123,8 +122,8 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 		contentType : 'undefined' == typeof contentType || null == contentType ? 'application/x-www-form-urlencoded; charset=UTF-8' : contentType,
 		async : 'undefined' == typeof async || null == async ? true : async,
 		cache : false,
-		beforeSend: function(){
-//			TODO
+		beforeSend: function(jqXHR) {
+		  jqXHR.setRequestHeader('customHeader', 'ajax');
 		},
 		statusCode: {
 			0 : function() {
@@ -160,15 +159,24 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 
 	result.done(function(responseText, textStatus, jqXHR) {
 //		notificationAlert("success");
-
+	  
+	  console.log('[done]');
+	  console.log(responseText);
+    console.log(textStatus);
+    console.log(jqXHR);
+	  
 		if ("text" == this.dataType.toLowerCase() || "html" == this.dataType.toLowerCase()) {
-
 			$(target).html(responseText);
-
 		}
 	});
 	
 	result.fail(function(jqXHR, textStatus, errorThrown){
+	  
+	  console.log('[fail]');
+	  console.log(jqXHR);
+	  console.log(textStatus);
+	  console.log(errorThrown);
+	  
 		var isDefinedError = false;
 		
 		for(var status in this.statusCode){
@@ -177,9 +185,7 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 				
 				isDefinedError = true;
 				break;
-			
 			}
-		
 		}
 		
 		if (isDefinedError) {
@@ -195,6 +201,10 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 
 	result.always(function(responseText, textStatus) {
 //		notificationAlert("complete");
+	  
+	  console.log('[always]');
+	  console.log(responseText);
+	  console.log(textStatus);
 	});
 	//dataType : xml , html , json , jsonp , script , text
 		
