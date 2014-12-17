@@ -94,7 +94,7 @@
 		          return false;
 		        }
 		        
-		        callAjax($("#newsletter form"), getContextPath() + '/newsletter/addEmail.do', null, 'get', 'json', null, function(obj) {
+		        callAjax($("#newsletter form"), getContextPath() + '/newsletter/addEmail.do', null, 'post', 'json', null, function(obj) {
 		          alert(obj);
 		          console.log(obj);
 		        });

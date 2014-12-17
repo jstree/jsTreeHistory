@@ -394,4 +394,20 @@ public class EgovTemplateManageController {
     	if (!checkAuthority(model)) return "/jsp/cmm/uat/uia/EgovLoginUsr";	// server-side 권한 확인
     	return "/jsp/cop/com/EgovMenuMgr";
     }
+    
+    /**
+     * 뉴스레터 관리를 호출한다.
+     * @author 류강하
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/cop/com/newsletterMgr.do")
+    public String newsletterMgr(ModelMap model) throws Exception {
+        
+        if (!checkAuthority(model)) {
+            return "/jsp/cmm/uat/uia/EgovLoginUsr"; // server-side 권한 확인
+        }
+        return "/jsp/cop/com/newsletterMgr";
+    }
 }

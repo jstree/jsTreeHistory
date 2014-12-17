@@ -15,6 +15,7 @@
  */
 package standard.mvc.component.business.community.newsletter.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,6 +54,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 @Controller
+@RequestMapping("/newsletter")
 public class NewsletterController extends GenericAbstractController {
 
     @Resource(name = "NewsletterService")
@@ -71,8 +73,9 @@ public class NewsletterController extends GenericAbstractController {
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping("/newsletter/addEmail.do")
-    public ComprehensiveTree addNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) throws Exception {
+    @RequestMapping("/addEmail.do")
+    public ComprehensiveTree addNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
+            throws Exception {
         
         String email = newsletterComprehensiveTree.getEmail();
         
@@ -80,15 +83,34 @@ public class NewsletterController extends GenericAbstractController {
         String emailPattern = "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+";
 		Pattern p = java.util.regex.Pattern.compile(emailPattern);
         Matcher m = p.matcher(email);
-        if(!m.matches()) {
+        if (!m.matches()) {
         	throw new RuntimeException("Email address is not valid");
         }
         
         newsletterComprehensiveTree.setRef(3); // addNode를 위한 ComprehensiveTree 필수값 지정
         newsletterComprehensiveTree.setC_type("default");
+        newsletterComprehensiveTree.setC_title(newsletterComprehensiveTree.getEmail());
         	
         newsletterService.addNode(newsletterComprehensiveTree);
         
         return newsletterComprehensiveTree;
+    }
+    
+    /**
+     * 이메일 목록을 가져온다.
+     * @param newsletterComprehensiveTree
+     * @return List<NewsletterComprehensiveTree>
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping("/getEmailList.do")
+    public List<NewsletterComprehensiveTree> getChildNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree)
+             throws Exception {
+        
+        if (newsletterComprehensiveTree.getC_id() == 0) {
+            throw new RuntimeException();
+        }
+        
+        return newsletterService.getChildNode(newsletterComprehensiveTree);
     }
 }

@@ -56,7 +56,9 @@ public class NewsletterServiceImpl implements CoreService {
     public <T extends ComprehensiveTree> List<T> getChildNode(
             T comprehensiveTree) throws Exception {
         
-        return null;
+        List<T> childNodes = coreService.getChildNode(comprehensiveTree);
+        
+        return childNodes;
     }
 
     @Override

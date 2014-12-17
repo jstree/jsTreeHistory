@@ -9,6 +9,6 @@ VALUES (2, 1, 0, 2, 5, 0, 'Newsletter', 'drive', NULL);
 
 /* Insert Anonymous Users Folder */
 INSERT INTO T_NEWSLETTER_COMPREHENSIVETREE(C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_EMAIL)
-VALUES (3, 2, 0, 3, 4, 0, 'Anonymous Users', 'folder', NULL);
+VALUES (3, 2, 0, 3, 4, 1, 'Anonymous Users', 'folder', NULL);
 
 COMMIT;

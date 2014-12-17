@@ -40,7 +40,11 @@ public class NewsletterComprehensiveTree extends ComprehensiveTree {
     public HashMap<String, String> getAttr() {
         
         HashMap<String, String> attrs = super.getAttr();
-        
+//        attrs.put("left", String.valueOf(super.getC_left()));
+//        attrs.put("right", String.valueOf(super.getC_right()));
+//        attrs.put("position", String.valueOf(super.getC_position()));
+//        
+//        attrs.put("email", String.valueOf(getEmail()));
         return attrs;
     }
     
