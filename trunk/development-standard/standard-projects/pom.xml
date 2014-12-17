@@ -19,7 +19,7 @@
 	
 	<modules>
 		<module>project-war</module>
-		<module>project-templateSm</module>
+		<module>project-ear</module>
 		<module>project-jar</module>
 	</modules>
 
