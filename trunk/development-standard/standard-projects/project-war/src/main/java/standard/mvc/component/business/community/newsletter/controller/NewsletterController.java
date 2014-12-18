@@ -45,10 +45,12 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  
  *  << 개정이력(Modification Information) >>
  *  
- *  수정일               수정자                 수정내용
- *  -------       ------------   -----------------------
+ *  수정일                 수정자                 수정내용
+ *  -------        ------------   -----------------------
  *  2014. 12. 09.  류강하                 최초 생성
- *  2014. 12. 13.  전경훈           EMail 검증부분 추가 및 jstree 필수 파라미터 설정
+ *  2014. 12. 13.  전경훈                 Email 검증부분 추가 및 jstree 필수 파라미터 설정
+ *  2014. 12. 15.  류강하                 getChildNode 추가
+ *  2014. 12. 19.  류강하                 사용자 및 관리자 화면을 동시 처리하게끔 addNode 보완, removeNode 추가
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -77,19 +79,26 @@ public class NewsletterController extends GenericAbstractController {
     public ComprehensiveTree addNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
             throws Exception {
         
-        String email = newsletterComprehensiveTree.getEmail();
+        String email = newsletterComprehensiveTree.getC_title();
         
-        // Email 검증
-        String emailPattern = "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+";
-		Pattern p = java.util.regex.Pattern.compile(emailPattern);
-        Matcher m = p.matcher(email);
-        if (!m.matches()) {
-        	throw new RuntimeException("Email address is not valid");
+        if (!"folder".equals(newsletterComprehensiveTree.getC_type())) {
+            
+            // Email 검증
+            String emailPattern = "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+";
+            Pattern p = java.util.regex.Pattern.compile(emailPattern);
+            Matcher m = p.matcher(email);
+            if (!m.matches()) {
+                throw new RuntimeException("Email address is not valid");
+            }
+            
+            // addNode를 위한 ComprehensiveTree 필수값 지정
+            if (newsletterComprehensiveTree.getRef() == 0) {
+                newsletterComprehensiveTree.setRef(3);
+            }
+            if (newsletterComprehensiveTree.getC_type() == null) {
+                newsletterComprehensiveTree.setC_type("default");
+            }
         }
-        
-        newsletterComprehensiveTree.setRef(3); // addNode를 위한 ComprehensiveTree 필수값 지정
-        newsletterComprehensiveTree.setC_type("default");
-        newsletterComprehensiveTree.setC_title(newsletterComprehensiveTree.getEmail());
         	
         newsletterService.addNode(newsletterComprehensiveTree);
         
@@ -98,8 +107,8 @@ public class NewsletterController extends GenericAbstractController {
     
     /**
      * 이메일 목록을 가져온다.
-     * @param newsletterComprehensiveTree
-     * @return List<NewsletterComprehensiveTree>
+     * @param newsletterComprehensiveTree Newsletter VO
+     * @return List<NewsletterComprehensiveTree> Newsletter VO List
      * @throws Exception
      */
     @ResponseBody
@@ -113,4 +122,18 @@ public class NewsletterController extends GenericAbstractController {
         
         return newsletterService.getChildNode(newsletterComprehensiveTree);
     }
+    
+    /**
+     * 이메일을 지운다.
+     * @param newsletterComprehensiveTree Newsletter VO
+     * @return removed count
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping("/removeEmail.do")
+    public int removeNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
+            throws Exception {
+        
+        return newsletterService.removeNode(newsletterComprehensiveTree);
+    } 
 }

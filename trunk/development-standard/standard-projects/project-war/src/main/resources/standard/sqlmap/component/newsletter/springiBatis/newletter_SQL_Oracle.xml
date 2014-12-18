@@ -13,7 +13,6 @@
 		     , A.c_level
 		     , A.c_title
 		     , A.c_type
-		     , A.c_email
 		     , ( SELECT CASE
 		                    WHEN COUNT(*) &gt; 0 THEN 'InChild'
            		 			ELSE 'NoChild'
@@ -37,7 +36,6 @@
 		     , C_LEVEL
 		     , C_TITLE
 		     , C_TYPE
-		     , c_email
 		  FROM T_Newsletter_Comprehensivetree 
 		 WHERE C_LEFT &gt;= #c_left# 
 		   AND C_RIGHT &lt;= #c_right# 
@@ -69,8 +67,6 @@
 		/* alterNode */
 		UPDATE T_Newsletter_Comprehensivetree 
 		   SET C_TYPE = #c_type#
-		     , C_TITLE = #c_title# 
-		     , c_email = #email# 
 		 WHERE C_ID = #c_id#
 	</update>
 
@@ -85,7 +81,6 @@
              , C_LEVEL
              , C_TITLE
              , C_TYPE
-             , c_email
           FROM T_Newsletter_Comprehensivetree 
          WHERE C_ID = #c_id#
     </select>
@@ -101,7 +96,6 @@
              , C_LEVEL
              , C_TITLE
              , C_TYPE
-             , c_email
           FROM T_Newsletter_Comprehensivetree 
          WHERE C_ID = #ref#
     </select>
@@ -275,8 +269,8 @@
 
 	<insert id="newsletter.addMyselfFromJstree" parameterClass="Newsletter">
 		/* addMyselfFromJstree */
-        INSERT INTO T_Newsletter_Comprehensivetree ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, c_email )
-                                 VALUES ( S_Newsletter_Comprehensivetree.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title#, #email# )
+        INSERT INTO T_Newsletter_Comprehensivetree ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE )
+                                 VALUES ( S_Newsletter_Comprehensivetree.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title# )
         <selectKey resultClass="java.lang.Integer">
         	/* addMyselfFromJstree SEQ */
             SELECT S_Newsletter_Comprehensivetree.CURRVAL AS SEQ 

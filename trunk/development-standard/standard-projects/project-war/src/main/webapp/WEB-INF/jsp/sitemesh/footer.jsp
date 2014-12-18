@@ -30,7 +30,7 @@
 											메일링 리스트에 가입하면 313 개발자 그룹의 소식을 받아보실 수 있습니다.
 										</p>
 										<form id="email-list-form" accept-charset="UTF-8" method="post">
-											<input id="email-list-input" type="email" class="bm-remove" name="email" placeholder="Email address..." />
+											<input id="email-list-input" type="email" class="bm-remove" name="c_title" placeholder="Email address..." />
 											<button id="email-list-submit" type="submit" name="submit" class="bm-remove">
 											<i class="fa fa-chevron-right"></i>
 											</button>
