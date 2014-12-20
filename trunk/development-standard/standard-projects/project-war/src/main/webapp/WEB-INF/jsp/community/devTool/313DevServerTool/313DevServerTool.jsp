@@ -7,14 +7,26 @@
   
 	<!-- DataTables -->
 	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
-	
+	<style type="text/css">
+		table a span{
+			display : inline-block;
+			width : 100%;
+		}
+	</style>
 	<script type="text/javascript">
 		$(document).ready( function () {
 		    $('#serverToolList').DataTable({
 		    	paging: false,
 		    	searching: false,
 		        ordering:  false,
-		        info: false
+		        info: false,
+		        "columnDefs": [ {
+		            "targets": 0,
+		            "width": "50%"
+		          },
+		          { "targets": 0,
+		            "width": "50%"
+		          }]
 		    });
 		} );
 	</script>

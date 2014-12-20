@@ -7,14 +7,28 @@
   
 	<!-- DataTables -->
 	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
-	
+	<style type="text/css">
+		table a span{
+			display : inline-block;
+			width : 100%;
+		}
+	</style>
 	<script type="text/javascript">
 		$(document).ready( function () {
-		    $('#table_id').DataTable({
+		    $('#almToolList').DataTable({
 		    	paging: false,
 		    	searching: false,
 		        ordering:  false,
-		        info: false
+		        info: false,
+		        "columnDefs": [ {
+		            "targets": 0,
+		            "width": "50%"
+		          },
+		          {
+		            "targets": 0,
+		            "width": "50%"
+		          }]
+		        
 		    });
 		} );
 	</script>
@@ -60,7 +74,7 @@
 									<p>우리는 개발 자동화를 꿈꾸었고, 그 꿈의 인프라를 구축하여 현재 운용하고 있습니다. 다음은 그 희망의 증거입니다</p>
 									
 									<p> 
-										<table id="table_id" class="display">
+										<table id="almToolList" class="display">
 									 	    <thead>
 										        <tr>
 										            <th>목적</th>
@@ -92,7 +106,7 @@
 										            <td>빌드</td>
 										            <td>
 										            	<a target="_blank" href="http://www.313.co.kr/hudson"><span>Hudson</span></a>
-										            	<a target="_blank" href="http://www.313.co.kr/jenkins"><span>, Jenkins</span></a>
+										            	<a target="_blank" href="http://www.313.co.kr/jenkins"><span>Jenkins</span></a>
 										            </td>
 										        </tr>
 										        <tr>
