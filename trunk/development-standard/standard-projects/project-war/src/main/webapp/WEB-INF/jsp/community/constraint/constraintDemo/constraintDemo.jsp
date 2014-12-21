@@ -175,6 +175,7 @@
 									<th>c_level</th>
 									<th>c_title</th>
 									<th>c_type</th>
+									<th>f_c_id</th>
 								</tr>
 							</thead>
 						</table>
@@ -206,7 +207,8 @@
 							{ "data": "cell.4" },
 							{ "data": "cell.5" },
 							{ "data": "cell.6" },
-							{ "data": "cell.7" }
+							{ "data": "cell.7" },
+							{ "data": "cell.8" }
 						]
 					} );
 					jstreeDataTable.api().ajax.reload();
@@ -235,7 +237,8 @@
 						{ "data": "cell.4" },
 						{ "data": "cell.5" },
 						{ "data": "cell.6" },
-						{ "data": "cell.7" }
+						{ "data": "cell.7" },
+						{ "data": "cell.8" }
 					]
 				} );
 

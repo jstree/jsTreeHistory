@@ -2,7 +2,9 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="constraintMonitor">
 	
-	<select id="constraintMonitor.getJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_JqGridCellData">
+	<typeAlias alias="T_Primary_JqGridCellData" type="standard.mvc.component.business.community.constraint.vo.T_Primary_JqGridCellData"/>
+	
+	<select id="constraintMonitor.getJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_Primary_JqGridCellData">
 		/* getJstreeMonitor */
 		SELECT c_id
 		     , c_parentid

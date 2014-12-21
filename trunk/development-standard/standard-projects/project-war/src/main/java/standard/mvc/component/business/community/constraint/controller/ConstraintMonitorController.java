@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
+import standard.mvc.component.business.community.constraint.service.ConstraintMonitorService;
+import standard.mvc.component.business.community.constraint.vo.T_Primary_JqGridCellData;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import egovframework.com.ext.jstree.springiBatis.monitor.service.MonitorService;
 import egovframework.com.ext.jstree.springiBatis.monitor.vo.P_JqGrid;
-import egovframework.com.ext.jstree.springiBatis.monitor.vo.T_JqGridCellData;
 import egovframework.com.ext.jstree.springiBatis.monitor.vo.T_JqGridRowData;
 import egovframework.com.ext.jstree.springiBatis.monitor.vo.T_JqgridJson;
 
@@ -26,7 +26,7 @@ import egovframework.com.ext.jstree.springiBatis.monitor.vo.T_JqgridJson;
 public class ConstraintMonitorController extends GenericAbstractController {
 
 	@Resource(name = "ConstraintMonitorService")
-	private MonitorService constraintMonitorService;
+	private ConstraintMonitorService constraintMonitorService;
 
 	@ResponseBody
 	@RequestMapping("/constraint/monitor/list.do")
@@ -39,10 +39,9 @@ public class ConstraintMonitorController extends GenericAbstractController {
 
 		List<T_JqGridRowData> rows = new ArrayList<T_JqGridRowData>();
 
-		List<T_JqGridCellData> t_JqGridCellDatas = constraintMonitorService
-				.getJqGridCellData(new P_JqGrid());
+		List<T_Primary_JqGridCellData> t_JqGridCellDatas = constraintMonitorService.getPrimaryJqGridCellData(new P_JqGrid());
 
-		for (T_JqGridCellData t_JqGridCellData : t_JqGridCellDatas) {
+		for (T_Primary_JqGridCellData t_JqGridCellData : t_JqGridCellDatas) {
 			T_JqGridRowData rowData = new T_JqGridRowData();
 
 			rowData.setId(Integer.toString(t_JqGridCellData.getC_id()));
