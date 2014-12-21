@@ -70,13 +70,6 @@
 			</DIV>
 		</div>
 	</div>
-	<div id="nodeForm" style="display:none;">
-    	<ul>
-    		<li>노드명 : <input type="text" id="nodeTitle"   /></li>
-    		<li>Email : <input type="text" id="nodeEmail" /></li>
-    	</ul>
-    </div>
-    <div id="nodeConfirm" title="확인"></div>	
 	<!-- //container 끝 -->
 	<!-- footer 시작 -->
     <div id="footer"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncFooter" /></div>
@@ -96,7 +89,6 @@ $("#demo")
     	"plugins" : [ 
 			"themes","json_data","ui","crrm","cookies","dnd","search","types","hotkeys","contextmenu"
 		],
-		
 		//contextmenu
 		"contextmenu" : 
 		{         
@@ -175,7 +167,7 @@ $("#demo")
 									"label" : "toEmail",                         
 									action : function (obj) 
 									{   
-										this.set_type("default");                     
+										this.set_type("default", obj);                     
 									}                     
 								},                     
 								"toFolder" :  
@@ -185,7 +177,7 @@ $("#demo")
 									"label" : "toCategory",                          
 									action : function (obj)  
 									{                                                            
-										this.set_type("folder");
+										this.set_type("folder", obj);
 									}                      
 								}
 							}                 
@@ -194,43 +186,6 @@ $("#demo")
 				}				
 			}     
 		}, 
-
-		// I usually configure the plugin that handles the data first
-		// This example uses JSON as it is most common
-		"json_data" : { 
-			// This tree is ajax enabled - as this is most common, and maybe a bit more complex
-			// All the options are almost the same as jQuery's AJAX (read the docs)
-			"ajax" : {
-				// the URL to fetch the data
-				"url" : "${pageContext.request.contextPath}/newsletter/getEmailList.do",
-				// the `data` function is executed in the instance's scope
-				// the parameter is the node being loaded 
-				// (may be -1, 0, or undefined when loading the root nodes)
-				"data" : function (n) { 
-					// the result is fed to the AJAX request `data` option
-					return { 
-						"c_id" : n.attr ? n.attr("id").replace("node_","").replace("copy_","") : 1 ,
-						"r" : getTimestamp()
-					}; 
-				}
-			}
-		},
-// 		// Configuring the search plugin
-// 		"search" : {
-// 			// As this has been a common question - async search
-// 			// Same as above - the `ajax` config option is actually jQuery's AJAX object
-// 			"ajax" : {
-// 				/* "url" : "/egovframework/com/ext/jstree/strutsiBatis/searchNode.action", */
-// 				"url" : "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/searchNode.do",
-// 				// You get the search string as a parameter
-// 				"data" : function (str) {
-// 					return { 
-// 						"r": getTimestamp(),
-// 						"searchString" : str 
-// 					}; 
-// 				}
-// 			}
-// 		},
 		// Using types - most of the time this is an overkill
 		// read the docs carefully to decide whether you need types	
 		"types" : {
@@ -291,13 +246,49 @@ $("#demo")
 			// just open those two nodes up
 			// as this is an AJAX enabled tree, both will be downloaded from the server
 			"initially_open" : [ "node_2" , "node_3" ] 
-		}
+		},
+		// I usually configure the plugin that handles the data first
+		// This example uses JSON as it is most common
+		"json_data" : { 
+			// This tree is ajax enabled - as this is most common, and maybe a bit more complex
+			// All the options are almost the same as jQuery's AJAX (read the docs)
+			"ajax" : {
+				// the URL to fetch the data
+				"url" : "${pageContext.request.contextPath}/newsletter/getEmailList.do",
+				// the `data` function is executed in the instance's scope
+				// the parameter is the node being loaded 
+				// (may be -1, 0, or undefined when loading the root nodes)
+				"data" : function (n) { 
+					// the result is fed to the AJAX request `data` option
+					return { 
+						"c_id" : n.attr ? n.attr("id").replace("node_","").replace("copy_","") : 1 ,
+						"r" : getTimestamp()
+					}; 
+				}
+			}
+		},
+//		// Configuring the search plugin
+//		"search" : {
+//			// As this has been a common question - async search
+//			// Same as above - the `ajax` config option is actually jQuery's AJAX object
+//			"ajax" : {
+//				/* "url" : "/egovframework/com/ext/jstree/strutsiBatis/searchNode.action", */
+//				"url" : "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/searchNode.do",
+//				// You get the search string as a parameter
+//				"data" : function (str) {
+//					return { 
+//						"r": getTimestamp(),
+//						"searchString" : str 
+//					}; 
+//				}
+//			}
+//		}
 	})
 	.bind("create.jstree", function (e, data) {
 		$.post(
 			"${pageContext.request.contextPath}/newsletter/addEmail.do", 
 			{ 
-				"ref" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""), 
+				"ref" : data.rslt.parent.attr("id").replace("node_", "").replace("copy_", ""), 
 				"c_position" : data.rslt.position,
 				"c_title" : data.rslt.name,
 				"c_type" : data.rslt.obj.attr("rel")
@@ -309,7 +300,7 @@ $("#demo")
 				else {
 					$.jstree.rollback(data.rlbk);
 				}
-				$('#demo').jstree('refresh',-1);
+				$('#demo').jstree('refresh', -1);
 			}
 		);
 	})
@@ -320,43 +311,43 @@ $("#demo")
 				type: 'POST',
 				url: "${pageContext.request.contextPath}/newsletter/removeEmail.do", 
 				data : { 
-					"c_id" : this.id.replace("node_","").replace("copy_","")
+					"c_id" : this.id.replace("node_", "").replace("copy_", "")
 				}, 
 				success : function (r) {
-					$('#demo').jstree('refresh',-1);
+					$('#demo').jstree('refresh', -1);
 				}
 			});
 		});
 	})
-// 	.bind("rename.jstree", function (e, data) {
-// 		$.post(
-// 				"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/alterNode.do", 
-// 			{ 
-// 					"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
-// 					"c_title" : data.rslt.new_name,
-// 					"c_type" : data.rslt.obj.attr("rel")
-// 			}, 
-// 			function (r) {
-// 				if(!r.status) {
-// 					$.jstree.rollback(data.rlbk);
-// 				}
-// 				$('#demo').jstree('refresh',-1);
-// 			}
-// 		);
-// 	})
-// 	.bind("set_type.jstree", function (e, data) {
-// 		$.post(
-// 				"${pageContext.request.contextPath}/egovframework/com/etc/jstree/core/springiBatis/alterNodeType.do", 
-// 			{ 
-// 					"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
-// 					"c_title" : data.rslt.new_name,
-// 					"c_type" : data.rslt.obj.attr("rel")
-// 			}, 
-// 			function (r) {
-// 				$('#demo').jstree('refresh',-1);
-// 			}
-// 		);
-// 	})
+	.bind("rename.jstree", function (e, data) {
+		$.post(
+			"${pageContext.request.contextPath}/newsletter/renameEmail.do", 
+			{ 
+					"c_id" : data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
+					"c_title" : data.rslt.new_name,
+					"c_type" : data.rslt.obj.attr("rel")
+			}, 
+			function (r) {
+				if (!r.status) {
+					$.jstree.rollback(data.rlbk);
+				}
+				$('#demo').jstree('refresh', -1);
+			}
+		);
+	})
+	.bind("set_type.jstree", function (e, data) {
+		$.post(
+			"${pageContext.request.contextPath}/newsletter/alterNodeType.do", 
+			{ 
+					"c_id" : data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
+					"c_title" : data.rslt.new_name,
+					"c_type" : data.rslt.obj.attr("rel")
+			}, 
+			function (r) {
+				$('#demo').jstree('refresh', -1);
+			}
+		);
+	});
 // 	.bind("move_node.jstree", function (e, data) {
 // 		data.rslt.o.each(function (i) {
 // 			$.ajax({

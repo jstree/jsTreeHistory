@@ -156,14 +156,14 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 		ifModified : false,
 		crossDomain : 'undefined' == typeof crossDomain || null == crossDomain ? false : crossDomain
 	});
-
+	
 	result.done(function(responseText, textStatus, jqXHR) {
 //		notificationAlert("success");
 	  
-	  console.log('[done]');
-	  console.log(responseText);
-    console.log(textStatus);
-    console.log(jqXHR);
+//	  console.log('[done]');
+//	  console.log(responseText);
+//    console.log(textStatus);
+//    console.log(jqXHR);
 	  
 		if ("text" == this.dataType.toLowerCase() || "html" == this.dataType.toLowerCase()) {
 			$(target).html(responseText);
@@ -172,10 +172,10 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 	
 	result.fail(function(jqXHR, textStatus, errorThrown){
 	  
-	  console.log('[fail]');
-	  console.log(jqXHR);
-	  console.log(textStatus);
-	  console.log(errorThrown);
+//	  console.log('[fail]');
+//	  console.log(jqXHR);
+//	  console.log(textStatus);
+//	  console.log(errorThrown);
 	  
 		var isDefinedError = false;
 		
@@ -199,12 +199,18 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 		}
 	});
 
-	result.always(function(responseText, textStatus) {
+	result.always(function(responseText, textStatus, jqXHR) {
 //		notificationAlert("complete");
 	  
-	  console.log('[always]');
-	  console.log(responseText);
-	  console.log(textStatus);
+//	  console.log('[always]');
+//	  console.log(responseText);
+//	  console.log(textStatus);
+//	  console.log(jqXHR);
+	  
+	  if (responseText.result == false) {
+	    notificationAlert(responseText.message);
+	  }
+	  
 	});
 	//dataType : xml , html , json , jsonp , script , text
 		

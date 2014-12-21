@@ -38,10 +38,12 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  
  *  << 개정이력(Modification Information) >>
  *  
- *  수정일               수정자                 수정내용
- *  -------       ------------   -----------------------
+ *  수정일                 수정자                 수정내용
+ *  -------        ------------   -----------------------
  *  2014. 12. 09.  류강하                 최초 생성
- *  2014. 12. 13   전경훈            removeNode 구현
+ *  2014. 12. 13   전경훈                 removeNode 구현
+ *  2014. 12. 15.  류강하                 getChildNode 추가
+ *  2014. 12. 20.  류강하                 alterNode, alterNodeType 추가
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -53,8 +55,8 @@ public class NewsletterServiceImpl implements CoreService {
     CoreService coreService;
     
     @Override
-    public <T extends ComprehensiveTree> List<T> getChildNode(
-            T comprehensiveTree) throws Exception {
+    public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) 
+            throws Exception {
         
         List<T> childNodes = coreService.getChildNode(comprehensiveTree);
         
@@ -62,8 +64,8 @@ public class NewsletterServiceImpl implements CoreService {
     }
 
     @Override
-    public <T extends ComprehensiveTree> List<String> searchNode(
-            T comprehensiveTree) throws Exception {
+    public <T extends ComprehensiveTree> List<String> searchNode(T comprehensiveTree) 
+            throws Exception {
         
         return null;
     }
@@ -86,14 +88,14 @@ public class NewsletterServiceImpl implements CoreService {
     public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree)
             throws Exception {
         
-        return 0;
+        return coreService.alterNode(comprehensiveTree);
     }
 
     @Override
     public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree)
             throws Exception {
         
-        return 0;
+        return coreService.alterNodeType(comprehensiveTree);
     }
 
     @Override

@@ -51,6 +51,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  2014. 12. 13.  전경훈                 Email 검증부분 추가 및 jstree 필수 파라미터 설정
  *  2014. 12. 15.  류강하                 getChildNode 추가
  *  2014. 12. 19.  류강하                 사용자 및 관리자 화면을 동시 처리하게끔 addNode 보완, removeNode 추가
+ *  2014. 12. 20.  류강하                 alterNode, alterNodeType 추가
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -135,5 +136,52 @@ public class NewsletterController extends GenericAbstractController {
             throws Exception {
         
         return newsletterService.removeNode(newsletterComprehensiveTree);
-    } 
+    }
+    
+    /**
+     * 이메일 주소를 변경한다.
+     * @param newsletterComprehensiveTree Newsletter VO
+     * @return alterd count
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping("/renameEmail.do")
+    public ComprehensiveTree alterNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree)
+             throws Exception {
+        
+        String email = newsletterComprehensiveTree.getC_title();
+        
+        if (!"folder".equals(newsletterComprehensiveTree.getC_type())) {
+        
+            // Email 검증
+            String emailPattern = "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+";
+            Pattern p = java.util.regex.Pattern.compile(emailPattern);
+            Matcher m = p.matcher(email);
+            if (!m.matches()) {
+                throw new RuntimeException("Email address is not valid");
+            }
+        }
+        
+        newsletterComprehensiveTree.setStatus(newsletterService.alterNode(newsletterComprehensiveTree));
+
+        return newsletterComprehensiveTree;
+    }
+    
+    /**
+     * 노드 타입을 변경한다.
+     * @param newsletterComprehensiveTree Newsletter VO
+     * @return Newsletter VO
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping("/alterNodeType.do")
+    public ComprehensiveTree alterNodeType(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
+            throws Exception {
+        
+        newsletterService.alterNodeType(newsletterComprehensiveTree);
+        
+        return newsletterComprehensiveTree;
+    }
+    
+    
 }

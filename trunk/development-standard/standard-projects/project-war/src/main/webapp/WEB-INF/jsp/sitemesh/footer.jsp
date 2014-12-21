@@ -83,37 +83,15 @@
 		$(document).ready(function() {
 		  
 		    $("#email-list-submit").click(function(e) {
-		      
-		        var $email = $("#email-list-input");
-		        var email = $email.val();
+		      	
+		        var result = callAjax($("#email-list-form"), getContextPath() + '/newsletter/addEmail.do', null, 'post', 'json', null);
 		        
-		        // TODO 예외처리 보강
-		        if (email.length == 0) {
-		          alert('이메일을 입력해주세요.'); // TODO 경고창 라이브러리로 대체
-		          $email.focus();
-		          return false;
-		        }
-		        
-		        callAjax($("#newsletter form"), getContextPath() + '/newsletter/addEmail.do', null, 'post', 'json', null, function(obj) {
-		          alert(obj);
-		          console.log(obj);
+		        // TODO 콜백 함수를 중복해서 사용하지 않도록 하는 방법이 필요함.
+		        result.always(function(responseText, textStatus, jqXHR) {
+		    	  if (responseText.result != false) {
+		    	    alert("메일링 리스트에 가입되었습니다."); // TODO 경고창을 대신할 팝업 레이어가 필요함.
+		    	  }
 		        });
-		        
-// 		    	$.post(
-// 	    			"${pageContext.request.contextPath}/newsletter/addEmail.do",		
-// 	    			{
-// 	    				"email" : $("#email-list-input").val()
-// 	    			},
-// 	    			function(r) {
-// 	    				if(r.status==0) {
-// 	    					$("#email-list-input").val("");
-// 	    					alert("Email 입력 성공");	
-// 	    				} else {
-// 	    					alert("Email 입력 실패\n 메일 주소 형식을 확인하세요");
-// 	    				}
-// 	    			}
-// 		    	);
-		        
 		        
 		        return false;
 		    });

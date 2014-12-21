@@ -62,14 +62,13 @@
         </iterate>
 	</select>
 
-
 	<update id="newsletter.alterNode" parameterClass="Newsletter">
 		/* alterNode */
 		UPDATE T_Newsletter_Comprehensivetree 
 		   SET C_TYPE = #c_type#
+		     , C_TITLE = #c_title# 
 		 WHERE C_ID = #c_id#
 	</update>
-
 
 	<select id="newsletter.getNode" parameterClass="Newsletter" resultClass="Newsletter">
 		/* getNode */
