@@ -17,6 +17,7 @@
 	<bean id="egov.sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocations">
 			<list>
+				<value>classpath:/META-INF/egovframework/sqlmap/config/${Globals.DbType}/*.xml</value>
 				<value>classpath:/egovframework/sqlmap/config/${Globals.DbType}/*.xml</value>
 			</list>
 		</property>
