@@ -3,7 +3,7 @@
 <sqlMap namespace="core">
 	<typeAlias alias="ComprehensiveTree" type="egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree"/>
 
-	<select id="core.getChildNode" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
+	<select id="getChildNode" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
 		/* getChildNode */
 		SELECT A.c_id
 		     , A.c_parentid
@@ -26,7 +26,7 @@
 	</select>
 
 
-	<select id="core.getChildNodeByLeftRight" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
+	<select id="getChildNodeByLeftRight" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		     , C_PARENTID
@@ -43,7 +43,7 @@
 	</select>
 
 
-	<select id="core.searchNodeByString" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
+	<select id="searchNodeByString" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
 		/* searchNodeByString */
 		SELECT c_left
 		     , c_right
@@ -52,7 +52,7 @@
 	</select>
 
 
-	<select id="core.searchNodeByPosition" parameterClass="java.util.List" resultClass="String">
+	<select id="searchNodeByPosition" parameterClass="java.util.List" resultClass="String">
 		/* searchNodeByPosition */
         SELECT DISTINCT C_ID
           FROM T_COMPREHENSIVETREE_SPRING
@@ -63,7 +63,7 @@
 	</select>
 
 
-	<update id="core.alterNode" parameterClass="ComprehensiveTree">
+	<update id="alterNode" parameterClass="ComprehensiveTree">
 		/* alterNode */
 		UPDATE T_COMPREHENSIVETREE_SPRING 
 		   SET C_TYPE = #c_type#
@@ -72,7 +72,7 @@
 	</update>
 
 
-	<select id="core.getNode" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
+	<select id="getNode" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
 		/* getNode */
         SELECT C_ID
              , C_PARENTID
@@ -87,7 +87,7 @@
     </select>
 
 
-	<select id="core.getNodeByRef" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
+	<select id="getNodeByRef" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
 		/* getNodeByRef */
         SELECT C_ID
              , C_PARENTID
@@ -102,7 +102,7 @@
     </select>
 
 
-	<delete id="core.removeNode" parameterClass="ComprehensiveTree">
+	<delete id="removeNode" parameterClass="ComprehensiveTree">
 		/* removeNode */
        	DELETE FROM T_COMPREHENSIVETREE_SPRING 
        	      WHERE C_LEFT  &gt;= #c_left# 
@@ -110,7 +110,7 @@
 	</delete>
 	
 	
-	<update id="core.removedAfterLeftFix" parameterClass="ComprehensiveTree">
+	<update id="removedAfterLeftFix" parameterClass="ComprehensiveTree">
 		/* removedAfterLeftFix */
        	UPDATE T_COMPREHENSIVETREE_SPRING 
   		   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
@@ -118,7 +118,7 @@
 	</update>
 	
 	
-	<update id="core.removedAfterRightFix" parameterClass="ComprehensiveTree">
+	<update id="removedAfterRightFix" parameterClass="ComprehensiveTree">
 		/* removedAfterRightFix */
 		UPDATE T_COMPREHENSIVETREE_SPRING 
 		   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -126,7 +126,7 @@
 	</update>
 	
 	
-	<update id="core.removedAfterPositionFix" parameterClass="ComprehensiveTree">
+	<update id="removedAfterPositionFix" parameterClass="ComprehensiveTree">
 		/* removedAfterPositionFix */
      	UPDATE T_COMPREHENSIVETREE_SPRING 
      	   SET C_POSITION = C_POSITION - 1 
@@ -135,7 +135,7 @@
 	</update>
 
 
-	<select id="core.analyzeRootNode" resultClass="ComprehensiveTree">
+	<select id="analyzeRootNode" resultClass="ComprehensiveTree">
 		/* searchNodeByString */
 	    SELECT C_LEFT 
 		  FROM T_COMPREHENSIVETREE_SPRING 
@@ -143,7 +143,7 @@
     </select>
 
 
-	<update id="core.cutMyselfPositionFix" parameterClass="ComprehensiveTree">
+	<update id="cutMyselfPositionFix" parameterClass="ComprehensiveTree">
 		/* cutMyselfPositionFix */
        	UPDATE T_COMPREHENSIVETREE_SPRING 
        	   SET C_POSITION = C_POSITION - 1 
@@ -152,7 +152,7 @@
     </update>
 
 
-	<update id="core.cutMyselfLeftFix" parameterClass="ComprehensiveTree">
+	<update id="cutMyselfLeftFix" parameterClass="ComprehensiveTree">
 		/* cutMyselfLeftFix */
        	UPDATE T_COMPREHENSIVETREE_SPRING 
        	   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
@@ -160,7 +160,7 @@
     </update>
     
     
-	<update id="core.cutMyselfRightFix" parameterClass="ComprehensiveTree">
+	<update id="cutMyselfRightFix" parameterClass="ComprehensiveTree">
 		/* cutMyselfRightFix */
        	UPDATE T_COMPREHENSIVETREE_SPRING 
        	   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -171,7 +171,7 @@
 	</update>
 
 
-	<update id="core.stretchPositionForMyself" parameterClass="ComprehensiveTree">
+	<update id="stretchPositionForMyself" parameterClass="ComprehensiveTree">
 		/* stretchPositionForMyselfFromJstree */
         UPDATE T_COMPREHENSIVETREE_SPRING
            SET C_POSITION = C_POSITION + 1
@@ -190,7 +190,7 @@
 	</update>
 
 
-	<update id="core.stretchLeftForMyselfFromJstree" parameterClass="ComprehensiveTree">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="ComprehensiveTree">
 		/* stretchLeftForMyselfFromJstree */
        	UPDATE T_COMPREHENSIVETREE_SPRING 
        	   SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
@@ -205,7 +205,7 @@
 	</update>
 
 
-	<update id="core.stretchRightForMyselfFromJstree" parameterClass="ComprehensiveTree">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="ComprehensiveTree">
 		/* stretchRightForMyselfFromJstree */
         UPDATE T_COMPREHENSIVETREE_SPRING 
            SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
@@ -220,7 +220,7 @@
 	</update>
 
 
-	<insert id="core.pasteMyselfFromJstree" parameterClass="ComprehensiveTree">
+	<insert id="pasteMyselfFromJstree" parameterClass="ComprehensiveTree">
 		/* pasteMyselfFromJstree */
         INSERT INTO T_COMPREHENSIVETREE_SPRING ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE ) 
     	SELECT S_COMPREHENSIVETREE_SPRING.NEXTVAL AS C_ID
@@ -247,7 +247,7 @@
 	</insert>
 
 
-	<update id="core.enterMyselfFixPosition" parameterClass="ComprehensiveTree">
+	<update id="enterMyselfFixPosition" parameterClass="ComprehensiveTree">
 		/* enterMyselfFixPosition */
         UPDATE T_COMPREHENSIVETREE_SPRING 
            SET C_PARENTID = #ref#
@@ -256,7 +256,7 @@
     </update>
     
     
-	<update id="core.enterMyselfFixLeftRight" parameterClass="ComprehensiveTree">
+	<update id="enterMyselfFixLeftRight" parameterClass="ComprehensiveTree">
 		/* enterMyselfFixLeftRight */
         UPDATE T_COMPREHENSIVETREE_SPRING 
            SET C_LEFT  = C_LEFT  - (#idif#)
@@ -268,7 +268,7 @@
 	</update>
 
 
-	<insert id="core.addMyselfFromJstree" parameterClass="ComprehensiveTree">
+	<insert id="addMyselfFromJstree" parameterClass="ComprehensiveTree">
 		/* addMyselfFromJstree */
         INSERT INTO T_COMPREHENSIVETREE_SPRING ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL )
                                  VALUES ( S_COMPREHENSIVETREE_SPRING.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level# )
@@ -280,7 +280,7 @@
 	</insert>
 
 
-	<update id="core.alterNodeType" parameterClass="ComprehensiveTree">
+	<update id="alterNodeType" parameterClass="ComprehensiveTree">
 		/* alterNodeType */
 		UPDATE T_COMPREHENSIVETREE_SPRING 
 		   SET C_TYPE = #c_type#
@@ -288,7 +288,7 @@
 	</update>
 
 
-	<update id="core.fixCopyIF" parameterClass="ComprehensiveTree">
+	<update id="fixCopyIF" parameterClass="ComprehensiveTree">
         /* fixCopyIF */
         UPDATE T_COMPREHENSIVETREE_SPRING 
            SET C_POSITION = #fixCopyPosition# 
@@ -296,7 +296,7 @@
 	</update>
 
 
-	<update id="core.fixCopy" parameterClass="ComprehensiveTree">
+	<update id="fixCopy" parameterClass="ComprehensiveTree">
 		/* fixCopy */
 		UPDATE T_COMPREHENSIVETREE_SPRING 
 		   SET C_PARENTID = #fixCopyId# 

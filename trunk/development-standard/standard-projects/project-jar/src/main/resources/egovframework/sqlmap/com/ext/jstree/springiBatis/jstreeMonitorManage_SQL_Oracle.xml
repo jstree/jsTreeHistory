@@ -4,7 +4,7 @@
 	<typeAlias alias="P_JqGrid"         type="egovframework.com.ext.jstree.springiBatis.monitor.vo.P_JqGrid"        />
 	<typeAlias alias="T_JqGridCellData" type="egovframework.com.ext.jstree.springiBatis.monitor.vo.T_JqGridCellData"/>
 	
-	<select id="monitor.getJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_JqGridCellData">
+	<select id="getJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_JqGridCellData">
 		/* getJstreeMonitor */
 		SELECT c_id
 		     , c_parentid
