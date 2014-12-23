@@ -102,7 +102,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>JsTree</finalName>
+		<finalName>project-jar</finalName>
 
 		<plugins>
 			<plugin>
