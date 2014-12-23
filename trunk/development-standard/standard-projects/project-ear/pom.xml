@@ -610,7 +610,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>templateSm</finalName>
+		<finalName>ear</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -703,7 +703,7 @@
 					<uriEncoding>UTF-8</uriEncoding>
 					<url>http://ubuntu.313.co.kr:8313/manager/text</url>
 					<server>StandardProject-Snapshot</server>
-					<path>/templateSm</path>
+					<path>/ear</path>
 				</configuration>
 			</plugin>
 			<plugin>
