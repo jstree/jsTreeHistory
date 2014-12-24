@@ -16,6 +16,9 @@
 <script type="text/javascript" language="javascript" src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
 <script type="text/javascript" language="javascript" src="http://cdn.datatables.net/responsive/1.0.3/js/dataTables.responsive.js"></script>
 
+<!-- 메뉴관리 jquery ui dialog 임시로 추가 -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
 <!-- Style Setting --> 
 <style type="text/css">
 	#demo {
@@ -276,12 +279,15 @@
 												// 파일인 경우에 실행하지 않는다
 												if( $(obj).attr("rel") != 'default' ){
 													
+													var _this = this;
+													
 													$("#nodeLevel").val("1");
 													
 													$("#nodeForm").dialog({
 														title  : "권한 추가"
 													  ,	buttons: {
 													        Ok    : function() {
+													        	_this.create(obj, "last", {"attr" : {"rel" : "default", "f_c_id" : $("#nodeLevel").val()}});                         
 													        	$("#nodeForm").dialog("close");
 													        },
 													        Cancel: function() {
@@ -292,7 +298,6 @@
 													$("#nodeForm").dialog("open");
 												}												
 												
-												this.create(obj, "last", {"attr" : {"rel" : "default", "f_c_id" : $("#nodeLevel").val()}});                         
 											}                     
 										},                     
 										"create_folder" :  
@@ -305,12 +310,15 @@
 												// 파일인 경우에 실행하지 않는다
 												if( $(obj).attr("rel") != 'default' ){
 													
+													var _this = this;
+													
 													$("#nodeLevel").val("1");
 													
 													$("#nodeForm").dialog({
 														title  : "권한 추가"
 													  ,	buttons: {
 													        Ok    : function() {
+																_this.create(obj, "last", {"attr" : { "rel" : "folder", "f_c_id" : $("#nodeLevel").val()}});                         
 													        	$("#nodeForm").dialog("close");
 													        },
 													        Cancel: function() {
@@ -321,7 +329,6 @@
 													$("#nodeForm").dialog("open");
 												}
 												
-												this.create(obj, "last", {"attr" : { "rel" : "folder", "f_c_id" : $("#nodeLevel").val()}});                         
 											}                      
 										}
 										
