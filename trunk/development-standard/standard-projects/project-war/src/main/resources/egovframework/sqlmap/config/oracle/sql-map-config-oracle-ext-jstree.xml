@@ -15,6 +15,7 @@
 	<sqlMap
 		resource="standard/sqlmap/component/newsletter/springiBatis/newletter_SQL_Oracle.xml" />
 		
-	<sqlMap resource="standard/sqlmap/component/constraint/springiBatis/constraint_SQL_Oracle.xml" />
+	<sqlMap resource="standard/sqlmap/component/constraint/springiBatis/primary_SQL_Oracle.xml" />
+	<sqlMap resource="standard/sqlmap/component/constraint/springiBatis/foreign_SQL_Oracle.xml" />
 	<sqlMap resource="standard/sqlmap/component/constraint/springiBatis/constraintMonitor_SQL_Oracle.xml" />		
 </sqlMapConfig>

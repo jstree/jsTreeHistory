@@ -11,8 +11,8 @@ import standard.mvc.component.business.community.constraint.vo.T_Primary_JqGridC
 import egovframework.com.ext.jstree.springiBatis.monitor.vo.P_JqGrid;
 import egovframework.com.ext.jstree.springiBatis.monitor.vo.T_JqGridCellData;
 
-@Service(value = "ConstraintMonitorService")
-public class ConstraintMonitorServiceImpl implements ConstraintMonitorService {
+@Service(value = "ForeignMonitorService")
+public class ForeignMonitorServiceImpl implements ConstraintMonitorService {
 
 	@Resource(name = "ConstraintMonitorDAO")
 	private ConstraintMonitorDAO constraintMonitorDAO;
@@ -24,10 +24,10 @@ public class ConstraintMonitorServiceImpl implements ConstraintMonitorService {
 	}
 
 	@Override
-	public List<T_Primary_JqGridCellData> getPrimaryJqGridCellData(
+	public List<T_Primary_JqGridCellData> getExtendedJqGridCellData(
 			P_JqGrid p_JqGrid) {
 		// TODO Auto-generated method stub
-		return constraintMonitorDAO.getJqGridCellData(p_JqGrid);
+		return constraintMonitorDAO.getForeignJqGridCellData(p_JqGrid);
 	}
 
 	

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,11 +22,11 @@ import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 @Controller
-@RequestMapping("/constraint")
-public class ConstraintController extends GenericAbstractController {
+@RequestMapping("/constraint/foreign")
+public class ForeignController extends GenericAbstractController {
 
-	@Resource(name = "ConstraintService")
-	private CoreService constraintService;
+	@Resource(name = "ForeignService")
+	private CoreService foreignService;
 
 	@Override
 	public Map<String, Map<String, Object>> bindTypes() {
@@ -35,14 +34,6 @@ public class ConstraintController extends GenericAbstractController {
 		return null;
 	}
 
-	@RequestMapping("/getChildNodeByFk.do")
-	public List<ConstraintComprehensiveTree> getChildNodeByFk(
-			@ModelAttribute ConstraintComprehensiveTree constraintComprehensiveTree)
-			throws Exception {
-		constraintComprehensiveTree.setQueryUsingFk(true);
-		return constraintService.getChildNode(constraintComprehensiveTree);
-	}
-	
 	/**
 	 * 자식노드를 요청한다.
 	 * 
@@ -61,7 +52,7 @@ public class ConstraintController extends GenericAbstractController {
 			throw new RuntimeException();
 		}
 
-		return constraintService.getChildNode(constraintComprehensiveTree);
+		return foreignService.getChildNode(constraintComprehensiveTree);
 	}
 
 	/**
@@ -84,7 +75,7 @@ public class ConstraintController extends GenericAbstractController {
 		
 		constraintComprehensiveTree.setSearchStr(request.getParameter("searchString"));
 
-		return constraintService.searchNode(constraintComprehensiveTree);
+		return foreignService.searchNode(constraintComprehensiveTree);
 	}
 
 	/**
@@ -125,7 +116,7 @@ public class ConstraintController extends GenericAbstractController {
 			}
 		}
 		constraintComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(constraintComprehensiveTree.getC_title()));
-		constraintService.addNode(constraintComprehensiveTree);
+		foreignService.addNode(constraintComprehensiveTree);
 
 		return constraintComprehensiveTree;
 	}
@@ -149,7 +140,7 @@ public class ConstraintController extends GenericAbstractController {
 			throw new RuntimeException();
 		}
 
-		constraintComprehensiveTree.setStatus(constraintService.removeNode(constraintComprehensiveTree));
+		constraintComprehensiveTree.setStatus(foreignService.removeNode(constraintComprehensiveTree));
 
 		return constraintComprehensiveTree;
 	}
@@ -190,7 +181,7 @@ public class ConstraintController extends GenericAbstractController {
 		}
 
 		constraintComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(constraintComprehensiveTree.getC_title()));
-		constraintComprehensiveTree.setStatus(constraintService.alterNode(constraintComprehensiveTree));
+		constraintComprehensiveTree.setStatus(foreignService.alterNode(constraintComprehensiveTree));
 
 		return constraintComprehensiveTree;
 	}
@@ -229,7 +220,7 @@ public class ConstraintController extends GenericAbstractController {
 			}
 		}
 
-		constraintService.alterNodeType(constraintComprehensiveTree);
+		foreignService.alterNodeType(constraintComprehensiveTree);
 
 		return constraintComprehensiveTree;
 	}
@@ -282,7 +273,7 @@ public class ConstraintController extends GenericAbstractController {
 				throw new RuntimeException("addNode multiCounter less 0");
 			}
 		}
-		constraintService.moveNode(constraintComprehensiveTree, request);
+		foreignService.moveNode(constraintComprehensiveTree, request);
 
 		return constraintComprehensiveTree;
 	}	

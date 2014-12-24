@@ -12,8 +12,13 @@ import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
 public class ConstraintMonitorDAO extends EgovAbstractDAO {
 
 	@SuppressWarnings("unchecked")
-	public List<T_Primary_JqGridCellData> getJqGridCellData(P_JqGrid p_JstreeMonitor) {
-		return list("constraintMonitor.getJstreeMonitor", p_JstreeMonitor);
+	public List<T_Primary_JqGridCellData> getPrimaryJqGridCellData(P_JqGrid p_JstreeMonitor) {
+		return list("constraintMonitor.getPrimaryJstreeMonitor", p_JstreeMonitor);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T_Primary_JqGridCellData> getForeignJqGridCellData(P_JqGrid p_JstreeMonitor) {
+		return list("constraintMonitor.getForeignJstreeMonitor", p_JstreeMonitor);
 	}
 	
 }

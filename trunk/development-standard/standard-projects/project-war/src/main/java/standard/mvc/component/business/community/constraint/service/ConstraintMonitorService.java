@@ -7,5 +7,5 @@ import egovframework.com.ext.jstree.springiBatis.monitor.service.MonitorService;
 import egovframework.com.ext.jstree.springiBatis.monitor.vo.P_JqGrid;
 
 public interface ConstraintMonitorService extends MonitorService {
-	public List<T_Primary_JqGridCellData> getPrimaryJqGridCellData(P_JqGrid p_JqGrid);
+	public List<T_Primary_JqGridCellData> getExtendedJqGridCellData(P_JqGrid p_JqGrid);
 }

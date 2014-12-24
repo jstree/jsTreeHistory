@@ -5,8 +5,8 @@
 	<typeAlias alias="P_JqGrid"	type="egovframework.com.ext.jstree.springiBatis.monitor.vo.P_JqGrid" />
 	<typeAlias alias="T_Primary_JqGridCellData" type="standard.mvc.component.business.community.constraint.vo.T_Primary_JqGridCellData"/>
 	
-	<select id="getJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_Primary_JqGridCellData">
-		/* getJstreeMonitor */
+	<select id="getPrimaryJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_Primary_JqGridCellData">
+		/* getPrimaryJstreeMonitor */
 		SELECT c_id
 		     , c_parentid
 		     , c_position
@@ -17,6 +17,20 @@
 		     , c_type
 		     , f_c_id 
 		  FROM T_PRIMARY_COMPREHENSIVETREE 
+	  ORDER BY c_parentid, c_position 
+	</select>
+	
+	<select id="getForeignJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_Primary_JqGridCellData">
+		/* getForeignJstreeMonitor */
+		SELECT c_id
+		     , c_parentid
+		     , c_position
+		     , c_left
+		     , c_right
+		     , c_level
+		     , c_title
+		     , c_type
+		  FROM T_FOREIGN_COMPREHENSIVETREE 
 	  ORDER BY c_parentid, c_position 
 	</select>
 </sqlMap>

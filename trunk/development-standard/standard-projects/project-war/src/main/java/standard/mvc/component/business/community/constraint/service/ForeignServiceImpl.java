@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
-@Service(value = "ConstraintService")
-public class ConstraintServiceImpl implements CoreService {
+@Service(value = "ForeignService")
+public class ForeignServiceImpl implements CoreService {
 
+	private final String sqlMapSelector = "foreign";
 	@Resource(name = "CoreService")
 	private CoreService coreService;
 
@@ -20,6 +21,7 @@ public class ConstraintServiceImpl implements CoreService {
 	public <T extends ComprehensiveTree> List<T> getChildNode(
 			T comprehensiveTree) throws Exception {
 		// TODO Auto-generated method stub
+		comprehensiveTree.setSqlMapSelector(sqlMapSelector);
 		return coreService.getChildNode(comprehensiveTree);
 	}
 
@@ -27,6 +29,7 @@ public class ConstraintServiceImpl implements CoreService {
 	public <T extends ComprehensiveTree> List<String> searchNode(
 			T comprehensiveTree) throws Exception {
 		// TODO Auto-generated method stub
+		comprehensiveTree.setSqlMapSelector(sqlMapSelector);
 		return coreService.searchNode(comprehensiveTree);
 	}
 
@@ -34,6 +37,7 @@ public class ConstraintServiceImpl implements CoreService {
 	public <T extends ComprehensiveTree> T addNode(T comprehensiveTree)
 			throws Exception {
 		// TODO Auto-generated method stub
+		comprehensiveTree.setSqlMapSelector(sqlMapSelector);
 		return coreService.addNode(comprehensiveTree);
 	}
 
@@ -41,6 +45,7 @@ public class ConstraintServiceImpl implements CoreService {
 	public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree)
 			throws Exception {
 		// TODO Auto-generated method stub
+		comprehensiveTree.setSqlMapSelector(sqlMapSelector);
 		return coreService.removeNode(comprehensiveTree);
 	}
 
@@ -48,6 +53,7 @@ public class ConstraintServiceImpl implements CoreService {
 	public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree)
 			throws Exception {
 		// TODO Auto-generated method stub
+		comprehensiveTree.setSqlMapSelector(sqlMapSelector);
 		return coreService.alterNode(comprehensiveTree);
 	}
 
@@ -55,6 +61,7 @@ public class ConstraintServiceImpl implements CoreService {
 	public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree)
 			throws Exception {
 		// TODO Auto-generated method stub
+		comprehensiveTree.setSqlMapSelector(sqlMapSelector);
 		return coreService.alterNodeType(comprehensiveTree);
 	}
 
@@ -62,6 +69,7 @@ public class ConstraintServiceImpl implements CoreService {
 	public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree,
 			HttpServletRequest request) throws Exception {
 		// TODO Auto-generated method stub
+		comprehensiveTree.setSqlMapSelector(sqlMapSelector);
 		return coreService.moveNode(comprehensiveTree, request);
 	}
 

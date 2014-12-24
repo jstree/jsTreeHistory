@@ -201,7 +201,7 @@
 				function jstreeDataTableReload() {
 					var jstreeDataTable = $('#jstreeTable').dataTable( {
 						"ajax": {
-							"url": "${pageContext.request.contextPath}/constraint/monitor/list.do",
+							"url": "${pageContext.request.contextPath}/constraint/monitor/primary/list.do",
 							"dataSrc": "rows"
 						},
 						"processing": true,
@@ -234,7 +234,7 @@
 
 				var jstreeDataTable = $('#jstreeTable').dataTable( {
 					"ajax": {
-						"url": "${pageContext.request.contextPath}/constraint/monitor/list.do",
+						"url": "${pageContext.request.contextPath}/constraint/monitor/primary/list.do",
 						"dataSrc": "rows"
 					},
 					"processing": true,
@@ -415,7 +415,7 @@
 							// All the options are almost the same as jQuery's AJAX (read the docs)
 							"ajax" : {
 								// the URL to fetch the data
-								"url" : "${pageContext.request.contextPath}/constraint/getChildNode.do",
+								"url" : "${pageContext.request.contextPath}/constraint/primary/getChildNode.do",
 								// the `data` function is executed in the instance's scope
 								// the parameter is the node being loaded 
 								// (may be -1, 0, or undefined when loading the root nodes)
@@ -432,7 +432,7 @@
 							// As this has been a common question - async search
 							// Same as above - the `ajax` config option is actually jQuery's AJAX object
 							"ajax" : {
-								"url" : "${pageContext.request.contextPath}/constraint/searchNode.do",
+								"url" : "${pageContext.request.contextPath}/constraint/primary/searchNode.do",
 								// You get the search string as a parameter
 								"data" : function (str) {
 									return { 
@@ -502,7 +502,7 @@
 					})
 					.bind("create.jstree", function (e, data) {
 						$.post(
-							"${pageContext.request.contextPath}/constraint/addNode.do", 
+							"${pageContext.request.contextPath}/constraint/primary/addNode.do", 
 							{ 
 								"ref" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""), 
 								"c_position" : data.rslt.position,
@@ -527,7 +527,7 @@
 							$.ajax({
 								async : false,
 								type: 'POST',
-								url: "${pageContext.request.contextPath}/constraint/removeNode.do",
+								url: "${pageContext.request.contextPath}/constraint/primary/removeNode.do",
 								data : { 
 									"c_id" : this.id.replace("node_","").replace("copy_","")
 								}, 
@@ -540,7 +540,7 @@
 					})
 					.bind("rename.jstree", function (e, data) {
 						$.post(
-								"${pageContext.request.contextPath}/constraint/alterNode.do", 
+								"${pageContext.request.contextPath}/constraint/primary/alterNode.do", 
 							{ 
 									"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
 									"c_title" : data.rslt.new_name,
@@ -557,7 +557,7 @@
 					})
 					.bind("set_type.jstree", function (e, data) {
 						$.post(
-								"${pageContext.request.contextPath}/constraint/alterNodeType.do", 
+								"${pageContext.request.contextPath}/constraint/primary/alterNodeType.do", 
 							{ 
 									"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
 									"c_title" : data.rslt.new_name,
@@ -574,7 +574,7 @@
 							$.ajax({
 								async : false,
 								type: 'POST',
-								url: "${pageContext.request.contextPath}/constraint/moveNode.do",
+								url: "${pageContext.request.contextPath}/constraint/primary/moveNode.do",
 								data : { 
 									"c_id" : $(this).attr("id").replace("node_","").replace("copy_",""), 
 									"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_",""), 
@@ -661,7 +661,6 @@
 									<th>c_level</th>
 									<th>c_title</th>
 									<th>c_type</th>
-									<th>f_c_id</th>
 								</tr>
 							</thead>
 						</table>
@@ -680,7 +679,7 @@
 				function jstreeDataTableReload() {
 					var jstreeDataTable = $('#jstreeTable_f').dataTable( {
 						"ajax": {
-							"url": "${pageContext.request.contextPath}/constraint/monitor/list.do",
+							"url": "${pageContext.request.contextPath}/constraint/monitor/foreign/list.do",
 							"dataSrc": "rows"
 						},
 						"processing": true,
@@ -693,8 +692,7 @@
 							{ "data": "cell.4" },
 							{ "data": "cell.5" },
 							{ "data": "cell.6" },
-							{ "data": "cell.7" },
-							{ "data": "cell.8" }
+							{ "data": "cell.7" }
 						]
 					} );
 					jstreeDataTable.api().ajax.reload();
@@ -713,7 +711,7 @@
 
 				var jstreeDataTable = $('#jstreeTable_f').dataTable( {
 					"ajax": {
-						"url": "${pageContext.request.contextPath}/constraint/monitor/list.do",
+						"url": "${pageContext.request.contextPath}/constraint/monitor/foreign/list.do",
 						"dataSrc": "rows"
 					},
 					"processing": true,
@@ -726,8 +724,7 @@
 						{ "data": "cell.4" },
 						{ "data": "cell.5" },
 						{ "data": "cell.6" },
-						{ "data": "cell.7" },
-						{ "data": "cell.8" }
+						{ "data": "cell.7" }
 					]
 				} );
 
@@ -762,27 +759,8 @@
 											"label" : "File",                         
 											action : function (obj) 
 											{
-												// 파일인 경우에 실행하지 않는다
-												if( $(obj).attr("rel") != 'default' ){
-													
-													var _this = this;
-													
-// 													$("#nodeLevel").val("1");
-													
-													$("#nodeForm").dialog({
-														title  : "권한 추가"
-													  ,	buttons: {
-													        Ok    : function() {
-													        	_this.create(obj, "last", {"attr" : {"rel" : "default", "f_c_id" : $("#nodeLevel").val()}});                         
-													        	$("#nodeForm").dialog("close");
-													        },
-													        Cancel: function() {
-													            $( "#nodeForm" ).dialog( "close" );
-													        }
-													    }
-													});
-													$("#nodeForm").dialog("open");
-												}												
+												
+												this.create(obj, "last", {"attr" : {"rel" : "default"}});   
 												
 											}                     
 										},                     
@@ -793,27 +771,9 @@
 											"label" : "Folder",                          
 											action : function (obj)  
 											{
-												// 파일인 경우에 실행하지 않는다
-												if( $(obj).attr("rel") != 'default' ){
-													
-													var _this = this;
-													
-// 													$("#nodeLevel").val("1");
-													
-													$("#nodeForm").dialog({
-														title  : "권한 추가"
-													  ,	buttons: {
-													        Ok    : function() {
-																_this.create(obj, "last", {"attr" : { "rel" : "folder", "f_c_id" : $("#nodeLevel").val()}});                         
-													        	$("#nodeForm").dialog("close");
-													        },
-													        Cancel: function() {
-													            $( "#nodeForm" ).dialog( "close" );
-													        }
-													    }
-													});
-													$("#nodeForm").dialog("open");
-												}
+												
+												this.create(obj, "last", {"attr" : { "rel" : "folder"}});
+												
 												
 											}                      
 										}
@@ -894,7 +854,7 @@
 							// All the options are almost the same as jQuery's AJAX (read the docs)
 							"ajax" : {
 								// the URL to fetch the data
-								"url" : "${pageContext.request.contextPath}/constraint/getChildNode.do",
+								"url" : "${pageContext.request.contextPath}/constraint/foreign/getChildNode.do",
 								// the `data` function is executed in the instance's scope
 								// the parameter is the node being loaded 
 								// (may be -1, 0, or undefined when loading the root nodes)
@@ -911,7 +871,7 @@
 							// As this has been a common question - async search
 							// Same as above - the `ajax` config option is actually jQuery's AJAX object
 							"ajax" : {
-								"url" : "${pageContext.request.contextPath}/constraint/searchNode.do",
+								"url" : "${pageContext.request.contextPath}/constraint/foreign/searchNode.do",
 								// You get the search string as a parameter
 								"data" : function (str) {
 									return { 
@@ -981,7 +941,7 @@
 					})
 					.bind("create.jstree", function (e, data) {
 						$.post(
-							"${pageContext.request.contextPath}/constraint/addNode.do", 
+							"${pageContext.request.contextPath}/constraint/foreign/addNode.do", 
 							{ 
 								"ref" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""), 
 								"c_position" : data.rslt.position,
@@ -1006,7 +966,7 @@
 							$.ajax({
 								async : false,
 								type: 'POST',
-								url: "${pageContext.request.contextPath}/constraint/removeNode.do",
+								url: "${pageContext.request.contextPath}/constraint/foreign/removeNode.do",
 								data : { 
 									"c_id" : this.id.replace("node_","").replace("copy_","")
 								}, 
@@ -1019,7 +979,7 @@
 					})
 					.bind("rename.jstree", function (e, data) {
 						$.post(
-								"${pageContext.request.contextPath}/constraint/alterNode.do", 
+								"${pageContext.request.contextPath}/constraint/foreign/alterNode.do", 
 							{ 
 									"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
 									"c_title" : data.rslt.new_name,
@@ -1036,7 +996,7 @@
 					})
 					.bind("set_type.jstree", function (e, data) {
 						$.post(
-								"${pageContext.request.contextPath}/constraint/alterNodeType.do", 
+								"${pageContext.request.contextPath}/constraint/foreign/alterNodeType.do", 
 							{ 
 									"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
 									"c_title" : data.rslt.new_name,
@@ -1053,7 +1013,7 @@
 							$.ajax({
 								async : false,
 								type: 'POST',
-								url: "${pageContext.request.contextPath}/constraint/moveNode.do",
+								url: "${pageContext.request.contextPath}/constraint/foreign/moveNode.do",
 								data : { 
 									"c_id" : $(this).attr("id").replace("node_","").replace("copy_",""), 
 									"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_",""), 

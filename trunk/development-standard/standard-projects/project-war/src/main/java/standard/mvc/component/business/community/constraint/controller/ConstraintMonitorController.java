@@ -25,13 +25,27 @@ import egovframework.com.ext.jstree.springiBatis.monitor.vo.T_JqgridJson;
 @Controller
 public class ConstraintMonitorController extends GenericAbstractController {
 
-	@Resource(name = "ConstraintMonitorService")
-	private ConstraintMonitorService constraintMonitorService;
+	@Resource(name = "PrimaryMonitorService")
+	private ConstraintMonitorService primaryMonitorService;
+	
+	@Resource(name = "ForeignMonitorService")
+	private ConstraintMonitorService foreignMonitorService;
 
 	@ResponseBody
-	@RequestMapping("/constraint/monitor/list.do")
-	public String list(ModelMap model) throws JsonProcessingException {
+	@RequestMapping("/constraint/monitor/primary/list.do")
+	public String getPrimaryList(ModelMap model) throws JsonProcessingException {
 
+		return list(primaryMonitorService);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/constraint/monitor/foreign/list.do")
+	public String getForeignList(ModelMap model) throws JsonProcessingException {
+
+		return list(foreignMonitorService);
+	}
+
+	private String list(ConstraintMonitorService constraintMonitorService) throws JsonProcessingException {
 		T_JqgridJson t_JqgridJson = new T_JqgridJson();
 		t_JqgridJson.setPage("1");
 		t_JqgridJson.setRecords("1");
@@ -39,7 +53,7 @@ public class ConstraintMonitorController extends GenericAbstractController {
 
 		List<T_JqGridRowData> rows = new ArrayList<T_JqGridRowData>();
 
-		List<T_Primary_JqGridCellData> t_JqGridCellDatas = constraintMonitorService.getPrimaryJqGridCellData(new P_JqGrid());
+		List<T_Primary_JqGridCellData> t_JqGridCellDatas = constraintMonitorService.getExtendedJqGridCellData(new P_JqGrid());
 
 		for (T_Primary_JqGridCellData t_JqGridCellData : t_JqGridCellDatas) {
 			T_JqGridRowData rowData = new T_JqGridRowData();
