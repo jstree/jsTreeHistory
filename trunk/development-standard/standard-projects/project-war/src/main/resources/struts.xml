@@ -32,9 +32,9 @@
 
 
 	<!-- www.313.co.kr -->
-	<include file="/egovframework/struts/com/ext/jstree/actionMapping.xml" />
+	<include file="META-INF/egovframework/struts/com/ext/jstree/actionMapping.xml" />
 
 	<include
-		file="/egovframework/struts/com/ext/jstree/jstreeMonitor/jstreeMonitor.xml" />
+		file="META-INF/egovframework/struts/com/ext/jstree/jstreeMonitor/jstreeMonitor.xml" />
 
 </struts>
