@@ -239,7 +239,7 @@ public class PrimaryController extends GenericAbstractController {
 	 */
 	@ResponseBody
 	@RequestMapping("/moveNode.do")
-	public ComprehensiveTree moveNode( ComprehensiveTree  constraintComprehensiveTree
+	public ComprehensiveTree moveNode( PrimaryComprehensiveTree  constraintComprehensiveTree
 			                         , ModelMap           model
 			                         , HttpServletRequest request )
 			 throws Exception {

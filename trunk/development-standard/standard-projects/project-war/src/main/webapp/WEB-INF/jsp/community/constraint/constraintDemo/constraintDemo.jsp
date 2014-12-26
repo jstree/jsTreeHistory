@@ -637,7 +637,7 @@
 						</div>
 						<div class="desktop-tablet alpha bm-remove boxed last btn_wrap02">
 							<div class="textInputVerticalCenter">
-								<input type="text" id="text" placeholder="찾을 노드 이름 입력" class="inline-block bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search"/>
+								<input type="text" id="f_text" placeholder="찾을 노드 이름 입력" class="inline-block bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search"/>
 							</div>
 							<button type="button" id="f_search" title="Search"><i class="fa fa-search"></i></button>
 							<button type="button" id="f_clear_search" title="Clear"><i class="fa fa-eraser"></i></button>
@@ -1056,7 +1056,8 @@
 								break;
 							case "f_text": break;
 							default:
-								$("#demo_f").jstree(this.id.toString().replace("f_", ""));
+// 								$("#demo_f").jstree(this.id);
+								$("#demo_f").jstree((this.id.toString().replace("f_", "")));
 								break;
 						}
 					});
