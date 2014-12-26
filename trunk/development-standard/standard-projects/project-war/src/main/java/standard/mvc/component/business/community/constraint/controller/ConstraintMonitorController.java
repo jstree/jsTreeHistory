@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
 import standard.mvc.component.business.community.constraint.service.ConstraintMonitorService;
-import standard.mvc.component.business.community.constraint.vo.T_Primary_JqGridCellData;
+import standard.mvc.component.business.community.constraint.vo.T_Constraint_JqGridCellData;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -53,9 +53,9 @@ public class ConstraintMonitorController extends GenericAbstractController {
 
 		List<T_JqGridRowData> rows = new ArrayList<T_JqGridRowData>();
 
-		List<T_Primary_JqGridCellData> t_JqGridCellDatas = constraintMonitorService.getExtendedJqGridCellData(new P_JqGrid());
+		List<T_Constraint_JqGridCellData> t_JqGridCellDatas = constraintMonitorService.getExtendedJqGridCellData(new P_JqGrid());
 
-		for (T_Primary_JqGridCellData t_JqGridCellData : t_JqGridCellDatas) {
+		for (T_Constraint_JqGridCellData t_JqGridCellData : t_JqGridCellDatas) {
 			T_JqGridRowData rowData = new T_JqGridRowData();
 
 			rowData.setId(Integer.toString(t_JqGridCellData.getC_id()));

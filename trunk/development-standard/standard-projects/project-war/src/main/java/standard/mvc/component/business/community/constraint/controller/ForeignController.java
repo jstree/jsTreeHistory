@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
-import standard.mvc.component.business.community.constraint.vo.ConstraintComprehensiveTree;
+import standard.mvc.component.business.community.constraint.vo.ForeignComprehensiveTree;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -45,7 +45,7 @@ public class ForeignController extends GenericAbstractController {
 	 */
 	@ResponseBody
 	@RequestMapping("/getChildNode.do")
-	public List<ConstraintComprehensiveTree> getChildNode(ConstraintComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
+	public List<ForeignComprehensiveTree> getChildNode(ForeignComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
 			 throws Exception {
 		
 		if (constraintComprehensiveTree.getC_id() == 0) {
@@ -66,7 +66,7 @@ public class ForeignController extends GenericAbstractController {
 	 */
 	@ResponseBody
 	@RequestMapping("/searchNode.do")
-	public List<String> searchNode(ConstraintComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
+	public List<String> searchNode(ForeignComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
 			 throws Exception {
 		
 		if (!StringUtils.hasText(request.getParameter("searchString"))) {
@@ -91,7 +91,7 @@ public class ForeignController extends GenericAbstractController {
 	 */
 	@ResponseBody
 	@RequestMapping("/addNode.do")
-	public ComprehensiveTree addNode(ConstraintComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ComprehensiveTree addNode(ForeignComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
 			 throws Exception {
 
 		if (request.getParameter("ref") == null || request.getParameter("c_position") == null
@@ -132,7 +132,7 @@ public class ForeignController extends GenericAbstractController {
 	 */
 	@ResponseBody
 	@RequestMapping("/removeNode.do")
-	public ComprehensiveTree removeNode(ConstraintComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ComprehensiveTree removeNode(ForeignComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
 			 throws Exception {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_id").equals("0")
@@ -156,7 +156,7 @@ public class ForeignController extends GenericAbstractController {
 	 */
 	@ResponseBody
 	@RequestMapping("/alterNode.do")
-	public ComprehensiveTree alterNode(ConstraintComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ComprehensiveTree alterNode(ForeignComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
 			 throws Exception {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_title") == null
@@ -197,7 +197,7 @@ public class ForeignController extends GenericAbstractController {
 	 */
 	@ResponseBody
 	@RequestMapping("/alterNodeType.do")
-	public ComprehensiveTree alterNodeType(ConstraintComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ComprehensiveTree alterNodeType(ForeignComprehensiveTree constraintComprehensiveTree, ModelMap model, HttpServletRequest request)
 			 throws Exception {
 
 		if (request.getParameter("c_id") == null || request.getParameter("c_type") == null) {

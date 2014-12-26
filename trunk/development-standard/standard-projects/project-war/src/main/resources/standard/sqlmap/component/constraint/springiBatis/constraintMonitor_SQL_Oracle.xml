@@ -3,9 +3,9 @@
 <sqlMap namespace="constraintMonitor">
 	
 	<typeAlias alias="P_JqGrid"	type="egovframework.com.ext.jstree.springiBatis.monitor.vo.P_JqGrid" />
-	<typeAlias alias="T_Primary_JqGridCellData" type="standard.mvc.component.business.community.constraint.vo.T_Primary_JqGridCellData"/>
+	<typeAlias alias="T_Constraint_JqGridCellData" type="standard.mvc.component.business.community.constraint.vo.T_Constraint_JqGridCellData"/>
 	
-	<select id="getPrimaryJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_Primary_JqGridCellData">
+	<select id="getPrimaryJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_Constraint_JqGridCellData">
 		/* getPrimaryJstreeMonitor */
 		SELECT c_id
 		     , c_parentid
@@ -20,7 +20,7 @@
 	  ORDER BY c_parentid, c_position 
 	</select>
 	
-	<select id="getForeignJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_Primary_JqGridCellData">
+	<select id="getForeignJstreeMonitor" parameterClass="P_JqGrid" resultClass="T_Constraint_JqGridCellData">
 		/* getForeignJstreeMonitor */
 		SELECT c_id
 		     , c_parentid

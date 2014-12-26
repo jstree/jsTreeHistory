@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="primary">
-	<typeAlias alias="Constraint" type="standard.mvc.component.business.community.constraint.vo.ConstraintComprehensiveTree"/>
+	<typeAlias alias="Primary" type="standard.mvc.component.business.community.constraint.vo.PrimaryComprehensiveTree"/>
 
-	<select id="getChildNode" parameterClass="Constraint" resultClass="Constraint">
+	<select id="getChildNode" parameterClass="Primary" resultClass="Primary">
 		/* getChildNode */
 		SELECT A.c_id
 		     , A.c_parentid
@@ -26,7 +26,7 @@
 	  ORDER BY A.C_POSITION ASC	
 	</select>
 
-	<select id="getChildNodeByLeftRight" parameterClass="Constraint" resultClass="Constraint">
+	<select id="getChildNodeByLeftRight" parameterClass="Primary" resultClass="Primary">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		     , C_PARENTID
@@ -44,7 +44,7 @@
 	</select>
 
 
-	<select id="searchNodeByString" parameterClass="Constraint" resultClass="Constraint">
+	<select id="searchNodeByString" parameterClass="Primary" resultClass="Primary">
 		/* searchNodeByString */
 		SELECT c_left
 		     , c_right
@@ -64,7 +64,7 @@
 	</select>
 
 
-	<update id="alterNode" parameterClass="Constraint">
+	<update id="alterNode" parameterClass="Primary">
 		/* alterNode */
 		UPDATE T_PRIMARY_COMPREHENSIVETREE 
 		   SET C_TYPE = #c_type#
@@ -73,7 +73,7 @@
 	</update>
 
 
-	<select id="getNode" parameterClass="Constraint" resultClass="Constraint">
+	<select id="getNode" parameterClass="Primary" resultClass="Primary">
 		/* getNode */
         SELECT C_ID
              , C_PARENTID
@@ -89,7 +89,7 @@
     </select>
 
 
-	<select id="getNodeByRef" parameterClass="Constraint" resultClass="Constraint">
+	<select id="getNodeByRef" parameterClass="Primary" resultClass="Primary">
 		/* getNodeByRef */
         SELECT C_ID
              , C_PARENTID
@@ -105,7 +105,7 @@
     </select>
 
 
-	<delete id="removeNode" parameterClass="Constraint">
+	<delete id="removeNode" parameterClass="Primary">
 		/* removeNode */
        	DELETE FROM T_PRIMARY_COMPREHENSIVETREE 
        	      WHERE C_LEFT  &gt;= #c_left# 
@@ -113,7 +113,7 @@
 	</delete>
 	
 	
-	<update id="removedAfterLeftFix" parameterClass="Constraint">
+	<update id="removedAfterLeftFix" parameterClass="Primary">
 		/* removedAfterLeftFix */
        	UPDATE T_PRIMARY_COMPREHENSIVETREE 
   		   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
@@ -121,7 +121,7 @@
 	</update>
 	
 	
-	<update id="removedAfterRightFix" parameterClass="Constraint">
+	<update id="removedAfterRightFix" parameterClass="Primary">
 		/* removedAfterRightFix */
 		UPDATE T_PRIMARY_COMPREHENSIVETREE 
 		   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -129,7 +129,7 @@
 	</update>
 	
 	
-	<update id="removedAfterPositionFix" parameterClass="Constraint">
+	<update id="removedAfterPositionFix" parameterClass="Primary">
 		/* removedAfterPositionFix */
      	UPDATE T_PRIMARY_COMPREHENSIVETREE 
      	   SET C_POSITION = C_POSITION - 1 
@@ -138,7 +138,7 @@
 	</update>
 
 
-	<select id="analyzeRootNode" resultClass="Constraint">
+	<select id="analyzeRootNode" resultClass="Primary">
 		/* searchNodeByString */
 	    SELECT C_LEFT 
 		  FROM T_PRIMARY_COMPREHENSIVETREE 
@@ -146,7 +146,7 @@
     </select>
 
 
-	<update id="cutMyselfPositionFix" parameterClass="Constraint">
+	<update id="cutMyselfPositionFix" parameterClass="Primary">
 		/* cutMyselfPositionFix */
        	UPDATE T_PRIMARY_COMPREHENSIVETREE 
        	   SET C_POSITION = C_POSITION - 1 
@@ -155,7 +155,7 @@
     </update>
 
 
-	<update id="cutMyselfLeftFix" parameterClass="Constraint">
+	<update id="cutMyselfLeftFix" parameterClass="Primary">
 		/* cutMyselfLeftFix */
        	UPDATE T_PRIMARY_COMPREHENSIVETREE 
        	   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
@@ -163,7 +163,7 @@
     </update>
     
     
-	<update id="cutMyselfRightFix" parameterClass="Constraint">
+	<update id="cutMyselfRightFix" parameterClass="Primary">
 		/* cutMyselfRightFix */
        	UPDATE T_PRIMARY_COMPREHENSIVETREE 
        	   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -174,7 +174,7 @@
 	</update>
 
 
-	<update id="stretchPositionForMyself" parameterClass="Constraint">
+	<update id="stretchPositionForMyself" parameterClass="Primary">
 		/* stretchPositionForMyselfFromJstree */
         UPDATE T_PRIMARY_COMPREHENSIVETREE
            SET C_POSITION = C_POSITION + 1
@@ -193,7 +193,7 @@
 	</update>
 
 
-	<update id="stretchLeftForMyselfFromJstree" parameterClass="Constraint">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="Primary">
 		/* stretchLeftForMyselfFromJstree */
        	UPDATE T_PRIMARY_COMPREHENSIVETREE 
        	   SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
@@ -208,7 +208,7 @@
 	</update>
 
 
-	<update id="stretchRightForMyselfFromJstree" parameterClass="Constraint">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="Primary">
 		/* stretchRightForMyselfFromJstree */
         UPDATE T_PRIMARY_COMPREHENSIVETREE 
            SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
@@ -223,7 +223,7 @@
 	</update>
 
 
-	<insert id="pasteMyselfFromJstree" parameterClass="Constraint">
+	<insert id="pasteMyselfFromJstree" parameterClass="Primary">
 		/* pasteMyselfFromJstree */
         INSERT INTO T_PRIMARY_COMPREHENSIVETREE ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, F_C_ID ) 
     	SELECT S_PRIMARY_COMPREHENSIVETREE.NEXTVAL AS C_ID
@@ -251,7 +251,7 @@
 	</insert>
 
 
-	<update id="enterMyselfFixPosition" parameterClass="Constraint">
+	<update id="enterMyselfFixPosition" parameterClass="Primary">
 		/* enterMyselfFixPosition */
         UPDATE T_PRIMARY_COMPREHENSIVETREE 
            SET C_PARENTID = #ref#
@@ -260,7 +260,7 @@
     </update>
     
     
-	<update id="enterMyselfFixLeftRight" parameterClass="Constraint">
+	<update id="enterMyselfFixLeftRight" parameterClass="Primary">
 		/* enterMyselfFixLeftRight */
         UPDATE T_PRIMARY_COMPREHENSIVETREE 
            SET C_LEFT  = C_LEFT  - (#idif#)
@@ -272,7 +272,7 @@
 	</update>
 
 
-	<insert id="addMyselfFromJstree" parameterClass="Constraint">
+	<insert id="addMyselfFromJstree" parameterClass="Primary">
 		/* addMyselfFromJstree */
         INSERT INTO T_PRIMARY_COMPREHENSIVETREE ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, F_C_ID )
                                  VALUES ( S_PRIMARY_COMPREHENSIVETREE.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #f_c_id# )
@@ -284,7 +284,7 @@
 	</insert>
 
 
-	<update id="alterNodeType" parameterClass="Constraint">
+	<update id="alterNodeType" parameterClass="Primary">
 		/* alterNodeType */
 		UPDATE T_PRIMARY_COMPREHENSIVETREE 
 		   SET C_TYPE = #c_type#
@@ -292,7 +292,7 @@
 	</update>
 
 
-	<update id="fixCopyIF" parameterClass="Constraint">
+	<update id="fixCopyIF" parameterClass="Primary">
         /* fixCopyIF */
         UPDATE T_PRIMARY_COMPREHENSIVETREE 
            SET C_POSITION = #fixCopyPosition# 
@@ -300,7 +300,7 @@
 	</update>
 
 
-	<update id="fixCopy" parameterClass="Constraint">
+	<update id="fixCopy" parameterClass="Primary">
 		/* fixCopy */
 		UPDATE T_PRIMARY_COMPREHENSIVETREE 
 		   SET C_PARENTID = #fixCopyId# 

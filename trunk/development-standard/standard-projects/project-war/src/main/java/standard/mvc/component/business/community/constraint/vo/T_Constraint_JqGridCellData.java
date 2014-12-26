@@ -4,7 +4,7 @@ import java.util.List;
 
 import egovframework.com.ext.jstree.springiBatis.monitor.vo.T_JqGridCellData;
 
-public class T_Primary_JqGridCellData extends T_JqGridCellData {
+public class T_Constraint_JqGridCellData extends T_JqGridCellData {
 	private int f_c_id;
 
 	public int getF_c_id() {

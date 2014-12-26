@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="foreign">
-	<typeAlias alias="Constraint" type="standard.mvc.component.business.community.constraint.vo.ConstraintComprehensiveTree"/>
+	<typeAlias alias="Foreign" type="standard.mvc.component.business.community.constraint.vo.ForeignComprehensiveTree"/>
 
-	<select id="getChildNode" parameterClass="Constraint" resultClass="Constraint">
+	<select id="getChildNode" parameterClass="Foreign" resultClass="Foreign">
 		/* getChildNode */
 		SELECT A.c_id
 		     , A.c_parentid
@@ -25,7 +25,7 @@
 	  ORDER BY A.C_POSITION ASC	
 	</select>
 
-	<select id="getChildNodeByLeftRight" parameterClass="Constraint" resultClass="Constraint">
+	<select id="getChildNodeByLeftRight" parameterClass="Foreign" resultClass="Foreign">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		     , C_PARENTID
@@ -42,7 +42,7 @@
 	</select>
 
 
-	<select id="searchNodeByString" parameterClass="Constraint" resultClass="Constraint">
+	<select id="searchNodeByString" parameterClass="Foreign" resultClass="Foreign">
 		/* searchNodeByString */
 		SELECT c_left
 		     , c_right
@@ -62,7 +62,7 @@
 	</select>
 
 
-	<update id="alterNode" parameterClass="Constraint">
+	<update id="alterNode" parameterClass="Foreign">
 		/* alterNode */
 		UPDATE T_FOREIGN_COMPREHENSIVETREE 
 		   SET C_TYPE = #c_type#
@@ -71,7 +71,7 @@
 	</update>
 
 
-	<select id="getNode" parameterClass="Constraint" resultClass="Constraint">
+	<select id="getNode" parameterClass="Foreign" resultClass="Foreign">
 		/* getNode */
         SELECT C_ID
              , C_PARENTID
@@ -86,7 +86,7 @@
     </select>
 
 
-	<select id="getNodeByRef" parameterClass="Constraint" resultClass="Constraint">
+	<select id="getNodeByRef" parameterClass="Foreign" resultClass="Foreign">
 		/* getNodeByRef */
         SELECT C_ID
              , C_PARENTID
@@ -101,7 +101,7 @@
     </select>
 
 
-	<delete id="removeNode" parameterClass="Constraint">
+	<delete id="removeNode" parameterClass="Foreign">
 		/* removeNode */
        	DELETE FROM T_FOREIGN_COMPREHENSIVETREE 
        	      WHERE C_LEFT  &gt;= #c_left# 
@@ -109,7 +109,7 @@
 	</delete>
 	
 	
-	<update id="removedAfterLeftFix" parameterClass="Constraint">
+	<update id="removedAfterLeftFix" parameterClass="Foreign">
 		/* removedAfterLeftFix */
        	UPDATE T_FOREIGN_COMPREHENSIVETREE 
   		   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
@@ -117,7 +117,7 @@
 	</update>
 	
 	
-	<update id="removedAfterRightFix" parameterClass="Constraint">
+	<update id="removedAfterRightFix" parameterClass="Foreign">
 		/* removedAfterRightFix */
 		UPDATE T_FOREIGN_COMPREHENSIVETREE 
 		   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -125,7 +125,7 @@
 	</update>
 	
 	
-	<update id="removedAfterPositionFix" parameterClass="Constraint">
+	<update id="removedAfterPositionFix" parameterClass="Foreign">
 		/* removedAfterPositionFix */
      	UPDATE T_FOREIGN_COMPREHENSIVETREE 
      	   SET C_POSITION = C_POSITION - 1 
@@ -134,7 +134,7 @@
 	</update>
 
 
-	<select id="analyzeRootNode" resultClass="Constraint">
+	<select id="analyzeRootNode" resultClass="Foreign">
 		/* searchNodeByString */
 	    SELECT C_LEFT 
 		  FROM T_FOREIGN_COMPREHENSIVETREE 
@@ -142,7 +142,7 @@
     </select>
 
 
-	<update id="cutMyselfPositionFix" parameterClass="Constraint">
+	<update id="cutMyselfPositionFix" parameterClass="Foreign">
 		/* cutMyselfPositionFix */
        	UPDATE T_FOREIGN_COMPREHENSIVETREE 
        	   SET C_POSITION = C_POSITION - 1 
@@ -151,7 +151,7 @@
     </update>
 
 
-	<update id="cutMyselfLeftFix" parameterClass="Constraint">
+	<update id="cutMyselfLeftFix" parameterClass="Foreign">
 		/* cutMyselfLeftFix */
        	UPDATE T_FOREIGN_COMPREHENSIVETREE 
        	   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
@@ -159,7 +159,7 @@
     </update>
     
     
-	<update id="cutMyselfRightFix" parameterClass="Constraint">
+	<update id="cutMyselfRightFix" parameterClass="Foreign">
 		/* cutMyselfRightFix */
        	UPDATE T_FOREIGN_COMPREHENSIVETREE 
        	   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -170,7 +170,7 @@
 	</update>
 
 
-	<update id="stretchPositionForMyself" parameterClass="Constraint">
+	<update id="stretchPositionForMyself" parameterClass="Foreign">
 		/* stretchPositionForMyselfFromJstree */
         UPDATE T_FOREIGN_COMPREHENSIVETREE
            SET C_POSITION = C_POSITION + 1
@@ -189,7 +189,7 @@
 	</update>
 
 
-	<update id="stretchLeftForMyselfFromJstree" parameterClass="Constraint">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="Foreign">
 		/* stretchLeftForMyselfFromJstree */
        	UPDATE T_FOREIGN_COMPREHENSIVETREE 
        	   SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
@@ -204,7 +204,7 @@
 	</update>
 
 
-	<update id="stretchRightForMyselfFromJstree" parameterClass="Constraint">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="Foreign">
 		/* stretchRightForMyselfFromJstree */
         UPDATE T_FOREIGN_COMPREHENSIVETREE 
            SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
@@ -219,7 +219,7 @@
 	</update>
 
 
-	<insert id="pasteMyselfFromJstree" parameterClass="Constraint">
+	<insert id="pasteMyselfFromJstree" parameterClass="Foreign">
 		/* pasteMyselfFromJstree */
         INSERT INTO T_FOREIGN_COMPREHENSIVETREE ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE ) 
     	SELECT S_FOREIGN_COMPREHENSIVETREE.NEXTVAL AS C_ID
@@ -246,7 +246,7 @@
 	</insert>
 
 
-	<update id="enterMyselfFixPosition" parameterClass="Constraint">
+	<update id="enterMyselfFixPosition" parameterClass="Foreign">
 		/* enterMyselfFixPosition */
         UPDATE T_FOREIGN_COMPREHENSIVETREE 
            SET C_PARENTID = #ref#
@@ -255,7 +255,7 @@
     </update>
     
     
-	<update id="enterMyselfFixLeftRight" parameterClass="Constraint">
+	<update id="enterMyselfFixLeftRight" parameterClass="Foreign">
 		/* enterMyselfFixLeftRight */
         UPDATE T_FOREIGN_COMPREHENSIVETREE 
            SET C_LEFT  = C_LEFT  - (#idif#)
@@ -267,7 +267,7 @@
 	</update>
 
 
-	<insert id="addMyselfFromJstree" parameterClass="Constraint">
+	<insert id="addMyselfFromJstree" parameterClass="Foreign">
 		/* addMyselfFromJstree */
         INSERT INTO T_FOREIGN_COMPREHENSIVETREE ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL )
                                  VALUES ( S_FOREIGN_COMPREHENSIVETREE.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level# )
@@ -279,7 +279,7 @@
 	</insert>
 
 
-	<update id="alterNodeType" parameterClass="Constraint">
+	<update id="alterNodeType" parameterClass="Foreign">
 		/* alterNodeType */
 		UPDATE T_FOREIGN_COMPREHENSIVETREE 
 		   SET C_TYPE = #c_type#
@@ -287,7 +287,7 @@
 	</update>
 
 
-	<update id="fixCopyIF" parameterClass="Constraint">
+	<update id="fixCopyIF" parameterClass="Foreign">
         /* fixCopyIF */
         UPDATE T_FOREIGN_COMPREHENSIVETREE 
            SET C_POSITION = #fixCopyPosition# 
@@ -295,7 +295,7 @@
 	</update>
 
 
-	<update id="fixCopy" parameterClass="Constraint">
+	<update id="fixCopy" parameterClass="Foreign">
 		/* fixCopy */
 		UPDATE T_FOREIGN_COMPREHENSIVETREE 
 		   SET C_PARENTID = #fixCopyId# 
