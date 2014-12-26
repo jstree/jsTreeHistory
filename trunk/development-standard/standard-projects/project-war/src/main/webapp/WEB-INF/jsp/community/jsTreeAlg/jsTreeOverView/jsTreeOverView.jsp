@@ -36,8 +36,8 @@
 										<img src="/images/community/jsTreeAlg/jsTreeOverView/RJCO-Cost-Timeliness-Quality-1v12-500w.jpg" alt="" />
 									</div>
 									<div class="space-20"></div>
-									<h4>개발 생산성 vs 비즈니스 적시성</h4>
-									<p><a href="http://jstree.com" target="_blank" title="새창">JsTree</a>J는 jQuery PlugIn 형태의 Library로 <br />
+									<h4>(연구 필요성) 개발 생산성 vs 비즈니스 적시성</h4>
+									<p>JsTree는 jQuery PlugIn 형태의 Library로 <br />
 										상호 작용하는 트리 형태의 UI를 쉽게 구현할 수 있게 해주는 OpenSource 입니다.<p>
 									<p>저희는 JsTree에 관하여 스터디를 진행하면서 다음과 같은 문제점을 발견하였습니다.
 										<ul>
@@ -46,11 +46,11 @@
 										</ul>
 										그래서 저희는 PHP로 구현된 부분을 Java로 전환하는 작업을 진행 하였습니다.
 									</p>
-									<p>그리고 JsTree를 단순한 PlugIn 이 아닌 컴포넌트 모듈로 확장하기 위해, <br />
-										<strong>하나의 스키마 안에서 데이터 집합간의 구조적 관계</strong>에 집중하기 시작하였으며, <br />
+									<p>그리고 JsTree를 단순한 PlugIn 이 아닌 컴포넌트 모듈로 확장하기 위해,
+										<strong>하나의 스키마 안에서 데이터 집합간의 구조적 관계</strong>에 집중하기 시작하였으며,
 										이는 기존 로직을 알고리즘 형태로 변경하게되는 중요한 계기가 되었습니다.
 									</p>
-									<p>이로 인하여 매우 쉽게 코드를 생산할 수 있고, 집중된 성능 관리, 향상된 개발 품질 등 <br />
+									<p>이로 인하여 매우 쉽게 코드를 생산할 수 있고, 집중된 성능 관리, 향상된 개발 품질 등
 										다양한 장점을 추가로 얻을 수 있다는 것을 알게 되었습니다. 
 									</p>
 									<p>지금 저희는 이것을 직접 보여드리고자 기존과 다른 무언가에 도전하고 있습니다.</p>
