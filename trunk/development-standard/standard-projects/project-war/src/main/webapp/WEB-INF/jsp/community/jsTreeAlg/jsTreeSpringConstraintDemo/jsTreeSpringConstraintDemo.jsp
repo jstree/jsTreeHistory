@@ -132,7 +132,7 @@
 				&nbsp;/&nbsp;
 				JsTree
 				&nbsp;/&nbsp;
-				Spring Demo
+				Spring PK FK Constraint Demo
 			</p>			
 		</div>
 	</div>
