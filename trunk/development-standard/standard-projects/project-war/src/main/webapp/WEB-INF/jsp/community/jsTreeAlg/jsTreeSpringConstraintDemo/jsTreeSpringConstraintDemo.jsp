@@ -125,7 +125,7 @@
 		<div class="no-display">article</div>
 		<div class="text-center">
 			<h1 class="bm-remove">
-				JAVA &amp; Oracle ( Spring + Ibatis ) demo + pk fk constraint
+				JAVA &amp; Oracle ( Spring + Ibatis ) PK FK Constraint demo
 			</h1>
 			<p class="bm-remove">
 				<a href="${pageContext.request.contextPath}/" target="_self">Home</a>
@@ -220,17 +220,15 @@
 					} );
 					jstreeDataTable.api().ajax.reload();
 				}
-
+				
 				$(function () {
 					
-					$("#radio").buttonset();					
-					
-					$("#nodeForm").dialog({
-						height   : 300
-					  , width    : 400					
-					  , modal    : true
-					  , autoOpen : false
-					});					
+				$("#nodeForm").dialog({
+					height   : 300
+				  , width    : 400					
+				  , modal    : true
+				  , autoOpen : false
+				});					
 
 				var jstreeDataTable = $('#jstreeTable').dataTable( {
 					"ajax": {
@@ -288,17 +286,57 @@
 													
 													var _this = this;
 													
-													$("#nodeLevel").val("1");
+													$.post(
+															"${pageContext.request.contextPath}/constraint/foreign/getChildNode.do",
+														{ 
+															"c_id" : "3"
+														}, 
+														function (r) {
+															
+															var jsonArrLength = r.length;
+															for (var i = 0; i < jsonArrLength; i++) {
+
+																var c_title;
+																var c_id;
+
+																var jsonData = r[i];
+																for (var key in jsonData) {
+																	
+																	if ("c_id" == key) {
+																		c_id = $(jsonData).attr(key);
+																	} else if ("c_title" == key) {
+																		c_title = $(jsonData).attr(key);
+																	} else {
+																		continue;
+																	}
+																	
+																}
+																
+																$("#authority").append(function(){
+																	if (i == jsonArrLength - 1) {
+																		return $("<option>", {value : c_id, text : c_title, selected : true});
+																	} 
+																	
+																	return $("<option>", {value : c_id, text : c_title});
+																});
+																	
+															}
+															
+// 															$("#authority").selectmenu();
+														}
+													);
 													
 													$("#nodeForm").dialog({
 														title  : "권한 추가"
 													  ,	buttons: {
 													        Ok    : function() {
-													        	_this.create(obj, "last", {"attr" : {"rel" : "default", "f_c_id" : $("#nodeLevel").val()}});                         
+													        	_this.create(obj, "last", {"attr" : {"rel" : "default", "f_c_id" : $("#authority").val()}});
 													        	$("#nodeForm").dialog("close");
+													        	$("#authority > option").remove();
 													        },
 													        Cancel: function() {
-													            $( "#nodeForm" ).dialog( "close" );
+													            $("#nodeForm").dialog("close");
+													            $("#authority > option").remove();
 													        }
 													    }
 													});
@@ -316,20 +354,59 @@
 											{
 												// 파일인 경우에 실행하지 않는다
 												if( $(obj).attr("rel") != 'default' ){
-													
 													var _this = this;
 													
-													$("#nodeLevel").val("1");
+													$.post(
+															"${pageContext.request.contextPath}/constraint/foreign/getChildNode.do",
+														{ 
+															"c_id" : "3"
+														}, 
+														function (r) {
+															
+															var jsonArrLength = r.length;
+															for (var i = 0; i < jsonArrLength; i++) {
+
+																var c_title;
+																var c_id;
+
+																var jsonData = r[i];
+																for (var key in jsonData) {
+																	
+																	if ("c_id" == key) {
+																		c_id = $(jsonData).attr(key);
+																	} else if ("c_title" == key) {
+																		c_title = $(jsonData).attr(key);
+																	} else {
+																		continue;
+																	}
+																	
+																}
+																
+																$("#authority").append(function(){
+																	if (i == jsonArrLength - 1) {
+																		return $("<option>", {value : c_id, text : c_title, selected : true});
+																	} 
+																	
+																	return $("<option>", {value : c_id, text : c_title});
+																});
+																	
+															}
+															
+// 															$("#authority").selectmenu();
+														}
+													);
 													
 													$("#nodeForm").dialog({
 														title  : "권한 추가"
 													  ,	buttons: {
 													        Ok    : function() {
-																_this.create(obj, "last", {"attr" : { "rel" : "folder", "f_c_id" : $("#nodeLevel").val()}});                         
+																_this.create(obj, "last", {"attr" : { "rel" : "folder", "f_c_id" : $("#authority").val()}});
 													        	$("#nodeForm").dialog("close");
+													        	$("#authority > option").remove();
 													        },
 													        Cancel: function() {
-													            $( "#nodeForm" ).dialog( "close" );
+													            $("#nodeForm").dialog("close");
+													            $("#authority > option").remove();
 													        }
 													    }
 													});
@@ -704,7 +781,6 @@
 					
 					$("#nodeForm").dialog({
 						height   : 300
-					  , width    : 400					
 					  , modal    : true
 					  , autoOpen : false
 					});					
@@ -1056,7 +1132,6 @@
 								break;
 							case "f_text": break;
 							default:
-// 								$("#demo_f").jstree(this.id);
 								$("#demo_f").jstree((this.id.toString().replace("f_", "")));
 								break;
 						}
@@ -1065,9 +1140,10 @@
 				</script>				
 				</div>
 				<div id="nodeForm" style="display:none;">
-			    	<ul>
-			    		<li>권한 : <input type="text" id="nodeLevel" /></li>
-			    	</ul>
+					<form action="#">
+						<select	name="authority" id="authority">
+						</select>
+					</form>
 			    </div>				
 			</div>
 		</div>
