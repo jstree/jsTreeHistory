@@ -21,8 +21,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,6 +54,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  2014. 12. 15.  류강하                 getChildNode 추가
  *  2014. 12. 19.  류강하                 사용자 및 관리자 화면을 동시 처리하게끔 addNode 보완, removeNode 추가
  *  2014. 12. 20.  류강하                 alterNode, alterNodeType 추가
+ *  2014. 12. 28.  류강하                 searchNode, moveNode 추가
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -183,5 +186,39 @@ public class NewsletterController extends GenericAbstractController {
         return newsletterComprehensiveTree;
     }
     
+    /**
+     * 노드를 검색한다.
+     * @param newsletterComprehensiveTree Newsletter VO
+     * @return TODO
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping("/searchEmail.do")
+    public List<String> searchNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
+            throws Exception {
+
+        if (!StringUtils.hasText(newsletterComprehensiveTree.getSearchStr())) {
+            throw new RuntimeException("Search string is required");
+        }
+        
+        return newsletterService.searchNode(newsletterComprehensiveTree);
+    }
     
+    /**
+     * 
+     * @param newsletterComprehensiveTree Newsletter VO
+     * @param request Request
+     * @return Newsletter VO
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping("/moveEmail.do")
+    public ComprehensiveTree moveNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+                                                    , HttpServletRequest request) 
+            throws Exception {
+        
+        newsletterService.moveNode(newsletterComprehensiveTree, request);
+        
+        return newsletterComprehensiveTree;
+    }
 }

@@ -84,11 +84,12 @@
 		  
 		    $("#email-list-submit").click(function(e) {
 		      	
-		        var result = callAjax($("#email-list-form"), getContextPath() + '/newsletter/addEmail.do', null, 'post', 'json', null);
+		        var result = callAjax($("#email-list-form"), getContextPath() + "/newsletter/addEmail.do", null, "post", "json", null);
 		        
 		        // TODO 콜백 함수를 중복해서 사용하지 않도록 하는 방법이 필요함.
 		        result.always(function(responseText, textStatus, jqXHR) {
 		    	  if (responseText.result != false) {
+		    	    $("#email-list-input").val("");
 		    	    alert("메일링 리스트에 가입되었습니다."); // TODO 경고창을 대신할 팝업 레이어가 필요함.
 		    	  }
 		        });

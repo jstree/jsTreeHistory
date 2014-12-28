@@ -44,6 +44,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  2014. 12. 13   전경훈                 removeNode 구현
  *  2014. 12. 15.  류강하                 getChildNode 추가
  *  2014. 12. 20.  류강하                 alterNode, alterNodeType 추가
+ *  2014. 12. 28.  류강하                 searchNode, moveNode 추가
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -58,16 +59,14 @@ public class NewsletterServiceImpl implements CoreService {
     public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) 
             throws Exception {
         
-        List<T> childNodes = coreService.getChildNode(comprehensiveTree);
-        
-        return childNodes;
+        return coreService.getChildNode(comprehensiveTree);
     }
 
     @Override
     public <T extends ComprehensiveTree> List<String> searchNode(T comprehensiveTree) 
             throws Exception {
         
-        return null;
+        return coreService.searchNode(comprehensiveTree);
     }
 
     @Override
@@ -102,7 +101,7 @@ public class NewsletterServiceImpl implements CoreService {
     public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree,
             HttpServletRequest request) throws Exception {
         
-        return null;
+        return coreService.moveNode(comprehensiveTree, request);
     }
 
 }

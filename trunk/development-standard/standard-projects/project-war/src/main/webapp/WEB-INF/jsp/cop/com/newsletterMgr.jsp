@@ -8,8 +8,6 @@
 <meta http-equiv='expires' content='0'>
 <meta http-equiv='pragma' content='no-cache'>
 <title>뉴스레터 관리</title>
-<link rel="stylesheet" type="text/css" href="http://nas.313.co.kr:5002/Component/jsp/community/index/reset.css" />
-<link rel="stylesheet" type="text/css" href="http://nas.313.co.kr:5002/Component/jsp/community/index/index.css" />
 <style type="text/css">
 </style>
 <!-- jQuery -->
@@ -59,9 +57,15 @@
 				<div id="jstreeSearch" class="asideSectionSearchHeight">
 					<table class="logoAsideWidth asideSectionSearchHeight">
 						<tr>
-							<td class="jstreeSearchLeft"></td>
-							<td class="jstreeSearchMiddle"></td>
-							<td class="jstreeSearchRight"></td>
+							<td class="jstreeSearchLeft">
+								<input id="inp_search" type="text" placeholder="찾을 노드 이름 입력" />
+							</td>
+							<td class="jstreeSearchMiddle">
+								<input id="btn_searchNode" type="button" value="검색" />
+							</td>
+							<td class="jstreeSearchRight">
+								<input id="btn_clearSearch" type="button" value="초기화" />
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -139,7 +143,8 @@ $("#demo")
 							"seperator_after" : false,                         
 							"label" : "Cut",                         
 							action : function (obj) 
-							{                             
+							{
+							  	console.log("cut : " + obj);
 								this.cut(obj, "last", {"attr" : {"rel" : "default"}});                         
 							}                     
 						},                     
@@ -149,7 +154,8 @@ $("#demo")
 							"seperator_after" : false,                         
 							"label" : "Paste",                          
 							action : function (obj)  
-							{                                                            
+							{
+							  	console.log("paste : " + obj);
 								this.paste(obj, "last", {"attr" : { "rel" : "folder"}});                         
 							}                      
 						},
@@ -176,7 +182,7 @@ $("#demo")
 									"seperator_after" : false,                         
 									"label" : "toCategory",                          
 									action : function (obj)  
-									{                                                            
+									{
 										this.set_type("folder", obj);
 									}                      
 								}
@@ -261,28 +267,26 @@ $("#demo")
 				"data" : function (n) { 
 					// the result is fed to the AJAX request `data` option
 					return { 
-						"c_id" : n.attr ? n.attr("id").replace("node_","").replace("copy_","") : 1 ,
+						"c_id" : n.attr ? n.attr("id").replace("node_", "").replace("copy_", "") : 1 ,
 						"r" : getTimestamp()
 					}; 
 				}
 			}
 		},
-//		// Configuring the search plugin
-//		"search" : {
-//			// As this has been a common question - async search
-//			// Same as above - the `ajax` config option is actually jQuery's AJAX object
-//			"ajax" : {
-//				/* "url" : "/egovframework/com/ext/jstree/strutsiBatis/searchNode.action", */
-//				"url" : "${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/searchNode.do",
-//				// You get the search string as a parameter
-//				"data" : function (str) {
-//					return { 
-//						"r": getTimestamp(),
-//						"searchString" : str 
-//					}; 
-//				}
-//			}
-//		}
+		// Configuring the search plugin
+		"search" : {
+			// As this has been a common question - async search
+			// Same as above - the `ajax` config option is actually jQuery's AJAX object
+			"ajax" : {
+				"url" : "${pageContext.request.contextPath}/newsletter/searchEmail.do",
+				// You get the search string as a parameter
+				"data" : function (str) {
+					return {
+						"searchString" : str
+					}; 
+				}
+			}
+		}
 	})
 	.bind("create.jstree", function (e, data) {
 		$.post(
@@ -344,47 +348,54 @@ $("#demo")
 					"c_type" : data.rslt.obj.attr("rel")
 			}, 
 			function (r) {
-				$('#demo').jstree('refresh', -1);
+				$("#demo").jstree("refresh", -1);
 			}
 		);
+	})
+	.bind("move_node.jstree", function (e, data) {
+	  	console.log("move_node : " + e);
+	  	console.log("move_node : " + data);
+		data.rslt.o.each(function (i) {
+			$.ajax({
+				async : false,
+				type: "POST",
+				url: "${pageContext.request.contextPath}/newsletter/moveEmail.do",
+				data : { 
+					"c_id" : $(this).attr("id").replace("node_", "").replace("copy_", ""), 
+					"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_", "").replace("copy_", ""), 
+					"c_position" : data.rslt.cp + i,
+					"c_title" : data.rslt.name, 
+					"copy" : data.rslt.cy ? 1 : 0,
+					"multiCounter" : i
+				},
+				success : function (r) {
+					if (r.status) {
+						$.jstree.rollback(data.rlbk);
+					}
+					else {
+						$(data.rslt.oc).attr("id", "node_" + r.id);
+						if (data.rslt.cy && $(data.rslt.oc).children("UL").length) {
+							data.inst.refresh(data.inst._get_parent(data.rslt.oc));
+						}
+					}
+					$("#demo").jstree("refresh", -1);
+				}
+			});
+		});
 	});
-// 	.bind("move_node.jstree", function (e, data) {
-// 		data.rslt.o.each(function (i) {
-// 			$.ajax({
-// 				async : false,
-// 				type: 'POST',
-// 				url: "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/moveNode.do",
-// 				data : { 
-// 					"c_id" : $(this).attr("id").replace("node_","").replace("copy_",""), 
-// 					"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_","").replace("copy_",""), 
-// 					"c_position" : data.rslt.cp + i,
-// 					"c_title" : data.rslt.name, 
-// 					"copy" : data.rslt.cy ? 1 : 0,
-// 					"multiCounter"	:	i
-// 				},
-// 				success : function (r) {
-// 					if(r.status) {
-// 						$.jstree.rollback(data.rlbk);
-// 					}
-// 					else {
-// 						$(data.rslt.oc).attr("id", "node_" + r.id);
-// 						if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
-// 							data.inst.refresh(data.inst._get_parent(data.rslt.oc));
-// 						}
-// 					}
-// 					$('#demo').jstree('refresh',-1);
-// 				}
-// 			});
-// 		});
-// 	});
+
+	$("#btn_searchNode").click(function() {
+	  	$("#demo").jstree("search", $("#inp_search").val());
+	});
+	$("#btn_clearSearch").click(function() {
+  		$("#demo").jstree("clear_search");
+	});
 });
 		
-function getTimestamp(){
+function getTimestamp() {
 	return Math.floor(new Date().getTime());
 }
 </script>
 <!-- //전체 레이어 끝 -->
 </body>
 </html>
-
-
