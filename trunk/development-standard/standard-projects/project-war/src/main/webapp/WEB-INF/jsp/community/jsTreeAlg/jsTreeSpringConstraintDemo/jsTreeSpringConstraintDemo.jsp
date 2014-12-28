@@ -322,7 +322,6 @@
 																	
 															}
 															
-// 															$("#authority").selectmenu();
 														}
 													);
 													
@@ -392,7 +391,6 @@
 																	
 															}
 															
-// 															$("#authority").selectmenu();
 														}
 													);
 													
@@ -685,8 +683,120 @@
 					$("#mmenu input, #mmenu button").click(function () {
 						switch(this.id) {
 							case "add_default":
+								var _this = this;
+								$.post(
+										"${pageContext.request.contextPath}/constraint/foreign/getChildNode.do",
+									{ 
+										"c_id" : "3"
+									}, 
+									function (r) {
+										
+										var jsonArrLength = r.length;
+										for (var i = 0; i < jsonArrLength; i++) {
+
+											var c_title;
+											var c_id;
+
+											var jsonData = r[i];
+											for (var key in jsonData) {
+												
+												if ("c_id" == key) {
+													c_id = $(jsonData).attr(key);
+												} else if ("c_title" == key) {
+													c_title = $(jsonData).attr(key);
+												} else {
+													continue;
+												}
+												
+											}
+											
+											$("#authority").append(function(){
+												if (i == jsonArrLength - 1) {
+													return $("<option>", {value : c_id, text : c_title, selected : true});
+												} 
+												
+												return $("<option>", {value : c_id, text : c_title});
+											});
+												
+										}
+										
+									}
+								);
+								
+								$("#nodeForm").dialog({
+									title  : "권한 추가"
+								  ,	buttons: {
+								        Ok    : function() {
+								        	$("#demo").jstree("create", null, "last", { "attr" : { "rel" : _this.id.toString().replace("add_", ""), "f_c_id" : $("#authority").val() } });
+								        	$("#nodeForm").dialog("close");
+								        	$("#authority > option").remove();
+								        },
+								        Cancel: function() {
+								            $("#nodeForm").dialog("close");
+								            $("#authority > option").remove();
+								        }
+								    }
+								});
+								$("#nodeForm").dialog("open");								
+								
+								break;								
 							case "add_folder":
-								$("#demo").jstree("create", null, "last", { "attr" : { "rel" : this.id.toString().replace("add_", "") } });
+								var _this = this;
+								$.post(
+										"${pageContext.request.contextPath}/constraint/foreign/getChildNode.do",
+									{ 
+										"c_id" : "3"
+									}, 
+									function (r) {
+										
+										var jsonArrLength = r.length;
+										for (var i = 0; i < jsonArrLength; i++) {
+
+											var c_title;
+											var c_id;
+
+											var jsonData = r[i];
+											for (var key in jsonData) {
+												
+												if ("c_id" == key) {
+													c_id = $(jsonData).attr(key);
+												} else if ("c_title" == key) {
+													c_title = $(jsonData).attr(key);
+												} else {
+													continue;
+												}
+												
+											}
+											
+											$("#authority").append(function(){
+												if (i == jsonArrLength - 1) {
+													return $("<option>", {value : c_id, text : c_title, selected : true});
+												} 
+												
+												return $("<option>", {value : c_id, text : c_title});
+											});
+												
+										}
+										
+									}
+								);
+								
+								$("#nodeForm").dialog({
+									title  : "권한 추가"
+								  ,	buttons: {
+								        Ok    : function() {
+								        	$("#demo").jstree("create", null, "last", { "attr" : { "rel" : _this.id.toString().replace("add_", ""), "f_c_id" : $("#authority").val() } });
+								        	$("#nodeForm").dialog("close");
+								        	$("#authority > option").remove();
+								        },
+								        Cancel: function() {
+								            $("#nodeForm").dialog("close");
+								            $("#authority > option").remove();
+								        }
+								    }
+								});
+								$("#nodeForm").dialog("open");								
+								
 								break;
 							case "search":
 								$("#demo").jstree("search", document.getElementById("text").value);
