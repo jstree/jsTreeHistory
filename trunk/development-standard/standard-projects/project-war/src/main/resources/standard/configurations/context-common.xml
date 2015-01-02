@@ -19,12 +19,10 @@
 	<bean id="messageSource" class="standard.mvc.component.manager.messageSource.CustomReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>
-            	<value>classpath:/egovframework/message/message-common</value>
 				<value>classpath:/egovframework/rte/fdl/idgnr/messages/idgnr</value>
 				<value>classpath:/egovframework/rte/fdl/property/messages/properties</value>
 				<value>classpath:/egovframework/message/com/message-common</value>
 				<value>classpath:/egovframework/egovProps/globals</value>
-                <value>classpath:/standard/messages/message</value>
             </list>
         </property>
         <property name="cacheSeconds" value="60" />
