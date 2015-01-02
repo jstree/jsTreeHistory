@@ -66,7 +66,6 @@ public class EventLogManager {
         eventLog.setEventLogType(loggingType.getNumString());
         eventLog.setLogContents(content);
         eventLog.setRegDate(new Date());
-        eventLog.setDeviceId(deviceId);
         
         logger.info("evetLog : " + eventLog.toString());
         
@@ -136,7 +135,7 @@ public class EventLogManager {
             //stringBuilder.append(logSupport.getMessage(messageSource, systemInfo.getLocale()));
         }
         
-        EventLog eventLog = new EventLog(loggingType.getNumString(), viewId, stringBuilder.toString(), new Date(), 0);
+        EventLog eventLog = new EventLog(loggingType.getNumString(), viewId, stringBuilder.toString(), new Date());
         store(eventLog);
     }
     

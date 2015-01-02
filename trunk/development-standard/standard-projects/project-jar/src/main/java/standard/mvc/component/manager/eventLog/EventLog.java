@@ -33,18 +33,15 @@ public class EventLog implements CsvViewForLog{
     private String loginId;
     private String logContents;
     private Date regDate;
-    private long deviceId;
-    private int productType = 1; //default는 PM
     
     public EventLog() {
     }
     
-    public EventLog(String eventLogType, String loginId, String logContents, Date regDate, long deviceId) {
+    public EventLog(String eventLogType, String loginId, String logContents, Date regDate) {
         this.eventLogType = eventLogType;
         this.loginId = loginId;
         this.logContents = logContents;
         this.regDate = regDate;
-        this.deviceId = deviceId;
     }
     
     @Id
@@ -119,27 +116,9 @@ public class EventLog implements CsvViewForLog{
         this.eventLogType = eventLogType;
     }
 
-    @Column(name = "device_id")
-    public long getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(long deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    @Column(name = "product_type")
-    public int getProductType() {
-        return productType;
-    }
-
-    public void setProductType(int productType) {
-        this.productType = productType;
-    }
-
     @Override
     public String toString() {
-        return "EventLog [id=" + id + ", eventLogType=" + eventLogType + ", loginId=" + loginId + ", logContents=" + logContents + ", regDate=" + regDate + ", deviceId=" + deviceId + "]";
+        return "EventLog [id=" + id + ", eventLogType=" + eventLogType + ", loginId=" + loginId + ", logContents=" + logContents + ", regDate=" + regDate + "]";
     }
     
 }

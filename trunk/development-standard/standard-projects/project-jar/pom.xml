@@ -46,13 +46,13 @@
 			<artifactId>support-junit</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>development</groupId>
 			<artifactId>support-log</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>development</groupId>
 			<artifactId>support-spring</artifactId>
@@ -62,6 +62,12 @@
 		<dependency>
 			<groupId>development</groupId>
 			<artifactId>support-struts</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-template</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
@@ -87,6 +93,33 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
+		<dependency>
+				<groupId>com.ibm.icu</groupId>
+				<artifactId>icu4j</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>ldapsdk</groupId>
+				<artifactId>ldapsdk</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.annotation</groupId>
+				<artifactId>jsr250-api</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet.jsp.jstl</groupId>
+				<artifactId>jstl-api</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
+			</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -95,6 +128,45 @@
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
 				<version>2.5</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ibm.icu</groupId>
+				<artifactId>icu4j</artifactId>
+				<version>4.8</version>
+			</dependency>
+			<dependency>
+				<groupId>ldapsdk</groupId>
+				<artifactId>ldapsdk</artifactId>
+				<version>4.1</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>2.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.annotation</groupId>
+				<artifactId>jsr250-api</artifactId>
+				<version>1.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet.jsp.jstl</groupId>
+				<artifactId>jstl-api</artifactId>
+				<version>1.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
+				<version>1.1.2</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

@@ -149,19 +149,38 @@ public abstract class GenericAbstractController
         response.addHeader("Cache-Control", "post-check=0, pre-check=0");
         response.setHeader("Pragma", "no-cache");
         
-        response.setContentType("text/html; charset=utf-8");
         PrintWriter out = response.getWriter();
         
-        out.println("<!DOCTYPE html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></head><body>");
-        out.println("<script type=\"text/javascript\" src=\"/ajaxpm/string.js\"></script>");
-        out.println("<script type=\"text/javascript\" src=\"/files/js/jquery.js\"></script>");
-        out.println("<script type=\"text/javascript\" src=\"/files/js/jquery.sprintf.js\"></script>");
-        out.println("<script type=\"text/javascript\" src=\"/files/js/underscore.js\"></script>");
-        out.println("<script type=\"text/javascript\">");
-        out.println("alert('fail system command : "
-                + StringUtils.remove(ex.getMessage(), "'") + "');");
-        
-        out.println("</script></body></html>");
+        if (StringUtils.equals(request.getHeader("customHeader"), "ajax")) {
+            
+            response.setContentType("application/json; charset=UTF-8");
+            
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("result", false);
+            map.put("message",
+                    messageSupport.getMessage(ex.getMessage(),
+                                              ex.getStackTrace(), "", request));
+            
+            Gson gson = new GsonBuilder().serializeNulls().create();
+            out.println(gson.toJson(map));
+            out.flush();
+            out.close();
+            return;
+        }
+        else {
+            response.setContentType("text/html; charset=utf-8");
+            
+            out.println("<!DOCTYPE html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></head><body>");
+            out.println("<script type=\"text/javascript\" src=\"/ajaxpm/string.js\"></script>");
+            out.println("<script type=\"text/javascript\" src=\"/files/js/jquery.js\"></script>");
+            out.println("<script type=\"text/javascript\" src=\"/files/js/jquery.sprintf.js\"></script>");
+            out.println("<script type=\"text/javascript\" src=\"/files/js/underscore.js\"></script>");
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('fail system command : "
+                    + StringUtils.remove(ex.getMessage(), "'") + "');");
+            
+            out.println("</script></body></html>");
+        }
     }
     
 }
