@@ -197,7 +197,7 @@ public class CoreServiceImpl implements CoreService {
 			                                       , T   comprehensiveTree ) throws Exception {
 		
 		comprehensiveTree.setC_idsByChildNodeFromNodeById( c_idsByChildNodeFromNodeById );
-		comprehensiveTree.setNodeById( nodeById );
+		comprehensiveTree.setNodeById( nodeById ); // TODO unused code
 
 		coreDao.stretchPositionForMyselfFromJstree( comprehensiveTree );
 	}

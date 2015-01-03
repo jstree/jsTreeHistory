@@ -15,18 +15,15 @@
  */
 package standard.mvc.component.business.community.newsletter.controller;
 
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.base.controller.GenericAbstractController;
@@ -55,6 +52,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  2014. 12. 19.  류강하                 사용자 및 관리자 화면을 동시 처리하게끔 addNode 보완, removeNode 추가
  *  2014. 12. 20.  류강하                 alterNode, alterNodeType 추가
  *  2014. 12. 28.  류강하                 searchNode, moveNode 추가
+ *  2015. 01. 03   류강하                 사용자와 관리자를 위한 로직을 분리하기 위해 관리자 관련 메서드들을 NewsletterAdminController로 옮김.
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -79,52 +77,30 @@ public class NewsletterController extends GenericAbstractController {
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping("/addEmail.do")
-    public ComprehensiveTree addNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
+    @RequestMapping(value = "/addEmail.do", method = RequestMethod.POST)
+    public ComprehensiveTree addNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+                                                   , HttpServletRequest request)
             throws Exception {
         
-        String email = newsletterComprehensiveTree.getC_title();
+        // 굳이 VO가 아닌 request에서 파라미터를 가져오는 이유는 추후 적용할 값 검증 기술이 어느 것이 될지 모르기 때문임.
+        String c_title = request.getParameter("c_title");
         
-        if (!"folder".equals(newsletterComprehensiveTree.getC_type())) {
-            
-            // Email 검증
-            String emailPattern = "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+";
-            Pattern p = java.util.regex.Pattern.compile(emailPattern);
-            Matcher m = p.matcher(email);
-            if (!m.matches()) {
-                throw new RuntimeException("Email address is not valid");
-            }
-            
-            // addNode를 위한 ComprehensiveTree 필수값 지정
-            if (newsletterComprehensiveTree.getRef() == 0) {
-                newsletterComprehensiveTree.setRef(3);
-            }
-            if (newsletterComprehensiveTree.getC_type() == null) {
-                newsletterComprehensiveTree.setC_type("default");
-            }
+        if (c_title == null) {
+            throw new RuntimeException("addNode()'s essential parameter not set.");
         }
-        	
+        
+        if ( !c_title.matches("[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+") ) {
+            throw new RuntimeException("Email address is not valid.");
+        }
+        
+        
+        /* 현 시점에는 익명 사용자에 대한 이메일만 접수한다. */
+        newsletterComprehensiveTree.setRef(3); // Anonymous Users folder
+        newsletterComprehensiveTree.setC_type("default");
+        
         newsletterService.addNode(newsletterComprehensiveTree);
         
         return newsletterComprehensiveTree;
-    }
-    
-    /**
-     * 이메일 목록을 가져온다.
-     * @param newsletterComprehensiveTree Newsletter VO
-     * @return List<NewsletterComprehensiveTree> Newsletter VO List
-     * @throws Exception
-     */
-    @ResponseBody
-    @RequestMapping("/getEmailList.do")
-    public List<NewsletterComprehensiveTree> getChildNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree)
-             throws Exception {
-        
-        if (newsletterComprehensiveTree.getC_id() == 0) {
-            throw new RuntimeException();
-        }
-        
-        return newsletterService.getChildNode(newsletterComprehensiveTree);
     }
     
     /**
@@ -139,86 +115,5 @@ public class NewsletterController extends GenericAbstractController {
             throws Exception {
         
         return newsletterService.removeNode(newsletterComprehensiveTree);
-    }
-    
-    /**
-     * 이메일 주소를 변경한다.
-     * @param newsletterComprehensiveTree Newsletter VO
-     * @return alterd count
-     * @throws Exception
-     */
-    @ResponseBody
-    @RequestMapping("/renameEmail.do")
-    public ComprehensiveTree alterNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree)
-             throws Exception {
-        
-        String email = newsletterComprehensiveTree.getC_title();
-        
-        if (!"folder".equals(newsletterComprehensiveTree.getC_type())) {
-        
-            // Email 검증
-            String emailPattern = "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+";
-            Pattern p = java.util.regex.Pattern.compile(emailPattern);
-            Matcher m = p.matcher(email);
-            if (!m.matches()) {
-                throw new RuntimeException("Email address is not valid");
-            }
-        }
-        
-        newsletterComprehensiveTree.setStatus(newsletterService.alterNode(newsletterComprehensiveTree));
-
-        return newsletterComprehensiveTree;
-    }
-    
-    /**
-     * 노드 타입을 변경한다.
-     * @param newsletterComprehensiveTree Newsletter VO
-     * @return Newsletter VO
-     * @throws Exception
-     */
-    @ResponseBody
-    @RequestMapping("/alterNodeType.do")
-    public ComprehensiveTree alterNodeType(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
-            throws Exception {
-        
-        newsletterService.alterNodeType(newsletterComprehensiveTree);
-        
-        return newsletterComprehensiveTree;
-    }
-    
-    /**
-     * 노드를 검색한다.
-     * @param newsletterComprehensiveTree Newsletter VO
-     * @return TODO
-     * @throws Exception
-     */
-    @ResponseBody
-    @RequestMapping("/searchEmail.do")
-    public List<String> searchNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
-            throws Exception {
-
-        if (!StringUtils.hasText(newsletterComprehensiveTree.getSearchStr())) {
-            throw new RuntimeException("Search string is required");
-        }
-        
-        return newsletterService.searchNode(newsletterComprehensiveTree);
-    }
-    
-    /**
-     * 
-     * @param newsletterComprehensiveTree Newsletter VO
-     * @param request Request
-     * @return Newsletter VO
-     * @throws Exception
-     */
-    @ResponseBody
-    @RequestMapping("/moveEmail.do")
-    public ComprehensiveTree moveNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
-                                                    , HttpServletRequest request) 
-            throws Exception {
-        
-        newsletterService.moveNode(newsletterComprehensiveTree, request);
-        
-        return newsletterComprehensiveTree;
     }
 }

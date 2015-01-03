@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
+import standard.mvc.component.business.community.newsletter.dao.NewsletterDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -53,7 +54,10 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 public class NewsletterServiceImpl implements CoreService {
     
     @Resource(name = "CoreService")
-    CoreService coreService;
+    private CoreService coreService;
+    
+    @Resource(name = "NewsletterDao")
+    private NewsletterDao newsletterDao;
     
     @Override
     public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) 
@@ -72,6 +76,13 @@ public class NewsletterServiceImpl implements CoreService {
     @Override
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree)
             throws Exception {
+
+        // TODO searchNode 메서드는 LIKE 검색을 하기 때문에 대체 메서드가 필요함.
+//        if (중복 이메일이 존재하면) {
+//            throw new RuntimeException("The email address already exist.");
+//        }
+        
+        comprehensiveTree.setC_position( getMaxPositionForAddNode(comprehensiveTree) + 1 );
         
         return coreService.addNode(comprehensiveTree);
     }
@@ -104,4 +115,14 @@ public class NewsletterServiceImpl implements CoreService {
         return coreService.moveNode(comprehensiveTree, request);
     }
 
+    /**
+     * 
+     * @param newsletterComprehensiveTree NewsletterVO
+     * @return 특정 부모의 자식들 중 position 값이 가장 큰, 가장 최근에 추가된 노드의 position 값을 반환한다.
+     * @throws Exception
+     */
+    private <T extends ComprehensiveTree> int getMaxPositionForAddNode(T comprehensiveTree) throws Exception {
+        
+        return newsletterDao.getMaxPositionForAddNode(comprehensiveTree);
+    }
 }

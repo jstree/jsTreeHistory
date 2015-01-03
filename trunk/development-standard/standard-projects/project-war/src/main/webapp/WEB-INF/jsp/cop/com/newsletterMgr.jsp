@@ -260,7 +260,7 @@ $("#demo")
 			// All the options are almost the same as jQuery's AJAX (read the docs)
 			"ajax" : {
 				// the URL to fetch the data
-				"url" : "${pageContext.request.contextPath}/newsletter/getEmailList.do",
+				"url" : "${pageContext.request.contextPath}/newsletterAdmin/getEmailList.do",
 				// the `data` function is executed in the instance's scope
 				// the parameter is the node being loaded 
 				// (may be -1, 0, or undefined when loading the root nodes)
@@ -278,7 +278,7 @@ $("#demo")
 			// As this has been a common question - async search
 			// Same as above - the `ajax` config option is actually jQuery's AJAX object
 			"ajax" : {
-				"url" : "${pageContext.request.contextPath}/newsletter/searchEmail.do",
+				"url" : "${pageContext.request.contextPath}/newsletterAdmin/searchEmail.do",
 				// You get the search string as a parameter
 				"data" : function (str) {
 					return {
@@ -290,7 +290,7 @@ $("#demo")
 	})
 	.bind("create.jstree", function (e, data) {
 		$.post(
-			"${pageContext.request.contextPath}/newsletter/addEmail.do", 
+			"${pageContext.request.contextPath}/newsletterAdmin/addEmail.do", 
 			{ 
 				"ref" : data.rslt.parent.attr("id").replace("node_", "").replace("copy_", ""), 
 				"c_position" : data.rslt.position,
@@ -313,7 +313,7 @@ $("#demo")
 			$.ajax({
 				async : false,
 				type: 'POST',
-				url: "${pageContext.request.contextPath}/newsletter/removeEmail.do", 
+				url: "${pageContext.request.contextPath}/newsletterAdmin/removeEmail.do", 
 				data : { 
 					"c_id" : this.id.replace("node_", "").replace("copy_", "")
 				}, 
@@ -325,7 +325,7 @@ $("#demo")
 	})
 	.bind("rename.jstree", function (e, data) {
 		$.post(
-			"${pageContext.request.contextPath}/newsletter/renameEmail.do", 
+			"${pageContext.request.contextPath}/newsletterAdmin/renameEmail.do", 
 			{ 
 					"c_id" : data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
 					"c_title" : data.rslt.new_name,
@@ -341,7 +341,7 @@ $("#demo")
 	})
 	.bind("set_type.jstree", function (e, data) {
 		$.post(
-			"${pageContext.request.contextPath}/newsletter/alterNodeType.do", 
+			"${pageContext.request.contextPath}/newsletterAdmin/alterNodeType.do", 
 			{ 
 					"c_id" : data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
 					"c_title" : data.rslt.new_name,
@@ -359,7 +359,7 @@ $("#demo")
 			$.ajax({
 				async : false,
 				type: "POST",
-				url: "${pageContext.request.contextPath}/newsletter/moveEmail.do",
+				url: "${pageContext.request.contextPath}/newsletterAdmin/moveEmail.do",
 				data : { 
 					"c_id" : $(this).attr("id").replace("node_", "").replace("copy_", ""), 
 					"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_", "").replace("copy_", ""), 

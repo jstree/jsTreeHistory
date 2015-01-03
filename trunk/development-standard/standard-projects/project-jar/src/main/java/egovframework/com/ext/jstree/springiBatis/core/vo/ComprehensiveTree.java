@@ -27,7 +27,7 @@ import java.util.HashMap;
  */
 public class ComprehensiveTree {
 
-	/** Node 의 고유 ID, 1부터 시작 */
+	/** Node 의 고유 ID, 1부터 시작(Root Node) */
 	private int c_id;
 	
 	/** Node 의 부모 ID, 0부터 시작(Root Node) */
@@ -36,7 +36,7 @@ public class ComprehensiveTree {
 	/** Parent의 몇 번째 자식인지를 나타냄. 0부터 시작 */
 	private int c_position;
 	
-	/** Node의 Left 위치, 1부터 시작 */
+	/** Node의 Left 위치, 1부터 시작(Root Node) */
 	private int c_left;
 	
 	/** Node의 Right 위치, 자식이 없다면 Left + 1의 값을 가진다. */
@@ -106,7 +106,7 @@ public class ComprehensiveTree {
 	}
 
 	public Boolean getCopyBooleanValue() {
-		copyBooleanValue = false;
+		copyBooleanValue = false; // TODO setCopyBooleanValue 메서드의 필요 의미를 없게 만드는 코드
 		if (this.getCopy() == 0) {
 			copyBooleanValue = false;
 		} else {

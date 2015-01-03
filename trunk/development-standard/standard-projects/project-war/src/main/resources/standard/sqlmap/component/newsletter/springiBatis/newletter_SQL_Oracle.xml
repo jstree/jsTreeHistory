@@ -3,7 +3,7 @@
 <sqlMap namespace="newsletter">
 	<typeAlias alias="Newsletter" type="standard.mvc.component.business.community.newsletter.vo.NewsletterComprehensiveTree"/>
 
-	<select id="newsletter.getChildNode" parameterClass="Newsletter" resultClass="Newsletter">
+	<select id="getChildNode" parameterClass="Newsletter" resultClass="Newsletter">
 		/* getChildNode */
 		SELECT A.c_id
 		     , A.c_parentid
@@ -26,7 +26,7 @@
 	</select>
 
 
-	<select id="newsletter.getChildNodeByLeftRight" parameterClass="Newsletter" resultClass="Newsletter">
+	<select id="getChildNodeByLeftRight" parameterClass="Newsletter" resultClass="Newsletter">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		     , C_PARENTID
@@ -43,7 +43,7 @@
 	</select>
 
 
-	<select id="newsletter.searchNodeByString" parameterClass="Newsletter" resultClass="Newsletter">
+	<select id="searchNodeByString" parameterClass="Newsletter" resultClass="Newsletter">
 		/* searchNodeByString */
 		SELECT c_left
 		     , c_right
@@ -52,7 +52,7 @@
 	</select>
 
 
-	<select id="newsletter.searchNodeByPosition" parameterClass="java.util.List" resultClass="String">
+	<select id="searchNodeByPosition" parameterClass="java.util.List" resultClass="String">
 		/* searchNodeByPosition */
         SELECT DISTINCT C_ID
           FROM T_Newsletter_Comprehensivetree
@@ -62,7 +62,7 @@
         </iterate>
 	</select>
 
-	<update id="newsletter.alterNode" parameterClass="Newsletter">
+	<update id="alterNode" parameterClass="Newsletter">
 		/* alterNode */
 		UPDATE T_Newsletter_Comprehensivetree 
 		   SET C_TYPE = #c_type#
@@ -70,7 +70,7 @@
 		 WHERE C_ID = #c_id#
 	</update>
 
-	<select id="newsletter.getNode" parameterClass="Newsletter" resultClass="Newsletter">
+	<select id="getNode" parameterClass="Newsletter" resultClass="Newsletter">
 		/* getNode */
         SELECT C_ID
              , C_PARENTID
@@ -85,7 +85,7 @@
     </select>
 
 
-	<select id="newsletter.getNodeByRef" parameterClass="Newsletter" resultClass="Newsletter">
+	<select id="getNodeByRef" parameterClass="Newsletter" resultClass="Newsletter">
 		/* getNodeByRef */
         SELECT C_ID
              , C_PARENTID
@@ -100,7 +100,7 @@
     </select>
 
 
-	<delete id="newsletter.removeNode" parameterClass="Newsletter">
+	<delete id="removeNode" parameterClass="Newsletter">
 		/* removeNode */
        	DELETE FROM T_Newsletter_Comprehensivetree 
        	      WHERE C_LEFT  &gt;= #c_left# 
@@ -108,7 +108,7 @@
 	</delete>
 	
 	
-	<update id="newsletter.removedAfterLeftFix" parameterClass="Newsletter">
+	<update id="removedAfterLeftFix" parameterClass="Newsletter">
 		/* removedAfterLeftFix */
        	UPDATE T_Newsletter_Comprehensivetree 
   		   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
@@ -116,7 +116,7 @@
 	</update>
 	
 	
-	<update id="newsletter.removedAfterRightFix" parameterClass="Newsletter">
+	<update id="removedAfterRightFix" parameterClass="Newsletter">
 		/* removedAfterRightFix */
 		UPDATE T_Newsletter_Comprehensivetree 
 		   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -124,7 +124,7 @@
 	</update>
 	
 	
-	<update id="newsletter.removedAfterPositionFix" parameterClass="Newsletter">
+	<update id="removedAfterPositionFix" parameterClass="Newsletter">
 		/* removedAfterPositionFix */
      	UPDATE T_Newsletter_Comprehensivetree 
      	   SET C_POSITION = C_POSITION - 1 
@@ -133,7 +133,7 @@
 	</update>
 
 
-	<select id="newsletter.analyzeRootNode" resultClass="Newsletter">
+	<select id="analyzeRootNode" resultClass="Newsletter">
 		/* searchNodeByString */
 	    SELECT C_LEFT 
 		  FROM T_Newsletter_Comprehensivetree 
@@ -141,7 +141,7 @@
     </select>
 
 
-	<update id="newsletter.cutMyselfPositionFix" parameterClass="Newsletter">
+	<update id="cutMyselfPositionFix" parameterClass="Newsletter">
 		/* cutMyselfPositionFix */
        	UPDATE T_Newsletter_Comprehensivetree 
        	   SET C_POSITION = C_POSITION - 1 
@@ -150,7 +150,7 @@
     </update>
 
 
-	<update id="newsletter.cutMyselfLeftFix" parameterClass="Newsletter">
+	<update id="cutMyselfLeftFix" parameterClass="Newsletter">
 		/* cutMyselfLeftFix */
        	UPDATE T_Newsletter_Comprehensivetree 
        	   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
@@ -158,7 +158,7 @@
     </update>
     
     
-	<update id="newsletter.cutMyselfRightFix" parameterClass="Newsletter">
+	<update id="cutMyselfRightFix" parameterClass="Newsletter">
 		/* cutMyselfRightFix */
        	UPDATE T_Newsletter_Comprehensivetree 
        	   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -169,7 +169,7 @@
 	</update>
 
 
-	<update id="newsletter.stretchPositionForMyself" parameterClass="Newsletter">
+	<update id="stretchPositionForMyself" parameterClass="Newsletter">
 		/* stretchPositionForMyselfFromJstree */
         UPDATE T_Newsletter_Comprehensivetree
            SET C_POSITION = C_POSITION + 1
@@ -188,7 +188,7 @@
 	</update>
 
 
-	<update id="newsletter.stretchLeftForMyselfFromJstree" parameterClass="Newsletter">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="Newsletter">
 		/* stretchLeftForMyselfFromJstree */
        	UPDATE T_Newsletter_Comprehensivetree 
        	   SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
@@ -203,7 +203,7 @@
 	</update>
 
 
-	<update id="newsletter.stretchRightForMyselfFromJstree" parameterClass="Newsletter">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="Newsletter">
 		/* stretchRightForMyselfFromJstree */
         UPDATE T_Newsletter_Comprehensivetree 
            SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
@@ -218,7 +218,7 @@
 	</update>
 
 
-	<insert id="newsletter.pasteMyselfFromJstree" parameterClass="Newsletter">
+	<insert id="pasteMyselfFromJstree" parameterClass="Newsletter">
 		/* pasteMyselfFromJstree */
         INSERT INTO T_Newsletter_Comprehensivetree ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE ) 
     	SELECT S_Newsletter_Comprehensivetree.NEXTVAL AS C_ID
@@ -245,7 +245,7 @@
 	</insert>
 
 
-	<update id="newsletter.enterMyselfFixPosition" parameterClass="Newsletter">
+	<update id="enterMyselfFixPosition" parameterClass="Newsletter">
 		/* enterMyselfFixPosition */
         UPDATE T_Newsletter_Comprehensivetree 
            SET C_PARENTID = #ref#
@@ -254,7 +254,7 @@
     </update>
     
     
-	<update id="newsletter.enterMyselfFixLeftRight" parameterClass="Newsletter">
+	<update id="enterMyselfFixLeftRight" parameterClass="Newsletter">
 		/* enterMyselfFixLeftRight */
         UPDATE T_Newsletter_Comprehensivetree 
            SET C_LEFT  = C_LEFT  - (#idif#)
@@ -266,7 +266,7 @@
 	</update>
 
 
-	<insert id="newsletter.addMyselfFromJstree" parameterClass="Newsletter">
+	<insert id="addMyselfFromJstree" parameterClass="Newsletter">
 		/* addMyselfFromJstree */
         INSERT INTO T_Newsletter_Comprehensivetree ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE )
                                  VALUES ( S_Newsletter_Comprehensivetree.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title# )
@@ -278,7 +278,7 @@
 	</insert>
 
 
-	<update id="newsletter.alterNodeType" parameterClass="Newsletter">
+	<update id="alterNodeType" parameterClass="Newsletter">
 		/* alterNodeType */
 		UPDATE T_Newsletter_Comprehensivetree 
 		   SET C_TYPE = #c_type#
@@ -286,7 +286,7 @@
 	</update>
 
 
-	<update id="newsletter.fixCopyIF" parameterClass="Newsletter">
+	<update id="fixCopyIF" parameterClass="Newsletter">
         /* fixCopyIF */
         UPDATE T_Newsletter_Comprehensivetree 
            SET C_POSITION = #fixCopyPosition# 
@@ -294,10 +294,18 @@
 	</update>
 
 
-	<update id="newsletter.fixCopy" parameterClass="Newsletter">
+	<update id="fixCopy" parameterClass="Newsletter">
 		/* fixCopy */
 		UPDATE T_Newsletter_Comprehensivetree 
 		   SET C_PARENTID = #fixCopyId# 
 		 WHERE C_ID = #c_id#
 	</update>
+	
+	
+	<select id="getMaxPositionForAddNode" parameterClass="Newsletter" resultClass="Integer">
+		/* getMaxPositionForAddNode */
+		SELECT NVL(MAX(C_POSITION), -1) AS C_POSITION
+		  FROM T_NEWSLETTER_COMPREHENSIVETREE
+		 WHERE C_PARENTID = #ref#
+	</select>
 </sqlMap>
