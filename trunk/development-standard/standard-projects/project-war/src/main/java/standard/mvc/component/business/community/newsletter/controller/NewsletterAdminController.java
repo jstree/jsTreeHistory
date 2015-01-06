@@ -176,7 +176,7 @@ public class NewsletterAdminController extends GenericAbstractController {
     }
     
     /**
-     * 노드 타입을 변경한다.
+     * 이메일 타입을 변경한다.
      * @param newsletterComprehensiveTree Newsletter VO
      * @return Newsletter VO
      * @throws Exception
@@ -192,7 +192,7 @@ public class NewsletterAdminController extends GenericAbstractController {
     }
     
     /**
-     * 노드를 검색한다.
+     * 이메일을 검색한다.
      * @param newsletterComprehensiveTree Newsletter VO
      * @return TODO
      * @throws Exception
@@ -210,7 +210,7 @@ public class NewsletterAdminController extends GenericAbstractController {
     }
     
     /**
-     * 
+     * 이메일을 이동한다.
      * @param newsletterComprehensiveTree Newsletter VO
      * @param request Request
      * @return Newsletter VO

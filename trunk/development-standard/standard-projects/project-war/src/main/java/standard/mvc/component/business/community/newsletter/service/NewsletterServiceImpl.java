@@ -42,10 +42,11 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  수정일                 수정자                 수정내용
  *  -------        ------------   -----------------------
  *  2014. 12. 09.  류강하                 최초 생성
- *  2014. 12. 13   전경훈                 removeNode 구현
- *  2014. 12. 15.  류강하                 getChildNode 추가
- *  2014. 12. 20.  류강하                 alterNode, alterNodeType 추가
- *  2014. 12. 28.  류강하                 searchNode, moveNode 추가
+ *  2014. 12. 13   전경훈                 removeNode() 구현
+ *  2014. 12. 15.  류강하                 getChildNode() 추가
+ *  2014. 12. 20.  류강하                 alterNode(), alterNodeType() 추가
+ *  2014. 12. 28.  류강하                 searchNode(), moveNode() 추가
+ *  2015. 01. 07   류강하                 addNode() - 이메일 추가 전 중복 이메일 여부 조회
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -77,12 +78,11 @@ public class NewsletterServiceImpl implements CoreService {
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree)
             throws Exception {
 
-        // TODO searchNode 메서드는 LIKE 검색을 하기 때문에 대체 메서드가 필요함.
-//        if (중복 이메일이 존재하면) {
-//            throw new RuntimeException("The email address already exist.");
-//        }
+        if (newsletterDao.searchNodeByTitle(comprehensiveTree) != null) {
+            throw new RuntimeException("The email address already exist.");
+        }
         
-        comprehensiveTree.setC_position( getMaxPositionForAddNode(comprehensiveTree) + 1 );
+        comprehensiveTree.setC_position( newsletterDao.getMaxPositionForAddNode(comprehensiveTree) + 1 );
         
         return coreService.addNode(comprehensiveTree);
     }
@@ -113,16 +113,5 @@ public class NewsletterServiceImpl implements CoreService {
             HttpServletRequest request) throws Exception {
         
         return coreService.moveNode(comprehensiveTree, request);
-    }
-
-    /**
-     * 
-     * @param newsletterComprehensiveTree NewsletterVO
-     * @return 특정 부모의 자식들 중 position 값이 가장 큰, 가장 최근에 추가된 노드의 position 값을 반환한다.
-     * @throws Exception
-     */
-    private <T extends ComprehensiveTree> int getMaxPositionForAddNode(T comprehensiveTree) throws Exception {
-        
-        return newsletterDao.getMaxPositionForAddNode(comprehensiveTree);
     }
 }

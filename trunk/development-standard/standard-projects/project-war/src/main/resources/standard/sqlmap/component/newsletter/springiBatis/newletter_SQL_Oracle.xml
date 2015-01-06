@@ -308,4 +308,19 @@
 		  FROM T_NEWSLETTER_COMPREHENSIVETREE
 		 WHERE C_PARENTID = #ref#
 	</select>
+	
+	
+	<select id="searchNodeByTitle" parameterClass="Newsletter" resultClass="Newsletter">
+		/* searchNodeByTitle */
+		SELECT C_ID
+		     , C_PARENTID
+		     , C_POSITION
+		     , C_LEFT
+		     , C_RIGHT
+		     , C_LEVEL
+		     , C_TITLE
+		     , C_TYPE
+		  FROM T_NEWSLETTER_COMPREHENSIVETREE
+		 WHERE C_TITLE = #c_title#
+	</select>
 </sqlMap>

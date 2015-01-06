@@ -49,4 +49,11 @@ public class NewsletterDaoImpl extends EgovComAbstractDAO implements NewsletterD
         return (int) getSqlMapClientTemplate().queryForObject(
                 comprehensiveTree.getSqlMapSelector() + ".getMaxPositionForAddNode", comprehensiveTree);
     }
+
+    @Override
+    public <T extends ComprehensiveTree> T searchNodeByTitle(T comprehensiveTree) {
+        
+        return (T) getSqlMapClientTemplate().queryForObject(
+                comprehensiveTree.getSqlMapSelector() + ".searchNodeByTitle", comprehensiveTree);
+    }
 }
