@@ -23,10 +23,10 @@
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
-				<value>classpath:/egovframework/message/com/message-common</value>
+				<value>classpath:/META-INF/egovframework/message/com/message-common</value>
 				<value>classpath:/egovframework/rte/fdl/idgnr/messages/idgnr</value>
 				<value>classpath:/egovframework/rte/fdl/property/messages/properties</value>
-				<value>classpath:/egovframework/egovProps/globals</value>
+				<value>classpath:/META-INF/egovframework/egovProps/globals</value>
 			</list>
 		</property>
 		<property name="cacheSeconds">
