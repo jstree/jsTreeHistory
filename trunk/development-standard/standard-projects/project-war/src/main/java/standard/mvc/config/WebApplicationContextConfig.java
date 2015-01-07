@@ -9,11 +9,8 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @Configuration
 @PropertySource({
 		"classpath:standard/properties/${profile.active.mode}-spring-viewResolver.properties",
-		"classpath:egovframework/egovProps/globals.properties" })
-@ImportResource({ "classpath*:egovframework/spring/context-*.xml",
-		"classpath*:egovframework/spring/com/context-*.xml",
-		"classpath*:standard/configurations/com/context-*.xml",
-		"classpath*:standard/configurations/context-*.xml" })
+		"classpath:/META-INF/egovframework/egovProps/globals.properties" })
+@ImportResource({ "classpath*:/META-INF/egovframework/spring/com/context-*.xml" })
 public class WebApplicationContextConfig {
 
 	public WebApplicationContextConfig() {
