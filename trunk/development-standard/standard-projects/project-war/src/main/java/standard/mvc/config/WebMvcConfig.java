@@ -119,9 +119,7 @@ XML base였다면 <mvc:annotation-driven/>과 같다
 이때는 XML이 쪽 필요한 빈 설정만 별도의 파일로 작성한 뒤에 @Configuration
 클래스에서 @ImportResource를 이용해 XML 파일의 빈 설정을 가져올 수 있다
 */
-@ImportResource({	"/WEB-INF/config/standard/springmvc/dispatcher-servlet.xml",
-						"/WEB-INF/config/standard/springmvc/egov-com-*.xml",
-						"/WEB-INF/config/egovframework/springmvc/egov-com-*.xml"})
+@ImportResource({	"classpath:/META-INF/egovframework/spring/config/*.xml"})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 //WebMvcConfig 클래스는 Application Root Context를 설정하는 클래스 
 	
