@@ -17,8 +17,6 @@ package standard.mvc.component.business.community.newsletter.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -140,8 +138,23 @@ public class NewsletterAdminController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping("/removeEmail.do")
-    public int removeNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
+    public int removeNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+                                        , HttpServletRequest request) 
             throws Exception {
+        
+        String c_id = request.getParameter("c_id");
+        
+        if (c_id == null) {
+            throw new RuntimeException("removeNode()'s essential parameter not set.");
+        }
+        
+        if (!c_id.matches("\\d+")) {
+            throw new RuntimeException("removeNode()'s c_id parameter value is not valid.");
+        }
+        
+        if (Integer.parseInt(c_id) < 4) {
+            throw new RuntimeException("removeNode()'s c_id parameter value is not acceptable.");
+        }
         
         return newsletterService.removeNode(newsletterComprehensiveTree);
     }
@@ -154,19 +167,38 @@ public class NewsletterAdminController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping("/renameEmail.do")
-    public ComprehensiveTree alterNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree)
+    public ComprehensiveTree alterNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+                                                     , HttpServletRequest request)
              throws Exception {
         
-        String email = newsletterComprehensiveTree.getC_title();
+        String c_id = request.getParameter("c_id");
+        String c_title = request.getParameter("c_title");
+        String c_type = request.getParameter("c_type");
         
-        if (!"folder".equals(newsletterComprehensiveTree.getC_type())) {
+        if ( c_id == null || c_title == null || c_type == null ) {
+            throw new RuntimeException("alterNode()'s essential parameter not set.");
+        }
         
-            // Email 검증
-            String emailPattern = "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+";
-            Pattern p = java.util.regex.Pattern.compile(emailPattern);
-            Matcher m = p.matcher(email);
-            if (!m.matches()) {
-                throw new RuntimeException("Email address is not valid");
+        if (!c_id.matches("\\d+")) {
+            throw new RuntimeException("alterNode()'s c_id parameter value is not valid.");
+        }
+        
+        if (Integer.parseInt(c_id) < 4) {
+            throw new RuntimeException("alterNode()'s c_id parameter value is not acceptable.");
+        }
+        
+        if ("drive".equals(c_type)) {
+            throw new RuntimeException("alterNode()'s c_type parameter value is drive.");
+        }
+        else if ( !("default".equals(c_type) || "folder".equals(c_type)) ) {
+            throw new RuntimeException("alterNode()'s c_type parameter value is not valid.");
+        }
+        
+        
+        if ( "default".equals(newsletterComprehensiveTree.getC_type()) ) {
+            
+            if ( !newsletterComprehensiveTree.getC_title().matches("[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+") ) {
+                throw new RuntimeException("Email address is not valid.");
             }
         }
         
@@ -183,8 +215,40 @@ public class NewsletterAdminController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping("/alterNodeType.do")
-    public ComprehensiveTree alterNodeType(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
+    public ComprehensiveTree alterNodeType(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+                                                         , HttpServletRequest request) 
             throws Exception {
+        
+        String c_id = request.getParameter("c_id");
+        String c_title = request.getParameter("c_title");
+        String c_type = request.getParameter("c_type");
+        
+        if ( c_id == null || c_title == null || c_type == null ) {
+            throw new RuntimeException("alterNodeType()'s essential parameter not set.");
+        }
+        
+        if (!c_id.matches("\\d+")) {
+            throw new RuntimeException("alterNodeType()'s ref or c_position parameter value is not valid.");
+        }
+        
+        if (Integer.parseInt(c_id) < 4) {
+            throw new RuntimeException("alterNodeType()'s c_id parameter value is not acceptable.");
+        }
+        
+        if ("drive".equals(c_type)) {
+            throw new RuntimeException("alterNodeType()'s c_type parameter value is drive.");
+        }
+        else if ( !("default".equals(c_type) || "folder".equals(c_type)) ) {
+            throw new RuntimeException("alterNodeType()'s c_type parameter value is not valid.");
+        }
+        
+        
+        if ( "default".equals(newsletterComprehensiveTree.getC_type()) ) {
+            
+            if ( !newsletterComprehensiveTree.getC_title().matches("[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+") ) {
+                throw new RuntimeException("Email address is not valid.");
+            }
+        }
         
         newsletterService.alterNodeType(newsletterComprehensiveTree);
         

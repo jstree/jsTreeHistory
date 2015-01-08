@@ -36,6 +36,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  수정일                 수정자                 수정내용
  *  -------        ------------   -----------------------
  *  2015. 01. 04.  류강하                 최초 생성
+ *  2015. 01. 07.  류강하                 searchNodeByTitle() 추가
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>

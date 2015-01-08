@@ -37,6 +37,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  -------       ------------   -----------------------
  *  2014.  7. 31.  이동민                 최초 생성
  *  2014. 10. 12.  류강하                 리플렉션을 성공적으로 수행하기 위한 메서드 시그너쳐 변경, 리플렉션 코드를 newInstance 메서드로 추출
+ *  2015. 01. 07.  류강하                 alterNodeType() 리팩토링
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -346,34 +347,34 @@ public class CoreServiceImpl implements CoreService {
 	 */
 	@Transactional
 	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree ) throws Exception {
-
-		List<T> childNodesFromNodeById = ((List<T>) coreDao.getChildNode(comprehensiveTree));
-
+	    
+	    int returnStatus = 0;
+	    
 		T nodeById = ((T) coreDao.getNode(comprehensiveTree));
+		
+		if (nodeById.getC_type().equals(comprehensiveTree.getC_type())) {
+		    returnStatus = 1;
+		    
+		} else if ("default".equals(comprehensiveTree.getC_type())) {
+	        List<T> childNodesFromNodeById = ((List<T>) coreDao.getChildNode(nodeById));
+            
+            if (childNodesFromNodeById.size() != 0) {
+                throw new RuntimeException("하위에 노드가 있는데 디폴트로 바꾸려고 함");
 
-		int returnStatus = 0;
-		if (comprehensiveTree.getC_type().equals("default")) {
-
-			if (childNodesFromNodeById.size() > 0) {
-				throw new RuntimeException("하위에 노드가 있는데 디폴트로 바꾸려고 함");
-
-			} else {
-				comprehensiveTree.setC_type("default");
-				int temp = coreDao.alterNodeType(comprehensiveTree);
-
-				if (temp == 1) {
-					returnStatus = 1;
-				} else {
-					throw new RuntimeException("여러개의 노드가 업데이트 되었음");
-				}
-			}
-		} else {
-			if (nodeById.getC_type().equals("folder")) {
-				returnStatus = 1;
-			} else {
-				returnStatus = coreDao.alterNodeType(comprehensiveTree);
-			}
+            } else {
+                int temp = coreDao.alterNodeType(comprehensiveTree);
+                
+                if (temp == 1) {
+                    returnStatus = 1;
+                } else {
+                    throw new RuntimeException("여러개의 노드가 업데이트 되었음"); // TODO 동일한 id가 여러개 라면 이미 노드 추가 로직이 문제가 있는 것임.
+                }
+            }
+            
+		} else if ("folder".equals(comprehensiveTree.getC_type())) {
+		    returnStatus = coreDao.alterNodeType(comprehensiveTree);
 		}
+		
 		return returnStatus;
 	}
 	

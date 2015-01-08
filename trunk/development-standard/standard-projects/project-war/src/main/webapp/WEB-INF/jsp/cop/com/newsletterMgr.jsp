@@ -289,6 +289,11 @@ $("#demo")
 		}
 	})
 	.bind("create.jstree", function (e, data) {
+	  	
+	  	console.log("create.jstree");
+	  	console.log(e);
+	  	console.log(data);
+	  
 		$.post(
 			"${pageContext.request.contextPath}/newsletterAdmin/addEmail.do", 
 			{ 
@@ -298,6 +303,7 @@ $("#demo")
 				"c_type" : data.rslt.obj.attr("rel")
 			}, 
 			function (r) {
+			  	console.log(r);
 				if(r.status) {
 					$(data.rslt.obj).attr("id", "node_" + r.id);
 				}
@@ -309,6 +315,11 @@ $("#demo")
 		);
 	})
 	.bind("remove.jstree", function (e, data) {
+	  
+	  	console.log("remove.jstree");
+	  	console.log(e);
+	  	console.log(data);
+	  	
 		data.rslt.obj.each(function () {
 			$.ajax({
 				async : false,
@@ -324,6 +335,11 @@ $("#demo")
 		});
 	})
 	.bind("rename.jstree", function (e, data) {
+	  
+		console.log("rename.jstree");
+		console.log(e);
+		console.log(data);
+	  	
 		$.post(
 			"${pageContext.request.contextPath}/newsletterAdmin/renameEmail.do", 
 			{ 
@@ -340,11 +356,16 @@ $("#demo")
 		);
 	})
 	.bind("set_type.jstree", function (e, data) {
+	  
+	  	console.log("set_type.jstree");
+		console.log(e);
+		console.log(data);
+		
 		$.post(
 			"${pageContext.request.contextPath}/newsletterAdmin/alterNodeType.do", 
 			{ 
 					"c_id" : data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
-					"c_title" : data.rslt.new_name,
+					"c_title" : $.trim( data.rslt.obj.children("a").text() ),
 					"c_type" : data.rslt.obj.attr("rel")
 			}, 
 			function (r) {
