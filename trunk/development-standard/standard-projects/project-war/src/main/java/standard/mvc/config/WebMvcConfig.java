@@ -47,11 +47,11 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.util.ArrayUtils;
 
-import standard.mvc.component.manager.interceptor.RequestHandlerInterceptor;
-import standard.mvc.component.manager.viewResolver.CustomFreemarkerViewResolver;
-import standard.mvc.component.manager.viewResolver.CustomInternalResourceViewResolver;
-import standard.mvc.component.manager.viewResolver.CustomThymeleafViewResolver;
-import standard.mvc.component.manager.viewResolver.SpecialPurposeViewResolver;
+import egovframework.com.ext.jstree.support.manager.interceptor.RequestHandlerInterceptor;
+import egovframework.com.ext.jstree.support.manager.viewResolver.CustomFreemarkerViewResolver;
+import egovframework.com.ext.jstree.support.manager.viewResolver.CustomInternalResourceViewResolver;
+import egovframework.com.ext.jstree.support.manager.viewResolver.CustomThymeleafViewResolver;
+import egovframework.com.ext.jstree.support.manager.viewResolver.SpecialPurposeViewResolver;
 
 /**
  *  Class Name : WebMvcConfig.java
