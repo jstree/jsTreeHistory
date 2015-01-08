@@ -84,7 +84,7 @@
 	</bean>
 
 	<bean id="freemarkerViewResolver"
-		class="standard.mvc.component.manager.viewResolver.CustomFreemarkerViewResolver">
+		class="egovframework.com.ext.jstree.support.manager.viewResolver.CustomFreemarkerViewResolver">
 		<property name="cache" value="true" />
 		<property name="contentType" value="text/html; charset=UTF-8" />
 		<property name="prefix" value="" />
@@ -111,7 +111,7 @@
 	</bean>
 
 	<bean id="velocityViewResolver"
-		class="standard.mvc.component.manager.viewResolver.CustomVelocityViewResolver">
+		class="egovframework.com.ext.jstree.support.manager.viewResolver.CustomVelocityViewResolver">
 		<property name="cache" value="true" />
 		<property name="prefix" value="" />
 		<property name="suffix" value=".vm" />
@@ -122,7 +122,7 @@
 	</bean>
 
 	<bean id="specialPurposeViewResolver"
-		class="standard.mvc.component.manager.viewResolver.SpecialPurposeViewResolver">
+		class="egovframework.com.ext.jstree.support.manager.viewResolver.SpecialPurposeViewResolver">
 		<property name="order" value="2"></property>
 	</bean>
 
@@ -131,7 +131,7 @@
 		<property name="order" value="1"></property>
 	</bean>
 	<bean id="urlBasedViewResolver"
-		class="standard.mvc.component.manager.viewResolver.CustomEgovUrlBasedViewResolver"
+		class="egovframework.com.ext.jstree.support.manager.viewResolver.CustomEgovUrlBasedViewResolver"
 		p:order="0" p:viewClass="org.springframework.web.servlet.view.JstlView"
 		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
 

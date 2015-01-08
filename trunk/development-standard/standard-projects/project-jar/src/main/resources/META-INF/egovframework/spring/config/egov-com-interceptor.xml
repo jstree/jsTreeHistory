@@ -25,7 +25,7 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
 
 	<!-- interceptor -->
 	<bean id="requestHandlerInterceptor"
-		class="standard.mvc.component.manager.interceptor.RequestHandlerInterceptor">
+		class="egovframework.com.ext.jstree.support.manager.interceptor.RequestHandlerInterceptor">
 	</bean>
 	
 	
