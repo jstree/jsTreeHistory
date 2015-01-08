@@ -6,8 +6,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Repository;
 
-import standard.mvc.component.manager.foundation.hibernate.CustomHibernateDaoSupport;
 import egovframework.com.ext.jstree.springHibernate.core.vo.P_JsTree;
+import egovframework.com.ext.jstree.support.manager.foundation.hibernate.CustomHibernateDaoSupport;
 import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupport;
 
 @Repository(value = "Hibernate_DB_GetNode")
