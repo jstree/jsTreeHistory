@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import standard.mvc.component.util.StringUtils;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 
 public class CustomInternalResourceViewResolver extends InternalResourceViewResolver {
 

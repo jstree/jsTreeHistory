@@ -19,9 +19,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import egovframework.com.ext.jstree.springHibernate.core.service.I_S_GetChildNode;
 import egovframework.com.ext.jstree.springHibernate.core.vo.P_JsTree;
-import standard.mvc.component.base.controller.GenericAbstractController;
-import standard.mvc.component.base.controller.GenericInterfaceController;
-import standard.mvc.component.base.dao.hibernate.SearchSupport;
+import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericInterfaceController;
+import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupport;
 
 @Controller
 public class C_GetChildNode extends GenericAbstractController implements

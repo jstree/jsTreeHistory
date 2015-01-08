@@ -1,4 +1,5 @@
-package standard.mvc.component.manager.foundation.hibernate;
+package egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate;
+
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -26,8 +27,6 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.postgresql.copy.CopyManager;
 import org.postgresql.core.BaseConnection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -35,151 +34,123 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import egovframework.com.ext.jstree.support.manager.eventLog.EventLogManager;
 import egovframework.com.ext.jstree.support.manager.eventLog.LogSupport;
 import egovframework.com.ext.jstree.support.manager.eventLog.LogSupportActionType;
-import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupport;
 
 @SuppressWarnings("unchecked")
-public abstract class CustomHibernateDaoSupport<T, ID extends Serializable>
-        extends HibernateDaoSupport
-{
+public abstract class CustomHibernateDaoSupport<T, ID extends Serializable> extends HibernateDaoSupport {
     
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
-    @Autowired
+	@Autowired
     private EventLogManager eventLogManager;
-    
+	
     protected abstract Class<T> getEntityClass();
     
-    public DetachedCriteria createDetachedCriteria(Class<?> clazz)
-    {
+    public DetachedCriteria createDetachedCriteria(Class<?> clazz) {
         return DetachedCriteria.forClass(clazz);
     }
     
-    public DetachedCriteria createDetachedCriteria()
-    {
+    public DetachedCriteria createDetachedCriteria() {
         return DetachedCriteria.forClass(getEntityClass());
     }
     
-    public T getUnique(Criterion criterion)
-    {
+    public T getUnique(Criterion criterion) {
         DetachedCriteria detachedCriteria = createDetachedCriteria();
         detachedCriteria.add(criterion);
         
-        List<T> list = (List<T>) getHibernateTemplate()
-                .findByCriteria(detachedCriteria);
+        List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
         
-        if (list.isEmpty()) { return null; }
+        if (list.isEmpty()) {
+            return null;
+        }
         
         return (T) list.get(0);
     }
     
-    public T getUnique(SearchSupport searchSupport)
-    {
+    public T getUnique(SearchSupport searchSupport) {
         
         DetachedCriteria detachedCriteria = createDetachedCriteria();
-        for (Criterion c : searchSupport.getCriterions())
-        {
+        for (Criterion c : searchSupport.getCriterions()) {
             detachedCriteria.add(c);
         }
         
-        List<T> list = (List<T>) getHibernateTemplate()
-                .findByCriteria(detachedCriteria);
+        List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
         
-        if (list.isEmpty()) { return null; }
+        if (list.isEmpty()) {
+            return null;
+        }
         
         return (T) list.get(0);
     }
     
-    public T getUnique(Criterion... criterions)
-    {
+    public T getUnique(Criterion... criterions) {
         
         DetachedCriteria detachedCriteria = createDetachedCriteria();
-        for (Criterion c : criterions)
-        {
+        for (Criterion c : criterions) {
             detachedCriteria.add(c);
         }
         
-        List<T> list = (List<T>) getHibernateTemplate()
-                .findByCriteria(detachedCriteria);
+        List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
         
-        if (list.isEmpty()) { return null; }
+        if (list.isEmpty()) {
+            return null;
+        }
         
         return (T) list.get(0);
     }
     
-    public T getUnique(List<Criterion> criterion)
-    {
+    public T getUnique(List<Criterion> criterion) {
         
         DetachedCriteria detachedCriteria = createDetachedCriteria();
-        for (Criterion c : criterion)
-        {
+        for (Criterion c : criterion) {
             detachedCriteria.add(c);
         }
         
-        List<T> list = (List<T>) getHibernateTemplate()
-                .findByCriteria(detachedCriteria);
+        List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
         
-        if (list.isEmpty()) { return null; }
+        if (list.isEmpty()) {
+            return null;
+        }
         
         return (T) list.get(0);
     }
     
-    public List<T> getList(SearchSupport searchSupport)
-    {
+    public List<T> getList(SearchSupport searchSupport) {
         
         DetachedCriteria detachedCriteria = createDetachedCriteria();
         
-        for (Order order : searchSupport.getOrder())
-        {
+        for (Order order : searchSupport.getOrder()) {
             detachedCriteria.addOrder(order);
         }
         
-        for (Criterion criterion : searchSupport.getCriterions())
-        {
+        for (Criterion criterion : searchSupport.getCriterions()) {
             detachedCriteria.add(criterion);
         }
         
-        List<T> test = (List<T>) getHibernateTemplate()
-        .findByCriteria(detachedCriteria,
-                        searchSupport.getPageSize()
-                                * (searchSupport.getPageNo() - 1),
-                        searchSupport.getPageSize());
-        return test;
+        return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, searchSupport.getPageSize() * (searchSupport.getPageNo() - 1), searchSupport.getPageSize());
     }
     
-    public List<T> getList(SearchSupport searchSupport, Criterion... criterion)
-    {
+    public List<T> getList(SearchSupport searchSupport, Criterion... criterion) {
         
         DetachedCriteria detachedCriteria = createDetachedCriteria();
         
-        for (Criterion c : criterion)
-        {
+        for (Criterion c : criterion) {
             detachedCriteria.add(c);
         }
         
-        for (Order order : searchSupport.getOrder())
-        {
+        for (Order order : searchSupport.getOrder()) {
             detachedCriteria.addOrder(order);
         }
         
-        return (List<T>) getHibernateTemplate()
-                .findByCriteria(detachedCriteria,
-                                searchSupport.getPageSize()
-                                        * (searchSupport.getPageNo() - 1),
-                                searchSupport.getPageSize());
+        return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, searchSupport.getPageSize() * (searchSupport.getPageNo() - 1), searchSupport.getPageSize());
     }
     
-    public List<T> getGroupByList(SearchSupport searchSupport, String target)
-    {
+    public List<T> getGroupByList(SearchSupport searchSupport, String target) {
         
         DetachedCriteria detachedCriteria = createDetachedCriteria();
         
-        for (Order order : searchSupport.getOrder())
-        {
+        for (Order order : searchSupport.getOrder()) {
             detachedCriteria.addOrder(order);
         }
         
-        for (Criterion criterion : searchSupport.getCriterions())
-        {
+        for (Criterion criterion : searchSupport.getCriterions()) {
             detachedCriteria.add(criterion);
         }
         
@@ -188,19 +159,13 @@ public abstract class CustomHibernateDaoSupport<T, ID extends Serializable>
         
         detachedCriteria.setProjection(projectList);
         
-        return (List<T>) getHibernateTemplate()
-                .findByCriteria(detachedCriteria,
-                                searchSupport.getPageSize()
-                                        * (searchSupport.getPageNo() - 1),
-                                searchSupport.getPageSize());
+        return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, searchSupport.getPageSize() * (searchSupport.getPageNo() - 1), searchSupport.getPageSize());
     }
     
-    public int getGroupByCount(SearchSupport searchSupport, String tagert)
-    {
+    public int getGroupByCount(SearchSupport searchSupport, String tagert) {
         DetachedCriteria detachedCriteria = createDetachedCriteria();
         
-        for (Criterion criterion : searchSupport.getCriterions())
-        {
+        for (Criterion criterion : searchSupport.getCriterions()) {
             detachedCriteria.add(criterion);
         }
         
@@ -213,23 +178,18 @@ public abstract class CustomHibernateDaoSupport<T, ID extends Serializable>
         
         detachedCriteria.setProjection(null);
         
-        if (null == l || l.size() == 0)
-        {
+        if (null == l || l.size() == 0) {
             return 0;
-        }
-        else
-        {
+        } else {
             return l.size();
         }
     }
     
-    public Map<String, Long> getGroupByList(SearchSupport searchSupport,
-            String groupProperty, String sumProperty)
-    {
+    
+    public Map<String, Long> getGroupByList(SearchSupport searchSupport, String groupProperty, String sumProperty) {
         DetachedCriteria detachedCriteria = createDetachedCriteria();
         Map<String, Long> result = new HashMap<String, Long>();
-        for (Criterion criterion : searchSupport.getCriterions())
-        {
+        for (Criterion criterion : searchSupport.getCriterions()) {
             detachedCriteria.add(criterion);
         }
         
@@ -245,63 +205,47 @@ public abstract class CustomHibernateDaoSupport<T, ID extends Serializable>
         
         detachedCriteria.setProjection(null);
         
-        if (null == l || l.size() == 0)
-        {
+        if (null == l || l.size() == 0) {
             return result;
-        }
-        else
-        {
+        } else {
             Iterator<?> ite = l.iterator();
-            while (ite.hasNext())
-            {
-                Object[] objects = (Object[]) ite.next();
-                result.put((String) objects[0], (Long) objects[1]);
+            while(ite.hasNext()){
+                Object[] objects = (Object[])ite.next();
+                result.put((String)objects[0], (Long)objects[1]);
             }
         }
         
         return result;
-    }
+    }    
     
-    public List<T> getListWithoutPaging(Order order)
-    {
+    public List<T> getListWithoutPaging(Order order) {
         DetachedCriteria detachedCriteria = createDetachedCriteria();
         detachedCriteria.addOrder(order);
         
-        return (List<T>) getHibernateTemplate()
-                .findByCriteria(detachedCriteria);
+        return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
     
-    public List<T> getListWithoutPaging(Order order, Criterion... criterion)
-    {
+    public List<T> getListWithoutPaging(Order order, Criterion... criterion) {
         DetachedCriteria detachedCriteria = createDetachedCriteria();
-        for (Criterion c : criterion)
-        {
+        for (Criterion c : criterion) {
             detachedCriteria.add(c);
         }
         detachedCriteria.addOrder(order);
         
-        return (List<T>) getHibernateTemplate()
-                .findByCriteria(detachedCriteria);
+        return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
     
-    public List<T> getListWithoutPaging(DetachedCriteria detachedCriteria)
-    {
-        return (List<T>) getHibernateTemplate()
-                .findByCriteria(detachedCriteria);
+    public List<T> getListWithoutPaging(DetachedCriteria detachedCriteria) {
+        return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
     
-    public List<T> getList(DetachedCriteria detachedCriteria, int limit,
-            int offset)
-    {
-        return (List<T>) getHibernateTemplate()
-                .findByCriteria(detachedCriteria, offset, limit);
+    public List<T> getList(DetachedCriteria detachedCriteria, int limit, int offset) {
+        return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, limit);
     }
     
-    public int getCount(Criterion... criterions)
-    {
+    public int getCount(Criterion... criterions) {
         DetachedCriteria detachedCriteria = createDetachedCriteria();
-        for (Criterion c : criterions)
-        {
+        for (Criterion c : criterions) {
             detachedCriteria.add(c);
         }
         
@@ -313,47 +257,29 @@ public abstract class CustomHibernateDaoSupport<T, ID extends Serializable>
         return total.intValue();
     }
     
-    public int getCount(SearchSupport searchSupport)
-    {
+    public int getCount(SearchSupport searchSupport) {
         DetachedCriteria detachedCriteria = createDetachedCriteria();
         
-        for (Criterion c : searchSupport.getCriterions())
-        {
+        for (Criterion c : searchSupport.getCriterions()) {
             detachedCriteria.add(c);
         }
         
         detachedCriteria.setProjection(Projections.rowCount());
         List<?> l = getHibernateTemplate().findByCriteria(detachedCriteria);
         
-        if (null == l || l.size() == 0) { return 0; }
-        
-        Long total = (Long) l.get(0);
-        detachedCriteria.setProjection(null);
-        return total.intValue();
-    }
-    
-    public int getCount(SearchSupport searchSupport, List<Criterion> criterions)
-    {
-        DetachedCriteria detachedCriteria = createDetachedCriteria();
-        
-        for (Criterion c : criterions)
-        {
-            detachedCriteria.add(c);
+        if (null == l || l.size() == 0) {
+            return 0;
         }
         
-        detachedCriteria.setProjection(Projections.rowCount());
-        List<?> l = getHibernateTemplate().findByCriteria(detachedCriteria);
-        
         Long total = (Long) l.get(0);
         detachedCriteria.setProjection(null);
         return total.intValue();
     }
     
-    public int getCount(List<Criterion> criterions)
-    {
+    public int getCount(SearchSupport searchSupport, List<Criterion> criterions) {
         DetachedCriteria detachedCriteria = createDetachedCriteria();
-        for (Criterion c : criterions)
-        {
+        
+        for (Criterion c : criterions) {
             detachedCriteria.add(c);
         }
         
@@ -365,13 +291,25 @@ public abstract class CustomHibernateDaoSupport<T, ID extends Serializable>
         return total.intValue();
     }
     
-    public int getSum(List<Criterion> criterions, String propertyName)
-    {
+    public int getCount(List<Criterion> criterions) {
+        DetachedCriteria detachedCriteria = createDetachedCriteria();
+        for (Criterion c : criterions) {
+            detachedCriteria.add(c);
+        }
+        
+        detachedCriteria.setProjection(Projections.rowCount());
+        List<?> l = getHibernateTemplate().findByCriteria(detachedCriteria);
+        
+        Long total = (Long) l.get(0);
+        detachedCriteria.setProjection(null);
+        return total.intValue();
+    }
+    
+    public int getSum(List<Criterion> criterions, String propertyName) {
         DetachedCriteria detachedCriteria = createDetachedCriteria();
         detachedCriteria.add(Restrictions.isNotNull(propertyName));
         
-        for (Criterion c : criterions)
-        {
+        for (Criterion c : criterions) {
             detachedCriteria.add(c);
         }
         
@@ -381,69 +319,47 @@ public abstract class CustomHibernateDaoSupport<T, ID extends Serializable>
         Long sum = (Long) l.get(0);
         detachedCriteria.setProjection(null);
         return sum != null ? sum.intValue() : 0;
-    }
+    }    
     
-    public T find(ID id, LockMode lockMode)
-    {
+    public T find(ID id, LockMode lockMode) {
         return (T) getHibernateTemplate().get(getEntityClass(), id, lockMode);
     }
     
-    public T find(ID id, LockMode lockMode, boolean enableCache)
-    {
+    public T find(ID id, LockMode lockMode, boolean enableCache) {
         Object obj = getHibernateTemplate().get(getEntityClass(), id, lockMode);
-        if (null != obj && !enableCache)
-        {
+        if (null != obj && !enableCache) {
             getHibernateTemplate().refresh(obj);
         }
         
         return (T) obj;
     }
     
-    public void refresh(Object entity)
-    {
+    public void refresh(Object entity) {
         getHibernateTemplate().refresh(entity);
     }
     
-    public ID store(T newInstance)
-    {
-        if (newInstance instanceof LogSupport)
-        {
+    public ID store(T newInstance) {
+        if (newInstance instanceof LogSupport) {
             LogSupport logSupport = (LogSupport) newInstance;
-            eventLogManager.writeLog(LogSupportActionType.ADD,
-                                     logSupport.getEventLogType(), newInstance,
-                                     null);
+            eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
         }
         return (ID) getHibernateTemplate().save(newInstance);
     }
     
-    public void storeOrUpdate(T newInstance)
-    {
-        if (newInstance instanceof LogSupport)
-        {
+    public void storeOrUpdate(T newInstance) {
+        if (newInstance instanceof LogSupport) {
             Class<?> clazz = newInstance.getClass();
             long id = getId(newInstance);
             LogSupport logSupport = (LogSupport) newInstance;
-            if (id == 0)
-            {
-                eventLogManager.writeLog(LogSupportActionType.ADD,
-                                         logSupport.getEventLogType(),
-                                         newInstance, null);
-            }
-            else
-            {
+            if (id == 0) {
+                eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
+            } else {
                 Session session = getSessionFactory().openSession();
                 Object oldObject = session.get(clazz, id);
-                if (null == oldObject)
-                {
-                    eventLogManager.writeLog(LogSupportActionType.ADD,
-                                             logSupport.getEventLogType(),
-                                             newInstance, null);
-                }
-                else
-                {
-                    eventLogManager.writeLog(LogSupportActionType.EDIT,
-                                             logSupport.getEventLogType(),
-                                             newInstance, oldObject);
+                if (null == oldObject) {
+                    eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
+                } else {
+                    eventLogManager.writeLog(LogSupportActionType.EDIT, logSupport.getEventLogType(), newInstance, oldObject);
                 }
                 session.close();
             }
@@ -452,34 +368,20 @@ public abstract class CustomHibernateDaoSupport<T, ID extends Serializable>
         getHibernateTemplate().saveOrUpdate(newInstance);
     }
     
-    public void storeOrUpdateAdvanced(T newInstance, String columId)
-    {
-        if (newInstance instanceof LogSupport)
-        {
+    public void storeOrUpdateAdvanced(T newInstance , String columId) {
+        if (newInstance instanceof LogSupport) {
             Class<?> clazz = newInstance.getClass();
             long id = getId(newInstance, columId);
             LogSupport logSupport = (LogSupport) newInstance;
-            if (id == 0)
-            {
-                eventLogManager.writeLog(LogSupportActionType.ADD,
-                                         logSupport.getEventLogType(),
-                                         newInstance, null);
-            }
-            else
-            {
+            if (id == 0) {
+                eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
+            } else {
                 Session session = getSessionFactory().openSession();
                 Object oldObject = session.get(clazz, id);
-                if (null == oldObject)
-                {
-                    eventLogManager.writeLog(LogSupportActionType.ADD,
-                                             logSupport.getEventLogType(),
-                                             newInstance, null);
-                }
-                else
-                {
-                    eventLogManager.writeLog(LogSupportActionType.EDIT,
-                                             logSupport.getEventLogType(),
-                                             newInstance, oldObject);
+                if (null == oldObject) {
+                    eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
+                } else {
+                    eventLogManager.writeLog(LogSupportActionType.EDIT, logSupport.getEventLogType(), newInstance, oldObject);
                 }
                 session.close();
             }
@@ -488,81 +390,60 @@ public abstract class CustomHibernateDaoSupport<T, ID extends Serializable>
         getHibernateTemplate().saveOrUpdate(newInstance);
     }
     
-    public void modify(T transientObject)
-    {
-        if (transientObject instanceof LogSupport)
-        {
+    public void modify(T transientObject) {
+        if (transientObject instanceof LogSupport) {
             
             Class<?> clazz = transientObject.getClass();
             long id = getId(transientObject);
             Session session = getSessionFactory().openSession();
             Object oldObject = session.get(clazz, id);
             LogSupport logSupport = (LogSupport) transientObject;
-            if (null == oldObject)
-            {
-                eventLogManager.writeLog(LogSupportActionType.ADD,
-                                         logSupport.getEventLogType(),
-                                         transientObject, null);
-            }
-            else
-            {
-                eventLogManager.writeLog(LogSupportActionType.EDIT,
-                                         logSupport.getEventLogType(),
-                                         transientObject, oldObject);
+            if (null == oldObject) {
+                eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), transientObject, null);
+            } else {
+                eventLogManager.writeLog(LogSupportActionType.EDIT, logSupport.getEventLogType(), transientObject, oldObject);
             }
             session.close();
             getHibernateTemplate().merge(transientObject);
-        }
-        else
-        {
+        } else {
             getHibernateTemplate().update(transientObject);
         }
     }
     
-    public int bulkUpdate(String queryString, Object... value)
-    {
+    public int bulkUpdate(String queryString, Object... value) {
         return getHibernateTemplate().bulkUpdate(queryString, value);
     }
     
-    public void delete(T persistentObject)
-    {
+    public void delete(T persistentObject) {
         // event log를 남긴다
-        if (persistentObject instanceof LogSupport)
-        {
+        if (persistentObject instanceof LogSupport) {
             LogSupport logSupport = (LogSupport) persistentObject;
-            eventLogManager.writeLog(LogSupportActionType.DEL,
-                                     logSupport.getEventLogType(),
-                                     persistentObject, null);
+            eventLogManager.writeLog(LogSupportActionType.DEL, logSupport.getEventLogType(), persistentObject, null);
         }
         getHibernateTemplate().delete(persistentObject);
     }
     
-    public void flush()
-    {
+    public void flush() {
         getHibernateTemplate().flush();
     }
     
-    public void deleteAll(Collection<T> entities)
-    {
+    public void deleteAll(Collection<T> entities) {
         getHibernateTemplate().deleteAll(entities);
     }
     
-    public void bulkInsert(Collection<T> entities)
-    {
-        Session session = getHibernateTemplate().getSessionFactory()
-                .openSession();
+    public void bulkInsert(Collection<T> entities) {
+        Session session = getHibernateTemplate().getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
         Transaction tx = session.beginTransaction();
         
         int i = 0;
-        for (T t : entities)
-        {
+        for (T t : entities) {
             session.save(t);
             
-            if (i % 50 == 0)
-            { // batch size
+            if (i % 50 == 0) { // batch size
                 session.flush();
                 session.clear();
+                System.out.println(i);
             }
             i++;
         }
@@ -571,73 +452,55 @@ public abstract class CustomHibernateDaoSupport<T, ID extends Serializable>
         session.close();
     }
     
-    public T excute(HibernateCallback<T> callback)
-    {
+    public T excute(HibernateCallback<T> callback) {
         return getHibernateTemplate().execute(callback);
     }
     
-    public void copyIn(DataSource dataSource, StringBuilder header,
-            StringBuilder body)
-    {
+    /**
+     * pgsql 에서 지원되는 format 을 이용해 bulk insert 처리 한다. pgsql copyManager가 Tomcat dbcp pool을 지원하지 않아 별도의 Connection을 맺어 사용 global.xml내 developmentDataSource 부분 참고
+     */
+    public void copyIn(DataSource dataSource, StringBuilder header, StringBuilder body) {
         logger.info("header : " + header);
         logger.info("body : ######################\n" + body);
         Connection connection = null;
-        try
-        {
+        try {
             connection = dataSource.getConnection();
             connection.setAutoCommit(true);
-            CopyManager copyManager = new CopyManager(
-                    (BaseConnection) connection);
-            copyManager.copyIn(header.toString(), new ByteArrayInputStream(body
-                    .toString().getBytes("utf-8")));
-        }
-        catch (SQLException | IOException e)
-        {
+            CopyManager copyManager = new CopyManager((BaseConnection) connection);
+            copyManager.copyIn(header.toString(), new ByteArrayInputStream(body.toString().getBytes("utf-8")));
+        } catch (SQLException | IOException e) {
             logger.error(e.getLocalizedMessage());
-        }
-        finally
-        {
-            if (connection != null)
-            {
-                try
-                {
+        } finally {
+            if (connection != null) {
+                try {
                     connection.close();
-                }
-                catch (SQLException ignored)
-                {
+                } catch (SQLException ignored) {
                 }
             }
         }
     }
     
-    private long getId(Object object)
-    {
+    private long getId(Object object) {
         String value = "";
-        try
-        {
+        try {
             value = BeanUtils.getProperty(object, "id");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("no search instace class id");
         }
         
         return Long.parseLong(value);
     }
     
-    // overload
-    private long getId(Object object, String columId)
-    {
+    //overload
+    private long getId(Object object, String columId) {
         String value = "";
-        try
-        {
+        try {
             value = BeanUtils.getProperty(object, columId);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("no search instace class id");
         }
         
         return Long.parseLong(value);
     }
+    
 }
