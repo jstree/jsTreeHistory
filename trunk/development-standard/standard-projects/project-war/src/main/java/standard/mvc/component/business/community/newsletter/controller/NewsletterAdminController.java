@@ -30,10 +30,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import standard.mvc.component.base.controller.GenericAbstractController;
 import standard.mvc.component.business.community.newsletter.vo.NewsletterComprehensiveTree;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
  * Modification Information

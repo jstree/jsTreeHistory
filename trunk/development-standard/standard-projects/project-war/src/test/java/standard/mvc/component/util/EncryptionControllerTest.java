@@ -6,6 +6,8 @@ import java.security.NoSuchAlgorithmException;
 
 import org.junit.Test;
 
+import egovframework.com.ext.jstree.support.util.EncryptionController;
+
 public class EncryptionControllerTest {
 
 	@Test

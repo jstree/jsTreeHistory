@@ -11,8 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import standard.mvc.component.base.controller.GenericAbstractController;
-import standard.mvc.component.base.dao.hibernate.SearchSupport;
+import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupport;
 
 /**
  * Class Name : TemplateMethodResolveViewSupporter.java Description : WEBDAV를
