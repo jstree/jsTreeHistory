@@ -10,6 +10,26 @@ import org.springframework.stereotype.Service;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
+/**
+ * Modification Information
+ * 
+ * @author Hoseong.Son
+ * @since 2014.12.21
+ * @version 1.0
+ * @see <pre>
+ * 	Class Name 	: PrimaryServiceImpl.java
+ * 	Description : 제약조건 예제 중 주키 트리 서비스
+ *  
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일               수정자                 수정내용
+ *  -------       ------------   -----------------------
+ *  2014.12.21    Hoseong.Son           최초 생성
+ *  2014.12.25    Hoseong.Son    Class 명 변경 ConstraintServiceImpl => PrimaryServiceImpl                                                 
+ * 
+ *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
 @Service(value = "PrimaryService")
 public class PrimaryServiceImpl implements CoreService {
 

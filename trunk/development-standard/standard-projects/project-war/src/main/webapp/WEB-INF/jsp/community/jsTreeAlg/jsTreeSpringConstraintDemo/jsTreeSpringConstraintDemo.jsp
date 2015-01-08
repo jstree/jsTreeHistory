@@ -198,6 +198,47 @@
 
 				<!-- JavaScript neccessary for the tree -->
 				<script type="text/javascript">
+				function loadAuthorityList(authority_group_id) {
+					$.post(
+							"${pageContext.request.contextPath}/constraint/foreign/getChildNode.do",
+						{ 
+							"c_id" : authority_group_id
+						}, 
+						function (r) {
+							
+							var jsonArrLength = r.length;
+							for (var i = 0; i < jsonArrLength; i++) {
+
+								var c_title;
+								var c_id;
+
+								var jsonData = r[i];
+								for (var key in jsonData) {
+									
+									if ("c_id" == key) {
+										c_id = $(jsonData).attr(key);
+									} else if ("c_title" == key) {
+										c_title = $(jsonData).attr(key);
+									} else {
+										continue;
+									}
+									
+								}
+								
+								$("#authority").append(function(){
+									if (i == jsonArrLength - 1) {
+										return $("<option>", {value : c_id, text : c_title, selected : true});
+									} 
+									
+									return $("<option>", {value : c_id, text : c_title});
+								});
+									
+							}
+							
+						}
+					);					
+				}
+				
 				function jstreeDataTableReload() {
 					var jstreeDataTable = $('#jstreeTable').dataTable( {
 						"ajax": {
@@ -286,44 +327,7 @@
 													
 													var _this = this;
 													
-													$.post(
-															"${pageContext.request.contextPath}/constraint/foreign/getChildNode.do",
-														{ 
-															"c_id" : "3"
-														}, 
-														function (r) {
-															
-															var jsonArrLength = r.length;
-															for (var i = 0; i < jsonArrLength; i++) {
-
-																var c_title;
-																var c_id;
-
-																var jsonData = r[i];
-																for (var key in jsonData) {
-																	
-																	if ("c_id" == key) {
-																		c_id = $(jsonData).attr(key);
-																	} else if ("c_title" == key) {
-																		c_title = $(jsonData).attr(key);
-																	} else {
-																		continue;
-																	}
-																	
-																}
-																
-																$("#authority").append(function(){
-																	if (i == jsonArrLength - 1) {
-																		return $("<option>", {value : c_id, text : c_title, selected : true});
-																	} 
-																	
-																	return $("<option>", {value : c_id, text : c_title});
-																});
-																	
-															}
-															
-														}
-													);
+													loadAuthorityList("3");
 													
 													$("#nodeForm").dialog({
 														title  : "권한 추가"
@@ -355,44 +359,7 @@
 												if( $(obj).attr("rel") != 'default' ){
 													var _this = this;
 													
-													$.post(
-															"${pageContext.request.contextPath}/constraint/foreign/getChildNode.do",
-														{ 
-															"c_id" : "3"
-														}, 
-														function (r) {
-															
-															var jsonArrLength = r.length;
-															for (var i = 0; i < jsonArrLength; i++) {
-
-																var c_title;
-																var c_id;
-
-																var jsonData = r[i];
-																for (var key in jsonData) {
-																	
-																	if ("c_id" == key) {
-																		c_id = $(jsonData).attr(key);
-																	} else if ("c_title" == key) {
-																		c_title = $(jsonData).attr(key);
-																	} else {
-																		continue;
-																	}
-																	
-																}
-																
-																$("#authority").append(function(){
-																	if (i == jsonArrLength - 1) {
-																		return $("<option>", {value : c_id, text : c_title, selected : true});
-																	} 
-																	
-																	return $("<option>", {value : c_id, text : c_title});
-																});
-																	
-															}
-															
-														}
-													);
+													loadAuthorityList("3");
 													
 													$("#nodeForm").dialog({
 														title  : "권한 추가"

@@ -21,6 +21,26 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
+/**
+ * Modification Information
+ * 
+ * @author Hoseong.Son
+ * @since 2014.12.21
+ * @version 1.0
+ * @see <pre>
+ * 	Class Name 	: PrimaryController.java
+ * 	Description : 제약조건 예제 중 주키 트리 컨트롤러
+ *  
+ *  << 개정이력(Modification Information) >>
+ *  
+ *  수정일               수정자                 수정내용
+ *  -------       ------------   -----------------------
+ *  2014.12.21    Hoseong.Son           최초 생성
+ *  2014.12.25    Hoseong.Son    Class 명 변경 ConstraintController => PrimaryController                                                 
+ * 
+ *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
 @Controller
 @RequestMapping("/constraint/primary")
 public class PrimaryController extends GenericAbstractController {
