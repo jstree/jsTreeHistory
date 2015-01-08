@@ -25,12 +25,12 @@
 		value=""/> </dataSource> </transactionManager> -->
 
 	<sqlMap
-		resource="egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeCoreManage_SQL_Oracle.xml" />
+		resource="META-INF/egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeCoreManage_SQL_Oracle.xml" />
 	<sqlMap
-		resource="egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeMonitorManage_SQL_Oracle.xml" />
+		resource="META-INF/egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeMonitorManage_SQL_Oracle.xml" />
 
 	<sqlMap
-		resource="egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeCoreManage_SQL_Oracle.xml" />
+		resource="META-INF/egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeCoreManage_SQL_Oracle.xml" />
 	<sqlMap
-		resource="egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeMonitorManage_SQL_Oracle.xml" />
+		resource="META-INF/egovframework/sqlmap/com/ext/jstree/strutsiBatis/jstreeMonitorManage_SQL_Oracle.xml" />
 </sqlMapConfig>

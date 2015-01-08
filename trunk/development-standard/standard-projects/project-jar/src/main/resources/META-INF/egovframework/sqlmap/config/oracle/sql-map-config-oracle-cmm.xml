@@ -3,8 +3,8 @@
     "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 
 <sqlMapConfig>						
-	<sqlMap resource="egovframework/sqlmap/com/cmm/use/EgovCmmUse_SQL_Oracle.xml"/>		
+	<sqlMap resource="META-INF/egovframework/sqlmap/com/cmm/use/EgovCmmUse_SQL_Oracle.xml"/>		
 	
-	<sqlMap resource="egovframework/sqlmap/com/cmm/fms/EgovFile_SQL_Oracle.xml"/>	
+	<sqlMap resource="META-INF/egovframework/sqlmap/com/cmm/fms/EgovFile_SQL_Oracle.xml"/>	
 			
 </sqlMapConfig>
