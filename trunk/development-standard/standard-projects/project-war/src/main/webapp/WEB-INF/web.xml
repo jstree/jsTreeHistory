@@ -33,7 +33,7 @@
    	2011.09.19		이기하			filter 정리
    	2013.05.31		이기하			미사용 filter 정리(.mdo, .action)
    	2014.07.07		최대열			(security 3.0) egov3.0.0b 이관 cf) http://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3:fdl:server_security:upgrade
-   	2014.11.17      손호성          <welcome-file>index.do</welcome-file> 추가후 나머지 주석처리
+   	2014.11.17      	손호성         <welcome-file>index.do</welcome-file> 추가후 나머지 주석처리
   	************************************************************************************************
 	0. 로그인 정책 컴포넌트용 필터 : 주석
 	1. 스프링 시큐리티 설정 : 사용
@@ -100,6 +100,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>egovframework.com.ext.jstree.support.manager.config</param-value>
 	</context-param>
+	
 	<context-param>
 		<param-name>profile.active.mode</param-name>
 		<param-value>dev</param-value>
@@ -110,6 +111,7 @@
 		<param-value>oracle</param-value>
 <!-- 		<param-value>mysql</param-value> -->
 	</context-param>
+	
 	<context-param>
 	    <param-name>log4jConfigLocation</param-name>
 	    <param-value>classpath:log4j.properties</param-value>
@@ -300,7 +302,7 @@
 		</init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>standard.mvc.config.WebMvcConfig</param-value>
+			<param-value>egovframework.com.ext.jstree.support.manager.config.WebMvcConfig</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
