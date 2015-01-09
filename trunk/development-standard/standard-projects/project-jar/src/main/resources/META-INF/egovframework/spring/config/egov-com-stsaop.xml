@@ -23,12 +23,16 @@
         <aop:aspect id="aspectLogggingBefore" ref="logAspect">
  
             <!-- @Before -->
-            <aop:before method="logBefore" pointcut="execution(* egovframework.com.ext.jstree.springiBatis..*(..))"/>
+            <aop:before method="logBefore" pointcut="execution(* egovframework.com.ext.jstree.spring*..*(..))"/>
         </aop:aspect>
         <aop:aspect id="aspectLogggingAfter" ref="logAspect">
             <!-- @After -->
-            <aop:after method="logAfter" pointcut="execution(* egovframework.com.ext.jstree.springiBatis..*(..))"/>
+            <aop:after method="logAfter" pointcut="execution(* egovframework.com.ext.jstree.spring*..*(..))"/>
         </aop:aspect>
-
+        <aop:aspect id="aspectLogggingAround" ref="logAspect">
+            <!-- @Around -->
+            <aop:around method="logAround" pointcut="execution(* egovframework.com.ext.jstree.spring*..*(..))"/>
+        </aop:aspect>
+        
     </aop:config>
 </beans>
