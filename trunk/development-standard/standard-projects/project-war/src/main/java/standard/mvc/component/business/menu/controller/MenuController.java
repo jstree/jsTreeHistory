@@ -113,9 +113,9 @@ public class MenuController extends GenericAbstractController {
 		}
 		
 		menuComprehensiveTree.setC_title(Util_TitleChecker.StringReplace(menuComprehensiveTree.getC_title()));
-		menuService.addNode(menuComprehensiveTree);
+		
 
-		return menuComprehensiveTree;
+		return menuService.addNode(menuComprehensiveTree);
 	}
 	
 	@ResponseBody

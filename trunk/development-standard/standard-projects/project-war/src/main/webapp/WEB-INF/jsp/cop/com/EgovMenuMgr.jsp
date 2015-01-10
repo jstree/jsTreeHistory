@@ -13,20 +13,20 @@
 <style type="text/css">
 </style>
 <!-- jQuery -->
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/index/jquery-1.11.1.js"></script>
-<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" href="http://nas.313.co.kr:5002/Source/Script/jQuery/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery-1.11.1.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery-ui.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jquery-ui.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jNotify.jquery.css" />
 <!--[if lt IE 9]>
 <script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/index/debug.js"></script>
 <![endif]-->
 <!-- JSTREE -->
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/_lib/jquery.cookie.js"></script>
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></script>
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/jquery.jstree.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/jquery.jstree.js"></script>
 <!-- JavaScript -->
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/Script/ajax/ajax.js" charset="UTF-8"></script>
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Source/Script/jQuery/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/ajax.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jNotify.jquery.js" charset="UTF-8"></script>
 <link href="<c:url value='/'/>css/common.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
@@ -94,8 +94,6 @@ $(function () {
 $("#demo")
 	.bind("before.jstree", function (e, data) {
 		//$("#section").append(data.func + "<br />");
-		$("li:not([rel='drive']).jstree-open > a > .jstree-icon").css('background-image','url(http://nas.313.co.kr:5002/Design/icon/miniCon/313/toolbar_open.png)');
-		$("li:not([rel='drive']).jstree-closed > a > .jstree-icon").css('background-image','url(http://nas.313.co.kr:5002/Design/icon/miniCon/313/ic_explorer.png)');
 	}).jstree({ 
 		// List of active plugins
 		"plugins" : [ 
@@ -122,27 +120,23 @@ $("#demo")
 							"label" : "File",                         
 							action : function (obj) 
 							{
-								
-								// 파일인 경우에 실행하지 않는다
-								if( $(obj).attr("rel") != 'default' ){
-									
-									$("#nodeTitle").val("");
-									$("#nodeLinkUrl").val("");
-									$("#nodeLinkUrl").attr("readonly", false);
-									
-									$("#nodeForm").dialog({
-										title  : "새 노드 추가"
-									  ,	buttons: {
-									        Ok    : function() {
-									        	excuteAddNode( obj, "default" );
-									        },
-									        Cancel: function() {
-									            $( "#nodeForm" ).dialog( "close" );
-									        }
-									    }
-									});
-									$("#nodeForm").dialog("open");
-								}
+								$("#nodeTitle").val("");
+								$("#nodeLinkUrl").val("");
+								var obj2 = this;
+								$("#nodeForm").dialog({
+									title  : "새 노드 추가"
+								  ,	buttons: {
+								        Ok    : function() {
+								        	obj2.create(obj, "last", {"attr" : {"rel" : "default"},"data" : $("#nodeTitle").val()});
+								        	$(obj).attr("href",$("#nodeLinkUrl").val());
+								        	$( "#nodeForm" ).dialog( "close" );
+								        },
+								        Cancel: function() {
+								            $( "#nodeForm" ).dialog( "close" );
+								        }
+								    }
+								});
+								$("#nodeForm").dialog("open");
 							}                     
 						},                     
 						"create_folder" :  
@@ -152,27 +146,23 @@ $("#demo")
 							"label" : "Folder",                          
 							action : function (obj)  
 							{
-								// 파일인 경우에 실행하지 않는다
-								if( $(obj).attr("rel") != 'default' ){
-									
-									$("#nodeTitle").val("");
-									$("#nodeLinkUrl").val("");
-									$("#nodeLinkUrl").attr("readonly", true);
-									
-									$("#nodeForm").dialog({
-										title  : "새 폴더 추가"
-									  ,	buttons: {
-									        Ok    : function() {
-									        	excuteAddNode( obj, "folder" );
-									        },
-									        Cancel: function() {
-									            $( "#nodeForm" ).dialog( "close" );
-									        }
-									    }
-									});
-									$("#nodeForm").dialog("open");
-								}
-								// this.create(obj, "last", {"attr" : { "rel" : "folder"}});                         
+								$("#nodeTitle").val("");
+								$("#nodeLinkUrl").val("");
+								var obj2 = this;
+								$("#nodeForm").dialog({
+									title  : "새 폴더 추가"
+								  ,	buttons: {
+								        Ok    : function() {
+								        	obj2.create(obj, "last", {"attr" : {"rel" : "folder"},"data" : $("#nodeTitle").val()});
+								        	$(obj).attr("href",$("#nodeLinkUrl").val());
+								        	$( "#nodeForm" ).dialog( "close" );
+								        },
+								        Cancel: function() {
+								            $( "#nodeForm" ).dialog( "close" );
+								        }
+								    }
+								});
+								$("#nodeForm").dialog("open");
 							}                      
 						}
 						
@@ -186,22 +176,16 @@ $("#demo")
 					action : function (obj) 
 					{
 						$("#nodeTitle"  ).val( $(obj).find("a").clone().children().remove().end().text() );
-						
-						if( "folder" == $(obj).attr("rel") ){
-							
-							$("#nodeLinkUrl").val("");
-							$("#nodeLinkUrl").attr("readonly", true);
-						}
-						else{
-							// url의 경우 어디로 잡히는지 보고 처리하도록 함.
-							$("#nodeLinkUrl").val($(obj).attr("href"));
-							$("#nodeLinkUrl").attr("readonly", false);
-						}
+						$("#nodeLinkUrl").val($(obj).attr("href"));
+						var obj1 = obj;
+						var obj2 = this;
 						$("#nodeForm").dialog({
 							title  : "노드 업데이트"
 						  ,	buttons: {
 						        Ok    : function() {
-						        	excuteUpdateNode( obj );
+						        	$(obj).find("a").html('<ins class="jstree-icon">&nbsp;</ins>'+$("#nodeTitle").val());
+						        	obj2.rename(obj2.data.ui.hovered || obj2.data.ui.last_selected);
+						        	$( "#nodeForm" ).dialog( "close" );
 						        },
 						        Cancel: function() {
 						            $( "#nodeForm" ).dialog( "close" );
@@ -244,7 +228,6 @@ $("#demo")
 										}
 										,complete : function(){
 											$("#nodeConfirm").dialog("close");
-											$("#demo").jstree("refresh");
 										}
 									});
 								 }
@@ -375,7 +358,7 @@ $("#demo")
 					"valid_children" : "none",
 					// If we specify an icon for the default type it WILL OVERRIDE the theme icons
 					"icon" : {
-						"image" : "http://nas.313.co.kr:5002/Design/icon/FileIconPack/HTML.png"
+						"image" : "${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_demo/file.png"
 					}
 				},
 				// The `folder` type
@@ -383,7 +366,7 @@ $("#demo")
 					// can have files and other folders inside of it, but NOT `drive` nodes
 					"valid_children" : [ "default", "folder" ],
 					"icon" : {
-						"image" : "http://nas.313.co.kr:5002/Design/icon/miniCon/313/ic_explorer.png"
+						"image" : "${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_demo/folder.png"
 						//Design/icon/miniCon/313/toolbar_open.png
 					}
 				},
@@ -392,7 +375,7 @@ $("#demo")
 					// can have files and folders inside, but NOT other `drive` nodes
 					"valid_children" : [ "default", "folder" ],
 					"icon" : {
-						"image" : "http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/Database-Search.png"
+						"image" : "${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_demo/root.png"
 						//Design/icon/IconSet/Aeon/PNG/Misc/Misc-Stuff.png
 						//Component/jsp/community/jstree-v.pre1.0/db.png
 					},
@@ -429,7 +412,51 @@ $("#demo")
 					"c_type" : data.rslt.obj.attr("rel")
 			}, 
 			function (r) {
-				$("#demo").jstree("refresh");
+			}
+		);
+	})
+	.bind("create.jstree", function (e, data) {
+		console.log("create.tree : "+data.rslt.parent.attr("id").replace("node_","").replace("copy_",""));
+		console.log("create.tree : "+data.rslt.position);
+		console.log("create.tree : "+$("#nodeTitle").val());
+		console.log("create.tree : "+data.rslt.obj.attr("rel"));
+		console.log("create.tree : "+$("#nodeLinkUrl").val());
+		$.post(
+			"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/addNode.do",
+			{ 
+				"ref" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""), 
+				"c_position" : data.rslt.position,
+				"c_title" : $("#nodeTitle").val(),
+				"c_type" : data.rslt.obj.attr("rel"),
+				"url" : $("#nodeLinkUrl").val()
+			}, 
+			function (r) {
+				if(r.status) {
+					$(data.rslt.obj).attr("id", "node_" + r.id);
+					$(data.rslt.obj).attr("href", $("#nodeLinkUrl").val());
+				}
+				else {
+					$.jstree.rollback(data.rlbk);
+				}
+			}
+		);
+	})
+	.bind("rename.jstree", function (e, data) {
+		$.post(
+				"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/alterNode.do",
+			{ 
+					"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
+					"c_title" : $("#nodeTitle").val(),
+					"url" : $("#nodeLinkUrl").val(),
+					"c_type" : data.rslt.obj.attr("rel")
+			}, 
+			function (r) {
+				if(!r.status) {
+					$.jstree.rollback(data.rlbk);
+				}else{
+					data.rslt.obj.attr("href",$("#nodeLinkUrl").val());
+				}
+				$("#nodeForm").dialog("close");
 			}
 		);
 	})
@@ -448,47 +475,19 @@ $("#demo")
 					"multiCounter"	:	i
 				},
 				success : function (r) {
-					$("#demo").jstree("refresh");
+					if(r.status) {
+						$.jstree.rollback(data.rlbk);
+					}else {
+						$(data.rslt.oc).attr("id", "node_" + r.id);
+						if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
+							data.inst.refresh(data.inst._get_parent(data.rslt.oc));
+						}
+					}
 				}
 			});
 		});
 	});
 });
-	
-	// 노드추가
-	function excuteAddNode( obj, type ){
-		$.post(
-			"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/addNode.do",
-			{ 
-				"ref" : $(obj).attr("id").replace("node_","").replace("copy_",""), 
-				"c_position" : $(obj).children().filter("ul").children().length,
-				"c_title" : $("#nodeTitle").val(),
-				"c_type" : type,
-				"url" : $("#nodeLinkUrl").val()
-			}, 
-			function (r) {
-				$("#nodeForm").dialog("close");
-				$("#demo").jstree("refresh");
-			}
-		);
-	}
-	
-	// 노드수정
-	function excuteUpdateNode( obj ){
-		$.post(
-			"${pageContext.request.contextPath}/none/json/community/largeMenu/middleMenu/smallMenu/menu/alterNode.do",
-			{ 
-				"c_id"    : $(obj).attr("id").replace("node_","").replace("copy_",""),
-				"c_title" : $("#nodeTitle").val(),
-				"url" : $("#nodeLinkUrl").val(),
-				"c_type"  : $(obj).attr("rel")
-			}, 
-			function (r) {
-				$("#nodeForm").dialog("close");
-				$("#demo").jstree("refresh");
-			}
-		);
-	}
 	
 	function getTimestamp(){
 		return Math.floor(new Date().getTime());
