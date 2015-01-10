@@ -71,6 +71,7 @@ String menuNo = ((String)session.getAttribute("menuNo")!=null)?(String)session.g
 				<li class="dept02"><a href="javascript:fn_main_headPageAction('55','cop/bbs/selectBoardList.do?bbsId=BBSMSTR_AAAAAAAAAAAA')">공지사항관리</a></li>
                 <li class="dept02"><a href="javascript:fn_main_headPageAction('56','cop/bbs/selectBoardList.do?bbsId=BBSMSTR_BBBBBBBBBBBB')">사이트갤러리관리</a></li>
                 <li class="dept02"><a href="javascript:fn_main_headPageAction('57','cop/com/menuMgr.do')">메뉴관리</a></li>
+                <li class="dept02"><a href="javascript:fn_main_headPageAction('58','cop/com/newsletterMgr.do')">뉴스레터관리</a></li>
 			</ul> 
 		</li>
 		<% } %>
