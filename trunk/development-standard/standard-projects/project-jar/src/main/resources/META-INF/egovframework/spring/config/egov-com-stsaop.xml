@@ -29,10 +29,11 @@
             <!-- @After -->
             <aop:after method="logAfter" pointcut="execution(* egovframework.com.ext.jstree.spring*..*(..))"/>
         </aop:aspect>
+         <!-- @Around 
         <aop:aspect id="aspectLogggingAround" ref="logAspect">
-            <!-- @Around -->
+           
             <aop:around method="logAround" pointcut="execution(* egovframework.com.ext.jstree.spring*..*(..))"/>
         </aop:aspect>
-        
+        -->
     </aop:config>
 </beans>
