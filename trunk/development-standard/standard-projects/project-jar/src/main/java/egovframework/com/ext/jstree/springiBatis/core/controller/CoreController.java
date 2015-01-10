@@ -140,9 +140,8 @@ public class CoreController extends GenericAbstractController{
 			}
 		}
 		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
-		coreService.addNode(comprehensiveTree);
 
-		return comprehensiveTree;
+		return coreService.addNode(comprehensiveTree);
 	}
 
 	/**

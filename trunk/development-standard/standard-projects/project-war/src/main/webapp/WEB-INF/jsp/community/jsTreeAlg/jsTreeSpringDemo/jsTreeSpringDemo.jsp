@@ -456,7 +456,6 @@
 									$.jstree.rollback(data.rlbk);
 								}
 								$("#analyze").click();
-								$('#demo').jstree('refresh',-1);
 							}
 						);
 					})
@@ -471,7 +470,6 @@
 								}, 
 								success : function (r) {
 									$("#analyze").click();
-									$('#demo').jstree('refresh',-1);
 								}
 							});
 						});
@@ -489,7 +487,6 @@
 									$.jstree.rollback(data.rlbk);
 								}
 								$("#analyze").click();
-								$('#demo').jstree('refresh',-1);
 							}
 						);
 					})
@@ -503,7 +500,6 @@
 							}, 
 							function (r) {
 								$("#analyze").click();
-								$('#demo').jstree('refresh',-1);
 							}
 						);
 					})
