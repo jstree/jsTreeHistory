@@ -492,7 +492,7 @@
 					})
 					.bind("set_type.jstree", function (e, data) {
 						$.post(
-								"${pageContext.request.contextPath}/egovframework/com/etc/jstree/core/springiBatis/alterNodeType.do", 
+								"${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/core/alterNodeType.do", 
 							{ 
 									"c_id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
 									"c_title" : data.rslt.new_name,
