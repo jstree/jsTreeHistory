@@ -107,9 +107,7 @@ public class NewsletterAdminController extends GenericAbstractController {
             }
         }
         
-        newsletterService.addNode(newsletterComprehensiveTree);
-        
-        return newsletterComprehensiveTree;
+        return newsletterService.addNode(newsletterComprehensiveTree);
     }
     
     /**
@@ -119,7 +117,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping("/getEmailList.do")
+    @RequestMapping(value = "/getEmailList.do", method = RequestMethod.GET)
     public List<NewsletterComprehensiveTree> getChildNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree)
              throws Exception {
         
@@ -133,12 +131,12 @@ public class NewsletterAdminController extends GenericAbstractController {
     /**
      * 이메일을 지운다.
      * @param newsletterComprehensiveTree Newsletter VO
-     * @return removed count
+     * @return Newsletter VO
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping("/removeEmail.do")
-    public int removeNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+    @RequestMapping(value = "/removeEmail.do", method = RequestMethod.POST)
+    public ComprehensiveTree removeNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
                                         , HttpServletRequest request) 
             throws Exception {
         
@@ -156,7 +154,9 @@ public class NewsletterAdminController extends GenericAbstractController {
             throw new RuntimeException("removeNode()'s c_id parameter value is not acceptable.");
         }
         
-        return newsletterService.removeNode(newsletterComprehensiveTree);
+        newsletterComprehensiveTree.setStatus(newsletterService.removeNode(newsletterComprehensiveTree));
+        
+        return newsletterComprehensiveTree;
     }
     
     /**
@@ -166,7 +166,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping("/renameEmail.do")
+    @RequestMapping(value = "/renameEmail.do", method = RequestMethod.POST)
     public ComprehensiveTree alterNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
                                                      , HttpServletRequest request)
              throws Exception {
@@ -214,7 +214,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping("/alterNodeType.do")
+    @RequestMapping(value = "/alterNodeType.do", method = RequestMethod.POST)
     public ComprehensiveTree alterNodeType(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
                                                          , HttpServletRequest request) 
             throws Exception {
@@ -262,7 +262,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping("/searchEmail.do")
+    @RequestMapping(value = "/searchEmail.do", method = RequestMethod.GET)
     public List<String> searchNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
             throws Exception {
 
@@ -281,7 +281,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping("/moveEmail.do")
+    @RequestMapping(value = "/moveEmail.do", method = RequestMethod.POST)
     public ComprehensiveTree moveNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
                                                     , HttpServletRequest request)
             throws Exception {

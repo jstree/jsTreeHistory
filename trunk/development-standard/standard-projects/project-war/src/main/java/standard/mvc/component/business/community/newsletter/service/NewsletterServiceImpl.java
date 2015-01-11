@@ -77,9 +77,12 @@ public class NewsletterServiceImpl implements CoreService {
     @Override
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree)
             throws Exception {
-
-        if (newsletterDao.searchNodeByTitle(comprehensiveTree) != null) {
-            throw new RuntimeException("The email address already exist.");
+        
+        if ("default".equals(comprehensiveTree.getC_type())) {
+            
+            if (newsletterDao.searchNodeByTitle(comprehensiveTree) != null) {
+                throw new RuntimeException("The email address already exist.");
+            }
         }
         
         comprehensiveTree.setC_position( newsletterDao.getMaxPositionForAddNode(comprehensiveTree) + 1 );
@@ -97,6 +100,13 @@ public class NewsletterServiceImpl implements CoreService {
     @Override
     public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree)
             throws Exception {
+        
+        if ("default".equals(comprehensiveTree.getC_type())) {
+            
+            if (newsletterDao.searchNodeByTitle(comprehensiveTree) != null) {
+                throw new RuntimeException("The email address already exist.");
+            }
+        }
         
         return coreService.alterNode(comprehensiveTree);
     }

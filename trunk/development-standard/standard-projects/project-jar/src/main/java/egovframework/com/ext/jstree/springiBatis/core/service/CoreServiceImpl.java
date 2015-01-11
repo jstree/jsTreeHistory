@@ -356,6 +356,7 @@ public class CoreServiceImpl implements CoreService {
 		    returnStatus = 1;
 		    
 		} else if ("default".equals(comprehensiveTree.getC_type())) {
+		    
 	        List<T> childNodesFromNodeById = ((List<T>) coreDao.getChildNode(nodeById));
             
             if (childNodesFromNodeById.size() != 0) {
@@ -367,11 +368,12 @@ public class CoreServiceImpl implements CoreService {
                 if (temp == 1) {
                     returnStatus = 1;
                 } else {
-                    throw new RuntimeException("여러개의 노드가 업데이트 되었음"); // TODO 동일한 id가 여러개 라면 이미 노드 추가 로직이 문제가 있는 것임.
+                    throw new RuntimeException("여러개의 노드가 업데이트 되었음"); // TODO 동일한 id가 여러개라면 이미 노드 추가 로직이 문제가 있는 것임.
                 }
             }
             
 		} else if ("folder".equals(comprehensiveTree.getC_type())) {
+		    
 		    returnStatus = coreDao.alterNodeType(comprehensiveTree);
 		}
 		

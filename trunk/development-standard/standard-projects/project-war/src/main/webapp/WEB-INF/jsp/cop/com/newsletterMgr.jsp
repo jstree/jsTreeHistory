@@ -144,7 +144,8 @@ $("#demo")
 							"label" : "Cut",                         
 							action : function (obj) 
 							{
-							  	console.log("cut : " + obj);
+							  	console.log("[cut]");
+							  	console.log(obj);
 								this.cut(obj, "last", {"attr" : {"rel" : "default"}});                         
 							}                     
 						},                     
@@ -155,7 +156,8 @@ $("#demo")
 							"label" : "Paste",                          
 							action : function (obj)  
 							{
-							  	console.log("paste : " + obj);
+							  	console.log("[paste]");
+						  		console.log(obj);
 								this.paste(obj, "last", {"attr" : { "rel" : "folder"}});                         
 							}                      
 						},
@@ -290,10 +292,6 @@ $("#demo")
 	})
 	.bind("create.jstree", function (e, data) {
 	  	
-	  	console.log("create.jstree");
-	  	console.log(e);
-	  	console.log(data);
-	  
 		$.post(
 			"${pageContext.request.contextPath}/newsletterAdmin/addEmail.do", 
 			{ 
@@ -303,23 +301,17 @@ $("#demo")
 				"c_type" : data.rslt.obj.attr("rel")
 			}, 
 			function (r) {
-			  	console.log(r);
-				if(r.status) {
+				if (r.status) {
 					$(data.rslt.obj).attr("id", "node_" + r.id);
 				}
 				else {
 					$.jstree.rollback(data.rlbk);
 				}
-				$('#demo').jstree('refresh', -1);
 			}
 		);
 	})
 	.bind("remove.jstree", function (e, data) {
 	  
-	  	console.log("remove.jstree");
-	  	console.log(e);
-	  	console.log(data);
-	  	
 		data.rslt.obj.each(function () {
 			$.ajax({
 				async : false,
@@ -329,17 +321,12 @@ $("#demo")
 					"c_id" : this.id.replace("node_", "").replace("copy_", "")
 				}, 
 				success : function (r) {
-					$('#demo').jstree('refresh', -1);
 				}
 			});
 		});
 	})
 	.bind("rename.jstree", function (e, data) {
 	  
-		console.log("rename.jstree");
-		console.log(e);
-		console.log(data);
-	  	
 		$.post(
 			"${pageContext.request.contextPath}/newsletterAdmin/renameEmail.do", 
 			{ 
@@ -351,16 +338,11 @@ $("#demo")
 				if (!r.status) {
 					$.jstree.rollback(data.rlbk);
 				}
-				$('#demo').jstree('refresh', -1);
 			}
 		);
 	})
 	.bind("set_type.jstree", function (e, data) {
 	  
-	  	console.log("set_type.jstree");
-		console.log(e);
-		console.log(data);
-		
 		$.post(
 			"${pageContext.request.contextPath}/newsletterAdmin/alterNodeType.do", 
 			{ 
@@ -369,13 +351,16 @@ $("#demo")
 					"c_type" : data.rslt.obj.attr("rel")
 			}, 
 			function (r) {
-				$("#demo").jstree("refresh", -1);
+				if (!r.status) {
+					$.jstree.rollback(data.rlbk);
+				}
 			}
 		);
 	})
 	.bind("move_node.jstree", function (e, data) {
-	  	console.log("move_node : " + e);
-	  	console.log("move_node : " + data);
+	  	console.log("[move_node]");
+	  	console.log(data);
+	  	
 		data.rslt.o.each(function (i) {
 			$.ajax({
 				async : false,
@@ -390,16 +375,17 @@ $("#demo")
 					"multiCounter" : i
 				},
 				success : function (r) {
+				  	console.log(r);
+				  
 					if (r.status) {
 						$.jstree.rollback(data.rlbk);
 					}
 					else {
 						$(data.rslt.oc).attr("id", "node_" + r.id);
-						if (data.rslt.cy && $(data.rslt.oc).children("UL").length) {
+						if (data.rslt.cy && $(data.rslt.oc).children("ul").length) {
 							data.inst.refresh(data.inst._get_parent(data.rslt.oc));
 						}
 					}
-					$("#demo").jstree("refresh", -1);
 				}
 			});
 		});
@@ -409,6 +395,7 @@ $("#demo")
 	  	$("#demo").jstree("search", $("#inp_search").val());
 	});
 	$("#btn_clearSearch").click(function() {
+	  $("#inp_search").val("");
   		$("#demo").jstree("clear_search");
 	});
 });
