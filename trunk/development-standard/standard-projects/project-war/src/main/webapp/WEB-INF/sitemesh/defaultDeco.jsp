@@ -73,6 +73,14 @@
 			})();
 		</script>
 		<noscript><p><img src="http://www.313.co.kr/php/piwik-1.12/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
-		<!-- End Piwik Code -->		
+		<!-- End Piwik Code -->
+		<!-- NAVER ANALYTICS START -->
+		<script type="text/javascript" src="http://wcs.naver.net/wcslog.js"></script>
+		<script type="text/javascript">
+			if(!wcs_add) var wcs_add = {};
+			wcs_add["wa"] = "1244b972beb34c";
+			wcs_do();
+		</script>
+		<!-- NAVER ANALYTICS END -->
 	</body>
 </html>
