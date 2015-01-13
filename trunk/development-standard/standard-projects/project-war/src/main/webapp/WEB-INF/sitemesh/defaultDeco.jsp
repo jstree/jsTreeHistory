@@ -20,7 +20,7 @@
 				<jsp:include page="/WEB-INF/jsp/community/common/script.inc.jsp"></jsp:include>
 			</c:otherwise>
 		</c:choose>
-		<title><decorator:title default="313 Developer Group page has been using the SiteMesh template engine." /></title>	
+		<title><decorator:title default="JsTree 아키텍쳐, 바로보드 Java 설치형 게시판 솔루션, 오픈소스 313 자바 개발자 그룹 커뮤니티" /></title>	
 		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/style.jsp"/>
 		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/script.jsp"/>
 		<decorator:head/>
