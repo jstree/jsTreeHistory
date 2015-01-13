@@ -85,7 +85,7 @@ public class NewsletterAdminController extends GenericAbstractController {
         String c_type = request.getParameter("c_type");
         
         if ( ref == null || c_position == null || c_title == null || c_type == null ) {
-            throw new RuntimeException("addNode()'s essential parameter not set.");
+            throw new RuntimeException("addNode()'s essential parameter is not set.");
         }
         
         if ( !ref.matches("\\d+") || !c_position.matches("\\d+") ) {
@@ -143,7 +143,7 @@ public class NewsletterAdminController extends GenericAbstractController {
         String c_id = request.getParameter("c_id");
         
         if (c_id == null) {
-            throw new RuntimeException("removeNode()'s essential parameter not set.");
+            throw new RuntimeException("removeNode()'s essential parameter is not set.");
         }
         
         if (!c_id.matches("\\d+")) {
@@ -176,7 +176,7 @@ public class NewsletterAdminController extends GenericAbstractController {
         String c_type = request.getParameter("c_type");
         
         if ( c_id == null || c_title == null || c_type == null ) {
-            throw new RuntimeException("alterNode()'s essential parameter not set.");
+            throw new RuntimeException("alterNode()'s essential parameter is not set.");
         }
         
         if (!c_id.matches("\\d+")) {
@@ -224,7 +224,7 @@ public class NewsletterAdminController extends GenericAbstractController {
         String c_type = request.getParameter("c_type");
         
         if ( c_id == null || c_title == null || c_type == null ) {
-            throw new RuntimeException("alterNodeType()'s essential parameter not set.");
+            throw new RuntimeException("alterNodeType()'s essential parameter is not set.");
         }
         
         if (!c_id.matches("\\d+")) {
@@ -263,11 +263,18 @@ public class NewsletterAdminController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/searchEmail.do", method = RequestMethod.GET)
-    public List<String> searchNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree) 
+    public List<String> searchNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+                                                 , HttpServletRequest request) 
             throws Exception {
-
-        if (!StringUtils.hasText(newsletterComprehensiveTree.getSearchStr())) {
-            throw new RuntimeException("Search string is required");
+        
+        String searchString = request.getParameter("searchString");
+        
+        if (searchString == null) {
+            throw new RuntimeException("searchNode()'s essential parameter is not set.");
+        }
+        
+        if (!StringUtils.hasText(searchString)) {
+            throw new RuntimeException("searchNode()'s searchString parameter is empty.");
         }
         
         return newsletterService.searchNode(newsletterComprehensiveTree);
