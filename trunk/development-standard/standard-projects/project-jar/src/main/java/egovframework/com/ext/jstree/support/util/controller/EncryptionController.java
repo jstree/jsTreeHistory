@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package egovframework.com.ext.jstree.support.util;
+package egovframework.com.ext.jstree.support.util.controller;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
