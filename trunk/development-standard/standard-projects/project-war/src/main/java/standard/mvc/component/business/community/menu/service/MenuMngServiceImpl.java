@@ -1,4 +1,4 @@
-package standard.mvc.component.business.menu.service;
+package standard.mvc.component.business.community.menu.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import standard.mvc.component.business.menu.dao.MenuMngDao;
-import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
+import standard.mvc.component.business.community.menu.dao.MenuMngDao;
+import standard.mvc.component.business.community.menu.vo.MenuComprehensiveTree;
 
 /**
  * Modification Information

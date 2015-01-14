@@ -1,4 +1,4 @@
-package standard.mvc.component.business.menu.service;
+package standard.mvc.component.business.community.menu.service;
 
 import java.util.List;
 

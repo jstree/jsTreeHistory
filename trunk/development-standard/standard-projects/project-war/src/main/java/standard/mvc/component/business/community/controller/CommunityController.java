@@ -9,7 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import standard.mvc.component.business.menu.service.MenuMngSerivce;
+import standard.mvc.component.business.community.menu.service.MenuMngSerivce;
 
 /**
  * Modification Information

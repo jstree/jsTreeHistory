@@ -1,8 +1,8 @@
-package standard.mvc.component.business.menu.dao;
+package standard.mvc.component.business.community.menu.service;
 
 import java.util.List;
 
-import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
+import standard.mvc.component.business.community.menu.vo.MenuComprehensiveTree;
 
 /**
  * Modification Information
@@ -12,7 +12,7 @@ import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
  * @version 1.0
  * @see <pre>
  * 	Class Name 	: CommunityController.java
- * 	Description : Community 메뉴 가져오는 Dao Interface
+ * 	Description : Community 메뉴 가져오는 Service Interface
  *  
  *  << 개정이력(Modification Information) >>
  *  
@@ -24,11 +24,12 @@ import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
  * </pre>
  */
 
-public interface MenuMngDao {
-
-	public List<MenuComprehensiveTree> getEgovUpperMenu();
+public interface MenuMngSerivce {
 	
+	public List<MenuComprehensiveTree> getEgovUpperMenu();
+
 	public List<MenuComprehensiveTree> getEgovLeftMenu(MenuComprehensiveTree menuComprehensiveTree);
 	
 	public List<MenuComprehensiveTree> getCommunityMenu();
+	
 }

@@ -1,10 +1,10 @@
-package standard.mvc.component.business.menu.dao;
+package standard.mvc.component.business.community.menu.dao;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
+import standard.mvc.component.business.community.menu.vo.MenuComprehensiveTree;
 import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
 
 /**

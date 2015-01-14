@@ -1,4 +1,4 @@
-package standard.mvc.component.business.menu.controller;
+package standard.mvc.component.business.community.menu.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import standard.mvc.component.business.menu.vo.MenuComprehensiveTree;
+import standard.mvc.component.business.community.menu.vo.MenuComprehensiveTree;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 

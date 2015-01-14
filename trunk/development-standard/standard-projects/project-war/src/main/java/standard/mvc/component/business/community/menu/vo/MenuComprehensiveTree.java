@@ -1,4 +1,4 @@
-package standard.mvc.component.business.menu.vo;
+package standard.mvc.component.business.community.menu.vo;
 
 import java.util.HashMap;
 
