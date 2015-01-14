@@ -120,6 +120,11 @@
 				<groupId>taglibs</groupId>
 				<artifactId>standard</artifactId>
 			</dependency>
+			
+			<dependency>
+	<groupId>net.bull.javamelody</groupId>
+	<artifactId>javamelody-core</artifactId>
+</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -168,6 +173,12 @@
 				<artifactId>standard</artifactId>
 				<version>1.1.2</version>
 			</dependency>
+			
+			<dependency>
+	<groupId>net.bull.javamelody</groupId>
+	<artifactId>javamelody-core</artifactId>
+	<version>1.54.0</version>
+</dependency>
 		</dependencies>
 	</dependencyManagement>
 
