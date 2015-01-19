@@ -94,37 +94,42 @@
 			<artifactId>servlet-api</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>com.ibm.icu</groupId>
-				<artifactId>icu4j</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>ldapsdk</groupId>
-				<artifactId>ldapsdk</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet.jsp</groupId>
-				<artifactId>jsp-api</artifactId>
-			</dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ldapsdk</groupId>
+			<artifactId>ldapsdk</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>jsr250-api</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>javax.servlet.jsp.jstl</groupId>
-				<artifactId>jstl-api</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>jstl-api</artifactId>
+		</dependency>
 
-			<dependency>
-				<groupId>taglibs</groupId>
-				<artifactId>standard</artifactId>
-			</dependency>
-			
-			<dependency>
-	<groupId>net.bull.javamelody</groupId>
-	<artifactId>javamelody-core</artifactId>
-</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.bull.javamelody</groupId>
+			<artifactId>javamelody-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jamonapi</groupId>
+			<artifactId>jamon</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -173,12 +178,18 @@
 				<artifactId>standard</artifactId>
 				<version>1.1.2</version>
 			</dependency>
-			
+
 			<dependency>
-	<groupId>net.bull.javamelody</groupId>
-	<artifactId>javamelody-core</artifactId>
-	<version>1.54.0</version>
-</dependency>
+				<groupId>net.bull.javamelody</groupId>
+				<artifactId>javamelody-core</artifactId>
+				<version>1.54.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.jamonapi</groupId>
+				<artifactId>jamon</artifactId>
+				<version>2.80</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
