@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
  * </pre>
  */
 
-@Service("egovUtil")
+//@Service("egovUtil")
 public class EgovComponentChecker implements ApplicationContextAware{
 	
 
