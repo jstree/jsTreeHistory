@@ -3,7 +3,7 @@
 <sqlMap namespace="menu">
 	<typeAlias alias="MenuComprehensiveTree" type="standard.mvc.component.business.community.menu.vo.MenuComprehensiveTree"/>
 
-	<select id="menu.getChildNode" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
+	<select id="getChildNode" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
 		/* getChildNode */
 		SELECT A.c_id
 		     , A.c_parentid
@@ -27,7 +27,7 @@
 	</select>
 
 
-	<select id="menu.getChildNodeByLeftRight" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
+	<select id="getChildNodeByLeftRight" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		     , C_PARENTID
@@ -45,7 +45,7 @@
 	</select>
 
 
-	<select id="menu.searchNodeByString" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
+	<select id="searchNodeByString" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
 		/* searchNodeByString */
 		SELECT c_left
 		     , c_right
@@ -54,7 +54,7 @@
 	</select>
 
 
-	<select id="menu.searchNodeByPosition" parameterClass="java.util.List" resultClass="String">
+	<select id="searchNodeByPosition" parameterClass="java.util.List" resultClass="String">
 		/* searchNodeByPosition */
         SELECT DISTINCT C_ID
           FROM T_MenuComprehensiveTree
@@ -65,7 +65,7 @@
 	</select>
 
 
-	<update id="menu.alterNode" parameterClass="MenuComprehensiveTree">
+	<update id="alterNode" parameterClass="MenuComprehensiveTree">
 		/* alterNode */
 		UPDATE T_MenuComprehensiveTree 
 		   SET C_TYPE = #c_type#
@@ -75,7 +75,7 @@
 	</update>
 
 
-	<select id="menu.getNode" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
+	<select id="getNode" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
 		/* getNode */
         SELECT C_ID
              , C_PARENTID
@@ -91,7 +91,7 @@
     </select>
 
 
-	<select id="menu.getNodeByRef" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
+	<select id="getNodeByRef" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
 		/* getNodeByRef */
         SELECT C_ID
              , C_PARENTID
@@ -107,7 +107,7 @@
     </select>
 
 
-	<delete id="menu.removeNode" parameterClass="MenuComprehensiveTree">
+	<delete id="removeNode" parameterClass="MenuComprehensiveTree">
 		/* removeNode */
        	DELETE FROM T_MenuComprehensiveTree 
        	      WHERE C_LEFT  &gt;= #c_left# 
@@ -115,7 +115,7 @@
 	</delete>
 	
 	
-	<update id="menu.removedAfterLeftFix" parameterClass="MenuComprehensiveTree">
+	<update id="removedAfterLeftFix" parameterClass="MenuComprehensiveTree">
 		/* removedAfterLeftFix */
        	UPDATE T_MenuComprehensiveTree 
   		   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
@@ -123,7 +123,7 @@
 	</update>
 	
 	
-	<update id="menu.removedAfterRightFix" parameterClass="MenuComprehensiveTree">
+	<update id="removedAfterRightFix" parameterClass="MenuComprehensiveTree">
 		/* removedAfterRightFix */
 		UPDATE T_MenuComprehensiveTree 
 		   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -131,7 +131,7 @@
 	</update>
 	
 	
-	<update id="menu.removedAfterPositionFix" parameterClass="MenuComprehensiveTree">
+	<update id="removedAfterPositionFix" parameterClass="MenuComprehensiveTree">
 		/* removedAfterPositionFix */
      	UPDATE T_MenuComprehensiveTree 
      	   SET C_POSITION = C_POSITION - 1 
@@ -140,7 +140,7 @@
 	</update>
 
 
-	<select id="menu.analyzeRootNode" resultClass="MenuComprehensiveTree">
+	<select id="analyzeRootNode" resultClass="MenuComprehensiveTree">
 		/* searchNodeByString */
 	    SELECT C_LEFT 
 		  FROM T_MenuComprehensiveTree 
@@ -148,7 +148,7 @@
     </select>
 
 
-	<update id="menu.cutMyselfPositionFix" parameterClass="MenuComprehensiveTree">
+	<update id="cutMyselfPositionFix" parameterClass="MenuComprehensiveTree">
 		/* cutMyselfPositionFix */
        	UPDATE T_MenuComprehensiveTree 
        	   SET C_POSITION = C_POSITION - 1 
@@ -157,7 +157,7 @@
     </update>
 
 
-	<update id="menu.cutMyselfLeftFix" parameterClass="MenuComprehensiveTree">
+	<update id="cutMyselfLeftFix" parameterClass="MenuComprehensiveTree">
 		/* cutMyselfLeftFix */
        	UPDATE T_MenuComprehensiveTree 
        	   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
@@ -165,7 +165,7 @@
     </update>
     
     
-	<update id="menu.cutMyselfRightFix" parameterClass="MenuComprehensiveTree">
+	<update id="cutMyselfRightFix" parameterClass="MenuComprehensiveTree">
 		/* cutMyselfRightFix */
        	UPDATE T_MenuComprehensiveTree 
        	   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
@@ -176,7 +176,7 @@
 	</update>
 
 
-	<update id="menu.stretchPositionForMyself" parameterClass="MenuComprehensiveTree">
+	<update id="stretchPositionForMyself" parameterClass="MenuComprehensiveTree">
 		/* stretchPositionForMyselfFromJstree */
         UPDATE T_MenuComprehensiveTree
            SET C_POSITION = C_POSITION + 1
@@ -195,7 +195,7 @@
 	</update>
 
 
-	<update id="menu.stretchLeftForMyselfFromJstree" parameterClass="MenuComprehensiveTree">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="MenuComprehensiveTree">
 		/* stretchLeftForMyselfFromJstree */
        	UPDATE T_MenuComprehensiveTree 
        	   SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
@@ -210,7 +210,7 @@
 	</update>
 
 
-	<update id="menu.stretchRightForMyselfFromJstree" parameterClass="MenuComprehensiveTree">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="MenuComprehensiveTree">
 		/* stretchRightForMyselfFromJstree */
         UPDATE T_MenuComprehensiveTree 
            SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
@@ -225,7 +225,7 @@
 	</update>
 
 
-	<insert id="menu.pasteMyselfFromJstree" parameterClass="MenuComprehensiveTree">
+	<insert id="pasteMyselfFromJstree" parameterClass="MenuComprehensiveTree">
 		/* pasteMyselfFromJstree */
         INSERT INTO T_MenuComprehensiveTree ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE ) 
     	SELECT S_MenuComprehensiveTree.NEXTVAL AS C_ID
@@ -252,7 +252,7 @@
 	</insert>
 
 
-	<update id="menu.enterMyselfFixPosition" parameterClass="MenuComprehensiveTree">
+	<update id="enterMyselfFixPosition" parameterClass="MenuComprehensiveTree">
 		/* enterMyselfFixPosition */
         UPDATE T_MenuComprehensiveTree 
            SET C_PARENTID = #ref#
@@ -261,7 +261,7 @@
     </update>
     
     
-	<update id="menu.enterMyselfFixLeftRight" parameterClass="MenuComprehensiveTree">
+	<update id="enterMyselfFixLeftRight" parameterClass="MenuComprehensiveTree">
 		/* enterMyselfFixLeftRight */
         UPDATE T_MenuComprehensiveTree 
            SET C_LEFT  = C_LEFT  - (#idif#)
@@ -273,7 +273,7 @@
 	</update>
 
 
-	<insert id="menu.addMyselfFromJstree" parameterClass="MenuComprehensiveTree">
+	<insert id="addMyselfFromJstree" parameterClass="MenuComprehensiveTree">
 		/* addMyselfFromJstree */
         INSERT INTO T_MenuComprehensiveTree ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, URL )
                                  VALUES ( S_MenuComprehensiveTree.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title#, #url# )
@@ -285,7 +285,7 @@
 	</insert>
 
 
-	<update id="menu.alterNodeType" parameterClass="MenuComprehensiveTree">
+	<update id="alterNodeType" parameterClass="MenuComprehensiveTree">
 		/* alterNodeType */
 		UPDATE T_MenuComprehensiveTree 
 		   SET C_TYPE = #c_type#
@@ -293,7 +293,7 @@
 	</update>
 
 
-	<update id="menu.fixCopyIF" parameterClass="MenuComprehensiveTree">
+	<update id="fixCopyIF" parameterClass="MenuComprehensiveTree">
         /* fixCopyIF */
         UPDATE T_MenuComprehensiveTree 
            SET C_POSITION = #fixCopyPosition# 
@@ -301,7 +301,7 @@
 	</update>
 
 
-	<update id="menu.fixCopy" parameterClass="MenuComprehensiveTree">
+	<update id="fixCopy" parameterClass="MenuComprehensiveTree">
 		/* fixCopy */
 		UPDATE T_MenuComprehensiveTree 
 		   SET C_PARENTID = #fixCopyId# 
