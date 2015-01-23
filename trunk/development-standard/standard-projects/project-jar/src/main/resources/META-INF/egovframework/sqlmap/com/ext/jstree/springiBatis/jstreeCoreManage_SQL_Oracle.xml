@@ -3,7 +3,7 @@
 <sqlMap namespace="core">
 	<typeAlias alias="ComprehensiveTree" type="egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree"/>
 
-	<select id="getChildNode" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
+	<sql id="getMetaField">
 		/* getChildNode */
 		SELECT A.c_id
 		     , A.c_parentid
@@ -12,7 +12,9 @@
 		     , A.c_right
 		     , A.c_level
 		     , A.c_title
-		     , A.c_type
+		     , A.c_type	   
+	     </sql>
+	     <sql id="getChildCount">  
 		     , ( SELECT CASE
 		                    WHEN COUNT(*) &gt; 0 THEN 'InChild'
            		 			ELSE 'NoChild'
@@ -20,9 +22,18 @@
          		   FROM T_COMPREHENSIVETREE_SPRING B
        			  WHERE B.C_PARENTID = A.C_ID
      		   ) AS childcount
-		  FROM T_COMPREHENSIVETREE_SPRING A
+		</sql>
+		  
+		<sql id="getAfterFrom">
 		 WHERE A.C_PARENTID = #c_id# 
 	  ORDER BY A.C_POSITION ASC
+	  </sql>
+	<select id="getChildNode" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
+		<include refid="getMetaField" />
+		/* user filed */
+		<include refid="getChildCount" />
+		FROM T_COMPREHENSIVETREE_SPRING A
+		<include refid="getAfterFrom" />
 	</select>
 
 

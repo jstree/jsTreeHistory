@@ -17,10 +17,16 @@
 	<bean id="egov.sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocations">
 			<list>
-				<value>classpath:/META-INF/egovframework/sqlmap/config/${Globals.DbType}/*.xml</value>
-				<value>classpath:/egovframework/sqlmap/config/${Globals.DbType}/*.xml</value>
+				<value>classpath:/META-INF/egovframework/sqlmap/config/${Globals.DbType}/sql-map-config.xml</value>
 			</list>
 		</property>
+		<property name="mappingLocations">
+        <list>
+            <value>classpath:/META-INF/egovframework/sqlmap/com/**/*_Oracle.xml</value>
+            <value>classpath:/egovframework/sqlmap/let/**/*_Oracle.xml</value>
+            <value>classpath:/standard/sqlmap/**/*_Oracle.xml</value>
+        </list>
+    </property>
 		<property name="dataSource" ref="egov.dataSource"/>
 		<property name="lobHandler" ref="egov.lobHandler"/>
 	</bean>
@@ -29,10 +35,16 @@
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocations">
             <list>
-                <value>classpath:/egovframework/sqlmap/config/${Globals.DbType}/*.xml</value>
-                <value>classpath:/standard/sqlmap/config/${Globals.DbType}/*.xml</value>
+                <value>classpath:/META-INF/egovframework/sqlmap/config/${Globals.DbType}/sql-map-config.xml</value>
             </list>
         </property>
+        <property name="mappingLocations">
+        <list>
+            <value>classpath:/META-INF/egovframework/sqlmap/com/**/*_Oracle.xml</value>
+            <value>classpath:/egovframework/sqlmap/let/**/*_Oracle.xml</value>
+            <value>classpath:/standard/sqlmap/**/*_Oracle.xml</value>
+        </list>
+    </property>
 		<property name="dataSource" ref="dataSource-${Globals.DbType}"/>
 		<property name="lobHandler" ref="egov.lobHandler"/>
 	</bean>
