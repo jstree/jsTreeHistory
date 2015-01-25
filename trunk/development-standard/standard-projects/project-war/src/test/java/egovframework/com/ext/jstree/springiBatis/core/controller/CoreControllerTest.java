@@ -1,11 +1,21 @@
 package egovframework.com.ext.jstree.springiBatis.core.controller;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.context.WebApplicationContext;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
+import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
 /**
  * Modification Information
@@ -31,15 +41,24 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
 public class CoreControllerTest {
 	
+
+    @Autowired
+    private ApplicationContext applicationContext;
+	
+    @Autowired
 	private CoreController controller;
+    
+    @Autowired
 	private ComprehensiveTree tree;
 	
 	@Before
 	public void setUp(){
-		controller = new CoreController();
-		tree = new ComprehensiveTree();
+		
 	}
 	
 	@Test
@@ -54,4 +73,8 @@ public class CoreControllerTest {
 		controller.alterNodeType(tree, modelMap, request);
 	}
 
+	@After
+	public void after(){
+		
+	}
 }
