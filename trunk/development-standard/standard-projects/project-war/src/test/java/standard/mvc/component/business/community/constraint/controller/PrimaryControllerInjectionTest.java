@@ -44,7 +44,6 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
-@ActiveProfiles("dev")
 public class PrimaryControllerInjectionTest {
 
 	@Autowired

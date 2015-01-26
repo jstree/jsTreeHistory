@@ -2,6 +2,7 @@ package egovframework.com.ext.jstree.springiBatis.core.controller;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  */
 
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
