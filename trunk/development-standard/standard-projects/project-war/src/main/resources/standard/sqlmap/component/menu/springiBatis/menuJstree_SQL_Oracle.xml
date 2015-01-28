@@ -6,10 +6,12 @@
 		
 		<cacheModel id="menuCache" type="LRU">
 		<flushInterval hours="18" />
+		<!-- 캐쉬 터치 이후 영향 받는 쿼리 적용할것.
 		<flushOnExecute statement="select" />
 		<flushOnExecute statement="insert" />
 		<flushOnExecute statement="update" />
 		<flushOnExecute statement="delete" />
+		 -->
 		<property name="size" value="100" />
 	</cacheModel>
 
