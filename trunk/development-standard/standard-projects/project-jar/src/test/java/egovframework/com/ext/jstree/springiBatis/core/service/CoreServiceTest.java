@@ -24,7 +24,6 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import scala.annotation.meta.getter;
 import egovframework.com.ext.jstree.springiBatis.core.mock.MockCoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreServiceImpl;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
