@@ -4,7 +4,7 @@
 	<typeAlias alias="MenuComprehensiveTree"
 		type="standard.mvc.component.business.community.menu.vo.MenuComprehensiveTree" />
 		
-		<cacheModel id="menuCache" type="LRU">
+		<cacheModel id="menuCache" type="FIFO">
 		<flushInterval hours="18" />
 		<!-- 캐쉬 터치 이후 영향 받는 쿼리 적용할것.
 		<flushOnExecute statement="select" />
