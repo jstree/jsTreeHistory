@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package egovframework.com.ext.jstree.springiBatis.core;
+package egovframework.com.ext.jstree.springiBatis.core.mock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -241,9 +241,43 @@ public class MockCoreDao<T> implements CoreDao {
     }
 
     @Override
-    public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree)
+    public <T extends ComprehensiveTree> int removeNode(T pNode)
             throws Exception {
-        // TODO Auto-generated method stub
+        
+        for (ComprehensiveTree node : tree) {
+            
+            if ( node.getC_left()  >= pNode.getC_left() 
+              && node.getC_right() <= pNode.getC_right() ) {
+                
+                tree.remove(node);
+            }
+        }
+        
+        for (ComprehensiveTree node : tree) {
+            
+            if (node.getC_left() > pNode.getC_right()) {
+
+                node.setC_left( node.getC_left() - pNode.getSpaceOfTargetNode() );
+            }
+        }
+        
+        for (ComprehensiveTree node : tree) {
+            
+            if (node.getC_right() > pNode.getC_left()) {
+
+                node.setC_right( node.getC_right() - pNode.getSpaceOfTargetNode() );
+            }
+        }
+        
+        for (ComprehensiveTree node : tree) {
+            
+            if ( node.getC_parentid() == pNode.getC_parentid()
+              && node.getC_position() >  pNode.getC_position() ) {
+
+                node.setC_position( node.getC_position() - 1 );
+            }
+        }
+        
         return 0;
     }
 

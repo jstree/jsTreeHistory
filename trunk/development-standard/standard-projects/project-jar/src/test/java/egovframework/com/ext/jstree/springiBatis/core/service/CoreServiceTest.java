@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package egovframework.com.ext.jstree.springiBatis.core;
+package egovframework.com.ext.jstree.springiBatis.core.service;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -21,9 +21,11 @@ import static org.junit.Assert.*;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import scala.annotation.meta.getter;
+import egovframework.com.ext.jstree.springiBatis.core.mock.MockCoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreServiceImpl;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -55,8 +57,8 @@ public class CoreServiceTest {
     private static ComprehensiveTree rootNodeStored;
     private static ComprehensiveTree firstChildNodeStored;
     
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
 
         Field coreDaoField = coreService.getClass().getDeclaredField("coreDao");
         
@@ -96,6 +98,7 @@ public class CoreServiceTest {
     @Test
     public void simpleAddNode() throws Exception {
         
+        /* leaf 노드 추가 테스트 */
         // TODO position을 생성해줄 유틸이 필요하여 만듦.
         int position = mockCoreDao.generatePosition(firstChildNodeStored);
         
@@ -122,5 +125,64 @@ public class CoreServiceTest {
         
         assertSame(firstChildNodeStored.getC_left(), 2);
         assertSame(firstChildNodeStored.getC_right(), 5);
+        
+        /* branch 노드 추가 테스트 */
+        ComprehensiveTree folderNode = new ComprehensiveTree();
+        folderNode.setC_type("folder");
+        folderNode.setC_position( mockCoreDao.generatePosition(firstChildNodeStored) );
+        folderNode.setC_title("folderNode");
+        folderNode.setRef(firstChildNodeStored.getC_id());
+        
+        coreService.addNode(folderNode);
+        
+        ComprehensiveTree folderNodeStored = coreService.getChildNode(firstChildNodeStored).get(1);
+        
+        assertSame(folderNodeStored.getC_id(), 4);
+        assertEquals(folderNodeStored.getC_type(), "folder");
+        assertSame(folderNodeStored.getC_left(), 5);
+        assertSame(folderNodeStored.getC_right(), 6);
+        assertSame(folderNodeStored.getC_position(), 2);
+        assertEquals(folderNodeStored.getC_title(), "folderNode");
+        assertSame(folderNodeStored.getC_parentid(), firstChildNodeStored.getC_id());
+        
+        assertSame(rootNodeStored.getC_left(), 1);
+        assertSame(rootNodeStored.getC_right(), 8);
+        
+        assertSame(firstChildNodeStored.getC_left(), 2);
+        assertSame(firstChildNodeStored.getC_right(), 7);
+        
+        /* leaf 노드 삭제 테스트 */
+        coreService.removeNode(defaultNodeStored);
+
+        assertNull(mockCoreDao.getNode(defaultNodeStored));
+        
+        assertSame(coreService.getChildNode(firstChildNodeStored).size(), 1);
+        
+        assertSame(folderNodeStored.getC_left(), 3);
+        assertSame(folderNodeStored.getC_right(), 4);
+        assertSame(folderNodeStored.getC_position(), 1);
+        
+        assertSame(rootNodeStored.getC_left(), 1);
+        assertSame(rootNodeStored.getC_right(), 6);
+        
+        assertSame(firstChildNodeStored.getC_left(), 2);
+        assertSame(firstChildNodeStored.getC_right(), 5);
+        
+        /* branch 노드에 노드 추가 테스트 */
+        
+    }
+    
+    @Test
+    public void simpleNegativeAddNode() throws Exception {
+        
+//        int position = mockCoreDao.generatePosition(firstChildNodeStored);
+//        
+//        ComprehensiveTree defaultNode = new ComprehensiveTree();
+//        defaultNode.setC_type("default");
+//        defaultNode.setC_position(position);
+//        defaultNode.setC_title("defaultNode");
+//        defaultNode.setRef(firstChildNodeStored.getC_id());
+//        
+//        coreService.addNode(defaultNode);
     }
 }
