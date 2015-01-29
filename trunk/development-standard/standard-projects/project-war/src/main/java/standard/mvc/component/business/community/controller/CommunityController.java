@@ -70,4 +70,10 @@ public class CommunityController {
 
 		return "/jsp/community/common/error";
 	}
+	
+	@RequestMapping(value = "/common/404error.do")
+	public String handle404Error(ModelMap model) throws Exception {
+		model.addAttribute("menuList", menuMngService.getCommunityMenu());
+		return "/jsp/community/common/404error";
+	}
 }
