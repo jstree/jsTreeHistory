@@ -3,7 +3,6 @@ package egovframework.com.ext.jstree.support.manager.interceptor;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,17 +12,12 @@ import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupport;
-import egovframework.com.ext.jstree.support.util.DateUtils;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.ext.jstree.support.util.StringUtils;
-import freemarker.ext.beans.BeansWrapper;
-import freemarker.template.TemplateHashModel;
 
 public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
 {
@@ -61,6 +55,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
      * actionTarget => 액션처리(select,update,delete,insert)
      * </pre>
      */
+    @SuppressWarnings("unused")
     private void setUrlVariable(HttpServletRequest request,
             ModelAndView modelAndView, Boolean checkPreHandle)
             throws MalformedURLException
@@ -145,6 +140,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
     /**
      * @param request
      */
+    @SuppressWarnings("unused")
     private void setLogging(HttpServletRequest request, Boolean checkPreHandle)
     {
         if (checkPreHandle)
@@ -183,6 +179,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
      * @param request
      * @param parameterParser
      */
+    @SuppressWarnings("unused")
     private void setSearchSupport(HttpServletRequest request)
     {
         ParameterParser parameterParser = new ParameterParser(request);

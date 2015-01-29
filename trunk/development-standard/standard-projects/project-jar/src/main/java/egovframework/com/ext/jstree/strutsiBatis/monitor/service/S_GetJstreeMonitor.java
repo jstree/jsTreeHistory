@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import egovframework.com.ext.jstree.strutsiBatis.monitor.dao.DB_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.monitor.dao.I_DB_ComprehensiveTree;
 import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.P_JqGrid;
 import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.T_JqGridCellData;

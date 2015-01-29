@@ -68,6 +68,7 @@ public class MockCoreDao<T> implements CoreDao {
         tree.add(firstChildNode);
     }
     
+    @SuppressWarnings({ "hiding", "unchecked" })
     @Override
     public <T extends ComprehensiveTree> List<T> getChildNode(T pNode) 
             throws Exception {
@@ -86,6 +87,7 @@ public class MockCoreDao<T> implements CoreDao {
         return (List<T>) rChildNodes;
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> List<T> searchNodeByString(
             T comprehensiveTree) throws Exception {
@@ -93,6 +95,7 @@ public class MockCoreDao<T> implements CoreDao {
         return null;
     }
 
+    @SuppressWarnings({ "hiding"})
     @Override
     public <T extends ComprehensiveTree> List<String> searchNodeByPosition(
             List<T> searchNodeByPositions) throws Exception {
@@ -100,6 +103,7 @@ public class MockCoreDao<T> implements CoreDao {
         return null;
     }
 
+    @SuppressWarnings({ "hiding", "unchecked" })
     @Override
     public <T extends ComprehensiveTree> T getNode(T pNode)
             throws Exception {
@@ -117,6 +121,7 @@ public class MockCoreDao<T> implements CoreDao {
         return (T) rNode;
     }
 
+    @SuppressWarnings({ "hiding", "unchecked" })
     @Override
     public <T extends ComprehensiveTree> T getNodeByRef(T pNode)
             throws Exception {
@@ -134,6 +139,7 @@ public class MockCoreDao<T> implements CoreDao {
         return (T) rNode;
     }
 
+    @SuppressWarnings({ "hiding"})
     @Override
     public <T extends ComprehensiveTree> void cutMyself(
             T p_OnlyCutMyselfFromJstree) throws Exception {
@@ -141,6 +147,7 @@ public class MockCoreDao<T> implements CoreDao {
         
     }
 
+    @SuppressWarnings({ "hiding"})
     @Override
     public <T extends ComprehensiveTree> void stretchPositionForMyselfFromJstree(T pNode) 
             throws Exception {
@@ -155,6 +162,7 @@ public class MockCoreDao<T> implements CoreDao {
         }
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> void stretchLeftRightForMyselfFromJstree(T pNode) 
             throws Exception {
@@ -176,6 +184,7 @@ public class MockCoreDao<T> implements CoreDao {
         }
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> int pasteMyselfFromJstree(
             T p_OnlyPasteMyselfFromJstree) throws Exception {
@@ -183,6 +192,7 @@ public class MockCoreDao<T> implements CoreDao {
         return 0;
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> List<T> getChildNodeByLeftRight(
             T comprehensiveTree) throws Exception {
@@ -190,6 +200,7 @@ public class MockCoreDao<T> implements CoreDao {
         return null;
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> void fixCopy(T comprehensiveTree)
             throws Exception {
@@ -197,6 +208,7 @@ public class MockCoreDao<T> implements CoreDao {
         
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> void fixCopyIF(T comprehensiveTree)
             throws Exception {
@@ -204,6 +216,7 @@ public class MockCoreDao<T> implements CoreDao {
         
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> void enterMyselfFromJstree(
             T comprehensiveTree) throws Exception {
@@ -211,6 +224,7 @@ public class MockCoreDao<T> implements CoreDao {
         
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> int addMyselfFromJstree(T node) 
             throws Exception {
@@ -224,6 +238,7 @@ public class MockCoreDao<T> implements CoreDao {
         return id;
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> int alterNode(T pNode)
             throws Exception {
@@ -240,6 +255,7 @@ public class MockCoreDao<T> implements CoreDao {
         return 1;
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> int removeNode(T pNode)
             throws Exception {
@@ -281,6 +297,7 @@ public class MockCoreDao<T> implements CoreDao {
         return 0;
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree)
             throws Exception {
@@ -288,6 +305,7 @@ public class MockCoreDao<T> implements CoreDao {
         return 0;
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> void stretchLeftForMyselfFromJstree(
             T comprehensiveTree) throws Exception {
@@ -295,6 +313,7 @@ public class MockCoreDao<T> implements CoreDao {
         
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> void stretchRightForMyselfFromJstree(
             T comprehensiveTree) throws Exception {
@@ -302,6 +321,7 @@ public class MockCoreDao<T> implements CoreDao {
         
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> void enterMyselfFixPosition(
             T comprehensiveTree) throws Exception {
@@ -309,6 +329,7 @@ public class MockCoreDao<T> implements CoreDao {
         
     }
 
+    @SuppressWarnings({ "hiding" })
     @Override
     public <T extends ComprehensiveTree> void enterMyselfFixLeftRight(
             T comprehensiveTree) throws Exception {

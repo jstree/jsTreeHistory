@@ -18,7 +18,6 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
 import egovframework.com.ext.jstree.strutsiBatis.monitor.service.I_S_GetJstreeMonitor;
-import egovframework.com.ext.jstree.strutsiBatis.monitor.service.S_GetJstreeMonitor;
 import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.P_JqGrid;
 import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.T_JqGridCellData;
 import egovframework.com.ext.jstree.strutsiBatis.monitor.vo.T_JqGridRowData;

@@ -1,7 +1,5 @@
 package egovframework.com.ext.jstree.strutsiBatis.core.dao;
 
-import egovframework.com.ext.jstree.strutsiBatis.core.dto.P_ComprehensiveTree;
-import egovframework.com.ext.jstree.strutsiBatis.core.vo.T_ComprehensiveTree;
 
 /**
  * Modification Information

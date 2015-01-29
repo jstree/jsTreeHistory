@@ -29,7 +29,6 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -47,7 +46,6 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.util.ArrayUtils;
 
-import egovframework.com.ext.jstree.support.manager.interceptor.RequestHandlerInterceptor;
 import egovframework.com.ext.jstree.support.manager.viewResolver.CustomFreemarkerViewResolver;
 import egovframework.com.ext.jstree.support.manager.viewResolver.CustomInternalResourceViewResolver;
 import egovframework.com.ext.jstree.support.manager.viewResolver.CustomThymeleafViewResolver;
