@@ -31,6 +31,7 @@ import standard.mvc.component.business.community.menu.service.MenuMngSerivce;
  *  2014.11.18    Hoseong.Son    1. index.do requestMapping 분리
  *                               2. requestMapping /{path}.do => /대분류(major)/소분류(minor).do
  *  2014.11.20    Hoseong.Son    1. index(..) 메소드 제거                                                     
+ *  2015.01.30    전경훈           1. handleError404 메소드 추가
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
