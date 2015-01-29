@@ -49,7 +49,7 @@
 	</error-page>
 	<error-page>
 		<error-code>404</error-code>
-		<location>/WEB-INF/jsp/community/common/error.jsp</location>
+		<location>/common/404error.do</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>

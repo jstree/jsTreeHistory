@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page"%>
+<page:applyDecorator name="default">
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 <!--<![endif]-->
@@ -35,3 +37,4 @@
 		</section>
 	</body>
 </html>
+</page:applyDecorator>
