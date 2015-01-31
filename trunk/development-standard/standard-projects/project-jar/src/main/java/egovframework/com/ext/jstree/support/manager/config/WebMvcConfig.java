@@ -1,25 +1,16 @@
 package egovframework.com.ext.jstree.support.manager.config;
 
-import java.nio.charset.StandardCharsets;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import egovframework.com.ext.jstree.support.manager.viewResolver.CustomFreemarkerViewResolver;
+import egovframework.com.ext.jstree.support.manager.viewResolver.CustomInternalResourceViewResolver;
+import egovframework.com.ext.jstree.support.manager.viewResolver.CustomThymeleafViewResolver;
+import egovframework.com.ext.jstree.support.manager.viewResolver.SpecialPurposeViewResolver;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
@@ -27,11 +18,7 @@ import org.springframework.web.accept.ContentNegotiationStrategy;
 import org.springframework.web.accept.PathExtensionContentNegotiationStrategy;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -46,10 +33,11 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.util.ArrayUtils;
 
-import egovframework.com.ext.jstree.support.manager.viewResolver.CustomFreemarkerViewResolver;
-import egovframework.com.ext.jstree.support.manager.viewResolver.CustomInternalResourceViewResolver;
-import egovframework.com.ext.jstree.support.manager.viewResolver.CustomThymeleafViewResolver;
-import egovframework.com.ext.jstree.support.manager.viewResolver.SpecialPurposeViewResolver;
+import java.io.File;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.text.MessageFormat;
+import java.util.*;
 
 /**
  *  Class Name : WebMvcConfig.java
@@ -295,16 +283,29 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		tilesViewResolver.setOrder(10);
 		return tilesViewResolver;
 	}
-	
+
 	/*
 	TilesConfigurer : 컴포지트 뷰(Composite View) 패턴을 구현한 라이브러리인 아파치 tiles 관련 메소드 
 	                           타일즈는 레이아웃을 이용하여 쉽게 웹페이지를 구성할 수 있도록 도와주는 템플릿 프레임워크
 	- 컴포지트 뷰(composite view)란 다른 뷰들을 포함하지만 레이아웃이 아닌 뷰, 컴포지트 뷰는 하나 이상의 뷰들로 구성된 복합적인 뷰임을 의미한다 
 	*/
 	@Bean
-	public TilesConfigurer tilesConfigurer(){
+	public TilesConfigurer tilesConfigurer() {
+		//TODO war 프로젝트로 옮겨야 함.
+		// 테스트시 tiles파일을 로드하는데 jar 패키지엔 해당 파일이 없어서 에러가 남. 파일이 있는 경우만 로드 하도록 변경
+		// 추후 war 에서 설정 파일을 로드 할수 있도록 해아함.
+		// 적용후 jstree springDemo 정상작동 확인 하였음.
+
 		TilesConfigurer tilesConfigurer = new TilesConfigurer();
-		tilesConfigurer.setDefinitions(new String[]{"/WEB-INF/tiles/tiles.xml"});
+		String[] tilesConfFilePath = {"/WEB-INF/tiles/tiles.xml"};
+		List<String> tilesConfFiles = new ArrayList<>();
+		URL classPath = getClass().getClassLoader().getResource("/");
+		for (String filepath : tilesConfFilePath) {
+			if (new File(classPath + filepath).isFile())
+				tilesConfFiles.add(filepath);
+		}
+
+		tilesConfigurer.setDefinitions(tilesConfFiles.toArray(new String[tilesConfFiles.size()]));
 		return tilesConfigurer;
 	}
 	

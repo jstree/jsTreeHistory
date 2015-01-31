@@ -130,6 +130,13 @@
 			<groupId>com.jamonapi</groupId>
 			<artifactId>jamon</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-cache</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

@@ -1,5 +1,8 @@
 package egovframework.com.ext.jstree.springiBatis.core.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -22,6 +25,7 @@ import java.util.HashMap;
  * 	2014.  9.  4. JeonKyunghun   주석 추가
  *  2014.  9. 16. 류강하                 주석 추가
  *  2014. 10. 12. 류강하                 getSqlMapSelector 메서드의 null 체크 추가
+ *  2015.  1. 31. 한지훈          toString, equals, hashCode 구현
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -71,7 +75,7 @@ public class ComprehensiveTree {
 	private int idif;
 	private int ldif;
 	private int spaceOfTargetNode;
-	Collection<Integer> c_idsByChildNodeFromNodeById;
+	private Collection<Integer> c_idsByChildNodeFromNodeById;
 
 	private int fixCopyId;
 	private int fixCopyPosition;
@@ -81,14 +85,16 @@ public class ComprehensiveTree {
 
 	private int idifLeft;
 	private int idifRight;
-	private Boolean copyBooleanValue;
+	private boolean copyBooleanValue;
 	
 	private int id; // moveNode
 	private final HashMap<String, String> attr;
 	
 	//ibatis 사용시에 쓸 map지정 필드.
 	private String sqlMapSelector;
-	
+
+	private volatile int hashCode;
+
 	public int getId() {
 		return id;
 	}
@@ -105,13 +111,9 @@ public class ComprehensiveTree {
 		this.copyBooleanValue = copyBooleanValue;
 	}
 
-	public Boolean getCopyBooleanValue() {
-		copyBooleanValue = false; // TODO setCopyBooleanValue 메서드의 필요 의미를 없게 만드는 코드
-		if (this.getCopy() == 0) {
-			copyBooleanValue = false;
-		} else {
-			copyBooleanValue = true;
-		}
+	public boolean getCopyBooleanValue() {
+		// TODO setCopyBooleanValue 메서드의 필요 의미를 없게 만드는 코드
+		copyBooleanValue = this.getCopy() != 0;
 		return copyBooleanValue;
 	}
 
@@ -342,6 +344,90 @@ public class ComprehensiveTree {
 	public void setSqlMapSelector(String sqlMapSelector) {
 		this.sqlMapSelector = sqlMapSelector;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		ComprehensiveTree that = (ComprehensiveTree) o;
+
+		if (c_id != that.c_id) return false;
+		if (c_left != that.c_left) return false;
+		if (c_level != that.c_level) return false;
+		if (c_parentid != that.c_parentid) return false;
+		if (c_position != that.c_position) return false;
+		if (c_right != that.c_right) return false;
+		if (copy != that.copy) return false;
+		if (copyBooleanValue != that.copyBooleanValue) return false;
+		if (fixCopyId != that.fixCopyId) return false;
+		if (fixCopyPosition != that.fixCopyPosition) return false;
+		if (hashCode != that.hashCode) return false;
+		if (id != that.id) return false;
+		if (idif != that.idif) return false;
+		if (idifLeft != that.idifLeft) return false;
+		if (idifRight != that.idifRight) return false;
+		if (ldif != that.ldif) return false;
+		if (multiCounter != that.multiCounter) return false;
+		if (ref != that.ref) return false;
+		if (rightPositionFromNodeByRef != that.rightPositionFromNodeByRef) return false;
+		if (spaceOfTargetNode != that.spaceOfTargetNode) return false;
+		if (status != that.status) return false;
+		if (!attr.equals(that.attr)) return false;
+		if (c_idsByChildNodeFromNodeById != null ? !c_idsByChildNodeFromNodeById.equals(that.c_idsByChildNodeFromNodeById) : that.c_idsByChildNodeFromNodeById != null)return false;
+		if (c_title != null ? !c_title.equals(that.c_title) : that.c_title != null) return false;
+		if (c_type != null ? !c_type.equals(that.c_type) : that.c_type != null) return false;
+		if (childcount != null ? !childcount.equals(that.childcount) : that.childcount != null) return false;
+		if (nodeById != null ? !nodeById.equals(that.nodeById) : that.nodeById != null) return false;
+		if (searchStr != null ? !searchStr.equals(that.searchStr) : that.searchStr != null) return false;
+		if (sqlMapSelector != null ? !sqlMapSelector.equals(that.sqlMapSelector) : that.sqlMapSelector != null)
+			return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = hashCode;
+
+		if (result == 0) {
+			int primeNumber = 31;
+			result = primeNumber + c_id;
+			result = primeNumber * result + c_parentid;
+			result = primeNumber * result + c_position;
+			result = primeNumber * result + c_left;
+			result = primeNumber * result + c_right;
+			result = primeNumber * result + c_level;
+			result = primeNumber * result + ref;
+			result = primeNumber * result + copy;
+			result = primeNumber * result + multiCounter;
+			result = primeNumber * result + status;
+			result = primeNumber * result + (c_title != null ? c_title.hashCode() : 0);
+			result = primeNumber * result + (c_type != null ? c_type.hashCode() : 0);
+			result = primeNumber * result + (childcount != null ? childcount.hashCode() : 0);
+			result = primeNumber * result + (searchStr != null ? searchStr.hashCode() : 0);
+			result = primeNumber * result + idif;
+			result = primeNumber * result + ldif;
+			result = primeNumber * result + spaceOfTargetNode;
+			result = primeNumber * result + (c_idsByChildNodeFromNodeById != null ? c_idsByChildNodeFromNodeById.hashCode() : 0);
+			result = primeNumber * result + fixCopyId;
+			result = primeNumber * result + fixCopyPosition;
+			result = primeNumber * result + rightPositionFromNodeByRef;
+			result = primeNumber * result + (nodeById != null ? nodeById.hashCode() : 0);
+			result = primeNumber * result + idifLeft;
+			result = primeNumber * result + idifRight;
+			result = primeNumber * result + (copyBooleanValue ? 1 : 0);
+			result = primeNumber * result + id;
+			result = primeNumber * result + attr.hashCode();
+			result = primeNumber * result + (sqlMapSelector != null ? sqlMapSelector.hashCode() : 0);
+
+			hashCode = result;
+		}
+		return result;
+	}
 }
