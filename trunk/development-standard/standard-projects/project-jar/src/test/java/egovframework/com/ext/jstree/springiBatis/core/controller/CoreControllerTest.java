@@ -1,33 +1,20 @@
 package egovframework.com.ext.jstree.springiBatis.core.controller;
 
+import egovframework.com.ext.jstree.springiBatis.core.mock.MockCoreDao;
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreServiceImpl;
+import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.ui.ModelMap;
+
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.ui.ModelMap;
-
-import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
-import egovframework.com.ext.jstree.springiBatis.core.mock.MockCoreDao;
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreServiceImpl;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
-import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
-import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Modification Information
@@ -54,30 +41,28 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  */
 
 public class CoreControllerTest {
-	
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
-	
 	private CoreController coreController;
-	private CoreServiceImpl coreService;
-	private MockCoreDao<ComprehensiveTree> mockDao;
-	
-	
+
 	@Before
 	public void setUp() throws Exception {
 		coreController = new CoreController();
-		coreService = new CoreServiceImpl();
-		mockDao = new MockCoreDao<ComprehensiveTree>();
+		CoreServiceImpl coreService = new CoreServiceImpl();
+		MockCoreDao<ComprehensiveTree> mockDao = new MockCoreDao<>();
 		Field coreControllerField = coreController.getClass().getDeclaredField("coreService");
 		coreControllerField.setAccessible(true);
 		coreControllerField.set(coreController, coreService);
-		
+
 		Field coreServiceField = coreService.getClass().getDeclaredField("coreDao");
 		coreServiceField.setAccessible(true);
 		coreServiceField.set(coreService, mockDao);
 	}
-	
-	/* 
+
+	@After
+	public void after(){
+
+	}
+
+	/*
 	 * 테스트 1
 	 * getChildNode 테스트 - 정상값
 	 */
@@ -92,7 +77,7 @@ public class CoreControllerTest {
 		
 		List<ComprehensiveTree> list = coreController.getChildNode(tree, model, request);
 		assertThat(list, notNullValue());
-		assertEquals(3, ((ComprehensiveTree)list.get(0)).getC_right());
+		assertEquals(3, list.get(0).getC_right());
 	}
 
 	/* 
@@ -100,22 +85,16 @@ public class CoreControllerTest {
 	 * getChildNode 테스트 - c_id 비정상값
 	 * c_ID 는 1 이상이 들어가므로 0이 입력되면 컨트롤러에서 exception 발생해야함
 	 */
-	@Test
+	@Test(expected = RuntimeException.class)
 	public void testCase2() throws Exception {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		ModelMap model = new ModelMap();
 		
-		expectedException.expect(Exception.class);
 		request.addParameter("c_id", "0");
 		ComprehensiveTree tree = new ComprehensiveTree();
 		tree.setC_id(0);
 		
 		// Exception 발생
-		List<ComprehensiveTree> list = coreController.getChildNode(tree, model, request);
-		
-	}
-	@After
-	public void after(){
-		
+		coreController.getChildNode(tree, model, request);
 	}
 }
