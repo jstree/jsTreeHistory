@@ -130,6 +130,13 @@
 			<groupId>com.jamonapi</groupId>
 			<artifactId>jamon</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-cache</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -394,7 +401,7 @@
 				<artifactId>emma-maven-plugin</artifactId>
 				<inherited>true</inherited>
 			</plugin>
-<!-- 			<plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>surefire-report-maven-plugin</artifactId>
 				<inherited>true</inherited>
@@ -405,7 +412,7 @@
 						</reports>
 					</reportSet>
 				</reportSets>
-			</plugin> -->
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
