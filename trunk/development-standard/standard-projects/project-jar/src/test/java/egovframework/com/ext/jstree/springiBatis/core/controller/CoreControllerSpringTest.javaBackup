@@ -41,7 +41,7 @@ public class CoreControllerSpringTest {
         defaultUri = "/egovframework/com/etc/jstree/springiBatis/core";
     }
 
-    //@Test
+    @Test
     public void getChildNodeTest() throws Exception {
         MvcResult result = mockMvc.perform(post(defaultUri + "/getChildNode.do")
                 .param("c_id", "1"))
@@ -51,7 +51,7 @@ public class CoreControllerSpringTest {
         assertThat(StringUtils.contains(result.getResponse().getHeader("Content-type"),MediaType.APPLICATION_JSON_VALUE), is(true));
     }
 
-    //@Test
+    @Test
     public void getChildNodeFailTest() throws Exception {
         MvcResult failResult = mockMvc.perform(post(defaultUri + "/getChildNode.do")
                 .param("c_id", "0"))
