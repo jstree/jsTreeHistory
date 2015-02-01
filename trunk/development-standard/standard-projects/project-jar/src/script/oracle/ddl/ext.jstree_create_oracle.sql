@@ -64,6 +64,31 @@ COMMENT ON COLUMN T_COMPREHENSIVETREE.C_TYPE IS '노드 타입';
  * CREATE UNIQUE INDEX I_COMPREHENSIVETREE ON T_COMPREHENSIVETREE
  *	("C_ID" ASC)
  */
+Insert into T_COMPREHENSIVETREE
+   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, 
+    C_LEVEL, C_TITLE, C_TYPE)
+ Values
+   (3, 2, 6, 3, 4, 
+    1, 'New node', 'default');
+Insert into T_COMPREHENSIVETREE
+   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, 
+    C_LEVEL, C_TITLE, C_TYPE)
+ Values
+   (4, 2, 7, 5, 6, 
+    1, 'New node', 'folder');
+Insert into T_COMPREHENSIVETREE
+   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, 
+    C_LEVEL, C_TITLE, C_TYPE)
+ Values
+   (1, 0, 0, 1, 8, 
+    0, 'Root Node', NULL);
+Insert into T_COMPREHENSIVETREE
+   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, 
+    C_LEVEL, C_TITLE, C_TYPE)
+ Values
+   (2, 1, 0, 2, 7, 
+    0, 'First Child', 'drive');
+COMMIT;
 
 
 DROP SEQUENCE S_COMPREHENSIVETREE;
