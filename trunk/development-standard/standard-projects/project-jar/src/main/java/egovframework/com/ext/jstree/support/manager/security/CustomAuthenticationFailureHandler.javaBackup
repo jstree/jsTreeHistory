@@ -1,0 +1,74 @@
+package egovframework.com.ext.jstree.support.manager.security;
+
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.session.SessionAuthenticationException;
+
+import egovframework.com.ext.jstree.support.manager.messageSource.MessageSupport;
+import egovframework.com.ext.jstree.support.util.StringUtils;
+
+public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+    @Autowired
+    private MemberManager memberManager;
+    @Autowired
+    private MessageSupport messageSupport;
+    
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+        String userIp = request.getRemoteAddr();
+        String userName = request.getParameter("j_username");
+        String returnType = "";
+        String logDesc = messageSupport.getMessage("LOG_LOGIN_FAIL_DETAIL_DESC1", "", request);    
+ 
+        // 동시접속 제한
+        if(exception.getClass().isAssignableFrom(SessionAuthenticationException.class)) {
+            returnType = "sessionAuthentication";
+            logDesc = messageSupport.getMessage("LOG_LOGIN_FAIL_DETAIL_DESC2", "", request);
+        } else {
+            if (!StringUtils.isEmpty(userName)) {
+            }
+        }
+        
+        Object[] args = {userName, userIp, logDesc };
+        
+        if (StringUtils.isNotEmpty(returnType)) {
+            String returnUrl = "/login/fail?type=" + returnType;
+            response.sendRedirect(returnUrl);
+            return;
+        } else {
+            super.onAuthenticationFailure(request, response, exception);
+        }
+    }
+    
+    private void authFailAlarm(String userName, String userIp, HttpServletRequest request) {
+        Object[] args = {userName, userIp};
+        String tempMsg = messageSupport.getMessage("LOG_LOGIN_FAIL_CC_DETAIL", args, "", request);
+        try {
+            Map<String, Object> datas = new HashMap<>();
+            datas.put("type", "alarm");
+            datas.put("date", new Date());
+            datas.put("message", tempMsg);
+            datas.put("isAlarmSound", "true");
+            datas.put("isAlarmWindow", "true");
+            
+            
+        } catch (Exception e) {
+            logger.error("error : " + e.getMessage());
+            return;
+        }
+    }
+
+    public void setMemberManager(MemberManager memberManager) {
+        this.memberManager = memberManager;
+    }
+}

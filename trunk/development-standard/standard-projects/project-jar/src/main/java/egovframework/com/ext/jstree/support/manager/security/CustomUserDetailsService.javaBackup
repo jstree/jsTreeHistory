@@ -1,0 +1,123 @@
+package egovframework.com.ext.jstree.support.manager.security;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.apache.poi.ss.formula.ptg.MemErrPtg;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
+
+import egovframework.com.ext.jstree.support.util.DateUtils;
+
+public class CustomUserDetailsService implements UserDetailsService {
+    @Autowired(required = false)
+    private HttpServletRequest request;
+    @Autowired
+    private MemberManager memberManager;
+    
+    private static final Logger logger = Logger.getLogger("cli");
+    
+    
+    
+    @Override
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException, DataAccessException {
+        
+        Member member = new Member();
+        
+        // 계정 잠금 및 계정 만료일에 관련된 처리
+        if (member.isBlock()) {
+            logger.info("user isblock!!");
+            throw new UsernameNotFoundException("userId : " + userId + ", is blocked!!");
+        }
+        
+        // 로그인 실패 재시도 횟수에 관련된 처리
+        if (member.getAccessCount() > 0) {
+            Date loginDate = member.getLoginDate();
+            Date checkTime = org.apache.commons.lang.time.DateUtils.addMinutes(new Date(), member.getLockoutPeriod() * -1);
+            if (member.getAccessCountTry() >= member.getAccessCount() && loginDate != null && loginDate.after(checkTime)) {
+                logger.info("accessCount is max : " + member.getAccessCount() + " => " + member.getAccessCountTry());
+                throw new UsernameNotFoundException("userId : " + userId);
+            }
+        }
+        
+        // 시스템 접속 시간 관련된 처리
+        if (!isValidAccessTime(member.getAccessTime())) {
+            logger.info("access time invalid => access time : " + member.getAccessTime());
+            throw new UsernameNotFoundException("userId : " + userId);
+        }
+
+
+        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        
+        // 비밀번호 만료일 계산.
+//        Date passwordChagneDate = (member.getPasswordChangeDate().equals(null))?member.getPasswordChangeDate():DateUtils.getCurrentDay();
+//        Date passwordTargetDate = DateUtils.addDays(passwordChagneDate, member.getPasswdInterval());
+//        
+//        if (member.getPasswdInterval() > 0 && passwordTargetDate.before(new Date())) {
+//            authorities.add(new CustomGrantedAuthority(RolesForSecurity.ROLE_PASSWORD));
+//        } else {
+//            
+//            if (member.isMaster()) {
+//                authorities.add(new CustomGrantedAuthority(RolesForSecurity.ROLE_MASTER));
+//                authorities.add(new CustomGrantedAuthority(RolesForSecurity.ROLE_ADMIN));
+//            }
+//            
+//            if (member.getRoleType().equals(RolesForSecurity.ROLE_ADMIN)) {
+//                authorities.add(new CustomGrantedAuthority(RolesForSecurity.ROLE_ADMIN));
+//            }
+//            
+//            authorities.add(new CustomGrantedAuthority(RolesForSecurity.ROLE_USER));
+//        }
+        
+        authorities.add(new CustomGrantedAuthority(RolesForSecurity.ROLE_USER));
+        
+        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
+        member.setName(userId);
+        member.setViewId(userId);
+        member.setPassword(encoder.encode("abcd"));
+        
+        UserCommon user = new UserCommon(member, authorities, request.getRemoteAddr());
+        
+        return member;
+    }
+    
+    private boolean isValidAccessTime(String accessTime) {
+        if (accessTime == null) {
+            return true;
+        }
+        
+        Date now = new Date();
+        String[] accessTimes = StringUtils.split(accessTime, ",");
+        for (String accessTimeString : accessTimes) {
+            String[] partioningTime = StringUtils.split(accessTimeString, "-");
+            if (partioningTime.length == 1) {
+                String[] timeArray = StringUtils.split(partioningTime[0], ":");
+                Date startTime = DateUtils.getDateWithMinute(Integer.parseInt(timeArray[0]), Integer.parseInt(timeArray[1]));
+                Date endTime = DateUtils.getEndOfTime(Integer.parseInt(timeArray[0]));
+                if (startTime.before(now) && endTime.after(now)) {
+                    return true;
+                }
+            } else {
+                String[] startTimeArray = StringUtils.split(partioningTime[0], ":");
+                String[] endTimeArray = StringUtils.split(partioningTime[1], ":");
+                Date startTime = DateUtils.getDateWithMinute(Integer.parseInt(startTimeArray[0]), Integer.parseInt(startTimeArray[1]));
+                Date endTime = DateUtils.getDateWithMinute(Integer.parseInt(endTimeArray[0]), Integer.parseInt(endTimeArray[1]));
+                if (startTime.before(now) && endTime.after(now)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+        
+    }
+}

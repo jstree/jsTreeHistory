@@ -1,0 +1,17 @@
+package egovframework.com.ext.jstree.support.manager.security;
+
+import org.apache.commons.lang.StringUtils;
+
+public enum RolesForSecurity {
+    ROLE_ALL, 
+    ROLE_PASSWORD, // 비밀번호 변경해야하는 유저
+    ROLE_READ, // 읽기전용 유저
+    ROLE_USER, // 일반 유저
+    ROLE_ADMIN, // 시스템 관리자
+    ROLE_MASTER; // 마스터권한
+    
+    public boolean equals(RolesForSecurity roles) {
+        return StringUtils.equals(this.toString(), roles.toString());
+    }
+    
+}

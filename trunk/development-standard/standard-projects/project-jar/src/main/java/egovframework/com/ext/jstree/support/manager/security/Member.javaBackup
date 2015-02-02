@@ -1,0 +1,247 @@
+package egovframework.com.ext.jstree.support.manager.security;
+
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+/**
+ * 사용자
+ */
+public class Member implements Serializable, UserDetails {
+    private static final long serialVersionUID = -8336750320756436106L;
+    
+    private long id;
+    private String viewId;
+    private String password;
+    private String name;
+    private RolesForSecurity roleType;
+    private boolean master;
+    private String funcList;    // @see RoleCategory.class
+    private String email;
+    private String desc;
+    private boolean block;
+    private Date passwordChangeDate;
+    private boolean readonly;
+    private String accessTime; // 시스템 접속시간
+    private int accessCount = 3; // 로그인 시도 제한
+    private int passwdInterval; // 암호 변경 주기
+    private Date expireDate; // 계정 만료일
+    private int accessCountTry; // 비번 틀린 횟수
+    private int lockoutPeriod = 5; // 로그인 실패 잠금 기간
+    private Date loginDate; // 최종 로그인 시간
+    
+    public long getId() {
+        return id;
+    }
+    
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    public String getViewId() {
+        return viewId;
+    }
+    
+    public void setViewId(String viewId) {
+        this.viewId = viewId;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public RolesForSecurity getRoleType() {
+        return roleType;
+    }
+    
+    public void setRoleType(RolesForSecurity roleType) {
+        this.roleType = roleType;
+    }
+    
+    public boolean isMaster() {
+        return master;
+    }
+    
+    public void setMaster(boolean master) {
+        this.master = master;
+    }
+    
+    public String getFuncList() {
+        return funcList;
+    }
+    
+    public void setFuncList(String funcList) {
+        this.funcList = funcList;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getDesc() {
+        return desc;
+    }
+    
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+    
+    public boolean isBlock() {
+        Date now = new Date();
+        if (null != expireDate && now.after(expireDate)) {
+            return true;
+        }
+        
+        return block;
+    }
+    
+    public void setBlock(boolean block) {
+        this.block = block;
+    }
+    
+    public Date getPasswordChangeDate() {
+        return passwordChangeDate;
+    }
+    
+    public void setPasswordChangeDate(Date passwordChangeDate) {
+        this.passwordChangeDate = passwordChangeDate;
+    }
+    
+    public boolean isReadonly() {
+        return readonly;
+    }
+    
+    public void setReadonly(boolean readonly) {
+        this.readonly = readonly;
+    }
+    
+    public String getAccessTime() {
+        return accessTime;
+    }
+    
+    public void setAccessTime(String accessTime) {
+        this.accessTime = accessTime;
+    }
+    
+    public int getAccessCount() {
+        return accessCount;
+    }
+    
+    public void setAccessCount(int accessCount) {
+        this.accessCount = accessCount;
+    }
+    
+    public int getPasswdInterval() {
+        return passwdInterval;
+    }
+    
+    public void setPasswdInterval(int passwdInterval) {
+        this.passwdInterval = passwdInterval;
+    }
+    
+    public Date getExpireDate() {
+        return expireDate;
+    }
+    
+    public void setExpireDate(Date expireDate) {
+        this.expireDate = expireDate;
+    }
+    
+    public int getAccessCountTry() {
+        return accessCountTry;
+    }
+    
+    public void setAccessCountTry(int accessCountTry) {
+        this.accessCountTry = accessCountTry;
+    }
+    
+    public int getLockoutPeriod() {
+        return lockoutPeriod;
+    }
+
+    public void setLockoutPeriod(int lockoutPeriod) {
+        this.lockoutPeriod = lockoutPeriod;
+    }
+
+    public Date getLoginDate() {
+        return loginDate;
+    }
+
+    public void setLoginDate(Date loginDate) {
+        this.loginDate = loginDate;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getUsername()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired()
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked()
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired()
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled()
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+    
+}

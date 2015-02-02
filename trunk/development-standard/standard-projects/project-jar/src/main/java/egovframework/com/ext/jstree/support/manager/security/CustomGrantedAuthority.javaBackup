@@ -1,0 +1,25 @@
+package egovframework.com.ext.jstree.support.manager.security;
+
+
+import org.springframework.security.core.GrantedAuthority;
+
+public class CustomGrantedAuthority implements GrantedAuthority {
+    
+    private static final long serialVersionUID = -3924226050250312247L;
+    
+    private RolesForSecurity authrity;
+    
+    public CustomGrantedAuthority(RolesForSecurity authrity) {
+        this.authrity = authrity;
+    }
+    
+    @Override
+    public String getAuthority() {
+        return authrity.toString();
+    }
+    
+    public RolesForSecurity getAuthrity() {
+        return authrity;
+    }
+    
+}
