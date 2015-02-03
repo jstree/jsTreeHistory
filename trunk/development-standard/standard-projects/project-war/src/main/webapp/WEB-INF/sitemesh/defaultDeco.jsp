@@ -65,7 +65,7 @@
 			_paq.push(['trackPageView']);
 			_paq.push(['enableLinkTracking']);
 			(function() {
-			  var u=(("https:" == document.location.protocol) ? "https" : "http") + "://www.313.co.kr/php/piwik-1.12//";
+			  var u=(("https:" == document.location.protocol) ? "https" : "http") + "://www.313.co.kr/php/piwik-1.12/";
 			  _paq.push(['setTrackerUrl', u+'piwik.php']);
 			  _paq.push(['setSiteId', 1]);
 			  var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
