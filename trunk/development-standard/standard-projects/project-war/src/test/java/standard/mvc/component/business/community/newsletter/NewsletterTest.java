@@ -25,7 +25,6 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
-// JVM 옵션에 -Dprofile.active.mode=dev를 추가해야 함!
 public class NewsletterTest {
 
     @Autowired
