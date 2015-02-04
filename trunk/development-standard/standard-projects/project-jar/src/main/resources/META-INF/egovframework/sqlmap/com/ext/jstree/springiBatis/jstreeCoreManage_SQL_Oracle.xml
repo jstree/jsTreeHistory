@@ -380,13 +380,13 @@
 
 
 	<update id="fixCopyIF" parameterClass="ComprehensiveTree">
-		/* fixCopyIF */
+/* fixCopyIF */
 		UPDATE
 		T_COMPREHENSIVETREE_SPRING
 		SET C_POSITION = #fixCopyPosition#
 		WHERE C_ID
 		= #fixCopyId#
-	</update>
+</update>
 
 
 	<update id="fixCopy" parameterClass="ComprehensiveTree">
