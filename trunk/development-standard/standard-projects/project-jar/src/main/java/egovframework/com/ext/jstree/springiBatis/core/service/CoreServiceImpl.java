@@ -288,34 +288,34 @@ public class CoreServiceImpl implements CoreService
     {
         
         T comprehensiveTree = newInstance(t_comprehensiveTree);
-        comprehensiveTree.setC_id(ind);
+        comprehensiveTree.setC_id(ind); //이건 뭐하는 짓인가.
         
-        T node = ((T) coreDao.getNode(comprehensiveTree));
+        T node = ((T) coreDao.getNode(comprehensiveTree)); //집어넣은 노드 가져오고
         
-        List<T> children = ((List<T>) coreDao.getChildNodeByLeftRight(node));
+        List<T> children = ((List<T>) coreDao.getChildNodeByLeftRight(node)); //집어넣은 노드 하위 차일드 노드 다 가져와서
         
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int i = node.getC_left() + 1; i < node.getC_right(); i++)
         {
-            map.put(i, ind);
+            map.put(i, ind); //인서트 노드의 좌측 좌표 + 1 부터 오른쪽 좌표까지 맵에 넣고 ( 이건 또 뭐하는 짓인가 )
         }
         
         for (int i = 0; i < children.size(); i++)
         {
             
-            T child = children.get(i);
+            T child = children.get(i); //하위 차일드 노드를 루프 돌면서 
             
-            if (child.getC_id() == ind)
+            if (child.getC_id() == ind) //혹시 인서트한 노드아이디와 동일한 차일드 아이디가 있다면 , 이런일이 있을수 있나?
             {
                 logger.debug(">>>>>>>>>>>>>>>>> 기준노드가 잡혔음.");
                 logger.debug("C_TITLE    = " + child.getC_title());
                 logger.debug("C_ID       = " + ind);
                 logger.debug("C_POSITION = " + ref);
                 
-                Class<T> targetTemp = null;
+                Class<T> targetTemp = null; //그냥 인스턴스 하나 만들어서 디비처리함. 뜬굼없음.
                 T onlyFixCopyFromJstree = targetTemp.newInstance();
-                onlyFixCopyFromJstree.setFixCopyId(ind);
-                onlyFixCopyFromJstree.setFixCopyPosition(ref);
+                onlyFixCopyFromJstree.setFixCopyId(ind); //추가한 노드 아이디
+                onlyFixCopyFromJstree.setFixCopyPosition(ref); //포지션 조정.
                 
                 coreDao.fixCopyIF(onlyFixCopyFromJstree);
                 continue;
