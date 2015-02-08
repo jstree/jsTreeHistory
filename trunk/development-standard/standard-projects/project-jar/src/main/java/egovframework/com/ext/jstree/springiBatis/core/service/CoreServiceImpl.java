@@ -116,7 +116,7 @@ public class CoreServiceImpl implements CoreService
         int spaceOfTargetNode = 2;
         Collection<Integer> c_idsByChildNodeFromNodeById = null;
         
-        this.stretchPositionForMyselfFromJstree(c_idsByChildNodeFromNodeById, nodeById, comprehensiveTree);
+        this.stretchPositionForMyselfFromJstree(c_idsByChildNodeFromNodeById, comprehensiveTree);
         
         int rightPositionFromNodeByRef = nodeByRef.getC_right();
         rightPositionFromNodeByRef = Math.max(rightPositionFromNodeByRef, 1);
@@ -186,11 +186,9 @@ public class CoreServiceImpl implements CoreService
     }
     
     private <T extends ComprehensiveTree> void stretchPositionForMyselfFromJstree(
-            Collection<Integer> c_idsByChildNodeFromNodeById, T nodeById, T comprehensiveTree) throws Exception
+            Collection<Integer> c_idsByChildNodeFromNodeById, T comprehensiveTree) throws Exception
     {
-        
         comprehensiveTree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
-        comprehensiveTree.setNodeById(nodeById); // TODO unused code, 시그너쳐 변경할 것!
         
         coreDao.stretchPositionForMyselfFromJstree(comprehensiveTree);
     }
@@ -443,7 +441,7 @@ public class CoreServiceImpl implements CoreService
         
         calculatePostion(comprehensiveTree, nodeById, childNodesFromNodeByRef, request);
         
-        this.stretchPositionForMyselfFromJstree(c_idsByChildNodeFromNodeById, nodeById, comprehensiveTree);
+        this.stretchPositionForMyselfFromJstree(c_idsByChildNodeFromNodeById, comprehensiveTree);
         
         int rightPositionFromNodeByRef = nodeByRef.getC_right();
         rightPositionFromNodeByRef = Math.max(rightPositionFromNodeByRef, 1);
