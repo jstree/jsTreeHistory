@@ -46,10 +46,6 @@ public interface CoreDao {
 	
 	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree ) throws Exception;
 	
-	public <T extends ComprehensiveTree> void stretchLeftForMyselfFromJstree( T comprehensiveTree ) throws Exception;
-	
-	public <T extends ComprehensiveTree> void stretchRightForMyselfFromJstree( T comprehensiveTree ) throws Exception;
-	
 	public <T extends ComprehensiveTree> void enterMyselfFixPosition( T comprehensiveTree ) throws Exception;
 	
 	public <T extends ComprehensiveTree> void enterMyselfFixLeftRight( T comprehensiveTree ) throws Exception;

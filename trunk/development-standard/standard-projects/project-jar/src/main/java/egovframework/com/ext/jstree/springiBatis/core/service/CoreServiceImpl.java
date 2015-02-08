@@ -105,8 +105,6 @@ public class CoreServiceImpl implements CoreService
     @Transactional
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree) throws Exception
     {
-        // TODO 순수 addNode 로직 제외 로직 삭제 처리!!
-        T nodeById = ((T) coreDao.getNode(comprehensiveTree));
         T nodeByRef = ((T) coreDao.getNodeByRef(comprehensiveTree));
         
         List<T> childNodesFromRef = ((List<T>) coreDao.getChildNode(nodeByRef));
@@ -206,29 +204,6 @@ public class CoreServiceImpl implements CoreService
         onlyStretchLeftRightForMyselfFromJstree.setCopy(copy);
         
         coreDao.stretchLeftRightForMyselfFromJstree(onlyStretchLeftRightForMyselfFromJstree);
-    }
-    
-    private <T extends ComprehensiveTree> int pasteMyselfFromJstree(int ref, int idif, int spaceOfTargetNode, int ldif,
-            int rightPositionFromNodeByRef, Collection<Integer> c_idsByChildNodeFromNodeById, T nodeById)
-            throws Exception
-    {
-        
-        T onlyPasteMyselfFromJstree = newInstance(nodeById);
-        
-        onlyPasteMyselfFromJstree.setRef(ref);
-        onlyPasteMyselfFromJstree.setIdif(idif);
-        onlyPasteMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
-        onlyPasteMyselfFromJstree.setLdif(ldif);
-        onlyPasteMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
-        onlyPasteMyselfFromJstree.setRightPositionFromNodeByRef(rightPositionFromNodeByRef);
-        onlyPasteMyselfFromJstree.setNodeById(nodeById);
-        
-        onlyPasteMyselfFromJstree.setIdifLeft(idif
-                + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode : 0));
-        onlyPasteMyselfFromJstree.setIdifRight(idif
-                + (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode : 0));
-        
-        return coreDao.pasteMyselfFromJstree(onlyPasteMyselfFromJstree);
     }
     
     private <T extends ComprehensiveTree> void fixCopy(int ind, int ref, T t_comprehensiveTree) throws Exception
@@ -465,9 +440,9 @@ public class CoreServiceImpl implements CoreService
             rightPositionFromNodeByRef -= spaceOfTargetNode;
         }
         
-        this.stretchLeftRightForMyselfFromJstree(spaceOfTargetNode, rightPositionFromNodeByRef,
-                                                 c_idsByChildNodeFromNodeById, comprehensiveTree.getCopy(),
-                                                 comprehensiveTree);
+        this.stretchLeftRightForMyselfFromJstree(spaceOfTargetNode,
+                rightPositionFromNodeByRef, comprehensiveTree.getCopy(),
+                c_idsByChildNodeFromNodeById, comprehensiveTree);
         
         logger.debug(">>>>>>>>>>>>>>>>>>>>" + rightPositionFromNodeByRef);
         int targetNodeLevel = nodeById.getC_level() - (nodeByRef.getC_level() + 1);
@@ -594,22 +569,6 @@ public class CoreServiceImpl implements CoreService
                 session.setAttribute("settedPosition", comprehensiveTree.getC_position());
             }
         }
-    }
-    
-    private <T extends ComprehensiveTree> void stretchLeftRightForMyselfFromJstree(int spaceOfTargetNode,
-            int rightPositionFromNodeByRef, Collection<Integer> c_idsByChildNodeFromNodeById, int copy,
-            T comprehensiveTree) throws Exception
-    {
-        
-        T onlyStretchLeftRightForMyselfFromJstree = newInstance(comprehensiveTree);
-        
-        onlyStretchLeftRightForMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
-        onlyStretchLeftRightForMyselfFromJstree.setRightPositionFromNodeByRef(rightPositionFromNodeByRef);
-        onlyStretchLeftRightForMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
-        onlyStretchLeftRightForMyselfFromJstree.setCopy(copy);
-        
-        coreDao.stretchLeftForMyselfFromJstree(onlyStretchLeftRightForMyselfFromJstree);
-        coreDao.stretchRightForMyselfFromJstree(onlyStretchLeftRightForMyselfFromJstree);
     }
     
     private <T extends ComprehensiveTree> int pasteMyselfFromJstree(int ref, int idif, int spaceOfTargetNode, int ldif,
