@@ -111,6 +111,8 @@ public class CoreServiceImpl implements CoreService
         
         List<T> childNodesFromRef = ((List<T>) coreDao.getChildNode(nodeByRef));
         
+        T t_ComprehensiveTree = newInstance(comprehensiveTree);
+        
         int spaceOfTargetNode = 2;
         Collection<Integer> c_idsByChildNodeFromNodeById = null;
         
@@ -155,6 +157,7 @@ public class CoreServiceImpl implements CoreService
         int insertSeqResult = coreDao.addMyselfFromJstree(comprehensiveTree);
         
         //아이디 리턴 잡아서 처리하고
+        t_ComprehensiveTree.setId(insertSeqResult);
         comprehensiveTree.setC_id(insertSeqResult);
         //db 처리할때 아이디값을 한번 더 업데이트 해준다. ( 타입 포함 ) 
         int alterCountResult = coreDao.alterNode(comprehensiveTree); // TODO 삭제하고 위에서 한 번에 처리하도록 리팩토링
@@ -162,14 +165,14 @@ public class CoreServiceImpl implements CoreService
         if (insertSeqResult > 0 && alterCountResult == 1)
         {
             // 성공한거다. 
-            comprehensiveTree.setStatus(1);
+            t_ComprehensiveTree.setStatus(1);
         }
         else
         {
             throw new RuntimeException("심각한 오류 발생 - 삽입 노드");
         }
         
-        return comprehensiveTree;
+        return t_ComprehensiveTree;
     }
     
     private <T extends ComprehensiveTree> void cutMyself(T nodeById, int spaceOfTargetNode,
