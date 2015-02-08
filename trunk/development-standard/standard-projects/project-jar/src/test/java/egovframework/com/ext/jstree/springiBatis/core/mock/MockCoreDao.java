@@ -305,21 +305,6 @@ public class MockCoreDao<T> implements CoreDao {
         return 0;
     }
 
-    @SuppressWarnings({ "hiding" })
-    @Override
-    public <T extends ComprehensiveTree> void stretchLeftForMyselfFromJstree(
-            T comprehensiveTree) throws Exception {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @SuppressWarnings({ "hiding" })
-    @Override
-    public <T extends ComprehensiveTree> void stretchRightForMyselfFromJstree(
-            T comprehensiveTree) throws Exception {
-        // TODO Auto-generated method stub
-        
-    }
 
     @SuppressWarnings({ "hiding" })
     @Override
