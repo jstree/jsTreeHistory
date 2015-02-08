@@ -116,12 +116,6 @@ public class CoreServiceImpl implements CoreService
         int spaceOfTargetNode = 2;
         Collection<Integer> c_idsByChildNodeFromNodeById = null;
         
-        //cut & paste
-        if (nodeById != null && !comprehensiveTree.isCopied())
-        {
-            this.cutMyself(nodeById, spaceOfTargetNode, c_idsByChildNodeFromNodeById);
-        }
-        
         this.stretchPositionForMyselfFromJstree(c_idsByChildNodeFromNodeById, nodeById, comprehensiveTree);
         
         int rightPositionFromNodeByRef = nodeByRef.getC_right();
@@ -139,14 +133,6 @@ public class CoreServiceImpl implements CoreService
             }
         }
         
-        //cut & paste 인 경우이면서, 내가 있던 자리보다 앞으로 이동하는 경우.
-        if (nodeById != null && !comprehensiveTree.isCopied()
-                && nodeById.getC_left() < rightPositionFromNodeByRef)
-        {
-            //따라서 우측 좌표값을을 2개 줄여놔야 한다.
-            rightPositionFromNodeByRef -= spaceOfTargetNode;
-        }
-        
         //벌린다.
         this.stretchLeftRightForMyselfFromJstree(spaceOfTargetNode, rightPositionFromNodeByRef,
                                                  comprehensiveTree.getCopy(), c_idsByChildNodeFromNodeById,
@@ -157,65 +143,35 @@ public class CoreServiceImpl implements CoreService
         //부모노드의 우측 포지션을 잠시 저장해 둔다.
         int comparePosition = rightPositionFromNodeByRef;
         
-        //쌩짜 addnode가 아닌경우.
-        if (nodeById != null)
+        //쌩짜 addnode인 경우.
+        //당연히 부모노드는 ref일거고
+        comprehensiveTree.setC_parentid(comprehensiveTree.getRef());
+        //부모의 우측 좌표값을 새로운 노드의 좌측 좌표값일거고
+        comprehensiveTree.setC_left(comparePosition);
+        //부모의 우측 좌표+1값을 새로운 노드의 우측 좌표값일거고
+        comprehensiveTree.setC_right(comparePosition + 1);
+        //계산된 노드의 레벨이 적용
+        comprehensiveTree.setC_level(targetNodeLevel);
+        
+        //db 처리하고 ( 타입을 제외한다 ) 
+        int insertSeqResult = coreDao.addMyselfFromJstree(comprehensiveTree);
+        
+        //아이디 리턴 잡아서 처리하고
+        t_ComprehensiveTree.setId(insertSeqResult);
+        comprehensiveTree.setC_id(insertSeqResult);
+        //db 처리할때 아이디값을 한번 더 업데이트 해준다. ( 타입 포함 ) 
+        int alterCountResult = coreDao.alterNode(comprehensiveTree); // TODO 삭제하고 위에서 한 번에 처리하도록 리팩토링
+        
+        if (insertSeqResult > 0 && alterCountResult == 1)
         {
-            
-            targetNodeLevel = nodeById.getC_level() - (nodeByRef.getC_level() + 1);
-            comparePosition = nodeById.getC_left() - rightPositionFromNodeByRef;
-            
-            if (comprehensiveTree.isCopied())
-            {
-                int ind = this.pasteMyselfFromJstree(comprehensiveTree.getRef(), comparePosition, spaceOfTargetNode,
-                                                     targetNodeLevel, rightPositionFromNodeByRef,
-                                                     c_idsByChildNodeFromNodeById, nodeById);
-                t_ComprehensiveTree.setId(ind);
-                this.fixCopy(ind, comprehensiveTree.getC_position(), comprehensiveTree);
-            }
-            else
-            {
-                this.enterMyselfFromJstree(comprehensiveTree.getRef(), comprehensiveTree.getC_position(),
-                                           comprehensiveTree.getC_id(), comparePosition, targetNodeLevel,
-                                           c_idsByChildNodeFromNodeById, comprehensiveTree);
-            }
+            // 성공한거다. 
+            t_ComprehensiveTree.setStatus(1);
         }
         else
         {
-            //쌩짜 addnode인 경우.
-            //당연히 부모노드는 ref일거고
-            comprehensiveTree.setC_parentid(comprehensiveTree.getRef());
-            //부모의 우측 좌표값을 새로운 노드의 좌측 좌표값일거고
-            comprehensiveTree.setC_left(comparePosition);
-            //부모의 우측 좌표+1값을 새로운 노드의 우측 좌표값일거고
-            comprehensiveTree.setC_right(comparePosition + 1);
-            //계산된 노드의 레벨이 적용
-            comprehensiveTree.setC_level(targetNodeLevel);
-            
-            //db 처리하고 ( 타입을 제외한다 ) 
-            int insertSeqResult = coreDao.addMyselfFromJstree(comprehensiveTree);
-            
-            //아이디 리턴 잡아서 처리하고
-            t_ComprehensiveTree.setId(insertSeqResult);
-            comprehensiveTree.setC_id(insertSeqResult);
-            //db 처리할때 아이디값을 한번 더 업데이트 해준다. ( 타입 포함 ) 
-            int alterCountResult = coreDao.alterNode(comprehensiveTree); // TODO 삭제하고 위에서 한 번에 처리하도록 리팩토링
-            
-            if (insertSeqResult > 0 && alterCountResult == 1)
-            {
-                // 성공한거다. 
-                t_ComprehensiveTree.setStatus(1);
-            }
-            else
-            {
-                throw new RuntimeException("심각한 오류 발생 - 삽입 노드");
-            }
+            throw new RuntimeException("심각한 오류 발생 - 삽입 노드");
         }
         
-        //카피한 케이스이면.
-        if (comprehensiveTree.isCopied())
-        {
-            this.fixCopy(comprehensiveTree.getC_id(), comprehensiveTree.getC_position(), comprehensiveTree);
-        }
         return t_ComprehensiveTree;
     }
     
