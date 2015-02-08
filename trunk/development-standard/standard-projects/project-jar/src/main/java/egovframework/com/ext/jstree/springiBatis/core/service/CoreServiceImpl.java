@@ -111,7 +111,7 @@ public class CoreServiceImpl implements CoreService
         
         List<T> childNodesFromRef = ((List<T>) coreDao.getChildNode(nodeByRef));
         
-        T t_ComprehensiveTree = newInstance(comprehensiveTree); //포지션값 맞지않음.
+        T t_ComprehensiveTree = newInstance(comprehensiveTree);
         
         int spaceOfTargetNode = 2;
         Collection<Integer> c_idsByChildNodeFromNodeById = null;
@@ -127,16 +127,10 @@ public class CoreServiceImpl implements CoreService
         int rightPositionFromNodeByRef = nodeByRef.getC_right();
         rightPositionFromNodeByRef = Math.max(rightPositionFromNodeByRef, 1);
         
-        // TODO self 삭제
-        //cut & paste 이면서 cut node를 같은 부모의 다른 position으로 이동시킬때.
-        int self = (nodeById != null && !comprehensiveTree.isCopied()
-                && nodeById.getC_parentid() == comprehensiveTree.getRef() && comprehensiveTree.getC_position() > nodeById
-                .getC_position()) ? 1 : 0;
-        
         for (T child : childNodesFromRef)
         {
             //대상 노드가 들어가려는 자리에 ( position ) 이미 자리잡고 있는 노드가 있는지 검사.
-            if (child.getC_position() - self == comprehensiveTree.getC_position())
+            if (child.getC_position() == comprehensiveTree.getC_position())
             {
                 //있다면 이건 이미 대상 노드가 뽑혀져 나온 케이스 이며, 부모노트의 오른쪽 포지션이 늘어나면 안되므로 내가 들어가려는 
                 //노드의 좌측 left 값을 rightPositionFromNodeByRef에 맵핑.
