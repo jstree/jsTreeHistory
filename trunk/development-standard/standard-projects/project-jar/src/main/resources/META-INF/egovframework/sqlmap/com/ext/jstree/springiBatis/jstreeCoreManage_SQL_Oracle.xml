@@ -266,7 +266,7 @@
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
 		WHERE C_LEFT &gt;=
 		#rightPositionFromNodeByRef#
-		<isEqual property="copyBooleanValue" compareValue="false">
+		<isEqual property="copy" compareValue="0">
 			<isNotEmpty property="c_idsByChildNodeFromNodeById">
 				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
 					open="(" close=")" conjunction=",">
@@ -283,7 +283,7 @@
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
 		WHERE C_RIGHT &gt;=
 		#rightPositionFromNodeByRef#
-		<isEqual property="copyBooleanValue" compareValue="false">
+		<isEqual property="copy" compareValue="0">
 			<isNotEmpty property="c_idsByChildNodeFromNodeById">
 				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
 					open="(" close=")" conjunction=",">
@@ -304,7 +304,7 @@
 		, A.*
 		FROM (
 		SELECT
-		#ref#
+		#ref# AS C_PARENTID
 		, C_POSITION
 		, C_LEFT - #idifLeft# AS C_LEFT
 		, C_RIGHT -
@@ -380,13 +380,13 @@
 
 
 	<update id="fixCopyIF" parameterClass="ComprehensiveTree">
-/* fixCopyIF */
+		/* fixCopyIF */
 		UPDATE
 		T_COMPREHENSIVETREE_SPRING
 		SET C_POSITION = #fixCopyPosition#
 		WHERE C_ID
 		= #fixCopyId#
-</update>
+	</update>
 
 
 	<update id="fixCopy" parameterClass="ComprehensiveTree">

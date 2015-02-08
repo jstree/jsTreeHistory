@@ -31,39 +31,42 @@ import java.util.HashMap;
  */
 public class ComprehensiveTree {
 
-	/** Node 의 고유 ID, 1부터 시작(Root Node) */
+	/** 노드의 고유 id, 1부터 시작(Root Node) */
 	private int c_id;
 	
-	/** Node 의 부모 ID, 0부터 시작(Root Node) */
+	/** 노드의 부모 id, 0부터 시작(Root Node) */
 	private int c_parentid;
 	
 	/** Parent의 몇 번째 자식인지를 나타냄. 0부터 시작 */
 	private int c_position;
 	
-	/** Node의 Left 위치, 1부터 시작(Root Node) */
+	/** 노드의 left 위치, 1부터 시작(Root Node) */
 	private int c_left;
 	
-	/** Node의 Right 위치, 자식이 없다면 Left + 1의 값을 가진다. */
+	/** 노드의 right 위치, 자식이 없다면 left + 1의 값을 가진다. */
 	private int c_right;
 	
-	/** Node 의 Depth, 0부터 시작 */
+	/** 노드의 depth, 0부터 시작 */
 	private int c_level;
 
+	/** 참조하고 있는 노드의 id */
 	private int ref;
+	
+	/** copy 시 1의 값을 가짐. */
 	private int copy;
 	private int multiCounter;
-
+	
 	private int status;
 	
-	/** Node 의 Title */
+	/** Node 의 title */
 	private String c_title;
 	
 	/**<pre>
-	 * Node 의 Type
-	 * null : Root Node
-	 * drive : First Child Node
-	 * folder : 자식(Folder 또는 File)을 가질 수 있다.
-	 * file : 자식을 가질 수 없다.
+	 * 노드의 type
+	 * null : root 노드
+	 * drive : first child 노드
+	 * folder : branch 노드
+	 * default : leaf 노드
 	 * </pre>
 	 */
 	private String c_type;
@@ -74,23 +77,28 @@ public class ComprehensiveTree {
 	
 	private int idif;
 	private int ldif;
+	
+	/** 노드가 차지하는 공간 (right - left + 1) */
 	private int spaceOfTargetNode;
+	
+	/** 임의 노드의 자식 노드들의 id만을 저장하는 컬렉션 */
 	private Collection<Integer> c_idsByChildNodeFromNodeById;
 
 	private int fixCopyId;
 	private int fixCopyPosition;
 
+	/** 참조 노드의 right */
 	private int rightPositionFromNodeByRef;
+	
 	private ComprehensiveTree nodeById;
 
 	private int idifLeft;
 	private int idifRight;
-	private boolean copyBooleanValue;
 	
 	private int id; // moveNode
 	private final HashMap<String, String> attr;
 	
-	//ibatis 사용시에 쓸 map지정 필드.
+	/** iBatis 사용 시에 쓸 map 지정 필드 */
 	private String sqlMapSelector;
 
 	private volatile int hashCode;
@@ -107,14 +115,8 @@ public class ComprehensiveTree {
 		attr = new HashMap<String, String>();
 	}
 	
-	public void setCopyBooleanValue(Boolean copyBooleanValue) {
-		this.copyBooleanValue = copyBooleanValue;
-	}
-
-	public boolean getCopyBooleanValue() {
-		// TODO setCopyBooleanValue 메서드의 필요 의미를 없게 만드는 코드
-		copyBooleanValue = this.getCopy() != 0;
-		return copyBooleanValue;
+	public boolean isCopied() {
+		return this.getCopy() == 1;
 	}
 
 	public int getRef() {
@@ -364,7 +366,6 @@ public class ComprehensiveTree {
 		if (c_position != that.c_position) return false;
 		if (c_right != that.c_right) return false;
 		if (copy != that.copy) return false;
-		if (copyBooleanValue != that.copyBooleanValue) return false;
 		if (fixCopyId != that.fixCopyId) return false;
 		if (fixCopyPosition != that.fixCopyPosition) return false;
 		if (hashCode != that.hashCode) return false;
@@ -421,7 +422,6 @@ public class ComprehensiveTree {
 			result = primeNumber * result + (nodeById != null ? nodeById.hashCode() : 0);
 			result = primeNumber * result + idifLeft;
 			result = primeNumber * result + idifRight;
-			result = primeNumber * result + (copyBooleanValue ? 1 : 0);
 			result = primeNumber * result + id;
 			result = primeNumber * result + attr.hashCode();
 			result = primeNumber * result + (sqlMapSelector != null ? sqlMapSelector.hashCode() : 0);
