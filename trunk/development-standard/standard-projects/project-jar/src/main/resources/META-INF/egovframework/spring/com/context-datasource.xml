@@ -13,7 +13,6 @@
 
 	<!-- DataSource -->
 	<alias name="dataSource-${Globals.DbType}" alias="egov.dataSource"/>
-    <alias name="dataSource-${Globals.DbType}" alias="dataSource"/>
 
 	<!-- MySQL -->
 	<bean id="dataSource-mysql" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">

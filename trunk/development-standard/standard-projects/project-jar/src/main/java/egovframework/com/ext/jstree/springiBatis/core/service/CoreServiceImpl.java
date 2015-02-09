@@ -15,6 +15,7 @@ import org.apache.commons.collections15.Transformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
@@ -102,7 +103,7 @@ public class CoreServiceImpl implements CoreService
      * egovframework.com.ext.jstree.springiBatis.core.service.CoreService#addNode
      * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
      */
-    @Transactional
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree) throws Exception
     {
         T nodeByRef = ((T) coreDao.getNodeByRef(comprehensiveTree));
@@ -282,7 +283,7 @@ public class CoreServiceImpl implements CoreService
      * executeRemoveNode
      * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
      */
-    @Transactional
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
     public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree) throws Exception
     {
         
@@ -304,7 +305,7 @@ public class CoreServiceImpl implements CoreService
      * egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNode
      * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
      */
-    @Transactional
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
     public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree) throws Exception
     {
         
@@ -318,7 +319,7 @@ public class CoreServiceImpl implements CoreService
      * alterNodeType
      * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
      */
-    @Transactional
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
     public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree) throws Exception
     {
         
@@ -373,7 +374,7 @@ public class CoreServiceImpl implements CoreService
      * egovframework.com.ext.jstree.springiBatis.core.service.CoreService#moveNode
      * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
      */
-    @Transactional
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
     public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree, HttpServletRequest request) throws Exception
     {
         
@@ -611,4 +612,21 @@ public class CoreServiceImpl implements CoreService
         Class<T> target = (Class<T>) Class.forName(comprehensiveTree.getClass().getCanonicalName());
         return target.newInstance();
     }
+    
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
+    public void txTest() throws Exception {
+      ComprehensiveTree comprehensiveTree = new ComprehensiveTree();
+      comprehensiveTree.setC_id(100);
+      comprehensiveTree.setC_parentid(1);
+      comprehensiveTree.setC_position(0);
+      comprehensiveTree.setC_left(100);
+      comprehensiveTree.setC_right(101);
+      comprehensiveTree.setC_level(100);
+      comprehensiveTree.setC_title("test");
+      comprehensiveTree.setC_type("default");
+      int seqResult = coreDao.addMyselfFromJstree(comprehensiveTree);
+      if(seqResult > 0){
+          throw new RuntimeException("tx test");
+      }
+   }
 }
