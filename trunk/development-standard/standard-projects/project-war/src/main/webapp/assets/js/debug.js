@@ -179,7 +179,7 @@ if (!window.console.trace)
 
 // add method to output 'hash data' inside an string
 window.console.data = function (data, title) {
-	var	w		= { array: ['[',']'], object: ['{','}'], string: ['"','"'], number: ['',''], function: ['','()'] }
+	var	w		= { array: ['[',']'], object: ['{','}'], string: ['"','"'], number: ['',''], func: ['','()'] }
 	,	x		= $.type( data )
 	,	obj		= x.match(/(object|array)/)
 	,	delim	= !obj ? ['',''] : x === 'object' ? ['{\n','\n}'] : ['[\n','\n]']
