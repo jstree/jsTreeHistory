@@ -4,12 +4,14 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
+@Service("CoreAddService")
 public class CoreAddServiceImpl implements CoreAddService
 {
     
