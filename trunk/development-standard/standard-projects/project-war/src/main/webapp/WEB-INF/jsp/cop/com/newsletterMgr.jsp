@@ -11,20 +11,22 @@
 <style type="text/css">
 </style>
 <!-- jQuery -->
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/index/jquery-1.11.1.js"></script>
-<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+<script src='http://code.jquery.com/jquery-migrate-1.2.1.js' type="text/javascript"></script>
+		
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" href="http://nas.313.co.kr:5002/Source/Script/jQuery/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.css" />
+<link rel="stylesheet" href="/js/community/jsTreeAlg/jstreeDemo/jnotify_v2.1/jquery/jNotify.jquery.css" />
 <!--[if lt IE 9]>
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/index/debug.js"></script>
+<script type="text/javascript" src="/assets/js/debug.js"></script>
 <![endif]-->
 <!-- JSTREE -->
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/_lib/jquery.cookie.js"></script>
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></script>
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/jquery.jstree.js"></script>
+<script type="text/javascript" src="/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></script>
+<script type="text/javascript" src="/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/jquery.jstree.js"></script>
 <!-- JavaScript -->
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/Script/ajax/ajax.js" charset="UTF-8"></script>
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Source/Script/jQuery/jQueryPlugIns/jnotify_v2.1/jquery/jNotify.jquery.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/assets/js/ajax.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/community/jsTreeAlg/jstreeDemo/jnotify_v2.1/jquery/jNotify.jquery.min.js" charset="UTF-8"></script>
 <link href="<c:url value='/'/>css/common.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
@@ -85,8 +87,8 @@ $(function () {
 	
 $("#demo")
 	.bind("before.jstree", function (e, data) {
-		$("li:not([rel='drive']).jstree-open > a > .jstree-icon").css('background-image','url(http://nas.313.co.kr:5002/Design/icon/miniCon/313/toolbar_open.png)');
-		$("li:not([rel='drive']).jstree-closed > a > .jstree-icon").css('background-image','url(http://nas.313.co.kr:5002/Design/icon/miniCon/313/ic_explorer.png)');
+		$("li:not([rel='drive']).jstree-open > a > .jstree-icon").css('background-image','url(/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/toolbar_open.png)');
+		$("li:not([rel='drive']).jstree-closed > a > .jstree-icon").css('background-image','url(/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/ic_explorer.png)');
 	})
 	.jstree({ 
 		// List of active plugins
@@ -212,7 +214,7 @@ $("#demo")
 					"valid_children" : "none",
 					// If we specify an icon for the default type it WILL OVERRIDE the theme icons
 					"icon" : {
-						"image" : "http://nas.313.co.kr:5002/Design/icon/FileIconPack/HTML.png"
+						"image" : "/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/themes/fileIcon/HTML.png"
 					}
 				},
 				// The `folder` type
@@ -220,7 +222,7 @@ $("#demo")
 					// can have files and other folders inside of it, but NOT `drive` nodes
 					"valid_children" : [ "default", "folder" ],
 					"icon" : {
-						"image" : "http://nas.313.co.kr:5002/Design/icon/miniCon/313/ic_explorer.png"
+						"image" : "/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/ic_explorer.png"
 						//Design/icon/miniCon/313/toolbar_open.png
 					}
 				},
@@ -229,7 +231,7 @@ $("#demo")
 					// can have files and folders inside, but NOT other `drive` nodes
 					"valid_children" : [ "default", "folder" ],
 					"icon" : {
-						"image" : "http://nas.313.co.kr:5002/Component/jsp/community/jstree-v.pre1.0/Database-Search.png"
+						"image" : "/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/Database-Search.png"
 						//Design/icon/IconSet/Aeon/PNG/Misc/Misc-Stuff.png
 						//Component/jsp/community/jstree-v.pre1.0/db.png
 					},

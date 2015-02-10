@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jquery-ui.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jNotify.jquery.css" />
 <!--[if lt IE 9]>
-<script type="text/javascript" src="http://nas.313.co.kr:5002/Component/jsp/community/index/debug.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/debug.js"></script>
 <![endif]-->
 <!-- JSTREE -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.cookie.js"></script>
