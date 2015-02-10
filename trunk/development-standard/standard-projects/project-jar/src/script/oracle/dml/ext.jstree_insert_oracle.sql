@@ -9,17 +9,17 @@ Insert into T_COMPREHENSIVETREE
     C_LEVEL, C_TITLE, C_TYPE)
  Values
    (2, 1, 0, 2, 7, 
-    0, 'First Child', 'drive');
+    1, 'First Child', 'drive');
 Insert into T_COMPREHENSIVETREE
    (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, 
     C_LEVEL, C_TITLE, C_TYPE)
  Values
    (3, 2, 0, 3, 4, 
-    1, 'New node', 'default');
+    2, 'New node', 'default');
 Insert into T_COMPREHENSIVETREE
    (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, 
     C_LEVEL, C_TITLE, C_TYPE)
  Values
    (4, 2, 1, 5, 6, 
-    1, 'New node', 'folder');
+    2, 'New node', 'folder');
 COMMIT;
