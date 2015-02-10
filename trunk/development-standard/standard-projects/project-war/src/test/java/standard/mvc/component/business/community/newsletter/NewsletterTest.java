@@ -1,9 +1,9 @@
 package standard.mvc.component.business.community.newsletter;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import standard.mvc.component.business.community.newsletter.controller.NewsletterAdminController;
 import standard.mvc.component.business.community.newsletter.controller.NewsletterController;
@@ -25,6 +26,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
+@Transactional
 public class NewsletterTest {
 
     @Autowired
@@ -87,16 +89,6 @@ public class NewsletterTest {
         newsletterService.addNode(testEmail1);
         
         assertThat(newsletterDao.searchNodeByTitle(testEmail1), notNullValue());
-    }
-    
-    @After
-    public void reset() throws Exception {
-        
-        assertThat(newsletterDao.searchNodeByTitle(testCategory), notNullValue());
-        
-        newsletterService.removeNode(testCategory);
-        
-        assertThat(newsletterDao.searchNodeByTitle(testCategory), nullValue());
     }
 }
 
