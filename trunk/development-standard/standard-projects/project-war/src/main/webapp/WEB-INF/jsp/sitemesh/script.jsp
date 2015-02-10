@@ -1,4 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page isELIgnored="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+
+<%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 	<head data-placeholder-focus="false" data-placeholder-live="false">
@@ -9,9 +17,9 @@
 			  return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 			}
 		</script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
-		<script src='http://code.jquery.com/jquery-migrate-1.2.1.js' type="text/javascript"></script>
+		<customTags:assetsJsExtendNas theRestOfFileName="/js/jquery-1.11.2.min.js"></customTags:assetsJsExtendNas>
+		<customTags:assetsJsExtendNas theRestOfFileName="/js/jquery-migrate-1.2.1.js"></customTags:assetsJsExtendNas>
+		<customTags:assetsJsExtendNas theRestOfFileName="/js/jquery-ui-1.11.2/jquery-ui.min.js"></customTags:assetsJsExtendNas>
 		<script>
 			window.jQuery || document.write('<script src="${pageContext.request.contextPath}/assets/js/cdn-fallback-jquery.min.js?20"><\/script>');
 		</script>

@@ -20,15 +20,16 @@
 <!--<![endif]-->
 <head>
 <!-- JSTREE -->
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:nasJqueryPlugin>
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:nasJqueryPlugin>
-<customTags:nasJqueryPlugin theRestOfFileName="/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/jquery.jstree.js"></customTags:nasJqueryPlugin>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/jquery.jstree.js"></customTags:assetsJsExtendNas>
 
 <!-- dataTable -->
-<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css" />
-<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/responsive/1.0.3/css/dataTables.responsive.css" />
-<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
-<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/responsive/1.0.3/js/dataTables.responsive.js"></script>
+<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.4/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
+<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.4/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
+
+<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.4/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.4/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
 
 <!-- Style Setting --> 
 <style type="text/css">
