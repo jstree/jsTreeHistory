@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="newsletter">
-	<typeAlias alias="Newsletter" type="standard.mvc.component.business.community.newsletter.vo.NewsletterComprehensiveTree"/>
+	<typeAlias alias="Newsletter" type="standard.mvc.component.business.community.newsletter.vo.NewsletterComprehensiveTree" />
 
 	<select id="getChildNode" parameterClass="Newsletter" resultClass="Newsletter">
 		/* getChildNode */
@@ -193,7 +193,7 @@
        	UPDATE T_Newsletter_Comprehensivetree 
        	   SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
        	 WHERE C_LEFT &gt;= #rightPositionFromNodeByRef#
-		<isEqual property="copyBooleanValue" compareValue="false">
+		<isEqual property="copy" compareValue="0">
 			<isNotEmpty property="c_idsByChildNodeFromNodeById">
 				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
 					#c_idsByChildNodeFromNodeById[]#
@@ -208,7 +208,7 @@
         UPDATE T_Newsletter_Comprehensivetree 
            SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
          WHERE C_RIGHT &gt;= #rightPositionFromNodeByRef#
-		<isEqual property="copyBooleanValue" compareValue="false">
+		<isEqual property="copy" compareValue="0">
 			<isNotEmpty property="c_idsByChildNodeFromNodeById">
 				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
 			   #c_idsByChildNodeFromNodeById[]#

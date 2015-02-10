@@ -194,7 +194,7 @@
        	UPDATE T_FOREIGN_COMPREHENSIVETREE 
        	   SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
        	 WHERE C_LEFT &gt;= #rightPositionFromNodeByRef#
-		<isEqual property="copyBooleanValue" compareValue="false">
+		<isEqual property="copy" compareValue="0">
 			<isNotEmpty property="c_idsByChildNodeFromNodeById">
 				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
 					#c_idsByChildNodeFromNodeById[]#
@@ -209,7 +209,7 @@
         UPDATE T_FOREIGN_COMPREHENSIVETREE 
            SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
          WHERE C_RIGHT &gt;= #rightPositionFromNodeByRef#
-		<isEqual property="copyBooleanValue" compareValue="false">
+		<isEqual property="copy" compareValue="0">
 			<isNotEmpty property="c_idsByChildNodeFromNodeById">
 				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
 			   #c_idsByChildNodeFromNodeById[]#
