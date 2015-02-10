@@ -84,7 +84,6 @@ public interface CoreService {
 	 * @return int
 	 */
 	public <T extends ComprehensiveTree> int alterNodeType( T comprehensiveTree ) throws Exception;
-	public void txTest() throws Exception;
 	
 	
 	/**

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreAddService;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -47,6 +48,8 @@ public class CoreController extends GenericAbstractController
     
     @Resource(name = "CoreService")
     CoreService coreService;
+    @Resource(name = "CoreAddService")
+    CoreAddService coreAddService;
     
     /**
      * jstree Spring + iBatis 버전의 첫페이지를 요청한다.
@@ -360,7 +363,7 @@ public class CoreController extends GenericAbstractController
     @RequestMapping("/txTest.do")
     public List<ComprehensiveTree> txTest(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
                      throws Exception {
-        coreService.txTest();
+        coreAddService.txTest();
             return null;
     }
 }
