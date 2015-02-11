@@ -15,11 +15,11 @@ Insert into T_COMPREHENSIVETREE
     C_LEVEL, C_TITLE, C_TYPE)
  Values
    (3, 2, 0, 3, 4, 
-    2, 'New node', 'default');
+    2, 'Leaf Node', 'default');
 Insert into T_COMPREHENSIVETREE
    (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, 
     C_LEVEL, C_TITLE, C_TYPE)
  Values
    (4, 2, 1, 5, 6, 
-    2, 'New node', 'folder');
+    2, 'Branch Node', 'folder');
 COMMIT;
