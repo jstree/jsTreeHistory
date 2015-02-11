@@ -27,23 +27,30 @@ import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
  * </pre>
  */
 
-@Repository(value="menuMngDao")
-public class MenuMngDaoImpl extends EgovAbstractDAO implements MenuMngDao{
-
-	@Override
-	public List<MenuComprehensiveTree> getEgovUpperMenu() {
-		return getSqlMapClientTemplate().queryForList("menuMng.getEgovUpperMenu");
-	}
-
-	@Override
-	public List<MenuComprehensiveTree> getEgovLeftMenu(MenuComprehensiveTree menuComprehensiveTree) {
-		// TODO Auto-generated method stub
-		return list("menuMng.getEgovLeftMenu", menuComprehensiveTree);
-	}
-
-	@Override
-	public List<MenuComprehensiveTree> getCommunityMenu() {
-		return getSqlMapClientTemplate().queryForList("menuMng.getCommunityMenu");
-	}
-
+@Repository(value = "menuMngDao")
+public class MenuMngDaoImpl extends EgovAbstractDAO implements MenuMngDao
+{
+    
+    @SuppressWarnings({ "deprecation", "unchecked" })
+    @Override
+    public List<MenuComprehensiveTree> getEgovUpperMenu()
+    {
+        return getSqlMapClientTemplate().queryForList("menuMng.getEgovUpperMenu");
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<MenuComprehensiveTree> getEgovLeftMenu(MenuComprehensiveTree menuComprehensiveTree)
+    {
+        // TODO Auto-generated method stub
+        return list("menuMng.getEgovLeftMenu", menuComprehensiveTree);
+    }
+    
+    @SuppressWarnings({ "deprecation", "unchecked" })
+    @Override
+    public List<MenuComprehensiveTree> getCommunityMenu()
+    {
+        return getSqlMapClientTemplate().queryForList("menuMng.getCommunityMenu");
+    }
+    
 }

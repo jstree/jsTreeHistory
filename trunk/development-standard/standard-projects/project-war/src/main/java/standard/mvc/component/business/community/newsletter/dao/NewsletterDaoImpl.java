@@ -42,19 +42,24 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 @Repository("NewsletterDao")
-public class NewsletterDaoImpl extends EgovComAbstractDAO implements NewsletterDao {
-
+public class NewsletterDaoImpl extends EgovComAbstractDAO implements NewsletterDao
+{
+    
+    @SuppressWarnings("deprecation")
     @Override
-    public <T extends ComprehensiveTree> int getMaxPositionForAddNode(T comprehensiveTree) {
+    public <T extends ComprehensiveTree> int getMaxPositionForAddNode(T comprehensiveTree)
+    {
         
-        return (int) getSqlMapClientTemplate().queryForObject(
-                comprehensiveTree.getSqlMapSelector() + ".getMaxPositionForAddNode", comprehensiveTree);
+        return (int) getSqlMapClientTemplate().queryForObject(comprehensiveTree.getSqlMapSelector()
+                                                                      + ".getMaxPositionForAddNode", comprehensiveTree);
     }
-
+    
+    @SuppressWarnings({ "deprecation", "unchecked" })
     @Override
-    public <T extends ComprehensiveTree> T searchNodeByTitle(T comprehensiveTree) {
+    public <T extends ComprehensiveTree> T searchNodeByTitle(T comprehensiveTree)
+    {
         
-        return (T) getSqlMapClientTemplate().queryForObject(
-                comprehensiveTree.getSqlMapSelector() + ".searchNodeByTitle", comprehensiveTree);
+        return (T) getSqlMapClientTemplate().queryForObject(comprehensiveTree.getSqlMapSelector()
+                                                                    + ".searchNodeByTitle", comprehensiveTree);
     }
 }
