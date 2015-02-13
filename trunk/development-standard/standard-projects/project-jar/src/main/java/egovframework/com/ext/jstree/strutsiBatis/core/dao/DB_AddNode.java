@@ -97,6 +97,8 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode
         try
         {
             getSqlMapClientTemplate().getSqlMapClient().startTransaction();
+            getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().setAutoCommit(false);
+            getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
             
             int spaceOfTargetNode = 2;
             Collection<Integer> c_idsByChildNodeFromNodeById = null;
@@ -186,7 +188,9 @@ public class DB_AddNode extends EgovComAbstractDAO implements I_DB_AddNode
                 this.fixCopy(p_ComprehensiveTree.getC_id(), p_ComprehensiveTree.getC_position());
             }
             
+            getSqlMapClientTemplate().getSqlMapClient().executeBatch();
             getSqlMapClientTemplate().getSqlMapClient().commitTransaction();
+            getSqlMapClientTemplate().getSqlMapClient().getCurrentConnection().commit();
         }
         catch (SQLException e)
         {
