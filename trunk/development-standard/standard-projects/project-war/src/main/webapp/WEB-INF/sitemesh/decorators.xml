@@ -21,6 +21,8 @@
 		<pattern>/monitoring?*</pattern>
 		<!-- 일정관리 등록에 달력 팝업사용 다른화면에 영향이있을까봐 일단 아래처럼 셋팅 추후 excludes 정리가 필요함 -->
 		<pattern>/sym/cmm/EgovselectNormalCalendar.do</pattern>
+		<!-- 에러페이지는 exclude 처리 후 해당 JSP에서 page:applyDecorator 로 적용한다. -->
+		<pattern>/common/*error.do</pattern>
 	</excludes>
 	
 	<decorator name="default" page="defaultDeco.jsp">
