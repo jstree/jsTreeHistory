@@ -4,13 +4,15 @@
 	<typeAlias alias="ComprehensiveTree"
 		type="egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree" />
 
-	<!-- <cacheModel id="coreCache" type="LRU"> -->
-	<!-- <flushInterval hours="18" /> -->
-	<!-- <property name="size" value="100" /> -->
-	<!-- 캐쉬 터치 이후 영향 받는 쿼리 적용할것. <flushOnExecute statement="select" /> <flushOnExecute 
-		statement="insert" /> <flushOnExecute statement="update" /> <flushOnExecute 
-		statement="delete" /> -->
-	<!-- </cacheModel> -->
+	<cacheModel id="coreCache" type="LRU">
+		<flushInterval minutes="60" />
+		<property name="cache-size" value="10" />
+		<!-- 캐쉬 터치 이후 영향 받는 쿼리 적용할것. -->
+		<flushOnExecute statement="core.alterNode" /> <!-- include add -->
+		<flushOnExecute statement="core.removeNode" />
+		<flushOnExecute statement="core.stretchPositionForMyself" />
+		<flushOnExecute statement="core.alterNodeType" />
+	</cacheModel> 
 
 	<sql id="getMetaField">
 		/* getChildNode */
@@ -43,8 +45,9 @@
 		WHERE A.C_PARENTID = #c_id#
 		ORDER BY A.C_POSITION ASC
 	</sql>
+	
 	<select id="getChildNode" parameterClass="ComprehensiveTree"
-		resultClass="ComprehensiveTree">
+		resultClass="ComprehensiveTree" cacheModel="core.coreCache">
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user filed */
@@ -203,8 +206,7 @@
 
 
 	<update id="cutMyselfPositionFix" parameterClass="ComprehensiveTree">
-		/*
-		cutMyselfPositionFix */
+		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_COMPREHENSIVETREE_SPRING
 		SET C_POSITION
 		= C_POSITION - 1
@@ -215,20 +217,17 @@
 
 
 	<update id="cutMyselfLeftFix" parameterClass="ComprehensiveTree">
-		/* cutMyselfLeftFix
-		*/
+		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_COMPREHENSIVETREE_SPRING
-		SET C_LEFT = C_LEFT -
-		#spaceOfTargetNode#
+		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
 
 
 	<update id="cutMyselfRightFix" parameterClass="ComprehensiveTree">
-		/* cutMyselfRightFix */
+		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_COMPREHENSIVETREE_SPRING
-		SET C_RIGHT =
-		C_RIGHT - #spaceOfTargetNode#
+		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
 			open="(" close=")" conjunction=",">
