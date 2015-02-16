@@ -4,16 +4,6 @@
 	<typeAlias alias="ComprehensiveTree"
 		type="egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree" />
 
-	<cacheModel id="coreCache" type="LRU">
-		<flushInterval minutes="60" />
-		<property name="cache-size" value="10" />
-		<!-- 캐쉬 터치 이후 영향 받는 쿼리 적용할것. -->
-		<flushOnExecute statement="core.alterNode" /> <!-- include add -->
-		<flushOnExecute statement="core.removeNode" />
-		<flushOnExecute statement="core.stretchPositionForMyself" />
-		<flushOnExecute statement="core.alterNodeType" />
-	</cacheModel> 
-
 	<sql id="getMetaField">
 		/* getChildNode */
 		SELECT A.c_id
@@ -47,7 +37,7 @@
 	</sql>
 	
 	<select id="getChildNode" parameterClass="ComprehensiveTree"
-		resultClass="ComprehensiveTree" cacheModel="core.coreCache">
+		resultClass="ComprehensiveTree">
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user filed */
