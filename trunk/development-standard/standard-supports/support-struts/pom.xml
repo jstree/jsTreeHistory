@@ -17,7 +17,7 @@
 	<description>아파치 커먼 라이브러리</description>
 
 	<properties>
-		<struts.maven.artifact.version>2.3.16</struts.maven.artifact.version>
+		<struts.maven.artifact.version>2.3.20</struts.maven.artifact.version>
 	</properties>
 
 	<dependencies>
