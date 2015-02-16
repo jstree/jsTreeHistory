@@ -122,48 +122,33 @@ public class CoreServiceImpl implements CoreService
         
         for (T child : childNodesFromRef)
         {
-            //대상 노드가 들어가려는 자리에 ( position ) 이미 자리잡고 있는 노드가 있는지 검사.
             if (child.getC_position() == comprehensiveTree.getC_position())
             {
-                //있다면 이건 이미 대상 노드가 뽑혀져 나온 케이스 이며, 부모노트의 오른쪽 포지션이 늘어나면 안되므로 내가 들어가려는 
-                //노드의 좌측 left 값을 rightPositionFromNodeByRef에 맵핑.
                 rightPositionFromNodeByRef = child.getC_left();
                 break;
             }
         }
         
-        //벌린다.
         this.stretchLeftRightForMyselfFromJstree(spaceOfTargetNode, rightPositionFromNodeByRef,
                                                  comprehensiveTree.getCopy(), c_idsByChildNodeFromNodeById,
                                                  comprehensiveTree);
         
-        //레벨 잡아주고, 사실 ref가 0일 경우는 없다.
         int targetNodeLevel = comprehensiveTree.getRef() == 0 ? 0 : nodeByRef.getC_level() + 1;
-        //부모노드의 우측 포지션을 잠시 저장해 둔다.
         int comparePosition = rightPositionFromNodeByRef;
         
-        //쌩짜 addnode인 경우.
-        //당연히 부모노드는 ref일거고
         comprehensiveTree.setC_parentid(comprehensiveTree.getRef());
-        //부모의 우측 좌표값을 새로운 노드의 좌측 좌표값일거고
         comprehensiveTree.setC_left(comparePosition);
-        //부모의 우측 좌표+1값을 새로운 노드의 우측 좌표값일거고
         comprehensiveTree.setC_right(comparePosition + 1);
-        //계산된 노드의 레벨이 적용
         comprehensiveTree.setC_level(targetNodeLevel);
         
-        //db 처리하고 ( 타입을 제외한다 ) 
         int insertSeqResult = coreDao.addMyselfFromJstree(comprehensiveTree);
         
-        //아이디 리턴 잡아서 처리하고
         t_ComprehensiveTree.setId(insertSeqResult);
         comprehensiveTree.setC_id(insertSeqResult);
-        //db 처리할때 아이디값을 한번 더 업데이트 해준다. ( 타입 포함 ) 
-        int alterCountResult = coreDao.alterNode(comprehensiveTree); // TODO 삭제하고 위에서 한 번에 처리하도록 리팩토링
+        int alterCountResult = coreDao.alterNode(comprehensiveTree); 
         
         if (insertSeqResult > 0 && alterCountResult == 1)
         {
-            // 성공한거다. 
             t_ComprehensiveTree.setStatus(1);
         }
         else
@@ -210,34 +195,33 @@ public class CoreServiceImpl implements CoreService
     private <T extends ComprehensiveTree> void fixCopy(int ind, int ref, T t_comprehensiveTree) throws Exception
     {
         T comprehensiveTree = newInstance(t_comprehensiveTree);
-        comprehensiveTree.setC_id(ind); //이건 뭐하는 짓인가.
+        comprehensiveTree.setC_id(ind); 
         
-        T node = ((T) coreDao.getNode(comprehensiveTree)); //집어넣은 노드 가져오고
+        T node = ((T) coreDao.getNode(comprehensiveTree)); 
         
-        List<T> children = ((List<T>) coreDao.getChildNodeByLeftRight(node)); //집어넣은 노드 하위 차일드 노드 다 가져와서
+        List<T> children = ((List<T>) coreDao.getChildNodeByLeftRight(node)); 
         
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int i = node.getC_left() + 1; i < node.getC_right(); i++)
         {
-            map.put(i, ind); //인서트 노드의 좌측 좌표 + 1 부터 오른쪽 좌표까지 맵에 넣고 ( 이건 또 뭐하는 짓인가 )
+            map.put(i, ind); 
         }
         
         for (int i = 0; i < children.size(); i++)
         {
             
-            T child = children.get(i); //하위 차일드 노드를 루프 돌면서 
+            T child = children.get(i); 
             
-            if (child.getC_id() == ind) //혹시 인서트한 노드아이디와 동일한 차일드 아이디가 있다면 , 이런일이 있을수 있나?
+            if (child.getC_id() == ind) 
             {
                 logger.debug(">>>>>>>>>>>>>>>>> 기준노드가 잡혔음.");
                 logger.debug("C_TITLE    = " + child.getC_title());
                 logger.debug("C_ID       = " + ind);
                 logger.debug("C_POSITION = " + ref);
 
-                //그냥 인스턴스 하나 만들어서 디비처리함. 뜬굼없음.
                 T onlyFixCopyFromJstree = newInstance(t_comprehensiveTree);
-                onlyFixCopyFromJstree.setFixCopyId(ind); //추가한 노드 아이디
-                onlyFixCopyFromJstree.setFixCopyPosition(ref); //포지션 조정.
+                onlyFixCopyFromJstree.setFixCopyId(ind); 
+                onlyFixCopyFromJstree.setFixCopyPosition(ref); 
                 
                 coreDao.fixCopyIF(onlyFixCopyFromJstree);
                 continue;
@@ -352,7 +336,6 @@ public class CoreServiceImpl implements CoreService
                 }
                 else
                 {
-                    // 동일한 id가 여러개라면 이미 노드 추가 로직이 문제가 있는 것임.
                     throw new RuntimeException("여러개의 노드가 업데이트 되었음");
                 }
             }
@@ -407,7 +390,7 @@ public class CoreServiceImpl implements CoreService
             if (c_idsByChildNodeFromNodeById.contains(comprehensiveTree.getRef())) { throw new RuntimeException(
                     "myself contains already refTargetNode"); }
             
-            spaceOfTargetNode = nodeById.getC_right() - nodeById.getC_left() + 1; //차일드 노드까지를 계산.
+            spaceOfTargetNode = nodeById.getC_right() - nodeById.getC_left() + 1; 
         }
         
         if (nodeById != null && !comprehensiveTree.isCopied())
@@ -549,12 +532,15 @@ public class CoreServiceImpl implements CoreService
                 logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
                 logger.debug("노드의 요청받은 위치값=" + comprehensiveTree.getC_position());
                 logger.debug("노드의 요청받은 멀티카운터=" + comprehensiveTree.getMultiCounter());
-                comprehensiveTree.setC_position(comprehensiveTree.getC_position()); // TODO useless code
+                comprehensiveTree.setC_position(comprehensiveTree.getC_position()); 
                 logger.debug("노드의 최종 위치값=" + comprehensiveTree.getC_position());
                 session.setAttribute("settedPosition", comprehensiveTree.getC_position());
             }
             else
             {
+                
+                
+                
                 logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 이 아닐때");
                 logger.debug("노드값=" + nodeById.getC_title());
                 logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
