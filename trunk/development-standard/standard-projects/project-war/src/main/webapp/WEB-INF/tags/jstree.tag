@@ -188,7 +188,7 @@ $("${target}")
 					// can have files and other folders inside of it, but NOT `drive` nodes
 					"valid_children" : [ "default", "folder" ],
 					"icon" : {
-						"image" : "http://www.313.co.kr/php/lh_7th/data/admin/pds/scriptPool/jQueryPlugIns/jstree-v.pre1.0/_demo/folder.png"
+						"image" : "${pageContext.request.contextPath}/assets/js/jstree-v.pre1.0/ic_explorer.png"
 					}
 				},
 				// The `drive` nodes 
