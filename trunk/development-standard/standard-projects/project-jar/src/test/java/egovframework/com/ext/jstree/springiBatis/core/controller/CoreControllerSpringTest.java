@@ -59,4 +59,14 @@ public class CoreControllerSpringTest {
 
         assertThat(StringUtils.contains(failResult.getResponse().getHeader("Content-type"), MediaType.TEXT_HTML_VALUE), is(true));
     }
+    
+    @Test
+    public void searchNodeTest() throws Exception {
+    	MvcResult failResult = mockMvc.perform(post(defaultUri + "/searchNode.do")
+    			.param("searchString", "검색"))
+    			.andDo(print())
+    			.andExpect(status().isOk()).andReturn();
+    	
+    	assertThat(StringUtils.contains(failResult.getResponse().getHeader("Content-type"), MediaType.TEXT_HTML_VALUE), is(true));
+    }
 }
