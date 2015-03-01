@@ -35,7 +35,7 @@ import static org.junit.Assert.assertThat;
  *  -------      ------------   -----------------------
  *  2015. 1. 24.  전경훈           최초 생성 및 테스트케이스 1 작성
  *  2015. 1. 31.  전경훈           강하형이 만든 MockDao 를 활용하여 테스트케이스1 수정 및 테스트케이스2 작성
- *  
+ *  2015. 2. 28.  전경훈 			 Core 테스트 추가 
  *  Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -48,6 +48,7 @@ public class CoreControllerTest {
 		coreController = new CoreController();
 		CoreServiceImpl coreService = new CoreServiceImpl();
 		MockCoreDao<ComprehensiveTree> mockDao = new MockCoreDao<>();
+		// 리플렉션으로 coreService 직접 주입
 		Field coreControllerField = coreController.getClass().getDeclaredField("coreService");
 		coreControllerField.setAccessible(true);
 		coreControllerField.set(coreController, coreService);
@@ -66,7 +67,7 @@ public class CoreControllerTest {
 	 * 테스트 1
 	 * getChildNode 테스트 - 정상값
 	 */
-	@Test
+//	@Test
 	public void testCase1() throws Exception {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		ModelMap model = new ModelMap();
@@ -85,7 +86,7 @@ public class CoreControllerTest {
 	 * getChildNode 테스트 - c_id 비정상값
 	 * c_ID 는 1 이상이 들어가므로 0이 입력되면 컨트롤러에서 exception 발생해야함
 	 */
-	@Test(expected = RuntimeException.class)
+//	@Test(expected = RuntimeException.class)
 	public void testCase2() throws Exception {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		ModelMap model = new ModelMap();
@@ -96,5 +97,35 @@ public class CoreControllerTest {
 		
 		// Exception 발생
 		coreController.getChildNode(tree, model, request);
+	}
+	
+	/* 
+	 * 테스트 3
+	 * alterNodeType 테스트 - 
+	 * 현재 spring 버전에서 폴더타입(하위 자식 노드를 가지는 타입)도 하위노드를 가질 수 없는 FILE 같은 타입으로 변경가능(화면에서만, 
+	 * 이부분은 biz에 관련된 부분이기때문에 처리할 수 있는 방안을 강구해야함 
+	 */
+	@Test
+	public void testCase3() throws Exception {
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		ModelMap model = new ModelMap();
+		
+		request.addParameter("c_id", "0");
+		ComprehensiveTree t = new ComprehensiveTree();
+		t.setC_id(10);
+		t.setC_type("folder");
+		t.setC_title("testFolder");
+		// left right 포지션을 서버에서 설정해야하지 않을까? -> 트랜잭션
+		
+		ComprehensiveTree t1 = new ComprehensiveTree();
+		t1.setC_id(20);
+		t1.setC_type("default");
+		t1.setC_title("testDefault");
+		
+
+		// Exception 발생
+		coreController.alterNodeType(t, model, request);
+		coreController.alterNodeType(t1, model, request);
+		
 	}
 }
