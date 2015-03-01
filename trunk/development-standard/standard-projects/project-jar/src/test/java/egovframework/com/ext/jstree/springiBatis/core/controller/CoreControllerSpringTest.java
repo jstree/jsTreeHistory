@@ -63,7 +63,7 @@ public class CoreControllerSpringTest {
     @Test
     public void searchNodeTest() throws Exception {
     	MvcResult failResult = mockMvc.perform(post(defaultUri + "/searchNode.do")
-    			.param("searchString", "검색"))
+    			.param("searchString", "test2"))
     			.andDo(print())
     			.andExpect(status().isOk()).andReturn();
     	
