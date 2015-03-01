@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 	<head></head>
@@ -16,7 +17,8 @@
 				</div>
 				<div id="header-logo" class="one-third bm-remove">
 					<a href="${pageContext.request.contextPath}/" target="_self">
-						<img src="${pageContext.request.contextPath}/assets/images/logo.jpg" alt="313 developer group logo">
+						<c:set var="logPath" value="${logUrl}" />
+						<img src="${pageContext.request.contextPath}${logPath}" alt="313 developer group logo">
 					</a>
 				</div>
 				<div id="header-cart" class="one-third bm-remove last">

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import standard.mvc.component.business.community.menu.service.MenuMngSerivce;
 
+import standard.mvc.component.business.community.log.service.LogUrlSerivce;
+
 /**
  * Modification Information
  * 
@@ -43,7 +45,11 @@ public class CommunityController {
 
 	@Resource(name = "menuMngService")
 	private MenuMngSerivce menuMngService;
-
+	
+	@Resource(name = "logUrlService")
+	private LogUrlSerivce logUrlService;
+	
+	
 	@RequestMapping(value = { "/{major}/{minor}.do" })
 	public String execute(ModelMap model, @PathVariable("major") String major,
 			@PathVariable("minor") String minor) throws Exception {
@@ -63,6 +69,7 @@ public class CommunityController {
 	@RequestMapping(value = "/index.do")
 	public String execute(ModelMap model) throws Exception {
 		model.addAttribute("menuList", menuMngService.getCommunityMenu());
+		model.addAttribute("logUrl", logUrlService.getLogUrl());
 		return "/jsp/community/index/index";
 	}
 
