@@ -60,7 +60,7 @@ public class CoreControllerSpringTest {
         assertThat(StringUtils.contains(failResult.getResponse().getHeader("Content-type"), MediaType.TEXT_HTML_VALUE), is(true));
     }
     
-    @Test
+    //@Test
     public void searchNodeTest() throws Exception {
     	MvcResult failResult = mockMvc.perform(post(defaultUri + "/searchNode.do")
     			.param("searchString", "test2"))
