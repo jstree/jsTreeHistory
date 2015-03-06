@@ -1,10 +1,22 @@
 package egovframework.com.ext.jstree.springiBatis.core.vo;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
 import java.util.Collection;
 import java.util.HashMap;
+
+import javax.validation.constraints.Min;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
+
+import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.AddNode;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNodeType;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.MoveNode;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNode;
+
 
 /**
  * Modification Information
@@ -19,25 +31,30 @@ import java.util.HashMap;
  *  
  *  << 개정이력(Modification Information) >>
  *  
- *  수정일         수정자             수정내용
- *  -------      ------------   -----------------------
- *  2014.  7. 31. 이동민                 최초 생성
- * 	2014.  9.  4. JeonKyunghun   주석 추가
- *  2014.  9. 16. 류강하                 주석 추가
- *  2014. 10. 12. 류강하                 getSqlMapSelector 메서드의 null 체크 추가
- *  2015.  1. 31. 한지훈          toString, equals, hashCode 구현
+ *  수정일            수정자             수정내용
+ *  --------      ------------   -----------------------
+ *  2014.  7. 31.  이동민            최초 생성
+ * 	2014.  9.  4.  전경훈            주석 추가
+ *  2014.  9. 16.  류강하            주석 추가
+ *  2014. 10. 12.  류강하            getSqlMapSelector 메서드의 null 체크 추가
+ *  2015.  1. 31.  한지훈            toString, equals, hashCode 구현
+ *  2015.  3.  3.  전경훈            Constraint Annotation 추가
+ *  
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 public class ComprehensiveTree {
 
 	/** 노드의 고유 id, 1부터 시작(Root Node) */
+	@Min(value = 2, groups = { RemoveNode.class, AlterNode.class, 
+			AlterNodeType.class, MoveNode.class })
 	private int c_id;
 	
 	/** 노드의 부모 id, 0부터 시작(Root Node) */
 	private int c_parentid;
 	
 	/** Parent의 몇 번째 자식인지를 나타냄. 0부터 시작 */
+	@Min(value = 0, groups = { AddNode.class, MoveNode.class })
 	private int c_position;
 	
 	/** 노드의 left 위치, 1부터 시작(Root Node) */
@@ -50,15 +67,20 @@ public class ComprehensiveTree {
 	private int c_level;
 
 	/** 참조하고 있는 노드의 id */
+	@Min(value = 1, groups = { AddNode.class, MoveNode.class })
 	private int ref;
 	
 	/** copy 시 1의 값을 가짐. */
+	@Range(min = 0, max = 1, groups = { MoveNode.class })
 	private int copy;
+	
+	@Min(value = 0, groups = { MoveNode.class })
 	private int multiCounter;
 	
 	private int status;
 	
 	/** Node 의 title */
+	@NotEmpty(groups = { AddNode.class, AlterNode.class })
 	private String c_title;
 	
 	/**<pre>
@@ -69,10 +91,14 @@ public class ComprehensiveTree {
 	 * default : leaf 노드
 	 * </pre>
 	 */
+	@Contained(values = {"folder", "default"}, message = "c_type must be folder or default"
+					, groups = { AddNode.class, AlterNode.class, AlterNodeType.class })
 	private String c_type;
+	
 	private String childcount;
 	
 	/** 검색시 Keyword */
+	// TODO : 확인할것
 	private String searchStr;
 	
 	private int idif;

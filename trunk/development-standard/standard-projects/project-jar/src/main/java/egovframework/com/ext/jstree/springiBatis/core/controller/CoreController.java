@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,6 +20,11 @@ import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreAddService;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.AddNode;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNodeType;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.MoveNode;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
@@ -37,7 +44,8 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  *  수정일         수정자             수정내용
  *  -------      ------------   -----------------------
  *  2014. 7. 30.  taekyung.Lee        최초 생성
- * 
+ *  2015. 3.  5.  전경훈            @Validated 를 통한 파라미터 빈 검증
+ *  
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -45,7 +53,6 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
 @RequestMapping(value = { "/egovframework/com/etc/jstree/springiBatis/core" })
 public class CoreController extends GenericAbstractController
 {
-    
     @Resource(name = "CoreService")
     CoreService coreService;
     @Resource(name = "CoreAddService")
@@ -77,8 +84,7 @@ public class CoreController extends GenericAbstractController
     public List<ComprehensiveTree> getChildNode(ComprehensiveTree comprehensiveTree, ModelMap model,
             HttpServletRequest request) throws Exception
     {
-        
-        if (comprehensiveTree.getC_id() == 0) { throw new RuntimeException(); }
+        if (comprehensiveTree.getC_id() <= 0) { throw new RuntimeException(); }
         
         return coreService.getChildNode(comprehensiveTree);
     }
@@ -97,7 +103,6 @@ public class CoreController extends GenericAbstractController
     public List<String> searchNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
             throws Exception
     {
-        
         if (!StringUtils.hasText(request.getParameter("searchString"))) { throw new RuntimeException(); }
         
         comprehensiveTree.setSearchStr(request.getParameter("searchString"));
@@ -118,37 +123,11 @@ public class CoreController extends GenericAbstractController
      */
     @ResponseBody
     @RequestMapping("/addNode.do")
-    public ComprehensiveTree addNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-            throws Exception
+    public ComprehensiveTree addNode(@Validated(value = AddNode.class) ComprehensiveTree comprehensiveTree,
+    		BindingResult bindingResult, ModelMap model) throws Exception
     {
-        
-        if (request.getParameter("ref") == null || request.getParameter("c_position") == null
-                || request.getParameter("c_title") == null || request.getParameter("c_type") == null)
-        {
-            throw new RuntimeException("addNode parameter null");
-        }
-        else
-        {
-            if (request.getParameter("ref").equals("0")) { throw new RuntimeException("addNode ref value is 0"); }
-            
-            if (Integer.parseInt(request.getParameter("c_position")) < 0) { throw new RuntimeException(
-                    "addNode c_postion less 0"); }
-            
-            if (request.getParameter("c_type").equals("default") || request.getParameter("c_type").equals("folder"))
-            {
-            }
-            else
-            {
-                if (request.getParameter("c_type").equals("drive"))
-                {
-                    throw new RuntimeException("addNode c_position value is drive");
-                }
-                else
-                {
-                    throw new RuntimeException("addNode c_position value is another");
-                }
-            }
-        }
+    	if(bindingResult.hasErrors()) throw new RuntimeException();
+
         comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
         
         return coreService.addNode(comprehensiveTree);
@@ -165,12 +144,10 @@ public class CoreController extends GenericAbstractController
      */
     @ResponseBody
     @RequestMapping("/removeNode.do")
-    public ComprehensiveTree removeNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-            throws Exception
+    public ComprehensiveTree removeNode(@Validated(value = RemoveNode.class) ComprehensiveTree comprehensiveTree,
+    		BindingResult bindingResult, ModelMap model) throws Exception
     {
-        
-        if (request.getParameter("c_id") == null || request.getParameter("c_id").equals("0")
-                || request.getParameter("c_id").equals("1")) { throw new RuntimeException(); }
+    	if(bindingResult.hasErrors()) throw new RuntimeException();
         
         comprehensiveTree.setStatus(coreService.removeNode(comprehensiveTree));
         
@@ -188,35 +165,10 @@ public class CoreController extends GenericAbstractController
      */
     @ResponseBody
     @RequestMapping("/alterNode.do")
-    public ComprehensiveTree alterNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-            throws Exception
+    public ComprehensiveTree alterNode(@Validated(value = AlterNode.class) ComprehensiveTree comprehensiveTree,
+    		BindingResult bindingResult, ModelMap model) throws Exception
     {
-        
-        if (request.getParameter("c_id") == null || request.getParameter("c_title") == null
-                || request.getParameter("c_type") == null)
-        {
-            throw new RuntimeException("alterNode parameter null");
-        }
-        else
-        {
-            if (request.getParameter("c_id").equals("0")) { throw new RuntimeException("alterNode ref value is 0"); }
-            if (request.getParameter("c_id").equals("1")) { throw new RuntimeException("alterNode ref value is 1"); }
-            
-            if (request.getParameter("c_type").equals("default") || request.getParameter("c_type").equals("folder"))
-            {
-            }
-            else
-            {
-                if (request.getParameter("c_type").equals("drive"))
-                {
-                    throw new RuntimeException("alterNode c_position value is drive");
-                }
-                else
-                {
-                    throw new RuntimeException("alterNode c_position value is another");
-                }
-            }
-        }
+    	if(bindingResult.hasErrors()) throw new RuntimeException();
         
         comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
         comprehensiveTree.setStatus(coreService.alterNode(comprehensiveTree));
@@ -235,34 +187,10 @@ public class CoreController extends GenericAbstractController
      */
     @ResponseBody
     @RequestMapping("/alterNodeType.do")
-    public ComprehensiveTree alterNodeType(ComprehensiveTree comprehensiveTree, ModelMap model,
-            HttpServletRequest request) throws Exception
+    public ComprehensiveTree alterNodeType(@Validated(value = AlterNodeType.class) ComprehensiveTree comprehensiveTree,
+    		BindingResult bindingResult, ModelMap model) throws Exception
     {
-        
-        if (request.getParameter("c_id") == null || request.getParameter("c_type") == null)
-        {
-            throw new RuntimeException();
-        }
-        else
-        {
-            if (request.getParameter("c_id").equals("0")) { throw new RuntimeException("alterNodeType c_id value is 0"); }
-            if (request.getParameter("c_id").equals("1")) { throw new RuntimeException("alterNodeType c_id value is 1"); }
-            
-            if (request.getParameter("c_type").equals("default") || request.getParameter("c_type").equals("folder"))
-            {
-            }
-            else
-            {
-                if (request.getParameter("c_type").equals("drive"))
-                {
-                    throw new RuntimeException("alterNodeType c_position value is drive");
-                }
-                else
-                {
-                    throw new RuntimeException("alterNodeType c_position value is another");
-                }
-            }
-        }
+    	if(bindingResult.hasErrors()) throw new RuntimeException();
         
         coreService.alterNodeType(comprehensiveTree);
         
@@ -283,39 +211,11 @@ public class CoreController extends GenericAbstractController
      */
     @ResponseBody
     @RequestMapping("/moveNode.do")
-    public ComprehensiveTree moveNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
-            throws Exception
+    public ComprehensiveTree moveNode(@Validated(value = MoveNode.class) ComprehensiveTree comprehensiveTree,
+    		BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception
     {
-        
-        if (request.getParameter("c_id") == null || request.getParameter("c_position") == null
-                || request.getParameter("copy") == null || request.getParameter("multiCounter") == null
-                || request.getParameter("ref") == null)
-        {
-            throw new RuntimeException("invalid parameters Null");
-        }
-        else
-        {
-            if (request.getParameter("ref").equals("0")) { throw new RuntimeException("moveNode ref value is 0"); }
-            
-            if (request.getParameter("c_id").equals("0") || request.getParameter("c_id").equals("1")) { throw new RuntimeException(
-                    "invalid parameters c_id is 0 or 1"); }
-            
-            if (Integer.parseInt(request.getParameter("c_position")) < 0) { throw new RuntimeException(
-                    "addNode c_postion less 0"); }
-            
-            if (Integer.parseInt(request.getParameter("copy")) < 0)
-            {
-                throw new RuntimeException("addNode copy less 0");
-            }
-            else
-            {
-                if (Integer.parseInt(request.getParameter("copy")) > 1) { throw new RuntimeException(
-                        "addNode copy lager 1"); }
-            }
-            
-            if (Integer.parseInt(request.getParameter("multiCounter")) < 0) { throw new RuntimeException(
-                    "addNode multiCounter less 0"); }
-        }
+    	if(bindingResult.hasErrors()) throw new RuntimeException();
+
         coreService.moveNode(comprehensiveTree, request);
         
         return comprehensiveTree;
@@ -325,7 +225,6 @@ public class CoreController extends GenericAbstractController
     @RequestMapping("/analyzeNode.do")
     public String getChildNode(ModelMap model)
     {
-        
         model.addAttribute("analyzeResult", "");
         
         return "jsp/community/jsTreeAlg/jsTreeSpringDemo/analyzeResult";
@@ -339,7 +238,6 @@ public class CoreController extends GenericAbstractController
     @RequestMapping("/mainTest.do")
     public String jstreeMain()
     {
-        
         return "/jsp/egovframework/com/ext/jstree/jstreeSolutionSpringVersion";
     }
     
