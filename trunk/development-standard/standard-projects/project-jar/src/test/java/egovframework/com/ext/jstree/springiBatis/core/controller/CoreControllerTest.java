@@ -123,9 +123,6 @@ public class CoreControllerTest {
 		t1.setC_title("testDefault");
 		
 
-		// Exception 발생
-		coreController.alterNodeType(t, model, request);
-		coreController.alterNodeType(t1, model, request);
 		
 	}
 }
