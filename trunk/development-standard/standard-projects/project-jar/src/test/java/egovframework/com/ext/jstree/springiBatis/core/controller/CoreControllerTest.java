@@ -108,8 +108,6 @@ public class CoreControllerTest {
 	@Test(expected = RuntimeException.class)
 	public void testCase3() throws Exception {
 		MockHttpServletRequest request = new MockHttpServletRequest();
-		ModelMap model = new ModelMap();
-		
 		request.addParameter("c_id", "0");
 		ComprehensiveTree t = new ComprehensiveTree();
 		t.setC_id(10);
