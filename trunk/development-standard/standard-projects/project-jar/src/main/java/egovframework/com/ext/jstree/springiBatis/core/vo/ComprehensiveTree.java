@@ -7,7 +7,7 @@ import javax.validation.constraints.Min;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
 import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
@@ -39,6 +39,7 @@ import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNod
  *  2014. 10. 12.  류강하            getSqlMapSelector 메서드의 null 체크 추가
  *  2015.  1. 31.  한지훈            toString, equals, hashCode 구현
  *  2015.  3.  3.  전경훈            Constraint Annotation 추가
+ *  2015.  3.  9.  전경훈            Constraint Annotation 변경 (공백값 체크를 위해 NotEmpty -> NotBlank)
  *  
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -80,7 +81,7 @@ public class ComprehensiveTree {
 	private int status;
 	
 	/** Node 의 title */
-	@NotEmpty(groups = { AddNode.class, AlterNode.class })
+	@NotBlank(groups = { AddNode.class, AlterNode.class })
 	private String c_title;
 	
 	/**<pre>
