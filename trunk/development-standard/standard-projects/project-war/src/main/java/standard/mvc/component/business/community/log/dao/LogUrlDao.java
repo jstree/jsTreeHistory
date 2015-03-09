@@ -1,9 +1,5 @@
 package standard.mvc.component.business.community.log.dao;
 
-import java.util.List;
-
-import standard.mvc.component.business.community.menu.vo.MenuComprehensiveTree;
-
 /**
  * Modification Information
  * 
