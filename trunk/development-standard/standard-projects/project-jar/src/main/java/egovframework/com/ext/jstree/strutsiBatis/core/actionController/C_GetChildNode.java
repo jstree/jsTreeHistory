@@ -71,8 +71,6 @@ public class C_GetChildNode extends ActionSupport implements Preparable,
 	public void prepare() throws Exception {
 		p_ComprehensiveTree = new P_ComprehensiveTree();
 		t_GetChildNodes = new ArrayList<T_ComprehensiveTree>();
-
-		//i_S_GetChildNode = new S_GetChildNode();
 	}
 
 	@Override
