@@ -58,7 +58,7 @@
 									<div class="content">
 										<p class="text"></p>
 										<div id="social-icons">
-											<span class="tip-t-fade" data-tooltip="Facebook"><a	href="https://www.facebook.com/313DevGroup" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></span> 
+											<span class="tip-t-fade" data-tooltip="Facebook"><a	href="https://www.facebook.com/groups/313devgroup/" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></span> 
 											<span class="tip-t-fade" data-tooltip="Twitter"><a href="https://twitter.com/313DevGroup" target="_blank"><i	class="fa fa-twitter fa-fw"></i></a></span> 
 											<span class="tip-t-fade" data-tooltip="Google+"><a href="https://plus.google.com/communities/116550874214546756994" target="_blank"><i class="fa fa-google-plus fa-fw"></i></a></span>
 										</div>
@@ -68,7 +68,7 @@
 						</div>
 					</div>
 					<div id="copyright" class="one-half-percent desktop-tablet bm-remove">
-						Copyright &copy; 2013-2014, 313 Developer Group
+						Copyright &copy; 2013-2015, 313 Developer Group
 					</div>
 					<div id="validation" class="one-half-percent desktop-tablet bm-remove last">
 						<span>
