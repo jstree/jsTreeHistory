@@ -86,8 +86,6 @@ public class C_MoveNode extends ActionSupport implements Preparable,
 	public void prepare() throws Exception {
 		p_ComprehensiveTree = new P_ComprehensiveTree();
 		t_ComprehensiveTree = new T_ComprehensiveTree();
-
-		//i_S_MoveNode = new S_MoveNode();
 	}
 
 	@Override
