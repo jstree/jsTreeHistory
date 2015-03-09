@@ -82,8 +82,6 @@ public class C_RemoveNode extends ActionSupport implements Preparable,
 	@Override
 	public void prepare() throws Exception {
 		t_ComprehensiveTree = new T_ComprehensiveTree();
-
-		//i_S_RemoveNode = new S_RemoveNode();
 	}
 
 	@Override
