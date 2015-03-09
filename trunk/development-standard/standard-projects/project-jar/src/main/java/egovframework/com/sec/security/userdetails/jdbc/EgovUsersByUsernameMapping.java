@@ -27,6 +27,7 @@ import org.springframework.jdbc.object.MappingSqlQuery;
  * </pre>
  */
 
+@SuppressWarnings("rawtypes")
 public abstract class EgovUsersByUsernameMapping  extends MappingSqlQuery {
 
 	/**
