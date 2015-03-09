@@ -81,14 +81,6 @@ public class C_AnalyzeNodeOfJstreeSolution extends ActionSupport implements
 	@Override
 	public String execute() {
 
-		// T_ComprehensiveTree rootNode = crud_JstreeSolutionStrutsVersion
-		// .analyzeRootNode();
-		//
-		// if (rootNode == null) {
-		// alayzeResult.append("[FAIL]\tNo root node.").append("</br>");
-		// } else {
-		// alayzeResult.append("[OK]\tJust one root node.").append("</br>");
-		// }
 		return Action.SUCCESS;
 	}
 
