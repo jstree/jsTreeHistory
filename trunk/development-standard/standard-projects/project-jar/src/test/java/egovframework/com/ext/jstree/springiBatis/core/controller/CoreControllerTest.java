@@ -105,7 +105,7 @@ public class CoreControllerTest {
 	 * 현재 spring 버전에서 폴더타입(하위 자식 노드를 가지는 타입)도 하위노드를 가질 수 없는 FILE 같은 타입으로 변경가능(화면에서만, 
 	 * 이부분은 biz에 관련된 부분이기때문에 처리할 수 있는 방안을 강구해야함 
 	 */
-	@Test(expected = RuntimeException.class)
+	@Test
 	public void testCase3() throws Exception {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.addParameter("c_id", "0");
