@@ -71,8 +71,6 @@ public class C_AddNode extends ActionSupport implements Preparable,
 	public void prepare() throws Exception {
 		p_ComprehensiveTree = new P_ComprehensiveTree();
 		t_ComprehensiveTree = new T_ComprehensiveTree();
-
-		//i_S_AddNode = new S_AddNode();
 	}
 
 	@Override
