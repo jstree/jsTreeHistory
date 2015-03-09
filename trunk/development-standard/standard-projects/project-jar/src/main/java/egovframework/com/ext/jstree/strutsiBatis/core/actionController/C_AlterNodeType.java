@@ -85,8 +85,6 @@ public class C_AlterNodeType extends ActionSupport implements Preparable,
 	public void prepare() throws Exception {
 		p_ComprehensiveTree = new P_ComprehensiveTree();
 		t_ComprehensiveTree = new T_ComprehensiveTree();
-
-		//i_S_AlterNodeType = new S_AlterNodeType();
 	}
 
 	@Override
