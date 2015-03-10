@@ -106,6 +106,7 @@ public class SecuredObjectServiceImpl implements ISecuredObjectService, Applicat
 	 * @return LinkedHashMap
 	 * @exception Exception
 	 */
+    @SuppressWarnings("unchecked")
     public LinkedHashMap getRolesAndUrl() throws Exception {
         try {
             return securedObjectDAO.getRolesAndUrl();
