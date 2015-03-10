@@ -28,7 +28,7 @@ import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
 public class LogUrlDaoImpl extends EgovAbstractDAO implements LogUrlDao
 {
     
-    @SuppressWarnings({ "deprecation", "unchecked" })
+    @SuppressWarnings({ "deprecation" })
     @Override
     public String getLogUrl()
     {
