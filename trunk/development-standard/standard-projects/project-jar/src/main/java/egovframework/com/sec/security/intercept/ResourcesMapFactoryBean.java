@@ -24,10 +24,10 @@ import egovframework.com.sec.security.securedobject.ISecuredObjectService;
  * </pre>
  */
 
+@SuppressWarnings("rawtypes")
 public class ResourcesMapFactoryBean implements FactoryBean {
 	
     private String resourceType;
-    @SuppressWarnings("rawtypes")
     private LinkedHashMap resourcesMap;
     private ISecuredObjectService securedObjectService;
 
