@@ -46,6 +46,7 @@ import org.springframework.security.web.util.RequestMatcher;
  * </pre>
  */
 
+@SuppressWarnings("deprecation")
 public interface ISecuredObjectService {
     Log LOGGER = LogFactory.getLog(ISecuredObjectService.class);
     
