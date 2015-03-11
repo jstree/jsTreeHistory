@@ -63,6 +63,7 @@ public class CommunityController {
 
 		logger.info("path : {}", new Object[] { sb });
 		model.addAttribute("menuList", menuMngService.getCommunityMenu());
+		model.addAttribute("logUrl", logUrlService.getLogUrl());
 		return sb.toString();
 	}
 
