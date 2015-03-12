@@ -453,7 +453,7 @@
 						<p class="bm-remove no-text-overflow">
 							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>손호성</strong></a>
 							<br />
-							(주)아이비즈소프트웨어
+							(주)마크애니
 						</p>
 						<div>
 							<div class="content">
