@@ -18,9 +18,10 @@
 	<description>ROOT Project Repository by 313 DEV GRP</description>
 	
 	<modules>
-		<module>project-war</module>
 		<module>project-ear</module>
 		<module>project-jar</module>
+		<module>project-war</module>
+		<module>project-baro-board</module>
 	</modules>
 
 	<properties>
