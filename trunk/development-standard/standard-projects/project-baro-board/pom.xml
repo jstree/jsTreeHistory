@@ -293,7 +293,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>baro</finalName>
+		<finalName>baroboard</finalName>
 
 		<plugins>
 
@@ -314,7 +314,7 @@
 					<uriEncoding>UTF-8</uriEncoding>
 					<url>http://ubuntu.313.co.kr:8313/manager/text</url>
 					<server>StandardProject-Snapshot</server>
-					<path>/baro</path>
+					<path>/baroboard</path>
 				</configuration>
 			</plugin>
 			<plugin>
