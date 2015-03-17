@@ -76,13 +76,13 @@ public class CommunityController {
 
 	@RequestMapping(value = "/common/error.do")
 	public String handleError() throws Exception {
-
 		return "/jsp/community/common/error";
 	}
 	
 	@RequestMapping(value = "/common/404error.do")
 	public String handle404Error(ModelMap model) throws Exception {
 		model.addAttribute("menuList", menuMngService.getCommunityMenu());
+		model.addAttribute("logUrl", logUrlService.getLogUrl());
 		return "/jsp/community/common/404error";
 	}
 }
