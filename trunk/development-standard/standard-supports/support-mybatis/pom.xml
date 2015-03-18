@@ -15,31 +15,27 @@
 
 	<name>support-mybatis</name>
 	<description>아파치 커먼 라이브러리</description>
-<!-- 
+
 	<dependencies>
 		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
+			<groupId>org.apache.ibatis</groupId>
+			<artifactId>ibatis-sqlmap</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-		</dependency>     
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.2.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>1.2.1</version>
-		</dependency>     
+			<dependency>
+				<groupId>org.apache.ibatis</groupId>
+				<artifactId>ibatis-sqlmap</artifactId>
+				<version>2.3.4.726</version>
+			</dependency>
 		</dependencies>
-	</dependencyManagement> 
--->
+	</dependencyManagement>
+	<!-- <dependencies> <dependency> <groupId>org.mybatis</groupId> <artifactId>mybatis</artifactId> 
+		</dependency> <dependency> <groupId>org.mybatis</groupId> <artifactId>mybatis-spring</artifactId> 
+		</dependency> </dependencies> <dependencyManagement> <dependencies> <dependency> 
+		<groupId>org.mybatis</groupId> <artifactId>mybatis</artifactId> <version>3.2.4</version> 
+		</dependency> <dependency> <groupId>org.mybatis</groupId> <artifactId>mybatis-spring</artifactId> 
+		<version>1.2.1</version> </dependency> </dependencies> </dependencyManagement> -->
 </project>
