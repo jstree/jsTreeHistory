@@ -132,10 +132,10 @@
 	<mailingLists>
 		<mailingList>
 			<name>LeeDongMin</name>
-			<subscribe>http://www.313.co.kr/war</subscribe>
-			<unsubscribe>http://www.313.co.kr/war</unsubscribe>
+			<subscribe>http://www.313.co.kr</subscribe>
+			<unsubscribe>http://www.313.co.kr</unsubscribe>
 			<post>313@313.co.kr</post>
-			<archive>http://www.313.co.kr/war</archive>
+			<archive>http://www.313.co.kr</archive>
 		</mailingList>
 	</mailingLists>
 
