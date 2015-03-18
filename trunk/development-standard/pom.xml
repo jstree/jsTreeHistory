@@ -100,15 +100,6 @@
 			</roles>
 		</developer>
 		<developer>
-			<name>Choi Dea Yul</name>
-			<id>cdy212</id>
-			<email>cdy212@naver.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
 			<name>Lee Jong Ryul</name>
 			<id>gaia012</id>
 			<email>gaia012@naver.com</email>
@@ -121,15 +112,6 @@
 			<name>Lee Tae Kyung</name>
 			<id>taekyung</id>
 			<email>2tk.java@gmail.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<name>Han Ji Hun</name>
-			<id>thetis15</id>
-			<email>thetis15@hanmail.net</email>
 			<organization>Developer Group</organization>
 			<roles>
 				<role>Java Developer</role>
