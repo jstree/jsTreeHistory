@@ -15,7 +15,7 @@
 
 	<name>support-mybatis</name>
 	<description>아파치 커먼 라이브러리</description>
-
+<!-- 
 	<dependencies>
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -40,5 +40,6 @@
 			<version>1.2.1</version>
 		</dependency>     
 		</dependencies>
-	</dependencyManagement>
+	</dependencyManagement> 
+-->
 </project>
