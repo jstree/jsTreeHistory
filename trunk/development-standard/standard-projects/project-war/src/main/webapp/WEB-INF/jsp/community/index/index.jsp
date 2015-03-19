@@ -8,11 +8,67 @@
 				font-size: 13pt;
 			}			
 		</style>
+		<script>
+			$(document).ready(
+					function() {
+						var $indexSlider = $('#index-image-slider');
+						$indexSlider.owlCarousel({
+							transitionStyle : 'fadeUp',
+							autoPlay : 5000,
+							paginationSpeed : 500,
+							singleItem : true,
+							stopOnHover : true
+						});
+
+						$('#index-image-slider-container .prev').on('click',
+								function() {
+									$indexSlider.trigger('owl.prev');
+								});
+
+						$('#index-image-slider-container .next').on('click',
+								function() {
+									$indexSlider.trigger('owl.next');
+								});
+					});
+		</script>
 	</head>
 	<body>
 		<section class="clearfix" >
 			<div class="container">
 				<div class="one-whole">
+					<div class="one-whole bm-larger">
+						<div id="index-image-slider-container" class="clearfix">
+							 <div id="index-image-slider" class="owl-carousel owl-theme">
+								<div class="item">
+									<img
+										src="${pageContext.request.contextPath}/images/slideImage/first.jpg"
+										alt="Slide One" />
+								</div>
+								<div class="item">
+									<img
+										src="${pageContext.request.contextPath}/images/slideImage/sec.jpg"
+										alt="Slide Two" />
+								</div>
+								<div class="item">
+									<img
+										src="${pageContext.request.contextPath}/images/slideImage/three.jpg"
+										alt="Slide Three" />
+								</div>
+								<div class="item">
+									<img
+										src="${pageContext.request.contextPath}/images/slideImage/four.jpg"
+										alt="Slide Four" />
+								</div>
+								<div class="item">
+									<img
+										src="${pageContext.request.contextPath}/images/slideImage/five.jpg"
+										alt="Slide Five" />
+								</div>
+							</div> 
+							<div class="prev tip-t-fade" data-tooltip="Previous"></div>
+							<div class="next tip-t-fade" data-tooltip="Next"></div>
+						</div>
+					</div>
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
