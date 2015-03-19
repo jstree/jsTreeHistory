@@ -67,7 +67,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/LDM.jpeg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg1">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>이동민</h2>
                             <span>graphic designer / illustrator</span>
@@ -77,25 +77,25 @@
                     </div>
                     <!--div    usquare_square -->
                     <div class="usquare_block_extended usquare_square_bg1">
-                        <a href="#" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="#" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -106,15 +106,15 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/LCY.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg2">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>이창용</h2>
                             <span>web designer / illustrator</span>
@@ -136,26 +136,26 @@
                     </div>
                     <!--div    usquare_square -->
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg2">
-                        <a href="" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -164,15 +164,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/ESM.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg3">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>엄선미</h2>
                             <span>학생</span>
@@ -195,26 +195,26 @@
                     </div>
                     <!--div    usquare_square -->
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg3">
-                        <a href="" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -223,15 +223,15 @@
                         <div class="usquare_about"> 현재 4학년 재학중입니다. 경기도 군포시 거주
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -242,7 +242,7 @@
                 <div class="usquare_block">
                     <div class="usquare_square usquare_square_bg4">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">윤봉태</h2>
                             <span class="usquare_r">graphic designer / illustrator</span>
@@ -253,26 +253,26 @@
                     <!--div    usquare_square -->
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/YBT.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg4">
-                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -281,15 +281,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -300,7 +300,7 @@
                 <div class="usquare_block">
                     <div class="usquare_square usquare_square_bg5">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">이혜진</h2>
                             <span class="usquare_r">graphic designer / illustrator</span>
@@ -311,26 +311,26 @@
                     <!--div    usquare_square -->
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/LHJ.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg5">
-                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -339,15 +339,15 @@
                         <div class="usquare_about">web desinger
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -358,7 +358,7 @@
                 <div class="usquare_block">
                     <div class="usquare_square usquare_square_bg6">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">최승현</h2>
                             <span class="usquare_r">graphic designer / illustrator</span>
@@ -369,26 +369,26 @@
                     <!--div    usquare_square -->
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/CSH.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg6">
-                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -397,15 +397,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -417,7 +417,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/PJK.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg7">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>박진경</h2>
                             <span>graphic designer / illustrator</span>
@@ -427,26 +427,26 @@
                     </div>
                     <!--div    usquare_square -->
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg7">
-                        <a href="" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -455,15 +455,15 @@
                         <div class="usquare_about">안녕하세요
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -475,7 +475,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/CKS.jpg" class="usquare_square" alt="" /> 
                     <div class="usquare_square usquare_square_bg8">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>최경석</h2>
                             <span>web designer / illustrator</span>
@@ -485,26 +485,26 @@
                     </div>
                     <!--div    usquare_square -->
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg8">
-                        <a href="" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -513,15 +513,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -534,7 +534,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/ZJH.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg9">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>전진홍</h2>
                             <span>SEO & SEM specialist</span>
@@ -544,26 +544,26 @@
                     </div>
                     <!--div    usquare_square -->
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg9">
-                        <a href="" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -572,15 +572,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -592,7 +592,7 @@
                 <div class="usquare_block">
                     <div class="usquare_square usquare_square_bg4">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">김희준</h2>
                             <span class="usquare_r">graphic designer / illustrator</span>
@@ -603,26 +603,26 @@
                     <!--div    usquare_square -->
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/KHJ.jpeg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg4">
-                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -631,15 +631,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -650,7 +650,7 @@
                 <div class="usquare_block">
                     <div class="usquare_square usquare_square_bg5">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">정재호</h2>
                             <span class="usquare_r">graphic designer / illustrator</span>
@@ -661,26 +661,26 @@
                     <!--div    usquare_square -->
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/JJH.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg5">
-                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -689,15 +689,15 @@
                         <div class="usquare_about">web desinger
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -708,7 +708,7 @@
                 <div class="usquare_block">
                     <div class="usquare_square usquare_square_bg6">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">전옥현</h2>
                             <span class="usquare_r">graphic designer / illustrator</span>
@@ -719,26 +719,26 @@
                     <!--div    usquare_square -->
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/JOH.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg6">
-                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -747,15 +747,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -767,7 +767,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/JHJ.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg1">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>정해정</h2>
                             <span>graphic designer / illustrator</span>
@@ -777,25 +777,25 @@
                     </div>
                     <!--div    usquare_square -->
                     <div class="usquare_block_extended usquare_square_bg1">
-                        <a href="#" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="#" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -806,15 +806,15 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -826,7 +826,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/CYJ.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg2">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>최유진</h2>
                             <span>web designer / illustrator</span>
@@ -836,26 +836,26 @@
                     </div>
                     <!--div    usquare_square -->
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg2">
-                        <a href="" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -864,15 +864,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -885,7 +885,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/LMY.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg3">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>이미영</h2>
                             <span></span>
@@ -895,26 +895,26 @@
                     </div>
                     <!--div    usquare_square -->
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg3">
-                        <a href="" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -923,15 +923,15 @@
                         <div class="usquare_about">
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -942,7 +942,7 @@
                 <div class="usquare_block">
                     <div class="usquare_square usquare_square_bg4">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">정종석</h2>
                             <span class="usquare_r">graphic designer / illustrator</span>
@@ -953,26 +953,26 @@
                     <!--div    usquare_square -->
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/JJS.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg4">
-                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -981,15 +981,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -1000,7 +1000,7 @@
                 <div class="usquare_block">
                     <div class="usquare_square usquare_square_bg5">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">이승희</h2>
                             <span class="usquare_r">graphic designer / illustrator</span>
@@ -1011,26 +1011,26 @@
                     <!--div    usquare_square -->
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/LSH.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg5">
-                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -1039,15 +1039,15 @@
                         <div class="usquare_about">web desinger
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -1058,7 +1058,7 @@
                 <div class="usquare_block">
                     <div class="usquare_square usquare_square_bg6">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">정시연</h2>
                             <span class="usquare_r">graphic designer / illustrator</span>
@@ -1067,28 +1067,28 @@
                         <!-- usquare_square_wrapper -->
                     </div>
                     <!--div    usquare_square -->
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/HC.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/JSY.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg6">
-                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -1097,15 +1097,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -1117,7 +1117,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/HC.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg7">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>김범룡</h2>
                             <span>graphic designer / illustrator</span>
@@ -1127,26 +1127,26 @@
                     </div>
                     <!--div    usquare_square -->
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg7">
-                        <a href="" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -1155,15 +1155,15 @@
                         <div class="usquare_about">
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -1175,7 +1175,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/HC.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg8">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>이은철</h2>
                             <span>web designer / illustrator</span>
@@ -1185,26 +1185,26 @@
                     </div>
                     <!--div    usquare_square -->
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg8">
-                        <a href="" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -1213,15 +1213,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -1234,7 +1234,7 @@
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/HC.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg9">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow.png" class="usquare_arrow" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
                             <div class="clear"></div>
                             <h2>양희성</h2>
                             <span>SEO & SEM specialist</span>
@@ -1244,26 +1244,26 @@
                     </div>
                     <!--div    usquare_square -->
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg9">
-                        <a href="" class="close"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -1272,15 +1272,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
@@ -1291,7 +1291,7 @@
                 <div class="usquare_block">
                     <div class="usquare_square usquare_square_bg4">
                         <div class="usquare_square_text_wrapper">
-                            <img src="${pageContext.request.contextPath}/images/frontEnd/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
+                            <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">유정우</h2>
                             <span class="usquare_r">graphic designer / illustrator</span>
@@ -1302,26 +1302,26 @@
                     <!--div    usquare_square -->
                     <img src="${pageContext.request.contextPath}/images/frontEnd/profile/YJW.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg4">
-                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/images/frontEnd/images/close.png" alt="close" /></a>
+                        <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
                         <ul class="social_background">
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-fb.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-tw.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-in.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-pint.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-pint.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-yah.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-yah.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/images/frontEnd/images/social-dig.png" alt="social" /></a>
+                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-dig.png" alt="social" /></a>
                             </li>
                         </ul>
 
@@ -1330,15 +1330,15 @@
                         <div class="usquare_about">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
                             <ul class="jcarousel-skin-tango">
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
-                                <li><img src="${pageContext.request.contextPath}/images/frontEnd/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider2.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider3.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider4.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider5.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider6.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider7.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider8.png" width="63" height="48" alt="" /></li>
+                                <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider9.png" width="63" height="48" alt="" /></li>
                             </ul>
                         </div>
                     </div>
