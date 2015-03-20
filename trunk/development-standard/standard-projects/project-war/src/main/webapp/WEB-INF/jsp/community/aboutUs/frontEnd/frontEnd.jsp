@@ -4,18 +4,18 @@
     <!--<![endif]-->
 
     <head>
-        <link href="${pageContext.request.contextPath}/css/frontEnd/usquare_style.css" rel="stylesheet" type="text/css" />
-        <link href="${pageContext.request.contextPath}/css/frontEnd/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
-        <link href="${pageContext.request.contextPath}/css/frontEnd/jcarousel.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/assets/js/usquare_jquery/css/usquare_style.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/assets/js/usquare_jquery/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/assets/js/usquare_jquery/css/jcarousel.css" rel="stylesheet" type="text/css" />
 
-        <link href="${pageContext.request.contextPath}/css/frontEnd/style.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/assets/js/usquare_jquery/style.css" rel="stylesheet" type="text/css" />
 
         <script src="${pageContext.request.contextPath}/assets/js/jquery-ui-1.11.2/jquery-ui.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/frontEnd/jquery.mousewheel.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/frontEnd/jquery.mCustomScrollbar.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/frontEnd/jcarousel.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/usquare_jquery/scripts/jquery.mousewheel.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/usquare_jquery/scripts/jquery.mCustomScrollbar.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/usquare_jquery/scripts/jcarousel.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/frontEnd/jquery.usquare.js" type="text/javascript" charset="UTF-8"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/usquare_jquery/scripts/jquery.usquare.js" type="text/javascript" charset="UTF-8"></script>
         <script>
             (function($) {
                 $(document).ready(function() {
