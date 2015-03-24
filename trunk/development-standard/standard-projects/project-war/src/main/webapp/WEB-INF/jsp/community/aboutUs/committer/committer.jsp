@@ -201,7 +201,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="#" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/ldm.jpeg" alt="이동민" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/ldm.jpeg" alt="이동민" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Dongmin Lee</span>
 										<span class="profile-box-role">PM</span>
@@ -241,7 +241,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/cms.jpeg" alt="최민석" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/cms.jpeg" alt="최민석" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Minseok Choi</span>
 										<span class="profile-box-role">PM</span>
@@ -281,7 +281,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/kbw.jpeg" alt="김병우" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/kbw.jpeg" alt="김병우" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Byungwoo Kim</span>
 										<span class="profile-box-role">PM</span>
@@ -321,7 +321,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/kdg.jpeg" alt="김대근" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/kdg.jpeg" alt="김대근" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Daegeun Kim</span>
 										<span class="profile-box-role">Developer</span>
@@ -362,7 +362,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="#" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/rgh.jpeg" alt="류강하" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/rgh.jpeg" alt="류강하" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Kangha Ryu</span>
 										<span class="profile-box-role">Developer</span>
@@ -402,7 +402,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/ltk.jpeg" alt="이태경" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/ltk.jpeg" alt="이태경" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Taekyung Lee</span>
 										<span class="profile-box-role">Developer</span>
@@ -442,7 +442,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/shs.jpg" alt="손호성" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/shs.jpg" alt="손호성" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Hoseong Son</span>
 										<span class="profile-box-role">Developer</span>
@@ -482,7 +482,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/yjw.jpeg" alt="유정우" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/yjw.jpeg" alt="유정우" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Jungwoo Yu</span>
 										<span class="profile-box-role">Developer</span>
@@ -523,7 +523,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="#" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/jwk.jpeg" alt="정원기" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/jwk.jpeg" alt="정원기" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Wonki Jung</span>
 										<span class="profile-box-role">Developer</span>
@@ -563,7 +563,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/jkh.jpg" alt="전경훈" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/jkh.jpg" alt="전경훈" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Kyunghun Jeon</span>
 										<span class="profile-box-role">Developer</span>
@@ -608,7 +608,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/ljr.jpeg" alt="이종렬" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/ljr.jpeg" alt="이종렬" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Jongryul Lee</span>
 										<span class="profile-box-role">Developer</span>
@@ -648,7 +648,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/okw.jpeg" alt="오권우" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/okw.jpeg" alt="오권우" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Gwonwoo Oh</span>
 										<span class="profile-box-role">Developer</span>
@@ -690,7 +690,7 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/images/profile/jkw.jpg" alt="조경원" class="block" />
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/jkw.jpg" alt="조경원" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Kyungwon Cho</span>
 										<span class="profile-box-role">Publisher</span>
