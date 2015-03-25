@@ -32,7 +32,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-half-percent tablet-mobile bm-remove omega alignleft" style="text-align:center; vertical-align:middle;">
-										<img src="/images/community/jsTreeAlg/jsTreeApply/kiki.bmp" alt="" />
+										<img src="/assets/images/community/jsTreeAlg/jsTreeApply/kiki.bmp" alt="" />
 									</div>
 									<div class="space-20"></div>
 									

@@ -32,7 +32,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-half-percent tablet-mobile bm-remove omega alignleft">
-										<img src="/images/community/jsTreeAlg/jsTreeResult/leader_3_display.jpg" alt="" />
+										<img src="/assets/images/community/jsTreeAlg/jsTreeResult/leader_3_display.jpg" alt="" />
 									</div>
 									<div class="space-20"></div>
 									

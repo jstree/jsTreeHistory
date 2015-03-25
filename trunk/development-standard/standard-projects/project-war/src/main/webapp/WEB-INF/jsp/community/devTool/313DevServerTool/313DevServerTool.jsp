@@ -60,8 +60,8 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-half-percent tablet-mobile bm-remove omega alignleft center-image">
-										<a href="/images/community/delTool/313DevServerTool/9872658.png" data-lightbox="image-1">
-											<img src="/images/community/delTool/313DevServerTool/9872658.png" alt="Server Tools" />
+										<a href="/assets/images/community/delTool/313DevServerTool/9872658.png" data-lightbox="image-1">
+											<img src="/assets/images/community/delTool/313DevServerTool/9872658.png" alt="Server Tools" />
 										</a>
 									</div>
 									<div class="space-20"></div>

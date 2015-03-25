@@ -79,7 +79,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-half-percent tablet-mobile bm-remove omega alignleft">
-										<img src="/images/community/jsTreeAlg/jsTreeSupport/fklYR.jpg" alt="" />
+										<img src="/assets/images/community/jsTreeAlg/jsTreeSupport/fklYR.jpg" alt="" />
 									</div>
 									<div class="space-20"></div>
 									
@@ -123,7 +123,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-half-percent tablet-mobile bm-remove omega alignleft">
-										<img src="/images/community/jsTreeAlg/jsTreeSupport/worddav624ac112722737446c039071d3ca8da3.png" alt="" />
+										<img src="/assets/images/community/jsTreeAlg/jsTreeSupport/worddav624ac112722737446c039071d3ca8da3.png" alt="" />
 									</div>
 									<div class="space-20"></div>
 									
@@ -236,7 +236,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-third-percent tablet-mobile bm-remove omega alignleft">
-										<img src="/images/community/jsTreeAlg/jsTreeSupport/tfessh-pic-1.gif" alt="" />
+										<img src="/assets/images/community/jsTreeAlg/jsTreeSupport/tfessh-pic-1.gif" alt="" />
 									</div>
 									<div class="space-20"></div>
 									<div id="link-list">
@@ -281,7 +281,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-third-percent tablet-mobile bm-remove omega alignleft">
-										<img src="/images/community/jsTreeAlg/jsTreeSupport/2012101109363253.jpg" alt="" />
+										<img src="/assets/images/community/jsTreeAlg/jsTreeSupport/2012101109363253.jpg" alt="" />
 									</div>
 									<div class="space-20"></div>
 									<div id="link-list">
@@ -320,7 +320,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-third-percent tablet-mobile bm-remove omega alignleft">
-										<img src="/images/community/jsTreeAlg/jsTreeSupport/plsqlAOP1.jpg" alt="" />
+										<img src="/assets/images/community/jsTreeAlg/jsTreeSupport/plsqlAOP1.jpg" alt="" />
 									</div>
 									<div class="space-20"></div>
 									<div id="link-list">
@@ -363,7 +363,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-third-percent tablet-mobile bm-remove omega alignleft">
-										<img src="/images/community/jsTreeAlg/jsTreeSupport/component-diagram.png" alt="" />
+										<img src="/assets/images/community/jsTreeAlg/jsTreeSupport/component-diagram.png" alt="" />
 									</div>
 									<div class="space-20"></div>
 									<div id="link-list">
@@ -402,7 +402,7 @@
 								
 								<div class="tablet-mobile alpha bm-remove last">
 									<div class="one-third-percent tablet-mobile bm-remove omega alignleft">
-										<img src="/images/community/jsTreeAlg/jsTreeSupport/6a01156e6430ac970c0115713986f0970b.png" alt="" />
+										<img src="/assets/images/community/jsTreeAlg/jsTreeSupport/6a01156e6430ac970c0115713986f0970b.png" alt="" />
 									</div>
 									<div class="space-20"></div>
 									<div id="link-list">
