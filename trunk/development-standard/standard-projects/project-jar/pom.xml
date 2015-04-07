@@ -83,11 +83,23 @@
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
-
 		<dependency>
-			<groupId>org.apache.ibatis</groupId>
-			<artifactId>ibatis-sqlmap</artifactId>
-			<version>2.3.4.726</version>
+			<groupId>development</groupId>
+			<artifactId>support-mybatis</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-cache</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-monitor</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -114,22 +126,6 @@
 			<artifactId>standard</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>net.bull.javamelody</groupId>
-			<artifactId>javamelody-core</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.jamonapi</groupId>
-			<artifactId>jamon</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>development</groupId>
-			<artifactId>support-cache</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -170,17 +166,6 @@
 				<version>1.1.2</version>
 			</dependency>
 
-			<dependency>
-				<groupId>net.bull.javamelody</groupId>
-				<artifactId>javamelody-core</artifactId>
-				<version>1.54.0</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.jamonapi</groupId>
-				<artifactId>jamon</artifactId>
-				<version>2.80</version>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
