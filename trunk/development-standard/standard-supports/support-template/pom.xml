@@ -21,6 +21,7 @@
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity-tools</artifactId>
@@ -42,12 +43,12 @@
 			<groupId>opensymphony</groupId>
 			<artifactId>sitemesh</artifactId>
 		</dependency>
-	</dependencies>
-
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-jsp</artifactId>
 		</dependency>
+	</dependencies>
+
 
 	<dependencyManagement>
 		<dependencies>
@@ -89,8 +90,8 @@
 				<version>2.4.2</version>
 			</dependency>
 			<!-- (e) layout engine -->
-			
-						<dependency>
+
+			<dependency>
 				<groupId>org.apache.tiles</groupId>
 				<artifactId>tiles-jsp</artifactId>
 				<version>3.0.1</version>
