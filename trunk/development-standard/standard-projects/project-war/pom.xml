@@ -49,6 +49,12 @@
 		</dependency>
 		<dependency>
 			<groupId>development</groupId>
+			<artifactId>support-chart</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
 			<artifactId>support-driver</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
@@ -127,11 +133,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 		</dependency>
@@ -164,11 +165,6 @@
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>jasperreports</groupId>
-			<artifactId>jasperreports</artifactId>
 		</dependency>
 
 		<dependency>
@@ -236,22 +232,6 @@
 				<artifactId>standard</artifactId>
 				<version>1.1.2</version>
 			</dependency>
-
-			<!-- ******************************************* Annotation ******************************************* -->
-
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>1.12.6</version>
-			</dependency>
-			
-			<!-- chart tool -->
-			<dependency>
-				<groupId>jasperreports</groupId>
-				<artifactId>jasperreports</artifactId>
-				<version>3.5.3</version>
-			</dependency>
-
 
 		</dependencies>
 	</dependencyManagement>

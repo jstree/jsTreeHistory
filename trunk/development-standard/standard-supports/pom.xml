@@ -20,6 +20,7 @@
 		<module>support-ajax</module>
 		<module>support-apache</module>
 		<module>support-cache</module>
+		<module>support-chart</module>
 		<module>support-driver</module>
 		<module>support-egov</module>
 		<module>support-encryption</module>

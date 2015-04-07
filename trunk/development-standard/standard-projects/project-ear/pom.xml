@@ -59,12 +59,13 @@
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
-
-		 
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
+			<groupId>development</groupId>
+			<artifactId>support-apache</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -150,11 +151,6 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
 		</dependency>
 
 		<dependency>
@@ -273,11 +269,6 @@
 		<dependencies>
 
 			<!-- ******************************************* aspectJ ******************************************* -->
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>1.12.6</version>
-			</dependency>
 
 			<dependency>
 				<groupId>org.aspectj</groupId>
@@ -375,12 +366,6 @@
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpmime</artifactId>
 				<version>4.3.1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>1.12.2</version>
 			</dependency>
 
 			<dependency>
