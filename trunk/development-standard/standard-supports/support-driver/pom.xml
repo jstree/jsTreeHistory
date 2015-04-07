@@ -75,6 +75,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<dependency>
+			<groupId>ldapsdk</groupId>
+			<artifactId>ldapsdk</artifactId>
+		</dependency>
 	</dependencies>
 
 
@@ -137,6 +142,13 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+
+			<dependency>
+				<groupId>ldapsdk</groupId>
+				<artifactId>ldapsdk</artifactId>
+				<version>4.1</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 </project>

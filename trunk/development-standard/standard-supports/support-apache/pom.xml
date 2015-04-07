@@ -149,10 +149,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-jsp</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-vfs2</artifactId>
 		</dependency>
@@ -161,7 +157,7 @@
 			<groupId>org.apache.jackrabbit</groupId>
 			<artifactId>jackrabbit-webdav</artifactId>
 		</dependency>
-
+		
 	</dependencies>
 
 	<dependencyManagement>
@@ -334,11 +330,6 @@
 				<version>2.0.8</version>
 			</dependency>
 
-			<dependency>
-				<groupId>org.apache.tiles</groupId>
-				<artifactId>tiles-jsp</artifactId>
-				<version>3.0.1</version>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>

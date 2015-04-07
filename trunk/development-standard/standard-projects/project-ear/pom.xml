@@ -17,24 +17,6 @@
 	</description>
 
 	<dependencies>
-		<!-- <dependency>
-			<groupId>development</groupId>
-			<artifactId>support-ajax</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency> -->
-		<!-- <dependency>
-			<groupId>development</groupId>
-			<artifactId>support-apache</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency> -->
-		<!-- <dependency>
-			<groupId>development</groupId>
-			<artifactId>support-cache</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency> -->
 		<dependency>
 			<groupId>development</groupId>
 			<artifactId>support-driver</artifactId>
@@ -47,18 +29,6 @@
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
-		<!--<dependency>
-			<groupId>development</groupId>
-			<artifactId>support-hibernate</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		 <dependency>
-			<groupId>development</groupId>
-			<artifactId>support-junit</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency> -->
 		<dependency>
 			<groupId>development</groupId>
 			<artifactId>support-log</artifactId>
@@ -71,18 +41,6 @@
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
-		<!-- <dependency>
-			<groupId>development</groupId>
-			<artifactId>support-struts</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency> -->
-		<!-- <dependency>
-			<groupId>development</groupId>
-			<artifactId>support-template</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency> -->
 		<dependency>
 			<groupId>development</groupId>
 			<artifactId>support-xml</artifactId>
@@ -95,42 +53,13 @@
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>development</groupId>
-			<artifactId>support-scheduler</artifactId>
+			<artifactId>support-mybatis</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
-		</dependency> -->
-		<!-- <dependency>
-			<groupId>development</groupId>
-			<artifactId>support-export</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency> -->
-		<dependency>
-			<groupId>org.apache.ibatis</groupId>
-			<artifactId>ibatis-sqlmap</artifactId>
-			<version>2.3.4.726</version>
 		</dependency>
-		
-		<!-- 
-		<dependency>
-			<groupId>com.ibm.icu</groupId>
-			<artifactId>icu4j</artifactId>
-			<version>4.8</version>
-		</dependency>
-		<dependency>
-			<groupId>ldapsdk</groupId>
-			<artifactId>ldapsdk</artifactId>
-			<version>4.1</version>
-		</dependency>
-		 -->
-		<!-- Twitter
-			<dependency>
-				<groupId>org.twitter4j</groupId>
-				<artifactId>twitter4j-core</artifactId>
-			</dependency>
-		 -->
+
 		 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -170,11 +99,6 @@
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
 		</dependency>
 
 		<dependency>
@@ -396,12 +320,6 @@
 				<groupId>taglibs</groupId>
 				<artifactId>standard</artifactId>
 				<version>1.1.2</version>
-			</dependency>
-
-			<dependency>
-				<groupId>xalan</groupId>
-				<artifactId>xalan</artifactId>
-				<version>2.7.1</version>
 			</dependency>
 
 			<!-- ******************************************* Annotation ******************************************* -->

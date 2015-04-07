@@ -123,10 +123,6 @@
 			<groupId>com.ibm.icu</groupId>
 			<artifactId>icu4j</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>ldapsdk</groupId>
-			<artifactId>ldapsdk</artifactId>
-		</dependency>
 
 		<!-- Twitter -->
 		<dependency>
@@ -172,11 +168,6 @@
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
 		</dependency>
 
 		<dependency>
@@ -250,12 +241,6 @@
 				<version>1.1.2</version>
 			</dependency>
 
-			<dependency>
-				<groupId>xalan</groupId>
-				<artifactId>xalan</artifactId>
-				<version>2.7.1</version>
-			</dependency>
-
 			<!-- ******************************************* Annotation ******************************************* -->
 			<dependency>
 				<groupId>jasperreports</groupId>
@@ -280,11 +265,6 @@
 				<groupId>com.ibm.icu</groupId>
 				<artifactId>icu4j</artifactId>
 				<version>4.8</version>
-			</dependency>
-			<dependency>
-				<groupId>ldapsdk</groupId>
-				<artifactId>ldapsdk</artifactId>
-				<version>4.1</version>
 			</dependency>
 
 		</dependencies>

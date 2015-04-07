@@ -44,7 +44,10 @@
 		</dependency>
 	</dependencies>
 
-
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+		</dependency>
 
 	<dependencyManagement>
 		<dependencies>
@@ -86,6 +89,12 @@
 				<version>2.4.2</version>
 			</dependency>
 			<!-- (e) layout engine -->
+			
+						<dependency>
+				<groupId>org.apache.tiles</groupId>
+				<artifactId>tiles-jsp</artifactId>
+				<version>3.0.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>

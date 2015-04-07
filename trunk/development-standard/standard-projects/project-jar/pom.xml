@@ -97,10 +97,7 @@
 			<groupId>com.ibm.icu</groupId>
 			<artifactId>icu4j</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>ldapsdk</groupId>
-			<artifactId>ldapsdk</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
@@ -151,11 +148,7 @@
 				<artifactId>icu4j</artifactId>
 				<version>4.8</version>
 			</dependency>
-			<dependency>
-				<groupId>ldapsdk</groupId>
-				<artifactId>ldapsdk</artifactId>
-				<version>4.1</version>
-			</dependency>
+
 			<dependency>
 				<groupId>javax.servlet.jsp</groupId>
 				<artifactId>jsp-api</artifactId>
