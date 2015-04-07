@@ -18,18 +18,21 @@
 
 	<modules>
 		<module>support-ajax</module>
+		<module>support-aop</module>
 		<module>support-apache</module>
 		<module>support-cache</module>
 		<module>support-chart</module>
 		<module>support-driver</module>
 		<module>support-egov</module>
 		<module>support-encryption</module>
+		<module>support-etc</module>
 		<module>support-export</module>
 		<module>support-flex</module>
 		<module>support-google</module>
 		<module>support-hibernate</module>
 		<module>support-junit</module>
 		<module>support-log</module>
+		<module>support-monitor</module>
 		<module>support-mybatis</module>
 		<module>support-scheduler</module>
 		<module>support-sns</module>
