@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -16,13 +15,14 @@
 
 	<name>standard-supports</name>
 	<description>프로젝트를 서포트 하는 모듈입니다.</description>
-	
+
 	<modules>
 		<module>support-ajax</module>
 		<module>support-apache</module>
 		<module>support-cache</module>
 		<module>support-driver</module>
 		<module>support-egov</module>
+		<module>support-encryption</module>
 		<module>support-export</module>
 		<module>support-flex</module>
 		<module>support-google</module>
@@ -31,9 +31,65 @@
 		<module>support-log</module>
 		<module>support-mybatis</module>
 		<module>support-scheduler</module>
+		<module>support-sns</module>
 		<module>support-spring</module>
 		<module>support-struts</module>
 		<module>support-template</module>
 		<module>support-xml</module>
 	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>emma</groupId>
+			<artifactId>emma</artifactId>
+		</dependency>
+
+		<!-- TokenStream -->
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- 미분류된 라이브러리 -->
+			<!-- WEB Common Dependency -->
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>2.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>emma</groupId>
+				<artifactId>emma</artifactId>
+				<version>2.1.5320</version>
+			</dependency>
+
+			<!-- TokenStream -->
+			<dependency>
+				<groupId>org.antlr</groupId>
+				<artifactId>antlr</artifactId>
+				<version>3.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ibm.icu</groupId>
+				<artifactId>icu4j</artifactId>
+				<version>4.8</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
 </project>
