@@ -25,12 +25,6 @@
 
 		<dependency>
 			<groupId>development</groupId>
-			<artifactId>standard-supports</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
 			<artifactId>support-ajax</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
@@ -67,6 +61,36 @@
 		</dependency>
 		<dependency>
 			<groupId>development</groupId>
+			<artifactId>support-egov</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-encryption</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-etc</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-export</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-flex</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
 			<artifactId>support-google</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
@@ -91,6 +115,30 @@
 		</dependency>
 		<dependency>
 			<groupId>development</groupId>
+			<artifactId>support-monitor</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-mybatis</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-scheduler</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-sns</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
 			<artifactId>support-spring</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
@@ -110,36 +158,6 @@
 		<dependency>
 			<groupId>development</groupId>
 			<artifactId>support-xml</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
-			<artifactId>support-egov</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
-			<artifactId>support-etc</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
-			<artifactId>support-scheduler</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
-			<artifactId>support-export</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
-			<artifactId>support-mybatis</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>

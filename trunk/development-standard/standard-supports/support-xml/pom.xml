@@ -17,15 +17,71 @@
 	<description>아파치 커먼 라이브러리</description>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-joda</artifactId>
-		</dependency>
+		<!-- ******************************************* XML ******************************************* -->
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+			</dependency>
 
-		<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
-		</dependency>
+			<dependency>
+				<groupId>org.jdom</groupId>
+				<artifactId>jdom</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.xml</groupId>
+				<artifactId>jaxrpc-api</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sun.xml.rpc</groupId>
+				<artifactId>jaxrpc-spi</artifactId>
+			</dependency>
+
+
+			<!-- 자바빈을 xml 로 변환 -->
+			<dependency>
+				<groupId>commons-betwixt</groupId>
+				<artifactId>commons-betwixt</artifactId>
+			</dependency>
+
+			<!-- RSS Atom -->
+			<dependency>
+				<groupId>rome</groupId>
+				<artifactId>rome</artifactId>
+			</dependency>
+
+			<!-- xmlParserAPI -->
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-ext</artifactId>
+			</dependency>
+
+			<!-- XML schema convert java class -->
+			<dependency>
+				<groupId>xmlbeans</groupId>
+				<artifactId>xmlbeans</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>xmlbeans</groupId>
+				<artifactId>xbean</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-joda</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>xalan</groupId>
+				<artifactId>xalan</artifactId>
+			</dependency>
 	</dependencies>
 
 	<dependencyManagement>
