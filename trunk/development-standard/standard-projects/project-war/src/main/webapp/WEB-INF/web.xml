@@ -206,9 +206,6 @@
 	<servlet>
 		<servlet-name>action</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<!-- 원본 <init-param> <param-name>contextConfigLocation</param-name> <param-value> 
-			/WEB-INF/config/egovframework/springmvc/dispatcher-servlet.xml, /WEB-INF/config/egovframework/springmvc/urlfilename-servlet.xml, 
-			/WEB-INF/config/egovframework/springmvc/egov-com-*.xml </param-value> </init-param> -->
 		<init-param>
 			<param-name>contextClass</param-name>
 			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
@@ -245,6 +242,33 @@
 		<servlet-name>ajaxServlet</servlet-name>
 		<url-pattern>/ajaxtags/css/*</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<display-name>============================= Quartz Initializer Servlet
+			=============================</display-name>
+		<servlet-name>QuartzInitializer</servlet-name>
+		<servlet-class>org.quartz.ee.servlet.QuartzInitializerServlet</servlet-class>
+		<init-param>
+			<param-name>config-file</param-name>
+			<param-value>classpath:/META-INF/quartz/scheduler.properties</param-value>
+		</init-param>
+		<init-param>
+			<param-name>shutdown-on-unload</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>start-scheduler-on-load</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<display-name>quartzSchedulerInit</display-name>
+		<servlet-name>quartzSchedulerInit</servlet-name>
+		<servlet-class>egovframework.com.ext.jstree.support.manager.scheduler.RegisterScheduleInitialize</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 
 	<jsp-config>
 		<jsp-property-group>

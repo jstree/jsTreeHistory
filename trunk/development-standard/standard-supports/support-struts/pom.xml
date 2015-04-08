@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<name>support-struts</name>
-	<description>아파치 커먼 라이브러리</description>
+	<description>스트럿츠 프레임워크 라이브러리</description>
 
 	<properties>
 		<struts.maven.artifact.version>2.3.20</struts.maven.artifact.version>
@@ -42,7 +42,6 @@
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-sitemesh-plugin</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-dwr-plugin</artifactId>
@@ -57,19 +56,15 @@
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-json-plugin</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-convention-plugin</artifactId>
-		</dependency>
-
+		<!-- <dependency> <groupId>org.apache.struts</groupId> <artifactId>struts2-convention-plugin</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-junit-plugin</artifactId>
 		</dependency>
 		<!-- <dependency> <groupId>com.jgeppert.struts2.jquery</groupId> <artifactId>struts2-jquery-plugin</artifactId> 
 			</dependency> -->
-		<!-- Struts 2(e) 에서 필요한 라이브러리-->
+		<!-- Struts 2(e) 에서 필요한 라이브러리 -->
 		<dependency>
 			<groupId>ognl</groupId>
 			<artifactId>ognl</artifactId>
@@ -135,8 +130,11 @@
 				<version>${struts.maven.artifact.version}</version>
 			</dependency>
 
-			<!-- <dependency> <groupId>org.apache.struts</groupId> <artifactId>struts2-rest-plugin</artifactId> 
-				<version>${struts.maven.artifact.version}</version> </dependency> -->
+			<dependency>
+				<groupId>org.apache.struts</groupId>
+				<artifactId>struts2-rest-plugin</artifactId>
+				<version>${struts.maven.artifact.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>com.jgeppert.struts2.jquery</groupId>

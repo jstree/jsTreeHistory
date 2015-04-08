@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 <!--<![endif]-->
@@ -8,67 +7,72 @@
 				font-size: 13pt;
 			}			
 		</style>
-		<script>
-			$(document).ready(
-					function() {
-						var $indexSlider = $('#index-image-slider');
-						$indexSlider.owlCarousel({
-							transitionStyle : 'fadeUp',
-							autoPlay : 5000,
-							paginationSpeed : 500,
-							singleItem : true,
-							stopOnHover : true
-						});
 
-						$('#index-image-slider-container .prev').on('click',
-								function() {
-									$indexSlider.trigger('owl.prev');
-								});
-
-						$('#index-image-slider-container .next').on('click',
-								function() {
-									$indexSlider.trigger('owl.next');
-								});
-					});
-		</script>
 	</head>
 	<body>
+	<main id="template-index-liquid" class="clearfix" role="main">
+	
+	<div class="container">
+		<div class="one-whole bm-larger">
+				<div id="index-image-slider-container" class="clearfix">
+					<div id="index-image-slider" class="owl-carousel owl-theme">
+						<div class="item">
+							<img
+								src="http://www.313.co.kr:5002/Component/jsp/community/index/slideImage/first.jpg"
+								alt="Slide One" />
+						</div>
+						<div class="item">
+							<img
+								src="http://www.313.co.kr:5002/Component/jsp/community/index/slideImage/sec.jpg"
+								alt="Slide Two" />
+						</div>
+						<div class="item">
+							<img
+								src="http://www.313.co.kr:5002/Component/jsp/community/index/slideImage/three.jpg"
+								alt="Slide Three" />
+						</div>
+						<div class="item">
+							<img
+								src="http://www.313.co.kr:5002/Component/jsp/community/index/slideImage/four.jpg"
+								alt="Slide Four" />
+						</div>
+						<div class="item">
+							<img
+								src="http://www.313.co.kr:5002/Component/jsp/community/index/slideImage/five.jpg"
+								alt="Slide Five" />
+						</div>
+					</div>
+					
+					<div class="prev tip-t-fade" data-tooltip="Previous"></div>
+					<div class="next tip-t-fade" data-tooltip="Next"></div>
+				
+				</div>
+			</div>
+
+</div>
+		<div class="container">
+				<div class="one-whole clearfix" data-anim-type="fade-in" data-anim-delay="fade-in">
+					<div class="one-whole boxed p-twenty">
+						
+							<h1 class="bm-small text-center">우리의 사명</h1>
+
+							<div class="rte">
+							<p style="text-align: center;">
+								일관되고, 정형화된 서비스 프레임워크를 제공하여 개발 방식을 단순하게 유지할 수 있게 돕습니다. <br>
+								또한, 비기능적 요구사항과 기능적 요구사항을 하나의 포인트에서 구현할 수 있게 확장 포인트를 제공하여 <br>
+								보다 월활하고 쉽게 적용할 수 있는 JsTree Service Framework 를 통해 <br>
+								개발자의 야근을 줄여주고 <strong>칼퇴</strong>를 할 수 있도록 지원합니다.
+							</p>
+								
+							</div>
+						
+					</div>
+			</div>
+			</div> 
+			
 		<section class="clearfix" >
 			<div class="container">
 				<div class="one-whole">
-					<div class="one-whole bm-larger">
-						<div id="index-image-slider-container" class="clearfix">
-							 <div id="index-image-slider" class="owl-carousel owl-theme">
-								<div class="item">
-									<img
-										src="${pageContext.request.contextPath}/images/slideImage/first.jpg"
-										alt="Slide One" />
-								</div>
-								<div class="item">
-									<img
-										src="${pageContext.request.contextPath}/images/slideImage/sec.jpg"
-										alt="Slide Two" />
-								</div>
-								<div class="item">
-									<img
-										src="${pageContext.request.contextPath}/images/slideImage/three.jpg"
-										alt="Slide Three" />
-								</div>
-								<div class="item">
-									<img
-										src="${pageContext.request.contextPath}/images/slideImage/four.jpg"
-										alt="Slide Four" />
-								</div>
-								<div class="item">
-									<img
-										src="${pageContext.request.contextPath}/images/slideImage/five.jpg"
-										alt="Slide Five" />
-								</div>
-							</div> 
-							<div class="prev tip-t-fade" data-tooltip="Previous"></div>
-							<div class="next tip-t-fade" data-tooltip="Next"></div>
-						</div>
-					</div>
 					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="image-and-overlay-container bm-small">
 							<div class="image">
@@ -81,7 +85,7 @@
 						</div>
 						<p class="bm-remove">
 							<a href="${pageContext.request.contextPath}/aboutUs/committer.do" target="_self"><strong>Member</strong></a><br />
-							2010년, 더 좋은 개발자가 되고싶은 사람들이 Java 스터디에 모였습니다. 그리고 생각을 나누며 같은 꿈을 꾸기 시작하였습니다.
+							2010년, 더 좋은 개발자가 되고싶은 사람들이 Java 스터디에 모였습니다. 그리고 생각을 나누며 같은 꿈을 꾸기 시작하였습니다. 123
 						</p>
 					</div>
 					<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
@@ -131,6 +135,31 @@
 					</div>
 				</div>
 			</div>
-		</section>	
+		</section>
+		</main>
+			
+		<script>
+			$(document).ready(
+					function() {
+						var $indexSlider = $('#index-image-slider');
+						$indexSlider.owlCarousel({
+							transitionStyle : 'fadeUp',
+							autoPlay : 5000,
+							paginationSpeed : 500,
+							singleItem : true,
+							stopOnHover : true
+						});
+
+						$('#index-image-slider-container .prev').on('click',
+								function() {
+									$indexSlider.trigger('owl.prev');
+								});
+
+						$('#index-image-slider-container .next').on('click',
+								function() {
+									$indexSlider.trigger('owl.next');
+								});
+					});
+		</script>
 	</body>
 </html>
