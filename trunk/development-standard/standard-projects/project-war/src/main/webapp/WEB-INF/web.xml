@@ -243,33 +243,6 @@
 		<url-pattern>/ajaxtags/css/*</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<display-name>============================= Quartz Initializer Servlet
-			=============================</display-name>
-		<servlet-name>QuartzInitializer</servlet-name>
-		<servlet-class>org.quartz.ee.servlet.QuartzInitializerServlet</servlet-class>
-		<init-param>
-			<param-name>config-file</param-name>
-			<param-value>standard/quartz/scheduler.properties</param-value>
-		</init-param>
-		<init-param>
-			<param-name>shutdown-on-unload</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>start-scheduler-on-load</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-	<servlet>
-		<display-name>quartzSchedulerInit</display-name>
-		<servlet-name>quartzSchedulerInit</servlet-name>
-		<servlet-class>egovframework.com.ext.jstree.support.manager.scheduler.RegisterScheduleInitialize</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
