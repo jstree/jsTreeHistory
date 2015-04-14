@@ -10,17 +10,7 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
-<!-- 
-	<bean id="messageSource" class="egovframework.com.ext.jstree.support.manager.messageSource.CustomReloadableResourceBundleMessageSource">
-        <property name="basenames">
-            <list>
-				<value>classpath:/egovframework/message/com/ext/jstree/message</value>
-            </list>
-        </property>
-        <property name="cacheSeconds" value="60" />
-    </bean>
-	-->
-	<bean id="messageSource" class="egovframework.com.ext.jstree.support.manager.messageSource.CustomReloadableResourceBundleMessageSource">
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
 				<value>classpath:/META-INF/egovframework/message/com/message-common</value>

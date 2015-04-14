@@ -7,7 +7,9 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CustomReloadableResourceBundleMessageSource extends ReloadableResourceBundleMessageSource {
 	
     public Map<String, Object> getAllMessages(Locale locale) {
@@ -20,6 +22,12 @@ public class CustomReloadableResourceBundleMessageSource extends ReloadableResou
             data.put((String) entry.getKey(), entry.getValue());
         }
         return data;
+    }
+    
+    public String getMessage(String code)
+    {
+        Locale locale = Locale.KOREAN;
+        return getMessage(code, null, "", locale);
     }
     
 }
