@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,15 +20,15 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import egovframework.com.ext.jstree.support.manager.messageSource.MessageSupport;
+import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupport;
 import egovframework.com.ext.jstree.support.util.StringUtils;
 
 public abstract class GenericAbstractController
 {
     
-    @Autowired
-    private MessageSupport messageSupport;
+    @Resource(name="egovMessageSource")
+    EgovMessageSource egovMessageSource;
     @Autowired
     private DefaultBeanValidator defaultBeanValidator;
     
@@ -99,7 +100,7 @@ public abstract class GenericAbstractController
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("result", false);
             map.put("message",
-                    messageSupport.getMessage(ex.getMessage(),
+                    egovMessageSource.getMessage(ex.getMessage(),
                                               ex.getStackTrace(), "", request));
             
             Gson gson = new GsonBuilder().serializeNulls().create();
@@ -121,7 +122,7 @@ public abstract class GenericAbstractController
             
             if (null != ex.getStackTrace())
             {
-                String message = messageSupport.getMessage(ex.getMessage(),
+                String message = egovMessageSource.getMessage(ex.getMessage(),
                                                            ex.getStackTrace(),
                                                            ex.getMessage(),
                                                            request);
@@ -158,7 +159,7 @@ public abstract class GenericAbstractController
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("result", false);
             map.put("message",
-                    messageSupport.getMessage(ex.getMessage(),
+                    egovMessageSource.getMessage(ex.getMessage(),
                                               ex.getStackTrace(), "", request));
             
             Gson gson = new GsonBuilder().serializeNulls().create();

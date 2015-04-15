@@ -10,7 +10,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,27 +22,29 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import au.com.bytecode.opencsv.CSVWriter;
+import egovframework.com.cmm.EgovMessageSource;
+import egovframework.com.ext.jstree.support.util.DateUtils;
 
 @Component
 public class SvnDataImporter
 {
-private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Resource(name = "egovMessageSource")
+    EgovMessageSource egovMessageSource;
     
-    @Resource(name="messageSource")
-    ReloadableResourceBundleMessageSource messageSource;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 05 17 * * *")
     public void execute()
     {
         try
         {
-            String getMsg = messageSource.getMessage("ahnlab.fisheye.baseurl" , null , Locale.getDefault() );
-            String authUrlAddr = getMsg + "/rest-service/auth-v1/login?userName=admin&password=love0618";
+            String authUrlAddr = egovMessageSource.getMessage("ahnlab.fisheye.baseurl")
+                    + "/rest-service/auth-v1/login?userName=" + egovMessageSource.getMessage("ahnlab.fisheye.id")
+                    + "&password=" + egovMessageSource.getMessage("ahnlab.fisheye.pass");
             Element authRootNode = getRootNodeFromUrl(authUrlAddr);
             Element authRootChildNode = authRootNode.getChild("token");
             String authToken = authRootChildNode.getText();
@@ -54,7 +55,8 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
             else
             {
                 logger.info("auth token check : " + authToken);
-                String queryUrl = "http://www.313.co.kr/fecru/rest-service-fe/repositories-v1";
+                String queryUrl = egovMessageSource.getMessage("ahnlab.fisheye.baseurl")
+                        + "/rest-service-fe/repositories-v1";
                 String query = "?FEAUTH=" + authToken;
                 String url = queryUrl + query;
                 logger.info(url);
@@ -84,9 +86,22 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
     {
         logger.info("auth token check : " + authToken);
         
-        String queryUrl = "http://www.313.co.kr/fecru/rest-service-fe/search-v1/queryAsRows/" + repositoryName;
+        // 일주일에 한번 매주 일요일 새벽 ( 오전 ) 에 부하가 없을것으로 사료되어.
+        // 스케쥴러를 조정하고 일주일치 데이터를 export 하는것으로 합니다.
+        
+        String startDate = egovMessageSource.getMessage("ahnlab.fisheye.start.date");
+        String endDate = egovMessageSource.getMessage("ahnlab.fisheye.end.date");
+        if (startDate.equals("N/A") || startDate.isEmpty() || endDate.equals("N/A") || endDate.isEmpty())
+        {
+            // 검색 날짜 선정이 안된 경우 ( 최초 실행을 위한 코드 )
+            startDate = DateUtils.format("yyyy-MM-dd", DateUtils.getWeekDate(DateUtils.getCurrentDay(), -1));
+            endDate = DateUtils.format("yyyy-MM-dd", DateUtils.getCurrentDay());
+        }
+        
+        String queryUrl = egovMessageSource.getMessage("ahnlab.fisheye.baseurl")
+                + "/rest-service-fe/search-v1/queryAsRows/" + repositoryName;
         String query = "?query=";
-        query += URLEncoder.encode("select revisions where date in [ 2014-12-10, 2014-12-12 ] ", "UTF-8");
+        query += URLEncoder.encode("select revisions where date in [ " + startDate + ", " + endDate + " ] ", "UTF-8");
         query += URLEncoder
                 .encode("return path , dir , revision , author , date , comment , csid , isBinary , totalLines , ",
                         "UTF-8");
@@ -107,11 +122,11 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
         }
         else
         {
-            //csv export setting
+            // csv export setting
             Map<String, Object> csvDataMap = null;
             HashSet<Map<String, Object>> csvDataList = new HashSet<Map<String, Object>>();
-
-            //head setting
+            
+            // head setting
             Element headingsNode = rootNode.getChild("headings");
             @SuppressWarnings("unchecked")
             List<Element> headList = headingsNode.getChildren("heading");
@@ -159,13 +174,15 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
                         Matcher matcherBT = patternBT.matcher(commentLowerText);
                         if (matcherBT.find())
                         {
+                            int checkPointBT = matcherBT.start();
+                            
                             logger.info("이슈 번호");
                             csvDataMap.put("BT", "존재함");
                         }
                         else
                         {
                             logger.info("이슈 번호가 없음.");
-                            csvDataMap.put("BT", "N/A");
+                            csvDataMap.put("BT", "N/A - format 오류");
                         }
                         
                         Pattern patternRV = Pattern.compile("RV", Pattern.CASE_INSENSITIVE);
@@ -178,7 +195,7 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
                         else
                         {
                             logger.info("리뷰 여부가 없음.");
-                            csvDataMap.put("RV", "N/A");
+                            csvDataMap.put("RV", "N/A - format 오류");
                         }
                     }// if end
                 }// inner for end
@@ -192,15 +209,17 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
                  * 한글깨짐설정을 방지하기위한 인코딩설정(UTF-8로 지정해줄경우 한글깨짐) ',' : 배열을 나눌 문자열 '"'
                  * : 값을 감싸주기위한 문자
                  **/
-                CSVWriter cw = new CSVWriter(new OutputStreamWriter(new FileOutputStream("C:\\Temp\\test.csv"),
-                        "EUC-KR"), ',', '"');
+                CSVWriter cw = new CSVWriter(new OutputStreamWriter(new FileOutputStream(
+                        egovMessageSource.getMessage("ahnlab.fisheye.export.path") + repositoryName + "_" + startDate
+                                + "-" + endDate + ".csv"), "EUC-KR"), ',', '"');
                 try
                 {
                     for (Map<String, Object> m : csvDataList)
                     {
                         // 배열을 이용하여 row를 CSVWriter 객체에 write
-                        cw.writeNext(new String[] { String.valueOf(m.get("repositoryName")), String.valueOf(m.get("revision")), String.valueOf(m.get("author"))
-                                , String.valueOf(m.get("date")), String.valueOf(m.get("BT")), String.valueOf(m.get("RV"))});
+                        cw.writeNext(new String[] { String.valueOf(m.get("repositoryName")),
+                                String.valueOf(m.get("revision")), String.valueOf(m.get("author")),
+                                String.valueOf(m.get("date")), String.valueOf(m.get("BT")), String.valueOf(m.get("RV")) });
                     }
                 }
                 catch (Exception e)
@@ -209,7 +228,6 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
                 }
                 finally
                 {
-                    // 무조건 CSVWriter 객체 close
                     cw.close();
                 }
             }
