@@ -15,173 +15,161 @@
  */
 package egovframework.com.ext.jstree.springiBatis.core.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
-import java.lang.reflect.Field;
+import java.io.File;
 import java.util.List;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 
-import egovframework.com.ext.jstree.springiBatis.core.mock.MockCoreDao;
+import org.dbunit.DataSourceDatabaseTester;
+import org.dbunit.IDatabaseTester;
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.ReplacementDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+
+import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
+import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
 /**
  * Modification Information
  * 
  * @author 류강하
- * @since 2015. 1. 27.
+ * @since 2015. 2. 26.
  * @version 1.0
  * @see <pre>
- *  Class Name  : CoreServiceTest.java
- *  Description : JsTree Spring+iBatis 버젼의 JUnit4 테스트 클래스
- *  Infomation  : 애플리케이션 컨텍스트를 사용하지 않고, DB를 사용하지 않는 Mock DAO를 사용하여 JsTree 코어 서비스를 검증하는 테스트
+ * Class Name  : CoreServiceTest.java
+ * Description : JsTree Spring+iBATIS 버젼의 JUnit4 테스트 클래스
+ * Infomation  : JsTree 코어 서비스 로직을 검증하는 테스트
  * 
- *  << 개정이력(Modification Information) >>
- *  
- *  수정일               수정자                 수정내용
- *  -------       ------------   -----------------------
- *  2015. 1. 27.  류강하                 최초 생성
+ * << 개정이력(Modification Information) >>
  * 
- *  Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
+ * 수정일               수정자                 수정내용
+ * -------       ------------   -----------------------
+ * 2015. 2. 26.  류강하                 최초 생성
+ * 2015. 4. 17.  류강하                 기존 환경을 건드리지 않고 상속 및 확장하여 테스트하도록 변경함. 메이븐 빌드와는 무관하게 동작할 것임.
+ * 
+ * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
 public class CoreServiceTest {
 
-    private static CoreServiceImpl coreService = new CoreServiceImpl();
-    private static MockCoreDao<ComprehensiveTree> mockCoreDao = new MockCoreDao<>();
+    @Autowired
+    private CoreService coreService;
     
-    private static ComprehensiveTree rootNodeStored;
-    private static ComprehensiveTree firstChildNodeStored;
+    @Autowired
+    private CoreDao coreDao;
     
-    @BeforeClass
-    public static void setUp() throws Exception {
-
-        Field coreDaoField = coreService.getClass().getDeclaredField("coreDao");
+    @Resource(name = "dataSource-${Globals.DbType}")
+    private DataSource testDataSource;
+    
+    private IDatabaseTester databaseTester;
+    
+    @Before
+    public void setUp() throws Exception {
         
-        coreDaoField.setAccessible(true);
-        coreDaoField.set(coreService, mockCoreDao);
+        IDatabaseConnection connection = null;
         
-        ComprehensiveTree pRootNode = new ComprehensiveTree();
-        pRootNode.setC_id(1);
-        
-        // TODO Core Service에 getNode()가 없기 때문에 Core DAO를 직접 사용해야 함.
-        rootNodeStored = mockCoreDao.getNode(pRootNode);
-        
-        assertSame(rootNodeStored.getC_id(), 1);
-        assertSame(rootNodeStored.getC_type(), null);
-        assertSame(rootNodeStored.getC_left(), 1);
-        assertSame(rootNodeStored.getC_right(), 4);
-        assertSame(rootNodeStored.getC_position(), 0);
-        assertEquals(rootNodeStored.getC_title(), "Root Node");
-        assertSame(rootNodeStored.getC_parentid(), 0);
-        
-        // TODO 또는 getChildNode()의 index 0을 사용해서 getNode()의 기능을 대신해야 함.
-        List<ComprehensiveTree> childNodes = coreService.getChildNode(pRootNode);
-        
-        assertSame(childNodes.size(), 1);
-        
-        firstChildNodeStored = childNodes.get(0);
-        
-        assertSame(firstChildNodeStored.getC_id(), 2);
-        assertEquals(firstChildNodeStored.getC_type(), "drive");
-        assertSame(firstChildNodeStored.getC_left(), 2);
-        assertSame(firstChildNodeStored.getC_right(), 3);
-        assertSame(firstChildNodeStored.getC_position(), 0);
-        assertEquals(firstChildNodeStored.getC_title(), "First Child Node");
-        assertSame(firstChildNodeStored.getC_parentid(), 1);
+        try {
+            databaseTester = new DataSourceDatabaseTester(testDataSource);
+            
+            File xmlInputFile = new File(this.getClass().getResource(".").getPath() + "initialJsTree.xml");
+            
+            ReplacementDataSet dataSet = new ReplacementDataSet(new FlatXmlDataSetBuilder().build(xmlInputFile));
+            dataSet.addReplacementObject("null", null);
+            
+            connection = databaseTester.getConnection();
+            
+            DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+            
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
     }
     
     @Test
-    public void simpleAddNode() throws Exception {
+    public void validateInitialTree() throws Exception {
         
-        /* leaf 노드 추가 테스트 */
-        // TODO position을 생성해줄 유틸이 필요하여 만듦.
-        int position = mockCoreDao.generatePosition(firstChildNodeStored);
+        ComprehensiveTree nodeForSearching = new ComprehensiveTree();
+        nodeForSearching.setSearchStr("");
         
-        ComprehensiveTree defaultNode = new ComprehensiveTree();
-        defaultNode.setC_type("default");
-        defaultNode.setC_position(position);
-        defaultNode.setC_title("defaultNode");
-        defaultNode.setRef(firstChildNodeStored.getC_id());
+        List<ComprehensiveTree> allNodes = coreDao.searchNodeByString(nodeForSearching);
         
-        coreService.addNode(defaultNode);
+        assertThat(allNodes.size(), is(4));
         
-        ComprehensiveTree defaultNodeStored = coreService.getChildNode(firstChildNodeStored).get(0);
+        ComprehensiveTree rootNode = new ComprehensiveTree();
+        rootNode.setC_id(1);
         
-        assertSame(defaultNodeStored.getC_id(), 3);
-        assertEquals(defaultNodeStored.getC_type(), "default");
-        assertSame(defaultNodeStored.getC_left(), 3);
-        assertSame(defaultNodeStored.getC_right(), 4);
-        assertSame(defaultNodeStored.getC_position(), 1);
-        assertEquals(defaultNodeStored.getC_title(), "defaultNode");
-        assertSame(defaultNodeStored.getC_parentid(), firstChildNodeStored.getC_id());
+        ComprehensiveTree rootNodeStored = coreDao.getNode(rootNode);
         
-        assertSame(rootNodeStored.getC_left(), 1);
-        assertSame(rootNodeStored.getC_right(), 6);
+        assertThat(rootNodeStored.getC_id(), is(1));
+        assertThat(rootNodeStored.getC_parentid(), is(0));
+        assertThat(rootNodeStored.getC_position(), is(0));
+        assertThat(rootNodeStored.getC_left(), is(1));
+        assertThat(rootNodeStored.getC_right(), is(8));
+        assertThat(rootNodeStored.getC_level(), is(0));
+        assertThat(rootNodeStored.getC_title(), is(equalTo("Root Node")));
+        assertThat(rootNodeStored.getC_type(), is(nullValue()));
         
-        assertSame(firstChildNodeStored.getC_left(), 2);
-        assertSame(firstChildNodeStored.getC_right(), 5);
-        
-        /* branch 노드 추가 테스트 */
-        ComprehensiveTree folderNode = new ComprehensiveTree();
-        folderNode.setC_type("folder");
-        folderNode.setC_position( mockCoreDao.generatePosition(firstChildNodeStored) );
-        folderNode.setC_title("folderNode");
-        folderNode.setRef(firstChildNodeStored.getC_id());
-        
-        coreService.addNode(folderNode);
-        
-        ComprehensiveTree folderNodeStored = coreService.getChildNode(firstChildNodeStored).get(1);
-        
-        assertSame(folderNodeStored.getC_id(), 4);
-        assertEquals(folderNodeStored.getC_type(), "folder");
-        assertSame(folderNodeStored.getC_left(), 5);
-        assertSame(folderNodeStored.getC_right(), 6);
-        assertSame(folderNodeStored.getC_position(), 2);
-        assertEquals(folderNodeStored.getC_title(), "folderNode");
-        assertSame(folderNodeStored.getC_parentid(), firstChildNodeStored.getC_id());
-        
-        assertSame(rootNodeStored.getC_left(), 1);
-        assertSame(rootNodeStored.getC_right(), 8);
-        
-        assertSame(firstChildNodeStored.getC_left(), 2);
-        assertSame(firstChildNodeStored.getC_right(), 7);
-        
-        /* leaf 노드 삭제 테스트 */
-        coreService.removeNode(defaultNodeStored);
+        ComprehensiveTree firstChildNode = new ComprehensiveTree();
+        firstChildNode.setC_id(2);
 
-        assertNull(mockCoreDao.getNode(defaultNodeStored));
+        ComprehensiveTree firstChildNodeStored = coreDao.getNode(firstChildNode);
         
-        assertSame(coreService.getChildNode(firstChildNodeStored).size(), 1);
+        assertThat(firstChildNodeStored.getC_id(), is(2));
+        assertThat(firstChildNodeStored.getC_parentid(), is(1));
+        assertThat(firstChildNodeStored.getC_position(), is(0));
+        assertThat(firstChildNodeStored.getC_left(), is(2));
+        assertThat(firstChildNodeStored.getC_right(), is(7));
+        assertThat(firstChildNodeStored.getC_level(), is(1));
+        assertThat(firstChildNodeStored.getC_title(), is(equalTo("First Child")));
+        assertThat(firstChildNodeStored.getC_type(), is(equalTo("drive")));
         
-        assertSame(folderNodeStored.getC_left(), 3);
-        assertSame(folderNodeStored.getC_right(), 4);
-        assertSame(folderNodeStored.getC_position(), 1);
+        ComprehensiveTree leafNode = new ComprehensiveTree();
+        leafNode.setC_id(3);
         
-        assertSame(rootNodeStored.getC_left(), 1);
-        assertSame(rootNodeStored.getC_right(), 6);
+        ComprehensiveTree leafNodeStored = coreDao.getNode(leafNode);
         
-        assertSame(firstChildNodeStored.getC_left(), 2);
-        assertSame(firstChildNodeStored.getC_right(), 5);
+        assertThat(leafNodeStored.getC_id(), is(3));
+        assertThat(leafNodeStored.getC_parentid(), is(2));
+        assertThat(leafNodeStored.getC_position(), is(0));
+        assertThat(leafNodeStored.getC_left(), is(3));
+        assertThat(leafNodeStored.getC_right(), is(4));
+        assertThat(leafNodeStored.getC_level(), is(2));
+        assertThat(leafNodeStored.getC_title(), is(equalTo("Leaf Node")));
+        assertThat(leafNodeStored.getC_type(), is(equalTo("default")));
         
-        /* branch 노드에 노드 추가 테스트 */
+        ComprehensiveTree branchNode = new ComprehensiveTree();
+        branchNode.setC_id(4);
         
-    }
-    
-    @Test
-    public void simpleNegativeAddNode() throws Exception {
+        ComprehensiveTree branchNodeStored = coreDao.getNode(branchNode);
         
-//        int position = mockCoreDao.generatePosition(firstChildNodeStored);
-//        
-//        ComprehensiveTree defaultNode = new ComprehensiveTree();
-//        defaultNode.setC_type("default");
-//        defaultNode.setC_position(position);
-//        defaultNode.setC_title("defaultNode");
-//        defaultNode.setRef(firstChildNodeStored.getC_id());
-//        
-//        coreService.addNode(defaultNode);
+        assertThat(branchNodeStored.getC_id(), is(4));
+        assertThat(branchNodeStored.getC_parentid(), is(2));
+        assertThat(branchNodeStored.getC_position(), is(1));
+        assertThat(branchNodeStored.getC_left(), is(5));
+        assertThat(branchNodeStored.getC_right(), is(6));
+        assertThat(branchNodeStored.getC_level(), is(2));
+        assertThat(branchNodeStored.getC_title(), is(equalTo("Branch Node")));
+        assertThat(branchNodeStored.getC_type(), is(equalTo("folder")));
     }
 }
