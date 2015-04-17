@@ -6,11 +6,17 @@ import java.util.regex.Pattern;
 
 
 
+
+
+
+
+
 import org.easymock.internal.matchers.GreaterThan;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import egovframework.com.ext.jstree.support.util.StringUtils;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
@@ -19,22 +25,117 @@ import static org.hamcrest.Matchers.*;
 
 public class SvnDataImporterTest
 {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @Test
     public void StringCheckTest(){
-        String commentString = "[오근현][BT:DEMO-38][RV:이동민] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
-        String commentLowerText = commentString.toLowerCase();
+        String commentString = "[오근현][ BT :  DEMO-40 , DEMO-46  ][RV :  ] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
         
-        Pattern patternBT = Pattern.compile("BT:", Pattern.CASE_INSENSITIVE);
-        Matcher matcherBT = patternBT.matcher(commentLowerText);
-        int checkPointBT = 0;
-        if (matcherBT.find())
-        {
-            checkPointBT = matcherBT.start();
+        
+        //RV 포맷이 있는지.
+        int checkPointRV = test(commentString, "RV", "end");
+        String filterRVstr = StringUtils.substring(commentString, checkPointRV);
+        System.out.println("returnStr = " + filterRVstr);
+        
+        //RV가 있더라도 : 구분자가 있는지
+        int checkPointRVDelimiter = test(filterRVstr, ":", "start");
+        String filterRVDelimiterStr = StringUtils.substring(filterRVstr, checkPointRVDelimiter);
+        System.out.println("returnStr = " + filterRVDelimiterStr);
+        
+        //RV와 구분자가 있더라도 잘 닫았는지.
+        int checkPointRVDivid = test(filterRVDelimiterStr, "]", "start");
+        String filterRVDividStr = StringUtils.substring(filterRVDelimiterStr, 1, checkPointRVDivid);
+        String filterRVTrimDividStr = filterRVDividStr.trim();
+        System.out.println("patternDelimiterReturnStr = " + filterRVTrimDividStr);
+        
+        if(StringUtils.lowerCase(filterRVTrimDividStr).equals("na") || StringUtils.lowerCase(filterRVTrimDividStr).equals("n/a")){
+            System.out.println("RV 비어있음.");
         }
-        logger.info("checkPointBT = " + checkPointBT);
-        System.out.println("checkPointBT = " + checkPointBT);
+        if(filterRVTrimDividStr.isEmpty()){
+            System.out.println("RV 비어있음.");
+        }
+        
+        //BT 포맷이 있는지.
+        int checkPointBT = test(commentString, "BT", "end");
+        String filterBTstr = StringUtils.substring(commentString, checkPointBT);
+        System.out.println("returnStr = " + filterBTstr);
+        
+        //BT가 있더라도 : 구분자가 있는지
+        int checkPointDelimiter = test(filterBTstr, ":", "start");
+        String filterDelimiterstr = StringUtils.substring(filterBTstr, checkPointDelimiter);
+        System.out.println("returnStr = " + filterDelimiterstr);
+        
+        //BT와 구분자가 있더라도 잘 닫았는지.
+        int checkPointDivid = test(filterBTstr, "]", "start");
+        String filterDividstr = StringUtils.substring(filterDelimiterstr, 1, checkPointDivid-1);
+        String filterTrimdividStr = filterDividstr.trim();
+        System.out.println("patternDelimiterReturnStr = " + filterTrimdividStr);
+        
+        
+        //여러개의 이슈를 연결하였는지 하나만 했는지 
+        int checkPointMuiltiIssue = test2(filterTrimdividStr, ",", "start");
+        String filterPointMuiltiIssuetr = StringUtils.substring(filterTrimdividStr, 0, checkPointMuiltiIssue);
+        String filterPointMuiltiIssueTrimStr = filterPointMuiltiIssuetr.trim();
+        System.out.println("filterPointMuiltiIssueTrimStr = " + filterPointMuiltiIssueTrimStr);
+        //전위 이슈를 정규표현식으로 검증
+        regMatch("^[_0-9a-zA-Z-]+-[0-9]*$", filterPointMuiltiIssueTrimStr);
+        
+
+        //전위 이슈를 가져와서 - 구분후 숫자로만 되 있는지 검사 
+        int checkPointIssueNumber = test(filterTrimdividStr, "-", "start");
+        String filterPointIssueNumber = StringUtils.substring(filterPointMuiltiIssuetr, checkPointIssueNumber+1);
+        String filterPointIssueTrimNumber = filterPointIssueNumber.trim();
+        System.out.println("filterPointIssueTrimNumber = " + filterPointIssueTrimNumber);
+        //정규 표현식 검증.
+        regMatch("^[0-9]*$", filterPointIssueTrimNumber);
+        
         assertThat( checkPointBT, greaterThan(0));
     }
+
+    private void regMatch(String regEx, String filterPointMuiltiIssueTrimStr)
+    {
+        if(Pattern.matches(regEx, filterPointMuiltiIssueTrimStr)){
+            System.out.println("success");
+        }else{
+            System.out.println("fail");
+        }
+        
+        
+    }
+
+    private int test(String originStr, String checkStr, String matchPoint)
+    {
+        String lowerStr = originStr.toLowerCase();
+        Pattern patternObj = Pattern.compile(checkStr, Pattern.CASE_INSENSITIVE);
+        Matcher matcherObj = patternObj.matcher(lowerStr);
+        int checkPointValue = 0;
+        if (matcherObj.find())
+        {
+            checkPointValue = (matchPoint.equals("end"))?matcherObj.end():matcherObj.start();
+            System.out.println("checkPoint = " + checkPointValue);
+        }else{
+            throw new RuntimeException();
+        }
+        return checkPointValue;
+    }
+    
+    private int test2(String originStr, String checkStr, String matchPoint)
+    {
+        String lowerStr = originStr.toLowerCase();
+        Pattern patternObj = Pattern.compile(checkStr, Pattern.CASE_INSENSITIVE);
+        Matcher matcherObj = patternObj.matcher(lowerStr);
+        int checkPointValue = 0;
+        if (matcherObj.find())
+        {
+            //muilti issue
+            checkPointValue = (matchPoint.equals("end"))?matcherObj.end():matcherObj.start();
+            System.out.println("checkPoint = " + checkPointValue);
+        }else{
+            //single issue
+            checkPointValue = lowerStr.length();
+            System.out.println("checkPoint = " + checkPointValue);
+        }
+        return checkPointValue;
+    }
+    
+
 }
