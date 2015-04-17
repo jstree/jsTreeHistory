@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
 import au.com.bytecode.opencsv.CSVWriter;
 import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.ext.jstree.support.util.DateUtils;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 
 @Component
 public class SvnDataImporter
@@ -37,7 +38,7 @@ public class SvnDataImporter
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
-    @Scheduled(cron = "0 05 17 * * *")
+    @Scheduled(cron = "0 12 17 * * *")
     public void execute()
     {
         try
@@ -144,6 +145,13 @@ public class SvnDataImporter
                     Element itemText = itemList.get(i);
                     logger.info(heading + " == " + itemText.getText());
                     
+                    if (heading.equals("path"))
+                    {
+                        String revisionText = itemText.getText();
+                        String revisionLowerText = revisionText.toLowerCase();
+                        csvDataMap.put("path", revisionLowerText);
+                    }
+                    
                     if (heading.equals("revision"))
                     {
                         String revisionText = itemText.getText();
@@ -168,35 +176,78 @@ public class SvnDataImporter
                     if (heading.equals("comment"))
                     {
                         String commentText = itemText.getText();
-                        String commentLowerText = commentText.toLowerCase();
                         
-                        Pattern patternBT = Pattern.compile("BT", Pattern.CASE_INSENSITIVE);
-                        Matcher matcherBT = patternBT.matcher(commentLowerText);
-                        if (matcherBT.find())
-                        {
-                            int checkPointBT = matcherBT.start();
-                            
-                            logger.info("이슈 번호");
-                            csvDataMap.put("BT", "존재함");
-                        }
-                        else
-                        {
-                            logger.info("이슈 번호가 없음.");
-                            csvDataMap.put("BT", "N/A - format 오류");
+                        //RV 포맷이 있는지.
+                        int checkPointRV = test(commentText, "RV", "end");
+                        checkPointRV = (checkPointRV < 0)?commentText.length():checkPointRV;
+                        String filterRVstr = StringUtils.substring(commentText, checkPointRV);
+                        logger.info("returnStr = " + filterRVstr);
+                        
+                        //RV가 있더라도 : 구분자가 있는지
+                        int checkPointRVDelimiter = test(filterRVstr, ":", "start");
+                        checkPointRVDelimiter = (checkPointRVDelimiter < 0)?commentText.length():checkPointRVDelimiter;
+                        String filterRVDelimiterStr = StringUtils.substring(filterRVstr, checkPointRVDelimiter);
+                        logger.info("returnStr = " + filterRVDelimiterStr);
+                        
+                        //RV와 구분자가 있더라도 잘 닫았는지.
+                        int checkPointRVDivid = test(filterRVDelimiterStr, "]", "start");
+                        checkPointRVDivid = (checkPointRV < 0)?1:checkPointRVDivid;
+                        String filterRVDividStr = StringUtils.substring(filterRVDelimiterStr, 1, checkPointRVDivid);
+                        String filterRVTrimDividStr = filterRVDividStr.trim();
+                        logger.info("patternDelimiterReturnStr = " + filterRVTrimDividStr);
+                        
+                        if(StringUtils.lowerCase(filterRVTrimDividStr).equals("na") || StringUtils.lowerCase(filterRVTrimDividStr).equals("n/a")){
+                            csvDataMap.put("RV", "N/A");
+                        }else if(filterRVTrimDividStr.isEmpty()){
+                            csvDataMap.put("RV", "N/A");
+                        }else{
+                            csvDataMap.put("RV", filterRVTrimDividStr);
                         }
                         
-                        Pattern patternRV = Pattern.compile("RV", Pattern.CASE_INSENSITIVE);
-                        Matcher matcherRV = patternRV.matcher(commentLowerText);
-                        if (matcherRV.find())
-                        {
-                            logger.info("리뷰 여부");
-                            csvDataMap.put("RV", "리뷰함");
+                        
+                        //BT 포맷이 있는지.
+                        int checkPointBT = test(commentText, "BT", "end");
+                        checkPointBT = (checkPointBT < 0)?commentText.length():checkPointBT;
+                        String filterBTstr = StringUtils.substring(commentText, checkPointBT);
+                        logger.info("returnStr = " + filterBTstr);
+                        
+                        //BT가 있더라도 : 구분자가 있는지
+                        int checkPointDelimiter = test(filterBTstr, ":", "start");
+                        checkPointDelimiter = (checkPointDelimiter < 0)?commentText.length():checkPointDelimiter;
+                        String filterDelimiterstr = StringUtils.substring(filterBTstr, checkPointDelimiter);
+                        logger.info("returnStr = " + filterDelimiterstr);
+                        
+                        //BT와 구분자가 있더라도 잘 닫았는지.
+                        int checkPointDivid = test(filterBTstr, "]", "start");
+                        checkPointDivid = (checkPointDivid < 0)?2:checkPointDivid;
+                        String filterDividstr = StringUtils.substring(filterDelimiterstr, 1, checkPointDivid-1);
+                        String filterTrimdividStr = filterDividstr.trim();
+                        logger.info("patternDelimiterReturnStr = " + filterTrimdividStr);
+                        
+                        
+                        //여러개의 이슈를 연결하였는지 하나만 했는지 
+                        int checkPointMuiltiIssue = test2(filterTrimdividStr, ",", "start");
+                        checkPointMuiltiIssue = (checkPointMuiltiIssue < 0)?0:checkPointMuiltiIssue;
+                        String filterPointMuiltiIssueStr = StringUtils.substring(filterTrimdividStr, 0, checkPointMuiltiIssue);
+                        String filterPointMuiltiIssueTrimStr = filterPointMuiltiIssueStr.trim();
+                        logger.info("filterPointMuiltiIssueTrimStr = " + filterPointMuiltiIssueTrimStr);
+                        
+
+                        //전위 이슈를 가져와서 - 구분후 숫자로만 되 있는지 검사 
+                        int checkPointIssueNumber = test(filterPointMuiltiIssueStr, "-", "start");
+                        checkPointIssueNumber = (checkPointIssueNumber < 0)?filterPointMuiltiIssueStr.length()-1:checkPointIssueNumber;
+                        String filterPointIssueNumber = StringUtils.substring(filterPointMuiltiIssueStr, checkPointIssueNumber+1);
+                        String filterPointIssueTrimNumber = filterPointIssueNumber.trim();
+                        logger.info("filterPointIssueTrimNumber = " + filterPointIssueTrimNumber);
+                        //정규 표현식 검증.
+                        if(regMatch("^[_0-9a-zA-Z-]+-[0-9]*$", filterPointMuiltiIssueTrimStr) && regMatch("^[0-9]*$", filterPointIssueTrimNumber)){
+                            csvDataMap.put("BT", filterTrimdividStr);
+                        }else{
+                            csvDataMap.put("BT", "N/A");
                         }
-                        else
-                        {
-                            logger.info("리뷰 여부가 없음.");
-                            csvDataMap.put("RV", "N/A - format 오류");
-                        }
+                        
+                        csvDataMap.put("SVNLOG", filterRVTrimDividStr + " / " + filterTrimdividStr);
+                        
                     }// if end
                 }// inner for end
                 csvDataList.add(csvDataMap);
@@ -217,9 +268,9 @@ public class SvnDataImporter
                     for (Map<String, Object> m : csvDataList)
                     {
                         // 배열을 이용하여 row를 CSVWriter 객체에 write
-                        cw.writeNext(new String[] { String.valueOf(m.get("repositoryName")),
+                        cw.writeNext(new String[] { String.valueOf(m.get("repositoryName")),  String.valueOf(m.get("path")),
                                 String.valueOf(m.get("revision")), String.valueOf(m.get("author")),
-                                String.valueOf(m.get("date")), String.valueOf(m.get("BT")), String.valueOf(m.get("RV")) });
+                                String.valueOf(m.get("date")), String.valueOf(m.get("RV")) ,String.valueOf(m.get("BT")), String.valueOf(m.get("SVNLOG")) });
                     }
                 }
                 catch (Exception e)
@@ -238,11 +289,55 @@ public class SvnDataImporter
         }
     }
     
+    private boolean regMatch(String regEx, String filterPointMuiltiIssueTrimStr)
+    {
+        if(Pattern.matches(regEx, filterPointMuiltiIssueTrimStr)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     private Element getRootNodeFromUrl(String url) throws JDOMException, IOException, MalformedURLException
     {
         SAXBuilder builder = new SAXBuilder();
         Document jdomdoc = builder.build(new URL(url));
         Element root = jdomdoc.getRootElement();
         return root;
+    }
+    
+    private int test(String originStr, String checkStr, String matchPoint)
+    {
+        String lowerStr = originStr.toLowerCase();
+        Pattern patternObj = Pattern.compile(checkStr, Pattern.CASE_INSENSITIVE);
+        Matcher matcherObj = patternObj.matcher(lowerStr);
+        int checkPointValue = 0;
+        if (matcherObj.find())
+        {
+            checkPointValue = (matchPoint.equals("end"))?matcherObj.end():matcherObj.start();
+            logger.info("checkPoint = " + checkPointValue);
+        }else{
+            checkPointValue = -1;
+        }
+        return checkPointValue;
+    }
+    
+    private int test2(String originStr, String checkStr, String matchPoint)
+    {
+        String lowerStr = originStr.toLowerCase();
+        Pattern patternObj = Pattern.compile(checkStr, Pattern.CASE_INSENSITIVE);
+        Matcher matcherObj = patternObj.matcher(lowerStr);
+        int checkPointValue = 0;
+        if (matcherObj.find())
+        {
+            //muilti issue
+            checkPointValue = (matchPoint.equals("end"))?matcherObj.end():matcherObj.start();
+            logger.info("checkPoint = " + checkPointValue);
+        }else{
+            //single issue
+            checkPointValue = lowerStr.length();
+            System.out.println("checkPoint = " + checkPointValue);
+        }
+        return checkPointValue;
     }
 }

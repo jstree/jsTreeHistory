@@ -1,35 +1,21 @@
 package egovframework.com.ext.jstree.support.manager.scheduler.job.fecruToEazyBI;
 
+import static org.hamcrest.Matchers.greaterThan;
+import static org.junit.Assert.assertThat;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-
-
-
-
-
-
-
-import org.easymock.internal.matchers.GreaterThan;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import egovframework.com.ext.jstree.support.util.StringUtils;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-import static org.junit.matchers.JUnitMatchers.*;
-import static org.mockito.Mockito.*;
-import static org.hamcrest.Matchers.*;
 
 public class SvnDataImporterTest
 {
     
     @Test
     public void StringCheckTest(){
-        String commentString = "[오근현][ BT :  DEMO-40 , DEMO-46  ][RV :  ] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
-        
+        String commentString = "[조경원][BT:DEMO-40 , DEMO-46][RV:이동민] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
         
         //RV 포맷이 있는지.
         int checkPointRV = test(commentString, "RV", "end");
@@ -98,8 +84,6 @@ public class SvnDataImporterTest
         }else{
             System.out.println("fail");
         }
-        
-        
     }
 
     private int test(String originStr, String checkStr, String matchPoint)
