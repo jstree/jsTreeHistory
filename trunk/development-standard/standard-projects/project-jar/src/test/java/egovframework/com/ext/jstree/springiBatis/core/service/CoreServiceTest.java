@@ -33,6 +33,7 @@ import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * -------       ------------   -----------------------
  * 2015. 2. 26.  류강하                 최초 생성
  * 2015. 4. 17.  류강하                 기존 환경을 건드리지 않고 상속 및 확장하여 테스트하도록 변경함. 메이븐 빌드와는 무관하게 동작할 것임.
+ * 2015. 4. 19.  류강하                 Leaf Node Add Node 테스트 케이스 추가(의도적인 개행을 넣었으니 Ctrl + Shift + F는 안 했으면 좋겠습니다.)
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -106,70 +108,209 @@ public class CoreServiceTest {
         }
     }
     
-    @Test
-    public void validateInitialTree() throws Exception {
+    private ComprehensiveTree getRootNode() {
+        
+        ComprehensiveTree rootNode = new ComprehensiveTree();
+        rootNode.setC_id(1);
+        
+        return rootNode;
+    }
+    
+    private ComprehensiveTree getRootNodeStored() throws Exception {
+        
+        return coreDao.getNode( getRootNode() );
+    }
+    
+    private ComprehensiveTree getFirstChildNode() {
+        
+        ComprehensiveTree firstChildNode = new ComprehensiveTree();
+        firstChildNode.setC_id(2);
+        
+        return firstChildNode;
+    }
+    
+    private ComprehensiveTree getFirstChildNodeStored() throws Exception {
+        
+        return coreDao.getNode( getFirstChildNode() );
+    }
+    
+    private ComprehensiveTree getInitialLeafNode() {
+        
+        ComprehensiveTree leafNode = new ComprehensiveTree();
+        leafNode.setC_id(3);
+        
+        return leafNode;
+    }
+    
+    private ComprehensiveTree getInitialLeafNodeStored() throws Exception {
+        
+        return coreDao.getNode( getInitialLeafNode() );
+    }
+    
+    private ComprehensiveTree getInitialBranchNode() {
+        
+        ComprehensiveTree branchNode = new ComprehensiveTree();
+        branchNode.setC_id(4);
+        
+        return branchNode;
+    }
+    
+    private ComprehensiveTree getInitialBranchNodeStored() throws Exception {
+        
+        return coreDao.getNode( getInitialBranchNode() );
+    }
+    
+    private void assertThatTotalNumberOfNodesIs(int size) throws Exception {
         
         ComprehensiveTree nodeForSearching = new ComprehensiveTree();
         nodeForSearching.setSearchStr("");
         
         List<ComprehensiveTree> allNodes = coreDao.searchNodeByString(nodeForSearching);
         
-        assertThat(allNodes.size(), is(4));
+        assertThat(allNodes.size(), is(size));
+    }
+    
+    private ComprehensiveTree validateRootNode() throws Exception {
         
-        ComprehensiveTree rootNode = new ComprehensiveTree();
-        rootNode.setC_id(1);
-        
-        ComprehensiveTree rootNodeStored = coreDao.getNode(rootNode);
+        ComprehensiveTree rootNodeStored = coreDao.getNode( getRootNode() );
         
         assertThat(rootNodeStored.getC_id(), is(1));
         assertThat(rootNodeStored.getC_parentid(), is(0));
         assertThat(rootNodeStored.getC_position(), is(0));
         assertThat(rootNodeStored.getC_left(), is(1));
-        assertThat(rootNodeStored.getC_right(), is(8));
+        
         assertThat(rootNodeStored.getC_level(), is(0));
         assertThat(rootNodeStored.getC_title(), is(equalTo("Root Node")));
         assertThat(rootNodeStored.getC_type(), is(nullValue()));
         
-        ComprehensiveTree firstChildNode = new ComprehensiveTree();
-        firstChildNode.setC_id(2);
-
-        ComprehensiveTree firstChildNodeStored = coreDao.getNode(firstChildNode);
+        return rootNodeStored;
+    }
+    
+    private ComprehensiveTree validateFirstChildNode() throws Exception {
+        
+        ComprehensiveTree firstChildNodeStored = coreDao.getNode( getFirstChildNode() );
         
         assertThat(firstChildNodeStored.getC_id(), is(2));
         assertThat(firstChildNodeStored.getC_parentid(), is(1));
         assertThat(firstChildNodeStored.getC_position(), is(0));
         assertThat(firstChildNodeStored.getC_left(), is(2));
-        assertThat(firstChildNodeStored.getC_right(), is(7));
+        
         assertThat(firstChildNodeStored.getC_level(), is(1));
         assertThat(firstChildNodeStored.getC_title(), is(equalTo("First Child")));
         assertThat(firstChildNodeStored.getC_type(), is(equalTo("drive")));
         
-        ComprehensiveTree leafNode = new ComprehensiveTree();
-        leafNode.setC_id(3);
+        return firstChildNodeStored;
+    }
+    
+    private ComprehensiveTree validateInitialLeafNode() throws Exception {
         
-        ComprehensiveTree leafNodeStored = coreDao.getNode(leafNode);
+        ComprehensiveTree leafNodeStored = coreDao.getNode( getInitialLeafNode() );
         
         assertThat(leafNodeStored.getC_id(), is(3));
         assertThat(leafNodeStored.getC_parentid(), is(2));
         assertThat(leafNodeStored.getC_position(), is(0));
-        assertThat(leafNodeStored.getC_left(), is(3));
-        assertThat(leafNodeStored.getC_right(), is(4));
+        
+        
         assertThat(leafNodeStored.getC_level(), is(2));
         assertThat(leafNodeStored.getC_title(), is(equalTo("Leaf Node")));
         assertThat(leafNodeStored.getC_type(), is(equalTo("default")));
         
-        ComprehensiveTree branchNode = new ComprehensiveTree();
-        branchNode.setC_id(4);
+        return leafNodeStored;
+    }
+    
+    private ComprehensiveTree validateInitialBranchNode() throws Exception {
         
-        ComprehensiveTree branchNodeStored = coreDao.getNode(branchNode);
+        ComprehensiveTree branchNodeStored = coreDao.getNode( getInitialBranchNode() );
         
         assertThat(branchNodeStored.getC_id(), is(4));
         assertThat(branchNodeStored.getC_parentid(), is(2));
         assertThat(branchNodeStored.getC_position(), is(1));
-        assertThat(branchNodeStored.getC_left(), is(5));
-        assertThat(branchNodeStored.getC_right(), is(6));
+        
+        
         assertThat(branchNodeStored.getC_level(), is(2));
         assertThat(branchNodeStored.getC_title(), is(equalTo("Branch Node")));
         assertThat(branchNodeStored.getC_type(), is(equalTo("folder")));
+        
+        return branchNodeStored;
+    }
+    
+    @Test
+    public void validateInitialTree() throws Exception {
+        
+        assertThatTotalNumberOfNodesIs(4);
+        
+        ComprehensiveTree rootNodeStored = validateRootNode();
+        assertThat(rootNodeStored.getC_right(), is(8));
+        
+        ComprehensiveTree firstChildNodeStored = validateFirstChildNode();
+        assertThat(firstChildNodeStored.getC_left(), is(2));
+        assertThat(firstChildNodeStored.getC_right(), is(7));
+        
+        ComprehensiveTree leafNodeStored = validateInitialLeafNode();
+        assertThat(leafNodeStored.getC_left(), is(3));
+        assertThat(leafNodeStored.getC_right(), is(4));
+        
+        ComprehensiveTree branchNodeStored = validateInitialBranchNode();
+        assertThat(branchNodeStored.getC_left(), is(5));
+        assertThat(branchNodeStored.getC_right(), is(6));
+        
+//      I|    L    R
+//      1|    1    8 : Root Node
+//      2|     2  7  : First Child Node
+//      3|      34   : Leaf Node
+//      4|      56   : Branch Node
+    }
+    
+    @Ignore // 약간의 문제가 있어서 잠시 ignore 처리
+    @Test
+    public void addNewLeafNodeToRootNode() throws Exception {
+        
+        ComprehensiveTree firstChildNode = coreService.getChildNode( getRootNode() ).get(0);
+
+        List<ComprehensiveTree> childNodesOfFirstChildNode = coreService.getChildNode(firstChildNode);
+        
+        assertThat(childNodesOfFirstChildNode.size(), is(2));
+        
+        ComprehensiveTree newLeafNode = new ComprehensiveTree();
+        newLeafNode.setRef( firstChildNode.getC_id() );
+        newLeafNode.setC_position( childNodesOfFirstChildNode.size() + 1 ); // TODO 테스트 코드에서 직접 만들어야 하나?
+        newLeafNode.setC_title( "New Leaf Node" );
+        newLeafNode.setC_type( "default" ); // TODO Enumeration 도입 필요
+        
+        coreService.addNode(newLeafNode);
+
+        assertThatTotalNumberOfNodesIs(5);
+        
+        ComprehensiveTree rootNodeStored = validateRootNode();
+        assertThat(rootNodeStored.getC_right(), is(10));
+        
+        ComprehensiveTree firstChildNodeStored = validateFirstChildNode();
+        assertThat(firstChildNodeStored.getC_right(), is(9));
+        
+        ComprehensiveTree leafNodeStored = validateInitialLeafNode();
+        assertThat(leafNodeStored.getC_left(), is(3));
+        assertThat(leafNodeStored.getC_right(), is(4));
+        
+        ComprehensiveTree branchNodeStored = validateInitialBranchNode();
+        assertThat(branchNodeStored.getC_left(), is(5));
+        assertThat(branchNodeStored.getC_right(), is(6));
+        
+        ComprehensiveTree newLeafNodeStored = coreService.getChildNode( getFirstChildNodeStored() ).get(2);
+        
+        assertThat(newLeafNodeStored.getC_id(), is(5));
+        assertThat(newLeafNodeStored.getC_parentid(), is(2));
+        assertThat(newLeafNodeStored.getC_position(), is(2));
+        assertThat(newLeafNodeStored.getC_left(), is(7));
+        assertThat(newLeafNodeStored.getC_right(), is(8));
+        assertThat(newLeafNodeStored.getC_level(), is(2));
+        assertThat(newLeafNodeStored.getC_title(), is(equalTo("New Leaf Node")));
+        assertThat(newLeafNodeStored.getC_type(), is(equalTo("default"))); // TODO Enumeration 도입 필요
+        
+//      I|    L    R
+//      1|    1    10 : Root Node
+//      2|     2  9   : First Child Node
+//      3|      34    : Leaf Node
+//      4|      56    : Branch Node
+//      5|      78    : New Leaf Node
     }
 }
