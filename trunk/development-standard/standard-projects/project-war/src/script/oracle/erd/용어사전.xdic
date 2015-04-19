@@ -13956,6 +13956,7 @@
   <term name="열람" physicalName="READ" physicalDescription="READING" tag="//@tag.362"/>
   <term name="상세" physicalName="DTL" physicalDescription="DETAIL" tag="//@tag.362"/>
   <term name="설명" physicalName="DSCRIPT" physicalDescription="DESCRIPTION" tag="//@tag.362"/>
+  <term name="닉네임" physicalName="NICK_NM" physicalDescription="NICK NAME"/>
   <tag name="기록물관리"/>
   <tag name="교육인적자원 행정지원"/>
   <tag name="재난예방 관리"/>
