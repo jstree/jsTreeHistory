@@ -16,17 +16,6 @@
 	<name>support-google</name>
 	<description>전자정부 프레임워크 라이브러리</description>
 
-	<repositories>
-		<repository>
-			<id>sardine-google-svn-repo</id>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<name>Sardine maven repo at Google Code</name>
-			<url>http://sardine.googlecode.com/svn/maven/</url>
-		</repository>
-	</repositories>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
