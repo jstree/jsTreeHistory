@@ -27,9 +27,13 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
@@ -56,15 +60,19 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class, TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
-@DbUnitConfiguration(databaseConnection = { "dataSource-oracle" })
-@DatabaseSetup("/egovframework/com/ext/jstree/springiBatis/core/dao/initialJsTree.xml")
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class
+	                    , TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@DbUnitConfiguration(databaseConnection = { "dataSource-oracle" },dataSetLoader = ColumnSensingFlatXmlDataSetLoader.class)
+@DatabaseSetup(value="/egovframework/com/ext/jstree/springiBatis/core/dao/initialJsTree.xml",type = DatabaseOperation.CLEAN_INSERT)
 public class CoreDaoTest
 {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired 
 	private CoreDao dao;
+	
+    @Autowired
+    private CoreService coreService;
 
 	private ComprehensiveTree comprehensiveTree;
 	private ComprehensiveTree comprehensiveResultTree;
@@ -125,7 +133,7 @@ public class CoreDaoTest
 		branchNode.setC_title("Branch Node");
 		branchNode.setC_type("folder");
 	}
-
+	
 	@Test
 	public void testGetChildNode() throws Exception
 	{
@@ -179,6 +187,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@ExpectedDatabase(value="/egovframework/com/ext/jstree/springiBatis/core/dao/cutMyselfAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testCutMyself() throws Exception
 	{
 		c_idsByChildNodeFromNodeById = new ArrayList<>();
