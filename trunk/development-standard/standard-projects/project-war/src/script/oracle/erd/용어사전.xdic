@@ -23,12 +23,10 @@
   <term name="일자" description="yyyyMMdd" physicalName="DE" physicalDescription="DATE"/>
   <term name="상태" physicalName="STATE" physicalDescription="STATE"/>
   <term name="상태" physicalName="ST" physicalDescription="STATE"/>
-  <term name="여부" physicalName="FLAG" physicalDescription="FLAG"/>
   <term name="여부" physicalName="FL" physicalDescription="FLAG"/>
   <term name="순서" physicalName="ORDER" physicalDescription="ORDER"/>
   <term name="순서" physicalName="ORD" physicalDescription="ORDER"/>
   <term name="수" physicalName="COUNT" physicalDescription="COUNT"/>
-  <term name="수" physicalName="CNT" physicalDescription="COUNT"/>
   <term name="량" physicalName="AMOUNT" physicalDescription="AMOUNT"/>
   <term name="량" physicalName="AMT" physicalDescription="AMOUNT"/>
   <term name="합계" physicalName="SUM" physicalDescription="SUM"/>
@@ -96,7 +94,6 @@
   <term name="첨부" physicalName="ATTACH" physicalDescription="ATTACH"/>
   <term name="저장" physicalName="STORE" physicalDescription="STORE"/>
   <term name="다운로드" physicalName="DOWNLOAD" physicalDescription="DOWNLOAD"/>
-  <term name="다운로드" physicalName="DWNLD" physicalDescription="DOWNLOAD"/>
   <term name="업로드" physicalName="UPLOAD" physicalDescription="UPLOAD"/>
   <term name="글" physicalName="ARTICLE" physicalDescription="ARTICLE"/>
   <term name="열람" physicalName="READING" physicalDescription="READING"/>
@@ -109,4 +106,14 @@
   <term name="추천" physicalName="RECMND" physicalDescription="RECOMMEND"/>
   <term name="차감" physicalName="DEDU" physicalDescription="DEDUCTION"/>
   <term name="스크랩" physicalName="SCRAP" physicalDescription="SCRAP"/>
+  <term name="접근" physicalName="ACCESS" physicalDescription="ACCESS"/>
+  <term name="썸네일" physicalName="THUM" physicalDescription="THUMBNAIL"/>
+  <term name="모바일" physicalName="MOBILE" physicalDescription="MOBILE"/>
+  <term name="현지" physicalName="LOCAL" physicalDescription="LOCAL"/>
+  <term name="위젯" physicalName="WIDGET" physicalDescription="WIDGET"/>
+  <term name="스킨" physicalName="SKIN" physicalDescription="SKIN"/>
+  <term name="레이어" physicalName="LAYER" physicalDescription="LAYER"/>
+  <term name="링크" physicalName="LINK" physicalDescription="LINK"/>
+  <term name="버전" physicalName="VERSION" physicalDescription="VERSION"/>
+  <term name="기간" physicalName="TERM" physicalDescription="TERM"/>
 </tm:TermDictionary>
