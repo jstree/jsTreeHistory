@@ -1,3 +1,56 @@
+/* 오권우 시작 */
+/* 회원_정보 */
+DELETE FROM T_USER_INFO;
+
+INSERT INTO T_USER_INFO (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, 
+                          C_EMAIL, C_PASSWORD, C_NICK_NM, C_MAILING_SERVICE_USE_FL, C_INDI_INFO_OPEN_FL, 
+                          C_JOIN_DT, C_PASSWORD_CHANGE_DT, C_LOGIN_FAILURE_CNT, C_PASSWORD_FIND_QUESTION, C_PASSWORD_FIND_ANSWER, 
+                          C_HOMEPAGE_URL, C_BLOG_URL, C_SIGN, C_PROFILE_PHOTO, C_IMAGE_ICON, 
+                          C_USER_GRADE, C_JOIN_STATE_CD)
+                  VALUES (1, 0, 0, 1, 4, 0, 'Root Node', NULL,
+                          ' ', ' ', ' ', '0', '0',
+                          ' ', ' ', '0', ' ', ' ',
+                          NULL, NULL, NULL, NULL, NULL,
+                          1, 1);            
+
+INSERT INTO T_USER_INFO (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, 
+                          C_EMAIL, C_PASSWORD, C_NICK_NM, C_MAILING_SERVICE_USE_FL, C_INDI_INFO_OPEN_FL, 
+                          C_JOIN_DT, C_PASSWORD_CHANGE_DT, C_LOGIN_FAILURE_CNT, C_PASSWORD_FIND_QUESTION, C_PASSWORD_FIND_ANSWER, 
+                          C_HOMEPAGE_URL, C_BLOG_URL, C_SIGN, C_PROFILE_PHOTO, C_IMAGE_ICON, 
+                          C_USER_GRADE, C_JOIN_STATE_CD)
+                  VALUES (2, 1, 0, 2, 3, 1, 'First Child', 'drive',
+                          'admin@313.co.kr', 'bbd7182cd0ee95488f1a1e6f3fe0d8f94ed0d14e4db1dce713fe82a3231c523d', '관리자', '0', '0',
+                          '20150425205811', '20150425205811', '0', '초등학교 이름은', '부원초등학교',
+                          NULL, NULL, NULL, NULL, NULL,
+                          1, 1);    
+COMMIT;
+
+/* 회원_가입상태 */
+DELETE FROM T_USER_JOIN_STATE;
+
+INSERT INTO T_USER_JOIN_STATE (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
+                       VALUES (1, 0, 0, 1, 4, 0, 'Root Node', NULL);
+
+INSERT INTO T_USER_JOIN_STATE (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
+                       VALUES (2, 1, 0, 2, 3, 1, 'First Child', 'drive');
+
+COMMIT;
+
+/* 회원_로그인현황 */
+DELETE FROM T_USER_LOGIN_CURRENT_STATE;
+
+INSERT INTO T_USER_LOGIN_CURRENT_STATE (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
+                                        C_IP_ADDRESS, C_MAC_ADDRESS, C_LOGIN_DT, C_USER_ID)                     
+                                VALUES (1, 0, 0, 1, 4, 0, 'Root Node', NULL,
+                                        ' ', ' ', ' ', 1);
+                                        
+INSERT INTO T_USER_LOGIN_CURRENT_STATE (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
+                                        C_IP_ADDRESS, C_MAC_ADDRESS, C_LOGIN_DT, C_USER_ID)                                                           
+                                VALUES (2, 1, 0, 2, 3, 1, 'First Child', 'drive',
+                                        ' ', ' ', ' ', 2);                                     
+COMMIT;
+/* 오권우 끝 */
+
 /* 회원_금지단어 */
 DELETE FROM T_USER_PROH_WORD;
 
