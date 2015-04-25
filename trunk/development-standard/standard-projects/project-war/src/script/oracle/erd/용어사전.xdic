@@ -108,4 +108,5 @@
   <term name="추천인" physicalName="RECMNDER" physicalDescription="RECOMMENDER"/>
   <term name="추천" physicalName="RECMND" physicalDescription="RECOMMEND"/>
   <term name="차감" physicalName="DEDU" physicalDescription="DEDUCTION"/>
+  <term name="스크랩" physicalName="SCRAP" physicalDescription="SCRAP"/>
 </tm:TermDictionary>
