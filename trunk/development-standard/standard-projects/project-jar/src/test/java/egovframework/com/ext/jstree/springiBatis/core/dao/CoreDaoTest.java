@@ -8,15 +8,11 @@ import static org.unitils.reflectionassert.ReflectionAssert.assertPropertyLenien
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -66,13 +62,9 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @DatabaseSetup(value="/egovframework/com/ext/jstree/springiBatis/core/dao/initialJsTree.xml",type = DatabaseOperation.CLEAN_INSERT)
 public class CoreDaoTest
 {
-	private final Logger logger = LoggerFactory.getLogger(getClass());
-
-	@Autowired 
-	private CoreDao dao;
+	@Autowired private CoreDao dao;
 	
-    @Autowired
-    private CoreService coreService;
+    @Autowired private CoreService coreService;
 
 	private ComprehensiveTree comprehensiveTree;
 	private ComprehensiveTree comprehensiveResultTree;
@@ -138,6 +130,7 @@ public class CoreDaoTest
 	public void testGetChildNode() throws Exception
 	{
 		comprehensiveTree.setC_id(1);
+		
 		l_StoredNodes = dao.getChildNode(comprehensiveTree);
 
 		firstChild.setChildcount("InChild");
@@ -151,7 +144,9 @@ public class CoreDaoTest
 	@Test
 	public void testSearchNodeByString() throws Exception
 	{
-		getAllTree();
+		comprehensiveTree.setC_title("");
+		
+		l_StoredNodes = dao.searchNodeByString(comprehensiveTree);
 
 		assertThat(l_StoredNodes.size(), is(4));
 	}
@@ -160,6 +155,7 @@ public class CoreDaoTest
 	public void testSearchNodeByPosition() throws Exception
 	{
 		comprehensiveTree.setC_id(2);
+		
 		l_StoredNodes = dao.getChildNode(comprehensiveTree);
 		l_StoredStrings = dao.searchNodeByPosition(l_StoredNodes);
 
@@ -172,6 +168,7 @@ public class CoreDaoTest
 	public void testGetNode() throws Exception
 	{
 		comprehensiveTree.setC_id(3);
+		
 		comprehensiveResultTree = dao.getNode(comprehensiveTree);
 
 		assertLenientEquals(comprehensiveResultTree, leafNode);
@@ -181,6 +178,7 @@ public class CoreDaoTest
 	public void testGetNodeByRef() throws Exception
 	{
 		comprehensiveTree.setRef(2);
+		
 		comprehensiveResultTree = dao.getNodeByRef(comprehensiveTree);
 
 		assertLenientEquals(comprehensiveResultTree, firstChild);
@@ -197,13 +195,6 @@ public class CoreDaoTest
 		firstChild.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
 
 		dao.cutMyself(firstChild);
-
-		getAllTree();
-		
-		assertPropertyLenientEquals("c_right", 6, l_StoredNodes.get(0));
-		assertPropertyLenientEquals("c_right", 3, l_StoredNodes.get(1));
-		assertPropertyLenientEquals("c_left", 4, l_StoredNodes.get(3));
-		assertPropertyLenientEquals("c_right", 5, l_StoredNodes.get(3));
 	}
 
 	@Test
@@ -221,6 +212,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@ExpectedDatabase(value="/egovframework/com/ext/jstree/springiBatis/core/dao/stretchLeftRightForMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testStretchLeftRightForMyselfFromJstree() throws Exception
 	{
 		comprehensiveTree.setSpaceOfTargetNode(spaceOfTargetNode);
@@ -229,18 +221,10 @@ public class CoreDaoTest
 		comprehensiveTree.setCopy(0);
 
 		dao.stretchLeftRightForMyselfFromJstree(comprehensiveTree);
-
-		rootNode.setC_right(10);
-
-		getAllTree();
-
-		assertPropertyLenientEquals("c_right", 10, l_StoredNodes.get(0));
-		assertPropertyLenientEquals("c_right", 7, l_StoredNodes.get(1));
-		assertPropertyLenientEquals("c_left", 8, l_StoredNodes.get(3));
-		assertPropertyLenientEquals("c_right", 9, l_StoredNodes.get(3));
 	}
 
 	@Test
+	@ExpectedDatabase(value="/egovframework/com/ext/jstree/springiBatis/core/dao/pasteMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testPasteMyselfFromJstree() throws Exception
 	{
 		c_idsByChildNodeFromNodeById = new ArrayList<>();
@@ -256,11 +240,6 @@ public class CoreDaoTest
 		comprehensiveTree.setIdifRight(1);
 
 		dao.pasteMyselfFromJstree(comprehensiveTree);
-
-		getAllTree();
-		
-		assertPropertyLenientEquals("c_left", 5, l_StoredNodes.get(4));
-		assertPropertyLenientEquals("c_right", 6, l_StoredNodes.get(4));
 	}
 
 	@Test
@@ -284,20 +263,72 @@ public class CoreDaoTest
 		
 		assertPropertyLenientEquals("c_parentid", 2, comprehensiveResultTree);
 	}
-
-	private void getAllTree() throws Exception
+	
+	@Test
+	public void testFixCopyIf() throws Exception
 	{
-		l_StoredNodes = dao.getChildNodeByLeftRight(rootNode);
+		comprehensiveTree.setC_id(4);
+		comprehensiveTree.setFixCopyId(4);
+		comprehensiveTree.setFixCopyPosition(0);
 
-		Collections.sort(l_StoredNodes, new C_IdAscCompare());
+		dao.fixCopyIF(comprehensiveTree);
+
+		comprehensiveResultTree = dao.getNode(comprehensiveTree);
+		
+		assertPropertyLenientEquals("c_position", 0, comprehensiveResultTree);
 	}
-
-	static class C_IdAscCompare implements Comparator<ComprehensiveTree>
+	
+	@Test
+	public void testAlterNode() throws Exception
 	{
-		@Override
-		public int compare(ComprehensiveTree tree1, ComprehensiveTree tree2)
-		{
-			return tree1.getC_id() < tree2.getC_id() ? -1 : tree1.getC_id() > tree2.getC_id() ? 1 : 0;
-		}
+		comprehensiveTree.setC_id(4);
+		comprehensiveTree.setC_type("default");
+		comprehensiveTree.setC_title("leaf Node");
+
+		dao.alterNode(comprehensiveTree);
+
+		comprehensiveResultTree = dao.getNode(comprehensiveTree);
+		
+		assertPropertyLenientEquals("c_type", "default", comprehensiveResultTree);
+		assertPropertyLenientEquals("c_title", "leaf Node", comprehensiveResultTree);
+	}
+	
+	@Test
+	@ExpectedDatabase(value="/egovframework/com/ext/jstree/springiBatis/core/dao/removeNodeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
+	public void testRemoveNode() throws Exception
+	{
+        int spaceOfTargetNode = firstChild.getC_right() - firstChild.getC_left()+1;
+        
+        firstChild.setSpaceOfTargetNode(spaceOfTargetNode);
+        
+        dao.removeNode(firstChild);
+	}
+	
+	@Test
+	public void testAlterNodeType() throws Exception
+	{
+		comprehensiveTree.setC_id(4);
+		comprehensiveTree.setC_type("default");
+
+		dao.alterNodeType(comprehensiveTree);
+
+		comprehensiveResultTree = dao.getNode(comprehensiveTree);
+		
+		assertPropertyLenientEquals("c_type", "default", comprehensiveResultTree);
+	}
+	
+	@Test
+	public void testEnterMyselfFixPosition() throws Exception
+	{
+		comprehensiveTree.setC_id(4);
+		comprehensiveTree.setRef(2);
+		comprehensiveTree.setC_position(1);
+
+		dao.enterMyselfFixPosition(comprehensiveTree);
+
+		comprehensiveResultTree = dao.getNode(comprehensiveTree);
+		
+		assertPropertyLenientEquals("c_parentid", 2, comprehensiveResultTree);
+		assertPropertyLenientEquals("c_position", 1, comprehensiveResultTree);
 	}
 }
