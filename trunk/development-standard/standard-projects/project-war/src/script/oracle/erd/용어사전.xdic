@@ -116,4 +116,6 @@
   <term name="링크" physicalName="LINK" physicalDescription="LINK"/>
   <term name="버전" physicalName="VERSION" physicalDescription="VERSION"/>
   <term name="기간" physicalName="TERM" physicalDescription="TERM"/>
+  <term name="여부" physicalName="FLAG" physicalDescription="FLAG"/>
+  <term name="수" physicalName="CNT" physicalDescription="COUNT"/>
 </tm:TermDictionary>
