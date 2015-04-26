@@ -51,7 +51,7 @@
   <term name="실패" physicalName="FAILURE" physicalDescription="FAILURE"/>
   <term name="금지" physicalName="PROH" physicalDescription="PROHIBITION"/>
   <term name="단어" physicalName="WORD" physicalDescription="WORD"/>
-  <term name="컴포넌트" physicalName="COMP" physicalDescription="COMPONENT"/>
+  <term name="컴포넌트" physicalName="COMPN" physicalDescription="COMPONENT"/>
   <term name="종류" physicalName="KIND" physicalDescription="KIND"/>
   <term name="정보" physicalName="INFO" physicalDescription="INFORMATION"/>
   <term name="공개" physicalName="OPEN" physicalDescription="OPEN"/>
