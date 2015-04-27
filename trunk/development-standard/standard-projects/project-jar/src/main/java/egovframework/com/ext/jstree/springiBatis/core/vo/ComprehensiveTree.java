@@ -86,7 +86,7 @@ public class ComprehensiveTree {
 	
 	/**<pre>
 	 * 노드의 type
-	 * null : root 노드
+	 * root : root 노드
 	 * drive : first child 노드
 	 * folder : branch 노드
 	 * default : leaf 노드
