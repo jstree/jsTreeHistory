@@ -31,15 +31,26 @@ import org.dbunit.IDatabaseTester;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
+
+import com.github.springtestdbunit.annotation.DatabaseOperation;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DbUnitConfiguration;
+import com.github.springtestdbunit.dataset.ReplacementDataSetLoader;
 
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -64,6 +75,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * 2015. 2. 26.  류강하                 최초 생성
  * 2015. 4. 17.  류강하                 기존 환경을 건드리지 않고 상속 및 확장하여 테스트하도록 변경함. 메이븐 빌드와는 무관하게 동작할 것임.
  * 2015. 4. 19.  류강하                 Leaf Node Add Node 테스트 케이스 추가(의도적인 개행을 넣었으니 Ctrl + Shift + F는 안 했으면 좋겠습니다.)
+ * 2015. 4. 24.  류강하                 타인은 테스트 DB를 잘 바라보는데 본인이 테스트 시에는 운영 DB를 보는 알 수 없는 문제가 있어서 테스트 설정 변경
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -71,6 +83,10 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class, 
+                          TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@DbUnitConfiguration(databaseConnection = { "dataSource-oracle" }, dataSetLoader = ReplacementDataSetLoader.class)
+@DatabaseSetup(value="/egovframework/com/ext/jstree/springiBatis/core/service/initialJsTree.xml", type = DatabaseOperation.CLEAN_INSERT)
 public class CoreServiceTest {
 
     @Autowired
@@ -79,34 +95,34 @@ public class CoreServiceTest {
     @Autowired
     private CoreDao coreDao;
     
-    @Resource(name = "dataSource-${Globals.DbType}")
-    private DataSource testDataSource;
+//    @Resource(name = "dataSource-${Globals.DbType}")
+//    private DataSource testDataSource;
     
-    private IDatabaseTester databaseTester;
+//    private IDatabaseTester databaseTester;
     
-    @Before
-    public void setUp() throws Exception {
-        
-        IDatabaseConnection connection = null;
-        
-        try {
-            databaseTester = new DataSourceDatabaseTester(testDataSource);
-            
-            File xmlInputFile = new File(this.getClass().getResource(".").getPath() + "initialJsTree.xml");
-            
-            ReplacementDataSet dataSet = new ReplacementDataSet(new FlatXmlDataSetBuilder().build(xmlInputFile));
-            dataSet.addReplacementObject("null", null);
-            
-            connection = databaseTester.getConnection();
-            
-            DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
-            
-        } finally {
-            if (connection != null) {
-                connection.close();
-            }
-        }
-    }
+//    @Before
+//    public void setUp() throws Exception {
+//        
+//        IDatabaseConnection connection = null;
+//        
+//        try {
+//            databaseTester = new DataSourceDatabaseTester(testDataSource);
+//            
+//            File xmlInputFile = new File(this.getClass().getResource(".").getPath() + "initialJsTree.xml");
+//            
+//            ReplacementDataSet dataSet = new ReplacementDataSet(new FlatXmlDataSetBuilder().build(xmlInputFile));
+//            dataSet.addReplacementObject("null", null);
+//            
+//            connection = databaseTester.getConnection();
+//            
+//            DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+//            
+//        } finally {
+//            if (connection != null) {
+//                connection.close();
+//            }
+//        }
+//    }
     
     private ComprehensiveTree getRootNode() {
         
@@ -181,6 +197,11 @@ public class CoreServiceTest {
         
         assertThat(rootNodeStored.getC_level(), is(0));
         assertThat(rootNodeStored.getC_title(), is(equalTo("Root Node")));
+        
+        System.out.println("하하");
+        System.out.println(rootNodeStored.getC_type());
+        System.out.println(nullValue());
+        
         assertThat(rootNodeStored.getC_type(), is(nullValue()));
         
         return rootNodeStored;
@@ -234,6 +255,7 @@ public class CoreServiceTest {
         return branchNodeStored;
     }
     
+    @Ignore
     @Test
     public void validateInitialTree() throws Exception {
         
@@ -261,7 +283,7 @@ public class CoreServiceTest {
 //      4|      56   : Branch Node
     }
     
-    @Ignore // 약간의 문제가 있어서 잠시 ignore 처리
+    @Ignore
     @Test
     public void addNewLeafNodeToRootNode() throws Exception {
         
