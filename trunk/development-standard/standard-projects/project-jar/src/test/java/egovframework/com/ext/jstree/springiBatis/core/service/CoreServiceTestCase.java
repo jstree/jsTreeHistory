@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,7 +50,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * 
  * 수정일               	  수정자                         수정내용
  * ------------  ------------   -----------------------
- * 2015. 4. 28   김형채                         최초 생성
+ * 2015. 4. 30   김형채                         최초 생성
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -85,16 +86,9 @@ public class CoreServiceTestCase {
 	private List<ComprehensiveTree> l_StoredNodes;
 	private List<String> l_StoredStrings;
 	
-	@Before
-	public void setUp() throws Exception
+	@BeforeClass
+	public void onceExecutedBeforeAll() throws Exception
 	{
-		
-		String sequenceName = "S_COMPREHENSIVETREE_SPRING";
-		int startNumber = 5;
-		DbTestUtil.resetAutoIncrementColumns(applicationContext, sequenceName, startNumber);
-		 
-		comprehensiveTree = new ComprehensiveTree();
-
 		rootNode = new ComprehensiveTree();
 		rootNode.setC_id(1);
 		rootNode = dao.getNode(rootNode);
@@ -110,7 +104,17 @@ public class CoreServiceTestCase {
 		branchNode = new ComprehensiveTree();
 		branchNode.setC_id(4);
 		branchNode = dao.getNode(branchNode);
+	}
+	
+	@Before
+	public void executedBeforeEach() throws Exception
+	{
+		String sequenceName = "S_COMPREHENSIVETREE_SPRING";
+		int startNumber = 5;
 		
+		DbTestUtil.resetAutoIncrementColumns(applicationContext, sequenceName, startNumber);
+		
+		comprehensiveTree = new ComprehensiveTree();
 	}
 	
 	@Test
