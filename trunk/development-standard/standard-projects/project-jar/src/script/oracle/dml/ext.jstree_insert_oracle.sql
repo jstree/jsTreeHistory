@@ -3,7 +3,7 @@ Insert into T_COMPREHENSIVETREE
     C_LEVEL, C_TITLE, C_TYPE)
  Values
    (1, 0, 0, 1, 8, 
-    0, 'Root Node', NULL);
+    0, 'Root Node', 'root');
 Insert into T_COMPREHENSIVETREE
    (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, 
     C_LEVEL, C_TITLE, C_TYPE)
