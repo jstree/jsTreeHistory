@@ -29,7 +29,6 @@ import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
@@ -62,9 +61,8 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @DatabaseSetup(value="/egovframework/com/ext/jstree/springiBatis/core/dao/initialJsTree.xml",type = DatabaseOperation.CLEAN_INSERT)
 public class CoreDaoTest
 {
-	@Autowired private CoreDao dao;
-	
-    @Autowired private CoreService coreService;
+	@Autowired 
+	private CoreDao dao;
 
 	private ComprehensiveTree comprehensiveTree;
 	private ComprehensiveTree comprehensiveResultTree;
