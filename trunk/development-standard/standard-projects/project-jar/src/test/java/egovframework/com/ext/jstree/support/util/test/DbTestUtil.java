@@ -1,4 +1,4 @@
-package egovframework.com.ext.jstree.springiBatis.core.service;
+package egovframework.com.ext.jstree.support.util.test;
 
 import javax.sql.DataSource;
 

@@ -17,7 +17,6 @@ package egovframework.com.ext.jstree.springiBatis.core.service;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
@@ -31,31 +30,20 @@ import org.dbunit.IDatabaseTester;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-
-import com.github.springtestdbunit.annotation.DatabaseOperation;
-
+import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import com.github.springtestdbunit.DbUnitTestExecutionListener;
-import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DbUnitConfiguration;
-import com.github.springtestdbunit.dataset.ReplacementDataSetLoader;
 
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
+import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 
 /**
  * Modification Information
@@ -75,7 +63,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * 2015. 2. 26.  류강하                 최초 생성
  * 2015. 4. 17.  류강하                 기존 환경을 건드리지 않고 상속 및 확장하여 테스트하도록 변경함. 메이븐 빌드와는 무관하게 동작할 것임.
  * 2015. 4. 19.  류강하                 Leaf Node Add Node 테스트 케이스 추가(의도적인 개행을 넣었으니 Ctrl + Shift + F는 안 했으면 좋겠습니다.)
- * 2015. 4. 24.  류강하                 타인은 테스트 DB를 잘 바라보는데 본인이 테스트 시에는 운영 DB를 보는 알 수 없는 문제가 있어서 테스트 설정 변경
+ * 2015. 5.  1.  류강하                 시퀀스를 초기화하도록 하여 c_id 검증 단정문 성공하도록 변경(DatabaseOperation의 확장 포인트를 찾기가 어려워 추후에 개선 예정)
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -83,10 +71,6 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class, 
-                          TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
-@DbUnitConfiguration(databaseConnection = { "dataSource-oracle" }, dataSetLoader = ReplacementDataSetLoader.class)
-@DatabaseSetup(value="/egovframework/com/ext/jstree/springiBatis/core/service/initialJsTree.xml", type = DatabaseOperation.CLEAN_INSERT)
 public class CoreServiceTest {
 
     @Autowired
@@ -95,34 +79,37 @@ public class CoreServiceTest {
     @Autowired
     private CoreDao coreDao;
     
-//    @Resource(name = "dataSource-${Globals.DbType}")
-//    private DataSource testDataSource;
+    @Resource(name = "dataSource-${Globals.DbType}")
+    private DataSource testDataSource;
     
-//    private IDatabaseTester databaseTester;
+    private IDatabaseTester databaseTester;
     
-//    @Before
-//    public void setUp() throws Exception {
-//        
-//        IDatabaseConnection connection = null;
-//        
-//        try {
-//            databaseTester = new DataSourceDatabaseTester(testDataSource);
-//            
-//            File xmlInputFile = new File(this.getClass().getResource(".").getPath() + "initialJsTree.xml");
-//            
-//            ReplacementDataSet dataSet = new ReplacementDataSet(new FlatXmlDataSetBuilder().build(xmlInputFile));
-//            dataSet.addReplacementObject("null", null);
-//            
-//            connection = databaseTester.getConnection();
-//            
-//            DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
-//            
-//        } finally {
-//            if (connection != null) {
-//                connection.close();
-//            }
-//        }
-//    }
+    private final int INIT_SEQ = 5;
+    
+    @Before
+    public void setUp() throws Exception {
+        
+        IDatabaseConnection connection = null;
+        
+        try {
+            databaseTester = new DataSourceDatabaseTester(testDataSource);
+            
+            File xmlInputFile = new File(this.getClass().getResource(".").getPath() + "initialJsTree.xml");
+            
+            ReplacementDataSet dataSet = new ReplacementDataSet(new FlatXmlDataSetBuilder().build(xmlInputFile));
+            dataSet.addReplacementObject("[null]", null);
+            
+            connection = databaseTester.getConnection();
+            
+            DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+            DatabaseOperations.INIT_SEQ.execute(connection, dataSet, INIT_SEQ);
+            
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
     
     private ComprehensiveTree getRootNode() {
         
@@ -188,7 +175,7 @@ public class CoreServiceTest {
     
     private ComprehensiveTree validateRootNode() throws Exception {
         
-        ComprehensiveTree rootNodeStored = coreDao.getNode( getRootNode() );
+        ComprehensiveTree rootNodeStored = getRootNodeStored();
         
         assertThat(rootNodeStored.getC_id(), is(1));
         assertThat(rootNodeStored.getC_parentid(), is(0));
@@ -197,12 +184,7 @@ public class CoreServiceTest {
         
         assertThat(rootNodeStored.getC_level(), is(0));
         assertThat(rootNodeStored.getC_title(), is(equalTo("Root Node")));
-        
-        System.out.println("하하");
-        System.out.println(rootNodeStored.getC_type());
-        System.out.println(nullValue());
-        
-        assertThat(rootNodeStored.getC_type(), is(nullValue()));
+        assertThat(rootNodeStored.getC_type(), is(equalTo("root")));
         
         return rootNodeStored;
     }
@@ -225,7 +207,7 @@ public class CoreServiceTest {
     
     private ComprehensiveTree validateInitialLeafNode() throws Exception {
         
-        ComprehensiveTree leafNodeStored = coreDao.getNode( getInitialLeafNode() );
+        ComprehensiveTree leafNodeStored = getInitialLeafNodeStored();
         
         assertThat(leafNodeStored.getC_id(), is(3));
         assertThat(leafNodeStored.getC_parentid(), is(2));
@@ -241,7 +223,7 @@ public class CoreServiceTest {
     
     private ComprehensiveTree validateInitialBranchNode() throws Exception {
         
-        ComprehensiveTree branchNodeStored = coreDao.getNode( getInitialBranchNode() );
+        ComprehensiveTree branchNodeStored = getInitialBranchNodeStored();
         
         assertThat(branchNodeStored.getC_id(), is(4));
         assertThat(branchNodeStored.getC_parentid(), is(2));
@@ -255,7 +237,6 @@ public class CoreServiceTest {
         return branchNodeStored;
     }
     
-    @Ignore
     @Test
     public void validateInitialTree() throws Exception {
         
@@ -265,7 +246,6 @@ public class CoreServiceTest {
         assertThat(rootNodeStored.getC_right(), is(8));
         
         ComprehensiveTree firstChildNodeStored = validateFirstChildNode();
-        assertThat(firstChildNodeStored.getC_left(), is(2));
         assertThat(firstChildNodeStored.getC_right(), is(7));
         
         ComprehensiveTree leafNodeStored = validateInitialLeafNode();
@@ -283,7 +263,6 @@ public class CoreServiceTest {
 //      4|      56   : Branch Node
     }
     
-    @Ignore
     @Test
     public void addNewLeafNodeToRootNode() throws Exception {
         
@@ -321,7 +300,7 @@ public class CoreServiceTest {
         
         assertThat(newLeafNodeStored.getC_id(), is(5));
         assertThat(newLeafNodeStored.getC_parentid(), is(2));
-        assertThat(newLeafNodeStored.getC_position(), is(2));
+        assertThat(newLeafNodeStored.getC_position(), is(3));
         assertThat(newLeafNodeStored.getC_left(), is(7));
         assertThat(newLeafNodeStored.getC_right(), is(8));
         assertThat(newLeafNodeStored.getC_level(), is(2));
