@@ -62,8 +62,8 @@ public abstract class DatabaseOperations {
             
             if ("Oracle".equals(databaseProductName)) {
                 
-                final String dropSequenceStatementTemplate = "DROP SEQUENCE %S";
-                final String createSequenceStatementTemplate = "CREATE SEQUENCE S_COMPREHENSIVETREE_SPRING START WITH %d MAXVALUE 999999999999999999999999999 MINVALUE 0 NOCYCLE CACHE 20 NOORDER";
+                final String dropSequenceStatementTemplate = "DROP SEQUENCE S_%S";
+                final String createSequenceStatementTemplate = "CREATE SEQUENCE S_%S START WITH %d MAXVALUE 999999999999999999999999999 MINVALUE 0 NOCYCLE CACHE 20 NOORDER";
                 
                 String[] tableNames = dataSet.getTableNames();
                 for (String tableName : tableNames) {
@@ -74,13 +74,12 @@ public abstract class DatabaseOperations {
                     if (! "T_".equals(tableNamePrefix)) {
                         fail("테이블 명명규칙(T_로 시작)에 맞지 않는 테이블입니다.");
                     } 
-                    else {
-                        Statement statement = realConnection.createStatement();
-                        
-                        statement.execute( String.format(dropSequenceStatementTemplate, "S_" + semanticTableName) );
-                        
-                        statement.execute( String.format(createSequenceStatementTemplate, initSequence) );
-                    }
+                    
+                    Statement statement = realConnection.createStatement();
+                    
+                    statement.execute( String.format(dropSequenceStatementTemplate, semanticTableName) );
+                    
+                    statement.execute( String.format(createSequenceStatementTemplate, semanticTableName, initSequence) );
                 }
                 
             } else {
