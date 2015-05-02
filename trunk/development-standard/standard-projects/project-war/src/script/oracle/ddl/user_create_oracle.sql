@@ -1,201 +1,526 @@
 /* 오권우 시작 */
-/* 회원_정보 */
-CREATE TABLE T_USER_INFO (
-	C_ID NUMBER NOT NULL, /* 노드아이디 */
-	C_PARENTID NUMBER NOT NULL, /* 부모노드아이디 */
-	C_POSITION NUMBER NOT NULL, /* 노드포지션 */
-	C_LEFT NUMBER NOT NULL, /* 노드좌측끝포인트 */
-	C_RIGHT NUMBER NOT NULL, /* 노드우측끝포인트 */
-	C_LEVEL NUMBER NOT NULL, /* 노드레벨 */
-	C_TITLE VARCHAR2(4000), /* 노드명 */
-	C_TYPE VARCHAR2(100), /* 노드타입 */
-	C_EMAIL VARCHAR2(320) NOT NULL, /* 이메일 */
-	C_PASSWORD VARCHAR2(256) NOT NULL, /* 비밀번호 */
-	C_NICK_NM VARCHAR2(30) NOT NULL, /* 닉네임 */
-	C_MAILING_SERVICE_USE_FL CHAR(1) DEFAULT 0 NOT NULL, /* 메일링서비스사용여부 */
-	C_INDI_INFO_OPEN_FL CHAR(1) DEFAULT 0 NOT NULL, /* 개인정보공개여부 */
-	C_JOIN_DT CHAR(14) NOT NULL, /* 가입일시 */
-	C_PASSWORD_CHANGE_DT CHAR(14) NOT NULL, /* 비밀번호변경일시 */
-	C_LOGIN_FAILURE_CNT NUMBER(1) NOT NULL, /* 로그인실패횟수 */
-	C_PASSWORD_FIND_QUESTION VARCHAR2(200) NOT NULL, /* 비밀번호찾기질문 */
-	C_PASSWORD_FIND_ANSWER VARCHAR2(200) NOT NULL, /* 비밀번호찾기답변 */
-	C_HOMEPAGE_URL VARCHAR2(320), /* 홈페이지 */
-	C_BLOG_URL VARCHAR2(320), /* 블로그 */
-	C_SIGN VARCHAR2(320), /* 서명 */
-	C_PROFILE_PHOTO VARCHAR2(320), /* 프로필사진 */
-	C_IMAGE_ICON VARCHAR2(320), /* 사용자아이콘 */
-	C_USER_GRADE NUMBER, /* 회원등급 */
-	C_JOIN_STATE_CD NUMBER /* 가입상태코드 */
+CREATE TABLE T_USER_INFO_LOG
+(
+  C_ID        NUMBER                            NOT NULL,
+  C_PARENTID  NUMBER                            NOT NULL,
+  C_POSITION  NUMBER                            NOT NULL,
+  C_LEFT      NUMBER                            NOT NULL,
+  C_RIGHT     NUMBER                            NOT NULL,
+  C_LEVEL     NUMBER                            NOT NULL,
+  C_TITLE     VARCHAR2(4000 BYTE),
+  C_TYPE      VARCHAR2(4000 BYTE),
+  C_METHOD    VARCHAR2(4000 BYTE),
+  C_STATE     VARCHAR2(4000 BYTE),
+  C_DATE      DATE                              NOT NULL
+);
+
+COMMENT ON TABLE T_USER_INFO_LOG IS '회원_정보 트리거 로그';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_ID IS '노드 아이디';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_PARENTID IS '부모 노드 아이디';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_POSITION IS '노드 포지션';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_LEFT IS '노드 좌측 끝 포인트';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_RIGHT IS '노드 우측 끝 포인트';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_LEVEL IS '노드 DEPTH ';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_TITLE IS '노드 명';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_TYPE IS '노드 타입';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_METHOD IS '노드 변경 행위';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_STATE IS '노드 상태값 ( 이전인지. 이후인지)';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_DATE IS '노드 변경 시';
+
+CREATE TABLE T_USER_INFO 
+(
+  C_ID                        NUMBER               NOT NULL,           /* 노드아이디 */
+  C_PARENTID                  NUMBER               NOT NULL,           /* 부모노드아이디 */
+  C_POSITION                  NUMBER               NOT NULL,           /* 노드포지션 */
+  C_LEFT                      NUMBER               NOT NULL,           /* 노드좌측끝포인트 */
+  C_RIGHT                     NUMBER               NOT NULL,           /* 노드우측끝포인트 */
+  C_LEVEL                     NUMBER               NOT NULL,           /* 노드레벨 */
+  C_TITLE                     VARCHAR2(4000)       NOT NULL,           /* 닉네임 */
+  C_TYPE                      VARCHAR2(100),                           /* 노드타입 */
+  C_USER_GRADE                NUMBER               NOT NULL,           /* 회원등급 */
+  C_JOIN_STATE_CD             NUMBER               NOT NULL,           /* 가입상태코드 */
+  C_PASSWORD                  VARCHAR2(256)        NOT NULL,           /* 비밀번호 */
+  C_EMAIL                     VARCHAR2(320)        NOT NULL,           /* 이메일 */
+  C_LOGIN_FAILURE_CNT         NUMBER(1)            DEFAULT 0 NOT NULL, /* 로그인실패횟수 */
+  C_PASSWORD_FIND_QUESTION    VARCHAR2(4000)       NOT NULL,           /* 비밀번호찾기질문 */
+  C_PASSWORD_FIND_ANSWER      VARCHAR2(4000)       NOT NULL,           /* 비밀번호찾기답변 */
+  C_MAILING_SERVICE_USE_FL    CHAR(1)              DEFAULT 0 NOT NULL, /* 메일링서비스사용여부 */
+  C_INDI_INFO_OPEN_FL         CHAR(1)              DEFAULT 0 NOT NULL, /* 개인정보공개여부 */
+  C_JOIN_DT                   CHAR(14)             NOT NULL,           /* 가입일시 */
+  C_PASSWORD_CHANGE_DT        CHAR(14)             NOT NULL,           /* 비밀번호변경일시 */
+  C_HOMEPAGE_URL              VARCHAR2(320),                           /* 홈페이지 */
+  C_BLOG_URL                  VARCHAR2(320),                           /* 블로그 */
+  C_SIGN                      VARCHAR2(320),                           /* 서명 */
+  C_PROFILE_PHOTO             VARCHAR2(320),                           /* 프로필사진 */
+  C_IMAGE_ICON                VARCHAR2(320),                           /* 사용자아이콘 */
+  CONSTRAINT  T_USER_INFO PRIMARY KEY (C_ID, C_TITLE)
 );
 
 COMMENT ON TABLE T_USER_INFO IS '회원_정보';
-
 COMMENT ON COLUMN T_USER_INFO.C_ID IS '노드아이디';
-
 COMMENT ON COLUMN T_USER_INFO.C_PARENTID IS '부모노드아이디';
-
 COMMENT ON COLUMN T_USER_INFO.C_POSITION IS '노드포지션';
-
 COMMENT ON COLUMN T_USER_INFO.C_LEFT IS '노드좌측끝포인트';
-
 COMMENT ON COLUMN T_USER_INFO.C_RIGHT IS '노드우측끝포인트';
-
 COMMENT ON COLUMN T_USER_INFO.C_LEVEL IS '노드레벨';
-
-COMMENT ON COLUMN T_USER_INFO.C_TITLE IS '노드명';
-
+COMMENT ON COLUMN T_USER_INFO.C_TITLE IS '닉네임';
 COMMENT ON COLUMN T_USER_INFO.C_TYPE IS '노드타입';
-
-COMMENT ON COLUMN T_USER_INFO.C_EMAIL IS '이메일';
-
+COMMENT ON COLUMN T_USER_INFO.C_USER_GRADE IS '회원등급';
+COMMENT ON COLUMN T_USER_INFO.C_JOIN_STATE_CD IS '가입상태코드';
 COMMENT ON COLUMN T_USER_INFO.C_PASSWORD IS '비밀번호';
-
-COMMENT ON COLUMN T_USER_INFO.C_NICK_NM IS '닉네임';
-
-COMMENT ON COLUMN T_USER_INFO.C_MAILING_SERVICE_USE_FL IS '메일링서비스사용여부';
-
-COMMENT ON COLUMN T_USER_INFO.C_INDI_INFO_OPEN_FL IS '개인정보공개여부';
-
-COMMENT ON COLUMN T_USER_INFO.C_JOIN_DT IS '가입일시';
-
-COMMENT ON COLUMN T_USER_INFO.C_PASSWORD_CHANGE_DT IS '비밀번호변경일시';
-
+COMMENT ON COLUMN T_USER_INFO.C_EMAIL IS '이메일';
 COMMENT ON COLUMN T_USER_INFO.C_LOGIN_FAILURE_CNT IS '로그인실패횟수';
-
 COMMENT ON COLUMN T_USER_INFO.C_PASSWORD_FIND_QUESTION IS '비밀번호찾기질문';
-
 COMMENT ON COLUMN T_USER_INFO.C_PASSWORD_FIND_ANSWER IS '비밀번호찾기답변';
-
+COMMENT ON COLUMN T_USER_INFO.C_MAILING_SERVICE_USE_FL IS '메일링서비스사용여부';
+COMMENT ON COLUMN T_USER_INFO.C_INDI_INFO_OPEN_FL IS '개인정보공개여부';
+COMMENT ON COLUMN T_USER_INFO.C_JOIN_DT IS '가입일시';
+COMMENT ON COLUMN T_USER_INFO.C_PASSWORD_CHANGE_DT IS '비밀번호변경일시';
 COMMENT ON COLUMN T_USER_INFO.C_HOMEPAGE_URL IS '홈페이지';
-
 COMMENT ON COLUMN T_USER_INFO.C_BLOG_URL IS '블로그';
-
 COMMENT ON COLUMN T_USER_INFO.C_SIGN IS '서명';
-
 COMMENT ON COLUMN T_USER_INFO.C_PROFILE_PHOTO IS '프로필사진';
-
 COMMENT ON COLUMN T_USER_INFO.C_IMAGE_ICON IS '사용자아이콘';
 
-COMMENT ON COLUMN T_USER_INFO.C_USER_GRADE IS '회원등급';
-
-COMMENT ON COLUMN T_USER_INFO.C_JOIN_STATE_CD IS '가입상태코드';
-
-ALTER TABLE T_USER_INFO
-	ADD
-		CONSTRAINT PK_T_USER_INFO
-		PRIMARY KEY (
-			C_ID
-		);
+DROP SEQUENCE S_USER_INFO;
 
 CREATE SEQUENCE S_USER_INFO
-  START WITH 7313
+  START WITH 10
   MAXVALUE 999999999999999999999999999
   MINVALUE 0
   NOCYCLE
   CACHE 20
   NOORDER;
 
-/* 회원_로그인현황 */
-CREATE TABLE T_USER_LOGIN_CURRENT_STATE (
-	C_ID NUMBER NOT NULL, /* 노드아이디 */
-	C_PARENTID NUMBER NOT NULL, /* 부모노드아이디 */
-	C_POSITION NUMBER NOT NULL, /* 노드포지션 */
-	C_LEFT NUMBER NOT NULL, /* 노드좌측끝포인트 */
-	C_RIGHT NUMBER NOT NULL, /* 노드우측끝포인트 */
-	C_LEVEL NUMBER NOT NULL, /* 노드레벨 */
-	C_TITLE VARCHAR2(4000), /* 노드명 */
-	C_TYPE VARCHAR2(100), /* 노드타입 */
-	C_IP_ADDRESS VARCHAR2(39) NOT NULL, /* 아이피주소 */
-	C_MAC_ADDRESS VARCHAR2(17) NOT NULL, /* MAC주소 */
-	C_LOGIN_DT CHAR(14) NOT NULL, /* 로그인일시 */
-	C_USER_ID NUMBER /* 회원아이디 */
+/*
+ * T_USER_INFO 트리거
+ */
+CREATE OR REPLACE TRIGGER "TRIGGER_T_USER_INFO" 
+BEFORE DELETE OR INSERT OR UPDATE
+ON T_USER_INFO
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+DECLARE
+tmpVar NUMBER;
+/******************************************************************************
+   NAME:       TRIGGER_T_USER_INFO
+   PURPOSE:    
+
+   REVISIONS:
+   Ver        Date        Author           Description
+   ---------  ----------  ---------------  ------------------------------------
+   1.0        2015-05-02             1. Created this trigger.
+
+   NOTES:
+
+   Automatically available Auto Replace Keywords:
+      Object Name:     TRIGGER_T_USER_INFO
+      Sysdate:         2015-05-02
+      Date and Time:   2015-05-02, 오후 9:23:25, and 2015-05-02 오후 9:23:25
+      Username:         (set in TOAD Options, Proc Templates)
+      Table Name:      T_USER_INFO (set in the "New PL/SQL Object" dialog)
+      Trigger Options:  (set in the "New PL/SQL Object" dialog)
+******************************************************************************/
+BEGIN
+   tmpVar := 0;
+    IF UPDATING  THEN    
+        insert into T_USER_INFO_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
+        insert into T_USER_INFO_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
+     END IF;
+    IF DELETING THEN
+        insert into T_USER_INFO_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
+    END IF;   
+    IF INSERTING  THEN
+        insert into T_USER_INFO_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
+    END IF;
+
+   EXCEPTION
+     WHEN OTHERS THEN
+       -- Consider logging the error and then re-raise
+       RAISE;
+END TRIGGER_T_USER_INFO;
+/
+
+
+/* 회원_로그인 현황
+ * T_USER_LOGIN_CURRENT_STATE 추적 로그 테이블
+ * 트리거 Log를 저장합니다.
+ */
+CREATE TABLE T_USER_LOGIN_STATE_LOG
+(
+  C_ID        NUMBER                            NOT NULL,
+  C_PARENTID  NUMBER                            NOT NULL,
+  C_POSITION  NUMBER                            NOT NULL,
+  C_LEFT      NUMBER                            NOT NULL,
+  C_RIGHT     NUMBER                            NOT NULL,
+  C_LEVEL     NUMBER                            NOT NULL,
+  C_TITLE     VARCHAR2(4000 BYTE),
+  C_TYPE      VARCHAR2(4000 BYTE),
+  C_METHOD    VARCHAR2(4000 BYTE),
+  C_STATE     VARCHAR2(4000 BYTE),
+  C_DATE      DATE                              NOT NULL
 );
 
-COMMENT ON TABLE T_USER_LOGIN_CURRENT_STATE IS '회원_로그인현황';
+COMMENT ON TABLE T_USER_INFO_LOG IS '회원_로그인현황 트리거 로그';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_ID IS '노드 아이디';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_PARENTID IS '부모 노드 아이디';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_POSITION IS '노드 포지션';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_LEFT IS '노드 좌측 끝 포인트';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_RIGHT IS '노드 우측 끝 포인트';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_LEVEL IS '노드 DEPTH ';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_TITLE IS '노드 명';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_TYPE IS '노드 타입';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_METHOD IS '노드 변경 행위';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_STATE IS '노드 상태값 ( 이전인지. 이후인지)';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_DATE IS '노드 변경 시';
 
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_ID IS '노드아이디';
+CREATE TABLE T_USER_LOGIN_STATE 
+(
+  C_ID                        NUMBER               NOT NULL,           /* 노드아이디 */
+  C_PARENTID                  NUMBER               NOT NULL,           /* 부모노드아이디 */
+  C_POSITION                  NUMBER               NOT NULL,           /* 노드포지션 */
+  C_LEFT                      NUMBER               NOT NULL,           /* 노드좌측끝포인트 */
+  C_RIGHT                     NUMBER               NOT NULL,           /* 노드우측끝포인트 */
+  C_LEVEL                     NUMBER               NOT NULL,           /* 노드레벨 */
+  C_TITLE                     VARCHAR2(4000)       NOT NULL,           /* 처리상태 */
+  C_TYPE                      VARCHAR2(100),                           /* 노드타입 */
+  C_USER_ID                   NUMBER               NOT NULL,           /* 회원아이디 */
+  C_MAC_ADDRESS               VARCHAR2(17)         NOT NULL,           /* MAC주소 */
+  C_IP_ADDRESS                VARCHAR2(39)         NOT NULL,           /* 아이피주소 */
+  C_LOGIN_DT                  CHAR(14)             NOT NULL,           /* 로그인일시 */
+  CONSTRAINT  T_USER_LOGIN_STATE PRIMARY KEY (C_ID)
+);
 
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_PARENTID IS '부모노드아이디';
+COMMENT ON TABLE T_USER_LOGIN_STATE IS '회원_로그인현황';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_ID IS '노드아이디';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_PARENTID IS '부모노드아이디';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_POSITION IS '노드포지션';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_LEFT IS '노드좌측끝포인트';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_RIGHT IS '노드우측끝포인트';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_LEVEL IS '노드레벨';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_TITLE IS '처리상태';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_TYPE IS '노드타입';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_USER_ID IS '회원아이디';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_MAC_ADDRESS IS 'MAC주소';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_IP_ADDRESS IS '아이피주소';
+COMMENT ON COLUMN T_USER_LOGIN_STATE.C_LOGIN_DT IS '로그인일시';
 
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_POSITION IS '노드포지션';
+DROP SEQUENCE S_USER_LOGIN_STATE;
 
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_LEFT IS '노드좌측끝포인트';
-
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_RIGHT IS '노드우측끝포인트';
-
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_LEVEL IS '노드레벨';
-
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_TITLE IS '노드명';
-
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_TYPE IS '노드타입';
-
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_IP_ADDRESS IS '아이피주소';
-
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_MAC_ADDRESS IS 'MAC주소';
-
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_LOGIN_DT IS '로그인일시';
-
-COMMENT ON COLUMN T_USER_LOGIN_CURRENT_STATE.C_USER_ID IS '회원아이디';
-
-ALTER TABLE T_USER_LOGIN_CURRENT_STATE
-	ADD
-		CONSTRAINT PK_T_USER_LOGIN_CURRENT_STATE
-		PRIMARY KEY (
-			C_ID
-		);
-
-CREATE SEQUENCE S_LOGIN_CURRENT_STATE
-  START WITH 7313
+CREATE SEQUENCE S_USER_LOGIN_STATE
+  START WITH 10
   MAXVALUE 999999999999999999999999999
   MINVALUE 0
   NOCYCLE
   CACHE 20
   NOORDER;
 
-/* 회원_가입상태 */
-CREATE TABLE T_USER_JOIN_STATE (
-	C_ID NUMBER NOT NULL, /* 노드아이디 */
-	C_PARENTID NUMBER NOT NULL, /* 부모노드아이디 */
-	C_POSITION NUMBER NOT NULL, /* 노드포지션 */
-	C_LEFT NUMBER NOT NULL, /* 노드좌측끝포인트 */
-	C_RIGHT NUMBER NOT NULL, /* 노드우측끝포인트 */
-	C_LEVEL NUMBER NOT NULL, /* 노드레벨 */
-	C_TITLE VARCHAR2(4000), /* 노드명 */
-	C_TYPE VARCHAR2(100) /* 노드타입 */
+/*
+ * T_USER_LOGIN_STATE 트리거
+ */
+CREATE OR REPLACE TRIGGER "TRIGGER_T_USER_LOGIN_STATE" 
+BEFORE DELETE OR INSERT OR UPDATE
+ON T_USER_LOGIN_STATE
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+DECLARE
+tmpVar NUMBER;
+/******************************************************************************
+
+   NAME:       TRIGGER_T_USER_LOGIN_STATE
+   PURPOSE:    
+
+   REVISIONS:
+   Ver        Date        Author           Description
+   ---------  ----------  ---------------  ------------------------------------
+   1.0        2015-05-02             1. Created this trigger.
+
+   NOTES:
+
+   Automatically available Auto Replace Keywords:
+      Object Name:     TRIGGER_T_USER_LOGIN_STATE
+      Sysdate:         2015-05-02
+      Date and Time:   2015-05-02, 오후 9:23:25, and 2015-05-02 오후 9:23:25
+      Username:         (set in TOAD Options, Proc Templates)
+      Table Name:      T_USER_LOGIN_STATE (set in the "New PL/SQL Object" dialog)
+      Trigger Options:  (set in the "New PL/SQL Object" dialog)
+******************************************************************************/
+BEGIN
+   tmpVar := 0;
+    IF UPDATING  THEN    
+        insert into T_USER_LOGIN_STATE_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
+        insert into T_USER_LOGIN_STATE_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
+     END IF;
+    IF DELETING THEN
+        insert into T_USER_LOGIN_STATE_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
+    END IF;   
+    IF INSERTING  THEN
+        insert into T_USER_LOGIN_STATE_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
+    END IF;
+
+   EXCEPTION
+     WHEN OTHERS THEN
+       -- Consider logging the error and then re-raise
+       RAISE;
+END TRIGGER_T_USER_LOGIN_STATE;
+/
+
+
+/* 회원_가입상태
+ * T_USER_JOIN_STATE 추적 로그 테이블
+ * 트리거 Log를 저장합니다.
+ */
+CREATE TABLE T_USER_JOIN_STATE_LOG
+(
+  C_ID        NUMBER                            NOT NULL,
+  C_PARENTID  NUMBER                            NOT NULL,
+  C_POSITION  NUMBER                            NOT NULL,
+  C_LEFT      NUMBER                            NOT NULL,
+  C_RIGHT     NUMBER                            NOT NULL,
+  C_LEVEL     NUMBER                            NOT NULL,
+  C_TITLE     VARCHAR2(4000 BYTE),
+  C_TYPE      VARCHAR2(4000 BYTE),
+  C_METHOD    VARCHAR2(4000 BYTE),
+  C_STATE     VARCHAR2(4000 BYTE),
+  C_DATE      DATE                              NOT NULL
+);
+
+COMMENT ON TABLE T_USER_INFO_LOG IS '회원_가입상태 트리거 로그';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_ID IS '노드 아이디';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_PARENTID IS '부모 노드 아이디';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_POSITION IS '노드 포지션';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_LEFT IS '노드 좌측 끝 포인트';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_RIGHT IS '노드 우측 끝 포인트';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_LEVEL IS '노드 DEPTH ';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_TITLE IS '노드 명';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_TYPE IS '노드 타입';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_METHOD IS '노드 변경 행위';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_STATE IS '노드 상태값 ( 이전인지. 이후인지)';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_DATE IS '노드 변경 시';
+
+CREATE TABLE T_USER_JOIN_STATE
+(
+  C_ID                        NUMBER               NOT NULL,          /* 노드아이디 */
+  C_PARENTID                  NUMBER               NOT NULL,          /* 부모노드아이디 */
+  C_POSITION                  NUMBER               NOT NULL,          /* 노드포지션 */
+  C_LEFT                      NUMBER               NOT NULL,          /* 노드좌측끝포인트 */
+  C_RIGHT                     NUMBER               NOT NULL,          /* 노드우측끝포인트 */
+  C_LEVEL                     NUMBER               NOT NULL,          /* 노드레벨 */
+  C_TITLE                     VARCHAR2(4000)       NOT NULL,          /* 가입상태명 */
+  C_TYPE                      VARCHAR2(100),                          /* 노드타입 */
+  CONSTRAINT  T_USER_JOIN_STATE PRIMARY KEY (C_ID)
 );
 
 COMMENT ON TABLE T_USER_JOIN_STATE IS '회원_가입상태';
-
 COMMENT ON COLUMN T_USER_JOIN_STATE.C_ID IS '노드아이디';
-
 COMMENT ON COLUMN T_USER_JOIN_STATE.C_PARENTID IS '부모노드아이디';
-
 COMMENT ON COLUMN T_USER_JOIN_STATE.C_POSITION IS '노드포지션';
-
 COMMENT ON COLUMN T_USER_JOIN_STATE.C_LEFT IS '노드좌측끝포인트';
-
 COMMENT ON COLUMN T_USER_JOIN_STATE.C_RIGHT IS '노드우측끝포인트';
-
 COMMENT ON COLUMN T_USER_JOIN_STATE.C_LEVEL IS '노드레벨';
-
-COMMENT ON COLUMN T_USER_JOIN_STATE.C_TITLE IS '노드명';
-
+COMMENT ON COLUMN T_USER_JOIN_STATE.C_TITLE IS '가입상태명';
 COMMENT ON COLUMN T_USER_JOIN_STATE.C_TYPE IS '노드타입';
 
-ALTER TABLE T_USER_JOIN_STATE
-	ADD
-		CONSTRAINT PK_T_USER_JOIN_STATE
-		PRIMARY KEY (
-			C_ID
-		);
+DROP SEQUENCE S_USER_JOIN_STATE;
 
 CREATE SEQUENCE S_USER_JOIN_STATE
-  START WITH 7313
+  START WITH 10
   MAXVALUE 999999999999999999999999999
   MINVALUE 0
   NOCYCLE
   CACHE 20
   NOORDER;
+
+/*
+ * T_USER_LOGIN_JOIN_STATE 트리거
+ */
+CREATE OR REPLACE TRIGGER "TRIGGER_T_USER_JOIN_STATE" 
+BEFORE DELETE OR INSERT OR UPDATE
+ON T_USER_JOIN_STATE
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+DECLARE
+tmpVar NUMBER;
+/******************************************************************************
+
+   NAME:       TRIGGER_T_USER_JOIN_STATE
+   PURPOSE:    
+
+   REVISIONS:
+   Ver        Date        Author           Description
+   ---------  ----------  ---------------  ------------------------------------
+   1.0        2015-05-02             1. Created this trigger.
+
+   NOTES:
+
+   Automatically available Auto Replace Keywords:
+      Object Name:     TRIGGER_T_USER_JOIN_STATE
+      Sysdate:         2015-05-02
+      Date and Time:   2015-05-02, 오후 9:23:25, and 2015-05-02 오후 9:23:25
+      Username:         (set in TOAD Options, Proc Templates)
+      Table Name:      T_USER_JOIN_STATE (set in the "New PL/SQL Object" dialog)
+      Trigger Options:  (set in the "New PL/SQL Object" dialog)
+******************************************************************************/
+BEGIN
+   tmpVar := 0;
+    IF UPDATING  THEN    
+        insert into T_USER_JOIN_STATE_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
+        insert into T_USER_JOIN_STATE_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
+     END IF;
+    IF DELETING THEN
+        insert into T_USER_JOIN_STATE_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
+    END IF;   
+    IF INSERTING  THEN
+        insert into T_USER_JOIN_STATE_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
+    END IF;
+
+   EXCEPTION
+     WHEN OTHERS THEN
+       -- Consider logging the error and then re-raise
+       RAISE;
+END TRIGGER_T_USER_JOIN_STATE;
+/
+
+/* 회원_스크랩
+ * T_USER_SCRAP 추적 로그 테이블
+ * 트리거 Log를 저장합니다. 
+ */
+ 
+ CREATE TABLE T_USER_SCRAP_LOG
+(
+  C_ID        NUMBER                            NOT NULL,
+  C_PARENTID  NUMBER                            NOT NULL,
+  C_POSITION  NUMBER                            NOT NULL,
+  C_LEFT      NUMBER                            NOT NULL,
+  C_RIGHT     NUMBER                            NOT NULL,
+  C_LEVEL     NUMBER                            NOT NULL,
+  C_TITLE     VARCHAR2(4000 BYTE),
+  C_TYPE      VARCHAR2(4000 BYTE),
+  C_METHOD    VARCHAR2(4000 BYTE),
+  C_STATE     VARCHAR2(4000 BYTE),
+  C_DATE      DATE                              NOT NULL
+);
+
+COMMENT ON TABLE T_USER_INFO_LOG IS '회원_스크랩 트리거 로그';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_ID IS '노드 아이디';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_PARENTID IS '부모 노드 아이디';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_POSITION IS '노드 포지션';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_LEFT IS '노드 좌측 끝 포인트';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_RIGHT IS '노드 우측 끝 포인트';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_LEVEL IS '노드 DEPTH ';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_TITLE IS '노드 명';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_TYPE IS '노드 타입';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_METHOD IS '노드 변경 행위';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_STATE IS '노드 상태값 ( 이전인지. 이후인지)';
+COMMENT ON COLUMN T_USER_INFO_LOG.C_DATE IS '노드 변경 시';
+
+CREATE TABLE T_USER_SCRAP
+(
+  C_ID                        NUMBER               NOT NULL,          /* 노드아이디 */  
+  C_PARENTID                  NUMBER               NOT NULL,          /* 부모노드아이디 */
+  C_POSITION                  NUMBER               NOT NULL,          /* 노드포지션 */
+  C_LEFT                      NUMBER               NOT NULL,          /* 노드좌측끝포인트 */
+  C_RIGHT                     NUMBER               NOT NULL,          /* 노드우측끝포인트 */
+  C_LEVEL                     NUMBER               NOT NULL,          /* 노드레벨 */
+  C_TITLE                     VARCHAR2(4000)       NOT NULL,          /* 가입상태명 */
+  C_TYPE                      VARCHAR2(100),                          /* 노드타입 */
+  C_USER_ID                   NUMBER               NOT NULL,          /* 회원아이디 */
+  C_BOARD_ID                  NUMBER               NOT NULL,          /* 보드아이디 */
+  C_POSTING_ID                NUMBER               NOT NULL,          /* 글ID */
+  C_SCRAP_DT                  CHAR(14)             NOT NULL,          /* 스크랩일시 */
+  CONSTRAINT  T_USER_SCRAP PRIMARY KEY (C_ID)
+);
+
+
+COMMENT ON TABLE T_USER_SCRAP IS '회원_스크랩';
+COMMENT ON COLUMN T_USER_SCRAP.C_ID IS '노드아이디';
+COMMENT ON COLUMN T_USER_SCRAP.C_USER_ID IS '회원아이디';
+COMMENT ON COLUMN T_USER_SCRAP.C_PARENTID IS '부모노드아이디';
+COMMENT ON COLUMN T_USER_SCRAP.C_POSITION IS '노드포지션';
+COMMENT ON COLUMN T_USER_SCRAP.C_LEFT IS '노드좌측끝포인트';
+COMMENT ON COLUMN T_USER_SCRAP.C_RIGHT IS '노드우측끝포인트';
+COMMENT ON COLUMN T_USER_SCRAP.C_LEVEL IS '노드레벨';
+COMMENT ON COLUMN T_USER_SCRAP.C_TITLE IS '노드명';
+COMMENT ON COLUMN T_USER_SCRAP.C_TYPE IS '노드타입';
+COMMENT ON COLUMN T_USER_SCRAP.C_BOARD_ID IS '보드아이디';
+COMMENT ON COLUMN T_USER_SCRAP.C_POSTING_ID IS '글ID';
+COMMENT ON COLUMN T_USER_SCRAP.C_SCRAP_DT IS '스크랩일시';
+
+DROP SEQUENCE S_USER_SCRAP;
+
+CREATE SEQUENCE S_USER_SCRAP
+  START WITH 10
+  MAXVALUE 999999999999999999999999999
+  MINVALUE 0
+  NOCYCLE
+  CACHE 20
+  NOORDER;
+
+/*
+ * T_USER_SCRAP 트리거
+ */
+CREATE OR REPLACE TRIGGER "TRIGGER_T_USER_SCRAP" 
+BEFORE DELETE OR INSERT OR UPDATE
+ON T_USER_SCRAP
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+DECLARE
+tmpVar NUMBER;
+/******************************************************************************
+
+   NAME:       TRIGGER_T_USER_SCRAP
+   PURPOSE:    
+
+   REVISIONS:
+   Ver        Date        Author           Description
+   ---------  ----------  ---------------  ------------------------------------
+   1.0        2015-05-02             1. Created this trigger.
+
+   NOTES:
+
+   Automatically available Auto Replace Keywords:
+      Object Name:     TRIGGER_T_USER_SCRAP
+      Sysdate:         2015-05-02
+      Date and Time:   2015-05-02, 오후 9:23:25, and 2015-05-02 오후 9:23:25
+      Username:         (set in TOAD Options, Proc Templates)
+      Table Name:      T_USER_SCRAP (set in the "New PL/SQL Object" dialog)
+      Trigger Options:  (set in the "New PL/SQL Object" dialog)
+******************************************************************************/
+BEGIN
+   tmpVar := 0;
+    IF UPDATING  THEN    
+        insert into T_USER_SCRAP_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
+        insert into T_USER_SCRAP_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
+     END IF;
+    IF DELETING THEN
+        insert into T_USER_SCRAP_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
+    END IF;   
+    IF INSERTING  THEN
+        insert into T_USER_JOIN_STATE_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
+    END IF;
+
+   EXCEPTION
+     WHEN OTHERS THEN
+       -- Consider logging the error and then re-raise
+       RAISE;
+END TRIGGER_T_USER_SCRAP;
+/
 /* 오권우  끝 */  
 
 
