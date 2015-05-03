@@ -22,27 +22,22 @@ import static org.junit.Assert.assertThat;
 import java.io.File;
 import java.util.List;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-
 import org.dbunit.DataSourceDatabaseTester;
-import org.dbunit.IDatabaseTester;
 import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.dataset.ReplacementDataSet;
+import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
+import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
 import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 
 /**
@@ -71,18 +66,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
-public class CoreServiceTest {
-
-    @Autowired
-    private CoreService coreService;
-    
-    @Autowired
-    private CoreDao coreDao;
-    
-    @Resource(name = "dataSource-${Globals.DbType}")
-    private DataSource testDataSource;
-    
-    private IDatabaseTester databaseTester;
+public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
     
     private final int INIT_SEQ = 5;
     
@@ -96,8 +80,7 @@ public class CoreServiceTest {
             
             File xmlInputFile = new File(this.getClass().getResource(".").getPath() + "initialJsTree.xml");
             
-            ReplacementDataSet dataSet = new ReplacementDataSet(new FlatXmlDataSetBuilder().build(xmlInputFile));
-            dataSet.addReplacementObject("[null]", null);
+            IDataSet dataSet = new FlatXmlDataSetBuilder().build(xmlInputFile);
             
             connection = databaseTester.getConnection();
             
@@ -109,32 +92,6 @@ public class CoreServiceTest {
                 connection.close();
             }
         }
-    }
-    
-    private ComprehensiveTree getRootNode() {
-        
-        ComprehensiveTree rootNode = new ComprehensiveTree();
-        rootNode.setC_id(1);
-        
-        return rootNode;
-    }
-    
-    private ComprehensiveTree getRootNodeStored() throws Exception {
-        
-        return coreDao.getNode( getRootNode() );
-    }
-    
-    private ComprehensiveTree getFirstChildNode() {
-        
-        ComprehensiveTree firstChildNode = new ComprehensiveTree();
-        firstChildNode.setC_id(2);
-        
-        return firstChildNode;
-    }
-    
-    private ComprehensiveTree getFirstChildNodeStored() throws Exception {
-        
-        return coreDao.getNode( getFirstChildNode() );
     }
     
     private ComprehensiveTree getInitialLeafNode() {
@@ -161,16 +118,6 @@ public class CoreServiceTest {
     private ComprehensiveTree getInitialBranchNodeStored() throws Exception {
         
         return coreDao.getNode( getInitialBranchNode() );
-    }
-    
-    private void assertThatTotalNumberOfNodesIs(int size) throws Exception {
-        
-        ComprehensiveTree nodeForSearching = new ComprehensiveTree();
-        nodeForSearching.setSearchStr("");
-        
-        List<ComprehensiveTree> allNodes = coreDao.searchNodeByString(nodeForSearching);
-        
-        assertThat(allNodes.size(), is(size));
     }
     
     private ComprehensiveTree validateRootNode() throws Exception {
