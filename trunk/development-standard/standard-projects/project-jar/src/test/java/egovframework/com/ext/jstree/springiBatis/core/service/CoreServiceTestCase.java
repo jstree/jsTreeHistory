@@ -78,42 +78,66 @@ public class CoreServiceTestCase {
     
     private ComprehensiveTree comprehensiveTree;
 	private ComprehensiveTree comprehensiveResultTree;
-
-	private ComprehensiveTree rootNode;
-	private ComprehensiveTree firstChild;
-	private ComprehensiveTree leafNode;
-	private ComprehensiveTree branchNode;
+	
+	private static ComprehensiveTree rootNode;
+	private static ComprehensiveTree firstChild;
+	private static ComprehensiveTree leafNode;
+	private static ComprehensiveTree branchNode;
 
 	private List<ComprehensiveTree> l_StoredNodes;
 	private List<String> l_StoredStrings;
 	
 	@BeforeClass
-	public void onceExecutedBeforeAll() throws Exception
+	public static void setUpOnce() throws Exception
 	{
 		rootNode = new ComprehensiveTree();
 		rootNode.setC_id(1);
-		rootNode = dao.getNode(rootNode);
+		rootNode.setC_parentid(0);
+		rootNode.setC_position(0);
+		rootNode.setC_left(1);
+		rootNode.setC_right(8);
+		rootNode.setC_level(0);
+		rootNode.setC_type("root");
+		rootNode.setC_title("Root Node");
 
 		firstChild = new ComprehensiveTree();
 		firstChild.setC_id(2);
-		firstChild = dao.getNode(firstChild);
+		firstChild.setC_parentid(1);
+		firstChild.setC_position(0);
+		firstChild.setC_left(2);
+		firstChild.setC_right(5);
+		firstChild.setC_level(1);
+		firstChild.setC_title("First Child");
+		firstChild.setC_type("drive");
 
 		leafNode = new ComprehensiveTree();
 		leafNode.setC_id(3);
-		leafNode = dao.getNode(leafNode);
-		
+		leafNode.setC_parentid(2);
+		leafNode.setC_position(0);
+		leafNode.setC_left(3);
+		leafNode.setC_right(4);
+		leafNode.setC_level(2);
+		leafNode.setC_title("Leaf Node");
+		leafNode.setC_type("default");
+
 		branchNode = new ComprehensiveTree();
 		branchNode.setC_id(4);
-		branchNode = dao.getNode(branchNode);
+		branchNode.setC_parentid(1);
+		branchNode.setC_position(1);
+		branchNode.setC_left(6);
+		branchNode.setC_right(7);
+		branchNode.setC_level(1);
+		branchNode.setC_title("Branch Node");
+		branchNode.setC_type("folder");
 	}
 	
 	@Before
-	public void executedBeforeEach() throws Exception
+	public void setUp() throws Exception
 	{
-		String sequenceName = "S_COMPREHENSIVETREE_SPRING";
-		int startNumber = 5;
+		final String sequenceName = "S_COMPREHENSIVETREE_SPRING";
+		final int startSeqNumber = 5;
 		
-		DbTestUtil.resetAutoIncrementColumns(applicationContext, sequenceName, startNumber);
+		DbTestUtil.resetAutoIncrementColumns(applicationContext, sequenceName, startSeqNumber);
 		
 		comprehensiveTree = new ComprehensiveTree();
 	}
@@ -150,11 +174,10 @@ public class CoreServiceTestCase {
 		comprehensiveTree.setC_type(Type.DEFAULT.getType());
 		
 		coreService.addNode(comprehensiveTree);
-		
 	}
 	
-	enum Title {
-		
+	enum Title 
+	{
 		ROOTNODE("Root Node"), FIRSTCHILD("First Child"), LEAFTNODE("Leaf Node"), BRANCHNODE("Branch Node");
 		
 		private String theTitle;
@@ -167,11 +190,10 @@ public class CoreServiceTestCase {
 		public String getTitle(){
 			return this.theTitle;
 		}
-		
 	}
 	
-	enum Type {
-		
+	enum Type 
+	{
 		NULL(""), DRIVE("drive"), FOLDER("folder"), DEFAULT("default");
 		
 		private String theType;
@@ -184,9 +206,5 @@ public class CoreServiceTestCase {
 		public String getType(){
 			return this.theType;
 		}
-		
 	}
-	
-	
-	
 }
