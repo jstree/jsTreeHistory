@@ -154,4 +154,31 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
         
         return coreService.addNode(comprehensiveTree);
     }
+
+    @Override
+    public int deleteEmailProhibitionWords() throws Exception {
+
+        ComprehensiveTree emailBranchNode = new ComprehensiveTree();
+        emailBranchNode.setC_id(3);
+        
+        List<ComprehensiveTree> childrenOfEmailBranchNode = coreService.getChildNode(emailBranchNode);
+        
+        int affectedRowCount = 0;
+        
+        for (ComprehensiveTree nodeToDelete : childrenOfEmailBranchNode) {
+            
+            coreService.removeNode(nodeToDelete);
+            ++affectedRowCount;
+        }
+        
+        return affectedRowCount;
+    }
+
+    @Override
+    public int deleteNicknameProhibitionWords() throws Exception {
+        
+        
+        
+        return 0;
+    }
 }

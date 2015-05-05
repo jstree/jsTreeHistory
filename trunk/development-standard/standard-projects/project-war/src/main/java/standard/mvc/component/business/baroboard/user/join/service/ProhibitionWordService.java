@@ -79,4 +79,20 @@ public interface ProhibitionWordService extends CoreService {
      */
     public <T extends ComprehensiveTree> T addNicknameProhibitionWord(T comprehensiveTree)
             throws Exception;
+
+    /**
+     * 이메일 금지단어들을 삭제한다.
+     * 
+     * @return
+     * @throws Exception
+     */
+    public int deleteEmailProhibitionWords() throws Exception;
+    
+    /**
+     * 닉네임 금지단어들을 삭제한다.
+     * 
+     * @return
+     * @throws Exception
+     */
+    public int deleteNicknameProhibitionWords() throws Exception;
 }

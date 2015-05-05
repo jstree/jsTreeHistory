@@ -164,9 +164,8 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         assertThat(emailProhibitionWords, is(nullValue()));
     }
     
-    @Test
-    public void addEmailProhibitionWord() throws Exception {
-
+    private void addEmailProhibitionWord_common() throws Exception {
+        
         ProhibitionWord prohibitionWord = new ProhibitionWord();
         prohibitionWord.setRef(3);
         prohibitionWord.setC_position(0);
@@ -175,6 +174,24 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         prohibitionWord.setC_type_cd("A"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
         
         prohibitionWordService.addEmailProhibitionWord(prohibitionWord);
+    }
+    
+    private void addNicknameProhibitionWord_common() throws Exception {
+        
+        ProhibitionWord prohibitionWord = new ProhibitionWord();
+        prohibitionWord.setRef(4);
+        prohibitionWord.setC_position(0);
+        prohibitionWord.setC_title("관리자");
+        prohibitionWord.setC_type("default");
+        prohibitionWord.setC_type_cd("B"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
+        
+        prohibitionWordService.addNicknameProhibitionWord(prohibitionWord);
+    }
+    
+    @Test
+    public void addEmailProhibitionWord() throws Exception {
+        
+        addEmailProhibitionWord_common();
         
         IDataSet actualDb = databaseTester.getConnection().createDataSet();
         ITable actualTable = actualDb.getTable(TABLE_NAME);
@@ -190,14 +207,7 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     @Test
     public void addNicknameProhibitionWord() throws Exception {
         
-        ProhibitionWord prohibitionWord = new ProhibitionWord();
-        prohibitionWord.setRef(4);
-        prohibitionWord.setC_position(0);
-        prohibitionWord.setC_title("관리자");
-        prohibitionWord.setC_type("default");
-        prohibitionWord.setC_type_cd("B"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
-        
-        prohibitionWordService.addNicknameProhibitionWord(prohibitionWord);
+        addNicknameProhibitionWord_common();
         
         IDataSet actualDb = databaseTester.getConnection().createDataSet();
         ITable actualTable = actualDb.getTable(TABLE_NAME);
@@ -212,8 +222,47 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     
     @Ignore
     @Test
+    public void deleteEmailProhibitionWords() throws Exception {
+        
+        addEmailProhibitionWord_common();
+        
+        prohibitionWordService.deleteEmailProhibitionWords();
+        
+        IDataSet actualDb = databaseTester.getConnection().createDataSet();
+        ITable actualTable = actualDb.getTable(TABLE_NAME);
+        
+        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(INIT_DATA_SET);
+        ITable expectedTable = expectedDataSet.getTable(TABLE_NAME);
+        
+        Assertion.assertEquals(expectedTable, actualTable);
+    }
+    
+    @Ignore
+    @Test
+    public void deleteNicknameProhibitionWords() throws Exception {
+        
+        prohibitionWordService.deleteNicknameProhibitionWords();
+        
+        IDataSet actualDb = databaseTester.getConnection().createDataSet();
+        ITable actualTable = actualDb.getTable(TABLE_NAME);
+        
+        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(INIT_DATA_SET);
+        ITable expectedTable = expectedDataSet.getTable(TABLE_NAME);
+        
+        Assertion.assertEquals(expectedTable, actualTable);
+    }
+    
+    @Ignore
+    @Test
     public void addEmailProhibitionWords() throws Exception {
 
+        fail();
+    }
+    
+    @Ignore
+    @Test
+    public void saveEmailProhibitionWords() throws Exception {
+        
         fail();
     }
     
