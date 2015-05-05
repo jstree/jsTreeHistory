@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package standard.mvc.component.business.baroboard.user.join.service;
+package standard.mvc.component.business.baroboard.user.admin.setting.basic.service;
 
 import java.util.List;
 
+import standard.mvc.component.business.baroboard.user.admin.setting.basic.vo.ProhibitionWord;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -95,4 +96,22 @@ public interface ProhibitionWordService extends CoreService {
      * @throws Exception
      */
     public int deleteNicknameProhibitionWords() throws Exception;
+
+    /**
+     * 이메일 금지단어들을 추가한다.
+     * 
+     * @param emailProhibitionWords 추가할 이메일 금지단어들
+     * @throws Exception
+     */
+    public void saveEmailProhibitionWords(List<ProhibitionWord> emailProhibitionWords) 
+            throws Exception;
+
+    /**
+     * 닉네임 금지단어들을 추가한다.
+     * 
+     * @param nicknameProhibitionWords
+     * @throws Exception
+     */
+    public void saveNicknameProhibitionWords(List<ProhibitionWord> nicknameProhibitionWords)
+            throws Exception;
 }

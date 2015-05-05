@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="prohibitionWord">
-	<typeAlias alias="ProhibitionWord" type="standard.mvc.component.business.baroboard.user.join.vo.ProhibitionWord" />
+	<typeAlias alias="ProhibitionWord" type="standard.mvc.component.business.baroboard.user.admin.setting.basic.vo.ProhibitionWord" />
 
 	<select id="getChildNode" parameterClass="ProhibitionWord" resultClass="ProhibitionWord">
 		/* getChildNode */

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package standard.mvc.component.business.baroboard.user.join.vo;
+package standard.mvc.component.business.baroboard.user.admin.setting.basic.vo;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 

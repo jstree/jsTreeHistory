@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package standard.mvc.component.business.baroboard.user.service;
+package standard.mvc.component.business.baroboard.user.admin.setting.basic.service;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.dbunit.Assertion;
@@ -32,7 +31,7 @@ import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +39,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import standard.mvc.component.business.baroboard.user.join.service.ProhibitionWordService;
-import standard.mvc.component.business.baroboard.user.join.vo.ProhibitionWord;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import standard.mvc.component.business.baroboard.user.admin.setting.basic.vo.ProhibitionWord;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
@@ -76,10 +73,30 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     @Autowired
     private ProhibitionWordService prohibitionWordService;
     
+    private static ProhibitionWord emailProhibitionWord;
+    private static ProhibitionWord nicknameProhibitionWord;
+    
     private final String SCHEMA = "STANDARD_DB";
     private final String TABLE_NAME = "T_USER_PROH_WORD";
     private final File INIT_DATA_SET = new File(this.getClass().getResource(".").getPath() + TABLE_NAME + "_initial.xml");
     private final int INIT_SEQ = 5;
+    
+    @BeforeClass
+    public static void setUpOnce() {
+        emailProhibitionWord = new ProhibitionWord();
+        emailProhibitionWord.setRef(3);
+        emailProhibitionWord.setC_position(0);
+        emailProhibitionWord.setC_title("admin");
+        emailProhibitionWord.setC_type("default");
+        emailProhibitionWord.setC_type_cd("A"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
+        
+        nicknameProhibitionWord = new ProhibitionWord();
+        nicknameProhibitionWord.setRef(4);
+        nicknameProhibitionWord.setC_position(0);
+        nicknameProhibitionWord.setC_title("관리자");
+        nicknameProhibitionWord.setC_type("default");
+        nicknameProhibitionWord.setC_type_cd("B"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
+    }
     
     @Before
     public void setUp() throws Exception {
@@ -146,46 +163,14 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         assertThat(nicknameBranchNode.getC_type_cd(), is(equalTo("B")));
     }
     
-    @Ignore
-    @Test
-    public void getEmailProhibitionWords() throws Exception {
-        
-        List<ComprehensiveTree> emailProhibitionWords = prohibitionWordService.getEmailProhibitionWords();
-        
-        assertThat(emailProhibitionWords, is(nullValue()));
-    }
-    
-    @Ignore
-    @Test
-    public void getNicknameProhibitionWords() throws Exception {
-        
-        List<ComprehensiveTree> emailProhibitionWords = prohibitionWordService.getNicknameProhibitionWords();
-        
-        assertThat(emailProhibitionWords, is(nullValue()));
-    }
-    
     private void addEmailProhibitionWord_common() throws Exception {
         
-        ProhibitionWord prohibitionWord = new ProhibitionWord();
-        prohibitionWord.setRef(3);
-        prohibitionWord.setC_position(0);
-        prohibitionWord.setC_title("admin");
-        prohibitionWord.setC_type("default");
-        prohibitionWord.setC_type_cd("A"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
-        
-        prohibitionWordService.addEmailProhibitionWord(prohibitionWord);
+        prohibitionWordService.addEmailProhibitionWord(emailProhibitionWord);
     }
     
     private void addNicknameProhibitionWord_common() throws Exception {
         
-        ProhibitionWord prohibitionWord = new ProhibitionWord();
-        prohibitionWord.setRef(4);
-        prohibitionWord.setC_position(0);
-        prohibitionWord.setC_title("관리자");
-        prohibitionWord.setC_type("default");
-        prohibitionWord.setC_type_cd("B"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
-        
-        prohibitionWordService.addNicknameProhibitionWord(prohibitionWord);
+        prohibitionWordService.addNicknameProhibitionWord(nicknameProhibitionWord);
     }
     
     @Test
@@ -220,7 +205,6 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         Assertion.assertEquals(expectedTable, actualTable);
     }
     
-    @Ignore
     @Test
     public void deleteEmailProhibitionWords() throws Exception {
         
@@ -237,9 +221,10 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         Assertion.assertEquals(expectedTable, actualTable);
     }
     
-    @Ignore
     @Test
     public void deleteNicknameProhibitionWords() throws Exception {
+        
+        addNicknameProhibitionWord_common();
         
         prohibitionWordService.deleteNicknameProhibitionWords();
         
@@ -252,24 +237,23 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         Assertion.assertEquals(expectedTable, actualTable);
     }
     
-    @Ignore
-    @Test
-    public void addEmailProhibitionWords() throws Exception {
-
-        fail();
-    }
-    
-    @Ignore
     @Test
     public void saveEmailProhibitionWords() throws Exception {
+
+        List<ProhibitionWord> emailProhibitionWords = new ArrayList<ProhibitionWord>();
+
+        emailProhibitionWords.add( emailProhibitionWord );
         
-        fail();
+        prohibitionWordService.saveEmailProhibitionWords( emailProhibitionWords );
     }
     
-    @Ignore
     @Test
-    public void addNicknameProhibitionWords() throws Exception {
+    public void saveNicknameProhibitionWords() throws Exception {
+
+        List<ProhibitionWord> nicknameProhibitionWords = new ArrayList<ProhibitionWord>();
+
+        nicknameProhibitionWords.add( nicknameProhibitionWord );
         
-        fail();
+        prohibitionWordService.saveNicknameProhibitionWords( nicknameProhibitionWords );
     }
 }

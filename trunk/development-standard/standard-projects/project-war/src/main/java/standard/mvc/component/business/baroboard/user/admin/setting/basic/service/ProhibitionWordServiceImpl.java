@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package standard.mvc.component.business.baroboard.user.join.service;
+package standard.mvc.component.business.baroboard.user.admin.setting.basic.service;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
-import standard.mvc.component.business.baroboard.user.join.vo.ProhibitionWord;
+import standard.mvc.component.business.baroboard.user.admin.setting.basic.vo.ProhibitionWord;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -126,8 +126,8 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
     }
 
     @Override
-    public <T extends ComprehensiveTree> T addEmailProhibitionWord(
-            T comprehensiveTree) throws Exception {
+    public <T extends ComprehensiveTree> T addEmailProhibitionWord(T comprehensiveTree) 
+            throws Exception {
         
         if (comprehensiveTree.getRef() != 3) {
             throw new RuntimeException("이메일 브랜치 노드의 자식이 아닙니다.");
@@ -158,14 +158,28 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
     @Override
     public int deleteEmailProhibitionWords() throws Exception {
 
-        ComprehensiveTree emailBranchNode = new ComprehensiveTree();
+        ProhibitionWord emailBranchNode = new ProhibitionWord();
         emailBranchNode.setC_id(3);
         
-        List<ComprehensiveTree> childrenOfEmailBranchNode = coreService.getChildNode(emailBranchNode);
+        return deleteCommonProhibitionWords(emailBranchNode);
+    }
+
+    @Override
+    public int deleteNicknameProhibitionWords() throws Exception {
+        
+        ProhibitionWord nicknameBranchNode = new ProhibitionWord();
+        nicknameBranchNode.setC_id(4);
+        
+        return deleteCommonProhibitionWords(nicknameBranchNode);
+    }
+    
+    private int deleteCommonProhibitionWords(ProhibitionWord branchNode) throws Exception {
+        
+        List<ProhibitionWord> children = coreService.getChildNode(branchNode);
         
         int affectedRowCount = 0;
         
-        for (ComprehensiveTree nodeToDelete : childrenOfEmailBranchNode) {
+        for (ProhibitionWord nodeToDelete : children) {
             
             coreService.removeNode(nodeToDelete);
             ++affectedRowCount;
@@ -173,12 +187,28 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
         
         return affectedRowCount;
     }
-
+    
     @Override
-    public int deleteNicknameProhibitionWords() throws Exception {
+    public void saveEmailProhibitionWords(List<ProhibitionWord> emailProhibitionWords) 
+            throws Exception {
         
+        deleteEmailProhibitionWords();
         
+        for (ProhibitionWord emailProhibitionWord : emailProhibitionWords) {
+            
+            addEmailProhibitionWord( emailProhibitionWord );
+        }
+    }
+    
+    @Override
+    public void saveNicknameProhibitionWords(List<ProhibitionWord> nicknameProhibitionWords) 
+            throws Exception {
         
-        return 0;
+        deleteNicknameProhibitionWords();
+        
+        for (ProhibitionWord nicknameProhibitionWord : nicknameProhibitionWords) {
+            
+            addNicknameProhibitionWord( nicknameProhibitionWord );
+        }
     }
 }
