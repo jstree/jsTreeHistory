@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+  <T_USER_PROH_WORD 
+  C_ID="1" C_PARENTID="0" C_POSITION="0" C_LEFT="1" C_RIGHT="10" C_LEVEL="0" C_TITLE="Root Node" C_TYPE="root" C_TYPE_CD=" " />
+  
+  <T_USER_PROH_WORD 
+  C_ID="2" C_PARENTID="1" C_POSITION="0" C_LEFT="2" C_RIGHT="9" C_LEVEL="1" C_TITLE="회원_금지단어" C_TYPE="drive" C_TYPE_CD=" " />
+
+  <T_USER_PROH_WORD
+  C_ID="3" C_PARENTID="2" C_POSITION="0" C_LEFT="3" C_RIGHT="4" C_LEVEL="2" C_TITLE="이메일" C_TYPE="folder" C_TYPE_CD="A" />
+  
+  <T_USER_PROH_WORD
+  C_ID="4" C_PARENTID="2" C_POSITION="1" C_LEFT="5" C_RIGHT="8" C_LEVEL="2" C_TITLE="닉네임" C_TYPE="folder" C_TYPE_CD="B" />
+  
+  <T_USER_PROH_WORD
+  C_ID="5" C_PARENTID="4" C_POSITION="0" C_LEFT="6" C_RIGHT="7" C_LEVEL="3" C_TITLE="관리자" C_TYPE="default" C_TYPE_CD="B" />
+</dataset>

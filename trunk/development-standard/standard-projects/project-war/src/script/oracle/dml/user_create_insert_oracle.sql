@@ -72,6 +72,7 @@ INSERT INTO T_USER_SCRAP
 COMMIT;
 /* 오권우 끝 */
 
+/* 류강하 시작 */
 /* 회원_금지단어 */
 DELETE FROM T_USER_PROH_WORD;
 
@@ -130,8 +131,9 @@ INSERT INTO T_USER_BASIC_SETTING (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT,
 VALUES (2, 1, 0, 2, 3, 1, '회원_기본설정', 'drive', 1, ' ', ' ', ' ', ' ', -1, -1, -1);
 
 COMMIT;
+/* 류강하 끝 */
 
-
+/* 김대근 시작 */
 /* 회원_등급관리 */
 INSERT INTO T_USER_GRADE_MANAGE (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_POINT_BY_GRADE_USE_FL, C_POINT_BY_GRADE, C_ICON_FILE_NM, C_STORE_FILE_NM)
 VALUES (1, 0, 0, 1, 4, 0, 'Root Node', 'root', '0', 0, NULL, NULL);
@@ -243,3 +245,4 @@ INSERT INTO T_USER_POINT_ASSIGN (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, 
 VALUES (2, 1, 0, 2, 3, 1, 'First Child', 'drive', 0, 0, 0, '19000101000000', NULL);
 
 COMMIT;
+/* 김대근 종료 */
