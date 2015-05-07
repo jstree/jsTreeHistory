@@ -15,7 +15,6 @@
  */
 package egovframework.com.ext.jstree.springiBatis.core.service;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -26,17 +25,14 @@ import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
-import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
-import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
 import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 
@@ -63,9 +59,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
+@DatabaseSetup("CoreServiceTest.xml")
 public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
     
     private final int INIT_SEQ = 5;
@@ -76,15 +70,14 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
         IDatabaseConnection connection = null;
         
         try {
-            databaseTester = new DataSourceDatabaseTester(testDataSource);
+            databaseTester = new DataSourceDatabaseTester(dataSource);
             
-            File xmlInputFile = new File(this.getClass().getResource(".").getPath() + "initialJsTree.xml");
+            File dataSetFile = new File(getClass().getResource(".").getPath() + getClass().getSimpleName() + ".xml");
             
-            IDataSet dataSet = new FlatXmlDataSetBuilder().build(xmlInputFile);
+            IDataSet dataSet = new FlatXmlDataSetBuilder().build(dataSetFile);
             
             connection = databaseTester.getConnection();
             
-            DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
             DatabaseOperations.INIT_SEQ.execute(connection, dataSet, INIT_SEQ);
             
         } finally {
@@ -120,88 +113,8 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
         return coreDao.getNode( getInitialBranchNode() );
     }
     
-    private ComprehensiveTree validateRootNode() throws Exception {
-        
-        ComprehensiveTree rootNodeStored = getRootNodeStored();
-        
-        assertThat(rootNodeStored.getC_id(), is(1));
-        assertThat(rootNodeStored.getC_parentid(), is(0));
-        assertThat(rootNodeStored.getC_position(), is(0));
-        assertThat(rootNodeStored.getC_left(), is(1));
-        
-        assertThat(rootNodeStored.getC_level(), is(0));
-        assertThat(rootNodeStored.getC_title(), is(equalTo("Root Node")));
-        assertThat(rootNodeStored.getC_type(), is(equalTo("root")));
-        
-        return rootNodeStored;
-    }
-    
-    private ComprehensiveTree validateFirstChildNode() throws Exception {
-        
-        ComprehensiveTree firstChildNodeStored = coreDao.getNode( getFirstChildNode() );
-        
-        assertThat(firstChildNodeStored.getC_id(), is(2));
-        assertThat(firstChildNodeStored.getC_parentid(), is(1));
-        assertThat(firstChildNodeStored.getC_position(), is(0));
-        assertThat(firstChildNodeStored.getC_left(), is(2));
-        
-        assertThat(firstChildNodeStored.getC_level(), is(1));
-        assertThat(firstChildNodeStored.getC_title(), is(equalTo("First Child")));
-        assertThat(firstChildNodeStored.getC_type(), is(equalTo("drive")));
-        
-        return firstChildNodeStored;
-    }
-    
-    private ComprehensiveTree validateInitialLeafNode() throws Exception {
-        
-        ComprehensiveTree leafNodeStored = getInitialLeafNodeStored();
-        
-        assertThat(leafNodeStored.getC_id(), is(3));
-        assertThat(leafNodeStored.getC_parentid(), is(2));
-        assertThat(leafNodeStored.getC_position(), is(0));
-        
-        
-        assertThat(leafNodeStored.getC_level(), is(2));
-        assertThat(leafNodeStored.getC_title(), is(equalTo("Leaf Node")));
-        assertThat(leafNodeStored.getC_type(), is(equalTo("default")));
-        
-        return leafNodeStored;
-    }
-    
-    private ComprehensiveTree validateInitialBranchNode() throws Exception {
-        
-        ComprehensiveTree branchNodeStored = getInitialBranchNodeStored();
-        
-        assertThat(branchNodeStored.getC_id(), is(4));
-        assertThat(branchNodeStored.getC_parentid(), is(2));
-        assertThat(branchNodeStored.getC_position(), is(1));
-        
-        
-        assertThat(branchNodeStored.getC_level(), is(2));
-        assertThat(branchNodeStored.getC_title(), is(equalTo("Branch Node")));
-        assertThat(branchNodeStored.getC_type(), is(equalTo("folder")));
-        
-        return branchNodeStored;
-    }
-    
     @Test
     public void validateInitialTree() throws Exception {
-        
-        assertThatTotalNumberOfNodesIs(4);
-        
-        ComprehensiveTree rootNodeStored = validateRootNode();
-        assertThat(rootNodeStored.getC_right(), is(8));
-        
-        ComprehensiveTree firstChildNodeStored = validateFirstChildNode();
-        assertThat(firstChildNodeStored.getC_right(), is(7));
-        
-        ComprehensiveTree leafNodeStored = validateInitialLeafNode();
-        assertThat(leafNodeStored.getC_left(), is(3));
-        assertThat(leafNodeStored.getC_right(), is(4));
-        
-        ComprehensiveTree branchNodeStored = validateInitialBranchNode();
-        assertThat(branchNodeStored.getC_left(), is(5));
-        assertThat(branchNodeStored.getC_right(), is(6));
         
 //      I|    L    R
 //      1|    1    8 : Root Node
@@ -210,50 +123,24 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
 //      4|      56   : Branch Node
     }
     
-    @Test
-    public void addNewLeafNodeToRootNode() throws Exception {
+    @Test                      
+    @ExpectedDatabase(value = "/egovframework/com/ext/jstree/springiBatis/core/service/CoreServiceTest_addNewLeafNodeToRootNode.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    public void addNewLeafNodeToFirstChildNode() throws Exception {
         
         ComprehensiveTree firstChildNode = coreService.getChildNode( getRootNode() ).get(0);
 
-        List<ComprehensiveTree> childNodesOfFirstChildNode = coreService.getChildNode(firstChildNode);
+        List<ComprehensiveTree> childrenOfFirstChildNode = coreService.getChildNode(firstChildNode);
         
-        assertThat(childNodesOfFirstChildNode.size(), is(2));
+        assertThat(childrenOfFirstChildNode.size(), is(2));
         
         ComprehensiveTree newLeafNode = new ComprehensiveTree();
         newLeafNode.setRef( firstChildNode.getC_id() );
-        newLeafNode.setC_position( childNodesOfFirstChildNode.size() + 1 ); // TODO 테스트 코드에서 직접 만들어야 하나?
+        newLeafNode.setC_position( childrenOfFirstChildNode.size() );
         newLeafNode.setC_title( "New Leaf Node" );
         newLeafNode.setC_type( "default" ); // TODO Enumeration 도입 필요
         
         coreService.addNode(newLeafNode);
 
-        assertThatTotalNumberOfNodesIs(5);
-        
-        ComprehensiveTree rootNodeStored = validateRootNode();
-        assertThat(rootNodeStored.getC_right(), is(10));
-        
-        ComprehensiveTree firstChildNodeStored = validateFirstChildNode();
-        assertThat(firstChildNodeStored.getC_right(), is(9));
-        
-        ComprehensiveTree leafNodeStored = validateInitialLeafNode();
-        assertThat(leafNodeStored.getC_left(), is(3));
-        assertThat(leafNodeStored.getC_right(), is(4));
-        
-        ComprehensiveTree branchNodeStored = validateInitialBranchNode();
-        assertThat(branchNodeStored.getC_left(), is(5));
-        assertThat(branchNodeStored.getC_right(), is(6));
-        
-        ComprehensiveTree newLeafNodeStored = coreService.getChildNode( getFirstChildNodeStored() ).get(2);
-        
-        assertThat(newLeafNodeStored.getC_id(), is(5));
-        assertThat(newLeafNodeStored.getC_parentid(), is(2));
-        assertThat(newLeafNodeStored.getC_position(), is(3));
-        assertThat(newLeafNodeStored.getC_left(), is(7));
-        assertThat(newLeafNodeStored.getC_right(), is(8));
-        assertThat(newLeafNodeStored.getC_level(), is(2));
-        assertThat(newLeafNodeStored.getC_title(), is(equalTo("New Leaf Node")));
-        assertThat(newLeafNodeStored.getC_type(), is(equalTo("default"))); // TODO Enumeration 도입 필요
-        
 //      I|    L    R
 //      1|    1    10 : Root Node
 //      2|     2  9   : First Child Node
