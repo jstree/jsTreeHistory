@@ -40,5 +40,5 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Configuration
 @PropertySource({ "classpath:/META-INF/egovframework/egovProps/globals.properties"
-                , "classpath:/egovframework/egovProps/test-globals.properties" })
+                , "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
 public class TestWebApplicationContextConfig extends WebApplicationContextConfig {}

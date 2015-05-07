@@ -101,17 +101,19 @@ public interface ProhibitionWordService extends CoreService {
      * 이메일 금지단어들을 추가한다.
      * 
      * @param emailProhibitionWords 추가할 이메일 금지단어들
+     * @return affectedRowCount
      * @throws Exception
      */
-    public void saveEmailProhibitionWords(List<ProhibitionWord> emailProhibitionWords) 
+    public int saveEmailProhibitionWords(List<ProhibitionWord> emailProhibitionWords) 
             throws Exception;
 
     /**
      * 닉네임 금지단어들을 추가한다.
      * 
      * @param nicknameProhibitionWords
+     * @return affectedRowCount
      * @throws Exception
      */
-    public void saveNicknameProhibitionWords(List<ProhibitionWord> nicknameProhibitionWords)
+    public int saveNicknameProhibitionWords(List<ProhibitionWord> nicknameProhibitionWords)
             throws Exception;
 }

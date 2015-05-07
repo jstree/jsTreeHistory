@@ -189,26 +189,36 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
     }
     
     @Override
-    public void saveEmailProhibitionWords(List<ProhibitionWord> emailProhibitionWords) 
+    public int saveEmailProhibitionWords(List<ProhibitionWord> emailProhibitionWords) 
             throws Exception {
+        
+        int affectedRowCount = 0;
         
         deleteEmailProhibitionWords();
         
         for (ProhibitionWord emailProhibitionWord : emailProhibitionWords) {
             
             addEmailProhibitionWord( emailProhibitionWord );
+            ++affectedRowCount;
         }
+        
+        return affectedRowCount;
     }
     
     @Override
-    public void saveNicknameProhibitionWords(List<ProhibitionWord> nicknameProhibitionWords) 
+    public int saveNicknameProhibitionWords(List<ProhibitionWord> nicknameProhibitionWords) 
             throws Exception {
+        
+        int affectedRowCount = 0;
         
         deleteNicknameProhibitionWords();
         
         for (ProhibitionWord nicknameProhibitionWord : nicknameProhibitionWords) {
             
             addNicknameProhibitionWord( nicknameProhibitionWord );
+            ++affectedRowCount;
         }
+        
+        return affectedRowCount;
     }
 }

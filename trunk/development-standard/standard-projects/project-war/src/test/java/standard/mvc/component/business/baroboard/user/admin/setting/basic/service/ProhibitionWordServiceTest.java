@@ -15,7 +15,6 @@
  */
 package standard.mvc.component.business.baroboard.user.admin.setting.basic.service;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -23,25 +22,21 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dbunit.Assertion;
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import standard.mvc.component.business.baroboard.user.admin.setting.basic.vo.ProhibitionWord;
-import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
-import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
+
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
+
 import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
 import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 
@@ -60,14 +55,13 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * 
  * 수정일               수정자                 수정내용
  * -------       ------------   -----------------------
- * 2015. 5.  3.  류강하                 최초 생성
+ * 2015. 5. 3.  류강하                 최초 생성
+ * 2015. 5. 8.  류강하                 리팩토링의 한계를 느껴 spring-test-dbunit을 사용하도록 변경. 중복된 설정을 부모 클래스 이동
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
+@DatabaseSetup("ProhibitionWordServiceTest.xml")
 public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     
     @Autowired
@@ -76,13 +70,11 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     private static ProhibitionWord emailProhibitionWord;
     private static ProhibitionWord nicknameProhibitionWord;
     
-    private final String SCHEMA = "STANDARD_DB";
-    private final String TABLE_NAME = "T_USER_PROH_WORD";
-    private final File INIT_DATA_SET = new File(this.getClass().getResource(".").getPath() + TABLE_NAME + "_initial.xml");
     private final int INIT_SEQ = 5;
     
     @BeforeClass
     public static void setUpOnce() {
+        
         emailProhibitionWord = new ProhibitionWord();
         emailProhibitionWord.setRef(3);
         emailProhibitionWord.setC_position(0);
@@ -104,13 +96,14 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         IDatabaseConnection connection = null;
         
         try {
-            databaseTester = new DataSourceDatabaseTester(testDataSource, SCHEMA);
+            databaseTester = new DataSourceDatabaseTester(dataSource);
             
-            IDataSet dataSet = new FlatXmlDataSetBuilder().build(INIT_DATA_SET);
+            File dataSetFile = new File(getClass().getResource(".").getPath() + getClass().getSimpleName() + ".xml");
+            
+            IDataSet dataSet = new FlatXmlDataSetBuilder().build(dataSetFile);
             
             connection = databaseTester.getConnection();
             
-            DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
             DatabaseOperations.INIT_SEQ.execute(connection, dataSet, INIT_SEQ);
             
         } finally {
@@ -120,89 +113,28 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         }
     }
     
-    @Test
-    public void validateInitialTree() throws Exception {
-        
-        IDataSet actualDb = databaseTester.getConnection().createDataSet();
-        ITable actualTable = actualDb.getTable(TABLE_NAME);
-        
-        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(INIT_DATA_SET);
-        ITable expectedTable = expectedDataSet.getTable(TABLE_NAME);
-        
-        Assertion.assertEquals(expectedTable, actualTable);
-    }
-    
-    @Test
-    public void selectChildrenOfFirstChildNode() throws Exception {
-        
-        List<ProhibitionWord> childrenOfFirstChildNode = 
-                prohibitionWordService.getChildNode( getFirstChildNodeStored() );
-        
-        ProhibitionWord emailBranchNode = childrenOfFirstChildNode.get(0);
-        
-        assertThat(emailBranchNode.getC_id(), is(3));
-        assertThat(emailBranchNode.getC_parentid(), is(2));
-        assertThat(emailBranchNode.getC_position(), is(0));
-        assertThat(emailBranchNode.getC_left(), is(3));
-        assertThat(emailBranchNode.getC_right(), is(4));
-        assertThat(emailBranchNode.getC_level(), is(2));
-        assertThat(emailBranchNode.getC_title(), is(equalTo("이메일")));
-        assertThat(emailBranchNode.getC_type(), is(equalTo("folder")));
-        assertThat(emailBranchNode.getC_type_cd(), is(equalTo("A")));
-        
-        ProhibitionWord nicknameBranchNode = childrenOfFirstChildNode.get(1);
-        
-        assertThat(nicknameBranchNode.getC_id(), is(4));
-        assertThat(nicknameBranchNode.getC_parentid(), is(2));
-        assertThat(nicknameBranchNode.getC_position(), is(1));
-        assertThat(nicknameBranchNode.getC_left(), is(5));
-        assertThat(nicknameBranchNode.getC_right(), is(6));
-        assertThat(nicknameBranchNode.getC_level(), is(2));
-        assertThat(nicknameBranchNode.getC_title(), is(equalTo("닉네임")));
-        assertThat(nicknameBranchNode.getC_type(), is(equalTo("folder")));
-        assertThat(nicknameBranchNode.getC_type_cd(), is(equalTo("B")));
-    }
-    
     private void addEmailProhibitionWord_common() throws Exception {
-        
+
         prohibitionWordService.addEmailProhibitionWord(emailProhibitionWord);
     }
-    
+
     private void addNicknameProhibitionWord_common() throws Exception {
-        
+
         prohibitionWordService.addNicknameProhibitionWord(nicknameProhibitionWord);
     }
-    
+
     @Test
+    @ExpectedDatabase(value = "/standard/mvc/component/business/baroboard/user/admin/setting/basic/service/ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     public void addEmailProhibitionWord() throws Exception {
         
         addEmailProhibitionWord_common();
-        
-        IDataSet actualDb = databaseTester.getConnection().createDataSet();
-        ITable actualTable = actualDb.getTable(TABLE_NAME);
-        
-        File dataSet = new File(this.getClass().getResource(".").getPath() + TABLE_NAME + "_addEmailProhibitionWord.xml");
-        
-        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(dataSet);
-        ITable expectedTable = expectedDataSet.getTable(TABLE_NAME);
-        
-        Assertion.assertEquals(expectedTable, actualTable);
     }
     
     @Test
+    @ExpectedDatabase(value = "/standard/mvc/component/business/baroboard/user/admin/setting/basic/service/ProhibitionWordServiceTest_addNicknameProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     public void addNicknameProhibitionWord() throws Exception {
         
         addNicknameProhibitionWord_common();
-        
-        IDataSet actualDb = databaseTester.getConnection().createDataSet();
-        ITable actualTable = actualDb.getTable(TABLE_NAME);
-        
-        File dataSet = new File(this.getClass().getResource(".").getPath() + TABLE_NAME + "_addNicknameProhibitionWord.xml");
-        
-        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(dataSet);
-        ITable expectedTable = expectedDataSet.getTable(TABLE_NAME);
-        
-        Assertion.assertEquals(expectedTable, actualTable);
     }
     
     @Test
@@ -211,14 +143,6 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         addEmailProhibitionWord_common();
         
         prohibitionWordService.deleteEmailProhibitionWords();
-        
-        IDataSet actualDb = databaseTester.getConnection().createDataSet();
-        ITable actualTable = actualDb.getTable(TABLE_NAME);
-        
-        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(INIT_DATA_SET);
-        ITable expectedTable = expectedDataSet.getTable(TABLE_NAME);
-        
-        Assertion.assertEquals(expectedTable, actualTable);
     }
     
     @Test
@@ -227,33 +151,31 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         addNicknameProhibitionWord_common();
         
         prohibitionWordService.deleteNicknameProhibitionWords();
-        
-        IDataSet actualDb = databaseTester.getConnection().createDataSet();
-        ITable actualTable = actualDb.getTable(TABLE_NAME);
-        
-        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(INIT_DATA_SET);
-        ITable expectedTable = expectedDataSet.getTable(TABLE_NAME);
-        
-        Assertion.assertEquals(expectedTable, actualTable);
     }
     
     @Test
+    @ExpectedDatabase(value = "/standard/mvc/component/business/baroboard/user/admin/setting/basic/service/ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     public void saveEmailProhibitionWords() throws Exception {
 
         List<ProhibitionWord> emailProhibitionWords = new ArrayList<ProhibitionWord>();
 
         emailProhibitionWords.add( emailProhibitionWord );
         
-        prohibitionWordService.saveEmailProhibitionWords( emailProhibitionWords );
+        int affectedRowCount = prohibitionWordService.saveEmailProhibitionWords( emailProhibitionWords );
+        
+        assertThat(affectedRowCount, is(emailProhibitionWords.size()));
     }
     
     @Test
+    @ExpectedDatabase(value = "/standard/mvc/component/business/baroboard/user/admin/setting/basic/service/ProhibitionWordServiceTest_addNicknameProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     public void saveNicknameProhibitionWords() throws Exception {
 
         List<ProhibitionWord> nicknameProhibitionWords = new ArrayList<ProhibitionWord>();
 
         nicknameProhibitionWords.add( nicknameProhibitionWord );
         
-        prohibitionWordService.saveNicknameProhibitionWords( nicknameProhibitionWords );
+        int affectedRowCount = prohibitionWordService.saveNicknameProhibitionWords( nicknameProhibitionWords );
+        
+        assertThat(affectedRowCount, is(nicknameProhibitionWords.size()));
     }
 }

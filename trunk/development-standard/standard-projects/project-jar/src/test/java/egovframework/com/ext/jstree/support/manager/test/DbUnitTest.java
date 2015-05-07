@@ -26,11 +26,21 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.dbunit.IDatabaseTester;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
+import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
 /**
  * Modification Information
@@ -47,12 +57,17 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * 
  * 수정일               수정자                 수정내용
  * -------       ------------   -----------------------
- * 2015. 5.  3.  류강하                 최초 생성
+ * 2015. 5. 3.  류강하                 최초 생성
+ * 2015. 5. 8.  류강하                 자식 클래스의 중복된 설정을 이곳으로 이동
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-public class DbUnitTest<T> {
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = {TestWebApplicationContextConfig.class, WebMvcConfig.class})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
+public abstract class DbUnitTest<T> {
     
     @Resource(name = "CoreService")
     protected CoreService coreService;
@@ -61,7 +76,7 @@ public class DbUnitTest<T> {
     protected CoreDao coreDao;
     
     @Resource(name = "dataSource-${Globals.DbType}")
-    protected DataSource testDataSource;
+    protected DataSource dataSource;
     
     protected IDatabaseTester databaseTester;
     
