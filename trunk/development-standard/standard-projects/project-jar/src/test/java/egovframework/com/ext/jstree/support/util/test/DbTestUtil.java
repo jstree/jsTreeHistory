@@ -7,6 +7,26 @@ import javax.sql.DataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/**
+ * Modification Information
+ * 
+ * @author 김형채
+ * @since 2015. 5. 3.
+ * @version 1.0
+ * @see <pre>
+ * Class Name  : DbTestUtil.java
+ * Description : 시퀀스를 초기화한다.
+ * Infomation  : 오라클 DB 버젼 쿼리만 구현, 다른 DB는 구현필요
+ * 
+ * << 개정이력(Modification Information) >>
+ * 
+ * 수정일               수정자                       수정내용
+ * --------  ------------   -----------------------
+ * 2015.5.3   김형채                      최초 생성
+ * 
+ * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
 public class DbTestUtil
 {
 	public static void resetAutoIncrementColumns(ApplicationContext applicationContext, String sequenceName, int startSeqNumber) throws Exception
