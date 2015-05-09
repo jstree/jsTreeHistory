@@ -85,4 +85,11 @@ public class PrimaryServiceImpl implements CoreService {
 		return coreService.moveNode(comprehensiveTree, request);
 	}
 
+    @Override
+    public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

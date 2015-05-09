@@ -111,6 +111,8 @@ public class CoreServiceImpl implements CoreService
         List<T> childNodesFromRef = ((List<T>) coreDao.getChildNode(nodeByRef));
         
         T t_ComprehensiveTree = newInstance(comprehensiveTree);
+        t_ComprehensiveTree.setC_position(childNodesFromRef.size());
+        comprehensiveTree.setC_position(childNodesFromRef.size());
         
         int spaceOfTargetNode = 2;
         Collection<Integer> c_idsByChildNodeFromNodeById = null;
@@ -280,6 +282,13 @@ public class CoreServiceImpl implements CoreService
         coreDao.removeNode(removeNode);
         
         return 0;
+    }
+    
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
+    public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception
+    {
+        T getNode = ((T) coreDao.getNode(comprehensiveTree));
+        return getNode;
     }
     
     /*

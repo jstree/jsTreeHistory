@@ -22,9 +22,6 @@ import egovframework.com.ext.jstree.support.util.StringUtils;
 public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
 {
     
-    @Autowired
-    private Properties configFile;
-    
     // set private localVariable
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
@@ -45,7 +42,6 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
      * @see <pre>
      * requestUrl => 풀URL
      * contextPath => ContextPath
-     * templateEngine => 템플릿엔진 선택 ex) /sitemesh , /tiles , /none
      * viewResolver => ViewResolver 선택 ex) /freemarker , /jsp , /velocity
      * siteCode => 사이트명 ( 하나의 컨텍스트에서도 여러사이트를 운용가능 )
      * largeMenu => 대메뉴

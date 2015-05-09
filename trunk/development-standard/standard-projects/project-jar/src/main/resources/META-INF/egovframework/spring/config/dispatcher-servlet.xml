@@ -65,61 +65,6 @@
 	<!-- - This bean configures the 'prefix' and 'suffix' properties of - InternalResourceViewResolver, 
 		which resolves logical view names - returned by Controllers. For example, 
 		a logical view name of "vets" - will be mapped to "/WEB-INF/jsp/vets.jsp". -->
-	<bean id="freemarkerConfig"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath" value="/WEB-INF" />
-		<property name="freemarkerSettings">
-			<props>
-				<prop key="default_encoding">UTF-8</prop>
-				<prop key="template_update_delay">0</prop>
-				<prop key="cache_storage">strong:30, soft</prop>
-				<prop key="template_exception_handler">ignore</prop>
-				<prop key="output_encoding">UTF-8</prop>
-				<prop key="number_format">0.##</prop>
-				<prop key="date_format">yyyy-MM-dd</prop>
-				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
-				<prop key="time_format">HH:mm:ss</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="freemarkerViewResolver"
-		class="egovframework.com.ext.jstree.support.manager.viewResolver.CustomFreemarkerViewResolver">
-		<property name="cache" value="true" />
-		<property name="contentType" value="text/html; charset=UTF-8" />
-		<property name="prefix" value="" />
-		<property name="suffix" value=".ftl" />
-		<property name="exposeRequestAttributes" value="true" />
-		<property name="exposeSessionAttributes" value="true" />
-		<property name="exposeSpringMacroHelpers" value="true" />
-		<property name="requestContextAttribute" value="rc" />
-		<property name="order" value="3" />
-	</bean>
-
-	<bean id="velocityConfigurer"
-		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-		<property name="resourceLoaderPath" value="/WEB-INF" />
-		<property name="velocityProperties">
-			<props>
-				<prop key="input.encoding">UTF-8</prop>
-				<prop key="output.encoding">UTF-8</prop>
-				<prop key="velocimacro.library.autoreload">true</prop>
-				<prop key="file.resource.loader.cache">true</prop>
-				<prop key="file.resource.loader.modificationCheckInterval">0</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="velocityViewResolver"
-		class="egovframework.com.ext.jstree.support.manager.viewResolver.CustomVelocityViewResolver">
-		<property name="cache" value="true" />
-		<property name="prefix" value="" />
-		<property name="suffix" value=".vm" />
-		<property name="contentType" value="text/html; charset=UTF-8" />
-		<!-- if you want to use the Spring Velocity macros, set this property to 
-			true -->
-		<property name="exposeSpringMacroHelpers" value="true" />
-	</bean>
 
 	<bean id="specialPurposeViewResolver"
 		class="egovframework.com.ext.jstree.support.manager.viewResolver.SpecialPurposeViewResolver">
@@ -143,7 +88,7 @@
 
 	<!-- For Pagination Tag -->
 	<bean id="imageRenderer"
-		class="egovframework.example.cmmn.web.EgovImgPaginationRenderer" />
+		class="egovframework.com.cmm.web.EgovImgPaginationRenderer" />
 
 	<bean id="paginationManager"
 		class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">

@@ -84,4 +84,10 @@ public class ForeignServiceImpl implements CoreService {
 		return coreService.moveNode(comprehensiveTree, request);
 	}
 
+    @Override
+    public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception
+    {
+        return coreService.getNode(comprehensiveTree);
+    }
+
 }

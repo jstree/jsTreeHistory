@@ -221,4 +221,11 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
         
         return affectedRowCount;
     }
+
+    @Override
+    public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<name>support-scheduler</name>
-	<description>아파치 커먼 라이브러리</description>
+	<description>스케쥴러 라이브러리</description>
 
 	<dependencies>
 		<!-- 스케쥴링 관련. 배치 라이브러리 -->
@@ -41,6 +41,7 @@
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz-jboss</artifactId>
 		</dependency>
+		
 	</dependencies>
 
 	<dependencyManagement>

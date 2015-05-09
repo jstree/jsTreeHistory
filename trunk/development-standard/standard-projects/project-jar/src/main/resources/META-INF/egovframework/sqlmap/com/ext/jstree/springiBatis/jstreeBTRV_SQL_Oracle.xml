@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="core">
-	<typeAlias alias="ComprehensiveTree"
-		type="egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree" />
+<sqlMap namespace="BTRV">
+	<typeAlias alias="BTRV_ComprehensiveTree"
+		type="egovframework.com.ext.jstree.support.manager.scheduler.job.fecruToEazyBI.BTRV_ComprehensiveTree" />
 
 	<sql id="getMetaField">
 		/* getChildNode */
@@ -14,6 +14,15 @@
 		, A.c_level
 		, A.c_title
 		, A.c_type
+
+		, A.c_project
+		, A.c_path
+		, A.c_rev
+		, A.c_author
+		, A.c_commitdate
+		, A.c_rv
+		, A.c_bt
+		, A.c_svnlog
 		/* user filed add
 		point*/
 	</sql>
@@ -36,36 +45,35 @@
 		ORDER BY A.C_POSITION ASC
 	</sql>
 	
-	<select id="getChildNode" parameterClass="ComprehensiveTree"
-		resultClass="ComprehensiveTree">
+	<select id="getChildNode" parameterClass="BTRV_ComprehensiveTree"
+		resultClass="BTRV_ComprehensiveTree">
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user filed */
 			<include refid="getInlineChildCount" />
 			/* inline table from filed*/
-			FROM T_COMPREHENSIVETREE_SPRING B
+			FROM T_BTRV_ComprehensiveTree B
 			<include refid="getInlineChildCountAfterFrom" />
 			/* table from filed*/
-			FROM T_COMPREHENSIVETREE_SPRING A
+			FROM T_BTRV_ComprehensiveTree A
 			<include refid="getAfterFrom" />
 		</dynamic>
 	</select>
 
 
-	<select id="getChildNodeByLeftRight" parameterClass="ComprehensiveTree"
-		resultClass="ComprehensiveTree">
+	<select id="getChildNodeByLeftRight" parameterClass="BTRV_ComprehensiveTree"
+		resultClass="BTRV_ComprehensiveTree">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		, C_PARENTID
-		,
-		C_POSITION
+		, C_POSITION
 		, C_LEFT
 		, C_RIGHT
 		, C_LEVEL
 		, C_TITLE
 		, C_TYPE
 		FROM
-		T_COMPREHENSIVETREE_SPRING
+		T_BTRV_ComprehensiveTree
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT &lt;=
 		#c_right#
@@ -73,13 +81,13 @@
 	</select>
 
 
-	<select id="searchNodeByString" parameterClass="ComprehensiveTree"
-		resultClass="ComprehensiveTree">
+	<select id="searchNodeByString" parameterClass="BTRV_ComprehensiveTree"
+		resultClass="BTRV_ComprehensiveTree">
 		/* searchNodeByString */
 		SELECT c_left
 		, c_right
 		FROM
-		T_COMPREHENSIVETREE_SPRING
+		T_BTRV_ComprehensiveTree
 		WHERE C_TITLE LIKE '%'||#searchStr#||'%'
 	</select>
 
@@ -89,27 +97,27 @@
 		/* searchNodeByPosition */
 		SELECT DISTINCT C_ID
 		FROM
-		T_COMPREHENSIVETREE_SPRING
+		T_BTRV_ComprehensiveTree
 		WHERE 1=1
 		<iterate prepend="AND" open="(" close=")" conjunction="OR">
 			( C_LEFT
-			&lt;= #[].c_left# AND C_RIGHT &gt;= #[].c_right# )
+			&lt; #[].c_left# AND C_RIGHT &gt; #[].c_right# )
 		</iterate>
 	</select>
 
 
-	<update id="alterNode" parameterClass="ComprehensiveTree">
+	<update id="alterNode" parameterClass="BTRV_ComprehensiveTree">
 		/* alterNode */
 		UPDATE
-		T_COMPREHENSIVETREE_SPRING
+		T_BTRV_ComprehensiveTree
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
 		WHERE C_ID = #c_id#
 	</update>
 
 
-	<select id="getNode" parameterClass="ComprehensiveTree"
-		resultClass="ComprehensiveTree">
+	<select id="getNode" parameterClass="BTRV_ComprehensiveTree"
+		resultClass="BTRV_ComprehensiveTree">
 		/* getNode */
 		SELECT C_ID
 		, C_PARENTID
@@ -120,14 +128,23 @@
 		, C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		FROM T_COMPREHENSIVETREE_SPRING
+
+		, c_project
+		, c_path
+		, c_rev
+		, c_author
+		, c_commitdate
+		, c_rv
+		, c_bt
+		, c_svnlog
+		FROM T_BTRV_ComprehensiveTree
 		WHERE
 		C_ID = #c_id#
 	</select>
 
 
-	<select id="getNodeByRef" parameterClass="ComprehensiveTree"
-		resultClass="ComprehensiveTree">
+	<select id="getNodeByRef" parameterClass="BTRV_ComprehensiveTree"
+		resultClass="BTRV_ComprehensiveTree">
 		/* getNodeByRef */
 		SELECT C_ID
 		, C_PARENTID
@@ -139,45 +156,45 @@
 		, C_TITLE
 		, C_TYPE
 		FROM
-		T_COMPREHENSIVETREE_SPRING
+		T_BTRV_ComprehensiveTree
 		WHERE C_ID = #ref#
 	</select>
 
 
-	<delete id="removeNode" parameterClass="ComprehensiveTree">
+	<delete id="removeNode" parameterClass="BTRV_ComprehensiveTree">
 		/* removeNode */
 		DELETE
-		FROM T_COMPREHENSIVETREE_SPRING
+		FROM T_BTRV_ComprehensiveTree
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT
 		&lt;= #c_right#
 	</delete>
 
 
-	<update id="removedAfterLeftFix" parameterClass="ComprehensiveTree">
+	<update id="removedAfterLeftFix" parameterClass="BTRV_ComprehensiveTree">
 		/*
 		removedAfterLeftFix */
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET C_LEFT =
 		C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
 
 
-	<update id="removedAfterRightFix" parameterClass="ComprehensiveTree">
+	<update id="removedAfterRightFix" parameterClass="BTRV_ComprehensiveTree">
 		/*
 		removedAfterRightFix */
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET C_RIGHT =
 		C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 	</update>
 
 
-	<update id="removedAfterPositionFix" parameterClass="ComprehensiveTree">
+	<update id="removedAfterPositionFix" parameterClass="BTRV_ComprehensiveTree">
 		/*
 		removedAfterPositionFix */
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET
 		C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
@@ -186,18 +203,18 @@
 	</update>
 
 
-	<select id="analyzeRootNode" resultClass="ComprehensiveTree">
+	<select id="analyzeRootNode" resultClass="BTRV_ComprehensiveTree">
 		/* searchNodeByString
 		*/
 		SELECT C_LEFT
-		FROM T_COMPREHENSIVETREE_SPRING
+		FROM T_BTRV_ComprehensiveTree
 		WHERE C_PARENTID = 0
 	</select>
 
 
-	<update id="cutMyselfPositionFix" parameterClass="ComprehensiveTree">
+	<update id="cutMyselfPositionFix" parameterClass="BTRV_ComprehensiveTree">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET C_POSITION
 		= C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
@@ -206,17 +223,17 @@
 	</update>
 
 
-	<update id="cutMyselfLeftFix" parameterClass="ComprehensiveTree">
+	<update id="cutMyselfLeftFix" parameterClass="BTRV_ComprehensiveTree">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
 
 
-	<update id="cutMyselfRightFix" parameterClass="ComprehensiveTree">
+	<update id="cutMyselfRightFix" parameterClass="BTRV_ComprehensiveTree">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
@@ -226,10 +243,10 @@
 	</update>
 
 
-	<update id="stretchPositionForMyself" parameterClass="ComprehensiveTree">
+	<update id="stretchPositionForMyself" parameterClass="BTRV_ComprehensiveTree">
 		/* stretchPositionForMyselfFromJstree */
 		UPDATE
-		T_COMPREHENSIVETREE_SPRING
+		T_BTRV_ComprehensiveTree
 		SET C_POSITION = C_POSITION + 1
 		WHERE
 		C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
@@ -248,9 +265,9 @@
 	</update>
 
 
-	<update id="stretchLeftForMyselfFromJstree" parameterClass="ComprehensiveTree">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="BTRV_ComprehensiveTree">
 		/* stretchLeftForMyselfFromJstree */
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
 		WHERE C_LEFT &gt;=
 		#rightPositionFromNodeByRef#
@@ -265,9 +282,9 @@
 	</update>
 
 
-	<update id="stretchRightForMyselfFromJstree" parameterClass="ComprehensiveTree">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="BTRV_ComprehensiveTree">
 		/* stretchRightForMyselfFromJstree */
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
 		WHERE C_RIGHT &gt;=
 		#rightPositionFromNodeByRef#
@@ -282,13 +299,21 @@
 	</update>
 
 
-	<insert id="pasteMyselfFromJstree" parameterClass="ComprehensiveTree">
+	<insert id="pasteMyselfFromJstree" parameterClass="BTRV_ComprehensiveTree">
 		/* pasteMyselfFromJstree */
-		INSERT INTO T_COMPREHENSIVETREE_SPRING (
+		INSERT INTO T_BTRV_ComprehensiveTree (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
+		, c_project
+		, c_path
+		, c_rev
+		, c_author
+		, c_commitdate
+		, c_rv
+		, c_bt
+		, c_svnlog
 		)
-		SELECT S_COMPREHENSIVETREE_SPRING.NEXTVAL AS C_ID
+		SELECT S_BTRV_ComprehensiveTree.NEXTVAL AS C_ID
 		, A.*
 		FROM (
 		SELECT
@@ -301,7 +326,16 @@
 		, C_LEVEL - #ldif# AS C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		FROM T_COMPREHENSIVETREE_SPRING
+		
+				, c_project
+		, c_path
+		, c_rev
+		, c_author
+		, c_commitdate
+		, c_rv
+		, c_bt
+		, c_svnlog
+		FROM T_BTRV_ComprehensiveTree
 		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
 			open="(" close=")" conjunction=",">
 			#c_idsByChildNodeFromNodeById[]#
@@ -310,16 +344,16 @@
 		) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-			SELECT S_COMPREHENSIVETREE_SPRING.CURRVAL AS SEQ
+			SELECT S_BTRV_ComprehensiveTree.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
 
 
-	<update id="enterMyselfFixPosition" parameterClass="ComprehensiveTree">
+	<update id="enterMyselfFixPosition" parameterClass="BTRV_ComprehensiveTree">
 		/*
 		enterMyselfFixPosition */
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET
 		C_PARENTID = #ref#
 		, C_POSITION = #c_position#
@@ -327,9 +361,9 @@
 	</update>
 
 
-	<update id="enterMyselfFixLeftRight" parameterClass="ComprehensiveTree">
+	<update id="enterMyselfFixLeftRight" parameterClass="BTRV_ComprehensiveTree">
 		/* enterMyselfFixLeftRight */
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET
 		C_LEFT = C_LEFT - (#idif#)
 		, C_RIGHT = C_RIGHT - (#idif#)
@@ -342,46 +376,62 @@
 	</update>
 
 
-	<insert id="addMyselfFromJstree" parameterClass="ComprehensiveTree">
+	<insert id="addMyselfFromJstree" parameterClass="BTRV_ComprehensiveTree">
 		/* addMyselfFromJstree */
-		INSERT INTO T_COMPREHENSIVETREE_SPRING (
+		INSERT INTO T_BTRV_ComprehensiveTree (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL )
+		C_LEFT, C_RIGHT, C_LEVEL 
+				, c_project
+		, c_path
+		, c_rev
+		, c_author
+		, c_commitdate
+		, c_rv
+		, c_bt
+		, c_svnlog)
 		VALUES (
-		S_COMPREHENSIVETREE_SPRING.NEXTVAL, #c_parentid#, #c_position#,
-		#c_left#, #c_right#, #c_level# )
+		S_BTRV_ComprehensiveTree.NEXTVAL, #c_parentid#, #c_position#,
+		#c_left#, #c_right#, #c_level#
+				, #c_project#
+		, #c_path#
+		, #c_rev#
+		, #c_author#
+		, #c_commitdate#
+		, #c_rv#
+		, #c_bt#
+		, #c_svnlog# )
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
-			S_COMPREHENSIVETREE_SPRING.CURRVAL AS SEQ
+			S_BTRV_ComprehensiveTree.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
 
 
-	<update id="alterNodeType" parameterClass="ComprehensiveTree">
+	<update id="alterNodeType" parameterClass="BTRV_ComprehensiveTree">
 		/* alterNodeType */
-		UPDATE T_COMPREHENSIVETREE_SPRING
+		UPDATE T_BTRV_ComprehensiveTree
 		SET C_TYPE = #c_type#
 		WHERE C_ID =
 		#c_id#
 	</update>
 
 
-	<update id="fixCopyIF" parameterClass="ComprehensiveTree">
+	<update id="fixCopyIF" parameterClass="BTRV_ComprehensiveTree">
 		/* fixCopyIF */
 		UPDATE
-		T_COMPREHENSIVETREE_SPRING
+		T_BTRV_ComprehensiveTree
 		SET C_POSITION = #fixCopyPosition#
 		WHERE C_ID
 		= #fixCopyId#
 	</update>
 
 
-	<update id="fixCopy" parameterClass="ComprehensiveTree">
+	<update id="fixCopy" parameterClass="BTRV_ComprehensiveTree">
 		/* fixCopy */
 		UPDATE
-		T_COMPREHENSIVETREE_SPRING
+		T_BTRV_ComprehensiveTree
 		SET C_PARENTID = #fixCopyId#
 		WHERE C_ID =
 		#c_id#

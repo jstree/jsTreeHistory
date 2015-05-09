@@ -28,7 +28,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 public interface CoreService {
 
-	
+    public <T extends ComprehensiveTree> T getNode( T comprehensiveTree ) throws Exception;
 	/**
 	 * 자식노드를 요청한다.
 	 * @param <T>
