@@ -18,7 +18,6 @@ package standard.mvc.component.business.baroboard.user.admin.setting.basic.servi
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -56,55 +55,6 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
     @Resource(name = "CoreDao")
     private CoreDao coreDao;
     
-    @Override
-    public <T extends ComprehensiveTree> List<T> getChildNode(
-            T comprehensiveTree) throws Exception {
-        
-        return coreService.getChildNode(comprehensiveTree);
-    }
-
-    @Override
-    public <T extends ComprehensiveTree> List<String> searchNode(
-            T comprehensiveTree) throws Exception {
-        
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public <T extends ComprehensiveTree> T addNode(T comprehensiveTree)
-            throws Exception {
-        
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree)
-            throws Exception {
-        
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree)
-            throws Exception {
-        
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree)
-            throws Exception {
-        
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree,
-            HttpServletRequest request) throws Exception {
-        
-        throw new UnsupportedOperationException();
-    }
-
     @SuppressWarnings("unchecked")
     @Override
     public <T extends ComprehensiveTree> List<T> getEmailProhibitionWords() throws Exception {
@@ -220,12 +170,5 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
         }
         
         return affectedRowCount;
-    }
-
-    @Override
-    public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception
-    {
-        // TODO Auto-generated method stub
-        return null;
     }
 }

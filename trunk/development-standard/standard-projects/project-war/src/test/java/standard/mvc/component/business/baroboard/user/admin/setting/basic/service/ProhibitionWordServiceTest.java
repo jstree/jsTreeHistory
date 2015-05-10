@@ -81,14 +81,14 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         emailProhibitionWord.setC_position(0);
         emailProhibitionWord.setC_title("admin");
         emailProhibitionWord.setC_type("default");
-        emailProhibitionWord.setC_type_cd("A"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
+        emailProhibitionWord.setTypeCd("A"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
         
         nicknameProhibitionWord = new ProhibitionWord();
         nicknameProhibitionWord.setRef(4);
         nicknameProhibitionWord.setC_position(0);
         nicknameProhibitionWord.setC_title("관리자");
         nicknameProhibitionWord.setC_type("default");
-        nicknameProhibitionWord.setC_type_cd("B"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
+        nicknameProhibitionWord.setTypeCd("B"); // TODO 필요 없네 이거 c_position으로 사용하면 될 듯
     }
     
     @Before
@@ -118,7 +118,7 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     public void selectChildrenOfFirstChildNode() throws Exception {
         
         List<ProhibitionWord> childrenOfFirstChildNode = 
-                prohibitionWordService.getChildNode( getFirstChildNodeStored() );
+                coreService.getChildNode( getFirstChildNodeStored() );
         
         ProhibitionWord emailBranchNode = childrenOfFirstChildNode.get(0);
         
@@ -130,7 +130,7 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         assertThat(emailBranchNode.getC_level(), is(2));
         assertThat(emailBranchNode.getC_title(), is(equalTo("이메일")));
         assertThat(emailBranchNode.getC_type(), is(equalTo("folder")));
-        assertThat(emailBranchNode.getC_type_cd(), is(equalTo("A")));
+        assertThat(emailBranchNode.getTypeCd(), is(equalTo("A")));
         
         ProhibitionWord nicknameBranchNode = childrenOfFirstChildNode.get(1);
         
@@ -142,7 +142,7 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         assertThat(nicknameBranchNode.getC_level(), is(2));
         assertThat(nicknameBranchNode.getC_title(), is(equalTo("닉네임")));
         assertThat(nicknameBranchNode.getC_type(), is(equalTo("folder")));
-        assertThat(nicknameBranchNode.getC_type_cd(), is(equalTo("B")));
+        assertThat(nicknameBranchNode.getTypeCd(), is(equalTo("B")));
     }
     
     private void addEmailProhibitionWord_common() throws Exception {
@@ -174,7 +174,7 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         assertThat(emailProhibitionWord.getC_level(), is(3));
         assertThat(emailProhibitionWord.getC_title(), is(equalTo("admin")));
         assertThat(emailProhibitionWord.getC_type(), is(equalTo("default"))); // TODO Enumeration 도입 필요
-        assertThat(emailProhibitionWord.getC_type_cd(), is(equalTo("A"))); // TODO 칼럼을 삭제할지 고민
+        assertThat(emailProhibitionWord.getTypeCd(), is(equalTo("A"))); // TODO 칼럼을 삭제할지 고민
     }
     
     @Test
@@ -196,7 +196,7 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         assertThat(nicknameProhibitionWord.getC_level(), is(3));
         assertThat(nicknameProhibitionWord.getC_title(), is(equalTo("관리자")));
         assertThat(nicknameProhibitionWord.getC_type(), is(equalTo("default"))); // TODO Enumeration 도입 필요
-        assertThat(nicknameProhibitionWord.getC_type_cd(), is(equalTo("B"))); // TODO 칼럼을 삭제할지 고민
+        assertThat(nicknameProhibitionWord.getTypeCd(), is(equalTo("B"))); // TODO 칼럼을 삭제할지 고민
     }
     
     @Test

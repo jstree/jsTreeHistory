@@ -40,16 +40,16 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 public class ProhibitionWord extends ComprehensiveTree {
 
     /** 유형코드 */
-    private String c_type_cd;
+    private String typeCd;
 
-    public String getC_type_cd() {
-        return c_type_cd;
+    public String getTypeCd() {
+        return typeCd;
     }
 
-    public void setC_type_cd(String c_type_cd) {
-        this.c_type_cd = c_type_cd;
+    public void setTypeCd(String typeCd) {
+        this.typeCd = typeCd;
     }
-    
+
     @Override
     public String getSqlMapSelector() {
         

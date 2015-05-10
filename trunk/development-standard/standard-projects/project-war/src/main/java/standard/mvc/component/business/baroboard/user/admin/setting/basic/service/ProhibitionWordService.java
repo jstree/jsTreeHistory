@@ -18,7 +18,6 @@ package standard.mvc.component.business.baroboard.user.admin.setting.basic.servi
 import java.util.List;
 
 import standard.mvc.component.business.baroboard.user.admin.setting.basic.vo.ProhibitionWord;
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
@@ -41,7 +40,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-public interface ProhibitionWordService extends CoreService {
+public interface ProhibitionWordService {
 
     /**
      * 이메일 금지 단어들을 조회한다.

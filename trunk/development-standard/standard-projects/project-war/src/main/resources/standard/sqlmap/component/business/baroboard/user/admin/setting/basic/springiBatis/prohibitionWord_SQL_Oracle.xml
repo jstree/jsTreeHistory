@@ -13,7 +13,7 @@
 		     , A.C_LEVEL
 		     , A.C_TITLE
 		     , A.C_TYPE
-		     , A.C_TYPE_CD
+		     , A.C_TYPE_CD AS typeCd
 		     , ( SELECT CASE
 		                    WHEN COUNT(*) &gt; 0 THEN 'InChild'
            		 			ELSE 'NoChild'
@@ -37,6 +37,7 @@
 		     , C_LEVEL
 		     , C_TITLE
 		     , C_TYPE
+		     , C_TYPE_CD AS typeCd
 		  FROM T_USER_PROH_WORD 
 		 WHERE C_LEFT &gt;= #c_left# 
 		   AND C_RIGHT &lt;= #c_right# 
@@ -46,9 +47,9 @@
 
 	<select id="searchNodeByString" parameterClass="ProhibitionWord" resultClass="ProhibitionWord">
 		/* searchNodeByString */
-		SELECT c_left
-		     , c_right
-		  FROM T_USER_PROH_WORD 
+		SELECT C_LEFT
+		     , C_RIGHT
+		  FROM T_USER_PROH_WORD
 		 WHERE C_TITLE LIKE '%'||#searchStr#||'%' 
 	</select>
 
@@ -63,6 +64,7 @@
         </iterate>
 	</select>
 
+
 	<update id="alterNode" parameterClass="ProhibitionWord">
 		/* alterNode */
 		UPDATE T_USER_PROH_WORD 
@@ -70,6 +72,7 @@
 		     , C_TITLE = #c_title# 
 		 WHERE C_ID = #c_id#
 	</update>
+
 
 	<select id="getNode" parameterClass="ProhibitionWord" resultClass="ProhibitionWord">
 		/* getNode */
@@ -81,6 +84,7 @@
              , C_LEVEL
              , C_TITLE
              , C_TYPE
+             , C_TYPE_CD AS typeCd
           FROM T_USER_PROH_WORD 
          WHERE C_ID = #c_id#
     </select>
@@ -96,6 +100,7 @@
              , C_LEVEL
              , C_TITLE
              , C_TYPE
+             , C_TYPE_CD AS typeCd
           FROM T_USER_PROH_WORD 
          WHERE C_ID = #ref#
     </select>
@@ -104,7 +109,7 @@
 	<delete id="removeNode" parameterClass="ProhibitionWord">
 		/* removeNode */
        	DELETE FROM T_USER_PROH_WORD 
-       	      WHERE C_LEFT  &gt;= #c_left# 
+       	      WHERE C_LEFT  &gt;= #c_left#
        	        AND C_RIGHT &lt;= #c_right#
 	</delete>
 	
@@ -135,7 +140,7 @@
 
 
 	<select id="analyzeRootNode" resultClass="ProhibitionWord">
-		/* searchNodeByString */
+		/* analyzeRootNode */
 	    SELECT C_LEFT 
 		  FROM T_USER_PROH_WORD 
 		 WHERE C_PARENTID = 0
@@ -221,7 +226,7 @@
 
 	<insert id="pasteMyselfFromJstree" parameterClass="ProhibitionWord">
 		/* pasteMyselfFromJstree */
-        INSERT INTO T_USER_PROH_WORD ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE ) 
+        INSERT INTO T_USER_PROH_WORD ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_TYPE_CD ) 
     	SELECT S_USER_PROH_WORD.NEXTVAL AS C_ID
     	     , A.*
        	  FROM (
@@ -231,7 +236,8 @@
 		             , C_RIGHT - #idifRight# AS C_RIGHT
 		             , C_LEVEL - #ldif#      AS C_LEVEL
 		             , C_TITLE
-		             , C_TYPE 
+		             , C_TYPE
+		             , C_TYPE_CD
 		          FROM T_USER_PROH_WORD 
 	    <iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
 		               #c_idsByChildNodeFromNodeById[]#
@@ -270,7 +276,7 @@
 	<insert id="addMyselfFromJstree" parameterClass="ProhibitionWord">
 		/* addMyselfFromJstree */
         INSERT INTO T_USER_PROH_WORD ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE_CD )
-                              VALUES ( S_USER_PROH_WORD.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title#, #c_type_cd# )
+                              VALUES ( S_USER_PROH_WORD.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title#, #typeCd# )
         <selectKey resultClass="java.lang.Integer">
         	/* addMyselfFromJstree SEQ */
             SELECT S_USER_PROH_WORD.CURRVAL AS SEQ
@@ -301,27 +307,4 @@
 		   SET C_PARENTID = #fixCopyId# 
 		 WHERE C_ID = #c_id#
 	</update>
-	
-	
-	<select id="getMaxPositionForAddNode" parameterClass="ProhibitionWord" resultClass="Integer">
-		/* getMaxPositionForAddNode */
-		SELECT NVL(MAX(C_POSITION), -1) AS C_POSITION
-		  FROM T_USER_PROH_WORD
-		 WHERE C_PARENTID = #ref#
-	</select>
-	
-	
-	<select id="searchNodeByTitle" parameterClass="ProhibitionWord" resultClass="ProhibitionWord">
-		/* searchNodeByTitle */
-		SELECT C_ID
-		     , C_PARENTID
-		     , C_POSITION
-		     , C_LEFT
-		     , C_RIGHT
-		     , C_LEVEL
-		     , C_TITLE
-		     , C_TYPE
-		  FROM T_USER_PROH_WORD
-		 WHERE C_TITLE = #c_title#
-	</select>
 </sqlMap>
