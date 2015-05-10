@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 import standard.mvc.component.business.baroboard.user.admin.setting.basic.vo.ProhibitionWord;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
  * Modification Information
@@ -55,54 +54,52 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
     @Resource(name = "CoreDao")
     private CoreDao coreDao;
     
-    @SuppressWarnings("unchecked")
     @Override
-    public <T extends ComprehensiveTree> List<T> getEmailProhibitionWords() throws Exception {
+    public List<ProhibitionWord> getEmailProhibitionWords() throws Exception {
         
         ProhibitionWord emailBranchNode = new ProhibitionWord();
         emailBranchNode.setC_id(3);
         
-        return (List<T>) coreDao.getChildNode(emailBranchNode);
+        return coreDao.getChildNode(emailBranchNode);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public <T extends ComprehensiveTree> List<T> getNicknameProhibitionWords() throws Exception {
+    public List<ProhibitionWord> getNicknameProhibitionWords() throws Exception {
         
         ProhibitionWord emailBranchNode = new ProhibitionWord();
         emailBranchNode.setC_id(4);
         
-        return (List<T>) coreDao.getChildNode(emailBranchNode);
+        return coreDao.getChildNode(emailBranchNode);
     }
 
     @Override
-    public <T extends ComprehensiveTree> T addEmailProhibitionWord(T comprehensiveTree) 
+    public ProhibitionWord addEmailProhibitionWord(ProhibitionWord prohibitionWord) 
             throws Exception {
         
-        if (comprehensiveTree.getRef() != 3) {
+        if (prohibitionWord.getRef() != 3) {
             throw new RuntimeException("이메일 브랜치 노드의 자식이 아닙니다.");
         }
         
-        if (!"default".equals(comprehensiveTree.getC_type())) {
+        if (!"default".equals(prohibitionWord.getC_type())) {
             throw new RuntimeException("리프 노드만 추가될 수 있습니다.");
         }
         
-        return coreService.addNode(comprehensiveTree);
+        return coreService.addNode(prohibitionWord);
     }
     
     @Override
-    public <T extends ComprehensiveTree> T addNicknameProhibitionWord(T comprehensiveTree) 
+    public ProhibitionWord addNicknameProhibitionWord(ProhibitionWord prohibitionWord) 
             throws Exception {
         
-        if (comprehensiveTree.getRef() != 4) {
+        if (prohibitionWord.getRef() != 4) {
             throw new RuntimeException("닉네임 브랜치 노드의 자식이 아닙니다.");
         }
         
-        if (!"default".equals(comprehensiveTree.getC_type())) {
+        if (!"default".equals(prohibitionWord.getC_type())) {
             throw new RuntimeException("리프 노드만 추가될 수 있습니다.");
         }
         
-        return coreService.addNode(comprehensiveTree);
+        return coreService.addNode(prohibitionWord);
     }
 
     @Override

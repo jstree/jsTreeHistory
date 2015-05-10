@@ -18,7 +18,6 @@ package standard.mvc.component.business.baroboard.user.admin.setting.basic.servi
 import java.util.List;
 
 import standard.mvc.component.business.baroboard.user.admin.setting.basic.vo.ProhibitionWord;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
  * Modification Information
@@ -45,56 +44,56 @@ public interface ProhibitionWordService {
     /**
      * 이메일 금지 단어들을 조회한다.
      * 
-     * @return List<T>
+     * @return 금지단어 DTO List
      * @throws Exception
      */
-    public <T extends ComprehensiveTree> List<T> getEmailProhibitionWords() 
+    List<ProhibitionWord> getEmailProhibitionWords() 
             throws Exception;
     
     /**
      * 닉네임 금지 단어들을 조회한다.
      * 
-     * @return List<T>
+     * @return 금지단어 DTO List
      * @throws Exception
      */
-    public <T extends ComprehensiveTree> List<T> getNicknameProhibitionWords() 
+    List<ProhibitionWord> getNicknameProhibitionWords() 
             throws Exception;
     
     /**
      * 이메일 금지단어를 추가한다.
      * 
-     * @param comprehensiveTree
-     * @return
+     * @param 금지단어 DTO
+     * @return 금지단어 DTO
      * @throws Exception
      */
-    public <T extends ComprehensiveTree> T addEmailProhibitionWord(T comprehensiveTree)
+    ProhibitionWord addEmailProhibitionWord(ProhibitionWord prohibitionWord)
             throws Exception;
     
     /**
      * 닉네임 금지단어를 추가한다.
      * 
-     * @param comprehensiveTree
-     * @return
+     * @param 금지단어 DTO
+     * @return 금지단어 DTO
      * @throws Exception
      */
-    public <T extends ComprehensiveTree> T addNicknameProhibitionWord(T comprehensiveTree)
+    ProhibitionWord addNicknameProhibitionWord(ProhibitionWord prohibitionWord)
             throws Exception;
 
     /**
      * 이메일 금지단어들을 삭제한다.
      * 
-     * @return
+     * @return affectedRowCount
      * @throws Exception
      */
-    public int deleteEmailProhibitionWords() throws Exception;
+    int deleteEmailProhibitionWords() throws Exception;
     
     /**
      * 닉네임 금지단어들을 삭제한다.
      * 
-     * @return
+     * @return affectedRowCount
      * @throws Exception
      */
-    public int deleteNicknameProhibitionWords() throws Exception;
+    int deleteNicknameProhibitionWords() throws Exception;
 
     /**
      * 이메일 금지단어들을 추가한다.
@@ -103,16 +102,16 @@ public interface ProhibitionWordService {
      * @return affectedRowCount
      * @throws Exception
      */
-    public int saveEmailProhibitionWords(List<ProhibitionWord> emailProhibitionWords) 
+    int saveEmailProhibitionWords(List<ProhibitionWord> emailProhibitionWords) 
             throws Exception;
 
     /**
      * 닉네임 금지단어들을 추가한다.
      * 
-     * @param nicknameProhibitionWords
+     * @param nicknameProhibitionWords 추가할 닉네임 금지단어들
      * @return affectedRowCount
      * @throws Exception
      */
-    public int saveNicknameProhibitionWords(List<ProhibitionWord> nicknameProhibitionWords)
+    int saveNicknameProhibitionWords(List<ProhibitionWord> nicknameProhibitionWords)
             throws Exception;
 }
