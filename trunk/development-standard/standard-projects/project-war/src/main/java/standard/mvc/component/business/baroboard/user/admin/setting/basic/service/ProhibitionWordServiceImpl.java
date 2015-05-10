@@ -112,7 +112,7 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
         ProhibitionWord emailBranchNode = new ProhibitionWord();
         emailBranchNode.setC_id(3);
         
-        return (List<T>) coreDao.getNodeByRef(emailBranchNode);
+        return (List<T>) coreDao.getChildNode(emailBranchNode);
     }
 
     @SuppressWarnings("unchecked")
@@ -122,7 +122,7 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
         ProhibitionWord emailBranchNode = new ProhibitionWord();
         emailBranchNode.setC_id(4);
         
-        return (List<T>) coreDao.getNodeByRef(emailBranchNode);
+        return (List<T>) coreDao.getChildNode(emailBranchNode);
     }
 
     @Override

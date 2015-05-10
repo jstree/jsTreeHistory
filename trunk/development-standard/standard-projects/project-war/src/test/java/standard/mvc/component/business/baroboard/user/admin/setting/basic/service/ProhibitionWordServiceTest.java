@@ -15,6 +15,7 @@
  */
 package standard.mvc.component.business.baroboard.user.admin.setting.basic.service;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -113,16 +114,91 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         }
     }
     
+    @Test
+    public void selectChildrenOfFirstChildNode() throws Exception {
+        
+        List<ProhibitionWord> childrenOfFirstChildNode = 
+                prohibitionWordService.getChildNode( getFirstChildNodeStored() );
+        
+        ProhibitionWord emailBranchNode = childrenOfFirstChildNode.get(0);
+        
+        assertThat(emailBranchNode.getC_id(), is(3));
+        assertThat(emailBranchNode.getC_parentid(), is(2));
+        assertThat(emailBranchNode.getC_position(), is(0));
+        assertThat(emailBranchNode.getC_left(), is(3));
+        assertThat(emailBranchNode.getC_right(), is(4));
+        assertThat(emailBranchNode.getC_level(), is(2));
+        assertThat(emailBranchNode.getC_title(), is(equalTo("이메일")));
+        assertThat(emailBranchNode.getC_type(), is(equalTo("folder")));
+        assertThat(emailBranchNode.getC_type_cd(), is(equalTo("A")));
+        
+        ProhibitionWord nicknameBranchNode = childrenOfFirstChildNode.get(1);
+        
+        assertThat(nicknameBranchNode.getC_id(), is(4));
+        assertThat(nicknameBranchNode.getC_parentid(), is(2));
+        assertThat(nicknameBranchNode.getC_position(), is(1));
+        assertThat(nicknameBranchNode.getC_left(), is(5));
+        assertThat(nicknameBranchNode.getC_right(), is(6));
+        assertThat(nicknameBranchNode.getC_level(), is(2));
+        assertThat(nicknameBranchNode.getC_title(), is(equalTo("닉네임")));
+        assertThat(nicknameBranchNode.getC_type(), is(equalTo("folder")));
+        assertThat(nicknameBranchNode.getC_type_cd(), is(equalTo("B")));
+    }
+    
     private void addEmailProhibitionWord_common() throws Exception {
 
         prohibitionWordService.addEmailProhibitionWord(emailProhibitionWord);
     }
-
+    
     private void addNicknameProhibitionWord_common() throws Exception {
 
         prohibitionWordService.addNicknameProhibitionWord(nicknameProhibitionWord);
     }
 
+    @Test
+    public void getEmailProhibitionWords() throws Exception {
+        
+        addEmailProhibitionWord_common();
+        
+        List<ProhibitionWord> emailProhibitionWords = prohibitionWordService.getEmailProhibitionWords();
+        
+        assertThat(emailProhibitionWords.size(), is(1));
+
+        ProhibitionWord emailProhibitionWord = emailProhibitionWords.get(0);
+        
+        assertThat(emailProhibitionWord.getC_id(), is(5));
+        assertThat(emailProhibitionWord.getC_parentid(), is(3));
+        assertThat(emailProhibitionWord.getC_position(), is(0));
+        assertThat(emailProhibitionWord.getC_left(), is(4));
+        assertThat(emailProhibitionWord.getC_right(), is(5));
+        assertThat(emailProhibitionWord.getC_level(), is(3));
+        assertThat(emailProhibitionWord.getC_title(), is(equalTo("admin")));
+        assertThat(emailProhibitionWord.getC_type(), is(equalTo("default"))); // TODO Enumeration 도입 필요
+        assertThat(emailProhibitionWord.getC_type_cd(), is(equalTo("A"))); // TODO 칼럼을 삭제할지 고민
+    }
+    
+    @Test
+    public void getNicknameProhibitionWords() throws Exception {
+        
+        addNicknameProhibitionWord_common();
+        
+        List<ProhibitionWord> nicknameProhibitionWords = prohibitionWordService.getNicknameProhibitionWords();
+        
+        assertThat(nicknameProhibitionWords.size(), is(1));
+
+        ProhibitionWord nicknameProhibitionWord = nicknameProhibitionWords.get(0);
+        
+        assertThat(nicknameProhibitionWord.getC_id(), is(5));
+        assertThat(nicknameProhibitionWord.getC_parentid(), is(4));
+        assertThat(nicknameProhibitionWord.getC_position(), is(0));
+        assertThat(nicknameProhibitionWord.getC_left(), is(6));
+        assertThat(nicknameProhibitionWord.getC_right(), is(7));
+        assertThat(nicknameProhibitionWord.getC_level(), is(3));
+        assertThat(nicknameProhibitionWord.getC_title(), is(equalTo("관리자")));
+        assertThat(nicknameProhibitionWord.getC_type(), is(equalTo("default"))); // TODO Enumeration 도입 필요
+        assertThat(nicknameProhibitionWord.getC_type_cd(), is(equalTo("B"))); // TODO 칼럼을 삭제할지 고민
+    }
+    
     @Test
     @ExpectedDatabase(value = "/standard/mvc/component/business/baroboard/user/admin/setting/basic/service/ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     public void addEmailProhibitionWord() throws Exception {
