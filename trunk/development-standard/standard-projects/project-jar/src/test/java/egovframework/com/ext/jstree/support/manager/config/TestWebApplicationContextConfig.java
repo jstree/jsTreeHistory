@@ -15,8 +15,15 @@
  */
 package egovframework.com.ext.jstree.support.manager.config;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+
+import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
 
 /**
  * Modification Information
@@ -41,4 +48,18 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource({ "classpath:/META-INF/egovframework/egovProps/globals.properties"
                 , "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
-public class TestWebApplicationContextConfig extends WebApplicationContextConfig {}
+public class TestWebApplicationContextConfig extends WebApplicationContextConfig 
+{
+    @Resource(name = "dataSource-${Globals.DbType}")
+    private DataSource dataSource;
+    
+    private @Value("${Globals.UserName}") String shemaName;
+    
+	@Bean
+	public DatabaseDataSourceConnectionFactoryBean dbUnitDatabaseConnection() 
+	{
+		DatabaseDataSourceConnectionFactoryBean databaseDataSourceConnectionFactoryBean = new DatabaseDataSourceConnectionFactoryBean(dataSource);
+		databaseDataSourceConnectionFactoryBean.setSchema(shemaName);
+		return databaseDataSourceConnectionFactoryBean;
+	}
+}
