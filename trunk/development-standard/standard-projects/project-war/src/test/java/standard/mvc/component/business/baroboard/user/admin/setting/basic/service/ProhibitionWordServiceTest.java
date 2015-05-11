@@ -200,14 +200,14 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     }
     
     @Test
-    @ExpectedDatabase(value = "/standard/mvc/component/business/baroboard/user/admin/setting/basic/service/ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     public void addEmailProhibitionWord() throws Exception {
         
         addEmailProhibitionWord_common();
     }
     
     @Test
-    @ExpectedDatabase(value = "/standard/mvc/component/business/baroboard/user/admin/setting/basic/service/ProhibitionWordServiceTest_addNicknameProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addNicknameProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     public void addNicknameProhibitionWord() throws Exception {
         
         addNicknameProhibitionWord_common();
@@ -230,7 +230,7 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     }
     
     @Test
-    @ExpectedDatabase(value = "/standard/mvc/component/business/baroboard/user/admin/setting/basic/service/ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     public void saveEmailProhibitionWords() throws Exception {
 
         List<ProhibitionWord> emailProhibitionWords = new ArrayList<ProhibitionWord>();
@@ -243,7 +243,7 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     }
     
     @Test
-    @ExpectedDatabase(value = "/standard/mvc/component/business/baroboard/user/admin/setting/basic/service/ProhibitionWordServiceTest_addNicknameProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addNicknameProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     public void saveNicknameProhibitionWords() throws Exception {
 
         List<ProhibitionWord> nicknameProhibitionWords = new ArrayList<ProhibitionWord>();

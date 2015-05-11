@@ -22,7 +22,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.user.admin.setting.basic.vo.ProhibitionWord;
-import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 
 /**
@@ -51,16 +50,13 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
     @Resource(name = "CoreService")
     private CoreService coreService;
     
-    @Resource(name = "CoreDao")
-    private CoreDao coreDao;
-    
     @Override
     public List<ProhibitionWord> getEmailProhibitionWords() throws Exception {
         
         ProhibitionWord emailBranchNode = new ProhibitionWord();
         emailBranchNode.setC_id(3);
         
-        return coreDao.getChildNode(emailBranchNode);
+        return coreService.getChildNode(emailBranchNode);
     }
 
     @Override
@@ -69,7 +65,7 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
         ProhibitionWord emailBranchNode = new ProhibitionWord();
         emailBranchNode.setC_id(4);
         
-        return coreDao.getChildNode(emailBranchNode);
+        return coreService.getChildNode(emailBranchNode);
     }
 
     @Override

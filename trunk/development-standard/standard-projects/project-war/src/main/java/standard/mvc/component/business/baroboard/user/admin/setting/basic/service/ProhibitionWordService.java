@@ -72,7 +72,7 @@ public interface ProhibitionWordService {
     /**
      * 닉네임 금지단어를 추가한다.
      * 
-     * @param 금지단어 DTO
+     * @param prohibitionWord 금지단어 DTO
      * @return 금지단어 DTO
      * @throws Exception
      */
