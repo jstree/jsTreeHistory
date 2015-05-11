@@ -118,4 +118,5 @@
   <term name="기간" physicalName="TERM" physicalDescription="TERM"/>
   <term name="여부" physicalName="FLAG" physicalDescription="FLAG"/>
   <term name="수" physicalName="CNT" physicalDescription="COUNT"/>
+  <term name="컨텐츠" physicalName="CONTENTS" physicalDescription="CONTENTS"/>
 </tm:TermDictionary>
