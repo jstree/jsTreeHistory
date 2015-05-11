@@ -1,41 +1,67 @@
 package egovframework.com.ext.jstree.springiBatis.core.service;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.emptyArray;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.hamcrest.Matchers.equalToIgnoringWhiteSpace;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.startsWith;
 
+import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
+import org.dbunit.DataSourceDatabaseTester;
+import org.dbunit.IDatabaseTester;
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.solr.repository.Query;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.util.ReflectionUtils;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
-import com.github.springtestdbunit.dataset.ReplacementDataSetLoader;
 
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
-import egovframework.com.ext.jstree.support.util.test.DbTestUtil;
-
+import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 /**
  * Modification Information
  * 
@@ -59,26 +85,34 @@ import egovframework.com.ext.jstree.support.util.test.DbTestUtil;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class, 
-                          TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
-@DbUnitConfiguration(databaseConnection = { "dataSource-oracle" }, dataSetLoader = ReplacementDataSetLoader.class)
-@DatabaseSetup(value="/egovframework/com/ext/jstree/springiBatis/core/service/initialJsTree.xml", type = DatabaseOperation.CLEAN_INSERT)
-public class CoreServiceTestCase {
-	
+//@PropertySource({ "classpath:/META-INF/egovframework/egovProps/globals.properties"
+//    		    , "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
+//@ContextConfiguration(locations = { "classpath:/META-INF/egovframework/spring/com/context-datasource.xml"
+//		                 	      , "classpath:/META-INF/egovframework/spring/com/context-test-datasource.xml"
+//		                 	      , "classpath:/META-INF/egovframework/spring/com/context-sqlMap.xml" 
+//		                 	      , "classpath:/META-INF/egovframework/spring/com/context-test-scan.xml"
+//		                 	      })
+//@ComponentScan( basePackages = { "classpath:egovframework/com/ext/jstree/springiBatis/core/dao"
+//		                       , "classpath:egovframework/com/ext/jstree/springiBatis/core/service"
+//		                       , "classpath:egovframework/com/ext/jstree/springiBatis/core/vo" })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,DbUnitTestExecutionListener.class })
+@DatabaseSetup(value = "initialJsTreeDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+public class CoreServiceTestCase 
+{
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private CoreService coreService;
-    
-	@Autowired 
+	@Resource(name="CoreService")
+	private CoreService coreService;
+
+	@Resource(name="CoreDao")
 	private CoreDao dao;
-	
+
 	@Autowired
-    private ApplicationContext applicationContext;
-    
-    private ComprehensiveTree comprehensiveTree;
+	private ApplicationContext applicationContext;
+
+	private ComprehensiveTree comprehensiveTree;
 	private ComprehensiveTree comprehensiveResultTree;
-	
+
 	private static ComprehensiveTree rootNode;
 	private static ComprehensiveTree firstChild;
 	private static ComprehensiveTree leafNode;
@@ -86,7 +120,16 @@ public class CoreServiceTestCase {
 
 	private List<ComprehensiveTree> l_StoredNodes;
 	private List<String> l_StoredStrings;
+
+	private CoreServiceImpl reflectionCoreService;
 	
+	MockHttpServletRequest request = new MockHttpServletRequest();
+	
+    @Resource(name = "dataSource-${Globals.DbType}")
+    protected DataSource dataSource;
+    protected IDatabaseTester databaseTester;
+    private final int INIT_SEQ = 5;
+    
 	@BeforeClass
 	public static void setUpOnce() throws Exception
 	{
@@ -130,80 +173,251 @@ public class CoreServiceTestCase {
 		branchNode.setC_title("Branch Node");
 		branchNode.setC_type("folder");
 	}
-	
+
 	@Before
 	public void setUp() throws Exception
 	{
-		final String sequenceName = "S_COMPREHENSIVETREE_SPRING";
-		final int startSeqNumber = 5;
-		
-		DbTestUtil.resetAutoIncrementColumns(applicationContext, sequenceName, startSeqNumber);
-		
-		comprehensiveTree = new ComprehensiveTree();
+		setUpComprehensiveTree();
+
+		setUpReflectionCoreService();
+
+		resetAutoIncrementColumns();
 	}
-	
+
 	@Test
 	public void testGetChildNode() throws Exception
 	{
 		comprehensiveTree.setC_id(2);
-		
-		l_StoredNodes =  coreService.getChildNode(comprehensiveTree);
-		
-		assertThat(l_StoredNodes.size(), is(2));
+
+		l_StoredNodes = coreService.getChildNode(comprehensiveTree);
+
+		assertThat(l_StoredNodes.size()).isEqualTo(2);
 	}
 	
 	@Test
 	public void testSearchNode() throws Exception
 	{
 		comprehensiveTree.setSearchStr("");
-		
+
 		l_StoredStrings = coreService.searchNode(comprehensiveTree);
+
+		assertThat(l_StoredStrings.size()).isEqualTo(2);
+	}
+
+	@Test
+	@ExpectedDatabase(value = "addNodeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT )
+	public void testAddNode() throws Exception
+	{
+		comprehensiveTree.setRef(firstChild.getC_id());
+		comprehensiveTree.setC_position(2);
+		comprehensiveTree.setC_title(Title.LEAFTNODE.getTitle());
+		comprehensiveTree.setC_type(Type.DEFAULT.getType());
+
+		comprehensiveResultTree = coreService.addNode(comprehensiveTree);
 		
-		assertThat(l_StoredStrings.size(), is(2));
+		assertThat(comprehensiveResultTree.getId()).isEqualTo(5);
+		assertThat(comprehensiveResultTree.getStatus()).isEqualTo(1);
+	}
+
+	@Test
+	@ExpectedDatabase(value = "removeNodeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testReMoveNode() throws Exception
+	{
+		coreService.removeNode(firstChild);
 	}
 	
 	@Test
-	@ExpectedDatabase(value="/egovframework/com/ext/jstree/springiBatis/core/service/addNodeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
-	public void testAddNode1() throws Exception
+	@ExpectedDatabase(value = "alterNodeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testAlterNode() throws Exception
 	{
-		//param ex : ref=2&c_position=2&c_title=New+Leaf+Node&c_type=default
-		
-		comprehensiveTree.setRef(firstChild.getC_id());
-		comprehensiveTree.setC_position(coreService.getChildNode(firstChild).size());
-		comprehensiveTree.setC_title(Title.LEAFTNODE.getTitle());
+		comprehensiveTree.setC_id(4);
 		comprehensiveTree.setC_type(Type.DEFAULT.getType());
+		comprehensiveTree.setC_title(Title.LEAFTNODE.getTitle());
 		
-		coreService.addNode(comprehensiveTree);
+		coreService.alterNode(comprehensiveTree);
+	}
+
+	@Test
+	@ExpectedDatabase(value = "alterNodeTypeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testAlterNodeType() throws Exception
+	{
+		comprehensiveTree.setC_id(4);
+		comprehensiveTree.setC_type(Type.DEFAULT.getType());
+
+		coreService.alterNodeType(comprehensiveTree);
 	}
 	
-	enum Title 
+	@Test
+	@DatabaseSetup(value = "initialMoveNodeDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+	@ExpectedDatabase(value = "moveNodeAtferDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNode() throws Exception
+	{
+		comprehensiveTree.setC_id(5);
+		comprehensiveTree.setRef(1);
+		comprehensiveTree.setC_position(0);
+		comprehensiveTree.setCopy(0);
+		comprehensiveTree.setMultiCounter(0);
+		
+		coreService.moveNode(comprehensiveTree, request);
+	}
+	
+	@Query()
+	@Test
+	@DatabaseSetup(value = "initialMoveNodeDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+	@ExpectedDatabase(value = "moveNodeMultiCountAtferDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodeMultiCount() throws Exception
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			comprehensiveTree.setC_id(9+i);
+			comprehensiveTree.setRef(5);
+			comprehensiveTree.setC_position(2+i);
+			comprehensiveTree.setCopy(0);
+			comprehensiveTree.setMultiCounter(i);
+			
+			coreService.moveNode(comprehensiveTree, request);
+		}
+	}
+	
+	@Test
+	@ExpectedDatabase(value = "moveNodeCopyAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodeCopy() throws Exception
+	{
+		comprehensiveTree.setC_id(4);
+		comprehensiveTree.setRef(2);
+		comprehensiveTree.setC_position(2);
+		comprehensiveTree.setCopy(1);
+		comprehensiveTree.setMultiCounter(0);
+		
+		coreService.moveNode(comprehensiveTree, request);
+	}
+
+	@Test
+	@ExpectedDatabase(value = "cutMyselfAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testCutMyself() throws Exception
+	{
+		final String relectionMethodName = "cutMyself";
+
+		Method method = reflectionCoreService.getClass().getDeclaredMethod(relectionMethodName, new Class[] { ComprehensiveTree.class, Integer.TYPE, Collection.class });
+
+		ReflectionUtils.makeAccessible(method);
+
+		final int spaceOfTargetNode = 2;
+		Collection<Integer> c_idsByChildNodeFromNodeById = new ArrayList<>();
+
+		ReflectionUtils.invokeMethod(method, reflectionCoreService, new Object[] { branchNode, spaceOfTargetNode, c_idsByChildNodeFromNodeById });
+	}
+
+	@Test
+	@ExpectedDatabase(value = "stretchPositionForMyselfFromJstreeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testStretchPositionForMyselfFromJstree() throws Exception
+	{
+		final String relectionMethodName = "stretchPositionForMyselfFromJstree";
+
+		Method method = reflectionCoreService.getClass().getDeclaredMethod(relectionMethodName, new Class[] { Collection.class, ComprehensiveTree.class });
+
+		ReflectionUtils.makeAccessible(method);
+
+		final int leafNodeId = 3;
+		final int branchNodeId = 4;
+		Collection<Integer> c_idsByChildNodeFromNodeById = new ArrayList<>(Arrays.asList(leafNodeId, branchNodeId));
+
+		ReflectionUtils.invokeMethod(method, reflectionCoreService, new Object[] { c_idsByChildNodeFromNodeById, firstChild });
+	}
+	
+	@Test
+	@ExpectedDatabase(value = "stretchLeftRightForMyselfFromJstreeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testStretchLeftRightForMyselfFromJstree() throws Exception
+	{
+		final String relectionMethodName = "stretchLeftRightForMyselfFromJstree";
+
+		Method method = reflectionCoreService.getClass().getDeclaredMethod(relectionMethodName, new Class[] { Integer.TYPE, Integer.TYPE, Integer.TYPE, Collection.class, ComprehensiveTree.class });
+		
+		ReflectionUtils.makeAccessible(method);
+		
+		final int spaceOfTargetNode = 2;
+		final int rightPositionFromNodeByRef = 7;
+		final int copy = 0;
+		final int leafNodeId = 3;
+		final int branchNodeId = 4;
+		
+		Collection<Integer> c_idsByChildNodeFromNodeById = new ArrayList<>(Arrays.asList(leafNodeId, branchNodeId));
+
+		ReflectionUtils.invokeMethod(method, reflectionCoreService, new Object[] { spaceOfTargetNode, rightPositionFromNodeByRef, copy, c_idsByChildNodeFromNodeById, comprehensiveTree });
+	}
+
+	private void setUpComprehensiveTree()
+	{
+		comprehensiveTree = new ComprehensiveTree();
+		comprehensiveResultTree = new ComprehensiveTree();
+	}
+
+	private void resetAutoIncrementColumns() throws Exception
+	{
+		 IDatabaseConnection connection = null;
+	        
+	        try {
+	            databaseTester = new DataSourceDatabaseTester(dataSource);
+	            
+	            File dataSetFile = new File(getClass().getResource(".").getPath()+ getClass().getSimpleName() + ".xml");
+	            
+	            IDataSet dataSet = new FlatXmlDataSetBuilder().build(dataSetFile);
+	            
+	            connection = databaseTester.getConnection();
+	            
+	            DatabaseOperations.INIT_SEQ.execute(connection, dataSet, INIT_SEQ);
+	            
+	        } finally {
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        }
+	}
+
+	private void setUpReflectionCoreService()
+	{
+		reflectionCoreService = new CoreServiceImpl();
+
+		final String reflectionFieldName = "coreDao";
+		final Class<? extends CoreService> reflectionClass = reflectionCoreService.getClass();
+		
+
+		final Field coreServiceField = ReflectionUtils.findField(reflectionClass, reflectionFieldName);
+
+		ReflectionUtils.makeAccessible(coreServiceField);
+		ReflectionUtils.setField(coreServiceField, reflectionCoreService, dao);
+	}
+
+	enum Title
 	{
 		ROOTNODE("Root Node"), FIRSTCHILD("First Child"), LEAFTNODE("Leaf Node"), BRANCHNODE("Branch Node");
-		
+
 		private String theTitle;
-		
+
 		private Title(String newTitle)
 		{
 			this.theTitle = newTitle;
 		}
-		
-		public String getTitle(){
+
+		public String getTitle()
+		{
 			return this.theTitle;
 		}
 	}
-	
-	enum Type 
+
+	enum Type
 	{
-		NULL(""), DRIVE("drive"), FOLDER("folder"), DEFAULT("default");
-		
+		ROOT("root"), DRIVE("drive"), FOLDER("folder"), DEFAULT("default");
+
 		private String theType;
-		
+
 		private Type(String newType)
 		{
 			this.theType = newType;
 		}
-		
-		public String getType(){
+
+		public String getType()
+		{
 			return this.theType;
 		}
 	}
