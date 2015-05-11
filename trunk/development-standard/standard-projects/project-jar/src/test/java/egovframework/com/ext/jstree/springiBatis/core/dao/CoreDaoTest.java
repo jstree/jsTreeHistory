@@ -14,6 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -57,8 +59,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class
 	                    , TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
-@DbUnitConfiguration(databaseConnection = { "dataSource-oracle" },dataSetLoader = ColumnSensingFlatXmlDataSetLoader.class)
-@DatabaseSetup(value="/egovframework/com/ext/jstree/springiBatis/core/dao/initialJsTree.xml",type = DatabaseOperation.CLEAN_INSERT)
+@DatabaseSetup(value="initialJsTree.xml",type = DatabaseOperation.CLEAN_INSERT)
 public class CoreDaoTest
 {
 	@Autowired 
@@ -183,7 +184,7 @@ public class CoreDaoTest
 	}
 
 	@Test
-	@ExpectedDatabase(value="/egovframework/com/ext/jstree/springiBatis/core/dao/cutMyselfAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value="cutMyselfAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testCutMyself() throws Exception
 	{
 		c_idsByChildNodeFromNodeById = new ArrayList<>();
@@ -210,7 +211,7 @@ public class CoreDaoTest
 	}
 
 	@Test
-	@ExpectedDatabase(value="/egovframework/com/ext/jstree/springiBatis/core/dao/stretchLeftRightForMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value="stretchLeftRightForMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testStretchLeftRightForMyselfFromJstree() throws Exception
 	{
 		comprehensiveTree.setSpaceOfTargetNode(spaceOfTargetNode);
@@ -222,7 +223,7 @@ public class CoreDaoTest
 	}
 
 	@Test
-	@ExpectedDatabase(value="/egovframework/com/ext/jstree/springiBatis/core/dao/pasteMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value="pasteMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testPasteMyselfFromJstree() throws Exception
 	{
 		c_idsByChildNodeFromNodeById = new ArrayList<>();
@@ -292,7 +293,7 @@ public class CoreDaoTest
 	}
 	
 	@Test
-	@ExpectedDatabase(value="/egovframework/com/ext/jstree/springiBatis/core/dao/removeNodeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value="removeNodeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testRemoveNode() throws Exception
 	{
         int spaceOfTargetNode = firstChild.getC_right() - firstChild.getC_left()+1;
