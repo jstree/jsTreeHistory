@@ -1,22 +1,6 @@
 package egovframework.com.ext.jstree.springiBatis.core.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.emptyArray;
-import static org.hamcrest.Matchers.endsWith;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
-import static org.hamcrest.Matchers.equalToIgnoringWhiteSpace;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.lessThan;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.startsWith;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -42,7 +26,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.solr.repository.Query;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -78,23 +61,13 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * 수정일               	  수정자                         수정내용
  * ------------  ------------   -----------------------
  * 2015. 4. 30   김형채                         최초 생성
- * 
+ * 2015. 5. 12   김형채                         @Query 어노테이션  및 주석 삭제
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
-//@PropertySource({ "classpath:/META-INF/egovframework/egovProps/globals.properties"
-//    		    , "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
-//@ContextConfiguration(locations = { "classpath:/META-INF/egovframework/spring/com/context-datasource.xml"
-//		                 	      , "classpath:/META-INF/egovframework/spring/com/context-test-datasource.xml"
-//		                 	      , "classpath:/META-INF/egovframework/spring/com/context-sqlMap.xml" 
-//		                 	      , "classpath:/META-INF/egovframework/spring/com/context-test-scan.xml"
-//		                 	      })
-//@ComponentScan( basePackages = { "classpath:egovframework/com/ext/jstree/springiBatis/core/dao"
-//		                       , "classpath:egovframework/com/ext/jstree/springiBatis/core/service"
-//		                       , "classpath:egovframework/com/ext/jstree/springiBatis/core/vo" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,DbUnitTestExecutionListener.class })
 @DatabaseSetup(value = "initialJsTreeDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
 public class CoreServiceTestCase 
@@ -261,7 +234,6 @@ public class CoreServiceTestCase
 		coreService.moveNode(comprehensiveTree, request);
 	}
 	
-	@Query()
 	@Test
 	@DatabaseSetup(value = "initialMoveNodeDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
 	@ExpectedDatabase(value = "moveNodeMultiCountAtferDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
