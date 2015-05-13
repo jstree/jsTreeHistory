@@ -62,7 +62,8 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * ------------  ------------   -----------------------
  * 2015. 4. 30   김형채                         최초 생성
  * 2015. 5. 12   김형채                         @Query 어노테이션  및 주석 삭제
- * 2015. 5. 12   김형채                         MoveNodeException 테스트 케이스 추가 
+ * 2015. 5. 13   김형채                         MoveNodeException 테스트 케이스 추가
+ * 2015. 5. 13   김형채                         testMoveNode 테스트 케이스 수정
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -226,7 +227,7 @@ public class CoreServiceTestCase
 	@ExpectedDatabase(value = "moveNodeAtferDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testMoveNode() throws Exception
 	{
-		comprehensiveTree.setC_id(30);
+		comprehensiveTree.setC_id(5);
 		comprehensiveTree.setRef(1);
 		comprehensiveTree.setC_position(0);
 		comprehensiveTree.setCopy(0);
