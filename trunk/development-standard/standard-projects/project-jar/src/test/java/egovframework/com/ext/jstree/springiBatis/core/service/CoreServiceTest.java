@@ -53,7 +53,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * -------       ------------   -----------------------
  * 2015. 2. 26.  류강하                 최초 생성
  * 2015. 4. 17.  류강하                 기존 환경을 건드리지 않고 상속 및 확장하여 테스트하도록 변경함. 메이븐 빌드와는 무관하게 동작할 것임.
- * 2015. 4. 19.  류강하                 Leaf Node Add Node 테스트 케이스 추가(의도적인 개행을 넣었으니 Ctrl + Shift + F는 안 했으면 좋겠습니다.)
+ * 2015. 4. 19.  류강하                 Leaf Node Add Node 테스트 케이스 추가
  * 2015. 5.  1.  류강하                 시퀀스를 초기화하도록 하여 c_id 검증 단정문 성공하도록 변경(DatabaseOperation의 확장 포인트를 찾기가 어려워 추후에 개선 예정)
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.

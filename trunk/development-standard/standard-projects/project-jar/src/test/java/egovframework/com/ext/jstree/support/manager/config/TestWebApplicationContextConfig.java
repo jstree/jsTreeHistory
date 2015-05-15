@@ -34,7 +34,7 @@ import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
  * @see <pre>
  * Class Name  : TestWebApplicationContextConfig.java
  * Description : JsTree Spring+iBATIS 버젼의 JUnit4 + DbUnit 테스트를 위해 WebApplicationContextConfig를 확장한 클래스
- * Infomation  : JsTree 코어 서비스 로직을 검증하는 테스트
+ * Infomation  : JsTree Spring+iBATIS 버젼의 JUnit4 + DbUnit 테스트를 위해 WebApplicationContextConfig를 확장한 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 
