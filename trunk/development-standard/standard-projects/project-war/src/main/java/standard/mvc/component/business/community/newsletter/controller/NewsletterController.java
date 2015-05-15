@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import standard.mvc.component.business.community.newsletter.vo.NewsletterComprehensiveTree;
+import standard.mvc.component.business.community.newsletter.vo.Newsletter;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
@@ -78,7 +78,7 @@ public class NewsletterController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/addEmail.do", method = RequestMethod.POST)
-    public ComprehensiveTree addNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+    public ComprehensiveTree addNode(@ModelAttribute Newsletter newsletterComprehensiveTree
                                                    , HttpServletRequest request)
             throws Exception {
         
@@ -111,7 +111,7 @@ public class NewsletterController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping("/removeEmail.do")
-    public int removeNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+    public int removeNode(@ModelAttribute Newsletter newsletterComprehensiveTree
                                         , HttpServletRequest request) 
             throws Exception {
         

@@ -126,9 +126,8 @@ public class NewsletterServiceImpl implements CoreService {
     }
 
     @Override
-    public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception
-    {
-        // TODO Auto-generated method stub
-        return null;
+    public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception {
+        
+        return coreService.getNode(comprehensiveTree);
     }
 }

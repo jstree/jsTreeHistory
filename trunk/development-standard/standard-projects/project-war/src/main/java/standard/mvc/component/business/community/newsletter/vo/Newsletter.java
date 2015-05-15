@@ -11,21 +11,20 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @since 2014. 12. 09.
  * @version 1.0
  * @see <pre>
- *  Class Name  : NewsletterComprehensiveTree.java
- *  Description : NewsletterComprehensiveTree VO 클래스
- *  Infomation  : NewsletterComprehensiveTree VO 클래스
+ *  Class Name  : Newsletter.java
+ *  Description : Newsletter VO 클래스
+ *  Infomation  : Newsletter VO 클래스
  *  
  *  << 개정이력(Modification Information) >>
  *  
  *  수정일                 수정자                 수정내용
  *  -------        ------------   -----------------------
  *  2014. 12. 09.  류강하                 최초 생성
- * 	2014. 12. 13.  전경훈                 클래스이름 변경 (Newsletter -> NewsletterComprehensiveTree)
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 //@JsonInclude(Include.NON_EMPTY)
-public class NewsletterComprehensiveTree extends ComprehensiveTree {
+public class Newsletter extends ComprehensiveTree {
 
     @Override
     public HashMap<String, String> getAttr() {

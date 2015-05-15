@@ -1,14 +1,14 @@
 
 /* Insert Root Node */
 INSERT INTO T_NEWSLETTER_COMPREHENSIVETREE(C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
-VALUES (1, 0, 0, 1, 6, 0, 'Root Node', NULL);
+VALUES (1, 0, 0, 1, 6, 0, 'Root Node', 'root');
 
 /* Insert First Child Node */
 INSERT INTO T_NEWSLETTER_COMPREHENSIVETREE(C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
-VALUES (2, 1, 0, 2, 5, 0, 'Newsletter', 'drive');
+VALUES (2, 1, 0, 2, 5, 1, 'Newsletter', 'drive');
 
 /* Insert Anonymous Users Folder */
 INSERT INTO T_NEWSLETTER_COMPREHENSIVETREE(C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
-VALUES (3, 2, 0, 3, 4, 1, 'Anonymous Users', 'folder');
+VALUES (3, 2, 0, 3, 4, 2, 'Anonymous Users', 'folder');
 
 COMMIT;

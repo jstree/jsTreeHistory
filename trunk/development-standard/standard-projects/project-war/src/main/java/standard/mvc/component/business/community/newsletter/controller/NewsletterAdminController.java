@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import standard.mvc.component.business.community.newsletter.vo.NewsletterComprehensiveTree;
+import standard.mvc.component.business.community.newsletter.vo.Newsletter;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
@@ -74,7 +74,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/addEmail.do", method = RequestMethod.POST)
-    public ComprehensiveTree addNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+    public ComprehensiveTree addNode(@ModelAttribute Newsletter newsletterComprehensiveTree
                                                    , HttpServletRequest request)
             throws Exception {
         
@@ -113,12 +113,12 @@ public class NewsletterAdminController extends GenericAbstractController {
     /**
      * 이메일 목록을 가져온다.
      * @param newsletterComprehensiveTree Newsletter VO
-     * @return List<NewsletterComprehensiveTree> Newsletter VO List
+     * @return List<Newsletter> Newsletter VO List
      * @throws Exception
      */
     @ResponseBody
     @RequestMapping(value = "/getEmailList.do", method = RequestMethod.GET)
-    public List<NewsletterComprehensiveTree> getChildNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree)
+    public List<Newsletter> getChildNode(@ModelAttribute Newsletter newsletterComprehensiveTree)
              throws Exception {
         
         if (newsletterComprehensiveTree.getC_id() == 0) {
@@ -136,7 +136,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/removeEmail.do", method = RequestMethod.POST)
-    public ComprehensiveTree removeNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+    public ComprehensiveTree removeNode(@ModelAttribute Newsletter newsletterComprehensiveTree
                                         , HttpServletRequest request) 
             throws Exception {
         
@@ -167,7 +167,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/renameEmail.do", method = RequestMethod.POST)
-    public ComprehensiveTree alterNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+    public ComprehensiveTree alterNode(@ModelAttribute Newsletter newsletterComprehensiveTree
                                                      , HttpServletRequest request)
              throws Exception {
         
@@ -215,7 +215,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/alterNodeType.do", method = RequestMethod.POST)
-    public ComprehensiveTree alterNodeType(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+    public ComprehensiveTree alterNodeType(@ModelAttribute Newsletter newsletterComprehensiveTree
                                                          , HttpServletRequest request) 
             throws Exception {
         
@@ -263,7 +263,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/searchEmail.do", method = RequestMethod.GET)
-    public List<String> searchNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+    public List<String> searchNode(@ModelAttribute Newsletter newsletterComprehensiveTree
                                                  , HttpServletRequest request) 
             throws Exception {
         
@@ -289,7 +289,7 @@ public class NewsletterAdminController extends GenericAbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/moveEmail.do", method = RequestMethod.POST)
-    public ComprehensiveTree moveNode(@ModelAttribute NewsletterComprehensiveTree newsletterComprehensiveTree
+    public ComprehensiveTree moveNode(@ModelAttribute Newsletter newsletterComprehensiveTree
                                                     , HttpServletRequest request)
             throws Exception {
         
