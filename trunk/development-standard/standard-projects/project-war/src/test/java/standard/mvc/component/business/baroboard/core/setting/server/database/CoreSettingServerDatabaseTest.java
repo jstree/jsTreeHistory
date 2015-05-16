@@ -107,16 +107,14 @@ public class CoreSettingServerDatabaseTest {
                 actual.setC_title(rs.getString(7));
                 actual.setC_state(rs.getString(9));
 
-                TriggerVO actualDelete = actual;
+                TriggerVO expected = new TriggerVO();
+                expected.setC_id(1);
+                expected.setC_title("root");
+                expected.setC_state(cMethods[i]);
 
-                TriggerVO expectedDelete = new TriggerVO();
-                expectedDelete.setC_id(1);
-                expectedDelete.setC_title("root");
-                expectedDelete.setC_state(cMethods[i]);
-
-                Assert.assertEquals(expectedDelete.getC_id(), actualDelete.getC_id());
-                Assert.assertEquals(expectedDelete.getC_title(), actualDelete.getC_title());
-                Assert.assertEquals(expectedDelete.getC_state(), actualDelete.getC_state());
+                Assert.assertEquals(expected.getC_id(), actual.getC_id());
+                Assert.assertEquals(expected.getC_title(), actual.getC_title());
+                Assert.assertEquals(expected.getC_state(), actual.getC_state());
 
             }
 
@@ -130,7 +128,42 @@ public class CoreSettingServerDatabaseTest {
 
     @Test
     public void testUpdate() throws Exception {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(dbUrl, userName, password);
+
+            String query = "UPDATE T_CORE_SETTING_SERVER SET C_HTTP_PORT = ? WHERE C_ID = ?";
+            pstmt = conn.prepareStatement(query);
+
+            pstmt.setString(1, "80");
+            pstmt.setInt(2, 4);
+            int updateCount = pstmt.executeUpdate();
+
+            Assert.assertEquals(1, updateCount);
+
+            query = "SELECT C_HTTP_PORT FROM T_CORE_SETTING_SERVER WHERE C_ID = ?";
+            pstmt = conn.prepareStatement(query);
+
+            pstmt.setInt(1, 4);
+
+            rs = pstmt.executeQuery();
+
+            if (!rs.next()) {
+                throw new SQLException("No Data Found!");
+            }
+
+            Assert.assertEquals("80", rs.getString(1));
+
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            logger.error("test 시  예외 발생", e);
+        }
     }
 
     class TriggerVO extends ComprehensiveTree {
