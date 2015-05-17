@@ -29,7 +29,7 @@
 										<p class="text bm-remove">
 											메일링 리스트에 가입하면 313 개발자 그룹의 소식을 받아보실 수 있습니다.
 										</p>
-										<form id="email-list-form" accept-charset="UTF-8" method="post">
+										<form id="email-list-form" action="/newsletter/addEmail.do" method="post">
 											<input id="email-list-input" type="email" class="bm-remove" name="c_title" placeholder="Email address..." />
 											<button id="email-list-submit" type="submit" name="submit" class="bm-remove">
 											<i class="fa fa-chevron-right"></i>
@@ -82,17 +82,17 @@
 		<script>
 		$(document).ready(function() {
 		  
-		    $("#email-list-submit").click(function(e) {
+		    $('#email-list-submit').click(function() {
 		      	
-		        var result = callAjax($("#email-list-form"), getContextPath() + "/newsletter/addEmail.do", null, "post", "json", null);
+		        var formId = 'email-list-form';
+	            var $form = $('#email-list-form');
 		        
-		        // TODO 콜백 함수를 중복해서 사용하지 않도록 하는 방법이 필요함.
-		        result.always(function(responseText, textStatus, jqXHR) {
-		    	  if (responseText.result != false) {
-		    	    $("#email-list-input").val("");
-		    	    alert("메일링 리스트에 가입되었습니다."); // TODO 경고창을 대신할 팝업 레이어가 필요함.
-		    	  }
-		        });
+		        callAjax(formId, $form.prop('action'), null, $form.prop('method'), "json", null, callback);
+		        
+		        function callback(r) {
+                    $("#email-list-input").val("");
+                    alert("메일링 리스트에 가입되었습니다.");
+		        }
 		        
 		        return false;
 		    });
