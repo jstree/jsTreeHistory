@@ -525,6 +525,36 @@ END TRIGGER_T_USER_SCRAP;
 
 /* 류강하 시작 */
 /* 회원_금지단어 */
+DROP TABLE T_USER_PROH_WORD_LOG;
+
+CREATE TABLE T_USER_PROH_WORD_LOG
+(
+  C_ID        NUMBER                            NOT NULL,
+  C_PARENTID  NUMBER                            NOT NULL,
+  C_POSITION  NUMBER                            NOT NULL,
+  C_LEFT      NUMBER                            NOT NULL,
+  C_RIGHT     NUMBER                            NOT NULL,
+  C_LEVEL     NUMBER                            NOT NULL,
+  C_TITLE     VARCHAR2(4000 BYTE)               NOT NULL,
+  C_TYPE      VARCHAR2(100 BYTE)                NOT NULL,
+  C_METHOD    VARCHAR2(4000 BYTE)               NOT NULL,
+  C_STATE     VARCHAR2(4000 BYTE)               NOT NULL,
+  C_DATE      DATE                              NOT NULL
+);
+
+COMMENT ON TABLE T_USER_PROH_WORD_LOG IS '회원_금지단어 트리거 로그';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_ID IS '노드 아이디';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_PARENTID IS '부모 노드 아이디';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_POSITION IS '노드 포지션';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_LEFT IS '노드 좌측 끝 포인트';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_RIGHT IS '노드 우측 끝 포인트';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_LEVEL IS '노드 DEPTH ';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_TITLE IS '노드 명';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_TYPE IS '노드 타입';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_METHOD IS '노드 변경 행위';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_STATE IS '노드 상태값 ( 이전인지. 이후인지)';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_DATE IS '노드 변경 시';
+
 DROP TABLE T_USER_PROH_WORD;
   
 CREATE TABLE T_USER_PROH_WORD (
@@ -580,8 +610,69 @@ CREATE SEQUENCE S_USER_PROH_WORD
   NOCYCLE
   CACHE 20
   NOORDER;
-  
+
+CREATE OR REPLACE TRIGGER "TRIGGER_USER_PROH_WORD"
+BEFORE DELETE OR INSERT OR UPDATE
+ON T_USER_PROH_WORD
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+DECLARE
+tmpVar NUMBER;
+
+BEGIN
+   tmpVar := 0;
+    IF UPDATING  THEN    
+        insert into T_USER_PROH_WORD_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
+        insert into T_USER_PROH_WORD_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
+     END IF;
+    IF DELETING THEN
+        insert into T_USER_PROH_WORD_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
+    END IF;   
+    IF INSERTING  THEN
+        insert into T_USER_PROH_WORD_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
+    END IF;
+
+   EXCEPTION
+     WHEN OTHERS THEN
+       -- Consider logging the error and then re-raise
+       RAISE;
+END TRIGGER_USER_PROH_WORD;
+
 /* 회원_기본컨텐츠 */
+DROP TABLE T_USER_BASIC_CONTENTS_LOG;
+
+CREATE TABLE T_USER_BASIC_CONTENTS_LOG
+(
+  C_ID        NUMBER                            NOT NULL,
+  C_PARENTID  NUMBER                            NOT NULL,
+  C_POSITION  NUMBER                            NOT NULL,
+  C_LEFT      NUMBER                            NOT NULL,
+  C_RIGHT     NUMBER                            NOT NULL,
+  C_LEVEL     NUMBER                            NOT NULL,
+  C_TITLE     VARCHAR2(4000 BYTE)               NOT NULL,
+  C_TYPE      VARCHAR2(100 BYTE)                NOT NULL,
+  C_METHOD    VARCHAR2(4000 BYTE)               NOT NULL,
+  C_STATE     VARCHAR2(4000 BYTE)               NOT NULL,
+  C_DATE      DATE                              NOT NULL
+);
+
+COMMENT ON TABLE T_USER_PROH_WORD_LOG IS '회원_기본컨텐츠 트리거 로그';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_ID IS '노드 아이디';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_PARENTID IS '부모 노드 아이디';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_POSITION IS '노드 포지션';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_LEFT IS '노드 좌측 끝 포인트';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_RIGHT IS '노드 우측 끝 포인트';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_LEVEL IS '노드 DEPTH ';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_TITLE IS '노드 명';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_TYPE IS '노드 타입';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_METHOD IS '노드 변경 행위';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_STATE IS '노드 상태값 ( 이전인지. 이후인지)';
+COMMENT ON COLUMN T_USER_PROH_WORD_LOG.C_DATE IS '노드 변경 시';
+
 DROP TABLE T_USER_BASIC_CONTENTS;
 
 CREATE TABLE T_USER_BASIC_CONTENTS (
@@ -643,6 +734,37 @@ CREATE SEQUENCE S_USER_BASIC_CONTENTS
   NOCYCLE
   CACHE 20
   NOORDER;
+
+CREATE OR REPLACE TRIGGER "TRIGGER_USER_BASIC_CONTENTS"
+BEFORE DELETE OR INSERT OR UPDATE
+ON T_USER_BASIC_CONTENTS
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+DECLARE
+tmpVar NUMBER;
+
+BEGIN
+   tmpVar := 0;
+    IF UPDATING  THEN    
+        insert into T_USER_BASIC_CONTENTS_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
+        insert into T_USER_PROH_WORD_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
+     END IF;
+    IF DELETING THEN
+        insert into T_USER_BASIC_CONTENTS_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
+    END IF;   
+    IF INSERTING  THEN
+        insert into T_USER_BASIC_CONTENTS_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
+    END IF;
+
+   EXCEPTION
+     WHEN OTHERS THEN
+       -- Consider logging the error and then re-raise
+       RAISE;
+END TRIGGER_USER_BASIC_CONTENTS;
   
 /* 회원_가입필드 */
 DROP TABLE T_USER_JOIN_FIELD;

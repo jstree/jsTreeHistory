@@ -11,7 +11,7 @@ CREATE TABLE T_COMPREHENSIVETREE_LOG
   C_RIGHT     NUMBER                            NOT NULL,
   C_LEVEL     NUMBER                            NOT NULL,
   C_TITLE     VARCHAR2(4000 BYTE),
-  C_TYPE      VARCHAR2(4000 BYTE)                            NOT NULL,
+  C_TYPE      VARCHAR2(4000 BYTE)               NOT NULL,
   C_METHOD    VARCHAR2(4000 BYTE),
   C_STATE     VARCHAR2(4000 BYTE),
   C_DATE      DATE                              NOT NULL
