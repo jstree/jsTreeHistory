@@ -1,4 +1,4 @@
-package standard.mvc.component.business.baroboard.core.setting.server.database;
+package standard.mvc.component.business.baroboard.core.admin.setting.server.database;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -69,7 +69,7 @@ public class CoreSettingServerDatabaseTest {
 				password, scheme);
 
 		try {
-			String datasetPath = "/standard/mvc/component/business/baroboard/core/setting/server/database/T_CORE_SETTING_SERVER.xml";
+			String datasetPath = "/standard/mvc/component/business/baroboard/core/admin/setting/server/database/T_CORE_SETTING_SERVER.xml";
 			URL url = this.getClass().getResource(datasetPath);
 
 			ReplacementDataSet dataSet = new ReplacementDataSet(
@@ -97,7 +97,7 @@ public class CoreSettingServerDatabaseTest {
 	private Properties newPropertiesInstance() throws IOException,
 			FileNotFoundException, URISyntaxException {
 		Properties props = new Properties();
-		String path = "/standard/mvc/component/business/baroboard/core/setting/server/database/jdbc.properties";
+		String path = "/standard/mvc/component/business/baroboard/core/admin/setting/server/database/jdbc.properties";
 		URL url = this.getClass().getResource(path);
 		props.load(new FileInputStream(new File(url.toURI())));
 		return props;
