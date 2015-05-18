@@ -48,8 +48,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * </pre>
  */
 @Controller
-@RequestMapping("/baroboard/user/admin/basicContents") // TODO baroboard 뺄 것
- // TODO admin -> manage로 변경 보안
+@RequestMapping("/user/manage/basic/setting/contents")
 public class BasicContentsController extends GenericAbstractController {
     
     @Autowired
@@ -66,7 +65,7 @@ public class BasicContentsController extends GenericAbstractController {
         
         model.addAttribute("basicContents", basicContentsService.getBasicContents());
         
-        return "/jsp/baroboard/user/admin/basicContents/index";
+        return "/jsp/user/manage/basic/setting/contents/index";
     }
     
     @RequestMapping("/save.do")
