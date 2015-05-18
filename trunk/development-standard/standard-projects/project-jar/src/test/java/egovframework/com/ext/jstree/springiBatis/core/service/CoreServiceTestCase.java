@@ -54,7 +54,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * @see <pre>
  * Class Name  : CoreServiceTestCase.java
  * Description : JsTree Spring+iBATIS 버젼의 JUnit4 Spring DbUnit 테스트 클래스
- * Infomation  : JsTree 코어 서비스 로직을 검증하는 테스트
+ * Information  : JsTree 코어 서비스 로직을 검증하는 테스트
  * 
  * << 개정이력(Modification Information) >>
  * 
@@ -64,6 +64,9 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * 2015. 5. 12   김형채                         @Query 어노테이션  및 주석 삭제
  * 2015. 5. 13   김형채                         MoveNodeException 테스트 케이스 추가
  * 2015. 5. 13   김형채                         testMoveNode 테스트 케이스 수정
+ * 2015. 5. 19   김형채                         testAddLeafNode 테스트 케이스 추가
+ * 2015. 5. 19   김형채                         testAddNodeByRefIsNull 테스트 케이스 추가
+ * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -75,7 +78,6 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 public class CoreServiceTestCase 
 {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Resource(name="CoreService")
 	private CoreService coreService;
 
@@ -181,7 +183,7 @@ public class CoreServiceTestCase
 
 	@Test
 	@ExpectedDatabase(value = "addNodeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT )
-	public void testAddNode() throws Exception
+	public void testAddFirstChildNode() throws Exception
 	{
 		comprehensiveTree.setRef(firstChild.getC_id());
 		comprehensiveTree.setC_position(2);
@@ -193,6 +195,29 @@ public class CoreServiceTestCase
 		assertThat(comprehensiveResultTree.getId()).isEqualTo(5);
 		assertThat(comprehensiveResultTree.getStatus()).isEqualTo(1);
 	}
+	
+	@Test(expected=RuntimeException.class)
+	public void testAddLeafNode() throws Exception
+	{
+		comprehensiveTree.setRef(leafNode.getC_id());
+		comprehensiveTree.setC_position(2);
+		comprehensiveTree.setC_title(Title.LEAFTNODE.getTitle());
+		comprehensiveTree.setC_type(Type.DEFAULT.getType());
+
+		comprehensiveResultTree = coreService.addNode(comprehensiveTree);
+	}
+	
+	@Test(expected=RuntimeException.class)
+	public void testAddNodeByRefIsNull() throws Exception
+	{
+		comprehensiveTree.setRef(5);
+		comprehensiveTree.setC_position(2);
+		comprehensiveTree.setC_title(Title.LEAFTNODE.getTitle());
+		comprehensiveTree.setC_type(Type.DEFAULT.getType());
+
+		comprehensiveResultTree = coreService.addNode(comprehensiveTree);
+	}
+	
 
 	@Test
 	@ExpectedDatabase(value = "removeNodeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
