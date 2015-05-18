@@ -1,9 +1,9 @@
 /**
  * 
- * @param formId
+ * @param form
  * @param url
  * @param target
- * @param type
+ * @param Type
  * @param returnType
  * @param contentType / String default : application/x-www-form-urlencoded; charset=UTF-8
  * @param jsonpCallback / String default : 'callback'
@@ -11,7 +11,7 @@
  * @param crossDomain /boolean default : false
  * @returns XMLHttpRequest
  */
-function callAjax(formId, url, target, type, returnType, contentType, jsonpCallback, processData, crossDomain, async) {
+function callAjax(form, url, target, Type, returnType, contentType, jsonpCallback, processData, crossDomain, async) {
 	/*
 	 * jquery로 ajax 사용시 No transport 라는 에러가 발생하는 경우 아래의 문장을 추가하면 해결가능. 
 	 * (보통 localhost 로 테스트 시 크로스 도메인 문제로 발생하는 오류)
@@ -23,8 +23,8 @@ function callAjax(formId, url, target, type, returnType, contentType, jsonpCallb
 	
 	var formQueryString;
 	
-	if (formId){
-		formQueryString = $('#' + formId).serialize();
+	if (form){
+		formQueryString = $(form).serialize();
 	}
 	
 	/**
@@ -112,7 +112,7 @@ function callAjax(formId, url, target, type, returnType, contentType, jsonpCallb
 		 * crossDomain(added 1.5) / boolean : 같은 도메인 내의 요청일 경우 true, 크로스 도메인 간의 데이터 교환이라면(JSONP와 같은), 이 세팅값을 true로 해야 함. (default 는 false) 
 		 * */
 		url : url,
-		type : type,
+		type : Type,
 		data : formQueryString,
 		dataType : returnType,
 		jsonp : false,
@@ -160,11 +160,11 @@ function callAjax(formId, url, target, type, returnType, contentType, jsonpCallb
 	result.done(function(responseText, textStatus, jqXHR) {
 //		notificationAlert("success");
 	  
-//	    console.log('[done]');
-//	    console.log(responseText);
-//	    console.log(textStatus);
-//	    console.log(jqXHR);
-	    
+//	  console.log('[done]');
+//	  console.log(responseText);
+//    console.log(textStatus);
+//    console.log(jqXHR);
+	  
 		if ("text" == this.dataType.toLowerCase() || "html" == this.dataType.toLowerCase()) {
 			$(target).html(responseText);
 		}
@@ -172,10 +172,10 @@ function callAjax(formId, url, target, type, returnType, contentType, jsonpCallb
 	
 	result.fail(function(jqXHR, textStatus, errorThrown){
 	  
-//        console.log('[fail]');
-//        console.log(jqXHR);
-//        console.log(textStatus);
-//        console.log(errorThrown);
+//	  console.log('[fail]');
+//	  console.log(jqXHR);
+//	  console.log(textStatus);
+//	  console.log(errorThrown);
 	  
 		var isDefinedError = false;
 		
@@ -210,9 +210,6 @@ function callAjax(formId, url, target, type, returnType, contentType, jsonpCallb
 	  if (responseText.result == false) {
 	    notificationAlert(responseText.message);
 	  }
-	  else if (jsonpCallback) {
-	      jsonpCallback(responseText);
-      }
 	  
 	});
 	//dataType : xml , html , json , jsonp , script , text

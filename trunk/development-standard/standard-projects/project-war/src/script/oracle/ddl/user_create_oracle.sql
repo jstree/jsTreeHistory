@@ -536,7 +536,7 @@ CREATE TABLE T_USER_PROH_WORD_LOG
   C_RIGHT     NUMBER                            NOT NULL,
   C_LEVEL     NUMBER                            NOT NULL,
   C_TITLE     VARCHAR2(4000 BYTE)               NOT NULL,
-  C_TYPE      VARCHAR2(100 BYTE)                NOT NULL,
+  C_TYPE      VARCHAR2(100 BYTE),
   C_METHOD    VARCHAR2(4000 BYTE)               NOT NULL,
   C_STATE     VARCHAR2(4000 BYTE)               NOT NULL,
   C_DATE      DATE                              NOT NULL
@@ -565,8 +565,7 @@ CREATE TABLE T_USER_PROH_WORD (
     C_RIGHT NUMBER NOT NULL, /* 노드우측끝포인트 */
     C_LEVEL NUMBER NOT NULL, /* 노드레벨 */
     C_TITLE VARCHAR2(4000) NOT NULL, /* 단어명 */
-    C_TYPE VARCHAR2(100), /* 노드타입 */
-    C_TYPE_CD CHAR(1) NOT NULL /* 유형코드 */
+    C_TYPE VARCHAR2(100) /* 노드타입 */
 );
 
 COMMENT ON TABLE T_USER_PROH_WORD IS '회원_금지단어';
@@ -586,8 +585,6 @@ COMMENT ON COLUMN T_USER_PROH_WORD.C_LEVEL IS '노드레벨';
 COMMENT ON COLUMN T_USER_PROH_WORD.C_TITLE IS '단어명';
 
 COMMENT ON COLUMN T_USER_PROH_WORD.C_TYPE IS '노드타입';
-
-COMMENT ON COLUMN T_USER_PROH_WORD.C_TYPE_CD IS '유형코드(A:이메일 B:닉네임)';
 
 --CREATE UNIQUE INDEX PK_T_USER_PROH_WORD
 --  ON T_USER_PROH_WORD (
@@ -654,7 +651,7 @@ CREATE TABLE T_USER_BASIC_CONTENTS_LOG
   C_RIGHT     NUMBER                            NOT NULL,
   C_LEVEL     NUMBER                            NOT NULL,
   C_TITLE     VARCHAR2(4000 BYTE)               NOT NULL,
-  C_TYPE      VARCHAR2(100 BYTE)                NOT NULL,
+  C_TYPE      VARCHAR2(100 BYTE),
   C_METHOD    VARCHAR2(4000 BYTE)               NOT NULL,
   C_STATE     VARCHAR2(4000 BYTE)               NOT NULL,
   C_DATE      DATE                              NOT NULL
@@ -841,7 +838,7 @@ CREATE TABLE T_USER_PWD_SECU_LEVEL_LOG
   C_RIGHT     NUMBER                            NOT NULL,
   C_LEVEL     NUMBER                            NOT NULL,
   C_TITLE     VARCHAR2(4000 BYTE)               NOT NULL,
-  C_TYPE      VARCHAR2(100 BYTE)                NOT NULL,
+  C_TYPE      VARCHAR2(100 BYTE),
   C_METHOD    VARCHAR2(4000 BYTE)               NOT NULL,
   C_STATE     VARCHAR2(4000 BYTE)               NOT NULL,
   C_DATE      DATE                              NOT NULL
@@ -906,7 +903,7 @@ ALTER TABLE T_USER_PWD_SECU_LEVEL
 DROP SEQUENCE S_USER_PWD_SECU_LEVEL;
 
 CREATE SEQUENCE S_USER_PWD_SECU_LEVEL
-  START WITH 7313
+  START WITH 6
   MAXVALUE 999999999999999999999999999
   MINVALUE 0
   NOCYCLE
@@ -956,7 +953,7 @@ CREATE TABLE T_USER_BASIC_SETTING_LOG
   C_RIGHT     NUMBER                            NOT NULL,
   C_LEVEL     NUMBER                            NOT NULL,
   C_TITLE     VARCHAR2(4000 BYTE)               NOT NULL,
-  C_TYPE      VARCHAR2(100 BYTE)                NOT NULL,
+  C_TYPE      VARCHAR2(100 BYTE),
   C_METHOD    VARCHAR2(4000 BYTE)               NOT NULL,
   C_STATE     VARCHAR2(4000 BYTE)               NOT NULL,
   C_DATE      DATE                              NOT NULL
