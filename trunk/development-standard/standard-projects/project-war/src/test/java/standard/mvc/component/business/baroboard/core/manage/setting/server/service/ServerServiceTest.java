@@ -30,7 +30,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
  * @since 2015. 5. 19.
  * @version 1.0
  * @see <pre>
- *  Class Name  : ServerSettingServiceTest.java
+ *  Class Name  : ServerServiceTest.java
  *  Description : 바로보드-코어-고급설정-서버 Service 테스트 클래스
  *  Infomation  :
  * 
@@ -88,6 +88,7 @@ public class ServerServiceTest {
     public void testAnnotationDrivenMock() throws Exception {
         Mockito.when(comprehensiveTree.getC_id()).thenReturn(1);
         Assert.assertEquals(1, comprehensiveTree.getC_id());
+        Mockito.verify(comprehensiveTree, Mockito.times(1)).getC_id();
     }
 
 }
