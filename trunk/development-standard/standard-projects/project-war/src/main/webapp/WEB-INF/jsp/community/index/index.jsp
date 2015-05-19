@@ -16,11 +16,13 @@
 		<div class="one-whole bm-larger">
 				<div id="index-image-slider-container" class="clearfix">
 					<div id="index-image-slider" class="owl-carousel owl-theme">
+						<%-- 
 						<div class="item">
 							<img
 								src="http://www.313.co.kr:5002/Component/jsp/community/index/slideImage/first.jpg"
 								alt="Slide One" />
 						</div>
+						 --%>
 						<div class="item">
 							<img
 								src="http://www.313.co.kr:5002/Component/jsp/community/index/slideImage/sec.jpg"
