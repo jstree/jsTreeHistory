@@ -46,7 +46,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
-public class ServerSettingServiceTest {
+public class ServerServiceTest {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
