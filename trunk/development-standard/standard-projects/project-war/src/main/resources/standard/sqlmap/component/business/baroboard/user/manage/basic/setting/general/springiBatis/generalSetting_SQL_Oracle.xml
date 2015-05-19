@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="basicContents">
-	<typeAlias alias="BasicContents" type="standard.mvc.component.business.baroboard.user.manage.basic.setting.contents.vo.BasicContents" />
+<sqlMap namespace="generalSetting">
+	<typeAlias alias="GeneralSetting" type="standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.GeneralSetting" />
 
-	<select id="getChildNode" parameterClass="BasicContents" resultClass="BasicContents">
+	<select id="getChildNode" parameterClass="GeneralSetting" resultClass="GeneralSetting">
 		/* getChildNode */
 		SELECT A.C_ID
 		     , A.C_PARENTID
@@ -13,23 +13,28 @@
 		     , A.C_LEVEL
 		     , A.C_TITLE
 		     , A.C_TYPE
-		     , A.C_COMPANY_INTR AS companyIntr
-		     , A.C_TERMS_OF_USE AS termsOfUse
-		     , A.C_PRIVACY_POLICY AS privacyPolicy
+		     , A.C_PASSWORD_SECURITY_LEVEL_CD AS passwordSecurityLevelCd
+		     , A.C_WEB_MASTER_NM AS webMasterNm
+		     , A.C_WEB_MASTER_EMAIL AS webMasterEmail
+		     , A.C_JOIN_APPROVAL_FL AS joinApprovalFl
+		     , A.C_EMAIL_AUTH_USE_FL AS emailAuthUseFl
+		     , A.C_PASSWORD_CHANGE_DCNT AS passwordChangeDcnt
+		     , A.C_LOGIN_LIMIT_DCNT AS loginLimitDcnt
+		     , A.C_LOGIN_FAILURE_LIMIT_CNT AS loginFailureLimitCnt
 		     , ( SELECT CASE
 		                    WHEN COUNT(*) &gt; 0 THEN 'InChild'
            		 			ELSE 'NoChild'
            		 		END AS YesNo
-         		   FROM T_USER_BASIC_CONTENTS B
+         		   FROM T_USER_GENERAL_SETTING B
        			  WHERE B.C_PARENTID = A.C_ID
      		   ) AS childcount
-		  FROM T_USER_BASIC_CONTENTS A
+		  FROM T_USER_GENERAL_SETTING A
 		 WHERE A.C_PARENTID = #c_id#
 	  ORDER BY A.C_POSITION ASC
 	</select>
 
 
-	<select id="getChildNodeByLeftRight" parameterClass="BasicContents" resultClass="BasicContents">
+	<select id="getChildNodeByLeftRight" parameterClass="GeneralSetting" resultClass="GeneralSetting">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		     , C_PARENTID
@@ -39,21 +44,26 @@
 		     , C_LEVEL
 		     , C_TITLE
 		     , C_TYPE
-		     , C_COMPANY_INTR AS companyIntr
-             , C_TERMS_OF_USE AS termsOfUse
-             , C_PRIVACY_POLICY AS privacyPolicy
-		  FROM T_USER_BASIC_CONTENTS 
+		     , C_PASSWORD_SECURITY_LEVEL_CD AS passwordSecurityLevelCd
+             , C_WEB_MASTER_NM AS webMasterNm
+             , C_WEB_MASTER_EMAIL AS webMasterEmail
+             , C_JOIN_APPROVAL_FL AS joinApprovalFl
+             , C_EMAIL_AUTH_USE_FL AS emailAuthUseFl
+             , C_PASSWORD_CHANGE_DCNT AS passwordChangeDcnt
+             , C_LOGIN_LIMIT_DCNT AS loginLimitDcnt
+             , C_LOGIN_FAILURE_LIMIT_CNT AS loginFailureLimitCnt
+		  FROM T_USER_GENERAL_SETTING 
 		 WHERE C_LEFT &gt;= #c_left# 
 		   AND C_RIGHT &lt;= #c_right# 
 	  ORDER BY C_LEFT ASC
 	</select>
 
 
-	<select id="searchNodeByString" parameterClass="BasicContents" resultClass="BasicContents">
+	<select id="searchNodeByString" parameterClass="GeneralSetting" resultClass="GeneralSetting">
 		/* searchNodeByString */
 		SELECT C_LEFT
 		     , C_RIGHT
-		  FROM T_USER_BASIC_CONTENTS
+		  FROM T_USER_GENERAL_SETTING
 		 WHERE C_TITLE LIKE '%'||#searchStr#||'%' 
 	</select>
 
@@ -61,7 +71,7 @@
 	<select id="searchNodeByPosition" parameterClass="java.util.List" resultClass="String">
 		/* searchNodeByPosition */
         SELECT DISTINCT C_ID
-          FROM T_USER_BASIC_CONTENTS
+          FROM T_USER_GENERAL_SETTING
          WHERE 1=1
         <iterate prepend="AND" open="(" close=")" conjunction="OR">
             ( C_LEFT &lt;= #[].c_left# AND C_RIGHT &gt;= #[].c_right# )
@@ -69,19 +79,16 @@
 	</select>
 
 
-	<update id="alterNode" parameterClass="BasicContents">
+	<update id="alterNode" parameterClass="GeneralSetting">
 		/* alterNode */
-		UPDATE T_USER_BASIC_CONTENTS
+		UPDATE T_USER_GENERAL_SETTING 
 		   SET C_TYPE = #c_type#
 		     , C_TITLE = #c_title#
-		     , C_COMPANY_INTR = #companyIntr#
-		     , C_TERMS_OF_USE = #termsOfUse#
-		     , C_PRIVACY_POLICY = #privacyPolicy#
 		 WHERE C_ID = #c_id#
 	</update>
 
 
-	<select id="getNode" parameterClass="BasicContents" resultClass="BasicContents">
+	<select id="getNode" parameterClass="GeneralSetting" resultClass="GeneralSetting">
 		/* getNode */
         SELECT C_ID
              , C_PARENTID
@@ -91,15 +98,20 @@
              , C_LEVEL
              , C_TITLE
              , C_TYPE
-             , C_COMPANY_INTR AS companyIntr
-             , C_TERMS_OF_USE AS termsOfUse
-             , C_PRIVACY_POLICY AS privacyPolicy
-          FROM T_USER_BASIC_CONTENTS 
+             , C_PASSWORD_SECURITY_LEVEL_CD AS passwordSecurityLevelCd
+             , C_WEB_MASTER_NM AS webMasterNm
+             , C_WEB_MASTER_EMAIL AS webMasterEmail
+             , C_JOIN_APPROVAL_FL AS joinApprovalFl
+             , C_EMAIL_AUTH_USE_FL AS emailAuthUseFl
+             , C_PASSWORD_CHANGE_DCNT AS passwordChangeDcnt
+             , C_LOGIN_LIMIT_DCNT AS loginLimitDcnt
+             , C_LOGIN_FAILURE_LIMIT_CNT AS loginFailureLimitCnt
+          FROM T_USER_GENERAL_SETTING 
          WHERE C_ID = #c_id#
     </select>
 
 
-	<select id="getNodeByRef" parameterClass="BasicContents" resultClass="BasicContents">
+	<select id="getNodeByRef" parameterClass="GeneralSetting" resultClass="GeneralSetting">
 		/* getNodeByRef */
         SELECT C_ID
              , C_PARENTID
@@ -109,75 +121,80 @@
              , C_LEVEL
              , C_TITLE
              , C_TYPE
-             , C_COMPANY_INTR AS companyIntr
-             , C_TERMS_OF_USE AS termsOfUse
-             , C_PRIVACY_POLICY AS privacyPolicy
-          FROM T_USER_BASIC_CONTENTS 
+             , C_PASSWORD_SECURITY_LEVEL_CD AS passwordSecurityLevelCd
+             , C_WEB_MASTER_NM AS webMasterNm
+             , C_WEB_MASTER_EMAIL AS webMasterEmail
+             , C_JOIN_APPROVAL_FL AS joinApprovalFl
+             , C_EMAIL_AUTH_USE_FL AS emailAuthUseFl
+             , C_PASSWORD_CHANGE_DCNT AS passwordChangeDcnt
+             , C_LOGIN_LIMIT_DCNT AS loginLimitDcnt
+             , C_LOGIN_FAILURE_LIMIT_CNT AS loginFailureLimitCnt
+          FROM T_USER_GENERAL_SETTING 
          WHERE C_ID = #ref#
     </select>
 
 
-	<delete id="removeNode" parameterClass="BasicContents">
+	<delete id="removeNode" parameterClass="GeneralSetting">
 		/* removeNode */
-       	DELETE FROM T_USER_BASIC_CONTENTS 
+       	DELETE FROM T_USER_GENERAL_SETTING 
        	      WHERE C_LEFT  &gt;= #c_left#
        	        AND C_RIGHT &lt;= #c_right#
 	</delete>
 	
 	
-	<update id="removedAfterLeftFix" parameterClass="BasicContents">
+	<update id="removedAfterLeftFix" parameterClass="GeneralSetting">
 		/* removedAfterLeftFix */
-       	UPDATE T_USER_BASIC_CONTENTS 
+       	UPDATE T_USER_GENERAL_SETTING 
   		   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
    	 	 WHERE C_LEFT &gt; #c_right#
 	</update>
 	
 	
-	<update id="removedAfterRightFix" parameterClass="BasicContents">
+	<update id="removedAfterRightFix" parameterClass="GeneralSetting">
 		/* removedAfterRightFix */
-		UPDATE T_USER_BASIC_CONTENTS 
+		UPDATE T_USER_GENERAL_SETTING 
 		   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
 		 WHERE C_RIGHT &gt; #c_left#
 	</update>
 	
 	
-	<update id="removedAfterPositionFix" parameterClass="BasicContents">
+	<update id="removedAfterPositionFix" parameterClass="GeneralSetting">
 		/* removedAfterPositionFix */
-     	UPDATE T_USER_BASIC_CONTENTS 
+     	UPDATE T_USER_GENERAL_SETTING 
      	   SET C_POSITION = C_POSITION - 1 
      	 WHERE C_PARENTID = #c_parentid# 
      	   AND C_POSITION &gt; #c_position#
 	</update>
 
 
-	<select id="analyzeRootNode" resultClass="BasicContents">
+	<select id="analyzeRootNode" resultClass="GeneralSetting">
 		/* analyzeRootNode */
 	    SELECT C_LEFT 
-		  FROM T_USER_BASIC_CONTENTS 
+		  FROM T_USER_GENERAL_SETTING 
 		 WHERE C_PARENTID = 0
     </select>
 
 
-	<update id="cutMyselfPositionFix" parameterClass="BasicContents">
+	<update id="cutMyselfPositionFix" parameterClass="GeneralSetting">
 		/* cutMyselfPositionFix */
-       	UPDATE T_USER_BASIC_CONTENTS 
+       	UPDATE T_USER_GENERAL_SETTING 
        	   SET C_POSITION = C_POSITION - 1 
        	 WHERE C_PARENTID = #c_parentid# 
            AND C_POSITION &gt; #c_position#
     </update>
 
 
-	<update id="cutMyselfLeftFix" parameterClass="BasicContents">
+	<update id="cutMyselfLeftFix" parameterClass="GeneralSetting">
 		/* cutMyselfLeftFix */
-       	UPDATE T_USER_BASIC_CONTENTS 
+       	UPDATE T_USER_GENERAL_SETTING 
        	   SET C_LEFT = C_LEFT - #spaceOfTargetNode# 
          WHERE C_LEFT &gt; #c_right#
     </update>
     
     
-	<update id="cutMyselfRightFix" parameterClass="BasicContents">
+	<update id="cutMyselfRightFix" parameterClass="GeneralSetting">
 		/* cutMyselfRightFix */
-       	UPDATE T_USER_BASIC_CONTENTS 
+       	UPDATE T_USER_GENERAL_SETTING 
        	   SET C_RIGHT = C_RIGHT - #spaceOfTargetNode# 
        	 WHERE C_RIGHT &gt; #c_left#
 		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
@@ -186,9 +203,9 @@
 	</update>
 
 
-	<update id="stretchPositionForMyself" parameterClass="BasicContents">
+	<update id="stretchPositionForMyself" parameterClass="GeneralSetting">
 		/* stretchPositionForMyselfFromJstree */
-        UPDATE T_USER_BASIC_CONTENTS
+        UPDATE T_USER_GENERAL_SETTING
            SET C_POSITION = C_POSITION + 1
          WHERE C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
 		<isEqual property="copy" compareValue="0">
@@ -205,9 +222,9 @@
 	</update>
 
 
-	<update id="stretchLeftForMyselfFromJstree" parameterClass="BasicContents">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="GeneralSetting">
 		/* stretchLeftForMyselfFromJstree */
-       	UPDATE T_USER_BASIC_CONTENTS 
+       	UPDATE T_USER_GENERAL_SETTING 
        	   SET C_LEFT = C_LEFT + #spaceOfTargetNode# 
        	 WHERE C_LEFT &gt;= #rightPositionFromNodeByRef#
 		<isEqual property="copy" compareValue="0">
@@ -220,9 +237,9 @@
 	</update>
 
 
-	<update id="stretchRightForMyselfFromJstree" parameterClass="BasicContents">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="GeneralSetting">
 		/* stretchRightForMyselfFromJstree */
-        UPDATE T_USER_BASIC_CONTENTS 
+        UPDATE T_USER_GENERAL_SETTING 
            SET C_RIGHT = C_RIGHT + #spaceOfTargetNode# 
          WHERE C_RIGHT &gt;= #rightPositionFromNodeByRef#
 		<isEqual property="copy" compareValue="0">
@@ -235,10 +252,10 @@
 	</update>
 
 
-	<insert id="pasteMyselfFromJstree" parameterClass="BasicContents">
+	<insert id="pasteMyselfFromJstree" parameterClass="GeneralSetting">
 		/* pasteMyselfFromJstree */
-        INSERT INTO T_USER_BASIC_CONTENTS ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_COMPANY_INTR, C_TERMS_OF_USE, C_PRIVACY_POLICY ) 
-    	SELECT S_USER_BASIC_CONTENTS.NEXTVAL AS C_ID
+        INSERT INTO T_USER_GENERAL_SETTING ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_PASSWORD_SECURITY_LEVEL_CD, C_WEB_MASTER_NM, C_WEB_MASTER_EMAIL, C_JOIN_APPROVAL_FL, C_EMAIL_AUTH_USE_FL, C_PASSWORD_CHANGE_DCNT, C_LOGIN_LIMIT_DCNT, C_LOGIN_FAILURE_LIMIT_CNT ) 
+    	SELECT S_USER_GENERAL_SETTING.NEXTVAL AS C_ID
     	     , A.*
        	  FROM (
 		        SELECT #ref#
@@ -248,10 +265,15 @@
 		             , C_LEVEL - #ldif#      AS C_LEVEL
 		             , C_TITLE
 		             , C_TYPE
-		             , C_COMPANY_INTR
-                     , C_TERMS_OF_USE
-                     , C_PRIVACY_POLICY
-		          FROM T_USER_BASIC_CONTENTS 
+		             , C_PASSWORD_SECURITY_LEVEL_CD
+                     , C_WEB_MASTER_NM
+                     , C_WEB_MASTER_EMAIL
+                     , C_JOIN_APPROVAL_FL
+                     , C_EMAIL_AUTH_USE_FL
+                     , C_PASSWORD_CHANGE_DCNT
+                     , C_LOGIN_LIMIT_DCNT
+                     , C_LOGIN_FAILURE_LIMIT_CNT
+		          FROM T_USER_GENERAL_SETTING 
 	    <iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
 		               #c_idsByChildNodeFromNodeById[]#
 		</iterate>
@@ -259,24 +281,24 @@
 			   ) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-            SELECT S_USER_BASIC_CONTENTS.CURRVAL AS SEQ 
+            SELECT S_USER_GENERAL_SETTING.CURRVAL AS SEQ 
               FROM DUAL
         </selectKey>
 	</insert>
 
 
-	<update id="enterMyselfFixPosition" parameterClass="BasicContents">
+	<update id="enterMyselfFixPosition" parameterClass="GeneralSetting">
 		/* enterMyselfFixPosition */
-        UPDATE T_USER_BASIC_CONTENTS 
+        UPDATE T_USER_GENERAL_SETTING 
            SET C_PARENTID = #ref#
              , C_POSITION = #c_position# 
          WHERE C_ID = #c_id#
     </update>
     
     
-	<update id="enterMyselfFixLeftRight" parameterClass="BasicContents">
+	<update id="enterMyselfFixLeftRight" parameterClass="GeneralSetting">
 		/* enterMyselfFixLeftRight */
-        UPDATE T_USER_BASIC_CONTENTS 
+        UPDATE T_USER_GENERAL_SETTING 
            SET C_LEFT  = C_LEFT  - (#idif#)
              , C_RIGHT = C_RIGHT - (#idif#)
              , C_LEVEL = C_LEVEL - (#ldif#)
@@ -286,37 +308,37 @@
 	</update>
 
 
-	<insert id="addMyselfFromJstree" parameterClass="BasicContents">
+	<insert id="addMyselfFromJstree" parameterClass="GeneralSetting">
 		/* addMyselfFromJstree */
-        INSERT INTO T_USER_BASIC_CONTENTS ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_COMPANY_INTR, C_TERMS_OF_USE, C_PRIVACY_POLICY )
-                              VALUES ( S_USER_BASIC_CONTENTS.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title#, #companyIntr#, #termsOfUse#, #privacyPolicy# )
+        INSERT INTO T_USER_GENERAL_SETTING ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_PASSWORD_SECURITY_LEVEL_CD, C_WEB_MASTER_NM, C_WEB_MASTER_EMAIL, C_JOIN_APPROVAL_FL, C_EMAIL_AUTH_USE_FL, C_PASSWORD_CHANGE_DCNT, C_LOGIN_LIMIT_DCNT, C_LOGIN_FAILURE_LIMIT_CNT )
+                              VALUES ( S_USER_GENERAL_SETTING.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title#, #passwordSecurityLevelCd#, #webMasterNm#, #webMasterEmail#, #joinApprovalFl#, #emailAuthUseFl#, #passwordChangeDcnt#, #loginLimitDcnt#, #loginFailureLimitCnt# )
         <selectKey resultClass="java.lang.Integer">
         	/* addMyselfFromJstree SEQ */
-            SELECT S_USER_BASIC_CONTENTS.CURRVAL AS SEQ
+            SELECT S_USER_GENERAL_SETTING.CURRVAL AS SEQ
               FROM DUAL
         </selectKey>
 	</insert>
 
 
-	<update id="alterNodeType" parameterClass="BasicContents">
+	<update id="alterNodeType" parameterClass="GeneralSetting">
 		/* alterNodeType */
-		UPDATE T_USER_BASIC_CONTENTS 
+		UPDATE T_USER_GENERAL_SETTING 
 		   SET C_TYPE = #c_type#
 		 WHERE C_ID = #c_id#
 	</update>
 
 
-	<update id="fixCopyIF" parameterClass="BasicContents">
+	<update id="fixCopyIF" parameterClass="GeneralSetting">
         /* fixCopyIF */
-        UPDATE T_USER_BASIC_CONTENTS 
+        UPDATE T_USER_GENERAL_SETTING 
            SET C_POSITION = #fixCopyPosition# 
          WHERE C_ID = #fixCopyId#
 	</update>
 
 
-	<update id="fixCopy" parameterClass="BasicContents">
+	<update id="fixCopy" parameterClass="GeneralSetting">
 		/* fixCopy */
-		UPDATE T_USER_BASIC_CONTENTS 
+		UPDATE T_USER_GENERAL_SETTING 
 		   SET C_PARENTID = #fixCopyId# 
 		 WHERE C_ID = #c_id#
 	</update>

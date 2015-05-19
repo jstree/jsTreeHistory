@@ -58,7 +58,7 @@
           FROM T_Newsletter_Comprehensivetree
          WHERE 1=1
         <iterate prepend="AND" open="(" close=")" conjunction="OR">
-            ( C_LEFT &lt; #[].c_left# AND C_RIGHT &gt; #[].c_right# )
+            ( C_LEFT &lt;= #[].c_left# AND C_RIGHT &gt;= #[].c_right# )
         </iterate>
 	</select>
 

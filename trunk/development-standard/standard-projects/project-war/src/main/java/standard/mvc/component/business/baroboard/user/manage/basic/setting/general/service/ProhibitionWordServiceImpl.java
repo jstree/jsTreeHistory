@@ -32,8 +32,8 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
  * @version 1.0
  * @see <pre>
  * Class Name  : ProhibitionWordServiceImpl.java
- * Description : 바로보드-회원관리-금지단어 Service 클래스
- * Infomation  : 바로보드-회원관리-금지단어 Service 클래스
+ * Description : 바로보드-회원관리-기본설정-일반설정-금지단어 Service 클래스
+ * Infomation  : 바로보드-회원관리-기본설정-일반설정-금지단어 Service 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 
