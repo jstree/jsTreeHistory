@@ -4,7 +4,7 @@ package standard.mvc.component.business.baroboard.core.manage.setting.messages;
  * 
  * Modification Information
  * 
- * @author
+ * @author 손호성
  * @since 2015. 5. 20.
  * @version 1.0
  * @see <pre>

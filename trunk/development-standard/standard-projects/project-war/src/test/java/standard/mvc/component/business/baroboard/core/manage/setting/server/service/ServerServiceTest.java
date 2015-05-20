@@ -21,8 +21,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import standard.mvc.component.business.baroboard.core.manage.setting.messages.ExceptionMessage;
+import standard.mvc.component.business.baroboard.core.manage.setting.server.vo.ServerComprehensiveTree;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericServiceRuntimeException;
@@ -59,7 +59,7 @@ public class ServerServiceTest {
     CoreService serverService;
 
     @Mock
-    ComprehensiveTree comprehensiveTree;
+    ServerComprehensiveTree serverComprehensiveTree;
 
     @Before
     public void setUp() throws Exception {
@@ -77,7 +77,7 @@ public class ServerServiceTest {
     @Test
     public void testUnsupportedOperation() throws Exception {
         try {
-            serverService.addNode(comprehensiveTree);
+            serverService.addNode(serverComprehensiveTree);
         } catch (Exception e) {
             assertThat(e, is(instanceOf(GenericServiceRuntimeException.class)));
             assertThat(e.getMessage(), is(equalTo(ExceptionMessage.UN_SUPPORTED.getValue())));
@@ -86,14 +86,14 @@ public class ServerServiceTest {
 
     @Test(expected = AssertionError.class)
     public void testAlterNode() throws Exception {
-        assertThat(serverService.alterNode(comprehensiveTree), is(1));
+        assertThat(serverService.alterNode(serverComprehensiveTree), is(1));
     }
 
     @Test
     public void testAnnotationDrivenMock() throws Exception {
-        when(comprehensiveTree.getC_id()).thenReturn(1);
-        assertThat(comprehensiveTree.getC_id(), is(1));
-        verify(comprehensiveTree).getC_id();
+        when(serverComprehensiveTree.getC_id()).thenReturn(1);
+        assertThat(serverComprehensiveTree.getC_id(), is(1));
+        verify(serverComprehensiveTree).getC_id();
     }
 
 }

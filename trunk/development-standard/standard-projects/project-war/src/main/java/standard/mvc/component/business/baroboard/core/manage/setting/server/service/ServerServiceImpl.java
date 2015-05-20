@@ -16,7 +16,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
  * 
  * Modification Information
  * 
- * @author
+ * @author 손호성
  * @since 2015. 5. 19.
  * @version 1.0
  * @see <pre>
