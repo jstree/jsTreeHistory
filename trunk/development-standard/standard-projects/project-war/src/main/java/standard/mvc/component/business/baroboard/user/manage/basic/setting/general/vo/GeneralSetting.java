@@ -50,8 +50,8 @@ public class GeneralSetting extends ComprehensiveTree {
 
     /** 웹마스터이메일 */
     private String webMasterEmail;
-
-    /** 가입승인여부 */
+    
+    /** 회원가입승인여부 */
     private String joinApprovalFl;
 
     /** 이메일인증사용여부 */
@@ -65,7 +65,13 @@ public class GeneralSetting extends ComprehensiveTree {
 
     /** 로그인실패제한횟수 */
     private int loginFailureLimitCnt;
-
+    
+    /** 웹마스터이메일 계정 */
+    private String webMasterEmailAccount;
+    
+    /** 웹마스터이메일 호스트 */
+    private String webMasterEmailHost;
+    
     public int getPasswordSecurityLevelCd() {
         return passwordSecurityLevelCd;
     }
@@ -136,6 +142,22 @@ public class GeneralSetting extends ComprehensiveTree {
 
     public void setLoginFailureLimitCnt(int loginFailureLimitCnt) {
         this.loginFailureLimitCnt = loginFailureLimitCnt;
+    }
+
+    public String getWebMasterEmailAccount() {
+        return webMasterEmailAccount;
+    }
+
+    public void setWebMasterEmailAccount(String webMasterEmailAccount) {
+        this.webMasterEmailAccount = webMasterEmailAccount;
+    }
+
+    public String getWebMasterEmailHost() {
+        return webMasterEmailHost;
+    }
+
+    public void setWebMasterEmailHost(String webMasterEmailHost) {
+        this.webMasterEmailHost = webMasterEmailHost;
     }
 
     @Override

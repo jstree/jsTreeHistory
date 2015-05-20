@@ -26,6 +26,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.GeneralSetting;
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.PasswordSecurityLevel;
+
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+
 import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
 
 /**
@@ -95,6 +98,7 @@ public class GeneralSettingServiceTest extends DbUnitTest<GeneralSetting> {
     }
     
     @Test
+    @DatabaseSetup("GeneralSettingServiceTest.xml")
     public void getGeneralSetting() throws Exception {
         
         GeneralSetting generalSetting = generalSettingService.getGeneralSetting();

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package standard.mvc.component.business.baroboard.user.manage.basic.setting.contents.controller;
+package standard.mvc.component.business.baroboard.user.manage.basic.setting.general.controller;
 
 import java.util.Map;
 
@@ -21,59 +21,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import standard.mvc.component.business.baroboard.user.manage.basic.setting.contents.service.BasicContentsService;
-import standard.mvc.component.business.baroboard.user.manage.basic.setting.contents.vo.BasicContents;
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.GeneralSettingService;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
  * Modification Information
  * 
  * @author 류강하
- * @since 2015. 5. 12.
+ * @since 2015. 5. 20.
  * @version 1.0
  * @see <pre>
- * Class Name  : BasicContentsController.java
- * Description : 바로보드-회원관리-기본 컨텐츠 설정 Controller
- * Infomation  : 바로보드-회원관리-기본 컨텐츠 설정 Controller
+ * Class Name  : GeneralSettingController.java
+ * Description : 바로보드-회원관리-기본설정-일반설정 Controller
+ * Infomation  : 바로보드-회원관리-기본설정-일반설정 Controller
  * 
  * << 개정이력(Modification Information) >>
  * 
- * 수정일                수정자                 수정내용
- * -------       ------------   -----------------------
- * 2015. 5. 12.  류강하                 최초 생성
+ * 수정일                 수정자                     수정내용
+ * -------      ------------  -----------------------
+ * 2015. 5. 20.      류강하       최초 생성
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 @Controller
-@RequestMapping("/user/manage/basic/setting/contents")
-public class BasicContentsController extends GenericAbstractController {
-    
+@RequestMapping("/user/manage/basic/setting/general")
+public class GeneralSettingController extends GenericAbstractController {
+
     @Autowired
-    private BasicContentsService basicContentsService;
+    private GeneralSettingService generalSettingService;
     
     @Override
     public Map<String, Map<String, Object>> bindTypes() {
         // TODO Auto-generated method stub
         return null;
     }
-
+    
     @RequestMapping("/index.do")
     public String movePage(ModelMap model) throws Exception {
         
-        model.addAttribute("basicContents", basicContentsService.getBasicContents());
+        model.addAttribute("generalSetting", generalSettingService.getGeneralSetting());
         
-        return "/jsp/user/manage/basic/setting/contents/index";
-    }
-    
-    @RequestMapping("/save.do")
-    @ResponseBody
-    public String save(BasicContents basicContents) throws Exception {
-        
-        basicContentsService.saveBasicContents(basicContents);
-        
-        return "{}";
+        return "/jsp/user/manage/basic/setting/general/index";
     }
 }

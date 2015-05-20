@@ -77,31 +77,38 @@
     text-align: right; <%-- 하단 버튼 영역에 대한 좌 중 우 위치에 대한 공통 CSS에 대한 적용 필요에 대한 문의 : 전경훈 --%>
                        <%-- 반응형 적용에 대한 문의 : 전경훈 --%>
 }
+.chk {
+    height: 13px !important;
+}
+.rdo {
+    width: 13px !important;
+    height: 13px !important;
+}
 </style>
 <script>
-var basicContents = {
+var generalSetting = {
      
     handleEvent : function() {
         
-        $('#frmBasicContents').on('submit', function() {
+//         $('#frmBasicContents').on('submit', function() {
             
-            var formId = 'frmBasicContents';
-            var $form = $('#frmBasicContents');
+//             var formId = 'frmBasicContents';
+//             var $form = $('#frmBasicContents');
             
-            callAjax(formId
-                   , $form.prop('action')
-                   , null
-                   , $form.prop('method')
-                   , 'json'
-                   , null
-                   , callback);
+//             callAjax(formId
+//                    , $form.prop('action')
+//                    , null
+//                    , $form.prop('method')
+//                    , 'json'
+//                    , null
+//                    , callback);
             
-            function callback(r) {
-                alert('저장되었습니다.');
-            }
+//             function callback(r) {
+//                 alert('저장되었습니다.');
+//             }
             
-            return false;
-        });
+//             return false;
+//         });
     },
         
     init : function() {
@@ -110,7 +117,7 @@ var basicContents = {
 };
 
 $(document).ready(function() {
-    basicContents.init();
+    generalSetting.init();
 });
 </script>
 </head>
@@ -226,33 +233,69 @@ $(document).ready(function() {
 	                            
 	                            <div class="responsive_row">
 	                                <div class="item_Lname one-quarter">
-	                                   <label for="txtCompanyIntr">회사소개 내용 설정</label>
-	                                </div>
+	                                   <label for="chkJoinApprovalFl">회원가입 승인여부</label>
+                                   </div>
 	                                <div class="item_Lvalue one-quarter">
-	                                    <textarea id="txtCompanyIntr" name="companyIntr" class="w-large">${basicContents.companyIntr}</textarea>
+	                                    <input id="chkJoinApprovalFl" type="checkbox" class="chk" />
 	                                </div>
 	                            </div>
+	                            <div class="responsive_row">
+                                    <div class="item_Lname one-quarter">
+                                       <label for="chkEmailAuthUseFl">메일인증 사용여부</label>
+                                   </div>
+                                    <div class="item_Lvalue one-quarter">
+                                        <input id="chkEmailAuthUseFl" type="checkbox" class="chk" />
+                                    </div>
+                                </div>
+                                <div class="responsive_row">
+                                    <div class="item_Lname one-quarter">
+                                       <label for="">비밀번호 보안수준</label>
+                                   </div>
+                                    <div class="item_Lvalue one-quarter">
+                                        <input id="" type="radio" class="rdo" /><label for="">낮음 (비밀번호 4자 이상)</label><br />
+                                        <input id="" type="radio" class="rdo" /><label for="">보통 (비밀번호 6자리 이상. 영문과 숫자를 반드시 포함)</label><br />
+                                        <input id="" type="radio" class="rdo" /><label for="">높음 (비밀번호 8자리 이상. 영문과 숫자, 특수문자를 반드시 포함)</label>
+                                    </div>
+                                </div>
+	                            <div class="responsive_row">
+                                    <div class="item_Lname one-quarter">
+                                       <label for="inpWebMasterNm">웹마스터 이름</label>
+                                   </div>
+                                    <div class="item_Lvalue one-quarter">
+                                        <input id="inpWebMasterNm" type="text" />
+                                    </div>
+                                </div>
+	                            <div class="responsive_row">
+                                    <div class="item_Lname one-quarter">
+                                       <label for="inpWebMasterEmailAccount">웹마스터 메일주소</label>
+                                   </div>
+                                    <div class="item_Lvalue one-quarter">
+                                        <input id="inpWebMasterEmailAccount" type="text" />@
+                                        <input id="inpWebMasterEmailHost" type="text" />
+                                    </div>
+                                </div>
+                                <div class="responsive_row">
+                                    <div class="item_Lname one-quarter">
+                                       <label for="inpLoginLimitDcnt">임시 제한일자</label>
+                                   </div>
+                                    <div class="item_Lvalue one-quarter">
+                                        <input id="inpLoginLimitDcnt" type="text" />일
+                                                                                설정 시 회원 가입 후 정해진 일자동안 인증을 제한합니다.
+                                    </div>
+                                </div>
+                                <div class="responsive-row">
+                                    <div class="item_Lname one-quarter">
+                                       <label for="txtProhibitionNickname">금지 닉네임</label>
+                                    </div>
+                                    <div class="item_Lvalue one-quarter">
+                                        <textarea id="txtProhibitionNickname" name="txtProhibitionNickname" class="w-large"></textarea>
+                                    </div>
+                                </div>
 	                            <div class="responsive-row">
-	                                <div class="item_Lname one-quarter">
-	                                   <label for="txtTermsOfUse">서비스 이용약관 내용 설정</label>
-	                                </div>
-	                                <div class="item_Lvalue one-quarter">
-	                                    <textarea id="txtTermsOfUse" name="termsOfUse" class="w-large">${basicContents.termsOfUse}</textarea>
-	                                </div>
-	                            </div>
-	                            <div class="responsive-row">
-	                                <div class="item_Lname one-quarter">
-	                                   <label for="txtPrivacyPolicy">개인정보처리방침 내용 설정</label>
-	                                </div>
-	                                <div class="item_Lvalue one-quarter">
-	                                    <textarea id="txtPrivacyPolicy" name="privacyPolicy" class="w-large">${basicContents.privacyPolicy}</textarea>
-	                                </div>
-	                            </div>
-	                            <div class="responsive-row">
-	                                <div class="item_Rvalue three-quarter right">
-	                                   <button id="btnSave" type="submit">저장</button>
-	                                </div>
-	                            </div>
+                                    <div class="item_Rvalue three-quarter right">
+                                       <button id="btnSave" type="submit">저장</button>
+                                    </div>
+                                </div>
 	                        </div>
 	                    </div>
                     </form>
