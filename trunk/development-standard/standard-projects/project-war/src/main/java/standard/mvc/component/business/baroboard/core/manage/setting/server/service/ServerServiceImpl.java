@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.core.manage.setting.messages.ExceptionMessage;
+import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericServiceRuntimeException;
@@ -39,6 +40,9 @@ public class ServerServiceImpl implements CoreService {
     @Resource(name = "CoreService")
     private CoreService coreService;
 
+    @Resource(name = "CoreDao")
+    private CoreDao coreDao;
+
     @Override
     public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception {
         return null;
@@ -46,7 +50,8 @@ public class ServerServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) throws Exception {
-        return null;
+        List<T> childNode = coreDao.getChildNode(comprehensiveTree);
+        return childNode;
     }
 
     @Override
