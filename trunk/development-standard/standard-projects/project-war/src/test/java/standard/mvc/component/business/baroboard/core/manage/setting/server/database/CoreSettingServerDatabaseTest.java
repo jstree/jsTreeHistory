@@ -37,7 +37,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : CoreSettingServerDatabaseTest, TriggerVO
  * Description : T_CORE_SETTING_SERVER, T_CORE_SETTING_SERVER_LOG DBUnit Test without Spring
- * Infomation  : 
+ * Infomation  :
  * 
  * << 개정이력(Modification Information) >>
  * 
@@ -45,177 +45,177 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * -------       ------------   -----------------------
  * 2015. 5. 16.       손호성                 최초 생성
  * 2015. 5. 17.       손호성                 하드코딩된 jdbc properties 외부로 분리
+ * 2015. 5. 20.       손호성                 패키지 이름 변경 *.admin.* => *.manage.*
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 public class CoreSettingServerDatabaseTest {
 
-	private String driver;
-	private String dbUrl;
-	private String userName;
-	private String password;
-	private String scheme;
+    private String driver;
+    private String dbUrl;
+    private String userName;
+    private String password;
+    private String scheme;
 
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	private IDatabaseTester databaseTester;
+    private IDatabaseTester databaseTester;
 
-	@Before
-	public void setUp() throws Exception {
-		initJdbcProps();
+    @Before
+    public void setUp() throws Exception {
+        initJdbcProps();
 
-		databaseTester = new JdbcDatabaseTester(driver, dbUrl, userName,
-				password, scheme);
+        databaseTester = new JdbcDatabaseTester(driver, dbUrl, userName, password, scheme);
 
-		try {
-			String datasetPath = "/standard/mvc/component/business/baroboard/core/admin/setting/server/database/T_CORE_SETTING_SERVER.xml";
-			URL url = this.getClass().getResource(datasetPath);
+        try {
+            String datasetPath =
+                    "/standard/mvc/component/business/baroboard/core/manage/setting/server/database/T_CORE_SETTING_SERVER.xml";
+            URL url = this.getClass().getResource(datasetPath);
 
-			ReplacementDataSet dataSet = new ReplacementDataSet(
-					new FlatXmlDataSetBuilder().build(new File(url.toURI())));
-			dataSet.addReplacementObject("[NULL]", null);
-			DatabaseOperation.CLEAN_INSERT.execute(
-					databaseTester.getConnection(), dataSet);
-		} catch (Exception e) {
-			logger.error("setUp 시 예외 발생", e);
-			databaseTester.getConnection().close();
-		}
-	}
+            ReplacementDataSet dataSet =
+                    new ReplacementDataSet(new FlatXmlDataSetBuilder().build(new File(url.toURI())));
+            dataSet.addReplacementObject("[NULL]", null);
+            DatabaseOperation.CLEAN_INSERT.execute(databaseTester.getConnection(), dataSet);
+        } catch (Exception e) {
+            logger.error("setUp 시 예외 발생", e);
+            databaseTester.getConnection().close();
+        }
+    }
 
-	private void initJdbcProps() throws IOException, FileNotFoundException,
-			URISyntaxException {
-		Properties props = newPropertiesInstance();
+    private void initJdbcProps() throws IOException, FileNotFoundException, URISyntaxException {
+        Properties props = newPropertiesInstance();
 
-		driver = props.getProperty("jdbc.driver");
-		dbUrl = props.getProperty("jdbc.url");
-		userName = props.getProperty("jdbc.username");
-		password = props.getProperty("jdbc.password");
-		scheme = props.getProperty("jdbc.scheme");
-	}
+        driver = props.getProperty("jdbc.driver");
+        dbUrl = props.getProperty("jdbc.url");
+        userName = props.getProperty("jdbc.username");
+        password = props.getProperty("jdbc.password");
+        scheme = props.getProperty("jdbc.scheme");
+    }
 
-	private Properties newPropertiesInstance() throws IOException,
-			FileNotFoundException, URISyntaxException {
-		Properties props = new Properties();
-		String path = "/standard/mvc/component/business/baroboard/core/admin/setting/server/database/jdbc.properties";
-		URL url = this.getClass().getResource(path);
-		props.load(new FileInputStream(new File(url.toURI())));
-		return props;
-	}
+    private Properties newPropertiesInstance() throws IOException, FileNotFoundException,
+    URISyntaxException {
+        Properties props = new Properties();
+        String path =
+                "/standard/mvc/component/business/baroboard/core/manage/setting/server/database/jdbc.properties";
+        URL url = this.getClass().getResource(path);
+        props.load(new FileInputStream(new File(url.toURI())));
+        return props;
+    }
 
-	@After
-	public void tearDown() throws Exception {
-	}
+    @After
+    public void tearDown() throws Exception {}
 
-	@Test
-	public void testCleanInsertRootNodeTrigger() {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+    @Test
+    public void testCleanInsertRootNodeTrigger() {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-		try {
-			Class.forName(driver).newInstance();
-			conn = DriverManager.getConnection(dbUrl, userName, password);
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(dbUrl, userName, password);
 
-			String[] cMethods = { "delete", "insert" };
+            String[] cMethods = {"delete", "insert"};
 
-			String query = "SELECT C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_METHOD, C_STATE FROM T_CORE_SETTING_SERVER_LOG WHERE C_ID= ? AND C_METHOD = ? AND ROWNUM < 2 ORDER BY C_DATE DESC";
-			pstmt = conn.prepareStatement(query);
+            String query =
+                    "SELECT C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_METHOD, C_STATE FROM T_CORE_SETTING_SERVER_LOG WHERE C_ID= ? AND C_METHOD = ? AND ROWNUM < 2 ORDER BY C_DATE DESC";
+            pstmt = conn.prepareStatement(query);
 
-			for (int i = 0; i < cMethods.length; i++) {
+            for (String cMethod : cMethods) {
 
-				pstmt.setInt(1, 1);
-				pstmt.setString(2, cMethods[i]);
-				rs = pstmt.executeQuery();
+                pstmt.setInt(1, 1);
+                pstmt.setString(2, cMethod);
+                rs = pstmt.executeQuery();
 
-				if (!rs.next()) {
-					throw new SQLException("No Data Found!");
-				}
+                if (!rs.next()) {
+                    throw new SQLException("No Data Found!");
+                }
 
-				TriggerVO actual = new TriggerVO();
-				actual.setC_id(rs.getInt(1));
-				actual.setC_title(rs.getString(7));
-				actual.setC_state(rs.getString(9));
+                TriggerVO actual = new TriggerVO();
+                actual.setC_id(rs.getInt(1));
+                actual.setC_title(rs.getString(7));
+                actual.setC_state(rs.getString(9));
 
-				TriggerVO expected = new TriggerVO();
-				expected.setC_id(1);
-				expected.setC_title("root");
-				expected.setC_state(cMethods[i]);
+                TriggerVO expected = new TriggerVO();
+                expected.setC_id(1);
+                expected.setC_title("root");
+                expected.setC_state(cMethod);
 
-				Assert.assertEquals(expected.getC_id(), actual.getC_id());
-				Assert.assertEquals(expected.getC_title(), actual.getC_title());
-				Assert.assertEquals(expected.getC_state(), actual.getC_state());
+                Assert.assertEquals(expected.getC_id(), actual.getC_id());
+                Assert.assertEquals(expected.getC_title(), actual.getC_title());
+                Assert.assertEquals(expected.getC_state(), actual.getC_state());
 
-			}
+            }
 
-			rs.close();
-			pstmt.close();
-			conn.close();
-		} catch (Exception e) {
-			logger.error("test 시  예외 발생", e);
-		}
-	}
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            logger.error("test 시  예외 발생", e);
+        }
+    }
 
-	@Test
-	public void testUpdate() throws Exception {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+    @Test
+    public void testUpdate() throws Exception {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-		try {
-			Class.forName(driver).newInstance();
-			conn = DriverManager.getConnection(dbUrl, userName, password);
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(dbUrl, userName, password);
 
-			String query = "UPDATE T_CORE_SETTING_SERVER SET C_HTTP_PORT = ? WHERE C_ID = ?";
-			pstmt = conn.prepareStatement(query);
+            String query = "UPDATE T_CORE_SETTING_SERVER SET C_HTTP_PORT = ? WHERE C_ID = ?";
+            pstmt = conn.prepareStatement(query);
 
-			pstmt.setString(1, "80");
-			pstmt.setInt(2, 4);
-			int updateCount = pstmt.executeUpdate();
+            pstmt.setString(1, "80");
+            pstmt.setInt(2, 4);
+            int updateCount = pstmt.executeUpdate();
 
-			Assert.assertEquals(1, updateCount);
+            Assert.assertEquals(1, updateCount);
 
-			query = "SELECT C_HTTP_PORT FROM T_CORE_SETTING_SERVER WHERE C_ID = ?";
-			pstmt = conn.prepareStatement(query);
+            query = "SELECT C_HTTP_PORT FROM T_CORE_SETTING_SERVER WHERE C_ID = ?";
+            pstmt = conn.prepareStatement(query);
 
-			pstmt.setInt(1, 4);
+            pstmt.setInt(1, 4);
 
-			rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
 
-			if (!rs.next()) {
-				throw new SQLException("No Data Found!");
-			}
+            if (!rs.next()) {
+                throw new SQLException("No Data Found!");
+            }
 
-			Assert.assertEquals("80", rs.getString(1));
+            Assert.assertEquals("80", rs.getString(1));
 
-			rs.close();
-			pstmt.close();
-			conn.close();
-		} catch (Exception e) {
-			logger.error("test 시  예외 발생", e);
-		}
-	}
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            logger.error("test 시  예외 발생", e);
+        }
+    }
 
-	class TriggerVO extends ComprehensiveTree {
-		private String c_method;
-		private String c_state;
+    class TriggerVO extends ComprehensiveTree {
+        private String c_method;
+        private String c_state;
 
-		public String getC_method() {
-			return c_method;
-		}
+        public String getC_method() {
+            return c_method;
+        }
 
-		public void setC_method(String c_method) {
-			this.c_method = c_method;
-		}
+        public void setC_method(String c_method) {
+            this.c_method = c_method;
+        }
 
-		public String getC_state() {
-			return c_state;
-		}
+        public String getC_state() {
+            return c_state;
+        }
 
-		public void setC_state(String c_state) {
-			this.c_state = c_state;
-		}
+        public void setC_state(String c_state) {
+            this.c_state = c_state;
+        }
 
-	}
+    }
 
 }
