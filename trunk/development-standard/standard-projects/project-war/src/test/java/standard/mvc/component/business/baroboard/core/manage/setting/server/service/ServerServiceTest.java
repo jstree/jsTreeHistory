@@ -1,26 +1,32 @@
 package standard.mvc.component.business.baroboard.core.manage.setting.server.service;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import javax.annotation.Resource;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import standard.mvc.component.business.baroboard.core.manage.setting.messages.ExceptionMessage;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericServiceRuntimeException;
+
 
 /**
  * 
@@ -39,6 +45,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
  *  수정일              수정자                  수정내용
  *  -------       ------------   -----------------------
  *  2015. 5. 19.        손호성                  최초생성
+ *  2015. 5. 20.        손호성                  import static Mockito, CoreMatchers
  * 
  *  Copyright (C) 2015 by MarkAny  All right reserved.
  * </pre>
@@ -47,8 +54,6 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
 public class ServerServiceTest {
-
-    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource(name = "ServerService")
     CoreService serverService;
@@ -66,7 +71,7 @@ public class ServerServiceTest {
 
     @Test
     public void testAnnotationDrivenServiceInit() {
-        Assert.assertNotNull(serverService);
+        assertThat(serverService, is(notNullValue()));
     }
 
     @Test
@@ -74,21 +79,21 @@ public class ServerServiceTest {
         try {
             serverService.addNode(comprehensiveTree);
         } catch (Exception e) {
-            Assert.assertEquals(GenericServiceRuntimeException.class, e.getClass());
-            Assert.assertEquals("현재 메뉴에서 지원되지 않는 기능입니다.", e.getMessage());
+            assertThat(e, is(instanceOf(GenericServiceRuntimeException.class)));
+            assertThat(e.getMessage(), is(equalTo(ExceptionMessage.UN_SUPPORTED.getValue())));
         }
     }
 
     @Test(expected = AssertionError.class)
     public void testAlterNode() throws Exception {
-        Assert.assertEquals(1, serverService.alterNode(comprehensiveTree));
+        assertThat(serverService.alterNode(comprehensiveTree), is(1));
     }
 
     @Test
     public void testAnnotationDrivenMock() throws Exception {
-        Mockito.when(comprehensiveTree.getC_id()).thenReturn(1);
-        Assert.assertEquals(1, comprehensiveTree.getC_id());
-        Mockito.verify(comprehensiveTree, Mockito.times(1)).getC_id();
+        when(comprehensiveTree.getC_id()).thenReturn(1);
+        assertThat(comprehensiveTree.getC_id(), is(1));
+        verify(comprehensiveTree).getC_id();
     }
 
 }
