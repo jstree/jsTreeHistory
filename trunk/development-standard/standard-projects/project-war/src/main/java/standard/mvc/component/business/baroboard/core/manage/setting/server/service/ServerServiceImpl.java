@@ -45,13 +45,14 @@ public class ServerServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception {
-        return null;
+        T node = coreDao.getNode(comprehensiveTree);
+        return node;
     }
 
     @Override
     public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) throws Exception {
-        List<T> childNode = coreDao.getChildNode(comprehensiveTree);
-        return childNode;
+        List<T> bunchOfChildNodes = coreDao.getChildNode(comprehensiveTree);
+        return bunchOfChildNodes;
     }
 
     @Override

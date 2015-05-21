@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="server">
+	<typeAlias alias="serverVO"
+		type="standard.mvc.component.business.baroboard.core.manage.setting.server.vo.ServerVO" />
+	<sql id="getMetaField">
+		/* getChildNode */
+		SELECT A.c_id
+		, A.c_parentid
+		, A.c_position
+		, A.c_left
+		, A.c_right
+		, A.c_level
+		, A.c_title
+		, A.c_type
+		/* user filed add
+		point*/
+	</sql>
+	<sql id="getInlineChildCount">
+		, ( SELECT CASE
+		WHEN COUNT(*) &gt; 0 THEN 'InChild'
+		ELSE
+		'NoChild'
+		END AS YesNo
+		/* inline table from filed add point*/
+	</sql>
+	<sql id="getInlineChildCountAfterFrom">
+		WHERE B.C_PARENTID = A.C_ID
+		) AS childcount
+		/* table from
+		filed add point*/
+	</sql>
+	<sql id="getAfterFrom">
+		WHERE A.C_PARENTID = #c_id#
+		ORDER BY A.C_POSITION ASC
+	</sql>
+
+	<select id="getChildNode" parameterClass="serverVO" resultClass="serverVO">
+		<dynamic>
+			<include refid="getMetaField" />
+			/* user filed */
+			, C_URL AS URL
+			, C_SSL_FL AS sslFl
+			, C_HTTP_PORT AS
+			httpPort
+			, C_HTTPS_PORT AS httpsPort
+			, C_SHORT_URL_FL AS shortUrlFl
+			,
+			C_SSO_FL AS ssoFl
+			<include refid="getInlineChildCount" />
+			/* inline table from filed*/
+			FROM T_CORE_SETTING_SERVER B
+			<include refid="getInlineChildCountAfterFrom" />
+			/* table from filed*/
+			FROM T_CORE_SETTING_SERVER A
+			<include refid="getAfterFrom" />
+		</dynamic>
+	</select>
+
+	<select id="getNode" parameterClass="serverVO" resultClass="serverVO">
+		/*
+		getNode */
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		, C_LEFT
+		, C_RIGHT
+		,
+		C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		, C_URL AS URL
+		, C_SSL_FL AS sslFl
+		, C_HTTP_PORT
+		AS httpPort
+		, C_HTTPS_PORT AS httpsPort
+		, C_SHORT_URL_FL AS shortUrlFl
+		,
+		C_SSO_FL AS ssoFl
+		FROM T_CORE_SETTING_SERVER
+		WHERE C_ID = #c_id#
+	</select>
+
+</sqlMap>

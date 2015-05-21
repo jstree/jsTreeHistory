@@ -8,6 +8,8 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.After;
@@ -21,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import standard.mvc.component.business.baroboard.core.manage.setting.messages.ExceptionMessage;
-import standard.mvc.component.business.baroboard.core.manage.setting.server.vo.ServerComprehensiveTree;
+import standard.mvc.component.business.baroboard.core.manage.setting.server.vo.ServerVO;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
@@ -46,6 +48,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
  *  -------       ------------   -----------------------
  *  2015. 5. 19.        손호성                  최초생성
  *  2015. 5. 20.        손호성                  import static Mockito, CoreMatchers
+ *  2015. 5. 21.        손호성                  testGetChildNode, testGetNode 추가
  * 
  *  Copyright (C) 2015 by MarkAny  All right reserved.
  * </pre>
@@ -59,7 +62,7 @@ public class ServerServiceTest {
     CoreService serverService;
 
     @Mock
-    ServerComprehensiveTree serverComprehensiveTree;
+    ServerVO mockServerVO;
 
     @Before
     public void setUp() throws Exception {
@@ -77,7 +80,7 @@ public class ServerServiceTest {
     @Test
     public void testUnsupportedOperation() throws Exception {
         try {
-            serverService.addNode(serverComprehensiveTree);
+            serverService.addNode(mockServerVO);
         } catch (Exception e) {
             assertThat(e, is(instanceOf(GenericServiceRuntimeException.class)));
             assertThat(e.getMessage(), is(equalTo(ExceptionMessage.UN_SUPPORTED.getValue())));
@@ -86,14 +89,58 @@ public class ServerServiceTest {
 
     @Test(expected = AssertionError.class)
     public void testAlterNode() throws Exception {
-        assertThat(serverService.alterNode(serverComprehensiveTree), is(1));
+        assertThat(serverService.alterNode(mockServerVO), is(1));
     }
 
     @Test
     public void testAnnotationDrivenMock() throws Exception {
-        when(serverComprehensiveTree.getC_id()).thenReturn(1);
-        assertThat(serverComprehensiveTree.getC_id(), is(1));
-        verify(serverComprehensiveTree).getC_id();
+        when(mockServerVO.getC_id()).thenReturn(1);
+        assertThat(mockServerVO.getC_id(), is(1));
+        verify(mockServerVO).getC_id();
+    }
+
+    @Test
+    public void testGetChildNode() throws Exception {
+        when(mockServerVO.getC_id()).thenReturn(3);
+        when(mockServerVO.getSqlMapSelector()).thenReturn("server");
+
+        List<ServerVO> bunchOfResultServerVO = serverService.getChildNode(mockServerVO);
+
+        assertThat(bunchOfResultServerVO.size(), is(1));
+
+        for (ServerVO resultServerVO : bunchOfResultServerVO) {
+            assertThat(resultServerVO.getC_id(), is(4));
+            assertThat(resultServerVO.getC_parentid(), is(3));
+            assertThat(resultServerVO.getC_position(), is(0));
+            assertThat(resultServerVO.getC_left(), is(4));
+            assertThat(resultServerVO.getC_right(), is(5));
+            assertThat(resultServerVO.getC_level(), is(3));
+            assertThat(resultServerVO.getC_title(), is(equalTo("서버설정")));
+            assertThat(resultServerVO.getC_type(), is(equalTo("default")));
+        }
+
+        verify(mockServerVO).getC_id();
+        verify(mockServerVO).getSqlMapSelector();
+    }
+
+    @Test
+    public void testGetNode() throws Exception {
+        when(mockServerVO.getC_id()).thenReturn(4);
+        when(mockServerVO.getSqlMapSelector()).thenReturn("server");
+
+        ServerVO resultServerVO = serverService.getNode(mockServerVO);
+
+        assertThat(resultServerVO.getC_id(), is(4));
+        assertThat(resultServerVO.getC_parentid(), is(3));
+        assertThat(resultServerVO.getC_position(), is(0));
+        assertThat(resultServerVO.getC_left(), is(4));
+        assertThat(resultServerVO.getC_right(), is(5));
+        assertThat(resultServerVO.getC_level(), is(3));
+        assertThat(resultServerVO.getC_title(), is(equalTo("서버설정")));
+        assertThat(resultServerVO.getC_type(), is(equalTo("default")));
+
+        verify(mockServerVO).getC_id();
+        verify(mockServerVO).getSqlMapSelector();
     }
 
 }

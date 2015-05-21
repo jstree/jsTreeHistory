@@ -29,7 +29,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  Copyright (C) 2015 by MarkAny  All right reserved.
  * </pre>
  */
-public class ServerComprehensiveTree extends ComprehensiveTree {
+public class ServerVO extends ComprehensiveTree {
 
     private static final String NUMBER_ONLY = "^[0-9]*$";
     private static final String FALSE = "0";
@@ -122,6 +122,13 @@ public class ServerComprehensiveTree extends ComprehensiveTree {
     @Override
     public String getSqlMapSelector() {
         return "server";
+    }
+
+    @Override
+    public String toString() {
+        return "ServerVO [url=" + url + ", sslFl=" + sslFl + ", httpPort=" + httpPort
+                + ", httpsPort=" + httpsPort + ", shortUrlFl=" + shortUrlFl + ", ssoFl=" + ssoFl
+                + "]";
     }
 
 }
