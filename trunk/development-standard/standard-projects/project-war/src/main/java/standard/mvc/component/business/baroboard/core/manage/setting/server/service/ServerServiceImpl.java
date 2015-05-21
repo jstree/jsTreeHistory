@@ -31,7 +31,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
  *  -------       ------------   -----------------------
  *  2015. 5. 19.        손호성                  최초생성
  * 
- *  Copyright (C) 2015 by MarkAny  All right reserved.
+ *  Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 @Service(value = "ServerService")

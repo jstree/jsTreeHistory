@@ -50,7 +50,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
  *  2015. 5. 20.        손호성                  import static Mockito, CoreMatchers
  *  2015. 5. 21.        손호성                  testGetChildNode, testGetNode 추가
  * 
- *  Copyright (C) 2015 by MarkAny  All right reserved.
+ *  Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 @RunWith(SpringJUnit4ClassRunner.class)

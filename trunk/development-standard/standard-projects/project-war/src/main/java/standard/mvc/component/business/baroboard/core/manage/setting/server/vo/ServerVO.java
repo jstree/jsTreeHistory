@@ -26,7 +26,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  -------       ------------   -----------------------
  *  2015. 5. 20.        손호성                  최초생성
  * 
- *  Copyright (C) 2015 by MarkAny  All right reserved.
+ *  Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 public class ServerVO extends ComprehensiveTree {
