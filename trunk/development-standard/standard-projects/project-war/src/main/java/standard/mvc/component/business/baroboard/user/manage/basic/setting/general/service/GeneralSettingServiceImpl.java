@@ -19,6 +19,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.GeneralSetting;
@@ -47,12 +49,14 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
  */
 @Service
 public class GeneralSettingServiceImpl implements GeneralSettingService {
-
+    
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
     @Resource(name = "CoreService")
     private CoreService coreService;
     
     @Override
-    public List<PasswordSecurityLevel> getPasswordSecurityLevel() throws Exception {
+    public List<PasswordSecurityLevel> getPasswordSecurityLevels() throws Exception {
         
         PasswordSecurityLevel passwordSecurityLevel = new PasswordSecurityLevel();
         passwordSecurityLevel.setC_id(2);
@@ -63,9 +67,16 @@ public class GeneralSettingServiceImpl implements GeneralSettingService {
     @Override
     public GeneralSetting getGeneralSetting() throws Exception {
         
-        GeneralSetting generalSetting = new GeneralSetting();
-        generalSetting.setC_id(3);
+        GeneralSetting paramObj = new GeneralSetting();
+        paramObj.setC_id(3);
         
-        return coreService.getNode(generalSetting);
+        GeneralSetting generalSetting = coreService.getNode(paramObj);
+        
+        String[] webMasterEmail = generalSetting.getWebMasterEmail().split("@");
+        
+        generalSetting.setWebMasterEmailAccount( webMasterEmail[0] );
+        generalSetting.setWebMasterEmailHost( webMasterEmail[1] );
+        
+        return generalSetting;
     }
 }

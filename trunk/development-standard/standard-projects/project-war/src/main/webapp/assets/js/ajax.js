@@ -210,6 +210,9 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 	  if (responseText.result == false) {
 	    notificationAlert(responseText.message);
 	  }
+	  if (jsonpCallback) {
+	      jsonpCallback(responseText);
+	  }
 	  
 	});
 	//dataType : xml , html , json , jsonp , script , text

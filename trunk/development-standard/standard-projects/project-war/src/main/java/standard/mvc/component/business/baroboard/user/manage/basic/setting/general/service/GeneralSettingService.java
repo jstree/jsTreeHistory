@@ -48,7 +48,7 @@ public interface GeneralSettingService {
      * @return 비밀번호 보안수준 DTO List
      * @throws Exception
      */
-    List<PasswordSecurityLevel> getPasswordSecurityLevel() throws Exception;
+    List<PasswordSecurityLevel> getPasswordSecurityLevels() throws Exception;
 
     /**
      * 일반설정을 조회한다.

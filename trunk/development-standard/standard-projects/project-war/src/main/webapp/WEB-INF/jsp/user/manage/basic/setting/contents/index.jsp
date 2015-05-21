@@ -85,10 +85,9 @@ var basicContents = {
         
         $('#frmBasicContents').on('submit', function() {
             
-            var formId = 'frmBasicContents';
             var $form = $('#frmBasicContents');
             
-            callAjax(formId
+            callAjax($form
                    , $form.prop('action')
                    , null
                    , $form.prop('method')
@@ -220,7 +219,7 @@ $(document).ready(function() {
                     </div>
                 </nav>
                 <section>
-                    <form id="frmBasicContents" action="/baroboard/user/admin/basicContents/save.do" method="post">
+                    <form id="frmBasicContents" action="save.do" method="post">
 	                    <div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
 	                        <div id="samDiv" class="tablet-mobile alpha bm-remove last">
 	                            

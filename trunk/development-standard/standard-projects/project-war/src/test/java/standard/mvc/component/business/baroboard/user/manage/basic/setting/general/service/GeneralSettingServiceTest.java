@@ -59,7 +59,7 @@ public class GeneralSettingServiceTest extends DbUnitTest<GeneralSetting> {
     @Test
     public void getPasswordSecurityLevel() throws Exception {
         
-        List<PasswordSecurityLevel> passwordSecurityLevels = generalSettingService.getPasswordSecurityLevel();
+        List<PasswordSecurityLevel> passwordSecurityLevels = generalSettingService.getPasswordSecurityLevels();
         
         assertThat(passwordSecurityLevels.size(), is(3));
         
@@ -111,9 +111,11 @@ public class GeneralSettingServiceTest extends DbUnitTest<GeneralSetting> {
         assertThat(generalSetting.getC_level(), is(2));
         assertThat(generalSetting.getC_title(), is(equalTo("회원가입")));
         assertThat(generalSetting.getC_type(), is(equalTo("default")));
-        assertThat(generalSetting.getPasswordSecurityLevelCd(), is(1));
+        assertThat(generalSetting.getPasswordSecurityLevelCd(), is(3));
         assertThat(generalSetting.getWebMasterNm(), is(equalTo("바로보드 관리자")));
         assertThat(generalSetting.getWebMasterEmail(), is(equalTo("313@313.co.kr")));
+        assertThat(generalSetting.getWebMasterEmailAccount(), is(equalTo("313")));
+        assertThat(generalSetting.getWebMasterEmailHost(), is(equalTo("313.co.kr")));
         assertThat(generalSetting.getJoinApprovalFl(), is(equalTo("0")));
         assertThat(generalSetting.getEmailAuthUseFl(), is(equalTo("0")));
         assertThat(generalSetting.getPasswordChangeDcnt(), is(0));

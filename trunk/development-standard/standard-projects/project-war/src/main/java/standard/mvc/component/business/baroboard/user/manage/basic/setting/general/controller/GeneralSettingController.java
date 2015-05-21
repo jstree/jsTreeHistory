@@ -21,7 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.contents.vo.BasicContents;
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.GeneralSettingService;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
@@ -61,8 +63,19 @@ public class GeneralSettingController extends GenericAbstractController {
     @RequestMapping("/index.do")
     public String movePage(ModelMap model) throws Exception {
         
+        model.addAttribute("passwordSecurityLevels", generalSettingService.getPasswordSecurityLevels());
+        
         model.addAttribute("generalSetting", generalSettingService.getGeneralSetting());
         
         return "/jsp/user/manage/basic/setting/general/index";
+    }
+    
+    @RequestMapping("/save.do")
+    @ResponseBody
+    public String save(BasicContents basicContents) throws Exception {
+        
+//        generalSettingService.saveBasicContents(basicContents);
+        
+        return "{}";
     }
 }

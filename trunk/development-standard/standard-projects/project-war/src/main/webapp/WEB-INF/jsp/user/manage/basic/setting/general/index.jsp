@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags" %>
 <!DOCTYPE html>
 <html lang="ko" class="js">
@@ -84,31 +85,33 @@
     width: 13px !important;
     height: 13px !important;
 }
+input[type="text"] {
+    height: 30px !important;
+}
 </style>
 <script>
 var generalSetting = {
      
     handleEvent : function() {
         
-//         $('#frmBasicContents').on('submit', function() {
+        $('#frmBasicContents').on('submit', function() {
             
-//             var formId = 'frmBasicContents';
-//             var $form = $('#frmBasicContents');
+            var $form = $('#frmBasicContents');
             
-//             callAjax(formId
-//                    , $form.prop('action')
-//                    , null
-//                    , $form.prop('method')
-//                    , 'json'
-//                    , null
-//                    , callback);
+            callAjax($form
+                   , $form.prop('action')
+                   , null
+                   , $form.prop('method')
+                   , 'json'
+                   , null
+                   , callback);
             
-//             function callback(r) {
-//                 alert('저장되었습니다.');
-//             }
+            function callback(r) {
+                alert('저장되었습니다.');
+            }
             
-//             return false;
-//         });
+            return false;
+        });
     },
         
     init : function() {
@@ -227,7 +230,7 @@ $(document).ready(function() {
                     </div>
                 </nav>
                 <section>
-                    <form id="frmBasicContents" action="/baroboard/user/admin/basicContents/save.do" method="post">
+                    <form id="frmBasicContents" action="save.do" method="post">
 	                    <div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
 	                        <div id="samDiv" class="tablet-mobile alpha bm-remove last">
 	                            
@@ -236,7 +239,7 @@ $(document).ready(function() {
 	                                   <label for="chkJoinApprovalFl">회원가입 승인여부</label>
                                    </div>
 	                                <div class="item_Lvalue one-quarter">
-	                                    <input id="chkJoinApprovalFl" type="checkbox" class="chk" />
+	                                    <input id="chkJoinApprovalFl" type="checkbox" class="chk" value="${generalSetting.joinApprovalFl}" />
 	                                </div>
 	                            </div>
 	                            <div class="responsive_row">
@@ -244,17 +247,20 @@ $(document).ready(function() {
                                        <label for="chkEmailAuthUseFl">메일인증 사용여부</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="chkEmailAuthUseFl" type="checkbox" class="chk" />
+                                        <input id="chkEmailAuthUseFl" type="checkbox" class="chk" value="${generalSetting.emailAuthUseFl}" />
                                     </div>
                                 </div>
                                 <div class="responsive_row">
                                     <div class="item_Lname one-quarter">
-                                       <label for="">비밀번호 보안수준</label>
+                                       <label for="passwordSecurityLevelCd1">비밀번호 보안수준</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="" type="radio" class="rdo" /><label for="">낮음 (비밀번호 4자 이상)</label><br />
-                                        <input id="" type="radio" class="rdo" /><label for="">보통 (비밀번호 6자리 이상. 영문과 숫자를 반드시 포함)</label><br />
-                                        <input id="" type="radio" class="rdo" /><label for="">높음 (비밀번호 8자리 이상. 영문과 숫자, 특수문자를 반드시 포함)</label>
+                                    <c:set var="end" value="${passwordSecurityLevels[0].c_id + fn:length(passwordSecurityLevels) - 1}" />
+                                    <c:forEach var="passwordSecurityLevel" items="${passwordSecurityLevels}" varStatus="status">
+                                        <c:if test="${!status.first}"><br /></c:if>
+                                        <input id="passwordSecurityLevelCd${status.index + 1}" name="passwordSecurityLevelCd" type="radio" class="rdo" value="${passwordSecurityLevel.c_id}" <c:if test="${passwordSecurityLevel.c_id == generalSetting.passwordSecurityLevelCd}">checked="checked"</c:if> />
+                                        <label for="passwordSecurityLevelCd${status.index + 1}">${passwordSecurityLevel.c_title}</label>
+                                    </c:forEach>
                                     </div>
                                 </div>
 	                            <div class="responsive_row">
@@ -262,7 +268,7 @@ $(document).ready(function() {
                                        <label for="inpWebMasterNm">웹마스터 이름</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpWebMasterNm" type="text" />
+                                        <input id="inpWebMasterNm" type="text" value="${generalSetting.webMasterNm}" />
                                     </div>
                                 </div>
 	                            <div class="responsive_row">
@@ -270,8 +276,8 @@ $(document).ready(function() {
                                        <label for="inpWebMasterEmailAccount">웹마스터 메일주소</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpWebMasterEmailAccount" type="text" />@
-                                        <input id="inpWebMasterEmailHost" type="text" />
+                                        <input id="inpWebMasterEmailAccount" type="text" value="${generalSetting.webMasterEmailAccount}" />@
+                                        <input id="inpWebMasterEmailHost" type="text" value="${generalSetting.webMasterEmailHost}" />
                                     </div>
                                 </div>
                                 <div class="responsive_row">
@@ -279,7 +285,7 @@ $(document).ready(function() {
                                        <label for="inpLoginLimitDcnt">임시 제한일자</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpLoginLimitDcnt" type="text" />일
+                                        <input id="inpLoginLimitDcnt" type="text" value="${generalSetting.loginLimitDcnt}" />일
                                                                                 설정 시 회원 가입 후 정해진 일자동안 인증을 제한합니다.
                                     </div>
                                 </div>
@@ -288,7 +294,7 @@ $(document).ready(function() {
                                        <label for="txtProhibitionNickname">금지 닉네임</label>
                                     </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <textarea id="txtProhibitionNickname" name="txtProhibitionNickname" class="w-large"></textarea>
+                                        <textarea id="txtProhibitionNickname" name="txtProhibitionNickname" class="w-large">\${generalSetting.prohibitionNickname}</textarea>
                                     </div>
                                 </div>
 	                            <div class="responsive-row">
