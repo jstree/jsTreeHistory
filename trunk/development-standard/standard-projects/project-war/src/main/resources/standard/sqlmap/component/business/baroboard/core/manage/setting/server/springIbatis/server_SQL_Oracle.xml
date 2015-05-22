@@ -81,4 +81,17 @@
 		WHERE C_ID = #c_id#
 	</select>
 
+	<update id="alterNode" parameterClass="serverVO">
+		/* alterNode */
+		UPDATE
+		T_CORE_SETTING_SERVER
+		SET C_URL = #url#
+		, C_SSL_FL = #sslFl#
+		, C_HTTP_PORT = #httpPort#
+		, C_HTTPS_PORT = #httpsPort#
+		, C_SHORT_URL_FL = #shortUrlFl#
+		, C_SSO_FL = #ssoFl#
+		WHERE C_ID = #c_id#
+	</update>
+
 </sqlMap>

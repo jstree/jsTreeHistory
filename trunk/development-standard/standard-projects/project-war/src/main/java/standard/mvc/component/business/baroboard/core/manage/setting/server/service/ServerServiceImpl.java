@@ -73,7 +73,8 @@ public class ServerServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree) throws Exception {
-        return 0;
+        int alterCount = coreDao.alterNode(comprehensiveTree);
+        return alterCount;
     }
 
     @Override

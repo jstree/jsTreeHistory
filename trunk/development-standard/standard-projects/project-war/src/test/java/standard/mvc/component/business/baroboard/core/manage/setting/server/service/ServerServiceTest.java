@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -49,6 +50,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
  *  2015. 5. 19.        손호성                  최초생성
  *  2015. 5. 20.        손호성                  import static Mockito, CoreMatchers
  *  2015. 5. 21.        손호성                  testGetChildNode, testGetNode 추가
+ *  2015. 5. 22.        손호성                  testAlterNode 테스트 성공하도록 수정
  * 
  *  Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -87,9 +89,37 @@ public class ServerServiceTest {
         }
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAlterNode() throws Exception {
+        when(mockServerVO.getC_id()).thenReturn(4);
+        when(mockServerVO.getSqlMapSelector()).thenReturn("server");
+        when(mockServerVO.getUrl()).thenReturn("http://192.168.0.1");
+        when(mockServerVO.getSslFl()).thenReturn("1");
+        when(mockServerVO.getHttpPort()).thenReturn("80");
+        when(mockServerVO.getHttpsPort()).thenReturn("9443");
+        when(mockServerVO.getShortUrlFl()).thenReturn("1");
+        when(mockServerVO.getSsoFl()).thenReturn("1");
+
         assertThat(serverService.alterNode(mockServerVO), is(1));
+
+        ServerVO resultServerVO = serverService.getNode(mockServerVO);
+
+        assertThat(resultServerVO.getC_id(), is(4));
+        assertThat(resultServerVO.getUrl(), is(equalTo("http://192.168.0.1")));
+        assertThat(resultServerVO.getSslFl(), is(equalTo("1")));
+        assertThat(resultServerVO.getHttpPort(), is(equalTo("80")));
+        assertThat(resultServerVO.getHttpsPort(), is(equalTo("9443")));
+        assertThat(resultServerVO.getShortUrlFl(), is(equalTo("1")));
+        assertThat(resultServerVO.getSsoFl(), is(equalTo("1")));
+
+        verify(mockServerVO, times(2)).getC_id();
+        verify(mockServerVO, times(2)).getSqlMapSelector();
+        verify(mockServerVO).getUrl();
+        verify(mockServerVO).getSslFl();
+        verify(mockServerVO).getHttpPort();
+        verify(mockServerVO).getHttpsPort();
+        verify(mockServerVO).getShortUrlFl();
+        verify(mockServerVO).getSsoFl();
     }
 
     @Test
@@ -117,6 +147,7 @@ public class ServerServiceTest {
             assertThat(resultServerVO.getC_level(), is(3));
             assertThat(resultServerVO.getC_title(), is(equalTo("서버설정")));
             assertThat(resultServerVO.getC_type(), is(equalTo("default")));
+            assertThat(resultServerVO.getChildcount(), is(equalTo("NoChild")));
         }
 
         verify(mockServerVO).getC_id();
