@@ -87,7 +87,7 @@
 						</div>
 						<p class="bm-remove">
 							<a href="${pageContext.request.contextPath}/aboutUs/committer.do" target="_self"><strong>Member</strong></a><br />
-							2010년, 더 좋은 개발자가 되고싶은 사람들이 Java 스터디에 모였습니다. 그리고 생각을 나누며 같은 꿈을 꾸기 시작하였습니다. 123
+							2010년, 더 좋은 개발자가 되고싶은 사람들이 Java 스터디에 모였습니다. 그리고 생각을 나누며 같은 꿈을 꾸기 시작하였습니다.
 						</p>
 					</div>
 					<div class="one-quarter product-item boxed p-ten text-center even loop-first animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
