@@ -94,11 +94,35 @@ var generalSetting = {
      
     handleEvent : function() {
         
-        $('#frmBasicContents').on('submit', function() {
+        // TODO 류강하 : 공통 js로 옮겨야 함.
+        $('input[type="checkbox"]').each(function() {
             
-            var $form = $('#frmBasicContents');
+            this.checked = Boolean(Number(this.value));
+        });
+        
+//         $('form').on('submit', function() {
+           
+//             var $form = $(this);
             
-            callAjax($form
+//             var checkboxes = $form.find('input[type="checkbox"]');
+            
+//             console.log(checkboxes);
+            
+//             $.each(checkboxes, function(i, checkbox) {
+                
+//                 console.log(checkbox);
+                
+//                 console.log(checkbox.checked);
+//             });
+//         });
+        
+        
+        var form = 'frmGeneralSetting';
+        var $form = $('#' + form);
+        
+        $form.on('submit', function() {
+            
+            callAjax(form
                    , $form.prop('action')
                    , null
                    , $form.prop('method')
@@ -230,7 +254,7 @@ $(document).ready(function() {
                     </div>
                 </nav>
                 <section>
-                    <form id="frmBasicContents" action="save.do" method="post">
+                    <form id="frmGeneralSetting" action="save.do" method="post">
 	                    <div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
 	                        <div id="samDiv" class="tablet-mobile alpha bm-remove last">
 	                            
@@ -239,7 +263,7 @@ $(document).ready(function() {
 	                                   <label for="chkJoinApprovalFl">회원가입 승인여부</label>
                                    </div>
 	                                <div class="item_Lvalue one-quarter">
-	                                    <input id="chkJoinApprovalFl" type="checkbox" class="chk" value="${generalSetting.joinApprovalFl}" />
+	                                    <input id="chkJoinApprovalFl" name="joinApprovalFl" type="checkbox" class="chk" value="${generalSetting.joinApprovalFl}" />
 	                                </div>
 	                            </div>
 	                            <div class="responsive_row">
@@ -247,7 +271,7 @@ $(document).ready(function() {
                                        <label for="chkEmailAuthUseFl">메일인증 사용여부</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="chkEmailAuthUseFl" type="checkbox" class="chk" value="${generalSetting.emailAuthUseFl}" />
+                                        <input id="chkEmailAuthUseFl" name="emailAuthUseFl" type="checkbox" class="chk" value="${generalSetting.emailAuthUseFl}" />
                                     </div>
                                 </div>
                                 <div class="responsive_row">
@@ -263,12 +287,20 @@ $(document).ready(function() {
                                     </c:forEach>
                                     </div>
                                 </div>
+                                <div class="responsive_row">
+                                    <div class="item_Lname one-quarter">
+                                       <label for="inpPasswordChangeDcnt">비밀번호변경일수</label>
+                                   </div>
+                                    <div class="item_Lvalue one-quarter">
+                                        <input id="inpPasswordChangeDcnt" name="passwordChangeDcnt" type="text" value="${generalSetting.passwordChangeDcnt}" />
+                                    </div>
+                                </div>
 	                            <div class="responsive_row">
                                     <div class="item_Lname one-quarter">
                                        <label for="inpWebMasterNm">웹마스터 이름</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpWebMasterNm" type="text" value="${generalSetting.webMasterNm}" />
+                                        <input id="inpWebMasterNm" name="webMasterNm" type="text" value="${generalSetting.webMasterNm}" />
                                     </div>
                                 </div>
 	                            <div class="responsive_row">
@@ -276,8 +308,8 @@ $(document).ready(function() {
                                        <label for="inpWebMasterEmailAccount">웹마스터 메일주소</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpWebMasterEmailAccount" type="text" value="${generalSetting.webMasterEmailAccount}" />@
-                                        <input id="inpWebMasterEmailHost" type="text" value="${generalSetting.webMasterEmailHost}" />
+                                        <input id="inpWebMasterEmailAccount" name="webMasterEmailAccount" type="text" value="${generalSetting.webMasterEmailAccount}" />@
+                                        <input id="inpWebMasterEmailHost" name="webMasterEmailHost" type="text" value="${generalSetting.webMasterEmailHost}" />
                                     </div>
                                 </div>
                                 <div class="responsive_row">
@@ -285,16 +317,24 @@ $(document).ready(function() {
                                        <label for="inpLoginLimitDcnt">임시 제한일자</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpLoginLimitDcnt" type="text" value="${generalSetting.loginLimitDcnt}" />일
+                                        <input id="inpLoginLimitDcnt" name="loginLimitDcnt" type="text" value="${generalSetting.loginLimitDcnt}" />일
                                                                                 설정 시 회원 가입 후 정해진 일자동안 인증을 제한합니다.
+                                    </div>
+                                </div>
+                                <div class="responsive_row">
+                                    <div class="item_Lname one-quarter">
+                                       <label for="inpLoginFailureLimitCnt">로그인실패제한횟수</label>
+                                   </div>
+                                    <div class="item_Lvalue one-quarter">
+                                        <input id="inpLoginFailureLimitCnt" name="loginFailureLimitCnt" type="text" value="${generalSetting.loginFailureLimitCnt}" />회
                                     </div>
                                 </div>
                                 <div class="responsive-row">
                                     <div class="item_Lname one-quarter">
-                                       <label for="txtProhibitionNickname">금지 닉네임</label>
+                                       <label for="txtNicknameProhibitionWords">금지 닉네임</label>
                                     </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <textarea id="txtProhibitionNickname" name="txtProhibitionNickname" class="w-large">\${generalSetting.prohibitionNickname}</textarea>
+                                        <textarea id="txtNicknameProhibitionWords" name="nicknameProhibitionWords" class="w-large"><c:forEach var="nicknameProhibitionWord" items="${nicknameProhibitionWords}" varStatus="status">${nicknameProhibitionWord.c_title}<c:if test="${!status.last}"><customTags:newLine /></c:if></c:forEach></textarea>
                                     </div>
                                 </div>
 	                            <div class="responsive-row">

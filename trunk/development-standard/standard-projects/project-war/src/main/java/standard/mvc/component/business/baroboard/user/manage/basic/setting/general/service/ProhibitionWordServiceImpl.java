@@ -141,6 +141,9 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
         
         for (ProhibitionWord emailProhibitionWord : emailProhibitionWords) {
             
+            emailProhibitionWord.setRef(3);
+            emailProhibitionWord.setC_type("default");
+            
             addEmailProhibitionWord( emailProhibitionWord );
             ++affectedRowCount;
         }
@@ -157,6 +160,9 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
         deleteNicknameProhibitionWords();
         
         for (ProhibitionWord nicknameProhibitionWord : nicknameProhibitionWords) {
+            
+            nicknameProhibitionWord.setRef(4);
+            nicknameProhibitionWord.setC_type("default");
             
             addNicknameProhibitionWord( nicknameProhibitionWord );
             ++affectedRowCount;

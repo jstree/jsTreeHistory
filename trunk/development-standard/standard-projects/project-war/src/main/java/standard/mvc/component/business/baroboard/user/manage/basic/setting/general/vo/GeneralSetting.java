@@ -15,6 +15,8 @@
  */
 package standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo;
 
+import java.util.List;
+
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
@@ -71,6 +73,9 @@ public class GeneralSetting extends ComprehensiveTree {
     
     /** 웹마스터이메일 호스트 */
     private String webMasterEmailHost;
+    
+    /** 닉네임 금지단어 */
+    private String nicknameProhibitionWords;
     
     public int getPasswordSecurityLevelCd() {
         return passwordSecurityLevelCd;
@@ -158,6 +163,14 @@ public class GeneralSetting extends ComprehensiveTree {
 
     public void setWebMasterEmailHost(String webMasterEmailHost) {
         this.webMasterEmailHost = webMasterEmailHost;
+    }
+
+    public String getNicknameProhibitionWords() {
+        return nicknameProhibitionWords;
+    }
+
+    public void setNicknameProhibitionWords(String nicknameProhibitionWords) {
+        this.nicknameProhibitionWords = nicknameProhibitionWords;
     }
 
     @Override

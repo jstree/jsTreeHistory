@@ -28,7 +28,10 @@ import standard.mvc.component.business.baroboard.user.manage.basic.setting.gener
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.PasswordSecurityLevel;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
 
 /**
@@ -121,5 +124,26 @@ public class GeneralSettingServiceTest extends DbUnitTest<GeneralSetting> {
         assertThat(generalSetting.getPasswordChangeDcnt(), is(0));
         assertThat(generalSetting.getLoginLimitDcnt(), is(0));
         assertThat(generalSetting.getLoginFailureLimitCnt(), is(0));
+    }
+    
+    @Test
+    @DatabaseSetup("GeneralSettingServiceTest.xml")
+    @ExpectedDatabase(value = "GeneralSettingServiceTest_saveGeneralSetting.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+    public void saveGeneralSetting() throws Exception {
+        
+        GeneralSetting generalSetting = new GeneralSetting();
+        generalSetting.setPasswordSecurityLevelCd(4);
+        generalSetting.setWebMasterNm("바로보드 최고 관리자");
+        generalSetting.setWebMasterEmailAccount("313");
+        generalSetting.setWebMasterEmailHost("313.co.kr");
+        generalSetting.setJoinApprovalFl("1");
+        generalSetting.setEmailAuthUseFl("0");
+        generalSetting.setPasswordChangeDcnt(90);
+        generalSetting.setLoginLimitDcnt(1);
+        generalSetting.setLoginFailureLimitCnt(5);
+        
+        int affectedRowCount = generalSettingService.saveGeneralSetting(generalSetting);
+        
+        assertThat(affectedRowCount, is(1));
     }
 }

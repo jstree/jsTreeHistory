@@ -204,4 +204,17 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
         
         return temp;
     }
+    
+    /**
+     * 운영체제 별로 다른 개행 문자를 기준으로 문자열을 잘라 문자열 배열로 만들어 반환
+     * 
+     * @author 류강하
+     * @since 2015. 5. 23.
+     * @param str 문자열
+     * @return
+     */
+    public static String[] splitStringByNewLineOrTab(String str) {
+        
+        return str.split("(\r\n)|\r|\n|\t");
+    }
 }

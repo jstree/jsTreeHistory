@@ -83,11 +83,12 @@ var basicContents = {
      
     handleEvent : function() {
         
-        $('#frmBasicContents').on('submit', function() {
+        var form = 'frmBasicContents';
+        var $form = $('#' + form);
+        
+        $form.on('submit', function() {
             
-            var $form = $('#frmBasicContents');
-            
-            callAjax($form
+            callAjax(form
                    , $form.prop('action')
                    , null
                    , $form.prop('method')

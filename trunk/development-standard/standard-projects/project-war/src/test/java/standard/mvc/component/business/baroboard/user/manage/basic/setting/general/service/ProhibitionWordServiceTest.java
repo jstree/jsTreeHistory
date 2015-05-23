@@ -78,13 +78,11 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         
         emailProhibitionWord = new ProhibitionWord();
         emailProhibitionWord.setRef(3);
-        emailProhibitionWord.setC_position(0);
         emailProhibitionWord.setC_title("admin");
         emailProhibitionWord.setC_type("default");
         
         nicknameProhibitionWord = new ProhibitionWord();
         nicknameProhibitionWord.setRef(4);
-        nicknameProhibitionWord.setC_position(0);
         nicknameProhibitionWord.setC_title("관리자");
         nicknameProhibitionWord.setC_type("default");
     }
@@ -194,14 +192,14 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     }
     
     @Test
-    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
     public void addEmailProhibitionWord() throws Exception {
         
         addEmailProhibitionWord_common();
     }
     
     @Test
-    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addNicknameProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addNicknameProhibitionWord.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
     public void addNicknameProhibitionWord() throws Exception {
         
         addNicknameProhibitionWord_common();
@@ -224,7 +222,7 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     }
     
     @Test
-    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addEmailProhibitionWord.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
     public void saveEmailProhibitionWords() throws Exception {
 
         List<ProhibitionWord> emailProhibitionWords = new ArrayList<ProhibitionWord>();
@@ -237,7 +235,7 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
     }
     
     @Test
-    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addNicknameProhibitionWord.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "ProhibitionWordServiceTest_addNicknameProhibitionWord.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
     public void saveNicknameProhibitionWords() throws Exception {
 
         List<ProhibitionWord> nicknameProhibitionWords = new ArrayList<ProhibitionWord>();

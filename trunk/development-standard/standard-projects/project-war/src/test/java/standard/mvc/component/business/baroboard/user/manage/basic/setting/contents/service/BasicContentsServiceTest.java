@@ -76,7 +76,7 @@ public class BasicContentsServiceTest extends DbUnitTest<BasicContents> {
     }
     
     @Test
-    @ExpectedDatabase(value = "BasicContentsServiceTest_saveBasicContents.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "BasicContentsServiceTest_saveBasicContents.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
     public void saveBasicContents() throws Exception {
         
         BasicContents basicContents = basicContentsService.getBasicContents();

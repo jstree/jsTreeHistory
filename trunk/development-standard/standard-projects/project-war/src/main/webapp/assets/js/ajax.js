@@ -3,7 +3,7 @@
  * @param form
  * @param url
  * @param target
- * @param Type
+ * @param type
  * @param returnType
  * @param contentType / String default : application/x-www-form-urlencoded; charset=UTF-8
  * @param jsonpCallback / String default : 'callback'
@@ -11,7 +11,7 @@
  * @param crossDomain /boolean default : false
  * @returns XMLHttpRequest
  */
-function callAjax(form, url, target, Type, returnType, contentType, jsonpCallback, processData, crossDomain, async) {
+function callAjax(form, url, target, type, returnType, contentType, jsonpCallback, processData, crossDomain, async) {
 	/*
 	 * jquery로 ajax 사용시 No transport 라는 에러가 발생하는 경우 아래의 문장을 추가하면 해결가능. 
 	 * (보통 localhost 로 테스트 시 크로스 도메인 문제로 발생하는 오류)
@@ -21,10 +21,28 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 	 * */
 	$.support.cors = true;
 	
-	var formQueryString;
+	var formQueryString = null;
 	
 	if (form){
-		formQueryString = $(form).serialize();
+	    
+	    var $form = $('#' + form);
+	    
+		formQueryString = $form.serialize();
+		console.log(formQueryString);
+		
+		// 체크박스 미체크 시에도 파라미터 값을 넘기도록 설정
+		var checkboxes = $('input[type="checkbox"]', $form).filter(function() {
+            
+            return $(this).prop('checked') === false;
+        });
+		
+		$.each(checkboxes, function(i, checkbox) {
+		    
+		    formQueryString += '&' + $(checkbox).attr('name') + '=0';
+		});
+		console.log(formQueryString);
+		
+//		return false;
 	}
 	
 	/**
@@ -112,7 +130,7 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 		 * crossDomain(added 1.5) / boolean : 같은 도메인 내의 요청일 경우 true, 크로스 도메인 간의 데이터 교환이라면(JSONP와 같은), 이 세팅값을 true로 해야 함. (default 는 false) 
 		 * */
 		url : url,
-		type : Type,
+		type : type,
 		data : formQueryString,
 		dataType : returnType,
 		jsonp : false,
@@ -208,9 +226,9 @@ function callAjax(form, url, target, Type, returnType, contentType, jsonpCallbac
 //	  console.log(jqXHR);
 	  
 	  if (responseText.result == false) {
-	    notificationAlert(responseText.message);
+	      notificationAlert(responseText.message);
 	  }
-	  if (jsonpCallback) {
+	  else if (jsonpCallback) {
 	      jsonpCallback(responseText);
 	  }
 	  

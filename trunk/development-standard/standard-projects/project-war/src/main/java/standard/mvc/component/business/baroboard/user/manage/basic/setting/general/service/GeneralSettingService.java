@@ -57,4 +57,13 @@ public interface GeneralSettingService {
      * @throws Exception
      */
     GeneralSetting getGeneralSetting() throws Exception;
+    
+    /**
+     * 일반설정을 저장한다.
+     * 
+     * @param generalSetting 일반설정 DTO
+     * @return affectedRowCount
+     * @throws Exception
+     */
+    int saveGeneralSetting(GeneralSetting generalSetting) throws Exception;
 }

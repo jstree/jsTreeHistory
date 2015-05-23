@@ -15,17 +15,25 @@
  */
 package standard.mvc.component.business.baroboard.user.manage.basic.setting.general.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import standard.mvc.component.business.baroboard.user.manage.basic.setting.contents.vo.BasicContents;
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.GeneralSettingService;
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.ProhibitionWordService;
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.GeneralSetting;
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.ProhibitionWord;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 
 /**
  * Modification Information
@@ -51,8 +59,13 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
 @RequestMapping("/user/manage/basic/setting/general")
 public class GeneralSettingController extends GenericAbstractController {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
     @Autowired
     private GeneralSettingService generalSettingService;
+    
+    @Autowired
+    private ProhibitionWordService prohibitionWordService;
     
     @Override
     public Map<String, Map<String, Object>> bindTypes() {
@@ -67,14 +80,43 @@ public class GeneralSettingController extends GenericAbstractController {
         
         model.addAttribute("generalSetting", generalSettingService.getGeneralSetting());
         
+        model.addAttribute("nicknameProhibitionWords", prohibitionWordService.getNicknameProhibitionWords());
+        
         return "/jsp/user/manage/basic/setting/general/index";
     }
     
-    @RequestMapping("/save.do")
+    @RequestMapping(value = "/save.do", method = RequestMethod.POST)
     @ResponseBody
-    public String save(BasicContents basicContents) throws Exception {
+    public String save(GeneralSetting generalSetting) throws Exception {
         
-//        generalSettingService.saveBasicContents(basicContents);
+        logger.debug("generalSetting : " + generalSetting);
+        
+        generalSettingService.saveGeneralSetting(generalSetting);
+
+        String[] nicknameProhibitionWordArray = StringUtils.splitStringByNewLineOrTab( generalSetting.getNicknameProhibitionWords() );
+        
+        if ( ! (nicknameProhibitionWordArray.length == 1 && "".equals(nicknameProhibitionWordArray[0])) ) {
+            
+            List<ProhibitionWord> nicknameProhibitionWordList = new ArrayList<ProhibitionWord>();
+            
+            for (int i = 0; i < nicknameProhibitionWordArray.length; i++) {
+                
+                ProhibitionWord prohibitionWord = new ProhibitionWord();
+                prohibitionWord.setC_title( nicknameProhibitionWordArray[i] );
+                
+                if ("".equals(prohibitionWord.getC_title())) {
+                    continue;
+                }
+                
+                nicknameProhibitionWordList.add(prohibitionWord);
+            }
+            
+            if (nicknameProhibitionWordList.size() > 0) {
+                prohibitionWordService.saveNicknameProhibitionWords(nicknameProhibitionWordList);
+            }
+            
+            logger.debug("nicknameProhibitionWordList : " + nicknameProhibitionWordList);
+        }
         
         return "{}";
     }

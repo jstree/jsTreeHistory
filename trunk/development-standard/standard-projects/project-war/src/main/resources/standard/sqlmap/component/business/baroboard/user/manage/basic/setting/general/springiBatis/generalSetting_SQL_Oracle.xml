@@ -84,6 +84,14 @@
 		UPDATE T_USER_GENERAL_SETTING 
 		   SET C_TYPE = #c_type#
 		     , C_TITLE = #c_title#
+		     , C_PASSWORD_SECURITY_LEVEL_CD = #passwordSecurityLevelCd#
+             , C_WEB_MASTER_NM = #webMasterNm#
+             , C_WEB_MASTER_EMAIL = #webMasterEmail#
+             , C_JOIN_APPROVAL_FL = #joinApprovalFl#
+             , C_EMAIL_AUTH_USE_FL = #emailAuthUseFl#
+             , C_PASSWORD_CHANGE_DCNT = #passwordChangeDcnt#
+             , C_LOGIN_LIMIT_DCNT = #loginLimitDcnt#
+             , C_LOGIN_FAILURE_LIMIT_CNT = #loginFailureLimitCnt#
 		 WHERE C_ID = #c_id#
 	</update>
 

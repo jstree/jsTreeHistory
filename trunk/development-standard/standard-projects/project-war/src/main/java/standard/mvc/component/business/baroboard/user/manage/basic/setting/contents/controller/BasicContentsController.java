@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.contents.service.BasicContentsService;
@@ -68,7 +69,7 @@ public class BasicContentsController extends GenericAbstractController {
         return "/jsp/user/manage/basic/setting/contents/index";
     }
     
-    @RequestMapping("/save.do")
+    @RequestMapping(value = "/save.do", method = RequestMethod.POST)
     @ResponseBody
     public String save(BasicContents basicContents) throws Exception {
         
