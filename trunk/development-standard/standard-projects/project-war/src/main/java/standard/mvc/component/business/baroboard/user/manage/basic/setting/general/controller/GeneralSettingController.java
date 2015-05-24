@@ -19,11 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -87,9 +90,20 @@ public class GeneralSettingController extends GenericAbstractController {
     
     @RequestMapping(value = "/save.do", method = RequestMethod.POST)
     @ResponseBody
-    public String save(GeneralSetting generalSetting) throws Exception {
+    public String save(@Valid GeneralSetting generalSetting, BindingResult bindingResult) throws Exception {
         
-        logger.debug("generalSetting : " + generalSetting);
+        if (bindingResult.hasErrors()) {
+            logger.error("bindingResult : " + bindingResult.getAllErrors());
+            throw new RuntimeException("bb.com.error.001");
+        }
+        
+        String webMasterEmail = generalSetting.getWebMasterEmailAccount() + "@" + generalSetting.getWebMasterEmailHost();
+        
+        if (!webMasterEmail.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+            throw new RuntimeException("bb.com.error.001");
+        }
+        
+        generalSetting.setWebMasterEmail(webMasterEmail);
         
         generalSettingService.saveGeneralSetting(generalSetting);
 
@@ -114,8 +128,6 @@ public class GeneralSettingController extends GenericAbstractController {
             if (nicknameProhibitionWordList.size() > 0) {
                 prohibitionWordService.saveNicknameProhibitionWords(nicknameProhibitionWordList);
             }
-            
-            logger.debug("nicknameProhibitionWordList : " + nicknameProhibitionWordList);
         }
         
         return "{}";

@@ -91,31 +91,20 @@ input[type="text"] {
 </style>
 <script>
 var generalSetting = {
-     
+    
     handleEvent : function() {
         
         // TODO 류강하 : 공통 js로 옮겨야 함.
         $('input[type="checkbox"]').each(function() {
             
-            this.checked = Boolean(Number(this.value));
+            this.checked = Number(this.value);
         });
-        
-//         $('form').on('submit', function() {
-           
-//             var $form = $(this);
+        $('input[type="checkbox"]').on('click', function() {
             
-//             var checkboxes = $form.find('input[type="checkbox"]');
+            var $checkbox = $(this);
             
-//             console.log(checkboxes);
-            
-//             $.each(checkboxes, function(i, checkbox) {
-                
-//                 console.log(checkbox);
-                
-//                 console.log(checkbox.checked);
-//             });
-//         });
-        
+            $checkbox.val( $checkbox.prop('checked') ? 1 : 0 );
+        });
         
         var form = 'frmGeneralSetting';
         var $form = $('#' + form);
@@ -131,7 +120,6 @@ var generalSetting = {
                    , callback);
             
             function callback(r) {
-                alert('저장되었습니다.');
             }
             
             return false;
@@ -279,7 +267,6 @@ $(document).ready(function() {
                                        <label for="passwordSecurityLevelCd1">비밀번호 보안수준</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                    <c:set var="end" value="${passwordSecurityLevels[0].c_id + fn:length(passwordSecurityLevels) - 1}" />
                                     <c:forEach var="passwordSecurityLevel" items="${passwordSecurityLevels}" varStatus="status">
                                         <c:if test="${!status.first}"><br /></c:if>
                                         <input id="passwordSecurityLevelCd${status.index + 1}" name="passwordSecurityLevelCd" type="radio" class="rdo" value="${passwordSecurityLevel.c_id}" <c:if test="${passwordSecurityLevel.c_id == generalSetting.passwordSecurityLevelCd}">checked="checked"</c:if> />
@@ -292,7 +279,7 @@ $(document).ready(function() {
                                        <label for="inpPasswordChangeDcnt">비밀번호변경일수</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpPasswordChangeDcnt" name="passwordChangeDcnt" type="text" value="${generalSetting.passwordChangeDcnt}" />
+                                        <input id="inpPasswordChangeDcnt" name="passwordChangeDcnt" type="text" value="${generalSetting.passwordChangeDcnt}" placeholder="3자리 이하의 숫자" />일
                                     </div>
                                 </div>
 	                            <div class="responsive_row">
@@ -300,7 +287,7 @@ $(document).ready(function() {
                                        <label for="inpWebMasterNm">웹마스터 이름</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpWebMasterNm" name="webMasterNm" type="text" value="${generalSetting.webMasterNm}" />
+                                        <input id="inpWebMasterNm" name="webMasterNm" type="text" value="${generalSetting.webMasterNm}" placeholder="10자리 이하의 문자" />
                                     </div>
                                 </div>
 	                            <div class="responsive_row">
@@ -308,8 +295,8 @@ $(document).ready(function() {
                                        <label for="inpWebMasterEmailAccount">웹마스터 메일주소</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpWebMasterEmailAccount" name="webMasterEmailAccount" type="text" value="${generalSetting.webMasterEmailAccount}" />@
-                                        <input id="inpWebMasterEmailHost" name="webMasterEmailHost" type="text" value="${generalSetting.webMasterEmailHost}" />
+                                        <input id="inpWebMasterEmailAccount" name="webMasterEmailAccount" type="text" value="${generalSetting.webMasterEmailAccount}" placeholder="64자리 이하의 이메일 형식 문자" />@
+                                        <input id="inpWebMasterEmailHost" name="webMasterEmailHost" type="text" value="${generalSetting.webMasterEmailHost}" placeholder="255자리 이하의 이메일 형식 문자" />
                                     </div>
                                 </div>
                                 <div class="responsive_row">
@@ -317,7 +304,7 @@ $(document).ready(function() {
                                        <label for="inpLoginLimitDcnt">임시 제한일자</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpLoginLimitDcnt" name="loginLimitDcnt" type="text" value="${generalSetting.loginLimitDcnt}" />일
+                                        <input id="inpLoginLimitDcnt" name="loginLimitDcnt" type="text" value="${generalSetting.loginLimitDcnt}" placeholder="2자리 이하의 숫자" />일
                                                                                 설정 시 회원 가입 후 정해진 일자동안 인증을 제한합니다.
                                     </div>
                                 </div>
@@ -326,7 +313,7 @@ $(document).ready(function() {
                                        <label for="inpLoginFailureLimitCnt">로그인실패제한횟수</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <input id="inpLoginFailureLimitCnt" name="loginFailureLimitCnt" type="text" value="${generalSetting.loginFailureLimitCnt}" />회
+                                        <input id="inpLoginFailureLimitCnt" name="loginFailureLimitCnt" type="text" value="${generalSetting.loginFailureLimitCnt}" placeholder="1자리 숫자" />회
                                     </div>
                                 </div>
                                 <div class="responsive-row">
@@ -334,7 +321,7 @@ $(document).ready(function() {
                                        <label for="txtNicknameProhibitionWords">금지 닉네임</label>
                                     </div>
                                     <div class="item_Lvalue one-quarter">
-                                        <textarea id="txtNicknameProhibitionWords" name="nicknameProhibitionWords" class="w-large"><c:forEach var="nicknameProhibitionWord" items="${nicknameProhibitionWords}" varStatus="status">${nicknameProhibitionWord.c_title}<c:if test="${!status.last}"><customTags:newLine /></c:if></c:forEach></textarea>
+                                        <textarea id="txtNicknameProhibitionWords" name="nicknameProhibitionWords" class="w-large" placeholder="단어 사이를 개행으로 구분하여 입력"><c:forEach var="nicknameProhibitionWord" items="${nicknameProhibitionWords}" varStatus="status">${nicknameProhibitionWord.c_title}<c:if test="${!status.last}"><customTags:newLine /></c:if></c:forEach></textarea>
                                     </div>
                                 </div>
 	                            <div class="responsive-row">

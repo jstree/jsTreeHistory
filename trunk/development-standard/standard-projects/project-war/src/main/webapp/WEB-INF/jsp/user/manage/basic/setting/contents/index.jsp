@@ -97,7 +97,6 @@ var basicContents = {
                    , callback);
             
             function callback(r) {
-                alert('저장되었습니다.');
             }
             
             return false;

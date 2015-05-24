@@ -23,7 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import standard.mvc.component.business.baroboard.user.manage.basic.setting.contents.vo.BasicContents;
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.GeneralSetting;
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.PasswordSecurityLevel;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
@@ -90,10 +89,6 @@ public class GeneralSettingServiceImpl implements GeneralSettingService {
         
         generalSetting.setC_type( original.getC_type() );
         generalSetting.setC_title( original.getC_title() );
-        
-        String webMasterEmail = generalSetting.getWebMasterEmailAccount() + "@" + generalSetting.getWebMasterEmailHost();
-        
-        generalSetting.setWebMasterEmail(webMasterEmail);
         
         return coreService.alterNode(generalSetting);
     }

@@ -24,11 +24,10 @@ function callAjax(form, url, target, type, returnType, contentType, jsonpCallbac
 	var formQueryString = null;
 	
 	if (form){
-	    
 	    var $form = $('#' + form);
 	    
 		formQueryString = $form.serialize();
-		console.log(formQueryString);
+//		console.log(formQueryString);
 		
 		// 체크박스 미체크 시에도 파라미터 값을 넘기도록 설정
 		var checkboxes = $('input[type="checkbox"]', $form).filter(function() {
@@ -40,9 +39,7 @@ function callAjax(form, url, target, type, returnType, contentType, jsonpCallbac
 		    
 		    formQueryString += '&' + $(checkbox).attr('name') + '=0';
 		});
-		console.log(formQueryString);
-		
-//		return false;
+//		console.log(formQueryString);
 	}
 	
 	/**
@@ -227,8 +224,11 @@ function callAjax(form, url, target, type, returnType, contentType, jsonpCallbac
 	  
 	  if (responseText.result == false) {
 	      notificationAlert(responseText.message);
+	  } else {
+	      notificationAlert('정상 처리되었습니다.');
 	  }
-	  else if (jsonpCallback) {
+	  
+	  if (jsonpCallback) {
 	      jsonpCallback(responseText);
 	  }
 	  

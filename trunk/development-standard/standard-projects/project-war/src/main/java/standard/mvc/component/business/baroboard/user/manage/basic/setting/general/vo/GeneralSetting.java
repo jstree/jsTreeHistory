@@ -15,7 +15,10 @@
  */
 package standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo;
 
-import java.util.List;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
+import org.springmodules.validation.bean.conf.loader.annotation.handler.RegExp;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -42,36 +45,45 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 public class GeneralSetting extends ComprehensiveTree {
 
     /** 비밀번호보안수준코드 */
+    @Range(min = 3, max = 5)
     private int passwordSecurityLevelCd;
     
     /** 비밀번호보안수준코드명 */
     private String passwordSecurityLevelCdNm;
 
     /** 웹마스터이름 */
+    @Size(min = 1, max = 30)
     private String webMasterNm;
 
     /** 웹마스터이메일 */
     private String webMasterEmail;
     
     /** 회원가입승인여부 */
+    @Size(min = 0, max = 1)
     private String joinApprovalFl;
 
     /** 이메일인증사용여부 */
+    @Size(min = 0, max = 1)
     private String emailAuthUseFl;
 
     /** 비밀번호변경일수 */
+    @RegExp("[0-9]{1,3}")
     private int passwordChangeDcnt;
 
     /** 로그인제한일수 */
+    @RegExp("[0-9]{1,2}")
     private int loginLimitDcnt;
 
     /** 로그인실패제한횟수 */
+    @RegExp("[0-9]{1}")
     private int loginFailureLimitCnt;
     
     /** 웹마스터이메일 계정 */
+    @Size(min = 1, max = 64)
     private String webMasterEmailAccount;
     
     /** 웹마스터이메일 호스트 */
+    @Size(min = 1, max = 255)
     private String webMasterEmailHost;
     
     /** 닉네임 금지단어 */

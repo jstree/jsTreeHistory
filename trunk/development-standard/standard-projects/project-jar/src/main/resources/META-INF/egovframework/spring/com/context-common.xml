@@ -17,6 +17,7 @@
 				<value>classpath:/egovframework/rte/fdl/idgnr/messages/idgnr</value>
 				<value>classpath:/egovframework/rte/fdl/property/messages/properties</value>
 				<value>classpath:/META-INF/egovframework/egovProps/globals</value>
+				<value>classpath:/META-INF/egovframework/message/com/baroboard</value>
 			</list>
 		</property>
 		<property name="cacheSeconds">

@@ -31,7 +31,6 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
 import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
 
 /**
@@ -117,8 +116,6 @@ public class GeneralSettingServiceTest extends DbUnitTest<GeneralSetting> {
         assertThat(generalSetting.getPasswordSecurityLevelCd(), is(3));
         assertThat(generalSetting.getWebMasterNm(), is(equalTo("바로보드 관리자")));
         assertThat(generalSetting.getWebMasterEmail(), is(equalTo("313@313.co.kr")));
-        assertThat(generalSetting.getWebMasterEmailAccount(), is(equalTo("313")));
-        assertThat(generalSetting.getWebMasterEmailHost(), is(equalTo("313.co.kr")));
         assertThat(generalSetting.getJoinApprovalFl(), is(equalTo("0")));
         assertThat(generalSetting.getEmailAuthUseFl(), is(equalTo("0")));
         assertThat(generalSetting.getPasswordChangeDcnt(), is(0));
@@ -134,8 +131,7 @@ public class GeneralSettingServiceTest extends DbUnitTest<GeneralSetting> {
         GeneralSetting generalSetting = new GeneralSetting();
         generalSetting.setPasswordSecurityLevelCd(4);
         generalSetting.setWebMasterNm("바로보드 최고 관리자");
-        generalSetting.setWebMasterEmailAccount("313");
-        generalSetting.setWebMasterEmailHost("313.co.kr");
+        generalSetting.setWebMasterEmail("313@313.co.kr");
         generalSetting.setJoinApprovalFl("1");
         generalSetting.setEmailAuthUseFl("0");
         generalSetting.setPasswordChangeDcnt(90);
