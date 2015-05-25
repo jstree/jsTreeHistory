@@ -22,7 +22,7 @@ import egovframework.com.ext.jstree.support.util.DateUtils;
  * @since 2015. 5. 16.
  * @version 1.0
  * @see <pre>
- * Class Name  : ProhibitionWordServiceImpl.java
+ * Class Name  : UserNoteServiceImpl.java
  * Description : 바로보드-쪽지 Service 구현 클래스
  * Infomation  : 바로보드-쪽지 Service 구현 클래스
  * 

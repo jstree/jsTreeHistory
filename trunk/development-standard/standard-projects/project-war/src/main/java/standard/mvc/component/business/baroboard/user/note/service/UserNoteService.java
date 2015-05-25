@@ -15,7 +15,7 @@ import standard.mvc.component.business.baroboard.user.note.vo.UserNoteTypeCode;
  * @since 2015. 5. 16.
  * @version 1.0
  * @see <pre>
- * Class Name  : ProhibitionWordServiceImpl.java
+ * Class Name  : UserNoteService.java
  * Description : 바로보드-쪽지 Service 인터페이스
  * Infomation  : 바로보드-쪽지 Service 인터페이스
  * 
