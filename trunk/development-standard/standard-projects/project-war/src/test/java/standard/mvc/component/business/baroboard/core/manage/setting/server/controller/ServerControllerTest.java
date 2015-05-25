@@ -61,7 +61,7 @@ public class ServerControllerTest {
 
     @Test
     public void testGetNode() throws Exception {
-        this.mockMvc.perform(get("/core/manage/setting/server/form.do")).andDo(print())
+        this.mockMvc.perform(get("/core/manage/setting/server/index.do")).andDo(print())
                 .andExpect(status().isOk());
     }
 

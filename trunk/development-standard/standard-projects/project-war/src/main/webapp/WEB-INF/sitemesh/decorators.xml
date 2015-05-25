@@ -25,6 +25,8 @@
 		<pattern>/common/*error.do</pattern>
 		<!-- 바로보드 관리자 임시 예외 처리 -->
 		<pattern>/user/manage/*</pattern>
+		<!-- 바로보드 코어 임시 예외 처리 -->
+		<pattern>/core/manage/*</pattern>
 	</excludes>
 	
 	<decorator name="default" page="defaultDeco.jsp">

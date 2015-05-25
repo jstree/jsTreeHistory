@@ -54,12 +54,12 @@ public class ServerController extends GenericAbstractController {
         return null;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/form.do", method = {RequestMethod.GET})
-    public ServerVO getNode(ModelMap modelMap, HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "/index.do", method = {RequestMethod.GET})
+    public String getNode(ModelMap modelMap, HttpServletRequest request) throws Exception {
         ServerVO serverVO = new ServerVO();
         serverVO.setC_id(4);
-        return serverService.getNode(serverVO);
+        modelMap.addAttribute("server", serverService.getNode(serverVO));
+        return "/jsp/core/manage/setting/server/index";
     }
 
     @ResponseBody
