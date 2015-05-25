@@ -1,4 +1,4 @@
-package standard.mvc.component.business.baroboard.user.manage.user.note.vo;
+package standard.mvc.component.business.baroboard.user.note.vo;
 
 import java.util.List;
 

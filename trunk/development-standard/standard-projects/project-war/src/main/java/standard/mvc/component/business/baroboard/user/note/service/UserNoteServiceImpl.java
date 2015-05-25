@@ -1,4 +1,4 @@
-package standard.mvc.component.business.baroboard.user.manage.user.note.service;
+package standard.mvc.component.business.baroboard.user.note.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,10 +6,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteAttachFile;
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteByUser;
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteDetail;
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteTypeCode;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteByUser;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteDetail;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteTypeCode;
+
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.util.DateUtils;

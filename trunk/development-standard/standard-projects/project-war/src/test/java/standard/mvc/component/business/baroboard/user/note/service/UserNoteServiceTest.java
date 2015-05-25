@@ -1,4 +1,4 @@
-package standard.mvc.component.business.baroboard.user.manage.note.service;
+package standard.mvc.component.business.baroboard.user.note.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,10 +15,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteAttachFile;
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteByUser;
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteDetail;
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteTypeCode;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteByUser;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteDetail;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteTypeCode;
+
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
@@ -36,7 +37,7 @@ public class UserNoteServiceTest {
 	
 	@Ignore
 	public void sendNote() throws Exception {
-		String noteTitle    = "쪽지 제목입니다.444"; //쪽지제목
+		String noteTitle    = "쪽지 제목입니다.555"; //쪽지제목
 		String noteContent  = "쪽지 내용입니다..金大根"; //쪽지내용
 		String attachFileNm = "김대근 테스트.jpg"; //첨부파일명
 				

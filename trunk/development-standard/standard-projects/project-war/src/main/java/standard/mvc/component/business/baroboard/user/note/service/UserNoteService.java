@@ -1,10 +1,11 @@
-package standard.mvc.component.business.baroboard.user.manage.user.note.service;
+package standard.mvc.component.business.baroboard.user.note.service;
 
 import java.util.List;
 
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteByUser;
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteDetail;
-import standard.mvc.component.business.baroboard.user.manage.user.note.vo.UserNoteTypeCode;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteByUser;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteDetail;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteTypeCode;
+
 
 
 /**
