@@ -149,12 +149,9 @@ public class ServerControllerTest {
     }
 
     @Test
-    public void testAlterNodeWithout() throws Exception {
-        this.mockMvc
-                .perform(
-                        post("/core/manage/setting/server/update.do").param("c_id", "4").param(
-                                "url", "http://127.0.1.1")).andDo(print())
-                .andExpect(status().isOk());
+    public void testAlterNodeWithUpdateConditionOnly() throws Exception {
+        this.mockMvc.perform(post("/core/manage/setting/server/update.do").param("c_id", "4"))
+                .andDo(print()).andExpect(status().isOk());
     }
 
 }
