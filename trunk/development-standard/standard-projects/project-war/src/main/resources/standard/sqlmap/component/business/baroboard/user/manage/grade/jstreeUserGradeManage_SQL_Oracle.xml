@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="standard.mvc.component.business.baroboard.user.manage.grade.vo.UserMenuByGrade">
+<sqlMap namespace="standard.mvc.component.business.baroboard.user.manage.grade.vo.UserGradeManage">
 	<typeAlias alias="UserGradeManage"
 		type="standard.mvc.component.business.baroboard.user.manage.grade.vo.UserGradeManage" />
 
 	<sql id="getMetaField">
 		/* getChildNode */
-		SELECT A.c_id
+		SELECT A.c_id 
 		, A.c_parentid
 		, A.c_position
 		, A.c_left
