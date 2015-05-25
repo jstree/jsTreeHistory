@@ -2,6 +2,7 @@ package standard.mvc.component.business.baroboard.board.article.service;
 
 import javax.annotation.Resource;
 
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -34,13 +35,12 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * </pre>
  */
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
 public class ArticleServiceTest {
 
-	@Resource(name = "ArticleService")
-	ArticleService service;
 	
 	
 	
