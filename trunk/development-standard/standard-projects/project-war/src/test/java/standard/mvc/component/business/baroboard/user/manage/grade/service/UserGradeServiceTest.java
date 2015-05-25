@@ -1,8 +1,5 @@
 package standard.mvc.component.business.baroboard.user.manage.grade.service;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,17 +13,11 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import standard.mvc.component.business.baroboard.user.manage.grade.vo.UserGradeManage;
-import standard.mvc.component.business.baroboard.user.manage.grade.vo.UserMenuByGrade;
-import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile;
-import standard.mvc.component.business.baroboard.user.note.vo.UserNoteByUser;
-import standard.mvc.component.business.baroboard.user.note.vo.UserNoteDetail;
-import standard.mvc.component.business.baroboard.user.note.vo.UserNoteTypeCode;
 
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
-import egovframework.com.ext.jstree.support.util.DateUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -37,19 +28,23 @@ public class UserGradeServiceTest{
 	@Resource(name = "CoreService")
     private CoreService coreService;
 
+	@Test
 	public void inquiryUserGradeList() throws Exception {
 		UserGradeManage userGradeManage = new UserGradeManage();
 		List<UserGradeManage> userGradeManageList = coreService.getChildNode(userGradeManage);
 	}
 
+	@Ignore
 	public void inquiryUserGradeDetailInf(UserGradeManage userGradeManage) throws Exception {
 		
 	}
 
+	@Ignore
 	public void saveUserGradeDetailInf(UserGradeManage userGradeManage) throws Exception {
 		
 	}
 
+	@Ignore
 	public void inquiryUserMenuByGradeList(UserGradeManage userGradeManage) throws Exception {
 		
 	}
