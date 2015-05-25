@@ -1,6 +1,7 @@
 package standard.mvc.component.business.baroboard.core.manage.setting.server.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -59,7 +60,41 @@ public class ServerControllerTest {
 
     @Test
     public void testGetNode() throws Exception {
-        this.mockMvc.perform(get("/core/manage/setting/server/index.do")).andDo(print())
+        this.mockMvc.perform(get("/core/manage/setting/server/form.do")).andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testAlterNodeWithoutC_type() throws Exception {
+        this.mockMvc
+                .perform(
+                        post("/core/manage/setting/server/update.do").param("c_id", "4")
+                                .param("url", "http://127.0.1.1").param("sslFl", "0")
+                                .param("httpPort", "18080").param("httpsPort", "18443")
+                                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testAlterNodeWithC_typeWithoutC_title() throws Exception {
+        this.mockMvc
+                .perform(
+                        post("/core/manage/setting/server/update.do").param("c_id", "4")
+                                .param("c_type", "default").param("url", "http://127.0.1.1")
+                                .param("sslFl", "0").param("httpPort", "18080")
+                                .param("httpsPort", "18443").param("shortUrlFl", "0")
+                                .param("ssoFl", "0")).andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    public void testAlterNodeWithC_typeAndC_title() throws Exception {
+        this.mockMvc
+                .perform(
+                        post("/core/manage/setting/server/update.do").param("c_id", "4")
+                                .param("c_type", "default").param("c_title", "서버설정")
+                                .param("url", "http://127.0.1.1").param("sslFl", "0")
+                                .param("httpPort", "18080").param("httpsPort", "18443")
+                                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
                 .andExpect(status().isOk());
     }
 

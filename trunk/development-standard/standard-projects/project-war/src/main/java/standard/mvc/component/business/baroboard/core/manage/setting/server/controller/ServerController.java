@@ -7,10 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.core.manage.setting.server.vo.ServerVO;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
@@ -48,12 +54,26 @@ public class ServerController extends GenericAbstractController {
         return null;
     }
 
-    @RequestMapping(value = "/index.do")
-    public ServerVO getNode(ModelMap modelMap, HttpServletRequest request)
-            throws Exception {
+    @ResponseBody
+    @RequestMapping(value = "/form.do", method = {RequestMethod.GET})
+    public ServerVO getNode(ModelMap modelMap, HttpServletRequest request) throws Exception {
         ServerVO serverVO = new ServerVO();
         serverVO.setC_id(4);
         return serverService.getNode(serverVO);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/update.do", method = {RequestMethod.POST})
+    public ServerVO alterNode(@Validated(value = AlterNode.class) ServerVO serverVO,
+            BindingResult bindingResult, ModelMap model) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new RuntimeException(bindingResult.getAllErrors().toString());
+        }
+
+        serverVO.setC_title(Util_TitleChecker.StringReplace(serverVO.getC_title()));
+        serverVO.setStatus(serverService.alterNode(serverVO));
+
+        return serverVO;
     }
 
 }
