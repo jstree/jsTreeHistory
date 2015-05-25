@@ -21,8 +21,6 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -62,8 +60,6 @@ import egovframework.com.ext.jstree.support.util.StringUtils;
 @RequestMapping("/user/manage/basic/setting/general")
 public class GeneralSettingController extends GenericAbstractController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
     @Autowired
     private GeneralSettingService generalSettingService;
     
@@ -93,7 +89,6 @@ public class GeneralSettingController extends GenericAbstractController {
     public String save(@Valid GeneralSetting generalSetting, BindingResult bindingResult) throws Exception {
         
         if (bindingResult.hasErrors()) {
-            logger.error("bindingResult : " + bindingResult.getAllErrors());
             throw new RuntimeException("bb.com.error.001");
         }
         

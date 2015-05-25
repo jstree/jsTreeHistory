@@ -19,8 +19,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.GeneralSetting;
@@ -49,8 +47,6 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
  */
 @Service
 public class GeneralSettingServiceImpl implements GeneralSettingService {
-    
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @Resource(name = "CoreService")
     private CoreService coreService;

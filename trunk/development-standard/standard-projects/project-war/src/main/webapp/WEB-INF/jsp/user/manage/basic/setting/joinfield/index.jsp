@@ -70,6 +70,15 @@
 <!-- !!!  FOR THIS PAGE ONLY !!! -->
 <link href="http://www.313.co.kr:5002/Component/jsp/admin/board/lib/admin.css" rel="stylesheet" type="text/css" media="all">
 <link href="http://www.313.co.kr:5002/Component/jsp/admin/board/divSample.css" rel="stylesheet" type="text/css" media="all">
+<!-- 반응성 테이블을 위한 dataTables 에드온 -->
+<link rel="stylesheet" type="text/css" href="http://www.313.co.kr:5002/Component/jsp/admin/board/DataTables-1.10.4/media/css/jquery.dataTables.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="http://www.313.co.kr:5002/Component/jsp/admin/board/DataTables-1.10.4/extensions/Responsive/css/dataTables.responsive.css" media="screen" />
+<script type="text/javascript" src="http://www.313.co.kr:5002/Component/jsp/admin/board/DataTables-1.10.4/media/js/jquery.dataTables.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://www.313.co.kr:5002/Component/jsp/admin/board/DataTables-1.10.4/extensions/Responsive/js/dataTables.responsive.js" charset="utf-8"></script>
+<!-- 반응형 테이블을 위한 css & JS & plugins -->
+<link rel="stylesheet" type="text/css" href="http://www.313.co.kr:5002/Component/jsp/admin/board/lib/tableSample.css">
+<link rel="stylesheet" type="text/css" href="http://www.313.co.kr:5002/Component/jsp/admin/board/DataTables-1.10.4/extensions/Responsive/css/dataTables.responsive.css">
+<script type="text/javascript" src="http://www.313.co.kr:5002/Component/jsp/admin/board/DataTables-1.10.4/extensions/Responsive/js/dataTables.responsive.js"></script>
 <style type="text/css">
 #samDiv>div>div {
     height: 100% !important; <%-- divSample.css #samDiv>div>div height: 30px --%>
@@ -90,8 +99,40 @@ input[type="text"] {
 }
 </style>
 <script>
-var generalSetting = {
-    
+var joinField = {
+
+    initGrid : function() {
+        
+        var joinFields = JSON.parse('${joinFields}');
+        
+        var $tblJoinFields = $('#tblJoinFields');
+        var $tbody = $tblJoinFields.find('tbody');
+        
+        $.each(joinFields, function(i, joinField) {
+            
+            var row = '<tr id="' + joinField.c_id + '">';
+            row += '<td>' + joinField.c_title + '</td>';
+            row += '<td><input type="checkbox" value="' + joinField.useFl + '" /></td>';
+            row += '<td><input type="checkbox" value="' + joinField.infoOpenFl + '" /></td>';
+            if (joinField.esseInputFl == '1') {
+                row += '<td><input type="radio" checked="checked" />필수 <input type="radio" />선택</td>';
+            } else {
+                row += '<td><input type="radio" />필수 <input type="radio" checked="checked" />선택</td>';
+            }
+            row += '</tr>';
+            
+            $tbody.append(row);
+        });
+        
+        $('#tblJoinFields').dataTable({
+            searching : false,
+            lengthChange : false,
+            paging : false,
+            ordering : false,
+            info : false
+        });
+    },
+        
     handleEvent : function() {
         
         // TODO 류강하 : 공통 js로 옮겨야 함.
@@ -106,7 +147,7 @@ var generalSetting = {
             $checkbox.val( $checkbox.prop('checked') ? 1 : 0 );
         });
         
-        var form = 'frmGeneralSetting';
+        var form = 'frmJoinField';
         var $form = $('#' + form);
         
         $form.on('submit', function() {
@@ -131,12 +172,13 @@ var generalSetting = {
     },
         
     init : function() {
+        this.initGrid();
         this.handleEvent();
     }
 };
 
 $(document).ready(function() {
-    generalSetting.init();
+    joinField.init();
 });
 </script>
 </head>
@@ -246,88 +288,36 @@ $(document).ready(function() {
                     </div>
                 </nav>
                 <section>
-                    <form id="frmGeneralSetting" action="save.do" method="post">
+                    <form id="frmJoinField" action="save.do" method="post">
 	                    <div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
 	                        <div id="samDiv" class="tablet-mobile alpha bm-remove last">
+	                            <table id="tblJoinFields" class="display">
+	                               <thead>
+	                                   <tr>
+	                                       <th>필드명</th>
+	                                       <th>사용여부</th>
+	                                       <th>정보공개여부</th>
+	                                       <th>필수/선택입력여부</th>
+	                                   </tr>
+	                               </thead>
+	                               <tbody>
+	                               </tbody>
+	                            </table>
 	                            
-	                            <div class="responsive_row">
-	                                <div class="item_Lname one-quarter">
-	                                   <label for="chkJoinApprovalFl">회원가입 승인여부</label>
-                                   </div>
-	                                <div class="item_Lvalue one-quarter">
-	                                    <input id="chkJoinApprovalFl" name="joinApprovalFl" type="checkbox" class="chk" value="${generalSetting.joinApprovalFl}" />
-	                                </div>
-	                            </div>
-	                            <div class="responsive_row">
-                                    <div class="item_Lname one-quarter">
-                                       <label for="chkEmailAuthUseFl">메일인증 사용여부</label>
-                                   </div>
-                                    <div class="item_Lvalue one-quarter">
-                                        <input id="chkEmailAuthUseFl" name="emailAuthUseFl" type="checkbox" class="chk" value="${generalSetting.emailAuthUseFl}" />
-                                    </div>
-                                </div>
-                                <div class="responsive_row">
-                                    <div class="item_Lname one-quarter">
-                                       <label for="passwordSecurityLevelCd1">비밀번호 보안수준</label>
-                                   </div>
-                                    <div class="item_Lvalue one-quarter">
-                                    <c:forEach var="passwordSecurityLevel" items="${passwordSecurityLevels}" varStatus="status">
-                                        <c:if test="${!status.first}"><br /></c:if>
-                                        <input id="passwordSecurityLevelCd${status.index + 1}" name="passwordSecurityLevelCd" type="radio" class="rdo" value="${passwordSecurityLevel.c_id}" <c:if test="${passwordSecurityLevel.c_id == generalSetting.passwordSecurityLevelCd}">checked="checked"</c:if> />
-                                        <label for="passwordSecurityLevelCd${status.index + 1}">${passwordSecurityLevel.c_title}</label>
-                                    </c:forEach>
-                                    </div>
-                                </div>
-                                <div class="responsive_row">
-                                    <div class="item_Lname one-quarter">
-                                       <label for="inpPasswordChangeDcnt">비밀번호변경일수</label>
-                                   </div>
-                                    <div class="item_Lvalue one-quarter">
-                                        <input id="inpPasswordChangeDcnt" name="passwordChangeDcnt" type="text" value="${generalSetting.passwordChangeDcnt}" placeholder="3자리 이하의 숫자" />일
-                                    </div>
-                                </div>
-	                            <div class="responsive_row">
-                                    <div class="item_Lname one-quarter">
-                                       <label for="inpWebMasterNm">웹마스터 이름</label>
-                                   </div>
-                                    <div class="item_Lvalue one-quarter">
-                                        <input id="inpWebMasterNm" name="webMasterNm" type="text" value="${generalSetting.webMasterNm}" placeholder="10자리 이하의 문자" />
-                                    </div>
-                                </div>
-	                            <div class="responsive_row">
-                                    <div class="item_Lname one-quarter">
-                                       <label for="inpWebMasterEmailAccount">웹마스터 메일주소</label>
-                                   </div>
-                                    <div class="item_Lvalue one-quarter">
-                                        <input id="inpWebMasterEmailAccount" name="webMasterEmailAccount" type="text" value="${generalSetting.webMasterEmailAccount}" placeholder="64자리 이하의 이메일 형식 문자" />@
-                                        <input id="inpWebMasterEmailHost" name="webMasterEmailHost" type="text" value="${generalSetting.webMasterEmailHost}" placeholder="255자리 이하의 이메일 형식 문자" />
-                                    </div>
-                                </div>
-                                <div class="responsive_row">
-                                    <div class="item_Lname one-quarter">
-                                       <label for="inpLoginLimitDcnt">임시 제한일자</label>
-                                   </div>
-                                    <div class="item_Lvalue one-quarter">
-                                        <input id="inpLoginLimitDcnt" name="loginLimitDcnt" type="text" value="${generalSetting.loginLimitDcnt}" placeholder="2자리 이하의 숫자" />일
-                                                                                설정 시 회원 가입 후 정해진 일자동안 인증을 제한합니다.
-                                    </div>
-                                </div>
-                                <div class="responsive_row">
-                                    <div class="item_Lname one-quarter">
-                                       <label for="inpLoginFailureLimitCnt">로그인실패제한횟수</label>
-                                   </div>
-                                    <div class="item_Lvalue one-quarter">
-                                        <input id="inpLoginFailureLimitCnt" name="loginFailureLimitCnt" type="text" value="${generalSetting.loginFailureLimitCnt}" placeholder="1자리 숫자" />회
-                                    </div>
-                                </div>
-                                <div class="responsive-row">
-                                    <div class="item_Lname one-quarter">
-                                       <label for="txtNicknameProhibitionWords">금지 닉네임</label>
-                                    </div>
-                                    <div class="item_Lvalue one-quarter">
-                                        <textarea id="txtNicknameProhibitionWords" name="nicknameProhibitionWords" class="w-large" placeholder="단어 사이를 개행으로 구분하여 입력"><c:forEach var="nicknameProhibitionWord" items="${nicknameProhibitionWords}" varStatus="status">${nicknameProhibitionWord.c_title}<c:if test="${!status.last}"><customTags:newLine /></c:if></c:forEach></textarea>
-                                    </div>
-                                </div>
+<!-- 	                        <div id="jstreeTable_wrapper" class="dataTables_wrapper no-footer"> -->
+<!-- 	                            <table id="jstreeTable" class="display responsive nowrap" cellspacing="0" width="100%"> -->
+<!-- 	                                <thead> -->
+<!-- 	                                    <tr> -->
+<!-- 	                                        <th>c_id</th> -->
+<!-- 	                                        <th>c_parent_id</th> -->
+<!-- 	                                        <th class="not-mobile">c_position</th> -->
+<!-- 	                                        <th class="not-tablet">c_left</th> -->
+<!-- 	                                        <th>c_right</th> -->
+<!-- 	                                        <th>c_level</th> -->
+<!-- 	                                        <th>c_title</th> -->
+<!-- 	                                    </tr> -->
+<!-- 	                                </thead> -->
+	                             
 	                            <div class="responsive-row">
                                     <div class="item_Rvalue three-quarter right">
                                        <button id="btnSave" type="submit">저장</button>

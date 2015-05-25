@@ -88,6 +88,10 @@ var basicContents = {
         
         $form.on('submit', function() {
             
+            if (!confirm('저장하시겠습니까?')) {
+                return false;
+            }
+            
             callAjax(form
                    , $form.prop('action')
                    , null
