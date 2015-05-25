@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.core.manage.setting.server.vo.ServerVO;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
@@ -36,6 +35,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * 수정일               수정자                 수정내용
  * -------       ------------   -----------------------
  * 2015. 5. 24.       손호성                 최초 생성
+ * 2015. 5. 25.       손호성                 alterNode validator 적용
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -70,7 +70,6 @@ public class ServerController extends GenericAbstractController {
             throw new RuntimeException(bindingResult.getAllErrors().toString());
         }
 
-        serverVO.setC_title(Util_TitleChecker.StringReplace(serverVO.getC_title()));
         serverVO.setStatus(serverService.alterNode(serverVO));
 
         return serverVO;
