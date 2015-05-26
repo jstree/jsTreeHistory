@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
+import standard.mvc.component.business.baroboard.board.article.vo.Article;
+import standard.mvc.component.business.baroboard.board.article.vo.SearchArticle;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -33,62 +35,40 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 
 @Service(value = "ArticleService")
-public class ArticleServiceImpl implements CoreService {
+public class ArticleServiceImpl implements ArticleService {
 
 	@Resource(name = "CoreService")
 	private CoreService coreService;
 	
 	@Resource(name = "CoreDao")
 	private CoreDao coreDao;
-	
-	@Override
-	public <T extends ComprehensiveTree> T getNode(T comprehensiveTree)	throws Exception {
-		T node = coreDao.getNode(comprehensiveTree);
-		return node;
-	}
 
 	@Override
-	public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) throws Exception {
-		List<T> childNodes = coreDao.getChildNode(comprehensiveTree);
-		return childNodes;
-	}
-
-	@Override
-	public <T extends ComprehensiveTree> List<String> searchNode(T comprehensiveTree) throws Exception {
-		return null;
-	}
-
-	@Override
-	public <T extends ComprehensiveTree> T addNode(T comprehensiveTree)
-			throws Exception {
+	public List<Article> getArticleList(String boardID, int pageNum, int pageSize) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree)
-			throws Exception {
+	public List<Article> searchArticleList(String boardID, SearchArticle searchArticle) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
-	public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree)
-			throws Exception {
+	public Article addArticle(String boardID, Article article) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
-	public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree)
-			throws Exception {
+	public Article alterArticle(String boardID, Article article) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
-	public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree,
-			HttpServletRequest request) throws Exception {
+	public Article removeArticle(String boardID, Article article) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

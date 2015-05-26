@@ -25,7 +25,6 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 public class Article extends ComprehensiveTree{
 
-	
 	/* 글쓴이 */
 	private int regId;
 	
@@ -55,7 +54,6 @@ public class Article extends ComprehensiveTree{
 	
 	/* 수정일시 */
 	private String modDt;
-
 	
 	@Override
 	public String getSqlMapSelector() {
