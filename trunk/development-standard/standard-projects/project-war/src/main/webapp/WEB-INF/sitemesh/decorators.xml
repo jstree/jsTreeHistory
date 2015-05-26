@@ -23,11 +23,14 @@
 		<pattern>/sym/cmm/EgovselectNormalCalendar.do</pattern>
 		<!-- 에러페이지는 exclude 처리 후 해당 JSP에서 page:applyDecorator 로 적용한다. -->
 		<pattern>/common/*error.do</pattern>
-		<!-- 바로보드 관리자 임시 예외 처리 -->
-		<pattern>/user/manage/*</pattern>
-		<!-- 바로보드 코어 임시 예외 처리 -->
-		<pattern>/core/manage/*</pattern>
 	</excludes>
+	
+	<!-- 바로보드 관리자 페이지 -->
+	<decorator name="admin" page="adminDeco.jsp">
+		<pattern>/core/manage/*</pattern>
+		<pattern>/user/manage/*</pattern>
+		<pattern>/board/manage/*</pattern>
+	</decorator>
 	
 	<decorator name="default" page="defaultDeco.jsp">
 		<pattern>/*</pattern>
