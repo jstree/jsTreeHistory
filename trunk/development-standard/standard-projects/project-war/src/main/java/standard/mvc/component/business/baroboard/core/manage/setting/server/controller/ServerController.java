@@ -28,7 +28,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * @see <pre>
  * Class Name  : ServerController.java
  * Description : 바로보드-코어-고급설정-서버 Controller
- * Infomation  : 
+ * Infomation  :
  * 
  * << 개정이력(Modification Information) >>
  * 
@@ -36,6 +36,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * -------       ------------   -----------------------
  * 2015. 5. 24.       손호성                 최초 생성
  * 2015. 5. 25.       손호성                 alterNode validator 적용
+ * 2015. 5. 26.       손호성                 jsp 경로 변경
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -59,7 +60,7 @@ public class ServerController extends GenericAbstractController {
         ServerVO serverVO = new ServerVO();
         serverVO.setC_id(4);
         modelMap.addAttribute("server", serverService.getNode(serverVO));
-        return "/jsp/core/manage/setting/server/index";
+        return "/jsp/baroboard/core/manage/setting/server/index";
     }
 
     @ResponseBody
