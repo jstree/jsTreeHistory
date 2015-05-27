@@ -19,8 +19,9 @@
 		<link href="${pageContext.request.contextPath}/assets/css/backbone.scss.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/section_common.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/common-font.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="${pageContext.request.contextPath}/assets/css/common-font.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="${pageContext.request.contextPath}/assets/css/jNotify.jquery.css" rel="stylesheet" type="text/css" media="all" />		
+		<link href="${pageContext.request.contextPath}/assets/css/jNotify.jquery.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/css/jquery.dataTables.css" rel="stylesheet" type="text/css" media="all">
+        <link href="${pageContext.request.contextPath}/assets/css/dataTables.responsive.css" rel="stylesheet" type="text/css" media="all" />
 	</head>
 	<body></body>
 </html>
