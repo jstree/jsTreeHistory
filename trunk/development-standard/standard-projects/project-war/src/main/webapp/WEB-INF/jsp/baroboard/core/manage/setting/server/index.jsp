@@ -71,90 +71,47 @@ input[type="text"] {
 <link href="http://www.313.co.kr:5002/Component/jsp/admin/board/divSample.css" rel="stylesheet" type="text/css" media="all">
 </head>
 <body class="template-index" gtools_scp_screen_capture_injected="true">
-				<section>
-					<div class="three-quarter last boxed p-twenty clearfix"
-						data-anim-type="fade-in" data-anim-delay="0">
-						<div id="samDiv" class="tablet-mobile alpha bm-remove last">
-							<div class="responsive_row">
-								<div class="item_Lname">게시판제목 ${server.c_title}</div>
-								<div class="item_Lvalue">
-									<input id="titleInput" type="text">
-								</div>
-								<div class="item_Rname">글쓰기 권한</div>
-								<div class="item_Rvalue">
-									<select>
-										<option value="모두">모두</option>
-										<option value="정회원">정회원</option>
-									</select>
-								</div>
-							</div>
-							<div class="responsive_row">
-								<div class="item_Lname">게시판 유형</div>
-								<div class="item_Lvalue">
-									<select>
-										<option value="글">글</option>
-										<option value="사진">사진</option>
-										<option value="방명록">방명록</option>
-									</select>
-								</div>
-								<div class="item_Rname">댓글 쓰기 권한</div>
-								<div class="item_Rvalue">
-									<select>
-										<option value="모두">모두</option>
-										<option value="정회원">정회원</option>
-									</select>
-								</div>
-							</div>
-							<div class="responsive_row">
-								<div class="item_Lname">페이지 당 목록 수</div>
-								<div class="item_Lvalue">
-									<input type="text">
-								</div>
-								<div class="item_Rname">링크 권한</div>
-								<div class="item_Rvalue">
-									<select>
-										<option value="모두">모두</option>
-										<option value="정회원">정회원</option>
-									</select>
-								</div>
-							</div>
-							<div class="responsive_row ">
-								<div class="item_Lname">목록 보기 권한</div>
-								<div class="item_Lvalue">
-									<select>
-										<option value="모두">모두</option>
-										<option value="정회원">정회원</option>
-									</select>
-								</div>
-								<div class="item_Rname">업로드 권한</div>
-								<div class="item_Rvalue">
-									<select>
-										<option value="모두">모두</option>
-										<option value="정회원">정회원</option>
-									</select>
-								</div>
-							</div>
-							<div class="responsive_row">
-								<div class="item_Lname">글 읽기 권한</div>
-								<div class="item_Lvalue">
-									<select>
-										<option value="모두">모두</option>
-										<option value="정회원">정회원</option>
-									</select>
-								</div>
-								<div class="item_Rname">다운로 권한</div>
-								<div class="item_Rvalue">
-									<select>
-										<option value="모두">모두</option>
-										<option value="정회원">정회원</option>
-									</select>
-								</div>
-							</div>
-							<div class="responsive_row">
-
-								<button id="saveBtn">저장</button>
-
-							</div>
-				</section>
+	<section>
+		<div class="three-quarter last boxed p-twenty clearfix"
+			data-anim-type="fade-in" data-anim-delay="0">
+			<div id="samDiv" class="tablet-mobile alpha bm-remove last">
+				<div class="responsive_row">
+					<div class="item_Lname">기본 URL </div>
+					<div class="item_Lvalue">
+						<input name="url" id="url" type="text" value="${server.url}">
+					</div>
+				</div>
+				<div class="responsive_row">
+					<div class="item_Lname">SSL 사용여부 설정</div>
+					<div class="item_Lvalue">
+						<input type="checkbox" name="sslFl" id="sslFl" value="1" <c:if test="${'1' == server.sslFl}">checked</c:if>/>
+					</div>
+				</div>
+				<div class="responsive_row">
+					<div class="item_Lname">PORT 설정</div>
+					<div class="item_Lvalue">
+						http : <input name="httpPort" id="httpPort" type="text" value="${server.httpPort}"> 
+					</div>
+					<div class="item_Rname"></div>
+					<div class="item_Rvalue">
+						https : <input name="httpsPort" id="httpsPort" type="text" value="${server.httpsPort}">
+					</div>					
+				</div>
+				<div class="responsive_row ">
+					<div class="item_Lname">짧은 주소 사용 설정</div>
+					<div class="item_Lvalue">
+						<input type="checkbox" name="shortUrlFl" id="shortUrlFl" value="1" <c:if test="${'1' == server.shortUrlFl}">checked</c:if>/>
+					</div>
+				</div>
+				<div class="responsive_row">
+					<div class="item_Lname">SSO 사용 설정</div>
+					<div class="item_Lvalue">
+						<input type="checkbox" name="ssoFl" id="ssoFl" value="1" <c:if test="${'1' == server.ssoFl}">checked</c:if>/>
+					</div>
+				</div>
+				<div class="responsive_row">
+					<button id="saveBtn">저장</button>
+				</div>
+	</section>
 </body>
 </html>
