@@ -64,7 +64,7 @@ public class ServerController extends GenericAbstractController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/update.do", method = {RequestMethod.POST})
+    @RequestMapping(value = "/save.do", method = {RequestMethod.POST})
     public ServerVO alterNode(@Validated(value = AlterNode.class) ServerVO serverVO,
             BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors()) {

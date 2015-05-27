@@ -30,7 +30,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * @see <pre>
  * Class Name  : ServerControllerTest.java
  * Description : ServerController, ServerVO validation test
- * Infomation  : 
+ * Infomation  :
  * 
  * << 개정이력(Modification Information) >>
  * 
@@ -62,17 +62,17 @@ public class ServerControllerTest {
     @Test
     public void testGetNode() throws Exception {
         this.mockMvc.perform(get("/core/manage/setting/server/index.do")).andDo(print())
-                .andExpect(status().isOk());
+        .andExpect(status().isOk());
     }
 
     @Test
     public void testAlterNodeWithoutC_type() throws Exception {
         this.mockMvc
-                .perform(
-                        post("/core/manage/setting/server/update.do").param("c_id", "4")
-                                .param("url", "http://127.0.1.1").param("sslFl", "0")
-                                .param("httpPort", "18080").param("httpsPort", "18443")
-                                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
+        .perform(
+                post("/core/manage/setting/server/save.do").param("c_id", "4")
+                .param("url", "http://127.0.1.1").param("sslFl", "0")
+                .param("httpPort", "18080").param("httpsPort", "18443")
+                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
                 .andExpect(status().isOk());
     }
 
@@ -80,11 +80,11 @@ public class ServerControllerTest {
     public void testAlterNodeWithNotAllowedUrl() throws Exception {
         String notAllowedUrl = "임의URL";
         this.mockMvc
-                .perform(
-                        post("/core/manage/setting/server/update.do").param("c_id", "4")
-                                .param("url", notAllowedUrl).param("sslFl", "0")
-                                .param("httpPort", "18080").param("httpsPort", "18443")
-                                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
+        .perform(
+                post("/core/manage/setting/server/save.do").param("c_id", "4")
+                .param("url", notAllowedUrl).param("sslFl", "0")
+                .param("httpPort", "18080").param("httpsPort", "18443")
+                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
                 .andExpect(status().isOk());
     }
 
@@ -92,11 +92,11 @@ public class ServerControllerTest {
     public void testAlterNodeWithNotAllowedSslFl() throws Exception {
         String notAllowedSslFl = "3";
         this.mockMvc
-                .perform(
-                        post("/core/manage/setting/server/update.do").param("c_id", "4")
-                                .param("url", "http://127.0.1.1").param("sslFl", notAllowedSslFl)
-                                .param("httpPort", "18080").param("httpsPort", "18443")
-                                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
+        .perform(
+                post("/core/manage/setting/server/save.do").param("c_id", "4")
+                .param("url", "http://127.0.1.1").param("sslFl", notAllowedSslFl)
+                .param("httpPort", "18080").param("httpsPort", "18443")
+                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
                 .andExpect(status().isOk());
     }
 
@@ -104,11 +104,11 @@ public class ServerControllerTest {
     public void testAlterNodeWithNotAllowedHttpPort() throws Exception {
         String notAllowedHttpPort = "문자열http포트번호";
         this.mockMvc
-                .perform(
-                        post("/core/manage/setting/server/update.do").param("c_id", "4")
-                                .param("url", "http://127.0.1.1").param("sslFl", "0")
-                                .param("httpPort", notAllowedHttpPort).param("httpsPort", "18443")
-                                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
+        .perform(
+                post("/core/manage/setting/server/save.do").param("c_id", "4")
+                .param("url", "http://127.0.1.1").param("sslFl", "0")
+                .param("httpPort", notAllowedHttpPort).param("httpsPort", "18443")
+                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
                 .andExpect(status().isOk());
     }
 
@@ -116,11 +116,11 @@ public class ServerControllerTest {
     public void testAlterNodeWithNotAllowedHttpsPort() throws Exception {
         String notAllowedHttpsPort = "문자열https포트번호";
         this.mockMvc
-                .perform(
-                        post("/core/manage/setting/server/update.do").param("c_id", "4")
-                                .param("url", "http://127.0.1.1").param("sslFl", "0")
-                                .param("httpPort", "18080").param("httpsPort", notAllowedHttpsPort)
-                                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
+        .perform(
+                post("/core/manage/setting/server/save.do").param("c_id", "4")
+                .param("url", "http://127.0.1.1").param("sslFl", "0")
+                .param("httpPort", "18080").param("httpsPort", notAllowedHttpsPort)
+                .param("shortUrlFl", "0").param("ssoFl", "0")).andDo(print())
                 .andExpect(status().isOk());
     }
 
@@ -128,11 +128,11 @@ public class ServerControllerTest {
     public void testAlterNodeWithNotAllowedShortUrlFl() throws Exception {
         String notAllowedShortUrlFl = "3";
         this.mockMvc
-                .perform(
-                        post("/core/manage/setting/server/update.do").param("c_id", "4")
-                                .param("url", "http://127.0.1.1").param("sslFl", "0")
-                                .param("httpPort", "18080").param("httpsPort", "18443")
-                                .param("shortUrlFl", notAllowedShortUrlFl).param("ssoFl", "0"))
+        .perform(
+                post("/core/manage/setting/server/save.do").param("c_id", "4")
+                .param("url", "http://127.0.1.1").param("sslFl", "0")
+                .param("httpPort", "18080").param("httpsPort", "18443")
+                .param("shortUrlFl", notAllowedShortUrlFl).param("ssoFl", "0"))
                 .andDo(print()).andExpect(status().isOk());
     }
 
@@ -140,18 +140,18 @@ public class ServerControllerTest {
     public void testAlterNodeWithNotAllowedSsoFl() throws Exception {
         String notAllowedSsoFl = "3";
         this.mockMvc
-                .perform(
-                        post("/core/manage/setting/server/update.do").param("c_id", "4")
-                                .param("url", "http://127.0.1.1").param("sslFl", "0")
-                                .param("httpPort", "18080").param("httpsPort", "18443")
-                                .param("shortUrlFl", "0").param("ssoFl", notAllowedSsoFl))
+        .perform(
+                post("/core/manage/setting/server/save.do").param("c_id", "4")
+                .param("url", "http://127.0.1.1").param("sslFl", "0")
+                .param("httpPort", "18080").param("httpsPort", "18443")
+                .param("shortUrlFl", "0").param("ssoFl", notAllowedSsoFl))
                 .andDo(print()).andExpect(status().isOk());
     }
 
     @Test
     public void testAlterNodeWithUpdateConditionOnly() throws Exception {
-        this.mockMvc.perform(post("/core/manage/setting/server/update.do").param("c_id", "4"))
-                .andDo(print()).andExpect(status().isOk());
+        this.mockMvc.perform(post("/core/manage/setting/server/save.do").param("c_id", "4"))
+        .andDo(print()).andExpect(status().isOk());
     }
 
 }
