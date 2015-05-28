@@ -96,7 +96,6 @@ var inputForm = {
                    , null
                    , null);
             
-            return false;
 		}
 }
 </script>
