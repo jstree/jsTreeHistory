@@ -76,49 +76,75 @@ input[type="checkbox"] {
 </style>
 <!-- !!!  FOR THIS PAGE ONLY !!! -->
 <link href="http://www.313.co.kr:5002/Component/jsp/admin/board/divSample.css" rel="stylesheet" type="text/css" media="all">
+<!-- 313 ajax.js -->
+<script src="${pageContext.request.contextPath}/assets/js/ajax.js" type="text/javascript"></script>
+<script type="text/javascript">
+var inputForm = {
+		submit : function(target){
+			$form = $('#' + target.id);
+	            
+            if (!confirm('저장하시겠습니까?')) {
+                return false;
+            }
+            
+            var ajaxResult = callAjax(form
+                   , $form.prop('action')
+                   , null
+                   , $form.prop('method')
+                   , 'json'
+                   , null
+                   , null);
+            
+            return false;
+		}
+}
+</script>
 </head>
 <body class="template-index" gtools_scp_screen_capture_injected="true">
 	<section>
 		<div class="three-quarter last boxed p-twenty clearfix"	data-anim-type="fade-in" data-anim-delay="0">
-			<div id="samDiv" class="tablet-mobile alpha bm-remove last">
-				<div class="responsive_row">
-					<div class="item_Lname">기본 URL </div>
-					<div class="item_Lvalue">
-						<input name="url" id="url" type="text" value="${server.url}">
+			<form name="serverForm" id="serverForm" method="post" action="${pageContext.request.contextPath}/core/manage/setting/server/save.do">
+				<input type="hidden" name="c_id" id="c_id" value="${server.c_id}"/>
+				<div id="samDiv" class="tablet-mobile alpha bm-remove last">
+					<div class="responsive_row">
+						<div class="item_Lname">기본 URL </div>
+						<div class="item_Lvalue">
+							<input name="url" id="url" type="text" value="${server.url}">
+						</div>
+					</div>
+					<div class="responsive_row">
+						<div class="item_Lname">SSL 사용여부 설정</div>
+						<div class="item_Lvalue">
+							<input type="checkbox" name="sslFl" id="sslFl" value="1" <c:if test="${'1' == server.sslFl}">checked</c:if>/>
+						</div>
+					</div>
+					<div class="responsive_row">
+						<div class="item_Lname">PORT 설정</div>
+						<div class="item_Lvalue">
+							http : <input name="httpPort" id="httpPort" type="text" value="${server.httpPort}"> 
+						</div>
+						<div class="item_Rname"></div>
+						<div class="item_Rvalue">
+							https : <input name="httpsPort" id="httpsPort" type="text" value="${server.httpsPort}">
+						</div>					
+					</div>
+					<div class="responsive_row ">
+						<div class="item_Lname">짧은 주소 사용 설정</div>
+						<div class="item_Lvalue">
+							<input type="checkbox" name="shortUrlFl" id="shortUrlFl" value="1" <c:if test="${'1' == server.shortUrlFl}">checked</c:if>/>
+						</div>
+					</div>
+					<div class="responsive_row">
+						<div class="item_Lname">SSO 사용 설정</div>
+						<div class="item_Lvalue">
+							<input type="checkbox" name="ssoFl" id="ssoFl" value="1" <c:if test="${'1' == server.ssoFl}">checked</c:if>/>
+						</div>
+					</div>
+					<div class="responsive_row">
+						<button id="saveBtn" onclick="inputForm.submit(this.form);return false;">저장</button>
 					</div>
 				</div>
-				<div class="responsive_row">
-					<div class="item_Lname">SSL 사용여부 설정</div>
-					<div class="item_Lvalue">
-						<input type="checkbox" name="sslFl" id="sslFl" value="1" <c:if test="${'1' == server.sslFl}">checked</c:if>/>
-					</div>
-				</div>
-				<div class="responsive_row">
-					<div class="item_Lname">PORT 설정</div>
-					<div class="item_Lvalue">
-						http : <input name="httpPort" id="httpPort" type="text" value="${server.httpPort}"> 
-					</div>
-					<div class="item_Rname"></div>
-					<div class="item_Rvalue">
-						https : <input name="httpsPort" id="httpsPort" type="text" value="${server.httpsPort}">
-					</div>					
-				</div>
-				<div class="responsive_row ">
-					<div class="item_Lname">짧은 주소 사용 설정</div>
-					<div class="item_Lvalue">
-						<input type="checkbox" name="shortUrlFl" id="shortUrlFl" value="1" <c:if test="${'1' == server.shortUrlFl}">checked</c:if>/>
-					</div>
-				</div>
-				<div class="responsive_row">
-					<div class="item_Lname">SSO 사용 설정</div>
-					<div class="item_Lvalue">
-						<input type="checkbox" name="ssoFl" id="ssoFl" value="1" <c:if test="${'1' == server.ssoFl}">checked</c:if>/>
-					</div>
-				</div>
-				<div class="responsive_row">
-					<button id="saveBtn">저장</button>
-				</div>
-			</div>	
+			</form>	
 	</section>
 </body>
 </html>

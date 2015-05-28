@@ -68,7 +68,7 @@ public class ServerController extends GenericAbstractController {
     public ServerVO alterNode(@Validated(value = AlterNode.class) ServerVO serverVO,
             BindingResult bindingResult, ModelMap model) throws Exception {
         if (bindingResult.hasErrors()) {
-            throw new RuntimeException(bindingResult.getAllErrors().toString());
+            throw new RuntimeException(bindingResult.getAllErrors().get(0).getDefaultMessage());
         }
 
         serverVO.setStatus(serverService.alterNode(serverVO));
