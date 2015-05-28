@@ -1,9 +1,9 @@
-package standard.mvc.component.business.baroboard.board.article.service;
+package standard.mvc.component.business.baroboard.board.service;
 
 import java.util.List;
 
-import standard.mvc.component.business.baroboard.board.article.vo.Article;
-import standard.mvc.component.business.baroboard.board.article.vo.SearchArticle;
+import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 
 /**
  * Modification Information
@@ -12,8 +12,8 @@ import standard.mvc.component.business.baroboard.board.article.vo.SearchArticle;
  * @since 2015. 5. 25.
  * @version 1.0
  * @see <pre>
- * Class Name  : ArticleService.java
- * Description : 바로보드-게시판-글관리 Service 인터페이스
+ * Class Name  : BoardService.java
+ * Description : 바로보드-게시판 Service 인터페이스
  * Infomation  : 
  * 
  * << 개정이력(Modification Information) >>
@@ -26,7 +26,7 @@ import standard.mvc.component.business.baroboard.board.article.vo.SearchArticle;
  * </pre>
  */
 
-public interface ArticleService {
+public interface BoardService {
 
 	/**
 	 * 페이지 순서로 글 목록을 조회한다.

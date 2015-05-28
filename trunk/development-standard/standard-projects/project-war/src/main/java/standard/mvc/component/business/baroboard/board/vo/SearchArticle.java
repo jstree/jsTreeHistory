@@ -1,4 +1,4 @@
-package standard.mvc.component.business.baroboard.board.article.vo;
+package standard.mvc.component.business.baroboard.board.vo;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 

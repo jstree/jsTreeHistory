@@ -1,17 +1,15 @@
-package standard.mvc.component.business.baroboard.board.article.service;
+package standard.mvc.component.business.baroboard.board.service;
 
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
-import standard.mvc.component.business.baroboard.board.article.vo.Article;
-import standard.mvc.component.business.baroboard.board.article.vo.SearchArticle;
+import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
  * Modification Information
@@ -20,7 +18,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @since 2015. 5. 25.
  * @version 1.0
  * @see <pre>
- * Class Name  : ArticleServiceImpl.java
+ * Class Name  : BoardServiceImpl.java
  * Description : 바로보드-게시판-글관리 Service 구현체
  * Infomation  : 
  * 
@@ -34,8 +32,8 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 
-@Service(value = "ArticleService")
-public class ArticleServiceImpl implements ArticleService {
+@Service(value = "BoardService")
+public class BoardServiceImpl implements BoardService {
 
 	@Resource(name = "CoreService")
 	private CoreService coreService;
