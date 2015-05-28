@@ -55,9 +55,12 @@ public class Article extends ComprehensiveTree{
 	/* 수정일시 */
 	private String modDt;
 	
+	/* 게시판 ID */
+	private String boardID;
+	
 	@Override
 	public String getSqlMapSelector() {
-		return "article";
+		return "board";
 	}
 	
 	public int getRegId() {
@@ -139,7 +142,12 @@ public class Article extends ComprehensiveTree{
 	public void setModDt(String modDt) {
 		this.modDt = modDt;
 	}
-	
-	
-	
+
+	public String getBoardID() {
+		return boardID;
+	}
+
+	public void setBoardID(String boardID) {
+		this.boardID = boardID;
+	}
 }
