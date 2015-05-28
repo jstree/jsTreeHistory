@@ -66,14 +66,20 @@ input[type="text"] {
 	height: 30px !important;
 	margin: 0 0 0px !important;
 }
+
+input[type="checkbox"] {
+	display: inline;
+	width: 20px !important;
+	height: 20px !important;
+	margin: 0 0 0px !important;
+}
 </style>
 <!-- !!!  FOR THIS PAGE ONLY !!! -->
 <link href="http://www.313.co.kr:5002/Component/jsp/admin/board/divSample.css" rel="stylesheet" type="text/css" media="all">
 </head>
 <body class="template-index" gtools_scp_screen_capture_injected="true">
 	<section>
-		<div class="three-quarter last boxed p-twenty clearfix"
-			data-anim-type="fade-in" data-anim-delay="0">
+		<div class="three-quarter last boxed p-twenty clearfix"	data-anim-type="fade-in" data-anim-delay="0">
 			<div id="samDiv" class="tablet-mobile alpha bm-remove last">
 				<div class="responsive_row">
 					<div class="item_Lname">기본 URL </div>
@@ -112,6 +118,7 @@ input[type="text"] {
 				<div class="responsive_row">
 					<button id="saveBtn">저장</button>
 				</div>
+			</div>	
 	</section>
 </body>
 </html>
