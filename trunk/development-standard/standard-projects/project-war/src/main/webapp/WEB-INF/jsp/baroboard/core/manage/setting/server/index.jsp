@@ -81,6 +81,7 @@ input[type="checkbox"] {
 <script type="text/javascript">
 var inputForm = {
 		submit : function(target){
+			form = target.id;
 			$form = $('#' + target.id);
 	            
             if (!confirm('저장하시겠습니까?')) {
