@@ -1,6 +1,6 @@
 /**
  * 
- * @param form
+ * @param form (Form id or Data json object)
  * @param url
  * @param target
  * @param type
@@ -23,11 +23,10 @@ function callAjax(form, url, target, type, returnType, contentType, jsonpCallbac
 	
 	var formQueryString = null;
 	
-	if (form){
+	if (typeof form == 'string') {
 	    var $form = $('#' + form);
 	    
 		formQueryString = $form.serialize();
-//		console.log(formQueryString);
 		
 		// 체크박스 미체크 시에도 파라미터 값을 넘기도록 설정
 		var checkboxes = $('input[type="checkbox"]', $form).filter(function() {
@@ -39,7 +38,10 @@ function callAjax(form, url, target, type, returnType, contentType, jsonpCallbac
 		    
 		    formQueryString += '&' + $(checkbox).attr('name') + '=0';
 		});
-//		console.log(formQueryString);
+		
+	} else if (typeof form == 'object') {
+	    
+	    formQueryString = JSON.stringify(form);
 	}
 	
 	/**

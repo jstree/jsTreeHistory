@@ -15,14 +15,19 @@
  */
 package standard.mvc.component.business.baroboard.user.manage.basic.setting.joinfield.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.joinfield.service.JoinFieldService;
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.joinfield.vo.JoinField;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
@@ -67,31 +72,39 @@ public class JoinFieldController extends GenericAbstractController {
     @RequestMapping("/index.do")
     public String movePage(ModelMap model) throws Exception {
         
-        Gson gson = new GsonBuilder().setExclusionStrategies(new UselessPropertiesExclusionStrategy()).create();
+        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+            
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                
+                if ( "c_id".equals(f.getName()) || "c_title".equals(f.getName())
+                  || "useFl".equals(f.getName()) || "infoOpenFl".equals(f.getName())
+                  || "esseInputFl".equals(f.getName()) ) 
+                {
+                    return false;
+                }
+                
+                return true;
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return false;
+            }
+            
+        }).create();
         
         model.addAttribute("joinFields", gson.toJson(joinFieldService.getJoinFields()));
         
         return "/jsp/user/manage/basic/setting/joinfield/index";
     }
     
-    private class UselessPropertiesExclusionStrategy implements ExclusionStrategy {
-
-        @Override
-        public boolean shouldSkipField(FieldAttributes f) {
-            
-            if ( "c_id".equals(f.getName()) || "c_title".equals(f.getName())
-              || "useFl".equals(f.getName()) || "infoOpenFl".equals(f.getName())
-              || "esseInputFl".equals(f.getName()) ) 
-            {
-                return false;
-            }
-            
-            return true;
-        }
-
-        @Override
-        public boolean shouldSkipClass(Class<?> clazz) {
-            return false;
-        }
+    @RequestMapping(value = "/save.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String save(@RequestBody List<JoinField> joinFields) throws Exception {
+        
+        joinFieldService.saveJoinFields(joinFields);
+        
+        return "{}";
     }
 }

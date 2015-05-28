@@ -45,13 +45,21 @@ var joinField = {
             row += '<td class="center"><input type="checkbox" value="' + joinField.useFl + '" /></td>';
             row += '<td class="center"><input type="checkbox" value="' + joinField.infoOpenFl + '" /></td>';
             if (joinField.esseInputFl == '1') {
-                row += '<td class="center"><input type="radio" checked="checked" />필수 <input type="radio" />선택</td>';
+                row += '<td class="center"><input type="radio" checked="checked" value="1" name="' + i + '" />필수 <input type="radio" value="0" name="' + i + '" />선택</td>';
             } else {
-                row += '<td class="center"><input type="radio" />필수 <input type="radio" checked="checked" />선택</td>';
+                row += '<td class="center"><input type="radio" value="0" name="' + i + '" />필수 <input type="radio" checked="checked" value="1" name="' + i + '" />선택</td>';
             }
             row += '</tr>';
             
-            $tbody.append(row);
+            var $tr = $(row);
+            
+            if (i == 0 || i == 2) {
+                $tr.find('td:eq(1) :checkbox, :radio').prop('disabled', true);
+            } else if (i == 1) {
+                $tr.find(':checkbox, :radio').prop('disabled', true);
+            }
+            
+            $tbody.append($tr);
         });
         
         $('#tblJoinFields').dataTable({
@@ -77,8 +85,7 @@ var joinField = {
             $checkbox.val( $checkbox.prop('checked') ? 1 : 0 );
         });
         
-        var form = 'frmJoinField';
-        var $form = $('#' + form);
+        var $form = $('#frmJoinField');
         
         $form.on('submit', function() {
             
@@ -86,12 +93,26 @@ var joinField = {
                 return false;
             }
             
-            callAjax(form
+            var params = [];
+            
+            $('#tblJoinFields tbody tr').each(function(i) {
+                
+                var $tr = $(this);
+                
+                params.push({
+                    c_id : $tr.prop('id'),
+                    useFl : $tr.find('td:eq(1) :checkbox').val(),
+                    infoOpenFl : $tr.find('td:eq(2) :checkbox').val(),
+                    esseInputFl : $tr.find('td:eq(3) :radio:checked').val()
+                });
+            });
+            
+            callAjax(params
                    , $form.prop('action')
                    , null
                    , $form.prop('method')
                    , 'json'
-                   , null
+                   , 'application/json'
                    , callback);
             
             function callback(r) {
