@@ -36,7 +36,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @version 1.0
  * @see <pre>
  * Class Name  : CoreSettingServerDatabaseTest, TriggerVO
- * Description : T_CORE_SETTING_SERVER, T_CORE_SETTING_SERVER_LOG DBUnit Test without Spring
+ * Description : T_CORE_SET_SERVER, T_CORE_SET_SERVER_LOG DBUnit Test without Spring
  * Infomation  :
  * 
  * << 개정이력(Modification Information) >>
@@ -70,7 +70,7 @@ public class CoreSettingServerDatabaseTest {
 
         try {
             String datasetPath =
-                    "/standard/mvc/component/business/baroboard/core/manage/setting/server/database/T_CORE_SETTING_SERVER.xml";
+                    "/standard/mvc/component/business/baroboard/core/manage/setting/server/database/T_CORE_SET_SERVER.xml";
             URL url = this.getClass().getResource(datasetPath);
 
             ReplacementDataSet dataSet =
@@ -97,7 +97,7 @@ public class CoreSettingServerDatabaseTest {
     URISyntaxException {
         Properties props = new Properties();
         String path =
-                "/standard/mvc/component/business/baroboard/core/manage/setting/server/database/jdbc.properties";
+ "/standard/mvc/component/business/baroboard/core/jdbc.properties";
         URL url = this.getClass().getResource(path);
         props.load(new FileInputStream(new File(url.toURI())));
         return props;
@@ -119,7 +119,7 @@ public class CoreSettingServerDatabaseTest {
             String[] cMethods = {"delete", "insert"};
 
             String query =
-                    "SELECT C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_METHOD, C_STATE FROM T_CORE_SETTING_SERVER_LOG WHERE C_ID= ? AND C_METHOD = ? AND ROWNUM < 2 ORDER BY C_DATE DESC";
+                    "SELECT C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_METHOD, C_STATE FROM T_CORE_SET_SERVER_LOG WHERE C_ID= ? AND C_METHOD = ? AND ROWNUM < 2 ORDER BY C_DATE DESC";
             pstmt = conn.prepareStatement(query);
 
             for (String cMethod : cMethods) {
@@ -166,7 +166,7 @@ public class CoreSettingServerDatabaseTest {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(dbUrl, userName, password);
 
-            String query = "UPDATE T_CORE_SETTING_SERVER SET C_HTTP_PORT = ? WHERE C_ID = ?";
+            String query = "UPDATE T_CORE_SET_SERVER SET C_HTTP_PORT = ? WHERE C_ID = ?";
             pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, "80");
@@ -175,7 +175,7 @@ public class CoreSettingServerDatabaseTest {
 
             Assert.assertEquals(1, updateCount);
 
-            query = "SELECT C_HTTP_PORT FROM T_CORE_SETTING_SERVER WHERE C_ID = ?";
+            query = "SELECT C_HTTP_PORT FROM T_CORE_SET_SERVER WHERE C_ID = ?";
             pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, 4);

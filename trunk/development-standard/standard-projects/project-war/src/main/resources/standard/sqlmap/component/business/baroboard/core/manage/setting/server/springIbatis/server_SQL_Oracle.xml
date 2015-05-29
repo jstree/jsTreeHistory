@@ -49,10 +49,10 @@
 			C_SSO_FL AS ssoFl
 			<include refid="getInlineChildCount" />
 			/* inline table from filed*/
-			FROM T_CORE_SETTING_SERVER B
+			FROM T_CORE_SET_SERVER B
 			<include refid="getInlineChildCountAfterFrom" />
 			/* table from filed*/
-			FROM T_CORE_SETTING_SERVER A
+			FROM T_CORE_SET_SERVER A
 			<include refid="getAfterFrom" />
 		</dynamic>
 	</select>
@@ -77,14 +77,14 @@
 		, C_SHORT_URL_FL AS shortUrlFl
 		,
 		C_SSO_FL AS ssoFl
-		FROM T_CORE_SETTING_SERVER
+		FROM T_CORE_SET_SERVER
 		WHERE C_ID = #c_id#
 	</select>
 
 	<update id="alterNode" parameterClass="serverVO">
 		/* alterNode */
 		UPDATE
-		T_CORE_SETTING_SERVER
+		T_CORE_SET_SERVER
 		SET C_URL = #url#
 		, C_SSL_FL = #sslFl#
 		, C_HTTP_PORT = #httpPort#
