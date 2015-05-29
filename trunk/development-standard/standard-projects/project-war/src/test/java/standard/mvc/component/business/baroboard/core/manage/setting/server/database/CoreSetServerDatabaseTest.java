@@ -35,7 +35,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @since 2015. 5. 16.
  * @version 1.0
  * @see <pre>
- * Class Name  : CoreSettingServerDatabaseTest, TriggerVO
+ * Class Name  : CoreSetServerDatabaseTest, TriggerVO
  * Description : T_CORE_SET_SERVER, T_CORE_SET_SERVER_LOG DBUnit Test without Spring
  * Infomation  :
  * 
@@ -46,11 +46,12 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * 2015. 5. 16.       손호성                 최초 생성
  * 2015. 5. 17.       손호성                 하드코딩된 jdbc properties 외부로 분리
  * 2015. 5. 20.       손호성                 패키지 이름 변경 *.admin.* => *.manage.*
+ * 2015. 5. 29.       손호성                 클래스 명 변경 CoreSetServerDatabaseTest
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-public class CoreSettingServerDatabaseTest {
+public class CoreSetServerDatabaseTest {
 
     private String driver;
     private String dbUrl;
@@ -97,7 +98,7 @@ public class CoreSettingServerDatabaseTest {
     URISyntaxException {
         Properties props = new Properties();
         String path =
- "/standard/mvc/component/business/baroboard/core/jdbc.properties";
+                "/standard/mvc/component/business/baroboard/core/jdbc.properties";
         URL url = this.getClass().getResource(path);
         props.load(new FileInputStream(new File(url.toURI())));
         return props;

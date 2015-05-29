@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ftp">
+	<typeAlias alias="ftpVO"
+		type="standard.mvc.component.business.baroboard.core.manage.setting.ftp.vo.FtpVO" />
+	<sql id="getMetaField">
+		/* getChildNode */
+		SELECT A.c_id
+		, A.c_parentid
+		, A.c_position
+		, A.c_left
+		, A.c_right
+		, A.c_level
+		, A.c_title
+		, A.c_type
+		/* user filed add
+		point*/
+	</sql>
+	<sql id="getInlineChildCount">
+		, ( SELECT CASE
+		WHEN COUNT(*) &gt; 0 THEN 'InChild'
+		ELSE
+		'NoChild'
+		END AS YesNo
+		/* inline table from filed add point*/
+	</sql>
+	<sql id="getInlineChildCountAfterFrom">
+		WHERE B.C_PARENTID = A.C_ID
+		) AS childcount
+		/* table from
+		filed add point*/
+	</sql>
+	<sql id="getAfterFrom">
+		WHERE A.C_PARENTID = #c_id#
+		ORDER BY A.C_POSITION ASC
+	</sql>
+
+	<select id="getChildNode" parameterClass="ftpVO" resultClass="ftpVO">
+		<dynamic>
+			<include refid="getMetaField" />
+			/* user filed */
+			, C_FTP_ID AS ftpId
+			, C_FTP_PASSWORD AS ftpPassword
+			, C_FTP_URL AS ftpUrl
+			, C_FTP_PORT AS ftpPort
+			, C_PASSIVE_FL AS passiveFl
+			, C_SFTP_FL AS sftpFl
+			<include refid="getInlineChildCount" />
+			/* inline table from filed*/
+			FROM T_CORE_SET_FTP B
+			<include refid="getInlineChildCountAfterFrom" />
+			/* table from filed*/
+			FROM T_CORE_SET_FTP A
+			<include refid="getAfterFrom" />
+		</dynamic>
+	</select>
+
+	<select id="getNode" parameterClass="ftpVO" resultClass="ftpVO">
+		/*
+		getNode */
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		, C_LEFT
+		, C_RIGHT
+		, C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		, C_FTP_ID AS ftpId
+		, C_FTP_PASSWORD AS ftpPassword
+		, C_FTP_URL AS ftpUrl
+		, C_FTP_PORT AS ftpPort
+		, C_PASSIVE_FL AS passiveFl
+		, C_SFTP_FL AS sftpFl
+		FROM T_CORE_SET_FTP
+		WHERE C_ID = #c_id#
+	</select>
+
+	<update id="alterNode" parameterClass="ftpVO">
+		/* alterNode */
+		UPDATE
+		T_CORE_SET_FTP
+		SET C_FTP_ID = #ftpId#
+		, C_FTP_PASSWORD = #ftpPassword#
+		, C_FTP_URL = #ftpUrl#
+		, C_FTP_PORT = #ftpPort#
+		, C_PASSIVE_FL = #passiveFl#
+		, C_SFTP_FL = #sftpFl#
+		WHERE C_ID = #c_id#
+	</update>
+
+</sqlMap>
