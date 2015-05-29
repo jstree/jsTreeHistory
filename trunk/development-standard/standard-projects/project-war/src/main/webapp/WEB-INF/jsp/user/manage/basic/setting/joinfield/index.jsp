@@ -135,20 +135,20 @@ $(document).ready(function() {
 
 <section>
     <form id="frmJoinField" action="save.do" method="post">
-     <div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
-         <div id="samDiv" class="tablet-mobile alpha bm-remove last">
-             <table id="tblJoinFields" class="display">
-                <thead>
-                    <tr>
-                        <th>필드명</th>
-                        <th>사용여부</th>
-                        <th>정보공개여부</th>
-                        <th>필수/선택입력여부</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-             </table>
+        <div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
+            <div id="samDiv" class="tablet-mobile alpha bm-remove last">
+                <table id="tblJoinFields" class="display">
+                    <thead>
+                        <tr>
+	                        <th>필드명</th>
+	                        <th>사용여부</th>
+	                        <th>정보공개여부</th>
+	                        <th>필수/선택입력여부</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
              
 <!--          <div id="jstreeTable_wrapper" class="dataTables_wrapper no-footer"> -->
 <!--              <table id="jstreeTable" class="display responsive nowrap" cellspacing="0" width="100%"> -->
@@ -164,10 +164,10 @@ $(document).ready(function() {
 <!--                      </tr> -->
 <!--                  </thead> -->
               
-            <div id="divBottom">
-                <button id="btnSave" type="submit">저장하기</button>
+                <div id="divBottom">
+                    <button id="btnSave" type="submit">저장하기</button>
+                </div>
             </div>
-         </div>
-     </div>
+        </div>
     </form>
 </section>
