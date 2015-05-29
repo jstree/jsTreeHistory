@@ -35,7 +35,7 @@ public interface BoardService {
 	 * @return 글목록 List
 	 * @throws Exception
 	 */
-	public List<Article> getArticleList(String boardID, int pageNum, int pageSize) throws Exception;
+	public List<Article> getArticleList(Article article) throws Exception;
 	
 	/**
 	 * 조건에 맞는 글을 검색한다.
@@ -44,7 +44,7 @@ public interface BoardService {
 	 * @return 글목록 List
 	 * @throws Exception
 	 */
-	public List<Article> searchArticleList(String boardID, SearchArticle searchArticle) throws Exception;
+	public List<Article> searchArticleList(SearchArticle searchArticle) throws Exception;
 	
 	/**
 	 * 글을 추가한다.
@@ -53,7 +53,7 @@ public interface BoardService {
 	 * @return Article
 	 * @throws Exception
 	 */
-	public Article addArticle(String boardID, Article article) throws Exception;
+	public Article addArticle(Article article) throws Exception;
 	
 	/**
 	 * 글을 수정한다.
@@ -62,7 +62,7 @@ public interface BoardService {
 	 * @return Article
 	 * @throws Exception
 	 */
-	public Article alterArticle(String boardID, Article article) throws Exception;
+	public Article alterArticle(Article article) throws Exception;
 	
 	/**
 	 * 글을 삭제한다.
@@ -72,6 +72,6 @@ public interface BoardService {
 	 * @throws Exception
 	 * 
 	 */
-	public Article removeArticle(String boardID, Article article) throws Exception;
+	public Article removeArticle(Article article) throws Exception;
 	
 }

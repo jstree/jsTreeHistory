@@ -43,6 +43,9 @@ public class Article extends ComprehensiveTree{
 	/* 글공개여부 */
 	private String openArticleFL;
 	
+	/* 공지글 여부 */
+	private String announcementFL;
+	
 	/* 조회수 */
 	private int viewCnt;
 	
@@ -55,8 +58,12 @@ public class Article extends ComprehensiveTree{
 	/* 수정일시 */
 	private String modDt;
 	
+	/* 테이블에는 없지만 DTO로서 필요한 필드 */
 	/* 게시판 ID */
 	private String boardID;
+	
+	/* 페이지 */
+	private int pageNum;
 	
 	@Override
 	public String getSqlMapSelector() {
@@ -111,6 +118,14 @@ public class Article extends ComprehensiveTree{
 		this.openArticleFL = openArticleFL;
 	}
 
+	public String getAnnouncementFL() {
+		return announcementFL;
+	}
+
+	public void setAnnouncementFL(String announcementFL) {
+		this.announcementFL = announcementFL;
+	}
+
 	public int getViewCnt() {
 		return viewCnt;
 	}
@@ -149,5 +164,13 @@ public class Article extends ComprehensiveTree{
 
 	public void setBoardID(String boardID) {
 		this.boardID = boardID;
+	}
+	
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
 	}
 }

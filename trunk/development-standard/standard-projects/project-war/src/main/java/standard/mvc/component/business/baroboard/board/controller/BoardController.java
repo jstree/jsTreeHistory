@@ -3,7 +3,6 @@ package standard.mvc.component.business.baroboard.board.controller;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,6 +19,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * Modification Information
  * 
  * @ author 전경훈
+ * 
  * @since 2015. 5. 25.
  * @version 1.0
  * @see <pre>
@@ -40,7 +40,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
 @Controller
 @RequestMapping(value = "/board")
 public class BoardController extends GenericAbstractController {
-	
+
 	@Resource(name = "BoardService")
 	private BoardService boardService;
 
@@ -49,62 +49,52 @@ public class BoardController extends GenericAbstractController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	@RequestMapping(value = "/index.do", method = {RequestMethod.GET})
+
+	@RequestMapping(value = "/index.do", method = { RequestMethod.GET })
 	public String showIndexPage(ModelMap modelMap, 
 			@RequestParam(value = "boardID", required = true) String boardID,
-			@RequestParam(value = "page", required = false, defaultValue="1") int page){
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+
 		
-		modelMap.addAttribute("pageName","테스트게시판");
+		modelMap.addAttribute("pageName", "테스트게시판");
 		return "/jsp/board/index";
 	}
-	
+
 	@RequestMapping(value = "/readArticle.do")
-	public String readArticle(ModelMap modelMap,
-			@RequestParam(value = "boardID", required = true) String boardID,
-			@ModelAttribute Article article){
-			
-		return "/jsp/board/newArticle";
+	public String readArticle(ModelMap modelMap, @ModelAttribute Article article) {
+
+		return "/jsp/board/readArticle";
 	}
-	
+
 	@RequestMapping(value = "/newArticle.do")
-	public String addArticle(ModelMap modelMap, 
-			@RequestParam(value = "boardID", required = true) String boardID){
-		
-		return null;
+	public String addArticle(ModelMap modelMap) {
+
+		return "/jsp/board/newArticle";
 	}
 
 	@RequestMapping(value = "/submitNewArticle.do")
-	public Article submitNewArticle(ModelMap modelMap,
-			@RequestParam(value = "boardID", required = true) String boardID,
-			@ModelAttribute Article article){
-		
+	public Article submitNewArticle(ModelMap modelMap, @ModelAttribute Article article) {
+
 		return null;
 	}
-	
+
 	@RequestMapping(value = "/modifyArticle.do")
-	public String modifyArticle(ModelMap modelMap,
-			@RequestParam(value = "boardID", required = true) String boardID,
-			@ModelAttribute Article article){
-		
-		return null;
+	public String modifyArticle(ModelMap modelMap, @ModelAttribute Article article) {
+
+		return "jsp/board/modifyArticle";
 	}
-	
+
 	@RequestMapping(value = "/submitModifiedArticle.do")
-	public Article submitModifiedArticle(ModelMap modelMap,
-			@RequestParam(value = "boardID", required = true) String boardID,
-			@ModelAttribute Article article){
-		
+	public Article submitModifiedArticle(ModelMap modelMap, @ModelAttribute Article article) {
+
 		return null;
 	}
-	
+
 	@RequestMapping(value = "/deleteArticle.do")
-	public Article deleteArticle(ModelMap modelMap,
-			@RequestParam(value = "boardID", required = true) String boardID,
-			@ModelAttribute Article article){
-		
+	public Article deleteArticle(ModelMap modelMap, @ModelAttribute Article article) {
+
 		return null;
 	}
-	
+
 	// TODO : 검색조건
 }

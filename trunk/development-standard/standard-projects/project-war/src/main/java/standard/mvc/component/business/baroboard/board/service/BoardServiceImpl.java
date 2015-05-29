@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import standard.mvc.component.business.baroboard.board.dao.BoardDao;
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
@@ -41,34 +43,35 @@ public class BoardServiceImpl implements BoardService {
 	@Resource(name = "CoreDao")
 	private CoreDao coreDao;
 
+	@Autowired
+	private BoardDao boardDao;
+	
 	@Override
-	public List<Article> getArticleList(String boardID, int pageNum, int pageSize) throws Exception {
+	public List<Article> getArticleList(Article article) throws Exception {
+		return boardDao.getArticleListByPage(article);
+	}
+
+	@Override
+	public List<Article> searchArticleList(SearchArticle searchArticle) throws Exception {
+		return null;
+	}
+
+	@Override
+	public Article addArticle(Article article) throws Exception {
+		return coreService.addNode(article);
+	}
+
+	@Override
+	public Article alterArticle(Article article) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Article> searchArticleList(String boardID, SearchArticle searchArticle) throws Exception {
+	public Article removeArticle(Article article) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Article addArticle(String boardID, Article article) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Article alterArticle(String boardID, Article article) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Article removeArticle(String boardID, Article article) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

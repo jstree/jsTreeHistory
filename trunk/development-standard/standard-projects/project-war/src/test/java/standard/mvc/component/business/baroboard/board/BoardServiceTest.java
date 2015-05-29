@@ -1,14 +1,19 @@
-package standard.mvc.component.business.baroboard.board.article.service;
+package standard.mvc.component.business.baroboard.board;
+
+
+import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.junit.Ignore;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import standard.mvc.component.business.baroboard.board.service.BoardService;
+import standard.mvc.component.business.baroboard.board.vo.Article;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
@@ -21,8 +26,8 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * @since 2015. 5. 25.
  * @version 1.0
  * @see <pre>
- *  Class Name  : ArticleServiceTest.java
- *  Description : 바로보드-게시판-글관리 Service 테스트 클래스
+ *  Class Name  : BoardServiceTest.java
+ *  Description : 바로보드-게시판 Service 테스트 클래스
  *  Infomation  :
  * 
  *  << 개정이력(Modification Information) >>
@@ -35,12 +40,34 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * </pre>
  */
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
-public class ArticleServiceTest {
+public class BoardServiceTest {
 
+	@Resource(name = "BoardService")
+	private BoardService boardService;
+	
+	@Before
+	public void setUp(){
+		
+	}
+
+	@Test
+	public void getAllArticles(){
+		Article article = new Article();
+		article.setBoardID("test");
+		List<Article> list = null;
+		try {
+			list = boardService.getArticleList(article);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(list.size());
+	}
+	
+	
+	
 	
 	
 	
