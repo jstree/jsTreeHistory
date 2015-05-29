@@ -5,7 +5,7 @@
   <term name="개인정보취급방침" physicalName="PRIVACY_POLICY" physicalDescription="PRIVACY POLICY"/>
   <term name="회사" physicalName="COMPANY" physicalDescription="COMPANY"/>
   <term name="소개" physicalName="INTR" physicalDescription="INTRODUCION"/>
-  <term name="유형" physicalName="TYPE" physicalDescription="TYPE"/>
+  <term name="유형" physicalName="TP" physicalDescription="TYPE"/>
   <term name="코드" physicalName="CODE" physicalDescription="CODE"/>
   <term name="이름" physicalName="NAME" physicalDescription="NAME"/>
   <term name="명" physicalName="NAME" physicalDescription="NAME"/>
@@ -36,7 +36,7 @@
   <term name="찾기" physicalName="FIND" physicalDescription="FIND"/>
   <term name="질문" physicalName="QUESTION" physicalDescription="QUESTION"/>
   <term name="기본" physicalName="BASIC" physicalDescription="BASIC"/>
-  <term name="설정" physicalName="SETTING" physicalDescription="SETTING"/>
+  <term name="설정" physicalName="SET" physicalDescription="SETTING"/>
   <term name="웹" physicalName="WEB" physicalDescription="WEB"/>
   <term name="마스터" physicalName="MASTER" physicalDescription="MASTER"/>
   <term name="이메일" physicalName="EMAIL" physicalDescription="EMAIL"/>
@@ -90,7 +90,7 @@
   <term name="부여" physicalName="ASSIGN" physicalDescription="ASSIGN"/>
   <term name="설명" physicalName="DESC" physicalDescription="DESCRIPTION"/>
   <term name="메뉴" physicalName="MENU" physicalDescription="MENU"/>
-  <term name="내용" physicalName="CONTENT" physicalDescription="CONTENT"/>
+  <term name="내용" physicalName="CONT" physicalDescription="CONTENT"/>
   <term name="첨부" physicalName="ATTACH" physicalDescription="ATTACH"/>
   <term name="저장" physicalName="STORE" physicalDescription="STORE"/>
   <term name="다운로드" physicalName="DOWNLOAD" physicalDescription="DOWNLOAD"/>
@@ -110,10 +110,10 @@
   <term name="썸네일" physicalName="THUM" physicalDescription="THUMBNAIL"/>
   <term name="모바일" physicalName="MOBILE" physicalDescription="MOBILE"/>
   <term name="현지" physicalName="LOCAL" physicalDescription="LOCAL"/>
-  <term name="위젯" physicalName="WIDGET" physicalDescription="WIDGET"/>
+  <term name="위젯" physicalName="WDGT" physicalDescription="WIDGET"/>
   <term name="스킨" physicalName="SKIN" physicalDescription="SKIN"/>
   <term name="레이어" physicalName="LAYER" physicalDescription="LAYER"/>
-  <term name="링크" physicalName="LINK" physicalDescription="LINK"/>
+  <term name="링크" physicalName="LNK" physicalDescription="LINK"/>
   <term name="버전" physicalName="VERSION" physicalDescription="VERSION"/>
   <term name="기간" physicalName="TERM" physicalDescription="TERM"/>
   <term name="여부" physicalName="FLAG" physicalDescription="FLAG"/>
