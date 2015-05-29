@@ -32,7 +32,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  *  -------       ------------   -----------------------
  *  2015. 5. 29.        손호성                  최초생성
  * 
- *  Copyright (C) 2015 by MarkAny  All right reserved.
+ * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 @Controller
@@ -49,9 +49,9 @@ public class FtpController extends GenericAbstractController {
 
     @RequestMapping(value = "/index.do", method = {RequestMethod.GET})
     public String getNode(ModelMap modelMap, HttpServletRequest request) throws Exception {
-        FtpVO serverVO = new FtpVO();
-        serverVO.setC_id(4);
-        modelMap.addAttribute("ftp", ftpService.getNode(serverVO));
+        FtpVO ftpVO = new FtpVO();
+        ftpVO.setC_id(4);
+        modelMap.addAttribute("ftp", ftpService.getNode(ftpVO));
         return "/jsp/baroboard/core/manage/setting/ftp/index";
     }
 
