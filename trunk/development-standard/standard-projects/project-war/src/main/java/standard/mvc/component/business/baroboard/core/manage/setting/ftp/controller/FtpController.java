@@ -7,11 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.core.manage.setting.ftp.vo.FtpVO;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
@@ -53,6 +57,19 @@ public class FtpController extends GenericAbstractController {
         ftpVO.setC_id(4);
         modelMap.addAttribute("ftp", ftpService.getNode(ftpVO));
         return "/jsp/baroboard/core/manage/setting/ftp/index";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/save.do", method = {RequestMethod.POST})
+    public FtpVO alterNode(@Validated(value = AlterNode.class) FtpVO ftpVO,
+            BindingResult bindingResult, ModelMap model) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new RuntimeException(bindingResult.getAllErrors().get(0).getDefaultMessage());
+        }
+
+        ftpVO.setStatus(ftpService.alterNode(ftpVO));
+
+        return ftpVO;
     }
 
 }

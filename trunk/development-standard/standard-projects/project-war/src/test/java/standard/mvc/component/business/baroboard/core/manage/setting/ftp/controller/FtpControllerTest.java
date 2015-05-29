@@ -1,6 +1,7 @@
 package standard.mvc.component.business.baroboard.core.manage.setting.ftp.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -61,6 +62,71 @@ public class FtpControllerTest {
     public void testGetNode() throws Exception {
         this.mockMvc.perform(get("/core/manage/setting/ftp/index.do")).andDo(print())
         .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testAlterNode() throws Exception {
+        this.mockMvc
+        .perform(
+                post("/core/manage/setting/ftp/save.do").param("c_id", "4")
+                .param("ftpId", "user2").param("ftpPassword", "2345")
+                .param("ftpUrl", "ftp://127.0.1.1").param("ftpPort", "21")
+                .param("passiveFl", "0").param("sftpFl", "0")).andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testAlterNodeWithNotAllowedFtpUrl() throws Exception {
+        String notAllowedUrl = "임의URL";
+        this.mockMvc
+        .perform(
+                post("/core/manage/setting/ftp/save.do").param("c_id", "4")
+                .param("ftpId", "user2").param("ftpPassword", "2345")
+                .param("ftpUrl", notAllowedUrl).param("ftpPort", "21")
+                .param("passiveFl", "0").param("sftpFl", "0")).andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testAlterNodeWithNotAllowedFtpPort() throws Exception {
+        String notAllowedFtpPort = "임의ftp포트";
+        this.mockMvc
+        .perform(
+                post("/core/manage/setting/ftp/save.do").param("c_id", "4")
+                .param("ftpId", "user2").param("ftpPassword", "2345")
+                .param("ftpUrl", "ftp://127.0.1.1")
+                .param("ftpPort", notAllowedFtpPort).param("passiveFl", "0")
+                .param("sftpFl", "0")).andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    public void testAlterNodeWithNotAllowedPassiveFl() throws Exception {
+        String notAllowedPassiveFl = "3";
+        this.mockMvc
+        .perform(
+                post("/core/manage/setting/ftp/save.do").param("c_id", "4")
+                .param("ftpId", "user2").param("ftpPassword", "2345")
+                .param("ftpUrl", "ftp://127.0.1.1").param("ftpPort", "21")
+                .param("passiveFl", notAllowedPassiveFl).param("sftpFl", "0"))
+                .andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    public void testAlterNodeWithNotAllowedSftpFl() throws Exception {
+        String notAllowedSftpFl = "3";
+        this.mockMvc
+        .perform(
+                post("/core/manage/setting/ftp/save.do").param("c_id", "4")
+                .param("ftpId", "user2").param("ftpPassword", "2345")
+                .param("ftpUrl", "ftp://127.0.1.1").param("ftpPort", "21")
+                .param("passiveFl", "0").param("sftpFl", notAllowedSftpFl))
+                .andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    public void testAlterNodeWithUpdateConditionOnly() throws Exception {
+        this.mockMvc.perform(post("/core/manage/setting/ftp/save.do").param("c_id", "4"))
+        .andDo(print()).andExpect(status().isOk());
     }
 
 }
