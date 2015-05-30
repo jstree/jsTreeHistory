@@ -2,8 +2,6 @@ package standard.mvc.component.business.baroboard.core.manage.setting.ftp.vo;
 
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.URL;
-
 import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -31,6 +29,9 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 public class FtpVO extends ComprehensiveTree {
 
+    private static final String IP_ONLY = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+            + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+            + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
     private static final String NUMBER_ONLY = "^[0-9]*$";
     private static final String FALSE = "0";
     private static final String TRUE = "1";
@@ -48,7 +49,7 @@ public class FtpVO extends ComprehensiveTree {
     /**
      * FTP URL
      */
-    @URL(groups = {AlterNode.class})
+    @Pattern(regexp = IP_ONLY, groups = {AlterNode.class})
     private String ftpUrl;
 
     /**

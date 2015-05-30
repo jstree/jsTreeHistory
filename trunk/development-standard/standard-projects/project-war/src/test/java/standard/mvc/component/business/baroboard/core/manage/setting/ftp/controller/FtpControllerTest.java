@@ -70,14 +70,14 @@ public class FtpControllerTest {
         .perform(
                 post("/core/manage/setting/ftp/save.do").param("c_id", "4")
                 .param("ftpId", "user2").param("ftpPassword", "2345")
-                .param("ftpUrl", "ftp://127.0.1.1").param("ftpPort", "21")
+                                .param("ftpUrl", "127.0.1.1").param("ftpPort", "21")
                 .param("passiveFl", "0").param("sftpFl", "0")).andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testAlterNodeWithNotAllowedFtpUrl() throws Exception {
-        String notAllowedUrl = "임의URL";
+        String notAllowedUrl = "1277.0.0.1";
         this.mockMvc
         .perform(
                 post("/core/manage/setting/ftp/save.do").param("c_id", "4")
@@ -94,7 +94,7 @@ public class FtpControllerTest {
         .perform(
                 post("/core/manage/setting/ftp/save.do").param("c_id", "4")
                 .param("ftpId", "user2").param("ftpPassword", "2345")
-                .param("ftpUrl", "ftp://127.0.1.1")
+                                .param("ftpUrl", "127.0.1.1")
                 .param("ftpPort", notAllowedFtpPort).param("passiveFl", "0")
                 .param("sftpFl", "0")).andDo(print()).andExpect(status().isOk());
     }
@@ -106,7 +106,7 @@ public class FtpControllerTest {
         .perform(
                 post("/core/manage/setting/ftp/save.do").param("c_id", "4")
                 .param("ftpId", "user2").param("ftpPassword", "2345")
-                .param("ftpUrl", "ftp://127.0.1.1").param("ftpPort", "21")
+                                .param("ftpUrl", "127.0.1.1").param("ftpPort", "21")
                 .param("passiveFl", notAllowedPassiveFl).param("sftpFl", "0"))
                 .andDo(print()).andExpect(status().isOk());
     }
@@ -118,7 +118,7 @@ public class FtpControllerTest {
         .perform(
                 post("/core/manage/setting/ftp/save.do").param("c_id", "4")
                 .param("ftpId", "user2").param("ftpPassword", "2345")
-                .param("ftpUrl", "ftp://127.0.1.1").param("ftpPort", "21")
+                                .param("ftpUrl", "127.0.1.1").param("ftpPort", "21")
                 .param("passiveFl", "0").param("sftpFl", notAllowedSftpFl))
                 .andDo(print()).andExpect(status().isOk());
     }
