@@ -76,10 +76,10 @@
 									</a>
 									<ul class="sub-nav unstyled bm-remove">
 										<li class="sub-nav-item first active">
-											<a href="#" class=" first active">» &nbsp;서버 설정</a>
+											<a href="${pageContext.request.contextPath}/core/manage/setting/server/index.do" class=" first active">» &nbsp;서버 설정</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="#" class="">» &nbsp;FTP 설정</a>
+											<a href="${pageContext.request.contextPath}/core/manage/setting/ftp/index.do" class="">» &nbsp;FTP 설정</a>
 										</li>
 										<li class="sub-nav-item">
 											<a href="#" class="">» &nbsp;파일업로드 설정</a>

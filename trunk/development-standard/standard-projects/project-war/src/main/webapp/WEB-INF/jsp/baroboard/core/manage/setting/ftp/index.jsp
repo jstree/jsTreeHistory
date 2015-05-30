@@ -103,41 +103,41 @@ var inputForm = {
 <body class="template-index" gtools_scp_screen_capture_injected="true">
 	<section>
 		<div class="three-quarter last boxed p-twenty clearfix"	data-anim-type="fade-in" data-anim-delay="0">
-			<form name="ftpForm" id="ftpForm" method="post" action="${pageContext.request.contextPath}/core/manage/setting/server/save.do">
+			<form name="ftpForm" id="ftpForm" method="post" action="${pageContext.request.contextPath}/core/manage/setting/ftp/save.do">
 				<input type="hidden" name="c_id" id="c_id" value="${ftp.c_id}"/>
 				<div id="samDiv" class="tablet-mobile alpha bm-remove last">
 					<div class="responsive_row">
-						<div class="item_Lname">기본 URL </div>
+						<div class="item_Lname">FTP 서버 주소 </div>
 						<div class="item_Lvalue">
-							<input name="url" id="url" type="text" value="${ftp.url}">
+							<input name="ftpUrl" id="ftpUrl" type="text" value="${ftp.ftpUrl}">
 						</div>
 					</div>
 					<div class="responsive_row">
-						<div class="item_Lname">SSL 사용여부 설정</div>
+						<div class="item_Lname">FTP 서버 Port</div>
 						<div class="item_Lvalue">
-							<input type="checkbox" name="sslFl" id="sslFl" value="1" <c:if test="${'1' == ftp.sslFl}">checked</c:if>/>
+							<input name="ftpPort" id="ftpPort" type="text" value="${ftp.ftpPort}">
 						</div>
 					</div>
 					<div class="responsive_row">
-						<div class="item_Lname">PORT 설정</div>
+						<div class="item_Lname">아이디 / 패스워드 </div>
 						<div class="item_Lvalue">
-							http : <input name="httpPort" id="httpPort" type="text" value="${ftp.httpPort}"> 
+							<input name="ftpId" id="ftpId" type="text" value="${ftp.ftpId}">
 						</div>
-						<div class="item_Rname"></div>
+						<div class="item_Rname"> / </div>
 						<div class="item_Rvalue">
-							https : <input name="httpsPort" id="httpsPort" type="text" value="${ftp.httpsPort}">
-						</div>					
+							<input name="ftpPassword" id="ftpPassword" type="text" value="${ftp.ftpPassword}">
+						</div>
 					</div>
 					<div class="responsive_row ">
-						<div class="item_Lname">짧은 주소 사용 설정</div>
+						<div class="item_Lname">Passive 모드 사용 설정</div>
 						<div class="item_Lvalue">
-							<input type="checkbox" name="shortUrlFl" id="shortUrlFl" value="1" <c:if test="${'1' == ftp.shortUrlFl}">checked</c:if>/>
+							<input type="checkbox" name="passiveFl" id="passiveFl" value="1" <c:if test="${'1' == ftp.passiveFl}">checked</c:if>/>
 						</div>
 					</div>
 					<div class="responsive_row">
-						<div class="item_Lname">SSO 사용 설정</div>
+						<div class="item_Lname">SFTP 사용 설정</div>
 						<div class="item_Lvalue">
-							<input type="checkbox" name="ssoFl" id="ssoFl" value="1" <c:if test="${'1' == ftp.ssoFl}">checked</c:if>/>
+							<input type="checkbox" name="sftpFl" id="sftpFl" value="1" <c:if test="${'1' == ftp.sftpFl}">checked</c:if>/>
 						</div>
 					</div>
 					<div class="responsive_row">
