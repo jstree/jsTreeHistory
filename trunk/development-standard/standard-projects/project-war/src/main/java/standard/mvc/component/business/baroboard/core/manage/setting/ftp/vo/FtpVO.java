@@ -2,6 +2,8 @@ package standard.mvc.component.business.baroboard.core.manage.setting.ftp.vo;
 
 import javax.validation.constraints.Pattern;
 
+import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidFormat;
+import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidInput;
 import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -29,13 +31,6 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 public class FtpVO extends ComprehensiveTree {
 
-    private static final String IP_ONLY = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
-            + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
-            + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
-    private static final String NUMBER_ONLY = "^[0-9]*$";
-    private static final String FALSE = "0";
-    private static final String TRUE = "1";
-
     /**
      * FTP 아이디
      */
@@ -49,25 +44,25 @@ public class FtpVO extends ComprehensiveTree {
     /**
      * FTP URL
      */
-    @Pattern(regexp = IP_ONLY, groups = {AlterNode.class})
+    @Pattern(regexp = ValidFormat.IP_ONLY, groups = {AlterNode.class})
     private String ftpUrl;
 
     /**
      * FTP PORT 번호
      */
-    @Pattern(regexp = NUMBER_ONLY, groups = {AlterNode.class})
+    @Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AlterNode.class})
     private String ftpPort;
 
     /**
      * Passive 모드 사용여부
      */
-    @Contained(values = {TRUE, FALSE}, groups = {AlterNode.class})
+    @Contained(values = {ValidInput.TRUE, ValidInput.FALSE}, groups = {AlterNode.class})
     private String passiveFl;
 
     /**
      * SFTP 모드 사용여부
      */
-    @Contained(values = {TRUE, FALSE}, groups = {AlterNode.class})
+    @Contained(values = {ValidInput.TRUE, ValidInput.FALSE}, groups = {AlterNode.class})
     private String sftpFl;
 
     public String getFtpId() {

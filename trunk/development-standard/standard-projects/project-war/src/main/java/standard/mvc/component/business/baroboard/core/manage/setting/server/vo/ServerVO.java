@@ -4,6 +4,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.URL;
 
+import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidFormat;
+import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidInput;
 import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -31,10 +33,6 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 public class ServerVO extends ComprehensiveTree {
 
-    private static final String NUMBER_ONLY = "^[0-9]*$";
-    private static final String FALSE = "0";
-    private static final String TRUE = "1";
-
     /**
      * 기본 URL
      */
@@ -44,31 +42,31 @@ public class ServerVO extends ComprehensiveTree {
     /**
      * SSL 사용여부
      */
-    @Contained(values = {TRUE, FALSE}, groups = {AlterNode.class})
+    @Contained(values = {ValidInput.TRUE, ValidInput.FALSE}, groups = {AlterNode.class})
     private String sslFl;
 
     /**
      * HTTP PORT 번호
      */
-    @Pattern(regexp = NUMBER_ONLY, groups = {AlterNode.class})
+    @Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AlterNode.class})
     private String httpPort;
 
     /**
      * HTTPS PORT 번호
      */
-    @Pattern(regexp = NUMBER_ONLY, groups = {AlterNode.class})
+    @Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AlterNode.class})
     private String httpsPort;
 
     /**
      * 짧은 주소 사용여부
      */
-    @Contained(values = {TRUE, FALSE}, groups = {AlterNode.class})
+    @Contained(values = {ValidInput.TRUE, ValidInput.FALSE}, groups = {AlterNode.class})
     private String shortUrlFl;
 
     /**
      * SSO 사용여부
      */
-    @Contained(values = {TRUE, FALSE}, groups = {AlterNode.class})
+    @Contained(values = {ValidInput.TRUE, ValidInput.FALSE}, groups = {AlterNode.class})
     private String ssoFl;
 
     public String getUrl() {

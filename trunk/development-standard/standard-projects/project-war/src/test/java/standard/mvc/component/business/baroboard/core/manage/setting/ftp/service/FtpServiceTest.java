@@ -92,7 +92,7 @@ public class FtpServiceTest {
         when(mockFtpVO.getSqlMapSelector()).thenReturn("ftp");
         when(mockFtpVO.getFtpId()).thenReturn("user1");
         when(mockFtpVO.getFtpPassword()).thenReturn("4321");
-        when(mockFtpVO.getFtpUrl()).thenReturn("ftp://192.168.0.1");
+        when(mockFtpVO.getFtpUrl()).thenReturn("192.168.0.1");
         when(mockFtpVO.getFtpPort()).thenReturn("22");
         when(mockFtpVO.getPassiveFl()).thenReturn("1");
         when(mockFtpVO.getSftpFl()).thenReturn("1");

@@ -51,7 +51,6 @@ public class ServerController extends GenericAbstractController {
 
     @Override
     public Map<String, Map<String, Object>> bindTypes() {
-        // TODO Auto-generated method stub
         return null;
     }
 
