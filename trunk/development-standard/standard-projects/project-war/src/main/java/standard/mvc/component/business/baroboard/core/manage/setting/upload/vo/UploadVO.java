@@ -37,7 +37,6 @@ public class UploadVO extends ComprehensiveTree {
     @Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AlterNode.class})
     private String docSizeLimit;
 
-    @Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AlterNode.class})
     private String fileExtLimit;
 
     @Contained(values = {ValidInput.TRUE, ValidInput.FALSE}, groups = {AlterNode.class})
