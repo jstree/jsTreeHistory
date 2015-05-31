@@ -15,7 +15,6 @@ import javax.annotation.Resource;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -54,104 +53,120 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
+@ContextConfiguration(classes = { WebApplicationContextConfig.class,
+		WebMvcConfig.class })
 public class UploadServiceTest {
 
-    @Resource(name = "UploadService")
-    CoreService uploadService;
+	@Resource(name = "UploadService")
+	CoreService uploadService;
 
-    @Mock
-    UploadVO mockUploadVO;
+	@Mock
+	UploadVO mockUploadVO;
 
-    @Before
-    public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-    }
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+	}
 
-    @After
-    public void tearDown() throws Exception {}
+	@After
+	public void tearDown() throws Exception {
+	}
 
-    @Test
-    public void testAnnotationDrivenServiceInit() {
-        assertThat(uploadService, is(notNullValue()));
-    }
+	@Test
+	public void testAnnotationDrivenServiceInit() {
+		assertThat(uploadService, is(notNullValue()));
+	}
 
-    @Test
-    public void testUnsupportedOperation() throws Exception {
-        try {
-            uploadService.addNode(mockUploadVO);
-        } catch (Exception e) {
-            assertThat(e, is(instanceOf(GenericServiceRuntimeException.class)));
-            assertThat(e.getMessage(), is(equalTo(ExceptionMessage.UN_SUPPORTED.getValue())));
-        }
-    }
-    
-    @Ignore
-    @Test
-    public void testAlterNode() throws Exception {
-        when(mockUploadVO.getC_id()).thenReturn(4);
-        when(mockUploadVO.getSqlMapSelector()).thenReturn("upload");
+	@Test
+	public void testUnsupportedOperation() throws Exception {
+		try {
+			uploadService.addNode(mockUploadVO);
+		} catch (Exception e) {
+			assertThat(e, is(instanceOf(GenericServiceRuntimeException.class)));
+			assertThat(e.getMessage(),
+					is(equalTo(ExceptionMessage.UN_SUPPORTED.getValue())));
+		}
+	}
 
-        assertThat(uploadService.alterNode(mockUploadVO), is(1));
+	@Test
+	public void testAlterNode() throws Exception {
+		when(mockUploadVO.getC_id()).thenReturn(4);
+		when(mockUploadVO.getSqlMapSelector()).thenReturn("upload");
+		when(mockUploadVO.getFileSizeLimit()).thenReturn("50");
+		when(mockUploadVO.getDocSizeLimit()).thenReturn("5");
+		when(mockUploadVO.getFileExtLimit()).thenReturn("*.*");
+		when(mockUploadVO.getExtnlLnkFl()).thenReturn("0");
+		when(mockUploadVO.getExtnlLnkAllowedExt()).thenReturn("hwp,doc");
+		when(mockUploadVO.getExtnlLnkAllowedSite()).thenReturn(
+				"http://www.naver.com");
 
-        UploadVO resultServerVO = uploadService.getNode(mockUploadVO);
+		assertThat(uploadService.alterNode(mockUploadVO), is(1));
 
-        assertThat(resultServerVO.getC_id(), is(4));
+		UploadVO resultServerVO = uploadService.getNode(mockUploadVO);
 
-        verify(mockUploadVO, times(2)).getC_id();
-        verify(mockUploadVO, times(2)).getSqlMapSelector();
-    }
+		assertThat(resultServerVO.getC_id(), is(4));
 
-    @Test
-    public void testAnnotationDrivenMock() throws Exception {
-        when(mockUploadVO.getC_id()).thenReturn(1);
-        assertThat(mockUploadVO.getC_id(), is(1));
-        verify(mockUploadVO).getC_id();
-    }
+		verify(mockUploadVO, times(2)).getC_id();
+		verify(mockUploadVO, times(2)).getSqlMapSelector();
+		verify(mockUploadVO).getFileSizeLimit();
+		verify(mockUploadVO).getDocSizeLimit();
+		verify(mockUploadVO).getFileExtLimit();
+		verify(mockUploadVO).getExtnlLnkFl();
+		verify(mockUploadVO).getExtnlLnkAllowedExt();
+		verify(mockUploadVO).getExtnlLnkAllowedSite();
+	}
 
-    @Test
-    public void testGetChildNode() throws Exception {
-        when(mockUploadVO.getC_id()).thenReturn(3);
-        when(mockUploadVO.getSqlMapSelector()).thenReturn("upload");
+	@Test
+	public void testAnnotationDrivenMock() throws Exception {
+		when(mockUploadVO.getC_id()).thenReturn(1);
+		assertThat(mockUploadVO.getC_id(), is(1));
+		verify(mockUploadVO).getC_id();
+	}
 
-        List<UploadVO> bunchOfResultServerVO = uploadService.getChildNode(mockUploadVO);
+	@Test
+	public void testGetChildNode() throws Exception {
+		when(mockUploadVO.getC_id()).thenReturn(3);
+		when(mockUploadVO.getSqlMapSelector()).thenReturn("upload");
 
-        assertThat(bunchOfResultServerVO.size(), is(1));
+		List<UploadVO> bunchOfResultServerVO = uploadService
+				.getChildNode(mockUploadVO);
 
-        for (UploadVO resultServerVO : bunchOfResultServerVO) {
-            assertThat(resultServerVO.getC_id(), is(4));
-            assertThat(resultServerVO.getC_parentid(), is(3));
-            assertThat(resultServerVO.getC_position(), is(0));
-            assertThat(resultServerVO.getC_left(), is(4));
-            assertThat(resultServerVO.getC_right(), is(5));
-            assertThat(resultServerVO.getC_level(), is(3));
-            assertThat(resultServerVO.getC_title(), is(equalTo("파일업로드설정")));
-            assertThat(resultServerVO.getC_type(), is(equalTo("default")));
-            assertThat(resultServerVO.getChildcount(), is(equalTo("NoChild")));
-        }
+		assertThat(bunchOfResultServerVO.size(), is(1));
 
-        verify(mockUploadVO).getC_id();
-        verify(mockUploadVO).getSqlMapSelector();
-    }
+		for (UploadVO resultServerVO : bunchOfResultServerVO) {
+			assertThat(resultServerVO.getC_id(), is(4));
+			assertThat(resultServerVO.getC_parentid(), is(3));
+			assertThat(resultServerVO.getC_position(), is(0));
+			assertThat(resultServerVO.getC_left(), is(4));
+			assertThat(resultServerVO.getC_right(), is(5));
+			assertThat(resultServerVO.getC_level(), is(3));
+			assertThat(resultServerVO.getC_title(), is(equalTo("파일업로드설정")));
+			assertThat(resultServerVO.getC_type(), is(equalTo("default")));
+			assertThat(resultServerVO.getChildcount(), is(equalTo("NoChild")));
+		}
 
-    @Test
-    public void testGetNode() throws Exception {
-        when(mockUploadVO.getC_id()).thenReturn(4);
-        when(mockUploadVO.getSqlMapSelector()).thenReturn("upload");
+		verify(mockUploadVO).getC_id();
+		verify(mockUploadVO).getSqlMapSelector();
+	}
 
-        UploadVO resultServerVO = uploadService.getNode(mockUploadVO);
+	@Test
+	public void testGetNode() throws Exception {
+		when(mockUploadVO.getC_id()).thenReturn(4);
+		when(mockUploadVO.getSqlMapSelector()).thenReturn("upload");
 
-        assertThat(resultServerVO.getC_id(), is(4));
-        assertThat(resultServerVO.getC_parentid(), is(3));
-        assertThat(resultServerVO.getC_position(), is(0));
-        assertThat(resultServerVO.getC_left(), is(4));
-        assertThat(resultServerVO.getC_right(), is(5));
-        assertThat(resultServerVO.getC_level(), is(3));
-        assertThat(resultServerVO.getC_title(), is(equalTo("파일업로드설정")));
-        assertThat(resultServerVO.getC_type(), is(equalTo("default")));
+		UploadVO resultServerVO = uploadService.getNode(mockUploadVO);
 
-        verify(mockUploadVO).getC_id();
-        verify(mockUploadVO).getSqlMapSelector();
-    }
+		assertThat(resultServerVO.getC_id(), is(4));
+		assertThat(resultServerVO.getC_parentid(), is(3));
+		assertThat(resultServerVO.getC_position(), is(0));
+		assertThat(resultServerVO.getC_left(), is(4));
+		assertThat(resultServerVO.getC_right(), is(5));
+		assertThat(resultServerVO.getC_level(), is(3));
+		assertThat(resultServerVO.getC_title(), is(equalTo("파일업로드설정")));
+		assertThat(resultServerVO.getC_type(), is(equalTo("default")));
+
+		verify(mockUploadVO).getC_id();
+		verify(mockUploadVO).getSqlMapSelector();
+	}
 
 }
