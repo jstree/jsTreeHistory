@@ -12,6 +12,27 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericServiceRuntimeException;
 
+/**
+ * 
+ * Modification Information
+ * 
+ * @author 손호성
+ * @since 2015. 5. 31.
+ * @version 1.0
+ * @see <pre>
+ *  Class Name  : UploadServiceImpl.java
+ *  Description : 바로보드-코어-고급설정-파일업로드 Service
+ *  Infomation  :
+ * 
+ *  << 개정이력(Modification Information) >>
+ * 
+ *  수정일              수정자                  수정내용
+ *  -------       ------------   -----------------------
+ *  2015. 5. 31.        손호성                  최초생성
+ * 
+ *  Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
+ * </pre>
+ */
 @Service(value = "UploadService")
 public class UploadServiceImpl implements CoreService {
 

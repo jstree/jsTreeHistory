@@ -39,7 +39,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericService
  * @version 1.0
  * @see <pre>
  * Class Name  : UploadServiceTest.java
- * Description : 바로보드-코어-고급설정-서버 파일업로드 테스트 클래스
+ * Description : 바로보드-코어-고급설정-파일업로드 서비스 테스트
  * Infomation  : 
  * 
  * << 개정이력(Modification Information) >>

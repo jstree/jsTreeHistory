@@ -18,7 +18,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @since 2015. 5. 20.
  * @version 1.0
  * @see <pre>
- *  Class Name  : ServerComprehensiveTree.java
+ *  Class Name  : ServerVO.java
  *  Description : 서버 설정 VO
  *  Infomation  :
  * 
