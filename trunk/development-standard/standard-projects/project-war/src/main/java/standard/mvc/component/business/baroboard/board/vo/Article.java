@@ -38,7 +38,7 @@ public class Article extends ComprehensiveTree{
 	private String allowReplyFL;
 	
 	/* 알림여부 */
-	private String alerResponseFL;
+	private String alertResponseFL;
 	
 	/* 글공개여부 */
 	private String openArticleFL;
@@ -102,12 +102,12 @@ public class Article extends ComprehensiveTree{
 		this.allowReplyFL = allowReplyFL;
 	}
 
-	public String getAlerResponseFL() {
-		return alerResponseFL;
+	public String getAlertResponseFL() {
+		return alertResponseFL;
 	}
 
-	public void setAlerResponseFL(String alerResponseFL) {
-		this.alerResponseFL = alerResponseFL;
+	public void setAlertResponseFL(String alertResponseFL) {
+		this.alertResponseFL = alertResponseFL;
 	}
 
 	public String getOpenArticleFL() {

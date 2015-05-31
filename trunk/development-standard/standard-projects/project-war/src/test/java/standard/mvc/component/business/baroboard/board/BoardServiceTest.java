@@ -6,8 +6,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -45,6 +48,8 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
 public class BoardServiceTest {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Resource(name = "BoardService")
 	private BoardService boardService;
 	
@@ -63,10 +68,33 @@ public class BoardServiceTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(list.size());
+		logger.debug(""+list.size());
 	}
 	
-	
+	@Ignore
+	@Test
+	public void addArticle(){
+		Article article = new Article();
+		article.setBoardID("test");
+		article.setBoardID("T_BOARD_"+article.getBoardID());
+		
+		article.setRef(2);
+		article.setC_type("default");
+		article.setC_position(0);
+		article.setC_title("전경훈입니다.");
+		article.setContent("<p>내용입니다.<p>");
+		article.setAllowCommentFL("1");
+		article.setAllowReplyFL("1");
+		article.setAlertResponseFL("0");
+		article.setViewCnt(0);
+		article.setRegDt("20150530113147");
+		Article insertedArticle;
+		try {
+			insertedArticle = boardService.addArticle(article);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

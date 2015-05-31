@@ -44,6 +44,7 @@
 			FROM $boardID$ B
 			<include refid="getInlineChildCountAfterFrom" />
 			/* table from filed*/
+			, #boardID# as boardID
 			FROM $boardID$ A
 			<include refid="getAfterFrom" />
 		</dynamic>
@@ -100,7 +101,7 @@
 			, C_CONTENT = #content# 			
 			, C_ALLOW_COMMENT_FL = #allowCommentFL#	
 			, C_ALLOW_REPLY_FL = #allowReplyFL#	
-			, C_ALERT_RESPONSE_FL = #alerResponseFL#
+			, C_ALERT_RESPONSE_FL = #alertResponseFL#
 			, C_OPEN_ARTICLE_FL = #openArticleFL# 	
 			, C_ANNOUNCEMENT_FL = ## 	
 			, C_VIEW_CNT = #viewCnt# 			
@@ -114,54 +115,48 @@
 	<select id="getNode" parameterClass="Article"
 		resultClass="Article">
 		/* getNode */
-		SELECT C_ID
-			, C_PARENTID
-			, C_POSITION
-			, C_LEFT
-			, C_RIGHT
-			, C_LEVEL
-			, C_TITLE
-			, C_TYPE
-			, C_REG_ID 							
-			, C_CONTENT 						
-			, C_ALLOW_COMMENT_FL	
-			, C_ALLOW_REPLY_FL 		
-			, C_ALERT_RESPONSE_FL 	
-			, C_OPEN_ARTICLE_FL 		
-			, C_ANNOUNCEMENT_FL 	
-			, C_VIEW_CNT 					
-			, C_IS_DELETED_FL				
-			, C_REG_DT 						
-			, C_MOD_DT 
-		FROM $boardID$
+		<dynamic>
+			<include refid="getMetaField" />
+			/* user fields */
+			, A.C_REG_ID 							
+			, A.C_CONTENT 						
+			, A.C_ALLOW_COMMENT_FL	
+			, A.C_ALLOW_REPLY_FL 		
+			, A.C_ALERT_RESPONSE_FL 	
+			, A.C_OPEN_ARTICLE_FL 		
+			, A.C_ANNOUNCEMENT_FL 	
+			, A.C_VIEW_CNT 					
+			, A.C_IS_DELETED_FL				
+			, A.C_REG_DT 						
+			, A.C_MOD_DT 
+			, #boardID# as boardID
+		FROM $boardID$ A
 		WHERE C_ID = #c_id#
+		</dynamic>
 	</select>
 
 
 	<select id="getNodeByRef" parameterClass="Article"
 		resultClass="Article">
+		<dynamic>
 		/* getNodeByRef */
-		SELECT C_ID
-			, C_PARENTID
-			, C_POSITION
-			, C_LEFT
-			, C_RIGHT
-			, C_LEVEL
-			, C_TITLE
-			, C_TYPE
-			, C_REG_ID 							
-			, C_CONTENT 						
-			, C_ALLOW_COMMENT_FL	
-			, C_ALLOW_REPLY_FL 		
-			, C_ALERT_RESPONSE_FL 	
-			, C_OPEN_ARTICLE_FL 		
-			, C_ANNOUNCEMENT_FL 	
-			, C_VIEW_CNT 					
-			, C_IS_DELETED_FL				
-			, C_REG_DT 						
-			, C_MOD_DT 
-		FROM $boardID$
+			<include refid="getMetaField" />
+			/* user fields */
+			, A.C_REG_ID 							
+			, A.C_CONTENT 						
+			, A.C_ALLOW_COMMENT_FL	
+			, A.C_ALLOW_REPLY_FL 		
+			, A.C_ALERT_RESPONSE_FL 	
+			, A.C_OPEN_ARTICLE_FL 		
+			, A.C_ANNOUNCEMENT_FL 	
+			, A.C_VIEW_CNT 					
+			, A.C_IS_DELETED_FL				
+			, A.C_REG_DT 						
+			, A.C_MOD_DT 
+			, #boardID# as boardID
+		FROM $boardID$ A
 		WHERE C_ID = #ref#
+		</dynamic>
 	</select>
 
 
@@ -382,19 +377,22 @@
 	</update>
 	
 	<select id="getArticleListByPage" parameterClass="Article" resultClass="Article">
+		/* getArticleListByPage */
 		<dynamic>
 			<include refid="getMetaField" />
-				, A.C_REG_ID 							
-				, A.C_CONTENT 						
-				, A.C_ALLOW_COMMENT_FL	
-				, A.C_ALLOW_REPLY_FL 		
-				, A.C_ALERT_RESPONSE_FL 	
-				, A.C_OPEN_ARTICLE_FL 		
-				, A.C_ANNOUNCEMENT_FL 	
-				, A.C_VIEW_CNT 					
-				, A.C_IS_DELETED_FL				
-				, A.C_REG_DT 						
-				, A.C_MOD_DT 						
+				, A.C_TITLE as c_title
+				, A.C_REG_ID as regId 			
+				, A.C_CONTENT as content 			
+				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
+				, A.C_ALLOW_REPLY_FL as allowReplyFL	
+				, A.C_ALERT_RESPONSE_FL as alertResponseFL
+				, A.C_OPEN_ARTICLE_FL as openArticleFL 	
+				, A.C_ANNOUNCEMENT_FL as  	
+				, A.C_VIEW_CNT as viewCnt 			
+				, A.C_IS_DELETED_FL as isDeletedFL		
+				, A.C_REG_DT as regDt 				
+				, A.C_MOD_DT as modDt 				
+				, #boardID# as boardID
 			FROM $boardID$ A
 			WHERE
 				C_PARENTID = 2

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags" %>
+
 <!DOCTYPE html>
 <html lang="ko" class="js">
 <head>
@@ -58,32 +60,28 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>3</td>
-												<td><a>안녕하세요 (4)</a></td>
-												<td>정원기</td>
-												<td>2015-05-01</td>
-												<td>1</td>
-												<td>0</td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td><a>반갑습니다 (2)</a></td>
-												<td>이동민</td>
-												<td>2015-04-01</td>
-												<td>3</td>
-												<td>2</td>
-											</tr>
-											<tr>
-												<td>1</td>
-												<td><a>테스트 (1)</a></td>
-												<td>김병우</td>
-												<td>2015-03-01</td>
-												<td>4</td>
-												<td>1</td>
-											</tr>
+											<c:forEach var="article" items="${articleList}" varStatus="status">
+												<tr>
+													<td>${article.c_id}</td>
+													<td><a>${article.c_title} (1)</a></td>
+													<td>${article.regId}</td>
+													<td>${article.regDt}</td>
+													<td>${article.viewCnt}</td>
+													<td>0</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
+									${ fn:length(articleList) }
+									<c:choose>
+										<c:when test="${not empty articleList}" >
+											존재
+										</c:when>
+										<c:otherwise>
+											없음 ㅠㅠ
+										</c:otherwise>
+									</c:choose>
+									
 								</div>
 							</div>
 						</div>

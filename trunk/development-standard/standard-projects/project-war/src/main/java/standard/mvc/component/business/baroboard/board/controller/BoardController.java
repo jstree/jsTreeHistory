@@ -1,15 +1,17 @@
 package standard.mvc.component.business.baroboard.board.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import standard.mvc.component.business.baroboard.board.service.BoardService;
 import standard.mvc.component.business.baroboard.board.vo.Article;
@@ -41,6 +43,8 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
 @RequestMapping(value = "/board")
 public class BoardController extends GenericAbstractController {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Resource(name = "BoardService")
 	private BoardService boardService;
 
@@ -51,17 +55,21 @@ public class BoardController extends GenericAbstractController {
 	}
 
 	@RequestMapping(value = "/index.do", method = { RequestMethod.GET })
-	public String showIndexPage(ModelMap modelMap, 
-			@RequestParam(value = "boardID", required = true) String boardID,
-			@RequestParam(value = "page", required = false, defaultValue = "1") int page) {
-
+	public String showIndexPage(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 		
+		// TODO : pageNo 검증
+		List<Article> articleList = boardService.getArticleList(article);
+		
+		logger.debug("-- ArticleList Size--");
+		logger.debug(articleList.size()+"  사이즈");
+		
+		modelMap.addAttribute("articleList", articleList);
 		modelMap.addAttribute("pageName", "테스트게시판");
 		return "/jsp/board/index";
 	}
 
 	@RequestMapping(value = "/readArticle.do")
-	public String readArticle(ModelMap modelMap, @ModelAttribute Article article) {
+	public String readArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 
 		return "/jsp/board/readArticle";
 	}
@@ -73,25 +81,25 @@ public class BoardController extends GenericAbstractController {
 	}
 
 	@RequestMapping(value = "/submitNewArticle.do")
-	public Article submitNewArticle(ModelMap modelMap, @ModelAttribute Article article) {
+	public Article submitNewArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 
 		return null;
 	}
 
 	@RequestMapping(value = "/modifyArticle.do")
-	public String modifyArticle(ModelMap modelMap, @ModelAttribute Article article) {
+	public String modifyArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 
 		return "jsp/board/modifyArticle";
 	}
 
 	@RequestMapping(value = "/submitModifiedArticle.do")
-	public Article submitModifiedArticle(ModelMap modelMap, @ModelAttribute Article article) {
+	public Article submitModifiedArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 
 		return null;
 	}
 
 	@RequestMapping(value = "/deleteArticle.do")
-	public Article deleteArticle(ModelMap modelMap, @ModelAttribute Article article) {
+	public Article deleteArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 
 		return null;
 	}
