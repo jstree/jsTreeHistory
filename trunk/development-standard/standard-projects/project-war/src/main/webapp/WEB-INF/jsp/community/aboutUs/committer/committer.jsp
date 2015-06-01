@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+\<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 <!--<![endif]-->
@@ -241,46 +241,6 @@
 						<div class="image-and-overlay-container bm-small">
 							<div class="image profile-box">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/cms.jpeg" alt="최민석" class="block" />
-									<span class="profile-box-title">
-										<span class="profile-box-name">Minseok Choi</span>
-										<span class="profile-box-role">PM</span>
-									</span>
-								</a>
-							</div>
-						</div>
-						<p class="bm-remove no-text-overflow">
-							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>최민석</strong></a>
-							<br />
-							쓰리웨어
-						</p>
-						<div>
-							<div class="content">
-								<p class="text"></p>
-								<div class="contact">
-									<span class="tip-t-fade" data-tooltip="Email">
-										<a href="mailto:icicleg0m@gmail.com" target="_blank">
-											<i class="fa fa-envelope-o fa-fw"></i>
-										</a>
-									</span>
-									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="https://www.facebook.com/profile.php?id=100005255539049" target="_blank">
-											<i class="fa fa-facebook fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="https://twitter.com/icicleg0m" target="_blank">
-											<i class="fa fa-twitter fa-fw"></i>
-										</a>
-									</span> 
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
-						<div class="image-and-overlay-container bm-small">
-							<div class="image profile-box">
-								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
 									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/kbw.jpeg" alt="김병우" class="block" />
 									<span class="profile-box-title">
 										<span class="profile-box-name">Byungwoo Kim</span>
@@ -310,6 +270,46 @@
 									</span> 
 									<span class="tip-t-fade" data-tooltip="Twitter">
 										<a href="https://twitter.com/SimpleLifeKBW" target="_blank">
+											<i class="fa fa-twitter fa-fw"></i>
+										</a>
+									</span> 
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
+						<div class="image-and-overlay-container bm-small">
+							<div class="image profile-box">
+								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
+									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/khc.jpg" alt="김형채" class="block" />
+									<span class="profile-box-title">
+										<span class="profile-box-name">Hyungchae Kim</span>
+										<span class="profile-box-role">Developer</span>
+									</span>
+								</a>
+							</div>
+						</div>
+						<p class="bm-remove no-text-overflow">
+							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>김형채</strong></a>
+							<br />
+							AllIp
+						</p>
+						<div>
+							<div class="content">
+								<p class="text"></p>
+								<div class="contact">
+									<span class="tip-t-fade" data-tooltip="Email">
+										<a href="mailto:kimhyungchae@gmail.com" target="_blank">
+											<i class="fa fa-envelope-o fa-fw"></i>
+										</a>
+									</span>
+									<span class="tip-t-fade" data-tooltip="Facebook">
+										<a href="https://www.facebook.com/profile.php?id=100003701964547" target="_blank">
+											<i class="fa fa-facebook fa-fw"></i>
+										</a>
+									</span> 
+									<span class="tip-t-fade" data-tooltip="Twitter">
+										<a href="https://twitter.com/KimHyungChae" target="_blank">
 											<i class="fa fa-twitter fa-fw"></i>
 										</a>
 									</span> 
@@ -684,49 +684,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- 
-					<div class="clear"></div>
-					<div class="one-quarter product-item boxed p-ten text-center odd loop-first animate-in clearfix profile-frame" data-anim-type="fade-in" data-anim-delay="0">
-						<div class="image-and-overlay-container bm-small">
-							<div class="image profile-box">
-								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="${pageContext.request.contextPath}/assets/images/community/backendProfile/jkw.jpg" alt="조경원" class="block" />
-									<span class="profile-box-title">
-										<span class="profile-box-name">Kyungwon Cho</span>
-										<span class="profile-box-role">Publisher</span>
-									</span>
-								</a>
-							</div>
-						</div>
-						<p class="bm-remove no-text-overflow">
-							<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>조경원</strong></a>
-							<br />
-							디지털웍스
-						</p>
-						<div>
-							<div class="content">
-								<p class="text"></p>
-								<div class="contact">
-									<span class="tip-t-fade" data-tooltip="EMail">
-										<a href="mailto:" target="_blank">
-											<i class="fa fa-envelope-o fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="Facebook">
-										<a href="#" target="_blank">
-											<i class="fa fa-facebook fa-fw"></i>
-										</a>
-									</span> 
-									<span class="tip-t-fade" data-tooltip="Twitter">
-										<a href="#" target="_blank">
-											<i class="fa fa-twitter fa-fw"></i>
-										</a>
-									</span> 
-								</div>
-							</div>
-						</div>
-					</div>
-					 -->
 				</div>
 			</div>
 			<div class="container">
@@ -735,6 +692,7 @@
 						<h1 class="bm-small text-center">Special Thanks Members</h1>
 						<div id="liscrollbox" class="rte">
 							<ul id="liscroll">
+								<li>최민석</li>
 								<li>최대열</li>
 								<li>유창근</li>
 								<li>민전기</li>
