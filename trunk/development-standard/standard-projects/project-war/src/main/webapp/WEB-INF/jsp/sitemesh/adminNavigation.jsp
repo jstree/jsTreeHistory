@@ -82,7 +82,7 @@
 											<a href="${pageContext.request.contextPath}/core/manage/setting/ftp/index.do" class="">» &nbsp;FTP 설정</a>
 										</li>
 										<li class="sub-nav-item">
-											<a href="#" class="">» &nbsp;파일업로드 설정</a>
+											<a href="${pageContext.request.contextPath}/core/manage/setting/upload/index.do" class="">» &nbsp;파일업로드 설정</a>
 										</li>
 										<li class="sub-nav-item has-dropdown">
 											<a href="#" class="parent-link">

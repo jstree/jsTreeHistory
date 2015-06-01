@@ -30,7 +30,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * @see <pre>
  * Class Name  : UploadControllerTest.java
  * Description : 바로보드-코어-고급설정-파일업로드 컨트롤러 테스트
- * Infomation  : 
+ * Infomation  :
  * 
  * << 개정이력(Modification Information) >>
  * 
@@ -43,103 +43,84 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { WebApplicationContextConfig.class,
-		WebMvcConfig.class })
+@ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
 public class UploadControllerTest {
 
-	@Autowired
-	private WebApplicationContext context;
-	private MockMvc mockMvc;
+    @Autowired
+    private WebApplicationContext context;
+    private MockMvc mockMvc;
 
-	@Before
-	public void setUp() throws Exception {
-		this.mockMvc = webAppContextSetup(this.context).build();
-	}
+    @Before
+    public void setUp() throws Exception {
+        this.mockMvc = webAppContextSetup(this.context).build();
+    }
 
-	@After
-	public void tearDown() throws Exception {
-	}
+    @After
+    public void tearDown() throws Exception {}
 
-	@Test
-	public void testGetNode() throws Exception {
-		this.mockMvc.perform(get("/core/manage/setting/upload/index.do"))
-				.andDo(print()).andExpect(status().isOk());
-	}
+    @Test
+    public void testGetNode() throws Exception {
+        this.mockMvc.perform(get("/core/manage/setting/upload/index.do")).andDo(print())
+        .andExpect(status().isOk());
+    }
 
-	@Test
-	public void testAlterNode() throws Exception {
-		this.mockMvc
-				.perform(
-						post("/core/manage/setting/upload/save.do")
-								.param("c_id", "4")
-								.param("fileSizeLimit", "50")
-								.param("docSizeLimit", "5")
-								.param("fileExtLimit", "*.*")
-								.param("extnlLnkFl", "0")
-								.param("extnlLnkAllowedExt", "hwp,doc")
-								.param("extnlLnkAllowedSite",
-										"http://www.naver.com"))
-				.andDo(print()).andExpect(status().isOk());
-	}
+    @Test
+    public void testAlterNode() throws Exception {
+        this.mockMvc
+        .perform(
+                post("/core/manage/setting/upload/save.do").param("c_id", "4")
+                .param("fileSizeLimit", "50").param("docSizeLimit", "5")
+                .param("fileExtLimit", "*.*").param("extnlLnkFl", "0")
+                .param("extnlLnkAllowedExt", "hwp,doc")
+                .param("extnlLnkAllowedSite", "http://www.naver.com"))
+                .andDo(print()).andExpect(status().isOk());
+    }
 
-	@Test
-	public void testAlterNodeWithNotAllowedFileSizeLimit() throws Exception {
-		String notAllowedFileSizeLimit = "file리미트";
-		this.mockMvc
-				.perform(
-						post("/core/manage/setting/upload/save.do")
-								.param("c_id", "4")
-								.param("fileSizeLimit", notAllowedFileSizeLimit)
-								.param("docSizeLimit", "5")
-								.param("fileExtLimit", "*.*")
-								.param("extnlLnkFl", "0")
-								.param("extnlLnkAllowedExt", "hwp,doc")
-								.param("extnlLnkAllowedSite",
-										"http://www.naver.com")).andDo(print())
-				.andExpect(status().isOk());
-	}
+    @Test
+    public void testAlterNodeWithNotAllowedFileSizeLimit() throws Exception {
+        String notAllowedFileSizeLimit = "file리미트";
+        this.mockMvc
+        .perform(
+                post("/core/manage/setting/upload/save.do").param("c_id", "4")
+                .param("fileSizeLimit", notAllowedFileSizeLimit)
+                .param("docSizeLimit", "5").param("fileExtLimit", "*.*")
+                .param("extnlLnkFl", "0").param("extnlLnkAllowedExt", "hwp,doc")
+                .param("extnlLnkAllowedSite", "http://www.naver.com"))
+                .andDo(print()).andExpect(status().isOk());
+    }
 
-	@Test
-	public void testAlterNodeWithNotAllowedDocSizeLimit() throws Exception {
-		String notAllowedDocSizeLimit = "doc리미트";
-		this.mockMvc
-				.perform(
-						post("/core/manage/setting/upload/save.do")
-								.param("c_id", "4")
-								.param("fileSizeLimit", "50")
-								.param("docSizeLimit", notAllowedDocSizeLimit)
-								.param("fileExtLimit", "*.*")
-								.param("extnlLnkFl", "0")
-								.param("extnlLnkAllowedExt", "hwp,doc")
-								.param("extnlLnkAllowedSite",
-										"http://www.naver.com")).andDo(print())
-				.andExpect(status().isOk());
-	}
+    @Test
+    public void testAlterNodeWithNotAllowedDocSizeLimit() throws Exception {
+        String notAllowedDocSizeLimit = "doc리미트";
+        this.mockMvc
+        .perform(
+                post("/core/manage/setting/upload/save.do").param("c_id", "4")
+                .param("fileSizeLimit", "50")
+                .param("docSizeLimit", notAllowedDocSizeLimit)
+                .param("fileExtLimit", "*.*").param("extnlLnkFl", "0")
+                .param("extnlLnkAllowedExt", "hwp,doc")
+                .param("extnlLnkAllowedSite", "http://www.naver.com"))
+                .andDo(print()).andExpect(status().isOk());
+    }
 
-	@Test
-	public void testAlterNodeWithNotAllowedExtnlLnkFl() throws Exception {
-		String notAllowedExtnlLnkFl = "3";
-		this.mockMvc
-				.perform(
-						post("/core/manage/setting/upload/save.do")
-								.param("c_id", "4")
-								.param("fileSizeLimit", "50")
-								.param("docSizeLimit", "5")
-								.param("fileExtLimit", "*.*")
-								.param("extnlLnkFl", notAllowedExtnlLnkFl)
-								.param("extnlLnkAllowedExt", "hwp,doc")
-								.param("extnlLnkAllowedSite",
-										"http://www.naver.com")).andDo(print())
-				.andExpect(status().isOk());
-	}
+    @Test
+    public void testAlterNodeWithNotAllowedExtnlLnkFl() throws Exception {
+        String notAllowedExtnlLnkFl = "3";
+        this.mockMvc
+        .perform(
+                post("/core/manage/setting/upload/save.do").param("c_id", "4")
+                .param("fileSizeLimit", "50").param("docSizeLimit", "5")
+                .param("fileExtLimit", "*.*")
+                .param("extnlLnkFl", notAllowedExtnlLnkFl)
+                .param("extnlLnkAllowedExt", "hwp,doc")
+                .param("extnlLnkAllowedSite", "http://www.naver.com"))
+                .andDo(print()).andExpect(status().isOk());
+    }
 
-	@Test
-	public void testAlterNodeWithUpdateConditionOnly() throws Exception {
-		this.mockMvc
-				.perform(
-						post("/core/manage/setting/upload/save.do").param(
-								"c_id", "4")).andDo(print())
-				.andExpect(status().isOk());
-	}
+    @Test
+    public void testAlterNodeWithUpdateConditionOnly() throws Exception {
+        this.mockMvc.perform(post("/core/manage/setting/upload/save.do").param("c_id", "4"))
+        .andDo(print()).andExpect(status().isOk());
+    }
 
 }
