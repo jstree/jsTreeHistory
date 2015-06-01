@@ -73,6 +73,14 @@ input[type="checkbox"] {
 	height: 20px !important;
 	margin: 0 0 0px !important;
 }
+
+.responsive_row_textarea {
+	width: 100%;
+	height: 140px !important;
+	margin-bottom: 10px;
+	overflow: auto;
+	text-align: center;
+}
 </style>
 <!-- !!!  FOR THIS PAGE ONLY !!! -->
 <link href="http://www.313.co.kr:5002/Component/jsp/admin/board/divSample.css" rel="stylesheet" type="text/css" media="all">
@@ -136,7 +144,7 @@ var inputForm = {
 							<input name="extnlLnkAllowedExt" id="extnlLnkAllowedExt" type="text" value="${upload.extnlLnkAllowedExt}">
 						</div>
 					</div>
-					<div class="responsive_row">
+					<div class="responsive_row_textarea">
 						<div class="item_Lname">파일 외부링크 허용 사이트 </div>
 						<div class="item_Lvalue">
 							<textarea name="extnlLnkAllowedSite" id="extnlLnkAllowedSite" >${upload.extnlLnkAllowedSite}</textarea>
