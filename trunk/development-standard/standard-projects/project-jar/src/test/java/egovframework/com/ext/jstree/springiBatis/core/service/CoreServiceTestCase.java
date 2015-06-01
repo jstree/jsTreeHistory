@@ -22,8 +22,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -66,6 +64,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * 2015. 5. 13   김형채                         testMoveNode 테스트 케이스 수정
  * 2015. 5. 19   김형채                         testAddLeafNode 테스트 케이스 추가
  * 2015. 5. 19   김형채                         testAddNodeByRefIsNull 테스트 케이스 추가
+ * 2015. 6. 01   김형채                         DataSet 네이밍 변경
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -74,10 +73,9 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 @WebAppConfiguration
 @ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,DbUnitTestExecutionListener.class })
-@DatabaseSetup(value = "initialJsTreeDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+@DatabaseSetup(value = "CoreServiceTestCase_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
 public class CoreServiceTestCase 
 {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource(name="CoreService")
 	private CoreService coreService;
 
@@ -182,7 +180,7 @@ public class CoreServiceTestCase
 	}
 
 	@Test
-	@ExpectedDatabase(value = "addNodeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT )
+	@ExpectedDatabase(value = "CoreServiceTestCase_AddNode_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT )
 	public void testAddFirstChildNode() throws Exception
 	{
 		comprehensiveTree.setRef(firstChild.getC_id());
@@ -220,14 +218,14 @@ public class CoreServiceTestCase
 	
 
 	@Test
-	@ExpectedDatabase(value = "removeNodeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_RemoveNode_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testReMoveNode() throws Exception
 	{
 		coreService.removeNode(firstChild);
 	}
 	
 	@Test
-	@ExpectedDatabase(value = "alterNodeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_AlterNode_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testAlterNode() throws Exception
 	{
 		comprehensiveTree.setC_id(4);
@@ -238,7 +236,7 @@ public class CoreServiceTestCase
 	}
 
 	@Test
-	@ExpectedDatabase(value = "alterNodeTypeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_AlterNodeType_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testAlterNodeType() throws Exception
 	{
 		comprehensiveTree.setC_id(4);
@@ -248,12 +246,12 @@ public class CoreServiceTestCase
 	}
 	
 	@Test
-	@DatabaseSetup(value = "initialMoveNodeDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
-	@ExpectedDatabase(value = "moveNodeAtferDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
-	public void testMoveNode() throws Exception
+	@DatabaseSetup(value = "CoreServiceTestCase_MoveNode_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_MoveNodePositionUp_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodePositionUp() throws Exception
 	{
-		comprehensiveTree.setC_id(5);
-		comprehensiveTree.setRef(1);
+		comprehensiveTree.setC_id(6);
+		comprehensiveTree.setRef(2);
 		comprehensiveTree.setC_position(0);
 		comprehensiveTree.setCopy(0);
 		comprehensiveTree.setMultiCounter(0);
@@ -261,8 +259,21 @@ public class CoreServiceTestCase
 		coreService.moveNode(comprehensiveTree, request);
 	}
 	
+	@Test
+	@DatabaseSetup(value = "CoreServiceTestCase_MoveNode_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+	public void testMoveNodePositionDown() throws Exception
+	{
+		comprehensiveTree.setC_id(3);
+		comprehensiveTree.setRef(2);
+		comprehensiveTree.setC_position(2);
+		comprehensiveTree.setCopy(0);
+		comprehensiveTree.setMultiCounter(0);
+		
+		coreService.moveNode(comprehensiveTree, request);
+	}
+	
 	@Test(expected=NullPointerException.class)
-	@DatabaseSetup(value = "initialMoveNodeDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+	@DatabaseSetup(value = "CoreServiceTestCase_MoveNode_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
 	public void testMoveNodeException() throws Exception
 	{
 		comprehensiveTree.setC_id(30);
@@ -275,14 +286,27 @@ public class CoreServiceTestCase
 	}
 	
 	@Test
-	@DatabaseSetup(value = "initialMoveNodeDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
-	@ExpectedDatabase(value = "moveNodeMultiCountAtferDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
-	public void testMoveNodeMultiCount() throws Exception
+	@ExpectedDatabase(value = "CoreServiceTestCase_MoveNodeCopy_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodeCopy() throws Exception
+	{
+		comprehensiveTree.setC_id(4);
+		comprehensiveTree.setRef(2);
+		comprehensiveTree.setC_position(3);
+		comprehensiveTree.setCopy(1);
+		comprehensiveTree.setMultiCounter(0);
+		
+		coreService.moveNode(comprehensiveTree, request);
+	}
+	
+	@Test
+	@DatabaseSetup(value = "CoreServiceTestCase_MoveNode_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_MoveNodeMultiCount_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodeMultiCountOutMyParent() throws Exception
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			comprehensiveTree.setC_id(9+i);
-			comprehensiveTree.setRef(5);
+			comprehensiveTree.setC_id(10+i);
+			comprehensiveTree.setRef(6);
 			comprehensiveTree.setC_position(2+i);
 			comprehensiveTree.setCopy(0);
 			comprehensiveTree.setMultiCounter(i);
@@ -292,20 +316,36 @@ public class CoreServiceTestCase
 	}
 	
 	@Test
-	@ExpectedDatabase(value = "moveNodeCopyAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
-	public void testMoveNodeCopy() throws Exception
+	@ExpectedDatabase(value = "CoreServiceTestCase_MoveNodeCopyMultiCounter_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodeCopyMultiCounterInMyParent() throws Exception
 	{
-		comprehensiveTree.setC_id(4);
-		comprehensiveTree.setRef(2);
+		for (int i = 0; i < 2; i++)
+		{
+			comprehensiveTree.setC_id(4);
+			comprehensiveTree.setRef(2);
+			comprehensiveTree.setC_position(3+i);
+			comprehensiveTree.setCopy(1);
+			comprehensiveTree.setMultiCounter(i);
+			
+			coreService.moveNode(comprehensiveTree, request);
+		}
+	}
+	
+	@Test
+	@ExpectedDatabase(value = "CoreServiceTestCase_MoveNodeFirstChildCopy_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodeFirstChildCopy() throws Exception
+	{
+		comprehensiveTree.setC_id(2);
+		comprehensiveTree.setRef(1);
 		comprehensiveTree.setC_position(2);
 		comprehensiveTree.setCopy(1);
 		comprehensiveTree.setMultiCounter(0);
 		
 		coreService.moveNode(comprehensiveTree, request);
 	}
-
+	
 	@Test
-	@ExpectedDatabase(value = "cutMyselfAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_CutMyself_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testCutMyself() throws Exception
 	{
 		final String relectionMethodName = "cutMyself";
@@ -321,7 +361,7 @@ public class CoreServiceTestCase
 	}
 
 	@Test
-	@ExpectedDatabase(value = "stretchPositionForMyselfFromJstreeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_StretchPositionForMyselfFromJstree_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testStretchPositionForMyselfFromJstree() throws Exception
 	{
 		final String relectionMethodName = "stretchPositionForMyselfFromJstree";
@@ -338,7 +378,7 @@ public class CoreServiceTestCase
 	}
 	
 	@Test
-	@ExpectedDatabase(value = "stretchLeftRightForMyselfFromJstreeAfterDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_StretchLeftRightForMyselfFromJstree_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testStretchLeftRightForMyselfFromJstree() throws Exception
 	{
 		final String relectionMethodName = "stretchLeftRightForMyselfFromJstree";
