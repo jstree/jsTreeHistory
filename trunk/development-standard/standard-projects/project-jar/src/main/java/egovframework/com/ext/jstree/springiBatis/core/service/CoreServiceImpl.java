@@ -41,18 +41,35 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  2015. 01. 07.  류강하                 alterNodeType() 리팩토링
  *  2015. 05. 19.  김형채                 addNode() 필요하지 않은 로직 삭제, nodeByRef 와 타입 체크 로직 추가
  *  2015. 06. 01.  김형채                 addNode() Position이 포함된 변수명을 Point로 변경
- * 
+ *  2015. 06. 01.  김형채                 calculatePostion() 노드 이동시 폴더를 대상으로 했을때 생기는 버그 발생 로직 분기 추가
+ *  2015. 06. 01.  김형채                 calculatePostion() 멀티 노드의 위치가 0번 노드보다 앞일때 로직 분기추가
+ *  2015. 06. 01.  김형채                 메소드 순서 변경
+ *  
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
+
 @Service("CoreService")
 public class CoreServiceImpl implements CoreService
 {
-    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @Resource(name = "CoreDao")
     private CoreDao coreDao;
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#
+     * getNode
+     * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+     */
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
+    public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception
+    {
+        T getNode = ((T) coreDao.getNode(comprehensiveTree));
+        return getNode;
+    }
     
     /*
      * (non-Javadoc)
@@ -76,7 +93,6 @@ public class CoreServiceImpl implements CoreService
      */
     public <T extends ComprehensiveTree> List<String> searchNode(T comprehensiveTree) throws Exception
     {
-        
         List<T> searchNodeByStrings = (List<T>) coreDao.searchNodeByString(comprehensiveTree);
         
         if (searchNodeByStrings.isEmpty())
@@ -95,7 +111,88 @@ public class CoreServiceImpl implements CoreService
             }
             return returnList;
         }
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#
+     * executeRemoveNode
+     * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+     */
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
+    public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree) throws Exception
+    {
+        T removeNode = ((T) coreDao.getNode(comprehensiveTree));
         
+        int spaceOfTargetNode = removeNode.getC_right() - removeNode.getC_left() + 1;
+        
+        removeNode.setSpaceOfTargetNode(spaceOfTargetNode);
+        
+        coreDao.removeNode(removeNode);
+        
+        return 0;
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNode
+     * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+     */
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
+    public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree) throws Exception
+    {
+        return coreDao.alterNode(comprehensiveTree);
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#
+     * alterNodeType
+     * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
+     */
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
+    public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree) throws Exception
+    {
+        int returnStatus = 0;
+        
+        T nodeById = ((T) coreDao.getNode(comprehensiveTree));
+        
+        if (nodeById.getC_type().equals(comprehensiveTree.getC_type()))
+        {
+            returnStatus = 1;
+        }
+        else if ("default".equals(comprehensiveTree.getC_type()))
+        {
+            List<T> childNodesFromNodeById = ((List<T>) coreDao.getChildNode(nodeById));
+            
+            if (childNodesFromNodeById.size() != 0)
+            {
+                throw new RuntimeException("하위에 노드가 있는데 디폴트로 바꾸려고 함");
+            }
+            else
+            {
+                int temp = coreDao.alterNodeType(comprehensiveTree);
+                
+                if (temp == 1)
+                {
+                    returnStatus = 1;
+                }
+                else
+                {
+                    throw new RuntimeException("여러개의 노드가 업데이트 되었음");
+                }
+            }
+        }
+        else if ("folder".equals(comprehensiveTree.getC_type()))
+        {
+            returnStatus = coreDao.alterNodeType(comprehensiveTree);
+        }
+        
+        return returnStatus;
     }
     
     /*
@@ -111,10 +208,14 @@ public class CoreServiceImpl implements CoreService
         T nodeByRef = ((T) coreDao.getNodeByRef(comprehensiveTree));
         
         if(nodeByRef == null)
+        {
         	throw new RuntimeException("nodeByRef is null");
+        }
         
         if("default".equals(nodeByRef.getC_type()))
+        {
         	throw new RuntimeException("nodeByRef is default Type");
+        }
         
         T t_ComprehensiveTree = newInstance(comprehensiveTree);
         
@@ -160,29 +261,10 @@ public class CoreServiceImpl implements CoreService
         return t_ComprehensiveTree;
     }
     
-    private <T extends ComprehensiveTree> void cutMyself(T nodeById, int spaceOfTargetNode,
-            Collection<Integer> c_idsByChildNodeFromNodeById) throws Exception
-    {
-        
-        nodeById.setSpaceOfTargetNode(spaceOfTargetNode);
-        nodeById.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
-        
-        coreDao.cutMyself(nodeById);
-    }
-    
-    private <T extends ComprehensiveTree> void stretchPositionForMyselfFromJstree(
-            Collection<Integer> c_idsByChildNodeFromNodeById, T comprehensiveTree) throws Exception
-    {
-        comprehensiveTree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
-        
-        coreDao.stretchPositionForMyselfFromJstree(comprehensiveTree);
-    }
-    
     private <T extends ComprehensiveTree> void stretchLeftRightForMyselfFromJstree(int spaceOfTargetNode,
             int rightPositionFromNodeByRef, int copy, Collection<Integer> c_idsByChildNodeFromNodeById,
             T comprehensiveTree) throws Exception
     {
-        
         T onlyStretchLeftRightForMyselfFromJstree = newInstance(comprehensiveTree);
         
         onlyStretchLeftRightForMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
@@ -191,171 +273,6 @@ public class CoreServiceImpl implements CoreService
         onlyStretchLeftRightForMyselfFromJstree.setCopy(copy);
         
         coreDao.stretchLeftRightForMyselfFromJstree(onlyStretchLeftRightForMyselfFromJstree);
-    }
-    
-    private <T extends ComprehensiveTree> void fixCopy(int ind, int ref, T t_comprehensiveTree) throws Exception
-    {
-        T comprehensiveTree = newInstance(t_comprehensiveTree);
-        comprehensiveTree.setC_id(ind); 
-        
-        T node = ((T) coreDao.getNode(comprehensiveTree)); 
-        
-        List<T> children = ((List<T>) coreDao.getChildNodeByLeftRight(node)); 
-        
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i = node.getC_left() + 1; i < node.getC_right(); i++)
-        {
-            map.put(i, ind); 
-        }
-        
-        for (int i = 0; i < children.size(); i++)
-        {
-            
-            T child = children.get(i); 
-            
-            if (child.getC_id() == ind) 
-            {
-                logger.error(">>>>>>>>>>>>>>>>> 기준노드가 잡혔음.");
-                logger.error("C_TITLE    = " + child.getC_title());
-                logger.error("C_ID       = " + ind);
-                logger.error("C_POSITION = " + ref);
-
-                T onlyFixCopyFromJstree = newInstance(t_comprehensiveTree);
-                onlyFixCopyFromJstree.setFixCopyId(ind); 
-                onlyFixCopyFromJstree.setFixCopyPosition(ref); 
-                
-                coreDao.fixCopyIF(onlyFixCopyFromJstree);
-                continue;
-            }
-            logger.error(">>>>>>>>>>>>>>>>> 기준노드 아래 있는 녀석임");
-            logger.error("C_TITLE    = " + child.getC_title());
-            logger.error("C_ID       = " + ind);
-            logger.error("C_POSITION = " + ref);
-            logger.error("부모아이디값 = " + map.get(child.getC_left()));
-            
-            child.setFixCopyId(map.get(child.getC_left()));
-            
-            coreDao.fixCopy(child);
-            
-            for (int j = child.getC_left() + 1; j < child.getC_right(); j++)
-            {
-                map.put(j, child.getC_id());
-            }
-        }
-    }
-    
-    private <T extends ComprehensiveTree> void enterMyselfFromJstree(int ref, int c_position, int c_id, int idif,
-            int ldif, Collection<Integer> c_idsByChildNodeFromNodeById, T comprehensiveTree) throws Exception
-    {
-        
-        T onlyPasteMyselfFromJstree = newInstance(comprehensiveTree);
-        
-        onlyPasteMyselfFromJstree.setRef(ref);
-        onlyPasteMyselfFromJstree.setC_position(c_position);
-        onlyPasteMyselfFromJstree.setC_id(c_id);
-        onlyPasteMyselfFromJstree.setIdif(idif);
-        onlyPasteMyselfFromJstree.setLdif(ldif);
-        onlyPasteMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
-        
-        coreDao.enterMyselfFixPosition(onlyPasteMyselfFromJstree);
-        coreDao.enterMyselfFixLeftRight(onlyPasteMyselfFromJstree);
-    }
-    
-    /*
-     * (non-Javadoc)
-     * 
-     * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#
-     * executeRemoveNode
-     * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-     */
-    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
-    public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree) throws Exception
-    {
-        
-        T removeNode = ((T) coreDao.getNode(comprehensiveTree));
-        
-        int spaceOfTargetNode = removeNode.getC_right() - removeNode.getC_left() + 1;
-        
-        removeNode.setSpaceOfTargetNode(spaceOfTargetNode);
-        
-        coreDao.removeNode(removeNode);
-        
-        return 0;
-    }
-    
-    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
-    public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception
-    {
-        T getNode = ((T) coreDao.getNode(comprehensiveTree));
-        return getNode;
-    }
-    
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * egovframework.com.ext.jstree.springiBatis.core.service.CoreService#alterNode
-     * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-     */
-    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
-    public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree) throws Exception
-    {
-        
-        return coreDao.alterNode(comprehensiveTree);
-    }
-    
-    /*
-     * (non-Javadoc)
-     * 
-     * @see egovframework.com.ext.jstree.springiBatis.core.service.CoreService#
-     * alterNodeType
-     * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
-     */
-    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
-    public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree) throws Exception
-    {
-        
-        int returnStatus = 0;
-        
-        T nodeById = ((T) coreDao.getNode(comprehensiveTree));
-        
-        if (nodeById.getC_type().equals(comprehensiveTree.getC_type()))
-        {
-            returnStatus = 1;
-            
-        }
-        else if ("default".equals(comprehensiveTree.getC_type()))
-        {
-            
-            List<T> childNodesFromNodeById = ((List<T>) coreDao.getChildNode(nodeById));
-            
-            if (childNodesFromNodeById.size() != 0)
-            {
-                throw new RuntimeException("하위에 노드가 있는데 디폴트로 바꾸려고 함");
-                
-            }
-            else
-            {
-                int temp = coreDao.alterNodeType(comprehensiveTree);
-                
-                if (temp == 1)
-                {
-                    returnStatus = 1;
-                }
-                else
-                {
-                    throw new RuntimeException("여러개의 노드가 업데이트 되었음");
-                }
-            }
-            
-        }
-        else if ("folder".equals(comprehensiveTree.getC_type()))
-        {
-            
-            returnStatus = coreDao.alterNodeType(comprehensiveTree);
-        }
-        
-        return returnStatus;
     }
     
     /*
@@ -368,7 +285,6 @@ public class CoreServiceImpl implements CoreService
     @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
     public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree, HttpServletRequest request) throws Exception
     {
-        
         T nodeById = (T) coreDao.getNode(comprehensiveTree);
         List<T> childNodesFromNodeById = ((List<T>) coreDao.getChildNodeByLeftRight(nodeById));
         
@@ -395,8 +311,10 @@ public class CoreServiceImpl implements CoreService
                                                                        }
                                                                    });
             
-            if (c_idsByChildNodeFromNodeById.contains(comprehensiveTree.getRef())) { throw new RuntimeException(
-                    "myself contains already refTargetNode"); }
+            if (c_idsByChildNodeFromNodeById.contains(comprehensiveTree.getRef())) 
+            { 
+            	throw new RuntimeException("myself contains already refTargetNode"); 
+            }
             
             spaceOfTargetNode = nodeById.getC_right() - nodeById.getC_left() + 1; 
         }
@@ -443,28 +361,33 @@ public class CoreServiceImpl implements CoreService
         
         if (comprehensiveTree.isCopied())
         {
-            
             int ind = this.pasteMyselfFromJstree(comprehensiveTree.getRef(), comparePosition, spaceOfTargetNode,
                                                  targetNodeLevel, c_idsByChildNodeFromNodeById,
                                                  rightPositionFromNodeByRef, nodeById);
             t_ComprehensiveTree.setId(ind);
             this.fixCopy(ind, comprehensiveTree.getC_position(), comprehensiveTree);
-            
         }
         else
         {
             this.enterMyselfFromJstree(comprehensiveTree.getRef(), comprehensiveTree.getC_position(),
                                        comprehensiveTree.getC_id(), comparePosition, targetNodeLevel,
                                        c_idsByChildNodeFromNodeById, comprehensiveTree);
-            
         }
         return t_ComprehensiveTree;
     }
     
+    private <T extends ComprehensiveTree> void cutMyself(T nodeById, int spaceOfTargetNode,
+            Collection<Integer> c_idsByChildNodeFromNodeById) throws Exception
+    {
+        nodeById.setSpaceOfTargetNode(spaceOfTargetNode);
+        nodeById.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
+        
+        coreDao.cutMyself(nodeById);
+    }
+
     private <T extends ComprehensiveTree> void calculatePostion(T comprehensiveTree, T nodeById,
             List<T> childNodesFromNodeByRef, HttpServletRequest request) throws Exception
     {
-        
         HttpSession session = request.getSession();
         
         if (comprehensiveTree.getRef() == nodeById.getC_parentid())
@@ -489,12 +412,14 @@ public class CoreServiceImpl implements CoreService
                         logger.debug("노드 이동시 폴더를 대상으로 했을때 생기는 버그 발생 =" + comprehensiveTree.getC_position());
                         comprehensiveTree.setC_position(childNodesFromNodeByRef.size());
                     }
-                    comprehensiveTree.setC_position(comprehensiveTree.getC_position() - 1);
+                    else
+                    {
+                    	comprehensiveTree.setC_position(comprehensiveTree.getC_position() - 1);
+                    }
                     
                     logger.debug("노드의 최종 위치값=" + comprehensiveTree.getC_position());
                     session.setAttribute("settedPosition", comprehensiveTree.getC_position());
                 }
-                
             }
             else
             {
@@ -515,7 +440,15 @@ public class CoreServiceImpl implements CoreService
                 else
                 {
                     logger.debug(">>>>>>>>>>>>>>>멀티 노드의 위치가 0번 노드보다 앞일때");
-                    increasePosition = (Integer) session.getAttribute("settedPosition");
+                    if(comprehensiveTree.isCopied())
+                    {
+                    	increasePosition = (Integer) session.getAttribute("settedPosition") + 1;
+                    }
+                    else
+                    {
+                    	increasePosition = (Integer) session.getAttribute("settedPosition");
+                    }
+                    
                 }
                 session.setAttribute("settedPosition", increasePosition);
                 
@@ -526,6 +459,7 @@ public class CoreServiceImpl implements CoreService
                     logger.debug(">>>>>>>>>>>>>>>원래 노드 위치값과 최종 계산된 노드의 위치값이 동일한 경우");
                     session.setAttribute("settedPosition", increasePosition - 1);
                 }
+                
                 logger.debug("노드의 최종 위치값=" + comprehensiveTree.getC_position());
             }
         }
@@ -563,11 +497,18 @@ public class CoreServiceImpl implements CoreService
         }
     }
     
+    private <T extends ComprehensiveTree> void stretchPositionForMyselfFromJstree(
+            Collection<Integer> c_idsByChildNodeFromNodeById, T comprehensiveTree) throws Exception
+    {
+        comprehensiveTree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
+        
+        coreDao.stretchPositionForMyselfFromJstree(comprehensiveTree);
+    }
+
     private <T extends ComprehensiveTree> int pasteMyselfFromJstree(int ref, int idif, int spaceOfTargetNode, int ldif,
             Collection<Integer> c_idsByChildNodeFromNodeById, int rightPositionFromNodeByRef, T nodeById)
             throws Exception
     {
-        
         T onlyPasteMyselfFromJstree = newInstance(nodeById);
         
         onlyPasteMyselfFromJstree.setRef(ref);
@@ -586,6 +527,72 @@ public class CoreServiceImpl implements CoreService
         return coreDao.pasteMyselfFromJstree(onlyPasteMyselfFromJstree);
     }
     
+    private <T extends ComprehensiveTree> void fixCopy(int ind, int ref, T t_comprehensiveTree) throws Exception
+    {
+        T comprehensiveTree = newInstance(t_comprehensiveTree);
+        comprehensiveTree.setC_id(ind); 
+        
+        T node = ((T) coreDao.getNode(comprehensiveTree)); 
+        
+        List<T> children = ((List<T>) coreDao.getChildNodeByLeftRight(node)); 
+        
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = node.getC_left() + 1; i < node.getC_right(); i++)
+        {
+            map.put(i, ind); 
+        }
+        
+        for (int i = 0; i < children.size(); i++)
+        {
+            T child = children.get(i); 
+            
+            if (child.getC_id() == ind) 
+            {
+                logger.error(">>>>>>>>>>>>>>>>> 기준노드가 잡혔음.");
+                logger.error("C_TITLE    = " + child.getC_title());
+                logger.error("C_ID       = " + ind);
+                logger.error("C_POSITION = " + ref);
+
+                T onlyFixCopyFromJstree = newInstance(t_comprehensiveTree);
+                onlyFixCopyFromJstree.setFixCopyId(ind); 
+                onlyFixCopyFromJstree.setFixCopyPosition(ref); 
+                
+                coreDao.fixCopyIF(onlyFixCopyFromJstree);
+                continue;
+            }
+            logger.error(">>>>>>>>>>>>>>>>> 기준노드 아래 있는 녀석임");
+            logger.error("C_TITLE    = " + child.getC_title());
+            logger.error("C_ID       = " + ind);
+            logger.error("C_POSITION = " + ref);
+            logger.error("부모아이디값 = " + map.get(child.getC_left()));
+            
+            child.setFixCopyId(map.get(child.getC_left()));
+            
+            coreDao.fixCopy(child);
+            
+            for (int j = child.getC_left() + 1; j < child.getC_right(); j++)
+            {
+                map.put(j, child.getC_id());
+            }
+        }
+    }
+    
+    private <T extends ComprehensiveTree> void enterMyselfFromJstree(int ref, int c_position, int c_id, int idif,
+            int ldif, Collection<Integer> c_idsByChildNodeFromNodeById, T comprehensiveTree) throws Exception
+    {
+        T onlyPasteMyselfFromJstree = newInstance(comprehensiveTree);
+        
+        onlyPasteMyselfFromJstree.setRef(ref);
+        onlyPasteMyselfFromJstree.setC_position(c_position);
+        onlyPasteMyselfFromJstree.setC_id(c_id);
+        onlyPasteMyselfFromJstree.setIdif(idif);
+        onlyPasteMyselfFromJstree.setLdif(ldif);
+        onlyPasteMyselfFromJstree.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
+        
+        coreDao.enterMyselfFixPosition(onlyPasteMyselfFromJstree);
+        coreDao.enterMyselfFixLeftRight(onlyPasteMyselfFromJstree);
+    }
+    
     /**
      * 파라미터로 넘겨진 인스턴스의 정보를 이용해 리플렉션하여 새로운 인스턴스를 만들어 반환한다.
      * 
@@ -599,9 +606,7 @@ public class CoreServiceImpl implements CoreService
     @SuppressWarnings("unchecked")
     private <T extends ComprehensiveTree> T newInstance(T comprehensiveTree) throws Exception
     {
-        
         Class<T> target = (Class<T>) Class.forName(comprehensiveTree.getClass().getCanonicalName());
         return target.newInstance();
     }
-    
 }
