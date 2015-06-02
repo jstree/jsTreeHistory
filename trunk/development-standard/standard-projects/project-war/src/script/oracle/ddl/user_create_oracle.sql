@@ -9,10 +9,10 @@ CREATE TABLE T_USER_INFO_LOG
   C_LEFT      NUMBER                            NOT NULL,
   C_RIGHT     NUMBER                            NOT NULL,
   C_LEVEL     NUMBER                            NOT NULL,
-  C_TITLE     VARCHAR2(4000 BYTE),
+  C_TITLE     VARCHAR2(4000 BYTE)               NOT NULL,
   C_TYPE      VARCHAR2(100 BYTE),
-  C_METHOD    VARCHAR2(4000 BYTE),
-  C_STATE     VARCHAR2(4000 BYTE),
+  C_METHOD    VARCHAR2(4000 BYTE)               NOT NULL,
+  C_STATE     VARCHAR2(4000 BYTE)               NOT NULL,
   C_DATE      DATE                              NOT NULL
 );
 
@@ -288,10 +288,10 @@ CREATE TABLE T_USER_JOIN_STATE_LOG
   C_LEFT      NUMBER                            NOT NULL,
   C_RIGHT     NUMBER                            NOT NULL,
   C_LEVEL     NUMBER                            NOT NULL,
-  C_TITLE     VARCHAR2(4000 BYTE),
-  C_TYPE      VARCHAR2(4000 BYTE),
-  C_METHOD    VARCHAR2(4000 BYTE),
-  C_STATE     VARCHAR2(4000 BYTE),
+  C_TITLE     VARCHAR2(4000 BYTE)               NOT NULL,
+  C_TYPE      VARCHAR2(100 BYTE),
+  C_METHOD    VARCHAR2(4000 BYTE)               NOT NULL,
+  C_STATE     VARCHAR2(4000 BYTE)               NOT NULL,
   C_DATE      DATE                              NOT NULL
 );
 
@@ -334,7 +334,7 @@ COMMENT ON COLUMN T_USER_JOIN_STATE.C_TYPE IS '노드타입';
 DROP SEQUENCE S_USER_JOIN_STATE;
 
 CREATE SEQUENCE S_USER_JOIN_STATE
-  START WITH 10
+  START WITH 7
   MAXVALUE 999999999999999999999999999
   MINVALUE 0
   NOCYCLE

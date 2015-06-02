@@ -125,4 +125,7 @@
   <term name="외부" physicalName="EXTNL" physicalDescription="EXTERNAL"/>
   <term name="확장자" physicalName="EXT" physicalDescription="EXTENSION"/>
   <term name="문서" physicalName="DOC" physicalDescription="DOCUMENT"/>
+  <term name="시작" physicalName="BEGI" physicalDescription="BEGINNING"/>
+  <term name="종료" physicalName="END" physicalDescription="END"/>
+  <term name="마지막" physicalName="LAST" physicalDescription="LAST"/>
 </tm:TermDictionary>

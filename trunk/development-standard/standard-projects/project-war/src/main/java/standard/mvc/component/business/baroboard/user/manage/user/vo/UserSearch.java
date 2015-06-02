@@ -15,6 +15,10 @@
  */
 package standard.mvc.component.business.baroboard.user.manage.user.vo;
 
+import javax.validation.constraints.Size;
+
+import standard.mvc.component.business.baroboard.user.vo.User;
+
 /**
  * Modification Information
  * 
@@ -35,7 +39,61 @@ package standard.mvc.component.business.baroboard.user.manage.user.vo;
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-public class UserSearch {
+public class UserSearch extends User {
 
+    /** 가입일자시작 */
+    private String joinDeBegi;
+
+    /** 가입일자종료 */
+    private String joinDeEnd;
+
+    /** 로그인일자시작 */
+    private String loginDeStart;
     
+    /** 로그인일자종료 */
+    private String loginDeEnd;
+    
+    /** 회원가입승인여부 */
+    @Size(min = 0, max = 1)
+    private String joinApprovalFl;
+
+	public String getJoinDeBegi() {
+		return joinDeBegi;
+	}
+
+	public void setJoinDeBegi(String joinDeBegi) {
+		this.joinDeBegi = joinDeBegi;
+	}
+
+	public String getJoinDeEnd() {
+		return joinDeEnd;
+	}
+
+	public void setJoinDeEnd(String joinDeEnd) {
+		this.joinDeEnd = joinDeEnd;
+	}
+
+	public String getLoginDeStart() {
+		return loginDeStart;
+	}
+
+	public void setLoginDeStart(String loginDeStart) {
+		this.loginDeStart = loginDeStart;
+	}
+
+	public String getLoginDeEnd() {
+		return loginDeEnd;
+	}
+
+	public void setLoginDeEnd(String loginDeEnd) {
+		this.loginDeEnd = loginDeEnd;
+	}
+
+	public String getJoinApprovalFl() {
+		return joinApprovalFl;
+	}
+
+	public void setJoinApprovalFl(String joinApprovalFl) {
+		this.joinApprovalFl = joinApprovalFl;
+	}
 }

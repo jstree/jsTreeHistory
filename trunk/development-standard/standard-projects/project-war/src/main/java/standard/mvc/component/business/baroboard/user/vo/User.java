@@ -87,6 +87,12 @@ public class User extends ComprehensiveTree {
     /** 사용자아이콘 */
     private String imageIcon;
 
+    /** 가입일자 */
+    private String joinDe;
+    
+    /** 로그인일자 */
+    private String loginDe;
+    
     public int getUserGrade() {
         return userGrade;
     }
@@ -214,8 +220,24 @@ public class User extends ComprehensiveTree {
     public void setImageIcon(String imageIcon) {
         this.imageIcon = imageIcon;
     }
+    
+    public String getJoinDe() {
+		return joinDe;
+	}
 
-    @Override
+	public void setJoinDe(String joinDe) {
+		this.joinDe = joinDe;
+	}
+
+	public String getLoginDe() {
+		return loginDe;
+	}
+
+	public void setLoginDe(String loginDe) {
+		this.loginDe = loginDe;
+	}
+
+	@Override
     public String getSqlMapSelector() {
         return "user";
     }
