@@ -65,7 +65,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * 2015. 5. 19   김형채                         testAddLeafNode 테스트 케이스 추가
  * 2015. 5. 19   김형채                         testAddNodeByRefIsNull 테스트 케이스 추가
  * 2015. 6. 01   김형채                         DataSet 네이밍 변경
- * 
+ * 2015. 6. 02   김형채                         testMoveNodeException 예외 클래스 변경
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -272,7 +272,7 @@ public class CoreServiceTestCase
 		coreService.moveNode(comprehensiveTree, request);
 	}
 	
-	@Test(expected=NullPointerException.class)
+	@Test(expected=RuntimeException.class)
 	@DatabaseSetup(value = "CoreServiceTestCase_MoveNode_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
 	public void testMoveNodeException() throws Exception
 	{
