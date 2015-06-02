@@ -39,12 +39,26 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  2014.  7. 31.  이동민                 최초 생성
  *  2014. 10. 12.  류강하                 리플렉션을 성공적으로 수행하기 위한 메서드 시그너쳐 변경, 리플렉션 코드를 newInstance 메서드로 추출
  *  2015. 01. 07.  류강하                 alterNodeType() 리팩토링
- *  2015. 05. 19.  김형채                 addNode() 필요하지 않은 로직 삭제, nodeByRef 와 타입 체크 로직 추가
+ *  2015. 05. 19.  김형채                 addNode() 사용하지 않는 로직 삭제, nodeByRef 타입 체크 로직 추가
  *  2015. 06. 01.  김형채                 addNode() Position이 포함된 변수명을 Point로 변경
  *  2015. 06. 01.  김형채                 calculatePostion() 노드 이동시 폴더를 대상으로 했을때 생기는 버그 발생 로직 분기 추가
  *  2015. 06. 01.  김형채                 calculatePostion() 멀티 노드의 위치가 0번 노드보다 앞일때 로직 분기추가
  *  2015. 06. 01.  김형채                 메소드 순서 변경
- *  
+ *  2015. 06. 03.  김형채                 alterNodeType() 매직넘버 상수로 변경 , 리턴변수명 변경  
+ *  2015. 06. 03.  김형채                 moveNode() nodeById null 체크 로직 else 분기 삭제 및 위치 이동
+ *  2015. 06. 03.  김형채                 moveNode() rightPosition 변수명을 rightPoint로 변경
+ *  2015. 06. 03.  김형채                 moveNode() self 변수명을 selfPosition으로 변경
+ *  2015. 06. 03.  김형채                 moveNode() nodeById null 체크 중복로직 삭제 
+ *  2015. 06. 03.  김형채                 moveNode() !comprehensiveTree.isCopied() 중복체크 로직 하나로 변경
+ *  2015. 06. 03.  김형채                 moveNode() comparePosition 변수명을 comparePoint로 변경
+ *  2015. 06. 03.  김형채                 moveNode() fixCopy 메소드명을 fixPositionParentIdOfCopyNodes로 변경
+ *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() idx 변수명을 insertSeqResult로 변경
+ *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() ref 변수명을 position로 변경
+ *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() map 변수명을 parentIds로 변경
+ *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() for loop를 for each로 변경
+ *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() parentIds의 셋팅 로직을 for each 내부로 이동
+ *  2015. 06. 03.  김형채                 fixPositionParentIdOfCopyNodes() 로그 변수명 수정
+ *  2015. 06. 03.  김형채                 calculatePostion() 세션 중복 저장 로직 삭제 및 위치 변경
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -157,13 +171,16 @@ public class CoreServiceImpl implements CoreService
     @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
     public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree) throws Exception
     {
-        int returnStatus = 0;
+    	final int FAILURE = 0;
+    	final int SUCCESS = 1;
+    	
+        int returnStatus = FAILURE;
         
         T nodeById = ((T) coreDao.getNode(comprehensiveTree));
         
         if (nodeById.getC_type().equals(comprehensiveTree.getC_type()))
         {
-            returnStatus = 1;
+            returnStatus = SUCCESS;
         }
         else if ("default".equals(comprehensiveTree.getC_type()))
         {
@@ -175,11 +192,11 @@ public class CoreServiceImpl implements CoreService
             }
             else
             {
-                int temp = coreDao.alterNodeType(comprehensiveTree);
+                int alterCountResult = coreDao.alterNodeType(comprehensiveTree);
                 
-                if (temp == 1)
+                if (alterCountResult == 1)
                 {
-                    returnStatus = 1;
+                    returnStatus = SUCCESS;
                 }
                 else
                 {
@@ -251,7 +268,8 @@ public class CoreServiceImpl implements CoreService
         
         if (insertSeqResult > 0 && alterCountResult == 1)
         {
-            t_ComprehensiveTree.setStatus(1);
+        	final int SUCCESS = 1;
+            t_ComprehensiveTree.setStatus(SUCCESS);
         }
         else
         {
@@ -286,6 +304,12 @@ public class CoreServiceImpl implements CoreService
     public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree, HttpServletRequest request) throws Exception
     {
         T nodeById = (T) coreDao.getNode(comprehensiveTree);
+        
+        if (nodeById == null)
+        {
+        	throw new RuntimeException("nodeById is null");
+        }
+        
         List<T> childNodesFromNodeById = ((List<T>) coreDao.getChildNodeByLeftRight(nodeById));
         
         T nodeByRef = (T) coreDao.getNodeByRef(comprehensiveTree);
@@ -296,81 +320,75 @@ public class CoreServiceImpl implements CoreService
         int spaceOfTargetNode = 2;
         Collection<Integer> c_idsByChildNodeFromNodeById = null;
         
-        if (nodeById == null)
-        {
-            throw new RuntimeException("nodeById is null");
-        }
-        else
-        {
-            c_idsByChildNodeFromNodeById = CollectionUtils.collect(childNodesFromNodeById,
-                                                                   new Transformer<T, Integer>() {
-                                                                       @Override
-                                                                       public Integer transform(T childNodePerNodeById)
-                                                                       {
-                                                                           return childNodePerNodeById.getC_id();
-                                                                       }
-                                                                   });
-            
-            if (c_idsByChildNodeFromNodeById.contains(comprehensiveTree.getRef())) 
-            { 
-            	throw new RuntimeException("myself contains already refTargetNode"); 
-            }
-            
-            spaceOfTargetNode = nodeById.getC_right() - nodeById.getC_left() + 1; 
+        c_idsByChildNodeFromNodeById = CollectionUtils.collect(childNodesFromNodeById,
+                                                               new Transformer<T, Integer>() {
+                                                                   @Override
+                                                                   public Integer transform(T childNodePerNodeById)
+                                                                   {
+                                                                       return childNodePerNodeById.getC_id();
+                                                                   }
+                                                               });
+        
+        if (c_idsByChildNodeFromNodeById.contains(comprehensiveTree.getRef())) 
+        { 
+        	throw new RuntimeException("myself contains already refTargetNode"); 
         }
         
-        if (nodeById != null && !comprehensiveTree.isCopied())
+        spaceOfTargetNode = nodeById.getC_right() - nodeById.getC_left() + 1; 
+        
+        if (!comprehensiveTree.isCopied())
         {
             this.cutMyself(nodeById, spaceOfTargetNode, c_idsByChildNodeFromNodeById);
         }
         
-        calculatePostion(comprehensiveTree, nodeById, childNodesFromNodeByRef, request);
+        this.calculatePostion(comprehensiveTree, nodeById, childNodesFromNodeByRef, request);
         
         this.stretchPositionForMyselfFromJstree(c_idsByChildNodeFromNodeById, comprehensiveTree);
         
-        int rightPositionFromNodeByRef = nodeByRef.getC_right();
-        rightPositionFromNodeByRef = Math.max(rightPositionFromNodeByRef, 1);
+        int rightPointFromNodeByRef = nodeByRef.getC_right();
+        rightPointFromNodeByRef = Math.max(rightPointFromNodeByRef, 1);
         
-        int self = (nodeById != null && !comprehensiveTree.isCopied()
-                && nodeById.getC_parentid() == comprehensiveTree.getRef() && comprehensiveTree.getC_position() > nodeById
-                .getC_position()) ? 1 : 0;
-        
-        for (T child : childNodesFromNodeByRef)
+        if(!comprehensiveTree.isCopied())
         {
-            if (child.getC_position() - self == comprehensiveTree.getC_position())
+        	int selfPosition = (nodeById.getC_parentid() == comprehensiveTree.getRef() 
+        			   && comprehensiveTree.getC_position() > nodeById.getC_position()) ? 1 : 0;
+            
+            for (T child : childNodesFromNodeByRef)
             {
-                rightPositionFromNodeByRef = child.getC_left();
-                break;
+                if (child.getC_position() - selfPosition == comprehensiveTree.getC_position())
+                {
+                    rightPointFromNodeByRef = child.getC_left();
+                    break;
+                }
             }
-        }
-        
-        if (nodeById != null && !comprehensiveTree.isCopied()
-                && nodeById.getC_left() < rightPositionFromNodeByRef)
-        {
-            rightPositionFromNodeByRef -= spaceOfTargetNode;
+            
+            if (nodeById.getC_left() < rightPointFromNodeByRef)
+            {
+                rightPointFromNodeByRef -= spaceOfTargetNode;
+            }	
         }
         
         this.stretchLeftRightForMyselfFromJstree(spaceOfTargetNode,
-                rightPositionFromNodeByRef, comprehensiveTree.getCopy(),
+                rightPointFromNodeByRef, comprehensiveTree.getCopy(),
                 c_idsByChildNodeFromNodeById, comprehensiveTree);
         
-        logger.error(">>>>>>>>>>>>>>>>>>>>" + rightPositionFromNodeByRef);
+        logger.info(">>>>>>>>>>>>>>>>>>>>" + rightPointFromNodeByRef);
         int targetNodeLevel = nodeById.getC_level() - (nodeByRef.getC_level() + 1);
-        int comparePosition = nodeById.getC_left() - rightPositionFromNodeByRef;
-        logger.error(">>>>>>>>>>>>>>>>>>>>" + comparePosition);
+        int comparePoint = nodeById.getC_left() - rightPointFromNodeByRef;
+        logger.info(">>>>>>>>>>>>>>>>>>>>" + comparePoint);
         
         if (comprehensiveTree.isCopied())
         {
-            int ind = this.pasteMyselfFromJstree(comprehensiveTree.getRef(), comparePosition, spaceOfTargetNode,
+            int insertSeqResult = this.pasteMyselfFromJstree(comprehensiveTree.getRef(), comparePoint, spaceOfTargetNode,
                                                  targetNodeLevel, c_idsByChildNodeFromNodeById,
-                                                 rightPositionFromNodeByRef, nodeById);
-            t_ComprehensiveTree.setId(ind);
-            this.fixCopy(ind, comprehensiveTree.getC_position(), comprehensiveTree);
+                                                 rightPointFromNodeByRef, nodeById);
+            t_ComprehensiveTree.setId(insertSeqResult);
+            this.fixPositionParentIdOfCopyNodes(insertSeqResult, comprehensiveTree.getC_position(), comprehensiveTree);
         }
         else
         {
             this.enterMyselfFromJstree(comprehensiveTree.getRef(), comprehensiveTree.getC_position(),
-                                       comprehensiveTree.getC_id(), comparePosition, targetNodeLevel,
+                                       comprehensiveTree.getC_id(), comparePoint, targetNodeLevel,
                                        c_idsByChildNodeFromNodeById, comprehensiveTree);
         }
         return t_ComprehensiveTree;
@@ -392,24 +410,21 @@ public class CoreServiceImpl implements CoreService
         
         if (comprehensiveTree.getRef() == nodeById.getC_parentid())
         {
-            logger.debug(">>>>>>>>>>>>>>>이동할 노드가 내 부모안에서 움직일때");
+            logger.info(">>>>>>>>>>>>>>>이동할 노드가 내 부모안에서 움직일때");
             
             if (comprehensiveTree.getMultiCounter() == 0)
             {
-                logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 일때");
-                session.setAttribute("settedPosition", comprehensiveTree.getC_position());
-                
                 if (comprehensiveTree.getC_position() > nodeById.getC_position())
                 {
-                    logger.debug(">>>>>>>>>>>>>>>이동 할 노드가 현재보다 뒤일때");
-                    logger.debug("노드값=" + nodeById.getC_title());
-                    logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
-                    logger.debug("노드의 요청받은 위치값=" + comprehensiveTree.getC_position());
-                    logger.debug("노드의 요청받은 멀티카운터=" + comprehensiveTree.getMultiCounter());
+                    logger.info(">>>>>>>>>>>>>>>이동 할 노드가 현재보다 뒤일때");
+                    logger.info("노드값=" + nodeById.getC_title());
+                    logger.info("노드의 초기 위치값=" + nodeById.getC_position());
+                    logger.info("노드의 요청받은 위치값=" + comprehensiveTree.getC_position());
+                    logger.info("노드의 요청받은 멀티카운터=" + comprehensiveTree.getMultiCounter());
                     
                     if (comprehensiveTree.getC_position() > childNodesFromNodeByRef.size())
                     {
-                        logger.debug("노드 이동시 폴더를 대상으로 했을때 생기는 버그 발생 =" + comprehensiveTree.getC_position());
+                        logger.info("노드 이동시 폴더를 대상으로 했을때 생기는 버그 발생 =" + comprehensiveTree.getC_position());
                         comprehensiveTree.setC_position(childNodesFromNodeByRef.size());
                     }
                     else
@@ -417,29 +432,29 @@ public class CoreServiceImpl implements CoreService
                     	comprehensiveTree.setC_position(comprehensiveTree.getC_position() - 1);
                     }
                     
-                    logger.debug("노드의 최종 위치값=" + comprehensiveTree.getC_position());
+                    logger.info("노드의 최종 위치값=" + comprehensiveTree.getC_position());
                     session.setAttribute("settedPosition", comprehensiveTree.getC_position());
                 }
             }
             else
             {
-                logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 이 아닐때");
-                logger.debug("노드값=" + nodeById.getC_title());
-                logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
-                logger.debug("노드의 요청받은 위치값=" + comprehensiveTree.getC_position());
-                logger.debug("노드의 요청받은 멀티카운터=" + comprehensiveTree.getMultiCounter());
-                logger.debug("0번 노드의 위치값=" + session.getAttribute("settedPosition"));
+                logger.info(">>>>>>>>>>>>>>>멀티 카운터가 0 이 아닐때");
+                logger.info("노드값=" + nodeById.getC_title());
+                logger.info("노드의 초기 위치값=" + nodeById.getC_position());
+                logger.info("노드의 요청받은 위치값=" + comprehensiveTree.getC_position());
+                logger.info("노드의 요청받은 멀티카운터=" + comprehensiveTree.getMultiCounter());
+                logger.info("0번 노드의 위치값=" + session.getAttribute("settedPosition"));
                 
                 int increasePosition = 0;
                 
                 if ((Integer) session.getAttribute("settedPosition") < nodeById.getC_position())
                 {
-                    logger.debug(">>>>>>>>>>>>>>>멀티 노드의 위치가 0번 노드보다 뒤일때");
+                    logger.info(">>>>>>>>>>>>>>>멀티 노드의 위치가 0번 노드보다 뒤일때");
                     increasePosition = (Integer) session.getAttribute("settedPosition") + 1;
                 }
                 else
                 {
-                    logger.debug(">>>>>>>>>>>>>>>멀티 노드의 위치가 0번 노드보다 앞일때");
+                    logger.info(">>>>>>>>>>>>>>>멀티 노드의 위치가 0번 노드보다 앞일때");
                     if(comprehensiveTree.isCopied())
                     {
                     	increasePosition = (Integer) session.getAttribute("settedPosition") + 1;
@@ -456,43 +471,42 @@ public class CoreServiceImpl implements CoreService
                 
                 if (nodeById.getC_position() == comprehensiveTree.getC_position())
                 {
-                    logger.debug(">>>>>>>>>>>>>>>원래 노드 위치값과 최종 계산된 노드의 위치값이 동일한 경우");
+                    logger.info(">>>>>>>>>>>>>>>원래 노드 위치값과 최종 계산된 노드의 위치값이 동일한 경우");
                     session.setAttribute("settedPosition", increasePosition - 1);
                 }
                 
-                logger.debug("노드의 최종 위치값=" + comprehensiveTree.getC_position());
+                logger.info("노드의 최종 위치값=" + comprehensiveTree.getC_position());
             }
         }
         else
         {
-            logger.debug(">>>>>>>>>>>>>>>이동할 노드가 내 부모밖으로 움직일때");
+            logger.info(">>>>>>>>>>>>>>>이동할 노드가 내 부모밖으로 움직일때");
             
             if (comprehensiveTree.getMultiCounter() == 0)
             {
-                logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 일때");
-                logger.debug("노드값=" + nodeById.getC_title());
-                logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
-                logger.debug("노드의 요청받은 위치값=" + comprehensiveTree.getC_position());
-                logger.debug("노드의 요청받은 멀티카운터=" + comprehensiveTree.getMultiCounter());
-                comprehensiveTree.setC_position(comprehensiveTree.getC_position()); 
-                logger.debug("노드의 최종 위치값=" + comprehensiveTree.getC_position());
+                logger.info(">>>>>>>>>>>>>>>멀티 카운터가 0 일때");
+                logger.info("노드값=" + nodeById.getC_title());
+                logger.info("노드의 초기 위치값=" + nodeById.getC_position());
+                logger.info("노드의 요청받은 위치값=" + comprehensiveTree.getC_position());
+                logger.info("노드의 요청받은 멀티카운터=" + comprehensiveTree.getMultiCounter());
+                logger.info("노드의 최종 위치값=" + comprehensiveTree.getC_position());
+                
                 session.setAttribute("settedPosition", comprehensiveTree.getC_position());
             }
             else
             {
-                logger.debug(">>>>>>>>>>>>>>>멀티 카운터가 0 이 아닐때");
-                logger.debug("노드값=" + nodeById.getC_title());
-                logger.debug("노드의 초기 위치값=" + nodeById.getC_position());
-                logger.debug("노드의 요청받은 위치값=" + comprehensiveTree.getC_position());
-                logger.debug("노드의 요청받은 멀티카운터=" + comprehensiveTree.getMultiCounter());
+                logger.info(">>>>>>>>>>>>>>>멀티 카운터가 0 이 아닐때");
+                logger.info("노드값=" + nodeById.getC_title());
+                logger.info("노드의 초기 위치값=" + nodeById.getC_position());
+                logger.info("노드의 요청받은 위치값=" + comprehensiveTree.getC_position());
+                logger.info("노드의 요청받은 멀티카운터=" + comprehensiveTree.getMultiCounter());
                 
                 int increasePosition = 0;
                 increasePosition = (Integer) session.getAttribute("settedPosition") + 1;
+                comprehensiveTree.setC_position(increasePosition);
                 session.setAttribute("settedPosition", increasePosition);
                 
-                comprehensiveTree.setC_position(increasePosition);
-                logger.debug("노드의 최종 위치값=" + comprehensiveTree.getC_position());
-                session.setAttribute("settedPosition", comprehensiveTree.getC_position());
+                logger.info("노드의 최종 위치값=" + comprehensiveTree.getC_position());
             }
         }
     }
@@ -527,53 +541,49 @@ public class CoreServiceImpl implements CoreService
         return coreDao.pasteMyselfFromJstree(onlyPasteMyselfFromJstree);
     }
     
-    private <T extends ComprehensiveTree> void fixCopy(int ind, int ref, T t_comprehensiveTree) throws Exception
+    private <T extends ComprehensiveTree> void fixPositionParentIdOfCopyNodes(int insertSeqResult, int position, T t_comprehensiveTree) throws Exception
     {
         T comprehensiveTree = newInstance(t_comprehensiveTree);
-        comprehensiveTree.setC_id(ind); 
+        comprehensiveTree.setC_id(insertSeqResult); 
         
-        T node = ((T) coreDao.getNode(comprehensiveTree)); 
+        T node = ((T) coreDao.getNode(comprehensiveTree));
         
-        List<T> children = ((List<T>) coreDao.getChildNodeByLeftRight(node)); 
+        List<T> children = ((List<T>) coreDao.getChildNodeByLeftRight(node));
         
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i = node.getC_left() + 1; i < node.getC_right(); i++)
+        Map<Integer, Integer> parentIds = new HashMap<Integer, Integer>();
+        
+        for (T child : children) 
         {
-            map.put(i, ind); 
-        }
-        
-        for (int i = 0; i < children.size(); i++)
-        {
-            T child = children.get(i); 
-            
-            if (child.getC_id() == ind) 
+        	for (int i = child.getC_left() + 1; i < child.getC_right(); i++)
+        	{
+        		final int parentId = child.getC_id();
+        		parentIds.put(i, parentId);
+        	}
+        	
+            if (child.getC_id() == insertSeqResult) 
             {
-                logger.error(">>>>>>>>>>>>>>>>> 기준노드가 잡혔음.");
-                logger.error("C_TITLE    = " + child.getC_title());
-                logger.error("C_ID       = " + ind);
-                logger.error("C_POSITION = " + ref);
+                logger.info(">>>>>>>>>>>>>>>>> 기준노드가 잡혔음.");
+                logger.info("C_TITLE    = " + child.getC_title());
+                logger.info("C_ID       = " + insertSeqResult);
+                logger.info("C_POSITION = " + position);
 
                 T onlyFixCopyFromJstree = newInstance(t_comprehensiveTree);
-                onlyFixCopyFromJstree.setFixCopyId(ind); 
-                onlyFixCopyFromJstree.setFixCopyPosition(ref); 
+                onlyFixCopyFromJstree.setFixCopyId(insertSeqResult); 
+                onlyFixCopyFromJstree.setFixCopyPosition(position);
                 
                 coreDao.fixCopyIF(onlyFixCopyFromJstree);
                 continue;
             }
-            logger.error(">>>>>>>>>>>>>>>>> 기준노드 아래 있는 녀석임");
-            logger.error("C_TITLE    = " + child.getC_title());
-            logger.error("C_ID       = " + ind);
-            logger.error("C_POSITION = " + ref);
-            logger.error("부모아이디값 = " + map.get(child.getC_left()));
             
-            child.setFixCopyId(map.get(child.getC_left()));
+            logger.info(">>>>>>>>>>>>>>>>> 기준노드 아래 있는 녀석임");
+            logger.info("C_TITLE    = " + child.getC_title());
+            logger.info("C_ID       = " + child.getC_id());
+            logger.info("C_POSITION = " + child.getC_position());
+            logger.info("부모아이디값 = " + parentIds.get(child.getC_left()));
+            
+            child.setFixCopyId(parentIds.get(child.getC_left()));
             
             coreDao.fixCopy(child);
-            
-            for (int j = child.getC_left() + 1; j < child.getC_right(); j++)
-            {
-                map.put(j, child.getC_id());
-            }
         }
     }
     
