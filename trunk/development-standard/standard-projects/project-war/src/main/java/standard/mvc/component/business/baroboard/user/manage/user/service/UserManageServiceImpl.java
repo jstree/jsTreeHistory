@@ -17,49 +17,56 @@ package standard.mvc.component.business.baroboard.user.manage.user.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import standard.mvc.component.business.baroboard.user.vo.User;
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 
 /**
  * Modification Information
  * 
  * @author 류강하
- * @since 2015. 5. 31.
+ * @since 2015. 6. 3.
  * @version 1.0
  * @see <pre>
- * Class Name  : UserManageService.java
- * Description : 바로보드-회원관리 Service 인터페이스
- * Infomation  : 바로보드-회원관리 Service 인터페이스
+ * Class Name  : UserManageServiceImpl.java
+ * Description : 바로보드-회원관리 Service 클래스
+ * Infomation  : 바로보드-회원관리 Service 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 
- * 수정일        수정자        수정내용
- * -------       ------------  -----------------------
- * 2015. 5. 31.  류강하        최초 생성
+ * 수정일               수정자                 수정내용
+ * -------       ------------   -----------------------
+ * 2015. 6. 3.   류강하                 최초 생성
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-public interface UserManageService {
+@Service
+public class UserManageServiceImpl implements UserManageService {
 
-    /**
-     * 회원 목록을 조회한다.
-     * 
-     * @param user 회원 DTO
-     * @return 회원 DTO List
-     */
-    List<User> getUserList(User user) throws Exception;
-    
-    /**
-     * 회원 정보를 삭제한다.
-     * 
-     * @param user 회원 DTO
-     */
-    void deleteUserInfo(User user) throws Exception;
-    
-    /**
-     * 회원 정보를 추가한다.
-     * 
-     * @param user 회원 DTO
-     */
-    void addUserInfo(User user) throws Exception;
+	@Resource(name = "CoreService")
+    private CoreService coreService;
+	
+	@Override
+	public List<User> getUserList(User user) throws Exception {
+		
+		user.setC_id(2);
+		
+		return coreService.getChildNode(user);
+	}
+
+	@Override
+	public void deleteUserInfo(User user) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void addUserInfo(User user) {
+		// TODO Auto-generated method stub
+
+	}
 }

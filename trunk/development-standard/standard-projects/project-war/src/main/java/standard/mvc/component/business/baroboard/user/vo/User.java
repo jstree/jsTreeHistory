@@ -15,6 +15,8 @@
  */
 package standard.mvc.component.business.baroboard.user.vo;
 
+import javax.validation.constraints.Size;
+
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
@@ -86,7 +88,26 @@ public class User extends ComprehensiveTree {
 
     /** 사용자아이콘 */
     private String imageIcon;
+    
+    /** 가입일자시작 */
+    private String joinDeBegi;
 
+    /** 가입일자종료 */
+    private String joinDeEnd;
+
+    /** 로그인일자시작 */
+    private String loginDeStart;
+    
+    /** 로그인일자종료 */
+    private String loginDeEnd;
+    
+    /** 회원가입승인여부 */
+    @Size(min = 0, max = 1)
+    private String joinApprovalFl;
+    
+    /** 로그인일시 */
+    private String loginDt;
+    
     /** 가입일자 */
     private String joinDe;
     
@@ -235,6 +256,54 @@ public class User extends ComprehensiveTree {
 
 	public void setLoginDe(String loginDe) {
 		this.loginDe = loginDe;
+	}
+	
+	public String getLoginDt() {
+		return loginDt;
+	}
+
+	public void setLoginDt(String loginDt) {
+		this.loginDt = loginDt;
+	}
+
+	public String getJoinDeBegi() {
+		return joinDeBegi;
+	}
+
+	public void setJoinDeBegi(String joinDeBegi) {
+		this.joinDeBegi = joinDeBegi;
+	}
+
+	public String getJoinDeEnd() {
+		return joinDeEnd;
+	}
+
+	public void setJoinDeEnd(String joinDeEnd) {
+		this.joinDeEnd = joinDeEnd;
+	}
+
+	public String getLoginDeStart() {
+		return loginDeStart;
+	}
+
+	public void setLoginDeStart(String loginDeStart) {
+		this.loginDeStart = loginDeStart;
+	}
+
+	public String getLoginDeEnd() {
+		return loginDeEnd;
+	}
+
+	public void setLoginDeEnd(String loginDeEnd) {
+		this.loginDeEnd = loginDeEnd;
+	}
+
+	public String getJoinApprovalFl() {
+		return joinApprovalFl;
+	}
+
+	public void setJoinApprovalFl(String joinApprovalFl) {
+		this.joinApprovalFl = joinApprovalFl;
 	}
 
 	@Override

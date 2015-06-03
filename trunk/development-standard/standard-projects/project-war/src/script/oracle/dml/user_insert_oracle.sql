@@ -34,8 +34,8 @@ INSERT INTO T_USER_INFO
     C_IMAGE_ICON)
   VALUES (3, 2, 0, 3, 4, 2, '관리자', 'default',
           1, 1, 'bbd7182cd0ee95488f1a1e6f3fe0d8f94ed0d14e4db1dce713fe82a3231c523d','admin@313.co.kr', 0,  
-          '초등학교 이름은', '부원초등학교', 0, 0, '20150425205811',
-          '20150425205811',  NULL, NULL, NULL, NULL,
+          '초등학교 이름은', '부원초등학교', 0, 0, '20150603222617',
+          '20150603222617',  NULL, NULL, NULL, NULL,
           NULL);  
 COMMIT;
 
@@ -73,14 +73,19 @@ DELETE FROM T_USER_LOGIN_STATE;
 
 INSERT INTO T_USER_LOGIN_STATE (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
    C_USER_ID, C_IP_ADDRESS, C_MAC_ADDRESS, C_LOGIN_DT)                     
-  VALUES (1, 0, 0, 1, 4, 0, 'Root Node', NULL,
-          1, ' ', ' ', ' ');
+  VALUES (1, 0, 0, 1, 6, 0, 'Root Node', 'root',
+          -1, ' ', ' ', ' ');
                                         
 INSERT INTO T_USER_LOGIN_STATE (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
    C_USER_ID, C_IP_ADDRESS, C_MAC_ADDRESS, C_LOGIN_DT)                                                           
-  VALUES (2, 1, 0, 2, 3, 1, '로그인', 'drive',
-           2, ' ', ' ', ' ');        
-           
+  VALUES (2, 1, 0, 2, 5, 1, '회원_로그인현황', 'drive',
+          -1, ' ', ' ', ' ');
+
+INSERT INTO T_USER_LOGIN_STATE (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
+   C_USER_ID, C_IP_ADDRESS, C_MAC_ADDRESS, C_LOGIN_DT)                                                           
+  VALUES (3, 2, 0, 3, 4, 2, '로그인', 'default',
+           3, '127.0.0.1', '0A-1B-2C-3D-4E-5F', '20150603223807');
+
 COMMIT;
 
 /* 회원_게시물 스크랩 */
