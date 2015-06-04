@@ -58,14 +58,19 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * 
  * 수정일               	  수정자                         수정내용
  * ------------  ------------   -----------------------
- * 2015. 4. 30   김형채                         최초 생성
- * 2015. 5. 12   김형채                         @Query 어노테이션  및 주석 삭제
- * 2015. 5. 13   김형채                         MoveNodeException 테스트 케이스 추가
- * 2015. 5. 13   김형채                         testMoveNode 테스트 케이스 수정
- * 2015. 5. 19   김형채                         testAddLeafNode 테스트 케이스 추가
- * 2015. 5. 19   김형채                         testAddNodeByRefIsNull 테스트 케이스 추가
- * 2015. 6. 01   김형채                         DataSet 네이밍 변경
- * 2015. 6. 02   김형채                         testMoveNodeException 예외 클래스 변경
+ * 2015. 4. 30   김형채                   최초 생성
+ * 2015. 5. 12   김형채                   @Query 어노테이션  및 주석 삭제
+ * 2015. 5. 13   김형채                   MoveNodeException 테스트 케이스 추가
+ * 2015. 5. 13   김형채                   testMoveNode 테스트 케이스 수정
+ * 2015. 5. 19   김형채                   testAddLeafNode 테스트 케이스 추가
+ * 2015. 5. 19   김형채                   testAddNodeByRefIsNull 테스트 케이스 추가
+ * 2015. 6. 01   김형채                   DataSet 네이밍 변경
+ * 2015. 6. 02   김형채                   testMoveNodeException 예외 클래스 변경
+ * 2015. 6. 04     김형채 			testMoveNodeMultiCounterInMyParenitPositionUp 테스트 케이스 추가
+ * 2015. 6. 04     김형채 			testMoveNodeMultiCounterInMyParenitPositionDown 테스트 케이스 추가
+ * 2015. 6. 04     김형채 			testMoveNodeMultiCounterOutMyParenitPositionUp 테스트 케이스 추가
+ * 2015. 6. 04     김형채 			testMoveNodeMultiCounterOutMyParenitPositionDown 테스트 케이스 추가
+ * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -270,6 +275,75 @@ public class CoreServiceTestCase
 		comprehensiveTree.setMultiCounter(0);
 		
 		coreService.moveNode(comprehensiveTree, request);
+	}
+	
+	@Test
+	@DatabaseSetup(value = "CoreServiceTestCase_MoveNodeMultiCounter_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_MoveNodeMultiCounterInMyParentPosotionUp_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodeMultiCounterInMyParenitPositionUp() throws Exception
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			comprehensiveTree.setC_id(6+i);
+			comprehensiveTree.setRef(3);
+			comprehensiveTree.setC_position(0+i);
+			comprehensiveTree.setCopy(0);
+			comprehensiveTree.setMultiCounter(i);
+			
+			coreService.moveNode(comprehensiveTree, request);
+		}
+	}
+	
+	@Test
+	@DatabaseSetup(value = "CoreServiceTestCase_MoveNodeMultiCounter_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_MoveNodeMultiCounterInMyParentPosotionDown_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodeMultiCounterInMyParenitPositionDown() throws Exception
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			comprehensiveTree.setC_id(4+i);
+			comprehensiveTree.setRef(3);
+			comprehensiveTree.setC_position(4+i);
+			comprehensiveTree.setCopy(0);
+			comprehensiveTree.setMultiCounter(i);
+			
+			coreService.moveNode(comprehensiveTree, request);
+		}
+	}
+	
+	@Test
+	@DatabaseSetup(value = "CoreServiceTestCase_MoveNodeMultiCounter_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_MoveNodeMultiCounterOutMyParentPosotionUp_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodeMultiCounterOutMyParenitPositionUp() throws Exception
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			comprehensiveTree.setC_id(6+i);
+			comprehensiveTree.setRef(8);
+			comprehensiveTree.setC_position(0+i);
+			comprehensiveTree.setCopy(0);
+			comprehensiveTree.setMultiCounter(i);
+			
+			coreService.moveNode(comprehensiveTree, request);
+		}
+	}
+	
+	
+	@Test
+	@DatabaseSetup(value = "CoreServiceTestCase_MoveNodeMultiCounter_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
+	@ExpectedDatabase(value = "CoreServiceTestCase_MoveNodeMultiCounterOutMyParentPosotionDown_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testMoveNodeMultiCounterOutMyParenitPositionDown() throws Exception
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			comprehensiveTree.setC_id(6+i);
+			comprehensiveTree.setRef(8);
+			comprehensiveTree.setC_position(4+i);
+			comprehensiveTree.setCopy(0);
+			comprehensiveTree.setMultiCounter(i);
+			
+			coreService.moveNode(comprehensiveTree, request);
+		}
 	}
 	
 	@Test(expected=RuntimeException.class)
