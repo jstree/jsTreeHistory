@@ -21,7 +21,6 @@ import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -57,7 +56,6 @@ public class UserManageServiceTest extends DbUnitTest<User> {
 	@Autowired
     private UserManageService userManageService;
 	
-	@Ignore
 	@Test
 	public void getUserList() throws Exception {
 		
