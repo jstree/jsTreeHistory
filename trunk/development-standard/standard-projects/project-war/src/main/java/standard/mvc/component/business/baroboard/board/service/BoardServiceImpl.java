@@ -48,9 +48,18 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<Article> getArticleList(Article article) throws Exception {
-		return boardDao.getArticleListByPage(article);
+		List<Article> list = boardDao.getArticleListByPage(article);
+		changeRegDTFormat(list);
+		return list;
 	}
 
+	@Override
+	public List<Article> getAnnounceList(Article article) throws Exception {
+		List<Article> list = boardDao.getAnnounceList(article);
+		changeRegDTFormat(list);
+		return list;
+	}
+	
 	@Override
 	public List<Article> searchArticleList(SearchArticle searchArticle) throws Exception {
 		return null;
@@ -73,5 +82,14 @@ public class BoardServiceImpl implements BoardService {
 		return null;
 	}
 
-
+	/** DB에 저장되어있는 20150601063125 형식의 날짜형식을 2015-06-01 형식으로 바꿔줌 */
+	public void changeRegDTFormat(List<Article> list){
+		for(Article article : list) {
+			String regDate = article.getRegDt();
+			String year = regDate.substring(0, 4);
+			String month = regDate.substring(4, 6);
+			String day = regDate.substring(6, 8);
+			article.setRegDt(year + "-" + month + "-" + day);
+		}
+	}
 }

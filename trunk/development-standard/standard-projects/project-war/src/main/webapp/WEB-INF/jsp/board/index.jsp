@@ -22,6 +22,16 @@
 		});
 	});
 </script>
+<style>
+#boardTable {
+	width: 100%;
+}
+
+.font-bold {
+	font-weight: bold;
+}
+	
+</style>
 </head>
 <body>
 	<section class="clearfix">
@@ -48,7 +58,7 @@
 									<button class="right">글쓰기</button>
 								</div>
 								<div>
-									<table id="boardTable" class="board-table display" cellspacing="0" width="100%">
+									<table id="boardTable" class="board-table display">
 										<thead>
 											<tr>
 												<th>번호</th>
@@ -60,28 +70,49 @@
 											</tr>
 										</thead>
 										<tbody>
+											<c:forEach var="announce" items="${announceList}" varStatus="status">
+												<tr>
+													<td class="dt-center font-bold">공지</td>
+													<td class="font-bold"><a>${announce.c_title} &nbsp; (${announce.commentCnt})</a></td>
+													<td class="dt-center">${announce.regId}</td>
+													<td class="dt-center">${announce.regDt}</td>
+													<td class="dt-center">${announce.viewCnt}</td>
+													<td class="dt-center">0</td>
+												</tr>
+											</c:forEach>
 											<c:forEach var="article" items="${articleList}" varStatus="status">
 												<tr>
-													<td>${article.c_id}</td>
-													<td><a>${article.c_title} (1)</a></td>
-													<td>${article.regId}</td>
-													<td>${article.regDt}</td>
-													<td>${article.viewCnt}</td>
-													<td>0</td>
+													<td class="dt-center">${article.c_id}</td>
+													<td><a>${article.c_title} &nbsp; (${article.commentCnt})</a></td>
+													<td class="dt-center">${article.regId}</td>
+													<td class="dt-center">${article.regDt}</td>
+													<td class="dt-center">${article.viewCnt}</td>
+													<td class="dt-center">0</td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
-									${ fn:length(articleList) }
-									<c:choose>
-										<c:when test="${not empty articleList}" >
-											존재
-										</c:when>
-										<c:otherwise>
-											없음 ㅠㅠ
-										</c:otherwise>
-									</c:choose>
+								</div>
+								<div>
+									<div id="paging">
+										<span><a>◀</a></span>
+										<span>
+											<a>1</a>
+											<a>2</a>
+											<a>3</a>
+											<a>4</a>
+											<a>5</a>
+											<a>6</a>
+											<a>7</a>
+											<a>8</a>
+											<a>9</a>
+											<a>10</a>
+										</span>
+										<span>▶</span>
+									</div>
+									<div id="search">
 									
+									</div>
 								</div>
 							</div>
 						</div>

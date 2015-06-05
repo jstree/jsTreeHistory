@@ -29,5 +29,6 @@ public interface BoardDao {
 	
 	public List<Article> getArticleListByPage(Article article) throws Exception;
 	
+	public List<Article> getAnnounceList(Article article) throws Exception;
 	
 }

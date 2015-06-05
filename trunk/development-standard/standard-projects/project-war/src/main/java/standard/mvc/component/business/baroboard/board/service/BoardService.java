@@ -29,13 +29,23 @@ import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 public interface BoardService {
 
 	/**
-	 * 페이지 순서로 글 목록을 조회한다.
+	 * 페이지 순서로 글 목록을 조회한다. 공지글은 제외한다.
 	 * 
 	 * @param 게시판ID, 페이지번호, 페이지크기
 	 * @return 글목록 List
 	 * @throws Exception
 	 */
 	public List<Article> getArticleList(Article article) throws Exception;
+	
+	/**
+	 * 공지글을 조회한다.
+	 * 
+	 * @param 게시판ID
+	 * @return 공지글목록 List
+	 * @throws Exception
+	 */
+	public List<Article> getAnnounceList(Article article) throws Exception;
+	
 	
 	/**
 	 * 조건에 맞는 글을 검색한다.

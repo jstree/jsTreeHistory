@@ -58,11 +58,13 @@ public class BoardController extends GenericAbstractController {
 	public String showIndexPage(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 		
 		// TODO : pageNo 검증
+		List<Article> announceList = boardService.getAnnounceList(article);
 		List<Article> articleList = boardService.getArticleList(article);
 		
 		logger.debug("-- ArticleList Size--");
 		logger.debug(articleList.size()+"  사이즈");
 		
+		modelMap.addAttribute("announceList", announceList);
 		modelMap.addAttribute("articleList", articleList);
 		modelMap.addAttribute("pageName", "테스트게시판");
 		return "/jsp/board/index";

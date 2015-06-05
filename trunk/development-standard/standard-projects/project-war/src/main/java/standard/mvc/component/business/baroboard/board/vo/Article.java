@@ -65,6 +65,9 @@ public class Article extends ComprehensiveTree{
 	/* 페이지 */
 	private int pageNum;
 	
+	/* 코멘트개수 */
+	private int commentCnt;
+	
 	@Override
 	public String getSqlMapSelector() {
 		return "board";
@@ -173,4 +176,13 @@ public class Article extends ComprehensiveTree{
 	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;
 	}
+
+	public int getCommentCnt() {
+		return commentCnt;
+	}
+
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
+	}
+
 }
