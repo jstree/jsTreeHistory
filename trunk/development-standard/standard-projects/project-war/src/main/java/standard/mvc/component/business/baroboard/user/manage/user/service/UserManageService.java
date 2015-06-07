@@ -52,9 +52,9 @@ public interface UserManageService {
     /**
      * 회원 정보를 삭제한다.
      * 
-     * @param user 회원 DTO
+     * @param users 회원 DTO List
      */
-    void deleteUserInfo(User user) throws Exception;
+    void deleteUserInfos(List<User> users) throws Exception;
     
     /**
      * 회원 정보를 추가한다.

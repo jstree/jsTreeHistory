@@ -19,6 +19,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -27,6 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
 
@@ -80,5 +83,18 @@ public class UserManageServiceTest extends DbUnitTest<User> {
         assertThat(user.getJoinStateCd(), is(4));
         assertThat(user.getEmail(), is(equalTo("admin@313.co.kr")));
         assertThat(user.getJoinDt(), is(equalTo("20150603222617")));
+	}
+	
+	@Test
+	@ExpectedDatabase(value = "UserManageServiceTest_deleteUserInfo.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void deleteUserInfo() throws Exception {
+	    
+	    User user = new User();
+	    user.setC_id(3);
+	    
+	    List<User> users = new ArrayList<User>();
+	    users.add(user);
+	    
+	    userManageService.deleteUserInfos(users);
 	}
 }

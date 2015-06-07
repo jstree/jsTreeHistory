@@ -59,9 +59,11 @@ public class UserManageServiceImpl implements UserManageService {
 	}
 
 	@Override
-	public void deleteUserInfo(User user) {
-		// TODO Auto-generated method stub
-
+	public void deleteUserInfos(List<User> users) throws Exception {
+	    
+	    for (User user : users) {
+	        coreService.removeNode( coreService.getNode(user) );
+        }
 	}
 
 	@Override
