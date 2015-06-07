@@ -72,9 +72,9 @@
 					</div>
 					<div id="validation" class="one-half-percent desktop-tablet bm-remove last">
 						<span>
-							<img id="" src="${pageContext.request.contextPath}/assets/images/valid-html5.png">
-							<img id="" src="${pageContext.request.contextPath}/assets/images/valid-css.png">
-							<img id="" src="${pageContext.request.contextPath}/assets/images/rss-btn.png">
+							<img src="${pageContext.request.contextPath}/assets/images/valid-html5.png">
+							<img src="${pageContext.request.contextPath}/assets/images/valid-css.png">
+							<img src="${pageContext.request.contextPath}/assets/images/rss-btn.png"> 
 						</span>
 					</div>
 				</div>
