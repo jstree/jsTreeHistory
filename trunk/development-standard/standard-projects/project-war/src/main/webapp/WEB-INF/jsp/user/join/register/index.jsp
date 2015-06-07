@@ -139,7 +139,7 @@ var inputForm = {
                                        <label for="passwordContext">비밀번호*</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                    	<input name="password" id="password" type="text">
+                                    	<input name="password" id="password" type="password">
                                     </div>
                                 </div>
                                 <div class="responsive_row">
@@ -147,7 +147,7 @@ var inputForm = {
                                        <label for="passwordComfirmContext">비밀번호확인*</label>
                                    </div>
                                     <div class="item_Lvalue one-quarter">
-                                    	<input name="passwordComfirm" id="passwordComfirm" type="text">
+                                    	<input name="passwordComfirm" id="passwordComfirm" type="password">
                                     </div>
                                 </div>
                                 <div class="responsive_row">

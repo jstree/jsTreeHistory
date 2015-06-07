@@ -56,29 +56,9 @@ public class UserRegisterController extends GenericAbstractController {
 		
 		
 		User user = new User();
-		user.setC_position(1);
 	    user.setC_title(req.getParameter("nickName"));
-        user.setC_type("default");
-        user.setRef(2);
-        
-        user.setUserGrade(1);
-        user.setJoinStateCd(2);
         user.setPassword(req.getParameter("password"));
         user.setEmail(mailId + "@" + mailUrl );
-        user.setLoginFailureCnt(0);
-        
-        user.setPasswordFindQuestion("초등학교 이름은");
-        user.setPasswordFindAnswer("부원초등학교");
-        user.setMailingServiceUseFl("0");
-        user.setIndiInfoOpenFl("0");
-        //user.setJoinDt("20150425205811");
-        
-        //user.setPasswordChangeDt("20150425205811")));
-        user.setHomepageUrl(" ");
-        user.setBlogUrl(" ");
-        user.setSign(" ");
-        user.setProfilePhoto(" ");
-        user.setImageIcon(" ");
         
 		userRegisterService.userRegister(user);
         return "{}";

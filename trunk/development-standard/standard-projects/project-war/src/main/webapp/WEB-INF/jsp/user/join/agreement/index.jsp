@@ -119,22 +119,7 @@ var inputForm = {
 </head>
 <body class="template-index" gtools_scp_screen_capture_injected="true">
     <div class="page-border clearfix">
-        <header class="clearfix">
-            <div id="header" class="container">
-                <div id="header-logo" class="one-third bm-remove">
-                    <a href="http://localhost:8080/" target="_self"> <img src="http://www.313.co.kr:5002/Component/jsp/admin/board/lib/logo.jpg" alt="313 developer group logo">
-                    </a>
-                </div>
-                <div id="header-admin" class="one-third bm-remove">
-                    <li><a>BaroBoard Admin</a></li>
-                    <li><a id="breadcrumb">Sample/DIV</a></li>
-                </div>
-                <div id="header-cart" class="one-third bm-remove last">
-                    <a href="#" target="_self">BARO ADMIN</a> <a href="#" target="_self">LOGOUT</a>
-                </div>
-                <hr id="r">
-            </div>
-        </header>
+        
         <div class="clearfix">
             <div class="container bm-remove">
                 <nav>

@@ -47,25 +47,37 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 
 	@Autowired
 	private UserRegisterDao userRegisterDao;
-	
-    //@Resource(name = "UserRegisterDao")
-    //private UserRegisterDao userRegisterDao;
     
 	@Override
 	public User userRegister(User user) throws Exception {
-		
-		user.setUserGrade(0); //회원 등급
-		user.setJoinStateCd(2); //가입 상태 코드
-		
-		//String encConverterPwd = encPassword(user.getPassword());
-		//user.setPassword(encConverterPwd);
-		user.setLoginFailureCnt(0);
 		Date currentDay      = DateUtils.getCurrentDay();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String currentDate = sdf.format(currentDay);
 		
-		user.setJoinDt(currentDate); //가입 일시
-		user.setPasswordChangeDt(currentDate); //비밀번호 변경 일시
+		user.setC_position(1);
+        user.setC_type("default");
+        user.setRef(2);
+        
+        user.setUserGrade(1); //회원 등급
+		user.setJoinStateCd(2); //가입 상태 코드
+        user.setPasswordFindQuestion("초등학교 이름은");
+        user.setPasswordFindAnswer("부원초등학교");
+        user.setMailingServiceUseFl("0");
+        user.setIndiInfoOpenFl("0");
+        user.setJoinDt(currentDate); //가입 일시
+        user.setLoginFailureCnt(0);
+        user.setPasswordChangeDt(currentDate); //비밀번호 변경 일시
+       
+        user.setHomepageUrl(" ");
+        user.setBlogUrl(" ");
+        user.setSign(" ");
+        user.setProfilePhoto(" ");
+        user.setImageIcon(" ");
+		
+		//String encConverterPwd = encPassword(user.getPassword());
+		//user.setPassword(encConverterPwd);
+		
+		
 		
 		coreService.addNode(user);
 		
