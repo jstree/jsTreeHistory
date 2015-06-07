@@ -22,7 +22,7 @@ import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
- * Modification debugrmation
+ * Modification Information
  * 
  * @author 이동민
  * @since 2014. 7. 31.
@@ -30,9 +30,9 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * 	Class Name 	: CoreServiceImpl.java
  * 	Description : jstree Spring + iBatis 버젼의 서비스 구현체
- * 	debugmation	: CoreService.java 를 구현한 클래스 로 실제 작업이 이루어지는 클래스
+ * 	Information	: CoreService.java 를 구현한 클래스 로 실제 작업이 이루어지는 클래스
  *  
- *  << 개정이력(Modification debugrmation) >>
+ *  << 개정이력(Modification Information) >>
  *  
  *  수정일               수정자                 수정내용
  *  -------       ------------   -----------------------
@@ -61,6 +61,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  2015. 06. 03.  김형채                 calculatePostion() 세션 중복 저장 로직 삭제 및 위치 변경
  *  2015. 06. 03.  김형채                 calculatePostion() 조건절을 추출해서 상수로 변경
  *  2015. 06. 07.  김형채                 moveNode() logger.isDebugEnabled() 분기 추가
+ *  2015. 06. 07.  김형채                 debugmation을 Information으로 변경
  *  
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
