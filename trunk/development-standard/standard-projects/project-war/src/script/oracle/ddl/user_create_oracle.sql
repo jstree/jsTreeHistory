@@ -55,7 +55,7 @@ CREATE TABLE T_USER_INFO
   C_SIGN                      VARCHAR2(320),                           /* 서명 */
   C_PROFILE_PHOTO             VARCHAR2(320),                           /* 프로필사진 */
   C_IMAGE_ICON                VARCHAR2(320),                           /* 사용자아이콘 */
-  CONSTRAINT  T_USER_INFO PRIMARY KEY (C_ID, C_TITLE)
+  CONSTRAINT  T_USER_INFO PRIMARY KEY (C_ID)
 );
 
 COMMENT ON TABLE T_USER_INFO IS '회원_정보';

@@ -21,7 +21,7 @@ INSERT INTO T_USER_INFO
     C_PASSWORD_CHANGE_DT, C_HOMEPAGE_URL, C_BLOG_URL, C_SIGN, C_PROFILE_PHOTO, 
     C_IMAGE_ICON)
   VALUES (2, 1, 0, 2, 5, 1, '회원_정보', 'drive',
-          '0', '0', ' ', ' ', 0,
+          0, 2, ' ', ' ', 0,
           ' ', ' ', 0, 0, ' ',
           ' ', NULL, NULL, NULL, NULL,
           NULL);
@@ -33,7 +33,7 @@ INSERT INTO T_USER_INFO
     C_PASSWORD_CHANGE_DT, C_HOMEPAGE_URL, C_BLOG_URL, C_SIGN, C_PROFILE_PHOTO, 
     C_IMAGE_ICON)
   VALUES (3, 2, 0, 3, 4, 2, '관리자', 'default',
-          1, 1, 'bbd7182cd0ee95488f1a1e6f3fe0d8f94ed0d14e4db1dce713fe82a3231c523d','admin@313.co.kr', 0,  
+          1, 2, 'bbd7182cd0ee95488f1a1e6f3fe0d8f94ed0d14e4db1dce713fe82a3231c523d','admin@313.co.kr', 0,  
           '초등학교 이름은', '부원초등학교', 0, 0, '20150603222617',
           '20150603222617',  NULL, NULL, NULL, NULL,
           NULL);  
