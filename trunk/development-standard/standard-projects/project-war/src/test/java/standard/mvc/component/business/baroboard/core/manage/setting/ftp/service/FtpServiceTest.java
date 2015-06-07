@@ -28,7 +28,6 @@ import standard.mvc.component.business.baroboard.core.manage.setting.messages.Ex
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
-import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericServiceRuntimeException;
 
 
 /**
@@ -81,7 +80,7 @@ public class FtpServiceTest {
         try {
             ftpService.addNode(mockFtpVO);
         } catch (Exception e) {
-            assertThat(e, is(instanceOf(GenericServiceRuntimeException.class)));
+            assertThat(e, is(instanceOf(RuntimeException.class)));
             assertThat(e.getMessage(), is(equalTo(ExceptionMessage.UN_SUPPORTED.getValue())));
         }
     }

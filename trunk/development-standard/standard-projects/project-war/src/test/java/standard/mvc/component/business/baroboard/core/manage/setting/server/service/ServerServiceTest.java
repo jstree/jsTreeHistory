@@ -28,7 +28,6 @@ import standard.mvc.component.business.baroboard.core.manage.setting.server.vo.S
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
-import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericServiceRuntimeException;
 
 
 /**
@@ -84,7 +83,7 @@ public class ServerServiceTest {
         try {
             serverService.addNode(mockServerVO);
         } catch (Exception e) {
-            assertThat(e, is(instanceOf(GenericServiceRuntimeException.class)));
+            assertThat(e, is(instanceOf(RuntimeException.class)));
             assertThat(e.getMessage(), is(equalTo(ExceptionMessage.UN_SUPPORTED.getValue())));
         }
     }

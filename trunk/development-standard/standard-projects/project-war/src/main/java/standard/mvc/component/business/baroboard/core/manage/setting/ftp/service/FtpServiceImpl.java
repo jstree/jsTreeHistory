@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import standard.mvc.component.business.baroboard.core.manage.setting.messages.ExceptionMessage;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
-import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericServiceRuntimeException;
 
 /**
  * 
@@ -54,17 +53,17 @@ public class FtpServiceImpl implements CoreService {
     @Override
     public <T extends ComprehensiveTree> List<String> searchNode(T comprehensiveTree)
             throws Exception {
-        throw new GenericServiceRuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
+        throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
     }
 
     @Override
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree) throws Exception {
-        throw new GenericServiceRuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
+        throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
     }
 
     @Override
     public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree) throws Exception {
-        throw new GenericServiceRuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
+        throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
     }
 
     @Override
@@ -75,13 +74,13 @@ public class FtpServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree) throws Exception {
-        throw new GenericServiceRuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
+        throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
     }
 
     @Override
     public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree, HttpServletRequest request)
             throws Exception {
-        throw new GenericServiceRuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
+        throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
     }
 
 }

@@ -37,7 +37,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
-import egovframework.com.ext.jstree.support.manager.mvc.exception.GenericServiceRuntimeException;
 
 @Controller
 public class EncryptionController extends GenericAbstractController
@@ -68,6 +67,7 @@ public class EncryptionController extends GenericAbstractController
      *  수정일               수정자                 수정내용
      *  -------       ------------   -----------------------
      *  2014. 12. 18.        오권우                 최초 생성
+     *  2015. 06. 07.        손호성                 GenericServiceRuntimeException => RuntimeException
      * 
      *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
      * </pre>
@@ -80,7 +80,7 @@ public class EncryptionController extends GenericAbstractController
     
     @SuppressWarnings("unused")
     @RequestMapping(value = "/common/EncryptionModule.do")
-    public void EncryptionModule(String url, String password) throws GenericServiceRuntimeException,
+    public void EncryptionModule(String url, String password) throws RuntimeException,
             NoSuchAlgorithmException
     {
         // MD5 암호화
