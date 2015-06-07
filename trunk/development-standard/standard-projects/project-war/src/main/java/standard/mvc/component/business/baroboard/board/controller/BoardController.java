@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import standard.mvc.component.business.baroboard.board.service.BoardService;
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
@@ -33,8 +34,8 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * 
  * 수정일                 수정자                     수정내용
  * -------      ------------  -----------------------
- * 2015. 5. 26.      전경훈        최초 생성
- * 
+ * 2015. 5. 26.      전경훈      최초 생성
+ * 2015. 6.  3.      전경훈      showIndexPage, searchArticle 추가  
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -56,20 +57,54 @@ public class BoardController extends GenericAbstractController {
 
 	@RequestMapping(value = "/index.do", method = { RequestMethod.GET })
 	public String showIndexPage(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
+		// TODO : pageNum 검증, boardID 검증
+		String boardID = article.getBoardID();
+		int totPages = boardService.getOpenArticleCnt(article) / article.getPageSize() + 1;
 		
-		// TODO : pageNo 검증
-		List<Article> announceList = boardService.getAnnounceList(article);
 		List<Article> articleList = boardService.getArticleList(article);
-		
-		logger.debug("-- ArticleList Size--");
-		logger.debug(articleList.size()+"  사이즈");
-		
-		modelMap.addAttribute("announceList", announceList);
 		modelMap.addAttribute("articleList", articleList);
+		
+		// 1페이지일 경우, 공지사항을 보여준다.
+		if(article.getPageNum() == 1) {
+			List<Article> announceList = boardService.getAnnounceList(article);
+			modelMap.addAttribute("announceList", announceList);
+		}
+		
+		// 좌측 화살표  
+		if(article.getPageNum() > article.getPageSize()) {
+			int leftPage = (((article.getPageNum() / 10) - 1) * 10) + 1;
+			modelMap.addAttribute("leftPage", leftPage);
+		}
+		
+		// a링크 ( 단위 : 10 )
+		int startPageNum = ((article.getPageNum() - 1) / 10 ) * 10 + 1;
+		int endPageNum = (totPages - 1) / 10 == (article.getPageNum() - 1) / 10 ? totPages : ((article.getPageNum() - 1) / 10 + 1) * 10;
+		modelMap.addAttribute("startPageNum", startPageNum);
+		modelMap.addAttribute("endPageNum", endPageNum);
+		modelMap.addAttribute("currentPageNum", article.getPageNum());
+		
+		// 우측 화살표
+		if(totPages > ((article.getPageNum() - 1) / article.getPageSize() + 1) * 10) {
+			int rightPage = ((article.getPageNum() - 1) / article.getPageSize() + 1) * 10 + 1;
+			modelMap.addAttribute("rightPage",rightPage);
+		}
+		
+		modelMap.addAttribute("boardID", boardID);
 		modelMap.addAttribute("pageName", "테스트게시판");
 		return "/jsp/board/index";
 	}
 
+	@RequestMapping(value = "/searchArticle.do", method = { RequestMethod.GET })
+	public String searchArticle(ModelMap modelMap, @ModelAttribute SearchArticle searchArticle) throws Exception {
+		
+		List<Article> searchedArticleList = boardService.searchArticleList(searchArticle);
+		
+		modelMap.addAttribute("searchKeyword", searchArticle.getSearchKeyword());
+		modelMap.addAttribute("type", searchArticle.getType());
+		modelMap.addAttribute("articleList", searchedArticleList);
+		return "/jsp/board/searchArticle";
+	}
+	
 	@RequestMapping(value = "/readArticle.do")
 	public String readArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 
@@ -106,5 +141,5 @@ public class BoardController extends GenericAbstractController {
 		return null;
 	}
 
-	// TODO : 검색조건
+	
 }

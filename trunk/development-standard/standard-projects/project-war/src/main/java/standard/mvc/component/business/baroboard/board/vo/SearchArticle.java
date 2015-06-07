@@ -23,23 +23,34 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 
-public class SearchArticle extends ComprehensiveTree{
+public class SearchArticle extends ComprehensiveTree {
 
 	public static final String TYPE_TITLE = "title";
 	public static final String TYPE_CONTENT = "content";
 	public static final String TYPE_TITLE_CONTENT = "title_content";
 	public static final String TYPE_NICKNAME = "nickName";
 	public static final String TYPE_DATE_RANGE = "date_range";
-	
+
 	/**
 	 * 검색 키워드
 	 */
 	private String searchKeyword;
-	
+
 	/**
 	 * 검색 타입
 	 */
 	private String type;
+
+	/**
+	 * 게시판ID
+	 */
+	private String boardID;
+	
+	
+	@Override
+	public String getSqlMapSelector() {
+		return "board";
+	};
 
 	public String getSearchKeyword() {
 		return searchKeyword;
@@ -56,4 +67,13 @@ public class SearchArticle extends ComprehensiveTree{
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	public String getBoardID() {
+		return boardID;
+	}
+
+	public void setBoardID(String boardID) {
+		this.boardID = boardID;
+	}
+
 }

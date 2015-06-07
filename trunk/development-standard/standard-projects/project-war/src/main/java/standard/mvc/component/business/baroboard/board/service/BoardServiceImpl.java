@@ -62,7 +62,14 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<Article> searchArticleList(SearchArticle searchArticle) throws Exception {
-		return null;
+		List<Article> list = boardDao.searchArticle(searchArticle);
+		changeRegDTFormat(list);
+		return list;
+	}
+	
+	@Override
+	public int getOpenArticleCnt(Article article) throws Exception {
+		return boardDao.getOpenArticleCnt(article);
 	}
 
 	@Override
@@ -92,4 +99,5 @@ public class BoardServiceImpl implements BoardService {
 			article.setRegDt(year + "-" + month + "-" + day);
 		}
 	}
+
 }

@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+#boardTable {
+	width: 100%;
+}
+
+.font-bold {
+	font-weight: bold;
+}
+
+.underline {
+	text-decoration: underline !important;
+}
+
+div#pagingDiv {
+	text-align: center;
+}
+
+div#searchDiv input, div#searchDiv select {
+	display: inline !important;
+	
+}

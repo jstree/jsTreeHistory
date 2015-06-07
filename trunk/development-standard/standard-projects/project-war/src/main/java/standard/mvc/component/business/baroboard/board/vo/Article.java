@@ -63,10 +63,16 @@ public class Article extends ComprehensiveTree{
 	private String boardID;
 	
 	/* 페이지 */
-	private int pageNum;
+	private int pageNum = 1;
+	
+	/* 페이지 사이즈 */
+	private int pageSize = 10;
 	
 	/* 코멘트개수 */
 	private int commentCnt;
+	
+	/* 글 총개수 */
+	private int totArticleCnt;
 	
 	@Override
 	public String getSqlMapSelector() {
@@ -183,6 +189,22 @@ public class Article extends ComprehensiveTree{
 
 	public void setCommentCnt(int commentCnt) {
 		this.commentCnt = commentCnt;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public int getTotArticleCnt() {
+		return totArticleCnt;
+	}
+
+	public void setTotArticleCnt(int totArticleCnt) {
+		this.totArticleCnt = totArticleCnt;
 	}
 
 }

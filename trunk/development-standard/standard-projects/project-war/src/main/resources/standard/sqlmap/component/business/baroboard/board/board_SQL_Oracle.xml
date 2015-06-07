@@ -392,18 +392,58 @@
 				, A.C_IS_DELETED_FL as isDeletedFL		
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 				
-			FROM T_BOARD_TEST A
-			WHERE 1=1
-				AND A.C_PARENTID = 2
-				AND A.C_ANNOUNCEMENT_FL = '0'
-				/* 페이징 처리할것 */
-			ORDER BY
-				A.C_ID DESC
+			/* 페이징 처리 */	
+			FROM (
+				SELECT ROWNUM AS RNUM, Z.* FROM (
+					SELECT * 
+					FROM T_BOARD_TEST Y
+					WHERE 1=1
+						AND Y.C_LEVEL = 2
+						AND Y.C_OPEN_ARTICLE_FL = '1'
+						AND Y.C_ANNOUNCEMENT_FL = '0'
+					ORDER BY C_ID DESC 
+				) Z WHERE ROWNUM &lt;= (#pageNum# * #pageSize#)
+			) A
+			WHERE RNUM &gt;= (1 + ((#pageNum# - 1) * #pageSize#))
 		</dynamic>
 	</select>
 	
 	<select id="getAnnounceList" parameterClass="Article" resultClass="Article">
 		/* getAnnounceList */
+		<dynamic>
+			<include refid="getMetaField" />
+				, A.C_TITLE as c_title
+				, A.C_REG_ID as regId 			
+				, A.C_CONTENT as content 			
+				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
+				, A.C_ALLOW_REPLY_FL as allowReplyFL	
+				, A.C_ALERT_RESPONSE_FL as alertResponseFL
+				, A.C_OPEN_ARTICLE_FL as openArticleFL 	
+				, A.C_ANNOUNCEMENT_FL as announcementFL 	
+				, A.C_VIEW_CNT as viewCnt 			
+				, A.C_IS_DELETED_FL as isDeletedFL		
+				, A.C_REG_DT as regDt 				
+				, A.C_MOD_DT as modDt 				
+			FROM T_BOARD_TEST A
+			WHERE 1=1
+				AND A.C_ANNOUNCEMENT_FL = '1'
+				AND A.C_OPEN_ARTICLE_FL = '1'
+			ORDER BY
+				A.C_REG_DT ASC
+		</dynamic>
+	</select>
+	
+	<select id="getOpenArticleCnt" parameterClass="Article" resultClass="int">
+		SELECT COUNT(1) 
+		FROM T_BOARD_TEST 
+		WHERE 1=1
+			AND C_OPEN_ARTICLE_FL = '1'
+		 	AND C_LEVEL = 2
+	</select>
+	
+	
+	<select id="searchArticle" parameterClass="SearchArticle" resultClass="Article">
+		/* searchArticle */
 		<dynamic>
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
@@ -419,10 +459,29 @@
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 				
 			FROM T_BOARD_TEST A
-			WHERE
-				A.C_ANNOUNCEMENT_FL = '1'
-			ORDER BY
-				A.C_REG_DT ASC
+			WHERE 1=1
+				AND A.C_LEVEL = 2
+				AND A.C_OPEN_ARTICLE_FL = '1'
+				AND A.C_ANNOUNCEMENT_FL = '0'
+				<isEqual property="type" compareValue="title">
+				AND A.C_TITLE LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+				<isEqual property="type" compareValue="content">
+				AND DBMS_LOB.INSTR(A.C_CONTENT, #searchKeyword#) &lt;&gt; 0 
+				</isEqual>
+				<isEqual property="type" compareValue="title_content">
+				AND (
+					A.C_TITLE LIKE '%' || #searchKeyword# || '%'
+					OR
+					DBMS_LOB.INSTR(A.C_CONTENT, #searchKeyword#) &lt;&gt; 0
+				)
+				</isEqual>
+				<isEqual property="type" compareValue="nickName">
+				
+				</isEqual>
+				<isEqual property="type" compareValue="date_rage">
+				
+				</isEqual>
 		</dynamic>
 	</select>
 </sqlMap>

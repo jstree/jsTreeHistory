@@ -60,16 +60,6 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="announce" items="${announceList}" varStatus="status">
-												<tr>
-													<td class="dt-center font-bold">공지</td>
-													<td class="font-bold"><a>${announce.c_title} &nbsp; (${announce.commentCnt})</a></td>
-													<td class="dt-center">${announce.regId}</td>
-													<td class="dt-center">${announce.regDt}</td>
-													<td class="dt-center">${announce.viewCnt}</td>
-													<td class="dt-center">0</td>
-												</tr>
-											</c:forEach>
 											<c:forEach var="article" items="${articleList}" varStatus="status">
 												<tr>
 													<td class="dt-center">${article.c_id}</td>
@@ -104,8 +94,8 @@
 										</c:if>
 									</div>
 									<div id="searchDiv">
-										<form action="${pageContext.request.contextPath}/board/searchArticle.do">
-											<input type="text" name="searchKeyword" placeholder="검색 키워드"/>
+										<form action="${pageContext.request.contextPath}/board/searchArticle.do?boardID=${boardID}">
+											<input type="text" name="searchKeyword" value="${searchKeyword}"/>
 											<select name="type">
 												<option value="title">제목</option>
 												<option value="content">내용</option>
@@ -113,7 +103,6 @@
 												<option value="nickName">닉네임</option>
 												<option value="date_range">기간</option>
 											</select>
-											<input type="hidden" name="boardID" value="${boardID}" />
 											<input type="submit" title="검색"/>
 										</form>
 									</div>

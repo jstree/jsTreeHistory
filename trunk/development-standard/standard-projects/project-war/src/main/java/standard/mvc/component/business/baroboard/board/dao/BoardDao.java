@@ -3,6 +3,7 @@ package standard.mvc.component.business.baroboard.board.dao;
 import java.util.List;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 
 /**
  * Modification Information
@@ -30,5 +31,9 @@ public interface BoardDao {
 	public List<Article> getArticleListByPage(Article article) throws Exception;
 	
 	public List<Article> getAnnounceList(Article article) throws Exception;
+
+	public List<Article> searchArticle(SearchArticle searchArticle) throws Exception;
+	
+	public int getOpenArticleCnt(Article article) throws Exception;
 	
 }

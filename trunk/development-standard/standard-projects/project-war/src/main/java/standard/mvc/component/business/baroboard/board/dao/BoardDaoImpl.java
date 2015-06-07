@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 
 /**
@@ -40,7 +41,7 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Article> getArticleListByPage(Article article) throws Exception {
-//		makeTableNameByBoardID(article);
+		makeTableNameByBoardID(article);
 		return list(article.getSqlMapSelector() + "." + "getArticleListByPage", article);
 	}
 
@@ -49,6 +50,20 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 	public List<Article> getAnnounceList(Article article) throws Exception {
 		makeTableNameByBoardID(article);
 		return list(article.getSqlMapSelector() + "." + "getAnnounceList", article);
+	}
+
+	@Override
+	public int getOpenArticleCnt(Article article) throws Exception {
+		makeTableNameByBoardID(article);
+		return (int)selectByPk(article.getSqlMapSelector() + "." + "getOpenArticleCnt", article);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Article> searchArticle(SearchArticle searchArticle)
+			throws Exception {
+		searchArticle.setBoardID(TABLE_PREFIX + searchArticle.getBoardID());
+		return list(searchArticle.getSqlMapSelector() + "." +"searchArticle", searchArticle);
 	}
 
 }

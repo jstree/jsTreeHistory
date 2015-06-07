@@ -31,7 +31,7 @@ public interface BoardService {
 	/**
 	 * 페이지 순서로 글 목록을 조회한다. 공지글은 제외한다.
 	 * 
-	 * @param 게시판ID, 페이지번호, 페이지크기
+	 * @param Article
 	 * @return 글목록 List
 	 * @throws Exception
 	 */
@@ -40,7 +40,7 @@ public interface BoardService {
 	/**
 	 * 공지글을 조회한다.
 	 * 
-	 * @param 게시판ID
+	 * @param Article
 	 * @return 공지글목록 List
 	 * @throws Exception
 	 */
@@ -50,16 +50,26 @@ public interface BoardService {
 	/**
 	 * 조건에 맞는 글을 검색한다.
 	 * 
-	 * @param 게시판ID, SearchArticle VO
+	 * @param SearchArticle VO
 	 * @return 글목록 List
 	 * @throws Exception
 	 */
 	public List<Article> searchArticleList(SearchArticle searchArticle) throws Exception;
 	
 	/**
+	 * 공개된 글 개수를 조회한다.
+	 * - 페이징 처리용
+	 * 
+	 * @param SearchArticle VO
+	 * @return 글목록개수(int)
+	 * @throws Exception
+	 */
+	public int getOpenArticleCnt(Article article) throws Exception;
+	
+	/**
 	 * 글을 추가한다.
 	 * 
-	 * @param 게시판ID, 글VO(Article)
+	 * @param Article
 	 * @return Article
 	 * @throws Exception
 	 */
@@ -68,7 +78,7 @@ public interface BoardService {
 	/**
 	 * 글을 수정한다.
 	 * 
-	 * @param 게시판ID, 글VO(Article)
+	 * @param Article
 	 * @return Article
 	 * @throws Exception
 	 */
@@ -77,7 +87,7 @@ public interface BoardService {
 	/**
 	 * 글을 삭제한다.
 	 * 
-	 * @param 게시판ID, 글VO(Article)
+	 * @param Article
 	 * @return Article
 	 * @throws Exception
 	 * 
