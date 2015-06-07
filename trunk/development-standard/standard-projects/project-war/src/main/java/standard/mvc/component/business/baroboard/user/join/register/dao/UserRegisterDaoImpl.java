@@ -35,12 +35,12 @@ public class UserRegisterDaoImpl extends EgovComAbstractDAO implements UserRegis
 	public User getUserInfo(String nickName)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return (User)getSqlMapClientTemplate().queryForObject("user.getUserInfo", nickName);
+		return (User)getSqlMapClientTemplate().queryForObject("userRegister.getUserInfo", nickName);
 	}
 
 	@Override
 	public int getNickNameUseFl(String nickName) throws Exception {
 		// TODO Auto-generated method stub
-		return (int)getSqlMapClientTemplate().queryForObject("user.getNickNameUseFl", nickName);
+		return (int)getSqlMapClientTemplate().queryForObject("userRegister.getNickNameUseFl", nickName);
 	}
 }
