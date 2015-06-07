@@ -1005,7 +1005,7 @@
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
                             <h2 class="usquare_r">이승희</h2>
-                            <span class="usquare_r">Web desinger / Publisher </span>
+                            <span class="usquare_r">Publisher </span>
                             <div class="clear"></div>
                         </div>
                         <!-- usquare_square_wrapper -->
@@ -1043,7 +1043,7 @@
                         <span class="bold">info:</span>
                         <div class="usquare_about">
                         		My name is Lee Seunghui.<br>
-								I am currently working as a Publisher / Web desinger in freelancer.<br>
+								I am currently working as a Publisher in freelancer.<br>
 								My motto is "Until the end!"
                             <%-- <ul class="jcarousel-skin-tango">
                                 <li><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/content/jcarousel/slider1.png" width="63" height="48" alt="" /></li>
