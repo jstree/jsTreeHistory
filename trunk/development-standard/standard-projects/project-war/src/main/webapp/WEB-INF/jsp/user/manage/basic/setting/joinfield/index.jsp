@@ -107,11 +107,12 @@ var joinField = {
                 });
             });
             
-            callAjax(params
+            callAjax(null
                    , $form.prop('action')
                    , null
                    , $form.prop('method')
                    , 'json'
+                   , params
                    , 'application/json'
                    , callback);
             
@@ -150,20 +151,6 @@ $(document).ready(function() {
                     </tbody>
                 </table>
              
-<!--          <div id="jstreeTable_wrapper" class="dataTables_wrapper no-footer"> -->
-<!--              <table id="jstreeTable" class="display responsive nowrap" cellspacing="0" width="100%"> -->
-<!--                  <thead> -->
-<!--                      <tr> -->
-<!--                          <th>c_id</th> -->
-<!--                          <th>c_parent_id</th> -->
-<!--                          <th class="not-mobile">c_position</th> -->
-<!--                          <th class="not-tablet">c_left</th> -->
-<!--                          <th>c_right</th> -->
-<!--                          <th>c_level</th> -->
-<!--                          <th>c_title</th> -->
-<!--                      </tr> -->
-<!--                  </thead> -->
-              
                 <div id="divBottom">
                     <button id="btnSave" type="submit">저장하기</button>
                 </div>

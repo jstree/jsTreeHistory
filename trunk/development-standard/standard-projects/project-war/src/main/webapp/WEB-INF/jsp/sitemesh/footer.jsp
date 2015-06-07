@@ -87,7 +87,7 @@
 		        var formId = 'email-list-form';
 	            var $form = $('#email-list-form');
 		        
-		        callAjax(formId, $form.prop('action'), null, $form.prop('method'), "json", null, callback);
+		        callAjax(formId, $form.prop('action'), null, $form.prop('method'), "json", null, null, callback);
 		        
 		        function callback(r) {
                     $("#email-list-input").val("");

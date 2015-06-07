@@ -1,17 +1,18 @@
 /**
  * 
- * @param form (Form id or Data json object)
+ * @param form (Form id or jQuery form obj)
  * @param url
  * @param target
  * @param type
  * @param returnType
+ * @param data (String or object)
  * @param contentType / String default : application/x-www-form-urlencoded; charset=UTF-8
  * @param jsonpCallback / String default : 'callback'
  * @param processData / boolean default : true
  * @param crossDomain /boolean default : false
  * @returns XMLHttpRequest
  */
-function callAjax(form, url, target, type, returnType, contentType, jsonpCallback, processData, crossDomain, async) {
+function callAjax(form, url, target, type, returnType, data, contentType, jsonpCallback, processData, crossDomain, async) {
 	/*
 	 * jquery로 ajax 사용시 No transport 라는 에러가 발생하는 경우 아래의 문장을 추가하면 해결가능. 
 	 * (보통 localhost 로 테스트 시 크로스 도메인 문제로 발생하는 오류)
@@ -21,12 +22,12 @@ function callAjax(form, url, target, type, returnType, contentType, jsonpCallbac
 	 * */
 	$.support.cors = true;
 	
-	var formQueryString = null;
+	var queryString = null;
 	
-	if (typeof form == 'string') {
-	    var $form = $('#' + form);
-	    
-		formQueryString = $form.serialize();
+	if (form) {
+		var $form = (typeof form == 'string') ? $('#' + form) : form;
+		
+		queryString = $form.serialize();
 		
 		// 체크박스 미체크 시에도 파라미터 값을 넘기도록 설정
 		var checkboxes = $('input[type="checkbox"]', $form).filter(function() {
@@ -36,12 +37,16 @@ function callAjax(form, url, target, type, returnType, contentType, jsonpCallbac
 		
 		$.each(checkboxes, function(i, checkbox) {
 		    
-		    formQueryString += '&' + $(checkbox).attr('name') + '=0';
+		    queryString += '&' + $(checkbox).attr('name') + '=0';
 		});
-		
-	} else if (typeof form == 'object') {
-	    
-	    formQueryString = JSON.stringify(form);
+	}
+	else if (data) {
+		if (typeof data == 'string') {
+			queryString = data;
+		}
+		else if (typeof data == 'object') {
+			queryString = JSON.stringify(data);
+		}
 	}
 	
 	/**
@@ -130,7 +135,7 @@ function callAjax(form, url, target, type, returnType, contentType, jsonpCallbac
 		 * */
 		url : url,
 		type : type,
-		data : formQueryString,
+		data : queryString,
 		dataType : returnType,
 		jsonp : false,
 		jsonpCallback : 'undefined' == typeof jsonpCallback || null == jsonpCallback ? "callback" : jsonpCallback,

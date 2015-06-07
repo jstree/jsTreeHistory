@@ -62,6 +62,7 @@ var generalSetting = {
                    , $form.prop('method')
                    , 'json'
                    , null
+                   , null
                    , callback);
             
             function callback(r) {
