@@ -96,7 +96,7 @@ public class User extends ComprehensiveTree {
     private String joinDeEnd;
 
     /** 로그인일자시작 */
-    private String loginDeStart;
+    private String loginDeBegi;
     
     /** 로그인일자종료 */
     private String loginDeEnd;
@@ -282,15 +282,15 @@ public class User extends ComprehensiveTree {
 		this.joinDeEnd = joinDeEnd;
 	}
 
-	public String getLoginDeStart() {
-		return loginDeStart;
-	}
+	public String getLoginDeBegi() {
+        return loginDeBegi;
+    }
 
-	public void setLoginDeStart(String loginDeStart) {
-		this.loginDeStart = loginDeStart;
-	}
+    public void setLoginDeBegi(String loginDeBegi) {
+        this.loginDeBegi = loginDeBegi;
+    }
 
-	public String getLoginDeEnd() {
+    public String getLoginDeEnd() {
 		return loginDeEnd;
 	}
 

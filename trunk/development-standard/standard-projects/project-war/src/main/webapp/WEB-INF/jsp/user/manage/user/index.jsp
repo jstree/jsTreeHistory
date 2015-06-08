@@ -11,32 +11,101 @@
 .chk {
     height: 13px !important;
 }
-.rdo {
-    width: 13px !important;
-    height: 13px !important;
+select {
+	width: 192px !important;
+	display: inline !important;
 }
 input[type="text"] {
+	width: 192px !important;
     height: 30px !important;
+    display: inline !important;
 }
-
+select {
+	height: 100%;
+}
 #divBtns {
     text-align: right;
     margin-top: 10px;
 }
-#divBtns button {
-    min-width: 71px;
+.compact {
+	min-width: 71px;
     min-height: 37px;
 }
+/*
+.responsive-row {
+	width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+	overflow: auto;
+	text-align: center;
+	overflow: auto;
+}
+.responsive-row > div {
+	float: left;
+}
+.item-name-left {
+	width: 20%;
+}
+.item-value-left {
+	width: 25%;
+}
+.item-name-right {
+	width: 20%;
+}
+.item-value-right {
+	width: 25%;
+}
+*/
 </style>
 
 <script type="text/javascript">
 var userList = {
 	
-	grid : null,
+	initScreen : function() {
+		
+		(function calendar() {
+			
+			var datepickerOptions = {
+				showOn: "button",
+				buttonImage: "${pageContext.request.contextPath}/assets/images/calendar.png",
+				buttonImageOnly: true,
+				buttonText: "Select date",
+				defaultDate: "-1w",
+				dateFormat: "yy-mm-dd",
+				changeMonth: true,
+				changeYear: true,
+				numberOfMonths: 1,
+			};
+			
+			datepickerOptions.onClose = function(selectedDate) {
+				$('#inpJoinDeEnd').datepicker('option', 'minDate', selectedDate);
+			};
+			
+			$('#inpJoinDeBegi').datepicker(datepickerOptions);
+			
+			datepickerOptions.onClose = function(selectedDate) {
+				$('#inpJoinDeBegi').datepicker('option', 'maxDate', selectedDate);
+			};
+			
+			$('#inpJoinDeEnd').datepicker(datepickerOptions);
+			
+			datepickerOptions.onClose = function(selectedDate) {
+				$('#inpLoginDeEnd').datepicker('option', 'minDate', selectedDate);
+			};
+			
+			$('#inpLoginDeBegi').datepicker(datepickerOptions);
+			
+			datepickerOptions.onClose = function(selectedDate) {
+				$('#inpLoginDeBegi').datepicker('option', 'maxDate', selectedDate);
+			};
+			
+			$('#inpLoginDeEnd').datepicker(datepickerOptions);
+		})();
+	},
 		
     initGrid : function() {
         
-        userList.grid = $('#tblUserList').dataTable({
+        $('#tblUserList').dataTable({
             searching : false,
             lengthChange : false,
             ordering : false,
@@ -132,12 +201,24 @@ var userList = {
 	           , callback);
 	    
 	    function callback(r) {
-// 	    	console.log(userList.grid);
-	    	userList.grid.fnDraw();
+	    	
+	    	$('#tblUserList tr').each(function(i, tr) {
+	    		
+	    		var $tr = $(tr);
+	    		
+	    		$(params).each(function(j, param) {
+					
+	    			if ( $tr.data('c_id') == param.c_id ) {
+						
+	    				$tr.remove();
+	    			}
+	    		});
+	    	});
 	    }
     },
     
     init : function() {
+    	this.initScreen();
         this.initGrid();
         this.handleEvent();
     }
@@ -152,9 +233,38 @@ $(document).ready(function() {
     <form id="frmJoinField" action="save.do" method="post">
         <div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
             <div id="samDiv" class="tablet-mobile alpha bm-remove last">
+				<div id="search" class="one-whole boxed p-twenty">
+					<div class="responsive-row">
+						<label for="inpEmail">이메일</label>
+						<input id="inpEmail" name="email" type="text" />
+						<label for="comboUserGrade">회원그룹</label>
+						<select id="comboUserGrade" name="userGrade">
+						</select>
+					</div>
+					<div class="responsive-row">
+						<label for="inpNickname">닉네임</label>
+						<input id="inpNickname" name="c_id" type="text" />
+						<label for="inpJoinDeBegi">가입일</label>
+						<input id="inpJoinDeBegi" name="joinDeBegi" type="text" style="width: 90px !important" />~
+						<input id="inpJoinDeEnd" name="joinDeEnd" type="text" style="width: 90px !important" />
+					</div>
+					<div class="responsive-row">
+						<label for="comboJoinApprovalFl">승인여부</label>
+						<select id="comboJoinApprovalFl" name="joinApprovalFl">
+							<option value="A">ALL</option>
+							<option value="1">Y</option>
+							<option value="0">N</option>
+						</select>
+						<label for="inpLoginDeBegi">최근로그인</label>
+						<input id="inpLoginDeBegi" name="loginDeBegi" type="text" />~
+						<input id="inpLoginDeEnd" name="loginDeEnd" type="text" />
+						<button id="btnSearchingUser" class="compact">검색</button>
+					</div>
+				</div>
+            
             	<div id="divBtns">
-                    <button id="btnDeleteUserInfo" type="button">회원삭제</button>
-                    <button id="btnAddUserInfo" type="button">회원추가</button>
+                    <button id="btnDeleteUserInfo" type="button" class="compact">회원삭제</button>
+                    <button id="btnAddUserInfo" type="button" class="compact">회원추가</button>
                 </div>
             	
                 <table id="tblUserList" class="display">
