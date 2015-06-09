@@ -14,8 +14,9 @@
 		, A.c_level
 		, A.c_title
 		, A.c_type
-		/* user filed add
-		point*/
+		/* user filed add point*/
+		, A.C_USER_GRADE_ID AS userGradeId
+		, A.C_MENU_ID AS menuId
 	</sql>
 	<sql id="getInlineChildCount">
 		, ( SELECT CASE
@@ -32,7 +33,7 @@
 		filed add point*/
 	</sql>
 	<sql id="getAfterFrom">
-		WHERE A.C_PARENTID = #c_id#
+		WHERE A.C_USER_GRADE_ID = #userGradeId#
 		ORDER BY A.C_POSITION ASC
 	</sql>
 	
@@ -104,6 +105,8 @@
 		T_USER_MENU_BY_GRADE
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
+		, C_USER_GRADE_ID = #userGradeId#
+		, C_MENU_ID = #menuId#
 		WHERE C_ID = #c_id#
 	</update>
 
@@ -115,11 +118,12 @@
 		, C_PARENTID
 		, C_POSITION
 		, C_LEFT
-		,
-		C_RIGHT
+		, C_RIGHT
 		, C_LEVEL
 		, C_TITLE
 		, C_TYPE
+		, C_USER_GRADE_ID AS userGradeId
+		, C_MENU_ID AS menuId
 		FROM T_USER_MENU_BY_GRADE
 		WHERE
 		C_ID = #c_id#
@@ -132,8 +136,7 @@
 		SELECT C_ID
 		, C_PARENTID
 		, C_POSITION
-		,
-		C_LEFT
+		, C_LEFT
 		, C_RIGHT
 		, C_LEVEL
 		, C_TITLE
@@ -288,7 +291,7 @@
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
 		)
-		SELECT S_COMPREHENSIVETREE_SPRING.NEXTVAL AS C_ID
+		SELECT S_USER_MENU_BY_GRADE.NEXTVAL AS C_ID
 		, A.*
 		FROM (
 		SELECT
@@ -310,7 +313,7 @@
 		) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-			SELECT S_COMPREHENSIVETREE_SPRING.CURRVAL AS SEQ
+			SELECT S_USER_MENU_BY_GRADE.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -348,12 +351,12 @@
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL )
 		VALUES (
-		S_COMPREHENSIVETREE_SPRING.NEXTVAL, #c_parentid#, #c_position#,
+		S_USER_MENU_BY_GRADE.NEXTVAL, #c_parentid#, #c_position#,
 		#c_left#, #c_right#, #c_level# )
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
-			S_COMPREHENSIVETREE_SPRING.CURRVAL AS SEQ
+			S_USER_MENU_BY_GRADE.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
