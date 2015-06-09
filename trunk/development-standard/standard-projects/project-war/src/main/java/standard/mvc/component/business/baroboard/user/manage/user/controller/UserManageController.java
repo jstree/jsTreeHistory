@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import standard.mvc.component.business.baroboard.user.manage.grade.service.UserGradeService;
 import standard.mvc.component.business.baroboard.user.manage.user.service.UserManageService;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
@@ -56,6 +57,9 @@ public class UserManageController extends GenericAbstractController {
     @Autowired
     private UserManageService userManageService;
     
+    @Autowired
+    private UserGradeService userGradeService;
+    
     @Override
     public Map<String, Map<String, Object>> bindTypes() {
         // TODO Auto-generated method stub
@@ -65,6 +69,7 @@ public class UserManageController extends GenericAbstractController {
     @RequestMapping("/index.do")
     public String movePage(ModelMap model, User user) throws Exception {
         
+        model.addAttribute("userGrades", userGradeService.inquiryUserGradeList(null));
         model.addAttribute("userList", userManageService.getUserList(user));
         
         return "/jsp/user/manage/user/index";
