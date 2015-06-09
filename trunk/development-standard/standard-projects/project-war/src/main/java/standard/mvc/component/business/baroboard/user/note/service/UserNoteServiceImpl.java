@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteByUser;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteDetail;
@@ -35,6 +37,7 @@ import egovframework.com.ext.jstree.support.util.DateUtils;
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
+@Service
 public class UserNoteServiceImpl implements UserNoteService{
 	
 	@Resource(name = "CoreService")

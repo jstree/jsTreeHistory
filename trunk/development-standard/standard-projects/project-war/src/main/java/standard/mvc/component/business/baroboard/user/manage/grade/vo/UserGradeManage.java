@@ -1,6 +1,11 @@
 package standard.mvc.component.business.baroboard.user.manage.grade.vo;
 
+import java.util.List;
+
+
+
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 
 /**
  * Modification Information
@@ -29,12 +34,16 @@ public class UserGradeManage extends ComprehensiveTree {
 	private String iconFileNm;
 	private String storeFileNm;
 	
+	List<UserMenuByGrade> userMenuByGradeList;
 	
 	public String getPointByGradeUseFl() {
 		return pointByGradeUseFl;
 	}
 
 	public void setPointByGradeUseFl(String pointByGradeUseFl) {
+		if(StringUtils.isBlank(pointByGradeUseFl)){
+			this.pointByGradeUseFl = "0";
+		}
 		this.pointByGradeUseFl = pointByGradeUseFl;
 	}
 
@@ -60,6 +69,14 @@ public class UserGradeManage extends ComprehensiveTree {
 
 	public void setStoreFileNm(String storeFileNm) {
 		this.storeFileNm = storeFileNm;
+	}
+
+	public List<UserMenuByGrade> getUserMenuByGradeList() {
+		return userMenuByGradeList;
+	}
+
+	public void setUserMenuByGradeList(List<UserMenuByGrade> userMenuByGradeList) {
+		this.userMenuByGradeList = userMenuByGradeList;
 	}
 
 	@Override

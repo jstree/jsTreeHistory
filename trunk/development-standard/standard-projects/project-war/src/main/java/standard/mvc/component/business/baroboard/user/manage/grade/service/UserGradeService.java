@@ -34,7 +34,7 @@ public interface UserGradeService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<UserGradeManage> inquiryUserGradeList() throws Exception;
+	public List<UserGradeManage> inquiryUserGradeList(UserGradeManage userGradeManage) throws Exception;
 
 	/**
 	 * 회원등급상세정보 조회
@@ -55,5 +55,19 @@ public interface UserGradeService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<UserMenuByGrade> inquiryUserMenuByGradeList(UserGradeManage userGradeManage) throws Exception;
+	public List<UserMenuByGrade> inquiryUserMenuByGradeList(int refId) throws Exception;
+	
+	/**
+	 * 회원등급 정보 수정
+	 * @param userGradeManage
+	 * @throws Exception
+	 */
+	public void updateUserGradeInf(UserGradeManage userGradeManage) throws Exception;
+	
+	/**
+	 * 회원등급 정보 삭제
+	 * @param userGradeManage
+	 * @throws Exception
+	 */
+	public void removeUserGradeInf(UserGradeManage userGradeManage) throws Exception;
 }
