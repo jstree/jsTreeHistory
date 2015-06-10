@@ -83,6 +83,7 @@ public class UserManageServiceTest extends DbUnitTest<User> {
         assertThat(user.getJoinStateCd(), is(4));
         assertThat(user.getEmail(), is(equalTo("admin@313.co.kr")));
         assertThat(user.getJoinDt(), is(equalTo("20150603222617")));
+        assertThat(user.getLastLoginDt(), is(equalTo("20150611123400")));
 	}
 	
 	@Test

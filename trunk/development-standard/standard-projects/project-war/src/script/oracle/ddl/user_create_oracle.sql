@@ -29,6 +29,8 @@ COMMENT ON COLUMN T_USER_INFO_LOG.C_METHOD IS '노드 변경 행위';
 COMMENT ON COLUMN T_USER_INFO_LOG.C_STATE IS '노드 상태값 ( 이전인지. 이후인지)';
 COMMENT ON COLUMN T_USER_INFO_LOG.C_DATE IS '노드 변경 시';
 
+DROP TABLE T_USER_INFO;
+
 CREATE TABLE T_USER_INFO 
 (
   C_ID                        NUMBER               NOT NULL,           /* 노드아이디 */
@@ -50,6 +52,7 @@ CREATE TABLE T_USER_INFO
   C_INDI_INFO_OPEN_FL         CHAR(1)              DEFAULT 0 NOT NULL, /* 개인정보공개여부 */
   C_JOIN_DT                   CHAR(14)             NOT NULL,           /* 가입일시 */
   C_PASSWORD_CHANGE_DT        CHAR(14)             NOT NULL,           /* 비밀번호변경일시 */
+  C_LAST_LOGIN_DT             CHAR(14),                                /* 마지막로그인일시 */
   C_HOMEPAGE_URL              VARCHAR2(320),                           /* 홈페이지 */
   C_BLOG_URL                  VARCHAR2(320),                           /* 블로그 */
   C_SIGN                      VARCHAR2(320),                           /* 서명 */
@@ -78,6 +81,7 @@ COMMENT ON COLUMN T_USER_INFO.C_MAILING_SERVICE_USE_FL IS '메일링서비스사
 COMMENT ON COLUMN T_USER_INFO.C_INDI_INFO_OPEN_FL IS '개인정보공개여부';
 COMMENT ON COLUMN T_USER_INFO.C_JOIN_DT IS '가입일시';
 COMMENT ON COLUMN T_USER_INFO.C_PASSWORD_CHANGE_DT IS '비밀번호변경일시';
+COMMENT ON COLUMN T_USER_INFO.C_LAST_LOGIN_DT IS '마지막로그인일시';
 COMMENT ON COLUMN T_USER_INFO.C_HOMEPAGE_URL IS '홈페이지';
 COMMENT ON COLUMN T_USER_INFO.C_BLOG_URL IS '블로그';
 COMMENT ON COLUMN T_USER_INFO.C_SIGN IS '서명';
@@ -87,7 +91,7 @@ COMMENT ON COLUMN T_USER_INFO.C_IMAGE_ICON IS '사용자아이콘';
 DROP SEQUENCE S_USER_INFO;
 
 CREATE SEQUENCE S_USER_INFO
-  START WITH 3
+  START WITH 4
   MAXVALUE 999999999999999999999999999
   MINVALUE 0
   NOCYCLE

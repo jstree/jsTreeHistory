@@ -17,10 +17,7 @@
 		     , A.C_JOIN_STATE_CD AS joinStateCd
 		     , A.C_EMAIL AS email
 		     , A.C_JOIN_DT AS joinDt
-		     , ( SELECT MAX(C_LOGIN_DT)
-		           FROM T_USER_LOGIN_STATE
-		          WHERE C_USER_ID = A.C_ID
-		       ) AS loginDt
+		     , A.C_LAST_LOGIN_DT AS lastLoginDt
 		     , ( SELECT CASE
 		                    WHEN COUNT(*) &gt; 0 THEN 'InChild'
 		                ELSE 'NoChild'
@@ -29,7 +26,34 @@
 		          WHERE B.C_PARENTID = A.C_ID
 		       ) AS childcount
 		  FROM T_USER_INFO A
-		 WHERE A.C_PARENTID = 2
+		 WHERE A.C_PARENTID = #c_id#
+		 <isNotEmpty property="email">
+		   AND A.C_EMAIL LIKE '%' || #email# || '%'
+		 </isNotEmpty>
+		 <isNotEmpty property="c_title">
+		   AND A.C_TITLE LIKE '%' || #c_title# || '%'
+		 </isNotEmpty>
+		 <isNotEqual property="userGrade" compareValue="0">
+		   AND A.C_USER_GRADE = #userGrade#
+		 </isNotEqual>
+		 <isEqual property="joinApprovalFl" compareValue="0">
+		   AND A.C_JOIN_STATE_CD = 3 /*가입승인요청*/
+		 </isEqual>
+		 <isEqual property="joinApprovalFl" compareValue="1">
+		   AND A.C_JOIN_STATE_CD = 4 /*가입완료*/
+		 </isEqual>
+		 <isNotEmpty property="joinDeBegi">
+		   AND SUBSTR(A.C_JOIN_DT, 1, 8) &gt;= #joinDeBegi#
+		 </isNotEmpty>
+		 <isNotEmpty property="joinDeEnd">
+		   AND SUBSTR(A.C_JOIN_DT, 1, 8) &lt;= #joinDeEnd#
+		 </isNotEmpty>
+		 <isNotEmpty property="loginDeBegi">
+		   AND SUBSTR(A.C_LAST_LOGIN_DT, 1, 8) &gt;= #loginDeBegi#
+		 </isNotEmpty>
+		 <isNotEmpty property="loginDeEnd">
+		   AND SUBSTR(A.C_LAST_LOGIN_DT, 1, 8) &lt;= #loginDeEnd#
+		 </isNotEmpty>
 		ORDER BY A.C_POSITION ASC
     </select>
 

@@ -74,6 +74,9 @@ public class User extends ComprehensiveTree {
     /** 비밀번호변경일시 */
     private String passwordChangeDt;
 
+    /** 마지막로그인일시 */
+    private String lastLoginDt;
+    
     /** 홈페이지 */
     private String homepageUrl;
 
@@ -306,7 +309,15 @@ public class User extends ComprehensiveTree {
 		this.joinApprovalFl = joinApprovalFl;
 	}
 
-	@Override
+	public String getLastLoginDt() {
+        return lastLoginDt;
+    }
+
+    public void setLastLoginDt(String lastLoginDt) {
+        this.lastLoginDt = lastLoginDt;
+    }
+
+    @Override
     public String getSqlMapSelector() {
         return "user";
     }
