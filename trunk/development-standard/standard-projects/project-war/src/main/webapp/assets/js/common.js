@@ -427,3 +427,24 @@ function receiveABMessage(event) {
         setABVCookie('0');
     }
 }
+
+jQuery.fn.serializeObject = function() {
+	
+	var object = null;
+	
+	if (this[0] && this[0].tagName == 'FORM') {
+		var array = this.serializeArray();
+		
+		if (array) {
+			var obj = {};
+			
+			jQuery.each(array, function() {
+				obj[this.name] = this.value;
+			});
+			
+			object = obj;
+		}
+	}
+	
+	return object;
+};

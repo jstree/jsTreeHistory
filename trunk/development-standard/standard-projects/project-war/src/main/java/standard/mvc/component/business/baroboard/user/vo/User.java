@@ -114,8 +114,8 @@ public class User extends ComprehensiveTree {
     /** 가입일자 */
     private String joinDe;
     
-    /** 로그인일자 */
-    private String loginDe;
+    /** 마지막로그인일자 */
+    private String lastLoginDe;
     
     public int getUserGrade() {
         return userGrade;
@@ -253,15 +253,15 @@ public class User extends ComprehensiveTree {
 		this.joinDe = joinDe;
 	}
 
-	public String getLoginDe() {
-		return loginDe;
-	}
+	public String getLastLoginDe() {
+        return lastLoginDe;
+    }
 
-	public void setLoginDe(String loginDe) {
-		this.loginDe = loginDe;
-	}
-	
-	public String getLoginDt() {
+    public void setLastLoginDe(String lastLoginDe) {
+        this.lastLoginDe = lastLoginDe;
+    }
+
+    public String getLoginDt() {
 		return loginDt;
 	}
 

@@ -61,6 +61,8 @@ select {
 <script type="text/javascript">
 var userList = {
 	
+	grid : null,
+		
 	initScreen : function() {
 		
 		(function date() {
@@ -123,7 +125,7 @@ var userList = {
 		
     initGrid : function() {
         
-        $('#tblUserList').dataTable({
+        userList.grid = $('#tblUserList').dataTable({
             searching : false,
             lengthChange : false,
             ordering : false,
@@ -134,9 +136,55 @@ var userList = {
         
     	$('#btnSearchingUser').on('click', function() {
     		
-//     		frmSearchingUser
-
-			
+    		var $form = $('#frmSearchingUser');
+    		
+    		var params = $form.serializeObject();
+    		
+    		params.joinDeBegi = params.joinDeBegi.replace(/-/g, '');
+    		params.joinDeEnd = params.joinDeEnd.replace(/-/g, '');
+    		params.loginDeBegi = params.loginDeBegi.replace(/-/g, '');
+    		params.loginDeEnd = params.loginDeEnd.replace(/-/g, '');
+    		
+			callAjax(null
+		           , $form.prop('action')
+		           , null
+		           , $form.prop('method')
+		           , 'json'
+		           , params
+		           , 'application/json'
+		           , callback);
+		    
+		    function callback(data) {
+		    	
+		    	var rows = [];
+		    	
+		    	$(data).each(function(i, obj) {
+		    		
+		    		var row = [];
+		    		//row.push(obj.c_id);
+		    		row.push(obj.email);
+		    		row.push(obj.c_title);
+		    		row.push(obj.userGrade);
+		    		row.push(obj.lastLoginDe || '');
+		    		row.push(obj.joinDe);
+		    		row.push(obj.joinStateCd);
+		    		row.push('<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>&nbsp;<a href="javascript:void(0);" data-function="deleteUserInfo">Delete</a>');
+		    		row.push('<input name="checkDelete" type="checkbox" />');
+		    		
+		    		rows.push(row);
+		    	});
+		    	
+		    	userList.grid.fnDestroy();
+		    	
+		    	userList.grid = $('#tblUserList').dataTable({
+		            searching : false,
+		            lengthChange : false,
+		            ordering : false,
+		            data : rows
+		        });
+		    	
+		    	$('[name="checkDelete"]').parent().addClass('center');
+		    }
     	});
     	
         $('#btnDeleteUserInfo').on('click', function() {
@@ -264,7 +312,7 @@ $(document).ready(function() {
 						<input id="inpEmail" name="email" type="text" />
 						<label for="comboUserGrade">회원그룹</label>
 						<select id="comboUserGrade" name="userGrade">
-							<option>전체</option>
+							<option value="0">전체</option>
 						<c:forEach var="userGrade" items="${userGrades}" varStatus="status">
 							<option value="${userGrade.c_id}">${userGrade.c_title}</option>
 		               </c:forEach>
@@ -272,7 +320,7 @@ $(document).ready(function() {
 					</div>
 					<div class="responsive-row">
 						<label for="inpNickname">닉네임</label>
-						<input id="inpNickname" name="c_id" type="text" />
+						<input id="inpNickname" name="c_title" type="text" />
 						<label for="inpJoinDeBegi">가입일</label>
 						<input id="inpJoinDeBegi" name="joinDeBegi" type="text" style="width: 90px !important" />&nbsp;~&nbsp;
 						<input id="inpJoinDeEnd" name="joinDeEnd" type="text" style="width: 90px !important" />
@@ -316,8 +364,8 @@ $(document).ready(function() {
 	           			<td>${user.email}</td>
 	           			<td>${user.c_title}</td>
 	           			<td>${user.userGrade}</td>
-	           			<td>${user.loginDt}</td>
-	           			<td>${user.joinDt}</td>
+	           			<td>${user.lastLoginDe}</td>
+	           			<td>${user.joinDe}</td>
 	           			<td>${user.joinStateCd}</td>
 	           			<td>
 	           				<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>

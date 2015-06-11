@@ -17,7 +17,9 @@
 		     , A.C_JOIN_STATE_CD AS joinStateCd
 		     , A.C_EMAIL AS email
 		     , A.C_JOIN_DT AS joinDt
+		     , SUBSTR(A.C_JOIN_DT, 1, 8) AS joinDe
 		     , A.C_LAST_LOGIN_DT AS lastLoginDt
+		     , SUBSTR(A.C_LAST_LOGIN_DT, 1, 8) AS lastLoginDe
 		     , ( SELECT CASE
 		                    WHEN COUNT(*) &gt; 0 THEN 'InChild'
 		                ELSE 'NoChild'

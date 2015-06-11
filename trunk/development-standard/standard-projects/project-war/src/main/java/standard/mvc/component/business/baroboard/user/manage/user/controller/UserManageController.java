@@ -24,10 +24,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.user.manage.grade.service.UserGradeService;
 import standard.mvc.component.business.baroboard.user.manage.user.service.UserManageService;
 import standard.mvc.component.business.baroboard.user.vo.User;
+
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
@@ -73,6 +80,36 @@ public class UserManageController extends GenericAbstractController {
         model.addAttribute("userList", userManageService.getUserList(user));
         
         return "/jsp/user/manage/user/index";
+    }
+    
+    @RequestMapping("/list.do")
+    @ResponseBody
+    public String list(@RequestBody User user) throws Exception {
+        
+        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+            
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                
+                if ( "c_id".equals(f.getName()) || "c_title".equals(f.getName())
+                  || "email".equals(f.getName()) || "userGrade".equals(f.getName())
+                  || "joinStateCd".equals(f.getName()) || "joinDe".equals(f.getName())
+                  || "lastLoginDe".equals(f.getName()) ) 
+                {
+                    return false;
+                }
+                
+                return true;
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return false;
+            }
+            
+        }).create();
+        
+        return gson.toJson(userManageService.getUserList(user));
     }
     
     @RequestMapping(value = "/delete.do", method = RequestMethod.POST)
