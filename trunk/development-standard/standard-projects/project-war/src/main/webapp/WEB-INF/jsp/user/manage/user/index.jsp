@@ -20,7 +20,6 @@ input[type="text"] {
     display: inline !important;
 }
 select {
-	width: 130px !important;
 	display: inline !important;
 }
 #divBtns {
@@ -140,11 +139,6 @@ var userList = {
     		
     		var params = $form.serializeObject();
     		
-    		params.joinDeBegi = params.joinDeBegi.replace(/-/g, '');
-    		params.joinDeEnd = params.joinDeEnd.replace(/-/g, '');
-    		params.loginDeBegi = params.loginDeBegi.replace(/-/g, '');
-    		params.loginDeEnd = params.loginDeEnd.replace(/-/g, '');
-    		
 			callAjax(null
 		           , $form.prop('action')
 		           , null
@@ -167,7 +161,7 @@ var userList = {
 		    		row.push(obj.userGrade);
 		    		row.push(obj.lastLoginDe || '');
 		    		row.push(obj.joinDe);
-		    		row.push(obj.joinStateCd);
+		    		row.push(obj.joinState);
 		    		row.push('<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>&nbsp;<a href="javascript:void(0);" data-function="deleteUserInfo">Delete</a>');
 		    		row.push('<input name="checkDelete" type="checkbox" />');
 		    		
@@ -311,7 +305,7 @@ $(document).ready(function() {
 						<label for="inpEmail">이메일</label>
 						<input id="inpEmail" name="email" type="text" />
 						<label for="comboUserGrade">회원그룹</label>
-						<select id="comboUserGrade" name="userGrade">
+						<select id="comboUserGrade" name="userGradeCd" style="width: 100px !important">
 							<option value="0">전체</option>
 						<c:forEach var="userGrade" items="${userGrades}" varStatus="status">
 							<option value="${userGrade.c_id}">${userGrade.c_title}</option>
@@ -366,7 +360,12 @@ $(document).ready(function() {
 	           			<td>${user.userGrade}</td>
 	           			<td>${user.lastLoginDe}</td>
 	           			<td>${user.joinDe}</td>
-	           			<td>${user.joinStateCd}</td>
+	           			<td>
+	           				<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">
+	           					<option value="1" <c:if test="${user.joinStateCd == 4}">selected="selected"</c:if>>Y</option>
+	           					<option value="0" <c:if test="${user.joinStateCd == 3}">selected="selected"</c:if>>N</option>
+	           				</select>
+	           			</td>
 	           			<td>
 	           				<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>
 	           				<a href="javascript:void(0);" data-function="deleteUserInfo">Delete</a>

@@ -36,6 +36,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.let.utl.fcc.service.EgovDateUtil;
 
 /**
  * Modification Information
@@ -77,7 +78,19 @@ public class UserManageController extends GenericAbstractController {
     public String movePage(ModelMap model, User user) throws Exception {
         
         model.addAttribute("userGrades", userGradeService.inquiryUserGradeList(null));
-        model.addAttribute("userList", userManageService.getUserList(user));
+        
+        List<User> userList = userManageService.getUserList(user);
+        
+        for (User u : userList) {
+                
+            u.setJoinDe( EgovDateUtil.formatDate(u.getJoinDe(), "-") );
+              
+            if (u.getLastLoginDe() != null) {
+                u.setLastLoginDe( EgovDateUtil.formatDate(u.getLastLoginDe(), "-") );
+            }
+        }
+        
+        model.addAttribute("userList", userList);
         
         return "/jsp/user/manage/user/index";
     }
@@ -86,14 +99,19 @@ public class UserManageController extends GenericAbstractController {
     @ResponseBody
     public String list(@RequestBody User user) throws Exception {
         
+        user.setJoinDeBegi( user.getJoinDeBegi().replaceAll("-", "") );
+        user.setJoinDeEnd( user.getJoinDeEnd().replaceAll("-", "") );
+        user.setLoginDeBegi( user.getLoginDeBegi().replaceAll("-", "") );
+        user.setLoginDeEnd( user.getLoginDeEnd().replaceAll("-", "") );
+        
         Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
             
             @Override
             public boolean shouldSkipField(FieldAttributes f) {
                 
                 if ( "c_id".equals(f.getName()) || "c_title".equals(f.getName())
-                  || "email".equals(f.getName()) || "userGrade".equals(f.getName())
-                  || "joinStateCd".equals(f.getName()) || "joinDe".equals(f.getName())
+                  || "email".equals(f.getName()) || "userGradeCd".equals(f.getName()) || "userGrade".equals(f.getName())
+                  || "joinStateCd".equals(f.getName()) || "joinState".equals(f.getName()) || "joinDe".equals(f.getName())
                   || "lastLoginDe".equals(f.getName()) ) 
                 {
                     return false;
@@ -109,7 +127,18 @@ public class UserManageController extends GenericAbstractController {
             
         }).create();
         
-        return gson.toJson(userManageService.getUserList(user));
+        List<User> userList = userManageService.getUserList(user);
+        
+        for (User u : userList) {
+            
+            u.setJoinDe( EgovDateUtil.formatDate(u.getJoinDe(), "-") );
+            
+            if (u.getLastLoginDe() != null) {
+                u.setLastLoginDe( EgovDateUtil.formatDate(u.getLastLoginDe(), "-") );
+            }
+        }
+        
+        return gson.toJson(userList);
     }
     
     @RequestMapping(value = "/delete.do", method = RequestMethod.POST)
