@@ -13,8 +13,10 @@
 		     , A.C_LEVEL
 		     , A.C_TITLE
 		     , A.C_TYPE
-		     , A.C_USER_GRADE AS userGrade
+		     , A.C_USER_GRADE_CD AS userGradeCd
+		     , (SELECT C_TITLE FROM T_USER_GRADE_MANAGE WHERE C_ID = A.C_USER_GRADE_CD) AS userGrade
 		     , A.C_JOIN_STATE_CD AS joinStateCd
+		     , (SELECT C_TITLE FROM T_USER_JOIN_STATE WHERE C_ID = A.C_JOIN_STATE_CD) AS joinState
 		     , A.C_EMAIL AS email
 		     , A.C_JOIN_DT AS joinDt
 		     , SUBSTR(A.C_JOIN_DT, 1, 8) AS joinDe
@@ -35,8 +37,8 @@
 		 <isNotEmpty property="c_title">
 		   AND A.C_TITLE LIKE '%' || #c_title# || '%'
 		 </isNotEmpty>
-		 <isNotEqual property="userGrade" compareValue="0">
-		   AND A.C_USER_GRADE = #userGrade#
+		 <isNotEqual property="userGradeCd" compareValue="0">
+		   AND A.C_USER_GRADE_CD = #userGradeCd#
 		 </isNotEqual>
 		 <isEqual property="joinApprovalFl" compareValue="0">
 		   AND A.C_JOIN_STATE_CD = 3 /*가입승인요청*/
@@ -70,7 +72,7 @@
 		     , C_LEVEL
 		     , C_TITLE
 		     , C_TYPE
-		     , C_USER_GRADE AS userGrade
+		     , C_USER_GRADE_CD AS userGradeCd
 		     , C_JOIN_STATE_CD AS joinStateCd
 		     , C_EMAIL AS email
 		     , C_JOIN_DT AS joinDt
@@ -110,7 +112,7 @@
         UPDATE T_USER_INFO
            SET C_TYPE = #c_type#
              , C_TITLE = #c_title#
-             , C_USER_GRADE = #userGrade#
+             , C_USER_GRADE_CD = #userGradeCd#
              , C_JOIN_STATE_CD = #joinStateCd#
              , C_PASSWORD = #password#
              , C_EMAIL = #email#
@@ -140,7 +142,7 @@
              , C_LEVEL
              , C_TITLE
              , C_TYPE
-             , C_USER_GRADE AS userGrade
+             , C_USER_GRADE_CD AS userGradeCd
              , C_JOIN_STATE_CD AS joinStateCd
              , C_PASSWORD AS password
              , C_EMAIL AS email
@@ -171,7 +173,7 @@
              , C_LEVEL
              , C_TITLE
              , C_TYPE
-             , C_USER_GRADE AS userGrade
+             , C_USER_GRADE_CD AS userGradeCd
              , C_JOIN_STATE_CD AS joinStateCd
              , C_PASSWORD AS password
              , C_EMAIL AS email
@@ -312,7 +314,7 @@
 
     <insert id="pasteMyselfFromJstree" parameterClass="User">
         /* pasteMyselfFromJstree */
-        INSERT INTO T_USER_INFO ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_USER_GRADE, C_JOIN_STATE_CD, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_PASSWORD_FIND_QUESTION, C_PASSWORD_FIND_ANSWER, C_MAILING_SERVICE_USE_FL, C_INDI_INFO_OPEN_FL, C_JOIN_DT, C_PASSWORD_CHANGE_DT, C_HOMEPAGE_URL, C_BLOG_URL, C_SIGN, C_PROFILE_PHOTO, C_IMAGE_ICON ) 
+        INSERT INTO T_USER_INFO ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_USER_GRADE_CD, C_JOIN_STATE_CD, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_PASSWORD_FIND_QUESTION, C_PASSWORD_FIND_ANSWER, C_MAILING_SERVICE_USE_FL, C_INDI_INFO_OPEN_FL, C_JOIN_DT, C_PASSWORD_CHANGE_DT, C_HOMEPAGE_URL, C_BLOG_URL, C_SIGN, C_PROFILE_PHOTO, C_IMAGE_ICON ) 
         SELECT S_USER_INFO.NEXTVAL AS C_ID
              , A.*
              FROM (
@@ -323,7 +325,7 @@
                      , C_LEVEL - #ldif#      AS C_LEVEL
                      , C_TITLE
                      , C_TYPE
-                     , C_USER_GRADE
+                     , C_USER_GRADE_CD
                      , C_JOIN_STATE_CD
                      , C_PASSWORD
                      , C_EMAIL
@@ -376,8 +378,8 @@
 
     <insert id="addMyselfFromJstree" parameterClass="User">
         /* addMyselfFromJstree */
-        INSERT INTO T_USER_INFO ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_USER_GRADE, C_JOIN_STATE_CD, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_PASSWORD_FIND_QUESTION, C_PASSWORD_FIND_ANSWER, C_MAILING_SERVICE_USE_FL, C_INDI_INFO_OPEN_FL, C_JOIN_DT, C_PASSWORD_CHANGE_DT, C_HOMEPAGE_URL, C_BLOG_URL, C_SIGN, C_PROFILE_PHOTO, C_IMAGE_ICON )
-                         VALUES ( S_USER_INFO.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title#, #userGrade#, #joinStateCd#, #password#, #email#, #loginFailureCnt#, #passwordFindQuestion#, #passwordFindAnswer#, #mailingServiceUseFl#, #indiInfoOpenFl#, #joinDt#, #passwordChangeDt#, #homepageUrl#, #blogUrl#, #sign#, #profilePhoto#, #imageIcon# )
+        INSERT INTO T_USER_INFO ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_USER_GRADE_CD, C_JOIN_STATE_CD, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_PASSWORD_FIND_QUESTION, C_PASSWORD_FIND_ANSWER, C_MAILING_SERVICE_USE_FL, C_INDI_INFO_OPEN_FL, C_JOIN_DT, C_PASSWORD_CHANGE_DT, C_HOMEPAGE_URL, C_BLOG_URL, C_SIGN, C_PROFILE_PHOTO, C_IMAGE_ICON )
+                         VALUES ( S_USER_INFO.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title#, #userGradeCd#, #joinStateCd#, #password#, #email#, #loginFailureCnt#, #passwordFindQuestion#, #passwordFindAnswer#, #mailingServiceUseFl#, #indiInfoOpenFl#, #joinDt#, #passwordChangeDt#, #homepageUrl#, #blogUrl#, #sign#, #profilePhoto#, #imageIcon# )
         <selectKey resultClass="java.lang.Integer">
             /* addMyselfFromJstree SEQ */
             SELECT S_USER_INFO.CURRVAL AS SEQ

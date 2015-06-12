@@ -2,9 +2,8 @@ package standard.mvc.component.business.baroboard.user.join.register;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -56,7 +55,7 @@ public class UserRegisterServiceTest extends DbUnitTest<User> {
         assertThat(user.getC_title(), is(equalTo("관리자")));
         assertThat(user.getC_type(), is(equalTo("drive"))); // TODO Enumeration 도입 필요
         
-        assertThat(user.getUserGrade(), is(1));
+        assertThat(user.getUserGradeCd(), is(1));
         assertThat(user.getJoinStateCd(), is(equalTo(2)));
         assertThat(user.getPassword(), is(equalTo("bbd7182cd0ee95488f1a1e6f3fe0d8f94ed0d14e4db1dce713fe82a3231c523d")));
         assertThat(user.getEmail(), is(equalTo("admin@313.co.kr")));
@@ -85,7 +84,7 @@ public class UserRegisterServiceTest extends DbUnitTest<User> {
         user.setC_type("default");
         user.setRef(2);
         
-        user.setUserGrade(1);
+        user.setUserGradeCd(1);
         user.setJoinStateCd(2);
         user.setPassword("bbd7182cd0ee95488f1a1e6f3fe0d8f94ed0d14e4db1dce713fe82a3231c523d");
         user.setEmail("user@313.co.kr");

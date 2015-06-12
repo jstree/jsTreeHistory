@@ -41,11 +41,17 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 public class User extends ComprehensiveTree {
 
+    /** 회원등급코드 */
+    private int userGradeCd;
+    
     /** 회원등급 */
-    private int userGrade;
-
+    private String userGrade;
+    
     /** 가입상태코드 */
     private int joinStateCd;
+    
+    /** 가입상태 */
+    private String joinState;
 
     /** 비밀번호 */
     private String password;
@@ -117,12 +123,12 @@ public class User extends ComprehensiveTree {
     /** 마지막로그인일자 */
     private String lastLoginDe;
     
-    public int getUserGrade() {
-        return userGrade;
+    public int getUserGradeCd() {
+        return userGradeCd;
     }
 
-    public void setUserGrade(int userGrade) {
-        this.userGrade = userGrade;
+    public void setUserGradeCd(int userGradeCd) {
+        this.userGradeCd = userGradeCd;
     }
 
     public int getJoinStateCd() {
@@ -315,6 +321,22 @@ public class User extends ComprehensiveTree {
 
     public void setLastLoginDt(String lastLoginDt) {
         this.lastLoginDt = lastLoginDt;
+    }
+
+    public String getUserGrade() {
+        return userGrade;
+    }
+
+    public void setUserGrade(String userGrade) {
+        this.userGrade = userGrade;
+    }
+
+    public String getJoinState() {
+        return joinState;
+    }
+
+    public void setJoinState(String joinState) {
+        this.joinState = joinState;
     }
 
     @Override

@@ -15,7 +15,7 @@
 		, A.c_title
 		, A.c_type
 		/* user filed add point*/
-		, A.C_USER_GRADE AS userGrade
+		, A.C_USER_GRADE_CD AS userGradeCd
 		, A.C_JOIN_STATE_CD AS joinStateCd
 		, A.C_PASSWORD AS password
 		, A.C_EMAIL AS email
@@ -78,7 +78,7 @@
 		, C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		, C_USER_GRADE AS userGrade
+		, C_USER_GRADE_CD AS userGradeCd
 		, C_JOIN_STATE_CD AS joinStateCd
 		, C_PASSWORD AS password
 		, C_EMAIL AS email
@@ -134,7 +134,7 @@
 		T_USER_INFO
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
-		, C_USER_GRADE = #userGrade#
+		, C_USER_GRADE_CD = #userGradeCd#
 		, C_JOIN_STATE_CD = #joinStateCd#
 		, C_PASSWORD = #password#
 		, C_EMAIL = #email#
@@ -165,7 +165,7 @@
 		, C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		, C_USER_GRADE AS userGrade
+		, C_USER_GRADE_CD AS userGradeCd
 		, C_JOIN_STATE_CD AS joinStateCd
 		, C_PASSWORD AS password
 		, C_EMAIL AS email
@@ -198,7 +198,7 @@
 		, C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		, C_USER_GRADE AS userGrade
+		, C_USER_GRADE_CD AS userGradeCd
 		, C_JOIN_STATE_CD AS joinStateCd
 		, C_PASSWORD AS password
 		, C_EMAIL AS email
@@ -419,12 +419,12 @@
 		/* addMyselfFromJstree */
 		INSERT INTO T_USER_INFO (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_USER_GRADE, 
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_USER_GRADE_CD, 
 		C_JOIN_STATE_CD, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_PASSWORD_FIND_QUESTION,
 		C_PASSWORD_FIND_ANSWER, C_MAILING_SERVICE_USE_FL, C_INDI_INFO_OPEN_FL, C_JOIN_DT, C_PASSWORD_CHANGE_DT )
 		VALUES (
 		S_USER_INFO.NEXTVAL, #c_parentid#, #c_position#, 
-		#c_left#, #c_right#, #c_level#, #c_title#, #userGrade#,
+		#c_left#, #c_right#, #c_level#, #c_title#, #userGradeCd#,
 		#joinStateCd#, #password#, #email#,  #loginFailureCnt#, #passwordFindQuestion#,
 		#passwordFindAnswer#, #mailingServiceUseFl#, #indiInfoOpenFl#, #joinDt#, #passwordChangeDt# )
 		<selectKey resultClass="java.lang.Integer">

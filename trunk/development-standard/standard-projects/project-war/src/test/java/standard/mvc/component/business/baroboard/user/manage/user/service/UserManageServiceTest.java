@@ -79,7 +79,7 @@ public class UserManageServiceTest extends DbUnitTest<User> {
         assertThat(user.getC_level(), is(2));
         assertThat(user.getC_title(), is(equalTo("관리자")));
         assertThat(user.getC_type(), is(equalTo("default")));
-        assertThat(user.getUserGrade(), is(1));
+        assertThat(user.getUserGradeCd(), is(1));
         assertThat(user.getJoinStateCd(), is(4));
         assertThat(user.getEmail(), is(equalTo("admin@313.co.kr")));
         assertThat(user.getJoinDt(), is(equalTo("20150603222617")));

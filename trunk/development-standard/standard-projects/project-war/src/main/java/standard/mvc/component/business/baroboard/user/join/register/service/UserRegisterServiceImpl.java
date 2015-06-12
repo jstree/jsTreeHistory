@@ -58,7 +58,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
         user.setC_type("default");
         user.setRef(2);
         
-        user.setUserGrade(1); //회원 등급
+        user.setUserGradeCd(1); //회원 등급
 		user.setJoinStateCd(2); //가입 상태 코드
         user.setPasswordFindQuestion("초등학교 이름은");
         user.setPasswordFindAnswer("부원초등학교");
