@@ -36,9 +36,8 @@ public class MailingServiceImpl implements MailingService {
 	private CoreService coreService;
 	
 	@Override
-	public List<MailingVO> getMailingList(MailingVO mailing) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MailingVO> getMailingList(MailingVO mailingParam) throws Exception {
+		return coreService.getChildNode(mailingParam);
 	}
 
 	@Override
@@ -46,4 +45,19 @@ public class MailingServiceImpl implements MailingService {
 		return coreService.getNode(paramVO);
 	}
 
+	@Override
+	public int alterMailing(MailingVO mailingParam) throws Exception {
+		return coreService.alterNode(mailingParam);
+	}
+
+	@Override
+	public int deleteMailing(MailingVO mailingParam) throws Exception {
+		return coreService.removeNode(mailingParam);
+	}
+
+	@Override
+	public MailingVO addMailing(MailingVO newMailing) throws Exception {
+		return coreService.addNode(newMailing);
+	}
+	
 }

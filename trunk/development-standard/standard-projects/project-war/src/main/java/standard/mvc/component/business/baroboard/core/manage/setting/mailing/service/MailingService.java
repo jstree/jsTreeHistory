@@ -41,4 +41,28 @@ public interface MailingService {
 	 * @throws Exception 
 	 */
 	MailingVO getMailing(MailingVO mailingParam) throws Exception;
+
+	/**
+	 * 메일링 정보를 업데이트한다.
+	 * @param mailingParam
+	 * @return
+	 * @throws Exception
+	 */
+	int alterMailing(MailingVO mailingParam) throws Exception;
+
+	/**
+	 * 메일링 단건을 삭제한다.
+	 * @param paramVO
+	 * @return
+	 * @throws Exception
+	 */
+	int deleteMailing(MailingVO paramVO) throws Exception;
+
+	/**
+	 * 메일링 단건을 추가한다.
+	 * @param paramVO
+	 * @return
+	 * @throws Exception
+	 */
+	MailingVO addMailing(MailingVO paramVO) throws Exception;
 }

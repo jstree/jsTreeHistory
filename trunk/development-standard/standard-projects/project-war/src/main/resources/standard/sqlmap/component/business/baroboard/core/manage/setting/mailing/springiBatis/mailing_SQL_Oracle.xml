@@ -12,19 +12,12 @@
 		     , A.C_LEVEL
 		     , A.C_TITLE
 		     , A.C_TYPE
-		     , A.C_SITE_TITLE AS siteTitle
-		     , A.C_BASIC_LANGUAGE_ID AS basicLanguageId
-		     , A.C_LOCAL_TIME_ID AS localTimeId
-		     , A.C_TIME_FORMAT_ID AS timeFormatId
-		     , A.C_THUM_CREAT_METHOD_ID AS thumCreatMethodId
-		     , A.C_FAVICON_USE_FL AS faviconUseFl
-		     , A.C_FAVICON_FILE_ID AS faviconFileId
-		     , A.C_MOBILE_ICON_APPLY_FL AS mobileIconApplyFl
-		     , A.C_MOBILE_ICON_FILE_ID AS mobileIconFileId
-		     , A.C_LAYOUT_ID AS layoutId
-		     , A.C_ACCES_PROH_WORDS AS accesProhWords
-		     , A.C_USER_JOIN_USE_FL AS userJoinUseFl
-		     , A.C_FOOTER_SCRIPT AS footerScript
+		     , A.C_EMAIL_CN AS emailCn   
+			 , A.C_MANAGER_NM AS managerNm
+			 , A.C_MANAGER_EMAIL_ID AS managerEmailId
+			 , A.C_MANAGER_EMAIL_URL AS managerEmailUrl
+			 , A.C_AUTO_SEND_FL AS autoSendFl
+			 , A.C_EMAIL_SEND_TARGET_ID AS emailSendTargetId
 		     , ( SELECT CASE
 		                    WHEN COUNT(*) &gt; 0 THEN 'InChild'
            		 			ELSE 'NoChild'
@@ -80,6 +73,12 @@
 		UPDATE T_CORE_SETTING_MAIL 
 		   SET C_TYPE = #c_type#
 		     , C_TITLE = #c_title#
+		     , C_EMAIL_CN = #emailCn#
+			 , C_MANAGER_NM = #managerNm#
+			 , C_MANAGER_EMAIL_ID = #managerEmailId#
+			 , C_MANAGER_EMAIL_URL = #managerEmailUrl#
+			 , C_AUTO_SEND_FL = #autoSendFl#
+			 , C_EMAIL_SEND_TARGET_ID = #emailSendTargetId#
 		 WHERE C_ID = #c_id#
 	</update>
 
@@ -96,10 +95,10 @@
              , C_TYPE
              , C_EMAIL_CN AS emailCn   
 			 , C_MANAGER_NM AS managerNm
-			 , C_MANAGER_EMAIL_ID AS managerEmailID
+			 , C_MANAGER_EMAIL_ID AS managerEmailId
 			 , C_MANAGER_EMAIL_URL AS managerEmailUrl
 			 , C_AUTO_SEND_FL AS autoSendFl
-			 , C_EMAIL_SEND_TARGET_ID AS mailSendTargetId
+			 , C_EMAIL_SEND_TARGET_ID AS emailSendTargetId
           FROM T_CORE_SETTING_MAIL 
          WHERE C_ID = #c_id#
     </select>
@@ -288,8 +287,10 @@
 
 	<insert id="addMyselfFromJstree" parameterClass="Mailing">
 		/* addMyselfFromJstree */
-        INSERT INTO T_CORE_SETTING_MAIL ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE )
-                              VALUES ( S_CORE_SETTING_MAIL.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title# )
+        INSERT INTO T_CORE_SETTING_MAIL ( C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, 
+        					              C_EMAIL_CN , C_MANAGER_NM, C_MANAGER_EMAIL_ID, C_MANAGER_EMAIL_URL, C_AUTO_SEND_FL, C_EMAIL_SEND_TARGET_ID)
+                              VALUES ( S_CORE_SETTING_MAIL.NEXTVAL, #c_parentid#, #c_position#, #c_left#, #c_right#, #c_level#, #c_title#, 
+                                       #emailCn#, #managerNm#, #managerEmailId#, #managerEmailUrl#, #autoSendFl#, #emailSendTargetId#)
         <selectKey resultClass="java.lang.Integer">
         	/* addMyselfFromJstree SEQ */
             SELECT S_CORE_SETTING_MAIL.CURRVAL AS SEQ

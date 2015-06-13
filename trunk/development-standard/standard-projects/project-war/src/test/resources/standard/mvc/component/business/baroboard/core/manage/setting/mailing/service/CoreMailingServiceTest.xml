@@ -10,5 +10,5 @@
 
   <T_CORE_SETTING_MAIL
   C_ID="3" C_PARENTID="2" C_POSITION="0" C_LEFT="3" C_RIGHT="4" C_LEVEL="2" C_TITLE="이메일제목" C_TYPE="default" 
-  C_EMAIL_CN="메일내용입니다."  C_MANAGER_NM="메일관리자" C_MANAGER_EMAIL_ID="mailAdmin" C_MANAGER_EMAIL_URL="313.co.kr" C_AUTO_SEND_FL="1"  />
+  C_EMAIL_CN="메일내용입니다."  C_MANAGER_NM="메일관리자" C_MANAGER_EMAIL_ID="mailAdmin" C_MANAGER_EMAIL_URL="313.co.kr" C_AUTO_SEND_FL="1" C_EMAIL_SEND_TARGET_ID="0" />
 </dataset>
