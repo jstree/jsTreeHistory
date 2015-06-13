@@ -45,7 +45,7 @@
 						<div class="article-body rte" itemprop="articleBody">
 							<div class="tablet-mobile alpha bm-remove last">
 								<div class="text-right">
-									<button class="right">글쓰기</button>
+									<a href="${pageContext.request.contextPath}/board/newArticle.do?boardID=${boardID}" class="right">글쓰기</a>
 								</div>
 								<div>
 									<table id="boardTable" class="board-table display">
@@ -63,7 +63,7 @@
 											<c:forEach var="announce" items="${announceList}" varStatus="status">
 												<tr>
 													<td class="dt-center font-bold">공지</td>
-													<td class="font-bold"><a>${announce.c_title} &nbsp; (${announce.commentCnt})</a></td>
+													<td class="font-bold"><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${announce.c_id}">${announce.c_title} &nbsp; (${announce.commentCnt})</a></td>
 													<td class="dt-center">${announce.regId}</td>
 													<td class="dt-center">${announce.regDt}</td>
 													<td class="dt-center">${announce.viewCnt}</td>
@@ -73,7 +73,7 @@
 											<c:forEach var="article" items="${articleList}" varStatus="status">
 												<tr>
 													<td class="dt-center">${article.c_id}</td>
-													<td><a>${article.c_title} &nbsp; (${article.commentCnt})</a></td>
+													<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
 													<td class="dt-center">${article.regId}</td>
 													<td class="dt-center">${article.regDt}</td>
 													<td class="dt-center">${article.viewCnt}</td>

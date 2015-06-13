@@ -57,6 +57,15 @@ public interface BoardService {
 	public List<Article> searchArticleList(SearchArticle searchArticle) throws Exception;
 	
 	/**
+	 * ID 로 글을 검색한다.
+	 * 
+	 * @param Article VO
+	 * @return Article VO
+	 * @throws Exception
+	 */
+	public Article getArticleById(Article article) throws Exception;
+	
+	/**
 	 * 공개된 글 개수를 조회한다.
 	 * - 페이징 처리용
 	 * 

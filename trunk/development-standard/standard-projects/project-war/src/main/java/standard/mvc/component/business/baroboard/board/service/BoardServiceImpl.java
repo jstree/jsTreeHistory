@@ -1,9 +1,14 @@
 package standard.mvc.component.business.baroboard.board.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +34,7 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
  * 수정일                 수정자                     수정내용
  * -------      ------------  -----------------------
  * 2015. 5. 25.      전경훈        최초 생성
+ * 2015. 6. 14.		 전경훈		 addArticle 추가
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -36,6 +42,8 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 
 @Service(value = "BoardService")
 public class BoardServiceImpl implements BoardService {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Resource(name = "CoreService")
 	private CoreService coreService;
@@ -68,13 +76,30 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public Article getArticleById(Article article) throws Exception {
+		return coreDao.getNode(article);
+	}
+	
+	@Override
 	public int getOpenArticleCnt(Article article) throws Exception {
 		return boardDao.getOpenArticleCnt(article);
 	}
 
 	@Override
 	public Article addArticle(Article article) throws Exception {
-		return coreService.addNode(article);
+		article.setRef(2);
+		article.setC_type("default");
+		
+		/* escaped 된 html 을 원래 html로 변환함 */
+		String unescapedHtml = StringEscapeUtils.unescapeHtml4(article.getContent());
+		article.setContent(unescapedHtml);
+		
+		Date today = new Date();
+		String formattedDate = DateFormatUtils.format(today, "yyyyMMddHHmmss");
+		article.setRegDt(formattedDate);
+		Article insertedArticle = coreService.addNode(article);
+		
+		return insertedArticle;
 	}
 
 	@Override
@@ -99,5 +124,7 @@ public class BoardServiceImpl implements BoardService {
 			article.setRegDt(year + "-" + month + "-" + day);
 		}
 	}
+
+	
 
 }

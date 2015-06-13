@@ -1,10 +1,12 @@
 package standard.mvc.component.business.baroboard.board.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,11 +14,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.board.service.BoardService;
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import flex.messaging.util.URLDecoder;
 
 /**
  * Modification Information
@@ -36,6 +40,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * -------      ------------  -----------------------
  * 2015. 5. 26.      전경훈      최초 생성
  * 2015. 6.  3.      전경훈      showIndexPage, searchArticle 추가  
+ * 2015. 6. 13.      전경훈      submitNewArticle 추가
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -107,7 +112,9 @@ public class BoardController extends GenericAbstractController {
 	
 	@RequestMapping(value = "/readArticle.do")
 	public String readArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
-
+		Article targetArticle = boardService.getArticleById(article);
+		
+		modelMap.addAttribute("article", targetArticle);
 		return "/jsp/board/readArticle";
 	}
 
@@ -117,10 +124,10 @@ public class BoardController extends GenericAbstractController {
 		return "/jsp/board/newArticle";
 	}
 
-	@RequestMapping(value = "/submitNewArticle.do")
-	public Article submitNewArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
-
-		return null;
+	@RequestMapping(value = "/submitNewArticle.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Article submitNewArticle(@ModelAttribute Article article) throws Exception {
+		return boardService.addArticle(article);
 	}
 
 	@RequestMapping(value = "/modifyArticle.do")
