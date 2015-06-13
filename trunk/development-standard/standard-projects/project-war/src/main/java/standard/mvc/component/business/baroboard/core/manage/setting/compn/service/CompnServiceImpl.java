@@ -45,7 +45,7 @@ public class CompnServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) throws Exception {
-        return null;
+        return coreService.getChildNode(comprehensiveTree);
     }
 
     @Override
@@ -56,12 +56,14 @@ public class CompnServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree) throws Exception {
-        return null;
+        T addedNodeCount = coreService.addNode(comprehensiveTree);
+        return addedNodeCount;
     }
 
     @Override
     public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree) throws Exception {
-        return 0;
+        int removedNodeCount = coreService.removeNode(comprehensiveTree);
+        return removedNodeCount;
     }
 
     @Override

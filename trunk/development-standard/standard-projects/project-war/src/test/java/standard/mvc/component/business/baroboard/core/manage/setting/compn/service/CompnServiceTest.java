@@ -5,6 +5,10 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -77,6 +81,19 @@ public class CompnServiceTest {
             assertThat(e, is(instanceOf(RuntimeException.class)));
             assertThat(e.getMessage(), is(equalTo(ExceptionMessage.UN_SUPPORTED.getValue())));
         }
+    }
+
+    @Test
+    public void testParentNode() throws Exception {
+        when(mockCompnVO.getC_id()).thenReturn(2);
+        when(mockCompnVO.getSqlMapSelector()).thenReturn("compn");
+
+        List<CompnVO> childNode = compnService.getChildNode(mockCompnVO);
+        assertThat(childNode.size(), is(1));
+        assertThat(childNode.get(0).getChildcount(), is(equalTo("InChild")));
+
+        verify(mockCompnVO).getC_id();
+        verify(mockCompnVO).getSqlMapSelector();
     }
 
 }
