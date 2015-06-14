@@ -3,6 +3,7 @@ package standard.mvc.component.business.baroboard.core.manage.setting.compn.serv
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
@@ -88,9 +89,29 @@ public class CompnServiceTest {
         when(mockCompnVO.getC_id()).thenReturn(2);
         when(mockCompnVO.getSqlMapSelector()).thenReturn("compn");
 
-        List<CompnVO> childNode = compnService.getChildNode(mockCompnVO);
-        assertThat(childNode.size(), is(1));
-        assertThat(childNode.get(0).getChildcount(), is(equalTo("InChild")));
+        List<CompnVO> childNodes = compnService.getChildNode(mockCompnVO);
+
+        assertThat(childNodes, is(notNullValue()));
+        assertThat(childNodes.size(), is(1));
+        assertThat(childNodes.get(0).getChildcount(), is(equalTo("InChild")));
+
+        verify(mockCompnVO).getC_id();
+        verify(mockCompnVO).getSqlMapSelector();
+    }
+
+    @Test
+    public void testGetChildNode() throws Exception {
+        when(mockCompnVO.getC_id()).thenReturn(3);
+        when(mockCompnVO.getSqlMapSelector()).thenReturn("compn");
+
+        List<CompnVO> childNodes = compnService.getChildNode(mockCompnVO);
+
+        assertThat(childNodes, is(notNullValue()));
+        assertThat(childNodes.size(), is(not(0)));
+
+        for (CompnVO compnVO : childNodes) {
+            assertThat(compnVO.getChildcount(), is(equalTo("NoChild")));
+        }
 
         verify(mockCompnVO).getC_id();
         verify(mockCompnVO).getSqlMapSelector();
