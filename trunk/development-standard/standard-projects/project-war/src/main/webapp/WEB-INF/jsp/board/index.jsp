@@ -64,7 +64,7 @@
 												<tr>
 													<td class="dt-center font-bold">공지</td>
 													<td class="font-bold"><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${announce.c_id}">${announce.c_title} &nbsp; (${announce.commentCnt})</a></td>
-													<td class="dt-center">${announce.regId}</td>
+													<td class="dt-center">${announce.regNickName}</td>
 													<td class="dt-center">${announce.regDt}</td>
 													<td class="dt-center">${announce.viewCnt}</td>
 													<td class="dt-center">0</td>
@@ -74,7 +74,7 @@
 												<tr>
 													<td class="dt-center">${article.c_id}</td>
 													<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
-													<td class="dt-center">${article.regId}</td>
+													<td class="dt-center">${article.regNickName}</td>
 													<td class="dt-center">${article.regDt}</td>
 													<td class="dt-center">${article.viewCnt}</td>
 													<td class="dt-center">0</td>

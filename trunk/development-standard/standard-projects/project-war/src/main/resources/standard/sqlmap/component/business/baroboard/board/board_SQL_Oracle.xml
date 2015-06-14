@@ -390,7 +390,8 @@
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
 				, A.C_REG_DT as regDt 				
-				, A.C_MOD_DT as modDt 				
+				, A.C_MOD_DT as modDt 	
+				, B.C_TITLE as regNickName			
 			/* 페이징 처리 */	
 			FROM (
 				SELECT ROWNUM AS RNUM, Z.* FROM (
@@ -402,8 +403,10 @@
 						AND Y.C_ANNOUNCEMENT_FL = '0'
 					ORDER BY C_ID DESC 
 				) Z WHERE ROWNUM &lt;= (#pageNum# * #pageSize#)
-			) A
-			WHERE RNUM &gt;= (1 + ((#pageNum# - 1) * #pageSize#))
+			) A, T_USER_INFO B
+			WHERE 1=1 
+				AND A.C_REG_ID = B.C_ID
+				AND A.RNUM &gt;= (1 + ((#pageNum# - 1) * #pageSize#))
 		</dynamic>
 	</select>
 	
@@ -422,9 +425,11 @@
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
 				, A.C_REG_DT as regDt 				
-				, A.C_MOD_DT as modDt 				
-			FROM T_BOARD_TEST A
+				, A.C_MOD_DT as modDt 	
+				, B.C_TITLE as regNickName			
+			FROM T_BOARD_TEST A, T_USER_INFO B
 			WHERE 1=1
+				AND A.C_REG_ID = B.C_ID
 				AND A.C_ANNOUNCEMENT_FL = '1'
 				AND A.C_OPEN_ARTICLE_FL = '1'
 			ORDER BY
@@ -456,9 +461,11 @@
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
 				, A.C_REG_DT as regDt 				
-				, A.C_MOD_DT as modDt 				
-			FROM T_BOARD_TEST A
+				, A.C_MOD_DT as modDt 	
+				, B.C_TITLE as regNickName			
+			FROM T_BOARD_TEST A, T_USER_INFO B
 			WHERE 1=1
+				AND A.C_REG_ID = B.C_ID
 				AND A.C_LEVEL = 2
 				AND A.C_OPEN_ARTICLE_FL = '1'
 				AND A.C_ANNOUNCEMENT_FL = '0'

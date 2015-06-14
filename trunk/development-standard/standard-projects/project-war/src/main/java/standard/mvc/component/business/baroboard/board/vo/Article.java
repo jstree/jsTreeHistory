@@ -27,7 +27,7 @@ public class Article extends ComprehensiveTree {
 
 	/* 글쓴이 */
 	private int regId;
-
+	
 	/* 내용 */
 	private String content;
 
@@ -78,6 +78,8 @@ public class Article extends ComprehensiveTree {
 
 	/* 글 총개수 */
 	private int totArticleCnt;
+	
+	private String regNickName;
 
 	@Override
 	public String toString() {
@@ -250,5 +252,12 @@ public class Article extends ComprehensiveTree {
 	public void setAllowTrackbackFL(String allowTrackbackFL) {
 		this.allowTrackbackFL = allowTrackbackFL;
 	}
+	
+	public String getRegNickName() {
+		return regNickName;
+	}
 
+	public void setRegNickName(String regNickName) {
+		this.regNickName = regNickName;
+	}
 }
