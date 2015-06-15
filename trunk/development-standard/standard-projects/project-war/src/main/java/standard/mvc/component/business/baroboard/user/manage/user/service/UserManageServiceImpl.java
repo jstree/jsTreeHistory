@@ -16,11 +16,14 @@
 package standard.mvc.component.business.baroboard.user.manage.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import standard.mvc.component.business.baroboard.user.manage.user.dao.UserManageDao;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 
@@ -50,6 +53,9 @@ public class UserManageServiceImpl implements UserManageService {
 	@Resource(name = "CoreService")
     private CoreService coreService;
 	
+	@Autowired
+    private UserManageDao userManageDao;
+	
 	@Override
 	public List<User> getUserList(User user) throws Exception {
 		
@@ -57,7 +63,7 @@ public class UserManageServiceImpl implements UserManageService {
 		
 		return coreService.getChildNode(user);
 	}
-
+	
 	@Override
 	public void deleteUserInfos(List<User> users) throws Exception {
 	    
@@ -70,5 +76,14 @@ public class UserManageServiceImpl implements UserManageService {
 	public void addUserInfo(User user) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public List<User> getUserListPaginated(Map<String, Object> paramMap) throws Exception {
+	    
+	    User user = (User) paramMap.get("user");
+	    user.setC_id(2);
+	    
+	    return userManageDao.selectUserListPaginated(paramMap);
 	}
 }

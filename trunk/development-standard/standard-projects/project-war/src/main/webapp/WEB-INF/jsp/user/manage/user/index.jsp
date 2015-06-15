@@ -127,7 +127,7 @@ var userList = {
         userList.grid = $('#tblUserList').dataTable({
             searching : false,
             lengthChange : false,
-            ordering : false,
+            ordering : false
         });
     },
     
@@ -135,53 +135,7 @@ var userList = {
         
     	$('#btnSearchingUser').on('click', function() {
     		
-    		var $form = $('#frmSearchingUser');
-    		
-    		var params = $form.serializeObject();
-    		
-			callAjax(null
-		           , $form.prop('action')
-		           , null
-		           , $form.prop('method')
-		           , 'json'
-		           , params
-		           , 'application/json'
-		           , callback);
-		    
-		    function callback(data) {
-		    	
-		    	var rows = [];
-		    	
-		    	$(data).each(function(i, obj) {
-		    		
-		    		var row = [];
-		    		//row.push(obj.c_id);
-		    		row.push(obj.email);
-		    		row.push(obj.c_title);
-		    		row.push(obj.userGrade);
-		    		row.push(obj.lastLoginDe || '');
-		    		row.push(obj.joinDe);
-		    		row.push('<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">'
-		    		       + '    <option value="1">Y</option>'
-		    		       + '    <option value="0">N</option>'
-		    		       + '</select>');
-		    		row.push('<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>&nbsp;<a href="javascript:void(0);" data-function="deleteUserInfo">Delete</a>');
-		    		row.push('<input name="checkDelete" type="checkbox" />');
-		    		
-		    		rows.push(row);
-		    	});
-		    	
-		    	userList.grid.fnDestroy();
-		    	
-		    	userList.grid = $('#tblUserList').dataTable({
-		            searching : false,
-		            lengthChange : false,
-		            ordering : false,
-		            data : rows
-		        });
-		    	
-		    	$('table [name="joinApprovalFl"], [name="checkDelete"]').parent().addClass('center');
-		    }
+    		userList.getList();
     	});
     	
         $('#btnDeleteUserInfo').on('click', function() {
@@ -284,6 +238,59 @@ var userList = {
 	    			}
 	    		});
 	    	});
+	    }
+    },
+    
+    getList : function() {
+    	
+    	var $form = $('#frmSearchingUser');
+		
+		var params = $form.serializeObject();
+		
+		var currentPageNo = 1; // TODO 류강하 :
+		
+		callAjax(null
+	           , $form.prop('action') + '?currentPageNo=' + currentPageNo
+	           , null
+	           , $form.prop('method')
+	           , 'json'
+	           , params
+	           , 'application/json'
+	           , callback);
+	    
+	    function callback(data) {
+	    	
+	    	var rows = [];
+	    	
+	    	$(data).each(function(i, obj) {
+	    		
+	    		var row = [];
+	    		//row.push(obj.c_id);
+	    		row.push(obj.email);
+	    		row.push(obj.c_title);
+	    		row.push(obj.userGrade);
+	    		row.push(obj.lastLoginDe || '');
+	    		row.push(obj.joinDe);
+	    		row.push('<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">'
+	    		       + '    <option value="1">Y</option>'
+	    		       + '    <option value="0">N</option>'
+	    		       + '</select>');
+	    		row.push('<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>&nbsp;<a href="javascript:void(0);" data-function="deleteUserInfo">Delete</a>');
+	    		row.push('<input name="checkDelete" type="checkbox" />');
+	    		
+	    		rows.push(row);
+	    	});
+	    	
+	    	userList.grid.fnDestroy();
+	    	
+	    	userList.grid = $('#tblUserList').dataTable({
+	            searching : false,
+	            lengthChange : false,
+	            ordering : false,
+	            data : rows
+	        });
+	    	
+	    	$('table [name="joinApprovalFl"], [name="checkDelete"]').parent().addClass('center');
 	    }
     },
     

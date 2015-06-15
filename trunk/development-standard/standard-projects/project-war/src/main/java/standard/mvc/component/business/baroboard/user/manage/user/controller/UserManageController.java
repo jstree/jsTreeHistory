@@ -15,6 +15,7 @@
  */
 package standard.mvc.component.business.baroboard.user.manage.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.user.manage.grade.service.UserGradeService;
@@ -37,6 +39,7 @@ import com.google.gson.GsonBuilder;
 
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.let.utl.fcc.service.EgovDateUtil;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 /**
  * Modification Information
@@ -79,7 +82,17 @@ public class UserManageController extends GenericAbstractController {
         
         model.addAttribute("userGrades", userGradeService.inquiryUserGradeList(null));
         
-        List<User> userList = userManageService.getUserList(user);
+        PaginationInfo paginationInfo = new PaginationInfo();
+        paginationInfo.setCurrentPageNo(1);
+        paginationInfo.setRecordCountPerPage(10);
+        paginationInfo.setPageSize(10);
+        
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("firstRecordIndex", paginationInfo.getFirstRecordIndex());
+        paramMap.put("lastRecordIndex", paginationInfo.getLastRecordIndex());
+        paramMap.put("user", user);
+        
+        List<User> userList = userManageService.getUserListPaginated(paramMap);
         
         for (User u : userList) {
                 
@@ -97,7 +110,16 @@ public class UserManageController extends GenericAbstractController {
     
     @RequestMapping("/list.do")
     @ResponseBody
-    public String list(@RequestBody User user) throws Exception {
+    public String list(@RequestBody User user
+                     , @RequestParam(required = false, defaultValue = "1") int currentPageNo
+                     , @RequestParam(required = false, defaultValue = "10") int recordCountPerPage) throws Exception {
+        
+        PaginationInfo paginationInfo = new PaginationInfo();
+        paginationInfo.setCurrentPageNo(currentPageNo);
+        paginationInfo.setRecordCountPerPage(recordCountPerPage);
+        paginationInfo.setPageSize(10);
+        
+        int firstRecordIndex = paginationInfo.getFirstRecordIndex();
         
         user.setJoinDeBegi( user.getJoinDeBegi().replaceAll("-", "") );
         user.setJoinDeEnd( user.getJoinDeEnd().replaceAll("-", "") );
@@ -127,7 +149,12 @@ public class UserManageController extends GenericAbstractController {
             
         }).create();
         
-        List<User> userList = userManageService.getUserList(user);
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("firstRecordIndex", firstRecordIndex);
+        paramMap.put("recordCountPerPage", recordCountPerPage);
+        paramMap.put("user", user);
+        
+        List<User> userList = userManageService.getUserListPaginated(paramMap);
         
         for (User u : userList) {
             

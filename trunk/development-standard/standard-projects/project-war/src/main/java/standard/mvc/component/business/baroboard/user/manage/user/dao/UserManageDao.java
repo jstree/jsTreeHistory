@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package standard.mvc.component.business.baroboard.user.manage.user.service;
+package standard.mvc.component.business.baroboard.user.manage.user.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -24,55 +24,29 @@ import standard.mvc.component.business.baroboard.user.vo.User;
  * Modification Information
  * 
  * @author 류강하
- * @since 2015. 5. 31.
+ * @since 2015. 6. 16.
  * @version 1.0
  * @see <pre>
- * Class Name  : UserManageService.java
- * Description : 바로보드-회원관리 Service 인터페이스
- * Information : 바로보드-회원관리 Service 인터페이스
+ * Class Name  : UserManageDao.java
+ * Description : 바로보드-회원관리 DAO 인터페이스
+ * Information : 바로보드-회원관리 DAO 인터페이스
  * 
  * << 개정이력(Modification Information) >>
  * 
- * 수정일        수정자        수정내용
- * -------       ------------  -----------------------
- * 2015. 5. 31.  류강하        최초 생성
+ * 수정일               수정자                 수정내용
+ * -------       ------------   -----------------------
+ * 2015. 6. 16.   류강하                 최초 생성
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-public interface UserManageService {
+public interface UserManageDao {
 
-    /**
-     * 회원 목록을 조회한다.
-     * 
-     * @param user 회원 DTO
-     * @return 회원 DTO List
-     * @throws Exception
-     */
-    List<User> getUserList(User user) throws Exception;
-    
-    /**
-     * 회원 정보를 삭제한다.
-     * 
-     * @param users 회원 DTO List
-     * @throws Exception
-     */
-    void deleteUserInfos(List<User> users) throws Exception;
-    
-    /**
-     * 회원 정보를 추가한다.
-     * 
-     * @param user 회원 DTO
-     * @throws Exception
-     */
-    void addUserInfo(User user) throws Exception;
-    
     /**
      * 페이징 처리된 회원 목록을 조회한다.
      * 
      * @param paramMap 회원 DTO, 페이징 처리 관련 속성을 담은 Map
      * @return 회원 DTO List
-     * @throws Exception
      */
-    List<User> getUserListPaginated(Map<String, Object> paramMap) throws Exception;
+    List<User> selectUserListPaginated(Map<String, Object> paramMap) throws Exception;
 }
