@@ -13,7 +13,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  *  Class Name  : Newsletter.java
  *  Description : Newsletter VO 클래스
- *  Infomation  : Newsletter VO 클래스
+ *  Information : Newsletter VO 클래스
  *  
  *  << 개정이력(Modification Information) >>
  *  

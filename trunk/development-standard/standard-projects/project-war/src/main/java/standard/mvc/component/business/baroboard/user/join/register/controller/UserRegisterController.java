@@ -24,7 +24,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * @see <pre>
  * Class Name  : UserRegisterController.java
  * Description : 회원가입- 사용자 등록 Controller 
- * Infomation  : 회원가입- 사용자 등록 컨트롤러
+ * Information : 회원가입- 사용자 등록 컨트롤러
  * 
  * << 개정이력(Modification Information) >>
  * 

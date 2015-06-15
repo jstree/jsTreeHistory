@@ -37,7 +37,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : CoreSetServerDatabaseTest, TriggerVO
  * Description : T_CORE_SET_SERVER, T_CORE_SET_SERVER_LOG DBUnit Test without Spring
- * Infomation  :
+ * Information :
  * 
  * << 개정이력(Modification Information) >>
  * 

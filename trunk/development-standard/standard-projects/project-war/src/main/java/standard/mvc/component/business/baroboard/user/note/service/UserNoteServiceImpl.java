@@ -26,7 +26,7 @@ import egovframework.com.ext.jstree.support.util.DateUtils;
  * @see <pre>
  * Class Name  : UserNoteServiceImpl.java
  * Description : 바로보드-쪽지 Service 구현 클래스
- * Infomation  : 바로보드-쪽지 Service 구현 클래스
+ * Information : 바로보드-쪽지 Service 구현 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 

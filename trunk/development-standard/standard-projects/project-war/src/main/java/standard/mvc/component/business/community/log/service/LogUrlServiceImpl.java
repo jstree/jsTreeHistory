@@ -15,7 +15,7 @@ import standard.mvc.component.business.community.log.dao.LogUrlDao;
  * @see <pre>
  * 	Class Name 	: LogUrlServiceImpl.java
  * 	Description : 313 Log 가져오는  Service Interface를 구현
- *  Infomation  : 313 Log 가져오는  Service Interface를 구현
+ *  Information : 313 Log 가져오는  Service Interface를 구현
  *  
  *  << 개정이력(Modification Information) >>
  *  

@@ -24,7 +24,7 @@ import standard.mvc.component.business.baroboard.user.vo.User;
  * @see <pre>
  * Class Name  : UserRegisterServiceImpl.java
  * Description : 바로보드- 회원가입-사용자 등록 Service 구현체
- * Infomation  : 
+ * Information : 
  * 
  * << 개정이력(Modification Information) >>
  * 

@@ -35,7 +35,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  *  Class Name  : NewsletterServiceImpl.java
  *  Description : Newsletter Service 클래스
- *  Infomation  : Newsletter Service 클래스
+ *  Information : Newsletter Service 클래스
  *  
  *  << 개정이력(Modification Information) >>
  *  

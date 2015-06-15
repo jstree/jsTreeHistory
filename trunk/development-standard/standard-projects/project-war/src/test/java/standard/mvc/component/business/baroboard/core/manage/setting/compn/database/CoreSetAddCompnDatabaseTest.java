@@ -37,7 +37,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : CoreSetCompnDatabaseTest.java
  * Description : T_CORE_ADD_SET_COMPN, T_CORE_ADD_SET_COMPN_LOG DBUnit Test without Spring
- * Infomation  : 
+ * Information : 
  * 
  * << 개정이력(Modification Information) >>
  * 

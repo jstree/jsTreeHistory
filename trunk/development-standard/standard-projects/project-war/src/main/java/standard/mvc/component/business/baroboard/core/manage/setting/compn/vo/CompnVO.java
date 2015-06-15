@@ -12,7 +12,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : CompnVO.java
  * Description : 설치프로그램 관리 VO
- * Infomation  : 
+ * Information : 
  * 
  * << 개정이력(Modification Information) >>
  * 

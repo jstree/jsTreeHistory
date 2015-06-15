@@ -34,7 +34,7 @@ import org.dbunit.dataset.IDataSet;
  * @see <pre>
  * Class Name  : DatabaseOperations.java
  * Description : DBUnit의 DatabaseOperation을 흉내내어 만든 클래스로 내부적으로는 다르게 동작한다.
- * Infomation  : DBUnit의 DatabaseOperation을 확장하기 어려워 별도로 만듦.
+ * Information : DBUnit의 DatabaseOperation을 확장하기 어려워 별도로 만듦.
  * 
  * << 개정이력(Modification Information) >>
  * 

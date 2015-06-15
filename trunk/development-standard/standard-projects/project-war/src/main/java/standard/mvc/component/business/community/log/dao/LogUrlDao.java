@@ -9,7 +9,7 @@ package standard.mvc.component.business.community.log.dao;
  * @see <pre>
  * 	Class Name 	: LogUrlDao.java
  * 	Description : 313 Log 설정  Dao Interface
- *  Infomation  : 313 Log 설정  Dao Interface
+ *  Information : 313 Log 설정  Dao Interface
  *  
  *  << 개정이력(Modification Information) >>
  *  

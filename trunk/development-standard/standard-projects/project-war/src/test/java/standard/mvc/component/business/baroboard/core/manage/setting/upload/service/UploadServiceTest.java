@@ -39,7 +39,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * @see <pre>
  * Class Name  : UploadServiceTest.java
  * Description : 바로보드-코어-고급설정-파일업로드 서비스 테스트
- * Infomation  : 
+ * Information : 
  * 
  * << 개정이력(Modification Information) >>
  * 

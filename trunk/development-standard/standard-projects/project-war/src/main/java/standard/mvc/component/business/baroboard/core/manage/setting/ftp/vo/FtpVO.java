@@ -18,7 +18,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  *  Class Name  : FtpVO.java
  *  Description : FTP 설정 VO
- *  Infomation  :
+ *  Information : 
  * 
  *  << 개정이력(Modification Information) >>
  * 

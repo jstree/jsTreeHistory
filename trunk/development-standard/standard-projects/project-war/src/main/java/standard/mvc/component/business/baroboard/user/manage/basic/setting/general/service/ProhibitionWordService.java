@@ -28,7 +28,7 @@ import standard.mvc.component.business.baroboard.user.manage.basic.setting.gener
  * @see <pre>
  * Class Name  : ProhibitionWordService.java
  * Description : 바로보드-회원관리-금지단어 Service 인터페이스
- * Infomation  : 바로보드-회원관리-금지단어 Service 인터페이스
+ * Information : 바로보드-회원관리-금지단어 Service 인터페이스
  * 
  * << 개정이력(Modification Information) >>
  * 

@@ -20,7 +20,7 @@ import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
  * @see <pre>
  * Class Name  : BasicLanguageServiceTest.java
  * Description : 바로보드-코어-일반설정-기본언어 Service 테스트
- * Infomation  : Have To Write Information
+ * Information : Have To Write Information
  * 
  * << 개정이력(Modification Information) >>
  * 

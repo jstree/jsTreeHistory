@@ -26,7 +26,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * @see <pre>
  * Class Name  : LoginController.java
  * Description : 로그인- 로그인 Controller 
- * Infomation  : 로그인- 로그인 컨트롤러
+ * Information : 로그인- 로그인 컨트롤러
  * 
  * << 개정이력(Modification Information) >>
  * 

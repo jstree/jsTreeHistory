@@ -34,7 +34,7 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
  * @see <pre>
  * Class Name  : GeneralSettingServiceImpl.java
  * Description : 바로보드-회원관리-기본설정-일반설정  Service 클래스
- * Infomation  : 바로보드-회원관리-기본설정-일반설정  Service 클래스
+ * Information : 바로보드-회원관리-기본설정-일반설정  Service 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 

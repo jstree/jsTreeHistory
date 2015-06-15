@@ -30,7 +30,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * @see <pre>
  * Class Name  : UploadControllerTest.java
  * Description : 바로보드-코어-고급설정-파일업로드 컨트롤러 테스트
- * Infomation  :
+ * Information :
  * 
  * << 개정이력(Modification Information) >>
  * 

@@ -28,7 +28,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : User.java
  * Description : 바로보드-회원 DTO
- * Infomation  : 바로보드-회원 DTO
+ * Information : 바로보드-회원 DTO
  * 
  * << 개정이력(Modification Information) >>
  * 

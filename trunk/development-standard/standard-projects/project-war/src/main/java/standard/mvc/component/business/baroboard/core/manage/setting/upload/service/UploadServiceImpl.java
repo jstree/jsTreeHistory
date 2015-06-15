@@ -21,7 +21,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  *  Class Name  : UploadServiceImpl.java
  *  Description : 바로보드-코어-고급설정-파일업로드 Service
- *  Infomation  :
+ *  Information :
  * 
  *  << 개정이력(Modification Information) >>
  * 

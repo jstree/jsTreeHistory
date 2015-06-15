@@ -50,7 +50,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * @see <pre>
  * Class Name  : ProhibitionWordServiceTest.java
  * Description : 바로보드-회원관리-금지단어 Service 테스트 클래스
- * Infomation  : 바로보드-회원관리-금지단어 Service 테스트 클래스
+ * Information : 바로보드-회원관리-금지단어 Service 테스트 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 

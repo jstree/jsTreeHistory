@@ -47,7 +47,7 @@ import egovframework.let.utl.fcc.service.EgovDateUtil;
  * @see <pre>
  * Class Name  : UserManageController.java
  * Description : 바로보드-회원관리-회원관리 Controller
- * Infomation  : 바로보드-회원관리-회원관리 Controller
+ * Information : 바로보드-회원관리-회원관리 Controller
  * 
  * << 개정이력(Modification Information) >>
  * 

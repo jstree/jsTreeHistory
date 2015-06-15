@@ -37,7 +37,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * @see <pre>
  * Class Name  : BasicContentsController.java
  * Description : 바로보드-회원관리-기본 컨텐츠 설정 Controller
- * Infomation  : 바로보드-회원관리-기본 컨텐츠 설정 Controller
+ * Information : 바로보드-회원관리-기본 컨텐츠 설정 Controller
  * 
  * << 개정이력(Modification Information) >>
  * 

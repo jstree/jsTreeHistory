@@ -45,7 +45,7 @@ import egovframework.com.ext.jstree.support.util.StringUtils;
  * @see <pre>
  * Class Name  : GeneralSettingController.java
  * Description : 바로보드-회원관리-기본설정-일반설정 Controller
- * Infomation  : 바로보드-회원관리-기본설정-일반설정 Controller
+ * Information : 바로보드-회원관리-기본설정-일반설정 Controller
  * 
  * << 개정이력(Modification Information) >>
  * 

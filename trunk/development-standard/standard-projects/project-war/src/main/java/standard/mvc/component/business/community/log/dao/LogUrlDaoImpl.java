@@ -13,7 +13,7 @@ import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
  * @see <pre>
  * 	Class Name 	: LogUrlDaoImpl.java
  * 	Description : 313 Log 가져오는  Dao Interface를 구현
- *  Infomation  : 313 Log 가져오는  Dao Interface를 구현
+ *  Information : 313 Log 가져오는  Dao Interface를 구현
  *  
  *  << 개정이력(Modification Information) >>
  *  

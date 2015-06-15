@@ -16,7 +16,7 @@ import standard.mvc.component.business.baroboard.user.manage.grade.vo.UserMenuBy
  * @see <pre>
  * Class Name  : UserGradeService.java
  * Description : 바로보드-회원등급관리 Service 인터페이스
- * Infomation  : 바로보드-회원등급관리 Service 인터페이스
+ * Information : 바로보드-회원등급관리 Service 인터페이스
  * 
  * << 개정이력(Modification Information) >>
  * 

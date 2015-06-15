@@ -18,7 +18,7 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
  * @see <pre>
  * Class Name  : BasicLanguageServiceImpl.java
  * Description : 바로보드-코어-일반설정-기본언어 Service 구현
- * Infomation  : 
+ * Information : 
  * 
  * << 개정이력(Modification Information) >>
  * 

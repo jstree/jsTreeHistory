@@ -26,7 +26,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : PasswordSecurityLevel.java
  * Description : 바로보드-회원관리-기본설정-비밀번호보안수준 DTO
- * Infomation  : 바로보드-회원관리-기본설정-비밀번호보안수준 DTO
+ * Information : 바로보드-회원관리-기본설정-비밀번호보안수준 DTO
  * 
  * << 개정이력(Modification Information) >>
  * 

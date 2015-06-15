@@ -17,7 +17,7 @@ import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
  * @see <pre>
  * Class Name  : BoardDaoImpl.java
  * Description : 바로보드-게시판 DAO 구현 클래스
- * Infomation  : 바로보드-게시판 DAO 구현 클래스
+ * Information : 바로보드-게시판 DAO 구현 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 

@@ -40,7 +40,7 @@ import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
  * @see <pre>
  * Class Name  : BasicContentsServiceTest.java
  * Description : 바로보드-회원관리-기본 컨텐츠 설정 Service 테스트 클래스
- * Infomation  : 바로보드-회원관리-기본 컨텐츠 설정 Service 테스트 클래스
+ * Information : 바로보드-회원관리-기본 컨텐츠 설정 Service 테스트 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 

@@ -13,7 +13,7 @@ import standard.mvc.component.business.baroboard.core.manage.setting.basicLangua
  * @see <pre>
  * Class Name  : BasicLanguageService.java
  * Description : 바로보드-코어-일반설정-기본언어 Service 인터페이스
- * Infomation  : 
+ * Information : 
  * 
  * << 개정이력(Modification Information) >>
  * 

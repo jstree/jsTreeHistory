@@ -10,7 +10,7 @@ package standard.mvc.component.business.community.log.service;
  * @see <pre>
  * 	Class Name 	: LogUrlService.java
  * 	Description : 313 Log 설정  Service Interface
- *  Infomation  : 313 Log 설정  Service Interface
+ *  Information : 313 Log 설정  Service Interface
  *  
  *  << 개정이력(Modification Information) >>
  *  

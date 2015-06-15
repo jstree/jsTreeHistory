@@ -29,7 +29,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * @see <pre>
  *  Class Name  : BoardServiceTest.java
  *  Description : 바로보드-게시판 Service 테스트 클래스
- *  Infomation  :
+ *  Information :
  * 
  *  << 개정이력(Modification Information) >>
  * 

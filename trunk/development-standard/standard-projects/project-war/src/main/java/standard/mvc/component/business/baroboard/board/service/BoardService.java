@@ -14,7 +14,7 @@ import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
  * @see <pre>
  * Class Name  : BoardService.java
  * Description : 바로보드-게시판 Service 인터페이스
- * Infomation  : 
+ * Information : 
  * 
  * << 개정이력(Modification Information) >>
  * 

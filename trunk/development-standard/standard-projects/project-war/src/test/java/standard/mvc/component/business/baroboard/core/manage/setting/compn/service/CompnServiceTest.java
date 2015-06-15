@@ -39,7 +39,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * @see <pre>
  * Class Name  : CompnServiceTest.java
  * Description : 바로보드-코어-고급설정-설치프로그램 관리 Service 테스트 클래스
- * Infomation  : 
+ * Information : 
  * 
  * << 개정이력(Modification Information) >>
  * 

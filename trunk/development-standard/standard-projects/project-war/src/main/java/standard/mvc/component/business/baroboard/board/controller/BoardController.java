@@ -32,7 +32,7 @@ import flex.messaging.util.URLDecoder;
  * @see <pre>
  * Class Name  : BoardController.java
  * Description : 바로보드-게시판 Controller 
- * Infomation  : 게시판의 글, 코멘트 등을 관리하는 컨트롤러
+ * Information : 게시판의 글, 코멘트 등을 관리하는 컨트롤러
  * 
  * << 개정이력(Modification Information) >>
  * 

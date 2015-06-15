@@ -26,7 +26,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : BasicContents.java
  * Description : 바로보드-회원관리-기본 컨텐츠 DTO
- * Infomation  : 바로보드-회원관리-기본 컨텐츠 DTO
+ * Information : 바로보드-회원관리-기본 컨텐츠 DTO
  * 
  * << 개정이력(Modification Information) >>
  * 

@@ -28,7 +28,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * @see <pre>
  * Class Name  : BasicSettingController.java
  * Description : 바로보드-코어-일반설정-기본 Controller
- * Infomation  : 
+ * Information : 
  * 
  * << 개정이력(Modification Information) >>
  * 

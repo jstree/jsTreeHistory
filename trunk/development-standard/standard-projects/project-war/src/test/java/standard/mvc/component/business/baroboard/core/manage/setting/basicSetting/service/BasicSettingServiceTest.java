@@ -23,7 +23,7 @@ import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
  * @see <pre>
  * Class Name  : BasicSettingServiceTest.java
  * Description : 바로보드 코어 일반설정 service 테스트
- * Infomation  : 바로보드 코어 일반설정 service 테스트
+ * Information : 바로보드 코어 일반설정 service 테스트
  * 
  * << 개정이력(Modification Information) >>
  * 

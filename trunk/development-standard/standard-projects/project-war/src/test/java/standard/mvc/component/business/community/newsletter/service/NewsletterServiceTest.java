@@ -44,7 +44,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * @see <pre>
  * Class Name  : NewsletterServiceTest.java
  * Description : 313 커뮤니티 뉴스레터 Service 테스트 클래스
- * Infomation  : 313 커뮤니티 뉴스레터 Service 테스트 클래스
+ * Information : 313 커뮤니티 뉴스레터 Service 테스트 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 

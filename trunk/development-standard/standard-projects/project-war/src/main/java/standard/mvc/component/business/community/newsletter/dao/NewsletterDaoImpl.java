@@ -29,7 +29,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  *  Class Name  : NewsletterDaoImpl.java
  *  Description : Newsletter DAO 인터페이스를 구현한 클래스
- *  Infomation  : Newsletter DAO 인터페이스를 구현한 클래스
+ *  Information : Newsletter DAO 인터페이스를 구현한 클래스
  *  
  *  << 개정이력(Modification Information) >>
  *  

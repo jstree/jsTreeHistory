@@ -40,7 +40,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * @see <pre>
  *  Class Name  : ServerServiceTest.java
  *  Description : 바로보드-코어-고급설정-서버 Service 테스트 클래스
- *  Infomation  :
+ *  Information :
  * 
  *  << 개정이력(Modification Information) >>
  * 

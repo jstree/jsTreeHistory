@@ -27,7 +27,7 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
  * @see <pre>
  * Class Name  : BoardServiceImpl.java
  * Description : 바로보드-게시판-글관리 Service 구현체
- * Infomation  : 
+ * Information : 
  * 
  * << 개정이력(Modification Information) >>
  * 

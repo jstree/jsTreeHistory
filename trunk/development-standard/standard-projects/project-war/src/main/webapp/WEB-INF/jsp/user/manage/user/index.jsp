@@ -161,7 +161,10 @@ var userList = {
 		    		row.push(obj.userGrade);
 		    		row.push(obj.lastLoginDe || '');
 		    		row.push(obj.joinDe);
-		    		row.push(obj.joinState);
+		    		row.push('<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">'
+		    		       + '    <option value="1">Y</option>'
+		    		       + '    <option value="0">N</option>'
+		    		       + '</select>');
 		    		row.push('<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>&nbsp;<a href="javascript:void(0);" data-function="deleteUserInfo">Delete</a>');
 		    		row.push('<input name="checkDelete" type="checkbox" />');
 		    		
@@ -177,7 +180,7 @@ var userList = {
 		            data : rows
 		        });
 		    	
-		    	$('[name="checkDelete"]').parent().addClass('center');
+		    	$('table [name="joinApprovalFl"], [name="checkDelete"]').parent().addClass('center');
 		    }
     	});
     	
@@ -360,7 +363,7 @@ $(document).ready(function() {
 	           			<td>${user.userGrade}</td>
 	           			<td>${user.lastLoginDe}</td>
 	           			<td>${user.joinDe}</td>
-	           			<td>
+	           			<td class="center">
 	           				<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">
 	           					<option value="1" <c:if test="${user.joinStateCd == 4}">selected="selected"</c:if>>Y</option>
 	           					<option value="0" <c:if test="${user.joinStateCd == 3}">selected="selected"</c:if>>N</option>

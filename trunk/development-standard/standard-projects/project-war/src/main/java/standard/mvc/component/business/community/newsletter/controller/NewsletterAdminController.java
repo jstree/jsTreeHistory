@@ -42,7 +42,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * @see <pre>
  *  Class Name  : NewsletterAdminController.java
  *  Description : Newsletter 관리 컨트롤러 클래스
- *  Infomation  : Newsletter 관리 컨트롤러 클래스
+ *  Information : Newsletter 관리 컨트롤러 클래스
  *  
  *  << 개정이력(Modification Information) >>
  *  

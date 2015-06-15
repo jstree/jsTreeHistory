@@ -28,7 +28,7 @@ import standard.mvc.component.business.baroboard.user.manage.basic.setting.joinf
  * @see <pre>
  * Class Name  : JoinFieldService.java
  * Description : 바로보드-회원관리-기본설정-회원가입필드 Service 인터페이스
- * Infomation  : 바로보드-회원관리-기본설정-회원가입필드 Service 인터페이스
+ * Information : 바로보드-회원관리-기본설정-회원가입필드 Service 인터페이스
  * 
  * << 개정이력(Modification Information) >>
  * 

@@ -37,7 +37,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : CoreSetFtpDatabaseTest, TriggerVO
  * Description : T_CORE_SET_FTP, T_CORE_SET_FTP_LOG DBUnit Test without Spring
- * Infomation  :
+ * Information :
  * 
  * << 개정이력(Modification Information) >>
  * 

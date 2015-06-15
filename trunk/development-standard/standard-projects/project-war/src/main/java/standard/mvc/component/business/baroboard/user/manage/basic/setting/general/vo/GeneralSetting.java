@@ -31,7 +31,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : GeneralSetting.java
  * Description : 바로보드-회원관리-기본설정-일반설정 DTO
- * Infomation  : 바로보드-회원관리-기본설정-일반설정 DTO
+ * Information : 바로보드-회원관리-기본설정-일반설정 DTO
  * 
  * << 개정이력(Modification Information) >>
  * 

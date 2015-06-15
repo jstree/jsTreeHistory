@@ -16,7 +16,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  *  Class Name  : MenuComprehensiveTree.java
  *  Description : 메뉴 jstree에서 사용되는 VO 
- *  Infomation  : 메뉴 jstree에서 사용되는 VO
+ *  Information : 메뉴 jstree에서 사용되는 VO
  *  
  *  << 개정이력(Modification Information) >>
  *  

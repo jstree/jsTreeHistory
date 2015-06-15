@@ -19,7 +19,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  *  Class Name  : MenuServiceImpl.java
  *  Description : jstree Spring + iBatis 버젼의 메뉴 서비스 구현체
- *  Infomation  : jstree 코어 기능은 코어 서비스를 사용하고, 추가적인 메뉴 관련 작업을 처리하는 클래스이다.
+ *  Information : jstree 코어 기능은 코어 서비스를 사용하고, 추가적인 메뉴 관련 작업을 처리하는 클래스이다.
  *  
  *  << 개정이력(Modification Information) >>
  *  

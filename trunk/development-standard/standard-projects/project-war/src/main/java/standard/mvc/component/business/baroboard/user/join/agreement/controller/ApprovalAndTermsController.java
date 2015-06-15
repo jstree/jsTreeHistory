@@ -23,7 +23,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * @see <pre>
  * Class Name  : ApprovalAndTermsController.java
  * Description : 회원가입- 이용 약관 및 개인정보처리 Controller 
- * Infomation  : 서비스 이용약관 및 개인정보처리방침등을 관리하는 컨트롤러
+ * Information : 서비스 이용약관 및 개인정보처리방침등을 관리하는 컨트롤러
  * 
  * << 개정이력(Modification Information) >>
  * 

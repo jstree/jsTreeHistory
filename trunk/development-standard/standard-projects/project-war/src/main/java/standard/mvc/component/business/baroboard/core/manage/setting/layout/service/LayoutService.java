@@ -13,7 +13,7 @@ import standard.mvc.component.business.baroboard.core.manage.setting.layout.vo.L
  * @see <pre>
  * Class Name  : LayoutService.java
  * Description : 바로보드-코어-일반-기본설정에서 사용되는 레이아웃 Service 
- * Infomation  : 
+ * Information :  
  * 
  * << 개정이력(Modification Information) >>
  * 

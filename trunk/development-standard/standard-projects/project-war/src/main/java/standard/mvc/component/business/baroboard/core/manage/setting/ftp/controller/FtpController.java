@@ -28,7 +28,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * @see <pre>
  *  Class Name  : FtpController.java
  *  Description : 바로보드-코어-고급설정-FTP Controller
- *  Infomation  :
+ *  Information : 
  * 
  *  << 개정이력(Modification Information) >>
  * 

@@ -26,7 +26,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : JoinField.java
  * Description : 바로보드-회원관리-기본설정-회원가입필드  DTO
- * Infomation  : 바로보드-회원관리-기본설정-회원가입필드  DTO
+ * Information : 바로보드-회원관리-기본설정-회원가입필드  DTO
  * 
  * << 개정이력(Modification Information) >>
  * 

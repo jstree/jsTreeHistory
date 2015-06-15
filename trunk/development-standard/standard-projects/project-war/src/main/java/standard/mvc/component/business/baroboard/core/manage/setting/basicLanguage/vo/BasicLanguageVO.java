@@ -11,7 +11,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @see <pre>
  * Class Name  : BasicLanguageVO.java
  * Description : 바로보드 코어
- * Infomation  : Have To Write Information
+ * Information : Have To Write Information
  * 
  * << 개정이력(Modification Information) >>
  * 

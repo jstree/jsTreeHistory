@@ -30,7 +30,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * @see <pre>
  *  Class Name  : FtpControllerTest.java
  *  Description : FtpController, FtpVO validation test
- *  Infomation  :
+ *  Information :
  * 
  *  << 개정이력(Modification Information) >>
  * 

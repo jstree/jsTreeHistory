@@ -12,7 +12,7 @@ import standard.mvc.component.business.baroboard.user.vo.User;
  * @see <pre>
  * Class Name  : UserRegisterService.java
  * Description : 바로보드-회원관리-회원가입  Service 인터페이스
- * Infomation  : 바로보드-회원관리-회원가입  Service 인터페이스
+ * Information : 바로보드-회원관리-회원가입  Service 인터페이스
  * 
  * << 개정이력(Modification Information) >>
  * 

@@ -29,7 +29,7 @@ import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
  * @see <pre>
  * Class Name  : JoinFieldDaoImpl.java
  * Description : 바로보드-회원관리-기본설정-회원가입필드 DAO 클래스
- * Infomation  : 바로보드-회원관리-기본설정-회원가입필드 DAO 클래스
+ * Information : 바로보드-회원관리-기본설정-회원가입필드 DAO 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 

@@ -18,7 +18,7 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
  * @see <pre>
  * Class Name  : MailingServiceImpl.java
  * Description : 바로보드-일반설정-메일링설정 Servie 클래스
- * Infomation  : Have To Write Information
+ * Information : Have To Write Information
  * 
  * << 개정이력(Modification Information) >>
  * 

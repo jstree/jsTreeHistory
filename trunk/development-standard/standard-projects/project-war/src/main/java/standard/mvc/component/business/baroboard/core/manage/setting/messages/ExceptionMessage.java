@@ -10,7 +10,7 @@ package standard.mvc.component.business.baroboard.core.manage.setting.messages;
  * @see <pre>
  *  Class Name  : ExceptionMessage.java
  *  Description : 설정메뉴의 예외 메세지 통합 관리 목적
- *  Infomation  :
+ *  Information : 
  * 
  *  << 개정이력(Modification Information) >>
  * 

@@ -13,7 +13,7 @@ import standard.mvc.component.business.baroboard.core.manage.setting.mailing.vo.
  * @see <pre>
  * Class Name  : MailingService.java
  * Description : 바로보드-일반설정-메일링 Service Interface
- * Infomation  : 
+ * Information :  
  * 
  * << 개정이력(Modification Information) >>
  * 

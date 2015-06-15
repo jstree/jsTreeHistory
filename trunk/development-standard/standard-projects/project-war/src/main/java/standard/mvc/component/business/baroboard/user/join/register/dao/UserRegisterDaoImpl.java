@@ -15,7 +15,7 @@ import standard.mvc.component.business.baroboard.user.vo.User;
  * @see <pre>
  * Class Name  : UserRegisterDaoImpl.java
  * Description : 바로보드-사용자 정보 DAO 구현 클래스
- * Infomation  : 바로보드-사용자 정보 DAO 구현 클래스
+ * Information : 바로보드-사용자 정보 DAO 구현 클래스
  * 
  * << 개정이력(Modification Information) >>
  * 
