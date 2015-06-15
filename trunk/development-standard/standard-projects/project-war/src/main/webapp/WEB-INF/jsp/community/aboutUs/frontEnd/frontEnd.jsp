@@ -523,10 +523,10 @@
                         		<a href="mailto:topdevlee@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
                         	</li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
+                                <a href="https://www.facebook.com/euncheol.lee.52"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-fb.png" alt="social" /></a>
                             </li>
                             <li>
-                                <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
+                                <a href="https://twitter.com/Cessiah"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-tw.png" alt="social" /></a>
                             </li>
                             <%-- <li>
                                 <a href=""><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/social-in.png" alt="social" /></a>
