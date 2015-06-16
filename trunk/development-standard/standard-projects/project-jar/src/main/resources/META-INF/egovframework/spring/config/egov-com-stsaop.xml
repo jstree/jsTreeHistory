@@ -31,12 +31,4 @@
 			</aop:aspect> -->
 	</aop:config>
 
-	<!-- monitoMe is the bean we will monitor -->
-	<bean id="jamonAspect" class="com.jamonapi.aop.spring.JamonAspect" />
-	<aop:config>
-		<aop:pointcut id="jamonMonitoringPointcut" expression="execution(* egovframework.com.ext.jstree.spring*..*(..))" />
-		<aop:aspect id="jamonSpringAspect2" ref="jamonAspect">
-			<aop:around pointcut-ref="jamonMonitoringPointcut" method="monitor" />
-		</aop:aspect>
-	</aop:config>
 </beans>

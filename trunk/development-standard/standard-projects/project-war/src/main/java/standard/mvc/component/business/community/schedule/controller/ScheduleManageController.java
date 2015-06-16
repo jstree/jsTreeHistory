@@ -22,8 +22,6 @@ import egovframework.com.cmm.service.EgovCmmUseService;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericInterfaceController;
 import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupport;
-import egovframework.let.cop.smt.sim.service.EgovIndvdlSchdulManageService;
-import egovframework.let.cop.smt.sim.service.IndvdlSchdulManageVO;
 
 /**
  * Modification Information
@@ -55,8 +53,8 @@ public class ScheduleManageController extends GenericAbstractController implemen
 	@Resource(name="EgovCmmUseService")
 	private EgovCmmUseService cmmUseService;
 	
-	@Resource(name = "egovIndvdlSchdulManageService")
-	private EgovIndvdlSchdulManageService egovIndvdlSchdulManageService;
+//	@Resource(name = "egovIndvdlSchdulManageService")
+//	private EgovIndvdlSchdulManageService egovIndvdlSchdulManageService;
 
 
 
@@ -145,7 +143,7 @@ public class ScheduleManageController extends GenericAbstractController implemen
               
     	commandMap.put("searchMonth", sSearchDate);
     	commandMap.put("searchMode", "MONTH");
-        model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageRetrieve(commandMap));
+        //model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageRetrieve(commandMap));
         model.addAttribute("searchMonth", sSearchDate);
         //년도/월 셋팅
         cal.set(iYear, iMonth, 1);
@@ -192,9 +190,9 @@ public class ScheduleManageController extends GenericAbstractController implemen
     	voComCode.setCodeId("COM031");
     	model.addAttribute("reptitSeCode", cmmUseService.selectCmmCodeDetail(voComCode));
     	
-    	IndvdlSchdulManageVO indvdlSchdulManageVO = new IndvdlSchdulManageVO();
-    	indvdlSchdulManageVO.setSchdulId((String)commandMap.get("schdulId"));
-    	model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageDetail(indvdlSchdulManageVO));
+//    	IndvdlSchdulManageVO indvdlSchdulManageVO = new IndvdlSchdulManageVO();
+//    	indvdlSchdulManageVO.setSchdulId((String)commandMap.get("schdulId"));
+//    	model.addAttribute("resultList", egovIndvdlSchdulManageService.selectIndvdlSchdulManageDetail(indvdlSchdulManageVO));
     	
     	model.addAllAttributes(commandMap);
     	

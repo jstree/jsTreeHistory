@@ -7,9 +7,10 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>src/main/java/egovframework/com/ext/jstree/support/manager/config/SpringBootapplication.java</config>
+		<config>src/main/java/egovframework/com/ext/jstree/support/manager/config/SpringBootapplication.javaBackup</config>
 	</configs>
 	<autoconfigs>
+		<config>java:egovframework.com.ext.jstree.support.manager.config.SpringBootapplication</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
