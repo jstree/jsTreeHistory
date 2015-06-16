@@ -82,6 +82,7 @@ public class UserManageController extends GenericAbstractController {
         
         model.addAttribute("userGrades", userGradeService.inquiryUserGradeList(null));
         
+        
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setCurrentPageNo(1);
         paginationInfo.setRecordCountPerPage(10);
@@ -92,34 +93,24 @@ public class UserManageController extends GenericAbstractController {
         paramMap.put("lastRecordIndex", paginationInfo.getLastRecordIndex());
         paramMap.put("user", user);
         
-        List<User> userList = userManageService.getUserListPaginated(paramMap);
+        paginationInfo.setTotalRecordCount( userManageService.getCountOfUser(paramMap) );
         
-        for (User u : userList) {
-                
-            u.setJoinDe( EgovDateUtil.formatDate(u.getJoinDe(), "-") );
-              
-            if (u.getLastLoginDe() != null) {
-                u.setLastLoginDe( EgovDateUtil.formatDate(u.getLastLoginDe(), "-") );
-            }
-        }
-        
-        model.addAttribute("userList", userList);
+        model.addAttribute("paginationInfo", paginationInfo);
         
         return "/jsp/user/manage/user/index";
     }
     
-    @RequestMapping("/list.do")
+    @RequestMapping(value = "/list.do", method = RequestMethod.POST)
     @ResponseBody
     public String list(@RequestBody User user
                      , @RequestParam(required = false, defaultValue = "1") int currentPageNo
-                     , @RequestParam(required = false, defaultValue = "10") int recordCountPerPage) throws Exception {
+                     , @RequestParam(required = false, defaultValue = "10") int recordCountPerPage
+                     , @RequestParam(required = false, defaultValue = "10") int pageSize) throws Exception {
         
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setCurrentPageNo(currentPageNo);
         paginationInfo.setRecordCountPerPage(recordCountPerPage);
-        paginationInfo.setPageSize(10);
-        
-        int firstRecordIndex = paginationInfo.getFirstRecordIndex();
+        paginationInfo.setPageSize(pageSize);
         
         user.setJoinDeBegi( user.getJoinDeBegi().replaceAll("-", "") );
         user.setJoinDeEnd( user.getJoinDeEnd().replaceAll("-", "") );
@@ -134,7 +125,12 @@ public class UserManageController extends GenericAbstractController {
                 if ( "c_id".equals(f.getName()) || "c_title".equals(f.getName())
                   || "email".equals(f.getName()) || "userGradeCd".equals(f.getName()) || "userGrade".equals(f.getName())
                   || "joinStateCd".equals(f.getName()) || "joinState".equals(f.getName()) || "joinDe".equals(f.getName())
-                  || "lastLoginDe".equals(f.getName()) ) 
+                  || "lastLoginDe".equals(f.getName()) || "lastLoginDe".equals(f.getName())
+                  
+                  || "currentPageNo".equals(f.getName()) || "recordCountPerPage".equals(f.getName())
+                  || "pageSize".equals(f.getName()) || "totalRecordCount".equals(f.getName())
+                  || "totalPageCount".equals(f.getName()) || "firstPageNoOnPageList".equals(f.getName())
+                  || "lastPageNoOnPageList".equals(f.getName()) ) 
                 {
                     return false;
                 }
@@ -150,9 +146,11 @@ public class UserManageController extends GenericAbstractController {
         }).create();
         
         Map<String, Object> paramMap = new HashMap<String, Object>();
-        paramMap.put("firstRecordIndex", firstRecordIndex);
-        paramMap.put("recordCountPerPage", recordCountPerPage);
+        paramMap.put("firstRecordIndex", paginationInfo.getFirstRecordIndex());
+        paramMap.put("lastRecordIndex", paginationInfo.getLastRecordIndex());
         paramMap.put("user", user);
+        
+        paginationInfo.setTotalRecordCount( userManageService.getCountOfUser(paramMap) );
         
         List<User> userList = userManageService.getUserListPaginated(paramMap);
         
@@ -165,7 +163,11 @@ public class UserManageController extends GenericAbstractController {
             }
         }
         
-        return gson.toJson(userList);
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        returnMap.put("userList", userList);
+        returnMap.put("paginationInfo", paginationInfo);
+        
+        return gson.toJson(returnMap);
     }
     
     @RequestMapping(value = "/delete.do", method = RequestMethod.POST)

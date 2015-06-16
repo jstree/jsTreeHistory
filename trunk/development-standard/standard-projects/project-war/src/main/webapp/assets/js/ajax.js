@@ -232,7 +232,7 @@ function callAjax(form, url, target, type, returnType, data, contentType, jsonpC
 	  if (responseText.result == false) {
 	      notificationAlert(responseText.message);
 	  } else {
-	      notificationAlert('정상 처리되었습니다.');
+	      //notificationAlert('정상 처리되었습니다.');
 	  }
 	  
 	  if (jsonpCallback) {

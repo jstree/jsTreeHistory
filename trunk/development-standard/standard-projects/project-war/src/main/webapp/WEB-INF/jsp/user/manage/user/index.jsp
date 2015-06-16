@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
 
 <style type="text/css">
 .center {
@@ -124,10 +125,14 @@ var userList = {
 		
     initGrid : function() {
         
-        userList.grid = $('#tblUserList').dataTable({
+    	userList.grid = $('#tblUserList');
+    	
+    	userList.grid.dataTable({
             searching : false,
             lengthChange : false,
-            ordering : false
+            paging : false,
+            ordering : false,
+            info : false
         });
     },
     
@@ -135,7 +140,7 @@ var userList = {
         
     	$('#btnSearchingUser').on('click', function() {
     		
-    		userList.getList();
+    		userList.getList(1);
     	});
     	
         $('#btnDeleteUserInfo').on('click', function() {
@@ -241,16 +246,15 @@ var userList = {
 	    }
     },
     
-    getList : function() {
+    getList : function(pageNo) {
     	
-    	var $form = $('#frmSearchingUser');
+    	var $form = $('#formSearchingUser');
 		
 		var params = $form.serializeObject();
 		
-		var currentPageNo = 1; // TODO 류강하 :
-		
 		callAjax(null
-	           , $form.prop('action') + '?currentPageNo=' + currentPageNo
+	           //, $form.prop('action') + '?currentPageNo=' + ('${param.currentPageNo}' || 1)
+	           , $form.prop('action') + '?currentPageNo=' + pageNo
 	           , null
 	           , $form.prop('method')
 	           , 'json'
@@ -262,15 +266,15 @@ var userList = {
 	    	
 	    	var rows = [];
 	    	
-	    	$(data).each(function(i, obj) {
+	    	$(data.userList).each(function(i, user) {
 	    		
 	    		var row = [];
-	    		//row.push(obj.c_id);
-	    		row.push(obj.email);
-	    		row.push(obj.c_title);
-	    		row.push(obj.userGrade);
-	    		row.push(obj.lastLoginDe || '');
-	    		row.push(obj.joinDe);
+	    		//row.push(user.c_id);
+	    		row.push(user.email);
+	    		row.push(user.c_title);
+	    		row.push(user.userGrade);
+	    		row.push(user.lastLoginDe || '');
+	    		row.push(user.joinDe);
 	    		row.push('<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">'
 	    		       + '    <option value="1">Y</option>'
 	    		       + '    <option value="0">N</option>'
@@ -284,13 +288,33 @@ var userList = {
 	    	userList.grid.fnDestroy();
 	    	
 	    	userList.grid = $('#tblUserList').dataTable({
-	            searching : false,
+	    		searching : false,
 	            lengthChange : false,
+	            paging : false,
 	            ordering : false,
+	            info : false,
 	            data : rows
 	        });
 	    	
 	    	$('table [name="joinApprovalFl"], [name="checkDelete"]').parent().addClass('center');
+	    	
+	    	$('#divPagination a').each(function(i, a) {
+	    		
+	    		$a = $(a);
+	    		
+	    		if ($a.text() == pageNo) {
+	    			
+	    			//$a.data('tooltip', '');
+	    			
+// 	    			$a.on('click', function() {
+// 	    				userList.getList(pageNo);
+// 	    			});
+	    		} else {
+	    			//$a.data('tooltip', '');
+	    		}
+	    		
+	    		$a.removeProp('tooltip');
+	    	});
 	    }
     },
     
@@ -298,6 +322,8 @@ var userList = {
     	this.initScreen();
         this.initGrid();
         this.handleEvent();
+        
+        userList.getList(1);
     }
 };
 
@@ -310,7 +336,7 @@ $(document).ready(function() {
 	<div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
 	    <div id="samDiv" class="tablet-mobile alpha bm-remove last">
 			<div id="search" class="one-whole boxed p-twenty">
-				<form id="frmSearchingUser" action="list.do" method="post">
+				<form id="formSearchingUser" action="list.do" method="post">
 					<div class="responsive-row">
 						<label for="inpEmail">이메일</label>
 						<input id="inpEmail" name="email" type="text" />
@@ -362,29 +388,10 @@ $(document).ready(function() {
 	                   <th><input id="checkAll" type="checkbox" /></th>
 	                </tr>
 	            </thead>
-	            <tbody>
-	           	<c:forEach var="user" items="${userList}" varStatus="status">
-	           		<tr data-c_id="${user.c_id}">
-	           			<td>${user.email}</td>
-	           			<td>${user.c_title}</td>
-	           			<td>${user.userGrade}</td>
-	           			<td>${user.lastLoginDe}</td>
-	           			<td>${user.joinDe}</td>
-	           			<td class="center">
-	           				<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">
-	           					<option value="1" <c:if test="${user.joinStateCd == 4}">selected="selected"</c:if>>Y</option>
-	           					<option value="0" <c:if test="${user.joinStateCd == 3}">selected="selected"</c:if>>N</option>
-	           				</select>
-	           			</td>
-	           			<td>
-	           				<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>
-	           				<a href="javascript:void(0);" data-function="deleteUserInfo">Delete</a>
-	           			</td>
-	           			<td class="center"><input name="checkDelete" type="checkbox" /></td>
-	           		</tr>
-	            </c:forEach>
-	            </tbody>
 	        </table>
+	        <div id="divPagination">
+	        	<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="userList.getList" />
+	        </div>
 	    </div>
 	</div>
 </section>

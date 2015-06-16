@@ -46,6 +46,14 @@ import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 @Repository
 public class UserManageDaoImpl extends EgovComAbstractDAO implements UserManageDao {
 
+    @Override
+    public int selectCountOfUser(Map<String, Object> paramMap) throws Exception {
+        
+        User user = (User) paramMap.get("user");
+        
+        return (int) getSqlMapClientTemplate().queryForObject(user.getSqlMapSelector() + "." + "selectCountOfUser", paramMap);
+    }
+    
     @SuppressWarnings("unchecked")
     @Override
     public List<User> selectUserListPaginated(Map<String, Object> paramMap) throws Exception {

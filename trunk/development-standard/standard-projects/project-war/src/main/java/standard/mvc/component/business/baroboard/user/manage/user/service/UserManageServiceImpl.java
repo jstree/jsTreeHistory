@@ -79,6 +79,15 @@ public class UserManageServiceImpl implements UserManageService {
 	}
 	
 	@Override
+    public int getCountOfUser(Map<String, Object> paramMap) throws Exception {
+	    
+	    User user = (User) paramMap.get("user");
+        user.setC_id(2);
+        
+        return userManageDao.selectCountOfUser(paramMap); 
+    }
+	
+	@Override
 	public List<User> getUserListPaginated(Map<String, Object> paramMap) throws Exception {
 	    
 	    User user = (User) paramMap.get("user");

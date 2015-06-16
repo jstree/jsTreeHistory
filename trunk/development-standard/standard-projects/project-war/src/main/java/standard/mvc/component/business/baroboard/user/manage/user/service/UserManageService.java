@@ -68,7 +68,16 @@ public interface UserManageService {
     void addUserInfo(User user) throws Exception;
     
     /**
-     * 페이징 처리된 회원 목록을 조회한다.
+     * 검색 조건에 부합하는 회원 총 수를 조회한다.
+     * 
+     * @param paramMap 회원 DTO, 페이징 처리 관련 속성을 담은 Map
+     * @return 검색 조건에 부합하는 회원 총 수
+     * @throws Exception
+     */
+    int getCountOfUser(Map<String, Object> paramMap) throws Exception;
+    
+    /**
+     * 페이징 처리된, 검색 조건에 부합하는 회원 목록을 조회한다.
      * 
      * @param paramMap 회원 DTO, 페이징 처리 관련 속성을 담은 Map
      * @return 회원 DTO List
