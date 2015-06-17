@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="defaultSetting">
+	<typeAlias alias="DefaultSetting" type="standard.mvc.component.business.baroboard.board.manager.defaultsetting.vo.DefaultSettingVO" />
+	
+	<update id="alterNode" parameterClass="DefaultSetting">
+		/* alterNode for GeneralSetting */
+		UPDATE T_BOARD_GENERAL_SETTING 
+		   SET C_USE_LIKE_FL                  = #useLikeFl# 
+		     , C_VIEW_CONTENT_IN_LIST_FL      = #viewContentInListFl# 
+		     , C_VIEW_ATTACH_IN_LIST_FL       = #viewAttachInListFl# 
+		     , C_MAX_LENGTH_IN_TITLE          = #maxLengthInTitle# 
+		     , C_MIN_LENGTH_IN_CONTENT        = #minLengthInContent# 
+		     , C_MAX_LENGTH_IN_CONTENT        = #maxLengthInContent# 
+		     , C_USE_SNS_LINK_FL              = #useSnsLinkFl# 
+		     , C_SPAM_KEYWORDS                = #spamKeywords# 
+		     , C_BLOCK_DOUBT_REQUEST_FL       = #blockDoubtRequestFl# 
+		     , C_COMMENT_CNT_FOR_BAN_EDITING  = #commentCntForBanEditing# 
+		     , C_COMMENT_CNT_FOR_BAN_DELETION = #commentCntForBanDeletion# 
+		     , C_USE_WRITTING_ANONYM_FL       = #useWrittingAnonymFl# 
+		 WHERE C_ID = #c_id#
+	</update>
+
+
+	<select id="getNode" parameterClass="DefaultSetting" resultClass="DefaultSetting">
+		/* getNode for GeneralSetting */
+        SELECT C_ID
+             , C_PARENTID
+             , C_POSITION
+             , C_LEFT
+             , C_RIGHT
+             , C_LEVEL
+             , C_TITLE
+             , C_TYPE
+             , C_USE_LIKE_FL                  AS useLikeFl
+		     , C_VIEW_CONTENT_IN_LIST_FL      AS viewContentInListFl
+		     , C_VIEW_ATTACH_IN_LIST_FL       AS viewAttachInListFl
+		     , C_MAX_LENGTH_IN_TITLE          AS maxLengthInTitle
+		     , C_MIN_LENGTH_IN_CONTENT        AS minLengthInContent 
+		     , C_MAX_LENGTH_IN_CONTENT        AS maxLengthInContent
+		     , C_USE_SNS_LINK_FL              AS useSnsLinkFl
+		     , C_SPAM_KEYWORDS                AS spamKeywords
+		     , C_BLOCK_DOUBT_REQUEST_FL       AS blockDoubtRequestFl
+		     , C_COMMENT_CNT_FOR_BAN_EDITING  AS commentCntForBanEditing
+		     , C_COMMENT_CNT_FOR_BAN_DELETION AS commentCntForBanDeletion
+		     , C_USE_WRITTING_ANONYM_FL       AS useWrittingAnonymFl
+          FROM T_BOARD_GENERAL_SETTING 
+         WHERE C_ID = #c_id#
+    </select>
+</sqlMap>

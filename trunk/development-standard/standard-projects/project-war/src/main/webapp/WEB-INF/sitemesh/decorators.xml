@@ -30,6 +30,7 @@
 		<pattern>/core/manage/*</pattern>
 		<pattern>/user/manage/*</pattern>
 		<pattern>/board/manage/*</pattern>
+		<pattern>/board/manager/*</pattern>
 	</decorator>
 	
 	<decorator name="default" page="defaultDeco.jsp">
