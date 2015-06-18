@@ -77,7 +77,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public Article getArticleById(Article article) throws Exception {
-		return coreDao.getNode(article);
+		return boardDao.getArticleById(article);
 	}
 	
 	@Override
@@ -89,7 +89,7 @@ public class BoardServiceImpl implements BoardService {
 	public Article addArticle(Article article) throws Exception {
 		article.setRef(2);
 		article.setC_type("default");
-		
+		article.setRegId(5);	// For Test Only
 		/* escaped 된 html 을 원래 html로 변환함 */
 		String unescapedHtml = StringEscapeUtils.unescapeHtml4(article.getContent());
 		article.setContent(unescapedHtml);
@@ -125,6 +125,23 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 
+	/**  DB에 저장되어있는 20150601063125 형식의 날짜형식을 2015-06-10 06:31:25 형식으로 바꿔줌 */
+	public void changeRegDTFormatForReadArticle(Article article) {
+		String org = article.getRegDt();
+		String formattedDate = 
+				org.substring(0,4)
+				+ "-"
+				+ org.substring(4, 6)
+				+ "-"
+				+ org.substring(6, 8)
+				+ " "
+				+ org.substring(8, 10)
+				+ ":"
+				+ org.substring(10, 12)
+				+ ":"
+				+ org.substring(12, 14);
+		article.setRegDt(formattedDate);
+	}
 	
 
 }

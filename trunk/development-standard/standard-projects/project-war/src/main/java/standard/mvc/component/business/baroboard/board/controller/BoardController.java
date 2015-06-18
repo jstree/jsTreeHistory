@@ -1,12 +1,10 @@
 package standard.mvc.component.business.baroboard.board.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,6 @@ import standard.mvc.component.business.baroboard.board.service.BoardService;
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
-import flex.messaging.util.URLDecoder;
 
 /**
  * Modification Information
@@ -119,7 +116,7 @@ public class BoardController extends GenericAbstractController {
 	}
 
 	@RequestMapping(value = "/newArticle.do")
-	public String addArticle(ModelMap modelMap) {
+	public String newArticle(ModelMap modelMap) {
 
 		return "/jsp/board/newArticle";
 	}

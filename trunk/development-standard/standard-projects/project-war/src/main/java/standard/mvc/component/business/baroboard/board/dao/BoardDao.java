@@ -35,5 +35,7 @@ public interface BoardDao {
 	public List<Article> searchArticle(SearchArticle searchArticle) throws Exception;
 	
 	public int getOpenArticleCnt(Article article) throws Exception;
+
+	public Article getArticleById(Article article)throws Exception;
 	
 }

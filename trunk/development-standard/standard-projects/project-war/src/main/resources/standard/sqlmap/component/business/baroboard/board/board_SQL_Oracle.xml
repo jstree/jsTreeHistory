@@ -381,7 +381,6 @@
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
 				, A.C_REG_ID as regId 			
-				, A.C_CONTENT as content 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
 				, A.C_ALERT_RESPONSE_FL as alertResponseFL
@@ -416,7 +415,6 @@
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
 				, A.C_REG_ID as regId 			
-				, A.C_CONTENT as content 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
 				, A.C_ALERT_RESPONSE_FL as alertResponseFL
@@ -445,6 +443,33 @@
 		 	AND C_LEVEL = 2
 	</select>
 	
+	<select id="getArticleById" parameterClass="Article" resultClass="Article">
+		/* getArticleById */
+		<dynamic>
+			<include refid="getMetaField" />
+				, A.C_TITLE as c_title
+				, A.C_REG_ID as regId 			
+				, A.C_CONTENT as content 			
+				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
+				, A.C_ALLOW_REPLY_FL as allowReplyFL	
+				, A.C_ALERT_RESPONSE_FL as alertResponseFL
+				, A.C_OPEN_ARTICLE_FL as openArticleFL 	
+				, A.C_ANNOUNCEMENT_FL as announcementFL 	
+				, A.C_VIEW_CNT as viewCnt 			
+				, A.C_IS_DELETED_FL as isDeletedFL		
+				, A.C_REG_DT as regDt 				
+				, A.C_MOD_DT as modDt 	
+				, B.C_TITLE as regNickName			
+			FROM T_BOARD_TEST A, T_USER_INFO B
+			WHERE 1=1
+				AND A.C_ID = #c_id#
+				AND A.C_REG_ID = B.C_ID
+				AND A.C_OPEN_ARTICLE_FL = '1'
+			ORDER BY
+				A.C_REG_DT ASC
+		</dynamic>
+	
+	</select>
 	
 	<select id="searchArticle" parameterClass="SearchArticle" resultClass="Article">
 		/* searchArticle */
@@ -452,7 +477,6 @@
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
 				, A.C_REG_ID as regId 			
-				, A.C_CONTENT as content 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
 				, A.C_ALERT_RESPONSE_FL as alertResponseFL
