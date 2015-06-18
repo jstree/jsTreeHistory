@@ -242,22 +242,13 @@
 						<!-- Switch router Sub Menu -->
 						
 						<a title="Mysql" class="submenu" name="Mysql-sub"><i class="icon-eye-open"></i><span>  
-						Switch router</span></a>
+						Mysql</span></a>
 						<!-- Mysql Sub Menu -->
 							<div id="Mysql-sub">
 								<a href="http://www.313.co.kr/php/phpMyAdmin-3.3.9.2-all-languages" target="_blank" title="phpMyAdmin-3.3.9.2"><i class="icon-film"></i><span>  
 								phpMyAdmin-3.3.9.2</span></a>
 							</div>
 						<!-- Mysql Sub Menu -->
-						
-						<a title="Postgres" class="submenu" name="Postgres-sub"><i class="icon-eye-open"></i><span>  
-						Postgres</span></a>
-						<!-- Postgres Sub Menu -->
-							<div id="Postgres-sub">
-								<a href="http://www.313.co.kr:8888/phppgadmin/" target="_blank" title="phppPgAdmin"><i class="icon-film"></i><span>  
-								phppPgAdmin</span></a>
-							</div>
-						<!-- Postgres Sub Menu -->
 						
 						<a title="Postgres" class="submenu" name="Postgres-sub"><i class="icon-eye-open"></i><span>  
 						Postgres</span></a>
