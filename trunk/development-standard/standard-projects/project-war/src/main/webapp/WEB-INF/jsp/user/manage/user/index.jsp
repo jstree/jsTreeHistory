@@ -56,6 +56,14 @@ select {
 	width: 25%;
 }
 */
+#divPagination {
+	text-align: center;
+	margin-top: 10px;
+	font-size: 1.1em;
+}
+.currentPage {
+	font-weight: bold !important;
+}
 </style>
 
 <script type="text/javascript">
@@ -254,7 +262,7 @@ var userList = {
 		
 		callAjax(null
 	           //, $form.prop('action') + '?currentPageNo=' + ('${param.currentPageNo}' || 1)
-	           , $form.prop('action') + '?currentPageNo=' + pageNo
+	           , $form.prop('action') + '?currentPageNo=' + pageNo + '&jsFunction=userList.getList'
 	           , null
 	           , $form.prop('method')
 	           , 'json'
@@ -264,58 +272,49 @@ var userList = {
 	    
 	    function callback(data) {
 	    	
-	    	var rows = [];
+	    	(function renderGrid() {
+		    	
+	    		var rows = [];
+		    	
+		    	$(data.userList).each(function(i, user) {
+		    		
+		    		var row = [];
+		    		//row.push(user.c_id);
+		    		row.push(user.email);
+		    		row.push(user.c_title);
+		    		row.push(user.userGrade);
+		    		row.push(user.lastLoginDe || '');
+		    		row.push(user.joinDe);
+		    		row.push('<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">'
+		    		       + '    <option value="1">Y</option>'
+		    		       + '    <option value="0">N</option>'
+		    		       + '</select>');
+		    		row.push('<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>&nbsp;<a href="javascript:void(0);" data-function="deleteUserInfo">Delete</a>');
+		    		row.push('<input name="checkDelete" type="checkbox" />');
+		    		
+		    		rows.push(row);
+		    	});
+		    	
+		    	userList.grid.fnDestroy();
+		    	
+		    	userList.grid = $('#tblUserList').dataTable({
+		    		searching : false,
+		            lengthChange : false,
+		            paging : false,
+		            ordering : false,
+		            info : false,
+		            data : rows
+		        });
+		    	
+		    	$('table [name="joinApprovalFl"], [name="checkDelete"]').parent().addClass('center');
+		    })();
 	    	
-	    	$(data.userList).each(function(i, user) {
-	    		
-	    		var row = [];
-	    		//row.push(user.c_id);
-	    		row.push(user.email);
-	    		row.push(user.c_title);
-	    		row.push(user.userGrade);
-	    		row.push(user.lastLoginDe || '');
-	    		row.push(user.joinDe);
-	    		row.push('<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">'
-	    		       + '    <option value="1">Y</option>'
-	    		       + '    <option value="0">N</option>'
-	    		       + '</select>');
-	    		row.push('<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>&nbsp;<a href="javascript:void(0);" data-function="deleteUserInfo">Delete</a>');
-	    		row.push('<input name="checkDelete" type="checkbox" />');
-	    		
-	    		rows.push(row);
-	    	});
-	    	
-	    	userList.grid.fnDestroy();
-	    	
-	    	userList.grid = $('#tblUserList').dataTable({
-	    		searching : false,
-	            lengthChange : false,
-	            paging : false,
-	            ordering : false,
-	            info : false,
-	            data : rows
-	        });
-	    	
-	    	$('table [name="joinApprovalFl"], [name="checkDelete"]').parent().addClass('center');
-	    	
-	    	$('#divPagination a').each(function(i, a) {
-	    		
-	    		$a = $(a);
-	    		
-	    		if ($a.text() == pageNo) {
-	    			
-	    			//$a.data('tooltip', '');
-	    			
-// 	    			$a.on('click', function() {
-// 	    				userList.getList(pageNo);
-// 	    			});
-	    		} else {
-	    			//$a.data('tooltip', '');
-	    		}
-	    		
-	    		$a.removeProp('tooltip');
-	    	});
+	    	(function renderPageList() {
+				
+		    	$('#divPagination').html(data.pageList);
+		    })();
 	    }
+	    
     },
     
     init : function() {
@@ -389,9 +388,7 @@ $(document).ready(function() {
 	                </tr>
 	            </thead>
 	        </table>
-	        <div id="divPagination">
-	        	<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="userList.getList" />
-	        </div>
+	        <div id="divPagination"></div>
 	    </div>
 	</div>
 </section>

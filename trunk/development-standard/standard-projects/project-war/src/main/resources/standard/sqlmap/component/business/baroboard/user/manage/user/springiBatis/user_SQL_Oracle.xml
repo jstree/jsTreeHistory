@@ -435,7 +435,7 @@
     <sql id="paginationEnd">
     		) DATA
 		)
-		WHERE RN BETWEEN #firstRecordIndex# AND #lastRecordIndex#
+		WHERE RN BETWEEN (#firstRecordIndex# + 1) AND #lastRecordIndex#
     </sql>
     
     <sql id="selectUserList">

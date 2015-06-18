@@ -38,6 +38,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.manager.mvc.tags.ui.pagination.AsyncPaginationTextRenderer;
 import egovframework.let.utl.fcc.service.EgovDateUtil;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
@@ -71,6 +72,9 @@ public class UserManageController extends GenericAbstractController {
     @Autowired
     private UserGradeService userGradeService;
     
+    @Autowired
+    private AsyncPaginationTextRenderer asyncPaginaionTexRenderer;
+    
     @Override
     public Map<String, Map<String, Object>> bindTypes() {
         // TODO Auto-generated method stub
@@ -82,21 +86,6 @@ public class UserManageController extends GenericAbstractController {
         
         model.addAttribute("userGrades", userGradeService.inquiryUserGradeList(null));
         
-        
-        PaginationInfo paginationInfo = new PaginationInfo();
-        paginationInfo.setCurrentPageNo(1);
-        paginationInfo.setRecordCountPerPage(10);
-        paginationInfo.setPageSize(10);
-        
-        Map<String, Object> paramMap = new HashMap<String, Object>();
-        paramMap.put("firstRecordIndex", paginationInfo.getFirstRecordIndex());
-        paramMap.put("lastRecordIndex", paginationInfo.getLastRecordIndex());
-        paramMap.put("user", user);
-        
-        paginationInfo.setTotalRecordCount( userManageService.getCountOfUser(paramMap) );
-        
-        model.addAttribute("paginationInfo", paginationInfo);
-        
         return "/jsp/user/manage/user/index";
     }
     
@@ -105,7 +94,8 @@ public class UserManageController extends GenericAbstractController {
     public String list(@RequestBody User user
                      , @RequestParam(required = false, defaultValue = "1") int currentPageNo
                      , @RequestParam(required = false, defaultValue = "10") int recordCountPerPage
-                     , @RequestParam(required = false, defaultValue = "10") int pageSize) throws Exception {
+                     , @RequestParam(required = false, defaultValue = "10") int pageSize
+                     , @RequestParam String jsFunction) throws Exception {
         
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setCurrentPageNo(currentPageNo);
@@ -165,7 +155,7 @@ public class UserManageController extends GenericAbstractController {
         
         Map<String, Object> returnMap = new HashMap<String, Object>();
         returnMap.put("userList", userList);
-        returnMap.put("paginationInfo", paginationInfo);
+        returnMap.put("pageList", asyncPaginaionTexRenderer.renderPagination(paginationInfo, jsFunction));
         
         return gson.toJson(returnMap);
     }
