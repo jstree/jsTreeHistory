@@ -201,10 +201,10 @@
 							</div>
 						<!-- Net FTP Sub Menu -->
 						
-						<a title="Web Hard" class="submenu" name="FTP-sub"><i class="icon-eye-open"></i><span>  
+						<a title="Web Hard" class="submenu" name="Hard-sub"><i class="icon-eye-open"></i><span>  
 						Web Hard</span></a>
 						<!-- Net FTP Sub Menu -->
-							<div id="FTP-sub">
+							<div id="Hard-sub">
 								<a href="http://www.313.co.kr/php/ajaxplorer-core-4.2.3" target="_blank" title="ajaxplorer-core-4.2.3"><i class="icon-film"></i><span>  
 								ajaxplorer-core-4.2.3</span></a>
 							</div>
