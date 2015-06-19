@@ -19,15 +19,12 @@ var Agreement = {
 	        
 	        $form.on('submit', function() {
 	        	if($("input:checkbox[id='agreement']").is(":checked") == false){
-	            	alert('약관의 동의 버튼에 체크해주세요');
+	            	alert('약관 동의 버튼에 체크해주세요');
 	            	return false;
 	            }
 	            if (!confirm('약관의 동의하시겠습니까?')) {
 	                return false;
 	            }
-	            
-	            
-	            
 	        });
 	    },
 	        
