@@ -135,15 +135,7 @@ var userList = {
 		
     initGrid : function() {
         
-    	userList.grid = $('#tblUserList');
-    	
-    	userList.grid.dataTable({
-            searching : false,
-            lengthChange : false,
-            paging : false,
-            ordering : false,
-            info : false
-        });
+    	userList.grid = $('#tblUserList').dataTable();
     },
     
     handleEvent : function() {
@@ -283,16 +275,19 @@ var userList = {
 		    	
 		    	userList.grid.fnDestroy();
 		    	
-		    	userList.grid = $('#tblUserList').dataTable({
+		    	userList.grid.dataTable({
 		    		searching : false,
 		            lengthChange : false,
 		            paging : false,
 		            ordering : false,
 		            info : false,
-		            data : rows
+		            data : rows,
+		            columnDefs : [
+		            	{targets : 2, className : 'center'},
+		            	{targets : 5, className : 'center'},
+		            	{targets : 7, className : 'center'}
+		            ]
 		        });
-		    	
-		    	//$('table [name="joinApprovalFl"], [name="checkDelete"]').parent().addClass('center'); // TODO 류강하 : 정렬
 		    })();
 	    	
 	    	(function renderPageList() {
