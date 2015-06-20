@@ -21,6 +21,7 @@ import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,10 +45,12 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * 수정일               수정자                 수정내용
  * -------       ------------   -----------------------
  * 2015. 6. 13.         손호성                 최초 생성
+ * 2015. 6. 20.         손호성                 Ignore
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
+@Ignore("2015.07 중순까지의 릴리즈에서 배제")
 public class CoreSetAddCompnDatabaseTest {
 
     private String driver;

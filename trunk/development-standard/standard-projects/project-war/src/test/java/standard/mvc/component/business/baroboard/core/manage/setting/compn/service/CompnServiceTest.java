@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -46,10 +47,12 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * 수정일               수정자                 수정내용
  * -------       ------------   -----------------------
  * 2015. 6. 13.         손호성                 최초 생성
+ * 2015. 6. 20.         손호성                 Ignore
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
+@Ignore("2015.07 중순까지의 릴리즈에서 배제")
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
