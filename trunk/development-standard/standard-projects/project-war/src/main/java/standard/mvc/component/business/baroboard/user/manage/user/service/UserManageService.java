@@ -36,7 +36,7 @@ import standard.mvc.component.business.baroboard.user.vo.User;
  * 수정일        수정자        수정내용
  * -------       ------------  -----------------------
  * 2015. 5. 31.  류강하        최초 생성
- * 
+ * 2015. 6. 21.  전경훈		 getUserInfoByID 추가 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
@@ -84,4 +84,13 @@ public interface UserManageService {
      * @throws Exception
      */
     List<User> getUserListPaginated(Map<String, Object> paramMap) throws Exception;
+    
+    /**
+     * C_ID 로 User 정보를 조회한다.
+     * 
+     * @param User VO
+     * @return 해당 유저정보 User VO
+     * @throws Exception
+     */
+	public User getUserInfoByID(User user) throws Exception;
 }

@@ -62,4 +62,9 @@ public class UserManageDaoImpl extends EgovComAbstractDAO implements UserManageD
         
         return list(user.getSqlMapSelector() + "." + "selectUserListPaginated", paramMap);
     }
+
+	@Override
+	public User getUserInfoByID(User user) throws Exception {
+		return (User)selectByPk(user.getSqlMapSelector() + "." + "getUserInfoByID", user);
+	}
 }

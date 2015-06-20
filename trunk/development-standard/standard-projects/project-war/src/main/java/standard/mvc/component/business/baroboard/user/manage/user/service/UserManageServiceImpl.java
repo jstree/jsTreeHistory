@@ -95,4 +95,11 @@ public class UserManageServiceImpl implements UserManageService {
 	    
 	    return userManageDao.selectUserListPaginated(paramMap);
 	}
+
+	@Override
+	public User getUserInfoByID(User user) throws Exception {
+		return userManageDao.getUserInfoByID(user);
+	}
+	
+	
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import standard.mvc.component.business.baroboard.board.dao.BoardDao;
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
+import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 
@@ -142,6 +143,7 @@ public class BoardServiceImpl implements BoardService {
 				+ org.substring(12, 14);
 		article.setRegDt(formattedDate);
 	}
+
 	
 
 }

@@ -22,6 +22,43 @@
 	});
 </script>
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Jquery Context Menu -->
+<link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />
+<script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.ui.position.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+	$.contextMenu({
+		selector: '.user-context',
+		trigger: 'left',
+		items: {
+			'userInfo': {
+				name: '회원정보 보기',
+				callback: function(key, option) {
+					var userID = $(this).attr('data-id');
+					var popupUrl = '${pageContext.request.contextPath}/board/getUserInfoPopup.do?c_id='+userID;
+					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
+					window.open(popupUrl, '', popupOption);
+				}
+			},
+			'sendNote': {
+				name: '쪽지 보내기',
+				callback: function(key, option) {
+					
+				}
+			},
+			'showArticles': {
+				name: '게시글 보기',
+				callback: function(key, option) {
+					
+				}
+			}
+		}
+	});
+})
+
+</script>
+
 </head>
 <body>
 	<section class="clearfix">
@@ -74,7 +111,7 @@
 												<tr>
 													<td class="dt-center">${article.c_id}</td>
 													<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
-													<td class="dt-center">${article.regNickName}</td>
+													<td class="dt-center"><a class="user-context" data-id="${article.regId}">${article.regNickName}</a></td>
 													<td class="dt-center">${article.regDt}</td>
 													<td class="dt-center">${article.viewCnt}</td>
 													<td class="dt-center">0</td>

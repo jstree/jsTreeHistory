@@ -79,8 +79,11 @@ public class Article extends ComprehensiveTree {
 	/* 글 총개수 */
 	private int totArticleCnt;
 	
+	/* 글쓴이 닉네임 */
 	private String regNickName;
 
+	/* 글쓴이 이메일 */
+	
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import standard.mvc.component.business.baroboard.board.service.BoardService;
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
+import standard.mvc.component.business.baroboard.user.manage.user.service.UserManageService;
+import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
@@ -48,9 +51,12 @@ public class BoardController extends GenericAbstractController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Resource(name = "BoardService")
+	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private UserManageService userManageService;
+	
 	@Override
 	public Map<String, Map<String, Object>> bindTypes() {
 		// TODO Auto-generated method stub
@@ -144,6 +150,12 @@ public class BoardController extends GenericAbstractController {
 
 		return null;
 	}
-
+	
+	@RequestMapping(value = "/getUserInfoPopup.do")
+	public String getUserInfoByID(ModelMap modelMap, @ModelAttribute User user) throws Exception {
+		User resultUser = userManageService.getUserInfoByID(user);
+		modelMap.addAttribute("user", resultUser);
+		return "/jsp/board/getUserInfoPopup";
+	}
 	
 }

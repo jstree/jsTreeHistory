@@ -510,4 +510,18 @@
         <include refid="selectUserList" />
 		<include refid="paginationEnd" />
     </select>
+    
+    <select id="getUserInfoByID" parameterClass="User" resultClass="User">
+    	/* getUserInfoByID */
+		SELECT 
+			  C_ID as c_id
+			, C_TITLE as c_title
+			, C_EMAIL as email
+			, C_INDI_INFO_OPEN_FL as indiInfoOpenFl
+			, C_HOMEPAGE_URL as homepageUrl
+			, C_BLOG_URL blogUrl
+		FROM T_USER_INFO	
+		WHERE 1=1
+			AND C_ID = #c_id#
+	</select>
 </sqlMap>

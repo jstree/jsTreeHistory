@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
+import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 
 /**
@@ -70,5 +71,4 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 	public Article getArticleById(Article article) throws Exception {
 		return (Article)selectByPk(article.getSqlMapSelector() + "." + "getArticleById", article);
 	}
-
 }

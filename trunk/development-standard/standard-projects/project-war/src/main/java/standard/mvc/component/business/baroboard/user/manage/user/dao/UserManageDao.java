@@ -59,4 +59,13 @@ public interface UserManageDao {
      * @throws Exception
      */
     List<User> selectUserListPaginated(Map<String, Object> paramMap) throws Exception;
+
+    /**
+     * C_ID 로 User 정보를 조회한다.
+     * 
+     * @param User VO
+     * @return 해당 유저정보 User VO
+     * @throws Exception
+     */
+	User getUserInfoByID(User user) throws Exception;
 }

@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+div.container {
+	margin-top: 20px;
+}
+
+/* Header */
+
+
+/* Section Layouts */
+section > div {
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+section > div > div {
+	float: left;
+}
+
+section .item-name {
+	width: 30%;
+}
+
+section .item-value {
+	width :70%;
+}
+
+#closeBtn {
+	float: right;
+	margin-top: 20px;
+	width: 50px;
+	max-width: 50%;
+	min-width: 50px;
+	height: 30px;
+	min-height: 30px;
+	padding: 0;
+}
+
+/* Section Designs */
+section .item-name {
+	font-weight: bold;
+}
+
+section .item-value {
+	
+}
+
+hr {
+	margin: 0;
+}

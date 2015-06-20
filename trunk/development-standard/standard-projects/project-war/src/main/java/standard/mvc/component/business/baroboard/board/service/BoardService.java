@@ -4,6 +4,7 @@ import java.util.List;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
+import standard.mvc.component.business.baroboard.user.vo.User;
 
 /**
  * Modification Information
