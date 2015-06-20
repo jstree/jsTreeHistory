@@ -143,11 +143,11 @@ $(document).ready(function(){
 										<form action="${pageContext.request.contextPath}/board/searchArticle.do?boardID=${boardID}">
 											<input type="text" name="searchKeyword" value="${reqSearchArticle.searchKeyword}"/>
 											<select name="type">
-												<c:choose><c:when test="${reqSearchArticle.type == 'title'}"><option value="title" selected>제목</option></c:when><c:otherwise><option value="title">제목</option></c:otherwise></c:choose>
-												<c:choose><c:when test="${reqSearchArticle.type == 'content'}"><option value="content" selected>내용</option></c:when><c:otherwise><option value="content">내용</option></c:otherwise></c:choose>
-												<c:choose><c:when test="${reqSearchArticle.type == 'title_content'}"><option value="title_content" selected>제목+내용</option></c:when><c:otherwise><option value="title_content">제목+내용</option></c:otherwise></c:choose>
-												<c:choose><c:when test="${reqSearchArticle.type == 'nickName'}"><option value="nickName" selected>닉네임</option></c:when><c:otherwise><option value="nickName">닉네임</option></c:otherwise></c:choose>
-												<c:choose><c:when test="${reqSearchArticle.type == 'date_range'}"><option value="date_range" selected>기간</option></c:when><c:otherwise><option value="date_range">기간</option></c:otherwise></c:choose>
+												<option value="title" <c:if test="${reqSearchArticle.type == 'title'}">selected</c:if>>제목</option>
+												<option value="content" <c:if test="${reqSearchArticle.type == 'content'}">selected</c:if>>내용</option>
+												<option value="title_content" <c:if test="${reqSearchArticle.type == 'title_content'}">selected</c:if>>제목+내용</option>
+												<option value="nickName" <c:if test="${reqSearchArticle.type == 'nickName'}">selected</c:if>>닉네임</option>
+												<option value="date_range" <c:if test="${reqSearchArticle.type == 'date_range'}">selected</c:if>>기간</option>
 											</select>
 											<input type="submit" value="검색"/>
 										</form>

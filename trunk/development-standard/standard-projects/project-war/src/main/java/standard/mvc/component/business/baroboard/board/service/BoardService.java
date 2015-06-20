@@ -86,15 +86,6 @@ public interface BoardService {
 	public Article addArticle(Article article) throws Exception;
 	
 	/**
-	 * 글을 수정한다.
-	 * 
-	 * @param Article
-	 * @return Article
-	 * @throws Exception
-	 */
-	public Article alterArticle(Article article) throws Exception;
-	
-	/**
 	 * 글을 삭제한다.
 	 * 
 	 * @param Article
@@ -114,4 +105,13 @@ public interface BoardService {
 	 */
 	public Article readArticle(Article article) throws Exception;
 	
+	/**
+	 * 글을 수정한다.
+	 * 
+	 * @param Article
+	 * @return Article
+	 * @throws Exception
+	 * 
+	 */
+	public Article modifyArticle(Article article) throws Exception;
 }

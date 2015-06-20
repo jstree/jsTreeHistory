@@ -75,4 +75,9 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 	public int countUpViewCnt(Article article) throws Exception {
 		return update(article.getSqlMapSelector() + "." + "countUpViewCnt", article);
 	}
+
+	@Override
+	public int modifyArticle(Article article) throws Exception {
+		return update(article.getSqlMapSelector() + "." + "modifyArticle", article);
+	}
 }

@@ -91,9 +91,8 @@ public class BoardServiceImpl implements BoardService {
 		article.setRef(2);
 		article.setC_type("default");
 		article.setRegId(5);	// For Test Only
-		/* escaped 된 html 을 원래 html로 변환함 */
-		String unescapedHtml = StringEscapeUtils.unescapeHtml4(article.getContent());
-		article.setContent(unescapedHtml);
+		
+		article.setContent(this.unescapeHtml(article.getContent()));
 		
 		Date today = new Date();
 		String formattedDate = DateFormatUtils.format(today, "yyyyMMddHHmmss");
@@ -103,12 +102,7 @@ public class BoardServiceImpl implements BoardService {
 		return insertedArticle;
 	}
 
-	@Override
-	public Article alterArticle(Article article) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public Article removeArticle(Article article) throws Exception {
 		article = coreDao.getNode(article);
@@ -122,11 +116,30 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Article readArticle(Article article) throws Exception {
+		this.countUpViewCnt(article);
 		Article resultArticle = this.getArticleById(article);
-		this.countUpViewCnt(resultArticle);
 		return resultArticle;
 	}
-	
+
+	@Override
+	public Article modifyArticle(Article article) throws Exception {
+		Article result = null;
+		article.setContent(this.unescapeHtml(article.getContent()));
+		
+		Date today = new Date();
+		String formattedDate = DateFormatUtils.format(today, "yyyyMMddHHmmss");
+		article.setModDt(formattedDate);
+		int resultInt = boardDao.modifyArticle(article);  
+		if(resultInt == 1){
+			result = article;
+		}
+		
+		logger.debug("JKH: resultInt");
+		logger.debug(resultInt+"");
+		return result;
+		
+	}
+
 	private int countUpViewCnt(Article article) throws Exception {
 		return boardDao.countUpViewCnt(article);
 	}
@@ -160,7 +173,11 @@ public class BoardServiceImpl implements BoardService {
 		article.setRegDt(formattedDate);
 	}
 
-
+	/* escaped 된 html 을 원래 html로 변환함 */
+	public String unescapeHtml(String str) {
+		return StringEscapeUtils.unescapeHtml4(str);
+	}
+	
 	
 
 }

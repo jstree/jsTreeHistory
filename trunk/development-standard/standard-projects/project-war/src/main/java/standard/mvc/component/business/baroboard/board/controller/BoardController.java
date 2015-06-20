@@ -105,9 +105,6 @@ public class BoardController extends GenericAbstractController {
 	@RequestMapping(value = "/searchArticle.do", method = { RequestMethod.GET })
 	public String searchArticle(ModelMap modelMap, @ModelAttribute SearchArticle searchArticle) throws Exception {
 		
-		logger.debug(" --- JKH : searchArticle");
-		logger.debug(searchArticle.toString());
-		
 		List<Article> searchedArticleList = boardService.searchArticleList(searchArticle);
 		
 		modelMap.addAttribute("reqSearchArticle", searchArticle);
@@ -138,14 +135,15 @@ public class BoardController extends GenericAbstractController {
 	@RequestMapping(value = "/modifyArticle.do")
 	public String modifyArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 		/* TODO : 시큐리티 및 계정 붙으면 수권한 체크하기 */
-
-		return "jsp/board/modifyArticle";
+		Article resultArticle = boardService.getArticleById(article);
+		modelMap.addAttribute("article", resultArticle);
+		return "/jsp/board/modifyArticle";
 	}
 
 	@RequestMapping(value = "/submitModifiedArticle.do")
+	@ResponseBody
 	public Article submitModifiedArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
-
-		return null;
+		return boardService.modifyArticle(article);
 	}
 
 	@RequestMapping(value = "/deleteArticle.do")

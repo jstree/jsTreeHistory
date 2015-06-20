@@ -142,8 +142,7 @@ $(document).ready(function(){
 			'userInfo': {
 				name: '회원정보 보기',
 				callback: function(key, option) {
-					var userID = $(this).attr('data-id');
-					var popupUrl = '${pageContext.request.contextPath}/board/getUserInfoPopup.do?c_id='+userID;
+					var popupUrl = '${pageContext.request.contextPath}/board/getUserInfoPopup.do?c_id=${article.regId}';
 					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
 					window.open(popupUrl, '', popupOption);
 				}
@@ -151,8 +150,7 @@ $(document).ready(function(){
 			'sendNote': {
 				name: '쪽지 보내기',
 				callback: function(key, option) {
-					var userID = $(this).attr('data-id');
-					var popupUrl = '${pageContext.request.contextPath}/board/sendNotePopup.do?c_id='+userID;
+					var popupUrl = '${pageContext.request.contextPath}/board/sendNotePopup.do?c_id=${article.regId}';
 					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
 					window.open(popupUrl, '', popupOption);
 				}
@@ -232,10 +230,10 @@ $(document).ready(function(){
 								<!-- 하단 Action 칸 -->
 								<div id="articleAction">
 									<span>
-										<a>수정</a>
-										<a onclick="deleteThisArticle(${article.c_id})">삭제</a>
-										<a>답글쓰기</a>
-										<a>목록가기</a>
+										<a href="${pageContext.request.contextPath}/board/modifyArticle.do?c_id=${article.c_id}">수정</a>
+										<a href="#" onclick="deleteThisArticle(${article.c_id})">삭제</a>
+										<a href="#">답글쓰기</a>
+										<a href="${pageContext.request.contextPath}/board/index.do">목록가기</a>
 									</span>
 								</div>
 							</div>

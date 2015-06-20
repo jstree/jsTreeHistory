@@ -523,4 +523,18 @@
 		WHERE C_ID = #c_id#
 	</update>
 	
+	<update id="modifyArticle" parameterClass="Article">
+		/* modifyArticle */
+		UPDATE T_BOARD_TEST
+		SET	  C_TITLE = #c_title#
+			, C_CONTENT = #content# 
+			, C_ALLOW_TRACKBACK_FL = #allowTrackbackFL#			
+			, C_ALLOW_COMMENT_FL = #allowCommentFL#	
+			, C_ALLOW_REPLY_FL = #allowReplyFL#	
+			, C_ALERT_RESPONSE_FL = #alertResponseFL#
+			, C_OPEN_ARTICLE_FL = #openArticleFL# 	
+			, C_ANNOUNCEMENT_FL = #announcementFL# 	
+			, C_MOD_DT = #modDt# 			
+		WHERE C_ID = #c_id#
+	</update>
 </sqlMap>
