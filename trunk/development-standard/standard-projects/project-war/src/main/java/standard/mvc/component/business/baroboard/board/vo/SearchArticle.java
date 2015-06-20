@@ -29,6 +29,7 @@ public class SearchArticle extends ComprehensiveTree {
 	public static final String TYPE_CONTENT = "content";
 	public static final String TYPE_TITLE_CONTENT = "title_content";
 	public static final String TYPE_NICKNAME = "nickName";
+	public static final String TYPE_USER_ID = "user_id";
 	public static final String TYPE_DATE_RANGE = "date_range";
 
 	/**
@@ -46,12 +47,19 @@ public class SearchArticle extends ComprehensiveTree {
 	 */
 	private String boardID;
 	
-	
 	@Override
 	public String getSqlMapSelector() {
 		return "board";
 	};
 
+	@Override
+	public String toString(){
+		return "searchKeyword : " + this.searchKeyword
+				+ "\ntype : " + this.type
+				+ "\nboardID : " + this.boardID;
+				
+	}
+	
 	public String getSearchKeyword() {
 		return searchKeyword;
 	}

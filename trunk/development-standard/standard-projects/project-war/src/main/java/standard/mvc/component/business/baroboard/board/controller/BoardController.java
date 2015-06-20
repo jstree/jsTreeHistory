@@ -105,6 +105,9 @@ public class BoardController extends GenericAbstractController {
 	@RequestMapping(value = "/searchArticle.do", method = { RequestMethod.GET })
 	public String searchArticle(ModelMap modelMap, @ModelAttribute SearchArticle searchArticle) throws Exception {
 		
+		logger.debug(" --- JKH : searchArticle");
+		logger.debug(searchArticle.toString());
+		
 		List<Article> searchedArticleList = boardService.searchArticleList(searchArticle);
 		
 		modelMap.addAttribute("searchKeyword", searchArticle.getSearchKeyword());
@@ -156,6 +159,12 @@ public class BoardController extends GenericAbstractController {
 		User resultUser = userManageService.getUserInfoByID(user);
 		modelMap.addAttribute("user", resultUser);
 		return "/jsp/board/getUserInfoPopup";
+	}
+	
+	@RequestMapping(value = "/sendNotePopup.do")
+	public String sendNotePopup(ModelMap modelMap) throws Exception {
+		/* TODO : 쪽지기능 완성시 서비스 붙이기 */
+		return "/jsp/board/sendNotePopup";
 	}
 	
 }

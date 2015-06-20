@@ -44,13 +44,15 @@ $(document).ready(function(){
 			'sendNote': {
 				name: '쪽지 보내기',
 				callback: function(key, option) {
-					
+					var userID = $(this).attr('data-id');
+					var popupUrl = '${pageContext.request.contextPath}/board/sendNotePopup.do?c_id='+userID;
+					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
+					window.open(popupUrl, '', popupOption);
 				}
 			},
 			'showArticles': {
 				name: '게시글 보기',
 				callback: function(key, option) {
-					
 				}
 			}
 		}
