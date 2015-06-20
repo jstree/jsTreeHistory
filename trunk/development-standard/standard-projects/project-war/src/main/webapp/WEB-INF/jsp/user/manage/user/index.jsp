@@ -69,8 +69,10 @@ select {
 <script type="text/javascript">
 var userList = {
 	
-	grid : null,
+	currentPageNo : null,
 		
+	grid : null,
+	
 	initScreen : function() {
 		
 		(function date() {
@@ -153,7 +155,7 @@ var userList = {
     	
         $('#btnDeleteUserInfo').on('click', function() {
 			
-        	var $checkboxesForDeleting = $(':checkbox[name="checkDelete"]:checked');
+        	var $checkboxesForDeleting = $('#tblUserList :checkbox[name="checkDelete"]:checked');
         	
         	if ( $checkboxesForDeleting.length == 0 ) {
         		alert('삭제할 회원 정보를 선택해주세요.');
@@ -165,7 +167,7 @@ var userList = {
         	$checkboxesForDeleting.each(function() {
         		
         		params.push({
-    				c_id : $(this).parent().parent().data('c_id')
+    				c_id : $(this).data('param')
     			});
         	});
 
@@ -189,31 +191,27 @@ var userList = {
        			}
        		});
         });
-        
-        $('#tblUserList a').each(function() {
+
+        $(document).on('click', '#tblUserList a', function() {
         	
         	var $a = $(this);
         	
-        	$a.on('click', function() {
+        	var func = $a.data('function');
+    		var c_id = $a.data('param');
+    		
+    		if (func == 'editUserInfo') {
+    			
+    			var params = 'c_id=' + c_id;
+    		}
+    		else if (func == 'deleteUserInfo') {
         		
-        		var c_id = $a.parent().parent().data('c_id');
-        		
-        		var func = $a.data('function');
-        		
-        		if (func == 'editUserInfo') {
-        			
-        			var params = 'c_id=' + c_id;
-        		}
-        		else if (func == 'deleteUserInfo') {
-            		
-        			var params = [];
-        			params.push({
-        				c_id : c_id
-        			});
-        			
-        			userList.deleteUserInfo(params);
-            	}
-    		});
+    			var params = [];
+    			params.push({
+    				c_id : c_id
+    			});
+    			
+    			userList.deleteUserInfo(params);
+        	}
         });
     },
 	
@@ -239,18 +237,7 @@ var userList = {
 	    
 	    function callback(r) {
 	    	
-	    	$('#tblUserList tr').each(function(i, tr) {
-	    		
-	    		var $tr = $(tr);
-	    		
-	    		$(params).each(function(j, param) {
-					
-	    			if ( $tr.data('c_id') == param.c_id ) {
-						
-	    				$tr.remove();
-	    			}
-	    		});
-	    	});
+	    	userList.getList(userList.currentPageNo);
 	    }
     },
     
@@ -261,7 +248,6 @@ var userList = {
 		var params = $form.serializeObject();
 		
 		callAjax(null
-	           //, $form.prop('action') + '?currentPageNo=' + ('${param.currentPageNo}' || 1)
 	           , $form.prop('action') + '?currentPageNo=' + pageNo + '&jsFunction=userList.getList'
 	           , null
 	           , $form.prop('method')
@@ -279,18 +265,18 @@ var userList = {
 		    	$(data.userList).each(function(i, user) {
 		    		
 		    		var row = [];
-		    		//row.push(user.c_id);
 		    		row.push(user.email);
 		    		row.push(user.c_title);
 		    		row.push(user.userGrade);
 		    		row.push(user.lastLoginDe || '');
 		    		row.push(user.joinDe);
 		    		row.push('<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">'
-		    		       + '    <option value="1">Y</option>'
-		    		       + '    <option value="0">N</option>'
+		    		       + '    <option value="1"' + (user.joinStateCd == 4 ? 'selected="selected"' : '') + '>Y</option>'
+		    		       + '    <option value="0"' + (user.joinStateCd == 3 ? 'selected="selected"' : '') + '>N</option>'
 		    		       + '</select>');
-		    		row.push('<a href="javascript:void(0);" data-function="editUserInfo">Edit</a>&nbsp;<a href="javascript:void(0);" data-function="deleteUserInfo">Delete</a>');
-		    		row.push('<input name="checkDelete" type="checkbox" />');
+		    		row.push('<a href="javascript:void(0);" data-function="editUserInfo" data-param="' + user.c_id + '">Edit</a>&nbsp;'
+		    		       + '<a href="javascript:void(0);" data-function="deleteUserInfo" data-param="' + user.c_id + '">Delete</a>');
+		    		row.push('<input name="checkDelete" type="checkbox" data-param="' + user.c_id + '" />');
 		    		
 		    		rows.push(row);
 		    	});
@@ -306,13 +292,15 @@ var userList = {
 		            data : rows
 		        });
 		    	
-		    	$('table [name="joinApprovalFl"], [name="checkDelete"]').parent().addClass('center');
+		    	//$('table [name="joinApprovalFl"], [name="checkDelete"]').parent().addClass('center'); // TODO 류강하 : 정렬
 		    })();
 	    	
 	    	(function renderPageList() {
 				
 		    	$('#divPagination').html(data.pageList);
 		    })();
+	    	
+	    	userList.currentPageNo = pageNo;
 	    }
 	    
     },
