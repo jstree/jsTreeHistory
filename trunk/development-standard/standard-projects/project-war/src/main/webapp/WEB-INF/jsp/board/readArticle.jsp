@@ -28,9 +28,14 @@ span#articleInfo > span {
 	display:block;
 }
 
+span#articleInfo > span > span {
+	margin: 0 5px;
+}
+
 span#articleAttachment {
 	text-align: right;
 }
+
 
 
 /* Article Content */
@@ -80,7 +85,94 @@ div#articleAction span {
 div#articleAction span a {
 	margin: 0 10px;
 }
+
+
 </style>
+<script>
+function deleteThisArticle(c_id){
+	if(confirm('게시물을 지우시겠습니까?') == true) {
+		$.ajax({
+			 method: 'GET'
+			,url: '${pageContext.request.contextPath}/board/deleteArticle.do?c_id=' + c_id
+			,success: function(data){
+				alert('삭제하였습니다.');
+				location.href = '${pageContext.request.contextPath}/board/index.do';
+			}
+			,fail: function(data) {
+				alert('글 삭제에 실패하였습니다.');
+			}
+		});
+	}	
+}
+</script>
+
+<!-- Jquery Context Menu -->
+<link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />
+<script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.ui.position.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+	$.contextMenu({
+		selector: '#attachmentFile',
+		trigger: 'left',
+		items: {
+			'atc1': {
+				name: 'TestExcep.xls',
+				callback: function(key, option) {
+					alert("atc1 Download");
+				}
+			},
+			'atc2': {
+				name: '내꺼.pdf',
+				callback: function(key, option) {
+				}
+			},
+			'atc3': {
+				name: 'zip.zip',
+				callback: function(key, option) {
+				}
+			}
+		}
+	});
+	
+	$.contextMenu({
+		selector: '.user-context',
+		trigger: 'left',
+		items: {
+			'userInfo': {
+				name: '회원정보 보기',
+				callback: function(key, option) {
+					var userID = $(this).attr('data-id');
+					var popupUrl = '${pageContext.request.contextPath}/board/getUserInfoPopup.do?c_id='+userID;
+					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
+					window.open(popupUrl, '', popupOption);
+				}
+			},
+			'sendNote': {
+				name: '쪽지 보내기',
+				callback: function(key, option) {
+					var userID = $(this).attr('data-id');
+					var popupUrl = '${pageContext.request.contextPath}/board/sendNotePopup.do?c_id='+userID;
+					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
+					window.open(popupUrl, '', popupOption);
+				}
+			},
+			'showArticles': {
+				name: '게시글 보기',
+				callback: function(key, option) {
+					var userNickName = $(this).text();
+					var params = {
+							type: 'nickName',
+							searchKeyword: userNickName
+					}
+					var url = '${pageContext.request.contextPath}/board/searchArticle.do?' + $.param(params);
+					location.href = url;
+				}
+			}
+		}
+	});
+})
+</script>
 </head>
 <body>
 	<section class="clearfix">
@@ -107,12 +199,15 @@ div#articleAction span a {
 								<div id="articleHeader" class="">
 									<span id="articleTitle"><h3>${article.c_title}</h3></span> 
 									<span id="articleInfo">
-										<span>
-											<span>${article.regNickName}</span>
+										<span id="firstInfoRow">
+											<span><a class="user-context">${article.regNickName}</a></span>
 											<span id="articleDt">2015-05-03 09:15:25</span>
-										
 										</span>
-										<span id="articleAttachment">첨부 <a>(3)</a></span>
+										<span id="secondInfoRow">
+											<span>조회수: ${article.viewCnt}</span>
+											<span>추천수: 0</span>
+											<span id="articleAttachment"><a href="#" id="attachmentFile">첨부 (3)</a></span>
+										</span>
 									</span>
 								</div>
 								<!-- 내용 -->
@@ -137,9 +232,9 @@ div#articleAction span a {
 								<!-- 하단 Action 칸 -->
 								<div id="articleAction">
 									<span>
-										<a>답글쓰기</a>
 										<a>수정</a>
-										<a>삭제</a>
+										<a onclick="deleteThisArticle(${article.c_id})">삭제</a>
+										<a>답글쓰기</a>
 										<a>목록가기</a>
 									</span>
 								</div>

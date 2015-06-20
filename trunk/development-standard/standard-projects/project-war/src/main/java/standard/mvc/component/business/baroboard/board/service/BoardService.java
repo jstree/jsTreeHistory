@@ -104,4 +104,14 @@ public interface BoardService {
 	 */
 	public Article removeArticle(Article article) throws Exception;
 	
+	/**
+	 * 글을 가져온다. 글의 카운트 숫자를 1 더한다.
+	 * 
+	 * @param Article
+	 * @return Article
+	 * @throws Exception
+	 * 
+	 */
+	public Article readArticle(Article article) throws Exception;
+	
 }

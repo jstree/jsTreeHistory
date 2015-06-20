@@ -110,15 +110,14 @@ public class BoardController extends GenericAbstractController {
 		
 		List<Article> searchedArticleList = boardService.searchArticleList(searchArticle);
 		
-		modelMap.addAttribute("searchKeyword", searchArticle.getSearchKeyword());
-		modelMap.addAttribute("type", searchArticle.getType());
+		modelMap.addAttribute("reqSearchArticle", searchArticle);
 		modelMap.addAttribute("articleList", searchedArticleList);
 		return "/jsp/board/searchArticle";
 	}
 	
 	@RequestMapping(value = "/readArticle.do")
 	public String readArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
-		Article targetArticle = boardService.getArticleById(article);
+		Article targetArticle = boardService.readArticle(article);
 		
 		modelMap.addAttribute("article", targetArticle);
 		return "/jsp/board/readArticle";
@@ -138,6 +137,7 @@ public class BoardController extends GenericAbstractController {
 
 	@RequestMapping(value = "/modifyArticle.do")
 	public String modifyArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
+		/* TODO : 시큐리티 및 계정 붙으면 수권한 체크하기 */
 
 		return "jsp/board/modifyArticle";
 	}
@@ -149,9 +149,11 @@ public class BoardController extends GenericAbstractController {
 	}
 
 	@RequestMapping(value = "/deleteArticle.do")
+	@ResponseBody
 	public Article deleteArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
-
-		return null;
+		/* TODO : 시큐리티 및 계정 붙으면 삭제권한 체크하기 */
+		Article result = boardService.removeArticle(article);
+		return result;
 	}
 	
 	@RequestMapping(value = "/getUserInfoPopup.do")

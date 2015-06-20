@@ -38,5 +38,7 @@ public interface BoardDao {
 	public int getOpenArticleCnt(Article article) throws Exception;
 
 	public Article getArticleById(Article article)throws Exception;
+
+	public int countUpViewCnt(Article article) throws Exception;
 	
 }

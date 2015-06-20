@@ -70,4 +70,9 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 	public Article getArticleById(Article article) throws Exception {
 		return (Article)selectByPk(article.getSqlMapSelector() + "." + "getArticleById", article);
 	}
+
+	@Override
+	public int countUpViewCnt(Article article) throws Exception {
+		return update(article.getSqlMapSelector() + "." + "countUpViewCnt", article);
+	}
 }

@@ -9,6 +9,7 @@
 <!-- !!!  FOR THIS PAGE ONLY !!! -->
 <script>
 	$(document).ready(function() {
+		
 		$('#boardTable').dataTable({
 			responsive : {
 				details : false
@@ -22,6 +23,50 @@
 	});
 </script>
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Jquery Context Menu -->
+<link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />
+<script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.ui.position.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+	$.contextMenu({
+		selector: '.user-context',
+		trigger: 'left',
+		items: {
+			'userInfo': {
+				name: '회원정보 보기',
+				callback: function(key, option) {
+					var userID = $(this).attr('data-id');
+					var popupUrl = '${pageContext.request.contextPath}/board/getUserInfoPopup.do?c_id='+userID;
+					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
+					window.open(popupUrl, '', popupOption);
+				}
+			},
+			'sendNote': {
+				name: '쪽지 보내기',
+				callback: function(key, option) {
+					var userID = $(this).attr('data-id');
+					var popupUrl = '${pageContext.request.contextPath}/board/sendNotePopup.do?c_id='+userID;
+					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
+					window.open(popupUrl, '', popupOption);
+				}
+			},
+			'showArticles': {
+				name: '게시글 보기',
+				callback: function(key, option) {
+					var userNickName = $(this).text();
+					var params = {
+							type: 'nickName',
+							searchKeyword: userNickName
+					}
+					var url = '${pageContext.request.contextPath}/board/searchArticle.do?' + $.param(params);
+					location.href = url;
+				}
+			}
+		}
+	});
+})
+</script>
 </head>
 <body>
 	<section class="clearfix">
@@ -63,8 +108,8 @@
 											<c:forEach var="article" items="${articleList}" varStatus="status">
 												<tr>
 													<td class="dt-center">${article.c_id}</td>
-													<td><a>${article.c_title} &nbsp; (${article.commentCnt})</a></td>
-													<td class="dt-center">${article.regId}</td>
+													<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
+													<td class="dt-center"><a class="user-context" data-id="${article.regId}">${article.regNickName}</a></td>
 													<td class="dt-center">${article.regDt}</td>
 													<td class="dt-center">${article.viewCnt}</td>
 													<td class="dt-center">0</td>
@@ -78,16 +123,17 @@
 										<c:if test="${leftPage != null}">
 											<span><a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${leftPage}">◀</a></span>
 										</c:if>
-										<span> <c:forEach var="i" begin="${startPageNum}" end="${endPageNum}" step="1">
-												<c:choose>
-													<c:when test="${i eq currentPageNum}">
-														<a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${i}" class="underline">${i}</a>
-													</c:when>
-													<c:otherwise>
-														<a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${i}">${i}</a>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
+										<span> 
+										<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}" step="1">
+											<c:choose>
+												<c:when test="${i eq currentPageNum}">
+													<a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${i}" class="underline">${i}</a>
+												</c:when>
+												<c:otherwise>
+													<a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${i}">${i}</a>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
 										</span>
 										<c:if test="${rightPage != null}">
 											<span><a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${rightPage}">▶</a></span>
@@ -95,15 +141,15 @@
 									</div>
 									<div id="searchDiv">
 										<form action="${pageContext.request.contextPath}/board/searchArticle.do?boardID=${boardID}">
-											<input type="text" name="searchKeyword" value="${searchKeyword}"/>
+											<input type="text" name="searchKeyword" value="${reqSearchArticle.searchKeyword}"/>
 											<select name="type">
-												<option value="title">제목</option>
-												<option value="content">내용</option>
-												<option value="title_content">제목+내용</option>
-												<option value="nickName">닉네임</option>
-												<option value="date_range">기간</option>
+												<c:choose><c:when test="${reqSearchArticle.type == 'title'}"><option value="title" selected>제목</option></c:when><c:otherwise><option value="title">제목</option></c:otherwise></c:choose>
+												<c:choose><c:when test="${reqSearchArticle.type == 'content'}"><option value="content" selected>내용</option></c:when><c:otherwise><option value="content">내용</option></c:otherwise></c:choose>
+												<c:choose><c:when test="${reqSearchArticle.type == 'title_content'}"><option value="title_content" selected>제목+내용</option></c:when><c:otherwise><option value="title_content">제목+내용</option></c:otherwise></c:choose>
+												<c:choose><c:when test="${reqSearchArticle.type == 'nickName'}"><option value="nickName" selected>닉네임</option></c:when><c:otherwise><option value="nickName">닉네임</option></c:otherwise></c:choose>
+												<c:choose><c:when test="${reqSearchArticle.type == 'date_range'}"><option value="date_range" selected>기간</option></c:when><c:otherwise><option value="date_range">기간</option></c:otherwise></c:choose>
 											</select>
-											<input type="submit" title="검색"/>
+											<input type="submit" value="검색"/>
 										</form>
 									</div>
 								</div>

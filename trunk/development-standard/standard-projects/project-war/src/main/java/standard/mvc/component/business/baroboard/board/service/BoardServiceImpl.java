@@ -111,8 +111,24 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Article removeArticle(Article article) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		article = coreDao.getNode(article);
+		Article result = null;
+		
+		if(coreDao.removeNode(article) == 1) {
+			result = article;
+		}
+		return result;
+	}
+
+	@Override
+	public Article readArticle(Article article) throws Exception {
+		Article resultArticle = this.getArticleById(article);
+		this.countUpViewCnt(resultArticle);
+		return resultArticle;
+	}
+	
+	private int countUpViewCnt(Article article) throws Exception {
+		return boardDao.countUpViewCnt(article);
 	}
 
 	/** DB에 저장되어있는 20150601063125 형식의 날짜형식을 2015-06-01 형식으로 바꿔줌 */
@@ -143,6 +159,7 @@ public class BoardServiceImpl implements BoardService {
 				+ org.substring(12, 14);
 		article.setRegDt(formattedDate);
 	}
+
 
 	
 

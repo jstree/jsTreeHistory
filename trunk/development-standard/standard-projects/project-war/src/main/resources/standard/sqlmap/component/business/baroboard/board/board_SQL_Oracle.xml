@@ -431,7 +431,7 @@
 				AND A.C_ANNOUNCEMENT_FL = '1'
 				AND A.C_OPEN_ARTICLE_FL = '1'
 			ORDER BY
-				A.C_REG_DT ASC
+				A.C_ID DESC
 		</dynamic>
 	</select>
 	
@@ -507,11 +507,20 @@
 				)
 				</isEqual>
 				<isEqual property="type" compareValue="nickName">
-				
+				AND B.C_TITLE = #searchKeyword#
 				</isEqual>
 				<isEqual property="type" compareValue="date_rage">
 				
 				</isEqual>
+			ORDER BY A.C_ID DESC
 		</dynamic>
 	</select>
+	
+	<update id="countUpViewCnt" parameterClass="Article">
+		/* countUpViewCnt */
+		UPDATE T_BOARD_TEST
+		SET C_VIEW_CNT = C_VIEW_CNT + 1
+		WHERE C_ID = #c_id#
+	</update>
+	
 </sqlMap>

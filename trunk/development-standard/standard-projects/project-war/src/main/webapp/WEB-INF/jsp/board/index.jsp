@@ -53,6 +53,13 @@ $(document).ready(function(){
 			'showArticles': {
 				name: '게시글 보기',
 				callback: function(key, option) {
+					var userNickName = $(this).text();
+					var params = {
+							type: 'nickName',
+							searchKeyword: userNickName
+					}
+					var url = '${pageContext.request.contextPath}/board/searchArticle.do?' + $.param(params);
+					location.href = url;
 				}
 			}
 		}
@@ -143,7 +150,7 @@ $(document).ready(function(){
 										</c:if>
 									</div>
 									<div id="searchDiv">
-										<form action="${pageContext.request.contextPath}/board/searchArticle.do">
+										<form action="${pageContext.request.contextPath}/board/searchArticle.do" method="GET">
 											<input type="text" name="searchKeyword" placeholder="검색 키워드"/>
 											<select name="type">
 												<option value="title">제목</option>
@@ -153,7 +160,7 @@ $(document).ready(function(){
 												<option value="date_range">기간</option>
 											</select>
 											<input type="hidden" name="boardID" value="${boardID}" />
-											<input type="submit" title="검색"/>
+											<input type="submit" value="검색"/>
 										</form>
 									</div>
 								</div>
