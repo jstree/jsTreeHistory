@@ -1,9 +1,11 @@
 package standard.mvc.component.business.baroboard.core.manage.setting.ftp.vo;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
+
 import javax.validation.constraints.Pattern;
 
-import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidFormat;
-import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidInput;
+import standard.mvc.component.business.baroboard.validCondition.ValidFormat;
+import standard.mvc.component.business.baroboard.validCondition.ValidInput;
 import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -98,7 +100,7 @@ public class FtpVO extends ComprehensiveTree {
     }
 
     public String getPassiveFl() {
-        return passiveFl;
+        return isBlank(passiveFl) ? ValidInput.FALSE : passiveFl;
     }
 
     public void setPassiveFl(String passiveFl) {
@@ -106,7 +108,7 @@ public class FtpVO extends ComprehensiveTree {
     }
 
     public String getSftpFl() {
-        return sftpFl;
+        return isBlank(sftpFl) ? ValidInput.FALSE : sftpFl;
     }
 
     public void setSftpFl(String sftpFl) {

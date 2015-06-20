@@ -2,8 +2,8 @@ package standard.mvc.component.business.baroboard.board.manager.defaultsetting.v
 
 import javax.validation.constraints.Pattern;
 
-import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidFormat;
-import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidInput;
+import standard.mvc.component.business.baroboard.validCondition.ValidFormat;
+import standard.mvc.component.business.baroboard.validCondition.ValidInput;
 import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;

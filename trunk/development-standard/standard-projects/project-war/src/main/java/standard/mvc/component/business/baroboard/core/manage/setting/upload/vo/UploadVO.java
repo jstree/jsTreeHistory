@@ -1,9 +1,11 @@
 package standard.mvc.component.business.baroboard.core.manage.setting.upload.vo;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
+
 import javax.validation.constraints.Pattern;
 
-import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidFormat;
-import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidInput;
+import standard.mvc.component.business.baroboard.validCondition.ValidFormat;
+import standard.mvc.component.business.baroboard.validCondition.ValidInput;
 import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -71,7 +73,7 @@ public class UploadVO extends ComprehensiveTree {
     }
 
     public String getExtnlLnkFl() {
-        return extnlLnkFl;
+        return isBlank(extnlLnkFl) ? ValidInput.FALSE : extnlLnkFl;
     }
 
     public void setExtnlLnkFl(String extnlLnkFl) {
@@ -97,6 +99,14 @@ public class UploadVO extends ComprehensiveTree {
     @Override
     public String getSqlMapSelector() {
         return "upload";
+    }
+
+    @Override
+    public String toString() {
+        return "UploadVO [fileSizeLimit=" + fileSizeLimit + ", docSizeLimit=" + docSizeLimit
+                + ", fileExtLimit=" + fileExtLimit + ", extnlLnkFl=" + extnlLnkFl
+                + ", extnlLnkAllowedExt=" + extnlLnkAllowedExt + ", extnlLnkAllowedSite="
+                + extnlLnkAllowedSite + "]";
     }
 
 }

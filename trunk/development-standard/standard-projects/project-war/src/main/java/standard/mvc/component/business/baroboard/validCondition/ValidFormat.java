@@ -1,4 +1,4 @@
-package standard.mvc.component.business.baroboard.core.manage.setting.validCondition;
+package standard.mvc.component.business.baroboard.validCondition;
 
 public class ValidFormat {
 

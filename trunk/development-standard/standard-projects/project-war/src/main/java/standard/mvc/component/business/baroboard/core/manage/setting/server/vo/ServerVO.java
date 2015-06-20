@@ -1,11 +1,13 @@
 package standard.mvc.component.business.baroboard.core.manage.setting.server.vo;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
+
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.URL;
 
-import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidFormat;
-import standard.mvc.component.business.baroboard.core.manage.setting.validCondition.ValidInput;
+import standard.mvc.component.business.baroboard.validCondition.ValidFormat;
+import standard.mvc.component.business.baroboard.validCondition.ValidInput;
 import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -78,7 +80,7 @@ public class ServerVO extends ComprehensiveTree {
     }
 
     public String getSslFl() {
-        return sslFl;
+        return isBlank(sslFl) ? ValidInput.FALSE : sslFl;
     }
 
     public void setSslFl(String sslFl) {
@@ -102,7 +104,7 @@ public class ServerVO extends ComprehensiveTree {
     }
 
     public String getShortUrlFl() {
-        return shortUrlFl;
+        return isBlank(shortUrlFl) ? ValidInput.FALSE : shortUrlFl;
     }
 
     public void setShortUrlFl(String shortUrlFl) {
@@ -110,7 +112,7 @@ public class ServerVO extends ComprehensiveTree {
     }
 
     public String getSsoFl() {
-        return ssoFl;
+        return isBlank(ssoFl) ? ValidInput.FALSE : ssoFl;
     }
 
     public void setSsoFl(String ssoFl) {
