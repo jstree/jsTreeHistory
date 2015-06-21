@@ -105,7 +105,6 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 	@Override
 	public User getUserInfo(String nickName) throws Exception {
 		User userInfo = userRegisterDao.getUserInfo(nickName);
-		
 		return userInfo;
 	}
 
@@ -120,6 +119,17 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	@Override
+	public User getUserInfoByEmail(String email) throws Exception
+	{
+		return userRegisterDao.getUserInfoByEmail(email);
+	}
+
+	@Override
+	public int setUserPassword(User user) throws Exception
+	{
+		return userRegisterDao.setUserPassword(user);
+	}
 
 }

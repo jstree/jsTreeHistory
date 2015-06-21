@@ -80,5 +80,22 @@ public interface UserRegisterService {
      */
 	public String passwordSearch(String mobilePhoneNumber) throws Exception;
 	
+	/**
+     * 회원 정보 가져오기
+     * 
+     * @param email 
+     * @return User
+     */
+	public User getUserInfoByEmail(String email) throws Exception;
+	
+	/**
+     * 비밀번호 초기화
+     * 
+     * @param password 
+     * @return int
+     */
+	public int setUserPassword(User user) throws Exception;
+	
+	
 
 }

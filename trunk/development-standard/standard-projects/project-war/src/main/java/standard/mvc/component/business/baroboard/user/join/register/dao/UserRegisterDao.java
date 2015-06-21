@@ -29,5 +29,9 @@ public interface UserRegisterDao {
 	
 	User getUserInfo(String nickName) throws Exception;
 	
+	User getUserInfoByEmail(String email) throws Exception;
+	
 	int getNickNameUseFl(String nickName) throws Exception;
+	
+	int setUserPassword(User user) throws Exception;
 }

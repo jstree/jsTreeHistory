@@ -43,4 +43,16 @@ public class UserRegisterDaoImpl extends EgovComAbstractDAO implements UserRegis
 		// TODO Auto-generated method stub
 		return (int)getSqlMapClientTemplate().queryForObject("userRegister.getNickNameUseFl", nickName);
 	}
+
+	@Override
+	public User getUserInfoByEmail(String email) throws Exception
+	{
+		return (User)selectByPk("userRegister.getUserInfoByEmail", email);
+	}
+
+	@Override
+	public int setUserPassword(User user) throws Exception
+	{
+		return (int)update("userRegister.setUserPassword", user);
+	}
 }
