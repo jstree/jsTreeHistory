@@ -42,7 +42,7 @@
 					</div>
 						<div class="responsive-row tm-larger" ">
 						<div class="one-quarter-percent inline-block">
-							<label>비밀번호 초기화 질문</label>
+							<label>초기화 질문</label>
 						</div>
 						<div class="three-quarter-percent">
 							<input type="text" id="question" name="question" class="w-full" readonly="readonly"/>
@@ -50,7 +50,7 @@
 					</div>
 					<div class="responsive-row tm-larger">
 					 	<div class="one-quarter-percent inline-block ">
-							<label for="answer">비밀번호 초기화 답변</label>
+							<label for="answer">초기화 답변</label>
 						</div>
 						 <div class="three-quarter-percent">
 							<input type="text" id="answer" name="answer" class="w-full"/>
