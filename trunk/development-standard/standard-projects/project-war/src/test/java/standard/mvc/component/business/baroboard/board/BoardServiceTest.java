@@ -108,7 +108,7 @@ public class BoardServiceTest {
 		}
 	}
 
-//	@Ignore
+	@Ignore
 	@Test
 	public void addArticles() {
 		for (int i = 70; i < 200; i++) {
