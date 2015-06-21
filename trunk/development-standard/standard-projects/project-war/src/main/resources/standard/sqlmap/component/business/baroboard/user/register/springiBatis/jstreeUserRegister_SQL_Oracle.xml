@@ -475,5 +475,20 @@
 		SELECT COUNT(C_ID) 
 		FROM T_USER_INFO
 		WHERE C_TITLE = #title#
-	</select>	
+	</select>
+	
+	<select id="getUserInfoByEmail" parameterClass="String" resultClass="User">
+		<dynamic>
+			<include refid="getMetaField" />
+			FROM T_USER_INFO A
+			WHERE C_EMAIL = #email# 
+		</dynamic>
+	</select>
+	
+	<update id="setUserPassword" parameterClass="User">
+		UPDATE T_USER_INFO
+		SET C_PASSWORD = #password#
+		  , C_PASSWORD_CHANGE_DT = TO_CHAR(SYSDATE,'yyyyMMddHHmmss') 
+		WHERE C_ID = #c_id#
+	</update>	
 </sqlMap>
