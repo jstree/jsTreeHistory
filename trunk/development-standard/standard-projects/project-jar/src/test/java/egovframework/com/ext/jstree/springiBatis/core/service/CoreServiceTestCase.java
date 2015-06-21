@@ -120,8 +120,8 @@ public class CoreServiceTestCase
 		rootNode.setC_left(1);
 		rootNode.setC_right(8);
 		rootNode.setC_level(0);
-		rootNode.setC_type("root");
-		rootNode.setC_title("Root Node");
+		rootNode.setC_type(Title.ROOTNODE.getTitle());
+		rootNode.setC_title(Type.ROOT.getType());
 
 		firstChild = new ComprehensiveTree();
 		firstChild.setC_id(2);
@@ -130,8 +130,8 @@ public class CoreServiceTestCase
 		firstChild.setC_left(2);
 		firstChild.setC_right(5);
 		firstChild.setC_level(1);
-		firstChild.setC_title("First Child");
-		firstChild.setC_type("drive");
+		firstChild.setC_title(Title.FIRSTCHILD.getTitle());
+		firstChild.setC_type(Type.DRIVE.getType());
 
 		leafNode = new ComprehensiveTree();
 		leafNode.setC_id(3);
@@ -140,8 +140,8 @@ public class CoreServiceTestCase
 		leafNode.setC_left(3);
 		leafNode.setC_right(4);
 		leafNode.setC_level(2);
-		leafNode.setC_title("Leaf Node");
-		leafNode.setC_type("default");
+		leafNode.setC_title(Title.LEAFTNODE.getTitle());
+		leafNode.setC_type(Type.DEFAULT.getType());
 
 		branchNode = new ComprehensiveTree();
 		branchNode.setC_id(4);
@@ -150,8 +150,8 @@ public class CoreServiceTestCase
 		branchNode.setC_left(6);
 		branchNode.setC_right(7);
 		branchNode.setC_level(1);
-		branchNode.setC_title("Branch Node");
-		branchNode.setC_type("folder");
+		branchNode.setC_title(Title.BRANCHNODE.getTitle());
+		branchNode.setC_type(Type.FOLDER.getType());
 	}
 
 	@Before
