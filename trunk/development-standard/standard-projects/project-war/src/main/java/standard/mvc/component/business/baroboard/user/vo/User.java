@@ -56,9 +56,23 @@ public class User extends ComprehensiveTree {
     /** 비밀번호 */
     private String password;
 
+    /** 비밀번호 확인 */
+    private String passwordConfirm;
+    
     /** 이메일 */
     private String email;
-
+    
+    /** 이메일 계정 */
+    @Size(min = 1, max = 64)
+    private String emailAccount;
+    
+    /** 이메일 호스트 */
+    @Size(min = 1, max = 255)
+    private String emailHost;
+    
+    /** 별명 */
+    private String nickname;
+    
     /** 로그인실패횟수 */
     private int loginFailureCnt;
 
@@ -337,6 +351,38 @@ public class User extends ComprehensiveTree {
 
     public void setJoinState(String joinState) {
         this.joinState = joinState;
+    }
+
+    public String getEmailAccount() {
+        return emailAccount;
+    }
+
+    public void setEmailAccount(String emailAccount) {
+        this.emailAccount = emailAccount;
+    }
+
+    public String getEmailHost() {
+        return emailHost;
+    }
+
+    public void setEmailHost(String emailHost) {
+        this.emailHost = emailHost;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     @Override

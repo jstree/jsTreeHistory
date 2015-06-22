@@ -10,7 +10,7 @@
 <!-- !!!  FOR THIS PAGE ONLY !!! -->
 
 <style>
-#thead{
+/* #thead{
 	outline-width: 0px;
 }
 #boardTable {
@@ -20,6 +20,30 @@
 .font-bold {
 	font-weight: bold;
 	font-size: 25px;
+} */
+
+label {
+	margin-bottom : 0 !important;
+}
+input[type="text"], input[type="password"] {
+	/* width: 192px !important; */
+    height: 30px !important;
+    display: inline !important;
+}
+input[type="radio"] {
+    /* width: 13px !important;
+    height: 13px !important; */
+}
+
+.essential {
+	color : red;
+}
+.compact {
+	min-width : 71px;
+    min-height : 37px;
+}
+.divButtons {
+	float : right;
 }
 </style>
 <script type="text/javascript">
@@ -133,6 +157,72 @@ jQuery( function($) {
 		<article>
 			<div class="clearfix">
 				<div class="container bm-remove">
+					<div>
+						<label>
+							이메일 주소<span class="essential">*</span>
+							<input name="emailAccount" type="text" placeholder="64자리 이하의 이메일 형식 문자" style="width:210px" />@
+							<input name="emailHost" type="text" placeholder="255자리 이하의 이메일 형식 문자" style="width:220px" />
+						</label>
+					</div>
+					<div>
+						<label>
+							비밀번호<span class="essential">*</span>
+							<input name="password" type="password" style="width:200px" />
+						</label>
+					</div>
+					<div>
+						<label>
+							비밀번호 확인<span class="essential">*</span>
+							<input name="passwordConfirm" type="password" style="width:200px" />
+						</label>
+					</div>
+					<div>
+						<label>
+							닉네임<span class="essential">*</span>
+							<input name="nickname" type="text" style="width:200px" />
+						</label>
+						<button id="btnDuplicateNicknameCheck" type="button" class="compact">중복체크</button>
+					</div>
+					<div>
+						<label>
+							본인 인증<span class="essential">*</span>
+							<button id="btnMobileAuthentication" type="button" class="compact">휴대폰 인증</button>
+						</label>
+						<p style="display:inline">휴대폰 인증을 눌러 본인 인증을 해주세요.</p>
+					</div>
+					<div>
+						<label>
+							메일링 서비스 설정
+							<label><input name="mailingServiceUseFl" type="radio" />예</label>
+							<label><input name="mailingServiceUseFl" type="radio" />아니오</label>
+						</label>
+					</div>
+					<div>
+						<label>
+							정보공개 설정
+							<label><input name="indiInfoOpenFl" type="radio" />전체공개</label>
+							<label><input name="indiInfoOpenFl" type="radio" />거부</label>
+						</label>
+					</div>
+					<div class="divButtons">
+	                    <button id="btnJoin" type="submit" class="compact">가입하기</button>
+	                </div>
+				</div>
+			</div>
+		</article>
+	</section>
+<!-- 
+	<section class="clearfix">
+		<nav>
+			<div class="container bm-medium">
+				<div class="one-whole">
+					<div class="no-display">agreement</div>
+				</div>
+			</div>
+		</nav>
+		<article>
+			<div class="clearfix">
+				<div class="container bm-remove">
 					<form id="frmUserRegister" action="${pageContext.request.contextPath}/user/join/register/save.do" method="post">
 						<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 							<div class="tablet-mobile alpha bm-remove last">
@@ -226,5 +316,6 @@ jQuery( function($) {
 			</div>
 		</article>
 	</section>
+ -->
 </body>
 </html>

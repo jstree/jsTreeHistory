@@ -17,11 +17,13 @@ package standard.mvc.component.business.baroboard.user.join.controller;
 
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
@@ -55,8 +57,27 @@ public class JoinController extends GenericAbstractController {
     }
 
     @RequestMapping(value = "/index.do", method = RequestMethod.POST)
-    public String index(ModelMap modelMap) throws Exception {
+    public String index() throws Exception {
         
         return "/jsp/user/join/index";
+    }
+    
+    @RequestMapping(value = "/join.do", method = RequestMethod.POST)
+    public String join(@Valid User user) throws Exception{
+        
+        
+        
+//        String mailId = req.getParameter("mailId");
+//        String mailUrl = req.getParameter("mailUrl");
+//        
+//        
+//        User user = new User();
+//        user.setC_title(req.getParameter("nickName"));
+//        user.setPassword(req.getParameter("password"));
+//        user.setEmail(mailId + "@" + mailUrl );
+//        
+//        userRegisterService.userRegister(user);
+        
+        return "{}";
     }
 }
