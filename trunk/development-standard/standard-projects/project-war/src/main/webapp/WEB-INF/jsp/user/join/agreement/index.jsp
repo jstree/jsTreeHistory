@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="customTags" %>
 
 <!DOCTYPE html>
 <html lang="ko" class="js">
@@ -50,7 +48,10 @@ var Agreement = {
 	font-weight: bold;
 	font-size: 25px;
 }
-	
+.compact {
+	min-width: 71px;
+    min-height: 37px;
+}
 </style>
 </head>
 <body>
@@ -73,7 +74,7 @@ var Agreement = {
 		<article>
 			<div class="clearfix">
 				<div class="container bm-remove">
-					<form id="frmAgreement" action="next.do" method="post">
+					<form id="frmAgreement" action="<c:url value="/user/join/index.do" />" method="post">
 						<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 							<div class="tablet-mobile alpha bm-remove last">
 								<div>
@@ -104,12 +105,12 @@ var Agreement = {
 											<tr>
 												<td align="left" width="10%" colspan="3">
 													&nbsp;&nbsp;<input type="checkbox" id="agreement" name="agreement" >
-													&nbsp;&nbsp;위 두가지를 모두 읽었으며 내용에 모두 동의합니다.
+													&nbsp;&nbsp;<label for="agreement">위 두가지를 모두 읽었으며 내용에 모두 동의합니다.</label>
 												</td>
 											</tr>
 											<tr>
 												<td align="right" width="10%" colspan="3">
-													<button id="btnNext" type="submit">다음</button>
+													<button id="btnNext" type="submit" class="compact">다음</button>
 												</td>
 											</tr>
 										</tbody>
