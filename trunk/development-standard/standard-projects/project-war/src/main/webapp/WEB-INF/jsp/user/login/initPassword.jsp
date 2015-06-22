@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <style type="text/css">
 	.responsive-row 
 	{
@@ -75,7 +76,7 @@
 			{
 				if( $('#email').val() === '' )
 				{
-					alert('이메일을 입력 하세요');
+					alert('<spring:message code="bb.com.error.014"/>');
 					$('#email').focus();
 					return;
 				}
@@ -96,7 +97,7 @@
 		    				$('#question').val('');
 		    				$('#initBtn').prop('disabled',true);
 		    				$('#email').focus();
-		    				alert('잘못된 이메일 주소 입니다.');
+		    				alert('<spring:message code="bb.com.error.010"/>');
 	    				}
 		    		}).fail(function(data){
 		    			alert(data);
@@ -107,21 +108,21 @@
 			{
 				if( $('#email').val() === '' )
 				{
-					alert('이메일을 입력 하세요');
+					alert('<spring:message code="bb.com.error.014"/>');
 					$('#email').focus();
 					return;
 				}
 				
 				if( $('#question').val() === '' )
 				{
-					alert('비밀번호 초기화 질문을 조회 하세요');
+					alert('<spring:message code="bb.com.error.016"/>');
 					$('#email').focus();
 					return;
 				}
 				
 				if( $('#answer').val() === '' )
 				{
-					alert('답변을 입력 하세요');
+					alert('<spring:message code="bb.com.error.017"/>');
 					$('#answer').focus();
 					return;
 				}
@@ -135,12 +136,13 @@
 		    		{
 		    			if(data.joinState === '0')
 	    				{
-		    				alert('일치하지 않는 초기화 답변입니다.');
+		    				
+		    				alert('<spring:message code="bb.com.error.018"/>');
 		    				$('#answer').focus();
 	    				}
 		    			else
 		    			{
-		    				alert('비밀번호가 이메일 주소로 초기화 되었습니다.');
+		    				alert('<spring:message code="bb.com.error.019"/>');
 		    			}
 		    		}).fail(function(data)
 		    		{

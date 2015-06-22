@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <style type="text/css">
 	.responsive-row 
 	{
@@ -66,14 +67,14 @@
 			{
 				if( $('#email').val() === '' )
 				{
-					alert('이메일을 입력해 주세요');
+					alert('<spring:message code="bb.com.error.014"/>');
 					$('#email').focus();
 					return;
 				}
 				
 				if( $('#t_password').val() === '' )
 				{
-					alert('패스워드를 입력해 주세요');
+					alert('<spring:message code="bb.com.error.015"/>');
 					$('#t_password').focus();
 					return;
 				}
