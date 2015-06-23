@@ -165,7 +165,7 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div id="divBottom" class="responsive-row">
-                    <button id="btnSave" type="submit">저장하기</button>
+                    <button type="submit">저장하기</button>
                 </div>
             </div>
         </div>
