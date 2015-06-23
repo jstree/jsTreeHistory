@@ -21,7 +21,6 @@ import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +69,7 @@ public class CoreMenuDatabaseTest {
 
         try {
             String datasetPath =
-                    "/standard/mvc/component/business/baroboard/core/manage/menu/database/T_CORE_MENU.xml";
+                    "/standard/mvc/component/business/baroboard/menu/database/T_CORE_MENU.xml";
             URL url = this.getClass().getResource(datasetPath);
 
             ReplacementDataSet dataSet =
