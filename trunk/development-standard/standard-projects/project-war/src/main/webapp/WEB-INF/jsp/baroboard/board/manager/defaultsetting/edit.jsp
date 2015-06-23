@@ -31,155 +31,204 @@ input[type="text"] {
 </style>
 
 <script type="text/javascript">
-	var inputForm = { submit : function(target){
-			                       form = target.id;
-			                       $form = $('#' + target.id);
-	            
-                                   if (!confirm('저장하시겠습니까?')) {
-                                       return false;
-                                   }
-            
-                                   var ajaxResult = callAjax( form
-                                                            , $form.prop('action')
-										                    , null
-										                    , $form.prop('method')
-										                    , 'json'
-										                    , null
-										                    , null );
-            
-		                       }
-                    }
 	$(document).ready(function(){
 		
+		// 체크박스 초기 설정
+		$("input[type=checkbox]").each(function(){
+			
+			if( $(this).next().val() == "1" ){
+				$(this).click();
+			}
+		});
+		
+		// 스팸키워드 초기 설정
+		if( '' != "<c:out value='${defaultSetting.spamKeywords}' default=''/>" ){
+			
+			var spamKeywords = "${defaultSetting.spamKeywords}".split(",");
+			
+			for( var i = 0; i < spamKeywords.length; i++ ){
+				addSpamKeyword( spamKeywords[i] );
+			}
+		}
 	});
 	
+	// 체크박스 체크 이벤트
 	$(document).on("click", "input[type=checkbox]", function(){
 		
-		alert($(this).next().val());
-		
 		if( $(this).prop("checked") ){
-			alert("체크됨");
+			$(this).next().val("1");
 		}
 		else{
-			alert("안됨");
+			$(this).next().val("0");
 		}
+	// 스팸키워드 추가
+	}).on("click", "#addSpamKeyword", function(){
+		
+		addSpamKeyword( $(this).prev().val() );
+		return false;
+	// 저장
+	}).on("click", "#saveBtn", function(){
+		
+		if( confirm("저장하시겠습니까?") ){
+			
+			validForm();
+			
+			callAjax( "basicSettingForm"
+	                , "${pageContext.request.contextPath}/board/manager/defaultsetting/save.do"
+	                , null
+	                , "POST"
+	                , 'json'
+	                , null
+	                , null );
+			alert("수정되었습니다.");
+		}		
 	});
+	
+	// 유효성 검사
+	function validForm(){
+		
+		var result = true;
+		
+		$("input[type=text]").each(function(){
+			
+			if( $(this).attr("id") != "spamKeywords" ){
+				
+				if( $(this).val() == "" || $(this).val() == null ){
+					result = false;
+					alert( $(this).parent().prev().text() + " 값을 입력해 주세요." );
+					$(this).focus();
+				}
+			}
+		});
+		// 금지단어
+		setSpamKeywordValueToForm();
+		
+		return result;
+	}
+	
+	// 금지단어 추가
+	function addSpamKeyword( spamKeyword ){
+		
+		var appendYn = true;
+		
+		$("#spamArea").children().filter("button").each(function(){
+			if( $(this).attr("id") == spamKeyword || spamKeyword == '' ){
+				appendYn = false;
+			}
+		});
+		
+		if( appendYn ){
+			
+			$("#spamArea").append("<span>&nbsp;</span><button id='" + spamKeyword 
+			                    + "' onClick=\"javascript:deleteSpamKeyword('" + spamKeyword + "')\" >"
+			                    + spamKeyword + "(X)</button>");
+		}
+	}
+	
+	// 금지단어 삭제
+	function deleteSpamKeyword( spamKeyword ){
+		
+		if( confirm("정말 삭제하시겠습니까?") ){
+			
+			$("#spamArea").children().filter("#" + spamKeyword).prev().remove();
+			$("#spamArea").children().filter("#" + spamKeyword).remove();
+		}
+	}
+	
+	// 금지단어값 hidden value 셋팅
+	function setSpamKeywordValueToForm(){
+	    if( $("#spamArea").children().filter("button").length > 0 ){
+            
+            var spamCount = 0;
+            var spamKeywordSet = "";
+            
+            $("#spamArea").children().filter("button").each(function(){
+                
+                if( spamCount > 0 ){
+                    spamKeywordSet += ",";
+                }
+                spamKeywordSet += $(this).attr("id");
+                ++spamCount;
+            });
+            $("input[name='spamKeywords']").val( spamKeywordSet );
+        }
+	}
 </script>
 <section>
-	<form name="basicSettingForm" id="basicSettingForm" method="post" action="${pageContext.request.contextPath}/core/manage/setting/basicSetting/save.do">
+	<form id="basicSettingForm">
+	    <input type="hidden" name="c_id" value="${defaultSetting.c_id}"/>
 		<div class="three-quarter last boxed p-twenty clearfix"	data-anim-type="fade-in" data-anim-delay="0">
 			<div id="samDiv" class="tablet-mobile alpha bm-remove last">
 				<div class="responsive-row">
 					<div class="one-quarter">글 추천 필드 사용 여부</div>
 					<div class="one-quarter">
-						<input name="useLikeFl" id="useLikeFl" type="checkbox" value="${defaultSetting.c_title}">
-						<input type="hidden" value="${defaultSetting.c_title}">
+						<input id="useLikeFl" type="checkbox">
+						<input type="hidden" name="useLikeFl" value="${defaultSetting.useLikeFl}">
 					</div>
 				</div>
 				<div class="responsive-row">
-					<div class="one-quarter">기본언어</div>
+					<div class="one-quarter">목록에서 내용 사용 여부</div>
 					<div class="one-quarter">
-						<select name="basicLanguageId" id="basicLanguageId">
-						<c:forEach var="list" items="${basicLanguageList}" varStatus="status">
-							<option value="<c:out value="${list.c_id}" />" 
-								<c:if test="${list.c_id == basicSetting.basicLanguageId}">selected="selected"</c:if>>
-								<c:out value="${list.c_title}" />
-							</option>
-						</c:forEach>
-						</select>
+						<input id="viewContentInListFl" type="checkbox">
+						<input type="hidden" name="viewContentInListFl" value="${defaultSetting.viewContentInListFl}">
 					</div>
 				</div>
 				<div class="responsive-row">
-					<div class="one-quarter">현지시간 및 포맷 설정</div>
+					<div class="one-quarter">목록에서 첨부파일 사용 여부</div>
 					<div class="one-quarter">
-						<select name="localTimeId" id="localTimeId">
-						<c:forEach var="list" items="${localTimeList}" varStatus="status">
-							<option value="<c:out value="${list.c_id}" />" 
-								<c:if test="${list.c_id == basicSetting.localTimeId}">selected="selected"</c:if>>
-								<c:out value="${list.c_title}" />
-							</option>
-						</c:forEach>
-						</select>
-						<select name="timeFormatId" id="timeFormatId">
-							<c:forEach var="list" items="${timeFormatList}" varStatus="status">
-								<option value="<c:out value="${list.c_id}" />" 
-									<c:if test="${list.c_id == basicSetting.timeFormatId}">selected="selected"</c:if>>
-									<c:out value="${list.c_title}" />
-								</option>
-							</c:forEach>
-						</select>
-					</div>
-				</div>
-				<div class="responsive-row ">
-					<div class="one-quarter">썸네일 생성방법</div>
-					<div class="one-quarter">					
-						<c:forEach var="list" items="${thumCreateMethodList}" varStatus="status">
-							<input type="radio" name="thumCreatMethodId" value="<c:out value="${list.c_id}" /> " 
-								<c:if test="${list.c_id == basicSetting.thumCreatMethodId}"> checked="checked"</c:if>>
-								<c:out value="${list.c_title}" />
-							</input>
-						</c:forEach>
+						<input id="viewAttachInListFl" type="checkbox">
+						<input type="hidden" name="viewAttachInListFl" value="${defaultSetting.viewAttachInListFl}">
 					</div>
 				</div>
 				<div class="responsive-row">
-					<div class="one-quarter">파비콘 지정</div>
+					<div class="one-quarter">익명 글쓰기 사용 여부</div>
 					<div class="one-quarter">
-					<input type="checkbox" name="faviconUseFl" id="faviconUseFl" value="${defaultSetting.maxLengthInContent}" />
-					<input type="hidden" value="개개소리">
+						<input id="useWrittingAnonymFl" type="checkbox">
+						<input type="hidden" name="useWrittingAnonymFl" value="${defaultSetting.useWrittingAnonymFl}">
 					</div>
 				</div>
 				<div class="responsive-row">
-					<div class="one-quarter">모바일 홈화면 아이콘</div>
+					<div class="one-quarter">제목 길이 제한</div>
 					<div class="one-quarter">
-					<input type="checkbox" name="mobileIconApplyFl" id="mobileIconApplyFl" value="1" <c:if test="${'1' == basicSetting.mobileIconApplyFl}">checked</c:if>/>적용여부
+						<input type="text" id="maxLengthInTitle" name="maxLengthInTitle" value="${defaultSetting.maxLengthInTitle}">
 					</div>
 				</div>
 				<div class="responsive-row">
-					<div class="one-quarter">홈페이지 레이아웃 설정</div>
+					<div class="one-quarter">최소 글자수 제한</div>
 					<div class="one-quarter">
-						<select name="layoutId" id="layoutId">
-							<c:forEach var="list" items="${layoutList}" varStatus="status">
-								<option value="<c:out value="${list.c_id}" />" 
-									<c:if test="${list.c_id == basicSetting.layoutId}">selected="selected"</c:if>>
-									<c:out value="${list.c_title}" />
-								</option>
-							</c:forEach>
-						</select>
+					    <input type="text" id="minLengthInContent" name="minLengthInContent" value="${defaultSetting.minLengthInContent}">
 					</div>
 				</div>
 				<div class="responsive-row">
-					<div class="one-quarter">iframe, object/embed 허용 URL 설정</div>
+					<div class="one-quarter">최대 글자수 제한</div>
 					<div class="one-quarter">
-						<textarea id="" name="" class="w-large" placeholder=""></textarea>
+						<input type="text" id="maxLengthInContent" name="maxLengthInContent" value="${defaultSetting.maxLengthInContent}">
 					</div>
 				</div>
 				<div class="responsive-row">
-					<div class="one-quarter">접근허용 IP 설정</div>
+					<div class="one-quarter">SNS 연동 사용 여부</div>
 					<div class="one-quarter">
-						<textarea id="" name="" class="w-large" placeholder=""></textarea>
+						<input id="useSnsLinkFl" type="checkbox">
+						<input type="hidden" name="useSnsLinkFl" value="${defaultSetting.useSnsLinkFl}">
 					</div>
 				</div>
 				<div class="responsive-row">
-					<div class="one-quarter">접근 불 가능 시 보여지는 페이지 문구 설정</div>
+					<div class="one-quarter">스팸 키워드 설정</div>
 					<div class="one-quarter">
-						<textarea id="accesProhWords" name="accesProhWords" class="w-large" placeholder="">${basicSetting.accesProhWords}</textarea>
+						<input id="spamKeywords" type="text"><button id="addSpamKeyword">추가</button>
+						<input type="hidden" name="spamKeywords" value="${defaultSetting.spamKeywords}">
+						<div id="spamArea"></div>
 					</div>
 				</div>
 				<div class="responsive-row">
-					<div class="one-quarter">회원가입 사용여부 설정</div>
+					<div class="one-quarter">자동 차단 설정</div>
 					<div class="one-quarter">
-						<input type="checkbox" name="userJoinUseFl" id="userJoinUseFl" value="1" <c:if test="${'1' == basicSetting.userJoinUseFl}">checked</c:if>/>
-						회원관리 컴포넌트가 반드시 필요합니다
-					</div>
-				</div>
-				<div class="responsive-row">
-					<div class="one-quarter">하단 스크립트 설정</div>
-					<div class="one-quarter">
-						<textarea id="footerScript" name="footerScript" class="w-large" placeholder="">${basicSetting.footerScript}</textarea>
+						<input id="blockDoubtRequestFl" type="checkbox">
+						<input type="hidden" name="blockDoubtRequestFl" value="${defaultSetting.blockDoubtRequestFl}">
 					</div>
 				</div>
 				<div id="divBottom" class="responsive-row">
-					<button id="saveBtn" onclick="inputForm.submit(this.form);return false;">저장</button>
+					<button id="saveBtn">저장</button>
 				</div>
 			</div>
 		</form>	
