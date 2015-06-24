@@ -49,11 +49,48 @@ input[type="radio"] {
 <script type="text/javascript">
 var join = {
     
+    nicknameDuplicaionChecked : false,
+    uniqueNickname : false,
+    
     init : function() {
-        this.handleEvent();
+        join.handleEvent();
     },
     
     handleEvent : function() {
+        
+        (function onChangeNickname() {
+            
+            var $form = $('#frmJoin');
+            
+            var $nickname = $form.find('input[name="nickname"]');
+            
+            $nickname.on('change paste keyup', function(e) {
+                
+                join.nicknameDuplicaionChecked = false;
+                join.uniqueNickname = false;
+            });
+            
+        })();
+        
+        (function onClickNicknameDuplicationCheckButton() {
+            
+            $('#btnNicknameDuplicationCheck').on('click', function() {
+                
+                var $nickname = $('#frmJoin input[name="nickname"]');
+                
+                var nickname = $nickname.val();
+                
+                if (!join.validateNicknameFormField(nickname)) {
+                    $nickname.focus();
+                    return false;
+                }
+                
+                
+            });
+            
+            
+            
+        })();
         
         (function onSubmitOfJoinForm() {
             
@@ -89,99 +126,120 @@ var join = {
         })();
     },
     
+    validateNicknameFormField : function(nickname) {
+      
+        var valid = true;
+        
+        if (!nickname) {
+            alert('닉네임을 입력해주세요.');
+            valid = false;
+        }
+        
+        return valid;
+    },
+    
     validateFormFields : function() {
         
-    	var $form = $('#frmJoin');
-    	
-    	var $emailAccount = $form.find('input[name="emailAccount"]');
-    	var emailAccount = $emailAccount.val();
-    	
-    	if (!emailAccount) {
-    		alert('이메일 주소를 입력해주세요.');
-    		$emailAccount.focus();
-    		return false;
-    	}
-    	
-    	var emailAccountRegExp = /^([\w\.-]+)$/;
-    	if ( ! emailAccountRegExp.test(emailAccount) ) {
-    		alert('이메일 주소가 올바르지 않습니다.');
-    		$emailAccount.focus();
-    		return false;
-    	}
-    	
-    	var $emailHost = $form.find('input[name="emailHost"]');
-    	var emailHost = $emailHost.val();
-    	
-    	if (!emailHost) {
-    		alert('이메일 주소를 입력해주세요.');
-    		$emailHost.focus();
-    		return false;
-    	}
-    	
-    	var emailHostRegExp = /^([a-z\d\.-]+)\.([a-z\.]{2,6})$/;
-    	if ( ! emailHostRegExp.test(emailHost) ) {
-    		alert('이메일 주소가 올바르지 않습니다.');
-    		$emailHost.focus();
-    		return false;
-    	}
-    	
-    	var $password = $form.find('input[name="password"]');
-    	var password = $password.val();
-    	
-    	if (!password) {
-    		alert('비밀번호를 입력해주세요.');
-    		$password.focus();
-    		return false;
-    	}
-    	
-    	var passwordRegExp = /^[a-z0-9]{8,256}$/;
-    	if ( ! passwordRegExp.test(password) ) {
-    		alert('비밀번호가 올바르지 않습니다.');
-    		$password.focus();
-    		return false;
-    	}
-    	
-    	var $passwordConfirm = $form.find('input[name="passwordConfirm"]');
-    	var passwordConfirm = $passwordConfirm.val();
-    	
-    	if (!passwordConfirm || password != passwordConfirm) {
-    		alert('비밀번호를 동일하게 한 번 더 입력해주세요.');
-    		$passwordConfirm.focus();
-    		return false;
-    	}
-    	
-    	var passwordRegExp = /^[a-z0-9]{8,256}$/;
-    	if ( ! passwordRegExp.test(passwordConfirm) ) {
-    		alert('비밀번호가 올바르지 않습니다.');
-    		$passwordConfirm.focus();
-    		return false;
-    	}
-    	
-    	var $nickname = $form.find('input[name="nickname"]');
-    	var nickname = $nickname.val();
-    	
-    	if (!nickname) {
-    		alert('닉네임을 입력해주세요.');
-    		$nickname.focus();
-    		return false;
-    	}
-    	
-    	// 닉네임 중복체크
-    	
-    	
-    	// 비밀번호찾기질문
-    	// 비밀번호찾기답변
-    	
-    	// 홈페이지
-    	// 블로그
-    	// 서명
-    	// 프로필사진
-    	// 사용자아이콘
-    	
-    	
-		var reUrl = /^(https?:\/\/)?([a-z\d\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/; // URL 검사식
-    	
-    	return false;
+        var $form = $('#frmJoin');
+        
+        var $emailAccount = $form.find('input[name="emailAccount"]');
+        var emailAccount = $emailAccount.val();
+        
+        if (!emailAccount) {
+            alert('이메일 주소를 입력해주세요.');
+            $emailAccount.focus();
+            return false;
+        }
+        
+        var emailAccountRegExp = /^([\w\.-]+)$/;
+        if ( ! emailAccountRegExp.test(emailAccount) ) {
+            alert('이메일 주소가 올바르지 않습니다.');
+            $emailAccount.focus();
+            return false;
+        }
+        
+        var $emailHost = $form.find('input[name="emailHost"]');
+        var emailHost = $emailHost.val();
+        
+        if (!emailHost) {
+            alert('이메일 주소를 입력해주세요.');
+            $emailHost.focus();
+            return false;
+        }
+        
+        var emailHostRegExp = /^([a-z\d\.-]+)\.([a-z\.]{2,6})$/;
+        if ( ! emailHostRegExp.test(emailHost) ) {
+            alert('이메일 주소가 올바르지 않습니다.');
+            $emailHost.focus();
+            return false;
+        }
+        
+        var $password = $form.find('input[name="password"]');
+        var password = $password.val();
+        
+        if (!password) {
+            alert('비밀번호를 입력해주세요.');
+            $password.focus();
+            return false;
+        }
+        
+        var passwordRegExp = /^[a-z0-9]{8,256}$/;
+        if ( ! passwordRegExp.test(password) ) {
+            alert('비밀번호가 올바르지 않습니다.');
+            $password.focus();
+            return false;
+        }
+        
+        var $passwordConfirm = $form.find('input[name="passwordConfirm"]');
+        var passwordConfirm = $passwordConfirm.val();
+        
+        if (!passwordConfirm || password != passwordConfirm) {
+            alert('비밀번호를 동일하게 한 번 더 입력해주세요.');
+            $passwordConfirm.focus();
+            return false;
+        }
+        
+        var passwordRegExp = /^[a-z0-9]{8,256}$/;
+        if ( ! passwordRegExp.test(passwordConfirm) ) {
+            alert('비밀번호가 올바르지 않습니다.');
+            $passwordConfirm.focus();
+            return false;
+        }
+        
+        var $nickname = $form.find('input[name="nickname"]');
+        var nickname = $nickname.val();
+        
+        if (!join.validateNicknameFormField()) {
+            $nickname.focus();
+            return false;
+        }
+        
+        if (!join.nicknameDuplicaionChecked) {
+            alert('닉네임 중복체크 버튼을 눌러 중복된 닉네임인지 확인해주세요.');
+            return false;
+        }
+        if (!join.uniqueNickname) {
+            alert('닉네임 중복체크 버튼을 눌러 중복된 닉네임인지 확인해주세요.');
+            $nickname.focus();
+            return false;
+        }
+        
+        
+        
+        
+        // 비밀번호찾기질문
+        // 비밀번호찾기답변
+        
+        // 홈페이지
+        // 블로그
+        // 서명
+        // 프로필사진
+        // 사용자아이콘
+        
+        
+        var reUrl = /^(https?:\/\/)?([a-z\d\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/; // URL 검사식
+        
+        return false;
     }
     
 };
@@ -228,14 +286,7 @@ $(document).ready(function() {
                             닉네임<span class="essential">*</span>
                             <input name="nickname" type="text" style="width:200px" />
                         </label>
-                        <button id="btnDuplicateNicknameCheck" type="button" class="compact">중복체크</button>
-                    </div>
-                    <div>
-                        <label>
-                            본인 인증<span class="essential">*</span>
-                            <button id="btnMobileAuthentication" type="button" class="compact">휴대폰 인증</button>
-                        </label>
-                        <p style="display:inline">휴대폰 인증을 눌러 본인 인증을 해주세요.</p>
+                        <button id="btnNicknameDuplicationCheck" type="button" class="compact">중복체크</button>
                     </div>
                     <div>
                         <label>
