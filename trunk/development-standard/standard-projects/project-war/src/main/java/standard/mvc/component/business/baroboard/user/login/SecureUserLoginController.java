@@ -40,6 +40,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * -----------   ------------  -----------------------
  * 2015. 06.16.  김형채 		      최초 생성
  * 2015. 06.24.  김형채 		      상태코드 수정
+ * 2015. 06.24.  김형채 		      상태코드 분기추가
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -129,9 +130,13 @@ public class SecureUserLoginController extends GenericAbstractController
 		{
 			ShaPasswordEncoder encoder=new ShaPasswordEncoder(SHA256);
 			String encoderUserEmail = encoder.encodePassword(user.getEmail(), null);
+			
 			user.setPassword(encoderUserEmail);
-			userRegisterService.setUserPassword(user);
-			user.setStatus(SUCCESS);
+			
+			int returnCnt = userRegisterService.setUserPassword(user);
+			
+			if ( returnCnt > 0 ) user.setStatus(SUCCESS); 
+			else                 user.setStatus(FAILURE);
 		}
 		else
 		{
