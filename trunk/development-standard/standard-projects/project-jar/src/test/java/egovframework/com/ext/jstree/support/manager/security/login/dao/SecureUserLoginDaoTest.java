@@ -1,23 +1,10 @@
 package egovframework.com.ext.jstree.support.manager.security.login.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
-import java.io.File;
-
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-
-import org.dbunit.DataSourceDatabaseTester;
-import org.dbunit.IDatabaseTester;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -34,7 +21,6 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
-import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 /**
  * Modification Information
  * 
@@ -51,6 +37,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * 수정일               	  수정자                         수정내용
  * ------------  ------------   -----------------------
  * 2015. 6. 24   김형채                   최초 생성
+ * 2015. 6. 24   김형채                   테스트 메소드 추가
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -128,7 +115,7 @@ public class SecureUserLoginDaoTest
 	}
 	
 	@Test
-	@ExpectedDatabase(value = "SecureUserLoginDaoTest_TestSetUserLoginFailureCntZero_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value = "SecureUserLoginDaoTest_TestSetUserLastLoginDt_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testSetUserLastLoginDt()
 	{
 		int returnCnt = this.secureUserLoginDao.setUserLastLoginDt(user);
@@ -137,8 +124,18 @@ public class SecureUserLoginDaoTest
 	}
 	
 	@Test
-	public void testSetUserLoginFailureCntIncrease(){}
+	@ExpectedDatabase(value = "SecureUserLoginDaoTest_TestSetUserLoginFailureCntIncrease_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testSetUserLoginFailureCntIncrease()
+	{
+		int returnCnt = this.secureUserLoginDao.setUserLoginFailureCntZero(user);
+		assertThat(returnCnt).isEqualTo(1);
+	}
 	
 	@Test
-	public void testSetUserLoginJoinStateCd(){}
+	@ExpectedDatabase(value = "SecureUserLoginDaoTest_TestSetUserLoginJoinStateCd_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void testSetUserLoginJoinStateCd()
+	{
+		int returnCnt = this.secureUserLoginDao.setUserLoginJoinStateCd(user);
+		assertThat(returnCnt).isEqualTo(1);
+	}
 }
