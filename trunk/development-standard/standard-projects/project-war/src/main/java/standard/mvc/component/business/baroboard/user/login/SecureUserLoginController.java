@@ -39,6 +39,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * 수정일                 수정자                     수정내용
  * -----------   ------------  -----------------------
  * 2015. 06.16.  김형채 		      최초 생성
+ * 2015. 06.24.  김형채 		      상태코드 수정
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -120,8 +121,8 @@ public class SecureUserLoginController extends GenericAbstractController
 		
 		User user = this.userRegisterService.getUserInfoByEmail(email);
 		
-		final String FAILURE = "0";
-		final String SUCCESS = "1";
+		final int FAILURE = 0;
+		final int SUCCESS = 1;
 		final int SHA256 = 256;
 		
 		if( StringUtils.equals(answer, user.getPasswordFindAnswer()) )
@@ -130,11 +131,11 @@ public class SecureUserLoginController extends GenericAbstractController
 			String encoderUserEmail = encoder.encodePassword(user.getEmail(), null);
 			user.setPassword(encoderUserEmail);
 			userRegisterService.setUserPassword(user);
-			user.setJoinState(SUCCESS);
+			user.setStatus(SUCCESS);
 		}
 		else
 		{
-			user.setJoinState(FAILURE);
+			user.setStatus(FAILURE);
 		}
 		return user;
 	}
