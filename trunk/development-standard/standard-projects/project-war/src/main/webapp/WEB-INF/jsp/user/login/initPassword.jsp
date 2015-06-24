@@ -134,7 +134,7 @@
 		    		  data: { email: $('#email').val(), answer: $('#answer').val()},
 		    		}).done(function(data)
 		    		{
-		    			if(data.joinState === '0')
+		    			if(data.state === 0)
 	    				{
 		    				
 		    				alert('<spring:message code="bb.com.error.018"/>');
