@@ -36,17 +36,17 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 public class DefaultSettingServiceImpl implements CoreService {
 
     @Resource(name = "CoreService")
-    private CoreService coreService;
+    private CoreService defaultSettingService;
 
     @Override
     public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception {
-        T node = coreService.getNode(comprehensiveTree);
+        T node = defaultSettingService.getNode(comprehensiveTree);
         return node;
     }
     
     @Override
     public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree) throws Exception {
-    	int alteredCount = coreService.alterNode(comprehensiveTree);
+    	int alteredCount = defaultSettingService.alterNode(comprehensiveTree);
     	return alteredCount;
     }
 
