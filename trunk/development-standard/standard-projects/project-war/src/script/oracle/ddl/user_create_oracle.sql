@@ -1,4 +1,3 @@
-/* 오권우 시작 */
 DROP TABLE T_USER_INFO_LOG;
 
 CREATE TABLE T_USER_INFO_LOG
@@ -43,6 +42,7 @@ CREATE TABLE T_USER_INFO
   C_TYPE                      VARCHAR2(100),                           /* 노드타입 */
   C_USER_GRADE_CD             NUMBER               NOT NULL,           /* 회원등급코드 */
   C_JOIN_STATE_CD             NUMBER               NOT NULL,           /* 가입상태코드 */
+  C_PWD_FIND_QUESTION_CD      NUMBER               NOT NULL,           /* 비밀번호찾기질문코드 */
   C_PASSWORD                  VARCHAR2(256)        NOT NULL,           /* 비밀번호 */
   C_EMAIL                     VARCHAR2(320)        NOT NULL,           /* 이메일 */
   C_LOGIN_FAILURE_CNT         NUMBER(1)            DEFAULT 0 NOT NULL, /* 로그인실패횟수 */
@@ -57,8 +57,7 @@ CREATE TABLE T_USER_INFO
   C_BLOG_URL                  VARCHAR2(320),                           /* 블로그 */
   C_SIGN                      VARCHAR2(320),                           /* 서명 */
   C_PROFILE_PHOTO             VARCHAR2(320),                           /* 프로필사진 */
-  C_IMAGE_ICON                VARCHAR2(320),                           /* 사용자아이콘 */
-  CONSTRAINT  T_USER_INFO PRIMARY KEY (C_ID)
+  C_IMAGE_ICON                VARCHAR2(320)                            /* 사용자아이콘 */
 );
 
 COMMENT ON TABLE T_USER_INFO IS '회원_정보';
@@ -72,10 +71,10 @@ COMMENT ON COLUMN T_USER_INFO.C_TITLE IS '닉네임';
 COMMENT ON COLUMN T_USER_INFO.C_TYPE IS '노드타입';
 COMMENT ON COLUMN T_USER_INFO.C_USER_GRADE_CD IS '회원등급코드';
 COMMENT ON COLUMN T_USER_INFO.C_JOIN_STATE_CD IS '가입상태코드';
+COMMENT ON COLUMN T_USER_INFO.C_PWD_FIND_QUESTION_CD IS '비밀번호찾기질문코드';
 COMMENT ON COLUMN T_USER_INFO.C_PASSWORD IS '비밀번호';
 COMMENT ON COLUMN T_USER_INFO.C_EMAIL IS '이메일';
 COMMENT ON COLUMN T_USER_INFO.C_LOGIN_FAILURE_CNT IS '로그인실패횟수';
-COMMENT ON COLUMN T_USER_INFO.C_PASSWORD_FIND_QUESTION IS '비밀번호찾기질문';
 COMMENT ON COLUMN T_USER_INFO.C_PASSWORD_FIND_ANSWER IS '비밀번호찾기답변';
 COMMENT ON COLUMN T_USER_INFO.C_MAILING_SERVICE_USE_FL IS '메일링서비스사용여부';
 COMMENT ON COLUMN T_USER_INFO.C_INDI_INFO_OPEN_FL IS '개인정보공개여부';
@@ -88,6 +87,48 @@ COMMENT ON COLUMN T_USER_INFO.C_SIGN IS '서명';
 COMMENT ON COLUMN T_USER_INFO.C_PROFILE_PHOTO IS '프로필사진';
 COMMENT ON COLUMN T_USER_INFO.C_IMAGE_ICON IS '사용자아이콘';
 
+--CREATE UNIQUE INDEX PK_T_USER_INFO
+--    ON T_USER_INFO (
+--        C_ID ASC
+--    );
+
+ALTER TABLE T_USER_INFO
+    ADD
+        CONSTRAINT PK_T_USER_INFO
+        PRIMARY KEY (
+            C_ID
+        );
+
+ALTER TABLE T_USER_INFO
+    ADD
+        CONSTRAINT FK_T_USER_GRADE_MANAGE
+        FOREIGN KEY (
+            C_USER_GRADE_CD
+        )
+        REFERENCES T_USER_GRADE_MANAGE (
+            C_ID
+        );
+
+ALTER TABLE T_USER_INFO
+    ADD
+        CONSTRAINT FK_T_USER_JOIN_STATE
+        FOREIGN KEY (
+            C_JOIN_STATE_CD
+        )
+        REFERENCES T_USER_JOIN_STATE (
+            C_ID
+        );
+
+ALTER TABLE T_USER_INFO
+    ADD
+        CONSTRAINT FK_T_USER_PWD_FIND_QUESTION
+        FOREIGN KEY (
+            C_PWD_FIND_QUESTION_CD
+        )
+        REFERENCES T_USER_PWD_FIND_QUESTION (
+            C_ID
+        );
+        
 DROP SEQUENCE S_USER_INFO;
 
 CREATE SEQUENCE S_USER_INFO
@@ -527,7 +568,121 @@ BEGIN
        RAISE;
 END TRIGGER_T_USER_SCRAP;
 /
-/* 오권우  끝 */  
+
+/* 회원_비밀번호찾기질문 */
+DROP TABLE T_USER_PWD_FIND_QUESTION_LOG;
+
+CREATE TABLE T_USER_PWD_FIND_QUESTION_LOG
+(
+  C_ID        NUMBER                            NOT NULL,
+  C_PARENTID  NUMBER                            NOT NULL,
+  C_POSITION  NUMBER                            NOT NULL,
+  C_LEFT      NUMBER                            NOT NULL,
+  C_RIGHT     NUMBER                            NOT NULL,
+  C_LEVEL     NUMBER                            NOT NULL,
+  C_TITLE     VARCHAR2(4000 BYTE)               NOT NULL,
+  C_TYPE      VARCHAR2(100 BYTE),
+  C_METHOD    VARCHAR2(4000 BYTE)               NOT NULL,
+  C_STATE     VARCHAR2(4000 BYTE)               NOT NULL,
+  C_DATE      DATE                              NOT NULL
+);
+
+COMMENT ON TABLE T_USER_PWD_FIND_QUESTION_LOG IS '회원_금지단어 트리거 로그';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_ID IS '노드 아이디';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_PARENTID IS '부모 노드 아이디';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_POSITION IS '노드 포지션';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_LEFT IS '노드 좌측 끝 포인트';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_RIGHT IS '노드 우측 끝 포인트';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_LEVEL IS '노드 DEPTH ';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_TITLE IS '노드 명';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_TYPE IS '노드 타입';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_METHOD IS '노드 변경 행위';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_STATE IS '노드 상태값 ( 이전인지. 이후인지)';
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION_LOG.C_DATE IS '노드 변경 시';
+
+DROP TABLE T_USER_PWD_FIND_QUESTION;
+
+CREATE TABLE T_USER_PWD_FIND_QUESTION (
+    C_ID NUMBER NOT NULL, /* 노드아이디 */
+    C_PARENTID NUMBER NOT NULL, /* 부모노드아이디 */
+    C_POSITION NUMBER NOT NULL, /* 노드포지션 */
+    C_LEFT NUMBER NOT NULL, /* 노드좌측끝포인트 */
+    C_RIGHT NUMBER NOT NULL, /* 노드우측끝포인트 */
+    C_LEVEL NUMBER NOT NULL, /* 노드레벨 */
+    C_TITLE VARCHAR2(4000) NOT NULL, /* 비밀번호찾기질문 */
+    C_TYPE VARCHAR2(100) /* 노드타입 */
+);
+
+COMMENT ON TABLE T_USER_PWD_FIND_QUESTION IS '회원_비밀번호찾기질문';
+
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION.C_ID IS '노드아이디';
+
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION.C_PARENTID IS '부모노드아이디';
+
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION.C_POSITION IS '노드포지션';
+
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION.C_LEFT IS '노드좌측끝포인트';
+
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION.C_RIGHT IS '노드우측끝포인트';
+
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION.C_LEVEL IS '노드레벨';
+
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION.C_TITLE IS '비밀번호찾기질문';
+
+COMMENT ON COLUMN T_USER_PWD_FIND_QUESTION.C_TYPE IS '노드타입';
+
+--CREATE UNIQUE INDEX PK_T_USER_PWD_FIND_QUESTION
+--    ON T_USER_PWD_FIND_QUESTION (
+--        C_ID ASC
+--    );
+
+ALTER TABLE T_USER_PWD_FIND_QUESTION
+    ADD
+        CONSTRAINT PK_T_USER_PWD_FIND_QUESTION
+        PRIMARY KEY (
+            C_ID
+        );
+        
+DROP SEQUENCE S_USER_PWD_FIND_QUESTION;
+
+CREATE SEQUENCE S_USER_PWD_FIND_QUESTION
+  START WITH 99999
+  MAXVALUE 999999999999999999999999999
+  MINVALUE 0
+  NOCYCLE
+  CACHE 20
+  NOORDER;
+
+CREATE OR REPLACE TRIGGER "TRIGGER_USER_PWD_FIND_QUESTION"
+BEFORE DELETE OR INSERT OR UPDATE
+ON T_USER_PROH_WORD
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+DECLARE
+tmpVar NUMBER;
+
+BEGIN
+   tmpVar := 0;
+    IF UPDATING  THEN    
+        insert into T_USER_PWD_FIND_QUESTION_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
+        insert into T_USER_PWD_FIND_QUESTION_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
+     END IF;
+    IF DELETING THEN
+        insert into T_USER_PWD_FIND_QUESTION_LOG 
+        values (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
+    END IF;   
+    IF INSERTING  THEN
+        insert into T_USER_PWD_FIND_QUESTION_LOG 
+        values (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
+    END IF;
+
+   EXCEPTION
+     WHEN OTHERS THEN
+       -- Consider logging the error and then re-raise
+       RAISE;
+END TRIGGER_USER_PWD_FIND_QUESTION;
 
 /* 류강하 시작 */
 /* 회원_금지단어 */

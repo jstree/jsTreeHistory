@@ -1,4 +1,3 @@
-/* 오권우 시작 */
 /* 회원_정보 */
 DELETE FROM T_USER_INFO;
 
@@ -103,7 +102,26 @@ INSERT INTO T_USER_SCRAP
   VALUES (2, 1, 0, 2, 3, 1, '게시판 스크랩 목록', 'drive',
            1, 1, 1,'20150425205811');
 COMMIT;
-/* 오권우 끝 */
+
+/* 회원_비밀번호찾기질문 */
+DELETE FROM T_USER_PWD_FIND_QUESTION;
+
+INSERT INTO T_USER_PWD_FIND_QUESTION (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
+VALUES (1, 0, 0, 1, 10, 0, 'Root Node', 'root');
+
+INSERT INTO T_USER_PWD_FIND_QUESTION (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
+VALUES (2, 1, 0, 2, 9, 1, '회원_비밀번호찾기질문', 'drive');
+
+INSERT INTO T_USER_PWD_FIND_QUESTION (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
+VALUES (3, 2, 0, 3, 4, 2, '초등학교 이름은', 'default');
+
+INSERT INTO T_USER_PWD_FIND_QUESTION (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
+VALUES (4, 2, 1, 5, 6, 2, '가장 많이 짝사랑했던 이성의 이름은', 'default');
+
+INSERT INTO T_USER_PWD_FIND_QUESTION (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE)
+VALUES (5, 2, 2, 7, 8, 2, '가장 좋아하는 음식은', 'default');
+
+COMMIT;
 
 /* 류강하 시작 */
 /* 회원_금지단어 */
