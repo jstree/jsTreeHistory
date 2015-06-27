@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="boardManagement">
+	<typeAlias alias="BoardManagement" type="standard.mvc.component.business.baroboard.board.manager.boardmanagement.vo.BoardManagementVO" />
+	
+	<update id="alterNode" parameterClass="BoardManagement">
+		/* alterNode for BoardManagement */
+		UPDATE T_BOARD_INDI_SETTING 
+		   SET C_TITLE = #c_title#
+		 WHERE C_ID = #c_id#
+	</update>
+
+
+	<select id="getNode" parameterClass="BoardManagement" resultClass="BoardManagement">
+		/* getNode for BoardManagement */
+        SELECT C_ID
+             , C_PARENTID
+             , C_POSITION
+             , C_LEFT
+             , C_RIGHT
+             , C_LEVEL
+             , C_TITLE
+             , C_TYPE
+          FROM T_BOARD_INDI_SETTING 
+         WHERE C_ID = #c_id#
+    </select>
+</sqlMap>

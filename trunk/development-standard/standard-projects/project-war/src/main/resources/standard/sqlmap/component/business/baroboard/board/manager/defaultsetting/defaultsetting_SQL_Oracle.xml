@@ -4,7 +4,7 @@
 	<typeAlias alias="DefaultSetting" type="standard.mvc.component.business.baroboard.board.manager.defaultsetting.vo.DefaultSettingVO" />
 	
 	<update id="alterNode" parameterClass="DefaultSetting">
-		/* alterNode for GeneralSetting */
+		/* alterNode for DefaultSetting */
 		UPDATE T_BOARD_GENERAL_SETTING 
 		   SET C_USE_LIKE_FL                  = #useLikeFl# 
 		     , C_VIEW_CONTENT_IN_LIST_FL      = #viewContentInListFl# 
@@ -23,7 +23,7 @@
 
 
 	<select id="getNode" parameterClass="DefaultSetting" resultClass="DefaultSetting">
-		/* getNode for GeneralSetting */
+		/* getNode for DefaultSetting */
         SELECT C_ID
              , C_PARENTID
              , C_POSITION
