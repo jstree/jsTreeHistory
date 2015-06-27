@@ -46,8 +46,7 @@ CREATE TABLE T_USER_INFO
   C_PASSWORD                  VARCHAR2(256)        NOT NULL,           /* 비밀번호 */
   C_EMAIL                     VARCHAR2(320)        NOT NULL,           /* 이메일 */
   C_LOGIN_FAILURE_CNT         NUMBER(1)            DEFAULT 0 NOT NULL, /* 로그인실패횟수 */
-  C_PASSWORD_FIND_QUESTION    VARCHAR2(4000)       NOT NULL,           /* 비밀번호찾기질문 */
-  C_PASSWORD_FIND_ANSWER      VARCHAR2(4000)       NOT NULL,           /* 비밀번호찾기답변 */
+  C_PWD_FIND_ANSWER           VARCHAR2(4000)       NOT NULL,           /* 비밀번호찾기답변 */
   C_MAILING_SERVICE_USE_FL    CHAR(1)              DEFAULT 0 NOT NULL, /* 메일링서비스사용여부 */
   C_INDI_INFO_OPEN_FL         CHAR(1)              DEFAULT 0 NOT NULL, /* 개인정보공개여부 */
   C_JOIN_DT                   CHAR(14)             NOT NULL,           /* 가입일시 */

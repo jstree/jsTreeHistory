@@ -70,17 +70,17 @@ public class User extends ComprehensiveTree {
     @Size(min = 1, max = 255)
     private String emailHost;
     
-    /** 별명 */
-    private String nickname;
-    
     /** 로그인실패횟수 */
     private int loginFailureCnt;
 
-    /** 비밀번호찾기질문 */
-    private String passwordFindQuestion;
+    /** 비밀번호찾기질문코드 */
+    private int pwdFindQuestionCd;
 
+    /** 비밀번호찾기질문 */
+    private String pwdFindQuestion;
+    
     /** 비밀번호찾기답변 */
-    private String passwordFindAnswer;
+    private String pwdFindAnswer;
 
     /** 메일링서비스사용여부 */
     private String mailingServiceUseFl;
@@ -177,20 +177,28 @@ public class User extends ComprehensiveTree {
         this.loginFailureCnt = loginFailureCnt;
     }
 
-    public String getPasswordFindQuestion() {
-        return passwordFindQuestion;
+    public int getPwdFindQuestionCd() {
+        return pwdFindQuestionCd;
     }
 
-    public void setPasswordFindQuestion(String passwordFindQuestion) {
-        this.passwordFindQuestion = passwordFindQuestion;
+    public void setPwdFindQuestionCd(int pwdFindQuestionCd) {
+        this.pwdFindQuestionCd = pwdFindQuestionCd;
     }
 
-    public String getPasswordFindAnswer() {
-        return passwordFindAnswer;
+    public String getPwdFindQuestion() {
+        return pwdFindQuestion;
     }
 
-    public void setPasswordFindAnswer(String passwordFindAnswer) {
-        this.passwordFindAnswer = passwordFindAnswer;
+    public void setPwdFindQuestion(String pwdFindQuestion) {
+        this.pwdFindQuestion = pwdFindQuestion;
+    }
+
+    public String getPwdFindAnswer() {
+        return pwdFindAnswer;
+    }
+
+    public void setPwdFindAnswer(String pwdFindAnswer) {
+        this.pwdFindAnswer = pwdFindAnswer;
     }
 
     public String getMailingServiceUseFl() {
@@ -375,14 +383,6 @@ public class User extends ComprehensiveTree {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     @Override
