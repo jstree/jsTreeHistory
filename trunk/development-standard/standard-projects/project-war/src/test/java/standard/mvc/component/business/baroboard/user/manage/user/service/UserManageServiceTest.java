@@ -71,21 +71,34 @@ public class UserManageServiceTest extends DbUnitTest<User> {
 		
 		User user = userList.get(0);
 		
-		assertThat(user.getC_id(), is(3));
+        assertThat(user.getC_id(), is(3));
         assertThat(user.getC_parentid(), is(2));
         assertThat(user.getC_position(), is(0));
         assertThat(user.getC_left(), is(3));
         assertThat(user.getC_right(), is(4));
         assertThat(user.getC_level(), is(2));
-        assertThat(user.getC_title(), is(equalTo("관리자")));
+        assertThat(user.getC_title(), is(equalTo("어쭈구리")));
         assertThat(user.getC_type(), is(equalTo("default")));
-        assertThat(user.getUserGradeCd(), is(1));
+        assertThat(user.getUserGradeCd(), is(4));
+        //assertThat(userStored.getUserGrade(), is(equalTo("관리자")));
         assertThat(user.getJoinStateCd(), is(4));
+        assertThat(user.getJoinState(), is(equalTo("가입완료")));
+        assertThat(user.getPwdFindQuestionCd(), is(3));
+        assertThat(user.getPwdFindQuestion(), is(equalTo("초등학교 이름은")));
+        assertThat(user.getPassword(), is(equalTo("045babdcd2118960e8c8b8e0ecf65b734686e1b18f58710c9646779f49e942ae")));
         assertThat(user.getEmail(), is(equalTo("admin@313.co.kr")));
-        assertThat(user.getJoinDt(), is(equalTo("20150603222617")));
-        assertThat(user.getLastLoginDt(), is(equalTo("20150611123400")));
-        assertThat(user.getJoinDe(), is(equalTo("20150603")));
-        assertThat(user.getLastLoginDe(), is(equalTo("20150611")));
+        assertThat(user.getLoginFailureCnt(), is(0));
+        assertThat(user.getPwdFindAnswer(), is(equalTo("부원초등학교")));
+        assertThat(user.getMailingServiceUseFl(), is(equalTo("1")));
+        assertThat(user.getIndiInfoOpenFl(), is(equalTo("1")));
+        assertThat(user.getJoinDt(), is(equalTo("20150625004822")));
+        assertThat(user.getPasswordChangeDt(), is(equalTo("20150625004822")));
+        assertThat(user.getLastLoginDt(), is(equalTo("20150625004000")));
+        assertThat(user.getHomepageUrl(), is(equalTo(" ")));
+        assertThat(user.getBlogUrl(), is(equalTo(" ")));
+        assertThat(user.getSign(), is(equalTo(" ")));
+        assertThat(user.getProfilePhoto(), is(equalTo(" ")));
+        assertThat(user.getImageIcon(), is(equalTo(" ")));
 	}
 	
 	@Test
