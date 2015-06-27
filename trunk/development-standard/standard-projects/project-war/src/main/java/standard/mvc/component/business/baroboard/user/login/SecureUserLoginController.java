@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import standard.mvc.component.business.baroboard.user.join.register.service.UserRegisterService;
+import standard.mvc.component.business.baroboard.user.service.UserService;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import standard.mvc.component.business.community.log.service.LogUrlSerivce;
 import standard.mvc.component.business.community.menu.service.MenuMngSerivce;
@@ -25,14 +25,14 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
 /**
  * Modification Information
  * 
- * @ author 김형채
+ * @author 김형채
  * 
  * @since 2015. 6. 16.
  * @version 1.0
  * @see <pre>
  * Class Name  : SecureUserLoginController.java
  * Description : 로그인- 로그인 SecureUserLoginController 
- * Information  : 로그인- 로그인 SecureUserLoginController
+ * Information : 로그인- 로그인 SecureUserLoginController
  * 
  * << 개정이력(Modification Information) >>
  * 
@@ -60,7 +60,7 @@ public class SecureUserLoginController extends GenericAbstractController
     EgovMessageSource egovMessageSource;
 	
 	@Autowired
-    private UserRegisterService userRegisterService;
+	private UserService userService;
 	
 	@RequestMapping("/login.do")
 	public String login( @RequestParam(value = "error", required = false) String error
@@ -110,7 +110,11 @@ public class SecureUserLoginController extends GenericAbstractController
 	public User findPasswordQuestion( @RequestParam("email") String email ) throws Exception 
 	{
 		Assert.notNull(email, "'email' must not be null");
-		return this.userRegisterService.getUserInfoByEmail(email);
+		
+		User user = new User();
+		user.setEmail(email);
+		
+		return this.userService.findUserByEmail(user);
 	}
 	
 	@RequestMapping(value = "/checkPasswordAnswer.do" ,method = RequestMethod.POST )
@@ -120,20 +124,23 @@ public class SecureUserLoginController extends GenericAbstractController
 		Assert.notNull(email, "'email' must not be null");
 		Assert.notNull(answer, "'answer' must not be null");
 		
-		User user = this.userRegisterService.getUserInfoByEmail(email);
+		User user = new User();
+        user.setEmail(email);
+		
+		user = this.userService.findUserByEmail(user);
 		
 		final int FAILURE = 0;
 		final int SUCCESS = 1;
 		final int SHA256 = 256;
 		
-		if( StringUtils.equals(answer, user.getPasswordFindAnswer()) )
+		if( StringUtils.equals(answer, user.getPwdFindAnswer()) )
 		{
 			ShaPasswordEncoder encoder=new ShaPasswordEncoder(SHA256);
 			String encoderUserEmail = encoder.encodePassword(user.getEmail(), null);
 			
 			user.setPassword(encoderUserEmail);
 			
-			int returnCnt = userRegisterService.setUserPassword(user);
+			int returnCnt = userService.initUserPassword(user);
 			
 			if ( returnCnt > 0 ) user.setStatus(SUCCESS); 
 			else                 user.setStatus(FAILURE);
