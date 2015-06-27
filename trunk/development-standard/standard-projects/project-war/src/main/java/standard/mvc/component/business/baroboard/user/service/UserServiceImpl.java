@@ -64,6 +64,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean isDuplicateNickname(User user) throws Exception {
+
+        boolean duplicate = false;
+        
+        if (findUserByNickname(user) != null) {
+            duplicate = true;
+        }
+        
+        return duplicate;
+    }
+    
+    @Override
     public User findUserByEmail(User user) throws Exception {
         
         return userDao.selectUserByEmail(user);

@@ -42,15 +42,23 @@ public interface UserService {
     /**
      * 닉네임으로 회원을 찾는다.
      * 
-     * @param 회원 DTO
+     * @param user 회원 DTO
      * @return 회원 DTO
      */
     User findUserByNickname(User user) throws Exception;
 
     /**
+     * 이미 사용중인 닉네임인지 여부를 반환한다.
+     * 
+     * @param user 회원 DTO
+     * @return 닉네임 중복 여부
+     */
+    boolean isDuplicateNickname(User user) throws Exception;
+    
+    /**
      * 이메일로 회원을 찾는다.
      * 
-     * @param 회원 DTO
+     * @param user 회원 DTO
      * @return 회원 DTO
      */
     User findUserByEmail(User user) throws Exception;

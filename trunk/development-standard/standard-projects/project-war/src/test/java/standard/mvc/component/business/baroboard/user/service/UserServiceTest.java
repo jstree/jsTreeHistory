@@ -111,6 +111,21 @@ public class UserServiceTest extends DbUnitTest<User> {
     
     @DatabaseSetup("UserServiceTest.xml")
     @Test
+    public void isDuplicateNickname() throws Exception {
+        
+        User notExistUser = new User();
+        notExistUser.setC_title("nothing");
+        
+        assertThat(userService.isDuplicateNickname(notExistUser), is(false));
+        
+        User user = new User();
+        user.setC_title("어쭈구리");
+        
+        assertThat(userService.isDuplicateNickname(user), is(true));
+    }
+    
+    @DatabaseSetup("UserServiceTest.xml")
+    @Test
     public void findUserByEmail() throws Exception {
         
         User notExistUser = new User();

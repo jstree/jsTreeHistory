@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
 
 <style type="text/css">
 .center {
@@ -168,6 +167,36 @@ var userList = {
         
 		$('#btnAddUserInfo').on('click', function() {
         	
+// 			callAjax(null
+//                    , '/user/join/agreement/next.do'
+//                    , { target : '#divPopup', selector : 'section' }
+//                    , 'post'
+//                    , 'html'
+//                    , null
+//                    , null
+//                    , callback);
+			
+// 			callAjax(null
+// 		           , 'delete.do'
+// 		           , null
+// 		           , 'post'
+// 		           , 'json'
+// 		           , params
+// 		           , 'application/json'
+// 		           , callback);
+		    
+// 		    function callback(r) {
+		    	
+		    	
+// 		    }
+			
+			popupOpen();
+			
+			function popupOpen(){
+				var popUrl = "add/popup.do";	//팝업창에 출력될 페이지 URL
+				var popOption = "width=400, height=450, resizable=no, scrollbars=no, status=no, menubar=no";    //팝업창 옵션(optoin)
+				window.open(popUrl, '', popOption);
+			}
         });
         
         $('#checkAll').on('change', function() {
@@ -372,6 +401,8 @@ $(document).ready(function() {
 	            </thead>
 	        </table>
 	        <div id="divPagination"></div>
+	        
+	        <div id="divPopup"></div>
 	    </div>
 	</div>
 </section>

@@ -85,11 +85,31 @@ var join = {
                     return false;
                 }
                 
+                var param = {
+                    c_title : nickname
+                };
                 
+                callAjax(null
+                       , 'isDuplicateNickname.do'
+                       , null
+                       , 'post'
+                       , 'json'
+                       , param
+                       , 'application/json'
+                       , callback);
+                 
+                 function callback(r) {
+                     
+                     if (r.status) {
+                         join.nicknameDuplicaionChecked = false;
+                         join.uniqueNickname = false;
+                         alert('중복된 닉네임입니다. 다시 입력해주세요.');
+                     } else {
+                         join.nicknameDuplicaionChecked = true;
+                         join.uniqueNickname = true;
+                     }
+                 }
             });
-            
-            
-            
         })();
         
         (function onSubmitOfJoinForm() {
@@ -209,7 +229,7 @@ var join = {
         var $nickname = $form.find('input[name="nickname"]');
         var nickname = $nickname.val();
         
-        if (!join.validateNicknameFormField()) {
+        if ( !join.validateNicknameFormField(nickname) ) {
             $nickname.focus();
             return false;
         }

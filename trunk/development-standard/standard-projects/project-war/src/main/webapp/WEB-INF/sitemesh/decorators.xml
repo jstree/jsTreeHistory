@@ -27,6 +27,12 @@
 		<pattern>/**/*Popup.do*</pattern>
 	</excludes>
 	
+	<decorator name="popup" page="popupDeco.jsp">
+		<pattern>/**/popup.do</pattern>
+		<pattern>/user/manage/user/add/popup.do</pattern>
+		<pattern>**/popup.do</pattern>
+	</decorator>
+	
 	<!-- 바로보드 관리자 페이지 -->
 	<decorator name="admin" page="adminDeco.jsp">
 		<pattern>/core/manage/*</pattern>
