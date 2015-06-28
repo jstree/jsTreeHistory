@@ -228,11 +228,11 @@ public class UserServiceTest extends DbUnitTest<User> {
         userService.initUserPassword(user);
     }
     
-    @DatabaseSetup("UserServiceTest_selectPasswordFindQuestions.xml")
+    @DatabaseSetup("UserServiceTest_getPasswordFindQuestions.xml")
     @Test
-    public void selectPasswordFindQuestions() throws Exception {
+    public void getPasswordFindQuestions() throws Exception {
         
-        List<PasswordFindQuestion> passwordFindQuestions = userService.selectPasswordFindQuestions();
+        List<PasswordFindQuestion> passwordFindQuestions = userService.getPasswordFindQuestions();
         
         assertThat(passwordFindQuestions.size(), is(3));
         

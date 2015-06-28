@@ -34,6 +34,12 @@ input[type="radio"] {
     /* width: 13px !important;
     height: 13px !important; */
 }
+select {
+    height: 100%;
+}
+select {
+    display: inline !important;
+}
 
 .essential {
     color : red;
@@ -62,7 +68,7 @@ var join = {
             
             var $form = $('#frmJoin');
             
-            var $nickname = $form.find('input[name="nickname"]');
+            var $nickname = $form.find('input[name="c_title"]');
             
             $nickname.on('change paste keyup', function(e) {
                 
@@ -76,7 +82,7 @@ var join = {
             
             $('#btnNicknameDuplicationCheck').on('click', function() {
                 
-                var $nickname = $('#frmJoin input[name="nickname"]');
+                var $nickname = $('#frmJoin input[name="c_title"]');
                 
                 var nickname = $nickname.val();
                 
@@ -107,6 +113,7 @@ var join = {
                      } else {
                          join.nicknameDuplicaionChecked = true;
                          join.uniqueNickname = true;
+                         alert('사용 가능한 닉네임입니다.');
                      }
                  }
             });
@@ -125,8 +132,6 @@ var join = {
                 if (!join.validateFormFields()) {
                     return false;
                 }
-                
-                return false;
                 
                 callAjax($form
                        , $form.prop('action')
@@ -150,7 +155,7 @@ var join = {
       
         var valid = true;
         
-        if (!nickname) {
+        if (! $.trim(nickname) ) {
             alert('닉네임을 입력해주세요.');
             valid = false;
         }
@@ -165,7 +170,7 @@ var join = {
         var $emailAccount = $form.find('input[name="emailAccount"]');
         var emailAccount = $emailAccount.val();
         
-        if (!emailAccount) {
+        if (! $.trim(emailAccount) ) {
             alert('이메일 주소를 입력해주세요.');
             $emailAccount.focus();
             return false;
@@ -181,7 +186,7 @@ var join = {
         var $emailHost = $form.find('input[name="emailHost"]');
         var emailHost = $emailHost.val();
         
-        if (!emailHost) {
+        if (! $.trim(emailHost) ) {
             alert('이메일 주소를 입력해주세요.');
             $emailHost.focus();
             return false;
@@ -197,7 +202,7 @@ var join = {
         var $password = $form.find('input[name="password"]');
         var password = $password.val();
         
-        if (!password) {
+        if (! $.trim(password) ) {
             alert('비밀번호를 입력해주세요.');
             $password.focus();
             return false;
@@ -213,7 +218,7 @@ var join = {
         var $passwordConfirm = $form.find('input[name="passwordConfirm"]');
         var passwordConfirm = $passwordConfirm.val();
         
-        if (!passwordConfirm || password != passwordConfirm) {
+        if (! $.trim(passwordConfirm) || password != passwordConfirm) {
             alert('비밀번호를 동일하게 한 번 더 입력해주세요.');
             $passwordConfirm.focus();
             return false;
@@ -226,7 +231,16 @@ var join = {
             return false;
         }
         
-        var $nickname = $form.find('input[name="nickname"]');
+        var $passwordFindAnswer = $form.find('input[name="pwdFindAnswer"]');
+        var passwordFindAnswer = $passwordFindAnswer.val();
+        
+        if (! $.trim(passwordFindAnswer) ) {
+            alert('비밀번호 찾기 답변을 입력해주세요.');
+            $passwordFindAnswer.focus();
+            return false;
+        }
+        
+        var $nickname = $form.find('input[name="c_title"]');
         var nickname = $nickname.val();
         
         if ( !join.validateNicknameFormField(nickname) ) {
@@ -244,22 +258,14 @@ var join = {
             return false;
         }
         
-        
-        
-        
-        // 비밀번호찾기질문
-        // 비밀번호찾기답변
-        
         // 홈페이지
         // 블로그
         // 서명
         // 프로필사진
         // 사용자아이콘
+        //var reUrl = /^(https?:\/\/)?([a-z\d\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/; // URL 검사식
         
-        
-        var reUrl = /^(https?:\/\/)?([a-z\d\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/; // URL 검사식
-        
-        return false;
+        return true;
     }
     
 };
@@ -284,42 +290,58 @@ $(document).ready(function() {
                 <form id="frmJoin" action="join.do" method="post">
                     <div>
                         <label>
-                            이메일 주소<span class="essential">*</span>
+                                                  이메일 주소<span class="essential">*</span>
                             <input name="emailAccount" type="text" placeholder="64자리 이하의 이메일 형식 문자" style="width:210px" />@
                             <input name="emailHost" type="text" placeholder="255자리 이하의 이메일 형식 문자" style="width:220px" />
                         </label>
                     </div>
                     <div>
                         <label>
-                            비밀번호<span class="essential">*</span>
+                                                  비밀번호<span class="essential">*</span>
                             <input name="password" type="password" placeholder="영문 소문자, 숫자를 포함한 8~256자" style="width:240px" />
                         </label>
                     </div>
                     <div>
                         <label>
-                            비밀번호 확인<span class="essential">*</span>
+                                                  비밀번호 확인<span class="essential">*</span>
                             <input name="passwordConfirm" type="password" placeholder="영문 소문자, 숫자를 포함한 8~256자" style="width:240px" />
                         </label>
                     </div>
                     <div>
                         <label>
-                            닉네임<span class="essential">*</span>
-                            <input name="nickname" type="text" style="width:200px" />
+                                                비밀번호 찾기 질문<span class="essential">*</span>
+                           <select name="pwdFindQuestionCd">
+	                       <c:forEach var="passwordFindQuestion" items="${passwordFindQuestions}" varStatus="status">
+	                           <option value="${passwordFindQuestion.c_id}">${passwordFindQuestion.c_title}</option>
+	                       </c:forEach>
+	                       </select>
+                        </label>
+                    </div>
+                    <div>
+                        <labe>
+                                                   비밀번호 찾기 답변<span class="essential">*</span>
+                            <input name="pwdFindAnswer" type="text" style="width:240px" />
+                        </labe>
+                    </div>
+                    <div>
+                        <label>
+                                                  닉네임<span class="essential">*</span>
+                            <input name="c_title" type="text" style="width:200px" />
                         </label>
                         <button id="btnNicknameDuplicationCheck" type="button" class="compact">중복체크</button>
                     </div>
                     <div>
                         <label>
-                            메일링 서비스 설정
-                            <label><input name="mailingServiceUseFl" type="radio" checked="checked" />예</label>
-                            <label><input name="mailingServiceUseFl" type="radio" />아니오</label>
+                                                  메일링 서비스 설정
+                            <label><input name="mailingServiceUseFl" type="radio" value="1" checked="checked" />예</label>
+                            <label><input name="mailingServiceUseFl" type="radio" value="0" />아니오</label>
                         </label>
                     </div>
                     <div>
                         <label>
-                            정보공개 설정
-                            <label><input name="indiInfoOpenFl" type="radio" checked="checked" />전체공개</label>
-                            <label><input name="indiInfoOpenFl" type="radio" />거부</label>
+                                                  정보공개 설정
+                            <label><input name="indiInfoOpenFl" type="radio" value="1" checked="checked" />전체공개</label>
+                            <label><input name="indiInfoOpenFl" type="radio" value="0" />거부</label>
                         </label>
                     </div>
                     <div class="divButtons">

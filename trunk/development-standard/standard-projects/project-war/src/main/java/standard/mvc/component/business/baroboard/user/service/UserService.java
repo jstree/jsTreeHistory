@@ -94,5 +94,5 @@ public interface UserService {
      * 
      * @return 비밀번호찾기질문 DTO List
      */
-    List<PasswordFindQuestion> selectPasswordFindQuestions() throws Exception;
+    List<PasswordFindQuestion> getPasswordFindQuestions() throws Exception;
 }

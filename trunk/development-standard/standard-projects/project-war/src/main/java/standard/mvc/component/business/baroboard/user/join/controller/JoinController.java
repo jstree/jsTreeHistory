@@ -21,6 +21,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,7 +71,9 @@ public class JoinController extends GenericAbstractController {
     }
 
     @RequestMapping(value = "/index.do", method = RequestMethod.POST)
-    public String index() throws Exception {
+    public String index(ModelMap model) throws Exception {
+        
+        model.addAttribute("passwordFindQuestions", userService.getPasswordFindQuestions());
         
         return "/jsp/user/join/index";
     }
@@ -110,18 +113,13 @@ public class JoinController extends GenericAbstractController {
     @RequestMapping(value = "/join.do", method = RequestMethod.POST)
     public String join(@Valid User user) throws Exception {
         
+        // TODO 류강하 : 예외처리
         
+        // 회원등급코드가 유효한지 검증
         
-//        String mailId = req.getParameter("mailId");
-//        String mailUrl = req.getParameter("mailUrl");
-//        
-//        
-//        User user = new User();
-//        user.setC_title(req.getParameter("nickName"));
-//        user.setPassword(req.getParameter("password"));
-//        user.setEmail(mailId + "@" + mailUrl );
-//        
-//        userRegisterService.userRegister(user);
+        user.setEmail(user.getEmailAccount() + "@" + user.getEmailHost());
+        
+        userService.addUser(user);
         
         return "{}";
     }

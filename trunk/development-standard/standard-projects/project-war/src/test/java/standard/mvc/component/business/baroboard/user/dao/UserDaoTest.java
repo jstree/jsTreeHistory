@@ -100,7 +100,7 @@ public class UserDaoTest extends DbUnitTest<User> {
         compareUserInfo(userStored);
     }
     
-private void compareUserInfo(User user) {
+    private void compareUserInfo(User user) {
         
         assertThat(user.getC_id(), is(3));
         assertThat(user.getC_parentid(), is(2));

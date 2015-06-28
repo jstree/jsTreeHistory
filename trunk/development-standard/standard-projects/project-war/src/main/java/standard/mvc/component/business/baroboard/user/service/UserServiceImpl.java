@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public List<PasswordFindQuestion> selectPasswordFindQuestions() throws Exception {
+    public List<PasswordFindQuestion> getPasswordFindQuestions() throws Exception {
         
         PasswordFindQuestion passwordFindQuestion = new PasswordFindQuestion();
         passwordFindQuestion.setC_id(2);
