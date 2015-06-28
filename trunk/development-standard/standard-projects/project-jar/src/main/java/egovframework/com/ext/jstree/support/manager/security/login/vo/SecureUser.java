@@ -67,6 +67,15 @@ public class SecureUser extends ComprehensiveTree {
 
     /** 비밀번호찾기답변 */
     private String passwordFindAnswer;
+    
+	/** 비밀번호찾기질문코드 */
+    private int pwdFindQuestionCd;
+
+    /** 비밀번호찾기질문 */
+    private String pwdFindQuestion;
+    
+    /** 비밀번호찾기답변 */
+    private String pwdFindAnswer;
 
     /** 메일링서비스사용여부 */
     private String mailingServiceUseFl;
@@ -122,6 +131,36 @@ public class SecureUser extends ComprehensiveTree {
     
     /** 마지막로그인일자 */
     private String lastLoginDe;
+    
+    public int getPwdFindQuestionCd()
+	{
+		return pwdFindQuestionCd;
+	}
+
+	public void setPwdFindQuestionCd(int pwdFindQuestionCd)
+	{
+		this.pwdFindQuestionCd = pwdFindQuestionCd;
+	}
+
+	public String getPwdFindQuestion()
+	{
+		return pwdFindQuestion;
+	}
+
+	public void setPwdFindQuestion(String pwdFindQuestion)
+	{
+		this.pwdFindQuestion = pwdFindQuestion;
+	}
+
+	public String getPwdFindAnswer()
+	{
+		return pwdFindAnswer;
+	}
+
+	public void setPwdFindAnswer(String pwdFindAnswer)
+	{
+		this.pwdFindAnswer = pwdFindAnswer;
+	}
     
     public int getUserGradeCd() {
         return userGradeCd;
