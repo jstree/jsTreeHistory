@@ -17,11 +17,11 @@
 		/* user filed add point*/
 		, A.C_USER_GRADE_CD AS userGrade
 		, A.C_JOIN_STATE_CD AS joinStateCd
+        , A.C_PWD_FIND_QUESTION_CD AS pwdFindQuestionCd
+        , A.C_PWD_FIND_ANSWER AS pwdFindAnswer
 		, A.C_PASSWORD AS password
 		, A.C_EMAIL AS email
 		, A.C_LOGIN_FAILURE_CNT AS loginFailureCnt
-		, A.C_PASSWORD_FIND_QUESTION AS passwordFindQuestion
-		, A.C_PASSWORD_FIND_ANSWER AS passwordFindAnswer
 		, A.C_MAILING_SERVICE_USE_FL AS mailingServiceUseFl
 		, A.C_INDI_INFO_OPEN_FL AS indiInfoOpenFl
 		, A.C_JOIN_DT AS joinDt
@@ -83,8 +83,8 @@
 		, C_PASSWORD AS password
 		, C_EMAIL AS email
 		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
-		, C_PASSWORD_FIND_QUESTION AS passwordFindQuestion
-		, C_PASSWORD_FIND_ANSWER AS passwordFindAnswer
+		, C_PWD_FIND_QUESTION_CD AS pwdFindQuestionCd
+        , C_PWD_FIND_ANSWER AS pwdFindAnswer
 		, C_MAILING_SERVICE_USE_FL AS mailingServiceUseFl
 		, C_INDI_INFO_OPEN_FL AS indiInfoOpenFl
 		, C_JOIN_DT AS joinDt
@@ -139,8 +139,8 @@
 		, C_PASSWORD = #password#
 		, C_EMAIL = #email#
 		, C_LOGIN_FAILURE_CNT = #loginFailureCnt#
-		, C_PASSWORD_FIND_QUESTION = #passwordFindQuestion#
-		, C_PASSWORD_FIND_ANSWER = #passwordFindAnswer#
+		, C_PWD_FIND_QUESTION_CD = #pwdFindQuestionCd#
+        , C_PWD_FIND_ANSWER = #pwdFindAnswer#
 		, C_MAILING_SERVICE_USE_FL = #mailingServiceUseFl#
 		, C_INDI_INFO_OPEN_FL = #indiInfoOpenFl#
 		, C_JOIN_DT = #joinDt#
@@ -158,32 +158,31 @@
 		resultClass="SecureUser">
 		/* getNode */
 		SELECT C_ID
-		, C_PARENTID
-		, C_POSITION
-		, C_LEFT
-		, C_RIGHT
-		, C_LEVEL
-		, C_TITLE
-		, C_TYPE
-		, C_USER_GRADE_CD AS userGrade
-		, C_JOIN_STATE_CD AS joinStateCd
-		, C_PASSWORD AS password
-		, C_EMAIL AS email
-		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
-		, C_PASSWORD_FIND_QUESTION AS passwordFindQuestion
-		, C_PASSWORD_FIND_ANSWER AS passwordFindAnswer
-		, C_MAILING_SERVICE_USE_FL AS mailingServiceUseFl
-		, C_INDI_INFO_OPEN_FL AS indiInfoOpenFl
-		, C_JOIN_DT AS joinDt
-		, C_PASSWORD_CHANGE_DT AS passwordChangeDt
-		, C_HOMEPAGE_URL AS homepageUrl
-		, C_BLOG_URL AS blogUrl
-		, C_SIGN AS sign
-		, C_PROFILE_PHOTO AS profilePhoto
-		, C_IMAGE_ICON AS imageIcon
-		FROM T_USER_INFO
-		WHERE
-		C_ID = #c_id#
+			 , C_PARENTID
+			 , C_POSITION
+			 , C_LEFT
+			 , C_RIGHT
+			 , C_LEVEL
+			 , C_TITLE
+			 , C_TYPE
+			 , C_USER_GRADE_CD AS userGrade
+			 , C_JOIN_STATE_CD AS joinStateCd
+			 , C_PASSWORD AS password
+			 , C_EMAIL AS email
+			 , C_LOGIN_FAILURE_CNT AS loginFailureCnt
+	 		 , C_PWD_FIND_QUESTION_CD AS pwdFindQuestionCd
+             , C_PWD_FIND_ANSWER AS pwdFindAnswer
+			 , C_MAILING_SERVICE_USE_FL AS mailingServiceUseFl
+			 , C_INDI_INFO_OPEN_FL AS indiInfoOpenFl
+			 , C_JOIN_DT AS joinDt
+			 , C_PASSWORD_CHANGE_DT AS passwordChangeDt
+			 , C_HOMEPAGE_URL AS homepageUrl
+			 , C_BLOG_URL AS blogUrl
+			 , C_SIGN AS sign
+			 , C_PROFILE_PHOTO AS profilePhoto
+			 , C_IMAGE_ICON AS imageIcon
+		  FROM T_USER_INFO
+		 WHERE C_ID = #c_id#
 	</select>
 
 
@@ -203,8 +202,8 @@
 		, C_PASSWORD AS password
 		, C_EMAIL AS email
 		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
-		, C_PASSWORD_FIND_QUESTION AS passwordFindQuestion
-		, C_PASSWORD_FIND_ANSWER AS passwordFindAnswer
+	    , C_PWD_FIND_QUESTION_CD AS pwdFindQuestionCd
+        , C_PWD_FIND_ANSWER AS pwdFindAnswer
 		, C_MAILING_SERVICE_USE_FL AS mailingServiceUseFl
 		, C_INDI_INFO_OPEN_FL AS indiInfoOpenFl
 		, C_JOIN_DT AS joinDt
@@ -274,8 +273,7 @@
 	<update id="cutMyselfPositionFix" parameterClass="SecureUser">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_USER_INFO
-		SET C_POSITION
-		= C_POSITION - 1
+		SET C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
 		AND C_POSITION &gt;
 		#c_position#
@@ -420,13 +418,13 @@
 		INSERT INTO T_USER_INFO (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_USER_GRADE_CD, 
-		C_JOIN_STATE_CD, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_PASSWORD_FIND_QUESTION,
-		C_PASSWORD_FIND_ANSWER, C_MAILING_SERVICE_USE_FL, C_INDI_INFO_OPEN_FL, C_JOIN_DT, C_PASSWORD_CHANGE_DT )
+		C_JOIN_STATE_CD, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_PWD_FIND_QUESTION,
+		C_PWD_FIND_ANSWER, C_MAILING_SERVICE_USE_FL, C_INDI_INFO_OPEN_FL, C_JOIN_DT, C_PASSWORD_CHANGE_DT )
 		VALUES (
 		S_USER_INFO.NEXTVAL, #c_parentid#, #c_position#, 
 		#c_left#, #c_right#, #c_level#, #c_title#, #userGrade#,
-		#joinStateCd#, #password#, #email#,  #loginFailureCnt#, #passwordFindQuestion#,
-		#passwordFindAnswer#, #mailingServiceUseFl#, #indiInfoOpenFl#, #joinDt#, #passwordChangeDt# )
+		#joinStateCd#, #password#, #email#,  #loginFailureCnt#, #pwdFindQuestionCd#,
+		#pwdFindAnswer#, #mailingServiceUseFl#, #indiInfoOpenFl#, #joinDt#, #passwordChangeDt# )
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
