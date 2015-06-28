@@ -3,23 +3,17 @@ package standard.mvc.component.business.baroboard.user.scrap.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import standard.mvc.component.business.baroboard.board.vo.Article;
-import standard.mvc.component.business.baroboard.user.join.register.service.UserRegisterService;
 import standard.mvc.component.business.baroboard.user.scrap.service.UserScrapService;
 import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
-import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
