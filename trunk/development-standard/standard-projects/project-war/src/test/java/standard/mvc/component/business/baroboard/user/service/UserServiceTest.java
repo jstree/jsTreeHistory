@@ -21,6 +21,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
+import java.util.List;
 
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.database.IDatabaseConnection;
@@ -31,6 +32,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import standard.mvc.component.business.baroboard.user.vo.PasswordFindQuestion;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -224,5 +226,47 @@ public class UserServiceTest extends DbUnitTest<User> {
         user.setPassword("초필살비밀번호");
         
         userService.initUserPassword(user);
+    }
+    
+    @DatabaseSetup("UserServiceTest_selectPasswordFindQuestions.xml")
+    @Test
+    public void selectPasswordFindQuestions() throws Exception {
+        
+        List<PasswordFindQuestion> passwordFindQuestions = userService.selectPasswordFindQuestions();
+        
+        assertThat(passwordFindQuestions.size(), is(3));
+        
+        PasswordFindQuestion passwordFindQuestion = passwordFindQuestions.get(0);
+        
+        assertThat(passwordFindQuestion.getC_id(), is(3));
+        assertThat(passwordFindQuestion.getC_parentid(), is(2));
+        assertThat(passwordFindQuestion.getC_position(), is(0));
+        assertThat(passwordFindQuestion.getC_left(), is(3));
+        assertThat(passwordFindQuestion.getC_right(), is(4));
+        assertThat(passwordFindQuestion.getC_level(), is(2));
+        assertThat(passwordFindQuestion.getC_title(), is(equalTo("초등학교 이름은")));
+        assertThat(passwordFindQuestion.getC_type(), is(equalTo("default")));
+        
+        passwordFindQuestion = passwordFindQuestions.get(1);
+        
+        assertThat(passwordFindQuestion.getC_id(), is(4));
+        assertThat(passwordFindQuestion.getC_parentid(), is(2));
+        assertThat(passwordFindQuestion.getC_position(), is(1));
+        assertThat(passwordFindQuestion.getC_left(), is(5));
+        assertThat(passwordFindQuestion.getC_right(), is(6));
+        assertThat(passwordFindQuestion.getC_level(), is(2));
+        assertThat(passwordFindQuestion.getC_title(), is(equalTo("가장 많이 짝사랑했던 이성의 이름은")));
+        assertThat(passwordFindQuestion.getC_type(), is(equalTo("default")));
+        
+        passwordFindQuestion = passwordFindQuestions.get(2);
+        
+        assertThat(passwordFindQuestion.getC_id(), is(5));
+        assertThat(passwordFindQuestion.getC_parentid(), is(2));
+        assertThat(passwordFindQuestion.getC_position(), is(2));
+        assertThat(passwordFindQuestion.getC_left(), is(7));
+        assertThat(passwordFindQuestion.getC_right(), is(8));
+        assertThat(passwordFindQuestion.getC_level(), is(2));
+        assertThat(passwordFindQuestion.getC_title(), is(equalTo("가장 좋아하는 음식은")));
+        assertThat(passwordFindQuestion.getC_type(), is(equalTo("default")));
     }
 }

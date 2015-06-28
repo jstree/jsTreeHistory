@@ -15,6 +15,9 @@
  */
 package standard.mvc.component.business.baroboard.user.service;
 
+import java.util.List;
+
+import standard.mvc.component.business.baroboard.user.vo.PasswordFindQuestion;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
 /**
@@ -84,5 +87,12 @@ public interface UserService {
      * 
      * @param user 회원 DTO
      */
-    public int initUserPassword(User user) throws Exception;
+    int initUserPassword(User user) throws Exception;
+    
+    /**
+     * 비밀번호찾기 질문을 조회한다.
+     * 
+     * @return 비밀번호찾기질문 DTO List
+     */
+    List<PasswordFindQuestion> selectPasswordFindQuestions() throws Exception;
 }

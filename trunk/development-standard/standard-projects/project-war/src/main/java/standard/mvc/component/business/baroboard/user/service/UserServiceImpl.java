@@ -17,6 +17,7 @@ package standard.mvc.component.business.baroboard.user.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -25,6 +26,7 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.user.dao.UserDao;
+import standard.mvc.component.business.baroboard.user.vo.PasswordFindQuestion;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 
@@ -107,5 +109,14 @@ public class UserServiceImpl implements UserService {
         user.setPasswordChangeDt( new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) );
         
         return userDao.updateUserPassword(user);
+    }
+    
+    @Override
+    public List<PasswordFindQuestion> selectPasswordFindQuestions() throws Exception {
+        
+        PasswordFindQuestion passwordFindQuestion = new PasswordFindQuestion();
+        passwordFindQuestion.setC_id(2);
+        
+        return coreService.getChildNode(passwordFindQuestion);
     }
 }
