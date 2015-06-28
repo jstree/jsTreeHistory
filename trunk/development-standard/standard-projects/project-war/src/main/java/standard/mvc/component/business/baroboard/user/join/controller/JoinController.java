@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.GeneralSettingService;
 import standard.mvc.component.business.baroboard.user.service.UserService;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
@@ -64,6 +65,9 @@ public class JoinController extends GenericAbstractController {
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private GeneralSettingService generalSettingService;
+    
     @Override
     public Map<String, Map<String, Object>> bindTypes() {
         // TODO Auto-generated method stub
@@ -73,6 +77,7 @@ public class JoinController extends GenericAbstractController {
     @RequestMapping(value = "/index.do", method = RequestMethod.POST)
     public String index(ModelMap model) throws Exception {
         
+        model.addAttribute("generalSetting", generalSettingService.getGeneralSetting());
         model.addAttribute("passwordFindQuestions", userService.getPasswordFindQuestions());
         
         return "/jsp/user/join/index";
@@ -111,16 +116,13 @@ public class JoinController extends GenericAbstractController {
     }
     
     @RequestMapping(value = "/join.do", method = RequestMethod.POST)
+    @ResponseBody
     public String join(@Valid User user) throws Exception {
-        
-        // TODO 류강하 : 예외처리
-        
-        // 회원등급코드가 유효한지 검증
         
         user.setEmail(user.getEmailAccount() + "@" + user.getEmailHost());
         
         userService.addUser(user);
         
-        return "{}";
+        return "{ \"status\" : \"1\" }";
     }
 }

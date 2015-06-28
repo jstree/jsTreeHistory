@@ -107,6 +107,7 @@
              , C_TITLE
              , C_TYPE
              , C_PASSWORD_SECURITY_LEVEL_CD AS passwordSecurityLevelCd
+             , (SELECT C_TITLE FROM T_USER_PWD_SECU_LEVEL WHERE C_ID = C_PASSWORD_SECURITY_LEVEL_CD) AS passwordSecurityLevel
              , C_WEB_MASTER_NM AS webMasterNm
              , C_WEB_MASTER_EMAIL AS webMasterEmail
              , C_JOIN_APPROVAL_FL AS joinApprovalFl

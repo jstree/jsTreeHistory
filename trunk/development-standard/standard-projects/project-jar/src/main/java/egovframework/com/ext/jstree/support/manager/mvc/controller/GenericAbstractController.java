@@ -85,6 +85,10 @@ public abstract class GenericAbstractController
     public void defenceException(Exception ex, HttpServletResponse response,
             HttpServletRequest request) throws IOException
     {
+        if (logger.isDebugEnabled()) {
+            ex.printStackTrace();
+        }
+        
         response.setHeader("Expires", "-1");
         response.setHeader("Cache-Control",
                            "must-revalidate, no-store, no-cache");
@@ -144,6 +148,10 @@ public abstract class GenericAbstractController
             HttpServletResponse response, HttpServletRequest request)
             throws IOException
     {
+        if (logger.isDebugEnabled()) {
+            ex.printStackTrace();
+        }
+        
         response.setHeader("Expires", "-1");
         response.setHeader("Cache-Control",
                            "must-revalidate, no-store, no-cache");

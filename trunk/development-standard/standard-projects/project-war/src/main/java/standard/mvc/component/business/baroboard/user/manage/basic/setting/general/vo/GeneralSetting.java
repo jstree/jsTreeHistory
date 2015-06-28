@@ -48,8 +48,8 @@ public class GeneralSetting extends ComprehensiveTree {
     @Range(min = 3, max = 5)
     private int passwordSecurityLevelCd;
     
-    /** 비밀번호보안수준코드명 */
-    private String passwordSecurityLevelCdNm;
+    /** 비밀번호보안수준 */
+    private String passwordSecurityLevel;
 
     /** 웹마스터이름 */
     @Size(min = 1, max = 30)
@@ -97,12 +97,12 @@ public class GeneralSetting extends ComprehensiveTree {
         this.passwordSecurityLevelCd = passwordSecurityLevelCd;
     }
 
-    public String getPasswordSecurityLevelCdNm() {
-        return passwordSecurityLevelCdNm;
+    public String getPasswordSecurityLevel() {
+        return passwordSecurityLevel;
     }
 
-    public void setPasswordSecurityLevelCdNm(String passwordSecurityLevelCdNm) {
-        this.passwordSecurityLevelCdNm = passwordSecurityLevelCdNm;
+    public void setPasswordSecurityLevel(String passwordSecurityLevel) {
+        this.passwordSecurityLevel = passwordSecurityLevel;
     }
 
     public String getWebMasterNm() {

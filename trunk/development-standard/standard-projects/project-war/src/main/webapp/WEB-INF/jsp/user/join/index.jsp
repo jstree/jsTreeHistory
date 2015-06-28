@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags" %>
 
 <!DOCTYPE html>
@@ -55,6 +54,7 @@ select {
 <script type="text/javascript">
 var join = {
     
+    passwordSecurityLevelCd : '${generalSetting.passwordSecurityLevelCd}',
     nicknameDuplicaionChecked : false,
     uniqueNickname : false,
     
@@ -113,7 +113,7 @@ var join = {
                      } else {
                          join.nicknameDuplicaionChecked = true;
                          join.uniqueNickname = true;
-                         alert('사용 가능한 닉네임입니다.');
+                         alert('사용할 수 있는 닉네임입니다.');
                      }
                  }
             });
@@ -125,11 +125,11 @@ var join = {
             
             $form.on('submit', function() {
                 
-                if (!confirm('저장하시겠습니까?')) {
+                if (!join.validateFormFields()) {
                     return false;
                 }
                 
-                if (!join.validateFormFields()) {
+                if (!confirm('저장하시겠습니까?')) {
                     return false;
                 }
                 
@@ -143,7 +143,11 @@ var join = {
                        , callback);
                 
                 function callback(r) {
-                    console.log(r);
+                    
+                    if (r.status) {
+                        alert('저장되었습니다.');
+                        location.href = '<c:url value="/user/login/index.do" />';
+                    }
                 }
                 
                 return false;
@@ -208,11 +212,26 @@ var join = {
             return false;
         }
         
-        var passwordRegExp = /^[a-z0-9]{8,256}$/;
-        if ( ! passwordRegExp.test(password) ) {
-            alert('비밀번호가 올바르지 않습니다.');
-            $password.focus();
-            return false;
+        if (join.passwordSecurityLevelCd == 3) {
+            if (password.length < 4) {
+                alert('비밀번호를 4자 이상 입력해주세요.');
+                $password.focus();
+                return false;
+            }
+        }
+        else if (join.passwordSecurityLevelCd == 4) {
+            if ( ! /^(?=\w{6,}$)(?=.*\d)(?=.*[a-zA-Z]).*/.test(password) ) {
+                alert('비밀번호를 6자 이상, 영문자/숫자 조합하여 입력해주세요.');
+                $password.focus();
+                return false;
+            }
+        }
+        else if (join.passwordSecurityLevelCd == 5) {
+            if ( ! /^(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*\(\)-_+=]).*$/.test(password) ) {
+                alert('비밀번호를 8자 이상, 영문자/숫자/특수문자를 조합하여 입력해주세요.');
+                $password.focus();
+                return false;
+            }
         }
         
         var $passwordConfirm = $form.find('input[name="passwordConfirm"]');
@@ -220,13 +239,6 @@ var join = {
         
         if (! $.trim(passwordConfirm) || password != passwordConfirm) {
             alert('비밀번호를 동일하게 한 번 더 입력해주세요.');
-            $passwordConfirm.focus();
-            return false;
-        }
-        
-        var passwordRegExp = /^[a-z0-9]{8,256}$/;
-        if ( ! passwordRegExp.test(passwordConfirm) ) {
-            alert('비밀번호가 올바르지 않습니다.');
             $passwordConfirm.focus();
             return false;
         }
@@ -298,13 +310,13 @@ $(document).ready(function() {
                     <div>
                         <label>
                                                   비밀번호<span class="essential">*</span>
-                            <input name="password" type="password" placeholder="영문 소문자, 숫자를 포함한 8~256자" style="width:240px" />
+                            <input name="password" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
                         </label>
                     </div>
                     <div>
                         <label>
                                                   비밀번호 확인<span class="essential">*</span>
-                            <input name="passwordConfirm" type="password" placeholder="영문 소문자, 숫자를 포함한 8~256자" style="width:240px" />
+                            <input name="passwordConfirm" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
                         </label>
                     </div>
                     <div>
@@ -352,111 +364,5 @@ $(document).ready(function() {
             </div>
         </article>
     </section>
-<!-- 
-    <section class="clearfix">
-        <nav>
-            <div class="container bm-medium">
-                <div class="one-whole">
-                    <div class="no-display">agreement</div>
-                </div>
-            </div>
-        </nav>
-        <article>
-            <div class="clearfix">
-                <div class="container bm-remove">
-                    <form id="frmUserRegister" action="${pageContext.request.contextPath}/user/join/register/save.do" method="post">
-                        <div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
-                            <div class="tablet-mobile alpha bm-remove last">
-                                <div>
-                                    <table id="boardTable" class="board-table display">
-                                        <tbody>
-                                            <tr>
-                                                <td class="dt-center" width="30%">이메일 주소*</td>
-                                                <td class="dt-center" width="10%"></td>
-                                                <td class="dt-center" width="10%">
-                                                    <input name="메일아이디" id="mailId" type="text">
-                                                </td>
-                                                <td class="dt-center" width="5%">
-                                                    @
-                                                </td>
-                                                <td class="dt-center" width="10%">
-                                                    <input name="메일주소" id="mailUrl" type="text">
-                                                </td>
-                                                <td class="dt-center" width="35%" colspan="3"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="dt-center" width="30%">비밀번호*</td>
-                                                <td class="dt-center" width="10%"></td>
-                                                <td class="dt-center" width="25%" colspan="3">
-                                                    <input name="패스워드" id="password" type="password">
-                                                </td>
-                                                <td class="dt-center" width="35%" colspan="3"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="dt-center" width="30%">비밀번호확인*</td>
-                                                <td class="dt-center" width="10%"></td>
-                                                <td class="dt-center" width="25%" colspan="3">
-                                                    <input name="패스워드 확인" id="passwordComfirm" type="password">
-                                                </td>
-                                                <td class="dt-center" width="35%" colspan="3">
-                                                    <input id="passwordCheckResult" type="text"  style="border: 0px;" value="패스워드를 입력하세요" readonly>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="dt-center" width="30%">닉네임*</td>
-                                                <td class="dt-center" width="10%"></td>
-                                                <td class="dt-center" width="25%" colspan="3">
-                                                    <input name="닉네임" id="nickName" type="text">
-                                                </td>
-                                                <td class="dt-center" width="5%"></td>
-                                                <td class="dt-center" width="15%">
-                                                    <button id="repeatedNickName" type="submit">중복체크</button>
-                                                </td>
-                                                <td class="dt-center" width="15%">
-                                                    <input id="nickNameCheckResult" type="text"  style="border: 0px;" value="중복 체크 하세요" readonly>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="dt-center" width="30%">본인 인증*</td>
-                                                <td class="dt-center" width="10%"></td>
-                                                <td class="dt-center" width="25%" colspan="3">
-                                                    <button id="moblieCertification" type="submit">휴대폰인증</button>
-                                                </td>
-                                                <td class="dt-center" width="35%" colspan="3">
-                                                    휴대폰 인증을 눌러 본인 인증을 해주세요
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="dt-center" width="30%">메일실 서비스 설정</td>
-                                                <td class="dt-center" width="10%"></td>
-                                                <td class="dt-center" width="60%" colspan="6">
-                                                    <input type="checkbox" id="mailingServiceFl" value="1"checked="checked">예
-                                                    <input type="checkbox" id="mailingServiceFl" value="0">아니오
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="dt-center" width="30%">정보공개 설정</td>
-                                                <td class="dt-center" width="10%"></td>
-                                                <td class="dt-center" width="60%" colspan="6">
-                                                    <input type="checkbox" id="indiInfoOpenFl" value="1"checked="checked">예
-                                                       <input type="checkbox" id="indiInfoOpenFl"  value="0">아니오
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="right" width="100%" colspan="8">
-                                                    <button id="btnNext" type="submit">저장하기</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </article>
-    </section>
- -->
 </body>
 </html>

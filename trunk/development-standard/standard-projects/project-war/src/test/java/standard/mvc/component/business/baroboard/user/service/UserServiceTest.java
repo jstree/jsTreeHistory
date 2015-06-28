@@ -21,6 +21,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.dbunit.DataSourceDatabaseTester;
@@ -213,6 +214,20 @@ public class UserServiceTest extends DbUnitTest<User> {
         user.setImageIcon(" ");
         
         userService.addUser(user);
+    }
+    
+    @Test
+    public void addUser_isValidUserGradeCd() throws Exception {
+        
+        int userGradeCd = 0;
+        
+        Method declaredMethod = userService.getClass().getDeclaredMethod("isValidUserGradeCd", Integer.TYPE);
+        
+        declaredMethod.setAccessible(true);
+        
+        boolean validUserGradeCd = (boolean) declaredMethod.invoke(userService, userGradeCd);
+        
+        assertThat(validUserGradeCd, is(false));
     }
     
     @Ignore

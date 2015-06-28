@@ -15,7 +15,10 @@
  */
 package standard.mvc.component.business.baroboard.user.vo;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -54,12 +57,14 @@ public class User extends ComprehensiveTree {
     private String joinState;
 
     /** 비밀번호 */
+    @Size(min = 4)
     private String password;
 
     /** 비밀번호 확인 */
     private String passwordConfirm;
     
     /** 이메일 */
+    @Email
     private String email;
     
     /** 이메일 계정 */
@@ -74,6 +79,7 @@ public class User extends ComprehensiveTree {
     private int loginFailureCnt;
 
     /** 비밀번호찾기질문코드 */
+    @Min(3)
     private int pwdFindQuestionCd;
 
     /** 비밀번호찾기질문 */
@@ -83,9 +89,11 @@ public class User extends ComprehensiveTree {
     private String pwdFindAnswer;
 
     /** 메일링서비스사용여부 */
+    @Size(min = 0, max = 1)
     private String mailingServiceUseFl;
 
     /** 개인정보공개여부 */
+    @Size(min = 0, max = 1)
     private String indiInfoOpenFl;
 
     /** 가입일시 */

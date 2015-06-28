@@ -26,6 +26,9 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.user.dao.UserDao;
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.GeneralSettingService;
+import standard.mvc.component.business.baroboard.user.manage.grade.service.UserGradeService;
+import standard.mvc.component.business.baroboard.user.manage.grade.vo.UserGradeManage;
 import standard.mvc.component.business.baroboard.user.vo.PasswordFindQuestion;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
@@ -55,6 +58,12 @@ public class UserServiceImpl implements UserService {
 
     @Resource(name = "CoreService")
     private CoreService coreService;
+    
+    @Autowired
+    private UserGradeService userGradeService;
+    
+    @Autowired
+    private GeneralSettingService generalSettingService;
     
     @Autowired
     private UserDao userDao;
@@ -91,13 +100,51 @@ public class UserServiceImpl implements UserService {
         return encoder.encodePassword(password, null);
     }
     
+    private boolean isValidUserGradeCd(int userGradeCd) throws Exception {
+        
+        boolean validUserGradeCd = false;
+        
+        List<UserGradeManage> userGrades = userGradeService.inquiryUserGradeList(null);
+        for (UserGradeManage userGrade : userGrades) {
+            
+            if (userGrade.getC_id() == userGradeCd) {
+                validUserGradeCd = true;
+                break;
+            }
+        }
+        
+        return validUserGradeCd;
+    }
+    
     @Override
     public User addUser(User user) throws Exception {
         
         user.setRef(2);
         user.setC_type("default");
+        
+        int userGradeCd = user.getUserGradeCd();
+        
+        if (userGradeCd == 0) {
+            user.setUserGradeCd(3);
+        } 
+        else if (! isValidUserGradeCd(userGradeCd) ) {
+            throw new RuntimeException("bb.user.error.001");
+        }
+        
+        if ("1".equals( generalSettingService.getGeneralSetting().getJoinApprovalFl() )) {
+            user.setJoinStateCd(3); // 가입승인요청
+        } else {
+            user.setJoinStateCd(4); // 가입완료
+        }
+        
         user.setPassword( encryptPassword(user.getPassword()) );
-        user.setPasswordChangeDt( new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) );
+        
+        String currentdateTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        
+        user.setPasswordChangeDt(currentdateTime);
+        user.setLoginFailureCnt(0);
+        user.setJoinDt(currentdateTime);
+        user.setPasswordChangeDt(currentdateTime);
         
         return coreService.addNode(user);
     }
