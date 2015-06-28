@@ -60,7 +60,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		secureLogInUser.setPassword( request.getParameter("password") );
 		
 		final int ACCOUNTLOCKED = 5;
-		final String LOGINURL = "/user/login/login.do";
+		final String LOGINURL = "/user/login/index.do";
 		
 		try
 		{
