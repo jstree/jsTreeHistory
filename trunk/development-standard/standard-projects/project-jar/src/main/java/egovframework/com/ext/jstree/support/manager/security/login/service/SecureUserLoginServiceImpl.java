@@ -79,20 +79,20 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
 			
 			if ( secureLogInUser == null )
 			{
-				throw new RuntimeException( this.egovMessageSource.getMessage("bb.com.error.010") );
+				throw new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.010") );
 			}
 			
 			final int JOINCOMPLETE = 4;
 			if ( secureLogInUser.getJoinStateCd() !=  JOINCOMPLETE)
 			{
-				new RuntimeException( this.egovMessageSource.getMessage("bb.com.error.011") );
+				new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.011") );
 			}
 			
 			SecureGeneralSetting secureGeneralSetting = secureGeneralSettingService.getGeneralSetting();
 			
 			if ( secureLogInUser.getLoginFailureCnt() == secureGeneralSetting.getLoginFailureLimitCnt() )
 			{
-				new RuntimeException( this.egovMessageSource.getMessage("bb.com.error.012") );
+				new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.012") );
 			}
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -102,7 +102,7 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
 			
 			if( joinTargetDate.after(new Date()) == true )
 			{
-				new RuntimeException( this.egovMessageSource.getMessage("bb.com.error.013") );
+				new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.013") );
 			}
 		} 
 		catch (Exception e) 
