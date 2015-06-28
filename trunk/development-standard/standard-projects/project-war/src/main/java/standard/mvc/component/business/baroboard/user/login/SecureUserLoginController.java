@@ -64,7 +64,7 @@ public class SecureUserLoginController extends GenericAbstractController
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/login.do")
+	@RequestMapping("/index.do")
 	public String login( @RequestParam(value = "error", required = false) String error
 			           , @RequestParam(value = "loginFailureCnt", required = false) String loginFailureCnt 
 			           , ModelMap model) throws Exception 
