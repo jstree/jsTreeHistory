@@ -1,5 +1,6 @@
 package standard.mvc.component.business.baroboard.user.login;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.user.service.UserService;
+import standard.mvc.component.business.baroboard.user.vo.PasswordFindQuestion;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import standard.mvc.component.business.community.log.service.LogUrlSerivce;
 import standard.mvc.component.business.community.menu.service.MenuMngSerivce;
@@ -76,19 +78,19 @@ public class SecureUserLoginController extends GenericAbstractController
 		{
 			if( StringUtils.equals(EMAILNOTFOUND, error) )
 			{
-				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.com.error.002")); 
+				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.002")); 
 			}
 			else if( StringUtils.equals(ACCOUNTLOCKED, error) )
 			{
-				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.com.error.008"));
+				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.008"));
 			}
 			else if( StringUtils.equals(WRONGPASSWORD , error) )
 			{
-				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.com.error.00" + String.valueOf(Integer.parseInt(loginFailureCnt)+2)));
+				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.00" + String.valueOf(Integer.parseInt(loginFailureCnt)+2)));
 			}
 			else if( StringUtils.equals(LOGINLIMITDAY, error) )
 			{
-				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.com.error.009"));
+				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.009"));
 			}
 		}
 		
@@ -113,8 +115,18 @@ public class SecureUserLoginController extends GenericAbstractController
 		
 		User user = new User();
 		user.setEmail(email);
+		user = this.userService.findUserByEmail(user);
+		List<PasswordFindQuestion> findQuestions = this.userService.getPasswordFindQuestions();
 		
-		return this.userService.findUserByEmail(user);
+		for (PasswordFindQuestion passwordFindQuestion : findQuestions)
+		{
+			if( passwordFindQuestion.getC_id() == user.getPwdFindQuestionCd() )
+			{
+				user.setPwdFindQuestion(passwordFindQuestion.getC_title());
+			}
+		}
+		
+		return user;
 	}
 	
 	@RequestMapping(value = "/checkPasswordAnswer.do" ,method = RequestMethod.POST )
