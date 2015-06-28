@@ -67,14 +67,14 @@
 			{
 				if( $('#email').val() === '' )
 				{
-					alert('<spring:message code="bb.com.error.014"/>');
+					alert('<spring:message code="bb.login.confirm.014"/>');
 					$('#email').focus();
 					return;
 				}
 				
 				if( $('#t_password').val() === '' )
 				{
-					alert('<spring:message code="bb.com.error.015"/>');
+					alert('<spring:message code="bb.login.confirm.015"/>');
 					$('#t_password').focus();
 					return;
 				}

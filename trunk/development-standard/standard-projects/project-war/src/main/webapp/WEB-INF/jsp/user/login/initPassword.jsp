@@ -76,7 +76,7 @@
 			{
 				if( $('#email').val() === '' )
 				{
-					alert('<spring:message code="bb.com.error.014"/>');
+					alert('<spring:message code="bb.login.confirm.014"/>');
 					$('#email').focus();
 					return;
 				}
@@ -89,7 +89,7 @@
 		    		{
 		    			if($.type(data) === 'object')
 		    			{
-			    			$('#question').val(data.passwordFindQuestion);
+			    			$('#question').val(data.pwdFindQuestion);
 			    			$('#initBtn').prop('disabled',false);
 		    			}
 		    			else
@@ -97,7 +97,7 @@
 		    				$('#question').val('');
 		    				$('#initBtn').prop('disabled',true);
 		    				$('#email').focus();
-		    				alert('<spring:message code="bb.com.error.010"/>');
+		    				alert('<spring:message code="bb.login.error.010"/>');
 	    				}
 		    		}).fail(function(data){
 		    			alert(data);
@@ -108,21 +108,21 @@
 			{
 				if( $('#email').val() === '' )
 				{
-					alert('<spring:message code="bb.com.error.014"/>');
+					alert('<spring:message code="bb.login.confirm.014"/>');
 					$('#email').focus();
 					return;
 				}
 				
 				if( $('#question').val() === '' )
 				{
-					alert('<spring:message code="bb.com.error.016"/>');
+					alert('<spring:message code="bb.login.confirm.016"/>');
 					$('#email').focus();
 					return;
 				}
 				
 				if( $('#answer').val() === '' )
 				{
-					alert('<spring:message code="bb.com.error.017"/>');
+					alert('<spring:message code="bb.login.confirm.017"/>');
 					$('#answer').focus();
 					return;
 				}
@@ -134,15 +134,14 @@
 		    		  data: { email: $('#email').val(), answer: $('#answer').val()},
 		    		}).done(function(data)
 		    		{
-		    			if(data.state === 0)
+		    			if(data.status === 0)
 	    				{
-		    				
-		    				alert('<spring:message code="bb.com.error.018"/>');
+		    				alert('<spring:message code="bb.login.info.018"/>');
 		    				$('#answer').focus();
 	    				}
 		    			else
 		    			{
-		    				alert('<spring:message code="bb.com.error.019"/>');
+		    				alert('<spring:message code="bb.login.info.019"/>');
 		    			}
 		    		}).fail(function(data)
 		    		{
