@@ -3,7 +3,6 @@ package egovframework.com.ext.jstree.support.manager.security.login.dao;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +62,6 @@ public class SecureUserLoginDaoTest
 		user.setLoginDt("201506241125");
 	}
 	
-	@Ignore
 	@Test
 	public void testGetUserInfoByEmail()
 	{
@@ -84,8 +82,8 @@ public class SecureUserLoginDaoTest
         assertThat(secureUser.getEmail()).isEqualTo("admin@313.co.kr");
         assertThat(secureUser.getLoginFailureCnt()).isEqualTo((0));
         
-        assertThat(secureUser.getPasswordFindQuestion()).isEqualTo("초등학교 이름은");
-        assertThat(secureUser.getPasswordFindAnswer()).isEqualTo("부원초등학교");
+        assertThat(secureUser.getPwdFindQuestionCd()).isEqualTo(5);
+        assertThat(secureUser.getPwdFindAnswer()).isEqualTo("부원초등학교");
         assertThat(secureUser.getMailingServiceUseFl()).isEqualTo("0");
         assertThat(secureUser.getIndiInfoOpenFl()).isEqualTo("0");
         assertThat(secureUser.getJoinDt()).isEqualTo("20150425205811");
@@ -98,7 +96,6 @@ public class SecureUserLoginDaoTest
         assertThat(secureUser.getImageIcon()).isEqualTo(" ");
 	}
 	
-	@Ignore
 	@Test(expected=NullPointerException.class)
 	public void testExceptionGetUserInfoByEmail()
 	{
@@ -107,7 +104,6 @@ public class SecureUserLoginDaoTest
 		assertThat(secureUser.getC_id()).isNotNull();
 	}
 	
-	@Ignore
 	@Test
 	public void testSetUserLoginFailureCntZero()
 	{
@@ -118,17 +114,14 @@ public class SecureUserLoginDaoTest
 		assertThat(secureUser.getLoginFailureCnt()).isEqualTo(0);
 	}
 	
-	@Ignore
 	@Test
 	@ExpectedDatabase(value = "SecureUserLoginDaoTest_TestSetUserLastLoginDt_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testSetUserLastLoginDt()
 	{
 		int returnCnt = this.secureUserLoginDao.setUserLastLoginDt(user);
-		
 		assertThat(returnCnt).isEqualTo(1);
 	}
 	
-	@Ignore
 	@Test
 	@ExpectedDatabase(value = "SecureUserLoginDaoTest_TestSetUserLoginFailureCntIncrease_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testSetUserLoginFailureCntIncrease()
@@ -137,7 +130,6 @@ public class SecureUserLoginDaoTest
 		assertThat(returnCnt).isEqualTo(1);
 	}
 	
-	@Ignore
 	@Test
 	@ExpectedDatabase(value = "SecureUserLoginDaoTest_TestSetUserLoginJoinStateCd_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testSetUserLoginJoinStateCd()
