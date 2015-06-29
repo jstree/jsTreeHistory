@@ -74,7 +74,7 @@
 		{
 			$('#questionBtn').on('click', function()
 			{
-				if( $('#email').val() === '' )
+				if( $.trim($('#email').val()) === '' )
 				{
 					alert('<spring:message code="bb.login.confirm.014"/>');
 					$('#email').focus();
@@ -106,21 +106,21 @@
 			
 			$('#initBtn').on('click', function()
 			{
-				if( $('#email').val() === '' )
+				if( $.trim($('#email').val()) === '' )
 				{
 					alert('<spring:message code="bb.login.confirm.014"/>');
 					$('#email').focus();
 					return;
 				}
 				
-				if( $('#question').val() === '' )
+				if( $.trim($('#question').val()) === '' )
 				{
 					alert('<spring:message code="bb.login.confirm.016"/>');
 					$('#email').focus();
 					return;
 				}
 				
-				if( $('#answer').val() === '' )
+				if( $.trim($('#answer').val()) === '' )
 				{
 					alert('<spring:message code="bb.login.confirm.017"/>');
 					$('#answer').focus();

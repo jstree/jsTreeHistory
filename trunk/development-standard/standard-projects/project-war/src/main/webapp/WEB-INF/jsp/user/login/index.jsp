@@ -65,14 +65,14 @@
 		{
 			$('#submitBtn').on('click', function()
 			{
-				if( $('#email').val() === '' )
+				if( $.trim($('#email').val()) === '' )
 				{
 					alert('<spring:message code="bb.login.confirm.014"/>');
 					$('#email').focus();
 					return;
 				}
 				
-				if( $('#t_password').val() === '' )
+				if( $.trim($('#t_password')).val() === '' )
 				{
 					alert('<spring:message code="bb.login.confirm.015"/>');
 					$('#t_password').focus();
