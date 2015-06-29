@@ -31,7 +31,7 @@
 								<label for="email">이메일 주소</label>
 							</div>
 							 <div class="three-quarter-percent">
-								<input type="text" id="email" name="email" class="w-full" value="VinDiesel@Gmail.com" />
+								<input type="text" id="email" name="email" class="w-full" value="" />
 							</div>
 						</div>
 						<div class="responsive-row inline-block ">
@@ -39,8 +39,8 @@
 								<label for="t_password">비밀번호</label>
 							</div>
 							<div class="three-quarter-percent">
-								<input type="text" id="t_password" class="w-full fake-password" value="VinDiesel"/>
-								<input type="password" id="password" name="password" class="w-full true-password no-display" value="VinDiesel"/>
+								<input type="text" id="t_password" class="w-full fake-password" value=""/>
+								<input type="password" id="password" name="password" class="w-full true-password no-display" value=""/>
 							</div>
 						</div>
 						<c:if test="${not empty errorMsg}">
@@ -65,19 +65,7 @@
 		{
 			$('#submitBtn').on('click', function()
 			{
-				if( $.trim($('#email').val()) === '' )
-				{
-					alert('<spring:message code="bb.login.confirm.014"/>');
-					$('#email').focus();
-					return;
-				}
-				
-				if( $.trim($('#t_password')).val() === '' )
-				{
-					alert('<spring:message code="bb.login.confirm.015"/>');
-					$('#t_password').focus();
-					return;
-				}
+				if( valid() === false ) return;
 				
 				$('#loginForm').submit();
 			});
@@ -86,6 +74,34 @@
 			{
 				$(location).attr('href',"initPassword.do");
 			});
+			
+			function valid()
+			{
+				var result = true
+				  , $form = $('#loginForm')
+			      , $inputText = $form.find('input[type="text"]');
+				
+				$($inputText).each(function()
+				{
+					if( $(this).val() === '' || $.type($(this).val()) === 'undefiend' || $.type($(this).val()) === 'null' )
+					{
+						var id = $.trim($(this).attr("id"))
+						  , confirmMsg;
+						
+						if ( id === 'email' )
+							confirmMsg = '<spring:message code="bb.login.confirm.014"/>';
+						else if ( id === 't_password' )
+							confirmMsg = '<spring:message code="bb.login.confirm.015"/>';
+						
+						alert(confirmMsg);
+						$(this).focus();
+						result = false;
+						return false;
+					}
+				});
+				
+				return result;
+			}
 		},
 		init : function() 
 		{
