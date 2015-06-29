@@ -92,8 +92,7 @@
 				
 				$($inputText).each(function()
 				{
-					alert($.trim($(this).attr("id")));
-					if( $.trim($(this).val()) === '' || $.type($(this).val()) === 'undefiend' || $.type($(this).val()) === 'null' )
+`					if( $.trim($(this).val()) === '' || $.type($(this).val()) === 'undefiend' || $.type($(this).val()) === 'null' )
 					{
 						var id = $(this).attr("id")
 						  , confirmMsg;
