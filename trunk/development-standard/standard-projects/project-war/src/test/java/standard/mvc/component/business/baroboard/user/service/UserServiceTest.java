@@ -146,6 +146,21 @@ public class UserServiceTest extends DbUnitTest<User> {
         compareUserInfo(userStored);
     }
     
+    @DatabaseSetup("UserServiceTest.xml")
+    @Test
+    public void isDuplicateEmail() throws Exception {
+        
+        User notExistUser = new User();
+        notExistUser.setEmail("nothing");
+        
+        assertThat(userService.isDuplicateEmail(notExistUser), is(false));
+        
+        User user = new User();
+        user.setEmail("admin@313.co.kr");
+        
+        assertThat(userService.isDuplicateEmail(user), is(true));
+    }
+    
     private void compareUserInfo(User user) {
         
         assertThat(user.getC_id(), is(3));
@@ -195,9 +210,8 @@ public class UserServiceTest extends DbUnitTest<User> {
     public void addUser() throws Exception {
 
         User user = new User();
-        //user.setC_position(c_position); // TODO 류강하 : 
         user.setC_title("때찌때찌");
-        user.setUserGradeCd(5);
+        user.setUserGradeCd(3);
         user.setJoinStateCd(3);
         user.setPwdFindQuestionCd(5);
         user.setPassword("맴매맴매");

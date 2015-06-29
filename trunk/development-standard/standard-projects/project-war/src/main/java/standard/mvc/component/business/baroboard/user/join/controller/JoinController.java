@@ -83,6 +83,38 @@ public class JoinController extends GenericAbstractController {
         return "/jsp/user/join/index";
     }
     
+    @RequestMapping(value = "/isDuplicateEmail.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String isDuplicateEmail(@RequestBody User user) throws Exception {
+        
+        if ( userService.isDuplicateEmail(user) ) {
+            user.setStatus(1);
+        } else {
+            user.setStatus(0);
+        }
+        
+        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+            
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                
+                if ("status".equals(f.getName())) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return false;
+            }
+            
+        }).create();
+        
+        return gson.toJson(user);
+    }
+    
     @RequestMapping(value = "/isDuplicateNickname.do", method = RequestMethod.POST)
     @ResponseBody
     public String isDuplicateNickname(@RequestBody User user) throws Exception {

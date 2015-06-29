@@ -67,6 +67,14 @@ public interface UserService {
     User findUserByEmail(User user) throws Exception;
     
     /**
+     * 이미 사용중인 이메일인지 여부를 반환한다.
+     * 
+     * @param user 회원 DTO
+     * @return 이메일 중복 여부
+     */
+    boolean isDuplicateEmail(User user) throws Exception;
+    
+    /**
      * 비밀번호를 암호화하여 반환한다.
      * 
      * @param password 비밀번호

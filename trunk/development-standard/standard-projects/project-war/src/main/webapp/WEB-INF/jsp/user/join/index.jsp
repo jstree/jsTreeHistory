@@ -6,21 +6,7 @@
 <html lang="ko" class="js">
 <head>
 <title>${pageName}</title>
-<!-- !!!  FOR THIS PAGE ONLY !!! -->
-
 <style>
-/* #thead{
-    outline-width: 0px;
-}
-#boardTable {
-    width: 100%;
-}
-
-.font-bold {
-    font-weight: bold;
-    font-size: 25px;
-} */
-
 label {
     margin-bottom : 0 !important;
 }
@@ -54,6 +40,8 @@ select {
 <script type="text/javascript">
 var join = {
     
+    emailDuplicaionChecked : false,
+    uniqueEmail : false,
     passwordSecurityLevelCd : '${generalSetting.passwordSecurityLevelCd}',
     nicknameDuplicaionChecked : false,
     uniqueNickname : false,
@@ -66,9 +54,7 @@ var join = {
         
         (function onChangeNickname() {
             
-            var $form = $('#frmJoin');
-            
-            var $nickname = $form.find('input[name="c_title"]');
+            var $nickname = $('#frmJoin input[name="c_title"]');
             
             $nickname.on('change paste keyup', function(e) {
                 
@@ -76,6 +62,46 @@ var join = {
                 join.uniqueNickname = false;
             });
             
+        })();
+        
+        (function onClickEmailDuplicationCheckButton() {
+            
+            $('#btnEmailDuplicationCheck').on('click', function() {
+                
+                if ( !join.validateEmailFormFields() ) {
+                    return false;
+                }
+                
+                var $form = $('#frmJoin');
+                var emailAccount = $form.find('input[name="emailAccount"]').val();
+                var emailHost = $form.find('input[name="emailHost"]').val();
+                
+                var param = {
+                    email : emailAccount + '@' + emailHost
+                };
+                
+                callAjax(null
+                       , 'isDuplicateEmail.do'
+                       , null
+                       , 'post'
+                       , 'json'
+                       , param
+                       , 'application/json'
+                       , callback);
+                 
+                 function callback(r) {
+                     
+                     if (r.status) {
+                         join.emailDuplicaionChecked = false;
+                         join.uniqueEmail = false;
+                         alert('중복된 이메일입니다. 다시 입력해주세요.');
+                     } else {
+                         join.emailDuplicaionChecked = true;
+                         join.uniqueEmail = true;
+                         alert('사용할 수 있는 이메일입니다.');
+                     }
+                 }
+            });
         })();
         
         (function onClickNicknameDuplicationCheckButton() {
@@ -129,7 +155,7 @@ var join = {
                     return false;
                 }
                 
-                if (!confirm('저장하시겠습니까?')) {
+                if (!confirm('가입하시겠습니까?')) {
                     return false;
                 }
                 
@@ -155,19 +181,7 @@ var join = {
         })();
     },
     
-    validateNicknameFormField : function(nickname) {
-      
-        var valid = true;
-        
-        if (! $.trim(nickname) ) {
-            alert('닉네임을 입력해주세요.');
-            valid = false;
-        }
-        
-        return valid;
-    },
-    
-    validateFormFields : function() {
+    validateEmailFormFields : function() {
         
         var $form = $('#frmJoin');
         
@@ -200,6 +214,38 @@ var join = {
         if ( ! emailHostRegExp.test(emailHost) ) {
             alert('이메일 주소가 올바르지 않습니다.');
             $emailHost.focus();
+            return false;
+        }
+        
+        return true;
+    },
+    
+    validateNicknameFormField : function(nickname) {
+      
+        var valid = true;
+        
+        if (! $.trim(nickname) ) {
+            alert('닉네임을 입력해주세요.');
+            valid = false;
+        }
+        
+        return valid;
+    },
+    
+    validateFormFields : function() {
+        
+        var $form = $('#frmJoin');
+        
+        if ( !join.validateEmailFormFields() ) {
+            return false;
+        }
+        
+        if (!join.emailDuplicaionChecked) {
+            alert('이메일 중복체크 버튼을 눌러 중복된 이메일인지 확인해주세요.');
+            return false;
+        } 
+        else if (!join.uniqueEmail) {
+            alert('이메일 중복체크 버튼을 눌러 중복된 이메일인지 확인해주세요.');
             return false;
         }
         
@@ -264,9 +310,8 @@ var join = {
             alert('닉네임 중복체크 버튼을 눌러 중복된 닉네임인지 확인해주세요.');
             return false;
         }
-        if (!join.uniqueNickname) {
+        else if (!join.uniqueNickname) {
             alert('닉네임 중복체크 버튼을 눌러 중복된 닉네임인지 확인해주세요.');
-            $nickname.focus();
             return false;
         }
         
@@ -305,6 +350,7 @@ $(document).ready(function() {
                                                   이메일 주소<span class="essential">*</span>
                             <input name="emailAccount" type="text" placeholder="64자리 이하의 이메일 형식 문자" style="width:210px" />@
                             <input name="emailHost" type="text" placeholder="255자리 이하의 이메일 형식 문자" style="width:220px" />
+                            <button id="btnEmailDuplicationCheck" type="button" class="compact">중복체크</button>
                         </label>
                     </div>
                     <div>

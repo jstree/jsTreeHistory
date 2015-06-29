@@ -93,6 +93,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean isDuplicateEmail(User user) throws Exception {
+        
+        boolean duplicate = false;
+        
+        if (findUserByEmail(user) != null) {
+            duplicate = true;
+        }
+        
+        return duplicate;
+    }
+    
+    @Override
     public String encryptPassword(String password) {
         
         ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
