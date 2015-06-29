@@ -31,7 +31,7 @@
 								<label for="email">이메일 주소</label>
 							</div>
 							 <div class="three-quarter-percent">
-								<input type="text" id="email" name="email" class="w-full" value="" />
+								<input type="text" id="email" name="email" class="w-full" value="VinDiesel@Gmail.com" />
 							</div>
 						</div>
 						<div class="responsive-row inline-block ">
@@ -39,8 +39,8 @@
 								<label for="t_password">비밀번호</label>
 							</div>
 							<div class="three-quarter-percent">
-								<input type="text" id="t_password" class="w-full fake-password" value=""/>
-								<input type="password" id="password" name="password" class="w-full true-password no-display" value=""/>
+								<!-- <input type="text" id="t_password" class="w-full fake-password" value=""/> -->
+								<input type="password" id="password" name="password" class="w-full" value=""/>
 							</div>
 						</div>
 						<c:if test="${not empty errorMsg}">
@@ -61,13 +61,22 @@
 <script>
 	var secureLogin = 
 	{
+		init : function() 
+		{
+		    this.handleEvent();
+		},
 		handleEvent : function()
 		{
 			$('#submitBtn').on('click', function()
 			{
-				if( valid() === false ) return;
-				
-				$('#loginForm').submit();
+				if( formValid() === false )
+				{
+					return;
+				}
+				else
+				{
+					$('#loginForm').submit();
+				}
 			});
 			
 			$('#searchBtn').on('click', function()
@@ -75,22 +84,23 @@
 				$(location).attr('href',"initPassword.do");
 			});
 			
-			function valid()
+			function formValid()
 			{
 				var result = true
-				  , $form = $('#loginForm')
-			      , $inputText = $form.find('input[type="text"]');
+				  , $form = $('#customer-login-form')
+			      , $inputText = $form.find(':input');
 				
 				$($inputText).each(function()
 				{
-					if( $(this).val() === '' || $.type($(this).val()) === 'undefiend' || $.type($(this).val()) === 'null' )
+					alert($.trim($(this).attr("id")));
+					if( $.trim($(this).val()) === '' || $.type($(this).val()) === 'undefiend' || $.type($(this).val()) === 'null' )
 					{
-						var id = $.trim($(this).attr("id"))
+						var id = $(this).attr("id")
 						  , confirmMsg;
 						
 						if ( id === 'email' )
 							confirmMsg = '<spring:message code="bb.login.confirm.014"/>';
-						else if ( id === 't_password' )
+						else if ( id === 'password' )
 							confirmMsg = '<spring:message code="bb.login.confirm.015"/>';
 						
 						alert(confirmMsg);
@@ -102,10 +112,6 @@
 				
 				return result;
 			}
-		},
-		init : function() 
-		{
-		    this.handleEvent();
 		}
 	}
 	

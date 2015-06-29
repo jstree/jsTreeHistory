@@ -25,7 +25,7 @@
 <section>
 	<div class="container bm-medium" id="account-sign">
 		<div class=" p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
-			<div class="element-center one-half-percent desktop-tablet alpha bm-remove last" id = "account-signin">
+			<div class="element-center one-half-percent desktop-tablet alpha bm-remove last" id = "pwdFind">
 				<h1 class="bm-small text-left">비밀번호 초기화</h1>
 				<div id="customer-login-form" >
 					<script>
@@ -74,60 +74,49 @@
 		{
 			$('#questionBtn').on('click', function()
 			{
-				if( $.trim($('#email').val()) === '' )
+				var $email = $.trim($('#email').val());
+				
+				if( $email === '' || $.type($email) === 'undefiend' || $.type($email) === 'null' )
 				{
 					alert('<spring:message code="bb.login.confirm.014"/>');
 					$('#email').focus();
-					return;
 				}
-				
-				$.ajax({
-		    		  url: 'findPasswordQuestion.do',
-		    		  method: 'GET',
-		    		  data: { email: $('#email').val() },
-		    		}).done(function(data)
-		    		{
-		    			if($.type(data) === 'object')
-		    			{
-			    			$('#question').val(data.pwdFindQuestion);
-			    			$('#initBtn').prop('disabled',false);
-		    			}
-		    			else
-	    				{
-		    				$('#question').val('');
-		    				$('#initBtn').prop('disabled',true);
-		    				$('#email').focus();
-		    				alert('<spring:message code="bb.login.error.010"/>');
-	    				}
-		    		}).fail(function(data){
-		    			alert(data);
-		    		});
+				else
+				{
+					$.ajax({
+			    		  url: 'findPasswordQuestion.do',
+			    		  method: 'GET',
+			    		  data: { email: $('#email').val() },
+			    		}).done(function(data)
+			    		{
+			    			if($.type(data) === 'object')
+			    			{
+				    			$('#question').val(data.pwdFindQuestion);
+				    			$('#initBtn').prop('disabled',false);
+			    			}
+			    			else
+		    				{
+			    				$('#question').val('');
+			    				$('#initBtn').prop('disabled',true);
+			    				$('#email').focus();
+			    				alert('<spring:message code="bb.login.error.010"/>');
+		    				}
+			    		}).fail(function(data){
+			    			alert(data);
+			    		});
+				}
 			});
+				
 			
 			$('#initBtn').on('click', function()
 			{
-				if( $.trim($('#email').val()) === '' )
+				if( formValid() === false )
 				{
-					alert('<spring:message code="bb.login.confirm.014"/>');
-					$('#email').focus();
 					return;
 				}
-				
-				if( $.trim($('#question').val()) === '' )
+				else
 				{
-					alert('<spring:message code="bb.login.confirm.016"/>');
-					$('#email').focus();
-					return;
-				}
-				
-				if( $.trim($('#answer').val()) === '' )
-				{
-					alert('<spring:message code="bb.login.confirm.017"/>');
-					$('#answer').focus();
-					return;
-				}
-				
-				$.ajax({
+					$.ajax({
 		    		  url: 'checkPasswordAnswer.do',
 		    		  method: 'POST',
 		    		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -147,7 +136,38 @@
 		    		{
 		    			alert(data);
 		    		});
+				}
 			});
+			
+			function formValid()
+			{
+				var result = true
+				  , $pwdfind = $('#pwdFind')
+			      , $inputText = $pwdfind.find('input[type="text"]');
+				
+				$($inputText).each(function()
+				{
+					if( $.trim($(this).val()) === '' || $.type($(this).val()) === 'undefiend' || $.type($(this).val()) === 'null' )
+					{
+						var id = $(this).attr("id")
+						  , confirmMsg;
+						
+						if ( id === 'email' )
+							confirmMsg = '<spring:message code="bb.login.confirm.014"/>';
+						else if ( id === 'question' )
+							confirmMsg = '<spring:message code="bb.login.confirm.016"/>';
+						else if ( id === 'answer' )
+							confirmMsg = '<spring:message code="bb.login.confirm.017"/>';
+						
+						alert(confirmMsg);
+						$(this).focus();
+						result = false;
+						return false;
+					}
+				});
+				
+				return result;
+			}
 		},
 		init : function() 
 		{
