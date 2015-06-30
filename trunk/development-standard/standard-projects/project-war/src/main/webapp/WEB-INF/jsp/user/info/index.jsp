@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html lang="ko" class="js">
+<!doctype html>
+<html lang="ko">
 <head>
-<title>${pageName}</title>
+<title>회원정보 수정</title>
 <style>
 label {
     margin-bottom : 0 !important;
@@ -342,82 +342,70 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-    <section class="clearfix">
-        <nav>
-            <div class="container bm-medium">
-                <div class="one-whole">
-                    <div class="no-display">agreement</div>
-                </div>
+<section class="clearfix">
+    <nav>
+        <div class="container bm-medium">
+            <div class="one-whole">
+                <div class="no-display">회원정보 수정</div>
             </div>
-        </nav>
-        <article>
-            <div class="clearfix">
-                <div class="container bm-remove">
-                <form id="frmJoin" action="join.do" method="post">
-                    <div>
-                        <label>
-                                                  이메일 주소<span class="essential">*</span>
-                            <input name="emailAccount" type="text" placeholder="64자리 이하의 이메일 형식 문자" style="width:210px" />@
-                            <input name="emailHost" type="text" placeholder="255자리 이하의 이메일 형식 문자" style="width:220px" />
-                            <button id="btnEmailDuplicationCheck" type="button" class="compact">중복체크</button>
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                                                  비밀번호<span class="essential">*</span>
-                            <input name="password" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                                                  비밀번호 확인<span class="essential">*</span>
-                            <input name="passwordConfirm" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                                                비밀번호 찾기 질문<span class="essential">*</span>
-                           <select name="pwdFindQuestionCd">
-	                       <c:forEach var="passwordFindQuestion" items="${passwordFindQuestions}" varStatus="status">
-	                           <option value="${passwordFindQuestion.c_id}">${passwordFindQuestion.c_title}</option>
-	                       </c:forEach>
-	                       </select>
-                        </label>
-                    </div>
-                    <div>
-                        <labe>
-                                                   비밀번호 찾기 답변<span class="essential">*</span>
-                            <input name="pwdFindAnswer" type="text" style="width:240px" />
-                        </labe>
-                    </div>
-                    <div>
-                        <label>
-                                                  닉네임<span class="essential">*</span>
-                            <input name="c_title" type="text" style="width:200px" />
-                        </label>
-                        <button id="btnNicknameDuplicationCheck" type="button" class="compact">중복체크</button>
-                    </div>
-                    <div>
-                        <label>
-                                                  메일링 서비스 설정
-                            <label><input name="mailingServiceUseFl" type="radio" value="1" checked="checked" />예</label>
-                            <label><input name="mailingServiceUseFl" type="radio" value="0" />아니오</label>
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                                                  정보공개 설정
-                            <label><input name="indiInfoOpenFl" type="radio" value="1" checked="checked" />전체공개</label>
-                            <label><input name="indiInfoOpenFl" type="radio" value="0" />거부</label>
-                        </label>
-                    </div>
-                    <div class="divButtons">
-                        <button type="submit" class="compact">가입하기</button>
-                    </div>
-                </form>
+        </div>
+    </nav>
+    <article>
+        <div class="clearfix">
+            <div class="container bm-remove">
+            <form id="frmJoin" action="join.do" method="post">
+                <div>
+                    <label>
+                                           이메일 주소<span class="essential">*</span>
+                        <input name="emailAccount" type="text" placeholder="64자리 이하의 이메일 형식 문자" value="${user.emailAccount}" style="width:210px" />@
+                        <input name="emailHost" type="text" placeholder="255자리 이하의 이메일 형식 문자" value="${user.emailHost}" style="width:220px" />
+                        <button id="btnEmailDuplicationCheck" type="button" class="compact">중복체크</button>
+                    </label>
                 </div>
+                <div>
+                    <label>
+                                         비밀번호 찾기 질문<span class="essential">*</span>
+                       <select name="pwdFindQuestionCd">
+                    <c:forEach var="passwordFindQuestion" items="${passwordFindQuestions}" varStatus="status">
+                        <option value="${passwordFindQuestion.c_id}" <c:if test="${passwordFindQuestion.c_id == user.pwdFindQuestionCd}">selected="selected"</c:if>>${passwordFindQuestion.c_title}</option>
+                    </c:forEach>
+                    </select>
+                    </label>
+                </div>
+                <div>
+                    <labe>
+                                           비밀번호 찾기 답변<span class="essential">*</span>
+                        <input name="pwdFindAnswer" type="text" value="${user.pwdFindAnswer}" style="width:240px" />
+                    </labe>
+                </div>
+                <div>
+                    <label>
+                                           닉네임<span class="essential">*</span>
+                        <input name="c_title" type="text" value="${user.c_title}" style="width:200px" />
+                    </label>
+                    <button id="btnNicknameDuplicationCheck" type="button" class="compact">중복체크</button>
+                </div>
+                <div>
+                    <label>
+                                           메일링 서비스 설정
+                        <label><input name="mailingServiceUseFl" type="radio" value="1" <c:if test="${user.mailingServiceUseFl == 1}">checked="checked"</c:if> />예</label>
+                        <label><input name="mailingServiceUseFl" type="radio" value="0" <c:if test="${user.mailingServiceUseFl == 0}">checked="checked"</c:if> />아니오</label>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                                           정보공개 설정
+                        <label><input name="indiInfoOpenFl" type="radio" value="1" <c:if test="${user.indiInfoOpenFl == 1}">checked="checked"</c:if> />전체공개</label>
+                        <label><input name="indiInfoOpenFl" type="radio" value="0" <c:if test="${user.indiInfoOpenFl == 0}">checked="checked"</c:if> />거부</label>
+                    </label>
+                </div>
+                <div class="divButtons">
+                    <button type="submit" class="compact">수정하기</button>
+                </div>
+            </form>
             </div>
-        </article>
-    </section>
+        </div>
+    </article>
+</section>
 </body>
 </html>
