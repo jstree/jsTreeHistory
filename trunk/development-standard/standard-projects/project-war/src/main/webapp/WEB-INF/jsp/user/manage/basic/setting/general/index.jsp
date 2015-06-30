@@ -158,6 +158,14 @@ $(document).ready(function() {
                 </div>
                 <div class="responsive-row">
                     <div class="one-quarter">
+                       <label for="txtEmailProhibitionWords">금지 이메일</label>
+                    </div>
+                    <div class="one-quarter">
+                        <textarea id="txtEmailProhibitionWords" name="emailProhibitionWords" placeholder="단어 사이를 개행으로 구분하여 입력"><c:forEach var="emailProhibitionWord" items="${emailProhibitionWords}" varStatus="status">${emailProhibitionWord.c_title}<c:if test="${!status.last}"><customTags:newLine /></c:if></c:forEach></textarea>
+                    </div>
+                </div>
+                <div class="responsive-row">
+                    <div class="one-quarter">
                        <label for="txtNicknameProhibitionWords">금지 닉네임</label>
                     </div>
                     <div class="one-quarter">
