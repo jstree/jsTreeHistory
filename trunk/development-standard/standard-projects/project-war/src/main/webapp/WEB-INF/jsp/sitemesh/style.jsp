@@ -57,6 +57,11 @@
 				#responsive-admin-menu #menu a.submenu:before {font-size:14px;right:15px }
 			}
 		</style>
+		<!-- 2015-06-22 : 네비 스크롤 -->
+		<style>
+			#responsive-lnb{}
+			#responsive-admin-menu{overflow-y:scroll}
+		</style>
 	</head>
 	<body></body>
 </html>

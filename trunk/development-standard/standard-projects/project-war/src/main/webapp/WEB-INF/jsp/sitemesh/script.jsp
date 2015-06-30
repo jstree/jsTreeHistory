@@ -109,6 +109,22 @@
 				});
 			});
 		</script>
+		<!-- 2015-06-22 : 네비 스크롤 -->
+		<script>
+			$(document).ready(function () {
+				mobileAdminNavHeight()
+			});
+			function mobileAdminNavHeight(){
+				$('#responsive-admin-menu').css('max-height',$(window).height())
+				$('#responsive-admin-menu').on('mouseover', function(){
+					$(this).focus();
+				});
+				$('#responsive-admin-menu').on('mouseout', function(){
+					$(this).blur();
+				});
+			}
+			// 마우스 올리면 현재 스크롤중인거를 멈추어야 함, 그러나 스크롤 다 끝나고 hover 이벤트가 적용 되어 스크롤 중일 때는 포커스 이벤트가 먹지 않음. (console.log 는 먹음) 
+		</script>
 	</head>
 	<body></body>
 </html>
