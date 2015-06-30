@@ -15,7 +15,6 @@
  */
 package standard.mvc.component.business.baroboard.user.manage.basic.setting.general.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +33,6 @@ import standard.mvc.component.business.baroboard.user.manage.basic.setting.gener
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.GeneralSetting;
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.ProhibitionWord;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
-import egovframework.com.ext.jstree.support.util.StringUtils;
 
 /**
  * Modification Information
@@ -73,11 +71,13 @@ public class GeneralSettingController extends GenericAbstractController {
     }
     
     @RequestMapping("/index.do")
-    public String movePage(ModelMap model) throws Exception {
+    public String index(ModelMap model) throws Exception {
         
         model.addAttribute("passwordSecurityLevels", generalSettingService.getPasswordSecurityLevels());
         
         model.addAttribute("generalSetting", generalSettingService.getGeneralSetting());
+        
+        model.addAttribute("emailProhibitionWords", prohibitionWordService.getEmailProhibitionWords());
         
         model.addAttribute("nicknameProhibitionWords", prohibitionWordService.getNicknameProhibitionWords());
         
@@ -101,28 +101,17 @@ public class GeneralSettingController extends GenericAbstractController {
         generalSetting.setWebMasterEmail(webMasterEmail);
         
         generalSettingService.saveGeneralSetting(generalSetting);
-
-        String[] nicknameProhibitionWordArray = StringUtils.splitStringByNewLineOrTab( generalSetting.getNicknameProhibitionWords() );
         
-        if ( ! (nicknameProhibitionWordArray.length == 1 && "".equals(nicknameProhibitionWordArray[0])) ) {
-            
-            List<ProhibitionWord> nicknameProhibitionWordList = new ArrayList<ProhibitionWord>();
-            
-            for (int i = 0; i < nicknameProhibitionWordArray.length; i++) {
-                
-                ProhibitionWord prohibitionWord = new ProhibitionWord();
-                prohibitionWord.setC_title( nicknameProhibitionWordArray[i] );
-                
-                if ("".equals(prohibitionWord.getC_title())) {
-                    continue;
-                }
-                
-                nicknameProhibitionWordList.add(prohibitionWord);
-            }
-            
-            if (nicknameProhibitionWordList.size() > 0) {
-                prohibitionWordService.saveNicknameProhibitionWords(nicknameProhibitionWordList);
-            }
+        List<ProhibitionWord> emailProhibitionWordList = prohibitionWordService.extractProhibitionWords( generalSetting.getEmailProhibitionWords() );
+        
+        if (emailProhibitionWordList.size() > 0) {
+            prohibitionWordService.saveEmailProhibitionWords(emailProhibitionWordList);
+        }
+        
+        List<ProhibitionWord> nicknameProhibitionWordList = prohibitionWordService.extractProhibitionWords( generalSetting.getNicknameProhibitionWords() );
+        
+        if (nicknameProhibitionWordList.size() > 0) {
+            prohibitionWordService.saveNicknameProhibitionWords(nicknameProhibitionWordList);
         }
         
         return "{}";

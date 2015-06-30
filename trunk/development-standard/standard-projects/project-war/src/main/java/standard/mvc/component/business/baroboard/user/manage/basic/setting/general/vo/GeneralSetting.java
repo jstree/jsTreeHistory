@@ -86,6 +86,9 @@ public class GeneralSetting extends ComprehensiveTree {
     @Size(min = 1, max = 255)
     private String webMasterEmailHost;
     
+    /** 이메일 금지단어 */
+    private String emailProhibitionWords;
+    
     /** 닉네임 금지단어 */
     private String nicknameProhibitionWords;
     
@@ -183,6 +186,14 @@ public class GeneralSetting extends ComprehensiveTree {
 
     public void setNicknameProhibitionWords(String nicknameProhibitionWords) {
         this.nicknameProhibitionWords = nicknameProhibitionWords;
+    }
+
+    public String getEmailProhibitionWords() {
+        return emailProhibitionWords;
+    }
+
+    public void setEmailProhibitionWords(String emailProhibitionWords) {
+        this.emailProhibitionWords = emailProhibitionWords;
     }
 
     @Override

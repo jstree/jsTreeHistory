@@ -27,6 +27,8 @@ import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.user.dao.UserDao;
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.GeneralSettingService;
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.ProhibitionWordService;
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.ProhibitionWord;
 import standard.mvc.component.business.baroboard.user.manage.grade.service.UserGradeService;
 import standard.mvc.component.business.baroboard.user.manage.grade.vo.UserGradeManage;
 import standard.mvc.component.business.baroboard.user.vo.PasswordFindQuestion;
@@ -64,6 +66,9 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private GeneralSettingService generalSettingService;
+    
+    @Autowired
+    private ProhibitionWordService prohibitionWordService;
     
     @Autowired
     private UserDao userDao;
@@ -141,6 +146,24 @@ public class UserServiceImpl implements UserService {
         } 
         else if (! isValidUserGradeCd(userGradeCd) ) {
             throw new RuntimeException("bb.user.error.001");
+        }
+        
+        List<ProhibitionWord> emailProhibitionWords = prohibitionWordService.getEmailProhibitionWords();
+        
+        for (ProhibitionWord emailProhibitionWord : emailProhibitionWords) {
+            
+            if (emailProhibitionWord.getC_title().equals( user.getEmail() )) {
+                throw new RuntimeException("bb.user.error.002");
+            }
+        }
+        
+        List<ProhibitionWord> nicknameProhibitionWords = prohibitionWordService.getNicknameProhibitionWords();
+        
+        for (ProhibitionWord nicknameProhibitionWord : nicknameProhibitionWords) {
+            
+            if (nicknameProhibitionWord.getC_title().equals( user.getC_title() )) {
+                throw new RuntimeException("bb.user.error.003");
+            }
         }
         
         if ("1".equals( generalSettingService.getGeneralSetting().getJoinApprovalFl() )) {

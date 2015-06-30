@@ -205,7 +205,7 @@ public class UserServiceTest extends DbUnitTest<User> {
     
     @Ignore
     @DatabaseSetup("UserServiceTest.xml")
-    @ExpectedDatabase(value = "UserServiceTest_addUser.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "UserServiceTest_addUser.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
     @Test
     public void addUser() throws Exception {
 

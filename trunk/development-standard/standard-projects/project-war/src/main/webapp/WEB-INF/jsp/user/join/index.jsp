@@ -52,6 +52,18 @@ var join = {
     
     handleEvent : function() {
         
+        (function onChangeEmail() {
+            
+            var $emails = $('#frmJoin').find('input[name="emailAccount"], input[name="emailHost"]');
+            
+            $emails.on('change paste keyup', function(e) {
+                
+                join.emailDuplicaionChecked = false;
+                join.uniqueEmail = false;
+            });
+            
+        })();
+        
         (function onChangeNickname() {
             
             var $nickname = $('#frmJoin input[name="c_title"]');
