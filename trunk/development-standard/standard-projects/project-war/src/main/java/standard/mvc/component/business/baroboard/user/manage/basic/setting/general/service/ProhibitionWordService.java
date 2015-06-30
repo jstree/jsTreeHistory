@@ -114,4 +114,13 @@ public interface ProhibitionWordService {
      */
     int saveNicknameProhibitionWords(List<ProhibitionWord> nicknameProhibitionWords)
             throws Exception;
+    
+    /**
+     * 하나의 문자열 형태로 이어진 금지단어들을 단어 각각으로 분리하여 DTO List로 만들어 반환한다.<br />
+     * 단어 앞 뒤의 공백은 제거된다.
+     * 
+     * @param prohibitionWords 하나의 문자열 형태의 금지단어들
+     * @return 금지단어 DTO List
+     */
+    List<ProhibitionWord> extractProhibitionWords(String prohibitionWords);
 }

@@ -246,4 +246,20 @@ public class ProhibitionWordServiceTest extends DbUnitTest<ProhibitionWord> {
         
         assertThat(affectedRowCount, is(nicknameProhibitionWords.size()));
     }
+    
+    @Test
+    public void extractProhibitionWords() {
+        
+        String prohibitionWords = "   관리자\r\n  admin  \n 바보   \r     멍충이\t   똘아이";
+        
+        List<ProhibitionWord> extractProhibitionWords = prohibitionWordService.extractProhibitionWords(prohibitionWords);
+        
+        assertThat(extractProhibitionWords.size(), is(5));
+        
+        assertThat(extractProhibitionWords.get(0).getC_title(), is("관리자"));
+        assertThat(extractProhibitionWords.get(1).getC_title(), is("admin"));
+        assertThat(extractProhibitionWords.get(2).getC_title(), is("바보"));
+        assertThat(extractProhibitionWords.get(3).getC_title(), is("멍충이"));
+        assertThat(extractProhibitionWords.get(4).getC_title(), is("똘아이"));
+    }
 }

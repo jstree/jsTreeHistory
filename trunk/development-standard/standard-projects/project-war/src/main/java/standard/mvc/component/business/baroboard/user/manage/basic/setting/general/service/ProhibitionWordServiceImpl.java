@@ -15,6 +15,8 @@
  */
 package standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.ProhibitionWord;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 
 /**
  * Modification Information
@@ -169,5 +172,36 @@ public class ProhibitionWordServiceImpl implements ProhibitionWordService {
         }
         
         return affectedRowCount;
+    }
+    
+    @Override
+    public List<ProhibitionWord> extractProhibitionWords(String prohibitionWords) {
+        
+        String[] prohibitionWordArray = StringUtils.splitStringByNewLineOrTab(prohibitionWords);
+        
+        List<ProhibitionWord> prohibitionWordList = null;
+        
+        if ( prohibitionWordArray == null || prohibitionWordArray.length == 0 ) {
+            prohibitionWordList = Collections.emptyList();
+        }
+        else {
+            prohibitionWordList = new ArrayList<ProhibitionWord>();
+            
+            for (int i = 0; i < prohibitionWordArray.length; i++) {
+                
+                String prohibitionWord = prohibitionWordArray[i].trim();
+                
+                if ("".equals(prohibitionWord)) {
+                    continue;
+                }
+                
+                ProhibitionWord prohibitionWordObj = new ProhibitionWord();
+                prohibitionWordObj.setC_title(prohibitionWord);
+                
+                prohibitionWordList.add(prohibitionWordObj);
+            }
+        }
+        
+        return prohibitionWordList;
     }
 }
