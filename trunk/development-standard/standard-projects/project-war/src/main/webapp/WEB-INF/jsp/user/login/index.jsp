@@ -40,7 +40,7 @@
 							</div>
 							<div class="three-quarter-percent">
 								<!-- <input type="text" id="t_password" class="w-full fake-password" value=""/> -->
-								<input type="password" id="password" name="password" class="w-full" value=""/>
+								<input type="password" id="password" name="password" class="w-full" value="VinDiesel"/>
 							</div>
 						</div>
 						<c:if test="${not empty errorMsg}">
@@ -92,7 +92,7 @@
 				
 				$($inputText).each(function()
 				{
-`					if( $.trim($(this).val()) === '' || $.type($(this).val()) === 'undefiend' || $.type($(this).val()) === 'null' )
+					if( $.trim($(this).val()) === '' || $.type($(this).val()) === 'undefiend' || $.type($(this).val()) === 'null' )
 					{
 						var id = $(this).attr("id")
 						  , confirmMsg;
