@@ -34,11 +34,11 @@
 				<value>**service.impl.*</value>
 			</list>
 		</property>
-		<property name="handlers">
+<!-- 		<property name="handlers">
 			<list>
 				<ref bean="egovHandler" />
 			</list>
-		</property>
+		</property> -->
 	</bean>
 
 	<bean id="otherExceptionHandleManager"
@@ -51,17 +51,17 @@
 				<value>**service.impl.*</value>
 			</list>
 		</property>
-		<property name="handlers">
+<!-- 		<property name="handlers">
 			<list>
 				<ref bean="otherHandler" />
 			</list>
-		</property>
+		</property> -->
 	</bean>
 	
-
+<!-- 
 	<bean id="egovHandler"
 		class="egovframework.rte.cmmn.EgovSampleExcepHndlr" />
 	<bean id="otherHandler"
-		class="egovframework.rte.cmmn.EgovSampleOthersExcepHndlr" />	
+		class="egovframework.rte.cmmn.EgovSampleOthersExcepHndlr" />	 -->
 	
 </beans>
