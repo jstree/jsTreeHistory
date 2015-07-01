@@ -86,7 +86,8 @@ public class SecureUserLoginController extends GenericAbstractController
 			}
 			else if( StringUtils.equals(WRONGPASSWORD , error) )
 			{
-				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.00" + String.valueOf(Integer.parseInt(loginFailureCnt)+2)));
+				Object[] args = {new String(loginFailureCnt)};
+				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.003", args));
 			}
 			else if( StringUtils.equals(LOGINLIMITDAY, error) )
 			{
