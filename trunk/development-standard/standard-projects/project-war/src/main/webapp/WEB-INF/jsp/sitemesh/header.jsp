@@ -22,9 +22,20 @@
 					</a>
 				</div>
 				<div id="header-cart" class="one-third bm-remove last">
-					<a href="${pageContext.request.contextPath}/account/accountSign.do" target="_self">
-						Sign in
-					</a>
+					<c:choose>
+						<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == null}">
+						  <c:url value="${pageContext.request.contextPath}/account/accountSign.do" var="SignInUrl" />
+							<a href="${SignInUrl}" target="_self">
+								Sign In
+							</a>
+						</c:when>
+						<c:otherwise>
+						  <c:url value="${pageContext.request.contextPath}/user/login/logout.do" var="logoutUrl" />
+							<a href="${logoutUrl}" target="_self">
+								Log Out
+							</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</header>
