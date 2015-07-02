@@ -24,9 +24,8 @@
 				<div id="header-cart" class="one-third bm-remove last">
 					<c:choose>
 						<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == null}">
-							<c:url value="${pageContext.request.contextPath}/user/join/index.do" var="JoinUrl" />
-							<form id="joinForm" method="post" action="${JoinUrl}"></form>
-						  	<a onclick="document.getElementById('joinForm').submit();" target="_self" style="cursor: pointer;">회원가입</a>
+							<c:url value="${pageContext.request.contextPath}/user/join/agreement/index.do" var="JoinUrl" />
+						  	<a  href="${JoinUrl}" target="_self" >회원가입</a>
 							<span>|</span>
 							<c:url value="${pageContext.request.contextPath}/user/login/index.do" var="LogInUrl" />
 							<a href="${LogInUrl}" target="_self">
