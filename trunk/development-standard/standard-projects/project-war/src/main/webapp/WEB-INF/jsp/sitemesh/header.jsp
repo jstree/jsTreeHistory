@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url value="${pageContext.request.contextPath}/user/join/agreement/index.do" var="JoinUrl" />
+<c:url value="${pageContext.request.contextPath}/user/login/index.do" var="LogInUrl" />
+<c:url value="${pageContext.request.contextPath}/user/login/logout.do" var="logoutUrl" />
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 	<head></head>
@@ -24,23 +27,14 @@
 				<div id="header-cart" class="one-third bm-remove last">
 					<c:choose>
 						<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == null}">
-							<c:url value="${pageContext.request.contextPath}/user/join/agreement/index.do" var="JoinUrl" />
 						  	<a  href="${JoinUrl}" target="_self" >회원가입</a>
 							<span>|</span>
-							<c:url value="${pageContext.request.contextPath}/user/login/index.do" var="LogInUrl" />
-							<a href="${LogInUrl}" target="_self">
-								로그인
-							</a>
+							<a href="${LogInUrl}" target="_self">로그인</a>
 						</c:when>
 						<c:otherwise>
-							<a href="#" target="_self">
-								바로보드 
-							</a>
+							<a href="#" target="_self">바로보드</a>
 							<span>|</span>
-							<c:url value="${pageContext.request.contextPath}/user/login/logout.do" var="logoutUrl" />
-							<a href="${logoutUrl}" target="_self">
-								로그아웃
-							</a>
+							<a href="${logoutUrl}" target="_self">로그아웃</a>
 						</c:otherwise>
 					</c:choose>
 				</div>
