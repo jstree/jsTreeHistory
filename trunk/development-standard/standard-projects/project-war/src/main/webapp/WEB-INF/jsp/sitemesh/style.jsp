@@ -40,7 +40,7 @@
 			}
 			@media (min-width: 980px) and (max-width: 1200px) { 
 				.page-border { width: auto; /*min-width: 980px;*/ }
-				.container { width: 90%; }
+				.container { width: 100%; padding: 0px 1px 0px 1px; }
 				.container .one-third { float: left; width: 32%; }
 				.container .one-third.last { float: right; width: 30%; }
 				#secondary-navigation { height: 100px; }
