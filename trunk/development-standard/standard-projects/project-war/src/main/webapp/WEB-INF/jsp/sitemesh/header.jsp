@@ -24,15 +24,23 @@
 				<div id="header-cart" class="one-third bm-remove last">
 					<c:choose>
 						<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == null}">
-						  <c:url value="${pageContext.request.contextPath}/account/accountSign.do" var="SignInUrl" />
-							<a href="${SignInUrl}" target="_self">
-								Sign In
+							<c:url value="${pageContext.request.contextPath}/user/join/index.do" var="JoinUrl" />
+							<form id="joinForm" method="post" action="${JoinUrl}"></form>
+						  	<a onclick="document.getElementById('joinForm').submit();" target="_self" style="cursor: pointer;">회원가입</a>
+							<span>|</span>
+							<c:url value="${pageContext.request.contextPath}/user/login/index.do" var="LogInUrl" />
+							<a href="${LogInUrl}" target="_self">
+								로그인
 							</a>
 						</c:when>
 						<c:otherwise>
-						  <c:url value="${pageContext.request.contextPath}/user/login/logout.do" var="logoutUrl" />
+							<a href="#" target="_self">
+								바로보드 
+							</a>
+							<span>|</span>
+							<c:url value="${pageContext.request.contextPath}/user/login/logout.do" var="logoutUrl" />
 							<a href="${logoutUrl}" target="_self">
-								Log Out
+								로그아웃
 							</a>
 						</c:otherwise>
 					</c:choose>
