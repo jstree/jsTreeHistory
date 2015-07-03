@@ -57,11 +57,13 @@ public class User extends ComprehensiveTree {
     private String joinState;
 
     /** 비밀번호 */
-    @Size(min = 4)
     private String password;
 
     /** 비밀번호 확인 */
     private String passwordConfirm;
+    
+    /** 현재 비밀번호 */
+    private String currentPassword;
     
     /** 이메일 */
     @Email
@@ -391,6 +393,14 @@ public class User extends ComprehensiveTree {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public String getCurrentPassword() {
+        return currentPassword;
+    }
+
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
     }
 
     @Override

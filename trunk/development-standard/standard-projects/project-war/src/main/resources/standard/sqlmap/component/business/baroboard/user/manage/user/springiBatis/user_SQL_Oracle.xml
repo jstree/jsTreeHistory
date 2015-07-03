@@ -56,7 +56,27 @@
       , #loginFailureCnt#, #pwdFindAnswer#, #mailingServiceUseFl#, #indiInfoOpenFl#
       , #joinDt#, #passwordChangeDt#, #homepageUrl#, #blogUrl#, #sign#, #profilePhoto#, #imageIcon#
     </sql>
-
+    
+    <sql id="getExtensionColumnsForUpdate">
+        , C_USER_GRADE_CD = #userGradeCd#
+        , C_JOIN_STATE_CD = #joinStateCd#
+        , C_PWD_FIND_QUESTION_CD = #pwdFindQuestionCd#
+        , C_PASSWORD = #password#
+        , C_EMAIL = #email#
+        , C_LOGIN_FAILURE_CNT = #loginFailureCnt#
+        , C_PWD_FIND_ANSWER = #pwdFindAnswer#
+        , C_MAILING_SERVICE_USE_FL = #mailingServiceUseFl#
+        , C_INDI_INFO_OPEN_FL = #indiInfoOpenFl#
+        , C_JOIN_DT = #joinDt#
+        , C_PASSWORD_CHANGE_DT = #passwordChangeDt#
+        , C_LAST_LOGIN_DT = #lastLoginDt#
+        , C_HOMEPAGE_URL = #homepageUrl#
+        , C_BLOG_URL = #blogUrl#
+        , C_SIGN = #sign#
+        , C_PROFILE_PHOTO = #profilePhoto#
+        , C_IMAGE_ICON = #imageIcon#
+    </sql>
+    
     <sql id="countingBegin">
         SELECT COUNT(*)
         FROM
@@ -126,22 +146,7 @@
         UPDATE T_USER_INFO
            SET C_TYPE = #c_type#
              , C_TITLE = #c_title#
-             , C_USER_GRADE_CD = #userGradeCd#
-             , C_JOIN_STATE_CD = #joinStateCd#
-             , C_PWD_FIND_QUESTION_CD = #pwdFindQuestionCd#
-             , C_PASSWORD = #password#
-             , C_EMAIL = #email#
-             , C_LOGIN_FAILURE_CNT = #loginFailureCnt#
-             , C_PWD_FIND_ANSWER = #pwdFindAnswer#
-             , C_MAILING_SERVICE_USE_FL = #mailingServiceUseFl#
-             , C_INDI_INFO_OPEN_FL = #indiInfoOpenFl#
-             , C_JOIN_DT = #joinDt#
-             , C_PASSWORD_CHANGE_DT = #passwordChangeDt#
-             , C_HOMEPAGE_URL = #homepageUrl#
-             , C_BLOG_URL = #blogUrl#
-             , C_SIGN = #sign#
-             , C_PROFILE_PHOTO = #profilePhoto#
-             , C_IMAGE_ICON = #imageIcon#
+        <include refid="getExtensionColumnsForUpdate" />
          WHERE C_ID = #c_id#
     </update>
 

@@ -103,4 +103,11 @@ public interface UserService {
      * @return 비밀번호찾기질문 DTO List
      */
     List<PasswordFindQuestion> getPasswordFindQuestions() throws Exception;
+    
+    /**
+     * 회원정보를 수정한다.
+     * 
+     * @param user 회원 DTO
+     */
+    void modifyUserInfo(User user) throws Exception;
 }

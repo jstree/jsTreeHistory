@@ -24,6 +24,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import standard.mvc.component.business.baroboard.user.dao.UserDao;
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.GeneralSettingService;
@@ -200,5 +201,39 @@ public class UserServiceImpl implements UserService {
         passwordFindQuestion.setC_id(2);
         
         return coreService.getChildNode(passwordFindQuestion);
+    }
+    
+    @Override
+    public void modifyUserInfo(User user) throws Exception {
+        
+        String encryptedCurrentPassword = encryptPassword(user.getCurrentPassword());
+        
+        User userStored = coreService.getNode(user);
+        
+        if (! user.getEmail().equals(userStored.getEmail()) ) {
+            throw new RuntimeException("bb.com.error.003");
+        }
+        
+        if (! encryptedCurrentPassword.equals(userStored.getPassword()) ) {
+            throw new RuntimeException("bb.com.error.004");
+        }
+        
+        if (! StringUtils.isEmpty(user.getPassword())) {
+            
+            if (! user.getPassword().equals(user.getPasswordConfirm())) {
+                throw new RuntimeException("bb.com.error.005");
+            }
+            
+            userStored.setPassword( encryptPassword(user.getPassword()) );
+        }
+        
+        userStored.setPwdFindQuestionCd( user.getPwdFindQuestionCd() );
+        userStored.setPwdFindAnswer( user.getPwdFindAnswer() );
+        userStored.setC_title( user.getC_title() );
+        userStored.setMailingServiceUseFl( user.getMailingServiceUseFl() );
+        userStored.setIndiInfoOpenFl( user.getIndiInfoOpenFl() );
+        userStored.setPasswordChangeDt( new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) );
+        
+        coreService.alterNode(userStored);
     }
 }

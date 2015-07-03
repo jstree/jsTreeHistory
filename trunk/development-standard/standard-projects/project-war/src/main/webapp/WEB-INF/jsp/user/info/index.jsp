@@ -37,79 +37,28 @@ select {
 }
 </style>
 <script type="text/javascript">
-var join = {
+var userInfo = {
     
-    emailDuplicaionChecked : false,
-    uniqueEmail : false,
+    nickname : '${user.c_title}',
+    
     passwordSecurityLevelCd : '${generalSetting.passwordSecurityLevelCd}',
     nicknameDuplicaionChecked : false,
     uniqueNickname : false,
     
     init : function() {
-        join.handleEvent();
+        userInfo.handleEvent();
     },
     
     handleEvent : function() {
         
-        (function onChangeEmail() {
-            
-            var $emails = $('#frmJoin').find('input[name="emailAccount"], input[name="emailHost"]');
-            
-            $emails.on('change paste keyup', function(e) {
-                
-                join.emailDuplicaionChecked = false;
-                join.uniqueEmail = false;
-            });
-        })();
-        
         (function onChangeNickname() {
             
-            var $nickname = $('#frmJoin input[name="c_title"]');
+            var $nickname = $('#frmUserInfo input[name="c_title"]');
             
             $nickname.on('change paste keyup', function(e) {
                 
-                join.nicknameDuplicaionChecked = false;
-                join.uniqueNickname = false;
-            });
-        })();
-        
-        (function onClickEmailDuplicationCheckButton() {
-            
-            $('#btnEmailDuplicationCheck').on('click', function() {
-                
-                if ( !join.validateEmailFormFields() ) {
-                    return false;
-                }
-                
-                var $form = $('#frmJoin');
-                var emailAccount = $form.find('input[name="emailAccount"]').val();
-                var emailHost = $form.find('input[name="emailHost"]').val();
-                
-                var param = {
-                    email : emailAccount + '@' + emailHost
-                };
-                
-                callAjax(null
-                       , 'isDuplicateEmail.do'
-                       , null
-                       , 'post'
-                       , 'json'
-                       , param
-                       , 'application/json'
-                       , callback);
-                 
-                 function callback(r) {
-                     
-                     if (r.status) {
-                         join.emailDuplicaionChecked = false;
-                         join.uniqueEmail = false;
-                         alert('중복된 이메일입니다. 다시 입력해주세요.');
-                     } else {
-                         join.emailDuplicaionChecked = true;
-                         join.uniqueEmail = true;
-                         alert('사용할 수 있는 이메일입니다.');
-                     }
-                 }
+                userInfo.nicknameDuplicaionChecked = false;
+                userInfo.uniqueNickname = false;
             });
         })();
         
@@ -117,11 +66,11 @@ var join = {
             
             $('#btnNicknameDuplicationCheck').on('click', function() {
                 
-                var $nickname = $('#frmJoin input[name="c_title"]');
+                var $nickname = $('#frmUserInfo input[name="c_title"]');
                 
                 var nickname = $nickname.val();
                 
-                if (!join.validateNicknameFormField(nickname)) {
+                if (!userInfo.validateNicknameFormField(nickname)) {
                     $nickname.focus();
                     return false;
                 }
@@ -142,12 +91,12 @@ var join = {
                  function callback(r) {
                      
                      if (r.status) {
-                         join.nicknameDuplicaionChecked = false;
-                         join.uniqueNickname = false;
+                         userInfo.nicknameDuplicaionChecked = false;
+                         userInfo.uniqueNickname = false;
                          alert('중복된 닉네임입니다. 다시 입력해주세요.');
                      } else {
-                         join.nicknameDuplicaionChecked = true;
-                         join.uniqueNickname = true;
+                         userInfo.nicknameDuplicaionChecked = true;
+                         userInfo.uniqueNickname = true;
                          alert('사용할 수 있는 닉네임입니다.');
                      }
                  }
@@ -156,15 +105,15 @@ var join = {
         
         (function onSubmitOfJoinForm() {
             
-            var $form = $('#frmJoin');
+            var $form = $('#frmUserInfo');
             
             $form.on('submit', function() {
                 
-                if (!join.validateFormFields()) {
+                if (!userInfo.validateFormFields()) {
                     return false;
                 }
                 
-                if (!confirm('가입하시겠습니까?')) {
+                if (!confirm('회원정보를 수정 하시겠습니까?')) {
                     return false;
                 }
                 
@@ -180,8 +129,7 @@ var join = {
                 function callback(r) {
                     
                     if (r.status) {
-                        alert('저장되었습니다.');
-                        location.href = '<c:url value="/user/login/index.do" />';
+                        alert('수정되었습니다.');
                     }
                 }
                 
@@ -190,40 +138,42 @@ var join = {
         })();
     },
     
-    validateEmailFormFields : function() {
+    validatePasswordFormField : function($password) {
         
-        var $form = $('#frmJoin');
+        var password = $password.val();
         
-        var $emailAccount = $form.find('input[name="emailAccount"]');
-        var emailAccount = $emailAccount.val();
-        
-        if (! $.trim(emailAccount) ) {
-            alert('이메일 주소를 입력해주세요.');
-            $emailAccount.focus();
-            return false;
+        if ($password.prop('name') == 'currentPassword') {
+            
+            if (! $.trim(password) ) {
+                alert('비밀번호를 입력해주세요.');
+                $password.focus();
+                return false;
+            }
         }
         
-        var emailAccountRegExp = /^([\w\.-]+)$/;
-        if ( ! emailAccountRegExp.test(emailAccount) ) {
-            alert('이메일 주소가 올바르지 않습니다.');
-            $emailAccount.focus();
-            return false;
-        }
-        
-        var $emailHost = $form.find('input[name="emailHost"]');
-        var emailHost = $emailHost.val();
-        
-        if (! $.trim(emailHost) ) {
-            alert('이메일 주소를 입력해주세요.');
-            $emailHost.focus();
-            return false;
-        }
-        
-        var emailHostRegExp = /^([a-z\d\.-]+)\.([a-z\.]{2,6})$/;
-        if ( ! emailHostRegExp.test(emailHost) ) {
-            alert('이메일 주소가 올바르지 않습니다.');
-            $emailHost.focus();
-            return false;
+        if (password.length > 0) {
+            
+            if (userInfo.passwordSecurityLevelCd == 3) {
+                if (password.length < 4) {
+                    alert('비밀번호를 4자 이상 입력해주세요.');
+                    $password.focus();
+                    return false;
+                }
+            }
+            else if (userInfo.passwordSecurityLevelCd == 4) {
+                if ( ! /^(?=\w{6,}$)(?=.*\d)(?=.*[a-zA-Z]).*/.test(password) ) {
+                    alert('비밀번호를 6자 이상, 영문자/숫자 조합하여 입력해주세요.');
+                    $password.focus();
+                    return false;
+                }
+            }
+            else if (userInfo.passwordSecurityLevelCd == 5) {
+                if ( ! /^(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*\(\)-_+=]).*$/.test(password) ) {
+                    alert('비밀번호를 8자 이상, 영문자/숫자/특수문자를 조합하여 입력해주세요.');
+                    $password.focus();
+                    return false;
+                }
+            }
         }
         
         return true;
@@ -243,56 +193,25 @@ var join = {
     
     validateFormFields : function() {
         
-        var $form = $('#frmJoin');
+        var $form = $('#frmUserInfo');
         
-        if ( !join.validateEmailFormFields() ) {
-            return false;
-        }
+        var $currentPassword = $form.find('input[name="currentPassword"]');
         
-        if (!join.emailDuplicaionChecked) {
-            alert('이메일 중복체크 버튼을 눌러 중복된 이메일인지 확인해주세요.');
-            return false;
-        } 
-        else if (!join.uniqueEmail) {
-            alert('이메일 중복체크 버튼을 눌러 중복된 이메일인지 확인해주세요.');
+        if (! userInfo.validatePasswordFormField($currentPassword) ) {
             return false;
         }
         
         var $password = $form.find('input[name="password"]');
         var password = $password.val();
         
-        if (! $.trim(password) ) {
-            alert('비밀번호를 입력해주세요.');
-            $password.focus();
+        if (! userInfo.validatePasswordFormField($password) ) {
             return false;
-        }
-        
-        if (join.passwordSecurityLevelCd == 3) {
-            if (password.length < 4) {
-                alert('비밀번호를 4자 이상 입력해주세요.');
-                $password.focus();
-                return false;
-            }
-        }
-        else if (join.passwordSecurityLevelCd == 4) {
-            if ( ! /^(?=\w{6,}$)(?=.*\d)(?=.*[a-zA-Z]).*/.test(password) ) {
-                alert('비밀번호를 6자 이상, 영문자/숫자 조합하여 입력해주세요.');
-                $password.focus();
-                return false;
-            }
-        }
-        else if (join.passwordSecurityLevelCd == 5) {
-            if ( ! /^(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*\(\)-_+=]).*$/.test(password) ) {
-                alert('비밀번호를 8자 이상, 영문자/숫자/특수문자를 조합하여 입력해주세요.');
-                $password.focus();
-                return false;
-            }
         }
         
         var $passwordConfirm = $form.find('input[name="passwordConfirm"]');
         var passwordConfirm = $passwordConfirm.val();
         
-        if (! $.trim(passwordConfirm) || password != passwordConfirm) {
+        if (passwordConfirm != password) {
             alert('비밀번호를 동일하게 한 번 더 입력해주세요.');
             $passwordConfirm.focus();
             return false;
@@ -310,18 +229,21 @@ var join = {
         var $nickname = $form.find('input[name="c_title"]');
         var nickname = $nickname.val();
         
-        if ( !join.validateNicknameFormField(nickname) ) {
+        if ( !userInfo.validateNicknameFormField(nickname) ) {
             $nickname.focus();
             return false;
         }
         
-        if (!join.nicknameDuplicaionChecked) {
-            alert('닉네임 중복체크 버튼을 눌러 중복된 닉네임인지 확인해주세요.');
-            return false;
-        }
-        else if (!join.uniqueNickname) {
-            alert('닉네임 중복체크 버튼을 눌러 중복된 닉네임인지 확인해주세요.');
-            return false;
+        if (userInfo.nickname != nickname) {
+            
+            if (!userInfo.nicknameDuplicaionChecked) {
+                alert('닉네임 중복체크 버튼을 눌러 중복된 닉네임인지 확인해주세요.');
+                return false;
+            }
+            else if (!userInfo.uniqueNickname) {
+                alert('닉네임 중복체크 버튼을 눌러 중복된 닉네임인지 확인해주세요.');
+                return false;
+            }
         }
         
         // 홈페이지
@@ -337,7 +259,7 @@ var join = {
 };
 
 $(document).ready(function() {
-    join.init();
+    userInfo.init();
 });
 </script>
 </head>
@@ -353,13 +275,30 @@ $(document).ready(function() {
     <article>
         <div class="clearfix">
             <div class="container bm-remove">
-            <form id="frmJoin" action="join.do" method="post">
+            <form id="frmUserInfo" action="modify.do" method="post">
                 <div>
                     <label>
                                            이메일 주소<span class="essential">*</span>
-                        <input name="emailAccount" type="text" placeholder="64자리 이하의 이메일 형식 문자" value="${user.emailAccount}" style="width:210px" />@
-                        <input name="emailHost" type="text" placeholder="255자리 이하의 이메일 형식 문자" value="${user.emailHost}" style="width:220px" />
-                        <button id="btnEmailDuplicationCheck" type="button" class="compact">중복체크</button>
+                        <input name="emailAccount" type="text" value="${user.emailAccount}" readonly="readonly" style="width:210px" />@
+                        <input name="emailHost" type="text" value="${user.emailHost}" readonly="readonly" style="width:220px" />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                                           현재 비밀번호<span class="essential">*</span>
+                        <input name="currentPassword" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                                           새 비밀번호
+                        <input name="password" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                                           새 비밀번호 확인
+                        <input name="passwordConfirm" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
                     </label>
                 </div>
                 <div>
@@ -402,6 +341,7 @@ $(document).ready(function() {
                 <div class="divButtons">
                     <button type="submit" class="compact">수정하기</button>
                 </div>
+                <input name="c_id" type="hidden" value="${user.c_id}" />
             </form>
             </div>
         </div>

@@ -15,14 +15,28 @@
  */
 package standard.mvc.component.business.baroboard.user.controller;
 
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.GeneralSettingService;
 import standard.mvc.component.business.baroboard.user.service.UserService;
 import standard.mvc.component.business.baroboard.user.vo.User;
+
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
  * Modification Information
@@ -46,14 +60,24 @@ import standard.mvc.component.business.baroboard.user.vo.User;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends GenericAbstractController {
     
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private GeneralSettingService generalSettingService;
+    
+    @Override
+    public Map<String, Map<String, Object>> bindTypes() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
     @RequestMapping(value = "/info/index.do", method = RequestMethod.GET)
     public String userInfoIndex(ModelMap model, User user) throws Exception {
         
+        model.addAttribute("generalSetting", generalSettingService.getGeneralSetting());
         model.addAttribute("passwordFindQuestions", userService.getPasswordFindQuestions());
         
         User userStored = userService.findUserByEmail(user);
@@ -66,5 +90,82 @@ public class UserController {
         model.addAttribute("user", userStored);
         
         return "/jsp/user/info/index";
+    }
+    
+    @RequestMapping(value = "/info/isDuplicateEmail.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String isDuplicateEmail(@RequestBody User user) throws Exception {
+        
+        if ( userService.isDuplicateEmail(user) ) {
+            user.setStatus(1);
+        } else {
+            user.setStatus(0);
+        }
+        
+        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+            
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                
+                if ("status".equals(f.getName())) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return false;
+            }
+            
+        }).create();
+        
+        return gson.toJson(user);
+    }
+    
+    @RequestMapping(value = "/info/isDuplicateNickname.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String isDuplicateNickname(@RequestBody User user) throws Exception {
+        
+        if ( userService.isDuplicateNickname(user) ) {
+            user.setStatus(1);
+        } else {
+            user.setStatus(0);
+        }
+        
+        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+            
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                
+                if ("status".equals(f.getName())) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return false;
+            }
+            
+        }).create();
+        
+        return gson.toJson(user);
+    }
+    
+    @RequestMapping(value = "/info/modify.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String modifyUserInfo(@Valid User user) throws Exception {
+        
+        // TODO 류강하 : 세션 정보와 일치하는지 확인
+        
+        user.setEmail(user.getEmailAccount() + "@" + user.getEmailHost());
+        
+        userService.modifyUserInfo(user);
+        
+        return "{ \"status\" : \"1\" }";
     }
 }

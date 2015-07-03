@@ -298,4 +298,30 @@ public class UserServiceTest extends DbUnitTest<User> {
         assertThat(passwordFindQuestion.getC_title(), is(equalTo("가장 좋아하는 음식은")));
         assertThat(passwordFindQuestion.getC_type(), is(equalTo("default")));
     }
+    
+    @Ignore
+    @Test
+    @DatabaseSetup("UserServiceTest.xml")
+    @ExpectedDatabase(value = "UserServiceTest_modifyUserInfo_passwordNotChanged.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
+    public void modifyUserInfo_passwordNotChanged() throws Exception {
+        
+        User user = new User();
+        user.setC_id(3);
+        user.setEmail("admin@313.co.kr");
+        user.setCurrentPassword("abracadabra");
+        user.setPwdFindQuestionCd(5);
+        user.setPwdFindAnswer("계란 후라이");
+        user.setC_title("밥바이쥐");
+        user.setMailingServiceUseFl("0");
+        user.setIndiInfoOpenFl("0");
+        
+        userService.modifyUserInfo(user);
+    }
+    
+    @Ignore
+    @Test
+    public void modifyUserInfo_passwordChanged() throws Exception {
+        
+        
+    }
 }

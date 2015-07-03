@@ -90,7 +90,7 @@ var join = {
                 };
                 
                 callAjax(null
-                       , 'isDuplicateEmail.do'
+                       , '${pageContext.request.contextPath}/user/info/isDuplicateEmail.do'
                        , null
                        , 'post'
                        , 'json'
@@ -131,7 +131,7 @@ var join = {
                 };
                 
                 callAjax(null
-                       , 'isDuplicateNickname.do'
+                       , '${pageContext.request.contextPath}/user/info/isDuplicateNickname.do'
                        , null
                        , 'post'
                        , 'json'

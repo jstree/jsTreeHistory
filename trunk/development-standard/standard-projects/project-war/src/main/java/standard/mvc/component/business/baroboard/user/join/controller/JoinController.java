@@ -22,7 +22,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,12 +29,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.GeneralSettingService;
 import standard.mvc.component.business.baroboard.user.service.UserService;
 import standard.mvc.component.business.baroboard.user.vo.User;
-
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
 /**
@@ -81,70 +74,6 @@ public class JoinController extends GenericAbstractController {
         model.addAttribute("passwordFindQuestions", userService.getPasswordFindQuestions());
         
         return "/jsp/user/join/index";
-    }
-    
-    @RequestMapping(value = "/isDuplicateEmail.do", method = RequestMethod.POST)
-    @ResponseBody
-    public String isDuplicateEmail(@RequestBody User user) throws Exception {
-        
-        if ( userService.isDuplicateEmail(user) ) {
-            user.setStatus(1);
-        } else {
-            user.setStatus(0);
-        }
-        
-        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
-            
-            @Override
-            public boolean shouldSkipField(FieldAttributes f) {
-                
-                if ("status".equals(f.getName())) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public boolean shouldSkipClass(Class<?> clazz) {
-                return false;
-            }
-            
-        }).create();
-        
-        return gson.toJson(user);
-    }
-    
-    @RequestMapping(value = "/isDuplicateNickname.do", method = RequestMethod.POST)
-    @ResponseBody
-    public String isDuplicateNickname(@RequestBody User user) throws Exception {
-        
-        if ( userService.isDuplicateNickname(user) ) {
-            user.setStatus(1);
-        } else {
-            user.setStatus(0);
-        }
-        
-        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
-            
-            @Override
-            public boolean shouldSkipField(FieldAttributes f) {
-                
-                if ("status".equals(f.getName())) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public boolean shouldSkipClass(Class<?> clazz) {
-                return false;
-            }
-            
-        }).create();
-        
-        return gson.toJson(user);
     }
     
     @RequestMapping(value = "/join.do", method = RequestMethod.POST)

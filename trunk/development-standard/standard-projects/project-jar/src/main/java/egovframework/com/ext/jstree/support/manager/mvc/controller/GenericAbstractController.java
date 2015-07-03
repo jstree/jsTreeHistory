@@ -103,9 +103,10 @@ public abstract class GenericAbstractController
             
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("result", false);
-            map.put("message",
-                    egovMessageSource.getMessage(ex.getMessage(),
-                                              ex.getStackTrace(), "", request));
+//            map.put("message",
+//                    egovMessageSource.getMessage(ex.getMessage(),
+//                                              ex.getStackTrace(), "", request));
+            map.put("message", egovMessageSource.getMessage(ex.getMessage()));
             
             Gson gson = new GsonBuilder().serializeNulls().create();
             out.println(gson.toJson(map));
@@ -166,9 +167,11 @@ public abstract class GenericAbstractController
             
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("result", false);
-            map.put("message",
-                    egovMessageSource.getMessage(ex.getMessage(),
-                                              ex.getStackTrace(), "", request));
+//            map.put("message",
+//                    egovMessageSource.getMessage(ex.getMessage(),
+//                                              ex.getStackTrace(), "", request));
+            
+            map.put("message", egovMessageSource.getMessage(ex.getMessage()));
             
             Gson gson = new GsonBuilder().serializeNulls().create();
             out.println(gson.toJson(map));
