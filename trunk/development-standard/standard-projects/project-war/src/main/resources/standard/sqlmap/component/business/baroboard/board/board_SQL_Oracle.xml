@@ -34,8 +34,7 @@
 		ORDER BY A.C_POSITION ASC
 	</sql>
 	
-	<select id="getChildNode" parameterClass="Article"
-		resultClass="Article">
+	<select id="getChildNode" parameterClass="Article" resultClass="Article">
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user fields */
@@ -508,9 +507,6 @@
 				</isEqual>
 				<isEqual property="type" compareValue="nickName">
 				AND B.C_TITLE = #searchKeyword#
-				</isEqual>
-				<isEqual property="type" compareValue="date_rage">
-				
 				</isEqual>
 			ORDER BY A.C_ID DESC
 		</dynamic>

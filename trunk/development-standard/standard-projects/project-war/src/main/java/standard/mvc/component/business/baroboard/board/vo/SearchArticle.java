@@ -30,7 +30,6 @@ public class SearchArticle extends ComprehensiveTree {
 	public static final String TYPE_TITLE_CONTENT = "title_content";
 	public static final String TYPE_NICKNAME = "nickName";
 	public static final String TYPE_USER_ID = "user_id";
-	public static final String TYPE_DATE_RANGE = "date_range";
 
 	/**
 	 * 검색 키워드

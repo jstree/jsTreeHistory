@@ -157,7 +157,6 @@ $(document).ready(function(){
 												<option value="content">내용</option>
 												<option value="title_content">제목+내용</option>
 												<option value="nickName">닉네임</option>
-												<option value="date_range">기간</option>
 											</select>
 											<input type="hidden" name="boardID" value="${boardID}" />
 											<input type="submit" value="검색"/>
