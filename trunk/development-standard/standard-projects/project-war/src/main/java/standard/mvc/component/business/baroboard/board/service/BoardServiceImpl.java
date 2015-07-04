@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.board.dao.BoardDao;
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
@@ -127,22 +128,38 @@ public class BoardServiceImpl implements BoardService {
 		Article result = null;
 		article.setContent(this.unescapeHtml(article.getContent()));
 		
-		Date today = new Date();
-		String formattedDate = DateFormatUtils.format(today, "yyyyMMddHHmmss");
-		article.setModDt(formattedDate);
+		
+		article.setModDt(this.getTodayFor14Digits());
 		int resultInt = boardDao.modifyArticle(article);  
 		if(resultInt == 1){
 			result = article;
 		}
 		
-		logger.debug("JKH: resultInt");
-		logger.debug(resultInt+"");
 		return result;
 		
 	}
 
 	private int countUpViewCnt(Article article) throws Exception {
 		return boardDao.countUpViewCnt(article);
+	}
+	
+	@Override
+	public Comment addComment(Comment comment) throws Exception {
+		comment.setC_type("folder");
+		comment.setArticleID(23); // TODO : FOR TEST ONLY
+		
+		comment.setRegDT(this.getTodayFor14Digits());
+		Comment insertedComment = null;
+		
+		if("1".equals(comment.getIsRoot())) {
+			comment.setRef(2);
+			insertedComment = coreService.addNode(comment);
+			insertedComment.setC_id(insertedComment.getId());
+			boardDao.updateCommentRootID(comment);
+			
+		} else {
+		}
+		return insertedComment;
 	}
 
 	/** DB에 저장되어있는 20150601063125 형식의 날짜형식을 2015-06-01 형식으로 바꿔줌 */
@@ -187,9 +204,16 @@ public class BoardServiceImpl implements BoardService {
 		
 		article.setContent(this.unescapeHtml(article.getContent()));
 		
+		
+		article.setRegDt(this.getTodayFor14Digits());
+	}
+	
+	private String getTodayFor14Digits() {
 		Date today = new Date();
 		String formattedDate = DateFormatUtils.format(today, "yyyyMMddHHmmss");
-		article.setRegDt(formattedDate);
+		return formattedDate;
 	}
+
+	
 
 }

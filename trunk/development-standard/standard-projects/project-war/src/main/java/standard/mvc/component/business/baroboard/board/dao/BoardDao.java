@@ -3,6 +3,7 @@ package standard.mvc.component.business.baroboard.board.dao;
 import java.util.List;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
@@ -44,5 +45,7 @@ public interface BoardDao {
 	public int modifyArticle(Article article) throws Exception;
 
 	public int updateRootArticleID(Article article) throws Exception;
-	
+
+	public int updateCommentRootID(Comment comment) throws Exception;
+
 }

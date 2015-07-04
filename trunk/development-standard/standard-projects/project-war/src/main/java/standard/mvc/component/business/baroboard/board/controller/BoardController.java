@@ -3,8 +3,6 @@ package standard.mvc.component.business.baroboard.board.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.board.service.BoardService;
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.manage.user.service.UserManageService;
 import standard.mvc.component.business.baroboard.user.vo.User;
@@ -178,6 +177,14 @@ public class BoardController extends GenericAbstractController {
 	public String sendNotePopup(ModelMap modelMap) throws Exception {
 		/* TODO : 쪽지기능 완성시 서비스 붙이기 */
 		return "/jsp/board/sendNotePopup";
+	}
+	
+	@RequestMapping(value = "/addComment.do")
+	@ResponseBody
+	public Comment addComment(@ModelAttribute Comment comment) throws Exception {
+		
+		return boardService.addComment(comment);
+		
 	}
 	
 }

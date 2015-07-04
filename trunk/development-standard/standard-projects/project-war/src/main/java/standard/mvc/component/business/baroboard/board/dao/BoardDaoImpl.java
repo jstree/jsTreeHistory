@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
@@ -85,4 +86,11 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 	public int updateRootArticleID(Article article) throws Exception {
 		return update(article.getSqlMapSelector() + "." + "updateRootArticleID", article);
 	}
+
+	@Override
+	public int updateCommentRootID(Comment comment) throws Exception {
+		return update(comment.getSqlMapSelector() + "." + "updateCommentRootID", comment);
+		
+	}
+
 }

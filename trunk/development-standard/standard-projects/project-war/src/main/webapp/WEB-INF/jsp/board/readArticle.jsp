@@ -11,6 +11,7 @@
 </script>
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css" media="all" />
 <style>
+
 /* Article Header */
 div#articleHeader {
 	overflow: hidden;
@@ -44,33 +45,46 @@ div#articleContent {
 }
 
 /* Comment */
+div.rdc-detail {
+	margin-bottom: 10px;
+}
+div.rdc-header > span {
+	padding-right : 10px;
+}
+
+span.rdc-reg-id {
+	 font-weight: bold;
+}
+span.rdc-reg-date {
+}
+
 
 /* Comment Write */
-div#writeComment {
+div.write-comment {
 	overflow: hidden;
 }
 
-div#writeComment > div {
+div.write-comment > div {
 	
 	float: left;
 }
 
-div#commentHeader {
+div.write-comment-header {
 	width: 20%;
 	text-align: center;
 }
 
-div#commentBody {
+div.write-comment-body {
 	width: 50%;
 }
 
-textarea#commentInput {
+textarea.write-comment-input {
 	
 	display: inline;
 	width: 300px !important;
 	height: 70px !important;
 }
-div#commentBtn {
+div.write-comment-btn {
 	width: 20%;
 }
 
@@ -85,7 +99,6 @@ div#articleAction span {
 div#articleAction span a {
 	margin: 0 10px;
 }
-
 
 </style>
 <script>
@@ -195,6 +208,7 @@ $(document).ready(function(){
 							<div class="tablet-mobile alpha bm-remove last">
 								<!-- 제목 날짜 첨부 -->
 								<div id="articleHeader" class="">
+									<input id="articleID" type="hidden" value="${article.c_id}" />
 									<span id="articleTitle"><h3>${article.c_title}</h3></span> 
 									<span id="articleInfo">
 										<span id="firstInfoRow">
@@ -214,18 +228,58 @@ $(document).ready(function(){
 								</div>
 								<!-- 댓글 -->
 								<div id="comment">
+									<div class="rdc-detail">
+										<div class="rdc-header">
+											<span class="rdc-reg-id">저에요</span>
+											<span class="rdc-reg-date">2015-07-05 12:11:30</span>
+											<span><a href="">답글달기</a></span>
+											<span><a href="">삭제</a></span>
+										</div>
+										<div class="rdc-body"><p>내용입니다.</p></div>
+									</div>
+									<div style="padding-left: 20px;" class="rdc-detail">
+										<div class="rdc-header">
+											<span class="rdc-reg-id">테스트2</span>
+											<span class="rdc-reg-date">2015-07-05 12:11:30</span>
+											<span><a href="">답글달기</a></span>
+											<span><a href="">삭제</a></span>
+										</div>
+										<div class="rdc-body"><p>답리플1</p></div>
+									</div>
+									
+									<!-- 댓글작성 -->
+									<div class="write-comment">
+										<div class="write-comment-header">
+											<div>댓글작성</div>
+											<div>
+												<input class="author-only" type="checkbox" name="authorOnly">
+												<label for="authorOnly">글쓴이만 보기</label>
+											</div>
+										</div>
+										<div class="write-comment-body"><textarea class="write-comment-input"></textarea></div>
+										<div class="write-comment-btn"><button>등록</button></div>								
+									</div>
+									<div style="padding-left: 20px;" class="rdc-detail">
+										<div class="rdc-header">
+											<span class="rdc-reg-id">테스트2</span>
+											<span class="rdc-reg-date">2015-07-05 12:11:30</span>
+											<span><a href="">답글달기</a></span>
+											<span><a href="">삭제</a></span>
+										</div>
+										<div class="rdc-body"><p>글쓴이만 보이는 코멘트입니다.</p></div>
+									</div>
 								</div>
 								<!-- 댓글작성 -->
-								<div id="writeComment">
-									<div id="commentHeader">
+								<div id="writeRootCommentDiv" class="write-comment">
+									<div class="write-comment-header">
 										<div>댓글작성</div>
 										<div>
-											<input id="authorOnly" type="checkbox" name="authorOnly">
+											<input class="author-only" type="checkbox" name="authorOnly">
 											<label for="authorOnly">글쓴이만 보기</label>
 										</div>
 									</div>
-									<div id="commentBody"><textarea id="commentInput"></textarea></div>
-									<div id="commentBtn"><button>등록</button></div>								
+									<div class="write-comment-body"><textarea class="write-comment-input"></textarea></div>
+									<div class="write-comment-btn"><button onclick="addComment(this, 'root')">등록</button></div>								
 								</div>
 								<!-- 하단 Action 칸 -->
 								<div id="articleAction">
@@ -243,5 +297,49 @@ $(document).ready(function(){
 			</div>
 		</article>
 	</section>
+	<script>
+	function addComment(btn, type) {
+		
+		var commentDiv = $(btn).parent('div').closest('.write-comment');
+		var viewOnlyRegIDFL = $(commentDiv).find('.author-only').is(":checked") ? '1' : '0';
+		var c_title = $(commentDiv).find('.write-comment-input').val();
+		var articleID = $('#articleID').val();
+		var obj = {
+				articleID: articleID,
+				viewOnlyRegIDFL: viewOnlyRegIDFL,
+				c_title: c_title
+		};
+		
+		if(c_title == '') {
+			alert('코멘트 내용을 입력해주세요.');
+			return;
+		}
+		
+		if(type == 'root') {
+			obj.isRoot = '1';
+			
+			
+			console.log(obj);
+			
+		} else {
+			obj.isRoot = '0';
+
+			console.log(obj);
+		}	
+		
+		$.ajax({
+	   		  url: '${pageContext.request.contextPath}/board/addComment.do',
+	   		  method: 'POST',
+	   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	   		  data: obj,
+	   		}).done(function(data){
+	   			alert('저장되었습니다.');
+				window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+ articleID;
+	   		}).fail(function(data){
+	   			alert('저장에 실패하였습니다.');
+	   			console.log(data); 
+	   		})
+	}
+	</script>
 </body>
 </html>

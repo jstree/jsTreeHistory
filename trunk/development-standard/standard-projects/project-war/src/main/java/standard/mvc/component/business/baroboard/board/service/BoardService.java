@@ -3,6 +3,7 @@ package standard.mvc.component.business.baroboard.board.service;
 import java.util.List;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
@@ -123,6 +124,15 @@ public interface BoardService {
 	 * 
 	 */
 	public Article modifyArticle(Article article) throws Exception;
+
+	
+	/**
+	 * 코멘트를 추가한다.
+	 * @param comment
+	 * @return comment
+	 * @throws Exception
+	 */
+	public Comment addComment(Comment comment) throws Exception;
 
 	
 	
