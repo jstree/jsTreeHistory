@@ -96,6 +96,7 @@
 		UPDATE T_BOARD_TEST
 		SET C_TYPE = #c_type#
 			, C_TITLE = #c_title#
+			, C_ROOT_ARTICLE_ID = #rootArticleID#
 			, C_REG_ID = #regId# 			
 			, C_CONTENT = #content# 
 			, C_ALLOW_TRACKBACK_FL = #allowTrackbackFL#			
@@ -118,6 +119,7 @@
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user fields */
+			, A.C_ROOT_ARTICLE_ID as rootArticleID
 			, A.C_REG_ID as regId 			
 			, A.C_CONTENT as content 			
 			, A.C_ALLOW_COMMENT_FL as allowCommentFL	
@@ -379,6 +381,7 @@
 		<dynamic>
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
+				, A.C_ROOT_ARTICLE_ID as rootArticleID
 				, A.C_REG_ID as regId 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
@@ -396,10 +399,9 @@
 					SELECT * 
 					FROM T_BOARD_TEST Y
 					WHERE 1=1
-						AND Y.C_LEVEL = 2
-						AND Y.C_OPEN_ARTICLE_FL = '1'
-						AND Y.C_ANNOUNCEMENT_FL = '0'
-					ORDER BY C_ID DESC 
+						AND Y.C_OPEN_ARTICLE_FL = '1'       
+			      	    AND Y.C_ANNOUNCEMENT_FL = '0'   
+			        ORDER BY C_ROOT_ARTICLE_ID DESC, C_LEFT ASC  
 				) Z WHERE ROWNUM &lt;= (#pageNum# * #pageSize#)
 			) A, T_USER_INFO B
 			WHERE 1=1 
@@ -413,6 +415,7 @@
 		<dynamic>
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
+				, A.C_ROOT_ARTICLE_ID as rootArticleID
 				, A.C_REG_ID as regId 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
@@ -447,6 +450,7 @@
 		<dynamic>
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
+				, A.C_ROOT_ARTICLE_ID as rootArticleID
 				, A.C_REG_ID as regId 			
 				, A.C_CONTENT as content 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
@@ -475,6 +479,7 @@
 		<dynamic>
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
+				, A.C_ROOT_ARTICLE_ID as rootArticleID
 				, A.C_REG_ID as regId 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
@@ -516,6 +521,13 @@
 		/* countUpViewCnt */
 		UPDATE T_BOARD_TEST
 		SET C_VIEW_CNT = C_VIEW_CNT + 1
+		WHERE C_ID = #c_id#
+	</update>
+	
+	<update id="updateRootArticleID" parameterClass="Article">
+		/* updateRootArticleID */
+		UPDATE T_BOARD_TEST
+		SET C_ROOT_ARTICLE_ID = C_ID
 		WHERE C_ID = #c_id#
 	</update>
 	

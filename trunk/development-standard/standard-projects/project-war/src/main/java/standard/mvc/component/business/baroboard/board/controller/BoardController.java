@@ -125,11 +125,24 @@ public class BoardController extends GenericAbstractController {
 
 		return "/jsp/board/newArticle";
 	}
+	
+	@RequestMapping(value = "/newReplyArticle.do", method = { RequestMethod.GET })
+	public String newReplyArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
+		Article parentArticle = boardService.getArticleById(article);
+		modelMap.addAttribute("parentArticle", parentArticle);
+		return "/jsp/board/newArticle";
+	}
 
 	@RequestMapping(value = "/submitNewArticle.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Article submitNewArticle(@ModelAttribute Article article) throws Exception {
 		return boardService.addArticle(article);
+	}
+	
+	@RequestMapping(value = "/submitNewReplyArticle.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Article submitNewReplyArticle(@ModelAttribute Article article) throws Exception {
+		return boardService.addReplyArticle(article);
 	}
 
 	@RequestMapping(value = "/modifyArticle.do")

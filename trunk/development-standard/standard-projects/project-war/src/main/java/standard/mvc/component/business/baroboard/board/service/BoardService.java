@@ -86,6 +86,15 @@ public interface BoardService {
 	public Article addArticle(Article article) throws Exception;
 	
 	/**
+	 * 답글을 추가한다.
+	 * 
+	 * @param Article
+	 * @return Article
+	 * @throws Exception
+	 */
+	public Article addReplyArticle(Article article) throws Exception;
+	
+	/**
 	 * 글을 삭제한다.
 	 * 
 	 * @param Article
@@ -114,4 +123,7 @@ public interface BoardService {
 	 * 
 	 */
 	public Article modifyArticle(Article article) throws Exception;
+
+	
+	
 }

@@ -32,13 +32,29 @@
 					<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="article-body rte" itemprop="articleBody">
 							<div class="tablet-mobile alpha bm-remove last">
+							<c:choose>
+								<c:when test="${not empty parentArticle}">
+							<form id="articleForm" action="${pageContext.request.contextPath}/board/submitNewReplyArticle.do" method="post" accept-charset="utf-8">
+								</c:when>
+								<c:otherwise>
 							<form id="articleForm" action="${pageContext.request.contextPath}/board/submitNewArticle.do" method="post" accept-charset="utf-8">
+								</c:otherwise>
+							</c:choose>
 								<div id="titleDiv">
 									<span>
 										<label>제목</label>
 									</span>
 									<span>
-										<input id="articleTitle" name="c_title" type="text" />
+										<c:choose>
+											<c:when test="${not empty parentArticle}">
+											<input id="rootArticleID" name="rootArticleID" type="hidden" value="${parentArticle.rootArticleID}" />
+											<input id="parentArticleID" name="ref" type="hidden" value="${parentArticle.c_id}" />
+											<input id="articleTitle" name="c_title" type="text"	value="RE: ${parentArticle.c_title}" />
+											</c:when>
+											<c:otherwise>
+											<input id="articleTitle" name="c_title" type="text"	/>
+											</c:otherwise>
+										</c:choose>
 									</span>
 									<!-- TODO : Admin일경우 공지선택가능 -->
 									<span id="announceSpan">
@@ -104,6 +120,7 @@ $('#articleForm').on('submit',function(e){
     e.preventDefault();
     CKEDITOR.instances.editor.updateElement();	// CKEditor를 refresh함
     if ($.trim($('#articleTitle').val()) != '') {
+    	
     	$.ajax({
    		  url: this.action,
    		  method: 'POST',

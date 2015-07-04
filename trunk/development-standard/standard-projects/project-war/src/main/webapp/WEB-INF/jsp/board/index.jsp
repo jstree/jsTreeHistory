@@ -119,7 +119,15 @@ $(document).ready(function(){
 											<c:forEach var="article" items="${articleList}" varStatus="status">
 												<tr>
 													<td class="dt-center">${article.c_id}</td>
-													<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
+													<c:choose>
+														<c:when test="${article.c_level == 2}">
+															<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
+														</c:when>
+														<c:otherwise>
+															<td><i style="padding: 0  5px 0 ${ (article.c_level - 2) * 10 }px" class="fa fa-chevron-right"></i><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
+														</c:otherwise>
+													</c:choose>
+													
 													<td class="dt-center"><a class="user-context" data-id="${article.regId}">${article.regNickName}</a></td>
 													<td class="dt-center">${article.regDt}</td>
 													<td class="dt-center">${article.viewCnt}</td>

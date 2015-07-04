@@ -25,6 +25,9 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 public class Article extends ComprehensiveTree {
 
+	/* 루트글 번호 */
+	private int rootArticleID;
+	
 	/* 글쓴이 */
 	private int regId;
 	
@@ -120,6 +123,14 @@ public class Article extends ComprehensiveTree {
 		return "board";
 	}
 
+	public int getRootArticleID() {
+		return rootArticleID;
+	}
+
+	public void setRootArticleID(int rootArticleID) {
+		this.rootArticleID = rootArticleID;
+	}
+	
 	public int getRegId() {
 		return regId;
 	}

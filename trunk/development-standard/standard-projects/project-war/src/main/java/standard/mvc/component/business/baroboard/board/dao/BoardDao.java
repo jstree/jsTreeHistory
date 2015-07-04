@@ -42,5 +42,7 @@ public interface BoardDao {
 	public int countUpViewCnt(Article article) throws Exception;
 
 	public int modifyArticle(Article article) throws Exception;
+
+	public int updateRootArticleID(Article article) throws Exception;
 	
 }

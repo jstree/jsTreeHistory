@@ -80,4 +80,9 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 	public int modifyArticle(Article article) throws Exception {
 		return update(article.getSqlMapSelector() + "." + "modifyArticle", article);
 	}
+
+	@Override
+	public int updateRootArticleID(Article article) throws Exception {
+		return update(article.getSqlMapSelector() + "." + "updateRootArticleID", article);
+	}
 }

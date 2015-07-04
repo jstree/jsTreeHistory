@@ -46,8 +46,6 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
 public class BoardServiceTest {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Resource(name = "BoardService")
 	private BoardService boardService;
 
@@ -67,7 +65,6 @@ public class BoardServiceTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.debug("" + list.size());
 	}
 
 	@Ignore
@@ -81,64 +78,6 @@ public class BoardServiceTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.debug("" + list.size());
-	}
-
-	@Ignore
-	@Test
-	public void addArticle() {
-		Article article = new Article();
-		article.setBoardID("test");
-		article.setBoardID("T_BOARD_" + article.getBoardID());
-
-		article.setRef(2);
-		article.setC_type("default");
-		article.setC_title("전경훈입니다.");
-		article.setContent("<p>내용입니다.<p>");
-		article.setAllowCommentFL("1");
-		article.setAllowReplyFL("1");
-		article.setAlertResponseFL("0");
-		article.setViewCnt(0);
-		article.setRegDt("20150530113147");
-		Article insertedArticle;
-		try {
-			insertedArticle = boardService.addArticle(article);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Ignore
-	@Test
-	public void addArticles() {
-		for (int i = 70; i < 200; i++) {
-
-			Article article = new Article();
-			article.setBoardID("test");
-			article.setBoardID("T_BOARD_" + article.getBoardID());
-
-			article.setRef(2);
-			article.setC_type("default");
-			article.setC_title(i+" 번째테스트글 / 2번째인서트");
-			article.setRegId(1);
-			article.setContent("<p>내용입니다.<p>");
-			article.setAllowCommentFL("1");
-			article.setAllowReplyFL("1");
-			article.setAlertResponseFL("0");
-			article.setOpenArticleFL("1");
-			article.setAnnouncementFL("0");
-			article.setViewCnt(0);
-			article.setIsDeletedFL("0");
-			article.setRegDt("20150503113147");
-			Article insertedArticle;
-			try {
-				insertedArticle = boardService.addArticle(article);
-				logger.debug(i+ " 번째 글 추가 완료");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 }

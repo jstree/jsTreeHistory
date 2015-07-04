@@ -89,19 +89,20 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Article addArticle(Article article) throws Exception {
 		article.setRef(2);
-		article.setC_type("default");
-		article.setRegId(5);	// For Test Only
+		this.setupArticleParameters(article);
 		
-		article.setContent(this.unescapeHtml(article.getContent()));
-		
-		Date today = new Date();
-		String formattedDate = DateFormatUtils.format(today, "yyyyMMddHHmmss");
-		article.setRegDt(formattedDate);
 		Article insertedArticle = coreService.addNode(article);
+		insertedArticle.setC_id(insertedArticle.getId());
+		boardDao.updateRootArticleID(insertedArticle);
 		
 		return insertedArticle;
 	}
-
+	
+	@Override
+	public Article addReplyArticle(Article article) throws Exception {
+		this.setupArticleParameters(article);
+		return coreService.addNode(article);
+	}
 	
 	@Override
 	public Article removeArticle(Article article) throws Exception {
@@ -178,6 +179,17 @@ public class BoardServiceImpl implements BoardService {
 		return StringEscapeUtils.unescapeHtml4(str);
 	}
 	
-	
+	/* 글 추가를 위한 공통 파라미터 설정 */
+	private void setupArticleParameters(Article article) {
+		article.setC_type("default");
+		article.setRegId(23);	// TODO : For Test Only
+		article.setC_type("folder");
+		
+		article.setContent(this.unescapeHtml(article.getContent()));
+		
+		Date today = new Date();
+		String formattedDate = DateFormatUtils.format(today, "yyyyMMddHHmmss");
+		article.setRegDt(formattedDate);
+	}
 
 }
