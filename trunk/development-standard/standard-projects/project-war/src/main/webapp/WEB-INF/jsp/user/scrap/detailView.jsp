@@ -90,13 +90,13 @@ div#articleAction span a {
 </style>
 <script>
 function deleteThisArticle(c_id){
-	if(confirm('게시물을 지우시겠습니까?') == true) {
+	if(confirm('스크랩 게시물을 지우시겠습니까?') == true) {
 		$.ajax({
 			 method: 'GET'
-			,url: '${pageContext.request.contextPath}/board/deleteArticle.do?c_id=' + c_id
+			,url: '${pageContext.request.contextPath}/user/scrap/deleteArticle.do?c_id=' + c_id
 			,success: function(data){
 				alert('삭제하였습니다.');
-				location.href = '${pageContext.request.contextPath}/board/index.do';
+				location.href = '${pageContext.request.contextPath}/user/scrap/index.do';
 			}
 			,fail: function(data) {
 				alert('글 삭제에 실패하였습니다.');
@@ -230,9 +230,9 @@ $(document).ready(function(){
 								<!-- 하단 Action 칸 -->
 								<div id="articleAction">
 									<span>
-										<a href="#" onclick="deleteThisArticle(${article.c_id})">삭제</a>
+										<a href="#" onclick="deleteThisArticle(${article.c_id})">스크랩 삭제</a>
 										<a href="#">답글쓰기</a>
-										<a href="${pageContext.request.contextPath}/board/index.do">목록가기</a>
+										<a href="${pageContext.request.contextPath}/user/scrap/index.do">목록가기</a>
 									</span>
 								</div>
 							</div>

@@ -5,7 +5,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 public class UserScrap extends ComprehensiveTree {
 
     /** 보드아이디 */
-    private int boardId;
+    private String boardId;
     
     /** 사용자 아이디 */
     private int userId;
@@ -23,7 +23,7 @@ public class UserScrap extends ComprehensiveTree {
     private int regID;
     
     /** 작성일시 */
-    private String regDT;
+    private String regDt;
     
     /** 작성자 닉네임 */
     private String nickName;
@@ -47,13 +47,17 @@ public class UserScrap extends ComprehensiveTree {
 	private int pageSize = 10;
 	
 	/** 코멘트개수 */
-	private int commentCount;
+	private int commentCnt;
     
-	public int getBoardId() {
+	public void setRegDt(String regDt) {
+		this.regDt = regDt;
+	}
+
+	public String getBoardId() {
 		return boardId;
 	}
 
-	public void setBoardId(int boardId) {
+	public void setBoardId(String boardId) {
 		this.boardId = boardId;
 	}
 
@@ -77,8 +81,7 @@ public class UserScrap extends ComprehensiveTree {
 		return scrapDt;
 	}
 
-	public void setScrapDt(String
-			scrapDt) {
+	public void setScrapDt(String scrapDt) {
 		this.scrapDt = scrapDt;
 	}
 
@@ -106,12 +109,12 @@ public class UserScrap extends ComprehensiveTree {
 		this.content = content;
 	}
 	
-	public String getRegDT() {
-		return regDT;
+	public String getRegDt() {
+		return regDt;
 	}
 
-	public void setRegDT(String regDT) {
-		this.regDT = regDT;
+	public void setRegDT(String regDt) {
+		this.regDt = regDt;
 	}
 
 	public int getViewCnt() {
@@ -162,17 +165,14 @@ public class UserScrap extends ComprehensiveTree {
 		this.pageSize = pageSize;
 	}
 	
-	public int getCommentCount() {
-		return commentCount;
+	public int getCommentCnt() {
+		return commentCnt;
 	}
 
-	public void setCommentCountt(int commentCount) {
-		this.commentCount = commentCount;
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
 	}
-	
-	public void setCommentCount(int commentCount) {
-		this.commentCount = commentCount;
-	}
+
 
     @Override
     public String getSqlMapSelector() {

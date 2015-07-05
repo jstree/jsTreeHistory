@@ -22,8 +22,6 @@ public class UserScrapServiceImpl implements UserScrapService {
     
 	@Override
 	public List<UserScrap> scrapList(UserScrap userScrap) throws Exception {
-		userScrap.setC_id(userScrap.getC_id());
-        
 		List<UserScrap> scrapList = (List<UserScrap>)userScrapDao.getUserScrapList(userScrap);
         return scrapList;
 	}

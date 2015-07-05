@@ -2,6 +2,7 @@ package standard.mvc.component.business.baroboard.user.scrap.dao;
 
 import java.util.List;
 
+import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
 
 /**
@@ -30,7 +31,8 @@ public interface UserScrapDao {
 	
 	UserScrap getScrapDetailView(UserScrap userScrap) throws Exception;
 
-	int getScrapListTotalCnt(UserScrap userScrap);
+	int getScrapListTotalCnt(UserScrap userScrap) throws Exception;
+	
 }
 
 

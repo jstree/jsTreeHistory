@@ -6,15 +6,22 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import standard.mvc.component.business.baroboard.board.service.BoardService;
+import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.user.scrap.service.UserScrapService;
 import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
 
 /**
  * Modification Information
@@ -43,6 +50,9 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
 public class UserScrapController extends GenericAbstractController {
 
 	@Autowired
+	private BoardService boardService;
+	
+	@Autowired
     private UserScrapService userScrapService;
 	
 	@Override
@@ -53,7 +63,21 @@ public class UserScrapController extends GenericAbstractController {
 
 	@RequestMapping(value = "/index.do", method = {RequestMethod.GET})
 	public String scrapList(ModelMap modelMap, @ModelAttribute UserScrap userScrap) throws Exception{
+		/*
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		SecureUserLogin user = (SecureUserLogin) (authentication == null ? null : authentication.getPrincipal());
+		userScrap.setUserId(user.getUserid());
+		
+		System.out.println("=======================");
+		System.out.println("userId : " + userScrap.getUserId());
+		System.out.println("=======================");
+		//int userId = 0;
+		*/
+		userScrap.setUserId(3);
+		String boardId = userScrap.getBoardId();
 		int totalPageCount = userScrapService.getScrapListTotalCnt(userScrap) / userScrap.getPageSize() + 1;
+		
+		int postingId = userScrap.getPostingId();
 		
 		List<UserScrap> scrapList = userScrapService.scrapList(userScrap); 
 		modelMap.addAttribute("scrapList", scrapList);
@@ -76,34 +100,33 @@ public class UserScrapController extends GenericAbstractController {
 			int rightPage = ((userScrap.getPageNum() - 1) / userScrap.getPageSize() + 1) * 10 + 1;
 			modelMap.addAttribute("rightPage",rightPage);
 		}
+		
+		modelMap.addAttribute("boardId", boardId);
+		
         return "/jsp/user/scrap/index";
 	}
 	
-	@RequestMapping(value = "/getScrapPopup.do")
-	public String getScapDetailView(ModelMap modelMap, @ModelAttribute UserScrap userScrap) throws Exception {
-		UserScrap resultScrap = userScrapService.getScrapDetailView(userScrap);
-		modelMap.addAttribute("userScrap", resultScrap);
-		return "/jsp/user/scrap/getScrapPopup";
-	}
 	
 	@RequestMapping(value = "/delete.do", method = {RequestMethod.GET})
-	public String scapDelete(ModelMap model, UserScrap userScrap) throws Exception {
-		userScrapService.scrapDelete(userScrap);
+	@ResponseBody
+	public String scapDelete(ModelMap model, @ModelAttribute Article article) throws Exception {
+		UserScrap userScrap = new UserScrap();
+		
+		//userScrap.setPostingId(article.getC_id());
+		//coreService.removeNode(userScrap);
 		return "/jsp/user/scrap/index";
 	}
 	
-	/*
-	@RequestMapping(value = "/view.do", method = {RequestMethod.POST})
-	public String scapView(ModelMap model, HttpServletRequest req) throws Exception {
-		return "/jsp/user/scrap/view";
-	}
-	*/
-	
-	
-	
-	@RequestMapping(value = "/save.do", method = {RequestMethod.POST})
-	public String scrapViewDetail(HttpServletRequest req) throws Exception{
+	@RequestMapping(value = "/readScrap.do")
+	public String readArticle(ModelMap modelMap,  UserScrap userScrap) throws Exception {
+		Article article = new Article();
+		article.setC_id(userScrap.getPostingId());
+		article.setBoardID(userScrap.getBoardId());
 		
-        return "/jsp/user/join/login/index";
+		Article targetArticle = boardService.readArticle(article);
+
+		modelMap.addAttribute("article", targetArticle);
+		return "/jsp/user/scrap/detailView";
 	}
+	
 }

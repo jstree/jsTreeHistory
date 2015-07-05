@@ -367,7 +367,7 @@
 				, B.C_TITLE AS nickName
 				/*
 				, (SELECT COUNT(C_ID) FROM T_BOARD_LIKE WHERE C_ARTICLE_ID = A.C_ID) AS likeCount
-				, (SELECT COUNT(C_ID) FROM T_BOARD_COMMENT WHERE C_ARTICLE_ID = A.C_ID ) AS commentCount 
+				, (SELECT COUNT(C_ID) FROM T_BOARD_COMMENT WHERE C_ARTICLE_ID = A.C_ID ) AS commentCnt
 				*/
 			/* 페이징 처리 */	
 			FROM (
@@ -404,4 +404,7 @@
 		 	AND C_LEVEL = 2
 	</select>
 	
+	<delete id="scrapDelete" parameterClass="UserScrap">
+		SELECT * FROM T_USER_SCRAP WHERE C_POSTING_ID = (SELECT C_ID FROM  T_BOARD_TEST WHERE C_ID = #boardId#)
+	</delete>
 </sqlMap>

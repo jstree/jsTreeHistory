@@ -55,13 +55,6 @@ public class UserScrapServiceTest extends DbUnitTest<UserScrap> {
         
         userScrapResult = userScrapList.get(0);
         
-        assertThat(userScrap.getBoardId(),  is(2));
-        assertThat(userScrap.getPostingId(),  is(270));
-        assertThat(userScrap.getScrapDt(),  is(""));
-        assertThat(userScrap.getRegID(),  is(3));
-        assertThat(userScrap.getRegDT(),  is("20150621145724"));
-        assertThat(userScrap.getViewCnt(),  is(0));
-        assertThat(userScrap.getLikeCount(),  is(0));
     }
 	
 	@Test

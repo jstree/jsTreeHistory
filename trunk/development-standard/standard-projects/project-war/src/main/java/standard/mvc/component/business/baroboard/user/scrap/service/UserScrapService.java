@@ -30,26 +30,31 @@ public interface UserScrapService {
 	/**
      * 스크랩 리스트 출력
      * 
-     * @param userRegisterInfo 사용자 입력 가입 정보
-     * @return userRegisterComplateFlag
+     * @param UserScrap 사용자 ID
+     * @return UserScrap List
      */
 	public List<UserScrap> scrapList(UserScrap userScrap) throws Exception;
 	
 	/**
      * 스크랩 상세 정보 가져오기
      * 
-     * @param email 
-     * @return UserRegisterInfo
+     * @param UserScrap
+     * @return UserScrap
      */
 	public UserScrap getScrapDetailView(UserScrap userScrap) throws Exception;
 	
 	/**
      * 스크랩 삭제
      * 
-     * @param title 
-     * @return nickUseVerificationFlag
+     * @param UserScrap postingId 
      */
 	public void scrapDelete(UserScrap userScrap) throws Exception;
 	
+	/**
+     * 스크랩 리스트 카운트
+     * 
+     * @param UserScrap userId 
+     * @return int
+     */
 	public int getScrapListTotalCnt(UserScrap userScrap) throws Exception;
 }

@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 
+
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
+import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
 /**
  * Modification Information
