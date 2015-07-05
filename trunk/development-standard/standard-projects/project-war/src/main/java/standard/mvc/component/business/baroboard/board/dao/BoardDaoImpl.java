@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
-import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 
 /**
@@ -92,5 +91,12 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 		return update(comment.getSqlMapSelector() + "." + "updateCommentRootID", comment);
 		
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Comment> getCommentList(Comment comment) throws Exception {
+		return list(comment.getSqlMapSelector() + "." + "getCommentList", comment);
+	}
+
 
 }

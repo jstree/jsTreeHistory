@@ -11,6 +11,11 @@
 </script>
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css" media="all" />
 <style>
+/* Common */
+a {
+	color: #f45b4f;
+}
+
 
 /* Article Header */
 div#articleHeader {
@@ -86,6 +91,11 @@ textarea.write-comment-input {
 }
 div.write-comment-btn {
 	width: 20%;
+}
+
+/* Comment Reply */
+div.write-comment.for-copy {
+	visibility: collapse;
 }
 
 /* Article Action */
@@ -218,7 +228,7 @@ $(document).ready(function(){
 										<span id="secondInfoRow">
 											<span>조회수: ${article.viewCnt}</span>
 											<span>추천수: 0</span>
-											<span id="articleAttachment"><a href="#" id="attachmentFile">첨부 (3)</a></span>
+											<span id="articleAttachment"><a id="attachmentFile">첨부 (3)</a></span>
 										</span>
 									</span>
 								</div>
@@ -226,53 +236,37 @@ $(document).ready(function(){
 								<div id="articleContent">
 								${article.content} 
 								</div>
-								<!-- 댓글 -->
+								<!-- 코멘트 -->
 								<div id="comment">
-									<div class="rdc-detail">
+									<c:forEach var="comment" items="${commentList}" varStatus="status">
+									<div data-id="${comment.c_id}" root-id="${comment.rootCommentID}" class="rdc-detail" style="padding-left: ${(comment.c_level -2) * 10}px">
 										<div class="rdc-header">
-											<span class="rdc-reg-id">저에요</span>
-											<span class="rdc-reg-date">2015-07-05 12:11:30</span>
-											<span><a href="">답글달기</a></span>
+											<span class="rdc-reg-id">${comment.regNickName}</span>
+											<span class="rdc-reg-date">${comment.regDT}</span>
+											<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
 											<span><a href="">삭제</a></span>
 										</div>
-										<div class="rdc-body"><p>내용입니다.</p></div>
+										
+										<div class="rdc-body"><p>${comment.c_title}</p></div>
 									</div>
-									<div style="padding-left: 20px;" class="rdc-detail">
-										<div class="rdc-header">
-											<span class="rdc-reg-id">테스트2</span>
-											<span class="rdc-reg-date">2015-07-05 12:11:30</span>
-											<span><a href="">답글달기</a></span>
-											<span><a href="">삭제</a></span>
-										</div>
-										<div class="rdc-body"><p>답리플1</p></div>
-									</div>
+									</c:forEach>
 									
-									<!-- 댓글작성 -->
-									<div class="write-comment">
-										<div class="write-comment-header">
-											<div>댓글작성</div>
-											<div>
-												<input class="author-only" type="checkbox" name="authorOnly">
-												<label for="authorOnly">글쓴이만 보기</label>
-											</div>
-										</div>
-										<div class="write-comment-body"><textarea class="write-comment-input"></textarea></div>
-										<div class="write-comment-btn"><button>등록</button></div>								
-									</div>
+									<!-- 
 									<div style="padding-left: 20px;" class="rdc-detail">
 										<div class="rdc-header">
 											<span class="rdc-reg-id">테스트2</span>
 											<span class="rdc-reg-date">2015-07-05 12:11:30</span>
-											<span><a href="">답글달기</a></span>
+											<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
 											<span><a href="">삭제</a></span>
 										</div>
 										<div class="rdc-body"><p>글쓴이만 보이는 코멘트입니다.</p></div>
 									</div>
+									 -->
 								</div>
-								<!-- 댓글작성 -->
+								<!-- 코멘트작성 -->
 								<div id="writeRootCommentDiv" class="write-comment">
 									<div class="write-comment-header">
-										<div>댓글작성</div>
+										<div>코멘트작성</div>
 										<div>
 											<input class="author-only" type="checkbox" name="authorOnly">
 											<label for="authorOnly">글쓴이만 보기</label>
@@ -281,11 +275,23 @@ $(document).ready(function(){
 									<div class="write-comment-body"><textarea class="write-comment-input"></textarea></div>
 									<div class="write-comment-btn"><button onclick="addComment(this, 'root')">등록</button></div>								
 								</div>
+								<!-- 코멘트 리플 복사 -->
+								<div class="write-comment for-reply for-copy">
+									<div class="write-comment-header">
+										<div>코멘트 답글 작성</div>
+										<div>
+											<input class="author-only" type="checkbox" name="authorOnly">
+											<label for="authorOnly">글쓴이만 보기</label>
+										</div>
+									</div>
+									<div class="write-comment-body"><textarea class="write-comment-input"></textarea></div>
+									<div class="write-comment-btn"><button>등록</button></div>								
+								</div>
 								<!-- 하단 Action 칸 -->
 								<div id="articleAction">
 									<span>
 										<a href="${pageContext.request.contextPath}/board/modifyArticle.do?c_id=${article.c_id}">수정</a>
-										<a href="#" onclick="deleteThisArticle(${article.c_id})">삭제</a>
+										<a onclick="deleteThisArticle(${article.c_id})">삭제</a>
 										<a href="${pageContext.request.contextPath}/board/newReplyArticle.do?c_id=${article.c_id}">답글쓰기</a>
 										<a href="${pageContext.request.contextPath}/board/index.do">목록가기</a>
 									</span>
@@ -298,7 +304,24 @@ $(document).ready(function(){
 		</article>
 	</section>
 	<script>
-	function addComment(btn, type) {
+	
+	function addCommentReply(btn, ref) {
+		var copiedCommentDivCheck = $('div.for-reply.copied');
+		if($(copiedCommentDivCheck).length != 0) {
+			$(copiedCommentDivCheck).remove();
+		}
+
+		var parentComment = $(btn).closest('.rdc-detail');
+		var parentID = $(parentComment).attr('data-id');
+		var rootID = $(parentComment).attr('root-id');
+		
+		var copiedCommentDiv = $('div.for-reply.for-copy').clone().removeClass('for-copy').addClass('copied');
+		$(copiedCommentDiv).find('.write-comment-btn').children('button').attr('onclick', 'addComment(this, '+ parentID +')')
+		$(copiedCommentDiv).attr('root-id', rootID);
+		$(parentComment).append(copiedCommentDiv);
+	}
+	
+	function addComment(btn, ref) {
 		
 		var commentDiv = $(btn).parent('div').closest('.write-comment');
 		var viewOnlyRegIDFL = $(commentDiv).find('.author-only').is(":checked") ? '1' : '0';
@@ -315,7 +338,7 @@ $(document).ready(function(){
 			return;
 		}
 		
-		if(type == 'root') {
+		if(ref == 'root') {
 			obj.isRoot = '1';
 			
 			
@@ -323,7 +346,10 @@ $(document).ready(function(){
 			
 		} else {
 			obj.isRoot = '0';
-
+			obj.ref = ref;
+			var rootID = $(commentDiv).attr('root-id');
+			obj.rootCommentID = rootID;
+			
 			console.log(obj);
 		}	
 		

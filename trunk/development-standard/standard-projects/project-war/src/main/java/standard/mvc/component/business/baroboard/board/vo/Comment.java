@@ -35,17 +35,23 @@ public class Comment extends ComprehensiveTree {
 	/* DB 필드는 아니지만 로직상 필요한 파라미터 */
 	private String isRoot;
 	
+	/* 글쓴이 닉네임 */
+	private String regNickName;
 
 	@Override
 	public String getSqlMapSelector() {
 		return "comment";
 	}
-	
 
+	public String getRegNickName() {
+		return regNickName;
+	}
+	public void setRegNickName(String regNickName) {
+		this.regNickName = regNickName;
+	}
 	public String getIsRoot() {
 		return isRoot;
 	}
-
 	public void setIsRoot(String isRoot) {
 		this.isRoot = isRoot;
 	}

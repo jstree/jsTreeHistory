@@ -114,8 +114,12 @@ public class BoardController extends GenericAbstractController {
 	@RequestMapping(value = "/readArticle.do")
 	public String readArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 		Article targetArticle = boardService.readArticle(article);
+		Comment comment = new Comment();
+		comment.setArticleID(article.getC_id());
+		List<Comment> commentList = boardService.getCommentList(comment);
 		
 		modelMap.addAttribute("article", targetArticle);
+		modelMap.addAttribute("commentList", commentList);
 		return "/jsp/board/readArticle";
 	}
 

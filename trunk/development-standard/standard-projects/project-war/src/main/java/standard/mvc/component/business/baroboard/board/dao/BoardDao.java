@@ -48,4 +48,6 @@ public interface BoardDao {
 
 	public int updateCommentRootID(Comment comment) throws Exception;
 
+	public List<Comment> getCommentList(Comment comment) throws Exception;
+
 }

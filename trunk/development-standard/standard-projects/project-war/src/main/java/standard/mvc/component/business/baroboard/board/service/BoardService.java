@@ -135,5 +135,14 @@ public interface BoardService {
 	public Comment addComment(Comment comment) throws Exception;
 
 	
+	/**
+	 * 글 ID로 코멘트 리스트를 조회한다.
+	 * @param article
+	 * @return List<Comment>
+	 * @throws Exception
+	 */
+	public List<Comment> getCommentList(Comment comment) throws Exception;
+
+	
 	
 }

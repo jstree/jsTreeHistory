@@ -407,5 +407,25 @@
 		WHERE C_ID = #c_id#
 	</update>
 	
+	<select id="getCommentList" parameterClass="Comment" resultClass="Comment">
+		/* getCommentList */
+		<dynamic>
+			<include refid="getMetaField" />
+			, A.C_ARTICLE_ID as articleID
+			, A.C_ROOT_COMMENT_ID as rootCommentID
+			, A.C_REG_ID as regID
+			, A.C_VIEW_ONLY_REG_ID_FL as viewOnlyRegIDFL
+			, A.C_IS_DELETED_FL as isDeletedFL
+			, A.C_REG_DT as regDT
+			, A.C_MOD_DT as modDT
+			, B.C_TITLE as regNickName
+		FROM T_BOARD_COMMENT_TEST A, T_USER_INFO B
+		WHERE 1=1
+			AND A.C_ARTICLE_ID = #articleID#
+			AND A.C_REG_ID = B.C_ID
+		ORDER BY A.C_ROOT_COMMENT_ID DESC, A.C_LEFT ASC
+		</dynamic>
+		
+	</select>
 	
 </sqlMap>
