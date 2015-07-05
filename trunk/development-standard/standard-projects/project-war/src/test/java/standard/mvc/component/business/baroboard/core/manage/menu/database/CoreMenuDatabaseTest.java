@@ -48,7 +48,6 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-// @Ignore("dataset 작성이 완료 안되서 정상작동 안함")
 public class CoreMenuDatabaseTest {
 
     private String driver;
