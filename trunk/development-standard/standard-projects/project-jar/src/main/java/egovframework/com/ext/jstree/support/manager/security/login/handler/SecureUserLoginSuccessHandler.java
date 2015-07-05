@@ -95,7 +95,7 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 		
 		if ( passwordTargetDate.before(new Date()) == true )
 		{
-			final String passwordChangePage = "/user/login/passwordChange.do";
+			final String passwordChangePage = "/user/info/index.do";
 			super.setDefaultTargetUrl(passwordChangePage);
 		}
 	}
