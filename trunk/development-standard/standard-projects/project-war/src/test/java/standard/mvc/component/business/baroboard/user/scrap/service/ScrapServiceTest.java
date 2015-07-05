@@ -34,15 +34,6 @@ public class ScrapServiceTest extends initScrapTestBase {
 		assertThat(userScrap.getRegDt(), is("20150621145724"));
 		assertThat(userScrap.getBoardTitle(), is(""));
 		assertThat(userScrap.getBoardTitle(), is(""));
-		
-        <td class="dt-center">${scrap.c_id}</td>
-		<td class="dt-center">일반 게시판</td>
-		<td><a href="${pageContext.request.contextPath}/user/scrap/readScrap.do?boardId=${scrap.boardId}">${scrap.c_title} &nbsp; (${scrap.commentCnt})</a></td>
-		<td class="dt-center">${scrap.nickName}</td>
-		<td class="dt-center">${scrap.regDt}</td>
-		<td class="dt-center">${scrap.viewCnt}</td>
-		<td class="dt-center">${scrap.likeCount}</td>
-        
     }
 
 	@Test
