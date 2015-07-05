@@ -39,12 +39,13 @@
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user filed */
-<!-- 			, C_FTP_ID AS ftpId -->
-<!-- 			, C_FTP_PASSWORD AS ftpPassword -->
-<!-- 			, C_FTP_URL AS ftpUrl -->
-<!-- 			, C_FTP_PORT AS ftpPort -->
-<!-- 			, C_PASSIVE_FL AS passiveFl -->
-<!-- 			, C_SFTP_FL AS sftpFl -->
+			, C_MENU_ID as menuId
+			, C_PAGE_ID as pageId
+			, C_AUTH_ID as authId
+			, C_IMAGE_DEAULT as imageDefault
+			, C_IMAGE_HOVER as imageHover
+			, C_IMAGE_SELECTED as imageSelected
+			, C_HOME_FL as homeFl
 			<include refid="getInlineChildCount" />
 			/* inline table from filed*/
 			FROM T_CORE_MENU B
@@ -66,12 +67,13 @@
 		, C_LEVEL
 		, C_TITLE
 		, C_TYPE
-<!-- 		, C_FTP_ID AS ftpId -->
-<!-- 		, C_FTP_PASSWORD AS ftpPassword -->
-<!-- 		, C_FTP_URL AS ftpUrl -->
-<!-- 		, C_FTP_PORT AS ftpPort -->
-<!-- 		, C_PASSIVE_FL AS passiveFl -->
-<!-- 		, C_SFTP_FL AS sftpFl -->
+		, C_MENU_ID as menuId
+		, C_PAGE_ID as pageId
+		, C_AUTH_ID as authId
+		, C_IMAGE_DEAULT as imageDefault
+		, C_IMAGE_HOVER as imageHover
+		, C_IMAGE_SELECTED as imageSelected
+		, C_HOME_FL as homeFl
 		FROM T_CORE_MENU
 		WHERE C_ID = #c_id#
 	</select>
@@ -79,14 +81,15 @@
 	<update id="alterNode" parameterClass="coreMenuVO">
 		/* alterNode */
 		UPDATE
-		T_CORE_MENU
+			T_CORE_MENU
 		SET 
-<!-- 		C_FTP_ID = #ftpId# -->
-<!-- 		, C_FTP_PASSWORD = #ftpPassword# -->
-<!-- 		, C_FTP_URL = #ftpUrl# -->
-<!-- 		, C_FTP_PORT = #ftpPort# -->
-<!-- 		, C_PASSIVE_FL = #passiveFl# -->
-<!-- 		, C_SFTP_FL = #sftpFl# -->
+			C_MENU_ID = #menuId#
+			, C_PAGE_ID = #pageId#
+			, C_AUTH_ID = #authId#
+			, C_IMAGE_DEAULT = #imageDefault#
+			, C_IMAGE_HOVER = #imageHover#
+			, C_IMAGE_SELECTED = #imageSelected#
+			, C_HOME_FL = #homeFl#
 		WHERE C_ID = #c_id#
 	</update>
 
