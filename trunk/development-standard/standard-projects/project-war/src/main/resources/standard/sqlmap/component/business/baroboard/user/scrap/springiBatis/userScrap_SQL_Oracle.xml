@@ -403,8 +403,5 @@
 			AND C_ID IN (SELECT C_POSTING_ID FROM T_USER_SCRAP WHERE C_USER_ID = #userId#)
 		 	AND C_LEVEL = 2
 	</select>
-	
-	<delete id="scrapDelete" parameterClass="UserScrap">
-		SELECT * FROM T_USER_SCRAP WHERE C_POSTING_ID = (SELECT C_ID FROM  T_BOARD_TEST WHERE C_ID = #boardId#)
-	</delete>
+
 </sqlMap>

@@ -26,6 +26,13 @@
 		});
 	});
 </script>
+<script>
+function readScrap(c_id){
+	var popupUrl = '${pageContext.request.contextPath}/user/scrap/readScrapPopup.do?boardId=' +  c_id;
+	var popupOption = 'width=760, height=280, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
+	window.open(popupUrl, '', popupOption);
+}
+</script>
 </head>
 <body>
 	<section class="clearfix">
@@ -60,7 +67,7 @@
 												<tr>
 												    <td class="dt-center">${scrap.c_id}</td>
 													<td class="dt-center">일반 게시판</td>
-													<td><a href="${pageContext.request.contextPath}/user/scrap/readScrap.do?boardId=${scrap.boardId}">${scrap.c_title} &nbsp; (${scrap.commentCnt})</a></td>
+													<td><a href="#" onclick="readScrap(${scrap.c_id})">${scrap.c_title} &nbsp; (${scrap.commentCnt})</a></td>
 													<td class="dt-center">${scrap.nickName}</td>
 													<td class="dt-center">${scrap.regDt}</td>
 													<td class="dt-center">${scrap.viewCnt}</td>
@@ -73,21 +80,21 @@
 								<div>
 									<div id="pagingDiv">
 										<c:if test="${leftPage != null}">
-											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${postingId}&pageNum=${leftPage}">◀</a></span>
+											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${scrap.c_id}&pageNum=${leftPage}">◀</a></span>
 										</c:if>
 										<span> <c:forEach var="i" begin="${startPageNum}" end="${endPageNum}" step="1">
 												<c:choose>
 													<c:when test="${i eq currentPageNum}">
-														<a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${postingId}&pageNum=${i}" class="underline">${i}</a>
+														<a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${scrap.c_id}&pageNum=${i}" class="underline">${i}</a>
 													</c:when>
 													<c:otherwise>
-														<a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${postingId}&pageNum=${i}">${i}</a>
+														<a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${scrap.c_id}&pageNum=${i}">${i}</a>
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
 										</span>
 										<c:if test="${rightPage != null}">
-											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${postingId}&pageNum=${rightPage}">▶</a></span>
+											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${scrap.c_id}&pageNum=${rightPage}">▶</a></span>
 										</c:if>
 									</div>
 								</div>

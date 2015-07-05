@@ -7,10 +7,9 @@
 <head>
 <title>${pageName}</title>
 <!-- !!!  FOR THIS PAGE ONLY !!! -->
-<script>
-</script>
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css" media="all" />
 <style>
+
 /* Article Header */
 div#articleHeader {
 	overflow: hidden;
@@ -44,33 +43,46 @@ div#articleContent {
 }
 
 /* Comment */
+div.rdc-detail {
+	margin-bottom: 10px;
+}
+div.rdc-header > span {
+	padding-right : 10px;
+}
+
+span.rdc-reg-id {
+	 font-weight: bold;
+}
+span.rdc-reg-date {
+}
+
 
 /* Comment Write */
-div#writeComment {
+div.write-comment {
 	overflow: hidden;
 }
 
-div#writeComment > div {
+div.write-comment > div {
 	
 	float: left;
 }
 
-div#commentHeader {
+div.write-comment-header {
 	width: 20%;
 	text-align: center;
 }
 
-div#commentBody {
+div.write-comment-body {
 	width: 50%;
 }
 
-textarea#commentInput {
+textarea.write-comment-input {
 	
 	display: inline;
 	width: 300px !important;
 	height: 70px !important;
 }
-div#commentBtn {
+div.write-comment-btn {
 	width: 20%;
 }
 
@@ -85,7 +97,6 @@ div#articleAction span {
 div#articleAction span a {
 	margin: 0 10px;
 }
-
 
 </style>
 <script>
@@ -107,86 +118,13 @@ function deleteThisArticle(c_id){
 </script>
 
 <!-- Jquery Context Menu -->
-<link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.contextPath}/assets/css/backbone.scss.css?20" rel="stylesheet" type="text/css" media="all" />
+<!--  <link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />-->
 <script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.ui.position.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.js" type="text/javascript"></script>
-<script>
-$(document).ready(function(){
-	$.contextMenu({
-		selector: '#attachmentFile',
-		trigger: 'left',
-		items: {
-			'atc1': {
-				name: 'TestExcep.xls',
-				callback: function(key, option) {
-					alert("atc1 Download");
-				}
-			},
-			'atc2': {
-				name: '내꺼.pdf',
-				callback: function(key, option) {
-				}
-			},
-			'atc3': {
-				name: 'zip.zip',
-				callback: function(key, option) {
-				}
-			}
-		}
-	});
-	
-	$.contextMenu({
-		selector: '.user-context',
-		trigger: 'left',
-		items: {
-			'userInfo': {
-				name: '회원정보 보기',
-				callback: function(key, option) {
-					var popupUrl = '${pageContext.request.contextPath}/board/getUserInfoPopup.do?c_id=${article.regId}';
-					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
-					window.open(popupUrl, '', popupOption);
-				}
-			},
-			'sendNote': {
-				name: '쪽지 보내기',
-				callback: function(key, option) {
-					var popupUrl = '${pageContext.request.contextPath}/board/sendNotePopup.do?c_id=${article.regId}';
-					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
-					window.open(popupUrl, '', popupOption);
-				}
-			},
-			'showArticles': {
-				name: '게시글 보기',
-				callback: function(key, option) {
-					var userNickName = $(this).text();
-					var params = {
-							type: 'nickName',
-							searchKeyword: userNickName
-					}
-					var url = '${pageContext.request.contextPath}/board/searchArticle.do?' + $.param(params);
-					location.href = url;
-				}
-			}
-		}
-	});
-})
-</script>
 </head>
 <body>
 	<section class="clearfix">
-		<nav>
-			<div class="container bm-medium">
-				<div class="one-whole">
-					<div class="no-display">article</div>
-					<div class="text-center">
-						<h1 class="bm-remove">자유게시판</h1>
-						<p class="bm-remove">
-							<a href="/" target="_self">Home</a> &nbsp;/&nbsp; BOARD &nbsp;/&nbsp; ${boardName}
-						</p>
-					</div>
-				</div>
-			</div>
-		</nav>
 		<article>
 			<div class="clearfix">
 				<div class="container bm-remove">
@@ -232,7 +170,7 @@ $(document).ready(function(){
 									<span>
 										<a href="#" onclick="deleteThisArticle(${article.c_id})">스크랩 삭제</a>
 										<a href="#">답글쓰기</a>
-										<a href="${pageContext.request.contextPath}/user/scrap/index.do">목록가기</a>
+										<a href="#" onclick="window.open('about:blank', '_self').close();">닫기</a>
 									</span>
 								</div>
 							</div>

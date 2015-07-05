@@ -3,6 +3,7 @@ package standard.mvc.component.business.baroboard.user.scrap.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +49,15 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
 @Controller
 @RequestMapping(value = "/user/scrap/")
 public class UserScrapController extends GenericAbstractController {
-
+	@Resource(name="CoreService")
+	private CoreService coreService;
+	
 	@Autowired
 	private BoardService boardService;
 	
 	@Autowired
     private UserScrapService userScrapService;
-	
+
 	@Override
 	public Map<String, Map<String, Object>> bindTypes() {
 		// TODO Auto-generated method stub
@@ -63,18 +66,17 @@ public class UserScrapController extends GenericAbstractController {
 
 	@RequestMapping(value = "/index.do", method = {RequestMethod.GET})
 	public String scrapList(ModelMap modelMap, @ModelAttribute UserScrap userScrap) throws Exception{
-		/*
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		SecureUserLogin user = (SecureUserLogin) (authentication == null ? null : authentication.getPrincipal());
-		userScrap.setUserId(user.getUserid());
 		
+		//SecureUserLogin secureUserLogin =(SecureUserLogin)SecurityContextHolder.getContext().getAuthentication().getDetails();
+       	//System.out.println(secureUserLogin.);
+		/*
 		System.out.println("=======================");
 		System.out.println("userId : " + userScrap.getUserId());
 		System.out.println("=======================");
 		//int userId = 0;
 		*/
 		userScrap.setUserId(3);
-		String boardId = userScrap.getBoardId();
+		int boardId = userScrap.getBoardId();
 		int totalPageCount = userScrapService.getScrapListTotalCnt(userScrap) / userScrap.getPageSize() + 1;
 		
 		int postingId = userScrap.getPostingId();
@@ -112,16 +114,15 @@ public class UserScrapController extends GenericAbstractController {
 	public String scapDelete(ModelMap model, @ModelAttribute Article article) throws Exception {
 		UserScrap userScrap = new UserScrap();
 		
-		//userScrap.setPostingId(article.getC_id());
-		//coreService.removeNode(userScrap);
+		userScrap.setPostingId(article.getC_id());
+		coreService.removeNode(userScrap);
 		return "/jsp/user/scrap/index";
 	}
 	
-	@RequestMapping(value = "/readScrap.do")
+	@RequestMapping(value = "/readScrapPopup.do")
 	public String readArticle(ModelMap modelMap,  UserScrap userScrap) throws Exception {
 		Article article = new Article();
-		article.setC_id(userScrap.getPostingId());
-		article.setBoardID(userScrap.getBoardId());
+		article.setC_id(userScrap.getBoardId());
 		
 		Article targetArticle = boardService.readArticle(article);
 

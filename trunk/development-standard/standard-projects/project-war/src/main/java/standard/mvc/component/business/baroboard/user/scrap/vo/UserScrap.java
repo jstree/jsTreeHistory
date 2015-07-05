@@ -5,7 +5,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 public class UserScrap extends ComprehensiveTree {
 
     /** 보드아이디 */
-    private String boardId;
+    private int boardId;
     
     /** 사용자 아이디 */
     private int userId;
@@ -53,11 +53,11 @@ public class UserScrap extends ComprehensiveTree {
 		this.regDt = regDt;
 	}
 
-	public String getBoardId() {
+	public int getBoardId() {
 		return boardId;
 	}
 
-	public void setBoardId(String boardId) {
+	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
 
