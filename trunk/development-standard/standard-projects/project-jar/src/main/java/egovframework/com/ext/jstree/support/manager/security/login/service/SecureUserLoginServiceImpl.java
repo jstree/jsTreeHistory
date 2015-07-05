@@ -112,12 +112,12 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
 		
 		SecureUserLogin secureLoggedInUser = new SecureUserLogin();
 		
-		secureLoggedInUser.setUserid(secureLogInUser.getC_id());
-		secureLoggedInUser.setUsername(secureLogInUser.getEmail());
+		secureLoggedInUser.setId(secureLogInUser.getC_id());
+		secureLoggedInUser.setEmail(secureLogInUser.getEmail());
 		secureLoggedInUser.setPassword(secureLogInUser.getPassword());
 		secureLoggedInUser.setPasswordChangeDt(secureLogInUser.getPasswordChangeDt());
 		secureLoggedInUser.setUserGradeCd(secureLogInUser.getUserGradeCd());
-		secureLoggedInUser.setC_title(secureLogInUser.getC_title());
+		secureLoggedInUser.setNickName(secureLogInUser.getC_title());
 		
 		return secureLoggedInUser;
 	}
