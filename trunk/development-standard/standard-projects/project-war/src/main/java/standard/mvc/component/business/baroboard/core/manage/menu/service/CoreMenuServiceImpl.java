@@ -45,7 +45,8 @@ public class CoreMenuServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) throws Exception {
-        return null;
+		List<T> bunchOfChildNodes = coreService.getChildNode(comprehensiveTree);
+		return bunchOfChildNodes;
     }
 
     @Override
