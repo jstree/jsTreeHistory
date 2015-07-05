@@ -20,6 +20,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +38,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
 
 /**
  * Modification Information
@@ -160,9 +162,13 @@ public class UserController extends GenericAbstractController {
     @ResponseBody
     public String modifyUserInfo(@Valid User user) throws Exception {
         
-        // TODO 류강하 : 세션 정보와 일치하는지 확인
-        
         user.setEmail(user.getEmailAccount() + "@" + user.getEmailHost());
+        
+        SecureUserLogin userSession = (SecureUserLogin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
+        if (! userSession.getUsername().equals( user.getEmail() )) {
+            throw new RuntimeException("bb.com.error.004");
+        }
         
         userService.modifyUserInfo(user);
         
