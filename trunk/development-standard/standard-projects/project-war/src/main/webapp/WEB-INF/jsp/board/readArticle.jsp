@@ -113,6 +113,9 @@ div#articleAction span a {
 	margin: 0 10px;
 }
 
+i.fa {
+	padding-right: 5px;	
+}
 </style>
 <script>
 function deleteThisArticle(c_id){
@@ -243,37 +246,25 @@ $(document).ready(function(){
 								<div id="comment">
 									<c:forEach var="comment" items="${commentList}" varStatus="status">
 									<div data-id="${comment.c_id}" root-id="${comment.rootCommentID}" class="rdc-detail" style="padding-left: ${(comment.c_level -2) * 10}px">
-										<div class="rdc-header">
-											<span class="rdc-reg-id">${comment.regNickName}</span>
-											<span class="rdc-reg-date">${comment.regDT}</span>
-											<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
-											<span><a onclick="deleteThisReply(this, ${comment.c_id})">삭제</a></span>
-										</div>
 										<c:choose>
 											<c:when test="${comment.isDeletedFL == '1' }">
-											<div class="rdc-body"><p><span class="bold">삭제된 코멘트 입니다.</span></p></div>
+											<div class="rdc-body"><p><i class="fa fa-times"></i><span class="bold">삭제된 코멘트 입니다.</span></p></div>
 											</c:when>
 											<c:when test="${comment.viewForRegOnlyFL == '1'}">
-											<div class="rdc-body"><p><span class="bold">글쓴이만 볼 수 있는 코멘트 입니다.</span></p></div>
+											<div class="rdc-body"><p><i class="fa fa-lock"></i><span class="bold">글쓴이만 볼 수 있는 코멘트 입니다.</span></p></div>
 											</c:when>
 											<c:otherwise>
+											<div class="rdc-header">
+												<span class="rdc-reg-id">${comment.regNickName}</span>
+												<span class="rdc-reg-date">${comment.regDT}</span>
+												<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
+												<span><a onclick="deleteThisReply(this, ${comment.c_id})">삭제</a></span>
+											</div>
 											<div class="rdc-body"><p>${comment.c_title}</p></div>
 											</c:otherwise>
 										</c:choose>
 									</div>
 									</c:forEach>
-									
-									<!-- 
-									<div style="padding-left: 20px;" class="rdc-detail">
-										<div class="rdc-header">
-											<span class="rdc-reg-id">테스트2</span>
-											<span class="rdc-reg-date">2015-07-05 12:11:30</span>
-											<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
-											<span><a href="">삭제</a></span>
-										</div>
-										<div class="rdc-body"><p>글쓴이만 보이는 코멘트입니다.</p></div>
-									</div>
-									 -->
 								</div>
 								<!-- 코멘트작성 -->
 								<div id="writeRootCommentDiv" class="write-comment">
@@ -299,9 +290,18 @@ $(document).ready(function(){
 									<div class="write-comment-body"><textarea class="write-comment-input"></textarea></div>
 									<div class="write-comment-btn"><button>등록</button></div>								
 								</div>
-								<!-- 하단 Action 칸 -->
+								<!-- 하단 Action -->
 								<div id="articleAction">
 									<span>
+										<c:choose>
+										<c:when test="${article.likeFL == '0'}">
+										<a href="${pageContext.request.contextPath}/board/likeArticle.do?c_id=${article.c_id}">좋아요</a>
+										</c:when>
+										<c:otherwise>
+										<a href="${pageContext.request.contextPath}/board/cancleLikeArticle.do?c_id=${article.c_id}">좋아요 취소</a>
+										</c:otherwise>
+										</c:choose>
+										<a href="${pageContext.request.contextPath}/board/modifyArticle.do?c_id=${article.c_id}">수정</a>
 										<a href="${pageContext.request.contextPath}/board/modifyArticle.do?c_id=${article.c_id}">수정</a>
 										<a onclick="deleteThisArticle(${article.c_id})">삭제</a>
 										<a href="${pageContext.request.contextPath}/board/newReplyArticle.do?c_id=${article.c_id}">답글쓰기</a>
@@ -325,7 +325,7 @@ $(document).ready(function(){
 	   		  url: '${pageContext.request.contextPath}/board/deleteComment.do',
 	   		  method: 'POST',
 	   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-	   		  data: obj,
+	   		  data: obj
 	   		}).done(function(data){
 	   			alert('삭제되었습니다.');
 				window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+ articleID;

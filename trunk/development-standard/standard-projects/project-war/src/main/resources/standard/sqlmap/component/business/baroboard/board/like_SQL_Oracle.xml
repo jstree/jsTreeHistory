@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="comment">
-	<typeAlias alias="Article" type="standard.mvc.component.business.baroboard.board.vo.Article" />
-	<typeAlias alias="Comment" type="standard.mvc.component.business.baroboard.board.vo.Comment" />
+<sqlMap namespace="like">
+	<typeAlias alias="Like" type="standard.mvc.component.business.baroboard.board.vo.Like" />
 	
 	<sql id="getMetaField">
 		/* getChildNode */
@@ -36,24 +35,24 @@
 		ORDER BY A.C_POSITION ASC
 	</sql>
 	
-	<select id="getChildNode" parameterClass="Comment"
-		resultClass="Comment">
+	<select id="getChildNode" parameterClass="Like"
+		resultClass="Like">
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user filed */
 			<include refid="getInlineChildCount" />
 			/* inline table from filed*/
-			FROM T_BOARD_COMMENT_TEST B
+			FROM T_BOARD_LIKE_TEST B
 			<include refid="getInlineChildCountAfterFrom" />
 			/* table from filed*/
-			FROM T_BOARD_COMMENT_TEST A
+			FROM T_BOARD_LIKE_TEST A
 			<include refid="getAfterFrom" />
 		</dynamic>
 	</select>
 
 
-	<select id="getChildNodeByLeftRight" parameterClass="Comment"
-		resultClass="Comment">
+	<select id="getChildNodeByLeftRight" parameterClass="Like"
+		resultClass="Like">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		, C_PARENTID
@@ -65,7 +64,7 @@
 		, C_TITLE
 		, C_TYPE
 		FROM
-		T_BOARD_COMMENT_TEST
+		T_BOARD_LIKE_TEST
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT &lt;=
 		#c_right#
@@ -73,13 +72,13 @@
 	</select>
 
 
-	<select id="searchNodeByString" parameterClass="Comment"
-		resultClass="Comment">
+	<select id="searchNodeByString" parameterClass="Like"
+		resultClass="Like">
 		/* searchNodeByString */
 		SELECT c_left
 		, c_right
 		FROM
-		T_BOARD_COMMENT_TEST
+		T_BOARD_LIKE_TEST
 		WHERE C_TITLE LIKE '%'||#searchStr#||'%'
 	</select>
 
@@ -89,7 +88,7 @@
 		/* searchNodeByPosition */
 		SELECT DISTINCT C_ID
 		FROM
-		T_BOARD_COMMENT_TEST
+		T_BOARD_LIKE_TEST
 		WHERE 1=1
 		<iterate prepend="AND" open="(" close=")" conjunction="OR">
 			( C_LEFT
@@ -98,25 +97,21 @@
 	</select>
 
 
-	<update id="alterNode" parameterClass="Comment">
+	<update id="alterNode" parameterClass="Like">
 		/* alterNode */
 		UPDATE
-		T_BOARD_COMMENT_TEST
+		T_BOARD_LIKE_TEST
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
 		, C_ARTICLE_ID = #articleID#
-		, C_ROOT_COMMENT_ID = #rootCommentID#
 		, C_REG_ID = #regID#
-		, C_VIEW_ONLY_REG_ID_FL = #viewOnlyRegIDFL#
-		, C_IS_DELETED_FL = #isDeletedFL#
 		, C_REG_DT = #regDT#
-		, C_MOD_DT = #modDT#
 		WHERE C_ID = #c_id#
 	</update>
 
 
-	<select id="getNode" parameterClass="Comment"
-		resultClass="Comment">
+	<select id="getNode" parameterClass="Like"
+		resultClass="Like">
 		/* getNode */
 		SELECT C_ID
 		, C_PARENTID
@@ -127,20 +122,16 @@
 		, C_TITLE
 		, C_TYPE
 		, C_ARTICLE_ID as articleID
-		, C_ROOT_COMMENT_ID as rootCommentID
 		, C_REG_ID as regID
-		, C_VIEW_ONLY_REG_ID_FL as viewOnlyRegIDFL
-		, C_IS_DELETED_FL as isDeletedFL
 		, C_REG_DT as regDT
-		, C_MOD_DT as modDT
-		FROM T_BOARD_COMMENT_TEST
+		FROM T_BOARD_LIKE_TEST
 		WHERE
 		C_ID = #c_id#
 	</select>
 
 
-	<select id="getNodeByRef" parameterClass="Comment"
-		resultClass="Comment">
+	<select id="getNodeByRef" parameterClass="Like"
+		resultClass="Like">
 		/* getNodeByRef */
 		SELECT C_ID
 		, C_PARENTID
@@ -151,45 +142,45 @@
 		, C_TITLE
 		, C_TYPE
 		FROM
-		T_BOARD_COMMENT_TEST
+		T_BOARD_LIKE_TEST
 		WHERE C_ID = #ref#
 	</select>
 
 
-	<delete id="removeNode" parameterClass="Comment">
+	<delete id="removeNode" parameterClass="Like">
 		/* removeNode */
 		DELETE
-		FROM T_BOARD_COMMENT_TEST
+		FROM T_BOARD_LIKE_TEST
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT
 		&lt;= #c_right#
 	</delete>
 
 
-	<update id="removedAfterLeftFix" parameterClass="Comment">
+	<update id="removedAfterLeftFix" parameterClass="Like">
 		/*
 		removedAfterLeftFix */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET C_LEFT =
 		C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
 
 
-	<update id="removedAfterRightFix" parameterClass="Comment">
+	<update id="removedAfterRightFix" parameterClass="Like">
 		/*
 		removedAfterRightFix */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET C_RIGHT =
 		C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 	</update>
 
 
-	<update id="removedAfterPositionFix" parameterClass="Comment">
+	<update id="removedAfterPositionFix" parameterClass="Like">
 		/*
 		removedAfterPositionFix */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET
 		C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
@@ -198,18 +189,18 @@
 	</update>
 
 
-	<select id="analyzeRootNode" resultClass="Comment">
+	<select id="analyzeRootNode" resultClass="Like">
 		/* searchNodeByString
 		*/
 		SELECT C_LEFT
-		FROM T_BOARD_COMMENT_TEST
+		FROM T_BOARD_LIKE_TEST
 		WHERE C_PARENTID = 0
 	</select>
 
 
-	<update id="cutMyselfPositionFix" parameterClass="Comment">
+	<update id="cutMyselfPositionFix" parameterClass="Like">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET C_POSITION
 		= C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
@@ -218,17 +209,17 @@
 	</update>
 
 
-	<update id="cutMyselfLeftFix" parameterClass="Comment">
+	<update id="cutMyselfLeftFix" parameterClass="Like">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
 
 
-	<update id="cutMyselfRightFix" parameterClass="Comment">
+	<update id="cutMyselfRightFix" parameterClass="Like">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
@@ -238,10 +229,10 @@
 	</update>
 
 
-	<update id="stretchPositionForMyself" parameterClass="Comment">
+	<update id="stretchPositionForMyself" parameterClass="Like">
 		/* stretchPositionForMyselfFromJstree */
 		UPDATE
-		T_BOARD_COMMENT_TEST
+		T_BOARD_LIKE_TEST
 		SET C_POSITION = C_POSITION + 1
 		WHERE
 		C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
@@ -260,9 +251,9 @@
 	</update>
 
 
-	<update id="stretchLeftForMyselfFromJstree" parameterClass="Comment">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="Like">
 		/* stretchLeftForMyselfFromJstree */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
 		WHERE C_LEFT &gt;=
 		#rightPositionFromNodeByRef#
@@ -277,9 +268,9 @@
 	</update>
 
 
-	<update id="stretchRightForMyselfFromJstree" parameterClass="Comment">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="Like">
 		/* stretchRightForMyselfFromJstree */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
 		WHERE C_RIGHT &gt;=
 		#rightPositionFromNodeByRef#
@@ -294,13 +285,13 @@
 	</update>
 
 
-	<insert id="pasteMyselfFromJstree" parameterClass="Comment">
+	<insert id="pasteMyselfFromJstree" parameterClass="Like">
 		/* pasteMyselfFromJstree */
-		INSERT INTO T_BOARD_COMMENT_TEST (
+		INSERT INTO T_BOARD_LIKE_TEST (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
 		)
-		SELECT S_BOARD_COMMENT_TEST.NEXTVAL AS C_ID
+		SELECT S_BOARD_LIKE_TEST.NEXTVAL AS C_ID
 		, A.*
 		FROM (
 		SELECT
@@ -313,7 +304,7 @@
 		, C_LEVEL - #ldif# AS C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		FROM T_BOARD_COMMENT_TEST
+		FROM T_BOARD_LIKE_TEST
 		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
 			open="(" close=")" conjunction=",">
 			#c_idsByChildNodeFromNodeById[]#
@@ -322,16 +313,16 @@
 		) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-			SELECT S_BOARD_COMMENT_TEST.CURRVAL AS SEQ
+			SELECT S_BOARD_LIKE_TEST.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
 
 
-	<update id="enterMyselfFixPosition" parameterClass="Comment">
+	<update id="enterMyselfFixPosition" parameterClass="Like">
 		/*
 		enterMyselfFixPosition */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET
 		C_PARENTID = #ref#
 		, C_POSITION = #c_position#
@@ -339,9 +330,9 @@
 	</update>
 
 
-	<update id="enterMyselfFixLeftRight" parameterClass="Comment">
+	<update id="enterMyselfFixLeftRight" parameterClass="Like">
 		/* enterMyselfFixLeftRight */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET
 		C_LEFT = C_LEFT - (#idif#)
 		, C_RIGHT = C_RIGHT - (#idif#)
@@ -354,85 +345,49 @@
 	</update>
 
 
-	<insert id="addMyselfFromJstree" parameterClass="Comment">
+	<insert id="addMyselfFromJstree" parameterClass="Like">
 		/* addMyselfFromJstree */
-		INSERT INTO T_BOARD_COMMENT_TEST (
+		INSERT INTO T_BOARD_LIKE_TEST (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL )
 		VALUES (
-		S_BOARD_COMMENT_TEST.NEXTVAL, #c_parentid#, #c_position#,
+		S_BOARD_LIKE_TEST.NEXTVAL, #c_parentid#, #c_position#,
 		#c_left#, #c_right#, #c_level# )
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
-			S_BOARD_COMMENT_TEST.CURRVAL AS SEQ
+			S_BOARD_LIKE_TEST.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
 
 
-	<update id="alterNodeType" parameterClass="Comment">
+	<update id="alterNodeType" parameterClass="Like">
 		/* alterNodeType */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_LIKE_TEST
 		SET C_TYPE = #c_type#
 		WHERE C_ID =
 		#c_id#
 	</update>
 
 
-	<update id="fixCopyIF" parameterClass="Comment">
+	<update id="fixCopyIF" parameterClass="Like">
 		/* fixCopyIF */
 		UPDATE
-		T_BOARD_COMMENT_TEST
+		T_BOARD_LIKE_TEST
 		SET C_POSITION = #fixCopyPosition#
 		WHERE C_ID
 		= #fixCopyId#
 	</update>
 
 
-	<update id="fixCopy" parameterClass="Comment">
+	<update id="fixCopy" parameterClass="Like">
 		/* fixCopy */
 		UPDATE
-		T_BOARD_COMMENT_TEST
+		T_BOARD_LIKE_TEST
 		SET C_PARENTID = #fixCopyId#
 		WHERE C_ID =
 		#c_id#
-	</update>
-	
-	<update id="updateCommentRootID" parameterClass="Comment">
-		/* updateCommentRootID */
-		UPDATE	
-		T_BOARD_COMMENT_TEST
-		SET C_ROOT_COMMENT_ID = C_ID
-		WHERE C_ID = #c_id#
-	</update>
-	
-	<select id="getCommentList" parameterClass="Comment" resultClass="Comment">
-		/* getCommentList */
-		<dynamic>
-			<include refid="getMetaField" />
-			, A.C_ARTICLE_ID as articleID
-			, A.C_ROOT_COMMENT_ID as rootCommentID
-			, A.C_REG_ID as regID
-			, A.C_VIEW_ONLY_REG_ID_FL as viewOnlyRegIDFL
-			, A.C_IS_DELETED_FL as isDeletedFL
-			, A.C_REG_DT as regDT
-			, A.C_MOD_DT as modDT
-			, B.C_TITLE as regNickName
-		FROM T_BOARD_COMMENT_TEST A, T_USER_INFO B
-		WHERE 1=1
-			AND A.C_ARTICLE_ID = #articleID#
-			AND A.C_REG_ID = B.C_ID
-		ORDER BY A.C_ROOT_COMMENT_ID DESC, A.C_LEFT ASC
-		</dynamic>
-		
-	</select>
-	
-	<update id="deleteComment" parameterClass="Comment" >
-		/* deleteComment */
-		UPDATE T_BOARD_COMMENT_TEST
-		SET C_IS_DELETED_FL = '1'
-		WHERE C_ID = #c_id#
 	</update>
 	
 </sqlMap>

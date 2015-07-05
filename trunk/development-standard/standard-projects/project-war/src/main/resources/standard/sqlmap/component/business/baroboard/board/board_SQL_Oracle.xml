@@ -3,6 +3,7 @@
 <sqlMap namespace="board">
 	<typeAlias alias="Article" type="standard.mvc.component.business.baroboard.board.vo.Article" />
 	<typeAlias alias="SearchArticle" type="standard.mvc.component.business.baroboard.board.vo.SearchArticle" />
+	<typeAlias alias="Like" type="standard.mvc.component.business.baroboard.board.vo.Like" />
 	
 	<sql id="getMetaField">
 		/* getChildNode */
@@ -392,7 +393,9 @@
 				, A.C_IS_DELETED_FL as isDeletedFL		
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
-				, B.C_TITLE as regNickName			
+				, B.C_TITLE as regNickName
+				, (SELECT COUNT(*) FROM T_BOARD_COMMENT_TEST C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt			
+				, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
 			/* 페이징 처리 */	
 			FROM (
 				SELECT ROWNUM AS RNUM, Z.* FROM (
@@ -426,7 +429,9 @@
 				, A.C_IS_DELETED_FL as isDeletedFL		
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
-				, B.C_TITLE as regNickName			
+				, B.C_TITLE as regNickName	
+				, (SELECT COUNT(*) FROM T_BOARD_COMMENT_TEST C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt		
+				, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
 			FROM T_BOARD_TEST A, T_USER_INFO B
 			WHERE 1=1
 				AND A.C_REG_ID = B.C_ID
@@ -462,7 +467,17 @@
 				, A.C_IS_DELETED_FL as isDeletedFL		
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
-				, B.C_TITLE as regNickName			
+				, B.C_TITLE as regNickName
+				, (	CASE WHEN 
+						(SELECT COUNT(*) 
+						 FROM T_BOARD_LIKE_TEST D 
+						 WHERE 1=1
+						 	AND A.C_ID = D.C_ARTICLE_ID
+						    AND D.C_REG_ID = #userID#
+						 ) = 0 
+						THEN 0
+          			ELSE 1 END
+          		   ) as likeFL			
 			FROM T_BOARD_TEST A, T_USER_INFO B
 			WHERE 1=1
 				AND A.C_ID = #c_id#
@@ -491,6 +506,8 @@
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
 				, B.C_TITLE as regNickName			
+				, (SELECT COUNT(*) FROM T_BOARD_COMMENT_TEST C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt
+				, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
 			FROM T_BOARD_TEST A, T_USER_INFO B
 			WHERE 1=1
 				AND A.C_REG_ID = B.C_ID
@@ -545,4 +562,5 @@
 			, C_MOD_DT = #modDt# 			
 		WHERE C_ID = #c_id#
 	</update>
+	
 </sqlMap>

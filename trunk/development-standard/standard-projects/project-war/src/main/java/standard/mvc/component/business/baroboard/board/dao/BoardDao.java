@@ -4,6 +4,7 @@ import java.util.List;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
+import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
@@ -51,5 +52,6 @@ public interface BoardDao {
 	public List<Comment> getCommentList(Comment comment) throws Exception;
 
 	public int deleteComment(Comment comment) throws Exception;
+
 
 }

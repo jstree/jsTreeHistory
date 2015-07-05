@@ -4,6 +4,7 @@ import java.util.List;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
+import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
@@ -150,5 +151,21 @@ public interface BoardService {
 	 * @throws Exception
 	 */
 	public Comment deleteComment(Comment comment) throws Exception;
+
+	/** 게시글에 좋아요를 추가한다.
+	 * 
+	 * @param like
+	 * @return Like
+	 * @throws Exception
+	 */
+	public Like likeArticle(Like like) throws Exception;
 	
+	
+	/** 게시글에 좋아요를 취소한다.
+	 * 
+	 * @param like
+	 * @return Like
+	 * @throws Exception
+	 */
+	public Like cancelLikeArticle(Like like) throws Exception;
 }

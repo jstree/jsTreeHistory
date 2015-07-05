@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import standard.mvc.component.business.baroboard.board.dao.BoardDao;
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
+import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
@@ -190,6 +191,20 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.deleteComment(comment);
 		return comment;
 	}
+
+	@Override
+	public Like likeArticle(Like like) throws Exception {
+		// TODO : 권한체크
+		like.setRegID(23);
+		return coreService.addNode(like);
+	}
+
+	@Override
+	public Like cancelLikeArticle(Like like) throws Exception {
+		// TODO : 권한체크
+		coreService.removeNode(like);
+		return like;
+	}
 	
 	/** DB에 저장되어있는 20150601063125 형식의 날짜형식을 2015-06-01 형식으로 바꿔줌 */
 	public void changeRegDTFormat(List<Article> list){
@@ -256,6 +271,4 @@ public class BoardServiceImpl implements BoardService {
 		
 		article.setRegDt(this.getTodayFor14Digits());
 	}
-
-
 }

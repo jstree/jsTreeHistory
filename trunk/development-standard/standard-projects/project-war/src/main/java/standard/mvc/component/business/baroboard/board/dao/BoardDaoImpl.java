@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
+import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 
@@ -102,6 +103,4 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 	public int deleteComment(Comment comment) throws Exception {
 		return update(comment.getSqlMapSelector() + "." + "deleteComment", comment);
 	}
-
-
 }

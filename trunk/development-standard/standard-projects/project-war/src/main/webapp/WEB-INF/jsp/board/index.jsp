@@ -113,7 +113,7 @@ $(document).ready(function(){
 													<td class="dt-center">${announce.regNickName}</td>
 													<td class="dt-center">${announce.regDt}</td>
 													<td class="dt-center">${announce.viewCnt}</td>
-													<td class="dt-center">0</td>
+													<td class="dt-center">${announce.likeCnt}</td>
 												</tr>
 											</c:forEach>
 											<c:forEach var="article" items="${articleList}" varStatus="status">
@@ -131,7 +131,7 @@ $(document).ready(function(){
 													<td class="dt-center"><a class="user-context" data-id="${article.regId}">${article.regNickName}</a></td>
 													<td class="dt-center">${article.regDt}</td>
 													<td class="dt-center">${article.viewCnt}</td>
-													<td class="dt-center">0</td>
+													<td class="dt-center">${article.likeCnt}</td>
 												</tr>
 											</c:forEach>
 										</tbody>

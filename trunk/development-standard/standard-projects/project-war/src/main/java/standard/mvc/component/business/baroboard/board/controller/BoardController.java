@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import standard.mvc.component.business.baroboard.board.service.BoardService;
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
+import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.manage.user.service.UserManageService;
 import standard.mvc.component.business.baroboard.user.vo.User;
@@ -195,6 +196,12 @@ public class BoardController extends GenericAbstractController {
 	@ResponseBody
 	public Comment deleteComment(@ModelAttribute Comment comment) throws Exception {
 		return boardService.deleteComment(comment);
+	}
+	
+	@RequestMapping(value = "/likeArticle.do")
+	@ResponseBody
+	public Like likeArticle(@ModelAttribute Like like) throws Exception {
+		return boardService.likeArticle(like);
 	}
 	
 }

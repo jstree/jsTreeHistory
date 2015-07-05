@@ -84,7 +84,18 @@ public class Article extends ComprehensiveTree {
 	
 	/* 글쓴이 닉네임 */
 	private String regNickName;
+	
+	/* 좋아요 수 */
+	private int likeCnt;
+	
+	/* 해당 글 좋아요 여부 */
+	private String likeFL;
 
+	/* 해당 사용자 ID */
+	private int userID;
+	
+	
+	
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();
@@ -115,10 +126,35 @@ public class Article extends ComprehensiveTree {
 
 		return b.toString();
 	}
-
+	
 	@Override
 	public String getSqlMapSelector() {
 		return "board";
+	}
+
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+
+
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
+	public String getLikeFL() {
+		return likeFL;
+	}
+
+	public void setLikeFL(String likeFL) {
+		this.likeFL = likeFL;
 	}
 
 	public int getRootArticleID() {
