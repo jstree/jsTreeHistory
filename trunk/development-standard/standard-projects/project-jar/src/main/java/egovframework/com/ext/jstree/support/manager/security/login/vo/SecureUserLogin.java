@@ -53,6 +53,8 @@ public class SecureUserLogin implements UserDetails
 	private String username;
 	private String password;
 	private String passwordChangeDt;
+	private int userGradeCd;
+	private String c_title;
 
 	public int getUserid()
 	{
@@ -94,6 +96,26 @@ public class SecureUserLogin implements UserDetails
 	public void setPasswordChangeDt(String passwordChangeDt)
 	{
 		this.passwordChangeDt = passwordChangeDt;
+	}
+	
+    public int getUserGradeCd()
+	{
+		return userGradeCd;
+	}
+
+	public void setUserGradeCd(int userGradeCd)
+	{
+		this.userGradeCd = userGradeCd;
+	}
+
+	public String getC_title()
+	{
+		return c_title;
+	}
+
+	public void setC_title(String c_title)
+	{
+		this.c_title = c_title;
 	}
 
 	@Override
