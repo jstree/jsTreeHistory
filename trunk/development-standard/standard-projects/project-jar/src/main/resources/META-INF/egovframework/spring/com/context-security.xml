@@ -7,7 +7,7 @@
           			  http://www.springframework.org/schema/security
           			  http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 	
-    <!-- <security:http pattern="/assets/**" security="none"/>
+   <!--  <security:http pattern="/assets/**" security="none"/>
 	<security:http pattern="/index.do" security="none"/>
 	<security:http pattern="/user/login/index.do" security="none"/>
 	<security:http pattern="*/*" security="none"/>
@@ -40,9 +40,7 @@
 
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider user-service-ref="secureUserLoginServiceImpl">
-			<security:password-encoder hash="sha-256">
-				<security:salt-source user-property=""/>
-			</security:password-encoder>
+			<security:password-encoder hash="sha-256"/>
 		</security:authentication-provider>
 	</security:authentication-manager> -->
 	
