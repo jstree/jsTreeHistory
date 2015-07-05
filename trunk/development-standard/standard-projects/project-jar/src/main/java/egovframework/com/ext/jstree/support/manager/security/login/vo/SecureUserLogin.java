@@ -49,32 +49,34 @@ public class SecureUserLogin implements UserDetails
 {
 	private static final long serialVersionUID = -6673037937422246017L;
 	
-	private int userid;
-	private String username;
+	private int id;
 	private String password;
 	private String passwordChangeDt;
 	private int userGradeCd;
-	private String c_title;
+	private String nickName;
+	private String email;
+	private String username;
 
-	public int getUserid()
+	public int getId()
 	{
-		return userid;
+		return id;
 	}
 
-	public void setUserid(int userid)
+	public void setId(int id)
 	{
-		this.userid = userid;
-	}
-
-	public void setUsername(String userName)
-	{
-		this.username = userName;
+		this.id = id;
 	}
 
 	@Override
 	public String getUsername()
 	{
 		return this.username;
+	}
+	
+	public void setUsername(String username)
+	{
+		 this.email = username;
+		 this.username = username;
 	}
 
 	public void setPassword(String password)
@@ -107,15 +109,26 @@ public class SecureUserLogin implements UserDetails
 	{
 		this.userGradeCd = userGradeCd;
 	}
-
-	public String getC_title()
+	
+	public String getNickName()
 	{
-		return c_title;
+		return nickName;
 	}
 
-	public void setC_title(String c_title)
+	public void setNickName(String nickName)
 	{
-		this.c_title = c_title;
+		this.nickName = nickName;
+	}
+
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
+		this.username = email;
 	}
 
 	@Override
