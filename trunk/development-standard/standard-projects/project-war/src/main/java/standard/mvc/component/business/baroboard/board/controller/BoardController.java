@@ -191,4 +191,10 @@ public class BoardController extends GenericAbstractController {
 		
 	}
 	
+	@RequestMapping(value = "/deleteComment.do")
+	@ResponseBody
+	public Comment deleteComment(@ModelAttribute Comment comment) throws Exception {
+		return boardService.deleteComment(comment);
+	}
+	
 }

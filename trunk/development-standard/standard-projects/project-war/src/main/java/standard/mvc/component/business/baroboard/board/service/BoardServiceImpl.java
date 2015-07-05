@@ -173,9 +173,23 @@ public class BoardServiceImpl implements BoardService {
 	public List<Comment> getCommentList(Comment comment) throws Exception {
 		List<Comment> commentList = boardDao.getCommentList(comment);
 		changeRegDTFormatForComment(commentList);
+		/* 글 볼수 있는 권한 체크 */
+		for(Comment c : commentList) {
+			if("1".equals(comment.getViewOnlyRegIDFL()) && comment.getRegID() != 23 )	{ // TODO : 세션 붙이면 개인인증 확인, 게시글 RegID 확인 
+				c.setViewForRegOnlyFL("1");
+			} else {
+				c.setViewForRegOnlyFL("0");
+			}
+		}
 		return commentList;
 	}
 
+	@Override
+	public Comment deleteComment(Comment comment) throws Exception {
+		// TODO : 권한체크
+		boardDao.deleteComment(comment);
+		return comment;
+	}
 	
 	/** DB에 저장되어있는 20150601063125 형식의 날짜형식을 2015-06-01 형식으로 바꿔줌 */
 	public void changeRegDTFormat(List<Article> list){
@@ -242,5 +256,6 @@ public class BoardServiceImpl implements BoardService {
 		
 		article.setRegDt(this.getTodayFor14Digits());
 	}
+
 
 }

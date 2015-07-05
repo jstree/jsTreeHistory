@@ -15,6 +15,9 @@
 a {
 	color: #f45b4f;
 }
+.bold {
+	font-weight: bold;
+}
 
 
 /* Article Header */
@@ -244,10 +247,19 @@ $(document).ready(function(){
 											<span class="rdc-reg-id">${comment.regNickName}</span>
 											<span class="rdc-reg-date">${comment.regDT}</span>
 											<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
-											<span><a href="">삭제</a></span>
+											<span><a onclick="deleteThisReply(this, ${comment.c_id})">삭제</a></span>
 										</div>
-										
-										<div class="rdc-body"><p>${comment.c_title}</p></div>
+										<c:choose>
+											<c:when test="${comment.isDeletedFL == '1' }">
+											<div class="rdc-body"><p><span class="bold">삭제된 코멘트 입니다.</span></p></div>
+											</c:when>
+											<c:when test="${comment.viewForRegOnlyFL == '1'}">
+											<div class="rdc-body"><p><span class="bold">글쓴이만 볼 수 있는 코멘트 입니다.</span></p></div>
+											</c:when>
+											<c:otherwise>
+											<div class="rdc-body"><p>${comment.c_title}</p></div>
+											</c:otherwise>
+										</c:choose>
 									</div>
 									</c:forEach>
 									
@@ -304,6 +316,26 @@ $(document).ready(function(){
 		</article>
 	</section>
 	<script>
+	function deleteThisReply(btn, c_id){
+		if(confirm("코멘트를 삭제하시겠습니까?") == true){
+			obj = {};
+			obj.c_id = $(btn).parent('div').closest('.write-comment').attr('data-id');
+
+			$.ajax({
+	   		  url: '${pageContext.request.contextPath}/board/deleteComment.do',
+	   		  method: 'POST',
+	   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	   		  data: obj,
+	   		}).done(function(data){
+	   			alert('삭제되었습니다.');
+				window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+ articleID;
+	   		}).fail(function(data){
+	   			alert('삭제에 실패하였습니다.');
+	   			console.log(data); 
+	   		})
+		}
+	}
+	
 	
 	function addCommentReply(btn, ref) {
 		var copiedCommentDivCheck = $('div.for-reply.copied');
@@ -366,6 +398,7 @@ $(document).ready(function(){
 	   			console.log(data); 
 	   		})
 	}
+	
 	</script>
 </body>
 </html>

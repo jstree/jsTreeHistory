@@ -50,4 +50,6 @@ public interface BoardDao {
 
 	public List<Comment> getCommentList(Comment comment) throws Exception;
 
+	public int deleteComment(Comment comment) throws Exception;
+
 }

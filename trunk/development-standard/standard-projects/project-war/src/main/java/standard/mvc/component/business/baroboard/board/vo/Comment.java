@@ -38,11 +38,20 @@ public class Comment extends ComprehensiveTree {
 	/* 글쓴이 닉네임 */
 	private String regNickName;
 
+	private String viewForRegOnlyFL;
+	
 	@Override
 	public String getSqlMapSelector() {
 		return "comment";
 	}
 
+
+	public String getViewForRegOnlyFL() {
+		return viewForRegOnlyFL;
+	}
+	public void setViewForRegOnlyFL(String viewForRegOnlyFL) {
+		this.viewForRegOnlyFL = viewForRegOnlyFL;
+	}
 	public String getRegNickName() {
 		return regNickName;
 	}

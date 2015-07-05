@@ -143,6 +143,12 @@ public interface BoardService {
 	 */
 	public List<Comment> getCommentList(Comment comment) throws Exception;
 
-	
+	/** 코멘트를 삭제한다. (IS_DELETED_FL 를 1로 변경) 
+	 * 
+	 * @param Comment
+	 * @return Comment
+	 * @throws Exception
+	 */
+	public Comment deleteComment(Comment comment) throws Exception;
 	
 }

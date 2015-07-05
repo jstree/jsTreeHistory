@@ -428,4 +428,11 @@
 		
 	</select>
 	
+	<update id="deleteComment" parameterClass="Comment" >
+		/* deleteComment */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_IS_DELETED_FL = '1'
+		WHERE C_ID = #c_id#
+	</update>
+	
 </sqlMap>
