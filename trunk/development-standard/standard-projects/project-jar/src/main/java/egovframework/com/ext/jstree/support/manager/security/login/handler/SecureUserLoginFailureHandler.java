@@ -61,6 +61,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		
 		final int ACCOUNTLOCKED = 5;
 		final String LOGINURL = "/user/login/index.do";
+		super.setDefaultFailureUrl(LOGINURL);
 		
 		try
 		{
@@ -70,7 +71,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 			ShaPasswordEncoder encoder=new ShaPasswordEncoder(256);
 			String secureLogInUserPassword = encoder.encodePassword(secureLogInUser.getPassword(), null);
 			
-			Date joinTargetDate = null;;
+			Date joinTargetDate = null;
 			
 			if ( secureLoggedInUser != null ) 
 			{
@@ -82,7 +83,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 			
 			if ( secureLoggedInUser == null ) 
 			{
-				super.setDefaultFailureUrl( LOGINURL+"?error=1" );
+				request.getSession().setAttribute("errorCode", "1");
 			}
 			else if ( StringUtils.equals(secureLoggedInUser.getPassword(), secureLogInUserPassword) == false ) 
 			{
@@ -95,20 +96,21 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 					secureUser.setC_id( ACCOUNTADMIN );
 					this.secureUserLoginDao.setUserLoginJoinStateCd(secureUser);
 					
-					super.setDefaultFailureUrl( LOGINURL+"?error=2" );
+					request.getSession().setAttribute("errorCode", "2");
 				}
 				else
 				{
-					super.setDefaultFailureUrl( LOGINURL+"?error=3&loginFailureCnt="+String.valueOf(secureLoggedInUser.getLoginFailureCnt()) );	
+					request.getSession().setAttribute("errorCode", "3");
+					request.getSession().setAttribute("loginFailureCnt", String.valueOf(secureLoggedInUser.getLoginFailureCnt()));
 				}
 			}
 			else if( secureLoggedInUser.getJoinStateCd() == ACCOUNTLOCKED )
 			{
-				super.setDefaultFailureUrl( LOGINURL+"?error=2" );
+				request.getSession().setAttribute("errorCode", "2");
 			}
 			else if( joinTargetDate.after(new Date()) == true )
 			{
-				super.setDefaultFailureUrl( LOGINURL+"?error=4" );
+				request.getSession().setAttribute("errorCode", "4");
 			}
 		} 
 		catch ( Exception e )
