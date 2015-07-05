@@ -95,7 +95,7 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 		
 		if ( passwordTargetDate.before(new Date()) == true )
 		{
-			final String passwordChangePage = "/user/info/index.do";
+			final String passwordChangePage = "/user/info/index.do?email="+secureUserlogin.getEmail();
 			super.setDefaultTargetUrl(passwordChangePage);
 		}
 	}
@@ -107,7 +107,7 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 		String currentDate = sdf.format(currentDay);
 		
 		SecureUser user = new SecureUser();
-		user.setC_id(secureUserlogin.getUserid());
+		user.setC_id(secureUserlogin.getId());
 		user.setLoginDt(currentDate);
 		
 		this.secureUserLoginDao.setUserLastLoginDt(user);
@@ -116,7 +116,7 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 	private void setUserLoginFailureCntZero( SecureUserLogin secureUserlogin ) throws Exception
 	{
 		SecureUser user = new SecureUser();
-		user.setC_id(secureUserlogin.getUserid());
+		user.setC_id(secureUserlogin.getId());
 		
 		this.secureUserLoginDao.setUserLoginFailureCntZero(user);
 	}
@@ -131,7 +131,7 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 		userLoginState.setRef(2);
 		userLoginState.setC_type("default");
 		userLoginState.setC_title("로그인");
-		userLoginState.setUserId(secureUserlogin.getUserid());
+		userLoginState.setUserId(secureUserlogin.getId());
 		userLoginState.setIpAddress(request.getRemoteAddr());
 		userLoginState.setMacAddress(getMacAddress(request.getRemoteAddr()));
 		userLoginState.setLoginDt(currentDate);
