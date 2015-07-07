@@ -29,7 +29,7 @@
 <script>
 function readScrap(c_id){
 	var popupUrl = '${pageContext.request.contextPath}/user/scrap/readScrapPopup.do?boardId=' +  c_id;
-	var popupOption = 'width=760, height=280, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
+	var popupOption = 'width=760, height=500, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
 	window.open(popupUrl, '', popupOption);
 }
 </script>

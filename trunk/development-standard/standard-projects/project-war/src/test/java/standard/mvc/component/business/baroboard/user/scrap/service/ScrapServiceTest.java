@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
 
-@Ignore("DB Unit 에러")
+//@Ignore("DB Unit 에러")
 public class ScrapServiceTest extends initScrapTestBase {
 
 	@Autowired

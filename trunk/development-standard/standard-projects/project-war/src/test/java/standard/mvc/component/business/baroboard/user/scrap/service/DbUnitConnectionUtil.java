@@ -10,8 +10,11 @@ import org.dbunit.database.IDatabaseConnection;
 public class DbUnitConnectionUtil {
 	public String DRIVER ="oracle.jdbc.driver.OracleDriver";
 	public String URL = "jdbc:oracle:thin:@db.313.co.kr:1521:family";
-	public String USER = "STANDARD_DB";
-	public String PWD = "STANDARD_DB_1234";
+	public String USER = "DBUNIT";
+	public String PWD = "DBUNIT_1234";
+	
+	//public String USER = "STANDARD_DB";
+	//public String PWD = "STANDARD_DB_1234";
 	
 	public String getDRIVER() {
 		return DRIVER;

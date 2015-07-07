@@ -101,19 +101,11 @@ div#articleAction span a {
 </style>
 <script>
 function deleteThisArticle(c_id){
-	if(confirm('스크랩 게시물을 지우시겠습니까?') == true) {
-		$.ajax({
-			 method: 'GET'
-			,url: '${pageContext.request.contextPath}/user/scrap/deleteArticle.do?c_id=' + c_id
-			,success: function(data){
-				alert('삭제하였습니다.');
-				location.href = '${pageContext.request.contextPath}/user/scrap/index.do';
-			}
-			,fail: function(data) {
-				alert('글 삭제에 실패하였습니다.');
-			}
-		});
-	}	
+	if(confirm('스크랩 게시물을 삭제 하시겠습니까?') == true) {
+		location.href ='${pageContext.request.contextPath}/user/scrap/delete.do?c_id=' + c_id;
+		parent.location.reload();
+		window.close();		
+	}
 }
 </script>
 

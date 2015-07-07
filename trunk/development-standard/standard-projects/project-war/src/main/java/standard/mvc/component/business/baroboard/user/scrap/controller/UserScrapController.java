@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,6 +51,9 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
 @Controller
 @RequestMapping(value = "/user/scrap/")
 public class UserScrapController extends GenericAbstractController {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Resource(name="CoreService")
 	private CoreService coreService;
 	
@@ -66,15 +71,9 @@ public class UserScrapController extends GenericAbstractController {
 
 	@RequestMapping(value = "/index.do", method = {RequestMethod.GET})
 	public String scrapList(ModelMap modelMap, @ModelAttribute UserScrap userScrap) throws Exception{
-		
-		//SecureUserLogin secureUserLogin =(SecureUserLogin)SecurityContextHolder.getContext().getAuthentication().getDetails();
-       	//System.out.println(secureUserLogin.);
-		/*
-		System.out.println("=======================");
-		System.out.println("userId : " + userScrap.getUserId());
-		System.out.println("=======================");
-		//int userId = 0;
-		*/
+		//SecureUserLogin secureUserLogin =(SecureUserLogin)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//userScrap.setUserId(secureUserLogin.getUserId());
+	
 		userScrap.setUserId(3);
 		int boardId = userScrap.getBoardId();
 		int totalPageCount = userScrapService.getScrapListTotalCnt(userScrap) / userScrap.getPageSize() + 1;

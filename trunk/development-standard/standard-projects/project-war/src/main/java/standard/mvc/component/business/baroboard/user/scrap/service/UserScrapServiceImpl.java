@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.user.scrap.dao.UserScrapDao;
 import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
 
@@ -23,7 +24,8 @@ public class UserScrapServiceImpl implements UserScrapService {
 	@Override
 	public List<UserScrap> scrapList(UserScrap userScrap) throws Exception {
 		List<UserScrap> scrapList = (List<UserScrap>)userScrapDao.getUserScrapList(userScrap);
-        return scrapList;
+		changeRegDTFormat(scrapList);
+		return scrapList;
 	}
 
 	
@@ -43,5 +45,14 @@ public class UserScrapServiceImpl implements UserScrapService {
 		int totalScrapCount =userScrapDao.getScrapListTotalCnt(userScrap);
 		return totalScrapCount;
 	}
-
+	
+	public void changeRegDTFormat(List<UserScrap> userScrapList){
+		for(UserScrap userScrap : userScrapList) {
+			String regDate = userScrap.getRegDt();
+			String year = regDate.substring(0, 4);
+			String month = regDate.substring(4, 6);
+			String day = regDate.substring(6, 8);
+			userScrap.setRegDt(year + "-" + month + "-" + day);
+		}
+	}
 }

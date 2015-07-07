@@ -94,14 +94,21 @@ DELETE FROM T_USER_SCRAP;
 INSERT INTO T_USER_SCRAP
   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
    C_USER_ID, C_BOARD_ID, C_POSTING_ID, C_SCRAP_DT)                     
-  VALUES (1, 0, 0, 1, 4, 0, 'Root Node', NULL,
-          1, 1, 1,'20150425205811');
+  VALUES (1, 0, 0, 1, 6, 0, 'Root Node', 'root',
+          0, 0, 0,'20150425205811');
   
 INSERT INTO T_USER_SCRAP 
   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
    C_USER_ID, C_BOARD_ID, C_POSTING_ID, C_SCRAP_DT)                     
-  VALUES (2, 1, 0, 2, 3, 1, '게시판 스크랩 목록', 'drive',
-           1, 1, 1,'20150425205811');
+  VALUES (2, 1, 0, 2, 5, 1, '게시판 스크랩 목록', 'drive',
+           3, 0, 0,'20150425205811');
+           
+INSERT INTO T_USER_SCRAP 
+  (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
+   C_USER_ID, C_BOARD_ID, C_POSTING_ID, C_SCRAP_DT)                     
+  VALUES (3, 2, 0, 3, 4, 2, '테스트 스크랩', 'default',
+           3, 24, 270,'20150425205811');
+           
 COMMIT;
 
 /* 회원_비밀번호찾기질문 */
