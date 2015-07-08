@@ -204,4 +204,10 @@ public class BoardController extends GenericAbstractController {
 		return boardService.likeArticle(like);
 	}
 	
+	@RequestMapping(value = "/cancelLikeArticle.do")
+	@ResponseBody
+	public Like cancleLikeArticle(@ModelAttribute Like like) throws Exception {
+		return boardService.cancelLikeArticle(like);
+	}
+	
 }

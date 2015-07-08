@@ -302,7 +302,6 @@ $(document).ready(function(){
 										</c:otherwise>
 										</c:choose>
 										<a href="${pageContext.request.contextPath}/board/modifyArticle.do?c_id=${article.c_id}">수정</a>
-										<a href="${pageContext.request.contextPath}/board/modifyArticle.do?c_id=${article.c_id}">수정</a>
 										<a onclick="deleteThisArticle(${article.c_id})">삭제</a>
 										<a href="${pageContext.request.contextPath}/board/newReplyArticle.do?c_id=${article.c_id}">답글쓰기</a>
 										<a href="${pageContext.request.contextPath}/board/index.do">목록가기</a>
