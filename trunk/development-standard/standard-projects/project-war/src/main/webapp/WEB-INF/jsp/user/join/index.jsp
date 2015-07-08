@@ -5,7 +5,7 @@
 <html lang="ko" class="js">
 <head>
 <title>${pageName}</title>
-<style>
+<style type="text/css" id="style">
 label {
     margin-bottom : 0 !important;
 }
@@ -36,7 +36,7 @@ select {
     float : right;
 }
 </style>
-<script type="text/javascript">
+<script type="text/javascript" id="script">
 var join = {
     
     emailDuplicaionChecked : false,
@@ -164,7 +164,7 @@ var join = {
                     return false;
                 }
                 
-                if (!confirm('가입하시겠습니까?')) {
+                if (!confirm('전송하시겠습니까?')) {
                     return false;
                 }
                 
@@ -181,7 +181,9 @@ var join = {
                     
                     if (r.status) {
                         alert('저장되었습니다.');
-                        location.href = '<c:url value="/user/login/index.do" />';
+                        if (location.href.indexOf('/user/join') > -1) {
+                            location.href = '<c:url value="/user/login/index.do" />';
+                        }
                     }
                 }
                 
@@ -282,7 +284,7 @@ var join = {
             }
         }
         else if (join.passwordSecurityLevelCd == 5) {
-            if ( ! /^(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*\(\)-_+=]).*$/.test(password) ) {
+            if ( ! /^(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\[\{\]\}\\\|\;\:\'\"\,\<\.\>\/\?]).*$/.test(password) ) {
                 alert('비밀번호를 8자 이상, 영문자/숫자/특수문자를 조합하여 입력해주세요.');
                 $password.focus();
                 return false;
@@ -333,7 +335,6 @@ var join = {
         
         return true;
     }
-    
 };
 
 $(document).ready(function() {
@@ -353,7 +354,7 @@ $(document).ready(function() {
         <article>
             <div class="clearfix">
                 <div class="container bm-remove">
-                <form id="frmJoin" action="join.do" method="post">
+                <form id="frmJoin" action="${pageContext.request.contextPath}/user/join/join.do" method="post">
                     <div>
                         <label>
                                                   이메일 주소<span class="essential">*</span>
@@ -412,7 +413,7 @@ $(document).ready(function() {
                         </label>
                     </div>
                     <div class="divButtons">
-                        <button type="submit" class="compact">가입하기</button>
+                        <button id="btnJoin" type="submit" class="compact">가입하기</button>
                     </div>
                 </form>
                 </div>

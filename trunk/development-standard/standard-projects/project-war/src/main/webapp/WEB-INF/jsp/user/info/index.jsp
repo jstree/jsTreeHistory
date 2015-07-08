@@ -168,7 +168,7 @@ var userInfo = {
                 }
             }
             else if (userInfo.passwordSecurityLevelCd == 5) {
-                if ( ! /^(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*\(\)-_+=]).*$/.test(password) ) {
+                if ( ! /^(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\[\{\]\}\\\|\;\:\'\"\,\<\.\>\/\?]).*$/.test(password) ) {
                     alert('비밀번호를 8자 이상, 영문자/숫자/특수문자를 조합하여 입력해주세요.');
                     $password.focus();
                     return false;
@@ -255,7 +255,6 @@ var userInfo = {
         
         return true;
     }
-    
 };
 
 $(document).ready(function() {

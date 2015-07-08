@@ -1,32 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<style type="text/css">
-.center {
+<!DOCTYPE html>
+<html lang="ko" class="js">
+<head>
+<title>${pageName}</title>
+<style type="text/css" id="style">
+#divUserManage .center {
     text-align: center;
 }
-.right {
+#divUserManage .right {
     text-align: right;
 }
-.chk {
+#divUserManage .chk {
     height: 13px !important;
 }
-select {
+#divUserManage select {
 	height: 100%;
 }
-input[type="text"] {
+#divUserManage input[type="text"] {
 	width: 192px !important;
     height: 30px !important;
     display: inline !important;
 }
-select {
+#divUserManage select {
 	display: inline !important;
 }
-#divBtns {
+#divUserManage #divBtns {
     text-align: right;
     margin-top: 10px;
 }
-.compact {
+#divUserManage .compact {
 	min-width: 71px;
     min-height: 37px;
 }
@@ -55,17 +59,17 @@ select {
 	width: 25%;
 }
 */
-#divPagination {
+#divUserManage #divPagination {
 	text-align: center;
 	margin-top: 10px;
 	font-size: 1.1em;
 }
-.currentPage {
+#divUserManage .currentPage {
 	font-weight: bold !important;
 }
 </style>
 
-<script type="text/javascript">
+<script type="text/javascript" id="script">
 var userList = {
 	
 	currentPageNo : null,
@@ -167,36 +171,32 @@ var userList = {
         
 		$('#btnAddUserInfo').on('click', function() {
         	
-// 			callAjax(null
-//                    , '/user/join/agreement/next.do'
-//                    , { target : '#divPopup', selector : 'section' }
-//                    , 'post'
-//                    , 'html'
-//                    , null
-//                    , null
-//                    , callback);
+			callAjax(null
+                   , '/user/join/index.do'
+                   , { target : '#divUserAdd', selector : 'section', $document : $(document) }
+                   , 'post'
+                   , 'html'
+                   , null
+                   , null
+                   , callback);
 			
-// 			callAjax(null
-// 		           , 'delete.do'
-// 		           , null
-// 		           , 'post'
-// 		           , 'json'
-// 		           , params
-// 		           , 'application/json'
-// 		           , callback);
-		    
-// 		    function callback(r) {
+		    function callback(r) {
 		    	
-		    	
-// 		    }
-			
-			popupOpen();
-			
-			function popupOpen(){
-				var popUrl = "add/popup.do";	//팝업창에 출력될 페이지 URL
-				var popOption = "width=400, height=450, resizable=no, scrollbars=no, status=no, menubar=no";    //팝업창 옵션(optoin)
-				window.open(popUrl, '', popOption);
-			}
+		        $('#divUserManage').hide();
+		        $('#divUserAdd').show();
+		        $('#divUserAdd').find('.container').removeClass('container');
+		        $('#divUserAdd #btnJoin').text('저장하기');
+		        
+		        var $btnShowList = $('<button type="button" class="compact">목록보기</button>');
+		        
+		        $btnShowList.on('click', function() {
+		            $('#divUserManage').show();
+	                $('#divUserAdd').hide();
+	                userList.getList(1);
+		        })
+		        
+		        $('#divUserAdd .divButtons').prepend($btnShowList);
+		    }
         });
         
         $('#checkAll').on('change', function() {
@@ -313,6 +313,7 @@ var userList = {
 		            data : rows,
 		            columnDefs : [
 		            	{targets : 2, className : 'center'},
+		            	{targets : 3, className : 'center'},
 		            	{targets : 5, className : 'center'},
 		            	{targets : 7, className : 'center'}
 		            ]
@@ -342,10 +343,12 @@ $(document).ready(function() {
     userList.init();
 });
 </script>
+</head>
 
+<body>
 <section>
 	<div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
-	    <div id="samDiv" class="tablet-mobile alpha bm-remove last">
+	    <div id="divUserManage" class="tablet-mobile alpha bm-remove last">
 			<div id="search" class="one-whole boxed p-twenty">
 				<form id="formSearchingUser" action="list.do" method="post">
 					<div class="responsive-row">
@@ -401,8 +404,8 @@ $(document).ready(function() {
 	            </thead>
 	        </table>
 	        <div id="divPagination"></div>
-	        
-	        <div id="divPopup"></div>
 	    </div>
+	    <div id="divUserAdd"></div>
 	</div>
 </section>
+</body>

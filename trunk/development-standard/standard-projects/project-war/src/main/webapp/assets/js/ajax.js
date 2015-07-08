@@ -195,9 +195,15 @@ function callAjax(form, url, target, type, returnType, data, contentType, jsonpC
             }
             else if (typeof target == 'object') {
                 
-                var html = $(responseText).find(target.selector);
+                var $style = target.$document.find('head style#style');
                 
-                $(target.target).html(html);
+                var $mockDiv = $('<div />').html(responseText);
+                
+                $style.html( $style.html() + $mockDiv.find('style#style').html() );
+                
+                $(target.target).html( $mockDiv.find(target.selector) );
+                
+                eval( $mockDiv.find('script#script').text() );
             }
         }
     });
