@@ -229,11 +229,11 @@ $(document).ready(function(){
 									<span id="articleInfo">
 										<span id="firstInfoRow">
 											<span><a class="user-context">${article.regNickName}</a></span>
-											<span id="articleDt">2015-05-03 09:15:25</span>
+											<span id="articleDt">${article.regDt}</span>
 										</span>
 										<span id="secondInfoRow">
 											<span>조회수: ${article.viewCnt}</span>
-											<span>추천수: 0</span>
+											<span>추천수: ${article.likeCnt}</span>
 											<span id="articleAttachment"><a id="attachmentFile">첨부 (3)</a></span>
 										</span>
 									</span>
@@ -294,12 +294,12 @@ $(document).ready(function(){
 								<div id="articleAction">
 									<span>
 										<c:choose>
-										<c:when test="${article.likeFL == '0'}">
-										<a href="${pageContext.request.contextPath}/board/likeArticle.do?c_id=${article.c_id}">좋아요</a>
-										</c:when>
-										<c:otherwise>
-										<a href="${pageContext.request.contextPath}/board/cancleLikeArticle.do?c_id=${article.c_id}">좋아요 취소</a>
-										</c:otherwise>
+											<c:when test="${article.likeFL == '0'}">
+												<a id="likeAnchor" onclick="likeArticle(${article.c_id})">좋아요</a>
+											</c:when>
+											<c:otherwise>
+												<a onclick="cancelLikeArticle(${article.c_id})">좋아요 취소</a>
+											</c:otherwise>
 										</c:choose>
 										<a href="${pageContext.request.contextPath}/board/modifyArticle.do?c_id=${article.c_id}">수정</a>
 										<a onclick="deleteThisArticle(${article.c_id})">삭제</a>
@@ -315,9 +315,44 @@ $(document).ready(function(){
 		</article>
 	</section>
 	<script>
+	
+	function likeArticle(articleID) {
+		var obj = {};
+		obj.articleID = articleID;
+		$.ajax({
+	   		  url: '${pageContext.request.contextPath}/board/likeArticle.do',
+	   		  method: 'POST',
+	   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	   		  data: obj
+	   		}).done(function(data){
+				$('#likeAnchor').text('좋아요 취소');
+				$('#likeAnchor').attr('onclick','cancelLikeArticle(${article.c_id})');
+	   		}).fail(function(data){
+	   			alert('좋아요 작업에 실패하였습니다.');
+	   			console.log(data); 
+	   		})
+	}
+	
+	function cancelLikeArticle(articleID) {
+		var obj = {};
+		obj.articleID = articleID;
+		$.ajax({
+	   		  url: '${pageContext.request.contextPath}/board/cancelLikeArticle.do',
+	   		  method: 'POST',
+	   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	   		  data: obj
+	   		}).done(function(data){
+				$('#likeAnchor').text('좋아요');
+				$('#likeAnchor').attr('onclick','likeArticle(${article.c_id})');
+	   		}).fail(function(data){
+	   			alert('좋아요 취소 작업에 실패하였습니다.');
+	   			console.log(data); 
+	   		})
+	}
+	
 	function deleteThisReply(btn, c_id){
 		if(confirm("코멘트를 삭제하시겠습니까?") == true){
-			obj = {};
+			var obj = {};
 			obj.c_id = $(btn).parent('div').closest('.write-comment').attr('data-id');
 
 			$.ajax({

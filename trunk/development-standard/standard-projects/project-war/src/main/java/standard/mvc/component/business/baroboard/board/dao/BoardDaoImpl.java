@@ -103,4 +103,12 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 	public int deleteComment(Comment comment) throws Exception {
 		return update(comment.getSqlMapSelector() + "." + "deleteComment", comment);
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Like getLikeByArticleIDAndRegID(Like like) throws Exception {
+		List<Like> resultList = list(like.getSqlMapSelector() + "." + "getLikeByArticleIDAndRegID", like);
+		return resultList.get(0);
+	}
+
 }

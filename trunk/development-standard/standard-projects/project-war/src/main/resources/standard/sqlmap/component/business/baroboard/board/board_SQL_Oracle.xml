@@ -477,7 +477,8 @@
 						 ) = 0 
 						THEN 0
           			ELSE 1 END
-          		   ) as likeFL			
+          		   ) as likeFL	
+          		, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt	
 			FROM T_BOARD_TEST A, T_USER_INFO B
 			WHERE 1=1
 				AND A.C_ID = #c_id#

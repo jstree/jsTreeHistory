@@ -53,5 +53,6 @@ public interface BoardDao {
 
 	public int deleteComment(Comment comment) throws Exception;
 
+	public Like getLikeByArticleIDAndRegID(Like like) throws Exception;
 
 }

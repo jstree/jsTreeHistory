@@ -390,4 +390,13 @@
 		#c_id#
 	</update>
 	
+	<select id="getLikeByArticleIDAndRegID" parameterClass="Like" resultClass="Like">
+		/* getLikeByArticleIDAndRegID */
+		SELECT C_ID
+		FROM T_BOARD_LIKE_TEST
+		WHERE 1=1
+			AND C_ARTICLE_ID = #articleID#
+			AND C_REG_ID = #regID#
+	</select>
+	
 </sqlMap>

@@ -120,7 +120,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Article readArticle(Article article) throws Exception {
 		this.countUpViewCnt(article);
+		// TODO : 권한체크
+		article.setUserID(23);
 		Article resultArticle = this.getArticleById(article);
+		this.changeRegDTFormatForReadArticle(resultArticle);
 		return resultArticle;
 	}
 
@@ -196,13 +199,16 @@ public class BoardServiceImpl implements BoardService {
 	public Like likeArticle(Like like) throws Exception {
 		// TODO : 권한체크
 		like.setRegID(23);
+		like.setRef(2);
 		return coreService.addNode(like);
 	}
 
 	@Override
 	public Like cancelLikeArticle(Like like) throws Exception {
 		// TODO : 권한체크
-		coreService.removeNode(like);
+		like.setRegID(23);
+		Like targetLike = boardDao.getLikeByArticleIDAndRegID(like);
+		coreService.removeNode(targetLike);
 		return like;
 	}
 	
