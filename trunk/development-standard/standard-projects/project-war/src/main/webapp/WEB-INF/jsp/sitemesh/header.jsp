@@ -33,9 +33,11 @@
 							<a href="${loginUrl}" target="_self">로그인</a>
 						</c:when>
 						<c:otherwise>
-							<%-- <form id="userInfoForm" method="post" action="${userInfo}"></form>
-							<a target="_self" onclick="document.getElementById('userInfoForm').submit();" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a> --%>
-							<a href="${userInfo}?email=${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}" target="_self" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a>
+							<form id="userInfoForm" method="post" action="${userInfo}">
+								<input type="hidden" name="email" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}" />
+							</form>
+							<a target="_self" onclick="document.getElementById('userInfoForm').submit();" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a>
+							<%-- <a href="${userInfo}?email=${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}" target="_self" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a> --%>
 							<span>|</span>
 							<a href="${logoutUrl}" target="_self">로그아웃</a>
 						</c:otherwise>
