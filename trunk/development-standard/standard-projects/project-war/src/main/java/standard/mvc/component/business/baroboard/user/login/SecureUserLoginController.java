@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,34 +66,38 @@ public class SecureUserLoginController extends GenericAbstractController
 	private UserService userService;
 	
 	@RequestMapping("/index.do")
-	public String login( @RequestParam(value = "error", required = false) String error
-			           , @RequestParam(value = "loginFailureCnt", required = false) String loginFailureCnt 
-			           , ModelMap model) throws Exception 
+	public String login( ModelMap model, HttpServletRequest request) throws Exception 
 	{
+		String errorCode = (String) request.getSession().getAttribute("errorCode");
+		
 		final String EMAILNOTFOUND = "1";
 		final String ACCOUNTLOCKED = "2";
 		final String WRONGPASSWORD = "3";
 		final String LOGINLIMITDAY = "4";
 		
-		if ( StringUtils.isNotBlank(error) )
+		if ( StringUtils.isNotBlank(errorCode) )
 		{
-			if( StringUtils.equals(EMAILNOTFOUND, error) )
+			if( StringUtils.equals(EMAILNOTFOUND, errorCode) )
 			{
 				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.002")); 
 			}
-			else if( StringUtils.equals(ACCOUNTLOCKED, error) )
+			else if( StringUtils.equals(ACCOUNTLOCKED, errorCode) )
 			{
 				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.008"));
 			}
-			else if( StringUtils.equals(WRONGPASSWORD , error) )
+			else if( StringUtils.equals(WRONGPASSWORD , errorCode) )
 			{
-				Object[] args = {new String(loginFailureCnt)};
+				Object[] args = {new String((String) request.getSession().getAttribute("loginFailureCnt"))};
 				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.003", args));
+				
 			}
-			else if( StringUtils.equals(LOGINLIMITDAY, error) )
+			else if( StringUtils.equals(LOGINLIMITDAY, errorCode) )
 			{
 				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.009"));
 			}
+			
+			request.getSession().removeAttribute("errorCode");
+			request.getSession().removeAttribute("loginFailureCnt");
 		}
 		
 		model.addAttribute("menuList", menuMngService.getCommunityMenu());
