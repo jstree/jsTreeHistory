@@ -38,7 +38,7 @@
 								<input type="hidden" name="id" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}" />
 							</form> --%>
 							<%-- <a id="userInfo" target="_self" onclick="document.getElementById('userInfoForm').submit();" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a> --%>
-							<a id="userInfo" href="javascript:void(0);" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a>
+							<a id="userInfo" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a>
 							<%-- <a href="${userInfo}?email=${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}" target="_self" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a> --%>
 							<span>|</span>
 							<a href="${logoutUrl}" target="_self">로그아웃</a>
@@ -47,8 +47,11 @@
 				</div>
 			</div>
 			<script type="text/javascript">
-				$('#userInfo').on('click', function()
+			
+				$('#userInfo').on('click', function(event)
 				{
+					event.preventDefault();
+					
 				    var $form = $('<form></form>');
 				    $form.attr('action', '${userInfo}');
 				    $form.attr('method', 'post');
@@ -68,6 +71,7 @@
 					 $form.appendTo('body');
 				     $form.submit();
 				});
+				
 			</script>
 		</header>
 	</body>
