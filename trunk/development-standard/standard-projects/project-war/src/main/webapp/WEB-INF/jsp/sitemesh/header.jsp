@@ -33,17 +33,43 @@
 							<a href="${loginUrl}" target="_self">로그인</a>
 						</c:when>
 						<c:otherwise>
-							<form id="userInfoForm" method="post" action="${userInfo}">
-								<input type="hidden" name="email" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}" />
-								<input type="hidden" name="id" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}" />
-							</form>
-							<a id="userInfo" href="javascript:void(0);" target="_self" onclick="document.getElementById('userInfoForm').submit();" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a>
+							<a id="userInfo" target="_self"style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a>
 							<span>|</span>
 							<a href="${logoutUrl}" target="_self">로그아웃</a>
 						</c:otherwise>
 					</c:choose>
 				</div>
 			</div>
+			<script type="text/javascript">
+			
+				$('#userInfo').on('click', function(event)
+				{
+					event.preventDefault();
+			        
+					$('#header-cart').find('#dynamicForm').remove();
+					
+				    var $form = $('<form/>');
+				    $form.attr('id', 'dynamicForm');
+				    $form.attr('action', '${userInfo}');
+				    $form.attr('method', 'post');
+				     
+				    $('<input>').attr({
+		                         type:'hidden'
+		                        ,name:'email'
+							    ,value:'${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}'
+		                        }).appendTo($form);
+				
+				    $('<input>').attr({
+				                 type:'hidden'
+				                ,name:'c_id'
+						        ,value:'${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}'
+				                }).appendTo($form);
+				
+					 $form.appendTo('#header-cart');
+				     $form.submit();
+				});
+				
+			</script>
 		</header>
 	</body>
 </html>
