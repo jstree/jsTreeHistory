@@ -76,7 +76,7 @@ public class UserController extends GenericAbstractController {
         return null;
     }
     
-    @RequestMapping(value = "/info/index.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/info/index.do", method = RequestMethod.POST)
     public String userInfoIndex(ModelMap model, User user) throws Exception {
         
         model.addAttribute("generalSetting", generalSettingService.getGeneralSetting());
@@ -166,7 +166,7 @@ public class UserController extends GenericAbstractController {
         
         SecureUserLogin userSession = (SecureUserLogin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         
-        if (! userSession.getUsername().equals( user.getEmail() )) {
+        if (! userSession.getEmail().equals( user.getEmail() )) {
             throw new RuntimeException("bb.com.error.004");
         }
         
