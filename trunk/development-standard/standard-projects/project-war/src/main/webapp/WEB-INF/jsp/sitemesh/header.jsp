@@ -33,10 +33,12 @@
 							<a href="${loginUrl}" target="_self">로그인</a>
 						</c:when>
 						<c:otherwise>
-							<form id="userInfoForm" method="post" action="${userInfo}">
+							<%-- <form id="userInfoForm" method="post" action="${userInfo}">
 								<input type="hidden" name="email" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}" />
-							</form>
-							<a target="_self" onclick="document.getElementById('userInfoForm').submit();" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a>
+								<input type="hidden" name="id" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}" />
+							</form> --%>
+							<%-- <a id="userInfo" target="_self" onclick="document.getElementById('userInfoForm').submit();" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a> --%>
+							<a id="userInfo" href="javascript:void(0);" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a>
 							<%-- <a href="${userInfo}?email=${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}" target="_self" style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a> --%>
 							<span>|</span>
 							<a href="${logoutUrl}" target="_self">로그아웃</a>
@@ -44,6 +46,29 @@
 					</c:choose>
 				</div>
 			</div>
+			<script type="text/javascript">
+				$('#userInfo').on('click', function()
+				{
+				    var $form = $('<form></form>');
+				    $form.attr('action', '${userInfo}');
+				    $form.attr('method', 'post');
+				     
+				    $('<input>').attr({
+		                        ,type='hidden'
+		                        ,name='email'
+							    ,value='${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}'
+		                        }).appendTo('form');
+				
+				    $('<input>').attr({
+				                ,type='hidden'
+				                ,name='c_id'
+						        ,value='${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}'
+				                }).appendTo('form');
+				
+					 $form.appendTo('body');
+				     $form.submit();
+				});
+			</script>
 		</header>
 	</body>
 </html>
