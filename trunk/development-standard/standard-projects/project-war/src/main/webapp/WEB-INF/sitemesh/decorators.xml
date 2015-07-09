@@ -13,7 +13,7 @@
 		<pattern>/cop/*</pattern>
 <!-- 		jstree 테스트용 페이지 -->		
 		<pattern>/jsp/community/index/index.do</pattern>		
-<!-- 		egov 관리자 페이지 -->		
+		<!--	egov 관리자 페이지 -->		
 		<pattern>/cmm/*</pattern>
 		<pattern>/EgovPageLink.do?*</pattern>
 		<pattern>/analyzeNode.action?*</pattern>
