@@ -45,26 +45,12 @@
 				$('#userInfo').on('click', function(event)
 				{
 					event.preventDefault();
-			        
-					var formElements = 
-					{
-					   id        : 'dynamicForm'
-				     , action    : '${userInfo}'
-				     , method    : 'post'
-				     , inputTags : [{
-				    	             type  : 'hidden'
-				    	           , name  : 'c_id'
-				    	           , value : '${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}'
-				                   }
-				                   ,
-				                   {
-					    	         type  : 'hidden'
-					    	       , name  : 'email'
-					    	       , value : '${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}'
-					               }]
-				     };
+			        var action = '${userInfo}';
+					var params =   { c_id  : '${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}' 
+							       , email : '${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}'
+							       }
 					
-					$.dynamicForm(formElements);
+					$.submitDynamicForm(action, params );
 				});
 				
 			</script>
