@@ -167,10 +167,4 @@ public class UserManageController extends GenericAbstractController {
         
         return "{}";
     }
-    
-    @RequestMapping("/add/popup.do")
-    public String add() throws Exception {
-        
-        return "/jsp/user/manage/user/add";
-    }
 }

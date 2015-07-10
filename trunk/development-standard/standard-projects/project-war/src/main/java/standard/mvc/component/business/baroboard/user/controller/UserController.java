@@ -17,6 +17,7 @@ package standard.mvc.component.business.baroboard.user.controller;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
 
@@ -64,6 +66,9 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
 @RequestMapping("/user")
 public class UserController extends GenericAbstractController {
     
+    @Resource(name="CoreService")
+    private CoreService coreService;
+    
     @Autowired
     private UserService userService;
     
@@ -82,7 +87,7 @@ public class UserController extends GenericAbstractController {
         model.addAttribute("generalSetting", generalSettingService.getGeneralSetting());
         model.addAttribute("passwordFindQuestions", userService.getPasswordFindQuestions());
         
-        User userStored = userService.findUserByEmail(user);
+        User userStored = coreService.getNode(user);
         
         String[] split = userStored.getEmail().split("@");
         
@@ -162,11 +167,9 @@ public class UserController extends GenericAbstractController {
     @ResponseBody
     public String modifyUserInfo(@Valid User user) throws Exception {
         
-        user.setEmail(user.getEmailAccount() + "@" + user.getEmailHost());
-        
         SecureUserLogin userSession = (SecureUserLogin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         
-        if (! userSession.getEmail().equals( user.getEmail() )) {
+        if (userSession.getId() != user.getC_id()) {
             throw new RuntimeException("bb.com.error.004");
         }
         

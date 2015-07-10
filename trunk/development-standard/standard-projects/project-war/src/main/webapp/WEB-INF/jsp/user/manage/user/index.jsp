@@ -172,8 +172,8 @@ var userList = {
 		$('#btnAddUserInfo').on('click', function() {
         	
 			callAjax(null
-                   , '/user/join/index.do'
-                   , { target : '#divUserAdd', selector : 'section', $document : $(document) }
+                   , '${pageContext.request.contextPath}/user/join/index.do'
+                   , { target : '#divUserAddition', selector : 'section', $document : $(document) }
                    , 'post'
                    , 'html'
                    , null
@@ -183,19 +183,19 @@ var userList = {
 		    function callback(r) {
 		    	
 		        $('#divUserManage').hide();
-		        $('#divUserAdd').show();
-		        $('#divUserAdd').find('.container').removeClass('container');
-		        $('#divUserAdd #btnJoin').text('저장하기');
+		        $('#divUserAddition').show();
+		        $('#divUserAddition').find('.container').removeClass('container');
+		        $('#divUserAddition #btnJoin').text('저장하기');
 		        
 		        var $btnShowList = $('<button type="button" class="compact">목록보기</button>');
 		        
 		        $btnShowList.on('click', function() {
 		            $('#divUserManage').show();
-	                $('#divUserAdd').hide();
+	                $('#divUserAddition').hide();
 	                userList.getList(1);
 		        })
 		        
-		        $('#divUserAdd .divButtons').prepend($btnShowList);
+		        $('#divUserAddition .divButtons').prepend($btnShowList);
 		    }
         });
         
@@ -222,7 +222,9 @@ var userList = {
     		
     		if (func == 'editUserInfo') {
     			
-    			var params = 'c_id=' + c_id;
+    			var param = 'c_id=' + c_id;
+    			
+    			userList.editUserInfo(param);
     		}
     		else if (func == 'deleteUserInfo') {
         		
@@ -236,9 +238,33 @@ var userList = {
         });
     },
 	
-    editUserInfo : function(params) {
-    	
-    	
+    editUserInfo : function(param) {
+        
+        callAjax(null
+               , '${pageContext.request.contextPath}/user/info/index.do'
+               , { target : '#divUserInfoModification', selector : 'section', $document : $(document) }
+               , 'post'
+               , 'html'
+               , param
+               , null
+               , callback);
+         
+         function callback(r) {
+             
+             $('#divUserManage').hide();
+             $('#divUserInfoModification').show();
+             $('#divUserInfoModification').find('.container').removeClass('container');
+             
+             var $btnShowList = $('<button type="button" class="compact">목록보기</button>');
+             
+             $btnShowList.on('click', function() {
+                 $('#divUserManage').show();
+                 $('#divUserInfoModification').hide();
+                 userList.getList(1);
+             })
+             
+             $('#divUserInfoModification .divButtons').prepend($btnShowList);
+         }
     },
     
     deleteUserInfo : function(params) {
@@ -405,7 +431,9 @@ $(document).ready(function() {
 	        </table>
 	        <div id="divPagination"></div>
 	    </div>
-	    <div id="divUserAdd"></div>
+	    <div id="divUserAddition"></div>
+	    <div id="divUserInfoModification"></div>
 	</div>
 </section>
 </body>
+</html>

@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
 <title>회원정보 수정</title>
-<style>
+<style type="text/css" id="style">
 label {
     margin-bottom : 0 !important;
 }
@@ -36,7 +36,7 @@ select {
     float : right;
 }
 </style>
-<script type="text/javascript">
+<script type="text/javascript" id="script">
 var userInfo = {
     
     nickname : '${user.c_title}',
@@ -80,7 +80,7 @@ var userInfo = {
                 };
                 
                 callAjax(null
-                       , 'isDuplicateNickname.do'
+                       , '${pageContext.request.contextPath}/user/info/isDuplicateNickname.do'
                        , null
                        , 'post'
                        , 'json'
@@ -274,7 +274,7 @@ $(document).ready(function() {
     <article>
         <div class="clearfix">
             <div class="container bm-remove">
-            <form id="frmUserInfo" action="modify.do" method="post">
+            <form id="frmUserInfo" action="${pageContext.request.contextPath}/user/info/modify.do" method="post">
                 <div>
                     <label>
                                            이메일 주소<span class="essential">*</span>
