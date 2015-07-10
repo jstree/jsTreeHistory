@@ -448,3 +448,25 @@ jQuery.fn.serializeObject = function() {
 	
 	return object;
 };
+
+jQuery.dynamicForm = function(formElements) {
+	
+	if( $.type(formElements) === 'undefind'||
+		$.type(formElements) === 'null' ) return;
+	
+	var $form = $('<form/>');
+	$form.attr('id'    , formElements.id    );
+	$form.attr('action', formElements.action);
+	$form.attr('method', formElements.method);
+	
+	$.each( formElements.inputTags, function( index, attr ) 
+	{
+		$('<input/>').attr({
+			                 type  : attr.type
+                           , name  : attr.name
+		                   , value : attr.value
+                           }).appendTo($form);
+	});
+	
+	$form.submit();
+};
