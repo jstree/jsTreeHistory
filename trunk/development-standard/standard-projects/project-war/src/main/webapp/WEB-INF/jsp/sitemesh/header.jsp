@@ -46,27 +46,25 @@
 				{
 					event.preventDefault();
 			        
-					$('#header-cart').find('#dynamicForm').remove();
+					var formElements = 
+					{
+					   id        : 'dynamicForm'
+				     , action    : '${userInfo}'
+				     , method    : 'post'
+				     , inputTags : [{
+				    	             type  : 'hidden'
+				    	           , name  : 'c_id'
+				    	           , value : '${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}'
+				                   }
+				                   ,
+				                   {
+					    	         type  : 'hidden'
+					    	       , name  : 'email'
+					    	       , value : '${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}'
+					               }]
+				     };
 					
-				    var $form = $('<form/>');
-				    $form.attr('id', 'dynamicForm');
-				    $form.attr('action', '${userInfo}');
-				    $form.attr('method', 'post');
-				     
-				    $('<input>').attr({
-		                         type:'hidden'
-		                        ,name:'email'
-							    ,value:'${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}'
-		                        }).appendTo($form);
-				
-				    $('<input>').attr({
-				                 type:'hidden'
-				                ,name:'c_id'
-						        ,value:'${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}'
-				                }).appendTo($form);
-				
-					 $form.appendTo('#header-cart');
-				     $form.submit();
+					$.dynamicForm(formElements);
 				});
 				
 			</script>
