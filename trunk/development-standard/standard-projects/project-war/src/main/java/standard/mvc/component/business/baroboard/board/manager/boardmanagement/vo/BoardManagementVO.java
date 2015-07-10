@@ -31,11 +31,10 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 public class BoardManagementVO extends ComprehensiveTree {
 	
-	private String boardType;
-	private int    postingCntPerPage;
+	private Integer writingCntPerPage;
 	private String levelForViewList;
 	private String levelForReadContent;
-	private String levelForPosting;
+	private String levelForWriting;
 	private String levelForReply;
 	private String levelForComment;
 	private String levelForClipping;
@@ -43,10 +42,10 @@ public class BoardManagementVO extends ComprehensiveTree {
 	private String levelForFileDownload;
 	
 	@Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AlterNode.class})
-	private String commentCntForBanDeletion;
+	private Integer commentCntForBanDeletion;
 	
 	@Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AlterNode.class})
-	private String commentCntForBanEditing;
+	private Integer commentCntForBanEditing;
 	
 	@Contained(values = {ValidInput.TRUE, ValidInput.FALSE}, groups = {AlterNode.class})
 	private String useAnonymFl;
@@ -56,11 +55,10 @@ public class BoardManagementVO extends ComprehensiveTree {
 	
 	@Override
 	public String toString() {
-		return "BoardManagementVO [boardType=" + boardType
-				+ ", postingCntPerPage=" + postingCntPerPage
+		return "BoardManagementVO [writingCntPerPage=" + writingCntPerPage
 				+ ", levelForViewList=" + levelForViewList
 				+ ", levelForReadContent=" + levelForReadContent
-				+ ", levelForPosting=" + levelForPosting + ", levelForReply="
+				+ ", levelForWriting=" + levelForWriting + ", levelForReply="
 				+ levelForReply + ", levelForComment=" + levelForComment
 				+ ", levelForClipping=" + levelForClipping
 				+ ", levelForFileUpload=" + levelForFileUpload
@@ -70,17 +68,21 @@ public class BoardManagementVO extends ComprehensiveTree {
 				+ ", useAnonymFl=" + useAnonymFl + ", boardTableName="
 				+ boardTableName + ", regDt=" + regDt + "]";
 	}
-	public String getBoardType() {
-		return boardType;
+	public Integer getWritingCntPerPage() {
+		
+		if( this.writingCntPerPage == null ){
+			writingCntPerPage = 0;
+		}
+		return writingCntPerPage;
 	}
-	public void setBoardType(String boardType) {
-		this.boardType = boardType;
+	public void setWritingCntPerPage(Integer writingCntPerPage) {
+		this.writingCntPerPage = writingCntPerPage;
 	}
-	public int getPostingCntPerPage() {
-		return postingCntPerPage;
+	public String getLevelForWriting() {
+		return levelForWriting;
 	}
-	public void setPostingCntPerPage(int postingCntPerPage) {
-		this.postingCntPerPage = postingCntPerPage;
+	public void setLevelForWriting(String levelForWriting) {
+		this.levelForWriting = levelForWriting;
 	}
 	public String getLevelForViewList() {
 		return levelForViewList;
@@ -93,12 +95,6 @@ public class BoardManagementVO extends ComprehensiveTree {
 	}
 	public void setLevelForReadContent(String levelForReadContent) {
 		this.levelForReadContent = levelForReadContent;
-	}
-	public String getLevelForPosting() {
-		return levelForPosting;
-	}
-	public void setLevelForPosting(String levelForPosting) {
-		this.levelForPosting = levelForPosting;
 	}
 	public String getLevelForReply() {
 		return levelForReply;
@@ -130,16 +126,16 @@ public class BoardManagementVO extends ComprehensiveTree {
 	public void setLevelForFileDownload(String levelForFileDownload) {
 		this.levelForFileDownload = levelForFileDownload;
 	}
-	public String getCommentCntForBanDeletion() {
+	public Integer getCommentCntForBanDeletion() {
 		return commentCntForBanDeletion;
 	}
-	public void setCommentCntForBanDeletion(String commentCntForBanDeletion) {
+	public void setCommentCntForBanDeletion(Integer commentCntForBanDeletion) {
 		this.commentCntForBanDeletion = commentCntForBanDeletion;
 	}
-	public String getCommentCntForBanEditing() {
+	public Integer getCommentCntForBanEditing() {
 		return commentCntForBanEditing;
 	}
-	public void setCommentCntForBanEditing(String commentCntForBanEditing) {
+	public void setCommentCntForBanEditing(Integer commentCntForBanEditing) {
 		this.commentCntForBanEditing = commentCntForBanEditing;
 	}
 	public String getUseAnonymFl() {

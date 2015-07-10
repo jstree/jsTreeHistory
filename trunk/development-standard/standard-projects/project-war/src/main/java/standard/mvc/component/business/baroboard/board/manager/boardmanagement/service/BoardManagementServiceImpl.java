@@ -5,8 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import standard.mvc.component.business.baroboard.board.manager.boardmanagement.dao.BoardManagementDao;
+import standard.mvc.component.business.baroboard.board.manager.boardmanagement.vo.BoardManagementVO;
 import standard.mvc.component.business.baroboard.core.manage.setting.messages.ExceptionMessage;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -37,6 +40,9 @@ public class BoardManagementServiceImpl implements CoreService {
 
     @Resource(name = "CoreService")
     private CoreService boardManagementService;
+    
+    @Autowired
+    private BoardManagementDao boardManagementDao;
 
     @Override
     public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception {
@@ -63,7 +69,37 @@ public class BoardManagementServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree) throws Exception {
-        throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
+    	
+    	BoardManagementVO boardManagementVO = (BoardManagementVO)comprehensiveTree;
+    	
+    	String tableName = createTableName(boardManagementVO);
+    	boardManagementVO.setBoardTableName(tableName);
+    	
+    	boardManagementDao.createBoardTable(boardManagementVO);
+
+    	boardManagementVO.setBoardTableName( boardManagementVO.getBoardTableName() + "_LIKE" );
+    	boardManagementDao.createLikeTable(boardManagementVO);
+    	
+    	boardManagementVO.setBoardTableName( boardManagementVO.getBoardTableName() + "_COMMENT" );
+    	boardManagementDao.createCommentTable(boardManagementVO);
+    	
+    	boardManagementVO.setBoardTableName( boardManagementVO.getBoardTableName() + "_FILE" );
+    	boardManagementDao.createFileTable(boardManagementVO);
+    	
+    	return comprehensiveTree;
+    }
+    
+    private String createTableName( BoardManagementVO boardManagementVO ) throws Exception{
+    	
+    	String tableName = "BOARD";
+    	int    order = 1;
+    	
+		List<BoardManagementVO> list = boardManagementService.getChildNode(boardManagementVO);
+    	
+    	if( list != null && list.size() > 0 ){
+    		order = (Integer.parseInt(list.get(0).getBoardTableName().split("_")[2])) + 1;
+    	}
+    	return tableName + "_" + order;
     }
 
     @Override
@@ -81,5 +117,4 @@ public class BoardManagementServiceImpl implements CoreService {
             throws Exception {
         throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
     }
-
 }

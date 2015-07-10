@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import standard.mvc.component.business.baroboard.board.manager.boardmanagement.v
 import standard.mvc.component.business.baroboard.board.manager.defaultsetting.vo.DefaultSettingVO;
 import standard.mvc.component.business.baroboard.user.manage.grade.service.UserGradeService;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 
@@ -58,33 +60,58 @@ public class BoardManagementController extends GenericAbstractController {
         return null;
     }
 
-    @RequestMapping(value = "/list.do", method = {RequestMethod.GET})
+    @RequestMapping(value = "/list.do")
     public String getChildNode( BoardManagementVO  boardManagementVO
     		                  , ModelMap           modelMap
     		                  , HttpServletRequest request) throws Exception {
-    	boardManagementVO.setC_parentid(2);
+    	
+    	boardManagementVO.setC_id(2);
         modelMap.addAttribute("list", boardManagementService.getChildNode(boardManagementVO));
-        return "/jsp/baroboard/board/manager/boardmanagement/edit";
+        
+        return "/jsp/baroboard/board/manager/boardmanagement/list";
     }
     
-    @RequestMapping(value = "/edit.do", method = {RequestMethod.GET})
-    public String getNode(ModelMap modelMap, HttpServletRequest request) throws Exception {
-    	DefaultSettingVO generalVO = new DefaultSettingVO();
-    	generalVO.setC_id(3);
-    	modelMap.addAttribute("defaultSetting", boardManagementService.getNode(generalVO));
+    @RequestMapping(value = "/edit.do")
+    public String getNode( BoardManagementVO  boardManagementVO
+    		             , ModelMap           modelMap
+    		             , HttpServletRequest request) throws Exception {
+    	
+    	BoardManagementVO board;
+    	
+    	// 수정
+    	if( StringUtils.hasText(request.getParameter("c_id")) ){
+    		board = boardManagementService.getNode(boardManagementVO);
+    	}
+    	// 등록
+    	else{
+    		board = new BoardManagementVO();
+    	}
+    	modelMap.addAttribute("board", board);
+    	modelMap.addAttribute("userGrades", userGradeService.inquiryUserGradeList(null));
+    	
     	return "/jsp/baroboard/board/manager/boardmanagement/edit";
     }
 
     @ResponseBody
     @RequestMapping(value = "/save.do", method = {RequestMethod.POST})
-    public DefaultSettingVO alterNode( @Validated(value = AlterNode.class) DefaultSettingVO defaultSettingVO
-    		                         , BindingResult bindingResult
-    		                         , ModelMap model ) throws Exception {
+    public BoardManagementVO alterNode( @Validated(value = AlterNode.class) BoardManagementVO boardManagementVO
+    		                          , BindingResult bindingResult
+    		                          , ModelMap model ) throws Exception {
         if (bindingResult.hasErrors()) {
             throw new RuntimeException(bindingResult.getAllErrors().get(0).getDefaultMessage());
         }
-        defaultSettingVO.setStatus(boardManagementService.alterNode(defaultSettingVO));
-        return defaultSettingVO;
+        boardManagementVO.setStatus(boardManagementService.alterNode(boardManagementVO));
+        return boardManagementVO;
     }
-
+    
+    @ResponseBody
+    @RequestMapping(value = "/create.do", method = {RequestMethod.POST})
+    public DefaultSettingVO addNode( @Validated(value = AddNode.class) DefaultSettingVO defaultSettingVO
+    		, BindingResult bindingResult
+    		, ModelMap model ) throws Exception {
+    	if (bindingResult.hasErrors()) {
+    		throw new RuntimeException(bindingResult.getAllErrors().get(0).getDefaultMessage());
+    	}
+    	return defaultSettingVO;
+    }
 }

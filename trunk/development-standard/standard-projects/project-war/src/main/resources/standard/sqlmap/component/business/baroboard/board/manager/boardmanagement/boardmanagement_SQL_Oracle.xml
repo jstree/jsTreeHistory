@@ -7,8 +7,71 @@
 		/* alterNode for BoardManagement */
 		UPDATE T_BOARD_INDI_SETTING 
 		   SET C_TITLE = #c_title#
+		     , C_WRITING_CNT_PER_PAGE = #writingCntPerPage#
+             , C_LEVEL_FOR_VIEW_LIST = #levelForViewList#
+             , C_LEVEL_FOR_READ_CONTENT = #levelForReadContent#
+             , C_LEVEL_FOR_WRITING = #levelForWriting#
+             , C_LEVEL_FOR_REPLY = #levelForReply#
+             , C_LEVEL_FOR_COMMENT = #levelForComment#
+             , C_LEVEL_FOR_CLIPPING = #levelForClipping#
+             , C_LEVEL_FOR_FILE_UPLOAD = #levelForFileUpload#
+             , C_LEVEL_FOR_FILE_DOWNLOAD = #levelForFileDownload#
+             , C_COMMENT_CNT_FOR_BAN_DELETION = #commentCntForBanDeletion#
+             , C_COMMENT_CNT_FOR_BAN_EDITING = #commentCntForBanEditing#
+             , C_USE_ANONYM_FL = #useAnonymFl#
 		 WHERE C_ID = #c_id#
 	</update>
+	
+	
+	<insert id="addNode" parameterClass="BoardManagement">
+	    /* addNode for BoardManagement */
+	    INSERT INTO T_BOARD_INDI_SETTING( C_ID
+						                , C_PARENTID
+						                , C_POSITION
+						                , C_LEFT
+						                , C_RIGHT
+						                , C_LEVEL
+						                , C_TITLE
+						                , C_TYPE
+						                , C_BOARD_TABLE_NAME
+						                , C_WRITING_CNT_PER_PAGE
+                                        , C_LEVEL_FOR_VIEW_LIST
+                                        , C_LEVEL_FOR_READ_CONTENT
+                                        , C_LEVEL_FOR_WRITING
+                                        , C_LEVEL_FOR_REPLY
+                                        , C_LEVEL_FOR_COMMENT
+                                        , C_LEVEL_FOR_CLIPPING
+                                        , C_LEVEL_FOR_FILE_UPLOAD
+                                        , C_LEVEL_FOR_FILE_DOWNLOAD
+                                        , C_COMMENT_CNT_FOR_BAN_DELETION
+                                        , C_COMMENT_CNT_FOR_BAN_EDITING
+                                        , C_USE_ANONYM_FL
+                                        , C_REG_DT
+                                        )
+                                  VALUES( S_BOARD_INDI_SETTING.NEXTVAL
+                                        , #c_parentid#
+                                        , #c_position#
+                                        , #c_left#
+                                        , #c_right#
+                                        , #c_level#
+                                        , #c_title#
+                                        , #c_type#
+                                        , #boardTableName#
+                                        , #writingCntPerPage#
+                                        , #levelForViewList#
+                                        , #levelForReadContent#
+                                        , #levelForWriting#
+                                        , #levelForReply#
+                                        , #levelForComment#
+                                        , #levelForClipping#
+                                        , #levelForFileUpload#
+                                        , #levelForFileDownload#
+                                        , #commentCntForBanDeletion#
+                                        , #commentCntForBanEditing#
+                                        , #useAnonymFl#
+                                        , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+                                        )
+	</insert>
 
 
 	<select id="getNode" parameterClass="BoardManagement" resultClass="BoardManagement">
@@ -21,7 +84,186 @@
              , C_LEVEL
              , C_TITLE
              , C_TYPE
+             , C_BOARD_TABLE_NAME AS boardTableName
+             , C_WRITING_CNT_PER_PAGE AS writingCntPerPage
+             , C_LEVEL_FOR_VIEW_LIST AS levelForViewList
+             , C_LEVEL_FOR_READ_CONTENT AS levelForReadContent
+             , C_LEVEL_FOR_WRITING AS levelForWriting
+             , C_LEVEL_FOR_REPLY AS levelForReply
+             , C_LEVEL_FOR_COMMENT AS levelForComment
+             , C_LEVEL_FOR_CLIPPING AS levelForClipping
+             , C_LEVEL_FOR_FILE_UPLOAD AS levelForFileUpload
+             , C_LEVEL_FOR_FILE_DOWNLOAD AS levelForFileDownload
+             , C_COMMENT_CNT_FOR_BAN_DELETION AS commentCntForBanDeletion
+             , C_COMMENT_CNT_FOR_BAN_EDITING AS commentCntForBanEditing
+             , C_USE_ANONYM_FL AS useAnonymFl
           FROM T_BOARD_INDI_SETTING 
          WHERE C_ID = #c_id#
     </select>
+    
+    
+    <select id="getChildNode" parameterClass="BoardManagement" resultClass="BoardManagement">
+        /* getChildNode for BoardManagement */
+        SELECT C_ID
+             , C_PARENTID
+             , C_POSITION
+             , C_LEFT
+             , C_RIGHT
+             , C_LEVEL
+             , C_TITLE
+             , C_TYPE
+             , C_BOARD_TABLE_NAME AS boardTableName   
+             , C_USE_ANONYM_FL AS useAnonymFl
+             , C_REG_DT AS regDt
+          FROM T_BOARD_INDI_SETTING
+         WHERE C_PARENTID = #c_id#
+      ORDER BY C_ID DESC
+    </select>
+    
+    
+    <statement id="createBoardTable" parameterClass="BoardManagement">
+        /* createBoardTable for BoardManagement */
+        CREATE TABLE T_$boardTableName$ (
+            C_ID NUMBER NOT NULL,
+            C_PARENTID NUMBER NOT NULL,
+		    C_POSITION NUMBER NOT NULL,
+		    C_LEFT NUMBER NOT NULL,
+		    C_RIGHT NUMBER NOT NULL,
+		    C_LEVEL NUMBER NOT NULL,
+		    C_TITLE VARCHAR2(4000),
+		    C_TYPE VARCHAR2(4000),
+		    C_REG_ID NUMBER NOT NULL,
+		    C_CONTENT CLOB,
+		    C_ALLOW_COMMENT_FL CHAR(1),
+		    C_ALLOW_REPLY_FL CHAR(1),
+		    C_ALLOW_TRACKBACK_FL CHAR(1),
+		    C_ALERT_RESPONSE_FL CHAR(1),
+		    C_OPEN_ARTICLE_FL CHAR(1),
+		    C_ANNOUNCEMENT_FL CHAR(1),
+		    C_VIEW_CNT NUMBER,
+		    C_IS_DELETED_FL CHAR(1),
+		    C_REG_DT VARCHAR2(14)
+        );
+    </statement>
+    
+    
+    <statement id="createLogTable" parameterClass="BoardManagement">
+        /* createLogTable for BoardManagement */
+        CREATE TABLE T_$boardTableName$_LOG (
+            C_ID NUMBER NOT NULL, 
+            C_PARENTID NUMBER NOT NULL, 
+            C_POSITION NUMBER NOT NULL, 
+            C_LEFT NUMBER NOT NULL, 
+            C_RIGHT NUMBER NOT NULL, 
+            C_LEVEL NUMBER NOT NULL, 
+            C_TITLE VARCHAR2(4000 BYTE), 
+            C_TYPE VARCHAR2(4000 BYTE), 
+            C_METHOD VARCHAR2(4000 BYTE), 
+            C_STATE VARCHAR2(4000 BYTE), 
+            C_DATE DATE NOT NULL ENABLE
+        )
+    </statement>
+    
+    
+    <statement id="createLikeTable" parameterClass="BoardManagement">
+        /* createLikeTable for BoardManagement */
+        CREATE TABLE T_$boardTableName$ (
+            C_ID NUMBER NOT NULL, 
+            C_PARENTID NUMBER NOT NULL, 
+            C_POSITION NUMBER NOT NULL, 
+            C_LEFT NUMBER NOT NULL, 
+            C_RIGHT NUMBER NOT NULL, 
+            C_LEVEL NUMBER NOT NULL, 
+            C_TITLE VARCHAR2(4000 BYTE), 
+            C_TYPE VARCHAR2(4000 BYTE), 
+            C_ARTICLE_ID NUMBER,
+            C_REG_ID NUMBER,
+            C_REG_DT VARCHAR2(14)
+        )
+    </statement>
+    
+    
+    <statement id="createCommentTable" parameterClass="BoardManagement">
+        /* createCommentTable for BoardManagement */
+        CREATE TABLE T_$boardTableName$ (
+            C_ID NUMBER NOT NULL, 
+            C_PARENTID NUMBER NOT NULL, 
+            C_POSITION NUMBER NOT NULL, 
+            C_LEFT NUMBER NOT NULL, 
+            C_RIGHT NUMBER NOT NULL, 
+            C_LEVEL NUMBER NOT NULL, 
+            C_TITLE VARCHAR2(4000 BYTE), 
+            C_TYPE VARCHAR2(4000 BYTE), 
+            C_ARTICLE_ID NUMBER,
+            C_REG_ID NUMBER,
+            C_VIEW_ONLY_REG_ID_FL CHAR(1),
+            C_REG_DT VARCHAR2(14)
+        )
+    </statement>
+    
+    
+    <statement id="createFileTable" parameterClass="BoardManagement">
+        /* createFileTable for BoardManagement */
+        CREATE TABLE T_$boardTableName$ (
+            C_ID NUMBER NOT NULL, 
+            C_PARENTID NUMBER NOT NULL, 
+            C_POSITION NUMBER NOT NULL, 
+            C_LEFT NUMBER NOT NULL, 
+            C_RIGHT NUMBER NOT NULL,
+            C_LEVEL NUMBER NOT NULL,
+            C_TITLE VARCHAR2(4000 BYTE), 
+            C_TYPE VARCHAR2(4000 BYTE), 
+            C_ARTICLE_ID NUMBER NOT NULL,
+            C_SAVED_FILE_NM VARCHAR2(50),
+            C_EXTENSION NUMBER,
+            C_ATTACH_FILE NUMBER,
+            C_REG_DT VARCHAR2(14)
+        )
+    </statement>
+    
+    
+    <statement id="createTrigger" parameterClass="BoardManagement">
+        /* createTrigger for BoardManagement */
+        CREATE OR REPLACE TRIGGER TRG_$boardTableName$
+        BEFORE DELETE OR INSERT OR UPDATE ON T_BOARD_INDI_SETTING
+        REFERENCING NEW AS NEW OLD AS OLD
+        FOR EACH ROW
+            DECLARE
+            tmpVar NUMBER;
+
+            BEGIN
+                tmpVar := 0;
+                IF UPDATING  THEN    
+	                INSERT INTO T_$boardTableName$_LOG 
+	                VALUES (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
+	                INSERT INTO T_$boardTableName$_LOG 
+	                VALUES (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
+                END IF;
+                IF DELETING THEN
+                    INSERT INTO T_$boardTableName$_LOG 
+                    VALUES (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
+                END IF;   
+                IF INSERTING  THEN
+                    INSERT INTO T_$boardTableName$_LOG 
+                    VALUES (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
+                END IF;
+
+                EXCEPTION
+                    WHEN OTHERS THEN
+                RAISE;
+            END TRG_$boardTableName$;
+    </statement>
+    
+    
+    <statement id="createSequence" parameterClass="BoardManagement">
+        /* createSequence for BoardManagement */
+        CREATE SEQUENCE S_$boardTableName$
+               MINVALUE 0
+               MAXVALUE 999999999999999999999999999
+           INCREMENT BY 1
+             START WITH 0
+                  CACHE 20
+                NOORDER
+                NOCYCLE 
+    </statement>
 </sqlMap>
