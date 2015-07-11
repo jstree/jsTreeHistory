@@ -451,7 +451,7 @@ jQuery.fn.serializeObject = function() {
 
 jQuery.submitDynamicForm = function( action, params ) 
 {
-	if( action == null || params == null ) return;
+	if( action == null ) return;
 	
 	var $form = $('<form/>');
 	$form.attr('action', action);
