@@ -64,22 +64,25 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException
 	{
-		SecureUserLogin secureUserlogin = (SecureUserLogin) authentication.getPrincipal();
+		SecureUserLogin secureUserLogin = (SecureUserLogin) authentication.getPrincipal();
 		
 		try
 		{
-			this.setPasswordChangePage(secureUserlogin);
+			this.setPasswordChangePage(secureUserLogin);
 			
-			this.setUserLastLoginDt(secureUserlogin);
+			this.setUserLastLoginDt(secureUserLogin);
 			
-			this.setUserLoginFailureCntZero(secureUserlogin);
+			this.setUserLoginFailureCntZero(secureUserLogin);
 			
-	        this.addUserLoginState(request, secureUserlogin);
+	        this.addUserLoginState(request, secureUserLogin);
 		} 
 		catch( Exception e )
 		{
 			throw new RuntimeException( e.getMessage() );
 		}
+		
+		
+		request.getSession().setAttribute("secureUserLogin", secureUserLogin);
 		
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
