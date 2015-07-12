@@ -13,7 +13,6 @@ import javax.annotation.Resource;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -29,8 +28,6 @@ import standard.mvc.component.business.baroboard.core.manage.menu.vo.CoreMenuVO;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DbUnitConfiguration;
-import com.github.springtestdbunit.dataset.ReplacementDataSetLoader;
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
@@ -59,14 +56,14 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-@Ignore("원시 dbunit test case 에선 null 컬럼을 ReplacementDataSet 으로 처리했으나 Spring-test 와 연동시는 방법을 잘 몰라서 헤딩중")
+// @Ignore("원시 dbunit test case 에선 null 컬럼을 ReplacementDataSet 으로 처리했으나 Spring-test 와 연동시는 방법을 잘 몰라서 헤딩중")
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { TestWebApplicationContextConfig.class,
 		WebMvcConfig.class })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
 		DbUnitTestExecutionListener.class })
-@DbUnitConfiguration(dataSetLoader = ReplacementDataSetLoader.class)
+// @DbUnitConfiguration(dataSetLoader = ReplacementDataSetLoader.class)
 public class CoreMenuServiceTest {
 
     @Resource(name = "CoreMenuService")
