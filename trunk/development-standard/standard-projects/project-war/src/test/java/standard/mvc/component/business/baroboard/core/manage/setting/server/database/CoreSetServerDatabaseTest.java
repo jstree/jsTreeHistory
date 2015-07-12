@@ -76,7 +76,7 @@ public class CoreSetServerDatabaseTest {
 
             ReplacementDataSet dataSet =
                     new ReplacementDataSet(new FlatXmlDataSetBuilder().build(new File(url.toURI())));
-            dataSet.addReplacementObject("[NULL]", null);
+            dataSet.addReplacementObject("[null]", null);
             DatabaseOperation.CLEAN_INSERT.execute(databaseTester.getConnection(), dataSet);
         } catch (Exception e) {
             logger.error("setUp 시 예외 발생", e);
