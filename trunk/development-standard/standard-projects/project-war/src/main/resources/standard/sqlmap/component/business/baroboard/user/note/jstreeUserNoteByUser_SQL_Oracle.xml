@@ -4,7 +4,7 @@
 	<typeAlias alias="UserNoteByUser"
 		type="standard.mvc.component.business.baroboard.user.note.vo.UserNoteByUser" />
 
-	<sql id="getMetaField">
+	<select id="getChildNode" parameterClass="UserNoteByUser" resultClass="UserNoteByUser">
 		/* getChildNode */
 		SELECT A.c_id
 		, A.c_parentid
@@ -16,43 +16,38 @@
 		, A.c_type
 		/* user filed add point*/
 		,A.C_USER_ID AS userId
+		,C.C_TITLE AS userNm
         ,A.C_NOTE_DETAIL_ID AS noteDetailId
         ,A.C_NOTE_TYPE_CODE AS noteTypeCode
         ,A.C_RECE_DISP_DT AS receDispDt
-	</sql>
-	<sql id="getInlineChildCount">
-		, ( SELECT CASE
-		WHEN COUNT(*) &gt; 0 THEN 'InChild'
-		ELSE
-		'NoChild'
-		END AS YesNo
-		/* inline table from filed add point*/
-	</sql>
-	<sql id="getInlineChildCountAfterFrom">
-		WHERE B.C_PARENTID = A.C_ID
-		) AS childcount
-		/* table from
-		filed add point*/
-	</sql>
-	<sql id="getAfterFrom">
-		WHERE A.C_USER_ID =  #userId#
-	      AND A.C_NOTE_TYPE_CODE = #noteTypeCode#	
+        FROM T_USER_NOTE_BY_USER A
+            ,T_USER_NOTE_BY_USER B
+            ,T_USER_INFO C
+        WHERE A.C_USER_ID = #userId#
+		  AND A.C_RECE_DISP_DT BETWEEN REPLACE(#inqStartYmd#, '-', '')||'000000' AND REPLACE(#inqEndYmd#, '-', '')||'235959'
+	      AND A.C_NOTE_TYPE_CODE = #noteTypeCode#
+	      AND A.C_NOTE_DETAIL_ID = B.C_NOTE_DETAIL_ID
+	      AND B.C_NOTE_TYPE_CODE = 4
+	      AND B.C_USER_ID = C.C_ID
+		<isNotEmpty prepend="AND" property="c_title">
+	    	A.C_TITLE LIKE '%'||#c_title#||'%'
+	    </isNotEmpty>
+	    <isNotEmpty prepend="AND" property="userNm"> 
+	    	EXISTS (SELECT 1 
+	      	          FROM T_USER_NOTE_BY_USER SUB_A
+	      	              ,T_USER_INFO SUB_B
+	      	         WHERE SUB_A.C_NOTE_DETAIL_ID = A.C_NOTE_DETAIL_ID
+	      	           AND SUB_A.C_NOTE_TYPE_CODE = '4'
+	      	           AND SUB_A.C_USER_ID = SUB_B.C_ID
+	      	           AND SUB_B.C_TITLE = #userNm#)
+	    </isNotEmpty>
+	    <isNotEmpty prepend="AND" property="content">
+	      	EXISTS (SELECT 1 
+	      	          FROM T_USER_NOTE_DETAIL SUB_A 
+	      	         WHERE SUB_A.C_CONTENT LIKE '%'||#content#||'%'
+	      	           AND SUB_A.C_ID = A.C_NOTE_DETAIL_ID)
+	    </isNotEmpty>
 		ORDER BY A.C_RECE_DISP_DT DESC
-	</sql>
-	
-	<select id="getChildNode" parameterClass="UserNoteByUser"
-		resultClass="UserNoteByUser">
-		<dynamic>
-			<include refid="getMetaField" />
-			/* user filed */
-			<include refid="getInlineChildCount" />
-			/* inline table from filed*/
-			FROM T_USER_NOTE_BY_USER B
-			<include refid="getInlineChildCountAfterFrom" />
-			/* table from filed*/
-			FROM T_USER_NOTE_BY_USER A
-			<include refid="getAfterFrom" />
-		</dynamic>
 	</select>
 
 

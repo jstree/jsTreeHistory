@@ -45,6 +45,8 @@ public class UserNoteServiceImpl implements UserNoteService{
 
 	@Override
 	public void sendNote(UserNoteDetail userNoteDetail) throws Exception {
+		userNoteDetail.setRef(2);
+		userNoteDetail.setC_type("default");
 		UserNoteDetail resultSendNote = coreService.addNode(userNoteDetail);
 		int noteDetailId = resultSendNote.getId();
 		
@@ -54,9 +56,28 @@ public class UserNoteServiceImpl implements UserNoteService{
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 			String receDispDt    = sdf.format(currentDay); //수발신일시
 			
+			boolean isExistSender = false;
 			for(UserNoteByUser user : userNoteByUserList){
+				if(4 == user.getNoteTypeCode()){
+					isExistSender = true;
+				}
+				user.setRef(2);
+				user.setC_type("default");
+				user.setC_title(userNoteDetail.getC_title());
 				user.setNoteDetailId(noteDetailId);
 				user.setReceDispDt(receDispDt);
+				coreService.addNode(user);
+			}
+			
+			if(!isExistSender){
+				UserNoteByUser user = new UserNoteByUser();
+				user.setRef(2);
+				user.setC_type("default");
+				user.setC_title(userNoteDetail.getC_title());
+				user.setNoteTypeCode(4); //4 : 발신
+				user.setNoteDetailId(noteDetailId);
+				user.setReceDispDt(receDispDt);
+				user.setUserId(3); //로그인자 id 현재는 하드코딩
 				coreService.addNode(user);
 			}
 		}
@@ -103,7 +124,15 @@ public class UserNoteServiceImpl implements UserNoteService{
 
 	@Override
 	public List<UserNoteByUser> inquiryNoteList(UserNoteByUser userNoteByUser) throws Exception {
-		return  coreService.getChildNode(userNoteByUser);
+		List<UserNoteByUser> noteList = coreService.getChildNode(userNoteByUser);
+		
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		for(UserNoteByUser note : noteList){
+//			
+//			String s = DateUtils.getDate(note.getReceDispDt()).toString();
+//		}
+		
+		return noteList;
 	}
 
 	@Override

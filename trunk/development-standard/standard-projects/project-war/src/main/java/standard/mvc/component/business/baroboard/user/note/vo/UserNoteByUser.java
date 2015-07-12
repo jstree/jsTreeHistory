@@ -29,6 +29,11 @@ public class UserNoteByUser extends ComprehensiveTree {
 	private int noteTypeCode;
 	private String receDispDt;
 	
+	private String userNm;
+	private String inqStartYmd;
+	private String inqEndYmd;
+	private String content;
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -59,6 +64,38 @@ public class UserNoteByUser extends ComprehensiveTree {
 
 	public void setReceDispDt(String receDispDt) {
 		this.receDispDt = receDispDt;
+	}
+
+	public String getInqStartYmd() {
+		return inqStartYmd;
+	}
+
+	public void setInqStartYmd(String inqStartYmd) {
+		this.inqStartYmd = inqStartYmd;
+	}
+
+	public String getInqEndYmd() {
+		return inqEndYmd;
+	}
+
+	public void setInqEndYmd(String inqEndYmd) {
+		this.inqEndYmd = inqEndYmd;
+	}
+
+	public String getUserNm() {
+		return userNm;
+	}
+
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	@Override
