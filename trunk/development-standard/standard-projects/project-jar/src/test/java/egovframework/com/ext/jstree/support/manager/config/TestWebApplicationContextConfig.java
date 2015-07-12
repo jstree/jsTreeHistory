@@ -46,20 +46,21 @@ import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
  * </pre>
  */
 @Configuration
-@PropertySource({ "classpath:/META-INF/egovframework/egovProps/globals.properties"
-                , "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
-public class TestWebApplicationContextConfig extends WebApplicationContextConfig 
+@PropertySource({ "classpath:/META-INF/egovframework/egovProps/globals.properties",
+        "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
+public class TestWebApplicationContextConfig extends WebApplicationContextConfig
 {
     @Resource(name = "dataSource-${Globals.DbType}")
     private DataSource dataSource;
     
     private @Value("${Globals.UserName}") String shemaName;
     
-	@Bean
-	public DatabaseDataSourceConnectionFactoryBean dbUnitDatabaseConnection() 
-	{
-		DatabaseDataSourceConnectionFactoryBean databaseDataSourceConnectionFactoryBean = new DatabaseDataSourceConnectionFactoryBean(dataSource);
-		databaseDataSourceConnectionFactoryBean.setSchema(shemaName);
-		return databaseDataSourceConnectionFactoryBean;
-	}
+    @Bean
+    public DatabaseDataSourceConnectionFactoryBean dbUnitDatabaseConnection()
+    {
+        DatabaseDataSourceConnectionFactoryBean databaseDataSourceConnectionFactoryBean = new DatabaseDataSourceConnectionFactoryBean(
+                dataSource);
+        databaseDataSourceConnectionFactoryBean.setSchema(shemaName);
+        return databaseDataSourceConnectionFactoryBean;
+    }
 }
