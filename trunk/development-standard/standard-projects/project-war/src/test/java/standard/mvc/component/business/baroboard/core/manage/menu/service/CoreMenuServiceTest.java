@@ -13,17 +13,27 @@ import javax.annotation.Resource;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import standard.mvc.component.business.baroboard.core.manage.menu.vo.CoreMenuVO;
+
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseOperation;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DbUnitConfiguration;
+import com.github.springtestdbunit.dataset.ReplacementDataSetLoader;
+
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
+import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
 /**
@@ -44,13 +54,19 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * -------       ------------   -----------------------
  * 2015. 7. 5.          손호성                 최초 생성
  * 2015. 7. 5.          손호성                 MenuService => CoreMenuService
+ * 2015. 7. 12.         손호성                 DBUnit 연동 설정 추가
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
+@Ignore("원시 dbunit test case 에선 null 컬럼을 ReplacementDataSet 으로 처리했으나 Spring-test 와 연동시는 방법을 잘 몰라서 헤딩중")
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
+@ContextConfiguration(classes = { TestWebApplicationContextConfig.class,
+		WebMvcConfig.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+		DbUnitTestExecutionListener.class })
+@DbUnitConfiguration(dataSetLoader = ReplacementDataSetLoader.class)
 public class CoreMenuServiceTest {
 
     @Resource(name = "CoreMenuService")
@@ -73,6 +89,7 @@ public class CoreMenuServiceTest {
     }
 
 	@Test
+	@DatabaseSetup(value = "classpath:/standard/mvc/component/business/baroboard/menu/service/T_CORE_MENU_INIT.xml", type = DatabaseOperation.CLEAN_INSERT)
     public void testGetChildNode() throws Exception {
 		when(mockCoreMenuVO.getC_id()).thenReturn(3);
 		when(mockCoreMenuVO.getSqlMapSelector()).thenReturn("coreMenu");
