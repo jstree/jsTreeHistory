@@ -25,7 +25,7 @@ function callAjax(form, url, target, type, returnType, data, contentType, jsonpC
     var queryString = null;
     
     if (form) {
-        var $form = (typeof form == 'string') ? $('#' + form) : form;
+        var $form = (typeof form === 'string') ? $('#' + form) : form;
         
         queryString = $form.serialize();
         
@@ -41,10 +41,10 @@ function callAjax(form, url, target, type, returnType, data, contentType, jsonpC
         });
     }
     else if (data) {
-        if (typeof data == 'string') {
+        if (typeof data === 'string') {
             queryString = data;
         }
-        else if (typeof data == 'object') {
+        else if (typeof data === 'object') {
             queryString = JSON.stringify(data);
         }
     }
@@ -138,11 +138,11 @@ function callAjax(form, url, target, type, returnType, data, contentType, jsonpC
         data : queryString,
         dataType : returnType,
         jsonp : false,
-        jsonpCallback : 'undefined' == typeof jsonpCallback || null == jsonpCallback ? "callback" : jsonpCallback,
+        jsonpCallback : 'undefined' === typeof jsonpCallback || null == jsonpCallback ? "callback" : jsonpCallback,
         timeout : 7313,
         global : true,
-        contentType : 'undefined' == typeof contentType || null == contentType ? 'application/x-www-form-urlencoded; charset=UTF-8' : contentType,
-        async : 'undefined' == typeof async || null == async ? true : async,
+        contentType : 'undefined' === typeof contentType || null == contentType ? 'application/x-www-form-urlencoded; charset=UTF-8' : contentType,
+        async : 'undefined' === typeof async || null == async ? true : async,
         cache : false,
         beforeSend: function(jqXHR) {
           jqXHR.setRequestHeader('customHeader', 'ajax');
@@ -174,9 +174,9 @@ function callAjax(form, url, target, type, returnType, data, contentType, jsonpC
             
             }
         },
-        processData : 'undefined' == typeof processData || null == processData ? true : processData,
+        processData : 'undefined' === typeof processData || null == processData ? true : processData,
         ifModified : false,
-        crossDomain : 'undefined' == typeof crossDomain || null == crossDomain ? false : crossDomain
+        crossDomain : 'undefined' === typeof crossDomain || null == crossDomain ? false : crossDomain
     });
     
     result.done(function(responseText, textStatus, jqXHR) {
@@ -189,11 +189,11 @@ function callAjax(form, url, target, type, returnType, data, contentType, jsonpC
         
         if ("text" == this.dataType.toLowerCase() || "html" == this.dataType.toLowerCase()) {
 
-            if (typeof target == 'string') {
+            if (typeof target === 'string') {
                 
                 $(target).html(responseText);
             }
-            else if (typeof target == 'object') {
+            else if (typeof target === 'object') {
                 
                 var $style = target.$document.find('head style#style');
                 
