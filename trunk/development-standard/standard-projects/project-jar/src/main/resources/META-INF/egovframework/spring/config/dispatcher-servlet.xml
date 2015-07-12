@@ -120,6 +120,14 @@
 		<property name="resolveLazily" value="false" />
 	</bean>
 
+	<bean id="fileUploadProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:/META-INF/egovframework/fileUpload/*.properties</value>
+            </list>
+        </property>
+    </bean>
+
 	<bean id="exceptionResolver"
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
