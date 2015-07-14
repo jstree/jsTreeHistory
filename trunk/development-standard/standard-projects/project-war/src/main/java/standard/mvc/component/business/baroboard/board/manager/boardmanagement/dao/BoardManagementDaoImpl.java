@@ -36,7 +36,7 @@ public class BoardManagementDaoImpl extends EgovComAbstractDAO implements BoardM
 		createAdditionalTables( boardManagementVO );
 	}
 	
-	private void createAdditionalTables( BoardManagementVO boardManagementVO ){
+	private void createAdditionalTables( BoardManagementVO boardManagementVO ) throws Exception{
 		update(boardManagementVO.getSqlMapSelector() + ".createLogTable", boardManagementVO);
 		update(boardManagementVO.getSqlMapSelector() + ".createTrigger",  boardManagementVO);
 		update(boardManagementVO.getSqlMapSelector() + ".createSequence", boardManagementVO);
@@ -61,5 +61,10 @@ public class BoardManagementDaoImpl extends EgovComAbstractDAO implements BoardM
 			throws Exception {
 		update(boardManagementVO.getSqlMapSelector() + ".createFileTable", boardManagementVO);
 		createAdditionalTables( boardManagementVO );
+	}
+	
+	@Override
+	public int getTableSeq(BoardManagementVO boardManagementVO) throws Exception{
+		return (Integer)selectByPk(boardManagementVO.getSqlMapSelector() + ".getTableSeq", boardManagementVO);
 	}
 }

@@ -30,4 +30,5 @@ public interface BoardManagementDao {
 	void createLikeTable( BoardManagementVO boardManagementVO ) throws Exception;
 	void createCommentTable( BoardManagementVO boardManagementVO ) throws Exception;
 	void createFileTable( BoardManagementVO boardManagementVO ) throws Exception;
+	int getTableSeq( BoardManagementVO boardManagementVO ) throws Exception;
 }

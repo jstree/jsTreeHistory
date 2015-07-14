@@ -121,6 +121,13 @@
     </select>
     
     
+    <select id="getTableSeq" resultClass="int">
+        /* getTableSeq */
+        SELECT S_BOARD_CREATE.NEXTVAL
+          FROM DUAL
+    </select>
+    
+    
     <statement id="createBoardTable" parameterClass="BoardManagement">
         /* createBoardTable for BoardManagement */
         CREATE TABLE T_$boardTableName$ (
@@ -143,7 +150,7 @@
 		    C_VIEW_CNT NUMBER,
 		    C_IS_DELETED_FL CHAR(1),
 		    C_REG_DT VARCHAR2(14)
-        );
+        )
     </statement>
     
     
@@ -224,34 +231,34 @@
     
     <statement id="createTrigger" parameterClass="BoardManagement">
         /* createTrigger for BoardManagement */
-        CREATE OR REPLACE TRIGGER TRG_$boardTableName$
-        BEFORE DELETE OR INSERT OR UPDATE ON T_BOARD_INDI_SETTING
-        REFERENCING NEW AS NEW OLD AS OLD
-        FOR EACH ROW
-            DECLARE
-            tmpVar NUMBER;
-
-            BEGIN
-                tmpVar := 0;
-                IF UPDATING  THEN    
-	                INSERT INTO T_$boardTableName$_LOG 
-	                VALUES (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
-	                INSERT INTO T_$boardTableName$_LOG 
-	                VALUES (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
-                END IF;
-                IF DELETING THEN
-                    INSERT INTO T_$boardTableName$_LOG 
-                    VALUES (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
-                END IF;   
-                IF INSERTING  THEN
-                    INSERT INTO T_$boardTableName$_LOG 
-                    VALUES (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
-                END IF;
-
-                EXCEPTION
-                    WHEN OTHERS THEN
-                RAISE;
-            END TRG_$boardTableName$;
+	        CREATE OR REPLACE TRIGGER TRG_$boardTableName$
+	        BEFORE DELETE OR INSERT OR UPDATE ON T_$boardTableName$
+	        REFERENCING NEW AS NEW OLD AS OLD
+	        FOR EACH ROW
+	            DECLARE
+	            tmpVar NUMBER;
+	
+	            BEGIN
+	                tmpVar := 0;
+	                IF UPDATING  THEN    
+		                INSERT INTO T_$boardTableName$_LOG 
+		                VALUES (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
+		                INSERT INTO T_$boardTableName$_LOG 
+		                VALUES (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
+	                END IF;
+	                IF DELETING THEN
+	                    INSERT INTO T_$boardTableName$_LOG 
+	                    VALUES (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
+	                END IF;   
+	                IF INSERTING  THEN
+	                    INSERT INTO T_$boardTableName$_LOG 
+	                    VALUES (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
+	                END IF;
+	
+	                EXCEPTION
+	                    WHEN OTHERS THEN
+	                RAISE;
+	            END TRG_$boardTableName$;
     </statement>
     
     

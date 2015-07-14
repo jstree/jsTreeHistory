@@ -59,8 +59,9 @@ input[type="text"] {
 				
 				var sendUrl = "<c:url value='/board/manager/boardmanagement/save.do' />";
 				
-				if( $("#c_id").val() == '' ){
+				if( $("#c_id").val() == '0' ){
 					sendUrl = "<c:url value='/board/manager/boardmanagement/create.do' />";
+					$("#c_id").val("2");
 				}
 				
 				callAjax( "boardManagementForm"
@@ -74,7 +75,7 @@ input[type="text"] {
 			}
 		}		
 	});
-	
+	 
 	// 유효성 검사
 	function validForm(){
 		
@@ -82,13 +83,10 @@ input[type="text"] {
 		
 		$("input[type=text]").each(function(){
 			
-			if( $(this).attr("id") != "spamKeywords" ){
-				
-				if( $(this).val() == "" || $(this).val() == null ){
-					result = false;
-					alert( $(this).parent().prev().text() + " 값을 입력해 주세요." );
-					$(this).focus();
-				}
+			if( $(this).val() == "" || $(this).val() == null ){
+				result = false;
+				alert( $(this).parent().prev().text() + " 값을 입력해 주세요." );
+				$(this).focus();
 			}
 		});
 		return result;
@@ -96,7 +94,10 @@ input[type="text"] {
 </script>
 <section>
 	<form id="boardManagementForm">
-	    <input type="hidden" id="c_id" name="c_id" value="<c:out value='${board.c_id}' default='' />"/>
+	    <input type="hidden" id="c_id"   name="c_id"   value="<c:out value='${board.c_id}' default='0' />"/>
+	    <input type="hidden" id="ref"    name="ref"    value="2"/>
+	    <input type="hidden" id="c_type" name="c_type" value="default"/>
+	    <input type="hidden" id="c_position" name="c_position" value="100"/>
 		<div class="three-quarter last boxed p-twenty clearfix"	data-anim-type="fade-in" data-anim-delay="0">
 			<div id="samDiv" class="tablet-mobile alpha bm-remove last">
 				<div class="responsive-row">

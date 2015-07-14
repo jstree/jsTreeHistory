@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.board.manager.boardmanagement.vo.BoardManagementVO;
-import standard.mvc.component.business.baroboard.board.manager.defaultsetting.vo.DefaultSettingVO;
 import standard.mvc.component.business.baroboard.user.manage.grade.service.UserGradeService;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AddNode;
@@ -106,12 +105,13 @@ public class BoardManagementController extends GenericAbstractController {
     
     @ResponseBody
     @RequestMapping(value = "/create.do", method = {RequestMethod.POST})
-    public DefaultSettingVO addNode( @Validated(value = AddNode.class) DefaultSettingVO defaultSettingVO
-    		, BindingResult bindingResult
-    		, ModelMap model ) throws Exception {
+    public BoardManagementVO addNode( @Validated(value = AddNode.class) BoardManagementVO boardManagementVO
+    		                        , BindingResult bindingResult
+    		                        , ModelMap model ) throws Exception {
     	if (bindingResult.hasErrors()) {
     		throw new RuntimeException(bindingResult.getAllErrors().get(0).getDefaultMessage());
     	}
-    	return defaultSettingVO;
+    	boardManagementService.addNode(boardManagementVO);
+    	return boardManagementVO;
     }
 }

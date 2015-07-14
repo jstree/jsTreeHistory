@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import standard.mvc.component.business.baroboard.board.manager.boardmanagement.dao.BoardManagementDao;
 import standard.mvc.component.business.baroboard.board.manager.boardmanagement.vo.BoardManagementVO;
@@ -68,6 +70,7 @@ public class BoardManagementServiceImpl implements CoreService {
     }
 
     @Override
+    @Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree) throws Exception {
     	
     	BoardManagementVO boardManagementVO = (BoardManagementVO)comprehensiveTree;
@@ -77,14 +80,16 @@ public class BoardManagementServiceImpl implements CoreService {
     	
     	boardManagementDao.createBoardTable(boardManagementVO);
 
-    	boardManagementVO.setBoardTableName( boardManagementVO.getBoardTableName() + "_LIKE" );
+    	boardManagementVO.setBoardTableName( tableName + "_LIKE" );
     	boardManagementDao.createLikeTable(boardManagementVO);
     	
-    	boardManagementVO.setBoardTableName( boardManagementVO.getBoardTableName() + "_COMMENT" );
+    	boardManagementVO.setBoardTableName( tableName + "_COMMENT" );
     	boardManagementDao.createCommentTable(boardManagementVO);
     	
-    	boardManagementVO.setBoardTableName( boardManagementVO.getBoardTableName() + "_FILE" );
+    	boardManagementVO.setBoardTableName( tableName + "_FILE" );
     	boardManagementDao.createFileTable(boardManagementVO);
+    	
+    	boardManagementService.addNode(boardManagementVO);
     	
     	return comprehensiveTree;
     }
@@ -92,13 +97,8 @@ public class BoardManagementServiceImpl implements CoreService {
     private String createTableName( BoardManagementVO boardManagementVO ) throws Exception{
     	
     	String tableName = "BOARD";
-    	int    order = 1;
+    	int    order     = boardManagementDao.getTableSeq(boardManagementVO);
     	
-		List<BoardManagementVO> list = boardManagementService.getChildNode(boardManagementVO);
-    	
-    	if( list != null && list.size() > 0 ){
-    		order = (Integer.parseInt(list.get(0).getBoardTableName().split("_")[2])) + 1;
-    	}
     	return tableName + "_" + order;
     }
 
