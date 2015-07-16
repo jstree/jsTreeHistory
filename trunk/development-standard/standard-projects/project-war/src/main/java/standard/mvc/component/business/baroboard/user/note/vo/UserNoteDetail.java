@@ -24,7 +24,8 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-public class UserNoteDetail extends ComprehensiveTree {
+public class UserNoteDetail extends ComprehensiveTree{
+
 	private String content;
 	
 	private List<UserNoteByUser> userNoteByUserList;
@@ -51,8 +52,7 @@ public class UserNoteDetail extends ComprehensiveTree {
 		return userNoteAttachFileList;
 	}
 
-	public void setUserNoteAttachFileList(
-			List<UserNoteAttachFile> userNoteAttachFileList) {
+	public void setUserNoteAttachFileList(List<UserNoteAttachFile> userNoteAttachFileList) {
 		this.userNoteAttachFileList = userNoteAttachFileList;
 	}
 

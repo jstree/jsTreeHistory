@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteByUser;
@@ -43,6 +44,7 @@ public class UserNoteServiceImpl implements UserNoteService{
 	@Resource(name = "CoreService")
     private CoreService coreService;
 
+	@Transactional
 	@Override
 	public void sendNote(UserNoteDetail userNoteDetail) throws Exception {
 		userNoteDetail.setRef(2);
@@ -85,11 +87,12 @@ public class UserNoteServiceImpl implements UserNoteService{
 		List<UserNoteAttachFile> userNoteAttachFileList = userNoteDetail.getUserNoteAttachFileList();
 		if(userNoteAttachFileList != null){
 			for(UserNoteAttachFile file : userNoteAttachFileList){
+				file.setRef(2);
+				file.setC_type("default");
 				file.setNoteDetailId(noteDetailId);
 				coreService.addNode(file);
 			}
 		}
-		
 	}
 
 	@Override
@@ -147,5 +150,10 @@ public class UserNoteServiceImpl implements UserNoteService{
 	@Override
 	public void deleteNote(UserNoteByUser userNoteByUser) throws Exception {
 		coreService.removeNode(userNoteByUser);
+	}
+
+	@Override
+	public UserNoteAttachFile inquiryNoteFileInf(UserNoteAttachFile userNoteAttachFile) throws Exception {
+		return coreService.getNode(userNoteAttachFile);
 	}
 }

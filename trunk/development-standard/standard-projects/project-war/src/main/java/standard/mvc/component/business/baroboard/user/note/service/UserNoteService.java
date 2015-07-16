@@ -2,6 +2,7 @@ package standard.mvc.component.business.baroboard.user.note.service;
 
 import java.util.List;
 
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteByUser;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteDetail;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteTypeCode;
@@ -65,6 +66,13 @@ public interface UserNoteService {
      * @throws Exception
      */
 	public List<UserNoteByUser> inquiryNoteList(UserNoteByUser userNoteByUser) throws Exception;
+	
+	/**
+	 * 쪽지 파일 정보 조회
+	 * @param userNoteByUser
+	 * @throws Exception
+	 */
+	public UserNoteAttachFile inquiryNoteFileInf(UserNoteAttachFile userNoteAttachFile) throws Exception;
 	
 	/**
      * 쪽지 일괄 삭제
