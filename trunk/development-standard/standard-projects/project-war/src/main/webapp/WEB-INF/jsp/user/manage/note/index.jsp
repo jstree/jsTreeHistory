@@ -87,19 +87,23 @@ select{
                     , $('#noteForm').prop('method')
                     , 'json'
                     , null
-                    , 'application/json'
+                    , null//'application/json'
                     , function(r){
-						$(r).each(function(i){
-							var tr = '';
-							tr += '<tr>';
-							tr += '<td><input name="grdCheckbox" type="checkbox"/></td>';				
-							tr += '<td>' + this.userNm + '</td>';
-							tr += '<td>' + this.receDispDt + '</td>';
-							tr += '<td><a target="_self" onclick="fnNoteDetailPop(' + this.noteDetailId + ')">' + this.c_title + '</a></td>';
-							tr += '<td>Delete</td>';
-							tr += '</tr>';
-							
-							$('#resultTblBody').append(tr);
+                    	$('#resultTblBody').children('tr').remove();
+                    	
+						$(r).each(function(i){							  
+							if(null != this.noteDetailId && '' != this.noteDetailId){
+								var tr = '';
+								tr += '<tr>';
+								tr += '<td><input name="grdCheckbox" type="checkbox"/></td>';				
+								tr += '<td>' + this.userNm + '</td>';
+								tr += '<td>' + this.receDispDt + '</td>';
+								tr += '<td><a target="_self" onclick="fnNoteDetailPop(' + this.noteDetailId + ')">' + this.c_title + '</a></td>';
+								tr += '<td>Delete</td>';
+								tr += '</tr>';
+								
+								$('#resultTblBody').append(tr);
+							}
 						});
 			        });
 			return false;
@@ -125,7 +129,7 @@ select{
 	<div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
 		<!-- 검색 부분 -->
 		<div id="search" class="one-whole boxed p-twenty search-area">
-			<form id="noteForm" action="inquiryNoteList.do" method="post">
+			<form id="noteForm" action="${pageContext.request.contextPath}/user/manage/note/inquiryNoteList.do" method="post">
 				<div class="responsive-row">
 					<div class="item-name">발신자</div>
 					<div class="item-value">
@@ -142,9 +146,9 @@ select{
 					<div class="item-name">발신일자</div>
 					<div class="item-value">
 						<label for="inqStartYmd"></label>
-						<input placeholder="2015-05-17" type="text" id="inqStartYmd" name="inqStartYmd" value="${inqStartYmd}">
+						<input placeholder="${inqStartYmd}" type="text" id="inqStartYmd" name="inqStartYmd">
 						<label for="inqEndYmd">~</label>
-						<input placeholder="2015-05-18" type="text" id="inqEndYmd" name="inqEndYmd" value="${inqEndYmd}">
+						<input placeholder="${inqEndYmd}" type="text" id="inqEndYmd" name="inqEndYmd">
 					</div>
 				</div>
 				<div class="responsive-row">

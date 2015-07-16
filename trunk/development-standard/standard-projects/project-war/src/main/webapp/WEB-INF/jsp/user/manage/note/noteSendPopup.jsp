@@ -25,7 +25,17 @@
 <customTags:assetsJsExtendNas theRestOfFileName="/js/jquery.form.js"></customTags:assetsJsExtendNas>
 
 <script type="text/javascript">	
-	var USER_LIST = [];
+	jQuery.browser = {};
+	(function () {
+	    jQuery.browser.msie = false;
+	    jQuery.browser.version = 0;
+	    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+	        jQuery.browser.msie = true;
+	        jQuery.browser.version = RegExp.$1;
+	    }
+	})();
+
+	var USER_LIST = []; //쪽지 수신인 유저 리스트
 	
 	$(function () {
 		$('#userNm').bind('keydown', function(e){
@@ -52,7 +62,7 @@
 			                	   if(inVal){
 			                		   alert('기 추가된 사용자');
 			                	   }else{
-			                		   USER_LIST[USER_LIST.length] = { 'userId' : r.c_id/*, 'noteTypeCode' : 3*/};
+			                		   USER_LIST.push({'userId' : r.c_id, 'noteTypeCode' : 3});
 			                		   $('#userList').append('<span>' + r.c_title + '</span>');
 			                	   }
 		                		   $('#userNm').val('');
@@ -67,101 +77,50 @@
 			}
 		});
 		
-		$("#sendForm").submit(function() {
-			/*var formData = new FormData();
-			formData.append('c_title', $('#c_title').val());
-			formData.append('content', $('#content').val());
-			formData.append('userNoteByUserList', JSON.stringify(USER_LIST));*/
-			///formData.append('file', $('#addAttachFile')[0].files[0]);
-			
-			/*var queryString = $("#sendForm").serialize();
-			alert(queryString);*/
-			
-			var options = {
-				url           : '${pageContext.request.contextPath}/user/manage/note/sendNote.do'
-				,type          : 'post'
-				//,contentType   : 'application/json'
-				//,dataType : 'json'
-				,data : {
-					    'c_title' : $('#c_title').val()
-						,'content' : $('#content').val()
-						,'userNoteByUserList' : [{userId : 1}, {userId : 2}]//JSON.stringify(USER_LIST)
-					}
-			};
-			$.ajax(options);
+		$("#sendForm").submit(function() {			
 			return false; // cancel conventional submit
 	    });
 		
-		/*$('#sendForm').ajaxForm({
-			beforeSubmit : function(formData, jqForm, options){
-				var queryString = JSON.stringify(USER_LIST);
-				//alert(queryString);
-				//$('#c_18').val(queryString);
-				//var queryString = $.param(formData); 
-				//alert('About to submit: \n\n' + queryString); 
-				//$('#sendForm').append('<input name="userNoteByUserList" type="text" value="' + queryString + '">');
-				
-				//formData.push({userNoteByUserList : USER_LIST});
-			}
-		    ,dataType : 'json'
-			,data : {
-				 'c_id' : 181818
-				//,'content' : '내용요요요요'
-				//,'userNoteByUserList' : [{userId : 1}, {userId : 2}]//JSON.stringify(USER_LIST)
+		$('#sendNoteForm').ajaxForm({	
+			 type : 'post'			
+			,contentType : 'multipart/form-data'			
+			,beforeSubmit: function(formArray, jqForm){
+				if(USER_LIST.length == 0){
+					$('#userNm').focus();
+					alert("수신인이 존재하지 않습니다.");
+					return false;
+				}
 			}
 			,success : function(r, stat){
-				window.close();
-			}
+					   		var fileList = jQuery.parseJSON(r.replace(/(<([^>]+)>)/ig,""));
+						
+							var fileNmList = [];
+							$(fileList).each(function(i){
+								fileNmList.push({'storeFileNm' : this.storeFileNm, 'c_title' : this.c_title});
+							});
+							
+							callAjax(  null
+					                  , '${pageContext.request.contextPath}/user/manage/note/sendNote.do'
+					                  , null
+					                  , 'post'
+					                  , 'json'
+					                  , {
+					                   		'c_title'  : $('#c_title').val()
+					                   		,'content' : $('#content').val()
+					                  		,'userNoteByUserList'     : USER_LIST
+					                   		,'userNoteAttachFileList' : fileNmList
+					                    }
+					                  , 'application/json; charset=utf-8'
+					                  , function(r){
+					                   		window.close();
+					                    }
+					                  );
+			         }
 			,error : function(r){
 				alert(r);
 			}
 		});
-		
-		/*$('#sendBtn').bind('click', function(e){
-			var queryString = JSON.stringify(USER_LIST);
-			alert(queryString);
-			 $('#sendForm').append('<input name="userNoteByUserList" value="' + queryString + '">');
 			
-			 $.ajax({
-				    url:'${pageContext.request.contextPath}/user/manage/note/sendNote.do',
-				    data:$('#sendForm').serialize(),
-				    cache:false,
-				    processData:false,
-				    contentType:false,
-				    type:'POST',
-				    success:function (data, status, req) {
-				        
-				    },
-				    error:function (req, status, error) {
-				       
-				    }
-				});
-			*callAjax(    'sendForm'
-	                   , '${pageContext.request.contextPath}/user/manage/note/sendNote.do'
-	                   , null
-	                   , 'post'
-	                   , 'json'
-	                   , null
-	                   , 'multipart/form-data'//'application/json; charset=utf-8'
-	                   , function(r){
-	                	   window.close();
-	                   }
-			);*/
-			
-			/*callAjax({
-				 form          : 'sendForm'
-				,url           : '${pageContext.request.contextPath}/user/manage/note/sendNote.do'
-				,type          : 'post'
-				,contentType   : 'multipart/form-data'
-				,returnType    : 'json'
-				,callback      : function(r){
-					             	alert(r);
-			                     }
-			    ,async         : false
-			});*/
-			
-			//return false;
-		//});*/		
 	});
 </script>
 </head>
@@ -169,7 +128,7 @@
 	<div class="container clearfix">
 		<div class="one-whole boxed">
 			<section class="">
-				<form id="sendForm" action="${pageContext.request.contextPath}/user/manage/note/sendNote.do" method="post" enctype="multipart/form-data">
+				<form id="sendNoteForm" action="${pageContext.request.contextPath}/user/manage/note/uploadNoteFile.do" method="post" enctype="multipart/form-data">
 				<div class="responsive-row">
 					<div class="item-name">수신자</div>
 					<div class="item-value">

@@ -47,7 +47,7 @@
 					<div class="item-name">첨부파일</div>
 					<div class="item-value">
 						<c:forEach var="item" items="${userNoteDetail.userNoteAttachFileList}">
-							<input name="storeFileNm" type="text" value="${item.storeFileNm}"><br/>
+							<span><a href="${pageContext.request.contextPath}/user/manage/note/downloadNoteFile.do?fileName=${item.c_id}" target="_self">${item.c_title}</a></span>
 						</c:forEach>			
 					</div>
 				</div>
