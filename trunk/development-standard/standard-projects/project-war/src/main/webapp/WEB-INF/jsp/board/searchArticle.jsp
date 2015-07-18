@@ -109,7 +109,7 @@ $(document).ready(function(){
 												<tr>
 													<td class="dt-center">${article.c_id}</td>
 													<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
-													<td class="dt-center"><a class="user-context" data-id="${article.regID}">${article.regNickName}</a></td>
+													<td class="dt-center"><a class="user-context" data-id="${article.regId}">${article.regNickName}</a></td>
 													<td class="dt-center">${article.regDt}</td>
 													<td class="dt-center">${article.viewCnt}</td>
 													<td class="dt-center">0</td>

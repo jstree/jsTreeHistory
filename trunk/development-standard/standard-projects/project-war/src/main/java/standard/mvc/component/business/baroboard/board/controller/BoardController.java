@@ -6,7 +6,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -67,8 +66,6 @@ public class BoardController extends GenericAbstractController {
 	@RequestMapping(value = "/index.do", method = { RequestMethod.GET })
 	public String showIndexPage(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 		// TODO : pageNum 검증, boardID 검증
-		// TODO : 허용된사용자 여부
-		
 		String boardID = article.getBoardID();
 		int totPages = boardService.getOpenArticleCnt(article) / article.getPageSize() + 1;
 		
@@ -102,7 +99,6 @@ public class BoardController extends GenericAbstractController {
 		
 		modelMap.addAttribute("boardID", boardID);
 		modelMap.addAttribute("pageName", "테스트게시판");
-		
 		return "/jsp/board/index";
 	}
 
@@ -129,26 +125,9 @@ public class BoardController extends GenericAbstractController {
 	}
 
 	@RequestMapping(value = "/newArticle.do")
-	public String newArticle(ModelMap modelMap) throws Exception {
-		String jspView = "";
-		
-		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(user instanceof String) { // 익명 사용자
-			String userStr = (String)user;
-			if(userStr.equals("anonymousUser")) {
-				modelMap.addAttribute("isGuestFL", "1");
-				logger.debug("게스트사용자");
-				jspView = "/jsp/board/newGuestArticle";
-			} else {
-				throw new Exception("허가되지 않은 사용자입니다.");
-			}
-		} else {	// 로그인 사용자
-			modelMap.addAttribute("isGuestFL", "0");
-			jspView = "/jsp/board/newArticle";
-			logger.debug("일반사용자");
-		}
-		
-		return jspView;
+	public String newArticle(ModelMap modelMap) {
+
+		return "/jsp/board/newArticle";
 	}
 	
 	@RequestMapping(value = "/newReplyArticle.do", method = { RequestMethod.GET })

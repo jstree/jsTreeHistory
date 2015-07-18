@@ -10,25 +10,6 @@
 <script src="${pageContext.request.contextPath}/assets/js/ckeditor/ckeditor.js" type="text/javascript"></script>
 <link href="${pageContext.request.contextPath}/assets/css/newArticle.css" rel="stylesheet" type="text/css" media="all" />
 
-<style>
-/* 
-div#titleDiv > div {
-	max-width: 300px;
-}
-
- */
- 
-div#titleDiv > div > span:first-child {
-	width : 60px;
-}
-div#titleDiv > div input {
-	display: inline !important;
-}
-
-
-
-</style>
-
 </head>
 <body>
 	<section class="clearfix">
@@ -60,24 +41,26 @@ div#titleDiv > div input {
 								</c:otherwise>
 							</c:choose>
 								<div id="titleDiv">
-									<div>
-										<span>
-											<label>제목</label>
-										</span>
-										<span>
-											<c:choose>
-												<c:when test="${not empty parentArticle}">
-												<input id="rootArticleID" name="rootArticleID" type="hidden" value="${parentArticle.rootArticleID}" />
-												<input id="parentArticleID" name="ref" type="hidden" value="${parentArticle.c_id}" />
-												<input id="articleTitle" name="c_title" type="text"	value="RE: ${parentArticle.c_title}" />
-												</c:when>
-												<c:otherwise>
-												<input id="articleTitle" name="c_title" type="text"	/>
-												</c:otherwise>
-											</c:choose>
-										</span>
-									</div>
-									<input id="isGuestFL" name="isGuestFL" type="hidden" value="${isGuestFL}" />
+									<span>
+										<label>제목</label>
+									</span>
+									<span>
+										<c:choose>
+											<c:when test="${not empty parentArticle}">
+											<input id="rootArticleID" name="rootArticleID" type="hidden" value="${parentArticle.rootArticleID}" />
+											<input id="parentArticleID" name="ref" type="hidden" value="${parentArticle.c_id}" />
+											<input id="articleTitle" name="c_title" type="text"	value="RE: ${parentArticle.c_title}" />
+											</c:when>
+											<c:otherwise>
+											<input id="articleTitle" name="c_title" type="text"	/>
+											</c:otherwise>
+										</c:choose>
+									</span>
+									<!-- TODO : Admin일경우 공지선택가능 -->
+									<span id="announceSpan">
+										<input type="checkbox" id="isAnnounce" name="announcementFL" value="1" />
+										<label for="isAnnounce">공지</label>
+									</span>										
 								</div>
 								<div>
 									<textarea name="content" id="editor" rows="10" cols="80"></textarea>
@@ -137,6 +120,7 @@ $('#articleForm').on('submit',function(e){
     e.preventDefault();
     CKEDITOR.instances.editor.updateElement();	// CKEditor를 refresh함
     if ($.trim($('#articleTitle').val()) != '') {
+    	
     	$.ajax({
    		  url: this.action,
    		  method: 'POST',

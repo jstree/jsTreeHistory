@@ -29,7 +29,7 @@ public class Article extends ComprehensiveTree {
 	private int rootArticleID;
 	
 	/* 글쓴이 */
-	private int regID;
+	private int regId;
 	
 	/* 내용 */
 	private String content;
@@ -58,16 +58,6 @@ public class Article extends ComprehensiveTree {
 	/* 삭제여부 */
 	private String isDeletedFL;
 
-	/* 게스트글 여부 */
-	private String isGuestFL;
-	
-	/* 게스트 글 닉네임 */
-	private String guestNickName;
-	
-	/* 게스트 글 비밀번호 */
-	private String guestPW;
-	
-	
 	/* TODO : 첨부파일 */
 
 	/* 생성일시 */
@@ -75,7 +65,7 @@ public class Article extends ComprehensiveTree {
 
 	/* 수정일시 */
 	private String modDt;
-	
+
 	/* 테이블에는 없지만 DTO로서 필요한 필드 */
 	/* 게시판 ID */
 	private String boardID;
@@ -113,7 +103,7 @@ public class Article extends ComprehensiveTree {
 		b.append("\n");
 		b.append("C_title : " + this.getC_title());
 		b.append("\n");
-		b.append("regId :" + this.getRegID());
+		b.append("regId :" + this.getRegId());
 		b.append("\n");
 
 		b.append("content :" + this.getContent());
@@ -140,30 +130,6 @@ public class Article extends ComprehensiveTree {
 	@Override
 	public String getSqlMapSelector() {
 		return "board";
-	}
-
-	public String getIsGuestFL() {
-		return isGuestFL;
-	}
-
-	public void setIsGuestFL(String isGuestFL) {
-		this.isGuestFL = isGuestFL;
-	}
-
-	public String getGuestNickName() {
-		return guestNickName;
-	}
-
-	public void setGuestNickName(String guestNickName) {
-		this.guestNickName = guestNickName;
-	}
-
-	public String getGuestPW() {
-		return guestPW;
-	}
-
-	public void setGuestPW(String guestPW) {
-		this.guestPW = guestPW;
 	}
 
 	public int getLikeCnt() {
@@ -199,12 +165,12 @@ public class Article extends ComprehensiveTree {
 		this.rootArticleID = rootArticleID;
 	}
 	
-	public int getRegID() {
-		return regID;
+	public int getRegId() {
+		return regId;
 	}
 
-	public void setRegID(int regID) {
-		this.regID = regID;
+	public void setRegId(int regId) {
+		this.regId = regId;
 	}
 
 	public String getContent() {
