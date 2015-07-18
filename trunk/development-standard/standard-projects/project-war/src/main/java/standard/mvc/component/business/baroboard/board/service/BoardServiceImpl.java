@@ -10,6 +10,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.board.dao.BoardDao;
@@ -17,9 +18,9 @@ import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
-import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
 
 /**
  * Modification Information
@@ -90,7 +91,21 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Article addArticle(Article article) throws Exception {
-		article.setRef(2);
+		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		if(article.getIsGuestFL().equals("0")) {	// 일반 사용자
+			SecureUserLogin userLogin = (SecureUserLogin) user;
+			article.setRegID(userLogin.getId());
+			
+		} else {									// 게스트 사용자
+			if(user instanceof String) {
+				String userStr = (String)user;
+				if(! userStr.equals("anonymousUser")) {
+					throw new Exception("허가되지 않은 사용자입니다.");
+				} 
+			}
+		}
+		
 		this.setupArticleParameters(article);
 		
 		Article insertedArticle = coreService.addNode(article);
@@ -121,7 +136,7 @@ public class BoardServiceImpl implements BoardService {
 	public Article readArticle(Article article) throws Exception {
 		this.countUpViewCnt(article);
 		// TODO : 권한체크
-		article.setUserID(23);
+//		article.setUserID(23);
 		Article resultArticle = this.getArticleById(article);
 		this.changeRegDTFormatForReadArticle(resultArticle);
 		return resultArticle;
@@ -151,7 +166,6 @@ public class BoardServiceImpl implements BoardService {
 	public Comment addComment(Comment comment) throws Exception {
 		comment.setC_type("folder");
 		comment.setRegID(23); // TODO : FOR TEST ONLY
-		
 		comment.setRegDT(this.getTodayFor14Digits());
 		Comment insertedComment = null;
 		
@@ -268,13 +282,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	/* 글 추가를 위한 공통 파라미터 설정 */
 	private void setupArticleParameters(Article article) {
+		article.setRef(2);
 		article.setC_type("default");
-		article.setRegId(23);	// TODO : For Test Only
 		article.setC_type("folder");
-		
 		article.setContent(this.unescapeHtml(article.getContent()));
-		
-		
 		article.setRegDt(this.getTodayFor14Digits());
 	}
 }

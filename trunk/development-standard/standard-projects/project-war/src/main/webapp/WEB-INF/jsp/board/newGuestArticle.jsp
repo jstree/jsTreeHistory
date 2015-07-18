@@ -25,8 +25,6 @@ div#titleDiv > div input {
 	display: inline !important;
 }
 
-
-
 </style>
 
 </head>
@@ -78,6 +76,19 @@ div#titleDiv > div input {
 										</span>
 									</div>
 									<input id="isGuestFL" name="isGuestFL" type="hidden" value="${isGuestFL}" />
+									<%-- 게스트글 닉네임, 비밀번호 입력 --%> 
+									<div>
+										<span>
+											<label>닉네임</label>
+										</span>
+										<input id="guestNickName" name="guestNickName"type="text" />
+									</div>
+									<div>
+										<span>
+											<label>글 비밀번호</label>
+										</span>
+										<input id="guestPW" name="guestPW"type="password" />
+									</div>
 								</div>
 								<div>
 									<textarea name="content" id="editor" rows="10" cols="80"></textarea>
@@ -137,6 +148,16 @@ $('#articleForm').on('submit',function(e){
     e.preventDefault();
     CKEDITOR.instances.editor.updateElement();	// CKEditor를 refresh함
     if ($.trim($('#articleTitle').val()) != '') {
+    	
+   		if( $.trim($('#guestNickName').val()) == '') {
+   			alert('닉네임을 입력해주세요.');
+   			return;
+   		}
+   		if( $.trim($('#guestPW').val()) == '') {
+   			alert('글 비밀번호를 입력해주세요.');
+   			return;
+   		}
+   		
     	$.ajax({
    		  url: this.action,
    		  method: 'POST',

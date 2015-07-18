@@ -98,7 +98,7 @@
 		SET C_TYPE = #c_type#
 			, C_TITLE = #c_title#
 			, C_ROOT_ARTICLE_ID = #rootArticleID#
-			, C_REG_ID = #regId# 			
+			, C_REG_ID = #regID# 			
 			, C_CONTENT = #content# 
 			, C_ALLOW_TRACKBACK_FL = #allowTrackbackFL#			
 			, C_ALLOW_COMMENT_FL = #allowCommentFL#	
@@ -107,7 +107,10 @@
 			, C_OPEN_ARTICLE_FL = #openArticleFL# 	
 			, C_ANNOUNCEMENT_FL = #announcementFL# 	
 			, C_VIEW_CNT = #viewCnt# 			
-			, C_IS_DELETED_FL = #isDeletedFL#		
+			, C_IS_DELETED_FL = #isDeletedFL#	
+			, C_IS_GUEST_FL = #isGuestFL#
+			, C_GUEST_NICKNAME = #guestNickName#
+			, C_GUEST_PW = #guestPW#
 			, C_REG_DT = #regDt# 				
 			, C_MOD_DT = #modDt# 			
 		WHERE C_ID = #c_id#
@@ -121,7 +124,7 @@
 			<include refid="getMetaField" />
 			/* user fields */
 			, A.C_ROOT_ARTICLE_ID as rootArticleID
-			, A.C_REG_ID as regId 			
+			, A.C_REG_ID as regID 			
 			, A.C_CONTENT as content 			
 			, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 			, A.C_ALLOW_REPLY_FL as allowReplyFL	
@@ -130,6 +133,9 @@
 			, A.C_ANNOUNCEMENT_FL as announcementFL 	
 			, A.C_VIEW_CNT as viewCnt 			
 			, A.C_IS_DELETED_FL as isDeletedFL		
+			, A.C_IS_GUEST_FL as isGuestFL
+			, A.C_GUEST_NICKNAME as guestNickName
+			, A.C_GUEST_PW as guestPW
 			, A.C_REG_DT as regDt 				
 			, A.C_MOD_DT as modDt 
 		FROM T_BOARD_TEST A
@@ -153,6 +159,9 @@
 			, A.C_ANNOUNCEMENT_FL 	
 			, A.C_VIEW_CNT 					
 			, A.C_IS_DELETED_FL				
+			, A.C_IS_GUEST_FL as isGuestFL
+			, A.C_GUEST_NICKNAME as guestNickName
+			, A.C_GUEST_PW as guestPW
 			, A.C_REG_DT 						
 			, A.C_MOD_DT 
 		FROM T_BOARD_TEST A
@@ -383,7 +392,7 @@
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
 				, A.C_ROOT_ARTICLE_ID as rootArticleID
-				, A.C_REG_ID as regId 			
+				, A.C_REG_ID as regID 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
 				, A.C_ALERT_RESPONSE_FL as alertResponseFL
@@ -391,6 +400,9 @@
 				, A.C_ANNOUNCEMENT_FL as  	
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
+				, A.C_IS_GUEST_FL as isGuestFL
+				, A.C_GUEST_NICKNAME as guestNickName
+				, A.C_GUEST_PW as guestPW
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
 				, B.C_TITLE as regNickName
@@ -406,9 +418,8 @@
 			      	    AND Y.C_ANNOUNCEMENT_FL = '0'   
 			        ORDER BY C_ROOT_ARTICLE_ID DESC, C_LEFT ASC  
 				) Z WHERE ROWNUM &lt;= (#pageNum# * #pageSize#)
-			) A, T_USER_INFO B
+			) A LEFT OUTER JOIN T_USER_INFO B ON A.C_REG_ID = B.C_ID 
 			WHERE 1=1 
-				AND A.C_REG_ID = B.C_ID
 				AND A.RNUM &gt;= (1 + ((#pageNum# - 1) * #pageSize#))
 		</dynamic>
 	</select>
@@ -419,7 +430,7 @@
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
 				, A.C_ROOT_ARTICLE_ID as rootArticleID
-				, A.C_REG_ID as regId 			
+				, A.C_REG_ID as regID 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
 				, A.C_ALERT_RESPONSE_FL as alertResponseFL
@@ -427,14 +438,16 @@
 				, A.C_ANNOUNCEMENT_FL as announcementFL 	
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
+				, A.C_IS_GUEST_FL as isGuestFL
+				, A.C_GUEST_NICKNAME as guestNickName
+				, A.C_GUEST_PW as guestPW
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
 				, B.C_TITLE as regNickName	
 				, (SELECT COUNT(*) FROM T_BOARD_COMMENT_TEST C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt		
 				, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
-			FROM T_BOARD_TEST A, T_USER_INFO B
+			FROM T_BOARD_TEST A LEFT OUTER JOIN T_USER_INFO B ON A.C_REG_ID = B.C_ID 
 			WHERE 1=1
-				AND A.C_REG_ID = B.C_ID
 				AND A.C_ANNOUNCEMENT_FL = '1'
 				AND A.C_OPEN_ARTICLE_FL = '1'
 			ORDER BY
@@ -456,7 +469,7 @@
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
 				, A.C_ROOT_ARTICLE_ID as rootArticleID
-				, A.C_REG_ID as regId 			
+				, A.C_REG_ID as regID 			
 				, A.C_CONTENT as content 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
@@ -465,9 +478,12 @@
 				, A.C_ANNOUNCEMENT_FL as announcementFL 	
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
+				, A.C_IS_GUEST_FL as isGuestFL
+				, A.C_GUEST_NICKNAME as guestNickName
+				, A.C_GUEST_PW as guestPW
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
-				, B.C_TITLE as regNickName
+				, (SELECT B.C_TITLE FROM T_USER_INFO B WHERE A.C_REG_ID = B.C_ID) as regNickName
 				, (	CASE WHEN 
 						(SELECT COUNT(*) 
 						 FROM T_BOARD_LIKE_TEST D 
@@ -479,13 +495,9 @@
           			ELSE 1 END
           		   ) as likeFL	
           		, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt	
-			FROM T_BOARD_TEST A, T_USER_INFO B
+			FROM T_BOARD_TEST A 
 			WHERE 1=1
 				AND A.C_ID = #c_id#
-				AND A.C_REG_ID = B.C_ID
-				AND A.C_OPEN_ARTICLE_FL = '1'
-			ORDER BY
-				A.C_REG_DT ASC
 		</dynamic>
 	
 	</select>
@@ -496,7 +508,7 @@
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
 				, A.C_ROOT_ARTICLE_ID as rootArticleID
-				, A.C_REG_ID as regId 			
+				, A.C_REG_ID as regID 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
 				, A.C_ALERT_RESPONSE_FL as alertResponseFL
@@ -504,14 +516,16 @@
 				, A.C_ANNOUNCEMENT_FL as  	
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
+				, A.C_IS_GUEST_FL as isGuestFL
+				, A.C_GUEST_NICKNAME as guestNickName
+				, A.C_GUEST_PW as guestPW
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
 				, B.C_TITLE as regNickName			
 				, (SELECT COUNT(*) FROM T_BOARD_COMMENT_TEST C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt
 				, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
-			FROM T_BOARD_TEST A, T_USER_INFO B
+			FROM T_BOARD_TEST A LEFT OUTER JOIN T_USER_INFO B ON A.C_REG_ID = B.C_ID 
 			WHERE 1=1
-				AND A.C_REG_ID = B.C_ID
 				AND A.C_LEVEL = 2
 				AND A.C_OPEN_ARTICLE_FL = '1'
 				AND A.C_ANNOUNCEMENT_FL = '0'

@@ -128,7 +128,14 @@ $(document).ready(function(){
 														</c:otherwise>
 													</c:choose>
 													
-													<td class="dt-center"><a class="user-context" data-id="${article.regId}">${article.regNickName}</a></td>
+													<c:choose>
+														<c:when test="${article.isGuestFL == '1'}">
+													<td class="dt-center">${article.guestNickName}</td>
+														</c:when>
+														<c:otherwise>
+													<td class="dt-center"><a class="user-context" data-id="${article.regID}">${article.regNickName}</a></td>
+														</c:otherwise>
+													</c:choose>
 													<td class="dt-center">${article.regDt}</td>
 													<td class="dt-center">${article.viewCnt}</td>
 													<td class="dt-center">${article.likeCnt}</td>

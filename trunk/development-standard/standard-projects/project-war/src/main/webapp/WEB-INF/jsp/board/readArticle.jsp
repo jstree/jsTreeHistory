@@ -117,23 +117,6 @@ i.fa {
 	padding-right: 5px;	
 }
 </style>
-<script>
-function deleteThisArticle(c_id){
-	if(confirm('게시물을 지우시겠습니까?') == true) {
-		$.ajax({
-			 method: 'GET'
-			,url: '${pageContext.request.contextPath}/board/deleteArticle.do?c_id=' + c_id
-			,success: function(data){
-				alert('삭제하였습니다.');
-				location.href = '${pageContext.request.contextPath}/board/index.do';
-			}
-			,fail: function(data) {
-				alert('글 삭제에 실패하였습니다.');
-			}
-		});
-	}	
-}
-</script>
 
 <!-- Jquery Context Menu -->
 <link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />
@@ -171,7 +154,7 @@ $(document).ready(function(){
 			'userInfo': {
 				name: '회원정보 보기',
 				callback: function(key, option) {
-					var popupUrl = '${pageContext.request.contextPath}/board/getUserInfoPopup.do?c_id=${article.regId}';
+					var popupUrl = '${pageContext.request.contextPath}/board/getUserInfoPopup.do?c_id=${article.regID}';
 					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
 					window.open(popupUrl, '', popupOption);
 				}
@@ -179,7 +162,7 @@ $(document).ready(function(){
 			'sendNote': {
 				name: '쪽지 보내기',
 				callback: function(key, option) {
-					var popupUrl = '${pageContext.request.contextPath}/board/sendNotePopup.do?c_id=${article.regId}';
+					var popupUrl = '${pageContext.request.contextPath}/board/sendNotePopup.do?c_id=${article.regID}';
 					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
 					window.open(popupUrl, '', popupOption);
 				}
@@ -225,10 +208,18 @@ $(document).ready(function(){
 								<!-- 제목 날짜 첨부 -->
 								<div id="articleHeader" class="">
 									<input id="articleID" type="hidden" value="${article.c_id}" />
+									<input id="isGuestFL" type="hidden" value="${article.isGuestFL}" />
 									<span id="articleTitle"><h3>${article.c_title}</h3></span> 
 									<span id="articleInfo">
 										<span id="firstInfoRow">
+											<c:choose>
+												<c:when test="${article.isGuestFL == '1'}">
+											<span>${article.guestNickName}</span>
+												</c:when>
+												<c:otherwise>
 											<span><a class="user-context">${article.regNickName}</a></span>
+												</c:otherwise>
+											</c:choose>
 											<span id="articleDt">${article.regDt}</span>
 										</span>
 										<span id="secondInfoRow">
@@ -294,15 +285,23 @@ $(document).ready(function(){
 								<div id="articleAction">
 									<span>
 										<c:choose>
-											<c:when test="${article.likeFL == '0'}">
-												<a id="likeAnchor" onclick="likeArticle(${article.c_id})">좋아요</a>
+											<c:when test="${article.isGuestFL eq '0'}">
+												<c:choose>
+													<c:when test="${article.likeFL == '0'}">
+														<a id="likeAnchor" onclick="likeArticle(${article.c_id})">좋아요</a>
+													</c:when>
+													<c:otherwise>
+														<a onclick="cancelLikeArticle(${article.c_id})">좋아요 취소</a>
+													</c:otherwise>
+												</c:choose>
 											</c:when>
 											<c:otherwise>
-												<a onclick="cancelLikeArticle(${article.c_id})">좋아요 취소</a>
+												<input type="password" name="guestPassword" id="guestPassword" name="guestPassword" placeholder="글 비밀번호" />
 											</c:otherwise>
 										</c:choose>
-										<a href="${pageContext.request.contextPath}/board/modifyArticle.do?c_id=${article.c_id}">수정</a>
-										<a onclick="deleteThisArticle(${article.c_id})">삭제</a>
+										<c:if test="${article.userID eq article.regID}">
+											<a onclick="deleteT4hisArticle(${article.c_id})">삭제</a>
+										</c:if>
 										<a href="${pageContext.request.contextPath}/board/newReplyArticle.do?c_id=${article.c_id}">답글쓰기</a>
 										<a href="${pageContext.request.contextPath}/board/index.do">목록가기</a>
 									</span>
@@ -315,6 +314,68 @@ $(document).ready(function(){
 		</article>
 	</section>
 	<script>
+	
+	function modifyThisArticle(c_id) {
+
+		 var form = document.createElement('form');
+		 form.setAttribute('method', 'post');
+		 form.setAttribute('action', '${pageContext.request.contextPath}/board/modifyArticle.do');
+		 
+		 var idInput = document.createElement('input');
+		 idInput.setAttribute('type', 'hidden');
+		 idInput.setAttribute('name', 'c_id');
+		 idInput.setAttribute('value', c_id);
+		 
+		 if($('#isGuestFL').val() == '1') { // 게스트사용자
+			 var guestPassword = $('#guestPassword').val();
+			 if(guestPassword == '') {
+				 alert('글 비밀번호를 입력해주세요.');
+				 return;
+			 }
+			 var encryptedPW = Sha256.hash(guestPassword);
+			 
+			 var pwInput = document.createElement('input');
+			 idInput.setAttribute('type', 'hidden');
+			 idInput.setAttribute('name', 'guestPW');
+			 idInput.setAttribute('value', encryptedPW);
+		 }
+		 
+		form.submit();		 
+	 }
+
+	function deleteThisArticle(c_id) {
+		var obj = {};
+		obj.c_id = c_id;
+		
+		 if($('#isGuestFL').val() == '1') { // 게스트사용자
+			 var guestPassword = $('#guestPassword').val();
+			 if(guestPassword == '') {
+				 alert('글 비밀번호를 입력해주세요.');
+				 return;
+			 }
+			 obj.guestPW = Sha256.hash(guestPassword);
+		 }
+		 
+		if(confirm('게시물을 지우시겠습니까?') == true) {
+			$.ajax({
+				 method: 'post'
+				,url: '${pageContext.request.contextPath}/board/deleteArticle.do'
+				,data: obj
+				,success: function(data){
+					if(data.id == '-1') {
+						alert('글 비밀번호가 맞지 않습니다.');
+					} else {
+						alert('삭제하였습니다.');
+						location.href = '${pageContext.request.contextPath}/board/index.do';	
+					}
+					
+				}
+				,fail: function(data) {
+					alert('글 삭제에 실패하였습니다.');
+				}
+			});
+		}	
+	};
 	
 	function likeArticle(articleID) {
 		var obj = {};
