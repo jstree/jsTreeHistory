@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import standard.mvc.component.business.baroboard.user.service.UserService;
 import standard.mvc.component.business.baroboard.user.vo.PasswordFindQuestion;
@@ -24,6 +26,7 @@ import standard.mvc.component.business.community.log.service.LogUrlSerivce;
 import standard.mvc.component.business.community.menu.service.MenuMngSerivce;
 import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
 
 /**
  * Modification Information
@@ -68,7 +71,7 @@ public class SecureUserLoginController extends GenericAbstractController
 	@RequestMapping("/index.do")
 	public String login( ModelMap model, HttpServletRequest request) throws Exception 
 	{
-		String errorCode = (String) request.getSession().getAttribute("errorCode");
+		String errorCode = (String)request.getSession().getAttribute("errorCode");
 		
 		final String EMAILNOTFOUND = "1";
 		final String ACCOUNTLOCKED = "2";
@@ -168,6 +171,14 @@ public class SecureUserLoginController extends GenericAbstractController
 			user.setStatus(FAILURE);
 		}
 		return user;
+	}
+	
+	@RequestMapping("/redirectUserInfoIndex.do")
+	public String redirectUserInfoIndex(RedirectAttributes redirectAttributes) throws Exception 
+	{
+		SecureUserLogin secureUserLogin = (SecureUserLogin)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		redirectAttributes.addFlashAttribute("email", secureUserLogin.getEmail());
+		return "redirect:/user/info/index.do";
 	}
 	
 	@Override
