@@ -3,6 +3,7 @@ package standard.mvc.component.business.baroboard.core.manage.menu.service;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -81,7 +83,7 @@ public class CoreMenuServiceTest {
     public void tearDown() throws Exception {}
 
 	@Test
-    public void test() {
+	public void testAnnotationDrivenServiceInit() {
         assertThat(coreMenuService, is(notNullValue()));
     }
 
@@ -108,5 +110,27 @@ public class CoreMenuServiceTest {
         verify(mockCoreMenuVO).getC_id();
         verify(mockCoreMenuVO).getSqlMapSelector();
     }
+
+	@Ignore("service method 미구현")
+	@Test
+	@DatabaseSetup(value = "classpath:/standard/mvc/component/business/baroboard/menu/service/T_CORE_MENU_INIT.xml", type = DatabaseOperation.CLEAN_INSERT)
+	public void testAddNodeWithLevel3() throws Exception {
+		when(mockCoreMenuVO.getRef()).thenReturn(3);
+		when(mockCoreMenuVO.getSqlMapSelector()).thenReturn("coreMenu");
+
+		CoreMenuVO resultCoreMenuVO = coreMenuService.addNode(mockCoreMenuVO);
+
+		assertThat(resultCoreMenuVO, is(notNullValue()));
+
+		assertThat(resultCoreMenuVO.getC_id(), is(greaterThanOrEqualTo(4)));
+		assertThat(resultCoreMenuVO.getC_parentid(), is(3));
+		assertThat(resultCoreMenuVO.getC_position(), is(1));
+		assertThat(resultCoreMenuVO.getC_left(), is(5));
+		assertThat(resultCoreMenuVO.getC_right(), is(6));
+		assertThat(resultCoreMenuVO.getC_level(), is(3));
+
+		verify(mockCoreMenuVO).getC_id();
+		verify(mockCoreMenuVO).getSqlMapSelector();
+	}
 
 }
