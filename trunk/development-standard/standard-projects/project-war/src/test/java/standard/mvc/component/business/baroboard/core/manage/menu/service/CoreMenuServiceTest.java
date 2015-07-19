@@ -117,6 +117,8 @@ public class CoreMenuServiceTest {
 	public void testAddNodeWithLevel3() throws Exception {
 		when(mockCoreMenuVO.getRef()).thenReturn(3);
 		when(mockCoreMenuVO.getSqlMapSelector()).thenReturn("coreMenu");
+		when(mockCoreMenuVO.getC_title()).thenReturn("testMenu");
+		when(mockCoreMenuVO.getC_type()).thenReturn("folder");
 
 		CoreMenuVO resultCoreMenuVO = coreMenuService.addNode(mockCoreMenuVO);
 

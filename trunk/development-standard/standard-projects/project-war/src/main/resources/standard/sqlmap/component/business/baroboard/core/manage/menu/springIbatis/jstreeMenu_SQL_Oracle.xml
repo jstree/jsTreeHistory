@@ -77,13 +77,39 @@
 		FROM T_CORE_MENU
 		WHERE C_ID = #c_id#
 	</select>
+	
+	<select id="getNodeByRef" parameterClass="coreMenuVO"
+		resultClass="coreMenuVO">
+		/* getNodeByRef */
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		,
+		C_LEFT
+		, C_RIGHT
+		, C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		, C_MENU_ID as menuId
+		, C_PAGE_ID as pageId
+		, C_AUTH_ID as authId
+		, C_IMAGE_DEAULT as imageDefault
+		, C_IMAGE_HOVER as imageHover
+		, C_IMAGE_SELECTED as imageSelected
+		, C_HOME_FL as homeFl		
+		FROM
+		T_CORE_MENU
+		WHERE C_ID = #ref#
+	</select>	
 
 	<update id="alterNode" parameterClass="coreMenuVO">
 		/* alterNode */
 		UPDATE
 			T_CORE_MENU
 		SET 
-			C_MENU_ID = #menuId#
+			C_TITLE = #c_title#
+			, C_TYPE = #c_type#
+			, C_MENU_ID = #menuId#
 			, C_PAGE_ID = #pageId#
 			, C_AUTH_ID = #authId#
 			, C_IMAGE_DEAULT = #imageDefault#
@@ -92,5 +118,85 @@
 			, C_HOME_FL = #homeFl#
 		WHERE C_ID = #c_id#
 	</update>
+	
+	<update id="stretchPositionForMyself" parameterClass="ComprehensiveTree">
+		/* stretchPositionForMyselfFromJstree */
+		UPDATE
+		T_CORE_MENU
+		SET C_POSITION = C_POSITION + 1
+		WHERE
+		C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
+		<isEqual property="copy" compareValue="0">
+			AND C_ID NOT IN
+			<isEmpty property="c_idsByChildNodeFromNodeById">
+				(-1)
+			</isEmpty>
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate property="c_idsByChildNodeFromNodeById" open="("
+					close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="ComprehensiveTree">
+		/* stretchLeftForMyselfFromJstree */
+		UPDATE T_CORE_MENU
+		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
+		WHERE C_LEFT &gt;=
+		#rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<update id="stretchRightForMyselfFromJstree" parameterClass="ComprehensiveTree">
+		/* stretchRightForMyselfFromJstree */
+		UPDATE T_CORE_MENU
+		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
+		WHERE C_RIGHT &gt;=
+		#rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>	
+	
+	<insert id="addMyselfFromJstree" parameterClass="coreMenuVO">
+		/* addMyselfFromJstree */
+		INSERT INTO T_CORE_MENU (
+		C_ID, C_PARENTID, C_POSITION,
+		C_LEFT, C_RIGHT, C_LEVEL )
+		VALUES (
+		S_CORE_MENU.NEXTVAL, #c_parentid#, #c_position#,
+		#c_left#, #c_right#, #c_level# )
+		<selectKey resultClass="java.lang.Integer">
+			/* addMyselfFromJstree SEQ */
+			SELECT
+			S_CORE_MENU.CURRVAL AS SEQ
+			FROM DUAL
+		</selectKey>
+	</insert>
+
+
+	<update id="alterNodeType" parameterClass="coreMenuVO">
+		/* alterNodeType */
+		UPDATE T_CORE_MENU
+		SET C_TYPE = #c_type#
+		WHERE C_ID =
+		#c_id#
+	</update>	
 
 </sqlMap>

@@ -57,7 +57,7 @@ public class CoreMenuServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> T addNode(T comprehensiveTree) throws Exception {
-        return null;
+		return coreService.addNode(comprehensiveTree);
     }
 
     @Override
