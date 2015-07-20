@@ -6,17 +6,17 @@
 
 	<select id="getChildNode" parameterClass="UserNoteByUser" resultClass="UserNoteByUser">
 		/* getChildNode */
-		SELECT A.c_id
-		, A.c_parentid
-		, A.c_position
-		, A.c_left
-		, A.c_right
-		, A.c_level
-		, A.c_title
-		, A.c_type
+		SELECT B.c_id
+		, B.c_parentid
+		, B.c_position
+		, B.c_left
+		, B.c_right
+		, B.c_level
+		, B.c_title
+		, B.c_type
 		
 		/* user filed add point*/
-		,A.C_USER_ID AS userId
+		,B.C_USER_ID AS userId
 		,C.C_TITLE AS userNm
         ,A.C_NOTE_DETAIL_ID AS noteDetailId
         ,A.C_NOTE_TYPE_CODE AS noteTypeCode
