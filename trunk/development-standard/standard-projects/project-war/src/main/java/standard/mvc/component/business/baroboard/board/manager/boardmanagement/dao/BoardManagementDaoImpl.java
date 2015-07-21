@@ -33,6 +33,7 @@ public class BoardManagementDaoImpl extends EgovComAbstractDAO implements BoardM
 			throws Exception{
 		// 테이블 생성
 		update(boardManagementVO.getSqlMapSelector() + ".createBoardTable", boardManagementVO);
+		setDefaultNode( boardManagementVO );
 		createAdditionalTables( boardManagementVO );
 	}
 	
@@ -41,11 +42,17 @@ public class BoardManagementDaoImpl extends EgovComAbstractDAO implements BoardM
 		update(boardManagementVO.getSqlMapSelector() + ".createTrigger",  boardManagementVO);
 		update(boardManagementVO.getSqlMapSelector() + ".createSequence", boardManagementVO);
 	}
+	
+	private void setDefaultNode( BoardManagementVO boardManagementVO ) throws Exception{
+		insert(boardManagementVO.getSqlMapSelector() + ".setRootNode",  boardManagementVO);
+		insert(boardManagementVO.getSqlMapSelector() + ".setDriveNode", boardManagementVO);
+	}
 
 	@Override
 	public void createLikeTable(BoardManagementVO boardManagementVO)
 			throws Exception {
 		update(boardManagementVO.getSqlMapSelector() + ".createLikeTable", boardManagementVO);
+		setDefaultNode( boardManagementVO );
 		createAdditionalTables( boardManagementVO );
 	}
 
@@ -53,6 +60,7 @@ public class BoardManagementDaoImpl extends EgovComAbstractDAO implements BoardM
 	public void createCommentTable(BoardManagementVO boardManagementVO)
 			throws Exception {
 		update(boardManagementVO.getSqlMapSelector() + ".createCommentTable", boardManagementVO);
+		setDefaultNode( boardManagementVO );
 		createAdditionalTables( boardManagementVO );
 	}
 
@@ -60,6 +68,7 @@ public class BoardManagementDaoImpl extends EgovComAbstractDAO implements BoardM
 	public void createFileTable(BoardManagementVO boardManagementVO)
 			throws Exception {
 		update(boardManagementVO.getSqlMapSelector() + ".createFileTable", boardManagementVO);
+		setDefaultNode( boardManagementVO );
 		createAdditionalTables( boardManagementVO );
 	}
 	
