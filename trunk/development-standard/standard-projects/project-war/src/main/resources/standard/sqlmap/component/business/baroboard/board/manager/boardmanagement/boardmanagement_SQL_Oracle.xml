@@ -139,7 +139,7 @@
 		    C_LEVEL NUMBER NOT NULL,
 		    C_TITLE VARCHAR2(4000),
 		    C_TYPE VARCHAR2(4000),
-		    C_REG_ID NUMBER NOT NULL,
+		    C_REG_ID NUMBER,
 		    C_CONTENT CLOB,
 		    C_ALLOW_COMMENT_FL CHAR(1),
 		    C_ALLOW_REPLY_FL CHAR(1),
@@ -220,7 +220,7 @@
             C_LEVEL NUMBER NOT NULL,
             C_TITLE VARCHAR2(4000 BYTE), 
             C_TYPE VARCHAR2(4000 BYTE), 
-            C_ARTICLE_ID NUMBER NOT NULL,
+            C_ARTICLE_ID NUMBER,
             C_SAVED_FILE_NM VARCHAR2(50),
             C_EXTENSION NUMBER,
             C_ATTACH_FILE NUMBER,
@@ -229,37 +229,10 @@
     </statement>
     
     
-    <statement id="createTrigger" parameterClass="BoardManagement">
+    <procedure id="createTrigger" parameterClass="BoardManagement">
         /* createTrigger for BoardManagement */
-	        CREATE OR REPLACE TRIGGER TRG_$boardTableName$
-	        BEFORE DELETE OR INSERT OR UPDATE ON T_$boardTableName$
-	        REFERENCING NEW AS NEW OLD AS OLD
-	        FOR EACH ROW
-	            DECLARE
-	            tmpVar NUMBER;
-	
-	            BEGIN
-	                tmpVar := 0;
-	                IF UPDATING  THEN    
-		                INSERT INTO T_$boardTableName$_LOG 
-		                VALUES (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'update','변경이전데이터',sysdate);        
-		                INSERT INTO T_$boardTableName$_LOG 
-		                VALUES (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'update','변경이후데이터',sysdate);   
-	                END IF;
-	                IF DELETING THEN
-	                    INSERT INTO T_$boardTableName$_LOG 
-	                    VALUES (:old.C_ID,:old.C_PARENTID,:old.C_POSITION,:old.C_LEFT,:old.C_RIGHT,:old.C_LEVEL,:old.C_TITLE,:old.C_TYPE,'delete','삭제된데이터',sysdate);
-	                END IF;   
-	                IF INSERTING  THEN
-	                    INSERT INTO T_$boardTableName$_LOG 
-	                    VALUES (:new.C_ID,:new.C_PARENTID,:new.C_POSITION,:new.C_LEFT,:new.C_RIGHT,:new.C_LEVEL,:new.C_TITLE,:new.C_TYPE,'insert','삽입된데이터',sysdate);
-	                END IF;
-	
-	                EXCEPTION
-	                    WHEN OTHERS THEN
-	                RAISE;
-	            END TRG_$boardTableName$;
-    </statement>
+        { call P_LINK_LOGTABLE( #boardTableName# ) }
+    </procedure>
     
     
     <statement id="createSequence" parameterClass="BoardManagement">
@@ -268,9 +241,39 @@
                MINVALUE 0
                MAXVALUE 999999999999999999999999999
            INCREMENT BY 1
-             START WITH 0
+             START WITH 3
                   CACHE 20
                 NOORDER
                 NOCYCLE 
     </statement>
+    
+    
+    <insert id="setRootNode" parameterClass="BoardManagement">
+        /* setRootNode */
+        INSERT INTO T_$boardTableName$( C_ID
+                                      , C_PARENTID
+                                      , C_POSITION
+                                      , C_LEFT
+                                      , C_RIGHT
+                                      , C_LEVEL
+                                      , C_TITLE
+                                      , C_TYPE
+                                      )
+                                VALUES( '1', '0', '0', '1', '4', '0', 'Root Node', 'root' )
+    </insert>
+    
+    
+    <insert id="setDriveNode" parameterClass="BoardManagement">
+        /* "setDriveNode" */
+        INSERT INTO T_$boardTableName$( C_ID
+                                      , C_PARENTID
+                                      , C_POSITION
+                                      , C_LEFT
+                                      , C_RIGHT
+                                      , C_LEVEL
+                                      , C_TITLE
+                                      , C_TYPE
+                                      )
+                                VALUES( '2', '1', '0', '2', '3', '1', 'First Child', 'drive' )
+    </insert>
 </sqlMap>
