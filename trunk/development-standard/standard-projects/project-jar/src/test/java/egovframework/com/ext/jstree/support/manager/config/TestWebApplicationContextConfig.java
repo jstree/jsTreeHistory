@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 
 import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
@@ -48,13 +49,19 @@ import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
 @Configuration
 @PropertySource({ "classpath:/META-INF/egovframework/egovProps/globals.properties",
         "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
-public class TestWebApplicationContextConfig extends WebApplicationContextConfig
+@ImportResource({ "classpath*:/META-INF/egovframework/spring/com/test-context-*.xml" })
+public class TestWebApplicationContextConfig
 {
     @Resource(name = "dataSource-${Globals.DbType}")
     private DataSource dataSource;
     
-    private @Value("${Globals.UserName}") String shemaName;
+    private String shemaName;
     
+    public TestWebApplicationContextConfig()
+    {
+        shemaName = "DBUNIT";
+    }
+
     @Bean
     public DatabaseDataSourceConnectionFactoryBean dbUnitDatabaseConnection()
     {
