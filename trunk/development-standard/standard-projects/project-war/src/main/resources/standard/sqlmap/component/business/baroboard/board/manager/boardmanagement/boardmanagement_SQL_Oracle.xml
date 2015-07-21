@@ -23,57 +23,6 @@
 	</update>
 	
 	
-	<insert id="addNode" parameterClass="BoardManagement">
-	    /* addNode for BoardManagement */
-	    INSERT INTO T_BOARD_INDI_SETTING( C_ID
-						                , C_PARENTID
-						                , C_POSITION
-						                , C_LEFT
-						                , C_RIGHT
-						                , C_LEVEL
-						                , C_TITLE
-						                , C_TYPE
-						                , C_BOARD_TABLE_NAME
-						                , C_WRITING_CNT_PER_PAGE
-                                        , C_LEVEL_FOR_VIEW_LIST
-                                        , C_LEVEL_FOR_READ_CONTENT
-                                        , C_LEVEL_FOR_WRITING
-                                        , C_LEVEL_FOR_REPLY
-                                        , C_LEVEL_FOR_COMMENT
-                                        , C_LEVEL_FOR_CLIPPING
-                                        , C_LEVEL_FOR_FILE_UPLOAD
-                                        , C_LEVEL_FOR_FILE_DOWNLOAD
-                                        , C_COMMENT_CNT_FOR_BAN_DELETION
-                                        , C_COMMENT_CNT_FOR_BAN_EDITING
-                                        , C_USE_ANONYM_FL
-                                        , C_REG_DT
-                                        )
-                                  VALUES( S_BOARD_INDI_SETTING.NEXTVAL
-                                        , #c_parentid#
-                                        , #c_position#
-                                        , #c_left#
-                                        , #c_right#
-                                        , #c_level#
-                                        , #c_title#
-                                        , #c_type#
-                                        , #boardTableName#
-                                        , #writingCntPerPage#
-                                        , #levelForViewList#
-                                        , #levelForReadContent#
-                                        , #levelForWriting#
-                                        , #levelForReply#
-                                        , #levelForComment#
-                                        , #levelForClipping#
-                                        , #levelForFileUpload#
-                                        , #levelForFileDownload#
-                                        , #commentCntForBanDeletion#
-                                        , #commentCntForBanEditing#
-                                        , #useAnonymFl#
-                                        , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
-                                        )
-	</insert>
-
-
 	<select id="getNode" parameterClass="BoardManagement" resultClass="BoardManagement">
 		/* getNode for BoardManagement */
         SELECT C_ID
@@ -119,6 +68,81 @@
          WHERE C_PARENTID = #c_id#
       ORDER BY C_ID DESC
     </select>
+    
+    
+    <select id="getNodeByRef" parameterClass="BoardManagement" resultClass="BoardManagement">
+		/* getNodeByRef */
+		SELECT C_ID
+		     , C_PARENTID
+		     , C_POSITION
+			 , C_LEFT
+		     , C_RIGHT
+		     , C_LEVEL
+		     , C_TITLE
+		     , C_TYPE
+		FROM T_BOARD_INDI_SETTING
+	   WHERE C_ID = #ref#
+	</select>
+	
+	
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="BoardManagement">
+		/* stretchLeftForMyselfFromJstree */
+		UPDATE T_BOARD_INDI_SETTING
+		   SET C_LEFT = C_LEFT + #spaceOfTargetNode#
+		 WHERE C_LEFT &gt;=	#rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+	
+	
+	<update id="stretchRightForMyselfFromJstree" parameterClass="BoardManagement">
+		/* stretchRightForMyselfFromJstree */
+		UPDATE T_BOARD_INDI_SETTING
+		   SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
+		 WHERE C_RIGHT &gt;= #rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+	
+	
+	<insert id="addMyselfFromJstree" parameterClass="BoardManagement">
+		/* addMyselfFromJstree */
+		INSERT INTO T_BOARD_INDI_SETTING ( C_ID
+		                                 , C_PARENTID
+		                                 , C_POSITION
+		                                 , C_LEFT
+		                                 , C_RIGHT
+		                                 , C_LEVEL
+		                                 , C_TYPE
+		                                 , C_REG_DT
+		                                 , C_BOARD_TABLE_NAME )
+		                          VALUES ( S_BOARD_INDI_SETTING.NEXTVAL
+		                                 , #c_parentid#
+		                                 , #c_position#
+		                                 , #c_left#
+		                                 , #c_right#
+		                                 , #c_level#
+		                                 , #c_type#
+		                                 , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		                                 , #boardTableName# )
+		<selectKey resultClass="java.lang.Integer">
+			/* addMyselfFromJstree SEQ */
+			SELECT S_BOARD_INDI_SETTING.CURRVAL AS SEQ
+			  FROM DUAL
+		</selectKey>
+	</insert>
     
     
     <select id="getTableSeq" resultClass="int">

@@ -39,6 +39,9 @@ input[type="text"] {
 			if( $(this).next().val() == "1" ){
 				$(this).click();
 			}
+			else{
+				$(this).next().val("0");
+			}
 		});
 	});
 	
@@ -115,7 +118,7 @@ input[type="text"] {
 				<div class="responsive-row">
 					<div class="one-quarter">목록 보기 권한</div>
 					<div class="one-quarter">
-						<select id="useAnonymFl" name="useAnonymFl" style="width: 70px !important">
+						<select id="levelForViewList" name="levelForViewList" style="width: 70px !important">
 						    <option value="">모두</option>
 				<c:forEach items="${userGrades}" var="grade">
                             <option value="${grade.c_id}">${grade.c_title}</option>

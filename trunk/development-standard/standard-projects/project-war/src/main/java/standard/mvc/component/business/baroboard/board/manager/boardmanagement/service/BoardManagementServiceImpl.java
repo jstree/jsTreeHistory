@@ -89,6 +89,8 @@ public class BoardManagementServiceImpl implements CoreService {
     	boardManagementVO.setBoardTableName( tableName + "_FILE" );
     	boardManagementDao.createFileTable(boardManagementVO);
     	
+    	// 테이블 저장시에는 다시 원래의 테이블명으로 넣어야한다.
+    	boardManagementVO.setBoardTableName("T_" + tableName);
     	boardManagementService.addNode(boardManagementVO);
     	
     	return comprehensiveTree;
