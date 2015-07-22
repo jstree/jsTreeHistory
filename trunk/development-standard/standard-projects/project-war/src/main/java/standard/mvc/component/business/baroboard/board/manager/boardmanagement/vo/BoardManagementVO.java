@@ -5,6 +5,7 @@ import javax.validation.constraints.Pattern;
 import standard.mvc.component.business.baroboard.validCondition.ValidFormat;
 import standard.mvc.component.business.baroboard.validCondition.ValidInput;
 import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
+import egovframework.com.ext.jstree.springiBatis.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -31,7 +32,9 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 public class BoardManagementVO extends ComprehensiveTree {
 	
+	@Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AddNode.class, AlterNode.class})
 	private Integer writingCntPerPage;
+	
 	private String levelForViewList;
 	private String levelForReadContent;
 	private String levelForWriting;
@@ -41,13 +44,13 @@ public class BoardManagementVO extends ComprehensiveTree {
 	private String levelForFileUpload;
 	private String levelForFileDownload;
 	
-	@Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AlterNode.class})
+	@Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AddNode.class, AlterNode.class})
 	private Integer commentCntForBanDeletion;
 	
-	@Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AlterNode.class})
+	@Pattern(regexp = ValidFormat.NUMBER_ONLY, groups = {AddNode.class, AlterNode.class})
 	private Integer commentCntForBanEditing;
 	
-	@Contained(values = {ValidInput.TRUE, ValidInput.FALSE}, groups = {AlterNode.class})
+	@Contained(values = {ValidInput.TRUE, ValidInput.FALSE}, groups = {AddNode.class, AlterNode.class})
 	private String useAnonymFl;
 	
 	private String boardTableName;
@@ -69,10 +72,6 @@ public class BoardManagementVO extends ComprehensiveTree {
 				+ boardTableName + ", regDt=" + regDt + "]";
 	}
 	public Integer getWritingCntPerPage() {
-		
-		if( this.writingCntPerPage == null ){
-			writingCntPerPage = 0;
-		}
 		return writingCntPerPage;
 	}
 	public void setWritingCntPerPage(Integer writingCntPerPage) {
