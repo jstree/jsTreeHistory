@@ -47,8 +47,7 @@ import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
  * </pre>
  */
 @Configuration
-@PropertySource({ "classpath:/META-INF/egovframework/egovProps/globals.properties",
-        "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
+@PropertySource({ "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
 @ImportResource({ "classpath*:/META-INF/egovframework/spring/com/test-context-*.xml" })
 public class TestWebApplicationContextConfig
 {
