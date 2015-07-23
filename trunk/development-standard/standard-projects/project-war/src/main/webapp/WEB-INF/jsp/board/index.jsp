@@ -68,6 +68,12 @@ $(document).ready(function(){
 
 </script>
 
+<style>
+.font-abnormal {
+	color: #f45b4f !important;
+}
+
+</style>
 </head>
 <body>
 	<section class="clearfix">
@@ -91,7 +97,10 @@ $(document).ready(function(){
 						<div class="article-body rte" itemprop="articleBody">
 							<div class="tablet-mobile alpha bm-remove last">
 								<div class="text-right">
-									<a href="${pageContext.request.contextPath}/board/newArticle.do?boardID=${boardID}" class="right">글쓰기</a>
+									<%-- TODO : 게스트는 글 작성 불가함 --%>
+									<c:if test="${isGuestUser eq '0'}">
+										<a href="${pageContext.request.contextPath}/board/newArticle.do?boardID=${boardID}" class="right">글쓰기</a>	
+									</c:if>
 								</div>
 								<div>
 									<table id="boardTable" class="board-table display">
@@ -121,14 +130,49 @@ $(document).ready(function(){
 													<td class="dt-center">${article.c_id}</td>
 													<c:choose>
 														<c:when test="${article.c_level == 2}">
-															<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
+															<c:choose>
+																<c:when test="${article.isDeletedFL eq '1'}">
+																	<td class="">삭제된 글입니다.</td>
+																</c:when>
+																<c:when test="${article.openArticleFL eq '0'}">
+																	<td class="">비공개 글입니다</td>
+																</c:when>	
+																<c:otherwise>
+																	<c:choose>
+																		<c:when test="${article.isDeletedFL eq '1'}">
+																			<td><i style="padding: 0  5px 0 ${ (article.c_level - 2) * 10 }px" class="fa fa-chevron-right"></i>삭제된 글입니다.</td>
+																		</c:when>
+																		<c:when test="${article.openArticleFL eq '0'}">
+																			<td><i style="padding: 0  5px 0 ${ (article.c_level - 2) * 10 }px" class="fa fa-chevron-right"></i>비공개 글입니다</td>
+																		</c:when>	
+																		<c:otherwise>
+																			<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
+																		</c:otherwise>
+																	</c:choose>
+																</c:otherwise>
+															</c:choose>
 														</c:when>
+														
 														<c:otherwise>
 															<td><i style="padding: 0  5px 0 ${ (article.c_level - 2) * 10 }px" class="fa fa-chevron-right"></i><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
 														</c:otherwise>
 													</c:choose>
 													
-													<td class="dt-center"><a class="user-context" data-id="${article.regId}">${article.regNickName}</a></td>
+													<c:choose>
+														<c:when test="${article.isGuestFL == '1'}">
+															<td class="dt-center">${article.guestNickName}</td>
+														</c:when>
+														<c:otherwise>
+															<c:choose>
+																<c:when test="${empty article.regNickName}">
+																	<td class="dt-center font-abnormal">탈퇴 사용자</td>
+																</c:when>
+																<c:otherwise>
+																	<td class="dt-center"><a class="user-context" data-id="${article.regID}">${article.regNickName}</a></td>
+																</c:otherwise>
+															</c:choose>
+														</c:otherwise>
+													</c:choose>
 													<td class="dt-center">${article.regDt}</td>
 													<td class="dt-center">${article.viewCnt}</td>
 													<td class="dt-center">${article.likeCnt}</td>

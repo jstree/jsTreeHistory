@@ -10,6 +10,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.board.dao.BoardDao;
@@ -17,9 +18,9 @@ import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
-import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
 
 /**
  * Modification Information
@@ -45,7 +46,7 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 
 @Service(value = "BoardService")
 public class BoardServiceImpl implements BoardService {
-	
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Resource(name = "CoreService")
@@ -90,7 +91,21 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Article addArticle(Article article) throws Exception {
-		article.setRef(2);
+		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		if(article.getIsGuestFL().equals("0")) {	// 일반 사용자
+			SecureUserLogin userLogin = (SecureUserLogin) user;
+			article.setRegID(userLogin.getId());
+			
+		} else {									// 게스트 사용자
+			if(user instanceof String) {
+				String userStr = (String)user;
+				if(! userStr.equals("anonymousUser")) {
+					throw new Exception("허가되지 않은 사용자입니다.");
+				} 
+			}
+		}
+		
 		this.setupArticleParameters(article);
 		
 		Article insertedArticle = coreService.addNode(article);
@@ -121,7 +136,7 @@ public class BoardServiceImpl implements BoardService {
 	public Article readArticle(Article article) throws Exception {
 		this.countUpViewCnt(article);
 		// TODO : 권한체크
-		article.setUserID(23);
+//		article.setUserID(23);
 		Article resultArticle = this.getArticleById(article);
 		this.changeRegDTFormatForReadArticle(resultArticle);
 		return resultArticle;
@@ -150,8 +165,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Comment addComment(Comment comment) throws Exception {
 		comment.setC_type("folder");
-		comment.setRegID(23); // TODO : FOR TEST ONLY
-		
+		comment.setRegID(this.getLoginedUserID());
+//		comment.setRegID(23); // TODO : FOR TEST ONLY
 		comment.setRegDT(this.getTodayFor14Digits());
 		Comment insertedComment = null;
 		
@@ -179,7 +194,7 @@ public class BoardServiceImpl implements BoardService {
 		changeRegDTFormatForComment(commentList);
 		/* 글 볼수 있는 권한 체크 */
 		for(Comment c : commentList) {
-			if("1".equals(comment.getViewOnlyRegIDFL()) && comment.getRegID() != 23 )	{ // TODO : 세션 붙이면 개인인증 확인, 게시글 RegID 확인 
+			if("1".equals(comment.getViewOnlyRegIDFL()) && comment.getRegID() == this.getLoginedUserID() )	{ // TODO : 세션 붙이면 개인인증 확인, 게시글 RegID 확인 
 				c.setViewForRegOnlyFL("1");
 			} else {
 				c.setViewForRegOnlyFL("0");
@@ -198,7 +213,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Like likeArticle(Like like) throws Exception {
 		// TODO : 권한체크
-		like.setRegID(23);
+		like.setRegID(this.getLoginedUserID());
 		like.setRef(2);
 		return coreService.addNode(like);
 	}
@@ -206,7 +221,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Like cancelLikeArticle(Like like) throws Exception {
 		// TODO : 권한체크
-		like.setRegID(23);
+		like.setRegID(this.getLoginedUserID());
 		Like targetLike = boardDao.getLikeByArticleIDAndRegID(like);
 		coreService.removeNode(targetLike);
 		return like;
@@ -268,13 +283,30 @@ public class BoardServiceImpl implements BoardService {
 	
 	/* 글 추가를 위한 공통 파라미터 설정 */
 	private void setupArticleParameters(Article article) {
+		article.setRef(2);
 		article.setC_type("default");
-		article.setRegId(23);	// TODO : For Test Only
 		article.setC_type("folder");
-		
 		article.setContent(this.unescapeHtml(article.getContent()));
-		
-		
 		article.setRegDt(this.getTodayFor14Digits());
+	}
+	
+	/* 사용자 ID 가져오기 - 게스트사용자일 경우 0을 리턴 */
+	private int getLoginedUserID() throws Exception {
+		int loginedUserID;
+		
+		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(user instanceof String) { // 익명 사용자
+			String userStr = (String)user;
+			if(userStr.equals("anonymousUser")) {
+				loginedUserID = 0;
+			} else {
+				throw new Exception("허가되지 않은 사용자입니다.");
+			}
+		} else {	// 로그인 사용자
+			SecureUserLogin loginedUser = (SecureUserLogin) user;
+			loginedUserID = loginedUser.getId();
+		}
+		
+		return loginedUserID;
 	}
 }

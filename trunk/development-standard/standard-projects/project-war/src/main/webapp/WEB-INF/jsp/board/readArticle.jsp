@@ -66,6 +66,11 @@ span.rdc-reg-id {
 span.rdc-reg-date {
 }
 
+#guestPassword {
+	display: inline;
+	width : 150px;
+}
+
 
 /* Comment Write */
 div.write-comment {
@@ -117,23 +122,6 @@ i.fa {
 	padding-right: 5px;	
 }
 </style>
-<script>
-function deleteThisArticle(c_id){
-	if(confirm('게시물을 지우시겠습니까?') == true) {
-		$.ajax({
-			 method: 'GET'
-			,url: '${pageContext.request.contextPath}/board/deleteArticle.do?c_id=' + c_id
-			,success: function(data){
-				alert('삭제하였습니다.');
-				location.href = '${pageContext.request.contextPath}/board/index.do';
-			}
-			,fail: function(data) {
-				alert('글 삭제에 실패하였습니다.');
-			}
-		});
-	}	
-}
-</script>
 
 <!-- Jquery Context Menu -->
 <link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />
@@ -171,7 +159,7 @@ $(document).ready(function(){
 			'userInfo': {
 				name: '회원정보 보기',
 				callback: function(key, option) {
-					var popupUrl = '${pageContext.request.contextPath}/board/getUserInfoPopup.do?c_id=${article.regId}';
+					var popupUrl = '${pageContext.request.contextPath}/board/getUserInfoPopup.do?c_id=${article.regID}';
 					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
 					window.open(popupUrl, '', popupOption);
 				}
@@ -179,7 +167,7 @@ $(document).ready(function(){
 			'sendNote': {
 				name: '쪽지 보내기',
 				callback: function(key, option) {
-					var popupUrl = '${pageContext.request.contextPath}/board/sendNotePopup.do?c_id=${article.regId}';
+					var popupUrl = '${pageContext.request.contextPath}/board/sendNotePopup.do?c_id=${article.regID}';
 					var popupOption = 'width=370, height=360, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
 					window.open(popupUrl, '', popupOption);
 				}
@@ -225,10 +213,18 @@ $(document).ready(function(){
 								<!-- 제목 날짜 첨부 -->
 								<div id="articleHeader" class="">
 									<input id="articleID" type="hidden" value="${article.c_id}" />
+									<input id="isGuestFL" type="hidden" value="${article.isGuestFL}" />
 									<span id="articleTitle"><h3>${article.c_title}</h3></span> 
 									<span id="articleInfo">
 										<span id="firstInfoRow">
+											<c:choose>
+												<c:when test="${article.isGuestFL == '1'}">
+											<span>${article.guestNickName}</span>
+												</c:when>
+												<c:otherwise>
 											<span><a class="user-context">${article.regNickName}</a></span>
+												</c:otherwise>
+											</c:choose>
 											<span id="articleDt">${article.regDt}</span>
 										</span>
 										<span id="secondInfoRow">
@@ -257,8 +253,11 @@ $(document).ready(function(){
 											<div class="rdc-header">
 												<span class="rdc-reg-id">${comment.regNickName}</span>
 												<span class="rdc-reg-date">${comment.regDT}</span>
-												<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
-												<span><a onclick="deleteThisReply(this, ${comment.c_id})">삭제</a></span>
+												<%-- TODO : 일반사용자만 코멘트 작성 가능 --%>
+												<c:if test="${isGuestUser eq '0'}">
+													<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
+													<span><a onclick="deleteThisReply(this, ${comment.c_id})">삭제</a></span>
+												</c:if>
 											</div>
 											<div class="rdc-body"><p>${comment.c_title}</p></div>
 											</c:otherwise>
@@ -266,6 +265,8 @@ $(document).ready(function(){
 									</div>
 									</c:forEach>
 								</div>
+								<%-- TODO : 일반사용자만 코멘트 작성 가능 --%>
+								<c:if test="${isGuestUser eq '0'}">
 								<!-- 코멘트작성 -->
 								<div id="writeRootCommentDiv" class="write-comment">
 									<div class="write-comment-header">
@@ -290,20 +291,47 @@ $(document).ready(function(){
 									<div class="write-comment-body"><textarea class="write-comment-input"></textarea></div>
 									<div class="write-comment-btn"><button>등록</button></div>								
 								</div>
+								</c:if>
+								
 								<!-- 하단 Action -->
 								<div id="articleAction">
 									<span>
+										<c:if test="${isGuestUser eq '0'}">
+											<%-- 일반 사용자 : 아이디 체크값 받아서 수정/삭제 가능여부 체크 --%>
+											<c:choose>
+												<c:when test="${article.likeFL == '0'}">
+													<a id="likeAnchor" onclick="likeArticle(${article.c_id})">좋아요</a>
+												</c:when>
+												<c:otherwise>
+													<a onclick="cancelLikeArticle(${article.c_id})">좋아요 취소</a>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+										<%-- 수정/삭제 --%>
 										<c:choose>
-											<c:when test="${article.likeFL == '0'}">
-												<a id="likeAnchor" onclick="likeArticle(${article.c_id})">좋아요</a>
+											<%-- TODO : 게스트사용자 기능 임시 삭제 --%>
+											<c:when test="${article.isGuestFL eq '1'}">
+												<%--
+												<input type="password" name="guestPassword" id="guestPassword" name="guestPassword" placeholder="게스트 글 비밀번호" />
+												<a onclick="modifyThisArticle(${article.c_id}, 1)">수정</a>
+												<a onclick="deleteT4hisArticle(${article.c_id}, 1)">삭제</a> 
+												 --%>
 											</c:when>
+											<%-- 일반글 --%>
 											<c:otherwise>
-												<a onclick="cancelLikeArticle(${article.c_id})">좋아요 취소</a>
+												<%-- TODO : 일반 사용자만 글 수정/삭제 가능 --%>
+												<c:if test="${isGuestUser eq '0'}">
+													<c:if test="${loginedUserID eq article.regID}">
+														<a onclick="modifyThisArticle(${article.c_id}, 0)">수정</a>
+														<a onclick="deleteThisArticle(${article.c_id}, 0)">삭제</a>
+													</c:if>
+												</c:if>
 											</c:otherwise>
 										</c:choose>
-										<a href="${pageContext.request.contextPath}/board/modifyArticle.do?c_id=${article.c_id}">수정</a>
-										<a onclick="deleteThisArticle(${article.c_id})">삭제</a>
-										<a href="${pageContext.request.contextPath}/board/newReplyArticle.do?c_id=${article.c_id}">답글쓰기</a>
+										<%-- TODO : 답글가능여부 체크, 일반 사용자만 답글 달기 가능 --%>
+										<c:if test="${isGuestUser eq '0'}">
+											<a href="${pageContext.request.contextPath}/board/newReplyArticle.do?c_id=${article.c_id}">답글쓰기</a>
+										</c:if>
 										<a href="${pageContext.request.contextPath}/board/index.do">목록가기</a>
 									</span>
 								</div>
@@ -315,6 +343,68 @@ $(document).ready(function(){
 		</article>
 	</section>
 	<script>
+	
+	function modifyThisArticle(c_id, isGuestUser) {
+
+		 var form = document.createElement('form');
+		 form.setAttribute('method', 'post');
+		 form.setAttribute('action', '${pageContext.request.contextPath}/board/modifyArticle.do');
+		 
+		 var idInput = document.createElement('input');
+		 idInput.setAttribute('type', 'hidden');
+		 idInput.setAttribute('name', 'c_id');
+		 idInput.setAttribute('value', c_id);
+		 
+		 if($('#isGuestFL').val() == '1') { // 게스트사용자
+			 var guestPassword = $('#guestPassword').val();
+			 if(guestPassword == '') {
+				 alert('글 비밀번호를 입력해주세요.');
+				 return;
+			 }
+			 var encryptedPW = Sha256.hash(guestPassword);
+			 
+			 var pwInput = document.createElement('input');
+			 idInput.setAttribute('type', 'hidden');
+			 idInput.setAttribute('name', 'guestPW');
+			 idInput.setAttribute('value', encryptedPW);
+		 }
+		 
+		form.submit();		 
+	 }
+
+	function deleteThisArticle(c_id, isGuestUser) {
+		var obj = {};
+		obj.c_id = c_id;
+		
+		 if($('#isGuestFL').val() == '1') { // 게스트사용자
+			 var guestPassword = $('#guestPassword').val();
+			 if(guestPassword == '') {
+				 alert('글 비밀번호를 입력해주세요.');
+				 return;
+			 }
+			 obj.guestPW = Sha256.hash(guestPassword);
+		 }
+		 
+		if(confirm('게시물을 지우시겠습니까?') == true) {
+			$.ajax({
+				 method: 'post'
+				,url: '${pageContext.request.contextPath}/board/deleteArticle.do'
+				,data: obj
+				,success: function(data){
+					if(data.id == '-1') {
+						alert('글 비밀번호가 맞지 않습니다.');
+					} else {
+						alert('삭제하였습니다.');
+						location.href = '${pageContext.request.contextPath}/board/index.do';	
+					}
+					
+				}
+				,fail: function(data) {
+					alert('글 삭제에 실패하였습니다.');
+				}
+			});
+		}	
+	};
 	
 	function likeArticle(articleID) {
 		var obj = {};
