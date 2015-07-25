@@ -10,10 +10,7 @@
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css" media="all" />
 <script>
 $(document).ready(function(){
-	$(document).on("click", "#save", function(){
-		alert("작업중입니다.");
-		return;
-	}).on("click", "#commentAllDelete", function(){
+	$(document).on("click", "#commentAllDelete", function(){
 		var chks = [];
 		$("input[name=chk]:checked").each(function() {
 			chks.push($(this).val());
@@ -35,7 +32,6 @@ $(document).ready(function(){
                 , callback);
 	}).on("click", "#aa", function(){
 		var queryStr = $("#searchForm").serialize();
-		alert(queryStr);
 		window.location.href = '${pageContext.request.contextPath}/board/manager/comment/index.do?'+queryStr;
 	});
 });
