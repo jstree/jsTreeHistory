@@ -106,6 +106,7 @@ public class BoardServiceImpl implements BoardService {
 			}
 		}
 		
+		article.setRef(2);
 		this.setupArticleParameters(article);
 		
 		Article insertedArticle = coreService.addNode(article);
@@ -117,6 +118,20 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public Article addReplyArticle(Article article) throws Exception {
+		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		if(article.getIsGuestFL().equals("0")) {	// 일반 사용자
+			SecureUserLogin userLogin = (SecureUserLogin) user;
+			article.setRegID(userLogin.getId());
+			
+		} else {									// 게스트 사용자
+			if(user instanceof String) {
+				String userStr = (String)user;
+				if(! userStr.equals("anonymousUser")) {
+					throw new Exception("허가되지 않은 사용자입니다.");
+				} 
+			}
+		}
 		this.setupArticleParameters(article);
 		return coreService.addNode(article);
 	}
@@ -283,7 +298,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	/* 글 추가를 위한 공통 파라미터 설정 */
 	private void setupArticleParameters(Article article) {
-		article.setRef(2);
 		article.setC_type("default");
 		article.setC_type("folder");
 		article.setContent(this.unescapeHtml(article.getContent()));

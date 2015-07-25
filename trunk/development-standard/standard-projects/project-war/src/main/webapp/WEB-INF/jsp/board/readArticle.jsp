@@ -354,6 +354,7 @@ $(document).ready(function(){
 		 idInput.setAttribute('type', 'hidden');
 		 idInput.setAttribute('name', 'c_id');
 		 idInput.setAttribute('value', c_id);
+		 form.appendChild(idInput);
 		 
 		 if($('#isGuestFL').val() == '1') { // 게스트사용자
 			 var guestPassword = $('#guestPassword').val();
@@ -364,9 +365,10 @@ $(document).ready(function(){
 			 var encryptedPW = Sha256.hash(guestPassword);
 			 
 			 var pwInput = document.createElement('input');
-			 idInput.setAttribute('type', 'hidden');
-			 idInput.setAttribute('name', 'guestPW');
-			 idInput.setAttribute('value', encryptedPW);
+			 pwInput.setAttribute('type', 'hidden');
+			 pwInput.setAttribute('name', 'guestPW');
+			 pwInput.setAttribute('value', encryptedPW);
+			 form.appendChild(pwInput);
 		 }
 		 
 		form.submit();		 

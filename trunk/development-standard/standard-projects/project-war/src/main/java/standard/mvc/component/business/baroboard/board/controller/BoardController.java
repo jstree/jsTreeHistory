@@ -186,11 +186,29 @@ public class BoardController extends GenericAbstractController {
 		return jspView;
 	}
 	
-	@RequestMapping(value = "/newReplyArticle.do", method = { RequestMethod.GET })
+	@RequestMapping(value = "/newReplyArticle.do")
 	public String newReplyArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 		Article parentArticle = boardService.getArticleById(article);
+		String jspView = "";
+		
+		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(user instanceof String) { // 익명 사용자
+			String userStr = (String)user;
+			if(userStr.equals("anonymousUser")) {
+				modelMap.addAttribute("isGuestFL", "1");
+				logger.debug("게스트사용자");
+				jspView = "/jsp/board/newGuestArticle";
+			} else {
+				throw new Exception("허가되지 않은 사용자입니다.");
+			}
+		} else {	// 로그인 사용자
+			modelMap.addAttribute("isGuestFL", "0");
+			jspView = "/jsp/board/newArticle";
+			logger.debug("일반사용자");
+		}
+		
 		modelMap.addAttribute("parentArticle", parentArticle);
-		return "/jsp/board/newArticle";
+		return jspView;
 	}
 
 	@RequestMapping(value = "/submitNewArticle.do", method = { RequestMethod.GET, RequestMethod.POST })
