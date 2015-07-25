@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="comment">
+	<typeAlias alias="CommentManageVO" type="standard.mvc.component.business.baroboard.board.manager.comment.vo.CommentManageVO" />
+
+	<sql id="getMetaField">
+		/* getChildNode */
+		SELECT A.C_ID
+		, A.C_PARENTID
+		, A.C_POSITION
+		, A.C_LEFT
+		, A.C_RIGHT
+		, A.C_LEVEL
+		, A.C_TITLE
+		, A.C_TYPE
+		/* user filed add point*/
+	</sql>
+	<sql id="getInlineChildCount">
+		, ( SELECT CASE
+		WHEN COUNT(*) &gt; 0 THEN 'InChild'
+		ELSE
+		'NoChild'
+		END AS YesNo
+		/* inline table from filed add point*/
+	</sql>
+	<sql id="getInlineChildCountAfterFrom">
+		WHERE B.C_PARENTID = A.C_ID
+		) AS childcount
+		/* table from filed add point*/
+	</sql>
+	<sql id="getAfterFrom">
+		WHERE A.C_PARENTID = #c_id#
+		ORDER BY A.C_POSITION ASC
+	</sql>
+	
+	<select id="getChildNode" parameterClass="CommentManageVO"
+		resultClass="CommentManageVO">
+		<dynamic>
+			<include refid="getMetaField" />
+			/* user fields */
+			<include refid="getInlineChildCount" />
+			/* inline table from filed*/
+			FROM T_BOARD_COMMENT_TEST B
+			<include refid="getInlineChildCountAfterFrom" />
+			/* table from filed*/
+			, #boardID# as boardID
+			FROM T_BOARD_COMMENT_TEST A
+			<include refid="getAfterFrom" />
+		</dynamic>
+	</select>
+
+
+	<select id="getChildNodeByLeftRight" parameterClass="CommentManageVO"
+		resultClass="CommentManageVO">
+		/* getChildNodeByLeftRight */
+		SELECT C_ID
+			, C_PARENTID
+			, C_POSITION
+			, C_LEFT
+			, C_RIGHT
+			, C_LEVEL
+			, C_TITLE
+			, C_TYPE
+		FROM T_BOARD_COMMENT_TEST
+		WHERE C_LEFT &gt;= #c_left#
+			AND C_RIGHT &lt;= #c_right#
+		ORDER BY C_LEFT ASC
+	</select>
+
+
+	<select id="searchNodeByString" parameterClass="CommentManageVO"
+		resultClass="CommentManageVO">
+		/* searchNodeByString */
+		SELECT c_left
+			, c_right
+		FROM T_BOARD_COMMENT_TEST
+		WHERE C_TITLE LIKE '%'||#searchStr#||'%'
+	</select>
+
+
+	<select id="searchNodeByPosition" parameterClass="java.util.List"
+		resultClass="String">
+		/* searchNodeByPosition */
+		SELECT DISTINCT C_ID
+		FROM T_BOARD_COMMENT_TEST
+		WHERE 1=1
+		<iterate prepend="AND" open="(" close=")" conjunction="OR">
+			( C_LEFT
+			&lt;= #[].c_left# AND C_RIGHT &gt;= #[].c_right# )
+		</iterate>
+	</select>
+
+
+	<update id="alterNode" parameterClass="CommentManageVO">
+		/* alterNode */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET  C_TITLE = #c_title#
+			, C_TYPE = #c_type#
+			, C_ARTICLE_ID = #articleId#
+			, C_REG_ID = #regId#
+			, C_VIEW_ONLY_REG_ID_FL = #viewOnlyRegIdFl#
+			, C_REG_DT = #regDt#
+			, C_MOD_DT = #modDt#
+			, C_ROOT_COMMENT_ID = #rootCommentId#
+			, C_IS_DELETED_FL = #isDeletedFl#
+		WHERE C_ID = #c_id#
+	</update>
+
+
+	<select id="getNode" parameterClass="CommentManageVO"
+		resultClass="CommentManageVO">
+		/* getNode */
+		<dynamic>
+			<include refid="getMetaField" />
+			/* user fields */
+			, A.C_ARTICLE_ID as articleId
+			, A.C_REG_ID as regId 
+			, A.C_VIEW_ONLY_REG_ID_FL as viewOnlyRegIdFl
+			, A.C_REG_DT as RegDt
+			, A.C_MOD_DT as modDt
+			, A.C_ROOT_COMMENT_ID as rootCommentId
+			, A.C_IS_DELETED_FL as isDeletedFl
+		FROM T_BOARD_COMMENT_TEST A
+		WHERE C_ID = #c_id#
+		</dynamic>
+	</select>
+
+
+	<select id="getNodeByRef" parameterClass="CommentManageVO"
+		resultClass="CommentManageVO">
+		<dynamic>
+		/* getNodeByRef */
+			<include refid="getMetaField" />
+			/* user fields */
+			, A.C_ARTICLE_ID as articleId
+			, A.C_REG_ID as regId 
+			, A.C_VIEW_ONLY_REG_ID_FL as viewOnlyRegIdFl
+			, A.C_REG_DT as RegDt
+			, A.C_MOD_DT as modDt
+			, A.C_ROOT_COMMENT_ID as rootCommentId
+			, A.C_IS_DELETED_FL as isDeletedFl
+		FROM T_BOARD_COMMENT_TEST A
+		WHERE C_ID = #ref#
+		</dynamic>
+	</select>
+
+
+	<delete id="removeNode" parameterClass="CommentManageVO">
+		/* removeNode */
+		DELETE
+		FROM T_BOARD_COMMENT_TEST
+		WHERE C_LEFT &gt;= #c_left#
+			AND C_RIGHT	&lt;= #c_right#
+	</delete>
+
+
+	<update id="removedAfterLeftFix" parameterClass="CommentManageVO">
+		/* removedAfterLeftFix */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
+		WHERE C_LEFT &gt; #c_right#
+	</update>
+
+
+	<update id="removedAfterRightFix" parameterClass="CommentManageVO">
+		/* removedAfterRightFix */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
+		WHERE C_RIGHT &gt; #c_left#
+	</update>
+
+
+	<update id="removedAfterPositionFix" parameterClass="CommentManageVO">
+		/* removedAfterPositionFix */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET	C_POSITION = C_POSITION - 1
+		WHERE C_PARENTID = #c_parentid#
+			AND	C_POSITION &gt; #c_position#
+	</update>
+
+
+	<select id="analyzeRootNode" resultClass="CommentManageVO">
+		/* searchNodeByString */
+		SELECT C_LEFT
+		FROM T_BOARD_COMMENT_TEST
+		WHERE C_PARENTID = 0
+	</select>
+
+
+	<update id="cutMyselfPositionFix" parameterClass="CommentManageVO">
+		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_POSITION = C_POSITION - 1
+		WHERE C_PARENTID = #c_parentid#
+			AND C_POSITION &gt;	#c_position#
+	</update>
+
+
+	<update id="cutMyselfLeftFix" parameterClass="CommentManageVO">
+		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
+		WHERE C_LEFT &gt; #c_right#
+	</update>
+
+
+	<update id="cutMyselfRightFix" parameterClass="CommentManageVO">
+		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
+		WHERE C_RIGHT &gt; #c_left#
+		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+			open="(" close=")" conjunction=",">
+			#c_idsByChildNodeFromNodeById[]#
+		</iterate>
+	</update>
+
+
+	<update id="stretchPositionForMyself" parameterClass="CommentManageVO">
+		/* stretchPositionForMyselfFromJstree */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_POSITION = C_POSITION + 1
+		WHERE C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
+		<isEqual property="copy" compareValue="0">
+			AND C_ID NOT IN
+			<isEmpty property="c_idsByChildNodeFromNodeById">
+				(-1)
+			</isEmpty>
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate property="c_idsByChildNodeFromNodeById" open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="CommentManageVO">
+		/* stretchLeftForMyselfFromJstree */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
+		WHERE C_LEFT &gt;= #rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<update id="stretchRightForMyselfFromJstree" parameterClass="CommentManageVO">
+		/* stretchRightForMyselfFromJstree */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
+		WHERE C_RIGHT &gt;= #rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<insert id="pasteMyselfFromJstree" parameterClass="CommentManageVO">
+		/* pasteMyselfFromJstree */
+		INSERT INTO T_BOARD_COMMENT_TEST (
+		C_ID, C_PARENTID, C_POSITION,
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
+		)
+		SELECT S_BOARD_TEST.NEXTVAL AS C_ID
+		, A.*
+		FROM (
+			SELECT
+			#ref# AS C_PARENTID
+			, C_POSITION
+			, C_LEFT - #idifLeft# AS C_LEFT
+			, C_RIGHT -	#idifRight# AS C_RIGHT
+			, C_LEVEL - #ldif# AS C_LEVEL
+			, C_TITLE
+			, C_TYPE
+			FROM T_BOARD_COMMENT_TEST
+			<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
+				open="(" close=")" conjunction=",">
+				#c_idsByChildNodeFromNodeById[]#
+			</iterate>
+			ORDER BY C_LEVEL DESC
+		) A
+		<selectKey resultClass="java.lang.Integer">
+			/* pasteMyselfFromJstree SEQ */
+			SELECT S_BOARD_TEST.CURRVAL AS SEQ
+			FROM DUAL
+		</selectKey>
+	</insert>
+
+
+	<update id="enterMyselfFixPosition" parameterClass="CommentManageVO">
+		/* enterMyselfFixPosition */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET	C_PARENTID = #ref#
+			, C_POSITION = #c_position#
+		WHERE C_ID = #c_id#
+	</update>
+
+
+	<update id="enterMyselfFixLeftRight" parameterClass="CommentManageVO">
+		/* enterMyselfFixLeftRight */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET	C_LEFT = C_LEFT - (#idif#)
+			, C_RIGHT = C_RIGHT - (#idif#)
+			, C_LEVEL =
+		C_LEVEL - (#ldif#)
+		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
+			open="(" close=")" conjunction=",">
+			#c_idsByChildNodeFromNodeById[]#
+		</iterate>
+	</update>
+
+
+	<insert id="addMyselfFromJstree" parameterClass="CommentManageVO">
+		/* addMyselfFromJstree */
+		INSERT INTO T_BOARD_COMMENT_TEST (
+		C_ID, C_PARENTID, C_POSITION,
+		C_LEFT, C_RIGHT, C_LEVEL )
+		VALUES (
+		S_BOARD_TEST.NEXTVAL, #c_parentid#, #c_position#,
+		#c_left#, #c_right#, #c_level# )
+		<selectKey resultClass="java.lang.Integer">
+			/* addMyselfFromJstree SEQ */
+			SELECT S_BOARD_TEST.CURRVAL AS SEQ
+			FROM DUAL
+		</selectKey>
+	</insert>
+
+
+	<update id="alterNodeType" parameterClass="CommentManageVO">
+		/* alterNodeType */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_TYPE = #c_type#
+		WHERE C_ID = #c_id#
+	</update>
+
+
+	<update id="fixCopyIF" parameterClass="CommentManageVO">
+		/* fixCopyIF */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_POSITION = #fixCopyPosition#
+		WHERE C_ID = #fixCopyId#
+	</update>
+
+
+	<update id="fixCopy" parameterClass="CommentManageVO">
+		/* fixCopy */
+		UPDATE T_BOARD_COMMENT_TEST
+		SET C_PARENTID = #fixCopyId#
+		WHERE C_ID = #c_id#
+	</update>
+	
+	<select id="getComment" parameterClass="CommentManageVO" resultClass="CommentManageVO">
+		SELECT * 
+		 FROM (
+		SELECT ROWNUM RNUM, A.* 
+		 FROM (
+			<include refid="getMetaField" />
+			, A.C_ARTICLE_ID as articleId
+			, A.C_REG_ID as regId 
+			, A.C_VIEW_ONLY_REG_ID_FL as viewOnlyRegIdFl
+			, A.C_REG_DT as RegDt
+			, A.C_MOD_DT as modDt
+			, A.C_ROOT_COMMENT_ID as rootCommentId
+			, A.C_IS_DELETED_FL as isDeletedFl
+			, A.boardId
+			, A.boardName
+			, B.c_title as regNickName
+			FROM (
+			<iterate property="tableInfo" conjunction="UNION ALL">
+				SELECT * FROM (
+					SELECT Y.*
+					, #tableInfo[].c_id# as boardId
+					, #tableInfo[].c_title# as boardName
+					FROM T_BOARD_COMMENT_TEST Y
+					WHERE 1=1
+						AND Y.C_LEVEL > 0
+						AND Y.C_IS_DELETED_FL = '0'
+				)
+			</iterate>
+			) A, T_USER_INFO B
+			WHERE 1=1 
+		      AND A.C_REG_ID = B.C_ID
+		      <isNotEmpty property="regNickName">
+		      AND B.C_TITLE LIKE '%'||#regNickName#||'%'
+		      </isNotEmpty>
+		      <isNotEmpty property="c_title">
+		      AND A.C_TITLE LIKE '%'||#c_title#||'%'
+		      </isNotEmpty>
+		      <isNotEmpty property="fromDt">
+		      AND A.C_REG_DT BETWEEN #fromDt# AND #toDt#
+		      </isNotEmpty>
+			ORDER BY C_ID DESC
+			) A
+			)
+			WHERE 1 = 1
+		      AND RNUM &gt;= (1 + ((#pageNum# - 1) * #pageSize#))
+		      AND RNUM &lt;= (#pageNum# * #pageSize#)
+	</select>
+</sqlMap>

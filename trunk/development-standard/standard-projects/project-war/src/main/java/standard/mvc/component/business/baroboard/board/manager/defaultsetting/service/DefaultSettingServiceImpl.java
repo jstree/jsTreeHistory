@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
+import standard.mvc.component.business.baroboard.board.manager.defaultsetting.vo.DefaultSettingVO;
 import standard.mvc.component.business.baroboard.core.manage.setting.messages.ExceptionMessage;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
@@ -52,7 +53,8 @@ public class DefaultSettingServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) throws Exception {
-    	throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
+    	List<T> node = defaultSettingService.getChildNode(comprehensiveTree);
+    	return node;
     }
 
     @Override
