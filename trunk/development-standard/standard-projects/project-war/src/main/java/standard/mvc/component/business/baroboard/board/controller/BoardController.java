@@ -149,6 +149,7 @@ public class BoardController extends GenericAbstractController {
 			isGuestUser = "0";		// 일반사용자
 			SecureUserLogin loginedUser = (SecureUserLogin) user;
 			loginedUserID = loginedUser.getId();
+			article.setUserID(loginedUserID);
 			modelMap.addAttribute("loginedUserID", loginedUserID);
 		}
 		
