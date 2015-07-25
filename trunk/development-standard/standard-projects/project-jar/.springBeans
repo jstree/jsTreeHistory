@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.6.4.201503051146-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.5.0.201404011509-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>src/main/java/egovframework/com/ext/jstree/support/manager/config/SpringBootapplication.javaBackup</config>
+		<config>src/main/java/egovframework/com/ext/jstree/support/manager/eventLog/SpringBootapplication.javaBackup</config>
 	</configs>
 	<autoconfigs>
-		<config>java:egovframework.com.ext.jstree.support.manager.config.SpringBootapplication</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
