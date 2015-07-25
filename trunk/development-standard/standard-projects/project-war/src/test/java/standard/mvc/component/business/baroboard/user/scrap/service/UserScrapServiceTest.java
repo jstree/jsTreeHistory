@@ -67,12 +67,6 @@ public class UserScrapServiceTest extends DbUnitTest<UserScrap> {
 	
 	@Test
     public void scrapDetailView() throws Exception {
-		UserScrap userScrap = new UserScrap();
-		userScrap = userScrapService.getScrapDetailView(userScrap);
 		
-		assertThat(userScrap.getBoardTitle(), is(""));
-		assertThat(userScrap.getContent(), is(""));
-		//assertThat(userScrap.get, is(""));
-		assertThat(userScrap.getBoardTitle(), is(""));
 	}
 }

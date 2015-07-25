@@ -36,14 +36,6 @@ public interface UserScrapService {
 	public List<UserScrap> scrapList(UserScrap userScrap) throws Exception;
 	
 	/**
-     * 스크랩 상세 정보 가져오기
-     * 
-     * @param UserScrap
-     * @return UserScrap
-     */
-	public UserScrap getScrapDetailView(UserScrap userScrap) throws Exception;
-	
-	/**
      * 스크랩 삭제
      * 
      * @param UserScrap postingId 
@@ -57,4 +49,12 @@ public interface UserScrapService {
      * @return int
      */
 	public int getScrapListTotalCnt(UserScrap userScrap) throws Exception;
+	
+	/**
+     * 스크랩 삭제할 ID 가져오기
+     * 
+     * @param String postingId 
+     * @return UserScrap
+     */
+	public UserScrap getDeleteScrapId(int postingId) throws Exception;
 }

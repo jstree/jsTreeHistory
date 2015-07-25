@@ -16,9 +16,6 @@ public class UserScrap extends ComprehensiveTree {
 	/** 스크랩일시 */
     private String scrapDt;
     
-    /** 제목 */
-    private String boardTitle;
-    
     /** 작성자 ID */
     private int regID;
     
@@ -28,27 +25,23 @@ public class UserScrap extends ComprehensiveTree {
     /** 작성자 닉네임 */
     private String nickName;
     
-	/** 조회수 */
-    private int viewCnt;
-    
-    /** 추천수 */
-    private int likeCount;
-    
-    /** 내용 */
-    private String content;
-    
-    /** 첨부 파일 갯수 */
-    private int attachmentCount;
-    
     /** 페이지 */
 	private int pageNum = 1;
 
 	/** 페이지 사이즈 */
 	private int pageSize = 10;
 	
-	/** 코멘트개수 */
-	private int commentCnt;
-    
+	/** 게시판 명 */
+	private String boardName;
+	
+	public String getBoardName() {
+		return boardName;
+	}
+
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
+
 	public void setRegDt(String regDt) {
 		this.regDt = regDt;
 	}
@@ -85,28 +78,12 @@ public class UserScrap extends ComprehensiveTree {
 		this.scrapDt = scrapDt;
 	}
 
-	public String getBoardTitle() {
-		return boardTitle;
-	}
-
-	public void setBoardTitle(String boardTitle) {
-		this.boardTitle = boardTitle;
-	}
-
 	public int getRegID() {
 		return regID;
 	}
 
 	public void setRegID(int regID) {
 		this.regID = regID;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
 	}
 	
 	public String getRegDt() {
@@ -115,30 +92,6 @@ public class UserScrap extends ComprehensiveTree {
 
 	public void setRegDT(String regDt) {
 		this.regDt = regDt;
-	}
-
-	public int getViewCnt() {
-		return viewCnt;
-	}
-
-	public void setViewCnt(int viewCnt) {
-		this.viewCnt = viewCnt;
-	}
-
-	public int getLikeCount() {
-		return likeCount;
-	}
-
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
-	}
-    
-	public int getAttachmentCount() {
-		return attachmentCount;
-	}
-
-	public void setAttachmentCount(int attachmentCount) {
-		this.attachmentCount = attachmentCount;
 	}
 
 	public String getNickName() {
@@ -165,15 +118,6 @@ public class UserScrap extends ComprehensiveTree {
 		this.pageSize = pageSize;
 	}
 	
-	public int getCommentCnt() {
-		return commentCnt;
-	}
-
-	public void setCommentCnt(int commentCnt) {
-		this.commentCnt = commentCnt;
-	}
-
-
     @Override
     public String getSqlMapSelector() {
         return "userScrap";

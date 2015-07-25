@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.board.service.BoardService;
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.user.scrap.service.UserScrapService;
 import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
@@ -78,8 +79,6 @@ public class UserScrapController extends GenericAbstractController {
 		int boardId = userScrap.getBoardId();
 		int totalPageCount = userScrapService.getScrapListTotalCnt(userScrap) / userScrap.getPageSize() + 1;
 		
-		int postingId = userScrap.getPostingId();
-		
 		List<UserScrap> scrapList = userScrapService.scrapList(userScrap); 
 		modelMap.addAttribute("scrapList", scrapList);
 		
@@ -108,24 +107,48 @@ public class UserScrapController extends GenericAbstractController {
 	}
 	
 	
-	@RequestMapping(value = "/delete.do", method = {RequestMethod.GET})
+	@RequestMapping(value = "/delete.do")
 	@ResponseBody
 	public String scapDelete(ModelMap model, @ModelAttribute Article article) throws Exception {
 		UserScrap userScrap = new UserScrap();
 		
-		userScrap.setPostingId(article.getC_id());
+		userScrap = userScrapService.getDeleteScrapId(article.getC_id());
 		coreService.removeNode(userScrap);
-		return "/jsp/user/scrap/index";
+		
+		return "{}"; 
 	}
 	
 	@RequestMapping(value = "/readScrapPopup.do")
 	public String readArticle(ModelMap modelMap,  UserScrap userScrap) throws Exception {
+		
 		Article article = new Article();
 		article.setC_id(userScrap.getBoardId());
 		
+		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String isGuestUser = "";
+		int loginedUserID;
+		if(user instanceof String) {
+			String userStr = (String)user;
+			if(userStr.equals("anonymousUser")) {
+				isGuestUser = "1";	// 게스트
+			} else {
+				throw new Exception("허가되지 않은 사용자입니다.");
+			}
+		} else {
+			isGuestUser = "0";		// 일반사용자
+			SecureUserLogin loginedUser = (SecureUserLogin) user;
+			loginedUserID = loginedUser.getId();
+			modelMap.addAttribute("loginedUserID", loginedUserID);
+		}
+		
 		Article targetArticle = boardService.readArticle(article);
-
+		Comment comment = new Comment();
+		comment.setArticleID(article.getC_id());
+		List<Comment> commentList = boardService.getCommentList(comment);
+		
+		modelMap.addAttribute("isGuestUser", isGuestUser);
 		modelMap.addAttribute("article", targetArticle);
+		modelMap.addAttribute("commentList", commentList);
 		return "/jsp/user/scrap/detailView";
 	}
 	

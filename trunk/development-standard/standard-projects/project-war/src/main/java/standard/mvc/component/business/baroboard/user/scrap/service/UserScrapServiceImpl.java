@@ -28,13 +28,6 @@ public class UserScrapServiceImpl implements UserScrapService {
 		return scrapList;
 	}
 
-	
-	@Override
-	public UserScrap getScrapDetailView(UserScrap userScrap) throws Exception {
-		UserScrap userScarp = (UserScrap) userScrapDao.getScrapDetailView(userScrap);
-        return userScrap;
-	}
-
 	@Override
 	public void scrapDelete(UserScrap userScrap) throws Exception {
 		coreService.removeNode(userScrap);
@@ -42,16 +35,23 @@ public class UserScrapServiceImpl implements UserScrapService {
 
 	@Override
 	public int getScrapListTotalCnt(UserScrap userScrap) throws Exception {
-		int totalScrapCount =userScrapDao.getScrapListTotalCnt(userScrap);
+		int totalScrapCount = userScrapDao.getScrapListTotalCnt(userScrap);
 		return totalScrapCount;
+	}
+	
+	@Override
+	public UserScrap getDeleteScrapId(int postingId) throws Exception {
+		// TODO Auto-generated method stub
+		UserScrap userScrap = userScrapDao.getC_id(postingId);
+		return userScrap;
 	}
 	
 	public void changeRegDTFormat(List<UserScrap> userScrapList){
 		for(UserScrap userScrap : userScrapList) {
-			String regDate = userScrap.getRegDt();
-			String year = regDate.substring(0, 4);
-			String month = regDate.substring(4, 6);
-			String day = regDate.substring(6, 8);
+			String scrapDate = userScrap.getScrapDt();
+			String year = scrapDate.substring(0, 4);
+			String month = scrapDate.substring(4, 6);
+			String day = scrapDate.substring(6, 8);
 			userScrap.setRegDt(year + "-" + month + "-" + day);
 		}
 	}

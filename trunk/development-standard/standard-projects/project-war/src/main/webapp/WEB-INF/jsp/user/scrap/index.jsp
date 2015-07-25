@@ -57,21 +57,17 @@ function readScrap(c_id){
 												<th>게시판명</th>
 												<th>제목</th>
 												<th>작성자</th>
-												<th class="desktop">작성일자</th>
-												<th class="not-mobile">조회수</th>
-												<th class="desktop ">추천수</th>
+												<th class="desktop">스크랩일자</th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach var="scrap" items="${scrapList}" varStatus="status">
 												<tr>
 												    <td class="dt-center">${scrap.c_id}</td>
-													<td class="dt-center">일반 게시판</td>
-													<td><a href="#" onclick="readScrap(${scrap.c_id})">${scrap.c_title} &nbsp; (${scrap.commentCnt})</a></td>
+													<td class="dt-center">${scrap.boardName}</td>
+													<td><a href="#" onclick="readScrap(${scrap.postingId})">${scrap.c_title}</a></td>
 													<td class="dt-center">${scrap.nickName}</td>
 													<td class="dt-center">${scrap.regDt}</td>
-													<td class="dt-center">${scrap.viewCnt}</td>
-													<td class="dt-center">${scrap.likeCount}</td>
 												</tr>
 											</c:forEach>
 										</tbody>

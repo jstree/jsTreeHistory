@@ -29,9 +29,9 @@ import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
 public interface UserScrapDao {
 	List<UserScrap> getUserScrapList(UserScrap userScrap) throws Exception;
 	
-	UserScrap getScrapDetailView(UserScrap userScrap) throws Exception;
-
 	int getScrapListTotalCnt(UserScrap userScrap) throws Exception;
+
+	UserScrap getC_id(int postingId) throws Exception;
 	
 }
 

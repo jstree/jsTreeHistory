@@ -15,6 +15,10 @@
 		, A.C_TITLE
 		, A.C_TYPE
 		/* user filed add point*/
+		, A.C_USER_ID AS userId    
+        , A.C_BOARD_ID AS boardId
+        , A.C_POSTING_ID AS postingId
+        , A.C_SCRAP_DT AS scrapDt  
 	</sql>
 	<sql id="getInlineChildCount">
 		, ( SELECT CASE
@@ -62,6 +66,10 @@
 			, C_LEVEL
 			, C_TITLE
 			, C_TYPE
+			, C_USER_ID AS userId    
+            , C_BOARD_ID AS boardId
+            , C_POSTING_ID AS postingId
+            , C_SCRAP_DT AS scrapDt  
 		FROM T_USER_SCRAP
 		WHERE C_LEFT &gt;= #c_left#
 			AND C_RIGHT &lt;= #c_right#
@@ -97,10 +105,10 @@
 		UPDATE T_USER_SCRAP
 		SET C_TYPE = #c_type#
 			, C_TITLE = #c_title#
-			, C_USER_ID = #regID# 
-			, C_BOARD_ID = #boardId#
-			, C_POSTING_ID = #postingId# 
-			, C_SCRAP_DT = #scrapDt#
+			, C_USER_ID AS userId    
+            , C_BOARD_ID AS boardId
+            , C_POSTING_ID AS postingId
+            , C_SCRAP_DT AS scrapDt  
 		WHERE C_ID = #c_id#
 	</update>
 
@@ -110,12 +118,6 @@
 		/* getNode */
 		<dynamic>
 			<include refid="getMetaField" />
-			/* user fields */
-			, A.C_TITLE AS c_title
-			, A.C_USER_ID AS regId
-			, A.C_BOARD_ID AS boardId
-			, A.C_POSTING_ID AS postingId 
-			, A.C_SCRAP_DT AS scrapDt
 		FROM T_USER_SCRAP A
 		WHERE C_ID = #c_id#
 		</dynamic>
@@ -127,13 +129,6 @@
 		<dynamic>
 		/* getNodeByRef */
 			<include refid="getMetaField" />
-			/* user fields */
-			/* user fields */
-			, A.C_TITLE AS c_title
-			, A.C_USER_ID AS regId
-			, A.C_BOARD_ID AS boardId
-			, A.C_POSTING_ID AS postingId 
-			, A.C_SCRAP_DT AS scrapDt
 		FROM T_USER_SCRAP A
 		WHERE C_ID = #ref#
 		</dynamic>
@@ -266,7 +261,8 @@
 		/* pasteMyselfFromJstree */
 		INSERT INTO T_USER_SCRAP (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
+		C_USER_ID, C_BOARD_ID, C_POSTING_ID, C_SCRAP_DT
 		)
 		SELECT S_USER_SCRAP.NEXTVAL AS C_ID
 		, A.*
@@ -279,6 +275,10 @@
 			, C_LEVEL - #ldif# AS C_LEVEL
 			, C_TITLE
 			, C_TYPE
+			, C_USER_ID
+			, C_BOARD_ID
+			, C_POSTING_ID
+			, C_SCRAP_DT
 			FROM T_USER_SCRAP
 			<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
 				open="(" close=")" conjunction=",">
@@ -321,10 +321,11 @@
 		/* addMyselfFromJstree */
 		INSERT INTO T_USER_SCRAP (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL )
+		C_LEFT, C_RIGHT, C_LEVEL, 
+		C_USER_ID, C_BOARD_ID, C_POSTING_ID, C_SCRAP_DT )
 		VALUES (
 		S_USER_SCRAP.NEXTVAL, #c_parentid#, #c_position#,
-		#c_left#, #c_right#, #c_level# )
+		#c_left#, #c_right#, #c_level#, #userId#, #boardId#, #postingId#, #scrapDt# )
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT S_USER_SCRAP.CURRVAL AS SEQ
@@ -360,48 +361,38 @@
 		/* getArticleListByPage */
 		<dynamic>
 			<include refid="getMetaField" />
-				, A.C_TITLE AS boardTitle
-				, A.C_REG_DT AS regDT
-				, A.C_VIEW_CNT AS viewCnt
-				, A.C_ID AS postingId
-				, B.C_TITLE AS nickName
-				/*
-				, (SELECT COUNT(C_ID) FROM T_BOARD_LIKE WHERE C_ARTICLE_ID = A.C_ID) AS likeCount
-				, (SELECT COUNT(C_ID) FROM T_BOARD_COMMENT WHERE C_ARTICLE_ID = A.C_ID ) AS commentCnt
-				*/
+                , B.C_TITLE AS nickName
+                , (SELECT C_TITLE FROM T_BOARD_INDI_SETTING WHERE C_ID = A.C_BOARD_ID ) as boardName 
 			/* 페이징 처리 */	
 			FROM (
 				SELECT ROWNUM AS RNUM, Z.* FROM (
 					SELECT * 
-					FROM T_BOARD_TEST Y
+					FROM T_USER_SCRAP Y
 					WHERE 1=1
 						AND Y.C_LEVEL = 2
 					ORDER BY C_ID DESC 
 				) Z WHERE ROWNUM &lt;= (#pageNum# * #pageSize#)
 			) A, T_USER_INFO B
 			WHERE 1=1 
-				AND A.C_ID IN (SELECT C_POSTING_ID FROM T_USER_SCRAP WHERE C_USER_ID = #userId#) 
-				AND A.C_REG_ID = B.C_ID
+				AND A.C_USER_ID = #userId#
+				AND A.C_USER_ID = B.C_ID
 				AND A.RNUM &gt;= (1 + ((#pageNum# - 1) * #pageSize#))
 		</dynamic>
 	</select>
 	
-	<select id="scrapDetailView" parameterClass="UserScrap" resultClass="UserScrap">
-		SELECT 
-			A.C_TITLE AS boardTitle
-		   ,A.C_CONTENT AS content
-		   ,(SELECT COUNT(C_ID) FROM T_BOARD_FILE WHERE C_ARTICLE_ID = A.C_ID)
-		FROM 
-			T_BOARD_TEST A
-		WHERE A.C_ID = #postingId#
-	</select>
-	
 	<select id="getScrapListCnt" parameterClass="UserScrap" resultClass="int">
 		SELECT COUNT(C_ID) 
-		FROM T_BOARD_TEST 
+		FROM T_User_Scrap 
 		WHERE 1=1
 			AND C_ID IN (SELECT C_POSTING_ID FROM T_USER_SCRAP WHERE C_USER_ID = #userId#)
 		 	AND C_LEVEL = 2
+	</select>
+	
+	<select id="getC_id" parameterClass="UserScrap" resultClass="int">
+		<include refid="getMetaField" />
+		FROM T_USER_SCRAP 
+		WHERE 1=1
+			AND C_POSTING_ID = #postingId#
 	</select>
 
 </sqlMap>

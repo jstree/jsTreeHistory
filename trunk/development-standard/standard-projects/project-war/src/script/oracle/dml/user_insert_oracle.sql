@@ -107,7 +107,7 @@ INSERT INTO T_USER_SCRAP
   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
    C_USER_ID, C_BOARD_ID, C_POSTING_ID, C_SCRAP_DT)                     
   VALUES (3, 2, 0, 3, 4, 2, '테스트 스크랩', 'default',
-           3, 24, 270,'20150425205811');
+           3, 6, 270,'20150617090502');
            
 COMMIT;
 
