@@ -105,10 +105,10 @@
 		UPDATE T_USER_SCRAP
 		SET C_TYPE = #c_type#
 			, C_TITLE = #c_title#
-			, C_USER_ID AS userId    
-            , C_BOARD_ID AS boardId
-            , C_POSTING_ID AS postingId
-            , C_SCRAP_DT AS scrapDt  
+			, C_USER_ID = #userId#    
+            , C_BOARD_ID = #boardId#
+            , C_POSTING_ID = #postingId#
+            , C_SCRAP_DT = #scrapDt#  
 		WHERE C_ID = #c_id#
 	</update>
 
@@ -388,10 +388,23 @@
 		 	AND C_LEVEL = 2
 	</select>
 	
-	<select id="getC_id" parameterClass="UserScrap" resultClass="int">
-		<include refid="getMetaField" />
+	<select id="getC_id" parameterClass="int" resultClass="UserScrap">
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		, C_LEFT
+		, C_RIGHT
+		, C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		/* user filed add point*/
+		, C_USER_ID AS userId    
+        , C_BOARD_ID AS boardId
+        , C_POSTING_ID AS postingId
+        , C_SCRAP_DT AS scrapDt  
 		FROM T_USER_SCRAP 
 		WHERE 1=1
+			AND C_LEVEL = 2
 			AND C_POSTING_ID = #postingId#
 	</select>
 
