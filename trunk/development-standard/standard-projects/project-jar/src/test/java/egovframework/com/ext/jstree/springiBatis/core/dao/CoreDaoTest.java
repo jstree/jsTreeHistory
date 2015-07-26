@@ -14,8 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -33,7 +31,7 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
-import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
+import egovframework.com.ext.jstree.support.manager.config.TestWebMvcConfig;
 
 /**
  * Modification Information
@@ -56,7 +54,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
+@ContextConfiguration(classes = { TestWebApplicationContextConfig.class, TestWebMvcConfig.class })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class
 	                    , TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
 @DatabaseSetup(value="initialJsTree.xml",type = DatabaseOperation.CLEAN_INSERT)

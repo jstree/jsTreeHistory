@@ -27,7 +27,7 @@
             <value>classpath:/standard/sqlmap/**/*_Oracle.xml</value>
         </list>
     </property>
-		<property name="dataSource" ref="egov.dataSource"/>
+		<property name="dataSource" ref="test.egov.dataSource"/>
 		<property name="lobHandler" ref="egov.lobHandler"/>
 	</bean>
 	
@@ -45,7 +45,7 @@
             <value>classpath:/standard/sqlmap/**/*_Oracle.xml</value>
         </list>
     </property>
-		<property name="dataSource" ref="egov.dataSource"/>
+		<property name="dataSource" ref="test.egov.dataSource"/>
 		<property name="lobHandler" ref="egov.lobHandler"/>
 	</bean>
 	

@@ -15,10 +15,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
+import egovframework.com.ext.jstree.support.manager.config.TestWebMvcConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
 /**
@@ -44,7 +46,7 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { TestWebApplicationContextConfig.class, WebMvcConfig.class })
+@ContextConfiguration(classes = { TestWebApplicationContextConfig.class, TestWebMvcConfig.class })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,DbUnitTestExecutionListener.class })
 @DatabaseSetup(value = "SecureUserLoginDaoTest_InitialDataset.xml", type = DatabaseOperation.CLEAN_INSERT)
 public class SecureUserLoginDaoTest

@@ -12,7 +12,7 @@
     </bean>
 
 	<!-- DataSource -->
-	<alias name="test-dataSource-${Globals.DbType}" alias="egov.dataSource"/>
+	<alias name="test-dataSource-${Globals.DbType}" alias="test.egov.dataSource"/>
 
 	<!-- MySQL -->
 	<!-- 

@@ -19,12 +19,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
+import egovframework.com.ext.jstree.support.manager.config.TestWebMvcConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
+@ContextConfiguration(classes = { TestWebApplicationContextConfig.class, TestWebMvcConfig.class })
 public class CoreControllerSpringTest {
 
     @Autowired

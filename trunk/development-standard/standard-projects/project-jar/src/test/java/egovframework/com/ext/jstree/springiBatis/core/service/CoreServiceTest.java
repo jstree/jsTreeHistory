@@ -127,7 +127,10 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
     @ExpectedDatabase(value = "/egovframework/com/ext/jstree/springiBatis/core/service/CoreServiceTest_addNewLeafNodeToRootNode.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     public void addNewLeafNodeToFirstChildNode() throws Exception {
         
-        ComprehensiveTree firstChildNode = coreService.getChildNode( getRootNode() ).get(0);
+        //ComprehensiveTree firstChildNode = coreService.getChildNode( getRootNode() ).get(0);
+        List<ComprehensiveTree> firstChildNodes = coreService.getChildNode( getRootNode() );
+        ComprehensiveTree firstChildNode = firstChildNodes.get(0);
+        
 
         List<ComprehensiveTree> childrenOfFirstChildNode = coreService.getChildNode(firstChildNode);
         

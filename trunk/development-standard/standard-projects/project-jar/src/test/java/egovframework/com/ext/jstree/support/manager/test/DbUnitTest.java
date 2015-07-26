@@ -40,6 +40,7 @@ import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
+import egovframework.com.ext.jstree.support.manager.config.TestWebMvcConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
 /**
@@ -65,7 +66,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {TestWebApplicationContextConfig.class, WebMvcConfig.class})
+@ContextConfiguration(classes = {TestWebApplicationContextConfig.class, TestWebMvcConfig.class})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public abstract class DbUnitTest<T> {
     
@@ -75,7 +76,7 @@ public abstract class DbUnitTest<T> {
     @Autowired
     protected CoreDao coreDao;
     
-    @Resource(name = "dataSource-${Globals.DbType}")
+    @Resource(name = "test-dataSource-${Globals.DbType}")
     protected DataSource dataSource;
     
     protected IDatabaseTester databaseTester;
