@@ -7,17 +7,17 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import standard.mvc.component.business.baroboard.board.dao.BoardDao;
+import standard.mvc.component.business.baroboard.board.dao.TotalArticleDao;
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
+import standard.mvc.component.business.baroboard.board.vo.TotalArticle;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
@@ -47,8 +47,6 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
 @Service(value = "BoardService")
 public class BoardServiceImpl implements BoardService {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Resource(name = "CoreService")
 	private CoreService coreService;
 	
@@ -57,6 +55,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardDao boardDao;
+	
+	@Autowired
+	private TotalArticleDao totalArticleDao;
 	
 	@Override
 	public List<Article> getArticleList(Article article) throws Exception {
@@ -110,10 +111,14 @@ public class BoardServiceImpl implements BoardService {
 		this.setupArticleParameters(article);
 		
 		Article insertedArticle = coreService.addNode(article);
-		insertedArticle.setC_id(insertedArticle.getId());
-		boardDao.updateRootArticleID(insertedArticle);
+		article.setC_id(insertedArticle.getId());
+		boardDao.updateRootArticleID(article);
 		
-		return insertedArticle;
+		/* T_TOTAL_ARTICLE Insert */
+		TotalArticle totalArticle = this.setTotalArticleByArticle(article);
+		coreService.addNode(totalArticle);
+		
+		return article;
 	}
 	
 	@Override
@@ -133,25 +138,38 @@ public class BoardServiceImpl implements BoardService {
 			}
 		}
 		this.setupArticleParameters(article);
-		return coreService.addNode(article);
+		
+		Article insertedArticle = coreService.addNode(article);
+		article.setC_id(insertedArticle.getId());
+		/* T_TOTAL_ARTICLE Insert */
+		TotalArticle totalArticle = this.setTotalArticleByArticle(article);
+		coreService.addNode(totalArticle);
+		
+		return article;
 	}
 	
 	@Override
 	public Article removeArticle(Article article) throws Exception {
+		/** 삭제는 C_IS_DELETED_FL 을 1로 업데이트 함 */
 		article = coreDao.getNode(article);
-		Article result = null;
 		
-		if(coreDao.removeNode(article) == 1) {
-			result = article;
+		// TODO : 권한체크
+		
+		article.setIsDeletedFL("1");
+		
+		if(coreDao.alterNode(article) != 1) {
+			throw new Exception("데이터 정합성 오류");
 		}
-		return result;
+		TotalArticle totalArticle = this.setTotalArticleByArticle(article);
+		totalArticleDao.updateIsDeletedFLByBoardIdAndArticleID(totalArticle);
+		
+		return article;
 	}
 
 	@Override
 	public Article readArticle(Article article) throws Exception {
 		this.countUpViewCnt(article);
 		// TODO : 권한체크
-//		article.setUserID(23);
 		Article resultArticle = this.getArticleById(article);
 		this.changeRegDTFormatForReadArticle(resultArticle);
 		return resultArticle;
@@ -159,18 +177,20 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Article modifyArticle(Article article) throws Exception {
-		Article result = null;
-		article.setContent(this.unescapeHtml(article.getContent()));
+		// TODO : 권한체크
 		
+		article.setContent(this.unescapeHtml(article.getContent()));
 		
 		article.setModDt(this.getTodayFor14Digits());
 		int resultInt = boardDao.modifyArticle(article);  
-		if(resultInt == 1){
-			result = article;
-		}
+		if(resultInt != 1){
+			throw new Exception("데이터 정합성 오류");
+		} 
 		
-		return result;
+		TotalArticle totalArticle = this.setTotalArticleByArticle(article);
+		totalArticleDao.updateTitleByBoardIdAndArticleID(totalArticle);
 		
+		return article;
 	}
 
 	private int countUpViewCnt(Article article) throws Exception {
@@ -181,7 +201,6 @@ public class BoardServiceImpl implements BoardService {
 	public Comment addComment(Comment comment) throws Exception {
 		comment.setC_type("folder");
 		comment.setRegID(this.getLoginedUserID());
-//		comment.setRegID(23); // TODO : FOR TEST ONLY
 		comment.setRegDT(this.getTodayFor14Digits());
 		Comment insertedComment = null;
 		
@@ -298,10 +317,25 @@ public class BoardServiceImpl implements BoardService {
 	
 	/* 글 추가를 위한 공통 파라미터 설정 */
 	private void setupArticleParameters(Article article) {
-		article.setC_type("default");
 		article.setC_type("folder");
 		article.setContent(this.unescapeHtml(article.getContent()));
 		article.setRegDt(this.getTodayFor14Digits());
+	}
+	
+	/* TOTAL ARTICLE vo 파라미터 설정 */
+	private TotalArticle setTotalArticleByArticle(Article article) {
+		TotalArticle totalArticle = new TotalArticle();
+		
+		totalArticle.setRef(2);
+		totalArticle.setC_title(article.getC_title());
+		totalArticle.setC_type("default");
+		totalArticle.setBoardID("test"); // TODO : 동적게시판 ID 적용
+		totalArticle.setArticleID(article.getC_id());
+		totalArticle.setRegID(article.getRegID());
+		totalArticle.setIsDeletedFL(article.getIsDeletedFL());
+		totalArticle.setRegDT(article.getRegDt());
+		
+		return totalArticle;
 	}
 	
 	/* 사용자 ID 가져오기 - 게스트사용자일 경우 0을 리턴 */

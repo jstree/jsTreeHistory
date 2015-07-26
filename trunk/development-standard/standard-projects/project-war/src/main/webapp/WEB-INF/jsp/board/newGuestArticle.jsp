@@ -165,7 +165,7 @@ $('#articleForm').on('submit',function(e){
    		  data: $('#articleForm').serialize(),
    		}).done(function(data){
    			alert('저장되었습니다.');
-			window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+data.id ;
+			window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+data.c_id ;
    		}).fail(function(data){
    			alert('저장에 실패하였습니다.');
    			console.log(data); 
