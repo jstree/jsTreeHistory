@@ -33,9 +33,6 @@ public class ScrapServiceTest extends initScrapTestBase {
         assertThat(userScrap.getC_id(), is(270));
         assertThat(userScrap.getC_title(), is("테스트글입니다..111"));
         assertThat(userScrap.getNickName(), is("관리자"));
-        assertThat(userScrap.getRegDt(), is("20150621145724"));
-        assertThat(userScrap.getBoardTitle(), is(""));
-        assertThat(userScrap.getBoardTitle(), is(""));
     }
 
     @Test
