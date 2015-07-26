@@ -193,7 +193,7 @@ function moveCallback(r){
 													<td class="dt-center"><fmt:formatDate value="${dateFmt}" pattern="yyyy-MM-dd"/></td>
 													<td class="dt-center">${fn:substring(board.content,0,10) }...</td>
 													<td class="dt-center">${board.viewCnt}</td>
-													<td class="dt-center">추천수</td>
+													<td class="dt-center">${board.likeCnt}</td>
 													<td class="dt-center"><a href = "javascript:postsDelete('${board.boardId}@${board.c_id}');">Delete</a></td>
 												</tr>
 											</c:forEach>

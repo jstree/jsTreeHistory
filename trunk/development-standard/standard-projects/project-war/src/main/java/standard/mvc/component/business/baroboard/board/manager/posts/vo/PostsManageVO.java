@@ -28,6 +28,8 @@ public class PostsManageVO extends ComprehensiveTree{
 	private String announcementFl;
 
 	private int viewCnt;
+	
+	private int likeCnt;
 
 	private String isDeletedFl;
 	
@@ -173,6 +175,14 @@ public class PostsManageVO extends ComprehensiveTree{
 
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
+	}
+
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
 	}
 
 	public String getIsDeletedFl() {
