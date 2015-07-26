@@ -25,6 +25,8 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 public class TotalArticle extends ComprehensiveTree {
 
+	/* DB Columns */
+	
 	private String boardID;
 	
 	private int articleID;
@@ -35,9 +37,31 @@ public class TotalArticle extends ComprehensiveTree {
 	
 	private String regDT;
 	
+	/* Non-DB Columns */
+	
+ 	private int pageSize = 10;
+	
+	private int pageNum = 1;
+	
 	@Override
 	public String getSqlMapSelector() {
 		return "totalArticle";
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
 	}
 
 	public String getBoardID() {

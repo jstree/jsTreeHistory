@@ -406,8 +406,8 @@
 			ORDER BY A.C_ID DESC
 	</select>
 	
-	<select id="getTotalArticlesByRegID" parameterClass="TotalArticle" resultClass="TotalArticle">
-			/* getTotalArticlesByRegID */
+	<select id="getArticlesByRegIDAndPage" parameterClass="TotalArticle" resultClass="TotalArticle">
+			/* getArticlesByRegIDAndPage */
 			<include refid="getMetaField" />
 				, A.C_TITLE as c_title
 				, A.C_BOARD_ID as boardID
@@ -415,10 +415,18 @@
 				, A.C_REG_ID as regID 			
 				, A.C_IS_DELETED_FL as isDeletedFL 			
 				, A.C_REG_DT as regDT 			
-			FROM T_BOARD_TOTAL_ARTICLE A 
-			WHERE 1=1
-				AND A.C_REG_ID = #regID#
-			ORDER BY A.C_ID DESC
+			/* 페이징 처리 */	
+			FROM (
+				SELECT ROWNUM AS RNUM, Z.* FROM (
+					SELECT * 
+					FROM T_BOARD_TOTAL_ARTICLE Y
+					WHERE 1=1
+			      	    AND Y.C_REG_ID = #regID#   
+			        ORDER BY C_ID DESC
+				) Z WHERE ROWNUM &lt;= (#pageNum# * #pageSize#)
+			) A  
+			WHERE 1=1 
+				AND A.RNUM &gt;= (1 + ((#pageNum# - 1) * #pageSize#))
 	</select>
 	
 	<update id="updateTitleByBoardIdAndArticleID" parameterClass="TotalArticle">
@@ -439,5 +447,13 @@
 			AND C_BOARD_ID    = #boardID#
 			AND C_ARTICLE_ID  = #articleID#
 	</update>
+	
+	<select id="getTotalArticleCountByRegID" parameterClass="TotalArticle" resultClass="int">
+			/* getTotalArticleCountByRegID */
+			SELECT COUNT(*) 			
+			FROM T_BOARD_TOTAL_ARTICLE A 
+			WHERE 1=1
+				AND A.C_REG_ID = #regID#
+	</select>
 	
 </sqlMap>

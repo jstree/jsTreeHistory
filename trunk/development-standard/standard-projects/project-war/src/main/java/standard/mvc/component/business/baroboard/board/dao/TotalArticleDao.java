@@ -29,10 +29,12 @@ public interface TotalArticleDao {
 	
 	public List<TotalArticle> getTotalArticlesByBoardID(TotalArticle totalArticle) throws Exception;
 	
-	public List<TotalArticle> getTotalArticlesByRegID(TotalArticle totalArticle) throws Exception;
+	public List<TotalArticle> getArticlesByRegIDAndPage(TotalArticle totalArticle) throws Exception;
 
 	public int updateTitleByBoardIdAndArticleID(TotalArticle totalArticle)	throws Exception;
 
 	public int updateIsDeletedFLByBoardIdAndArticleID(TotalArticle totalArticle) throws Exception;
+	
+	public int getTotalArticleCountByRegID(TotalArticle totalArticle) throws Exception;
 	
 }

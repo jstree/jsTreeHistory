@@ -57,7 +57,7 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao boardDao;
 	
 	@Autowired
-	private TotalArticleDao totalArticleDao;
+	private TotalArticleService totalArticleService;
 	
 	@Override
 	public List<Article> getArticleList(Article article) throws Exception {
@@ -161,7 +161,7 @@ public class BoardServiceImpl implements BoardService {
 			throw new Exception("데이터 정합성 오류");
 		}
 		TotalArticle totalArticle = this.setTotalArticleByArticle(article);
-		totalArticleDao.updateIsDeletedFLByBoardIdAndArticleID(totalArticle);
+		totalArticleService.updateIsDeletedFLByBoardIdAndArticleID(totalArticle);
 		
 		return article;
 	}
@@ -188,7 +188,7 @@ public class BoardServiceImpl implements BoardService {
 		} 
 		
 		TotalArticle totalArticle = this.setTotalArticleByArticle(article);
-		totalArticleDao.updateTitleByBoardIdAndArticleID(totalArticle);
+		totalArticleService.updateTitleByBoardIdAndArticleID(totalArticle);
 		
 		return article;
 	}

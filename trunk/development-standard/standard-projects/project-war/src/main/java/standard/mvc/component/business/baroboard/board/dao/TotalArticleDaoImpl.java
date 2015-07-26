@@ -39,8 +39,8 @@ public class TotalArticleDaoImpl extends EgovComAbstractDAO implements TotalArti
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TotalArticle> getTotalArticlesByRegID(TotalArticle totalArticle) throws Exception {
-		return list(totalArticle.getSqlMapSelector() + "." +"getTotalArticlesByRegID", totalArticle);
+	public List<TotalArticle> getArticlesByRegIDAndPage(TotalArticle totalArticle) throws Exception {
+		return list(totalArticle.getSqlMapSelector() + "." +"getArticlesByRegIDAndPage", totalArticle);
 	}
 
 	@Override
@@ -51,6 +51,11 @@ public class TotalArticleDaoImpl extends EgovComAbstractDAO implements TotalArti
 	@Override
 	public int updateIsDeletedFLByBoardIdAndArticleID(TotalArticle totalArticle) throws Exception {
 		return update(totalArticle.getSqlMapSelector() + "." + "updateIsDeletedFLByBoardIdAndArticleID", totalArticle);
+	}
+
+	@Override
+	public int getTotalArticleCountByRegID(TotalArticle totalArticle) throws Exception {
+		return (int)selectByPk(totalArticle.getSqlMapSelector() + "." + "getTotalArticleCountByRegID", totalArticle);
 	}
 
 }
