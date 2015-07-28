@@ -80,6 +80,10 @@ public class BoardManagementController extends GenericAbstractController {
     	// 수정
     	if( StringUtils.hasText(request.getParameter("c_id")) ){
     		board = boardManagementService.getNode(boardManagementVO);
+    		
+    		if( board == null || board.getC_id() < 3 ){
+    			throw new RuntimeException("잘못된 접근이거나 이미 삭제된 게시판입니다.");
+    		}
     	}
     	// 등록
     	else{
