@@ -97,7 +97,7 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
     
     private ComprehensiveTree getInitialLeafNodeStored() throws Exception {
         
-        return coreDao.getNode( getInitialLeafNode() );
+        return coreService.getNode( getInitialLeafNode() );
     }
     
     private ComprehensiveTree getInitialBranchNode() {
@@ -110,9 +110,10 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
     
     private ComprehensiveTree getInitialBranchNodeStored() throws Exception {
         
-        return coreDao.getNode( getInitialBranchNode() );
+        return coreService.getNode( getInitialBranchNode() );
     }
     
+    @ExpectedDatabase(value = "CoreServiceTest.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
     @Test
     public void validateInitialTree() throws Exception {
         
@@ -123,8 +124,8 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
 //      4|      56   : Branch Node
     }
     
-    @Test                      
-    @ExpectedDatabase(value = "/egovframework/com/ext/jstree/springiBatis/core/service/CoreServiceTest_addNewLeafNodeToRootNode.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @ExpectedDatabase(value = "CoreServiceTest_addNewLeafNodeToRootNode.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+    @Test
     public void addNewLeafNodeToFirstChildNode() throws Exception {
         
         //ComprehensiveTree firstChildNode = coreService.getChildNode( getRootNode() ).get(0);
@@ -140,7 +141,7 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
         newLeafNode.setRef( firstChildNode.getC_id() );
         newLeafNode.setC_position( childrenOfFirstChildNode.size() );
         newLeafNode.setC_title( "New Leaf Node" );
-        newLeafNode.setC_type( "default" ); // TODO Enumeration 도입 필요
+        newLeafNode.setC_type( "default" );
         
         coreService.addNode(newLeafNode);
 

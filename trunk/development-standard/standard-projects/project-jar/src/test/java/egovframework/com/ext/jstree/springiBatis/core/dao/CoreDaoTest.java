@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +19,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
-import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
-import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
-import egovframework.com.ext.jstree.support.manager.config.TestWebMvcConfig;
+import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
+import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
 /**
  * Modification Information
@@ -54,10 +51,9 @@ import egovframework.com.ext.jstree.support.manager.config.TestWebMvcConfig;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { TestWebApplicationContextConfig.class, TestWebMvcConfig.class })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class
-	                    , TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
-@DatabaseSetup(value="initialJsTree.xml",type = DatabaseOperation.CLEAN_INSERT)
+@ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+//@TestPropertySource(properties = {"Globals.UserName=DBUNIT", "Globals.Password=DBUNIT_1234"})
 public class CoreDaoTest
 {
 	@Autowired 
@@ -124,6 +120,7 @@ public class CoreDaoTest
 	}
 	
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testGetChildNode() throws Exception
 	{
 		comprehensiveTree.setC_id(1);
@@ -139,6 +136,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testSearchNodeByString() throws Exception
 	{
 		comprehensiveTree.setC_title("");
@@ -148,7 +146,9 @@ public class CoreDaoTest
 		assertThat(l_StoredNodes.size(), is(4));
 	}
 
+	@Ignore // TODO
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testSearchNodeByPosition() throws Exception
 	{
 		comprehensiveTree.setC_id(2);
@@ -162,6 +162,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testGetNode() throws Exception
 	{
 		comprehensiveTree.setC_id(3);
@@ -172,6 +173,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testGetNodeByRef() throws Exception
 	{
 		comprehensiveTree.setRef(2);
@@ -182,6 +184,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	@ExpectedDatabase(value="cutMyselfAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testCutMyself() throws Exception
 	{
@@ -195,6 +198,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testStretchPositionForMyselfFromJstree() throws Exception
 	{
 		comprehensiveTree.setRef(2);
@@ -209,6 +213,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	@ExpectedDatabase(value="stretchLeftRightForMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testStretchLeftRightForMyselfFromJstree() throws Exception
 	{
@@ -221,6 +226,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	@ExpectedDatabase(value="pasteMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testPasteMyselfFromJstree() throws Exception
 	{
@@ -240,6 +246,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testGetChildNodeByLeftRight() throws Exception
 	{
 		l_StoredNodes = dao.getChildNodeByLeftRight(firstChild);
@@ -249,6 +256,7 @@ public class CoreDaoTest
 	}
 
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testFixCopy() throws Exception
 	{
 		comprehensiveTree.setC_id(4);
@@ -262,6 +270,7 @@ public class CoreDaoTest
 	}
 	
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testFixCopyIf() throws Exception
 	{
 		comprehensiveTree.setC_id(4);
@@ -276,6 +285,7 @@ public class CoreDaoTest
 	}
 	
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testAlterNode() throws Exception
 	{
 		comprehensiveTree.setC_id(4);
@@ -291,6 +301,7 @@ public class CoreDaoTest
 	}
 	
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	@ExpectedDatabase(value="removeNodeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
 	public void testRemoveNode() throws Exception
 	{
@@ -302,6 +313,7 @@ public class CoreDaoTest
 	}
 	
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testAlterNodeType() throws Exception
 	{
 		comprehensiveTree.setC_id(4);
@@ -315,6 +327,7 @@ public class CoreDaoTest
 	}
 	
 	@Test
+	@DatabaseSetup("initialJsTree.xml")
 	public void testEnterMyselfFixPosition() throws Exception
 	{
 		comprehensiveTree.setC_id(4);
@@ -328,4 +341,20 @@ public class CoreDaoTest
 		assertPropertyLenientEquals("c_parentid", 2, comprehensiveResultTree);
 		assertPropertyLenientEquals("c_position", 1, comprehensiveResultTree);
 	}
+	
+	@Ignore
+	@Test
+	@DatabaseSetup("getCountOfDescendantNodes.xml")
+    public void getCountOfDescendantNodes() {
+        
+	    ComprehensiveTree comprehensiveTree = new ComprehensiveTree();
+	    comprehensiveTree.setC_level(3);
+	    
+        int countOfDescendantNodes = dao.getCountOfDescendantNodes(comprehensiveTree);
+        
+        System.out.println("countOfDescendantNodes : " + countOfDescendantNodes);
+        
+//        List<ComprehensiveTree> childNodes
+//        System.out.println(childNodes.size());
+    }
 }

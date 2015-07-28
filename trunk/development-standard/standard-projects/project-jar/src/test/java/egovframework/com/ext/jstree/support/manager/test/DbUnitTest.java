@@ -28,6 +28,10 @@ import javax.sql.DataSource;
 import org.dbunit.IDatabaseTester;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,12 +39,12 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
 
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
-import egovframework.com.ext.jstree.support.manager.config.TestWebApplicationContextConfig;
-import egovframework.com.ext.jstree.support.manager.config.TestWebMvcConfig;
+import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
 /**
@@ -65,8 +69,8 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * </pre>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
 @WebAppConfiguration
-@ContextConfiguration(classes = {TestWebApplicationContextConfig.class, TestWebMvcConfig.class})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public abstract class DbUnitTest<T> {
     
@@ -76,12 +80,35 @@ public abstract class DbUnitTest<T> {
     @Autowired
     protected CoreDao coreDao;
     
-    @Resource(name = "test-dataSource-${Globals.DbType}")
+    @Resource(name = "dataSource-${Globals.DbType}")
     protected DataSource dataSource;
     
     protected IDatabaseTester databaseTester;
     
     private Class<T> voClass;
+    
+    @Configuration
+    @PropertySource({ "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
+    static class DbUnitConfig {
+        
+        @Resource(name = "dataSource-${Globals.DbType}")
+        private DataSource dataSource;
+        
+        @Value("${Globals.UserName}")
+        private String schemaName;
+        
+        @Bean
+        public DatabaseDataSourceConnectionFactoryBean dbUnitDatabaseConnection()
+        {
+            System.out.println("schemaName : " + schemaName);
+            
+            DatabaseDataSourceConnectionFactoryBean databaseDataSourceConnectionFactoryBean = 
+                    new DatabaseDataSourceConnectionFactoryBean(dataSource);
+            databaseDataSourceConnectionFactoryBean.setSchema(schemaName);
+            
+            return databaseDataSourceConnectionFactoryBean;
+        }
+    }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public DbUnitTest() {

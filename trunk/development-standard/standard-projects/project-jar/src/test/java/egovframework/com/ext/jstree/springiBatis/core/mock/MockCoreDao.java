@@ -42,6 +42,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
+@Deprecated
 public class MockCoreDao<T> implements CoreDao {
 
     private List<ComprehensiveTree> tree = new ArrayList<>();
@@ -352,5 +353,19 @@ public class MockCoreDao<T> implements CoreDao {
         }
         
         return maxPosition + 1;
+    }
+
+    @Override
+    public <T extends ComprehensiveTree> int getCountOfDescendantNodes(
+            T comprehensiveTree) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(
+            T comprehensiveTree) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
