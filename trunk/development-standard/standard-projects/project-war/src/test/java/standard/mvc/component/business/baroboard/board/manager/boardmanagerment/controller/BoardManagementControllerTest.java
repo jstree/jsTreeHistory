@@ -61,72 +61,36 @@ public class BoardManagementControllerTest {
     @Test
     public void testGetChildNode() throws Exception {
         this.mockMvc
-        .perform(
-            get("/board/manager/boardmanagement/list.do"))
+        .perform(get("/board/manager/boardmanagement/list.do"))
         .andDo(print())
         .andExpect(status().isOk());
     }
 
-    // 아래 기능의 경우 번호가 있으면 상세고 없으면 신규 등록인데
-    // c_id 가 넘어왔으나 조회 결과가 없는 경우 어떤 오류를 내보내야 할지 고민해야함
     @Test
     public void testGetNode() throws Exception {
         this.mockMvc
-        .perform(
-            post("/board/manager/boardmanagement/edit.do").param("c_id", "6"))
+        .perform(post("/board/manager/boardmanagement/edit.do").param("c_id", "6"))
         .andDo(print())
         .andExpect(status().isOk());
-    }
-
-    @Test
-    public void testAlterNodeWithNotAllowedFtpUrl() throws Exception {
+        
         this.mockMvc
-        .perform(
-                post("/core/manage/setting/ftp/save.do"))
+        .perform(post("/board/manager/boardmanagement/edit.do").param("c_id", "2"))
         .andDo(print())
-        .andExpect(status().isOk());
-    }
-
-    @Test
-    public void testAlterNodeWithNotAllowedFtpPort() throws Exception {
-        String notAllowedFtpPort = "임의ftp포트";
+        .andExpect(status().isExpectationFailed());
+        
         this.mockMvc
-        .perform(
-                post("/core/manage/setting/ftp/save.do").param("c_id", "4")
-                .param("ftpId", "user2").param("ftpPassword", "2345")
-                                .param("ftpUrl", "127.0.1.1")
-                .param("ftpPort", notAllowedFtpPort).param("passiveFl", "0")
-                .param("sftpFl", "0")).andDo(print()).andExpect(status().isOk());
+        .perform(post("/board/manager/boardmanagement/edit.do").param("c_id", "4"))
+        .andDo(print())
+        .andExpect(status().is5xxServerError());
     }
 
     @Test
-    public void testAlterNodeWithNotAllowedPassiveFl() throws Exception {
-        String notAllowedPassiveFl = "3";
+    public void testAlterNode() throws Exception {
         this.mockMvc
-        .perform(
-                post("/core/manage/setting/ftp/save.do").param("c_id", "4")
-                .param("ftpId", "user2").param("ftpPassword", "2345")
-                                .param("ftpUrl", "127.0.1.1").param("ftpPort", "21")
-                .param("passiveFl", notAllowedPassiveFl).param("sftpFl", "0"))
-                .andDo(print()).andExpect(status().isOk());
+        .perform(post("/board/manager/boardmanagement/save.do")
+        	.param("writingCntPerPage","hahaha")
+        	)
+        .andDo(print())
+        .andExpect(status().is5xxServerError());
     }
-
-    @Test
-    public void testAlterNodeWithNotAllowedSftpFl() throws Exception {
-        String notAllowedSftpFl = "3";
-        this.mockMvc
-        .perform(
-                post("/core/manage/setting/ftp/save.do").param("c_id", "4")
-                .param("ftpId", "user2").param("ftpPassword", "2345")
-                                .param("ftpUrl", "127.0.1.1").param("ftpPort", "21")
-                .param("passiveFl", "0").param("sftpFl", notAllowedSftpFl))
-                .andDo(print()).andExpect(status().isOk());
-    }
-
-    @Test
-    public void testAlterNodeWithUpdateConditionOnly() throws Exception {
-        this.mockMvc.perform(post("/core/manage/setting/ftp/save.do").param("c_id", "4"))
-        .andDo(print()).andExpect(status().isOk());
-    }
-
 }
