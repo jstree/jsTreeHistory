@@ -342,19 +342,4 @@ public class CoreDaoTest
 		assertPropertyLenientEquals("c_position", 1, comprehensiveResultTree);
 	}
 	
-	@Ignore
-	@Test
-	@DatabaseSetup("getCountOfDescendantNodes.xml")
-    public void getCountOfDescendantNodes() {
-        
-	    ComprehensiveTree comprehensiveTree = new ComprehensiveTree();
-	    comprehensiveTree.setC_level(3);
-	    
-        int countOfDescendantNodes = dao.getCountOfDescendantNodes(comprehensiveTree);
-        
-        System.out.println("countOfDescendantNodes : " + countOfDescendantNodes);
-        
-//        List<ComprehensiveTree> childNodes
-//        System.out.println(childNodes.size());
-    }
 }
