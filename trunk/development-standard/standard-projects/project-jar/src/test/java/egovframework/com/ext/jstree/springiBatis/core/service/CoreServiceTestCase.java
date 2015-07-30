@@ -175,7 +175,6 @@ public class CoreServiceTestCase
 		assertThat(l_StoredNodes.size()).isEqualTo(2);
 	}
 	
-	@Ignore // TODO
 	@Test
 	public void testSearchNode() throws Exception
 	{
