@@ -148,7 +148,6 @@ public class CoreDaoTest
 		assertThat(l_StoredNodes.size(), is(4));
 	}
 
-	@Ignore // TODO
 	@Test
 	@DatabaseSetup("initialJsTree.xml")
 	public void testSearchNodeByPosition() throws Exception
