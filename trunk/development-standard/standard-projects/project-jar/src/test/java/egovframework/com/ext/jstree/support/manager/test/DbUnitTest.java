@@ -31,7 +31,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -88,7 +90,6 @@ public abstract class DbUnitTest<T> {
     private Class<T> voClass;
     
     @Configuration
-    @PropertySource({ "classpath:/META-INF/egovframework/egovProps/test-globals.properties" })
     static class DbUnitConfig {
         
         @Resource(name = "dataSource-${Globals.DbType}")

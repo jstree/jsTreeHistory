@@ -4,9 +4,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-                http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+                http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-4.1.xsd">
 
 	<context:property-placeholder
 		location="classpath:/META-INF/egovframework/egovProps/globals.properties" />
