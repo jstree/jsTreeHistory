@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,7 @@ public class BoardManagementControllerTest {
     }
 
     @Test
+    @Ignore
     public void testGetNode() throws Exception {
         this.mockMvc
         .perform(post("/board/manager/boardmanagement/edit.do").param("c_id", "6"))
@@ -85,6 +87,7 @@ public class BoardManagementControllerTest {
     }
 
     @Test
+    @Ignore
     public void testAlterNode() throws Exception {
         this.mockMvc
         .perform(post("/board/manager/boardmanagement/save.do")

@@ -6,8 +6,8 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import standard.mvc.component.business.baroboard.core.manage.setting.sms.vo.SmsVO;
 import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
+import standard.mvc.component.business.baroboard.core.manage.setting.sms.vo.SmsVO;
 
 public class SmsLinkServiceTest extends DbUnitTest<SmsVO> {
 
