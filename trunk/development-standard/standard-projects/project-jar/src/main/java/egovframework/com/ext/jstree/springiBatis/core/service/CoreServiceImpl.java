@@ -61,7 +61,6 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  2015. 06. 03.  김형채                 calculatePostion() 세션 중복 저장 로직 삭제 및 위치 변경
  *  2015. 06. 03.  김형채                 calculatePostion() 조건절을 추출해서 상수로 변경
  *  2015. 06. 07.  김형채                 moveNode() logger.isDebugEnabled() 분기 추가
- *  2015. 06. 07.  김형채                 debugmation을 Information으로 변경
  *  
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -654,6 +653,20 @@ public class CoreServiceImpl implements CoreService
             
             coreDao.fixCopy(child);
         }
+    }
+    
+    @Override
+    public <T extends ComprehensiveTree> int getCountOfDescendantNodes(
+            T comprehensiveTree) {
+        
+        return coreDao.getCountOfDescendantNodes(comprehensiveTree);
+    }
+    
+    @Override
+    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(
+            T comprehensiveTree) {
+        
+        return coreDao.getDescendantNodesPaginated(comprehensiveTree);
     }
     
     /**

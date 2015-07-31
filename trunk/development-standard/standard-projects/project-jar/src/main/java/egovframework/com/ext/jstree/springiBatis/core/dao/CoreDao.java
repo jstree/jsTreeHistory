@@ -49,4 +49,8 @@ public interface CoreDao {
 	public <T extends ComprehensiveTree> void enterMyselfFixPosition( T comprehensiveTree ) throws Exception;
 	
 	public <T extends ComprehensiveTree> void enterMyselfFixLeftRight( T comprehensiveTree ) throws Exception;
+
+	public <T extends ComprehensiveTree> int getCountOfDescendantNodes( T comprehensiveTree );
+	
+    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree);
 }

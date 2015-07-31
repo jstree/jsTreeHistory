@@ -22,6 +22,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  수정일         수정자             수정내용
  *  -------      ------------   -----------------------
  *  2014. 7. 31.      ?        최초 생성
+ *  2015. 7. 31. 류강하               getCountOfDescendantNodes, getDescendantNodesPaginated 메서드 추가
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -96,4 +97,20 @@ public interface CoreService {
 	 */
 	public <T extends ComprehensiveTree> T moveNode( T                  comprehensiveTree
 			                                       , HttpServletRequest request ) throws Exception;
+	
+	/**
+	 * Root node를 제외한 노드들의 총 수를 조회한다.
+	 * 
+	 * @param comprehensiveTree
+	 * @return 노드 총 수
+	 */
+	public <T extends ComprehensiveTree> int getCountOfDescendantNodes( T comprehensiveTree );
+	
+	/**
+	 * Root node를 제외한 노드들 중 페이징 처리된 노드들을 조회한다.
+	 * 
+	 * @param comprehensiveTree
+	 * @return 노드 DTO
+	 */
+	public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated( T comprehensiveTree );
 }

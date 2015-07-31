@@ -683,7 +683,6 @@ BEGIN
        RAISE;
 END TRIGGER_USER_PWD_FIND_QUESTION;
 
-/* 류강하 시작 */
 /* 회원_금지단어 */
 DROP TABLE T_USER_PROH_WORD_LOG;
 
@@ -1310,9 +1309,7 @@ BEGIN
        -- Consider logging the error and then re-raise
        RAISE;
 END TRIGGER_USER_JOIN_FIELD;
-/* 류강하 끝 */
 
-/* 김대근 시작 */
 /* 회원_등급관리 */
 CREATE TABLE T_USER_GRADE_MANAGE (
 	C_ID NUMBER NOT NULL, /* 노드아이디 */
@@ -1716,4 +1713,3 @@ CREATE SEQUENCE S_USER_POINT_ASSIGN
   NOCYCLE
   CACHE 20
   NOORDER;
-/* 김대근 종료 */

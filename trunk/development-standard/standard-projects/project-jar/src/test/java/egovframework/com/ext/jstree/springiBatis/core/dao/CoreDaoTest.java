@@ -11,11 +11,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -52,10 +50,10 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * </pre>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
+@ActiveProfiles("test")
 @ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
+@WebAppConfiguration
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
-//@TestPropertySource(properties = {"Globals.UserName=DBUNIT", "Globals.Password=DBUNIT_1234"})
 public class CoreDaoTest
 {
 	@Autowired 
@@ -343,4 +341,51 @@ public class CoreDaoTest
 		assertPropertyLenientEquals("c_position", 1, comprehensiveResultTree);
 	}
 	
+	@Test
+    @DatabaseSetup("initialJsTreeForPagination.xml")
+    public void getCountOfDescendantNodes() {
+        
+        ComprehensiveTree comprehensiveTree = new ComprehensiveTree();
+        comprehensiveTree.setC_level(2);
+        
+        int countOfDescendantNodes = dao.getCountOfDescendantNodes(comprehensiveTree);
+        assertThat(countOfDescendantNodes, is(3));
+        
+        comprehensiveTree.setC_level(3);
+        
+        countOfDescendantNodes = dao.getCountOfDescendantNodes(comprehensiveTree);
+        assertThat(countOfDescendantNodes, is(7));
+        
+        comprehensiveTree.setC_level(4);
+        
+        countOfDescendantNodes = dao.getCountOfDescendantNodes(comprehensiveTree);
+        assertThat(countOfDescendantNodes, is(10));
+        
+        comprehensiveTree.setC_level(5);
+        
+        countOfDescendantNodes = dao.getCountOfDescendantNodes(comprehensiveTree);
+        assertThat(countOfDescendantNodes, is(13));
+    }
+	
+	@Test
+	@DatabaseSetup("initialJsTreeForPagination.xml")
+    public void getDescendantNodesPaginated() {
+	    
+	    ComprehensiveTree comprehensiveTree = new ComprehensiveTree();
+	    comprehensiveTree.setC_level(5);
+	    
+	    comprehensiveTree.setBeginningRowOfRange(1);
+	    comprehensiveTree.setEndRowOfRange(10);
+	    
+	    List<ComprehensiveTree> descendantNodes = dao.getDescendantNodesPaginated(comprehensiveTree);
+	    
+	    assertThat(descendantNodes.size(), is(10));
+	    
+	    comprehensiveTree.setBeginningRowOfRange(11);
+        comprehensiveTree.setEndRowOfRange(20);
+        
+        descendantNodes = dao.getDescendantNodesPaginated(comprehensiveTree);
+        
+        assertThat(descendantNodes.size(), is(3));
+	}
 }

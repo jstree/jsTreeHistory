@@ -128,7 +128,12 @@ public class ComprehensiveTree {
 	private String sqlMapSelector;
 
 	private volatile int hashCode;
-
+	
+	private int currentPage;
+	private int rowCountPerPage;
+	private int beginningRowOfRange;
+	private int endRowOfRange;
+	
 	public int getId() {
 		return id;
 	}
@@ -141,7 +146,19 @@ public class ComprehensiveTree {
 		attr = new HashMap<String, String>();
 	}
 	
-	public boolean isCopied() {
+    public ComprehensiveTree(int c_id, int c_parentid, int c_position, int c_left, int c_right, int c_level, String c_title, String c_type) {
+        this();
+        this.c_id = c_id;
+        this.c_parentid = c_parentid;
+        this.c_position = c_position;
+        this.c_left = c_left;
+        this.c_right = c_right;
+        this.c_level = c_level;
+        this.c_title = c_title;
+        this.c_type = c_type;
+    }
+    
+    public boolean isCopied() {
 		return this.getCopy() == 1;
 	}
 
@@ -456,4 +473,36 @@ public class ComprehensiveTree {
 		}
 		return result;
 	}
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getRowCountPerPage() {
+        return rowCountPerPage;
+    }
+
+    public void setRowCountPerPage(int rowCountPerPage) {
+        this.rowCountPerPage = rowCountPerPage;
+    }
+
+    public int getBeginningRowOfRange() {
+        return beginningRowOfRange;
+    }
+
+    public void setBeginningRowOfRange(int beginningRowOfRange) {
+        this.beginningRowOfRange = beginningRowOfRange;
+    }
+
+    public int getEndRowOfRange() {
+        return endRowOfRange;
+    }
+
+    public void setEndRowOfRange(int endRowOfRange) {
+        this.endRowOfRange = endRowOfRange;
+    }
 }

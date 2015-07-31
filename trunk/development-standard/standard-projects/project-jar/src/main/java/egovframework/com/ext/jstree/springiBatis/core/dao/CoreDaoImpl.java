@@ -23,6 +23,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  *  수정일         수정자             수정내용
  *  -------      ------------   -----------------------
  *  2014. 7. 31.      이동민         최초 생성
+ *  2015. 7. 31.      류강하         getCountOfDescendantNodes, getDescendantNodesPaginated 메서드 추가
  * 
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -125,4 +126,17 @@ public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 	public <T extends ComprehensiveTree> void enterMyselfFixLeftRight( T comprehensiveTree ) throws Exception {
 		update(comprehensiveTree.getSqlMapSelector() + ".enterMyselfFixLeftRight", comprehensiveTree);
 	}
+	
+    @SuppressWarnings("deprecation")
+    public <T extends ComprehensiveTree> int getCountOfDescendantNodes( T comprehensiveTree ) {
+
+        return (int) getSqlMapClientTemplate().queryForObject(
+                comprehensiveTree.getSqlMapSelector() + ".getCountOfDescendantNodes", comprehensiveTree);
+	}
+	
+    @SuppressWarnings("unchecked")
+    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
+        
+        return list(comprehensiveTree.getSqlMapSelector() + ".getDescendantNodesPaginated", comprehensiveTree);
+    }
 }
