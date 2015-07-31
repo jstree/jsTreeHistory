@@ -21,6 +21,7 @@
 			<groupId>development</groupId>
 			<artifactId>project-jar</artifactId>
 			<version>${project.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 	</dependencies>
