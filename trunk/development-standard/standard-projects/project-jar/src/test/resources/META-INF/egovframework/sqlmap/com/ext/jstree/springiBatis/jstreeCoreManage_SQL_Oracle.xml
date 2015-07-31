@@ -417,7 +417,7 @@
     <sql id="getDescendantNodes">
         <include refid="getMetaField" />
         FROM T_COMPREHENSIVETREE_SPRING A
-       WHERE C_ID != 1
+       WHERE C_ID &gt; 1
          AND C_LEVEL &lt;= #c_level#
     </sql>
     
