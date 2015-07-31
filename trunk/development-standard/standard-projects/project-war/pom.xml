@@ -21,7 +21,14 @@
 			<groupId>development</groupId>
 			<artifactId>project-jar</artifactId>
 			<version>${project.version}</version>
-			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>project-jar</artifactId>
+			<version>${project.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
