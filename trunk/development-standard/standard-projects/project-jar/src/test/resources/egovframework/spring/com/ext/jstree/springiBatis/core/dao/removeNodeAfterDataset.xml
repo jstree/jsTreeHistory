@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dataset>
-	<T_COMPREHENSIVETREE_SPRING	C_ID="1" C_PARENTID="0" C_POSITION="0" C_LEFT="1" C_RIGHT="4" C_LEVEL="0" C_TITLE="Root Node" C_TYPE="null" />
-	<T_COMPREHENSIVETREE_SPRING	C_ID="4" C_PARENTID="1" C_POSITION="0" C_LEFT="2" C_RIGHT="3" C_LEVEL="1" C_TITLE="Branch Node" C_TYPE="folder" />
-</dataset>
