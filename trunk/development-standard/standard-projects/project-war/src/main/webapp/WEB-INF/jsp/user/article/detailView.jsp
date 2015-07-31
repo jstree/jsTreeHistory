@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
 <html lang="ko" class="js">
@@ -184,7 +185,8 @@ $(document).ready(function(){
 									<span id="articleInfo">
 										<span id="firstInfoRow">
 											<span><a class="user-context">${article.regNickName}</a></span>
-											<span id="articleDt">${article.regDt}</span>
+											<fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss"/>
+											<td class="dt-center"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 										</span>
 										<span id="secondInfoRow">
 											<span>조회수: ${article.viewCnt}</span>
@@ -211,7 +213,8 @@ $(document).ready(function(){
 											<c:otherwise>
 											<div class="rdc-header">
 												<span class="rdc-reg-id">${comment.regNickName}</span>
-												<span class="rdc-reg-date">${comment.regDT}</span>
+												<fmt:parseDate value="${comment.regDT}" var="commentRegDt" pattern="yyyyMMddHHmmss"/>
+												<span class="rdc-reg-date"><fmt:formatDate value="${commentRegDt}" pattern="yyyy-MM-dd HH:mm"/></span>
 												<%-- TODO : 일반사용자만 코멘트 작성 가능 --%>
 												<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
 												<span><a onclick="deleteThisReply(this, ${comment.c_id})">삭제</a></span>

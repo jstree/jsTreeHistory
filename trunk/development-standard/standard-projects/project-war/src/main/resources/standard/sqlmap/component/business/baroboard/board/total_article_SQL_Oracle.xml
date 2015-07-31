@@ -104,7 +104,7 @@
 		, C_ARTICLE_ID = #articleID#
 		, C_REG_ID = #regID#
 		, C_IS_DELETED_FL = #isDeletedFL#
-		, C_REG_DT = #regDT#
+		, C_REG_DT = #regDt#
 		WHERE C_ID = #c_id#
 	</update>
 
@@ -123,7 +123,7 @@
 		, C_ARTICLE_ID as articleID
 		, C_REG_ID as regID
 		, C_IS_DELETED_FL as isDeletedFL
-		, C_REG_DT as regDT
+		, C_REG_DT as regDt
 		FROM T_BOARD_TOTAL_ARTICLE
 		WHERE
 		C_ID = #c_id#
@@ -399,7 +399,7 @@
 				, A.C_ARTICLE_ID as articleID
 				, A.C_REG_ID as regID 			
 				, A.C_IS_DELETED_FL as isDeletedFL 			
-				, A.C_REG_DT as regDT 			
+				, A.C_REG_DT as regDt 			
 			FROM T_BOARD_TOTAL_ARTICLE A 
 			WHERE 1=1
 				AND A.C_BOARD_ID = #boardID#
@@ -414,7 +414,7 @@
 				, A.C_ARTICLE_ID as articleID
 				, A.C_REG_ID as regID 			
 				, A.C_IS_DELETED_FL as isDeletedFL 			
-				, A.C_REG_DT as regDT 			
+				, A.C_REG_DT as regDt 			
 			/* 페이징 처리 */	
 			FROM (
 				SELECT ROWNUM AS RNUM, Z.* FROM (

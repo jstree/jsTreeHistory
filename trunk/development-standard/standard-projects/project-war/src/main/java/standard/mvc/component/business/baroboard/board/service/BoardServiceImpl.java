@@ -62,21 +62,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Article> getArticleList(Article article) throws Exception {
 		List<Article> list = boardDao.getArticleListByPage(article);
-		changeRegDTFormat(list);
 		return list;
 	}
 
 	@Override
 	public List<Article> getAnnounceList(Article article) throws Exception {
 		List<Article> list = boardDao.getAnnounceList(article);
-		changeRegDTFormat(list);
 		return list;
 	}
 	
 	@Override
 	public List<Article> searchArticleList(SearchArticle searchArticle) throws Exception {
 		List<Article> list = boardDao.searchArticle(searchArticle);
-		changeRegDTFormat(list);
 		return list;
 	}
 	
@@ -171,7 +168,6 @@ public class BoardServiceImpl implements BoardService {
 		this.countUpViewCnt(article);
 		// TODO : 권한체크
 		Article resultArticle = this.getArticleById(article);
-		this.changeRegDTFormatForReadArticle(resultArticle);
 		return resultArticle;
 	}
 
@@ -225,7 +221,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Comment> getCommentList(Comment comment) throws Exception {
 		List<Comment> commentList = boardDao.getCommentList(comment);
-		changeRegDTFormatForComment(commentList);
 		/* 글 볼수 있는 권한 체크 */
 		for(Comment c : commentList) {
 			if("1".equals(comment.getViewOnlyRegIDFL()) && comment.getRegID() == this.getLoginedUserID() )	{ // TODO : 세션 붙이면 개인인증 확인, 게시글 RegID 확인 
@@ -260,55 +255,6 @@ public class BoardServiceImpl implements BoardService {
 		coreService.removeNode(targetLike);
 		return like;
 	}
-	
-	/** DB에 저장되어있는 20150601063125 형식의 날짜형식을 2015-06-01 형식으로 바꿔줌 */
-	public void changeRegDTFormat(List<Article> list){
-		for(Article article : list) {
-			String regDate = article.getRegDt();
-			String year = regDate.substring(0, 4);
-			String month = regDate.substring(4, 6);
-			String day = regDate.substring(6, 8);
-			article.setRegDt(year + "-" + month + "-" + day);
-		}
-	}
-	
-	/** DB에 저장되어있는 20150601063125 형식의 날짜형식을 2015-06-10 06:31:25 형식으로 바꿔줌 */
-	public void changeRegDTFormatForComment(List<Comment> list){
-		for(Comment comment : list) {
-			String org = comment.getRegDT();
-			String formattedDate = 
-					org.substring(0,4)
-					+ "-"
-					+ org.substring(4, 6)
-					+ "-"
-					+ org.substring(6, 8)
-					+ " "
-					+ org.substring(8, 10)
-					+ ":"
-					+ org.substring(10, 12)
-					+ ":"
-					+ org.substring(12, 14);
-			comment.setRegDT(formattedDate);
-		}
-	}
-
-	/**  DB에 저장되어있는 20150601063125 형식의 날짜형식을 2015-06-10 06:31:25 형식으로 바꿔줌 */
-	public void changeRegDTFormatForReadArticle(Article article) {
-		String org = article.getRegDt();
-		String formattedDate = 
-				org.substring(0,4)
-				+ "-"
-				+ org.substring(4, 6)
-				+ "-"
-				+ org.substring(6, 8)
-				+ " "
-				+ org.substring(8, 10)
-				+ ":"
-				+ org.substring(10, 12)
-				+ ":"
-				+ org.substring(12, 14);
-		article.setRegDt(formattedDate);
-	}
 
 	/* escaped 된 html 을 원래 html로 변환함 */
 	public String unescapeHtml(String str) {
@@ -333,7 +279,7 @@ public class BoardServiceImpl implements BoardService {
 		totalArticle.setArticleID(article.getC_id());
 		totalArticle.setRegID(article.getRegID());
 		totalArticle.setIsDeletedFL(article.getIsDeletedFL());
-		totalArticle.setRegDT(article.getRegDt());
+		totalArticle.setRegDt(article.getRegDt());
 		
 		return totalArticle;
 	}

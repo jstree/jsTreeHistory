@@ -35,7 +35,7 @@ public class TotalArticle extends ComprehensiveTree {
 	
 	private String isDeletedFL;
 	
-	private String regDT;
+	private String regDt;
 	
 	/* Non-DB Columns */
 	
@@ -96,12 +96,12 @@ public class TotalArticle extends ComprehensiveTree {
 		this.isDeletedFL = isDeletedFL;
 	}
 
-	public String getRegDT() {
-		return regDT;
+	public String getRegDt() {
+		return regDt;
 	}
 
-	public void setRegDT(String regDT) {
-		this.regDT = regDT;
+	public void setRegDt(String regDt) {
+		this.regDt = regDt;
 	}
 	
 }

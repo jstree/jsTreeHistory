@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
 <html lang="ko" class="js">
@@ -70,11 +71,11 @@ function readArticle(boardID, articleID){
 														<td><a href="#">삭제된 게시글입니다.</a></td>
 														</c:when>
 														<c:otherwise>
-														<td><a href="#" onclick="readArticle(${article.boardID}, ${article.articleID})">${article.c_title}</a></td>	
+														<td><a href="#" onclick="readArticle('${article.boardID}', ${article.articleID})">${article.c_title}</a></td>	
 														</c:otherwise>
 													</c:choose>
-													<td class="dt-center">${article.regDT}</td>
-												</tr>
+													<fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss"/>
+													<td class="dt-center"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd"/></td>												</tr>
 											</c:forEach>
 										</tbody>
 									</table>

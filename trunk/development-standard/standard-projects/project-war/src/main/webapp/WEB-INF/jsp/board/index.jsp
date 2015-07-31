@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
 <html lang="ko" class="js">
@@ -120,7 +121,8 @@ $(document).ready(function(){
 													<td class="dt-center font-bold">공지</td>
 													<td class="font-bold"><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${announce.c_id}">${announce.c_title} &nbsp; (${announce.commentCnt})</a></td>
 													<td class="dt-center">${announce.regNickName}</td>
-													<td class="dt-center">${announce.regDt}</td>
+													<fmt:parseDate value="${announce.regDt}" var="announceDateFmt" pattern="yyyyMMddHHmmss"/>
+													<td class="dt-center"><fmt:formatDate value="${announceDateFmt}" pattern="yyyy-MM-dd"/></td>
 													<td class="dt-center">${announce.viewCnt}</td>
 													<td class="dt-center">${announce.likeCnt}</td>
 												</tr>
@@ -173,7 +175,8 @@ $(document).ready(function(){
 															</c:choose>
 														</c:otherwise>
 													</c:choose>
-													<td class="dt-center">${article.regDt}</td>
+													<fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss"/>
+													<td class="dt-center"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd"/></td>
 													<td class="dt-center">${article.viewCnt}</td>
 													<td class="dt-center">${article.likeCnt}</td>
 												</tr>

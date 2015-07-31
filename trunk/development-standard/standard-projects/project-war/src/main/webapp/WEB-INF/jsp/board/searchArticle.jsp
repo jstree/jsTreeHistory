@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
 <html lang="ko" class="js">
@@ -110,7 +111,8 @@ $(document).ready(function(){
 													<td class="dt-center">${article.c_id}</td>
 													<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
 													<td class="dt-center"><a class="user-context" data-id="${article.regID}">${article.regNickName}</a></td>
-													<td class="dt-center">${article.regDt}</td>
+													<fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss"/>
+													<td class="dt-center"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd"/></td>
 													<td class="dt-center">${article.viewCnt}</td>
 													<td class="dt-center">0</td>
 												</tr>
