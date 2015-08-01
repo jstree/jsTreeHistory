@@ -46,6 +46,14 @@ public class SearchArticle extends ComprehensiveTree {
 	 */
 	private String boardID;
 	
+	
+	/* NON DB FIELD */
+	/* 페이지 */
+	private int pageNum = 1;
+
+	/* 페이지 사이즈 */
+	private int pageSize = 10;
+	
 	@Override
 	public String getSqlMapSelector() {
 		return "board";
@@ -59,6 +67,23 @@ public class SearchArticle extends ComprehensiveTree {
 				
 	}
 	
+	
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
 	public String getSearchKeyword() {
 		return searchKeyword;
 	}

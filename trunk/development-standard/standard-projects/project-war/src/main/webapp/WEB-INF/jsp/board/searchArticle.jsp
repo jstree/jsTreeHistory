@@ -149,7 +149,6 @@ $(document).ready(function(){
 												<option value="content" <c:if test="${reqSearchArticle.type == 'content'}">selected</c:if>>내용</option>
 												<option value="title_content" <c:if test="${reqSearchArticle.type == 'title_content'}">selected</c:if>>제목+내용</option>
 												<option value="nickName" <c:if test="${reqSearchArticle.type == 'nickName'}">selected</c:if>>닉네임</option>
-												<option value="date_range" <c:if test="${reqSearchArticle.type == 'date_range'}">selected</c:if>>기간</option>
 											</select>
 											<input type="submit" value="검색"/>
 										</form>

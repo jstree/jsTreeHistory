@@ -503,16 +503,18 @@
 	
 	<select id="searchArticle" parameterClass="SearchArticle" resultClass="Article">
 		/* searchArticle */
+		SELECT Z.*
+		FROM (
 		<dynamic>
 			<include refid="getMetaField" />
-				, A.C_TITLE as c_title
+				, ROWNUM AS RNUM
 				, A.C_ROOT_ARTICLE_ID as rootArticleID
 				, A.C_REG_ID as regID 			
 				, A.C_ALLOW_COMMENT_FL as allowCommentFL	
 				, A.C_ALLOW_REPLY_FL as allowReplyFL	
 				, A.C_ALERT_RESPONSE_FL as alertResponseFL
 				, A.C_OPEN_ARTICLE_FL as openArticleFL 	
-				, A.C_ANNOUNCEMENT_FL as  	
+				, A.C_ANNOUNCEMENT_FL as announcementFL 	
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
 				, A.C_IS_GUEST_FL as isGuestFL
@@ -525,10 +527,8 @@
 				, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
 			FROM T_BOARD_TEST A LEFT OUTER JOIN T_USER_INFO B ON A.C_REG_ID = B.C_ID 
 			WHERE 1=1
-				AND A.C_LEVEL = 2
 				AND A.C_OPEN_ARTICLE_FL = '1'
-				AND A.C_ANNOUNCEMENT_FL = '0'
-				AND A.C_IS_DELETED_FL   = '0' 
+				AND ( A.C_IS_DELETED_FL IS NULL OR  A.C_IS_DELETED_FL =  '0' )
 				<isEqual property="type" compareValue="title">
 				AND A.C_TITLE LIKE '%' || #searchKeyword# || '%'
 				</isEqual>
@@ -545,8 +545,13 @@
 				<isEqual property="type" compareValue="nickName">
 				AND B.C_TITLE = #searchKeyword#
 				</isEqual>
+				/* PAGING 1 */
+				AND ROWNUM &lt;= (#pageNum# * #pageSize#)
 			ORDER BY A.C_ID DESC
 		</dynamic>
+		) Z WHERE 1=1
+			/* PAGING 2 */
+			AND Z.RNUM &gt;= (1 + ((#pageNum# - 1) * #pageSize#))
 	</select>
 	
 	<update id="countUpViewCnt" parameterClass="Article">

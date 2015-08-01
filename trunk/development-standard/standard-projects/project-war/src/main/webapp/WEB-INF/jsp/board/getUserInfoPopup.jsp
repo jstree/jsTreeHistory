@@ -18,13 +18,12 @@
 				<h2>회원 정보</h2>
 			</header>
 			<section class="">
-			<c:choose>
-				<c:when test="${user.indiInfoOpenFl == '0'}">
 				<div>
 					<div class="item-name">닉네임</div>
 					<div class="item-value">${user.c_title}</div>
 				</div>
-				
+			<c:choose>
+				<c:when test="${user.indiInfoOpenFl == '1'}">
 				<div>
 					<div class="item-name">이메일</div>
 					<div class="item-value"><a href="mailto:${user.email}">${user.email}</a></div>

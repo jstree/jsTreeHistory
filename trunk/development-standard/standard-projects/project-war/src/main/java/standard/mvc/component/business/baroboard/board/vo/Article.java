@@ -57,7 +57,7 @@ public class Article extends ComprehensiveTree {
 	private int viewCnt;
 
 	/* 삭제여부 */
-	private String isDeletedFL;
+	private String isDeletedFL = "0";
 
 	/* 게스트글 여부 */
 	private String isGuestFL;
