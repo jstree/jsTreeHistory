@@ -120,7 +120,7 @@ public class UserArticleController extends GenericAbstractController {
 		modelMap.addAttribute("loginedUserID", userID );
 		modelMap.addAttribute("article", targetArticle);
 		modelMap.addAttribute("commentList", commentList);
-		return "/jsp/user/article/detailView";
+		return "/jsp/user/article/articlePopup";
 	}
 }
 
