@@ -9,6 +9,6 @@ import standard.mvc.component.business.baroboard.board.vo.Article;
 public interface PostsManageDao {
 
 	List<PostsManageVO> getPosts(PostsManageVO postsManageVo) throws Exception;
-	int getPostsRightPage(PostsManageVO postsManageVo) throws Exception;
+	int getPostsTotalCnt(PostsManageVO postsManageVo) throws Exception;
 	int postsDelete(PostsManageVO postsManageVo) throws Exception;
 }

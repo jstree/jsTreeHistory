@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import standard.mvc.component.business.baroboard.board.manager.defaultsetting.vo.DefaultSettingVO;
 import standard.mvc.component.business.baroboard.board.manager.posts.service.PostsManageService;
 import standard.mvc.component.business.baroboard.board.manager.posts.vo.PostsManageVO;
@@ -50,17 +51,16 @@ public class PostsManageController {
 	@RequestMapping(value = "/index.do", method=RequestMethod.GET)
 	public String getPosts(ModelMap map, PostsManageVO postsManageVo) throws Exception{
 		DefaultSettingVO defaultSettingVo = new DefaultSettingVO();
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setCurrentPageNo(Integer.parseInt(postsManageVo.getPageNo()));
+		pagingInfo.setPageSize(postsManageVo.getPageSize());
+		pagingInfo.setRecordCountPerPage(postsManageVo.getRecordsPerPage());
+		pagingInfo.setTotalRecordCount(postsManageService.getPostsTotalCnt(postsManageVo));
 		defaultSettingVo.setC_id(2);
 		List<DefaultSettingVO> list = defaultSettingService.getChildNode(defaultSettingVo);
 		map.put("boardInfo", list);
-		//paging처리
-		System.out.println(postsManageVo);
-//		map.put("leftPage", null);
-//		map.put("RightPage", postsManageService.getPostsRightPage(postsManageVo));
-//		map.put("startNum", null);
-//		map.put("rightNum", null);
-//		map.put("curruntNum", null);
 		map.put("list", postsManageService.getPosts(postsManageVo));
+		map.put("paginationInfo", pagingInfo);
 		return "/jsp/baroboard/board/manager/posts/index";
 	}
 	

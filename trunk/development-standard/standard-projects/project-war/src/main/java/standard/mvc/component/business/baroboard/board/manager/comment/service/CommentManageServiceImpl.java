@@ -72,6 +72,23 @@ public class CommentManageServiceImpl implements CommentManageService, CoreServi
 		return commentManageDao.getComment(commentManageVo);
 	}
 	
+	public int getCommentTotalCnt(CommentManageVO commentManageVo) throws Exception {
+		DefaultSettingVO defaultSettingVo = new DefaultSettingVO();
+		defaultSettingVo.setC_id(2);
+		List<DefaultSettingVO> boardSettingList = defaultSettingService.getChildNode(defaultSettingVo);
+		if(StringUtils.isNotEmpty(commentManageVo.getBoardId())){
+			for(DefaultSettingVO defaultSetting : boardSettingList){
+				if(commentManageVo.getBoardId().equals(Integer.toString(defaultSetting.getC_id()))){
+					boardSettingList.clear();
+					boardSettingList.add(defaultSetting);
+					break;
+				}
+			}
+		}
+		commentManageVo.setTableInfo(boardSettingList);
+		return commentManageDao.getCommentTotalCnt(commentManageVo);
+	}
+	
 	public CommentManageVO commentDelete(CommentManageVO commentManageVo) throws Exception {
 		for(String chk : commentManageVo.getChk()){
 			String[] postsInfo = chk.split("@");
@@ -137,5 +154,4 @@ public class CommentManageServiceImpl implements CommentManageService, CoreServi
 			HttpServletRequest request) throws Exception {
 		throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
 	}
-
 }

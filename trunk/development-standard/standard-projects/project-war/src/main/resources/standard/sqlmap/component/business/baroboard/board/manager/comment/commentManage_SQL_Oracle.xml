@@ -405,7 +405,35 @@
 			) A
 			)
 			WHERE 1 = 1
-		      AND RNUM &gt;= (1 + ((#pageNum# - 1) * #pageSize#))
-		      AND RNUM &lt;= (#pageNum# * #pageSize#)
+		      AND RNUM &gt;= (1 + ((#pageNo# - 1) * #pageSize#))
+		      AND RNUM &lt;= (#pageNo# * #pageSize#)
+	</select>
+	
+	<select id="getCommentTotalCnt" parameterClass="CommentManageVO" resultClass="java.lang.Integer">
+		SELECT COUNT(1)
+			FROM (
+			<iterate property="tableInfo" conjunction="UNION ALL">
+				SELECT * FROM (
+					SELECT Y.*
+					, #tableInfo[].c_id# as boardId
+					, #tableInfo[].c_title# as boardName
+					FROM T_BOARD_$tableInfo[].c_id$_COMMENT Y
+					WHERE 1=1
+						AND Y.C_LEVEL > 1
+						AND Y.C_IS_DELETED_FL = '0'
+				)
+			</iterate>
+			) A, T_USER_INFO B
+			WHERE 1=1 
+		      AND A.C_REG_ID = B.C_ID
+		      <isNotEmpty property="regNickName">
+		      AND B.C_TITLE LIKE '%'||#regNickName#||'%'
+		      </isNotEmpty>
+		      <isNotEmpty property="c_title">
+		      AND A.C_TITLE LIKE '%'||#c_title#||'%'
+		      </isNotEmpty>
+		      <isNotEmpty property="fromDt">
+		      AND A.C_REG_DT BETWEEN #fromDt# AND #toDt#
+		      </isNotEmpty>
 	</select>
 </sqlMap>

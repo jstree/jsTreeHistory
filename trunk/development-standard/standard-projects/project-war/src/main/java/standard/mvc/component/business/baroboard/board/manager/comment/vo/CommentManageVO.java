@@ -3,6 +3,7 @@ package standard.mvc.component.business.baroboard.board.manager.comment.vo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -39,7 +40,9 @@ public class CommentManageVO extends ComprehensiveTree{
 	
 	private int pageSize = 10;
 	
-	private int pageNum = 1;
+	private String pageNo = "1";
+	
+	private int recordsPerPage = 10;
 	
 	private List<String> chk = new ArrayList<String>();
 	
@@ -155,12 +158,22 @@ public class CommentManageVO extends ComprehensiveTree{
 		this.pageSize = pageSize;
 	}
 
-	public int getPageNum() {
-		return pageNum;
+	public String getPageNo() {
+		return pageNo;
 	}
 
-	public void setPageNum(int pageNum) {
-		this.pageNum = pageNum;
+	public void setPageNo(String pageNo) {
+		if(StringUtils.isNotEmpty(pageNo)){
+			this.pageNo = pageNo;			
+		}
+	}
+
+	public int getRecordsPerPage() {
+		return recordsPerPage;
+	}
+
+	public void setRecordsPerPage(int recordsPerPage) {
+		this.recordsPerPage = recordsPerPage;
 	}
 
 	public List<String> getChk() {

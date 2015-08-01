@@ -18,8 +18,8 @@ public class PostsManageDaoImpl extends EgovAbstractDAO implements PostsManageDa
 	}
 
 	@Override
-	public int getPostsRightPage(PostsManageVO postsManageVo) throws Exception {
-		return (int) selectByPk(postsManageVo.getSqlMapSelector() + "." + "getPostsRightPage", postsManageVo);
+	public int getPostsTotalCnt(PostsManageVO postsManageVo) throws Exception {
+		return (int) selectByPk(postsManageVo.getSqlMapSelector() + "." + "getPostsTotalCnt", postsManageVo);
 	}
 
 	@Override

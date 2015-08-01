@@ -9,4 +9,5 @@ public interface CommentManageService {
 
 	List<CommentManageVO> getComment(CommentManageVO commentManageVo) throws Exception;
 	CommentManageVO commentDelete(CommentManageVO commentManageVo) throws Exception;
+	int getCommentTotalCnt(CommentManageVO commentManageVo) throws Exception;
 }

@@ -78,6 +78,25 @@ public class PostsManageServiceImpl implements PostsManageService, CoreService, 
 		return postsManageDao.getPosts(postsManageVo);
 	}
 	
+	@Override
+	public int getPostsTotalCnt(PostsManageVO postsManageVo) throws Exception {
+		
+		DefaultSettingVO defaultSettingVo = new DefaultSettingVO();
+		defaultSettingVo.setC_id(2);
+		List<DefaultSettingVO> boardSettingList = defaultSettingService.getChildNode(defaultSettingVo);
+		if(StringUtils.isNotEmpty(postsManageVo.getBoardId())){
+			for(DefaultSettingVO defaultSetting : boardSettingList){
+				if(postsManageVo.getBoardId().equals(Integer.toString(defaultSetting.getC_id()))){
+					boardSettingList.clear();
+					boardSettingList.add(defaultSetting);
+					break;
+				}
+			}
+		}
+		postsManageVo.setTableInfo(boardSettingList);
+		return postsManageDao.getPostsTotalCnt(postsManageVo);
+	}
+	
 	@Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public PostsManageVO postsDelete(PostsManageVO postsManageVo) throws Exception {
 		for(String chk : postsManageVo.getChk()){
@@ -218,11 +237,6 @@ public class PostsManageServiceImpl implements PostsManageService, CoreService, 
 	public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree,
 			HttpServletRequest request) throws Exception {
 		throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
-	}
-
-	@Override
-	public int getPostsRightPage(PostsManageVO postsManageVo) throws Exception {
-		return postsManageDao.getPostsRightPage(postsManageVo);
 	}
 	
 	private <T extends ComprehensiveTree> void stretchLeftRightForMyselfFromJstree(int spaceOfTargetNode,

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import standard.mvc.component.business.baroboard.board.manager.comment.service.CommentManageService;
 import standard.mvc.component.business.baroboard.board.manager.comment.vo.CommentManageVO;
 import standard.mvc.component.business.baroboard.board.manager.defaultsetting.vo.DefaultSettingVO;
@@ -52,11 +53,17 @@ public class CommentManageController {
 	@RequestMapping(value = "/index.do", method=RequestMethod.GET)
 	public String getComments(ModelMap modelMap, CommentManageVO commentManageVo) throws Exception{
 		DefaultSettingVO defaultSettingVo = new DefaultSettingVO();
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setCurrentPageNo(Integer.parseInt(commentManageVo.getPageNo()));
+		pagingInfo.setPageSize(commentManageVo.getPageSize());
+		pagingInfo.setRecordCountPerPage(commentManageVo.getRecordsPerPage());
+		pagingInfo.setTotalRecordCount(commentManageService.getCommentTotalCnt(commentManageVo));
 		defaultSettingVo.setC_id(1);
 		List<DefaultSettingVO> list = defaultSettingService.getChildNode(defaultSettingVo);
 		System.out.println(list.size());
 		modelMap.put("boardInfo", list);
 		modelMap.put("list", commentManageService.getComment(commentManageVo));
+		modelMap.put("paginationInfo", pagingInfo);
 		return "/jsp/baroboard/board/manager/comment/index";
 	}
 

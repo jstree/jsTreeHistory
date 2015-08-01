@@ -10,5 +10,5 @@ public interface PostsManageService {
 	List<PostsManageVO> getPosts(PostsManageVO postsManageVo) throws Exception;
 	PostsManageVO postsDelete(PostsManageVO postsManageVo) throws Exception;
 	PostsManageVO postsBoardMove(PostsManageVO postsManageVo) throws Exception;
-	int getPostsRightPage(PostsManageVO postsManageVo) throws Exception;
+	int getPostsTotalCnt(PostsManageVO postsManageVo) throws Exception;
 }

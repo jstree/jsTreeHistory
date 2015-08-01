@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
 <html lang="ko" class="js">
@@ -51,9 +52,8 @@ $(document).ready(function(){
                 , params
                 , 'application/json'
                 , deleteCallback);
-	}).on("click", "#searching", function(){
-		var queryStr = $("#searchForm").serialize();
-		window.location.href = '${pageContext.request.contextPath}/board/manager/posts/index.do?'+queryStr;
+	}).on("click", "#searchBtn", function(){
+		linkPage();
 	});
 });
 
@@ -77,7 +77,7 @@ function deleteCallback(r){
 	}else{
 		alert("오류입니다.");
 	}
-	window.location.href = '${pageContext.request.contextPath}/board/manager/posts/index.do';
+	linkPage();
 }
 
 function moveCallback(r){
@@ -86,9 +86,16 @@ function moveCallback(r){
 	}else{
 		alert("오류입니다.");
 	}
-	window.location.href = '${pageContext.request.contextPath}/board/manager/posts/index.do';
+	linkPage();
 }
 
+function linkPage(pageNo){
+	if(typeof(pageNo) == "number"){
+		$("#pageNo").val(pageNo);
+	}
+	var queryStr = $("#searchForm").serialize();
+	window.location.href = '${pageContext.request.contextPath}/board/manager/posts/index.do?'+queryStr;
+}
 </script>
 </head>
 <body>
@@ -148,8 +155,9 @@ function moveCallback(r){
 					</div>
 				</div>
 				<div class="responsive-row">
-						<input type="button" name="searching" id = "searching" value="검색"/>
+						<input type="button" name="searchBtn" id = "searchBtn" value="검색"/>
 				</div>
+				<input type = "hidden" name = "pageNo" id = "pageNo" />
 			</form>
 		<article>
 			<div class="clearfix">
@@ -202,23 +210,7 @@ function moveCallback(r){
 								</div>
 								<div>
 									<div id="pagingDiv">
-										<c:if test="${leftPage != null}">
-											<span><a href="#" onclick = getPage('${leftPage }');>◀</a></span>
-										</c:if>
-										<span> <c:forEach var="i" begin="${startPageNum}" end="${endPageNum}" step="1">
-												<c:choose>
-													<c:when test="${i eq currentPageNum}">
-														<a href="#" class="underline" onclick = getPage('${i }')>${i}</a>
-													</c:when>
-													<c:otherwise>
-														<a href="#" onclick = getPage('${i }')>${i}</a>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-										</span>
-										<c:if test="${rightPage != null}">
-											<span><a href="#" onclick = getPage('${rightPage }')>▶</a></span>
-										</c:if>
+										<ui:pagination paginationInfo = "${paginationInfo}" type="asyncText" jsFunction="linkPage"/>
 									</div>
 								</div>
 							</div>

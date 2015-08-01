@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
 <html lang="ko" class="js">
@@ -30,9 +31,8 @@ $(document).ready(function(){
                 , params
                 , 'application/json'
                 , callback);
-	}).on("click", "#aa", function(){
-		var queryStr = $("#searchForm").serialize();
-		window.location.href = '${pageContext.request.contextPath}/board/manager/comment/index.do?'+queryStr;
+	}).on("click", "#searchBtn", function(){
+		linkPage();
 	});
 });
 
@@ -56,9 +56,16 @@ function callback(r){
 	}else{
 		alert("오류입니다.");
 	}
-	window.location.href = '${pageContext.request.contextPath}/board/manager/comment/index.do';
+	linkPage();
 }
 
+function linkPage(pageNo){
+	if(typeof(pageNo) == "number"){
+		$("#pageNo").val(pageNo);
+	}
+	var queryStr = $("#searchForm").serialize();
+	window.location.href = '${pageContext.request.contextPath}/board/manager/comment/index.do?'+queryStr;
+}
 </script>
 </head>
 <body>
@@ -112,8 +119,9 @@ function callback(r){
 					</div>
 				</div>
 				<div class="responsive-row">
-						<input type="button" name="aa" id = "aa" value="검색"/>
+						<input type="button" name="searchBtn" id = "searchBtn" value="검색"/>
 				</div>
+				<input type = "hidden" name = "pageNo" id = "pageNo" />
 			</form>
 		<article>
 			<div class="clearfix">
@@ -154,23 +162,7 @@ function callback(r){
 								</div>
 								<div>
 									<div id="pagingDiv">
-										<c:if test="${leftPage != null}">
-											<span><a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${leftPage}">◀</a></span>
-										</c:if>
-										<span> <c:forEach var="i" begin="${startPageNum}" end="${endPageNum}" step="1">
-												<c:choose>
-													<c:when test="${i eq currentPageNum}">
-														<a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${i}" class="underline">${i}</a>
-													</c:when>
-													<c:otherwise>
-														<a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${i}">${i}</a>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-										</span>
-										<c:if test="${rightPage != null}">
-											<span><a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${rightPage}">▶</a></span>
-										</c:if>
+										<ui:pagination paginationInfo = "${paginationInfo}" type="asyncText" jsFunction="linkPage"/>
 									</div>
 								</div>
 							</div>
