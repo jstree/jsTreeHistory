@@ -11,100 +11,13 @@
 <script>
 </script>
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css" media="all" />
-<style>
-/* Article Header */
-div#articleHeader {
-	overflow: hidden;
-}
+<link href="${pageContext.request.contextPath}/assets/css/article.css" rel="stylesheet" type="text/css" media="all" />
 
-div#articleHeader h3 {
-	display: inline !important;
-}
-
-span#articleInfo {
-	float: right;
-}
-
-span#articleInfo > span {
-	display:block;
-}
-
-span#articleInfo > span > span {
-	margin: 0 5px;
-}
-
-span#articleAttachment {
-	text-align: right;
-}
-
-
-
-/* Article Content */
-div#articleContent {
-	margin: 40px 0;
-}
-
-/* Comment */
-div.rdc-detail {
-	margin-bottom: 10px;
-}
-div.rdc-header > span {
-	padding-right : 10px;
-}
-
-span.rdc-reg-id {
-	 font-weight: bold;
-}
-span.rdc-reg-date {
-}
-
-
-/* Comment Write */
-div.write-comment {
-	overflow: hidden;
-}
-
-div.write-comment > div {
-	
-	float: left;
-}
-
-div.write-comment-header {
-	width: 20%;
-	text-align: center;
-}
-
-div.write-comment-body {
-	width: 50%;
-}
-
-textarea.write-comment-input {
-	
-	display: inline;
-	width: 300px !important;
-	height: 70px !important;
-}
-div.write-comment-btn {
-	width: 20%;
-}
-
-/* Article Action */
-div#articleAction {
-	text-align: right;
-}
-
-div#articleAction span {
-}
-
-div#articleAction span a {
-	margin: 0 10px;
-}
-</style>
-
-<!-- Jquery Context Menu -->
 <link href="${pageContext.request.contextPath}/assets/css/backbone.scss.css?20" rel="stylesheet" type="text/css" media="all" />
 <script src="${pageContext.request.contextPath}/assets/js/jquery-1.11.2.min.js"></script>
-<!--  <link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />-->
+
+<!-- Jquery Context Menu -->
+<link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />
 <script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.ui.position.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.js" type="text/javascript"></script>
 
@@ -186,7 +99,7 @@ $(document).ready(function(){
 										<span id="firstInfoRow">
 											<span><a class="user-context">${article.regNickName}</a></span>
 											<fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss"/>
-											<td class="dt-center"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+											<span id="articleDt"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 										</span>
 										<span id="secondInfoRow">
 											<span>조회수: ${article.viewCnt}</span>
@@ -430,7 +343,5 @@ $(document).ready(function(){
 	}
 	
 	</script>
-
-</script>
 </body>
 </html>

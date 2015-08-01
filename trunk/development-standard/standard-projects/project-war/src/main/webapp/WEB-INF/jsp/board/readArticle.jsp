@@ -11,118 +11,7 @@
 <script>
 </script>
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css" media="all" />
-<style>
-/* Common */
-a {
-	color: #f45b4f;
-}
-.bold {
-	font-weight: bold;
-}
-
-
-/* Article Header */
-div#articleHeader {
-	overflow: hidden;
-}
-
-div#articleHeader h3 {
-	display: inline !important;
-}
-
-span#articleInfo {
-	float: right;
-}
-
-span#articleInfo > span {
-	display:block;
-}
-
-span#articleInfo > span > span {
-	margin: 0 5px;
-}
-
-span#articleAttachment {
-	text-align: right;
-}
-
-
-
-/* Article Content */
-div#articleContent {
-	margin: 40px 0;
-}
-
-/* Comment */
-div.rdc-detail {
-	margin-bottom: 10px;
-}
-div.rdc-header > span {
-	padding-right : 10px;
-}
-
-span.rdc-reg-id {
-	 font-weight: bold;
-}
-span.rdc-reg-date {
-}
-
-#guestPassword {
-	display: inline;
-	width : 150px;
-}
-
-
-/* Comment Write */
-div.write-comment {
-	overflow: hidden;
-}
-
-div.write-comment > div {
-	
-	float: left;
-}
-
-div.write-comment-header {
-	width: 20%;
-	text-align: center;
-}
-
-div.write-comment-body {
-	width: 50%;
-}
-
-textarea.write-comment-input {
-	
-	display: inline;
-	width: 300px !important;
-	height: 70px !important;
-}
-div.write-comment-btn {
-	width: 20%;
-}
-
-/* Comment Reply */
-div.write-comment.for-copy {
-	visibility: collapse;
-}
-
-/* Article Action */
-div#articleAction {
-	text-align: right;
-}
-
-div#articleAction span {
-}
-
-div#articleAction span a {
-	margin: 0 10px;
-}
-
-i.fa {
-	padding-right: 5px;	
-}
-</style>
+<link href="${pageContext.request.contextPath}/assets/css/article.css" rel="stylesheet" type="text/css" media="all" />
 
 <!-- Jquery Context Menu -->
 <link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />
@@ -130,6 +19,7 @@ i.fa {
 <script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.js" type="text/javascript"></script>
 <script>
 $(document).ready(function(){
+	/* Jquery ContextMenu */
 	$.contextMenu({
 		selector: '#attachmentFile',
 		trigger: 'left',
@@ -188,6 +78,188 @@ $(document).ready(function(){
 		}
 	});
 })
+
+/* 글 제어 JS */
+function modifyThisArticle(c_id, isGuestUser) {
+
+	 var form = document.createElement('form');
+	 form.setAttribute('method', 'post');
+	 form.setAttribute('action', '${pageContext.request.contextPath}/board/modifyArticle.do');
+	 
+	 var idInput = document.createElement('input');
+	 idInput.setAttribute('type', 'hidden');
+	 idInput.setAttribute('name', 'c_id');
+	 idInput.setAttribute('value', c_id);
+	 form.appendChild(idInput);
+	 
+	 if($('#isGuestFL').val() == '1') { // 게스트사용자
+		 var guestPassword = $('#guestPassword').val();
+		 if(guestPassword == '') {
+			 alert('글 비밀번호를 입력해주세요.');
+			 return;
+		 }
+		 var encryptedPW = Sha256.hash(guestPassword);
+		 
+		 var pwInput = document.createElement('input');
+		 pwInput.setAttribute('type', 'hidden');
+		 pwInput.setAttribute('name', 'guestPW');
+		 pwInput.setAttribute('value', encryptedPW);
+		 form.appendChild(pwInput);
+	 }
+	 
+	form.submit();		 
+ }
+
+function deleteThisArticle(c_id, isGuestUser) {
+	var obj = {};
+	obj.c_id = c_id;
+	
+	 if($('#isGuestFL').val() == '1') { // 게스트사용자
+		 var guestPassword = $('#guestPassword').val();
+		 if(guestPassword == '') {
+			 alert('글 비밀번호를 입력해주세요.');
+			 return;
+		 }
+		 obj.guestPW = Sha256.hash(guestPassword);
+	 }
+	 
+	if(confirm('게시물을 지우시겠습니까?') == true) {
+		$.ajax({
+			 method: 'post'
+			,url: '${pageContext.request.contextPath}/board/deleteArticle.do'
+			,data: obj
+			,success: function(data){
+				if(data.id == '-1') {
+					alert('글 비밀번호가 맞지 않습니다.');
+				} else {
+					alert('삭제하였습니다.');
+					location.href = '${pageContext.request.contextPath}/board/index.do';	
+				}
+				
+			}
+			,fail: function(data) {
+				alert('글 삭제에 실패하였습니다.');
+			}
+		});
+	}	
+};
+
+function likeArticle(articleID) {
+	var obj = {};
+	obj.articleID = articleID;
+	$.ajax({
+   		  url: '${pageContext.request.contextPath}/board/likeArticle.do',
+   		  method: 'POST',
+   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+   		  data: obj
+   		}).done(function(data){
+			$('#likeAnchor').text('좋아요 취소');
+			$('#likeAnchor').attr('onclick','cancelLikeArticle(${article.c_id})');
+   		}).fail(function(data){
+   			alert('좋아요 작업에 실패하였습니다.');
+   			console.log(data); 
+   		})
+}
+
+function cancelLikeArticle(articleID) {
+	var obj = {};
+	obj.articleID = articleID;
+	$.ajax({
+   		  url: '${pageContext.request.contextPath}/board/cancelLikeArticle.do',
+   		  method: 'POST',
+   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+   		  data: obj
+   		}).done(function(data){
+			$('#likeAnchor').text('좋아요');
+			$('#likeAnchor').attr('onclick','likeArticle(${article.c_id})');
+   		}).fail(function(data){
+   			alert('좋아요 취소 작업에 실패하였습니다.');
+   			console.log(data); 
+   		})
+}
+
+function deleteThisReply(btn, c_id){
+	if(confirm("코멘트를 삭제하시겠습니까?") == true){
+		var obj = {};
+		obj.c_id = $(btn).parent('div').closest('.write-comment').attr('data-id');
+
+		$.ajax({
+   		  url: '${pageContext.request.contextPath}/board/deleteComment.do',
+   		  method: 'POST',
+   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+   		  data: obj
+   		}).done(function(data){
+   			alert('삭제되었습니다.');
+			window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+ articleID;
+   		}).fail(function(data){
+   			alert('삭제에 실패하였습니다.');
+   			console.log(data); 
+   		})
+	}
+}
+
+
+function addCommentReply(btn, ref) {
+	var copiedCommentDivCheck = $('div.for-reply.copied');
+	if($(copiedCommentDivCheck).length != 0) {
+		$(copiedCommentDivCheck).remove();
+	}
+
+	var parentComment = $(btn).closest('.rdc-detail');
+	var parentID = $(parentComment).attr('data-id');
+	var rootID = $(parentComment).attr('root-id');
+	
+	var copiedCommentDiv = $('div.for-reply.for-copy').clone().removeClass('for-copy').addClass('copied');
+	$(copiedCommentDiv).find('.write-comment-btn').children('button').attr('onclick', 'addComment(this, '+ parentID +')')
+	$(copiedCommentDiv).attr('root-id', rootID);
+	$(parentComment).append(copiedCommentDiv);
+}
+
+function addComment(btn, ref) {
+	
+	var commentDiv = $(btn).parent('div').closest('.write-comment');
+	var viewOnlyRegIDFL = $(commentDiv).find('.author-only').is(":checked") ? '1' : '0';
+	var c_title = $(commentDiv).find('.write-comment-input').val();
+	var articleID = $('#articleID').val();
+	var obj = {
+			articleID: articleID,
+			viewOnlyRegIDFL: viewOnlyRegIDFL,
+			c_title: c_title
+	};
+	
+	if(c_title == '') {
+		alert('코멘트 내용을 입력해주세요.');
+		return;
+	}
+	
+	if(ref == 'root') {
+		obj.isRoot = '1';
+		
+		
+		console.log(obj);
+		
+	} else {
+		obj.isRoot = '0';
+		obj.ref = ref;
+		var rootID = $(commentDiv).attr('root-id');
+		obj.rootCommentID = rootID;
+		
+		console.log(obj);
+	}	
+	
+	$.ajax({
+   		  url: '${pageContext.request.contextPath}/board/addComment.do',
+   		  method: 'POST',
+   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+   		  data: obj,
+   		}).done(function(data){
+   			alert('저장되었습니다.');
+			window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+ articleID;
+   		}).fail(function(data){
+   			alert('저장에 실패하였습니다.');
+   			console.log(data); 
+   		})
+}
 </script>
 </head>
 <body>
@@ -345,189 +417,5 @@ $(document).ready(function(){
 			</div>
 		</article>
 	</section>
-	<script>
-	
-	function modifyThisArticle(c_id, isGuestUser) {
-
-		 var form = document.createElement('form');
-		 form.setAttribute('method', 'post');
-		 form.setAttribute('action', '${pageContext.request.contextPath}/board/modifyArticle.do');
-		 
-		 var idInput = document.createElement('input');
-		 idInput.setAttribute('type', 'hidden');
-		 idInput.setAttribute('name', 'c_id');
-		 idInput.setAttribute('value', c_id);
-		 form.appendChild(idInput);
-		 
-		 if($('#isGuestFL').val() == '1') { // 게스트사용자
-			 var guestPassword = $('#guestPassword').val();
-			 if(guestPassword == '') {
-				 alert('글 비밀번호를 입력해주세요.');
-				 return;
-			 }
-			 var encryptedPW = Sha256.hash(guestPassword);
-			 
-			 var pwInput = document.createElement('input');
-			 pwInput.setAttribute('type', 'hidden');
-			 pwInput.setAttribute('name', 'guestPW');
-			 pwInput.setAttribute('value', encryptedPW);
-			 form.appendChild(pwInput);
-		 }
-		 
-		form.submit();		 
-	 }
-
-	function deleteThisArticle(c_id, isGuestUser) {
-		var obj = {};
-		obj.c_id = c_id;
-		
-		 if($('#isGuestFL').val() == '1') { // 게스트사용자
-			 var guestPassword = $('#guestPassword').val();
-			 if(guestPassword == '') {
-				 alert('글 비밀번호를 입력해주세요.');
-				 return;
-			 }
-			 obj.guestPW = Sha256.hash(guestPassword);
-		 }
-		 
-		if(confirm('게시물을 지우시겠습니까?') == true) {
-			$.ajax({
-				 method: 'post'
-				,url: '${pageContext.request.contextPath}/board/deleteArticle.do'
-				,data: obj
-				,success: function(data){
-					if(data.id == '-1') {
-						alert('글 비밀번호가 맞지 않습니다.');
-					} else {
-						alert('삭제하였습니다.');
-						location.href = '${pageContext.request.contextPath}/board/index.do';	
-					}
-					
-				}
-				,fail: function(data) {
-					alert('글 삭제에 실패하였습니다.');
-				}
-			});
-		}	
-	};
-	
-	function likeArticle(articleID) {
-		var obj = {};
-		obj.articleID = articleID;
-		$.ajax({
-	   		  url: '${pageContext.request.contextPath}/board/likeArticle.do',
-	   		  method: 'POST',
-	   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-	   		  data: obj
-	   		}).done(function(data){
-				$('#likeAnchor').text('좋아요 취소');
-				$('#likeAnchor').attr('onclick','cancelLikeArticle(${article.c_id})');
-	   		}).fail(function(data){
-	   			alert('좋아요 작업에 실패하였습니다.');
-	   			console.log(data); 
-	   		})
-	}
-	
-	function cancelLikeArticle(articleID) {
-		var obj = {};
-		obj.articleID = articleID;
-		$.ajax({
-	   		  url: '${pageContext.request.contextPath}/board/cancelLikeArticle.do',
-	   		  method: 'POST',
-	   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-	   		  data: obj
-	   		}).done(function(data){
-				$('#likeAnchor').text('좋아요');
-				$('#likeAnchor').attr('onclick','likeArticle(${article.c_id})');
-	   		}).fail(function(data){
-	   			alert('좋아요 취소 작업에 실패하였습니다.');
-	   			console.log(data); 
-	   		})
-	}
-	
-	function deleteThisReply(btn, c_id){
-		if(confirm("코멘트를 삭제하시겠습니까?") == true){
-			var obj = {};
-			obj.c_id = $(btn).parent('div').closest('.write-comment').attr('data-id');
-
-			$.ajax({
-	   		  url: '${pageContext.request.contextPath}/board/deleteComment.do',
-	   		  method: 'POST',
-	   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-	   		  data: obj
-	   		}).done(function(data){
-	   			alert('삭제되었습니다.');
-				window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+ articleID;
-	   		}).fail(function(data){
-	   			alert('삭제에 실패하였습니다.');
-	   			console.log(data); 
-	   		})
-		}
-	}
-	
-	
-	function addCommentReply(btn, ref) {
-		var copiedCommentDivCheck = $('div.for-reply.copied');
-		if($(copiedCommentDivCheck).length != 0) {
-			$(copiedCommentDivCheck).remove();
-		}
-
-		var parentComment = $(btn).closest('.rdc-detail');
-		var parentID = $(parentComment).attr('data-id');
-		var rootID = $(parentComment).attr('root-id');
-		
-		var copiedCommentDiv = $('div.for-reply.for-copy').clone().removeClass('for-copy').addClass('copied');
-		$(copiedCommentDiv).find('.write-comment-btn').children('button').attr('onclick', 'addComment(this, '+ parentID +')')
-		$(copiedCommentDiv).attr('root-id', rootID);
-		$(parentComment).append(copiedCommentDiv);
-	}
-	
-	function addComment(btn, ref) {
-		
-		var commentDiv = $(btn).parent('div').closest('.write-comment');
-		var viewOnlyRegIDFL = $(commentDiv).find('.author-only').is(":checked") ? '1' : '0';
-		var c_title = $(commentDiv).find('.write-comment-input').val();
-		var articleID = $('#articleID').val();
-		var obj = {
-				articleID: articleID,
-				viewOnlyRegIDFL: viewOnlyRegIDFL,
-				c_title: c_title
-		};
-		
-		if(c_title == '') {
-			alert('코멘트 내용을 입력해주세요.');
-			return;
-		}
-		
-		if(ref == 'root') {
-			obj.isRoot = '1';
-			
-			
-			console.log(obj);
-			
-		} else {
-			obj.isRoot = '0';
-			obj.ref = ref;
-			var rootID = $(commentDiv).attr('root-id');
-			obj.rootCommentID = rootID;
-			
-			console.log(obj);
-		}	
-		
-		$.ajax({
-	   		  url: '${pageContext.request.contextPath}/board/addComment.do',
-	   		  method: 'POST',
-	   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-	   		  data: obj,
-	   		}).done(function(data){
-	   			alert('저장되었습니다.');
-				window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+ articleID;
-	   		}).fail(function(data){
-	   			alert('저장에 실패하였습니다.');
-	   			console.log(data); 
-	   		})
-	}
-	
-	</script>
 </body>
 </html>

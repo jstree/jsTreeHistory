@@ -1,0 +1,118 @@
+@CHARSET "UTF-8";
+
+/*
+ * 바로보드 게시글 보기 공통 CSS
+ * Author: 전경훈
+ * Date: 2015.06.03
+ */
+
+/* Common */
+a {
+	color: #f45b4f;
+}
+.bold {
+	font-weight: bold;
+}
+
+
+/* Article Header */
+div#articleHeader {
+	overflow: hidden;
+}
+
+div#articleHeader h3 {
+	display: inline !important;
+}
+
+span#articleInfo {
+	float: right;
+}
+
+span#articleInfo > span {
+	display:block;
+}
+
+span#articleInfo > span > span {
+	margin: 0 5px;
+}
+
+span#articleAttachment {
+	text-align: right;
+}
+
+
+
+/* Article Content */
+div#articleContent {
+	margin: 40px 0;
+}
+
+/* Comment */
+div.rdc-detail {
+	margin-bottom: 10px;
+}
+div.rdc-header > span {
+	padding-right : 10px;
+}
+
+span.rdc-reg-id {
+	 font-weight: bold;
+}
+span.rdc-reg-date {
+}
+
+#guestPassword {
+	display: inline;
+	width : 150px;
+}
+
+
+/* Comment Write */
+div.write-comment {
+	overflow: hidden;
+}
+
+div.write-comment > div {
+	
+	float: left;
+}
+
+div.write-comment-header {
+	width: 20%;
+	text-align: center;
+}
+
+div.write-comment-body {
+	width: 50%;
+}
+
+textarea.write-comment-input {
+	
+	display: inline;
+	width: 300px !important;
+	height: 70px !important;
+}
+div.write-comment-btn {
+	width: 20%;
+}
+
+/* Comment Reply */
+div.write-comment.for-copy {
+	visibility: collapse;
+}
+
+/* Article Action */
+div#articleAction {
+	text-align: right;
+}
+
+div#articleAction span {
+}
+
+div#articleAction span a {
+	margin: 0 10px;
+}
+
+i.fa {
+	padding-right: 5px;	
+}
