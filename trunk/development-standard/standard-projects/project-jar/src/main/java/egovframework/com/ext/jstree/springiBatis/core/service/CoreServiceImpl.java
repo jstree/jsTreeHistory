@@ -63,6 +63,7 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
  *  2015. 06. 03.  김형채                 calculatePostion() 세션 중복 저장 로직 삭제 및 위치 변경
  *  2015. 06. 03.  김형채                 calculatePostion() 조건절을 추출해서 상수로 변경
  *  2015. 06. 07.  김형채                 moveNode() logger.isDebugEnabled() 분기 추가
+ *  2015. 08. 02.  류강하                 getChildNode에 페이지네이션 옵션 추가
  *  
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
