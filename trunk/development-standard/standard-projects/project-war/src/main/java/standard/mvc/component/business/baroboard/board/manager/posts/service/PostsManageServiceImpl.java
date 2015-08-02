@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
-import egovframework.com.ext.jstree.support.util.DateUtils;
 import standard.mvc.component.business.baroboard.board.manager.defaultsetting.vo.DefaultSettingVO;
 import standard.mvc.component.business.baroboard.board.manager.posts.dao.PostsManageDao;
 import standard.mvc.component.business.baroboard.board.manager.posts.vo.PostsManageVO;
 import standard.mvc.component.business.baroboard.core.manage.setting.messages.ExceptionMessage;
+import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.support.util.DateUtils;
 
 /**
  * 
@@ -60,7 +60,8 @@ public class PostsManageServiceImpl implements PostsManageService, CoreService, 
 	private CoreDao coreDao;
 	
 	
-	public List<PostsManageVO> getPosts(PostsManageVO postsManageVo) throws Exception {
+	@Override
+    public List<PostsManageVO> getPosts(PostsManageVO postsManageVo) throws Exception {
 		
 		DefaultSettingVO defaultSettingVo = new DefaultSettingVO();
 		defaultSettingVo.setC_id(2);
@@ -97,7 +98,8 @@ public class PostsManageServiceImpl implements PostsManageService, CoreService, 
 		return postsManageDao.getPostsTotalCnt(postsManageVo);
 	}
 	
-	@Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
+	@Override
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public PostsManageVO postsDelete(PostsManageVO postsManageVo) throws Exception {
 		for(String chk : postsManageVo.getChk()){
 			String[] postsInfo = chk.split("@");
@@ -115,7 +117,8 @@ public class PostsManageServiceImpl implements PostsManageService, CoreService, 
 		return result;
 	}
 	
-	@Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
+	@Override
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public PostsManageVO postsBoardMove(PostsManageVO postsManageVo) throws Exception {
 		
 		for(String chk : postsManageVo.getChk()){
@@ -157,7 +160,7 @@ public class PostsManageServiceImpl implements PostsManageService, CoreService, 
 	@Override
 	public <T extends ComprehensiveTree> T addNode(T comprehensiveTree)
 			throws Exception {
-		T nodeByRef = (T) newInstance(coreDao.getNodeByRef(comprehensiveTree), comprehensiveTree);
+		T nodeByRef = newInstance(coreDao.getNodeByRef(comprehensiveTree), comprehensiveTree);
 		if(nodeByRef == null)
         {
         	throw new RuntimeException("nodeByRef is null");
@@ -170,7 +173,7 @@ public class PostsManageServiceImpl implements PostsManageService, CoreService, 
         
         T t_ComprehensiveTree = newInstance(comprehensiveTree);
         
-        List<T> childNodesFromRef = ((List<T>) coreDao.getChildNode(nodeByRef));
+        List<T> childNodesFromRef = (coreDao.getChildNode(nodeByRef));
 
         final int lastPosiotionOfNodeByRef = childNodesFromRef.size();
         
@@ -267,5 +270,17 @@ public class PostsManageServiceImpl implements PostsManageService, CoreService, 
 		BeanUtils.copyProperties(comp, target);
 		BeanUtils.copyProperties(t, comp);
         return t;
+    }
+
+    @Override
+    public <T extends ComprehensiveTree> int getCountOfDescendantNodes(T comprehensiveTree) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

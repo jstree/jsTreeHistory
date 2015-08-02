@@ -25,6 +25,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ActiveProfiles;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -51,6 +52,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 @Ignore("2015.07 중순까지의 릴리즈에서 배제")
+@ActiveProfiles("test")
 public class CoreSetAddCompnDatabaseTest {
 
     private String driver;

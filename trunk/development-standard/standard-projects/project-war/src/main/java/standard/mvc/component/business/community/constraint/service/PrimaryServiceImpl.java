@@ -92,4 +92,16 @@ public class PrimaryServiceImpl implements CoreService {
         return null;
     }
 
+    @Override
+    public <T extends ComprehensiveTree> int getCountOfDescendantNodes(T comprehensiveTree) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

@@ -130,4 +130,16 @@ public class NewsletterServiceImpl implements CoreService {
         
         return coreService.getNode(comprehensiveTree);
     }
+
+    @Override
+    public <T extends ComprehensiveTree> int getCountOfDescendantNodes(T comprehensiveTree) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

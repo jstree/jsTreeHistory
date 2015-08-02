@@ -8,14 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
-import egovframework.com.ext.jstree.support.util.DateUtils;
 import standard.mvc.component.business.baroboard.board.manager.comment.dao.CommentManageDao;
 import standard.mvc.component.business.baroboard.board.manager.comment.vo.CommentManageVO;
 import standard.mvc.component.business.baroboard.board.manager.defaultsetting.vo.DefaultSettingVO;
-import standard.mvc.component.business.baroboard.board.manager.posts.vo.PostsManageVO;
 import standard.mvc.component.business.baroboard.core.manage.setting.messages.ExceptionMessage;
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.support.util.DateUtils;
 
 /**
  * 
@@ -53,7 +52,8 @@ public class CommentManageServiceImpl implements CommentManageService, CoreServi
 	private CoreService coreService;
 	
 	
-	public List<CommentManageVO> getComment(CommentManageVO commentManageVo)
+	@Override
+    public List<CommentManageVO> getComment(CommentManageVO commentManageVo)
 			throws Exception {
 		
 		DefaultSettingVO defaultSettingVo = new DefaultSettingVO();
@@ -72,7 +72,8 @@ public class CommentManageServiceImpl implements CommentManageService, CoreServi
 		return commentManageDao.getComment(commentManageVo);
 	}
 	
-	public int getCommentTotalCnt(CommentManageVO commentManageVo) throws Exception {
+	@Override
+    public int getCommentTotalCnt(CommentManageVO commentManageVo) throws Exception {
 		DefaultSettingVO defaultSettingVo = new DefaultSettingVO();
 		defaultSettingVo.setC_id(2);
 		List<DefaultSettingVO> boardSettingList = defaultSettingService.getChildNode(defaultSettingVo);
@@ -89,7 +90,8 @@ public class CommentManageServiceImpl implements CommentManageService, CoreServi
 		return commentManageDao.getCommentTotalCnt(commentManageVo);
 	}
 	
-	public CommentManageVO commentDelete(CommentManageVO commentManageVo) throws Exception {
+	@Override
+    public CommentManageVO commentDelete(CommentManageVO commentManageVo) throws Exception {
 		for(String chk : commentManageVo.getChk()){
 			String[] postsInfo = chk.split("@");
 			
@@ -154,4 +156,16 @@ public class CommentManageServiceImpl implements CommentManageService, CoreServi
 			HttpServletRequest request) throws Exception {
 		throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
 	}
+
+    @Override
+    public <T extends ComprehensiveTree> int getCountOfDescendantNodes(T comprehensiveTree) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
