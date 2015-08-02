@@ -52,8 +52,8 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
-@ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
 @WebAppConfiguration
+@ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
 public class CoreDaoTest
 {
@@ -147,7 +147,6 @@ public class CoreDaoTest
 		assertThat(l_StoredNodes.size(), is(4));
 	}
 
-    @Ignore("Assertion Error")
 	@Test
 	@DatabaseSetup("initialJsTree.xml")
 	public void testSearchNodeByPosition() throws Exception
@@ -157,9 +156,9 @@ public class CoreDaoTest
 		l_StoredNodes = dao.getChildNode(comprehensiveTree);
 		l_StoredStrings = dao.searchNodeByPosition(l_StoredNodes);
 
-		assertThat(l_StoredStrings.size(), is(2));
-		assertThat(l_StoredStrings.get(0), is(equalTo("1")));
-		assertThat(l_StoredStrings.get(1), is(equalTo("2")));
+		assertThat(l_StoredStrings.size(), is(3));
+		assertThat(l_StoredStrings.get(0), is(equalTo("3")));
+		assertThat(l_StoredStrings.get(1), is(equalTo("1")));
 	}
 
 	@Test
