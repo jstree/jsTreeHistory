@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -76,6 +77,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * </pre>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles("test")
 @WebAppConfiguration
 @ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,DbUnitTestExecutionListener.class })
@@ -175,7 +177,6 @@ public class CoreServiceTestCase
 		assertThat(l_StoredNodes.size()).isEqualTo(2);
 	}
 	
-    @Ignore("Assertion Error")
     @Test
 	public void testSearchNode() throws Exception
 	{
@@ -183,7 +184,7 @@ public class CoreServiceTestCase
 
 		l_StoredStrings = coreService.searchNode(comprehensiveTree);
 
-		assertThat(l_StoredStrings.size()).isEqualTo(2);
+		assertThat(l_StoredStrings.size()).isEqualTo(4);
 	}
 
 	@Test
