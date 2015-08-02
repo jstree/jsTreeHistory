@@ -65,6 +65,22 @@ public class BoardController extends GenericAbstractController {
 		return null;
 	}
 
+	private int getTotalPages(int totCnt, int pageSize) {
+		int pages = 0;
+		
+		if(totCnt == 0) { // zero check
+			pages = 1;
+		} else {
+			if(totCnt % pageSize == 0) {
+				pages = totCnt / pageSize;
+			} else {
+				pages = totCnt / pageSize + 1;
+			}
+		}
+		return pages;
+	}
+
+	
 	@RequestMapping(value = "/index.do", method = { RequestMethod.GET })
 	public String showIndexPage(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
 		// TODO : pageNum 검증, boardID 검증
@@ -86,10 +102,13 @@ public class BoardController extends GenericAbstractController {
 		
 		
 		String boardID = article.getBoardID();
-		int totPages = boardService.getOpenArticleCnt(article) / article.getPageSize() + 1;
+			
 		
 		List<Article> articleList = boardService.getArticleList(article);
 		modelMap.addAttribute("articleList", articleList);
+		
+		int totPages = this.getTotalPages(articleList.get(0).getTotCnt(), article.getPageSize());  
+		
 		
 		// 1페이지일 경우, 공지사항을 보여준다.
 		if(article.getPageNum() == 1) {
@@ -123,10 +142,45 @@ public class BoardController extends GenericAbstractController {
 		return "/jsp/board/index";
 	}
 
+	
 	@RequestMapping(value = "/searchArticle.do", method = { RequestMethod.GET })
 	public String searchArticle(ModelMap modelMap, @ModelAttribute SearchArticle searchArticle) throws Exception {
 		
 		List<Article> searchedArticleList = boardService.searchArticleList(searchArticle);
+		
+		if(searchedArticleList.size() == 0) { // 검색결과 없음	
+			
+		} else {
+			int totPages = this.getTotalPages(searchedArticleList.get(0).getTotCnt(), searchArticle.getPageSize()); 
+			// 좌측 화살표  
+			if(searchArticle.getPageNum() > searchArticle.getPageSize()) {
+				int leftPage = (((searchArticle.getPageNum() / 10) - 1) * 10) + 1;
+				modelMap.addAttribute("leftPage", leftPage);
+			}
+			
+			// a링크 ( 단위 : 10 )
+			int startPageNum = ((searchArticle.getPageNum() - 1) / 10 ) * 10 + 1;
+			int endPageNum = (totPages - 1) / 10 == (searchArticle.getPageNum() - 1) / 10 ? totPages : ((searchArticle.getPageNum() - 1) / 10 + 1) * 10;
+			modelMap.addAttribute("startPageNum", startPageNum);
+			modelMap.addAttribute("endPageNum", endPageNum);
+			modelMap.addAttribute("currentPageNum", searchArticle.getPageNum());
+			
+			logger.debug("--- JKH ---");
+			logger.debug("startPageNum "+ startPageNum);
+			logger.debug("endPageNum "+ endPageNum);
+			logger.debug("currentPageNum "+ searchArticle.getPageNum());
+			logger.debug("totCnt "+ totPages);
+			
+			
+			// 우측 화살표
+			if(totPages > ((searchArticle.getPageNum() - 1) / searchArticle.getPageSize() + 1) * 10) {
+				int rightPage = ((searchArticle.getPageNum() - 1) / searchArticle.getPageSize() + 1) * 10 + 1;
+				modelMap.addAttribute("rightPage",rightPage);
+			}
+			
+		}
+		
+		
 		
 		modelMap.addAttribute("reqSearchArticle", searchArticle);
 		modelMap.addAttribute("articleList", searchedArticleList);

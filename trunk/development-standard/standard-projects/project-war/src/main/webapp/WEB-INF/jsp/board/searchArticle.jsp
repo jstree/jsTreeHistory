@@ -123,26 +123,33 @@ $(document).ready(function(){
 								<div>
 									<div id="pagingDiv">
 										<c:if test="${leftPage != null}">
-											<span><a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${leftPage}">◀</a></span>
+											<span><a href="${pageContext.request.contextPath}/board/searchArticle.do?boardID=${boardID}&searchKeyword=${reqSearchArticle.searchKeyword}&type=${reqSearchArticle.type}&pageNum=${leftPage}">◀</a></span>
 										</c:if>
 										<span> 
-										<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}" step="1">
-											<c:choose>
-												<c:when test="${i eq currentPageNum}">
-													<a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${i}" class="underline">${i}</a>
-												</c:when>
-												<c:otherwise>
-													<a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${i}">${i}</a>
-												</c:otherwise>
-											</c:choose>
-										</c:forEach>
+										<c:choose>
+											<c:when test="${fn:length(articleList) eq 0}">
+												<a href="#" class="underline">1</a>
+											</c:when>
+											<c:otherwise>
+												<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}" step="1">
+													<c:choose>
+														<c:when test="${i eq currentPageNum}">
+															<a href="${pageContext.request.contextPath}/board/searchArticle.do?boardID=${boardID}&searchKeyword=${reqSearchArticle.searchKeyword}&type=${reqSearchArticle.type}&pageNum=${i}" class="underline">${i}</a>
+														</c:when>
+														<c:otherwise>
+															<a href="${pageContext.request.contextPath}/board/searchArticle.do?boardID=${boardID}&searchKeyword=${reqSearchArticle.searchKeyword}&type=${reqSearchArticle.type}&pageNum=${i}">${i}</a>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>	
+											</c:otherwise>
+										</c:choose>
 										</span>
 										<c:if test="${rightPage != null}">
-											<span><a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}&pageNum=${rightPage}">▶</a></span>
+											<span><a href="${pageContext.request.contextPath}/board/searchArticle.do?boardID=${boardID}&searchKeyword=${reqSearchArticle.searchKeyword}&type=${reqSearchArticle.type}&pageNum=${rightPage}">▶</a></span>
 										</c:if>
 									</div>
 									<div id="searchDiv">
-										<form action="${pageContext.request.contextPath}/board/searchArticle.do?boardID=${boardID}">
+										<form method="get" action="${pageContext.request.contextPath}/board/searchArticle.do?boardID=${boardID}">
 											<input type="text" name="searchKeyword" value="${reqSearchArticle.searchKeyword}"/>
 											<select name="type">
 												<option value="title" <c:if test="${reqSearchArticle.type == 'title'}">selected</c:if>>제목</option>

@@ -105,6 +105,12 @@ public class Article extends ComprehensiveTree {
 	/* 해당 사용자 ID */
 	private int userID;
 	
+	/* 현재 Row Number */
+	private int rnum;
+	
+	/* 전체 게시글 수 */
+	private int totCnt;
+	
 	
 	
 	@Override
@@ -141,6 +147,24 @@ public class Article extends ComprehensiveTree {
 	@Override
 	public String getSqlMapSelector() {
 		return "board";
+	}
+
+	
+	
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
+	public int getTotCnt() {
+		return totCnt;
+	}
+
+	public void setTotCnt(int totCnt) {
+		this.totCnt = totCnt;
 	}
 
 	public String getIsGuestFL() {
