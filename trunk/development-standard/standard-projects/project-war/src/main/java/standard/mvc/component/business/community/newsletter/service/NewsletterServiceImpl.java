@@ -133,13 +133,13 @@ public class NewsletterServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> int getCountOfDescendantNodes(T comprehensiveTree) {
-        // TODO Auto-generated method stub
-        return 0;
+        
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        throw new UnsupportedOperationException();
     }
 }
