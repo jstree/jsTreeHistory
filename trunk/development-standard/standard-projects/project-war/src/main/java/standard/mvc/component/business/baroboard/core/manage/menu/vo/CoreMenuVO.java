@@ -122,10 +122,6 @@ public class CoreMenuVO extends ComprehensiveTree {
 				+ ", getIdifRight()=" + getIdifRight() + ", getData()="
 				+ getData() + ", getAttr()=" + getAttr() + ", toString()="
 				+ super.toString() + ", hashCode()=" + hashCode()
-				+ ", getCurrentPage()=" + getCurrentPage()
-				+ ", getRowCountPerPage()=" + getRowCountPerPage()
-				+ ", getBeginningRowOfRange()=" + getBeginningRowOfRange()
-				+ ", getEndRowOfRange()=" + getEndRowOfRange()
 				+ ", getClass()=" + getClass() + "]";
 	}
 

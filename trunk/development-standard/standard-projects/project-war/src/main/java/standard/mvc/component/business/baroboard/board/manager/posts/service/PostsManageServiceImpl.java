@@ -271,16 +271,4 @@ public class PostsManageServiceImpl implements PostsManageService, CoreService, 
 		BeanUtils.copyProperties(t, comp);
         return t;
     }
-
-    @Override
-    public <T extends ComprehensiveTree> int getCountOfDescendantNodes(T comprehensiveTree) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

@@ -130,16 +130,4 @@ public class NewsletterServiceImpl implements CoreService {
         
         return coreService.getNode(comprehensiveTree);
     }
-
-    @Override
-    public <T extends ComprehensiveTree> int getCountOfDescendantNodes(T comprehensiveTree) {
-        
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
-        
-        throw new UnsupportedOperationException();
-    }
 }

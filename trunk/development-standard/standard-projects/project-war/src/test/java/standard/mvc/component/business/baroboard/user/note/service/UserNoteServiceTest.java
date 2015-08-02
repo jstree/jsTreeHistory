@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -19,8 +20,6 @@ import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteByUser;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteDetail;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteTypeCode;
-
-
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
@@ -28,6 +27,7 @@ import egovframework.com.ext.jstree.support.util.DateUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
+@ActiveProfiles("test")
 @ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
 @TransactionConfiguration(defaultRollback=true)
 public class UserNoteServiceTest {

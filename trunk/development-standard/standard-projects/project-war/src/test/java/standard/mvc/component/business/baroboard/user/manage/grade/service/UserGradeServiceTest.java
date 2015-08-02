@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -21,6 +22,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
+@ActiveProfiles("test")
 @ContextConfiguration(classes = {WebApplicationContextConfig.class, WebMvcConfig.class})
 @TransactionConfiguration(defaultRollback=true)
 public class UserGradeServiceTest{

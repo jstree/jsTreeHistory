@@ -119,16 +119,4 @@ public class BoardManagementServiceImpl implements CoreService {
             throws Exception {
         throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
     }
-
-    @Override
-    public <T extends ComprehensiveTree> int getCountOfDescendantNodes(T comprehensiveTree) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }
