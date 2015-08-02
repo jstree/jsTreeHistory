@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
 
 /**
  * Modification Information
@@ -127,15 +128,15 @@ public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 		update(comprehensiveTree.getSqlMapSelector() + ".enterMyselfFixLeftRight", comprehensiveTree);
 	}
 	
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
     public <T extends ComprehensiveTree> int getCountOfDescendantNodes( T comprehensiveTree ) {
 
         return (int) getSqlMapClientTemplate().queryForObject(
                 comprehensiveTree.getSqlMapSelector() + ".getCountOfDescendantNodes", comprehensiveTree);
-	}
-	
+    }
+    
     @SuppressWarnings("unchecked")
-    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
+    public <T extends PaginatedComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
         
         return list(comprehensiveTree.getSqlMapSelector() + ".getDescendantNodesPaginated", comprehensiveTree);
     }

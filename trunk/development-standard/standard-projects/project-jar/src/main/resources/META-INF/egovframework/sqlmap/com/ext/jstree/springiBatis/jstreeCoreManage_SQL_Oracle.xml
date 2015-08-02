@@ -3,6 +3,8 @@
 <sqlMap namespace="core">
     <typeAlias alias="ComprehensiveTree"
         type="egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree" />
+    <typeAlias alias="PaginatedComprehensiveTree"
+        type="egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree" />
 
     <sql id="getMetaField">
         /* getChildNode */
@@ -411,7 +413,7 @@
     <sql id="paginationEnd">
             ) DATA
         )
-        WHERE RN BETWEEN #beginningRowOfRange# AND #endRowOfRange#
+        WHERE RN BETWEEN (#beginningRowOfRange# + 1) AND #endRowOfRange#
     </sql>
     
     <sql id="getDescendantNodes">
@@ -428,7 +430,7 @@
         <include refid="countingEnd" />
     </select>
     
-    <select id="getDescendantNodesPaginated" parameterClass="ComprehensiveTree" resultClass="ComprehensiveTree">
+    <select id="getDescendantNodesPaginated" parameterClass="PaginatedComprehensiveTree" resultClass="PaginatedComprehensiveTree">
         /* getDescendantNodesPaginated */
         <include refid="paginationBegin" />
         <include refid="getDescendantNodes" />

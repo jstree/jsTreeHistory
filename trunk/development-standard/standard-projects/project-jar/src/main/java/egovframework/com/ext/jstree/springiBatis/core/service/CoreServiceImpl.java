@@ -20,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 /**
  * Modification Information
@@ -95,9 +97,39 @@ public class CoreServiceImpl implements CoreService
      * getChildNode
      * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
      */
+    @SuppressWarnings("unchecked")
     public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) throws Exception
     {
-        List<T> childNode = (List<T>) coreDao.getChildNode(comprehensiveTree);
+        List<T> childNode = null;
+        
+        if (comprehensiveTree instanceof PaginatedComprehensiveTree) 
+        {
+            PaginatedComprehensiveTree paginatedComprehensiveTree = (PaginatedComprehensiveTree) comprehensiveTree;
+            
+            if (paginatedComprehensiveTree.getC_level() < 1) {
+                throw new RuntimeException("The c_level property value is not valid.");
+            }
+            if (paginatedComprehensiveTree.getCurrentPage() < 1) {
+                throw new RuntimeException("The currentPage property value is not valid.");
+            }
+            if (paginatedComprehensiveTree.getRowCountPerPage() < 1) {
+                throw new RuntimeException("The currentPage property value is not valid.");
+            }
+            
+            PaginationInfo paginationInfo = new PaginationInfo();
+            paginationInfo.setCurrentPageNo(paginatedComprehensiveTree.getCurrentPage());
+            paginationInfo.setRecordCountPerPage(paginatedComprehensiveTree.getRowCountPerPage());
+            
+            paginatedComprehensiveTree.setBeginningRowOfRange(paginationInfo.getFirstRecordIndex());
+            paginatedComprehensiveTree.setEndRowOfRange(paginationInfo.getLastRecordIndex());
+            
+            childNode = (List<T>) coreDao.getDescendantNodesPaginated(paginatedComprehensiveTree);
+        } 
+        else 
+        {
+            childNode = (List<T>) coreDao.getChildNode(comprehensiveTree);
+        }
+        
         return childNode;
     }
     
@@ -653,20 +685,6 @@ public class CoreServiceImpl implements CoreService
             
             coreDao.fixCopy(child);
         }
-    }
-    
-    @Override
-    public <T extends ComprehensiveTree> int getCountOfDescendantNodes(
-            T comprehensiveTree) {
-        
-        return coreDao.getCountOfDescendantNodes(comprehensiveTree);
-    }
-    
-    @Override
-    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(
-            T comprehensiveTree) {
-        
-        return coreDao.getDescendantNodesPaginated(comprehensiveTree);
     }
     
     /**

@@ -17,6 +17,7 @@ package egovframework.com.ext.jstree.springiBatis.core.service;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.List;
@@ -33,6 +34,7 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
 import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 
@@ -55,6 +57,7 @@ import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
  * 2015. 4. 17.  류강하                 기존 환경을 건드리지 않고 상속 및 확장하여 테스트하도록 변경함. 메이븐 빌드와는 무관하게 동작할 것임.
  * 2015. 4. 19.  류강하                 Leaf Node Add Node 테스트 케이스 추가
  * 2015. 5.  1.  류강하                 시퀀스를 초기화하도록 하여 c_id 검증 단정문 성공하도록 변경(DatabaseOperation의 확장 포인트를 찾기가 어려워 추후에 개선 예정)
+ * 2015. 8.  2.  류강하                 getChildNode의 페이징 처리 옵션 테스트 추가
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -151,5 +154,158 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
 //      3|      34    : Leaf Node
 //      4|      56    : Branch Node
 //      5|      78    : New Leaf Node
+    }
+    
+    @DatabaseSetup("CoreServiceTest_initialJsTreeForPagination.xml")
+    @Test
+    public void getChildNode() throws Exception {
+        
+        ComprehensiveTree comprehensiveTree = new ComprehensiveTree();
+        
+        comprehensiveTree.setC_id(1);
+        List<ComprehensiveTree> childNodes = coreService.getChildNode(comprehensiveTree);
+        assertThat(childNodes.size(), is(1));
+        assertThat(childNodes.get(0).getC_id(), is(2));
+        
+        comprehensiveTree.setC_id(2);
+        childNodes = coreService.getChildNode(comprehensiveTree);
+        assertThat(childNodes.size(), is(2));
+        assertThat(childNodes.get(0).getC_id(), is(3));
+        assertThat(childNodes.get(1).getC_id(), is(4));
+        
+        comprehensiveTree.setC_id(3);
+        childNodes = coreService.getChildNode(comprehensiveTree);
+        assertThat(childNodes.size(), is(2));
+        assertThat(childNodes.get(0).getC_id(), is(5));
+        assertThat(childNodes.get(1).getC_id(), is(6));
+        
+        comprehensiveTree.setC_id(4);
+        childNodes = coreService.getChildNode(comprehensiveTree);
+        assertThat(childNodes.size(), is(2));
+        assertThat(childNodes.get(0).getC_id(), is(9));
+        assertThat(childNodes.get(1).getC_id(), is(12));
+        
+        comprehensiveTree.setC_id(5);
+        childNodes = coreService.getChildNode(comprehensiveTree);
+        assertThat(childNodes.size(), is(2));
+        assertThat(childNodes.get(0).getC_id(), is(7));
+        assertThat(childNodes.get(1).getC_id(), is(8));
+        
+        comprehensiveTree.setC_id(6);
+        childNodes = coreService.getChildNode(comprehensiveTree);
+        assertThat(childNodes.size(), is(1));
+        assertThat(childNodes.get(0).getC_id(), is(10));
+        
+        comprehensiveTree.setC_id(7);
+        assertThatChildNodesAreNothing(comprehensiveTree);
+        
+        comprehensiveTree.setC_id(8);
+        assertThatChildNodesAreNothing(comprehensiveTree);
+        
+        comprehensiveTree.setC_id(9);
+        assertThatChildNodesAreNothing(comprehensiveTree);
+        
+        comprehensiveTree.setC_id(10);
+        childNodes = coreService.getChildNode(comprehensiveTree);
+        assertThat(childNodes.size(), is(3));
+        assertThat(childNodes.get(0).getC_id(), is(11));
+        assertThat(childNodes.get(1).getC_id(), is(13));
+        assertThat(childNodes.get(2).getC_id(), is(14));
+        
+        comprehensiveTree.setC_id(11);
+        assertThatChildNodesAreNothing(comprehensiveTree);
+        
+        comprehensiveTree.setC_id(12);
+        assertThatChildNodesAreNothing(comprehensiveTree);
+        
+        comprehensiveTree.setC_id(13);
+        assertThatChildNodesAreNothing(comprehensiveTree);
+        
+        comprehensiveTree.setC_id(14);
+        assertThatChildNodesAreNothing(comprehensiveTree);
+    }
+    
+    private void assertThatChildNodesAreNothing(ComprehensiveTree comprehensiveTree) throws Exception {
+        
+        List<ComprehensiveTree> childNodes = coreService.getChildNode(comprehensiveTree);
+        assertTrue(childNodes.isEmpty());
+    }
+    
+    @DatabaseSetup("CoreServiceTest_initialJsTreeForPagination.xml")
+    @Test
+    public void getDescendantNodesPaginatedWithLevel5() throws Exception {
+        
+        PaginatedComprehensiveTree paginatedComprehensiveTree = new PaginatedComprehensiveTree();
+        paginatedComprehensiveTree.setC_level(5);
+        
+        List<PaginatedComprehensiveTree> descendantNodes = coreService.getChildNode(paginatedComprehensiveTree);
+        
+        assertThat(descendantNodes.size(), is(10));
+        assertThat(descendantNodes.get(0).getC_id(), is(2));
+        assertThat(descendantNodes.get(1).getC_id(), is(3));
+        assertThat(descendantNodes.get(2).getC_id(), is(5));
+        assertThat(descendantNodes.get(3).getC_id(), is(7));
+        assertThat(descendantNodes.get(4).getC_id(), is(8));
+        assertThat(descendantNodes.get(5).getC_id(), is(6));
+        assertThat(descendantNodes.get(6).getC_id(), is(10));
+        assertThat(descendantNodes.get(7).getC_id(), is(11));
+        assertThat(descendantNodes.get(8).getC_id(), is(13));
+        assertThat(descendantNodes.get(9).getC_id(), is(14));
+        
+        paginatedComprehensiveTree.setCurrentPage(2);
+        
+        descendantNodes = coreService.getChildNode(paginatedComprehensiveTree);
+        
+        assertThat(descendantNodes.size(), is(3));
+        assertThat(descendantNodes.get(0).getC_id(), is(4));
+        assertThat(descendantNodes.get(1).getC_id(), is(9));
+        assertThat(descendantNodes.get(2).getC_id(), is(12));
+    }
+    
+    @DatabaseSetup("CoreServiceTest_initialJsTreeForPagination.xml")
+    @Test
+    public void getDescendantNodesPaginatedWithLevel4() throws Exception {
+        
+        PaginatedComprehensiveTree paginatedComprehensiveTree = new PaginatedComprehensiveTree();
+        paginatedComprehensiveTree.setC_level(4);
+        
+        List<PaginatedComprehensiveTree> descendantNodes = coreService.getChildNode(paginatedComprehensiveTree);
+        
+        assertThat(descendantNodes.size(), is(10));
+        assertThat(descendantNodes.get(0).getC_id(), is(2));
+        assertThat(descendantNodes.get(1).getC_id(), is(3));
+        assertThat(descendantNodes.get(2).getC_id(), is(5));
+        assertThat(descendantNodes.get(3).getC_id(), is(7));
+        assertThat(descendantNodes.get(4).getC_id(), is(8));
+        assertThat(descendantNodes.get(5).getC_id(), is(6));
+        assertThat(descendantNodes.get(6).getC_id(), is(10));
+        assertThat(descendantNodes.get(7).getC_id(), is(4));
+        assertThat(descendantNodes.get(8).getC_id(), is(9));
+        assertThat(descendantNodes.get(9).getC_id(), is(12));
+        
+        paginatedComprehensiveTree.setCurrentPage(2);
+        
+        descendantNodes = coreService.getChildNode(paginatedComprehensiveTree);
+        
+        assertTrue(descendantNodes.isEmpty());
+    }
+    
+    @DatabaseSetup("CoreServiceTest_initialJsTreeForPagination.xml")
+    @Test
+    public void getDescendantNodesPaginatedWithLevel3() throws Exception {
+        
+        PaginatedComprehensiveTree paginatedComprehensiveTree = new PaginatedComprehensiveTree();
+        paginatedComprehensiveTree.setC_level(3);
+        
+        List<PaginatedComprehensiveTree> descendantNodes = coreService.getChildNode(paginatedComprehensiveTree);
+        
+        assertThat(descendantNodes.size(), is(7));
+        assertThat(descendantNodes.get(0).getC_id(), is(2));
+        assertThat(descendantNodes.get(1).getC_id(), is(3));
+        assertThat(descendantNodes.get(2).getC_id(), is(5));
+        assertThat(descendantNodes.get(3).getC_id(), is(6));
+        assertThat(descendantNodes.get(4).getC_id(), is(4));
+        assertThat(descendantNodes.get(5).getC_id(), is(9));
+        assertThat(descendantNodes.get(6).getC_id(), is(12));
     }
 }

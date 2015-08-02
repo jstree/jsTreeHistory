@@ -27,6 +27,7 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 
@@ -346,23 +347,20 @@ public class CoreDaoTest
     public void getCountOfDescendantNodes() {
         
         ComprehensiveTree comprehensiveTree = new ComprehensiveTree();
-        comprehensiveTree.setC_level(2);
         
+        comprehensiveTree.setC_level(2);
         int countOfDescendantNodes = dao.getCountOfDescendantNodes(comprehensiveTree);
         assertThat(countOfDescendantNodes, is(3));
         
         comprehensiveTree.setC_level(3);
-        
         countOfDescendantNodes = dao.getCountOfDescendantNodes(comprehensiveTree);
         assertThat(countOfDescendantNodes, is(7));
         
         comprehensiveTree.setC_level(4);
-        
         countOfDescendantNodes = dao.getCountOfDescendantNodes(comprehensiveTree);
         assertThat(countOfDescendantNodes, is(10));
         
         comprehensiveTree.setC_level(5);
-        
         countOfDescendantNodes = dao.getCountOfDescendantNodes(comprehensiveTree);
         assertThat(countOfDescendantNodes, is(13));
     }
@@ -371,21 +369,34 @@ public class CoreDaoTest
 	@DatabaseSetup("initialJsTreeForPagination.xml")
     public void getDescendantNodesPaginated() {
 	    
-	    ComprehensiveTree comprehensiveTree = new ComprehensiveTree();
+	    PaginatedComprehensiveTree comprehensiveTree = new PaginatedComprehensiveTree();
 	    comprehensiveTree.setC_level(5);
 	    
-	    comprehensiveTree.setBeginningRowOfRange(1);
+	    comprehensiveTree.setBeginningRowOfRange(0);
 	    comprehensiveTree.setEndRowOfRange(10);
 	    
-	    List<ComprehensiveTree> descendantNodes = dao.getDescendantNodesPaginated(comprehensiveTree);
+	    List<PaginatedComprehensiveTree> descendantNodes = dao.getDescendantNodesPaginated(comprehensiveTree);
 	    
 	    assertThat(descendantNodes.size(), is(10));
+	    assertThat(descendantNodes.get(0).getC_id(), is(2));
+	    assertThat(descendantNodes.get(1).getC_id(), is(3));
+	    assertThat(descendantNodes.get(2).getC_id(), is(5));
+	    assertThat(descendantNodes.get(3).getC_id(), is(7));
+	    assertThat(descendantNodes.get(4).getC_id(), is(8));
+	    assertThat(descendantNodes.get(5).getC_id(), is(6));
+	    assertThat(descendantNodes.get(6).getC_id(), is(10));
+	    assertThat(descendantNodes.get(7).getC_id(), is(11));
+	    assertThat(descendantNodes.get(8).getC_id(), is(13));
+	    assertThat(descendantNodes.get(9).getC_id(), is(14));
 	    
-	    comprehensiveTree.setBeginningRowOfRange(11);
+	    comprehensiveTree.setBeginningRowOfRange(10);
         comprehensiveTree.setEndRowOfRange(20);
         
         descendantNodes = dao.getDescendantNodesPaginated(comprehensiveTree);
         
         assertThat(descendantNodes.size(), is(3));
+        assertThat(descendantNodes.get(0).getC_id(), is(4));
+        assertThat(descendantNodes.get(1).getC_id(), is(9));
+        assertThat(descendantNodes.get(2).getC_id(), is(12));
 	}
 }

@@ -97,20 +97,4 @@ public interface CoreService {
 	 */
 	public <T extends ComprehensiveTree> T moveNode( T                  comprehensiveTree
 			                                       , HttpServletRequest request ) throws Exception;
-	
-	/**
-	 * Root node를 제외한 노드들의 총 수를 조회한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @return 노드 총 수
-	 */
-	public <T extends ComprehensiveTree> int getCountOfDescendantNodes( T comprehensiveTree );
-	
-	/**
-	 * Root node를 제외한 노드들 중 페이징 처리된 노드들을 조회한다.
-	 * 
-	 * @param comprehensiveTree
-	 * @return 노드 DTO
-	 */
-	public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated( T comprehensiveTree );
 }

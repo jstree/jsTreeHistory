@@ -129,11 +129,6 @@ public class ComprehensiveTree {
 
 	private volatile int hashCode;
 	
-	private int currentPage;
-	private int rowCountPerPage;
-	private int beginningRowOfRange;
-	private int endRowOfRange;
-	
 	public int getId() {
 		return id;
 	}
@@ -473,36 +468,4 @@ public class ComprehensiveTree {
 		}
 		return result;
 	}
-
-    public int getCurrentPage() {
-        return currentPage;
-    }
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public int getRowCountPerPage() {
-        return rowCountPerPage;
-    }
-
-    public void setRowCountPerPage(int rowCountPerPage) {
-        this.rowCountPerPage = rowCountPerPage;
-    }
-
-    public int getBeginningRowOfRange() {
-        return beginningRowOfRange;
-    }
-
-    public void setBeginningRowOfRange(int beginningRowOfRange) {
-        this.beginningRowOfRange = beginningRowOfRange;
-    }
-
-    public int getEndRowOfRange() {
-        return endRowOfRange;
-    }
-
-    public void setEndRowOfRange(int endRowOfRange) {
-        this.endRowOfRange = endRowOfRange;
-    }
 }
