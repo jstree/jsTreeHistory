@@ -40,7 +40,7 @@ public class CoreMenuServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception {
-        return null;
+		return coreService.getNode(comprehensiveTree);
     }
 
     @Override

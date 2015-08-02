@@ -14,7 +14,6 @@ import javax.annotation.Resource;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -62,82 +61,81 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { WebApplicationContextConfig.class, WebMvcConfig.class })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
-public class CoreMenuServiceTest
-{
-    
-    @Resource(name = "CoreMenuService")
-    CoreService coreMenuService;
-    
-    @Mock
-    CoreMenuVO mockCoreMenuVO;
-    
-    @Before
-    public void setUp() throws Exception
-    {
-        MockitoAnnotations.initMocks(this);
-    }
-    
-    @After
-    public void tearDown() throws Exception
-    {
-    }
-    
-    @Test
-    public void testAnnotationDrivenServiceInit()
-    {
-        assertThat(coreMenuService, is(notNullValue()));
-    }
-    
-    @Test
-    @DatabaseSetup(value = "classpath:/standard/mvc/component/business/baroboard/menu/service/T_CORE_MENU_INIT.xml", type = DatabaseOperation.CLEAN_INSERT)
-    public void testGetChildNode() throws Exception
-    {
-        when(mockCoreMenuVO.getC_id()).thenReturn(3);
-        when(mockCoreMenuVO.getSqlMapSelector()).thenReturn("coreMenu");
-        
-        List<CoreMenuVO> bunchOfResultCoreMenuVO = coreMenuService.getChildNode(mockCoreMenuVO);
-        
-        assertThat(bunchOfResultCoreMenuVO.size(), is(not(0)));
-        
-        for (CoreMenuVO resultCoreMenuVO : bunchOfResultCoreMenuVO)
-        {
-            assertThat(resultCoreMenuVO.getC_id(), is(4));
-            assertThat(resultCoreMenuVO.getC_parentid(), is(3));
-            assertThat(resultCoreMenuVO.getC_position(), is(0));
-            assertThat(resultCoreMenuVO.getC_left(), is(4));
-            assertThat(resultCoreMenuVO.getC_right(), is(5));
-            assertThat(resultCoreMenuVO.getC_level(), is(3));
-        }
-        
-        verify(mockCoreMenuVO).getC_id();
-        verify(mockCoreMenuVO).getSqlMapSelector();
-    }
-    
-    @Ignore("service method 미구현")
-    @Test
-    @DatabaseSetup(value = "classpath:/standard/mvc/component/business/baroboard/menu/service/T_CORE_MENU_INIT.xml", type = DatabaseOperation.CLEAN_INSERT)
-    public void testAddNodeWithLevel3() throws Exception
-    {
-        when(mockCoreMenuVO.getRef()).thenReturn(3);
-        when(mockCoreMenuVO.getSqlMapSelector()).thenReturn("coreMenu");
-        when(mockCoreMenuVO.getC_title()).thenReturn("testMenu");
-        when(mockCoreMenuVO.getC_type()).thenReturn("folder");
-        
-        CoreMenuVO resultCoreMenuVO = coreMenuService.addNode(mockCoreMenuVO);
-        
-        assertThat(resultCoreMenuVO, is(notNullValue()));
-        
-        assertThat(resultCoreMenuVO.getC_id(), is(greaterThanOrEqualTo(4)));
-        assertThat(resultCoreMenuVO.getC_parentid(), is(3));
-        assertThat(resultCoreMenuVO.getC_position(), is(1));
-        assertThat(resultCoreMenuVO.getC_left(), is(5));
-        assertThat(resultCoreMenuVO.getC_right(), is(6));
-        assertThat(resultCoreMenuVO.getC_level(), is(3));
-        
-        verify(mockCoreMenuVO).getC_id();
-        verify(mockCoreMenuVO).getSqlMapSelector();
-    }
-    
+@ContextConfiguration(classes = { WebApplicationContextConfig.class,
+		WebMvcConfig.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+		DbUnitTestExecutionListener.class })
+public class CoreMenuServiceTest {
+
+	@Resource(name = "CoreMenuService")
+	CoreService coreMenuService;
+
+	@Mock
+	CoreMenuVO mockCoreMenuVO;
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testAnnotationDrivenServiceInit() {
+		assertThat(coreMenuService, is(notNullValue()));
+	}
+
+	@Test
+	@DatabaseSetup(value = "classpath:/standard/mvc/component/business/baroboard/menu/service/T_CORE_MENU_INIT.xml", type = DatabaseOperation.CLEAN_INSERT)
+	public void testGetChildNode() throws Exception {
+		when(mockCoreMenuVO.getC_id()).thenReturn(3);
+		when(mockCoreMenuVO.getSqlMapSelector()).thenReturn("coreMenu");
+
+		List<CoreMenuVO> bunchOfResultCoreMenuVO = coreMenuService
+				.getChildNode(mockCoreMenuVO);
+
+		assertThat(bunchOfResultCoreMenuVO.size(), is(not(0)));
+
+		for (CoreMenuVO resultCoreMenuVO : bunchOfResultCoreMenuVO) {
+			assertThat(resultCoreMenuVO.getC_id(), is(4));
+			assertThat(resultCoreMenuVO.getC_parentid(), is(3));
+			assertThat(resultCoreMenuVO.getC_position(), is(0));
+			assertThat(resultCoreMenuVO.getC_left(), is(4));
+			assertThat(resultCoreMenuVO.getC_right(), is(5));
+			assertThat(resultCoreMenuVO.getC_level(), is(3));
+		}
+
+		verify(mockCoreMenuVO).getC_id();
+		verify(mockCoreMenuVO).getSqlMapSelector();
+	}
+
+	@Test
+	@DatabaseSetup(value = "classpath:/standard/mvc/component/business/baroboard/menu/service/T_CORE_MENU_INIT.xml", type = DatabaseOperation.CLEAN_INSERT)
+	public void testAddNodeWithLevel3() throws Exception {
+		CoreMenuVO coreMenuVO = new CoreMenuVO();
+		coreMenuVO.setRef(3);
+		coreMenuVO.setC_title("testMenu");
+		coreMenuVO.setC_type("default");
+
+		CoreMenuVO addedNode = coreMenuService.addNode(coreMenuVO);
+
+		assertThat(addedNode, is(notNullValue()));
+		assertThat(addedNode.getId(), is(greaterThanOrEqualTo(4)));
+
+		addedNode.setC_id(addedNode.getId());
+
+		CoreMenuVO nodeForVerification = coreMenuService.getNode(addedNode);
+
+		assertThat(nodeForVerification, is(notNullValue()));
+		assertThat(nodeForVerification.getC_id(), is(greaterThanOrEqualTo(4)));
+		assertThat(nodeForVerification.getC_parentid(), is(3));
+		assertThat(nodeForVerification.getC_position(), is(1));
+		assertThat(nodeForVerification.getC_left(), is(6));
+		assertThat(nodeForVerification.getC_right(), is(7));
+		assertThat(nodeForVerification.getC_level(), is(3));
+
+	}
+
 }

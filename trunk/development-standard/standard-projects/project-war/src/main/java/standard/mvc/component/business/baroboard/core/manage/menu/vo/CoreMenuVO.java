@@ -95,4 +95,38 @@ public class CoreMenuVO extends ComprehensiveTree {
 		return "coreMenu";
 	}
 
+	@Override
+	public String toString() {
+		return "CoreMenuVO [menuId=" + menuId + ", pageId=" + pageId
+				+ ", authId=" + authId + ", imageDefault=" + imageDefault
+				+ ", imageHover=" + imageHover + ", imageSelected="
+				+ imageSelected + ", homeFl=" + homeFl + ", getId()=" + getId()
+				+ ", isCopied()=" + isCopied() + ", getRef()=" + getRef()
+				+ ", getCopy()=" + getCopy() + ", getC_id()=" + getC_id()
+				+ ", getC_parentid()=" + getC_parentid() + ", getC_position()="
+				+ getC_position() + ", getC_left()=" + getC_left()
+				+ ", getC_right()=" + getC_right() + ", getC_level()="
+				+ getC_level() + ", getC_title()=" + getC_title()
+				+ ", getC_type()=" + getC_type() + ", getMultiCounter()="
+				+ getMultiCounter() + ", getSpaceOfTargetNode()="
+				+ getSpaceOfTargetNode() + ", getSearchStr()=" + getSearchStr()
+				+ ", getChildcount()=" + getChildcount() + ", getState()="
+				+ getState() + ", getStatus()=" + getStatus() + ", getIdif()="
+				+ getIdif() + ", getLdif()=" + getLdif()
+				+ ", getC_idsByChildNodeFromNodeById()="
+				+ getC_idsByChildNodeFromNodeById() + ", getFixCopyId()="
+				+ getFixCopyId() + ", getFixCopyPosition()="
+				+ getFixCopyPosition() + ", getRightPositionFromNodeByRef()="
+				+ getRightPositionFromNodeByRef() + ", getNodeById()="
+				+ getNodeById() + ", getIdifLeft()=" + getIdifLeft()
+				+ ", getIdifRight()=" + getIdifRight() + ", getData()="
+				+ getData() + ", getAttr()=" + getAttr() + ", toString()="
+				+ super.toString() + ", hashCode()=" + hashCode()
+				+ ", getCurrentPage()=" + getCurrentPage()
+				+ ", getRowCountPerPage()=" + getRowCountPerPage()
+				+ ", getBeginningRowOfRange()=" + getBeginningRowOfRange()
+				+ ", getEndRowOfRange()=" + getEndRowOfRange()
+				+ ", getClass()=" + getClass() + "]";
+	}
+
 }
