@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,13 +87,14 @@ public class CoreDaoTest
 		rootNode.setC_right(8);
 		rootNode.setC_level(0);
 		rootNode.setC_title("Root Node");
+		rootNode.setC_type("root");
 
 		firstChild = new ComprehensiveTree();
 		firstChild.setC_id(2);
 		firstChild.setC_parentid(1);
 		firstChild.setC_position(0);
 		firstChild.setC_left(2);
-		firstChild.setC_right(5);
+		firstChild.setC_right(7);
 		firstChild.setC_level(1);
 		firstChild.setC_title("First Child");
 		firstChild.setC_type("drive");
@@ -111,11 +111,11 @@ public class CoreDaoTest
 
 		branchNode = new ComprehensiveTree();
 		branchNode.setC_id(4);
-		branchNode.setC_parentid(1);
+		branchNode.setC_parentid(2);
 		branchNode.setC_position(1);
-		branchNode.setC_left(6);
-		branchNode.setC_right(7);
-		branchNode.setC_level(1);
+		branchNode.setC_left(5);
+		branchNode.setC_right(6);
+		branchNode.setC_level(2);
 		branchNode.setC_title("Branch Node");
 		branchNode.setC_type("folder");
 	}
@@ -131,9 +131,8 @@ public class CoreDaoTest
 		firstChild.setChildcount("InChild");
 		branchNode.setChildcount("NoChild");
 
-		assertThat(l_StoredNodes.size(), is(2));
+		assertThat(l_StoredNodes.size(), is(1));
 		assertLenientEquals(l_StoredNodes.get(0), firstChild);
-		assertLenientEquals(l_StoredNodes.get(1), branchNode);
 	}
 
 	@Test
@@ -156,9 +155,9 @@ public class CoreDaoTest
 		l_StoredNodes = dao.getChildNode(comprehensiveTree);
 		l_StoredStrings = dao.searchNodeByPosition(l_StoredNodes);
 
-		assertThat(l_StoredStrings.size(), is(3));
+		assertThat(l_StoredStrings.size(), is(4));
 		assertThat(l_StoredStrings.get(0), is(equalTo("3")));
-		assertThat(l_StoredStrings.get(1), is(equalTo("1")));
+		assertThat(l_StoredStrings.get(1), is(equalTo("4")));
 	}
 
 	@Test
@@ -185,7 +184,7 @@ public class CoreDaoTest
 
 	@Test
 	@DatabaseSetup("initialJsTree.xml")
-	@ExpectedDatabase(value="cutMyselfAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value="cutMyselfAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void testCutMyself() throws Exception
 	{
 		c_idsByChildNodeFromNodeById = new ArrayList<>();
@@ -214,7 +213,7 @@ public class CoreDaoTest
 
 	@Test
 	@DatabaseSetup("initialJsTree.xml")
-	@ExpectedDatabase(value="stretchLeftRightForMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value="stretchLeftRightForMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void testStretchLeftRightForMyselfFromJstree() throws Exception
 	{
 		comprehensiveTree.setSpaceOfTargetNode(spaceOfTargetNode);
@@ -227,7 +226,7 @@ public class CoreDaoTest
 
 	@Test
 	@DatabaseSetup("initialJsTree.xml")
-	@ExpectedDatabase(value="pasteMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value="pasteMyselfFromJstreeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void testPasteMyselfFromJstree() throws Exception
 	{
 		c_idsByChildNodeFromNodeById = new ArrayList<>();
@@ -302,7 +301,7 @@ public class CoreDaoTest
 	
 	@Test
 	@DatabaseSetup("initialJsTree.xml")
-	@ExpectedDatabase(value="removeNodeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value="removeNodeAfterDataset.xml",assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void testRemoveNode() throws Exception
 	{
         int spaceOfTargetNode = firstChild.getC_right() - firstChild.getC_left()+1;
