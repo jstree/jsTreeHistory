@@ -164,7 +164,7 @@
 				<!--Menu-->
 				<div id="menu">
 					<a href="" title="OpenSource Tools"><i class="icon-dashboard"></i>
-						<span>OpenSource Grp</span>
+						<span>OpenSource</span>
 					</a>
 					<a title="Document" class="submenu" name="Document-sub"><i class="icon-eye-open"></i>
 						<span>Document</span>
@@ -187,7 +187,7 @@
 					</a>
 						<div id="Repository-sub">
 							<a href="http://www.313.co.kr/fecru" target="_blank" title="Fisheye & Cruclible"><i class="icon-film"></i><span>  
-							Fisheye<br/>Cruclible</span></a>
+							Fisheye<br/>&nbsp;Cruclible</span></a>
 							<a href="http://www.313.co.kr/nas" target="_blank" title="Xpenology"><i class="icon-film"></i><span>  
 							Xpenology</span></a>
 						</div>
@@ -221,11 +221,11 @@
 							<a href="http://www.313.co.kr/oracle" target="_blank" title="Oracle EM"><i class="icon-film"></i><span>  
 							Oracle EM</span></a>
 							<a href="http://www.313.co.kr/php/phpMyAdmin-3.3.9.2-all-languages" target="_blank" title="phpMyAdmin-3.3.9.2"><i class="icon-film"></i><span>  
-							phpMyAdmin-3.3.9.2</span></a>
+							Mysql</span></a>
 							<a href="http://www.313.co.kr:8888/phppgadmin/" target="_blank" title="phppPgAdmin"><i class="icon-film"></i><span>  
-							phppPgAdmin</span></a>
+							Postgres</span></a>
 							<a href="http://www.313.co.kr:8808" target="_blank" title="EFM Networks ipTIME A3004NS"><i class="icon-film"></i><span>  
-							EFM Networks ipTIME A3004NS</span></a>
+							Router</span></a>
 						</div>
 						
 					<a title="Monitoring" class="submenu" name="Monitoring-sub"><i class="icon-eye-open"></i>
@@ -235,15 +235,15 @@
 							<a href="http://www.313.co.kr/piwik" target="_blank" title="Piwik"><i class="icon-list"></i><span>  
 							Piwik</span></a>
 							<a href="analytics.naver.com/" target="_blank" title="Naver analytics"><i class="icon-list"></i><span>  
-							Naver analytics</span></a>
+							Naver<br/>&nbsp;analytics</span></a>
 							<a href="http://www.google.com/intl/ko/analytics" target="_blank" title="Google analytics"><i class="icon-list"></i><span>  
-							Google analytics</span></a>
+							Google<br/>&nbsp;analytics</span></a>
 							<a href="http://www.313.co.kr/php/phpservermon-2.0.1" target="_blank" title="phpservermon-2.0.1"><i class="icon-film"></i><span>  
-							phpservermon-2.0.1</span></a>
+							ServerMon</span></a>
 							<a href="http://www.313.co.kr/probe" target="_blank" title="Probe"><i class="icon-film"></i><span>  
 							Probe</span></a>
 							<a href="http://www.313.co.kr/php/eXtplorer_2.1.0RC3" target="_blank" title="eXtplorer_2.1.0RC3"><i class="icon-film"></i><span>  
-							eXtplorer_2.1.0RC3</span></a>
+							EXtplorer</span></a>
 						</div>
 					
 						
