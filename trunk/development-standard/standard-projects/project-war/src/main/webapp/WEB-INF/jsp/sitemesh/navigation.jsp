@@ -163,184 +163,89 @@
 			
 				<!--Menu-->
 				<div id="menu">
-						<a href="" title="313 Dev Gro"><i class="icon-dashboard"></i><span> 
-						313 Dev Grp</span></a>
-						<a title="NAS" class="submenu" name="nas-sub"><i class="icon-eye-open"></i><span>  
-						NAS</span></a>
-						<!-- NAS Sub Menu -->
-							<div id="nas-sub">
-								<a href="http://www.313.co.kr/nas" target="_blank" title="Xpenology"><i class="icon-film"></i><span>  
-								Xpenology</span></a>
-							</div>
-						<!-- NAS Sub Menu -->
+					<a href="" title="OpenSource Tools"><i class="icon-dashboard"></i>
+						<span>OpenSource Grp</span>
+					</a>
+					<a title="Document" class="submenu" name="Document-sub"><i class="icon-eye-open"></i>
+						<span>Document</span>
+					</a>
+						<div id="Document-sub">
+							<a href="http://www.313.co.kr/confluence" target="_blank" title="Confluence"><i class="icon-film"></i><span>  
+							Confluence</span></a>
+						</div>
 						
-						<a title="Web Server HeartBeat Monitor" class="submenu" name="HeartBeat-sub"><i class="icon-eye-open"></i><span>  
-						Web Server HeartBeat Monitor</span></a>
-						<!-- Web Server HeartBeat Monitor Sub Menu -->
-							<div id="HeartBeat-sub">
-								<a href="http://www.313.co.kr/php/phpservermon-2.0.1" target="_blank" title="phpservermon-2.0.1"><i class="icon-film"></i><span>  
-								phpservermon-2.0.1</span></a>
-							</div>
-						<!-- Web Server HeartBeat Monitor Sub Menu -->
+					<a title="IssueTracker" class="submenu" name="IssueTracker-sub"><i class="icon-eye-open"></i>
+						<span>IssueTracker</span>
+					</a>
+						<div id="IssueTracker-sub">
+							<a href="http://www.313.co.kr/jira" target="_blank" title="Jira"><i class="icon-film"></i><span>  
+							Jira</span></a>
+						</div>
 						
-						<a title="Was Server Monitor" class="submenu" name="Monitor-sub"><i class="icon-eye-open"></i><span>  
-						Was Server Monitor</span></a>
-						<!-- Was Server Monitor Sub Menu -->
-							<div id="Monitor-sub">
-								<a href="http://www.313.co.kr/probe" target="_blank" title="Probe"><i class="icon-film"></i><span>  
-								Probe</span></a>
-							</div>
-						<!-- Was Server Monitor Sub Menu -->
+					<a title="Repository" class="submenu" name="Repository-sub"><i class="icon-eye-open"></i>
+						<span>Repository</span>
+					</a>
+						<div id="Repository-sub">
+							<a href="http://www.313.co.kr/fecru" target="_blank" title="Fisheye & Cruclible"><i class="icon-film"></i><span>  
+							Fisheye<br/>Cruclible</span></a>
+							<a href="http://www.313.co.kr/nas" target="_blank" title="Xpenology"><i class="icon-film"></i><span>  
+							Xpenology</span></a>
+						</div>
 						
-						<a title="Net FTP" class="submenu" name="FTP-sub"><i class="icon-eye-open"></i><span>  
-						Net FTP</span></a>
-						<!-- Net FTP Sub Menu -->
-							<div id="FTP-sub">
-								<a href="http://www.313.co.kr/php/net2ftp_v0.98/files_to_upload" target="_blank" title="net2ftp_v0.98"><i class="icon-film"></i><span>  
-								net2ftp_v0.98</span></a>
-							</div>
-						<!-- Net FTP Sub Menu -->
+					<a title="Build" class="submenu" name="Build-sub"><i class="icon-eye-open"></i>
+						<span>Build</span>
+					</a>
+						<div id="Build-sub">
+							<a href="http://www.313.co.kr/nexus" target="_blank" title="Nexus"><i class="icon-film"></i><span>  
+							Nexus</span></a>
+							<a href="http://www.313.co.kr/jenkins" target="_blank" title="Jenkins"><i class="icon-film"></i><span>  
+							Jenkins</span></a>
+							<a href="http://www.313.co.kr/bamboo" target="_blank" title="Bamboo"><i class="icon-film"></i><span>  
+							Bamboo</span></a>
+						</div>
+					
+					<a title="Analysis" class="submenu" name="Analysis-sub"><i class="icon-eye-open"></i>
+						<span>Analysis</span>
+					</a>
+						<div id="Analysis-sub">
+							<a href="http://www.313.co.kr/php/www313cokr-maven-site/standard-supports/" target="_blank" title="Maven"><i class="icon-film"></i><span>  
+							Maven</span></a>
+							<a href="http://www.313.co.kr/sonar/" target="_blank" title="Sonar"><i class="icon-film"></i><span>  
+							Sonar</span></a>
+						</div>
+					
+					<a title="Database" class="submenu" name="Database-sub"><i class="icon-eye-open"></i>
+						<span>Database</span>
+					</a>
+						<div id="Database-sub">
+							<a href="http://www.313.co.kr/oracle" target="_blank" title="Oracle EM"><i class="icon-film"></i><span>  
+							Oracle EM</span></a>
+							<a href="http://www.313.co.kr/php/phpMyAdmin-3.3.9.2-all-languages" target="_blank" title="phpMyAdmin-3.3.9.2"><i class="icon-film"></i><span>  
+							phpMyAdmin-3.3.9.2</span></a>
+							<a href="http://www.313.co.kr:8888/phppgadmin/" target="_blank" title="phppPgAdmin"><i class="icon-film"></i><span>  
+							phppPgAdmin</span></a>
+							<a href="http://www.313.co.kr:8808" target="_blank" title="EFM Networks ipTIME A3004NS"><i class="icon-film"></i><span>  
+							EFM Networks ipTIME A3004NS</span></a>
+						</div>
 						
-						<a title="Web Hard" class="submenu" name="Hard-sub"><i class="icon-eye-open"></i><span>  
-						Web Hard</span></a>
-						<!-- Net FTP Sub Menu -->
-							<div id="Hard-sub">
-								<a href="http://www.313.co.kr/php/ajaxplorer-core-4.2.3" target="_blank" title="ajaxplorer-core-4.2.3"><i class="icon-film"></i><span>  
-								ajaxplorer-core-4.2.3</span></a>
-							</div>
-						<!-- Net FTP Sub Menu -->
-						
-						<a class="submenu" name="Analytics-sub" title="Analytics"><i class="icon-book"></i><span> 
-						Analytics</span></a>
-						<!-- Analytics Sub Menu -->
-							<div id="Analytics-sub">
-								<a href="http://www.google.com/intl/ko/analytics" target="_blank" title="Google analytics"><i class="icon-list"></i><span>  
-								Google analytics</span></a>
-								<a href="http://www.313.co.kr/php/analyzer/deeplog" target="_blank" title="DeepLog"><i class="icon-list-ul"></i><span>  
-								DeepLog</span></a>
-								<a href="http://www.313.co.kr/php/analyzer/alterwind" target="_blank" title="AlterWind"><i class="icon-map-marker"></i><span>  
-								AlterWind</span></a>
-							</div>
-						<!-- Analytics Sub Menu -->
-						
-						<a title="Server Log Viewer" class="submenu" name="Viewer-sub"><i class="icon-eye-open"></i><span>  
-						Server Log Viewer</span></a>
-						<!-- Server Log Viewer Sub Menu -->
-							<div id="Viewer-sub">
-								<a href="http://www.313.co.kr/php/eXtplorer_2.1.0RC3" target="_blank" title="eXtplorer_2.1.0RC3"><i class="icon-film"></i><span>  
-								eXtplorer_2.1.0RC3</span></a>
-							</div>
-						<!-- Server Log Viewer Sub Menu -->
-						
-						<a title="Switch router" class="submenu" name="router-sub"><i class="icon-eye-open"></i><span>  
-						Switch router</span></a>
-						<!-- Switch router Sub Menu -->
-							<div id="router-sub">
-								<a href="http://www.313.co.kr:8808" target="_blank" title="EFM Networks ipTIME A3004NS"><i class="icon-film"></i><span>  
-								EFM Networks ipTIME A3004NS</span></a>
-							</div>
-						<!-- Switch router Sub Menu -->
-						
-						<a title="Mysql" class="submenu" name="Mysql-sub"><i class="icon-eye-open"></i><span>  
-						Mysql</span></a>
-						<!-- Mysql Sub Menu -->
-							<div id="Mysql-sub">
-								<a href="http://www.313.co.kr/php/phpMyAdmin-3.3.9.2-all-languages" target="_blank" title="phpMyAdmin-3.3.9.2"><i class="icon-film"></i><span>  
-								phpMyAdmin-3.3.9.2</span></a>
-							</div>
-						<!-- Mysql Sub Menu -->
-						
-						<a title="Postgres" class="submenu" name="Postgres-sub"><i class="icon-eye-open"></i><span>  
-						Postgres</span></a>
-						<!-- Postgres Sub Menu -->
-							<div id="Postgres-sub">
-								<a href="http://www.313.co.kr:8888/phppgadmin/" target="_blank" title="phppPgAdmin"><i class="icon-film"></i><span>  
-								phppPgAdmin</span></a>
-							</div>
-						<!-- Postgres Sub Menu -->
-						
-						<a title="산출물 관리 및 위키" class="submenu" name="wiki-sub"><i class="icon-eye-open"></i><span>  
-						산출물 관리 및 위키</span></a>
-						<!-- 산출물 관리 및 위키 Sub Menu -->
-							<div id="wiki-sub">
-								<a href="http://www.313.co.kr/confluence" target="_blank" title="Confluence"><i class="icon-film"></i><span>  
-								Confluence</span></a>
-							</div>
-						<!-- 산출물 관리 및 위키 Sub Menu -->
-						
-						<a title="이슈 관리" class="submenu" name="issue-sub"><i class="icon-eye-open"></i><span>  
-						이슈 관리</span></a>
-						<!-- Jira Sub Menu -->
-							<div id="issue-sub">
-								<a href="http://www.313.co.kr/jira" target="_blank" title="Jira"><i class="icon-film"></i><span>  
-								Jira</span></a>
-							</div>
-						<!-- Jira Sub Menu -->
-						
-						<a title="리뷰" class="submenu" name="fecru-sub"><i class="icon-eye-open"></i><span>  
-						리뷰</span></a>
-						<!-- fecru Sub Menu -->
-							<div id="fecru-sub">
-								<a href="http://www.313.co.kr/fecru" target="_blank" title="Fisheye & Cruclible"><i class="icon-film"></i><span>  
-								Fisheye & Cruclible</span></a>
-							</div>
-						<!-- fecru Sub Menu -->
-						
-						<a title="소스코드 일관성 유지" class="submenu" name="svn-sub"><i class="icon-eye-open"></i><span>  
-						소스코드 일관성 유지</span></a>
-						<!-- SvnWebClient Sub Menu -->
-							<div id="svn-sub">
-								<a href="http://www.313.co.kr/svnwebclient/" target="_blank" title="SvnWebClient"><i class="icon-film"></i><span>  
-								SvnWebClient</span></a>
-							</div>
-						<!-- SvnWebClient Sub Menu -->
-						
-						<a title="자동 빌드" class="submenu" name="maven-sub"><i class="icon-eye-open"></i><span>  
-						자동 빌드</span></a>
-						<!-- maven Sub Menu -->
-							<div id="maven-sub">
-								<a href="http://www.313.co.kr/php/www313cokr-maven-site/standard-supports/" target="_blank" title="Maven"><i class="icon-film"></i><span>  
-								Maven</span></a>
-							</div>
-						<!-- maven Sub Menu -->
-						
-						<a title="빌드" class="submenu" name="build-sub"><i class="icon-eye-open"></i><span>  
-						빌드</span></a>
-						<!-- build Sub Menu -->
-							<div id="build-sub">
-								<a href="http://www.313.co.kr/hudson" target="_blank" title="Hudson"><i class="icon-film"></i><span>  
-								Maven</span></a>
-								<a href="http://www.313.co.kr/jenkins" target="_blank" title="Jenkins"><i class="icon-film"></i><span>  
-								Jenkins</span></a>
-							</div>
-						<!-- build Sub Menu -->
-						
-						<a title="라이브러리 관리" class="submenu" name="nexus-sub"><i class="icon-eye-open"></i><span>  
-						라이브러리 관리</span></a>
-						<!-- SvnWebClient Sub Menu -->
-							<div id="nexus-sub">
-								<a href="http://www.313.co.kr/nexus" target="_blank" title="Nexus"><i class="icon-film"></i><span>  
-								Nexus</span></a>
-							</div>
-						<!-- Nexus Sub Menu -->
-						
-						<a title="빌드 통합 관리" class="submenu" name="bamboo-sub"><i class="icon-eye-open"></i><span>  
-						빌드 통합 관리</span></a>
-						<!-- bamboo Sub Menu -->
-							<div id="bamboo-sub">
-								<a href="http://www.313.co.kr/bamboo" target="_blank" title="Bamboo"><i class="icon-film"></i><span>  
-								Bamboo</span></a>
-							</div>
-						<!-- bamboo Sub Menu -->
-						
-						<a title="자동 테스팅" class="submenu" name="sonar-sub"><i class="icon-eye-open"></i><span>  
-						자동 테스팅</span></a>
-						<!-- sonar Sub Menu -->
-							<div id="sonar-sub">
-								<a href="http://www.313.co.kr/sonar/" target="_blank" title="Sonar"><i class="icon-film"></i><span>  
-								Sonar</span></a>
-							</div>
-						<!-- sonar Sub Menu -->
+					<a title="Monitoring" class="submenu" name="Monitoring-sub"><i class="icon-eye-open"></i>
+						<span>Monitoring</span>
+					</a>
+						<div id="Monitoring-sub">
+							<a href="http://www.313.co.kr/piwik" target="_blank" title="Piwik"><i class="icon-list"></i><span>  
+							Piwik</span></a>
+							<a href="analytics.naver.com/" target="_blank" title="Naver analytics"><i class="icon-list"></i><span>  
+							Naver analytics</span></a>
+							<a href="http://www.google.com/intl/ko/analytics" target="_blank" title="Google analytics"><i class="icon-list"></i><span>  
+							Google analytics</span></a>
+							<a href="http://www.313.co.kr/php/phpservermon-2.0.1" target="_blank" title="phpservermon-2.0.1"><i class="icon-film"></i><span>  
+							phpservermon-2.0.1</span></a>
+							<a href="http://www.313.co.kr/probe" target="_blank" title="Probe"><i class="icon-film"></i><span>  
+							Probe</span></a>
+							<a href="http://www.313.co.kr/php/eXtplorer_2.1.0RC3" target="_blank" title="eXtplorer_2.1.0RC3"><i class="icon-film"></i><span>  
+							eXtplorer_2.1.0RC3</span></a>
+						</div>
+					
 						
 				</div>
 				<!--//Menu-->
