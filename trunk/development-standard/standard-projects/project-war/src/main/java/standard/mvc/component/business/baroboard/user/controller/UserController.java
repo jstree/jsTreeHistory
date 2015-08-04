@@ -15,7 +15,10 @@
  */
 package standard.mvc.component.business.baroboard.user.controller;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -30,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.GeneralSettingService;
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.service.ProhibitionWordService;
+import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.ProhibitionWord;
 import standard.mvc.component.business.baroboard.user.service.UserService;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
@@ -38,6 +43,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
@@ -75,6 +81,12 @@ public class UserController extends GenericAbstractController {
     @Autowired
     private GeneralSettingService generalSettingService;
     
+    @Autowired
+    private ProhibitionWordService prohibitionWordService;
+    
+    @Resource(name="egovMessageSource")
+    EgovMessageSource egovMessageSource;
+    
     @Override
     public Map<String, Map<String, Object>> bindTypes() {
         // TODO Auto-generated method stub
@@ -99,14 +111,28 @@ public class UserController extends GenericAbstractController {
         return "/jsp/user/info/index";
     }
     
-    @RequestMapping(value = "/info/isDuplicateEmail.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/info/isAvailableEmail.do", method = RequestMethod.POST)
     @ResponseBody
-    public String isDuplicateEmail(@RequestBody User user) throws Exception {
+    public String isAvailableEmail(@RequestBody User user) throws Exception {
         
-        if ( userService.isDuplicateEmail(user) ) {
-            user.setStatus(1);
-        } else {
+        List<ProhibitionWord> emailProhibitionWords = prohibitionWordService.getEmailProhibitionWords();
+        Set<String> prohibitionWords = new HashSet<String>();
+        
+        for (ProhibitionWord prohibitionWord : emailProhibitionWords) {
+            prohibitionWords.add(prohibitionWord.getC_title());
+        }
+        
+        if ( prohibitionWords.contains(user.getEmail()) ) {
             user.setStatus(0);
+            user.setAjaxMessage( egovMessageSource.getMessage("bb.user.error.002") );
+        }
+        else if ( userService.isDuplicateEmail(user) ) {
+            user.setStatus(0);
+            user.setAjaxMessage( egovMessageSource.getMessage("bb.user.error.004") );
+        }
+        else {
+            user.setStatus(1);
+            user.setAjaxMessage( egovMessageSource.getMessage("bb.user.info.001") );
         }
         
         Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
@@ -114,7 +140,7 @@ public class UserController extends GenericAbstractController {
             @Override
             public boolean shouldSkipField(FieldAttributes f) {
                 
-                if ("status".equals(f.getName())) {
+                if ( "status".equals(f.getName()) || "ajaxMessage".equals(f.getName()) ) {
                     return false;
                 } else {
                     return true;
@@ -131,14 +157,28 @@ public class UserController extends GenericAbstractController {
         return gson.toJson(user);
     }
     
-    @RequestMapping(value = "/info/isDuplicateNickname.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/info/isAvailableNickname.do", method = RequestMethod.POST)
     @ResponseBody
-    public String isDuplicateNickname(@RequestBody User user) throws Exception {
+    public String isAvailableNickname(@RequestBody User user) throws Exception {
         
-        if ( userService.isDuplicateNickname(user) ) {
-            user.setStatus(1);
-        } else {
+        List<ProhibitionWord> nicknameProhibitionWords = prohibitionWordService.getNicknameProhibitionWords();
+        Set<String> prohibitionWords = new HashSet<String>();
+        
+        for (ProhibitionWord prohibitionWord : nicknameProhibitionWords) {
+            prohibitionWords.add(prohibitionWord.getC_title());
+        }
+        
+        if ( prohibitionWords.contains(user.getC_title()) ) {
             user.setStatus(0);
+            user.setAjaxMessage( egovMessageSource.getMessage("bb.user.error.003") );
+        }
+        else if ( userService.isDuplicateNickname(user) ) {
+            user.setStatus(0);
+            user.setAjaxMessage( egovMessageSource.getMessage("bb.user.error.005") );
+        }
+        else {
+            user.setStatus(1);
+            user.setAjaxMessage( egovMessageSource.getMessage("bb.user.info.002") );
         }
         
         Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
@@ -146,7 +186,7 @@ public class UserController extends GenericAbstractController {
             @Override
             public boolean shouldSkipField(FieldAttributes f) {
                 
-                if ("status".equals(f.getName())) {
+                if ( "status".equals(f.getName()) || "ajaxMessage".equals(f.getName()) ) {
                     return false;
                 } else {
                     return true;
@@ -172,6 +212,8 @@ public class UserController extends GenericAbstractController {
         if (userSession.getId() != user.getC_id()) {
             throw new RuntimeException("bb.com.error.004");
         }
+        
+        user.setEmail(user.getEmailAccount() + "@" + user.getEmailHost());
         
         userService.modifyUserInfo(user);
         

@@ -56,7 +56,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
  * @see <pre>
  * Class Name  : DbUnitTest.java
  * Description : 바로보드-회원관리 테스트 클래스의 부모 클래스
- * Infomation  : Root Node, First Child Node 검증과 같은 공통적인 요소를 포함하고 있음.
+ * Information  : Root Node, First Child Node 검증과 같은 공통적인 요소를 포함하고 있음.
  * 
  * << 개정이력(Modification Information) >>
  * 

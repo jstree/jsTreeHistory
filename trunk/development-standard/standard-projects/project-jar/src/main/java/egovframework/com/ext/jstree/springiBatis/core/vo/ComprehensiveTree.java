@@ -40,6 +40,7 @@ import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNod
  *  2015.  3.  3.  전경훈            Constraint Annotation 추가
  *  2015.  3.  9.  전경훈            Constraint Annotation 변경 (공백값 체크를 위해 NotEmpty -> NotBlank)
  *  2015.  5. 25.  손호성            c_title NotBlank Annotation 제거
+ *  2015.  8.  4.  류강하            ajaxMessage 프라퍼티 추가
  *  
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
@@ -79,6 +80,8 @@ public class ComprehensiveTree {
 	private int multiCounter;
 	
 	private int status;
+	/** ajax 처리 결과 메시지 */
+	private String ajaxMessage;
 	
 	/** Node 의 title */
 	private String c_title;
@@ -289,8 +292,16 @@ public class ComprehensiveTree {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	public String getAjaxMessage() {
+        return ajaxMessage;
+    }
 
-	public int getIdif() {
+    public void setAjaxMessage(String ajaxMessage) {
+        this.ajaxMessage = ajaxMessage;
+    }
+
+    public int getIdif() {
 		return idif;
 	}
 
@@ -372,8 +383,8 @@ public class ComprehensiveTree {
 		attr.put("rel", c_type);
 		return attr;
 	}
-
-	public String getSqlMapSelector() {
+	
+    public String getSqlMapSelector() {
 		if (sqlMapSelector == null || sqlMapSelector.isEmpty()) {
 			return "core";
 		} else {

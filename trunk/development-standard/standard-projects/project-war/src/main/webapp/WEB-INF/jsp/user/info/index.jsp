@@ -32,6 +32,9 @@ select {
     min-width : 71px;
     min-height : 37px;
 }
+.hidden {
+    display : none;
+}
 .divButtons {
     float : right;
 }
@@ -80,7 +83,7 @@ var userInfo = {
                 };
                 
                 callAjax(null
-                       , '${pageContext.request.contextPath}/user/info/isDuplicateNickname.do'
+                       , '${pageContext.request.contextPath}/user/info/isAvailableNickname.do'
                        , null
                        , 'post'
                        , 'json'
@@ -88,18 +91,31 @@ var userInfo = {
                        , 'application/json'
                        , callback);
                  
-                 function callback(r) {
-                     
-                     if (r.status) {
-                         userInfo.nicknameDuplicaionChecked = false;
-                         userInfo.uniqueNickname = false;
-                         alert('중복된 닉네임입니다. 다시 입력해주세요.');
-                     } else {
-                         userInfo.nicknameDuplicaionChecked = true;
-                         userInfo.uniqueNickname = true;
-                         alert('사용할 수 있는 닉네임입니다.');
-                     }
-                 }
+                function callback(r) {
+                    
+                    if (r.status) {
+                        userInfo.nicknameDuplicaionChecked = true;
+                        userInfo.uniqueNickname = true;
+                    } else {
+                        userInfo.nicknameDuplicaionChecked = false;
+                        userInfo.uniqueNickname = false;
+                    }
+                    
+                    alert(r.ajaxMessage);
+                }
+            });
+        })();
+        
+        (function onChangeNickname() {
+            
+            $('#frmUserInfo input[name="c_title"]').on('input propertychange paste', function() {
+                
+                if (this.value == userInfo.nickname) {
+                    $('#btnNicknameDuplicationCheck').addClass('hidden');
+                }
+                else {
+                    $('#btnNicknameDuplicationCheck').removeClass('hidden');
+                }
             });
         })();
         
@@ -321,7 +337,7 @@ $(document).ready(function() {
                                            닉네임<span class="essential">*</span>
                         <input name="c_title" type="text" value="${user.c_title}" style="width:200px" />
                     </label>
-                    <button id="btnNicknameDuplicationCheck" type="button" class="compact">중복체크</button>
+                    <button id="btnNicknameDuplicationCheck" type="button" class="compact hidden">중복체크</button>
                 </div>
                 <div>
                     <label>

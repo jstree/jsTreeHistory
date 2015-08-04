@@ -138,7 +138,23 @@ var userList = {
 		
     initGrid : function() {
         
-    	userList.grid = $('#tblUserList').dataTable();
+    	userList.grid = $('#tblUserList').dataTable(userList.getGridOptions());
+    },
+    
+    getGridOptions : function() {
+        return {
+            searching : false,
+            lengthChange : false,
+            paging : false,
+            ordering : false,
+            info : false,
+            columnDefs : [
+                {targets : 2, className : 'center'},
+                {targets : 3, className : 'center'},
+                {targets : 5, className : 'center'},
+                {targets : 7, className : 'center'}
+            ]
+        };
     },
     
     handleEvent : function() {
@@ -330,20 +346,10 @@ var userList = {
 		    	
 		    	userList.grid.fnDestroy();
 		    	
-		    	userList.grid.dataTable({
-		    		searching : false,
-		            lengthChange : false,
-		            paging : false,
-		            ordering : false,
-		            info : false,
-		            data : rows,
-		            columnDefs : [
-		            	{targets : 2, className : 'center'},
-		            	{targets : 3, className : 'center'},
-		            	{targets : 5, className : 'center'},
-		            	{targets : 7, className : 'center'}
-		            ]
-		        });
+		    	var gridOptions = userList.getGridOptions();
+		    	gridOptions.data = rows;
+		    	
+		    	userList.grid.dataTable(gridOptions);
 		    })();
 	    	
 	    	(function renderPageList() {

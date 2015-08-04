@@ -90,7 +90,7 @@ var join = {
                 };
                 
                 callAjax(null
-                       , '${pageContext.request.contextPath}/user/info/isDuplicateEmail.do'
+                       , '${pageContext.request.contextPath}/user/info/isAvailableEmail.do'
                        , null
                        , 'post'
                        , 'json'
@@ -101,14 +101,14 @@ var join = {
                  function callback(r) {
                      
                      if (r.status) {
-                         join.emailDuplicaionChecked = false;
-                         join.uniqueEmail = false;
-                         alert('중복된 이메일입니다. 다시 입력해주세요.');
-                     } else {
                          join.emailDuplicaionChecked = true;
                          join.uniqueEmail = true;
-                         alert('사용할 수 있는 이메일입니다.');
+                     } else {
+                         join.emailDuplicaionChecked = false;
+                         join.uniqueEmail = false;
                      }
+                     
+                     alert(r.ajaxMessage);
                  }
             });
         })();
@@ -131,7 +131,7 @@ var join = {
                 };
                 
                 callAjax(null
-                       , '${pageContext.request.contextPath}/user/info/isDuplicateNickname.do'
+                       , '${pageContext.request.contextPath}/user/info/isAvailableNickname.do'
                        , null
                        , 'post'
                        , 'json'
@@ -142,14 +142,14 @@ var join = {
                  function callback(r) {
                      
                      if (r.status) {
-                         join.nicknameDuplicaionChecked = false;
-                         join.uniqueNickname = false;
-                         alert('중복된 닉네임입니다. 다시 입력해주세요.');
-                     } else {
                          join.nicknameDuplicaionChecked = true;
                          join.uniqueNickname = true;
-                         alert('사용할 수 있는 닉네임입니다.');
+                     } else {
+                         join.nicknameDuplicaionChecked = false;
+                         join.uniqueNickname = false;
                      }
+                     
+                     alert(r.ajaxMessage);
                  }
             });
         })();

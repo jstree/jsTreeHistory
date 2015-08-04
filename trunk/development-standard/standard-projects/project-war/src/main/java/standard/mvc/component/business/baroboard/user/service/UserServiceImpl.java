@@ -137,6 +137,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User addUser(User user) throws Exception {
         
+        if (isDuplicateEmail(user)) {
+            throw new RuntimeException("bb.user.error.004");
+        }
+        if (isDuplicateNickname(user)) {
+            throw new RuntimeException("bb.user.error.005");
+        }
+        
         user.setRef(2);
         user.setC_type("default");
         
