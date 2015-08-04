@@ -30,7 +30,7 @@
 
 			/* custom */
 			.page-border { width: 90%; /* min-width: 1227px; */ margin-left: 10%; }
-			#responsive-lnb #responsive-admin-menu { position: fixed; top: 0 !important; z-index: 100; width: 10%; max-width: 200px; min-width: 135px; }
+			#responsive-lnb #responsive-admin-menu { position: fixed; top: 0 !important; z-index: 100; width: 10%; max-width: 200px; min-width: 127px; }
 			#responsive-lnb #responsive-admin-menu #menu a { font-size : 13px; }
 			#responsive-lnb #responsive-admin-menu #menu a.submenu:before { top: 13px; right: 11px; font-size: 13px; }
 			@media (min-width: 1200px) and (max-width: 1600px) { 
