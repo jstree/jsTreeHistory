@@ -234,7 +234,7 @@
 						<div id="Monitoring-sub">
 							<a href="http://www.313.co.kr/piwik" target="_blank" title="Piwik"><i class="icon-list"></i>
 							<span>Piwik</span></a>
-							<a href="analytics.naver.com/" target="_blank" title="Naver analytics"><i class="icon-list"></i>
+							<a href="http://analytics.naver.com/" target="_blank" title="Naver analytics"><i class="icon-list"></i>
 							<span>Naver<br/>&nbsp;analytics</span></a>
 							<a href="http://www.google.com/intl/ko/analytics" target="_blank" title="Google analytics"><i class="icon-list"></i>
 							<span>Google<br/>&nbsp;analytics</span></a>
