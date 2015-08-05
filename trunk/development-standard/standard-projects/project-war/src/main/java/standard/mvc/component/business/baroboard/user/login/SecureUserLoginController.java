@@ -74,7 +74,7 @@ public class SecureUserLoginController extends GenericAbstractController
 		String errorCode = (String)request.getSession().getAttribute("errorCode");
 		
 		final String EMAILNOTFOUND = "1";
-		final String ACCOUNTLOCKED = "2";
+		final String NOTCOMPLATE = "2";
 		final String WRONGPASSWORD = "3";
 		final String LOGINLIMITDAY = "4";
 		
@@ -84,9 +84,9 @@ public class SecureUserLoginController extends GenericAbstractController
 			{
 				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.002")); 
 			}
-			else if( StringUtils.equals(ACCOUNTLOCKED, errorCode) )
+			else if( StringUtils.equals(NOTCOMPLATE, errorCode) )
 			{
-				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.008"));
+				model.addAttribute("errorMsg", this.egovMessageSource.getMessage("bb.login.error.011"));
 			}
 			else if( StringUtils.equals(WRONGPASSWORD , errorCode) )
 			{
