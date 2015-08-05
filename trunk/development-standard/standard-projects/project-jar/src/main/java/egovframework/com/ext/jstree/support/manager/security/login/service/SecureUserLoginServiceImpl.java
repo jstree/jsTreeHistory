@@ -23,7 +23,6 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import egovframework.com.cmm.EgovMessageSource;
@@ -68,7 +67,7 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
     EgovMessageSource egovMessageSource;
 	
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
+	public UserDetails loadUserByUsername(String email) throws RuntimeException
 	{
 		SecureUser secureLogInUser = new SecureUser();
 		secureLogInUser.setEmail(email);
@@ -85,14 +84,14 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
 			final int JOINCOMPLETE = 4;
 			if ( secureLogInUser.getJoinStateCd() !=  JOINCOMPLETE)
 			{
-				new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.011") );
+				throw new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.011") );
 			}
 			
 			SecureGeneralSetting secureGeneralSetting = secureGeneralSettingService.getGeneralSetting();
 			
 			if ( secureLogInUser.getLoginFailureCnt() == secureGeneralSetting.getLoginFailureLimitCnt() )
 			{
-				new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.012") );
+				throw new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.012") );
 			}
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -102,7 +101,7 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
 			
 			if( joinTargetDate.after(new Date()) == true )
 			{
-				new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.013") );
+				throw new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.013") );
 			}
 		} 
 		catch (Exception e) 
