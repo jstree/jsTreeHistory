@@ -232,6 +232,8 @@
 						<span>Monitoring</span>
 					</a>
 						<div id="Monitoring-sub">
+							<a href="http://313.co.kr:8088" target="_blank" title="PRTG"><i class="icon-list"></i>
+							<span>PRTG</span></a>
 							<a href="http://www.313.co.kr/piwik" target="_blank" title="Piwik"><i class="icon-list"></i>
 							<span>Piwik</span></a>
 							<a href="http://analytics.naver.com/" target="_blank" title="Naver analytics"><i class="icon-list"></i>
