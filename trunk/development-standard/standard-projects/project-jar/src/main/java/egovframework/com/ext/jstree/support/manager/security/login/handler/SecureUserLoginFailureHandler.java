@@ -59,7 +59,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		secureLogInUser.setEmail( request.getParameter("email") );
 		secureLogInUser.setPassword( request.getParameter("password") );
 		
-		final int ACCOUNTLOCKED = 5;
+		final int JOINCOMPLETE = 4;
 		final String LOGINURL = "/user/login/index.do";
 		super.setDefaultFailureUrl(LOGINURL);
 		
@@ -72,7 +72,6 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 			String secureLogInUserPassword = encoder.encodePassword(secureLogInUser.getPassword(), null);
 			
 			Date joinTargetDate = null;
-			
 			if ( secureLoggedInUser != null ) 
 			{
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -104,7 +103,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 					request.getSession().setAttribute("loginFailureCnt", String.valueOf(secureLoggedInUser.getLoginFailureCnt()));
 				}
 			}
-			else if( secureLoggedInUser.getJoinStateCd() == ACCOUNTLOCKED )
+			else if( secureLoggedInUser.getJoinStateCd() != JOINCOMPLETE )
 			{
 				request.getSession().setAttribute("errorCode", "2");
 			}
