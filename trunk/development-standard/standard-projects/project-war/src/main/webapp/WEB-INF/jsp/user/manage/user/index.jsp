@@ -252,6 +252,23 @@ var userList = {
     			userList.deleteUserInfo(params);
         	}
         });
+        
+        $(document).on('change', '#tblUserList select[name="joinApprovalFl"]', function() {
+            
+            var $select = $(this);
+            
+            var params = {
+                c_id : $select.data('param')
+              , joinApprovalFl : $select.val()
+            };
+            
+            userList.approveJoining(params, function() {
+                
+                var $td = $select.parent();
+                $td.empty();
+                $td.text('Y');
+            });
+        });
     },
 	
     editUserInfo : function(param) {
@@ -333,10 +350,15 @@ var userList = {
 		    		row.push(user.userGrade);
 		    		row.push(user.lastLoginDe || '');
 		    		row.push(user.joinDe);
-		    		row.push('<select name="joinApprovalFl" style="width:55px !important; height: 33px !important; margin-bottom: 0">'
-		    		       + '    <option value="1"' + (user.joinStateCd == 4 ? 'selected="selected"' : '') + '>Y</option>'
-		    		       + '    <option value="0"' + (user.joinStateCd == 3 ? 'selected="selected"' : '') + '>N</option>'
-		    		       + '</select>');
+		    		if (user.joinStateCd == 4) {
+		    		    row.push('Y');
+		    		}
+		    		else {
+		    		    row.push('<select name="joinApprovalFl" data-param="' + user.c_id + '" style="width:55px !important; height: 33px !important; margin-bottom: 0">'
+	                           + '    <option value="1">Y</option>'
+	                           + '    <option value="0" selected="selected">N</option>'
+	                           + '</select>');
+		    		}
 		    		row.push('<a href="javascript:void(0);" data-function="editUserInfo" data-param="' + user.c_id + '">Edit</a>&nbsp;'
 		    		       + '<a href="javascript:void(0);" data-function="deleteUserInfo" data-param="' + user.c_id + '">Delete</a>');
 		    		row.push('<input name="checkDelete" type="checkbox" data-param="' + user.c_id + '" />');
@@ -359,7 +381,25 @@ var userList = {
 	    	
 	    	userList.currentPageNo = pageNo;
 	    }
-	    
+    },
+    
+    approveJoining : function(params, callback) {
+        
+//         callAjax(null
+//                 , 'delete.do'
+//                 , null
+//                 , 'post'
+//                 , 'json'
+//                 , params
+//                 , 'application/json'
+//                 , callback);
+         
+//          function callback(r) {
+             
+//              userList.getList(userList.currentPageNo);
+//          }
+
+        callback();
     },
     
     init : function() {
