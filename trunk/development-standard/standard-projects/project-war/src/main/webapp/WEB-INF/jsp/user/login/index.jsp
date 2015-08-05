@@ -31,7 +31,7 @@
 								<label for="email">이메일 주소</label>
 							</div>
 							 <div class="three-quarter-percent">
-								<input type="text" id="email" name="email" class="w-full" value="VinDiesel@Gmail.com" />
+								<input type="text" id="email" name="email" class="w-full" />
 							</div>
 						</div>
 						<div class="responsive-row inline-block ">
@@ -40,7 +40,7 @@
 							</div>
 							<div class="three-quarter-percent">
 								<!-- <input type="text" id="t_password" class="w-full fake-password" value=""/> -->
-								<input type="password" id="password" name="password" class="w-full" value="VinDiesel"/>
+								<input type="password" id="password" name="password" class="w-full" />
 							</div>
 						</div>
 						<c:if test="${not empty errorMsg}">
