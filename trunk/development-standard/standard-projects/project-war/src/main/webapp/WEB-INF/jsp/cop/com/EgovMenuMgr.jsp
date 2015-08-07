@@ -46,16 +46,16 @@
 <!-- 전체 레이어 시작 -->
 <div id="wrap">
 	<!-- header 시작 -->
-    <div id="header_mainsize"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncHeader" /></div>
-    <div id="topnavi"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncTopnav" /></div>     
+    <%-- <div id="header_mainsize"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncHeader" /></div>
+    <div id="topnavi"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncTopnav" /></div>   --%>   
     <!-- //header 끝 -->
 	<!-- container 시작 -->
 	<div id="container">
 		<!-- 좌측메뉴 시작 -->
-		<div id="leftmenu"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncLeftmenu" /></div>
+		<%-- <div id="leftmenu"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncLeftmenu" /></div> --%>
 		<div id="content">
 			<div id="cur_loc">
-				<div id="cur_loc_align">
+				<!-- <div id="cur_loc_align">
 					<ul>
 						<li>HOME</li>
 						<li>&gt;</li>
@@ -63,7 +63,7 @@
 						<li>&gt;</li>
 						<li><strong>메뉴관리</strong></li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
             <DIV id="content2" style="width:100%;height:100%;">
 				<div id="search_field">
@@ -92,7 +92,7 @@
     <div id="nodeConfirm" title="확인"></div>	
 	<!-- //container 끝 -->
 	<!-- footer 시작 -->
-    <div id="footer"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncFooter" /></div>
+    <%-- <div id="footer"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncFooter" /></div> --%>
     <!-- //footer 끝 -->
 </div>
 <!-- JavaScript neccessary for the tree -->

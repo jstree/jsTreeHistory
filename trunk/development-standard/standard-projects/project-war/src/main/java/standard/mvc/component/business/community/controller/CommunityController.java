@@ -85,4 +85,9 @@ public class CommunityController {
 		model.addAttribute("logUrl", logUrlService.getLogUrl());
 		return "/jsp/community/common/404error";
 	}
+	
+	@RequestMapping(value = "/menuMgr.do")
+	public String menuMgr(ModelMap model) throws Exception {
+		return "/jsp/cop/com/EgovMenuMgr";
+	}
 }
