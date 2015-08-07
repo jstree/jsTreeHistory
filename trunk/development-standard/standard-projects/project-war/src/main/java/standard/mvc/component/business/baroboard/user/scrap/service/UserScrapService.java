@@ -2,6 +2,7 @@ package standard.mvc.component.business.baroboard.user.scrap.service;
 
 import java.util.List;
 
+import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
 
 
@@ -57,4 +58,28 @@ public interface UserScrapService {
      * @return UserScrap
      */
 	public UserScrap getDeleteScrapId(int postingId) throws Exception;
+	
+	/**
+     * 스크랩 추가
+     * 
+     * @param Article article, String loginedUserID
+     * @return UserScrap
+     */
+	public UserScrap addScrap(Article article, int loginedUserID) throws Exception;
+	
+	/**
+     * 보드 ID 가져오기
+     * 
+     * @param int article 
+     * @return String 
+     */
+	public String getBoardId(int articleId) throws Exception;
+	
+	/**
+    * 게시물 목록 가져오기
+    * 
+    * @param Article article
+    * @return UserScrap
+    */
+	public UserScrap getArticle(Article article) throws Exception;
 }

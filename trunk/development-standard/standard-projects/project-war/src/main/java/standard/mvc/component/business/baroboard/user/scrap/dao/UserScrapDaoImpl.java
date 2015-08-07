@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 
 
+
+
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
@@ -51,6 +53,18 @@ public class UserScrapDaoImpl extends EgovComAbstractDAO implements UserScrapDao
 	public UserScrap getC_id(int postingId) throws Exception {
 		// TODO Auto-generated method stub
 		return (UserScrap)getSqlMapClientTemplate().queryForObject("userScrap.getC_id", postingId);
+	}
+
+	@Override
+	public String getBoardId(int articleId) throws Exception {
+		// TODO Auto-generated method stub
+		return (String)getSqlMapClientTemplate().queryForObject("userScrap.getBoardId", articleId);
+	}
+
+	@Override
+	public UserScrap getArticle(Article article) throws Exception {
+		// TODO Auto-generated method stub
+		return (UserScrap)getSqlMapClientTemplate().queryForObject("userScrap.getArticle", article);
 	}
 
 }

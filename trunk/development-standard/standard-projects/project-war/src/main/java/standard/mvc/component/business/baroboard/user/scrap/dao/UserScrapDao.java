@@ -33,6 +33,9 @@ public interface UserScrapDao {
 
 	UserScrap getC_id(int postingId) throws Exception;
 	
+	String getBoardId(int articleId) throws Exception;
+
+	UserScrap getArticle(Article article) throws Exception;
 }
 
 

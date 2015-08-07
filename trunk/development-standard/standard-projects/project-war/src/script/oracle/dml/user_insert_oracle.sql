@@ -95,19 +95,19 @@ INSERT INTO T_USER_SCRAP
   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
    C_USER_ID, C_BOARD_ID, C_POSTING_ID, C_SCRAP_DT)                     
   VALUES (1, 0, 0, 1, 6, 0, 'Root Node', 'root',
-          0, 0, 0,'20150425205811');
+          0, '0', 0,'20150425205811');
   
 INSERT INTO T_USER_SCRAP 
   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
    C_USER_ID, C_BOARD_ID, C_POSTING_ID, C_SCRAP_DT)                     
   VALUES (2, 1, 0, 2, 5, 1, '게시판 스크랩 목록', 'drive',
-           3, 0, 0,'20150425205811');
+           3, '0', 0,'20150425205811');
            
 INSERT INTO T_USER_SCRAP 
   (C_ID, C_PARENTID, C_POSITION, C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE,
    C_USER_ID, C_BOARD_ID, C_POSTING_ID, C_SCRAP_DT)                     
-  VALUES (3, 2, 0, 3, 4, 2, '테스트 스크랩', 'default',
-           3, 6, 270,'20150617090502');
+  VALUES (3, 2, 0, 3, 4, 2, '테스트글입니다..111', 'default',
+           3, '365', 270,'20150617090502');
            
 COMMIT;
 

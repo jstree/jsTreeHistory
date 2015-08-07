@@ -3,6 +3,7 @@
 <sqlMap namespace="userScrap">
 	<typeAlias alias="UserScrap"
 		type="standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap" />
+	<typeAlias alias="Article" type="standard.mvc.component.business.baroboard.board.vo.Article" />
 		
 	<sql id="getMetaField">
 		/* getChildNode */
@@ -48,7 +49,7 @@
 			FROM T_USER_SCRAP B
 			<include refid="getInlineChildCountAfterFrom" />
 			/* table from filed*/
-			, #boardID# as boardID
+			, #boardId# as boardId
 			FROM T_USER_SCRAP A
 			<include refid="getAfterFrom" />
 		</dynamic>
@@ -321,11 +322,11 @@
 		/* addMyselfFromJstree */
 		INSERT INTO T_USER_SCRAP (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL, 
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE,
 		C_USER_ID, C_BOARD_ID, C_POSTING_ID, C_SCRAP_DT )
 		VALUES (
 		S_USER_SCRAP.NEXTVAL, #c_parentid#, #c_position#,
-		#c_left#, #c_right#, #c_level#, #userId#, #boardId#, #postingId#, #scrapDt# )
+		#c_left#, #c_right#, #c_level#, #c_title#, #userId#, #boardId#, #postingId#, #scrapDt# )
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT S_USER_SCRAP.CURRVAL AS SEQ
@@ -362,7 +363,8 @@
 		<dynamic>
 			<include refid="getMetaField" />
                 , B.C_TITLE AS nickName
-                , (SELECT C_TITLE FROM T_BOARD_INDI_SETTING WHERE C_ID = A.C_BOARD_ID ) as boardName 
+                , (SELECT C_TITLE FROM T_BOARD_INDI_SETTING WHERE C_ID = A.C_POSTING_ID ) as boardName
+                , A.C_SCRAP_DT AS scrapDt 
 			/* 페이징 처리 */	
 			FROM (
 				SELECT ROWNUM AS RNUM, Z.* FROM (
@@ -406,6 +408,26 @@
 		WHERE 1=1
 			AND C_LEVEL = 2
 			AND C_POSTING_ID = #postingId#
+	</select>
+	
+	<select id="getBoardId" parameterClass="int" resultClass="String">
+		SELECT C_BOARD_ID
+		FROM T_BOARD_TOTAL_ARTICLE 
+		WHERE 1=1
+			AND C_LEVEL = 2
+			AND C_ARTICLE_ID = #articleId#
+	</select>
+	
+	<select id="getArticle" parameterClass="Article" resultClass="UserScrap">
+		/* getArticleById */
+		<dynamic>
+			SELECT 
+			A.C_TITLE as c_title, 
+			A.C_ID as postingId
+			FROM T_BOARD_TEST A 
+			WHERE 1=1
+				AND A.C_ID = #c_id#
+		</dynamic>
 	</select>
 
 </sqlMap>

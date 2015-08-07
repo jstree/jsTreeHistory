@@ -483,7 +483,7 @@ CREATE TABLE T_USER_SCRAP
   C_TITLE                     VARCHAR2(4000)       NOT NULL,          /* 가입상태명 */
   C_TYPE                      VARCHAR2(100),                          /* 노드타입 */
   C_USER_ID                   NUMBER               NOT NULL,          /* 회원아이디 */
-  C_BOARD_ID                  NUMBER               NOT NULL,          /* 보드아이디 */
+  C_BOARD_ID                  VARCHAR2(20)         NOT NULL,          /* 보드아이디 */
   C_POSTING_ID                NUMBER               NOT NULL,          /* 글ID */
   C_SCRAP_DT                  CHAR(14)             NOT NULL,          /* 스크랩일시 */
   CONSTRAINT  T_USER_SCRAP PRIMARY KEY (C_ID)

@@ -76,7 +76,7 @@ public class UserScrapController extends GenericAbstractController {
 		//userScrap.setUserId(secureUserLogin.getUserId());
 	
 		userScrap.setUserId(3);
-		int boardId = userScrap.getBoardId();
+		int postingId = userScrap.getPostingId();
 		int totalPageCount = userScrapService.getScrapListTotalCnt(userScrap) / userScrap.getPageSize() + 1;
 		
 		List<UserScrap> scrapList = userScrapService.scrapList(userScrap); 
@@ -101,7 +101,7 @@ public class UserScrapController extends GenericAbstractController {
 			modelMap.addAttribute("rightPage",rightPage);
 		}
 		
-		modelMap.addAttribute("boardId", boardId);
+		modelMap.addAttribute("postingId", postingId);
 		
         return "/jsp/user/scrap/index";
 	}
@@ -122,7 +122,7 @@ public class UserScrapController extends GenericAbstractController {
 	public String readArticle(ModelMap modelMap,  UserScrap userScrap) throws Exception {
 		
 		Article article = new Article();
-		article.setC_id(userScrap.getBoardId());
+		article.setC_id(userScrap.getPostingId());
 		
 		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String isGuestUser = "";
@@ -152,4 +152,28 @@ public class UserScrapController extends GenericAbstractController {
 		return "/jsp/user/scrap/detailView";
 	}
 	
+	@RequestMapping(value = "/add.do")
+	@ResponseBody
+	public String scrapAdd(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
+		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String isGuestUser = "";
+		int loginedUserID;
+		if(user instanceof String) {
+			String userStr = (String)user;
+			if(userStr.equals("anonymousUser")) {
+				isGuestUser = "1";	// 게스트
+			} else {
+				throw new Exception("허가되지 않은 사용자입니다.");
+			}
+		} else {
+			isGuestUser = "0";		// 일반사용자
+			SecureUserLogin loginedUser = (SecureUserLogin) user;
+			loginedUserID = loginedUser.getId();
+			modelMap.addAttribute("loginedUserID", loginedUserID);
+			
+			coreService.addNode(userScrapService.addScrap(article, loginedUserID));
+		}
+		
+		return "{}";
+	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
 <html lang="ko" class="js">
@@ -28,7 +29,7 @@
 </script>
 <script>
 function readScrap(c_id){
-	var popupUrl = '${pageContext.request.contextPath}/user/scrap/readScrapPopup.do?boardId=' +  c_id;
+	var popupUrl = '${pageContext.request.contextPath}/user/scrap/readScrapPopup.do?postingId=' +  c_id;
 	var popupOption = 'width=760, height=500, left=150, top=150, resizable=no, scrollbars=no, status=no;'; 
 	window.open(popupUrl, '', popupOption);
 }
@@ -67,7 +68,10 @@ function readScrap(c_id){
 													<td class="dt-center">${scrap.boardName}</td>
 													<td><a href="#" onclick="readScrap(${scrap.postingId})">${scrap.c_title}</a></td>
 													<td class="dt-center">${scrap.nickName}</td>
-													<td class="dt-center">${scrap.regDt}</td>
+													<td class="dt-center">
+														<fmt:parseDate value="${scrap.scrapDt}" var="scrapDateFmt" pattern="yyyyMMddHHmmss"/>
+														<fmt:formatDate value="${scrapDateFmt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+													</td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -76,21 +80,21 @@ function readScrap(c_id){
 								<div>
 									<div id="pagingDiv">
 										<c:if test="${leftPage != null}">
-											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${scrap.c_id}&pageNum=${leftPage}">◀</a></span>
+											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?postingId=${scrap.c_id}&pageNum=${leftPage}">◀</a></span>
 										</c:if>
 										<span> <c:forEach var="i" begin="${startPageNum}" end="${endPageNum}" step="1">
 												<c:choose>
 													<c:when test="${i eq currentPageNum}">
-														<a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${scrap.c_id}&pageNum=${i}" class="underline">${i}</a>
+														<a href="${pageContext.request.contextPath}/user/scrap/index.do?postingId=${scrap.c_id}&pageNum=${i}" class="underline">${i}</a>
 													</c:when>
 													<c:otherwise>
-														<a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${scrap.c_id}&pageNum=${i}">${i}</a>
+														<a href="${pageContext.request.contextPath}/user/scrap/index.do?postingId=${scrap.c_id}&pageNum=${i}">${i}</a>
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
 										</span>
 										<c:if test="${rightPage != null}">
-											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?boardId=${scrap.c_id}&pageNum=${rightPage}">▶</a></span>
+											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?postingId=${scrap.c_id}&pageNum=${rightPage}">▶</a></span>
 										</c:if>
 									</div>
 								</div>
