@@ -97,9 +97,13 @@ public class UserManageServiceImpl implements UserManageService {
 	}
 
 	@Override
+	public void updateJoinState(User user) {
+	    
+	    userManageDao.updateJoinState(user);
+	}
+	
+	@Override
 	public User getUserInfoByID(User user) throws Exception {
 		return userManageDao.getUserInfoByID(user);
 	}
-	
-	
 }

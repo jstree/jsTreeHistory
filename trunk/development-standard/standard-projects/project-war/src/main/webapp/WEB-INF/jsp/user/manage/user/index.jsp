@@ -257,12 +257,13 @@ var userList = {
             
             var $select = $(this);
             
-            var params = {
+            var param = {
                 c_id : $select.data('param')
-              , joinApprovalFl : $select.val()
             };
             
-            userList.approveJoining(params, function() {
+            userList.approveJoining(param, function(r) {
+                
+                console.log(r);
                 
                 var $td = $select.parent();
                 $td.empty();
@@ -383,23 +384,16 @@ var userList = {
 	    }
     },
     
-    approveJoining : function(params, callback) {
+    approveJoining : function(param, callback) {
         
-//         callAjax(null
-//                 , 'delete.do'
-//                 , null
-//                 , 'post'
-//                 , 'json'
-//                 , params
-//                 , 'application/json'
-//                 , callback);
-         
-//          function callback(r) {
-             
-//              userList.getList(userList.currentPageNo);
-//          }
-
-        callback();
+        callAjax(null
+                , 'approveJoining.do'
+                , null
+                , 'post'
+                , 'json'
+                , param
+                , 'application/json'
+                , callback);
     },
     
     init : function() {

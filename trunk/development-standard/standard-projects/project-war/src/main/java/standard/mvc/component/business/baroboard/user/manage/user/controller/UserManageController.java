@@ -167,4 +167,15 @@ public class UserManageController extends GenericAbstractController {
         
         return "{}";
     }
+    
+    @RequestMapping(value = "/approveJoining.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String approveJoining(@RequestBody User user) {
+        
+        user.setJoinStateCd(4);
+        
+        userManageService.updateJoinState(user);
+        
+        return "{ \"status\" : \"1\" }";
+    }
 }

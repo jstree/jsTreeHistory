@@ -453,6 +453,14 @@
         <include refid="paginationEnd" />
     </select>
     
+    <update id="updateJoinState" parameterClass="User">
+        /* updateJoinState */
+        UPDATE T_USER_INFO
+        SET C_JOIN_STATE_CD = #joinStateCd#
+        WHERE C_ID = #c_id#
+    </update>
+    
+    
     <select id="getUserInfoByID" parameterClass="User" resultClass="User">
         /* getUserInfoByID */
         SELECT 

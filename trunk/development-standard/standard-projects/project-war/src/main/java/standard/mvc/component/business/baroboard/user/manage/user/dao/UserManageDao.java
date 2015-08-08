@@ -61,6 +61,13 @@ public interface UserManageDao {
     List<User> selectUserListPaginated(Map<String, Object> paramMap) throws Exception;
 
     /**
+     * 회원가입상태를 변경한다.
+     * 
+     * @param user 회원 DTO
+     */
+    void updateJoinState(User user);
+    
+    /**
      * C_ID 로 User 정보를 조회한다.
      * 
      * @param User VO
