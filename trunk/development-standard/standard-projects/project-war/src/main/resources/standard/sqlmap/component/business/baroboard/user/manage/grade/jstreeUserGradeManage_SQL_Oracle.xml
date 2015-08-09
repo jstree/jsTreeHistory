@@ -103,15 +103,14 @@
 
 	<update id="alterNode" parameterClass="UserGradeManage">
 		/* alterNode */
-		UPDATE
-		T_USER_GRADE_MANAGE
-		SET C_TYPE = #c_type#
-		, C_TITLE = #c_title#		
-		, C_POINT_BY_GRADE_USE_FL = #pointByGradeUseFl#
-		, C_POINT_BY_GRADE = #pointByGrade#
-		, C_ICON_FILE_NM = #iconFileNm#
-		, C_STORE_FILE_NM = #storeFileNm#
-		WHERE C_ID = #c_id#
+		UPDATE T_USER_GRADE_MANAGE
+		   SET C_TYPE = NVL(#c_type#, C_TYPE)
+		     , C_TITLE =  NVL(#c_title#, C_TITLE)		
+		     , C_POINT_BY_GRADE_USE_FL =  NVL(#pointByGradeUseFl#, C_POINT_BY_GRADE_USE_FL)
+		     , C_POINT_BY_GRADE =  NVL(#pointByGrade#, C_POINT_BY_GRADE)
+		     , C_ICON_FILE_NM =  NVL(#iconFileNm#, C_ICON_FILE_NM)
+		     , C_STORE_FILE_NM =  NVL(#storeFileNm#, C_STORE_FILE_NM)
+		 WHERE C_ID = #c_id#
 	</update>
 
 

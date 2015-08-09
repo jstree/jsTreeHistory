@@ -3,8 +3,8 @@
 <sqlMap namespace="standard.mvc.component.business.baroboard.user.manage.grade.vo.UserMenuByGrade">
 	<typeAlias alias="UserMenuByGrade"
 		type="standard.mvc.component.business.baroboard.user.manage.grade.vo.UserMenuByGrade" />
-
-	<sql id="getMetaField">
+	
+	<select id="getChildNode" parameterClass="UserMenuByGrade" resultClass="UserMenuByGrade">
 		/* getChildNode */
 		SELECT A.c_id
 		, A.c_parentid
@@ -14,42 +14,11 @@
 		, A.c_level
 		, A.c_title
 		, A.c_type
-		/* user filed add point*/
 		, A.C_USER_GRADE_ID AS userGradeId
 		, A.C_MENU_ID AS menuId
-	</sql>
-	<sql id="getInlineChildCount">
-		, ( SELECT CASE
-		WHEN COUNT(*) &gt; 0 THEN 'InChild'
-		ELSE
-		'NoChild'
-		END AS YesNo
-		/* inline table from filed add point*/
-	</sql>
-	<sql id="getInlineChildCountAfterFrom">
-		WHERE B.C_PARENTID = A.C_ID
-		) AS childcount
-		/* table from
-		filed add point*/
-	</sql>
-	<sql id="getAfterFrom">
+		 FROM T_USER_MENU_BY_GRADE A
 		WHERE A.C_USER_GRADE_ID = #userGradeId#
 		ORDER BY A.C_POSITION ASC
-	</sql>
-	
-	<select id="getChildNode" parameterClass="UserMenuByGrade"
-		resultClass="UserMenuByGrade">
-		<dynamic>
-			<include refid="getMetaField" />
-			/* user filed */
-			<include refid="getInlineChildCount" />
-			/* inline table from filed*/
-			FROM T_USER_MENU_BY_GRADE B
-			<include refid="getInlineChildCountAfterFrom" />
-			/* table from filed*/
-			FROM T_USER_MENU_BY_GRADE A
-			<include refid="getAfterFrom" />
-		</dynamic>
 	</select>
 
 
@@ -101,8 +70,7 @@
 
 	<update id="alterNode" parameterClass="UserMenuByGrade">
 		/* alterNode */
-		UPDATE
-		T_USER_MENU_BY_GRADE
+		UPDATE T_USER_MENU_BY_GRADE
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
 		, C_USER_GRADE_ID = #userGradeId#
