@@ -1,5 +1,6 @@
 package standard.mvc.component.business.baroboard.user.manage.grade.vo;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -34,7 +35,13 @@ public class UserGradeManage extends ComprehensiveTree {
 	private String iconFileNm;
 	private String storeFileNm;
 	
-	List<UserMenuByGrade> userMenuByGradeList;
+	private String[] accessMenuList;
+	private List<UserMenuByGrade> userMenuByGradeList;
+	
+	public UserGradeManage(){
+		this.setRef(2);
+		this.setC_type("default");
+	}
 	
 	public String getPointByGradeUseFl() {
 		return pointByGradeUseFl;
@@ -79,8 +86,22 @@ public class UserGradeManage extends ComprehensiveTree {
 		this.userMenuByGradeList = userMenuByGradeList;
 	}
 
+	public String[] getAccessMenuList() {
+		return accessMenuList;
+	}
+
+	public void setAccessMenuList(String[] accessMenuList) {
+		this.accessMenuList = accessMenuList;
+	}
+
 	@Override
     public String getSqlMapSelector() {
         return this.getClass().getName();
     }
+	
+	public HashMap<String, String> getAttr() {
+		HashMap<String, String> parentAttr = super.getAttr();
+		parentAttr.put("position", String.valueOf(this.getC_position()));
+		return parentAttr;
+	}
 }

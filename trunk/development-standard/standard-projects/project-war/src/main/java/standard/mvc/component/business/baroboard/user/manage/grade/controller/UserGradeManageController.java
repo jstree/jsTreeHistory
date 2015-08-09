@@ -15,6 +15,10 @@ import javax.validation.Valid;
 
 import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -33,7 +37,9 @@ import standard.mvc.component.business.baroboard.user.manage.basic.setting.gener
 import standard.mvc.component.business.baroboard.user.manage.basic.setting.general.vo.ProhibitionWord;
 import standard.mvc.component.business.baroboard.user.manage.grade.service.UserGradeService;
 import standard.mvc.component.business.baroboard.user.manage.grade.vo.UserGradeManage;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile;
 import standard.mvc.component.business.community.constraint.vo.ForeignComprehensiveTree;
+import standard.mvc.component.business.community.menu.service.MenuMngSerivce;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
@@ -66,11 +72,16 @@ public class UserGradeManageController extends GenericAbstractController {
     @Autowired
     private UserGradeService userGradeService;
     
-//    @Resource(name = "fileUploadProperties")
-//    Properties fileUploadProperties;
+    @Resource(name = "fileUploadProperties")
+	private Properties fileUploadProperties;
+    
+    @Resource(name = "menuMngService")
+	private MenuMngSerivce menuMngService;
     
     @RequestMapping("/index.do")
     public String main(ModelMap model) throws Exception {
+    	model.addAttribute("menuList", menuMngService.getCommunityMenu());
+    	
         return "/jsp/user/manage/grade/index";
     }
 
@@ -81,76 +92,88 @@ public class UserGradeManageController extends GenericAbstractController {
     }
     
     @ResponseBody
-	@RequestMapping(value="/addNode.do", method=RequestMethod.POST)
-	public UserGradeManage addNode(UserGradeManage userGradeManage, MultipartHttpServletRequest request) throws Exception {
+	@RequestMapping(value="/saveUserGrade.do", method=RequestMethod.POST)
+	public ResponseEntity<UserGradeManage> saveUserGrade(UserGradeManage userGradeManage, HttpServletRequest request) throws Exception {
     	
-    	Map<String, MultipartFile> files = request.getFileMap();
-    	//Map<String, MultipartFile> files = request.getFileMap().get("uploadImgFile");
-
-    	String uploadPath = "test";//fileUploadProperties.getProperty("file.upload.path");
-    	String defaultImagePath = request.getSession().getServletContext().getRealPath("/") + "images\\userGrade\\upload\\";
-    	uploadPath = defaultImagePath + uploadPath;
-    	
-    	File saveFolder = new File(uploadPath);
-
-    	// 디렉토리 생성
-    	if (!saveFolder.exists() || saveFolder.isFile()) {
-    		saveFolder.mkdirs();
-    	}
-    	System.out.println(uploadPath);
-    	
-    	Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
-    	MultipartFile file = null;
-    	String filePath = null;;
-    	
-    	while (itr.hasNext()) {
-    		Entry<String, MultipartFile> entry = itr.next();
-    	 
-    		file = entry.getValue();
-    		if (!"".equals(file.getOriginalFilename())) {
-    			filePath = uploadPath + file.getOriginalFilename();
-    			userGradeManage.setIconFileNm(file.getOriginalFilename());
-    			userGradeManage.setStoreFileNm(file.getOriginalFilename()); //추후 서버에 저장될 파일명으로 변경 해야함.
-    			file.transferTo(new File(filePath));
+    	boolean isNewGradeInf = true;
+    	UserGradeManage rtnUserGradeManage = new UserGradeManage();
+    	if(userGradeManage.getC_id() != 0){
+    		rtnUserGradeManage = userGradeService.inquiryUserGradeDetailInf(userGradeManage);
+    		
+    		if(0 != rtnUserGradeManage.getC_id()){
+    			isNewGradeInf = false;
     		}
     	}
-
-    	userGradeService.saveUserGradeDetailInf(userGradeManage);
-		return userGradeService.inquiryUserGradeDetailInf(userGradeManage);
+    	
+    	if(request instanceof MultipartHttpServletRequest){
+    		String defaultPath = request.getSession().getServletContext().getRealPath("/");
+    		String uploadPath = fileUploadProperties.getProperty("grade.upload.dir");
+    		uploadPath = defaultPath + uploadPath;
+    		
+    		File saveFolder = new File(uploadPath);
+    		
+    		// 디렉토리 생성
+    		if (!saveFolder.exists() || saveFolder.isFile()) {
+    			saveFolder.mkdirs();
+    		}
+    		
+    		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+        	Map<String, MultipartFile> files = multipartRequest.getFileMap();
+        	
+        	Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
+        	MultipartFile file = null;
+        	String filePath = null;;
+        	
+        	String originalFileNm = null;
+        	String storeFileNm = null;
+        	String fileExtension = null;
+        	
+        	while (itr.hasNext()) {
+        		Entry<String, MultipartFile> entry = itr.next();
+        	 
+        		file = entry.getValue();
+        		originalFileNm = file.getOriginalFilename();
+        		
+        		if (StringUtils.isNotBlank(originalFileNm)) {
+        			if(isNewGradeInf){
+        				fileExtension = originalFileNm.substring(originalFileNm.lastIndexOf(".")+1);
+        				
+        				storeFileNm = "USER_GRADE" + "c_id." + fileExtension; //c_id 추후 로그인자 ID 셋팅
+        				
+        				filePath = uploadPath + storeFileNm;
+        				
+        				userGradeManage.setIconFileNm(file.getOriginalFilename());
+        				userGradeManage.setStoreFileNm(storeFileNm);
+        				file.transferTo(new File(filePath));
+        				
+        			}else{
+        				if(!originalFileNm.equals(rtnUserGradeManage.getIconFileNm())){
+        					fileExtension = originalFileNm.substring(originalFileNm.lastIndexOf(".")+1);
+            				
+            				storeFileNm = "USER_GRADE" + "c_id." + fileExtension; //c_id 추후 로그인자 ID 셋팅
+            				
+            				filePath = uploadPath + storeFileNm;
+            				
+            				userGradeManage.setIconFileNm(file.getOriginalFilename());
+            				userGradeManage.setStoreFileNm(storeFileNm);
+            				file.transferTo(new File(filePath));
+        				}
+        			}
+        		}
+        	}
+    	}
+    	
+    	if(isNewGradeInf){
+    		userGradeService.saveUserGradeDetailInf(userGradeManage);
+    		
+    	}else{
+    		userGradeService.updateUserGradeInf(userGradeManage);
+    	}
+    	
+    	HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.TEXT_PLAIN);
+		return new ResponseEntity<UserGradeManage>(userGradeService.inquiryUserGradeDetailInf(userGradeManage), headers, HttpStatus.OK);
 	}
-    
-	@ResponseBody
-    @RequestMapping(value="/alterNode.do", method=RequestMethod.POST)
-    public UserGradeManage alterNode(UserGradeManage userGradeManage, MultipartHttpServletRequest request) throws Exception {
-    	Map<String, MultipartFile> files = request.getFileMap();
-
-    	String uploadPath = "C:\\temp";//fileUploadProperties.getProperty("file.upload.path");
-    	File saveFolder = new File(uploadPath);
-
-    	// 디렉토리 생성
-    	if (!saveFolder.exists() || saveFolder.isFile()) {
-    		saveFolder.mkdirs();
-    	}
-
-    	Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
-    	MultipartFile file = null;
-    	String filePath = null;;
-    	
-    	while (itr.hasNext()) {
-    		Entry<String, MultipartFile> entry = itr.next();
-    	 
-    		file = entry.getValue();
-    		if (!"".equals(file.getOriginalFilename())) {
-    			filePath = uploadPath + "\\" + file.getOriginalFilename();
-    			userGradeManage.setIconFileNm(file.getOriginalFilename());
-    			userGradeManage.setStoreFileNm(file.getOriginalFilename()); //추후 서버에 저장될 파일명으로 변경 해야함.
-    			file.transferTo(new File(filePath));
-    		}
-    	}
-    	
-    	userGradeService.updateUserGradeInf(userGradeManage);
-    	return userGradeService.inquiryUserGradeDetailInf(userGradeManage);
-    }
     
 	@ResponseBody 
     @RequestMapping(value="/inquiryUserGradeDetailInf.do", method=RequestMethod.POST)
@@ -165,12 +188,7 @@ public class UserGradeManageController extends GenericAbstractController {
     	userGradeService.inquiryUserGradeList(userGradeManage);
     	return "{}";
     }
-    
-    private String ddd(){
-    	
-    	return null;
-    }
-    
+        
 	@Override
 	public Map<String, Map<String, Object>> bindTypes() {
 		// TODO Auto-generated method stub

@@ -27,6 +27,10 @@ public class UserMenuByGrade extends ComprehensiveTree {
 	private int userGradeId;
 	private int menuId;
 	
+	public UserMenuByGrade(){
+		this.setRef(2);
+		this.setC_type("default");
+	}
 	
 	public int getUserGradeId() {
 		return userGradeId;
