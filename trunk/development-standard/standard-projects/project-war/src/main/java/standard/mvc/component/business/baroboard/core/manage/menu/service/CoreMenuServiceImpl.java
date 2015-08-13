@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
+import standard.mvc.component.business.baroboard.core.manage.setting.messages.ExceptionMessage;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -52,7 +53,7 @@ public class CoreMenuServiceImpl implements CoreService {
     @Override
     public <T extends ComprehensiveTree> List<String> searchNode(T comprehensiveTree)
             throws Exception {
-        return null;
+        throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
     }
 
     @Override
@@ -62,22 +63,22 @@ public class CoreMenuServiceImpl implements CoreService {
 
     @Override
     public <T extends ComprehensiveTree> int removeNode(T comprehensiveTree) throws Exception {
-        return 0;
+        return coreService.removeNode(comprehensiveTree);
     }
 
     @Override
     public <T extends ComprehensiveTree> int alterNode(T comprehensiveTree) throws Exception {
-        return 0;
+        return coreService.alterNode(comprehensiveTree);
     }
 
     @Override
     public <T extends ComprehensiveTree> int alterNodeType(T comprehensiveTree) throws Exception {
-        return 0;
+        throw new RuntimeException(ExceptionMessage.UN_SUPPORTED.getValue());
     }
 
     @Override
     public <T extends ComprehensiveTree> T moveNode(T comprehensiveTree, HttpServletRequest request)
             throws Exception {
-        return null;
+        return coreService.moveNode(comprehensiveTree, request);
     }
 }
