@@ -57,7 +57,7 @@ public interface UserNoteService {
      * @return 
      * @throws Exception
      */
-	public UserNoteDetail inquiryNoteDetail(UserNoteDetail userNoteDetail) throws Exception;
+	public UserNoteByUser inquiryNoteDetail(UserNoteByUser userNoteByUser) throws Exception;
 	
 	/**
      * 쪽지 리스트 조회

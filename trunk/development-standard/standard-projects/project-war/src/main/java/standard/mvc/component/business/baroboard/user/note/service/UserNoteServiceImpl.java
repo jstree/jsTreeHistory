@@ -47,8 +47,6 @@ public class UserNoteServiceImpl implements UserNoteService{
 	@Transactional
 	@Override
 	public void sendNote(UserNoteDetail userNoteDetail) throws Exception {
-		userNoteDetail.setRef(2);
-		userNoteDetail.setC_type("default");
 		UserNoteDetail resultSendNote = coreService.addNode(userNoteDetail);
 		int noteDetailId = resultSendNote.getId();
 		
@@ -63,8 +61,6 @@ public class UserNoteServiceImpl implements UserNoteService{
 				if(4 == user.getNoteTypeCode()){
 					isExistSender = true;
 				}
-				user.setRef(2);
-				user.setC_type("default");
 				user.setC_title(userNoteDetail.getC_title());
 				user.setNoteDetailId(noteDetailId);
 				user.setReceDispDt(receDispDt);
@@ -73,8 +69,6 @@ public class UserNoteServiceImpl implements UserNoteService{
 			
 			if(!isExistSender){
 				UserNoteByUser user = new UserNoteByUser();
-				user.setRef(2);
-				user.setC_type("default");
 				user.setC_title(userNoteDetail.getC_title());
 				user.setNoteTypeCode(4); //4 : 발신
 				user.setNoteDetailId(noteDetailId);
@@ -87,8 +81,6 @@ public class UserNoteServiceImpl implements UserNoteService{
 		List<UserNoteAttachFile> userNoteAttachFileList = userNoteDetail.getUserNoteAttachFileList();
 		if(userNoteAttachFileList != null){
 			for(UserNoteAttachFile file : userNoteAttachFileList){
-				file.setRef(2);
-				file.setC_type("default");
 				file.setNoteDetailId(noteDetailId);
 				coreService.addNode(file);
 			}
@@ -112,17 +104,17 @@ public class UserNoteServiceImpl implements UserNoteService{
 	}
 
 	@Override
-	public UserNoteDetail inquiryNoteDetail(UserNoteDetail userNoteDetail) throws Exception {
-		UserNoteDetail rtnUserNoteDetail = coreService.getNode(userNoteDetail);
+	public UserNoteByUser inquiryNoteDetail(UserNoteByUser userNoteByUser) throws Exception {
+		UserNoteByUser rtnUserNoteByUser = coreService.getNode(userNoteByUser);
 		
 		UserNoteAttachFile attachFile = new UserNoteAttachFile();
-		attachFile.setNoteDetailId(rtnUserNoteDetail.getC_id());
+		attachFile.setNoteDetailId(rtnUserNoteByUser.getNoteDetailId());
 		
 		List<UserNoteAttachFile> rtnAttachFileList = coreService.getChildNode(attachFile);
 		
-		rtnUserNoteDetail.setUserNoteAttachFileList(rtnAttachFileList);
+		rtnUserNoteByUser.setUserNoteAttachFileList(rtnAttachFileList);
 		
-		return rtnUserNoteDetail;
+		return rtnUserNoteByUser;
 	}
 
 	@Override

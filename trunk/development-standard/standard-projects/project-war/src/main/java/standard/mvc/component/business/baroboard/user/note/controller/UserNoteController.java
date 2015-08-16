@@ -71,18 +71,18 @@ public class UserNoteController extends GenericAbstractController {
 	
 	@RequestMapping(value="/noteDetailPopup.do", method=RequestMethod.GET)
     public String noteDetailPopup(HttpServletRequest request, ModelMap model) throws Exception {
-		UserNoteDetail userNoteDetail = new UserNoteDetail();
-		userNoteDetail.setC_id(Integer.parseInt(request.getParameter("noteDetailId")));
+		UserNoteByUser userNoteByUser = new UserNoteByUser();
+		userNoteByUser.setC_id(Integer.parseInt(request.getParameter("notdDispId")));
 		
-		model.addAttribute("userNoteDetail", userNoteService.inquiryNoteDetail(userNoteDetail));
+		model.addAttribute("userNoteByUser", userNoteService.inquiryNoteDetail(userNoteByUser));
 		
         return "/jsp/user/manage/note/noteDetailPopup";
     }
 
 	@RequestMapping(value="/inquiryNoteList.do", method={RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody List<UserNoteByUser> inquiryNoteList(UserNoteByUser userNoteByUser) throws Exception {
-		userNoteByUser.setUserId(4); // 로그인자의 ID를 셋팅해야 한다. 현재 미구현 상태(2015.06.19)
-		userNoteByUser.setNoteTypeCode(3); //3:수신, 4:발신, 5:보관
+		userNoteByUser.setUserId(104); // 로그인자의 ID를 셋팅해야 한다. 현재 미구현 상태(2015.06.19)
+//		userNoteByUser.setNoteTypeCode(3); //3:수신, 4:발신, 5:보관
 		
 		List<UserNoteByUser> userNoteByUserList = userNoteService.inquiryNoteList(userNoteByUser);
 		
@@ -104,44 +104,49 @@ public class UserNoteController extends GenericAbstractController {
 
 	@RequestMapping(value="/uploadNoteFile.do", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<List<UserNoteAttachFile>> uploadNoteFile(MultipartHttpServletRequest request) throws Exception {
-    	String defaultPath = request.getSession().getServletContext().getRealPath("/");
-    	String uploadPath = fileUploadProperties.getProperty("note.upload.dir");
-    	uploadPath = defaultPath + uploadPath;
+	public ResponseEntity<List<UserNoteAttachFile>> uploadNoteFile(HttpServletRequest request) throws Exception {
     	
-    	File saveFolder = new File(uploadPath);
-
-    	// 디렉토리 생성
-    	if (!saveFolder.exists() || saveFolder.isFile()) {
-    		saveFolder.mkdirs();
-    	}
-    	Map<String, MultipartFile> files = request.getFileMap();
-    	
-    	Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
-    	MultipartFile file = null;
-    	String filePath = null;;
-    	
-    	List<UserNoteAttachFile> userNoteAttachFileList = new ArrayList<UserNoteAttachFile>();
-    	UserNoteAttachFile addUserNoteAttachFile = null;
-    	
-    	String storeFileNm = null;
-    	while (itr.hasNext()) {
-    		Entry<String, MultipartFile> entry = itr.next();
-    	 
-    		file = entry.getValue();
-    		if (!"".equals(file.getOriginalFilename())) {
-    			addUserNoteAttachFile = new UserNoteAttachFile();
-    			
-    			storeFileNm = "USER_NOTE" + "c_id" + System.currentTimeMillis(); //c_id 추후 로그인자 ID 셋팅
-    			
-    			filePath = uploadPath + storeFileNm;
-    			addUserNoteAttachFile.setC_title(file.getOriginalFilename());
-    			addUserNoteAttachFile.setStoreFileNm(storeFileNm); 
-    			file.transferTo(new File(filePath));
-    			
-    			userNoteAttachFileList.add(addUserNoteAttachFile);
-    		}
-    	}
+		List<UserNoteAttachFile> userNoteAttachFileList = new ArrayList<UserNoteAttachFile>();
+		
+		if(request instanceof MultipartHttpServletRequest){
+			String defaultPath = request.getSession().getServletContext().getRealPath("/");
+			String uploadPath = fileUploadProperties.getProperty("note.upload.dir");
+			uploadPath = defaultPath + uploadPath;
+			
+			File saveFolder = new File(uploadPath);
+			
+			// 디렉토리 생성
+			if (!saveFolder.exists() || saveFolder.isFile()) {
+				saveFolder.mkdirs();
+			}
+    		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+			Map<String, MultipartFile> files = multipartRequest.getFileMap();
+			
+			Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
+			MultipartFile file = null;
+			String filePath = null;;
+			
+			UserNoteAttachFile addUserNoteAttachFile = null;
+			
+			String storeFileNm = null;
+			while (itr.hasNext()) {
+				Entry<String, MultipartFile> entry = itr.next();
+				
+				file = entry.getValue();
+				if (!"".equals(file.getOriginalFilename())) {
+					addUserNoteAttachFile = new UserNoteAttachFile();
+					
+					storeFileNm = "USER_NOTE" + "c_id" + System.currentTimeMillis(); //c_id 추후 로그인자 ID 셋팅
+					
+					filePath = uploadPath + storeFileNm;
+					addUserNoteAttachFile.setC_title(file.getOriginalFilename());
+					addUserNoteAttachFile.setStoreFileNm(storeFileNm); 
+					file.transferTo(new File(filePath));
+					
+					userNoteAttachFileList.add(addUserNoteAttachFile);
+				}
+			}
+		}
     	
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.TEXT_PLAIN);
@@ -175,6 +180,14 @@ public class UserNoteController extends GenericAbstractController {
 		userNoteService.sendNote(userNoteDetail);		
 		return "{}";
 	}
+	
+	@RequestMapping(value="/deleteNoteList.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String deleteNoteList(@RequestBody UserNoteDetail userNoteDetail) throws Exception {
+		userNoteService.deleteNoteList(userNoteDetail.getUserNoteByUserList());		
+		return "{}";
+	}
+	
 	
 	@Override
 	public Map<String, Map<String, Object>> bindTypes() {
