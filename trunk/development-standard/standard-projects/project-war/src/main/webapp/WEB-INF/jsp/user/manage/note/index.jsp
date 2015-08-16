@@ -38,7 +38,17 @@ select{
 </style>
 
 <script type="text/javascript">
-	$(function () {		
+	$(function () {	
+		$('#noteForm').submit(function() {
+			return false;
+	    });
+		
+		$("input:text").bind('keydown',function(e) {	        
+			if (e.keyCode == 13){
+	            return false;
+	        }
+	    });
+		
 		$('#inqStartYmd').datepicker({
 			 showOn: 'button'
 			,buttonImage: '${pageContext.request.contextPath}/assets/images/calendar.png'
@@ -69,18 +79,6 @@ select{
 		});
 		
 		$('#searchBtn').bind('click', function(e){
-			
-			/*callAjax(  'noteForm'
-	                   , $('#noteForm').prop('action')
-	                   , '#resultSection'
-	                   , $('#noteForm').prop('method')
-	                   , 'text'
-	                   , null
-	                   , null
-	                   , function(r){
-				
-			             }
-			);*/
 			callAjax('noteForm'
                     , $('#noteForm').prop('action')
                     , null
@@ -95,11 +93,11 @@ select{
 							if(null != this.noteDetailId && '' != this.noteDetailId){
 								var tr = '';
 								tr += '<tr>';
-								tr += '<td><input name="grdCheckbox" type="checkbox"/></td>';				
+								tr += '<td><input name="grdCheckbox" type="checkbox" value="' + this.receId + '"/></td>';				
 								tr += '<td>' + this.userNm + '</td>';
 								tr += '<td>' + this.receDispDt + '</td>';
-								tr += '<td><a target="_self" onclick="fnNoteDetailPop(' + this.noteDetailId + ')">' + this.c_title + '</a></td>';
-								tr += '<td>Delete</td>';
+								tr += '<td><a target="_self" onclick="fnNoteDetailPop(' + this.c_id + ')">' + this.c_title + '</a></td>';
+								tr += '<td><a target="_self" onclick="fnNoteDelete(' + this.receId + ')">Delete</a></td>';
 								tr += '</tr>';
 								
 								$('#resultTblBody').append(tr);
@@ -107,6 +105,19 @@ select{
 						});
 			        });
 			return false;
+		});
+		
+		$('#deleteBatchBtn').bind('click', function(e){
+			var checkArr = [];
+			$('input[name="grdCheckbox"]:checked').each(function(){
+				checkArr.push({'c_id' : this.value});
+			});
+			fnDeleteNote(checkArr);
+			
+		});
+		
+		$('#batCheckbox').bind('click', function(e){
+			$('input[name="grdCheckbox"]').attr('checked', $('#batCheckbox').is(':checked'));
 		});
 		
 		$('#noteSendBtn').bind('click', function(e){
@@ -118,8 +129,28 @@ select{
 		$('#searchBtn').trigger('click');
 	});
 	
-	function fnNoteDetailPop(noteDetailId){
-		window.open('${pageContext.request.contextPath}/user/manage/note/noteDetailPopup.do?noteDetailId=' + noteDetailId
+	function fnNoteDelete(noteReceId){
+		fnDeleteNote([{'c_id' : noteReceId}]);
+	}
+	
+	function fnDeleteNote(deleteList){
+		callAjax(  null
+                  , '${pageContext.request.contextPath}/user/manage/note/deleteNoteList.do'
+                  , null
+                  , 'post'
+                  , 'json'
+                  , {
+                	  'userNoteByUserList' : deleteList
+                	}
+                  , 'application/json; charset=utf-8'
+                  , function(r){
+                	  $('#searchBtn').trigger('click');
+                    }
+                  );
+	}
+	
+	function fnNoteDetailPop(notdDispId){
+		window.open('${pageContext.request.contextPath}/user/manage/note/noteDetailPopup.do?notdDispId=' + notdDispId
 				, '상세보기'
 				, 'width=600, height=550, resizable=no, scrollbars=no, status=no, menubar=no');
 	}

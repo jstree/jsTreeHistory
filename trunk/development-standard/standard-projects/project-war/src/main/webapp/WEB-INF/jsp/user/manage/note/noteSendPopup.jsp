@@ -84,11 +84,22 @@
 		$('#sendNoteForm').ajaxForm({	
 			 type : 'post'			
 			,contentType : 'multipart/form-data'			
-			,beforeSubmit: function(formArray, jqForm){
+			,beforeSubmit: function(formArray, jqForm, options){
 				if(USER_LIST.length == 0){
 					$('#userNm').focus();
 					alert("수신인이 존재하지 않습니다.");
 					return false;
+				}
+				
+				var saveFileNm = "";
+				$(formArray).each( function(idx, value){
+					if('attachFile' == this.name && '' != this.value && null != this.value){
+						saveFileNm = this.value;
+						return false;
+					}
+				});
+				if('' == saveFileNm || null == saveFileNm){
+					options.contentType = 'application/x-www-form-urlencoded; charset=UTF-8';	
 				}
 			}
 			,success : function(r, stat){
@@ -152,7 +163,7 @@
 				<div class="responsive-row">
 					<div class="item-name">첨부파일</div>
 					<div class="item-value">
-						<input id="addAttachFile" class="reset-btn" type="file" name="fileTest" value="추가">
+						<input id="attachFile" class="reset-btn" type="file" name="attachFile" value="추가">
 					</div>		
 				</div>
 				<div class="responsive-row button-area">

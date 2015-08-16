@@ -23,6 +23,16 @@
 <customTags:assetsJsExtendNas theRestOfFileName="/js/jquery-1.11.2.min.js"></customTags:assetsJsExtendNas>
 <script type="text/javascript">	
 	$(function () {		
+		jQuery.browser = {};
+		(function () {
+		    jQuery.browser.msie = false;
+		    jQuery.browser.version = 0;
+		    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+		        jQuery.browser.msie = true;
+		        jQuery.browser.version = RegExp.$1;
+		    }
+		})();
+
 		
 	});
 </script>
@@ -33,26 +43,24 @@
 			<section class="">
 				<div class="responsive-row">
 					<div class="item-name">제목</div>
-					<div class="item-value">
-						<input id="c_title" name="c_title" type="text" value="${userNoteDetail.c_title}">
-					</div>
+					<div class="item-value">${userNoteByUser.c_title}</div>
 				</div>
 				<div class="responsive-row">
 					<div class="item-name">내용</div>
 					<div class="item-value">
-						<textarea id="content" name="content">${userNoteDetail.content}</textarea>
+						<textarea id="content" name="content" disabled="disabled">${userNoteByUser.content}</textarea>
 					</div>
 				</div>
 				<div class="responsive-row">
 					<div class="item-name">첨부파일</div>
 					<div class="item-value">
-						<c:forEach var="item" items="${userNoteDetail.userNoteAttachFileList}">
+						<c:forEach var="item" items="${userNoteByUser.userNoteAttachFileList}">
 							<span><a href="${pageContext.request.contextPath}/user/manage/note/downloadNoteFile.do?fileName=${item.c_id}" target="_self">${item.c_title}</a></span>
 						</c:forEach>			
 					</div>
 				</div>
 				<div class="responsive-row button-area">
-					<button id="searchBtn" type="submit">답장하기</button>
+					<button id="rtnNote" type="button">답장하기</button>
 				</div>
 			</section>
 		</div>
