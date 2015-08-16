@@ -16,6 +16,7 @@
 		, B.c_type
 		
 		/* user filed add point*/
+		,A.C_ID AS receId /*수신id*/
 		,B.C_USER_ID AS userId
 		,C.C_TITLE AS userNm
         ,A.C_NOTE_DETAIL_ID AS noteDetailId
@@ -25,7 +26,7 @@
             ,T_USER_NOTE_BY_USER B
             ,T_USER_INFO C
         WHERE A.C_USER_ID = #userId#
-	      AND A.C_NOTE_TYPE_CODE = #noteTypeCode#
+	      AND A.C_NOTE_TYPE_CODE = 3
 	      AND A.C_NOTE_DETAIL_ID = B.C_NOTE_DETAIL_ID
 	      AND B.C_NOTE_TYPE_CODE = 4
 	      AND B.C_USER_ID = C.C_ID
@@ -120,21 +121,23 @@
 	<select id="getNode" parameterClass="UserNoteByUser"
 		resultClass="UserNoteByUser">
 		/* getNode */
-		SELECT C_ID
-		, C_PARENTID
-		, C_POSITION
-		, C_LEFT
-		, C_RIGHT
-		, C_LEVEL
-		, C_TITLE
-		, C_TYPE
-		, C_USER_ID AS userId
-		, C_NOTE_DETAIL_ID AS noteDetailId
-		, C_NOTE_TYPE_CODE AS noteTypeCode
-		, C_RECE_DISP_DT AS receDispDt
-		FROM T_USER_NOTE_BY_USER
-		WHERE
-		C_ID = #c_id#
+		SELECT A.C_ID
+		, A.C_PARENTID
+		, A.C_POSITION
+		, A.C_LEFT
+		, A.C_RIGHT
+		, A.C_LEVEL
+		, A.C_TITLE
+		, A.C_TYPE
+		, A.C_USER_ID AS userId
+		, A.C_NOTE_DETAIL_ID AS noteDetailId
+		, A.C_NOTE_TYPE_CODE AS noteTypeCode
+		, A.C_RECE_DISP_DT AS receDispDt
+		, B.C_CONTENT AS content
+		FROM T_USER_NOTE_BY_USER A
+		, T_USER_NOTE_DETAIL B
+		WHERE A.C_ID = #c_id#
+		  AND A.C_NOTE_DETAIL_ID = B.C_ID
 	</select>
 
 
