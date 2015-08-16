@@ -27,10 +27,16 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 public class UserNoteDetail extends ComprehensiveTree{
 
 	private String content;
+	private int noteTypeCode;
 	
 	private List<UserNoteByUser> userNoteByUserList;
 	
 	private List<UserNoteAttachFile> userNoteAttachFileList;
+	
+	public UserNoteDetail(){
+		this.setRef(2);
+		this.setC_type("default");
+	}
 	
 	public String getContent() {
 		return content;
@@ -40,6 +46,14 @@ public class UserNoteDetail extends ComprehensiveTree{
 		this.content = content;
 	}
 	
+	public int getNoteTypeCode() {
+		return noteTypeCode;
+	}
+
+	public void setNoteTypeCode(int noteTypeCode) {
+		this.noteTypeCode = noteTypeCode;
+	}
+
 	public List<UserNoteByUser> getUserNoteByUserList() {
 		return userNoteByUserList;
 	}

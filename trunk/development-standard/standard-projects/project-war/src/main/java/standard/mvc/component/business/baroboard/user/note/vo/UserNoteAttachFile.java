@@ -27,6 +27,12 @@ public class UserNoteAttachFile extends ComprehensiveTree {
 	private int noteDetailId;
 	private String storeFileNm;
 	
+	
+	public UserNoteAttachFile(){
+		this.setRef(2);
+		this.setC_type("default");
+	}
+	
 	public int getNoteDetailId() {
 		return noteDetailId;
 	}

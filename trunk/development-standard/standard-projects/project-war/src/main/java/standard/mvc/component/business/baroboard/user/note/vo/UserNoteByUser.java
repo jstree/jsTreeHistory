@@ -1,5 +1,7 @@
 package standard.mvc.component.business.baroboard.user.note.vo;
 
+import java.util.List;
+
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
@@ -25,6 +27,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 public class UserNoteByUser extends ComprehensiveTree {
 
 	private int userId;
+	private int receId;
 	private int noteDetailId;
 	private int noteTypeCode;
 	private String receDispDt;
@@ -33,6 +36,13 @@ public class UserNoteByUser extends ComprehensiveTree {
 	private String inqStartYmd;
 	private String inqEndYmd;
 	private String content;
+	
+	public UserNoteByUser(){
+		this.setRef(2);
+		this.setC_type("default");
+	}
+	
+	private List<UserNoteAttachFile> userNoteAttachFileList;
 	
 	public int getUserId() {
 		return userId;
@@ -96,6 +106,23 @@ public class UserNoteByUser extends ComprehensiveTree {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public List<UserNoteAttachFile> getUserNoteAttachFileList() {
+		return userNoteAttachFileList;
+	}
+
+	public void setUserNoteAttachFileList(
+			List<UserNoteAttachFile> userNoteAttachFileList) {
+		this.userNoteAttachFileList = userNoteAttachFileList;
+	}
+
+	public int getReceId() {
+		return receId;
+	}
+
+	public void setReceId(int receId) {
+		this.receId = receId;
 	}
 
 	@Override
