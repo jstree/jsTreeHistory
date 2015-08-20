@@ -1,4 +1,4 @@
-package standard.mvc.component.business.baroboard.core.manage.menu.database;
+package standard.mvc.component.business.baroboard.core.manage.setting.menu.database;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -70,7 +70,7 @@ public class CoreMenuDatabaseTest {
 
         try {
             String datasetPath =
-                    "/standard/mvc/component/business/baroboard/menu/database/T_CORE_MENU.xml";
+                    "/standard/mvc/component/business/baroboard/core/manage/setting/menu/database/T_CORE_MENU.xml";
             URL url = this.getClass().getResource(datasetPath);
 
             ReplacementDataSet dataSet =
