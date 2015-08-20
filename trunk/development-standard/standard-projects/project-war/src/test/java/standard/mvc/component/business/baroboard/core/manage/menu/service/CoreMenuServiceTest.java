@@ -27,7 +27,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import standard.mvc.component.business.baroboard.core.manage.menu.vo.CoreMenuVO;
+import standard.mvc.component.business.baroboard.core.manage.setting.menu.vo.CoreMenuVO;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
