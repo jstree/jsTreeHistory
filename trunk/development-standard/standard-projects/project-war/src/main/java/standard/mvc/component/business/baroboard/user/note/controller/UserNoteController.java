@@ -82,7 +82,7 @@ public class UserNoteController extends GenericAbstractController {
 	@RequestMapping(value="/inquiryNoteList.do", method={RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody List<UserNoteByUser> inquiryNoteList(UserNoteByUser userNoteByUser) throws Exception {
 		userNoteByUser.setUserId(104); // 로그인자의 ID를 셋팅해야 한다. 현재 미구현 상태(2015.06.19)
-//		userNoteByUser.setNoteTypeCode(3); //3:수신, 4:발신, 5:보관
+		userNoteByUser.setNoteTypeCode(3); //3:수신, 4:발신, 5:보관
 		
 		List<UserNoteByUser> userNoteByUserList = userNoteService.inquiryNoteList(userNoteByUser);
 		
