@@ -3,6 +3,8 @@ package standard.mvc.component.business.baroboard.board.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import standard.mvc.component.business.baroboard.board.service.BoardService;
 import standard.mvc.component.business.baroboard.board.vo.Article;
@@ -266,6 +269,17 @@ public class BoardController extends GenericAbstractController {
 		return jspView;
 	}
 
+	@RequestMapping(value = "/uploadAttachedFiles.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Article uploadAttachedFiles(HttpServletRequest request) throws Exception {
+		
+		if(request instanceof MultipartHttpServletRequest) {
+			
+		}
+		
+		return null;
+	}
+	
 	@RequestMapping(value = "/submitNewArticle.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Article submitNewArticle(@ModelAttribute Article article) throws Exception {
