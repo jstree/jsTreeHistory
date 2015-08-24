@@ -108,16 +108,15 @@ div#titleDiv > div input {
 										<div>
 											파일 첨부
 											<select id="fileAttachSelect"multiple="multiple" size=3>
-												<option>test1.html</option>
-												<option>test2.css</option>
-												<option>test3.css</option>
-												<option>test4.css</option>
-												<option>test5.css</option>
 											</select>
+											<!-- <div id="fileListDiv" style="display: none"> -->
+											<div id="fileListDiv">
+												<input id="fileInput0" name="files[]" type="file" />
+											</div>
 										</div>
 										<div>
-											<button class="file-btn">추가</button>
-											<button class="file-btn">삭제</button>
+											<a id="addFileBtn" class="file-btn">추가</a>
+											<a id="removeFileBtn" class="file-btn">삭제</a>
 										</div>
 									</div>
 									<div class="action-btn-div">
@@ -132,6 +131,65 @@ div#titleDiv > div input {
 			</div>
 		</article>
 	</section>
+	<script>
+		var FILE_ARR = [];
+		var FILE_CNT_NUM = 0;
+		
+		$(document).ready(function(){
+			
+			// 파일추가 버튼
+			$('#addFileBtn').click(function(){
+				
+				if(FILE_ARR.length >= 10) {
+					alert('첨부파일은 10개까지 가능합니다.');
+					return;
+				}
+				
+				var fileID = 'fileInput' + FILE_CNT_NUM;
+				var targetFileID = '#' + fileID;
+
+				$(targetFileID).change(function(){
+					if(this.value.length != 0) {	// 변경이 있을때만
+						
+						var fileName = this.value.split('\\').pop();
+						
+						$('#fileAttachSelect').append( $('<option>', {
+						    value: fileID,
+						    text: fileName
+						}));
+						
+						FILE_ARR.push(fileID);
+						
+						var inputStr = '<input id="fileInput' + ++FILE_CNT_NUM +'" name="files[]" type="file">';
+						$('#fileListDiv').append(inputStr);
+						
+					}
+				});
+				
+				$(targetFileID).trigger('click');
+				
+			});	
+		
+			// 파일 삭제 버튼
+			$('#removeFileBtn').click(function(){
+				$('#fileAttachSelect option:selected').each(function(){
+					$('#' + $(this).val()).remove();
+					
+					for(var i=0; i<FILE_ARR.length; i++) {
+						if(FILE_ARR[i] == $(this).val()) {
+							FILE_ARR.splice(i, 1);
+							break;
+						}
+					}
+					
+					$(this).remove();
+				});
+			});			
+			
+			
+		});	
+	</script>
+	
 	<script>
 $('#articleForm').on('submit',function(e){
     e.preventDefault();
