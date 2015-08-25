@@ -15,11 +15,11 @@ public class SvnDataImporterTest
     
     @Test
     public void StringCheckTest(){
-        String commentString = "[조경원][BT:DEMO-40 , DEMO-46][RV:이동민] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
+        String commentText = "[조경원][BT:DEMO-40 , DEMO-46][RV:이동민] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
         
         //RV 포맷이 있는지.
-        int checkPointRV = test(commentString, "RV", "end");
-        String filterRVstr = StringUtils.substring(commentString, checkPointRV);
+        int checkPointRV = test(commentText, "RV", "end");
+        String filterRVstr = StringUtils.substring(commentText, checkPointRV);
         System.out.println("returnStr = " + filterRVstr);
         
         //RV가 있더라도 : 구분자가 있는지
@@ -41,8 +41,8 @@ public class SvnDataImporterTest
         }
         
         //BT 포맷이 있는지.
-        int checkPointBT = test(commentString, "BT", "end");
-        String filterBTstr = StringUtils.substring(commentString, checkPointBT);
+        int checkPointBT = test(commentText, "BT", "end");
+        String filterBTstr = StringUtils.substring(commentText, checkPointBT);
         System.out.println("returnStr = " + filterBTstr);
         
         //BT가 있더라도 : 구분자가 있는지
