@@ -103,6 +103,13 @@ public class BoardServiceImpl implements BoardService {
 				} 
 			}
 		}
+		/* 1. 파일업로드, 2.게시글 업로드, 3.파일update(게시글ID) 
+		 * 파일 업로드 실패 및 DB insert 실패시, 파일 삭제 및 DB 삭제 
+		 * */
+		//  TODO : 여기부터 작업
+		
+		
+		
 		
 		article.setRef(2);
 		this.setupArticleParameters(article);

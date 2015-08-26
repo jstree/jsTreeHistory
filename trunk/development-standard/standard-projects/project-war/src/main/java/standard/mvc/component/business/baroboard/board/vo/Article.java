@@ -1,5 +1,9 @@
 package standard.mvc.component.business.baroboard.board.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
@@ -69,7 +73,8 @@ public class Article extends ComprehensiveTree {
 	private String guestPW;
 	
 	
-	/* TODO : 첨부파일 */
+	/* 첨부파일 리스트 */
+	private List<MultipartFile> attachedFiles;
 
 	/* 생성일시 */
 	private String regDt;
@@ -148,9 +153,15 @@ public class Article extends ComprehensiveTree {
 	public String getSqlMapSelector() {
 		return "board";
 	}
+	
+	public List<MultipartFile> getAttachedFiles() {
+		return attachedFiles;
+	}
 
-	
-	
+	public void setAttachedFiles(List<MultipartFile> attachedFiles) {
+		this.attachedFiles = attachedFiles;
+	}
+
 	public int getRnum() {
 		return rnum;
 	}

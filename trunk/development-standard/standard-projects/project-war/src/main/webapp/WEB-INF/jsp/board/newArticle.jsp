@@ -9,6 +9,9 @@
 <!-- !!!  FOR THIS PAGE ONLY !!! -->
 <script src="${pageContext.request.contextPath}/assets/js/ckeditor/ckeditor.js" type="text/javascript"></script>
 <link href="${pageContext.request.contextPath}/assets/css/newArticle.css" rel="stylesheet" type="text/css" media="all" />
+<customTags:assetsJsExtendNas theRestOfFileName="/js/ajax.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/jquery.form.js"></customTags:assetsJsExtendNas>
+
 
 <style>
 /* 
@@ -51,6 +54,7 @@ div#titleDiv > div input {
 					<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="article-body rte" itemprop="articleBody">
 							<div class="tablet-mobile alpha bm-remove last">
+							<%-- 
 							<c:choose>
 								<c:when test="${not empty parentArticle}">
 							<form id="articleForm" action="${pageContext.request.contextPath}/board/submitNewReplyArticle.do" method="post" accept-charset="utf-8">
@@ -59,6 +63,8 @@ div#titleDiv > div input {
 							<form id="articleForm" action="${pageContext.request.contextPath}/board/submitNewArticle.do" method="post" accept-charset="utf-8">
 								</c:otherwise>
 							</c:choose>
+							--%>
+							<form id="articleForm" action="${pageContext.request.contextPath}/board/uploadAttachedFiles.do" method="post" accept-charset="utf-8">
 								<div id="titleDiv">
 									<div>
 										<span>
@@ -77,6 +83,7 @@ div#titleDiv > div input {
 											</c:choose>
 										</span>
 									</div>
+									<input id="boardID" name="boardID" type="hidden" value="test" />
 									<input id="isGuestFL" name="isGuestFL" type="hidden" value="${isGuestFL}" />
 								</div>
 								<div>
@@ -111,12 +118,13 @@ div#titleDiv > div input {
 											</select>
 											<!-- <div id="fileListDiv" style="display: none"> -->
 											<div id="fileListDiv">
-												<input id="fileInput0" name="files[]" type="file" />
+												<input id="fileInput0" name="files" type="file" />
 											</div>
 										</div>
 										<div>
 											<a id="addFileBtn" class="file-btn">추가</a>
 											<a id="removeFileBtn" class="file-btn">삭제</a>
+											<a class="file-btn" onclick="uploadAttachFiles">임시파일업로드</a>
 										</div>
 									</div>
 									<div class="action-btn-div">
@@ -160,7 +168,7 @@ div#titleDiv > div input {
 						
 						FILE_ARR.push(fileID);
 						
-						var inputStr = '<input id="fileInput' + ++FILE_CNT_NUM +'" name="files[]" type="file">';
+						var inputStr = '<input id="fileInput' + ++FILE_CNT_NUM +'" name="files" type="file">';
 						$('#fileListDiv').append(inputStr);
 						
 					}
@@ -195,6 +203,25 @@ $('#articleForm').on('submit',function(e){
     e.preventDefault();
     CKEDITOR.instances.editor.updateElement();	// CKEditor를 refresh함
     if ($.trim($('#articleTitle').val()) != '') {
+    	
+    	$('#articleForm').ajaxForm({	
+			 type : 'post'			
+			,contentType : 'multipart/form-data'			
+			,beforeSubmit: function(formArray, jqForm, options){
+				
+			}
+			,success : function(r, stat){
+				console.log(r)
+				console.log(stat)
+				
+			}
+			,error : function(r){
+				alert(r);
+			}
+		});
+    	
+    	
+    	/*
     	$.ajax({
    		  url: this.action,
    		  method: 'POST',
@@ -207,6 +234,7 @@ $('#articleForm').on('submit',function(e){
    			alert('저장에 실패하였습니다.');
    			console.log(data); 
    		})
+   		*/
     } else {
     	alert("글제목을 입력해주세요.");
     }	    

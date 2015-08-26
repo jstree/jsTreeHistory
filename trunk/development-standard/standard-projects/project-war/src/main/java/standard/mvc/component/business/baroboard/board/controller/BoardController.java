@@ -1,8 +1,14 @@
 package standard.mvc.component.business.baroboard.board.controller;
 
+import java.io.File;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import java.util.Map.Entry;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -14,7 +20,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import standard.mvc.component.business.baroboard.board.service.BoardService;
@@ -23,6 +31,7 @@ import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.manage.user.service.UserManageService;
+import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
@@ -61,13 +70,16 @@ public class BoardController extends GenericAbstractController {
 
 	@Autowired
 	private UserManageService userManageService;
+
+	@Resource(name = "fileUploadProperties")
+	private Properties fileUploadProperties;
 	
 	@Override
 	public Map<String, Map<String, Object>> bindTypes() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	private int getTotalPages(int totCnt, int pageSize) {
 		int pages = 0;
 		
@@ -269,12 +281,54 @@ public class BoardController extends GenericAbstractController {
 		return jspView;
 	}
 
-	@RequestMapping(value = "/uploadAttachedFiles.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/uploadAttachedFiles.do", method = { RequestMethod.POST })
 	@ResponseBody
-	public Article uploadAttachedFiles(HttpServletRequest request) throws Exception {
+	public Article uploadAttachedFiles(HttpServletRequest request, @RequestParam("boardID") String boardID) throws Exception {
 		
-		if(request instanceof MultipartHttpServletRequest) {
+		if(request instanceof MultipartHttpServletRequest){
+			String defaultPath = request.getSession().getServletContext().getRealPath("/");
+			String uploadPath = fileUploadProperties.getProperty("article.upload.dir");
+			uploadPath = defaultPath + uploadPath + boardID + "\\";
+			Enumeration<String> paramNames = request.getParameterNames();
+			while(paramNames.hasMoreElements()){
+				String name = paramNames.nextElement();
+				logger.debug(name);
+				String content = request.getParameter(name);
+				logger.debug(content);
+			}
+			File saveFolder = new File(uploadPath);
 			
+			// 디렉토리 생성
+			if (!saveFolder.exists() || saveFolder.isFile()) {
+				saveFolder.mkdirs();
+			}
+    		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+			List<MultipartFile> files = multipartRequest.getFiles("files");
+			MultipartFile file = null;
+			String filePath = null;
+			
+			UserNoteAttachFile addUserNoteAttachFile = null;
+			
+			String storeFileNm = null;
+			for(int i=0; i<files.size(); i++) {
+				
+				file = files.get(i);
+				if (!"".equals(file.getOriginalFilename())) {
+					addUserNoteAttachFile = new UserNoteAttachFile();
+					
+//					storeFileNm = "USER_NOTE" + "c_id" + System.currentTimeMillis(); //c_id 추후 로그인자 ID 셋팅
+					storeFileNm = file.getOriginalFilename() + "_" + System.currentTimeMillis();
+					
+					filePath = uploadPath + storeFileNm;
+					addUserNoteAttachFile.setC_title(file.getOriginalFilename());
+					addUserNoteAttachFile.setStoreFileNm(storeFileNm); 
+					file.transferTo(new File(filePath));
+					
+//					userNoteAttachFileList.add(addUserNoteAttachFile);
+				} else {
+					files.remove(i--);
+				}
+			}
 		}
 		
 		return null;
@@ -282,7 +336,12 @@ public class BoardController extends GenericAbstractController {
 	
 	@RequestMapping(value = "/submitNewArticle.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public Article submitNewArticle(@ModelAttribute Article article) throws Exception {
+	public Article submitNewArticle(HttpServletRequest request, @ModelAttribute Article article) throws Exception {
+		
+		if(request instanceof MultipartHttpServletRequest){
+			List<MultipartFile> attachedFiles = ((MultipartHttpServletRequest)request).getFiles("files");
+			article.setAttachedFiles(attachedFiles);
+		}
 		return boardService.addArticle(article);
 	}
 	
