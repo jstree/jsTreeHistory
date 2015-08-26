@@ -27,6 +27,15 @@
 <script type="text/javascript">
 	var NODE_OBJ = {};
 	
+	function fnInitGradeForm(){
+		$('#myMenuList option').remove();
+		$('input[name="accessMenuList"]').remove();		
+		$('#gradeName').text('');
+		$('#iconFileNm').attr('src', '${pageContext.request.contextPath}/assets/images/logo.jpg');
+		$('#gradeForm')[0].reset();	
+		$('input[type=checkbox]').attr('checked',false);
+	}
+	
 	$(function () {
 	
 		$('#gradeForm').submit(function() {
@@ -66,7 +75,10 @@
 						}
 						,success : function(r, stat){
 							$('input[name="accessMenuList"]').remove();
-							jQuery.jstree._reference('#gradeTree').load_node_json(0,false,false);
+							NODE_OBJ = {};
+							jQuery.jstree._reference('#gradeTree').load_node_json(-1,false,false);
+							
+							fnInitGradeForm();
 						}
 						,error : function(r){
 							alert(r);
@@ -321,9 +333,7 @@
 				$.jstree._focused().deselect_node(data.rslt.parent);
 				$.jstree._focused().select_node(data.rslt.obj);
 				
-				$('#iconFileNm').attr('src', '${pageContext.request.contextPath}/assets/images/logo.jpg');
-				$('#gradeForm')[0].reset();	
-				$('input[type=checkbox]').attr('checked',false);
+				//fnInitGradeForm();
 			})
 			.bind('remove.jstree', function (e, data) {
 				if("default" != data.rslt.obj.attr('rel')){
@@ -376,11 +386,9 @@
 					return false;
 				}
 				
-				$('#myMenuList option').remove();
-				$('input[name="accessMenuList"]').remove();
-				$('#gradeForm')[0].reset();	
-				$('input[type=checkbox]').attr('checked',false);
-	
+				fnInitGradeForm();
+				
+				//input type file 초기화
 				var $inputFile = $('#uploadImgFile'); 
 				$inputFile.replaceWith($inputFile.val('').clone(true));
 				
