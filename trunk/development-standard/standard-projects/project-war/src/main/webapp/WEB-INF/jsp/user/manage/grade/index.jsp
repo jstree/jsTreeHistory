@@ -14,6 +14,7 @@
 .demo-grade-con .responsive_jsrow .c_value .g-point input {display:inline-block; width:20%; float:left}
 .demo-grade-con .responsive_jsrow .c_value .g-point em {position:relative; top:8px; margin-left:5px; font-style:normal}
 .demo-grade-con #myMenu {width:100%}
+.logo-img {width:120px; height:120px}
 </style>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
@@ -128,8 +129,6 @@
 				
 				var reader = new FileReader();
 				reader.onload = function(e){
-					$('#iconFileNm').width('100');
-					$('#iconFileNm').height('100');
 					$('#iconFileNm').attr('src', e.target.result);
 					
 					//if(currentNodePosition != null && currentNodePosition != ''){

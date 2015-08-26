@@ -123,7 +123,7 @@ public class UserGradeManageController extends GenericAbstractController {
         			if(isNewGradeInf){
         				fileExtension = originalFileNm.substring(originalFileNm.lastIndexOf(".")+1);
         				
-        				storeFileNm = "USER_GRADE" + "c_id." + fileExtension; //c_id 추후 로그인자 ID 셋팅
+        				storeFileNm = "USER_GRADE" + userGradeManage.getC_id() + "." + fileExtension; //c_id 추후 로그인자 ID 셋팅
         				
         				filePath = uploadPath + storeFileNm;
         				
@@ -135,7 +135,7 @@ public class UserGradeManageController extends GenericAbstractController {
         				if(!originalFileNm.equals(rtnUserGradeManage.getIconFileNm())){
         					fileExtension = originalFileNm.substring(originalFileNm.lastIndexOf(".")+1);
             				
-            				storeFileNm = "USER_GRADE" + "c_id." + fileExtension; //c_id 추후 로그인자 ID 셋팅
+            				storeFileNm = "USER_GRADE" + userGradeManage.getC_id() + "." + fileExtension;
             				
             				filePath = uploadPath + storeFileNm;
             				
