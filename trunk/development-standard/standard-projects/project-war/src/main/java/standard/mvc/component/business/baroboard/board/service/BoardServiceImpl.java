@@ -1,7 +1,9 @@
 package standard.mvc.component.business.baroboard.board.service;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 
@@ -10,10 +12,11 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import standard.mvc.component.business.baroboard.board.dao.BoardDao;
-import standard.mvc.component.business.baroboard.board.dao.TotalArticleDao;
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.AttachedFile;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
@@ -58,6 +61,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	private TotalArticleService totalArticleService;
+
+	@Resource(name = "fileUploadProperties")
+	private Properties fileUploadProperties;
 	
 	@Override
 	public List<Article> getArticleList(Article article) throws Exception {
@@ -106,11 +112,13 @@ public class BoardServiceImpl implements BoardService {
 		/* 1. 파일업로드, 2.게시글 업로드, 3.파일update(게시글ID) 
 		 * 파일 업로드 실패 및 DB insert 실패시, 파일 삭제 및 DB 삭제 
 		 * */
-		//  TODO : 여기부터 작업
 		
+		/* 1. 파일 업로드 및 DB insert */
+		if(article.getAttachedFiles() != null)  {
+			this.fileUpload(article);
+		}
 		
-		
-		
+		/* 2. 게시글 insert */
 		article.setRef(2);
 		this.setupArticleParameters(article);
 		
@@ -118,11 +126,122 @@ public class BoardServiceImpl implements BoardService {
 		article.setC_id(insertedArticle.getId());
 		boardDao.updateRootArticleID(article);
 		
+		/* 3. 추가된 파일에 articleID 지정 */
+		if(article.getAttachedFiles() != null) {
+			this.setArticleIDOfFiles(article);
+		}
+		
 		/* T_TOTAL_ARTICLE Insert */
 		TotalArticle totalArticle = this.setTotalArticleByArticle(article);
 		coreService.addNode(totalArticle);
 		
 		return article;
+	}
+	
+	
+	/** 저장된 파일에 articleID 를 지정한다. 
+	 * @param article
+	 * @throws Exception
+	 */
+	private void setArticleIDOfFiles(Article article) throws Exception {
+		List<AttachedFile> files = article.getAttachedFiles();
+		for (AttachedFile attachedFile : files) {
+			attachedFile.setArticleID(article.getC_id());
+			coreService.alterNode(attachedFile);
+		}
+	}
+
+	/** 
+	 * 파일 업로드를 수행한다.
+	 * @param article
+	 * @throws Exception
+	 */
+	private void fileUpload(Article article) throws Exception {
+		
+		String defaultPath = article.getContextPath();
+		String uploadPath = fileUploadProperties.getProperty("article.upload.dir");
+		uploadPath = defaultPath + uploadPath + article.getBoardID() + "\\";		
+		
+		List<AttachedFile> files = article.getAttachedFiles();
+		String savedFilePath = "";
+		
+		
+		/* 1.모든 파일 업로드 */
+		try {
+			File saveFolder = new File(uploadPath);
+			// 디렉토리 생성
+			if (!saveFolder.exists() || saveFolder.isFile()) {
+				saveFolder.mkdirs();
+			}
+			
+			// TODO : 20150827기준 익명사용자는 고려하지 않음
+			for (AttachedFile attachedFile : files) {
+				MultipartFile file = attachedFile.getFile();
+				String savedFileNM = article.getRegID() + "_" + System.currentTimeMillis();
+				String fileExt = this.getExtention(file.getOriginalFilename());
+				
+				attachedFile.setC_title(file.getOriginalFilename());;
+				attachedFile.setSavedFileNM(savedFileNM);
+				attachedFile.setExtension(fileExt);
+				
+				savedFilePath = uploadPath + savedFileNM;
+				
+				file.transferTo(new File(savedFilePath));
+			}
+		} catch(Exception e) {
+			// 문제 발생시 모든 파일 삭제
+			this.deleteFiles(files, uploadPath);
+			throw new Exception("파일 업로드 에러");
+		}
+		
+		/* 2.모든 파일 DB insert */
+		try {
+			for (AttachedFile attachedFile : files) {
+				attachedFile.setRef(2);
+				attachedFile.setC_type("default");
+				attachedFile.setRegDt(this.getTodayFor14Digits());
+				AttachedFile insertedFile = coreService.addNode(attachedFile);
+				attachedFile.setC_id(insertedFile.getId());
+			}
+		} catch(Exception e) {
+			/* 2. 에러처리 - DB 삭제 및 파일 삭제 */
+			for (AttachedFile attachedFile : files) {
+				if(attachedFile.getC_id() != 0) {
+					coreService.removeNode(attachedFile);
+				}
+			}
+			this.deleteFiles(files, uploadPath);
+			throw new Exception("파일 DB 저장 에러");
+		}
+	}
+
+	/** 파일 리스트 삭제 
+	 * 
+	 */
+	private void deleteFiles(List<AttachedFile> files, String uploadPath) {
+		for (AttachedFile attachedFile : files) {
+			String savedFileNM = attachedFile.getSavedFileNM();
+			if(savedFileNM != null) {
+				String savedFilePath = uploadPath + savedFileNM;
+				File f = new File(savedFilePath);
+				if(f.exists()) f.delete();
+			}
+		}
+	}
+	
+	
+	/** 확장자 추출
+	 * @param fileName String
+	 * @return Extention String
+	 */
+	private String getExtention(String fileName) {
+		String ext = "";
+		int dotIndex = fileName.lastIndexOf(".");
+		
+		if (-1 != dotIndex && fileName.length() - 1 > dotIndex) {
+			ext =  fileName.substring(dotIndex + 1);
+		} 
+		return ext;
 	}
 	
 	@Override

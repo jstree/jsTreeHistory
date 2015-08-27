@@ -6,7 +6,6 @@ import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
-import standard.mvc.component.business.baroboard.user.vo.User;
 
 /**
  * Modification Information
@@ -46,7 +45,7 @@ public interface BoardDao {
 	public int modifyArticle(Article article) throws Exception;
 
 	public int updateRootArticleID(Article article) throws Exception;
-
+	
 	public int updateCommentRootID(Comment comment) throws Exception;
 
 	public List<Comment> getCommentList(Comment comment) throws Exception;

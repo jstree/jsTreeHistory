@@ -54,7 +54,6 @@ div#titleDiv > div input {
 					<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
 						<div class="article-body rte" itemprop="articleBody">
 							<div class="tablet-mobile alpha bm-remove last">
-							<%-- 
 							<c:choose>
 								<c:when test="${not empty parentArticle}">
 							<form id="articleForm" action="${pageContext.request.contextPath}/board/submitNewReplyArticle.do" method="post" accept-charset="utf-8">
@@ -63,8 +62,6 @@ div#titleDiv > div input {
 							<form id="articleForm" action="${pageContext.request.contextPath}/board/submitNewArticle.do" method="post" accept-charset="utf-8">
 								</c:otherwise>
 							</c:choose>
-							--%>
-							<form id="articleForm" action="${pageContext.request.contextPath}/board/uploadAttachedFiles.do" method="post" accept-charset="utf-8">
 								<div id="titleDiv">
 									<div>
 										<span>
@@ -116,15 +113,13 @@ div#titleDiv > div input {
 											파일 첨부
 											<select id="fileAttachSelect"multiple="multiple" size=3>
 											</select>
-											<!-- <div id="fileListDiv" style="display: none"> -->
-											<div id="fileListDiv">
+											<div id="fileListDiv" style="display: none">
 												<input id="fileInput0" name="files" type="file" />
 											</div>
 										</div>
 										<div>
 											<a id="addFileBtn" class="file-btn">추가</a>
 											<a id="removeFileBtn" class="file-btn">삭제</a>
-											<a class="file-btn" onclick="uploadAttachFiles">임시파일업로드</a>
 										</div>
 									</div>
 									<div class="action-btn-div">
@@ -206,35 +201,22 @@ $('#articleForm').on('submit',function(e){
     	
     	$('#articleForm').ajaxForm({	
 			 type : 'post'			
-			,contentType : 'multipart/form-data'			
+			,dataType : 'text'
+			,contentType : 'multipart/form-data'
 			,beforeSubmit: function(formArray, jqForm, options){
 				
 			}
 			,success : function(r, stat){
-				console.log(r)
-				console.log(stat)
+		   		var resultObj = jQuery.parseJSON(r.replace(/(<([^>]+)>)/ig,""));
+
+				alert(resultObj);
+				window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+resultObj.c_id ;
 				
 			}
 			,error : function(r){
 				alert(r);
 			}
 		});
-    	
-    	
-    	/*
-    	$.ajax({
-   		  url: this.action,
-   		  method: 'POST',
-   		  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-   		  data: $('#articleForm').serialize(),
-   		}).done(function(data){
-   			alert('저장되었습니다.');
-			window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+data.c_id ;
-   		}).fail(function(data){
-   			alert('저장에 실패하였습니다.');
-   			console.log(data); 
-   		})
-   		*/
     } else {
     	alert("글제목을 입력해주세요.");
     }	    

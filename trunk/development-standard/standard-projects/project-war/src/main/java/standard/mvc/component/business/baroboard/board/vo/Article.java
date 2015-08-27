@@ -2,7 +2,7 @@ package standard.mvc.component.business.baroboard.board.vo;
 
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
@@ -27,9 +27,9 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 
+@JsonIgnoreProperties({"attachedFiles"})
 public class Article extends ComprehensiveTree {
 
-	/* 루트글 번호
 	/* 루트글 번호 */
 	private int rootArticleID;
 	
@@ -73,9 +73,14 @@ public class Article extends ComprehensiveTree {
 	private String guestPW;
 	
 	
-	/* 첨부파일 리스트 */
-	private List<MultipartFile> attachedFiles;
+	/* 첨부파일 리스트 
+	 * jackson json 으로 return 시, 이 필드는 빠진다.
+	 * */
+	private transient List<AttachedFile> attachedFiles;
 
+	/* Root Context Path */
+	private String contextPath;
+	
 	/* 생성일시 */
 	private String regDt;
 
@@ -84,7 +89,9 @@ public class Article extends ComprehensiveTree {
 	
 	/* 테이블에는 없지만 DTO로서 필요한 필드 */
 	/* 게시판 ID */
-	private String boardID;
+	
+//	private String boardID; 
+	private String boardID = "test"; 
 
 	/* 페이지 */
 	private int pageNum = 1;
@@ -115,8 +122,6 @@ public class Article extends ComprehensiveTree {
 	
 	/* 전체 게시글 수 */
 	private int totCnt;
-	
-	
 	
 	@Override
 	public String toString() {
@@ -154,11 +159,19 @@ public class Article extends ComprehensiveTree {
 		return "board";
 	}
 	
-	public List<MultipartFile> getAttachedFiles() {
+	public String getContextPath() {
+		return contextPath;
+	}
+
+	public void setContextPath(String contextPath) {
+		this.contextPath = contextPath;
+	}
+
+	public List<AttachedFile> getAttachedFiles() {
 		return attachedFiles;
 	}
 
-	public void setAttachedFiles(List<MultipartFile> attachedFiles) {
+	public void setAttachedFiles(List<AttachedFile> attachedFiles) {
 		this.attachedFiles = attachedFiles;
 	}
 
