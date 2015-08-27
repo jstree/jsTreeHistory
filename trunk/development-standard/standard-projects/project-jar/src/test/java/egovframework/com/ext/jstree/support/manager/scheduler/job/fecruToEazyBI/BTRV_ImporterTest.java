@@ -17,8 +17,16 @@ public class BTRV_ImporterTest
     public void oldSpecCheckTest(){
         Map<String, Object> csvDataMap = new HashMap<String, Object>();
         String commentText = "[조경원][BT:DEMO-40 , DEMO-46][RV:이동민] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
-        csvDataMap = checkRV(commentText, csvDataMap);
-        csvDataMap = checkBT(commentText, csvDataMap);
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
         assertThat(csvDataMap.get("BT")).isEqualTo("N/A");
         assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
     }
@@ -26,8 +34,16 @@ public class BTRV_ImporterTest
     public void oldSpecCheckSpaceTest(){
         Map<String, Object> csvDataMap = new HashMap<String, Object>();
         String commentText = "[조경원][BT: DEMO-40 , DEMO-46 ][RV: 이동민 ] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
-        csvDataMap = checkRV(commentText, csvDataMap);
-        csvDataMap = checkBT(commentText, csvDataMap);
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
         assertThat(csvDataMap.get("BT")).isEqualTo("N/A");
         assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
     }
@@ -35,8 +51,16 @@ public class BTRV_ImporterTest
     public void oldSpecCheckNaBTNaRVTest(){
         Map<String, Object> csvDataMap = new HashMap<String, Object>();
         String commentText = "[조경원][BT: NA ][RV: N/A ] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
-        csvDataMap = checkRV(commentText, csvDataMap);
-        csvDataMap = checkBT(commentText, csvDataMap);
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
         assertThat(csvDataMap.get("BT")).isEqualTo("N/A");
         assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
     }
@@ -44,8 +68,16 @@ public class BTRV_ImporterTest
     public void newSpecCheckTest(){
         Map<String, Object> csvDataMap = new HashMap<String, Object>();
         String commentText = "ASSERT 기능 구현 [BT] ACM-41,DEMO-313 #time 2h #comment 각 지원 플랫폼 개발 +review RV-ACM @tskim [RV] 신현진 추후에 조사하고 추가하여야 함";
-        csvDataMap = checkRV(commentText, csvDataMap);
-        csvDataMap = checkBT(commentText, csvDataMap);
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
         assertThat(csvDataMap.get("BT")).isEqualTo("ACM-41,DEMO-313");
         assertThat(csvDataMap.get("RV")).isEqualTo("신현진");
     }
@@ -53,8 +85,16 @@ public class BTRV_ImporterTest
     public void newSpecCheckSpaceTest(){
         Map<String, Object> csvDataMap = new HashMap<String, Object>();
         String commentText = "ASSERT 기능 구현 [BT] ACM-41, DEMO-313 #time 2h #comment 각 지원 플랫폼 개발 +review RV-ACM @tskim [RV] 신현진 추후에 조사하고 추가하여야 함";
-        csvDataMap = checkRV(commentText, csvDataMap);
-        csvDataMap = checkBT(commentText, csvDataMap);
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
         assertThat(csvDataMap.get("BT")).isEqualTo("ACM-41,");
         assertThat(csvDataMap.get("RV")).isEqualTo("신현진");
     }
@@ -62,12 +102,106 @@ public class BTRV_ImporterTest
     public void newSpecCheckNaBTNaRVTest(){
         Map<String, Object> csvDataMap = new HashMap<String, Object>();
         String commentText = "ASSERT 기능 구현 [BT] n/a #time 2h #comment 각 지원 플랫폼 개발 +review RV-ACM @tskim [RV] n/a 추후에 조사하고 추가하여야 함";
-        csvDataMap = checkRV(commentText, csvDataMap);
-        csvDataMap = checkBT(commentText, csvDataMap);
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
+        
         assertThat(csvDataMap.get("BT")).isEqualTo("N/A");
         assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
     }
+    @Test
+    public void newSpecCheckBTRVFormat(){
+        Map<String, Object> csvDataMap = new HashMap<String, Object>();
+        String commentText = "buildman";
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }    
+        assertThat(csvDataMap.get("BT")).isEqualTo("N/A");
+        assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
+    }
+    @Test
+    public void newSpecCheckBTremainFormat(){
+        Map<String, Object> csvDataMap = new HashMap<String, Object>();
+        String commentText = "ASSERT 기능 구현 [BT] DEMO-313 #time 2h #comment 각 지원 플랫폼 개발 +review RV-ACM @tskim";
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
+        assertThat(csvDataMap.get("BT")).isEqualTo("DEMO-313");
+        assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
+    }
+    @Test
+    public void newSpecCheckRVremainFormat(){
+        Map<String, Object> csvDataMap = new HashMap<String, Object>();
+        String commentText = "ASSERT 기능 구현 [RV] RV-DEMO-313 추후에 조사하고 추가하여야 함";
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
+        assertThat(csvDataMap.get("BT")).isEqualTo("N/A");
+        assertThat(csvDataMap.get("RV")).isEqualTo("RV-DEMO-313");
+    }
+    
+    private Boolean checkLimitBTFormat(String commentText){
+        String lowerStr = commentText.toLowerCase();
+        Pattern oldPatternObj = Pattern.compile("BT:", Pattern.CASE_INSENSITIVE);
+        Matcher oldMatcherObj = oldPatternObj.matcher(lowerStr);
+        Pattern newPatternObj = Pattern.compile("BT]", Pattern.CASE_INSENSITIVE);
+        Matcher newMatcherObj = newPatternObj.matcher(lowerStr);
+        
+        if (oldMatcherObj.find() || newMatcherObj.find())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
+    private Boolean checkLimitRVFormat(String commentText){
+        String lowerStr = commentText.toLowerCase();
+        Pattern oldPatternObj = Pattern.compile("RV:", Pattern.CASE_INSENSITIVE);
+        Matcher oldMatcherObj = oldPatternObj.matcher(lowerStr);
+        Pattern newPatternObj = Pattern.compile("RV]", Pattern.CASE_INSENSITIVE);
+        Matcher newMatcherObj = newPatternObj.matcher(lowerStr);
+        
+        if (oldMatcherObj.find() || newMatcherObj.find())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     private Map<String, Object> checkBT(String commentText, Map<String, Object> csvDataMap)
     {
         //기존포맷

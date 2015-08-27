@@ -350,8 +350,16 @@ public class BTRV_Importer
                         {
                             String commentText = itemText.getText();
                             
-                            csvDataMap = checkRV(commentText, csvDataMap);
-                            csvDataMap = checkBT(commentText, csvDataMap);
+                            if(checkLimitBTFormat(commentText)){            
+                                csvDataMap = checkBT(commentText, csvDataMap);
+                            }else{
+                                csvDataMap.put("BT", "N/A");
+                            }
+                            if(checkLimitRVFormat(commentText)){            
+                                csvDataMap = checkRV(commentText, csvDataMap);
+                            }else{
+                                csvDataMap.put("RV", "N/A");
+                            }
                             
                             csvDataMap.put("SVNLOG", StringUtils.substring(commentText, 0, 254));
                             
@@ -389,6 +397,39 @@ public class BTRV_Importer
         
     }
     
+    private Boolean checkLimitBTFormat(String commentText){
+        String lowerStr = commentText.toLowerCase();
+        Pattern oldPatternObj = Pattern.compile("BT:", Pattern.CASE_INSENSITIVE);
+        Matcher oldMatcherObj = oldPatternObj.matcher(lowerStr);
+        Pattern newPatternObj = Pattern.compile("BT]", Pattern.CASE_INSENSITIVE);
+        Matcher newMatcherObj = newPatternObj.matcher(lowerStr);
+        
+        if (oldMatcherObj.find() || newMatcherObj.find())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private Boolean checkLimitRVFormat(String commentText){
+        String lowerStr = commentText.toLowerCase();
+        Pattern oldPatternObj = Pattern.compile("RV:", Pattern.CASE_INSENSITIVE);
+        Matcher oldMatcherObj = oldPatternObj.matcher(lowerStr);
+        Pattern newPatternObj = Pattern.compile("RV]", Pattern.CASE_INSENSITIVE);
+        Matcher newMatcherObj = newPatternObj.matcher(lowerStr);
+        
+        if (oldMatcherObj.find() || newMatcherObj.find())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }    
     private Element getRootNodeFromUrl(String url)
     {
         try
