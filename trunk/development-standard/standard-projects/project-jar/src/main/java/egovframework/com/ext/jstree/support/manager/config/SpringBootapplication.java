@@ -10,12 +10,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
 //1. spring.pom 파일 spring-boot 활성화
 //2. 본 자바 파일 확장자 변경.
-//3. egov-security 비활성화
 @SpringBootApplication
 @EnableScheduling
+@EnableWebMvcSecurity
 public class SpringBootapplication{
 
     private static Log logger = LogFactory.getLog(SpringBootapplication.class);

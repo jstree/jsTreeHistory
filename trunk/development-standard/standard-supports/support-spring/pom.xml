@@ -106,7 +106,6 @@
 		</dependency>
 
 		<!-- Spring Boot -->
-		<!-- 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot</artifactId>
@@ -138,31 +137,30 @@
 			<version>1.2.3.RELEASE</version>
 			<scope>import</scope>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>com.github.springtestdbunit</groupId>
 			<artifactId>spring-test-dbunit</artifactId>
 		</dependency>
 
 		<!-- spring security 라이브러리 시작 -->
-		<dependency> 
-			<groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-core</artifactId> 
-		</dependency>
-		
-		<dependency> 
-			<groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-taglibs</artifactId> 
-		</dependency>
-		
 		<dependency>
-			<groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-web</artifactId> 
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
 		</dependency>
-		 
-		<dependency> 
-			<groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-config</artifactId> 
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
 		</dependency>
 
 
@@ -304,17 +302,22 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot</artifactId>
-				<version>1.2.3.RELEASE</version>
+				<version>1.2.5.RELEASE</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter</artifactId>
-				<version>1.2.3.RELEASE</version>
+				<version>1.2.5.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-security</artifactId>
+				<version>1.2.5.RELEASE</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-tomcat</artifactId>
-				<version>1.2.3.RELEASE</version>
+				<version>1.2.5.RELEASE</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
@@ -324,19 +327,19 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-log4j</artifactId>
-				<version>1.2.3.RELEASE</version>
+				<version>1.2.5.RELEASE</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-test</artifactId>
-				<version>1.2.3.RELEASE</version>
+				<version>1.2.5.RELEASE</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
 				<type>pom</type>
-				<version>1.2.3.RELEASE</version>
+				<version>1.2.5.RELEASE</version>
 				<scope>import</scope>
 			</dependency>
 
@@ -348,30 +351,29 @@
 			</dependency>
 
 			<!-- spring security 라이브러리 시작 -->
-			<!-- spring security 라이브러리 시작 -->
-		<dependency> 
-			<groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-core</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
-		
-		<dependency> 
-			<groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-taglibs</artifactId> 
-			<version>${spring.security.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-web</artifactId> 
-			<version>${spring.security.version}</version>
-		</dependency>
-		 
-		<dependency> 
-			<groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-config</artifactId> 
-			<version>${spring.security.version}</version>
-		</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-taglibs</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
 			<!-- spring security 라이브러리 끝 -->
 
 		</dependencies>
