@@ -23,12 +23,39 @@ public class BTRV_ImporterTest
         assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
     }
     @Test
+    public void oldSpecCheckSpaceTest(){
+        Map<String, Object> csvDataMap = new HashMap<String, Object>();
+        String commentText = "[조경원][BT: DEMO-40 , DEMO-46 ][RV: 이동민 ] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
+        csvDataMap = checkRV(commentText, csvDataMap);
+        csvDataMap = checkBT(commentText, csvDataMap);
+        assertThat(csvDataMap.get("BT")).isEqualTo("N/A");
+        assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
+    }
+    @Test
+    public void oldSpecCheckNaBTNaRVTest(){
+        Map<String, Object> csvDataMap = new HashMap<String, Object>();
+        String commentText = "[조경원][BT: NA ][RV: N/A ] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
+        csvDataMap = checkRV(commentText, csvDataMap);
+        csvDataMap = checkBT(commentText, csvDataMap);
+        assertThat(csvDataMap.get("BT")).isEqualTo("N/A");
+        assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
+    }
+    @Test
     public void newSpecCheckTest(){
         Map<String, Object> csvDataMap = new HashMap<String, Object>();
         String commentText = "ASSERT 기능 구현 [BT] ACM-41,DEMO-313 #time 2h #comment 각 지원 플랫폼 개발 +review RV-ACM @tskim [RV] 신현진 추후에 조사하고 추가하여야 함";
         csvDataMap = checkRV(commentText, csvDataMap);
         csvDataMap = checkBT(commentText, csvDataMap);
         assertThat(csvDataMap.get("BT")).isEqualTo("ACM-41,DEMO-313");
+        assertThat(csvDataMap.get("RV")).isEqualTo("신현진");
+    }
+    @Test
+    public void newSpecCheckSpaceTest(){
+        Map<String, Object> csvDataMap = new HashMap<String, Object>();
+        String commentText = "ASSERT 기능 구현 [BT] ACM-41, DEMO-313 #time 2h #comment 각 지원 플랫폼 개발 +review RV-ACM @tskim [RV] 신현진 추후에 조사하고 추가하여야 함";
+        csvDataMap = checkRV(commentText, csvDataMap);
+        csvDataMap = checkBT(commentText, csvDataMap);
+        assertThat(csvDataMap.get("BT")).isEqualTo("ACM-41,");
         assertThat(csvDataMap.get("RV")).isEqualTo("신현진");
     }
     @Test
