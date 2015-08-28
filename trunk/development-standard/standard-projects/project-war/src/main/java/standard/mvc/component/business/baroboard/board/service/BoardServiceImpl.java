@@ -7,11 +7,14 @@ import java.util.Properties;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import standard.mvc.component.business.baroboard.board.dao.BoardDao;
@@ -178,7 +181,7 @@ public class BoardServiceImpl implements BoardService {
 			for (AttachedFile attachedFile : files) {
 				MultipartFile file = attachedFile.getFile();
 				String savedFileNM = article.getRegID() + "_" + System.currentTimeMillis();
-				String fileExt = this.getExtention(file.getOriginalFilename());
+				String fileExt = FilenameUtils.getExtension(file.getOriginalFilename());
 				
 				attachedFile.setC_title(file.getOriginalFilename());;
 				attachedFile.setSavedFileNM(savedFileNM);
@@ -190,35 +193,24 @@ public class BoardServiceImpl implements BoardService {
 			}
 		} catch(Exception e) {
 			// 문제 발생시 모든 파일 삭제
-			this.deleteFiles(files, uploadPath);
+			this.deleteSavedFiles(files, uploadPath);
 			throw new Exception("파일 업로드 에러");
 		}
 		
 		/* 2.모든 파일 DB insert */
 		try {
-			for (AttachedFile attachedFile : files) {
-				attachedFile.setRef(2);
-				attachedFile.setC_type("default");
-				attachedFile.setRegDt(this.getTodayFor14Digits());
-				AttachedFile insertedFile = coreService.addNode(attachedFile);
-				attachedFile.setC_id(insertedFile.getId());
-			}
+			this.insertFileInfo(files);
 		} catch(Exception e) {
-			/* 2. 에러처리 - DB 삭제 및 파일 삭제 */
-			for (AttachedFile attachedFile : files) {
-				if(attachedFile.getC_id() != 0) {
-					coreService.removeNode(attachedFile);
-				}
-			}
-			this.deleteFiles(files, uploadPath);
+			/* 2.에러처리 - DB 삭제 및 파일 삭제 */
+			this.deleteSavedFiles(files, uploadPath);
 			throw new Exception("파일 DB 저장 에러");
 		}
 	}
 
-	/** 파일 리스트 삭제 
-	 * 
+	/** 
+	 * 파일 리스트 삭제 
 	 */
-	private void deleteFiles(List<AttachedFile> files, String uploadPath) {
+	private void deleteSavedFiles(List<AttachedFile> files, String uploadPath) {
 		for (AttachedFile attachedFile : files) {
 			String savedFileNM = attachedFile.getSavedFileNM();
 			if(savedFileNM != null) {
@@ -229,19 +221,18 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	
-	
-	/** 확장자 추출
-	 * @param fileName String
-	 * @return Extention String
+	/**
+	 * 파일내역 DB Insert
 	 */
-	private String getExtention(String fileName) {
-		String ext = "";
-		int dotIndex = fileName.lastIndexOf(".");
-		
-		if (-1 != dotIndex && fileName.length() - 1 > dotIndex) {
-			ext =  fileName.substring(dotIndex + 1);
-		} 
-		return ext;
+    @Transactional(readOnly = false, rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
+	private void insertFileInfo(List<AttachedFile> files) throws Exception {
+		for (AttachedFile attachedFile : files) {
+			attachedFile.setRef(2);
+			attachedFile.setC_type("default");
+			attachedFile.setRegDt(this.getTodayFor14Digits());
+			AttachedFile insertedFile = coreService.addNode(attachedFile);
+			attachedFile.setC_id(insertedFile.getId());
+		}
 	}
 	
 	@Override
@@ -290,11 +281,22 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Article readArticle(Article article) throws Exception {
-		this.countUpViewCnt(article);
+	public Article readArticle(Article inputArticle) throws Exception {
+		this.countUpViewCnt(inputArticle);
 		// TODO : 권한체크
-		Article resultArticle = this.getArticleById(article);
-		return resultArticle;
+		Article article = this.getArticleById(inputArticle);
+		if(article.getHasAttachedFileFL() != null && article.getHasAttachedFileFL().equals("1")) {
+			this.getAttachedFilesInfoByArticleID(article);
+		}
+		
+		return article;
+	}
+
+	private void getAttachedFilesInfoByArticleID(Article article) throws Exception {
+		AttachedFile input = new AttachedFile();
+		input.setArticleID(article.getC_id());
+		List<AttachedFile> fileList = boardDao.getAttachedFilesInfoByArticleID(input);
+		article.setAttachedFiles(fileList);
 	}
 
 	@Override
@@ -429,4 +431,5 @@ public class BoardServiceImpl implements BoardService {
 		
 		return loginedUserID;
 	}
+	
 }

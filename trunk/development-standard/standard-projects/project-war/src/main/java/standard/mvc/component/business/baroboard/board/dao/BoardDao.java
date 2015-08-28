@@ -3,6 +3,7 @@ package standard.mvc.component.business.baroboard.board.dao;
 import java.util.List;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.AttachedFile;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
@@ -53,5 +54,7 @@ public interface BoardDao {
 	public int deleteComment(Comment comment) throws Exception;
 
 	public Like getLikeByArticleIDAndRegID(Like like) throws Exception;
+
+	public List<AttachedFile> getAttachedFilesInfoByArticleID(AttachedFile attachedFile) throws Exception;
 
 }

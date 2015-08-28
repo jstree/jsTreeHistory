@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.AttachedFile;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
@@ -109,6 +110,12 @@ public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 	public Like getLikeByArticleIDAndRegID(Like like) throws Exception {
 		List<Like> resultList = list(like.getSqlMapSelector() + "." + "getLikeByArticleIDAndRegID", like);
 		return resultList.get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AttachedFile> getAttachedFilesInfoByArticleID(AttachedFile attachedFile) throws Exception {
+		return list(attachedFile.getSqlMapSelector() + "." + "getAttachedFilesInfoByArticleID", attachedFile);
 	}
 
 }

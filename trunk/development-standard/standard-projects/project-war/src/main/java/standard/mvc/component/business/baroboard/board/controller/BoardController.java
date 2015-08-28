@@ -112,16 +112,12 @@ public class BoardController extends GenericAbstractController {
 			isGuestUser = "0";		// 일반사용자
 		}
 		
-		
-		
 		String boardID = article.getBoardID();
-			
 		
 		List<Article> articleList = boardService.getArticleList(article);
 		modelMap.addAttribute("articleList", articleList);
 		
 		int totPages = this.getTotalPages(articleList.get(0).getTotCnt(), article.getPageSize());  
-		
 		
 		// 1페이지일 경우, 공지사항을 보여준다.
 		if(article.getPageNum() == 1) {
@@ -224,6 +220,9 @@ public class BoardController extends GenericAbstractController {
 		Comment comment = new Comment();
 		comment.setArticleID(article.getC_id());
 		List<Comment> commentList = boardService.getCommentList(comment);
+		
+		
+		
 		
 		modelMap.addAttribute("isGuestUser", isGuestUser);
 		modelMap.addAttribute("article", targetArticle);

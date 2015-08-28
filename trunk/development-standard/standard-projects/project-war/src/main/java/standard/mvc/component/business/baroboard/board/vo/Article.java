@@ -72,15 +72,6 @@ public class Article extends ComprehensiveTree {
 	/* 게스트 글 비밀번호 */
 	private String guestPW;
 	
-	
-	/* 첨부파일 리스트 
-	 * jackson json 으로 return 시, 이 필드는 빠진다.
-	 * */
-	private transient List<AttachedFile> attachedFiles;
-
-	/* Root Context Path */
-	private String contextPath;
-	
 	/* 생성일시 */
 	private String regDt;
 
@@ -88,9 +79,9 @@ public class Article extends ComprehensiveTree {
 	private String modDt;
 	
 	/* 테이블에는 없지만 DTO로서 필요한 필드 */
+
 	/* 게시판 ID */
-	
-//	private String boardID; 
+	//	TODO : private String boardID; 
 	private String boardID = "test"; 
 
 	/* 페이지 */
@@ -122,6 +113,18 @@ public class Article extends ComprehensiveTree {
 	
 	/* 전체 게시글 수 */
 	private int totCnt;
+	
+	/* 첨부파일 리스트 
+	 * jackson json 으로 return 시, 이 필드는 빠진다. */
+	private transient List<AttachedFile> attachedFiles;
+
+	/* 파일 첨부 YN */
+	private String hasAttachedFileFL;
+	
+	/* Root Context Path */
+	private String contextPath;
+
+	
 	
 	@Override
 	public String toString() {
@@ -159,6 +162,14 @@ public class Article extends ComprehensiveTree {
 		return "board";
 	}
 	
+	public String getHasAttachedFileFL() {
+		return hasAttachedFileFL;
+	}
+
+	public void setHasAttachedFileFL(String hasAttachedFileFL) {
+		this.hasAttachedFileFL = hasAttachedFileFL;
+	}
+
 	public String getContextPath() {
 		return contextPath;
 	}

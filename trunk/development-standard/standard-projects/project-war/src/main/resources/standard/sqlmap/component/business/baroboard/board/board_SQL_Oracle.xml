@@ -496,6 +496,15 @@
           			ELSE 1 END
           		   ) as likeFL	
           		, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt	
+          		, (	CASE WHEN 
+						(SELECT COUNT(*) 
+						 FROM T_BOARD_FILE_TEST E
+						 WHERE 1=1
+						 	AND A.C_ID = E.C_ARTICLE_ID
+						 ) = 0 
+						THEN 0
+          			ELSE 1 END
+          		   ) as hasAttachedFileFL	
 			FROM T_BOARD_TEST A 
 			WHERE 1=1
 				AND A.C_ID = #c_id#
