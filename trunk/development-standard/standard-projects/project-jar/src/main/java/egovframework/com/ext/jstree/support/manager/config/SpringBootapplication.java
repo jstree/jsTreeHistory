@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
 //1. spring.pom 파일 spring-boot 활성화
-//2. 본 자바 파일 확장자 변경.
+//2. 본 자바 파일 어노테이션 활성화
 @SpringBootApplication
 @EnableScheduling
 @EnableWebMvcSecurity

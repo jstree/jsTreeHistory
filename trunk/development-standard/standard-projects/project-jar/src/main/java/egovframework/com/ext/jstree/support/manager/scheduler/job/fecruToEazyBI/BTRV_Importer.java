@@ -48,7 +48,7 @@ public class BTRV_Importer
     public static String storeStartDate = "N/A";
     public static String storePropertiesDate = "N/A";
     
-    @Scheduled(cron = "0 10 01 03 * ?")
+    @Scheduled(cron = "0 59 16 28 08 ?")
     public void execute()
     {
         //여기서 스톱.
