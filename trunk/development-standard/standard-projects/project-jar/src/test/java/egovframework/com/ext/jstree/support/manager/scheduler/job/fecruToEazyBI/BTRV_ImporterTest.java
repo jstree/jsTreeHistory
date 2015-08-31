@@ -16,7 +16,7 @@ public class BTRV_ImporterTest
     @Test
     public void oldSpecCheckTest(){
         Map<String, Object> csvDataMap = new HashMap<String, Object>();
-        String commentText = "[조경원][BT:DEMO-40 , DEMO-46][RV:이동민] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
+        String commentText = "[이혜진][BT:DEMO-40 , DEMO-46][RV:이동민] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
         if(checkLimitBTFormat(commentText)){            
             csvDataMap = checkBT(commentText, csvDataMap);
         }else{
@@ -33,7 +33,7 @@ public class BTRV_ImporterTest
     @Test
     public void oldSpecCheckSpaceTest(){
         Map<String, Object> csvDataMap = new HashMap<String, Object>();
-        String commentText = "[조경원][BT: DEMO-40 , DEMO-46 ][RV: 이동민 ] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
+        String commentText = "[이혜진][BT: DEMO-40 , DEMO-46 ][RV: 이동민 ] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
         if(checkLimitBTFormat(commentText)){            
             csvDataMap = checkBT(commentText, csvDataMap);
         }else{
@@ -50,7 +50,7 @@ public class BTRV_ImporterTest
     @Test
     public void oldSpecCheckNaBTNaRVTest(){
         Map<String, Object> csvDataMap = new HashMap<String, Object>();
-        String commentText = "[조경원][BT: NA ][RV: N/A ] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
+        String commentText = "[이혜진][BT: NA ][RV: N/A ] 테스트 제거 [문제의 원인] - 테스트 제거 [개발/변경 사항] - 테스트 제거 [변경된 파일/모듈] - N/A [개발자 테스트 내용] - N/A [테스트 요청 사항] - N/A";
         if(checkLimitBTFormat(commentText)){            
             csvDataMap = checkBT(commentText, csvDataMap);
         }else{
@@ -115,6 +115,42 @@ public class BTRV_ImporterTest
         
         assertThat(csvDataMap.get("BT")).isEqualTo("N/A");
         assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
+    }
+    @Test
+    public void newSpecCheckRealTest(){
+        Map<String, Object> csvDataMap = new HashMap<String, Object>();
+        String commentText = "ASSERT 기능 구현 [BT] V3LC-30[RV] 오근현 추후에 조사하고 추가하여야 함";
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
+        
+        assertThat(csvDataMap.get("BT")).isEqualTo("V3LC-30");
+        assertThat(csvDataMap.get("RV")).isEqualTo("오근현");
+    }
+    @Test
+    public void newSpecCheckReal뒷골Test(){
+        Map<String, Object> csvDataMap = new HashMap<String, Object>();
+        String commentText = "ASSERT 기능 구현 [bt] V3LC-30[rv] 오근현 추후에 조사하고 추가하여야 함";
+        if(checkLimitBTFormat(commentText)){            
+            csvDataMap = checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(checkLimitRVFormat(commentText)){            
+            csvDataMap = checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
+        
+        assertThat(csvDataMap.get("BT")).isEqualTo("V3LC-30");
+        assertThat(csvDataMap.get("RV")).isEqualTo("오근현");
     }
     @Test
     public void newSpecCheckBTRVFormat(){
@@ -229,13 +265,25 @@ public class BTRV_ImporterTest
             String filterBTDividStr = StringUtils.substring(filterBTstr, 1, checkPointBTDivid);
             String filterBTTrimDividStr = filterBTDividStr.trim();
             
+            int checkPointBTMarkDivid = matchPointWithSoftCheck(filterBTTrimDividStr, "RV]", "start");
+            String filterBTMarkDividStr = "";
+            String filterBTMarkTrimDividStr = "";
+            if(filterBTTrimDividStr.length() == checkPointBTMarkDivid){
+                filterBTMarkDividStr = StringUtils.substring(filterBTTrimDividStr, 0, checkPointBTMarkDivid);
+                filterBTMarkTrimDividStr = filterBTMarkDividStr.trim();
+            }else{
+                filterBTMarkDividStr = StringUtils.substring(filterBTTrimDividStr, 0, checkPointBTMarkDivid-1);
+                filterBTMarkTrimDividStr = filterBTMarkDividStr.trim();
+            }
+            
             //여러개의 이슈를 연결하였는지 하나만 했는지 
-            int checkPointMuiltiIssue = matchPointWithSoftCheck(filterBTTrimDividStr, ",", "start");
-            String filterPointMuiltiIssuetr = StringUtils.substring(filterBTTrimDividStr, 0, checkPointMuiltiIssue);
+            int checkPointMuiltiIssue = matchPointWithSoftCheck(filterBTMarkTrimDividStr, ",", "start");
+            String filterPointMuiltiIssuetr = StringUtils.substring(filterBTMarkTrimDividStr, 0, checkPointMuiltiIssue);
             String filterPointMuiltiIssueTrimStr = filterPointMuiltiIssuetr.trim();
+            
             //전위 이슈를 정규표현식으로 검증
             if(regMatch("^[_0-9a-zA-Z-]+-[0-9]*$", filterPointMuiltiIssueTrimStr)){
-                csvDataMap.put("BT", filterBTTrimDividStr);
+                csvDataMap.put("BT", filterBTMarkTrimDividStr);
             }else{
                 csvDataMap.put("BT", "N/A");
             }
