@@ -397,7 +397,23 @@ public class BTRV_Importer
         
     }
     
-    private Boolean checkLimitBTFormat(String commentText){
+    
+    private Element getRootNodeFromUrl(String url)
+    {
+        try
+        {
+            SAXBuilder builder = new SAXBuilder();
+            Document jdomdoc = builder.build(new URL(url));
+            Element root = jdomdoc.getRootElement();
+            return root;
+        }
+        catch (JDOMException | IOException e)
+        {
+            return new Element("blank");
+        }
+    }
+    
+    public static Boolean checkLimitBTFormat(String commentText){
         String lowerStr = commentText.toLowerCase();
         Pattern oldPatternObj = Pattern.compile("BT:", Pattern.CASE_INSENSITIVE);
         Matcher oldMatcherObj = oldPatternObj.matcher(lowerStr);
@@ -414,7 +430,7 @@ public class BTRV_Importer
         }
     }
 
-    private Boolean checkLimitRVFormat(String commentText){
+    public static Boolean checkLimitRVFormat(String commentText){
         String lowerStr = commentText.toLowerCase();
         Pattern oldPatternObj = Pattern.compile("RV:", Pattern.CASE_INSENSITIVE);
         Matcher oldMatcherObj = oldPatternObj.matcher(lowerStr);
@@ -429,23 +445,9 @@ public class BTRV_Importer
         {
             return false;
         }
-    }    
-    private Element getRootNodeFromUrl(String url)
-    {
-        try
-        {
-            SAXBuilder builder = new SAXBuilder();
-            Document jdomdoc = builder.build(new URL(url));
-            Element root = jdomdoc.getRootElement();
-            return root;
-        }
-        catch (JDOMException | IOException e)
-        {
-            return new Element("blank");
-        }
     }
     
-    private Map<String, Object> checkBT(String commentText, Map<String, Object> csvDataMap)
+    public static Map<String, Object> checkBT(String commentText, Map<String, Object> csvDataMap)
     {
         //기존포맷
         //BT 포맷이 있는지.
@@ -454,7 +456,14 @@ public class BTRV_Importer
         
         //BT가 있더라도 : 구분자가 있는지
         int checkPointOldBTDelimiter = matchPointWithSoftCheck(filterOldBTstr, ":", "start");
-        String filterOldBTDelimiterStr = StringUtils.substring(filterOldBTstr, checkPointOldBTDelimiter);
+        int checkPointOldBTDelimiterreverseChecker = matchPointWithSoftCheck(filterOldBTstr, "]", "start");
+        String filterOldBTDelimiterStr = "";
+        if(checkPointOldBTDelimiter > checkPointOldBTDelimiterreverseChecker){
+            //뒤집어진 상태
+        }else{
+            //정상인 상태.
+            filterOldBTDelimiterStr = StringUtils.substring(filterOldBTstr, checkPointOldBTDelimiter);
+        }
         System.out.println("returnStr = " + filterOldBTDelimiterStr);
         
         //BT와 구분자가 있더라도 잘 닫았는지.
@@ -472,13 +481,25 @@ public class BTRV_Importer
             String filterBTDividStr = StringUtils.substring(filterBTstr, 1, checkPointBTDivid);
             String filterBTTrimDividStr = filterBTDividStr.trim();
             
+            int checkPointBTMarkDivid = matchPointWithSoftCheck(filterBTTrimDividStr, "RV]", "start");
+            String filterBTMarkDividStr = "";
+            String filterBTMarkTrimDividStr = "";
+            if(filterBTTrimDividStr.length() == checkPointBTMarkDivid){
+                filterBTMarkDividStr = StringUtils.substring(filterBTTrimDividStr, 0, checkPointBTMarkDivid);
+                filterBTMarkTrimDividStr = filterBTMarkDividStr.trim();
+            }else{
+                filterBTMarkDividStr = StringUtils.substring(filterBTTrimDividStr, 0, checkPointBTMarkDivid-1);
+                filterBTMarkTrimDividStr = filterBTMarkDividStr.trim();
+            }
+            
             //여러개의 이슈를 연결하였는지 하나만 했는지 
-            int checkPointMuiltiIssue = matchPointWithSoftCheck(filterBTTrimDividStr, ",", "start");
-            String filterPointMuiltiIssuetr = StringUtils.substring(filterBTTrimDividStr, 0, checkPointMuiltiIssue);
+            int checkPointMuiltiIssue = matchPointWithSoftCheck(filterBTMarkTrimDividStr, ",", "start");
+            String filterPointMuiltiIssuetr = StringUtils.substring(filterBTMarkTrimDividStr, 0, checkPointMuiltiIssue);
             String filterPointMuiltiIssueTrimStr = filterPointMuiltiIssuetr.trim();
+            
             //전위 이슈를 정규표현식으로 검증
             if(regMatch("^[_0-9a-zA-Z-]+-[0-9]*$", filterPointMuiltiIssueTrimStr)){
-                csvDataMap.put("BT", filterBTTrimDividStr);
+                csvDataMap.put("BT", filterBTMarkTrimDividStr);
             }else{
                 csvDataMap.put("BT", "N/A");
             }
@@ -489,7 +510,7 @@ public class BTRV_Importer
         return csvDataMap;
     }
 
-    private Map<String, Object> checkRV(String commentText, Map<String, Object> csvDataMap)
+    public static Map<String, Object> checkRV(String commentText, Map<String, Object> csvDataMap)
     {
         //기존포맷인지 체크
         //RV 포맷이 있는지.
@@ -513,9 +534,21 @@ public class BTRV_Importer
             String filterRVstr = StringUtils.substring(commentText, checkPointRV);
             
             //RV의 기록 데이터를 가져온다.
-            int checkPointRVDivid = matchPointWithHardCheck(ltrim(filterRVstr), " ", "end");
-            String filterRVDividStr = StringUtils.substring(filterRVstr, 1, checkPointRVDivid);
-            String filterRVTrimDividStr = filterRVDividStr.trim();
+            String filterRVDividStr = "";
+            String filterRVTrimDividStr = "";
+
+            int checkPointRVMarkDivid = matchPointWithSoftCheck(ltrim(filterRVstr), " ", "start");
+            
+            if(ltrim(filterRVstr).length() == checkPointRVMarkDivid){
+                filterRVDividStr = StringUtils.substring(filterRVstr, 1, filterRVstr.length());
+                filterRVTrimDividStr = filterRVDividStr.trim();
+            }else if(matchPointWithOnlyCheck(filterRVstr, "N/A") || matchPointWithOnlyCheck(filterRVstr, "NA")){
+                filterRVTrimDividStr = "N/A";
+            }else{
+                int checkPointRVDivid = matchPointWithHardCheck(ltrim(filterRVstr), " ", "end");
+                filterRVDividStr = StringUtils.substring(filterRVstr, 1, checkPointRVDivid);
+                filterRVTrimDividStr = filterRVDividStr.trim();
+            }
             
             if(StringUtils.lowerCase(filterRVTrimDividStr).equals("na") || StringUtils.lowerCase(filterRVTrimDividStr).equals("n/a")){
                 csvDataMap.put("RV", "N/A");
@@ -531,7 +564,7 @@ public class BTRV_Importer
         return csvDataMap;
     }
     
-    private boolean regMatch(String regEx, String filterPointMuiltiIssueTrimStr)
+    public static boolean regMatch(String regEx, String filterPointMuiltiIssueTrimStr)
     {
         if(Pattern.matches(regEx, filterPointMuiltiIssueTrimStr)){
             return true;
@@ -540,7 +573,7 @@ public class BTRV_Importer
         }
     }
 
-    private int matchPointWithHardCheck(String originStr, String checkStr, String matchPoint)
+    public static int matchPointWithHardCheck(String originStr, String checkStr, String matchPoint)
     {
         String lowerStr = originStr.toLowerCase();
         Pattern patternObj = Pattern.compile(checkStr, Pattern.CASE_INSENSITIVE);
@@ -555,7 +588,7 @@ public class BTRV_Importer
         return checkPointValue;
     }
     
-    private int matchPointWithSoftCheck(String originStr, String checkStr, String matchPoint)
+    public static int matchPointWithSoftCheck(String originStr, String checkStr, String matchPoint)
     {
         String lowerStr = originStr.toLowerCase();
         Pattern patternObj = Pattern.compile(checkStr, Pattern.CASE_INSENSITIVE);
@@ -570,6 +603,18 @@ public class BTRV_Importer
             checkPointValue = lowerStr.length();
         }
         return checkPointValue;
+    }
+    public static boolean matchPointWithOnlyCheck(String originStr, String checkStr)
+    {
+        String lowerStr = originStr.toLowerCase();
+        Pattern patternObj = Pattern.compile(checkStr, Pattern.CASE_INSENSITIVE);
+        Matcher matcherObj = patternObj.matcher(lowerStr);
+        if (matcherObj.find())
+        {
+            return true;
+        }else{
+            return false;
+        }
     }
     
     /**
