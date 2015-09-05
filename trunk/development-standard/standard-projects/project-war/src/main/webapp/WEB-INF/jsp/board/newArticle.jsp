@@ -111,9 +111,9 @@ div#titleDiv > div input {
 									<div class="additional-input-div">
 										<div>
 											파일 첨부
-											<select id="fileAttachSelect"multiple="multiple" size=3>
-											</select>
+											<select id="fileAttachSelect"multiple="multiple" size=3></select>
 											<div id="fileListDiv" style="display: none">
+												<!-- 새 파일 리스트 -->
 												<input id="fileInput0" name="files" type="file" />
 											</div>
 										</div>
@@ -134,21 +134,21 @@ div#titleDiv > div input {
 			</div>
 		</article>
 	</section>
+	<%-- TODO : FILE CONTROL 공통으로 뺄것 --%>
 	<script>
-		var FILE_ARR = [];
-		var FILE_CNT_NUM = 0;
+		var FILE_ID_NUM = 0;
 		
 		$(document).ready(function(){
 			
 			// 파일추가 버튼
 			$('#addFileBtn').click(function(){
 				
-				if(FILE_ARR.length >= 10) {
+				if($('#fileAttachSelect option').length >= 10) {
 					alert('첨부파일은 10개까지 가능합니다.');
 					return;
 				}
 				
-				var fileID = 'fileInput' + FILE_CNT_NUM;
+				var fileID = 'fileInput' + FILE_ID_NUM;
 				var targetFileID = '#' + fileID;
 
 				$(targetFileID).change(function(){
@@ -161,9 +161,7 @@ div#titleDiv > div input {
 						    text: fileName
 						}));
 						
-						FILE_ARR.push(fileID);
-						
-						var inputStr = '<input id="fileInput' + ++FILE_CNT_NUM +'" name="files" type="file">';
+						var inputStr = '<input id="fileInput' + ++FILE_ID_NUM +'" name="files" type="file">';
 						$('#fileListDiv').append(inputStr);
 						
 					}
@@ -176,20 +174,12 @@ div#titleDiv > div input {
 			// 파일 삭제 버튼
 			$('#removeFileBtn').click(function(){
 				$('#fileAttachSelect option:selected').each(function(){
-					$('#' + $(this).val()).remove();
+					$('#' + $(this).val()).remove();	// Input file 삭제
 					
-					for(var i=0; i<FILE_ARR.length; i++) {
-						if(FILE_ARR[i] == $(this).val()) {
-							FILE_ARR.splice(i, 1);
-							break;
-						}
-					}
-					
+					// Select Option 삭제
 					$(this).remove();
 				});
 			});			
-			
-			
 		});	
 	</script>
 	
@@ -198,11 +188,23 @@ $('#articleForm').on('submit',function(e){
     e.preventDefault();
     CKEDITOR.instances.editor.updateElement();	// CKEditor를 refresh함
     if ($.trim($('#articleTitle').val()) != '') {
+
+    	// 추가해둔 마지막 fileInput 삭제
+    	$('#fileInput'+FILE_ID_NUM).remove();
+    	// Content Type 지정
+    	var fileInputs = $("input[name=files]");
+    	var articleContentType = '';
+    	if(fileInputs.length <= 0) {
+    		articleContentType = 'application/x-www-form-urlencoded; charset=utf-8';
+    	} else {
+    		articleContentType = 'multipart/form-data; charset=utf-8'
+    	}
+
     	
     	$('#articleForm').ajaxForm({	
 			 type : 'post'			
 			,dataType : 'text'
-			,contentType : 'multipart/form-data'
+			,contentType : articleContentType
 			,beforeSubmit: function(formArray, jqForm, options){
 				
 			}

@@ -288,30 +288,7 @@ public class BoardController extends GenericAbstractController {
 	@ResponseBody
 	public ResponseEntity<Article> submitNewArticle(HttpServletRequest request, HttpServletResponse response, @ModelAttribute Article article) throws Exception {
 		
-		if(request instanceof MultipartHttpServletRequest){
-			List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles("files");
-			if(files != null) {
-				// 빈 파일이면 삭제
-				// TODO : 파일업로드 허용수 제한
-				Iterator<MultipartFile> itr = files.iterator();
-				List<AttachedFile> attachedFiles = new ArrayList<AttachedFile>();
-				while(itr.hasNext()) {
-					MultipartFile file = itr.next();
-					if("".equals(file.getOriginalFilename())) {
-						itr.remove();
-					} else {
-						AttachedFile attachedFile = new AttachedFile();
-						attachedFile.setFile(file);
-						attachedFiles.add(attachedFile);
-					}
-				}
-				if(attachedFiles.size() != 0) {
-					article.setAttachedFiles(attachedFiles);
-					String contextPath = request.getSession().getServletContext().getRealPath("/");
-					article.setContextPath(contextPath);
-				}
-			}
-		}
+		this.attachFileIfExist(request, article);
 		
 		response.setContentType(MediaType.TEXT_PLAIN_VALUE);
 		Article resultArticle = boardService.addArticle(article);
@@ -322,7 +299,7 @@ public class BoardController extends GenericAbstractController {
 	}
 	
 	@RequestMapping(value="/downloadAttachedFile.do", method=RequestMethod.GET)
-	public ModelAndView downloadNoteFile(@ModelAttribute AttachedFile reqFileInfo,
+	public ModelAndView downloadAttachedFile(@ModelAttribute AttachedFile reqFileInfo,
 			HttpServletRequest request) throws Exception {
     	
 		AttachedFile targetFile = boardService.getAttachedFileByID(reqFileInfo);
@@ -362,8 +339,15 @@ public class BoardController extends GenericAbstractController {
 
 	@RequestMapping(value = "/submitModifiedArticle.do")
 	@ResponseBody
-	public Article submitModifiedArticle(ModelMap modelMap, @ModelAttribute Article article) throws Exception {
-		return boardService.modifyArticle(article);
+	public ResponseEntity<Article> submitModifiedArticle(HttpServletRequest request, HttpServletResponse response, @ModelAttribute Article article) throws Exception {
+		this.attachFileIfExist(request, article);
+		
+		response.setContentType(MediaType.TEXT_PLAIN_VALUE);
+		Article resultArticle = boardService.modifyArticle(article);
+		
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.TEXT_PLAIN);
+		return new ResponseEntity<Article>(resultArticle, headers, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/deleteArticle.do")
@@ -413,5 +397,39 @@ public class BoardController extends GenericAbstractController {
 		return boardService.cancelLikeArticle(like);
 	}
 	
+	
+	
+	
+	/* 첨부파일이 있을 경우 Article 에 추가한다. */
+	private void attachFileIfExist(HttpServletRequest request, Article article) {
+		if(request instanceof MultipartHttpServletRequest){
+			logger.debug("------ DEBUG 0 -------");
+			logger.debug("MultipartHttpServletRequest");
+			List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles("files");
+			if(files != null) {
+				// 빈 파일이면 삭제
+				// TODO : 파일업로드 허용수 제한
+				Iterator<MultipartFile> itr = files.iterator();
+				List<AttachedFile> attachedFiles = new ArrayList<AttachedFile>();
+				while(itr.hasNext()) {
+					MultipartFile file = itr.next();
+					if("".equals(file.getOriginalFilename())) {
+						itr.remove();
+					} else {
+						logger.debug("------ DEBUG 1 -------");
+						logger.debug("FILE ADDED : "+ file.getOriginalFilename() );
+						AttachedFile attachedFile = new AttachedFile();
+						attachedFile.setFile(file);
+						attachedFiles.add(attachedFile);
+					}
+				}
+				if(attachedFiles.size() != 0) {
+					article.setAttachedFiles(attachedFiles);
+					String contextPath = request.getSession().getServletContext().getRealPath("/");
+					article.setContextPath(contextPath);
+				}
+			}
+		}		
+	}
 }
 

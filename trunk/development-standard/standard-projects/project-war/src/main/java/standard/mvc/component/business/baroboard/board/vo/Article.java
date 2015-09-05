@@ -121,11 +121,12 @@ public class Article extends ComprehensiveTree {
 	/* 파일 첨부 YN */
 	private String hasAttachedFileFL;
 	
+	/* 글 수정시 기존 첨부파일 리스트 */
+	private List<String> existing_files;
+	
 	/* Root Context Path */
 	private String contextPath;
 
-	
-	
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();
@@ -162,6 +163,14 @@ public class Article extends ComprehensiveTree {
 		return "board";
 	}
 	
+	public List<String> getExisting_files() {
+		return existing_files;
+	}
+
+	public void setExisting_files(List<String> existing_files) {
+		this.existing_files = existing_files;
+	}
+
 	public String getHasAttachedFileFL() {
 		return hasAttachedFileFL;
 	}

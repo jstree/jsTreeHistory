@@ -1,7 +1,9 @@
 package standard.mvc.component.business.baroboard.board.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -10,6 +12,8 @@ import javax.annotation.Resource;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -52,6 +56,8 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
 
 @Service(value = "BoardService")
 public class BoardServiceImpl implements BoardService {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Resource(name = "CoreService")
 	private CoreService coreService;
@@ -87,8 +93,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public Article getArticleById(Article article) throws Exception {
-		return boardDao.getArticleById(article);
+	public Article getArticleById(Article paramArticle) throws Exception {
+		Article article = boardDao.getArticleById(paramArticle);
+		if(article.getHasAttachedFileFL() != null && article.getHasAttachedFileFL().equals("1")) {
+			article.setAttachedFiles(this.getAttachedFilesInfoByArticleID(article));
+		}
+		return article;
 	}
 	
 	@Override
@@ -141,6 +151,40 @@ public class BoardServiceImpl implements BoardService {
 		return article;
 	}
 	
+
+	@Override
+	public Article modifyArticle(Article article) throws Exception {
+		// TODO : 권한체크
+		
+		// File Process 1. 기존파일 확인 및 삭제
+		this.processExistingFiles(article);
+		
+		// File Process 2. 신규파일 추가
+		if(article.getAttachedFiles() != null)  {
+			logger.debug("------ DEBUG 2 -------");
+			logger.debug("fileUpload start");
+			this.fileUpload(article);
+		}		
+		article.setContent(this.unescapeHtml(article.getContent()));
+		article.setModDt(this.getTodayFor14Digits());
+		
+		int resultInt = boardDao.modifyArticle(article);  
+		if(resultInt != 1){
+			throw new Exception("데이터 정합성 오류");
+		} 
+		
+		/* 3. 추가된 파일에 articleID 지정 */
+		if(article.getAttachedFiles() != null) {
+			logger.debug("------ DEBUG 3 -------");
+			logger.debug("file DB update");
+			this.setArticleIDOfFiles(article);
+		}
+		
+		TotalArticle totalArticle = this.setTotalArticleByArticle(article);
+		totalArticleService.updateTitleByBoardIdAndArticleID(totalArticle);
+		
+		return article;
+	}
 	
 	/** 저장된 파일에 articleID 를 지정한다. 
 	 * @param article
@@ -151,59 +195,6 @@ public class BoardServiceImpl implements BoardService {
 		for (AttachedFile attachedFile : files) {
 			attachedFile.setArticleID(article.getC_id());
 			coreService.alterNode(attachedFile);
-		}
-	}
-
-	/** 
-	 * 파일 업로드를 수행한다.
-	 * @param article
-	 * @throws Exception
-	 */
-	private void fileUpload(Article article) throws Exception {
-		
-		String defaultPath = article.getContextPath();
-		String uploadPath = fileUploadProperties.getProperty("article.upload.dir");
-		uploadPath = defaultPath + uploadPath + article.getBoardID() + "/";		
-		
-		List<AttachedFile> files = article.getAttachedFiles();
-		String savedFilePath = "";
-		
-		
-		/* 1.모든 파일 업로드 */
-		try {
-			File saveFolder = new File(uploadPath);
-			// 디렉토리 생성
-			if (!saveFolder.exists() || saveFolder.isFile()) {
-				saveFolder.mkdirs();
-			}
-			
-			// TODO : 20150827기준 익명사용자는 고려하지 않음
-			for (AttachedFile attachedFile : files) {
-				MultipartFile file = attachedFile.getFile();
-				String savedFileNM = article.getRegID() + "_" + System.currentTimeMillis();
-				String fileExt = FilenameUtils.getExtension(file.getOriginalFilename());
-				
-				attachedFile.setC_title(file.getOriginalFilename());;
-				attachedFile.setSavedFileNM(savedFileNM);
-				attachedFile.setExtension(fileExt);
-				
-				savedFilePath = uploadPath + savedFileNM;
-				
-				file.transferTo(new File(savedFilePath));
-			}
-		} catch(Exception e) {
-			// 문제 발생시 모든 파일 삭제
-			this.deleteSavedFiles(files, uploadPath);
-			throw new Exception("파일 업로드 에러");
-		}
-		
-		/* 2.모든 파일 DB insert */
-		try {
-			this.insertFileInfo(files);
-		} catch(Exception e) {
-			/* 2.에러처리 - DB 삭제 및 파일 삭제 */
-			this.deleteSavedFiles(files, uploadPath);
-			throw new Exception("파일 DB 저장 에러");
 		}
 	}
 
@@ -285,38 +276,15 @@ public class BoardServiceImpl implements BoardService {
 		this.countUpViewCnt(inputArticle);
 		// TODO : 권한체크
 		Article article = this.getArticleById(inputArticle);
-		if(article.getHasAttachedFileFL() != null && article.getHasAttachedFileFL().equals("1")) {
-			this.getAttachedFilesInfoByArticleID(article);
-		}
-		
 		return article;
 	}
 
-	private void getAttachedFilesInfoByArticleID(Article article) throws Exception {
+	private List<AttachedFile> getAttachedFilesInfoByArticleID(Article article) throws Exception {
 		AttachedFile input = new AttachedFile();
 		input.setArticleID(article.getC_id());
-		List<AttachedFile> fileList = boardDao.getAttachedFilesInfoByArticleID(input);
-		article.setAttachedFiles(fileList);
+		return boardDao.getAttachedFilesInfoByArticleID(input);
 	}
-
-	@Override
-	public Article modifyArticle(Article article) throws Exception {
-		// TODO : 권한체크
-		
-		article.setContent(this.unescapeHtml(article.getContent()));
-		
-		article.setModDt(this.getTodayFor14Digits());
-		int resultInt = boardDao.modifyArticle(article);  
-		if(resultInt != 1){
-			throw new Exception("데이터 정합성 오류");
-		} 
-		
-		TotalArticle totalArticle = this.setTotalArticleByArticle(article);
-		totalArticleService.updateTitleByBoardIdAndArticleID(totalArticle);
-		
-		return article;
-	}
-
+	
 	private int countUpViewCnt(Article article) throws Exception {
 		return boardDao.countUpViewCnt(article);
 	}
@@ -438,4 +406,107 @@ public class BoardServiceImpl implements BoardService {
 		return coreDao.getNode(reqFileInfo);
 	}
 	
+	/** 
+	 * 파일 업로드를 수행한다.
+	 * @param article
+	 * @throws Exception
+	 */
+	private void fileUpload(Article article) throws Exception {
+		
+		String defaultPath = article.getContextPath();
+		String uploadPath = fileUploadProperties.getProperty("article.upload.dir");
+		uploadPath = defaultPath + uploadPath + article.getBoardID() + "/";		
+		
+		List<AttachedFile> files = article.getAttachedFiles();
+		String savedFilePath = "";
+		
+		
+		/* 1.모든 파일 업로드 */
+		try {
+			File saveFolder = new File(uploadPath);
+			// 디렉토리 생성
+			if (!saveFolder.exists() || saveFolder.isFile()) {
+				saveFolder.mkdirs();
+			}
+			
+			// TODO : 20150827기준 익명사용자는 고려하지 않음
+			for (AttachedFile attachedFile : files) {
+				MultipartFile file = attachedFile.getFile();
+				String savedFileNM = article.getRegID() + "_" + System.currentTimeMillis();
+				String fileExt = FilenameUtils.getExtension(file.getOriginalFilename());
+				
+				attachedFile.setC_title(file.getOriginalFilename());;
+				attachedFile.setSavedFileNM(savedFileNM);
+				attachedFile.setExtension(fileExt);
+				
+				savedFilePath = uploadPath + savedFileNM;
+				
+				file.transferTo(new File(savedFilePath));
+			}
+		} catch(Exception e) {
+			// 문제 발생시 모든 파일 삭제
+			this.deleteSavedFiles(files, uploadPath);
+			throw new Exception("파일 업로드 에러");
+		}
+		
+		/* 2.모든 파일 DB insert */
+		try {
+			this.insertFileInfo(files);
+		} catch(Exception e) {
+			/* 2.에러처리 - DB 삭제 및 파일 삭제 */
+			this.deleteSavedFiles(files, uploadPath);
+			throw new Exception("파일 DB 저장 에러");
+		}
+	}
+	
+	private void processExistingFiles(Article article) throws Exception {
+		logger.debug("processExistingFiles");
+		String defaultPath = article.getContextPath();
+		String uploadPath = fileUploadProperties.getProperty("article.upload.dir");
+		uploadPath = defaultPath + uploadPath + article.getBoardID() + "/";	
+		
+		List<AttachedFile> orgFiles = this.getAttachedFilesInfoByArticleID(article);
+		
+		List<String> modifiedFileIDs = article.getExisting_files();
+		if(modifiedFileIDs == null) {	// input 에 기존파일이 없다
+			if(orgFiles != null && orgFiles.size() != 0) { // 그런데 리스트에 존재할 경우는 모든 첨부파일 삭제
+				Iterator<AttachedFile> orgItr = orgFiles.iterator();
+				while(orgItr.hasNext()) {
+					AttachedFile orgFile = orgItr.next();
+					File targetFile = new File(uploadPath + orgFile.getSavedFileNM());
+					targetFile.delete(); // 물리 파일 삭제
+					coreService.removeNode(orgFile);	// DB 파일 데이터 삭제
+					orgItr.remove();
+					logger.debug("---- FILE DELETE ----");
+					logger.debug(orgFile.getSavedFileNM());
+				}
+			}
+		} else {
+			// 기존 파일과 입력 파일 체크
+			Iterator<String> modifiedFileItr = modifiedFileIDs.iterator();
+			Iterator<AttachedFile> orgItr = orgFiles.iterator();
+
+			while(orgItr.hasNext()) {
+				boolean needToBeDeleted = true;
+				AttachedFile orgFile = orgItr.next();
+				while(modifiedFileItr.hasNext()) {
+					int modifiedFileID = Integer.parseInt(modifiedFileItr.next());
+					if(orgFile.getC_id() == modifiedFileID) {
+						needToBeDeleted = false;
+						orgItr.remove();
+						modifiedFileItr.remove();
+						break;
+					}
+				}
+				if(needToBeDeleted) {
+					File targetFile = new File(uploadPath + orgFile.getSavedFileNM());
+					targetFile.delete(); // 물리 파일 삭제
+					coreService.removeNode(orgFile);	// DB 파일 데이터 삭제
+					orgItr.remove();
+					logger.debug("---- FILE DELETE ----");
+					logger.debug(orgFile.getSavedFileNM());
+				}
+			}
+		}
+	}
 }
