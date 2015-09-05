@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
 
 @Service
 public class UserScrapServiceImpl implements UserScrapService {
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
     @Resource(name = "CoreService")
     private CoreService coreService;
@@ -66,20 +69,16 @@ public class UserScrapServiceImpl implements UserScrapService {
 	public UserScrap addScrap(Article article, int loginedUserID) throws Exception {
 		UserScrap userScrap = new UserScrap();
 		
-		Article getArticle = new Article();
-		
 		userScrap = getArticle(article);
 		
 		String boardId = getBoardId(article.getC_id());
-		System.out.println("======================================================");
-		System.out.println("title() " + userScrap.getUserId());
-		System.out.println("======================================================");
+		
 		userScrap.setUserId(3);
 		//userScrap.setUserId(loginedUserID);
 		//userScrap.setBoardId(boardId);
 		userScrap.setC_type("default");
-		userScrap.setBoardId("test");
-		userScrap.setPostingId(getArticle.getC_id());
+		userScrap.setBoardId("23");
+		userScrap.setPostingId(article.getC_id());
 		userScrap.setScrapDt(getTodayFor14Digits());
 		userScrap.setRef(2);
 		return userScrap;
@@ -101,6 +100,12 @@ public class UserScrapServiceImpl implements UserScrapService {
 	public String getBoardId(int articleId) throws Exception {
 		String BoardId = userScrapDao.getBoardId(articleId);
 		return null;
+	}
+
+	@Override
+	public int useScrapFlag(int postingId) throws Exception {
+		int useScrapFlag = userScrapDao.getUseScrapFlag(postingId);
+		return useScrapFlag;
 	}
 
 }

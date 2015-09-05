@@ -36,6 +36,8 @@ public interface UserScrapDao {
 	String getBoardId(int articleId) throws Exception;
 
 	UserScrap getArticle(Article article) throws Exception;
+	
+	int getUseScrapFlag(int postingId) throws Exception;
 }
 
 

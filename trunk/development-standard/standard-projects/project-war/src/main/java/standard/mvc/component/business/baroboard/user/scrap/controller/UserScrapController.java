@@ -23,6 +23,7 @@ import standard.mvc.component.business.baroboard.board.vo.Article;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.user.scrap.service.UserScrapService;
 import standard.mvc.component.business.baroboard.user.scrap.vo.UserScrap;
+import standard.mvc.component.business.community.log.service.LogUrlSerivce;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
@@ -57,6 +58,9 @@ public class UserScrapController extends GenericAbstractController {
 	
 	@Resource(name="CoreService")
 	private CoreService coreService;
+	
+	@Resource(name = "logUrlService")
+	private LogUrlSerivce logUrlService;
 	
 	@Autowired
 	private BoardService boardService;
@@ -101,17 +105,16 @@ public class UserScrapController extends GenericAbstractController {
 			modelMap.addAttribute("rightPage",rightPage);
 		}
 		
-		modelMap.addAttribute("postingId", postingId);
-		
+		//modelMap.addAttribute("postingId", postingId);
+		modelMap.addAttribute("logUrl", logUrlService.getLogUrl());
         return "/jsp/user/scrap/index";
 	}
 	
 	
 	@RequestMapping(value = "/delete.do")
 	@ResponseBody
-	public String scapDelete(ModelMap model, @ModelAttribute Article article) throws Exception {
+	public String scrapDelete(ModelMap model, @ModelAttribute Article article) throws Exception {
 		UserScrap userScrap = new UserScrap();
-		
 		userScrap = userScrapService.getDeleteScrapId(article.getC_id());
 		coreService.removeNode(userScrap);
 		
@@ -159,6 +162,7 @@ public class UserScrapController extends GenericAbstractController {
 		String isGuestUser = "";
 		int loginedUserID;
 		if(user instanceof String) {
+			System.out.println("fail scrap");
 			String userStr = (String)user;
 			if(userStr.equals("anonymousUser")) {
 				isGuestUser = "1";	// 게스트
@@ -171,9 +175,16 @@ public class UserScrapController extends GenericAbstractController {
 			loginedUserID = loginedUser.getId();
 			modelMap.addAttribute("loginedUserID", loginedUserID);
 			
-			coreService.addNode(userScrapService.addScrap(article, loginedUserID));
+			int useScrapFlag = userScrapService.useScrapFlag(article.getC_id());
+			
+			if(useScrapFlag == 0) {
+				coreService.addNode(userScrapService.addScrap(article, loginedUserID));
+			}else{
+				throw new Exception("이미 등록된 스크랩 입니다.");
+			}
+			
 		}
-		
+	
 		return "{}";
 	}
 }

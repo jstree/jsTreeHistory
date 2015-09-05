@@ -111,29 +111,6 @@ div#articleAction span a {
 <script>
 $(document).ready(function(){
 	$.contextMenu({
-		selector: '#attachmentFile',
-		trigger: 'left',
-		items: {
-			'atc1': {
-				name: 'TestExcep.xls',
-				callback: function(key, option) {
-					alert("atc1 Download");
-				}
-			},
-			'atc2': {
-				name: '내꺼.pdf',
-				callback: function(key, option) {
-				}
-			},
-			'atc3': {
-				name: 'zip.zip',
-				callback: function(key, option) {
-				}
-			}
-		}
-	});
-	
-	$.contextMenu({
 		selector: '.user-context',
 		trigger: 'left',
 		items: {
@@ -169,6 +146,26 @@ $(document).ready(function(){
 	});
 })
 </script>
+<c:if test="${not empty article.attachedFiles}">
+<script>
+$(document).ready(function(){
+	/* Jquery ContextMenu */
+	$.contextMenu({
+		selector: '#attachmentFile',
+		trigger: 'left',
+		items: {
+			<c:forEach var="file" items="${article.attachedFiles}" varStatus="status">
+				'file_${status.index}': {
+					name: '${file.c_title}',
+					callback: function(key, option) {
+					}
+				}<c:if test="${not status.last}">,</c:if>
+			</c:forEach>
+		}
+	});
+});
+</script>
+</c:if>
 </head>
 <body>
 	<section class="clearfix">
@@ -193,12 +190,20 @@ $(document).ready(function(){
 											<span><a class="user-context">${article.regNickName}</a></span>
 												</c:otherwise>
 											</c:choose>
-											<span id="articleDt">${article.regDt}</span>
+											<fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss"/>
+											<span id="articleDt"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 										</span>
 										<span id="secondInfoRow">
 											<span>조회수: ${article.viewCnt}</span>
 											<span>추천수: ${article.likeCnt}</span>
-											<span id="articleAttachment"><a id="attachmentFile">첨부 (3)</a></span>
+											<c:choose>
+												<c:when test="${empty article.attachedFiles}">
+													<span id="articleAttachment"><a id="">첨부 (0)</a></span>
+												</c:when>
+												<c:otherwise>
+													<span id="articleAttachment"><a id="attachmentFile">첨부 (${fn:length(article.attachedFiles)})</a></span>
+												</c:otherwise>
+											</c:choose>
 										</span>
 									</span>
 								</div>
@@ -482,7 +487,5 @@ $(document).ready(function(){
 	}
 	
 	</script>
-
-</script>
 </body>
 </html>

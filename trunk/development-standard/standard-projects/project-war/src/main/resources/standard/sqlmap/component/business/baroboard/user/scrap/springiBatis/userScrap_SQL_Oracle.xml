@@ -363,7 +363,7 @@
 		<dynamic>
 			<include refid="getMetaField" />
                 , B.C_TITLE AS nickName
-                , (SELECT C_TITLE FROM T_BOARD_INDI_SETTING WHERE C_ID = A.C_POSTING_ID ) as boardName
+                , (SELECT C_TITLE FROM T_BOARD_INDI_SETTING WHERE C_ID = TO_NUMBER(A.C_BOARD_ID, '999999999')) as boardName
                 , A.C_SCRAP_DT AS scrapDt 
 			/* 페이징 처리 */	
 			FROM (
@@ -384,10 +384,10 @@
 	
 	<select id="getScrapListCnt" parameterClass="UserScrap" resultClass="int">
 		SELECT COUNT(C_ID) 
-		FROM T_User_Scrap 
-		WHERE 1=1
-			AND C_ID IN (SELECT C_POSTING_ID FROM T_USER_SCRAP WHERE C_USER_ID = #userId#)
-		 	AND C_LEVEL = 2
+        FROM T_User_Scrap 
+        WHERE 1=1
+            AND C_USER_ID = #userId#
+             AND C_LEVEL = 2
 	</select>
 	
 	<select id="getC_id" parameterClass="int" resultClass="UserScrap">
@@ -429,5 +429,13 @@
 				AND A.C_ID = #c_id#
 		</dynamic>
 	</select>
-
+	
+	<select id="getUseScrapFlag" parameterClass="int" resultClass="int">
+		SELECT COUNT(C_POSTING_ID) 
+		FROM T_USER_SCRAP
+		WHERE 1=1
+			AND C_LEVEL = 2
+			AND C_POSTING_ID = #postingId#
+	</select>
+	
 </sqlMap>

@@ -82,4 +82,12 @@ public interface UserScrapService {
     * @return UserScrap
     */
 	public UserScrap getArticle(Article article) throws Exception;
+	
+	/**
+	 * 등록된 스크랩 여부 체크
+	 * 
+	 * @param int postingId
+	 * @return int
+	 */
+	public int useScrapFlag(int postingId) throws Exception;
 }

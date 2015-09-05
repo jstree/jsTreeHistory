@@ -80,21 +80,21 @@ function readScrap(c_id){
 								<div>
 									<div id="pagingDiv">
 										<c:if test="${leftPage != null}">
-											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?postingId=${scrap.c_id}&pageNum=${leftPage}">◀</a></span>
+											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?pageNum=${leftPage}">◀</a></span>
 										</c:if>
 										<span> <c:forEach var="i" begin="${startPageNum}" end="${endPageNum}" step="1">
 												<c:choose>
 													<c:when test="${i eq currentPageNum}">
-														<a href="${pageContext.request.contextPath}/user/scrap/index.do?postingId=${scrap.c_id}&pageNum=${i}" class="underline">${i}</a>
+														<a href="${pageContext.request.contextPath}/user/scrap/index.do?pageNum=${i}" class="underline">${i}</a>
 													</c:when>
 													<c:otherwise>
-														<a href="${pageContext.request.contextPath}/user/scrap/index.do?postingId=${scrap.c_id}&pageNum=${i}">${i}</a>
+														<a href="${pageContext.request.contextPath}/user/scrap/index.do?pageNum=${i}">${i}</a>
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
 										</span>
 										<c:if test="${rightPage != null}">
-											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?postingId=${scrap.c_id}&pageNum=${rightPage}">▶</a></span>
+											<span><a href="${pageContext.request.contextPath}/user/scrap/index.do?pageNum=${rightPage}">▶</a></span>
 										</c:if>
 									</div>
 								</div>
