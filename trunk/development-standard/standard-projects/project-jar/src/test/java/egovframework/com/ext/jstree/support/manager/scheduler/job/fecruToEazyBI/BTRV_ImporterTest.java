@@ -270,6 +270,23 @@ public class BTRV_ImporterTest
         assertThat(csvDataMap.get("BT")).isEqualTo("EPS-2236");
         assertThat(csvDataMap.get("RV")).isEqualTo("N/A");
     }
+    @Test
+    public void newSpecCheckEtcFormat(){
+        Map<String, Object> csvDataMap = new HashMap<String, Object>();
+        String commentText = "[박진곤][BT]WORKS:TZ-3340[RV]김유현 [문제의 원인]";
+        if(BTRV_Importer.checkLimitBTFormat(commentText)){            
+            csvDataMap = BTRV_Importer.checkBT(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("BT", "N/A");
+        }
+        if(BTRV_Importer.checkLimitRVFormat(commentText)){            
+            csvDataMap = BTRV_Importer.checkRV(commentText, csvDataMap);
+        }else{
+            csvDataMap.put("RV", "N/A");
+        }
+        assertThat(csvDataMap.get("BT")).isEqualTo("ORKS:TZ-3340");
+        assertThat(csvDataMap.get("RV")).isEqualTo("유현");
+    }
     
 
 }

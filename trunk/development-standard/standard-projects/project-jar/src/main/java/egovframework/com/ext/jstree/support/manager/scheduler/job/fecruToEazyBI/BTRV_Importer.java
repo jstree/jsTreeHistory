@@ -478,6 +478,7 @@ public class BTRV_Importer
             String filterBTstr = StringUtils.substring(commentText, checkPointBT);
             
             int checkPointBTDivid = matchPointWithHardCheck(ltrim(filterBTstr), " ", "end");
+            
             String filterBTDividStr = StringUtils.substring(filterBTstr, 1, checkPointBTDivid);
             String filterBTTrimDividStr = filterBTDividStr.trim();
             
@@ -493,16 +494,16 @@ public class BTRV_Importer
             }
             
             //여러개의 이슈를 연결하였는지 하나만 했는지 
-            int checkPointMuiltiIssue = matchPointWithSoftCheck(filterBTMarkTrimDividStr, ",", "start");
-            String filterPointMuiltiIssuetr = StringUtils.substring(filterBTMarkTrimDividStr, 0, checkPointMuiltiIssue);
-            String filterPointMuiltiIssueTrimStr = filterPointMuiltiIssuetr.trim();
+            //int checkPointMuiltiIssue = matchPointWithSoftCheck(filterBTMarkTrimDividStr, ",", "start");
+            //String filterPointMuiltiIssuetr = StringUtils.substring(filterBTMarkTrimDividStr, 0, checkPointMuiltiIssue);
+            //String filterPointMuiltiIssueTrimStr = filterPointMuiltiIssuetr.trim();
             
             //전위 이슈를 정규표현식으로 검증
-            if(regMatch("^[_0-9a-zA-Z-]+-[0-9]*$", filterPointMuiltiIssueTrimStr)){
-                csvDataMap.put("BT", filterBTMarkTrimDividStr);
-            }else{
-                csvDataMap.put("BT", "N/A");
-            }
+            //if(regMatch("^[_0-9a-zA-Z-]+-[0-9]*$", filterPointMuiltiIssueTrimStr)){
+            csvDataMap.put("BT", filterBTMarkTrimDividStr.toUpperCase());
+            //}else{
+            //    csvDataMap.put("BT", "N/A");
+            //}
             
         }else{
             csvDataMap.put("BT", "N/A");

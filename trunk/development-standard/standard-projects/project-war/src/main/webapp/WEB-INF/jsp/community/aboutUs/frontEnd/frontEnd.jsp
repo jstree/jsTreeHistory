@@ -36,7 +36,7 @@
     <body>
 				<div class="one-whole">
 					<div class="text-center">
-						<h1 style="height: 31; color: #f45b4f; font-family: Alegreya Sans,sans-serif; font-size: 2em;">
+						<h1 style="height: 31; color: #f45b4f; font-family: Dotum; font-size: 2em;">
 							FrontEnd
 						</h1>
 						<p class="bm-remove">
