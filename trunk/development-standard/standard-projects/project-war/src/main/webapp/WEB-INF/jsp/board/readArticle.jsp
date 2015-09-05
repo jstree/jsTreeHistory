@@ -244,6 +244,25 @@ function fileDown(c_id) {
 	$(downATag).attr('href', fileUrl);
 	downATag[0].click();
 }
+
+function addScrap(c_id, isGuestUser) {
+	var obj = {};
+	obj.c_id = c_id;
+	 
+	if(confirm('스크랩을 등록 하시겠습니까?') == true) {
+		$.ajax({
+			 method: 'post'
+			,url: '${pageContext.request.contextPath}/user/scrap/add.do'
+			,data: obj
+			,success: function(data){
+				alert('스크랩 등록을 완료 하였습니다.');	
+			}
+			,fail: function(data) {
+				alert('스크랩 등록에 실패하였습니다.');
+			}
+		});
+	}	
+};
 </script>
 
 
@@ -319,7 +338,7 @@ $(document).ready(function(){
 												</c:when>
 												<c:otherwise>
 											<span id="articleAttachment"><a id="attachmentFile">첨부 (${fn:length(article.attachedFiles)})</a></span>
-											<a id="hiddenFileDown" hidden="hidden" href=""></a>
+											<a id="hiddenFileDown" hidden="hidden" href=""></a>	
 												</c:otherwise>
 											</c:choose>
 										</span>
@@ -416,6 +435,7 @@ $(document).ready(function(){
 													<c:if test="${loginedUserID eq article.regID}">
 														<a onclick="modifyThisArticle(${article.c_id}, 0)">수정</a>
 														<a onclick="deleteThisArticle(${article.c_id}, 0)">삭제</a>
+														<a onclick="addScrap(${article.c_id}, 0)">스크랩 등록</a>
 													</c:if>
 												</c:if>
 											</c:otherwise>
