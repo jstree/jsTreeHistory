@@ -8,6 +8,42 @@
 <html lang="ko" class="js">
 <head>
 <title>${pageName}</title>
+<style type="text/css">
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+.chk {
+    height: 13px !important;
+}
+select {
+	height: 100%;
+	display: inline !important;
+}
+input[type="text"] {
+	width: 192px !important;
+    height: 30px !important;
+    display: inline !important;
+}
+#divBtns {
+    text-align: right;
+    margin-top: 10px;
+}
+.compact {
+	min-width: 71px;
+    min-height: 37px;
+}
+#divPagination {
+	text-align: center;
+	margin-top: 10px;
+	font-size: 1.1em;
+}
+.currentPage {
+	font-weight: bold !important;
+}
+</style>
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css" media="all" />
 <script>
 $(document).ready(function(){
@@ -70,107 +106,67 @@ function linkPage(pageNo){
 </head>
 <body>
 	<section class="clearfix">
-		<nav>
-			<div class="container bm-medium">
-				<div class="one-whole">
-					<div class="no-display">article</div>
-					<div class="text-center">
-						<h1 class="bm-remove">댓글 관리</h1>
-						<p class="bm-remove">
-							<a href="/" target="_self">Home</a> &nbsp;/&nbsp; BOARD &nbsp;/&nbsp; 댓글 관리
-						</p>
-					</div>
-				</div>
-			</div>
-		</nav>
+	<div class="three-quarter last boxed p-twenty clearfix" data-anim-type="fade-in" data-anim-delay="0">
+	    <div id="samDiv" class="tablet-mobile alpha bm-remove last">
 		<form name = "searchForm" id = "searchForm">
 			<div id="search" class="one-whole boxed p-twenty">
 				<div class="responsive-row">
-					<div class="item-name">게시판</div>
-					<div class="item-value">
+					<label for="boardId">게시판</label>
 						<select id = "boardId" name = "boardId">
 							<option value="">모두 </option>
 						<c:forEach var="result" items="${boardInfo}" varStatus="status">
 							<option value="${result.c_id }" <c:if test="${result.c_id == commentManageVO.boardId }">selected</c:if>>${result.c_title }</option>
 						</c:forEach>
 						</select>
-					</div>
-				</div>
-				<div class="responsive-row">
-					<div class="item-name">작성자</div>
-					<div class="item-value">
+					<label for="regNickName">작성자</label>
 						<input id="regNickName" type="text" name="regNickName" value = "${commentManageVO.regNickName }"/>
-					</div>
-				</div>
-				<div class="responsive-row">
-					<div class="item-name">내용</div>
-					<div class="item-value">
+					<label for="c_title">내용</label>
 						<input id="c_title" type="text" name="c_title" value = "${commentManageVO.c_title }"/>
-					</div>
-				</div>
-				<div class="responsive-row has-two-value">
-					<div class="item-name">작성일자</div>
-					<div class="item-value">
+					<label for="ftDate">작성일자</label>
 						<label for="from"></label>
 						<input type="text" id="fromDt" name="fromDt" value = "${commentManageVO.fromDt }">
 						<label for="to">~</label>
 						<input type="text" id="toDt" name="toDt" value="${commentManageVO.toDt }">
-					</div>
-					</div>
-				</div>
-				<div class="responsive-row">
+						<input type = "hidden" name = "pageNo" id = "pageNo" />
 						<input type="button" name="searchBtn" id = "searchBtn" value="검색"/>
-				</div>
-				<input type = "hidden" name = "pageNo" id = "pageNo" />
-			</form>
-		<article>
-			<div class="clearfix">
-				<div class="container bm-remove">
-					<div id="article" class="one-whole boxed p-twenty animate-in clearfix" data-anim-type="fade-in" data-anim-delay="0">
-						<div class="article-body rte" itemprop="articleBody">
-							<div class="tablet-mobile alpha bm-remove last">
-								<div class="text-right">
-									<!-- <a href="#" class="right"><input type="button" name="save" id = "save" value="저장"/></a> -->
-									<a href="#" class="right"><input type="button" name = "commentAllDelete" id = "commentAllDelete" value="일괄삭제"/></a>
-								</div>
-								<div>
-									<table id="boardTable" class="board-table display">
-										<thead>
-											<tr>
-												<th>선택</th>
-												<th>게시판</th>
-												<th>내용</th>
-												<th>작성자</th>
-												<th class="desktop">작성일자</th>
-												<th>비고</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="board" items="${list}" varStatus="status">
-											<fmt:parseDate value="${board.regDt}" var="dateFmt" pattern="yyyyMMddHHmmss"/>
-												<tr>
-													<td class="dt-center"><input type = "checkbox" name = "chk" id = "chk" value = "${board.boardId}@${board.c_id}"></td>
-													<td class="dt-center">${board.boardName }</td>
-													<td>${board.c_title}</a></td>
-													<td class="dt-center"><a class="user-context" data-id="${board.regId}">${board.regNickName}</a></td>
-													<td class="dt-center"><fmt:formatDate value="${dateFmt}" pattern="yyyy-MM-dd"/></td>
-													<td class="dt-center"><a href = "javascript:commentDelete('${board.boardId}@${board.c_id}');">Delete</a></td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</div>
-								<div>
-									<div id="pagingDiv">
-										<ui:pagination paginationInfo = "${paginationInfo}" type="asyncText" jsFunction="linkPage"/>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
-				</div>
+					
+			</form>
 			</div>
-		</article>
+			
+			<div id="divBtns">
+	            <a href="#" class="right"><input type="button" name = "commentAllDelete" id = "commentAllDelete" value="일괄삭제"/></a>
+	        </div>
+			<div class="dataTables_wrapper no-footer">
+					<table id="boardTable">
+						<thead>
+							<tr>
+								<th>선택</th>
+								<th>게시판</th>
+								<th>내용</th>
+								<th>작성자</th>
+								<th class="desktop">작성일자</th>
+								<th>비고</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="board" items="${list}" varStatus="status">
+							<fmt:parseDate value="${board.regDt}" var="dateFmt" pattern="yyyyMMddHHmmss"/>
+								<tr>
+									<td class="dt-center"><input type = "checkbox" name = "chk" id = "chk" value = "${board.boardId}@${board.c_id}"></td>
+									<td class="dt-center">${board.boardName }</td>
+									<td>${board.c_title}</a></td>
+									<td class="dt-center"><a class="user-context" data-id="${board.regId}">${board.regNickName}</a></td>
+									<td class="dt-center"><fmt:formatDate value="${dateFmt}" pattern="yyyy-MM-dd"/></td>
+									<td class="dt-center"><a href = "javascript:commentDelete('${board.boardId}@${board.c_id}');">Delete</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+			</div>
+			<div id="pagingDiv">
+				<ui:pagination paginationInfo = "${paginationInfo}" type="asyncText" jsFunction="linkPage"/>
+			</div>
 	</section>
 </body>
 </html>
