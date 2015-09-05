@@ -26,7 +26,40 @@
 		<!-- 시간이 없어서 우선 붙이고 차후 찾아서 올리던지 아니면 별도로 CSS파일로 대체예정 -->
 		<!-- responsive-lnb -->
 		<style type="text/css">
-			#responsive-admin-menu {float:left;width:200px;background-color:#404040;height:100%;position:relative;overflow:hidden;left:0;min-height:500px}#content-wrapper{width:auto;margin-left:200px;background-color:#fff;height:1200px;padding:15px}#responsive-admin-menu #responsive-menu{height:50px;display:none;line-height:50px;cursor:pointer;color:#fff;text-indent:10px}#responsive-admin-menu #responsive-menu .menuicon{color:#fff;font-size:24px;position:absolute;right:10px;top:0}#responsive-admin-menu #logo{background:url('../images/logo.png');background-position:-0px -36px;width:174px;height:40px;margin:10px}#responsive-admin-menu #menu{width:100%}#responsive-admin-menu #menu a{border-bottom:1px dotted #52535a;font-size:14px;text-decoration:none;display:block;padding:12px;color:#fff;position:relative;font-weight:400;overflow:hidden}#responsive-admin-menu #menu a:hover{color:#52535a;background-color:#fcfcfc}#responsive-admin-menu #menu i{width:16px;padding-right:4px}#responsive-admin-menu #menu div{display:none;width:100%;background-color:#5c5d64;overflow:hidden}#responsive-admin-menu #menu div a{color:silver}#responsive-admin-menu #menu div a:hover{color:#888}#responsive-admin-menu #menu a.submenu:before{font-family:FontAwesome;content:"\f054"}#responsive-admin-menu #menu a.downarrow:before{font-family:FontAwesome;content:"\f078"}#responsive-admin-menu #menu a.submenu:before{font-size:14px;position:absolute;right:15px;top:17px}@media screen and (max-width:960px){#responsive-admin-menu #responsive-menu{display:none}#responsive-admin-menu #menu a span{display:inline-block}}@media screen and (max-width:800px){#responsive-admin-menu #menu a span{display:none}#responsive-admin-menu{float:left;width:40px;position:relative}#responsive-admin-menu{height:100%}#content-wrapper{margin-left:40px}#responsive-admin-menu #menu a.submenu:before{font-size:6px;right:5px}#responsive-admin-menu #logo{background:url('../images/logo.png');background-position:-0px -0px;width:29px;height:26px;margin:10px 10px 10px 5px}}@media screen and (max-width:480px){#responsive-admin-menu{min-height:50px;float:left;width:100%;background-color:#404040;height:auto;position:static;top:0}#responsive-admin-menu #logo{display:none}#responsive-admin-menu #menu a span{display:inline-block}#content-wrapper{margin-left:0;padding-top:60px}#responsive-admin-menu #responsive-menu{display:block}#responsive-admin-menu #menu{display:none}#responsive-admin-menu #menu a{color:#fff}#responsive-admin-menu #menu a.submenu:before{font-size:14px;right:15px}}
+			#responsive-admin-menu {float:left;width:200px;background-color:#404040;height:100%;position:relative;overflow:hidden;left:0;min-height:500px}
+			#content-wrapper{width:auto;margin-left:200px;background-color:#fff;height:1200px;padding:15px}
+			#responsive-admin-menu #responsive-menu{height:50px;display:none;line-height:50px;cursor:pointer;color:#fff;text-indent:10px}
+			#responsive-admin-menu #responsive-menu .menuicon{color:#fff;font-size:24px;position:absolute;right:10px;top:0}
+			#responsive-admin-menu #logo{width:174px;height:40px;margin:10px}
+			#responsive-admin-menu #menu{width:100%}
+			#responsive-admin-menu #menu a{border-bottom:1px dotted #52535a;font-size:14px;text-decoration:none;display:block;padding:12px;color:#fff;position:relative;font-weight:400;overflow:hidden}
+			#responsive-admin-menu #menu a:hover{color:#52535a;background-color:#fcfcfc}
+			#responsive-admin-menu #menu i{width:16px;padding-right:4px}
+			#responsive-admin-menu #menu div{display:none;width:100%;background-color:#5c5d64;overflow:hidden}
+			#responsive-admin-menu #menu div a{color:silver}
+			#responsive-admin-menu #menu div a:hover{color:#888}
+			#responsive-admin-menu #menu a.submenu:before{font-family:FontAwesome;content:"\f054"}
+			#responsive-admin-menu #menu a.downarrow:before{font-family:FontAwesome;content:"\f078"}
+			#responsive-admin-menu #menu a.submenu:before{font-size:14px;position:absolute;right:15px;top:17px}
+			@media screen and (max-width:960px){
+			#responsive-admin-menu #responsive-menu{display:none}
+			#responsive-admin-menu #menu a span{display:inline-block}}
+			@media screen and (max-width:800px){
+			#responsive-admin-menu #menu a span{display:none}
+			#responsive-admin-menu{float:left;width:40px;position:relative}
+			#responsive-admin-menu{height:100%}
+			#content-wrapper{margin-left:40px}
+			#responsive-admin-menu #menu a.submenu:before{font-size:6px;right:5px}
+			#responsive-admin-menu #logo{width:29px;height:26px;margin:10px 10px 10px 5px}}
+			@media screen and (max-width:480px){
+			#responsive-admin-menu{min-height:50px;float:left;width:100%;background-color:#404040;height:auto;position:static;top:0}
+			#responsive-admin-menu #logo{display:none}
+			#responsive-admin-menu #menu a span{display:inline-block}
+			#content-wrapper{margin-left:0;padding-top:60px}
+			#responsive-admin-menu #responsive-menu{display:block}
+			#responsive-admin-menu #menu{display:none}
+			#responsive-admin-menu #menu a{color:#fff}
+			#responsive-admin-menu #menu a.submenu:before{font-size:14px;right:15px}}
 
 			/* custom */
 			.page-border { width: 90%; /* min-width: 1227px; */ margin-left: 10%; }
