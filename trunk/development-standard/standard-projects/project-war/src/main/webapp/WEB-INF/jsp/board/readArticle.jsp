@@ -435,8 +435,8 @@ $(document).ready(function(){
 													<c:if test="${loginedUserID eq article.regID}">
 														<a onclick="modifyThisArticle(${article.c_id}, 0)">수정</a>
 														<a onclick="deleteThisArticle(${article.c_id}, 0)">삭제</a>
-														<a onclick="addScrap(${article.c_id}, 0)">스크랩 등록</a>
 													</c:if>
+													<a onclick="addScrap(${article.c_id}, 0)">스크랩 등록</a>
 												</c:if>
 											</c:otherwise>
 										</c:choose>
