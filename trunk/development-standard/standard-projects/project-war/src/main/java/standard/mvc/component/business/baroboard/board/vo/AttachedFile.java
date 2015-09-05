@@ -33,14 +33,22 @@ public class AttachedFile extends ComprehensiveTree {
 	private String attachFile;
 	private String regDt;
 
-	/** 해당 파일 */
-	private MultipartFile file;
+	/* Non DB-Column */
+	private String boardID;
+	private MultipartFile file; 
 	
 	@Override
 	public String getSqlMapSelector() {
 		return "attachedFile";
 	}
-
+	
+	public String getBoardID() {
+		return boardID;
+	}
+	public void setBoardID(String boardID) {
+		this.boardID = boardID;
+	}
+	
 	public int getArticleID() {
 		return articleID;
 	}

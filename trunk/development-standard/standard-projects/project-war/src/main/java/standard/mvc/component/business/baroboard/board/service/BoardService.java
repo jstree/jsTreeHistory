@@ -3,10 +3,10 @@ package standard.mvc.component.business.baroboard.board.service;
 import java.util.List;
 
 import standard.mvc.component.business.baroboard.board.vo.Article;
+import standard.mvc.component.business.baroboard.board.vo.AttachedFile;
 import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
-import standard.mvc.component.business.baroboard.user.vo.User;
 
 /**
  * Modification Information
@@ -168,4 +168,12 @@ public interface BoardService {
 	 * @throws Exception
 	 */
 	public Like cancelLikeArticle(Like like) throws Exception;
+
+	/**
+	 * 첨부파일 정보를 조회한다.
+	 * @param reqFileInfo
+	 * @return AttachedFile
+	 * @throws Exception
+	 */
+	public AttachedFile getAttachedFileByID(AttachedFile reqFileInfo) throws Exception;
 }

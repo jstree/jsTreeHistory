@@ -163,7 +163,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		String defaultPath = article.getContextPath();
 		String uploadPath = fileUploadProperties.getProperty("article.upload.dir");
-		uploadPath = defaultPath + uploadPath + article.getBoardID() + "\\";		
+		uploadPath = defaultPath + uploadPath + article.getBoardID() + "/";		
 		
 		List<AttachedFile> files = article.getAttachedFiles();
 		String savedFilePath = "";
@@ -430,6 +430,12 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 		return loginedUserID;
+	}
+
+	@Override
+	public AttachedFile getAttachedFileByID(AttachedFile reqFileInfo)
+			throws Exception {
+		return coreDao.getNode(reqFileInfo);
 	}
 	
 }

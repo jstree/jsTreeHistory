@@ -237,6 +237,13 @@ function addComment(btn, ref) {
    			console.log(data); 
    		})
 }
+
+function fileDown(c_id) {
+	var fileUrl = '${pageContext.request.contextPath}/board/downloadAttachedFile.do?boardID=${article.boardID}&c_id='+c_id;
+	var downATag = $('#hiddenFileDown');
+	$(downATag).attr('href', fileUrl);
+	downATag[0].click();
+}
 </script>
 
 
@@ -252,6 +259,7 @@ $(document).ready(function(){
 				'file_${status.index}': {
 					name: '${file.c_title}',
 					callback: function(key, option) {
+						fileDown('${file.c_id}');
 					}
 				}<c:if test="${not status.last}">,</c:if>
 			</c:forEach>
@@ -311,6 +319,7 @@ $(document).ready(function(){
 												</c:when>
 												<c:otherwise>
 											<span id="articleAttachment"><a id="attachmentFile">첨부 (${fn:length(article.attachedFiles)})</a></span>
+											<a id="hiddenFileDown" hidden="hidden" href=""></a>
 												</c:otherwise>
 											</c:choose>
 										</span>

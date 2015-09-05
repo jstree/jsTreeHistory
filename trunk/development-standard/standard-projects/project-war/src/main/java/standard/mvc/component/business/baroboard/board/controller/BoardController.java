@@ -1,10 +1,13 @@
 package standard.mvc.component.business.baroboard.board.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import standard.mvc.component.business.baroboard.board.service.BoardService;
 import standard.mvc.component.business.baroboard.board.vo.Article;
@@ -32,7 +36,6 @@ import standard.mvc.component.business.baroboard.board.vo.Comment;
 import standard.mvc.component.business.baroboard.board.vo.Like;
 import standard.mvc.component.business.baroboard.board.vo.SearchArticle;
 import standard.mvc.component.business.baroboard.user.manage.user.service.UserManageService;
-import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile;
 import standard.mvc.component.business.baroboard.user.vo.User;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
@@ -71,6 +74,9 @@ public class BoardController extends GenericAbstractController {
 
 	@Autowired
 	private UserManageService userManageService;
+	
+	@Resource(name = "fileUploadProperties")
+	private Properties fileUploadProperties;
 
 	@Override
 	public Map<String, Map<String, Object>> bindTypes() {
@@ -313,6 +319,31 @@ public class BoardController extends GenericAbstractController {
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.TEXT_PLAIN);
 		return new ResponseEntity<Article>(resultArticle, headers, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/downloadAttachedFile.do", method=RequestMethod.GET)
+	public ModelAndView downloadNoteFile(@ModelAttribute AttachedFile reqFileInfo,
+			HttpServletRequest request) throws Exception {
+    	
+		AttachedFile targetFile = boardService.getAttachedFileByID(reqFileInfo);
+		
+		String defaultPath = request.getSession().getServletContext().getRealPath("/");
+		String uploadPath = fileUploadProperties.getProperty("article.upload.dir") + reqFileInfo.getBoardID() + "/";
+		File downFile = new File(defaultPath + uploadPath +targetFile.getSavedFileNM());
+		
+		logger.debug("--- FILE DOWNLOAD PATH ---");
+		logger.debug(defaultPath + uploadPath + targetFile.getSavedFileNM());
+		
+		if(!downFile.exists()) {
+			throw new Exception("존재하지 않는 파일입니다.");
+		}
+		
+    	ModelAndView mav = new ModelAndView();
+    	mav.setViewName(":download");
+    	mav.addObject("file", downFile);
+    	mav.addObject("fileName", targetFile.getC_title());
+    	
+    	return mav;
 	}
 	
 	@RequestMapping(value = "/submitNewReplyArticle.do", method = { RequestMethod.GET, RequestMethod.POST })

@@ -208,10 +208,7 @@ $('#articleForm').on('submit',function(e){
 			}
 			,success : function(r, stat){
 		   		var resultObj = jQuery.parseJSON(r.replace(/(<([^>]+)>)/ig,""));
-
-				alert(resultObj);
 				window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+resultObj.c_id ;
-				
 			}
 			,error : function(r){
 				alert(r);
