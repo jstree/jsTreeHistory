@@ -37,13 +37,13 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
     DirtiesContextTestExecutionListener.class,
     TransactionalTestExecutionListener.class,
     DbUnitTestExecutionListener.class })
-@DatabaseSetup("/standard/mvc/component/business/baroboard/board/manage/posts/PostsManageServiceTest.xml")
 public class PostsManageServiceTest {
 
 	@Autowired
 	PostsManageService postsManageService;
 	
 	@Test
+	@DatabaseSetup("/standard/mvc/component/business/baroboard/board/manage/posts/PostsManageServiceTest.xml")
 	public void getPostsTest() throws Exception {
 		PostsManageVO postsManageVo = new PostsManageVO();
 		
@@ -53,6 +53,7 @@ public class PostsManageServiceTest {
 	}
 	
 	@Test
+	@DatabaseSetup("/standard/mvc/component/business/baroboard/board/manage/posts/PostsManageServiceTest.xml")
 	public void getPostsTotalCntTest() throws Exception {
 		PostsManageVO postsManageVo = new PostsManageVO();
 		
@@ -78,6 +79,10 @@ public class PostsManageServiceTest {
 		PostsManageVO result = postsManageService.postsDelete(postsManageVo);
 		
 		assertThat(1, is(result.getStatus()));
+		
+		PostsManageVO postsManageVo2 = new PostsManageVO();
+		int postsCnt = postsManageService.getPostsTotalCnt(postsManageVo2);
+		assertThat(postsCnt, is(1));
 		
 	}
 	
