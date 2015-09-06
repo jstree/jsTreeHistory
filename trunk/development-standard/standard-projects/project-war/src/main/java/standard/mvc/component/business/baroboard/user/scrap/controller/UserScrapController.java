@@ -73,7 +73,22 @@ public class UserScrapController extends GenericAbstractController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	private int getTotalPages(int totCnt, int pageSize) {
+		int pages = 0;
+		
+		if(totCnt == 0) { // zero check
+			pages = 1;
+		} else {
+			if(totCnt % pageSize == 0) {
+				pages = totCnt / pageSize;
+			} else {
+				pages = totCnt / pageSize + 1;
+			}
+		}
+		return pages;
+	}
+	
 	@RequestMapping(value = "/index.do", method = {RequestMethod.GET})
 	public String scrapList(ModelMap modelMap, @ModelAttribute UserScrap userScrap) throws Exception{
 		//SecureUserLogin secureUserLogin =(SecureUserLogin)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -81,7 +96,7 @@ public class UserScrapController extends GenericAbstractController {
 	
 		userScrap.setUserId(3);
 		int postingId = userScrap.getPostingId();
-		int totalPageCount = userScrapService.getScrapListTotalCnt(userScrap) / userScrap.getPageSize() + 1;
+		int totalPageCount = this.getTotalPages(userScrapService.getScrapListTotalCnt(userScrap), userScrap.getPageSize());
 		
 		List<UserScrap> scrapList = userScrapService.scrapList(userScrap); 
 		modelMap.addAttribute("scrapList", scrapList);
