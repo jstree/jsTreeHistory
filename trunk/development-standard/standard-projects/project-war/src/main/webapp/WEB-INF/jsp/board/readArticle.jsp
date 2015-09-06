@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
 <html lang="ko" class="js">
@@ -12,7 +12,6 @@
 </script>
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/assets/css/article.css" rel="stylesheet" type="text/css" media="all" />
-
 <!-- Jquery Context Menu -->
 <link href="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" media="all" />
 <script src="${pageContext.request.contextPath}/assets/js/jqueryContextMenu/jquery.ui.position.js" type="text/javascript"></script>
@@ -84,6 +83,7 @@ function modifyThisArticle(c_id, isGuestUser) {
 		 form.appendChild(pwInput);
 	 }
 	 
+	document.body.appendChild(form);
 	form.submit();		 
  }
 
@@ -264,10 +264,8 @@ function addScrap(c_id, isGuestUser) {
 	}	
 };
 </script>
-
-
 <c:if test="${not empty article.attachedFiles}">
-<script>
+	<script>
 $(document).ready(function(){
 	/* Jquery ContextMenu */
 	$.contextMenu({
@@ -287,8 +285,6 @@ $(document).ready(function(){
 });
 </script>
 </c:if>
-
-
 </head>
 <body>
 	<section class="clearfix">
@@ -313,101 +309,102 @@ $(document).ready(function(){
 							<div class="tablet-mobile alpha bm-remove last">
 								<!-- 제목 날짜 첨부 -->
 								<div id="articleHeader" class="">
-									<input id="articleID" type="hidden" value="${article.c_id}" />
-									<input id="isGuestFL" type="hidden" value="${article.isGuestFL}" />
-									<span id="articleTitle"><h3>${article.c_title}</h3></span> 
-									<span id="articleInfo">
-										<span id="firstInfoRow">
-											<c:choose>
+									<input id="articleID" type="hidden" value="${article.c_id}" /> <input id="isGuestFL" type="hidden" value="${article.isGuestFL}" /> <span id="articleTitle"><h3>${article.c_title}</h3></span> <span id="articleInfo"> <span id="firstInfoRow"> <c:choose>
 												<c:when test="${article.isGuestFL == '1'}">
-											<span>${article.guestNickName}</span>
+													<span>${article.guestNickName}</span>
 												</c:when>
 												<c:otherwise>
-											<span><a class="user-context">${article.regNickName}</a></span>
+													<span><a class="user-context">${article.regNickName}</a></span>
 												</c:otherwise>
-											</c:choose>
-											<fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss"/>
-											<span id="articleDt"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
-										</span>
-										<span id="secondInfoRow">
-											<span>조회수: ${article.viewCnt}</span>
-											<span>추천수: ${article.likeCnt}</span>
-											<c:choose>
+											</c:choose> <fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss" /> <span id="articleDt"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
+									</span> <span id="secondInfoRow"> <span>조회수: ${article.viewCnt}</span> <span>추천수: ${article.likeCnt}</span> <c:choose>
 												<c:when test="${empty article.attachedFiles}">
-											<span id="articleAttachment"><a id="">첨부 (0)</a></span>
+													<span id="articleAttachment"><a id="">첨부 (0)</a></span>
 												</c:when>
 												<c:otherwise>
-											<span id="articleAttachment"><a id="attachmentFile">첨부 (${fn:length(article.attachedFiles)})</a></span>
-											<a id="hiddenFileDown" hidden="hidden" href=""></a>	
+													<span id="articleAttachment"><a id="attachmentFile">첨부 (${fn:length(article.attachedFiles)})</a></span>
+													<a id="hiddenFileDown" hidden="hidden" href=""></a>
 												</c:otherwise>
 											</c:choose>
-										</span>
+									</span>
 									</span>
 								</div>
 								<!-- 내용 -->
-								<div id="articleContent">
-								${article.content} 
-								</div>
+								<div id="articleContent">${article.content}</div>
 								<!-- 코멘트 -->
 								<div id="comment">
 									<c:forEach var="comment" items="${commentList}" varStatus="status">
-									<div data-id="${comment.c_id}" root-id="${comment.rootCommentID}" class="rdc-detail" style="padding-left: ${(comment.c_level -2) * 10}px">
-										<c:choose>
-											<c:when test="${comment.isDeletedFL == '1' }">
-											<div class="rdc-body"><p><i class="fa fa-times"></i><span class="bold">삭제된 코멘트 입니다.</span></p></div>
-											</c:when>
-											<c:when test="${comment.viewForRegOnlyFL == '1'}">
-											<div class="rdc-body"><p><i class="fa fa-lock"></i><span class="bold">글쓴이만 볼 수 있는 코멘트 입니다.</span></p></div>
-											</c:when>
-											<c:otherwise>
-											<div class="rdc-header">
-												<span class="rdc-reg-id">${comment.regNickName}</span>
-												<fmt:parseDate value="${comment.regDT}" var="commentRegDt" pattern="yyyyMMddHHmmss"/>
-												<span class="rdc-reg-date"><fmt:formatDate value="${commentRegDt}" pattern="yyyy-MM-dd HH:mm"/></span>
-												<%-- TODO : 일반사용자만 코멘트 작성 가능 --%>
-												<c:if test="${isGuestUser eq '0'}">
-													<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
-													<span><a onclick="deleteThisReply(this, ${comment.c_id})">삭제</a></span>
-												</c:if>
-											</div>
-											<div class="rdc-body"><p>${comment.c_title}</p></div>
-											</c:otherwise>
-										</c:choose>
-									</div>
+										<div data-id="${comment.c_id}" root-id="${comment.rootCommentID}" class="rdc-detail" style="padding-left: ${(comment.c_level -2) * 10}px">
+											<c:choose>
+												<c:when test="${comment.isDeletedFL == '1' }">
+													<div class="rdc-body">
+														<p>
+															<i class="fa fa-times"></i><span class="bold">삭제된 코멘트 입니다.</span>
+														</p>
+													</div>
+												</c:when>
+												<c:when test="${comment.viewForRegOnlyFL == '1'}">
+													<div class="rdc-body">
+														<p>
+															<i class="fa fa-lock"></i><span class="bold">글쓴이만 볼 수 있는 코멘트 입니다.</span>
+														</p>
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="rdc-header">
+														<span class="rdc-reg-id">${comment.regNickName}</span>
+														<fmt:parseDate value="${comment.regDT}" var="commentRegDt" pattern="yyyyMMddHHmmss" />
+														<span class="rdc-reg-date"><fmt:formatDate value="${commentRegDt}" pattern="yyyy-MM-dd HH:mm" /></span>
+														<%-- TODO : 일반사용자만 코멘트 작성 가능 --%>
+														<c:if test="${isGuestUser eq '0'}">
+															<span><a onclick="addCommentReply(this, ${comment.c_id})">답글달기</a></span>
+															<span><a onclick="deleteThisReply(this, ${comment.c_id})">삭제</a></span>
+														</c:if>
+													</div>
+													<div class="rdc-body">
+														<p>${comment.c_title}</p>
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</div>
 									</c:forEach>
 								</div>
 								<%-- TODO : 일반사용자만 코멘트 작성 가능 --%>
 								<c:if test="${isGuestUser eq '0'}">
-								<!-- 코멘트작성 -->
-								<div id="writeRootCommentDiv" class="write-comment">
-									<div class="write-comment-header">
-										<div>코멘트작성</div>
-										<div>
-											<input class="author-only" type="checkbox" name="authorOnly">
-											<label for="authorOnly">글쓴이만 보기</label>
+									<!-- 코멘트작성 -->
+									<div id="writeRootCommentDiv" class="write-comment">
+										<div class="write-comment-header">
+											<div>코멘트작성</div>
+											<div>
+												<input class="author-only" type="checkbox" name="authorOnly"> <label for="authorOnly">글쓴이만 보기</label>
+											</div>
+										</div>
+										<div class="write-comment-body">
+											<textarea class="write-comment-input"></textarea>
+										</div>
+										<div class="write-comment-btn">
+											<button onclick="addComment(this, 'root')">등록</button>
 										</div>
 									</div>
-									<div class="write-comment-body"><textarea class="write-comment-input"></textarea></div>
-									<div class="write-comment-btn"><button onclick="addComment(this, 'root')">등록</button></div>								
-								</div>
-								<!-- 코멘트 리플 복사 -->
-								<div class="write-comment for-reply for-copy">
-									<div class="write-comment-header">
-										<div>코멘트 답글 작성</div>
-										<div>
-											<input class="author-only" type="checkbox" name="authorOnly">
-											<label for="authorOnly">글쓴이만 보기</label>
+									<!-- 코멘트 리플 복사 -->
+									<div class="write-comment for-reply for-copy">
+										<div class="write-comment-header">
+											<div>코멘트 답글 작성</div>
+											<div>
+												<input class="author-only" type="checkbox" name="authorOnly"> <label for="authorOnly">글쓴이만 보기</label>
+											</div>
+										</div>
+										<div class="write-comment-body">
+											<textarea class="write-comment-input"></textarea>
+										</div>
+										<div class="write-comment-btn">
+											<button>등록</button>
 										</div>
 									</div>
-									<div class="write-comment-body"><textarea class="write-comment-input"></textarea></div>
-									<div class="write-comment-btn"><button>등록</button></div>								
-								</div>
 								</c:if>
-								
 								<!-- 하단 Action -->
 								<div id="articleAction">
-									<span>
-										<c:if test="${isGuestUser eq '0'}">
+									<span> <c:if test="${isGuestUser eq '0'}">
 											<%-- 일반 사용자 : 아이디 체크값 받아서 수정/삭제 가능여부 체크 --%>
 											<c:choose>
 												<c:when test="${article.likeFL == '0'}">
@@ -417,9 +414,7 @@ $(document).ready(function(){
 													<a onclick="cancelLikeArticle(${article.c_id})">좋아요 취소</a>
 												</c:otherwise>
 											</c:choose>
-										</c:if>
-										<%-- 수정/삭제 --%>
-										<c:choose>
+										</c:if> <%-- 수정/삭제 --%> <c:choose>
 											<%-- TODO : 게스트사용자 기능 임시 삭제 --%>
 											<c:when test="${article.isGuestFL eq '1'}">
 												<%--
@@ -439,12 +434,9 @@ $(document).ready(function(){
 													<a onclick="addScrap(${article.c_id}, 0)">스크랩 등록</a>
 												</c:if>
 											</c:otherwise>
-										</c:choose>
-										<%-- TODO : 답글가능여부 체크, 일반 사용자만 답글 달기 가능 --%>
-										<c:if test="${isGuestUser eq '0'}">
+										</c:choose> <%-- TODO : 답글가능여부 체크, 일반 사용자만 답글 달기 가능 --%> <c:if test="${isGuestUser eq '0'}">
 											<a href="${pageContext.request.contextPath}/board/newReplyArticle.do?c_id=${article.c_id}">답글쓰기</a>
-										</c:if>
-										<a href="${pageContext.request.contextPath}/board/index.do">목록가기</a>
+										</c:if> <a href="${pageContext.request.contextPath}/board/index.do">목록가기</a>
 									</span>
 								</div>
 							</div>
