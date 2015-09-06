@@ -69,18 +69,29 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 		try
 		{
 			this.setPasswordChangePage(secureUserLogin);
-			
-			this.setUserLastLoginDt(secureUserLogin);
-			
-			this.setUserLoginFailureCntZero(secureUserLogin);
-			
-	        this.addUserLoginState(request, secureUserLogin);
 		} 
 		catch( Exception e )
 		{
-			throw new RuntimeException( e.getMessage() );
+			throw new RuntimeException( "setPasswordChangePage");
 		}
 		
+		try {
+			this.setUserLastLoginDt(secureUserLogin);
+			
+		} catch (Exception e) {
+			throw new RuntimeException( "setUserLastLoginDt");
+		}
+		try {
+			this.setUserLoginFailureCntZero(secureUserLogin);
+	       
+		} catch (Exception e) {
+			throw new RuntimeException( "setUserLoginFailureCntZero");
+		}
+		try {
+			 this.addUserLoginState(request, secureUserLogin);
+		} catch (Exception e) {
+			throw new RuntimeException( "addUserLoginState" );
+		}
 		
 		request.getSession().setAttribute("secureUserLogin", secureUserLogin);
 		
@@ -129,17 +140,25 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 		Date currentDay      = DateUtils.getCurrentDay();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String currentDate = sdf.format(currentDay);
-		
 		SecureUserLoginState userLoginState = new SecureUserLoginState();
 		userLoginState.setRef(2);
 		userLoginState.setC_type("default");
 		userLoginState.setC_title("로그인");
 		userLoginState.setUserId(secureUserlogin.getId());
-		userLoginState.setIpAddress(request.getRemoteAddr());
-		userLoginState.setMacAddress(getMacAddress(request.getRemoteAddr()));
+		userLoginState.setIpAddress(getIPV6ConvertToIPV4(request.getRemoteAddr()));
+		userLoginState.setMacAddress(getMacAddress(getIPV6ConvertToIPV4(request.getRemoteAddr())));
 		userLoginState.setLoginDt(currentDate);
 		
+		
+		
 		this.coreService.addNode(userLoginState);
+	}
+	
+	private String getIPV6ConvertToIPV4(String ipAddr){
+		if(ipAddr == "0:0:0:0:0:0:0:1" || ipAddr.equals("0:0:0:0:0:0:0:1") ){
+			return "127.0.0.1"; 
+		}
+		return ipAddr;
 	}
 		
 	private String getMacAddress(String ip)
@@ -174,6 +193,9 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 		} 
 		catch (SocketException e)
 		{
+			return sb.toString();
+		}
+		catch (Exception e){
 			return sb.toString();
 		}
 		
