@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
 
 /**
  * Modification Information
@@ -42,7 +42,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-public class User extends ComprehensiveTree {
+public class User extends PaginatedComprehensiveTree {
 
     /** 회원등급코드 */
     private int userGradeCd;
@@ -57,13 +57,13 @@ public class User extends ComprehensiveTree {
     private String joinState;
 
     /** 비밀번호 */
-    private String password;
+    private transient String password;
 
     /** 비밀번호 확인 */
-    private String passwordConfirm;
+    private transient String passwordConfirm;
     
     /** 현재 비밀번호 */
-    private String currentPassword;
+    private transient String currentPassword;
     
     /** 이메일 */
     @Email

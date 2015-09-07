@@ -25,22 +25,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import standard.mvc.component.business.baroboard.user.manage.grade.service.UserGradeService;
 import standard.mvc.component.business.baroboard.user.manage.user.service.UserManageService;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.mvc.tags.ui.pagination.AsyncPaginationTextRenderer;
 import egovframework.let.utl.fcc.service.EgovDateUtil;
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 /**
  * Modification Information
@@ -91,58 +86,14 @@ public class UserManageController extends GenericAbstractController {
     
     @RequestMapping(value = "/list.do", method = RequestMethod.POST)
     @ResponseBody
-    public String list(@RequestBody User user
-                     , @RequestParam(required = false, defaultValue = "1") int currentPageNo
-                     , @RequestParam(required = false, defaultValue = "10") int recordCountPerPage
-                     , @RequestParam(required = false, defaultValue = "10") int pageSize
-                     , @RequestParam String jsFunction) throws Exception {
-        
-        PaginationInfo paginationInfo = new PaginationInfo();
-        paginationInfo.setCurrentPageNo(currentPageNo);
-        paginationInfo.setRecordCountPerPage(recordCountPerPage);
-        paginationInfo.setPageSize(pageSize);
+    public String list(@RequestBody User user) throws Exception {
         
         user.setJoinDeBegi( user.getJoinDeBegi().replaceAll("-", "") );
         user.setJoinDeEnd( user.getJoinDeEnd().replaceAll("-", "") );
         user.setLoginDeBegi( user.getLoginDeBegi().replaceAll("-", "") );
         user.setLoginDeEnd( user.getLoginDeEnd().replaceAll("-", "") );
         
-        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
-            
-            @Override
-            public boolean shouldSkipField(FieldAttributes f) {
-                
-                if ( "c_id".equals(f.getName()) || "c_title".equals(f.getName())
-                  || "email".equals(f.getName()) || "userGradeCd".equals(f.getName()) || "userGrade".equals(f.getName())
-                  || "joinStateCd".equals(f.getName()) || "joinState".equals(f.getName()) || "joinDe".equals(f.getName())
-                  || "lastLoginDe".equals(f.getName()) || "lastLoginDe".equals(f.getName())
-                  
-                  || "currentPageNo".equals(f.getName()) || "recordCountPerPage".equals(f.getName())
-                  || "pageSize".equals(f.getName()) || "totalRecordCount".equals(f.getName())
-                  || "totalPageCount".equals(f.getName()) || "firstPageNoOnPageList".equals(f.getName())
-                  || "lastPageNoOnPageList".equals(f.getName()) ) 
-                {
-                    return false;
-                }
-                
-                return true;
-            }
-
-            @Override
-            public boolean shouldSkipClass(Class<?> clazz) {
-                return false;
-            }
-            
-        }).create();
-        
-        Map<String, Object> paramMap = new HashMap<String, Object>();
-        paramMap.put("firstRecordIndex", paginationInfo.getFirstRecordIndex());
-        paramMap.put("lastRecordIndex", paginationInfo.getLastRecordIndex());
-        paramMap.put("user", user);
-        
-        paginationInfo.setTotalRecordCount( userManageService.getCountOfUser(paramMap) );
-        
-        List<User> userList = userManageService.getUserListPaginated(paramMap);
+        List<User> userList = userManageService.getUserListPaginated(user);
         
         for (User u : userList) {
             
@@ -155,9 +106,9 @@ public class UserManageController extends GenericAbstractController {
         
         Map<String, Object> returnMap = new HashMap<String, Object>();
         returnMap.put("userList", userList);
-        returnMap.put("pageList", asyncPaginaionTexRenderer.renderPagination(paginationInfo, jsFunction));
+        returnMap.put("pageList", asyncPaginaionTexRenderer.renderPagination(user.getPaginationInfo(), user.getJsFunction()));
         
-        return gson.toJson(returnMap);
+        return new GsonBuilder().setPrettyPrinting().create().toJson(returnMap);
     }
     
     @RequestMapping(value = "/delete.do", method = RequestMethod.POST)

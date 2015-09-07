@@ -16,7 +16,6 @@
 package standard.mvc.component.business.baroboard.user.manage.user.service;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -73,27 +72,12 @@ public class UserManageServiceImpl implements UserManageService {
 	}
 
 	@Override
-	public void addUserInfo(User user) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	@Override
-    public int getCountOfUser(Map<String, Object> paramMap) throws Exception {
+	public List<User> getUserListPaginated(User user) throws Exception {
 	    
-	    User user = (User) paramMap.get("user");
-        user.setC_id(2);
-        
-        return userManageDao.selectCountOfUser(paramMap); 
-    }
-	
-	@Override
-	public List<User> getUserListPaginated(Map<String, Object> paramMap) throws Exception {
-	    
-	    User user = (User) paramMap.get("user");
 	    user.setC_id(2);
+	    user.setC_level(2);
 	    
-	    return userManageDao.selectUserListPaginated(paramMap);
+	    return coreService.getChildNode(user);
 	}
 
 	@Override

@@ -16,7 +16,6 @@
 package standard.mvc.component.business.baroboard.user.manage.user.service;
 
 import java.util.List;
-import java.util.Map;
 
 import standard.mvc.component.business.baroboard.user.vo.User;
 
@@ -60,30 +59,13 @@ public interface UserManageService {
     void deleteUserInfos(List<User> users) throws Exception;
     
     /**
-     * 회원 정보를 추가한다.
-     * 
-     * @param user 회원 DTO
-     * @throws Exception
-     */
-    void addUserInfo(User user) throws Exception;
-    
-    /**
-     * 검색 조건에 부합하는 회원 총 수를 조회한다.
-     * 
-     * @param paramMap 회원 DTO, 페이징 처리 관련 속성을 담은 Map
-     * @return 검색 조건에 부합하는 회원 총 수
-     * @throws Exception
-     */
-    int getCountOfUser(Map<String, Object> paramMap) throws Exception;
-    
-    /**
      * 페이징 처리된, 검색 조건에 부합하는 회원 목록을 조회한다.
      * 
-     * @param paramMap 회원 DTO, 페이징 처리 관련 속성을 담은 Map
+     * @param user 회원 DTO
      * @return 회원 DTO List
      * @throws Exception
      */
-    List<User> getUserListPaginated(Map<String, Object> paramMap) throws Exception;
+    List<User> getUserListPaginated(User user) throws Exception;
     
     /**
      * 회원가입상태를 변경한다.

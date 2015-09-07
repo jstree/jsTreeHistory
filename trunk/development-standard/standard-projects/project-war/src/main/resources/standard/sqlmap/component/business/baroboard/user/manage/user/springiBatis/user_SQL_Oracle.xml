@@ -100,7 +100,7 @@
     <sql id="paginationEnd">
             ) DATA
         )
-        WHERE RN BETWEEN (#firstRecordIndex# + 1) AND #lastRecordIndex#
+        WHERE RN BETWEEN (#beginningRow# + 1) AND #endRow#
     </sql>
     
     
@@ -382,74 +382,55 @@
          WHERE C_ID = #c_id#
     </update>
     
-    <sql id="selectUserList">
-        SELECT A.C_ID
-             , A.C_PARENTID
-             , A.C_POSITION
-             , A.C_LEFT
-             , A.C_RIGHT
-             , A.C_LEVEL
-             , A.C_TITLE
-             , A.C_TYPE
-             , A.C_USER_GRADE_CD AS userGradeCd
-             , (SELECT C_TITLE FROM T_USER_GRADE_MANAGE WHERE C_ID = A.C_USER_GRADE_CD) AS userGrade
-             , A.C_JOIN_STATE_CD AS joinStateCd
-             , (SELECT C_TITLE FROM T_USER_JOIN_STATE WHERE C_ID = A.C_JOIN_STATE_CD) AS joinState
-             , A.C_EMAIL AS email
-             , A.C_JOIN_DT AS joinDt
-             , SUBSTR(A.C_JOIN_DT, 1, 8) AS joinDe
-             , A.C_LAST_LOGIN_DT AS lastLoginDt
-             , SUBSTR(A.C_LAST_LOGIN_DT, 1, 8) AS lastLoginDe
-             , ( SELECT CASE
-                            WHEN COUNT(*) &gt; 0 THEN 'InChild'
-                        ELSE 'NoChild'
-                      END AS YesNo
-                   FROM T_USER_INFO B
-                  WHERE B.C_PARENTID = A.C_ID
-               ) AS childcount
-          FROM T_USER_INFO A
-         WHERE A.C_PARENTID = #user.c_id#
-         <isNotEmpty property="user.email">
-           AND A.C_EMAIL LIKE '%' || #user.email# || '%'
-         </isNotEmpty>
-         <isNotEmpty property="user.c_title">
-           AND A.C_TITLE LIKE '%' || #user.c_title# || '%'
-         </isNotEmpty>
-         <isNotEqual property="user.userGradeCd" compareValue="0">
-           AND A.C_USER_GRADE_CD = #user.userGradeCd#
-         </isNotEqual>
-         <isEqual property="user.joinApprovalFl" compareValue="0">
-           AND A.C_JOIN_STATE_CD = 3 /*가입승인요청*/
-         </isEqual>
-         <isEqual property="user.joinApprovalFl" compareValue="1">
-           AND A.C_JOIN_STATE_CD = 4 /*가입완료*/
-         </isEqual>
-         <isNotEmpty property="user.joinDeBegi">
-           AND SUBSTR(A.C_JOIN_DT, 1, 8) &gt;= #user.joinDeBegi#
-         </isNotEmpty>
-         <isNotEmpty property="user.joinDeEnd">
-           AND SUBSTR(A.C_JOIN_DT, 1, 8) &lt;= #user.joinDeEnd#
-         </isNotEmpty>
-         <isNotEmpty property="user.loginDeBegi">
-           AND SUBSTR(A.C_LAST_LOGIN_DT, 1, 8) &gt;= #user.loginDeBegi#
-         </isNotEmpty>
-         <isNotEmpty property="user.loginDeEnd">
-           AND SUBSTR(A.C_LAST_LOGIN_DT, 1, 8) &lt;= #user.loginDeEnd#
-         </isNotEmpty>
-        ORDER BY A.C_POSITION ASC
+    <sql id="getDescendantNodes">
+        <include refid="getMetaColumns" />
+        <include refid="getExtensionColumns" />
+        FROM T_USER_INFO
+       WHERE C_LEFT &gt; #c_left#
+         AND C_RIGHT &lt; #c_right#
+         AND C_LEVEL &lt;= #c_level#
+         
+        <isNotEmpty property="email">
+         AND C_EMAIL LIKE '%' || #email# || '%'
+        </isNotEmpty>
+        <isNotEmpty property="c_title">
+         AND C_TITLE LIKE '%' || #c_title# || '%'
+        </isNotEmpty>
+        <isNotEqual property="userGradeCd" compareValue="0">
+         AND C_USER_GRADE_CD = #userGradeCd#
+        </isNotEqual>
+        <isEqual property="joinApprovalFl" compareValue="0">
+         AND C_JOIN_STATE_CD = 3 /*가입승인요청*/
+        </isEqual>
+        <isEqual property="joinApprovalFl" compareValue="1">
+         AND C_JOIN_STATE_CD = 4 /*가입완료*/
+        </isEqual>
+        <isNotEmpty property="joinDeBegi">
+         AND SUBSTR(C_JOIN_DT, 1, 8) &gt;= #joinDeBegi#
+        </isNotEmpty>
+        <isNotEmpty property="joinDeEnd">
+         AND SUBSTR(C_JOIN_DT, 1, 8) &lt;= #joinDeEnd#
+        </isNotEmpty>
+        <isNotEmpty property="loginDeBegi">
+         AND SUBSTR(C_LAST_LOGIN_DT, 1, 8) &gt;= #loginDeBegi#
+        </isNotEmpty>
+        <isNotEmpty property="loginDeEnd">
+         AND SUBSTR(C_LAST_LOGIN_DT, 1, 8) &lt;= #loginDeEnd#
+        </isNotEmpty>
     </sql>
     
-    <select id="selectCountOfUser" parameterClass="java.util.Map" resultClass="int">
-        /* selectCountOfUser */
+    <select id="getCountOfDescendantNodes" parameterClass="User" resultClass="int">
+        /* getCountOfDescendantNodes */
         <include refid="countingBegin" />
-        <include refid="selectUserList" />
+        <include refid="getDescendantNodes" />
         <include refid="countingEnd" />
     </select>
     
-    <select id="selectUserListPaginated" parameterClass="java.util.Map" resultClass="User">
-        /* selectUserListPaginated */
+    <select id="getDescendantNodesPaginated" parameterClass="User" resultClass="User">
+        /* getDescendantNodesPaginated */
         <include refid="paginationBegin" />
-        <include refid="selectUserList" />
+        <include refid="getDescendantNodes" />
+        ORDER BY C_LEFT
         <include refid="paginationEnd" />
     </select>
     

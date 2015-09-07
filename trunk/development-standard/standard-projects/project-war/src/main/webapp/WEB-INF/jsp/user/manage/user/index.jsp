@@ -72,7 +72,7 @@
 <script type="text/javascript" id="script">
 var userList = {
 	
-	currentPageNo : null,
+	currentPage : null,
 		
 	grid : null,
 	
@@ -318,7 +318,7 @@ var userList = {
 	    
 	    function callback(r) {
 	    	
-	    	userList.getList(userList.currentPageNo);
+	    	userList.getList(userList.currentPage);
 	    }
     },
     
@@ -327,9 +327,11 @@ var userList = {
     	var $form = $('#formSearchingUser');
 		
 		var params = $form.serializeObject();
+		params.page = pageNo;
+		params.jsFunction = 'userList.getList';
 		
 		callAjax(null
-	           , $form.prop('action') + '?currentPageNo=' + pageNo + '&jsFunction=userList.getList'
+	           , $form.prop('action')
 	           , null
 	           , $form.prop('method')
 	           , 'json'
@@ -380,7 +382,7 @@ var userList = {
 		    	$('#divPagination').html(data.pageList);
 		    })();
 	    	
-	    	userList.currentPageNo = pageNo;
+	    	userList.currentPage = pageNo;
 	    }
     },
     

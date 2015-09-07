@@ -63,7 +63,8 @@ public class UserManageServiceTest extends DbUnitTest<User> {
 	public void getUserList() throws Exception {
 		
 		User userSearch = new User();
-		// TODO 류강하 : 검색 조건 추가
+		userSearch.setC_id(2); // First Child
+		userSearch.setC_level(2);
 		
 		List<User> userList = userManageService.getUserList(userSearch);
 

@@ -15,9 +15,6 @@
  */
 package standard.mvc.component.business.baroboard.user.manage.user.dao;
 
-import java.util.List;
-import java.util.Map;
-
 import standard.mvc.component.business.baroboard.user.vo.User;
 
 /**
@@ -41,24 +38,6 @@ import standard.mvc.component.business.baroboard.user.vo.User;
  * </pre>
  */
 public interface UserManageDao {
-
-    /**
-     * 검색 조건에 부합하는 회원 총 수를 조회한다.
-     * 
-     * @param paramMap 회원 DTO, 페이징 처리 관련 속성을 담은 Map
-     * @return 검색 조건에 부합하는 회원 총 수
-     * @throws Exception
-     */
-    int selectCountOfUser(Map<String, Object> paramMap) throws Exception;
-    
-    /**
-     * 페이징 처리된, 검색 조건에 부합하는 회원 목록을 조회한다.
-     * 
-     * @param paramMap 회원 DTO, 페이징 처리 관련 속성을 담은 Map
-     * @return 회원 DTO List
-     * @throws Exception
-     */
-    List<User> selectUserListPaginated(Map<String, Object> paramMap) throws Exception;
 
     /**
      * 회원가입상태를 변경한다.
