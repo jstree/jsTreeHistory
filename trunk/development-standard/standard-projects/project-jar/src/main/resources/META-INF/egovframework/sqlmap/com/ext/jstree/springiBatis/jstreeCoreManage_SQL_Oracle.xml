@@ -413,13 +413,14 @@
     <sql id="paginationEnd">
             ) DATA
         )
-        WHERE RN BETWEEN (#beginningRowOfRange# + 1) AND #endRowOfRange#
+        WHERE RN BETWEEN (#beginningRow# + 1) AND #endRow#
     </sql>
     
     <sql id="getDescendantNodes">
         <include refid="getMetaField" />
         FROM T_COMPREHENSIVETREE_SPRING A
-       WHERE C_ID &gt; 1
+       WHERE C_LEFT &gt; #c_left#
+         AND C_RIGHT &lt; #c_right#
          AND C_LEVEL &lt;= #c_level#
     </sql>
     

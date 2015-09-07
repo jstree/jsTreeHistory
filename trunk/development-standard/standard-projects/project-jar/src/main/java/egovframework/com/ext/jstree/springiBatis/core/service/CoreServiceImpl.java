@@ -110,21 +110,30 @@ public class CoreServiceImpl implements CoreService
             if (paginatedComprehensiveTree.getC_level() < 1) {
                 throw new RuntimeException("The c_level property value is not valid.");
             }
-            if (paginatedComprehensiveTree.getCurrentPage() < 1) {
-                throw new RuntimeException("The currentPage property value is not valid.");
+            if (paginatedComprehensiveTree.getPage() < 1) {
+                throw new RuntimeException("The page property value is not valid.");
             }
-            if (paginatedComprehensiveTree.getRowCountPerPage() < 1) {
-                throw new RuntimeException("The currentPage property value is not valid.");
+            if (paginatedComprehensiveTree.getRowCount() < 1) {
+                throw new RuntimeException("The rowCount property value is not valid.");
             }
             
             PaginationInfo paginationInfo = new PaginationInfo();
-            paginationInfo.setCurrentPageNo(paginatedComprehensiveTree.getCurrentPage());
-            paginationInfo.setRecordCountPerPage(paginatedComprehensiveTree.getRowCountPerPage());
+            paginationInfo.setCurrentPageNo(paginatedComprehensiveTree.getPage());
+            paginationInfo.setRecordCountPerPage(paginatedComprehensiveTree.getRowCount());
+            paginationInfo.setPageSize(paginatedComprehensiveTree.getPageCount());
             
-            paginatedComprehensiveTree.setBeginningRowOfRange(paginationInfo.getFirstRecordIndex());
-            paginatedComprehensiveTree.setEndRowOfRange(paginationInfo.getLastRecordIndex());
+            paginatedComprehensiveTree.setBeginningRow(paginationInfo.getFirstRecordIndex());
+            paginatedComprehensiveTree.setEndRow(paginationInfo.getLastRecordIndex());
             
-            childNode = (List<T>) coreDao.getDescendantNodesPaginated(paginatedComprehensiveTree);
+            ComprehensiveTree node = coreDao.getNode(paginatedComprehensiveTree);
+            paginatedComprehensiveTree.setC_left(node.getC_left());
+            paginatedComprehensiveTree.setC_right(node.getC_right());
+            
+            paginationInfo.setTotalRecordCount( coreDao.getCountOfDescendantNodes(comprehensiveTree) );
+            
+            paginatedComprehensiveTree.setPaginationInfo(paginationInfo);
+            
+            childNode = (List<T>) coreDao.getDescendantNodesPaginated(comprehensiveTree);
         } 
         else 
         {

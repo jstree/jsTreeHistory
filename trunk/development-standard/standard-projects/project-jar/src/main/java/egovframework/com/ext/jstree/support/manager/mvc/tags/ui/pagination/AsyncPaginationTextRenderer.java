@@ -44,12 +44,12 @@ public class AsyncPaginationTextRenderer extends AbstractPaginationRenderer {
 
     public AsyncPaginationTextRenderer() {
         
-        firstPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\">◀◀</a>&#160;&#160;"; 
-        previousPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\">◀</a>&#160;&#160;";
-        currentPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\" class=\"currentPage\">{2}</a>&#160;&#160;";
-        otherPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\">{2}</a>&#160;&#160;";
-        nextPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\">▶</a>&#160;&#160;";
-        lastPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\">▶▶</a>&#160;&#160;";
+        firstPageLabel = "<a href=\"javascript:void(0);\" onclick=\"{0}({1}); return false;\">◀◀</a>&#160;&#160;"; 
+        previousPageLabel = "<a href=\"javascript:void(0);\" onclick=\"{0}({1}); return false;\">◀</a>&#160;&#160;";
+        currentPageLabel = "<a href=\"javascript:void(0);\" onclick=\"{0}({1}); return false;\" class=\"currentPage\">{2}</a>&#160;&#160;";
+        otherPageLabel = "<a href=\"javascript:void(0);\" onclick=\"{0}({1}); return false;\">{2}</a>&#160;&#160;";
+        nextPageLabel = "<a href=\"javascript:void(0);\" onclick=\"{0}({1}); return false;\">▶</a>&#160;&#160;";
+        lastPageLabel = "<a href=\"javascript:void(0);\" onclick=\"{0}({1}); return false;\">▶▶</a>&#160;&#160;";
     }
     
     @Override
@@ -88,8 +88,8 @@ public class AsyncPaginationTextRenderer extends AbstractPaginationRenderer {
                 sb.append(MessageFormat.format(nextPageLabel, new Object[] {jsFunction,Integer.toString(firstPageNoOnPageList+pageSize)}));
                 sb.append(MessageFormat.format(lastPageLabel, new Object[] {jsFunction,Integer.toString(lastPageNo)}));
             } else {
-                sb.append(MessageFormat.format(nextPageLabel,new Object[]{jsFunction,Integer.toString(lastPageNo)}));
-                sb.append(MessageFormat.format(lastPageLabel,new Object[]{jsFunction,Integer.toString(lastPageNo)}));
+                sb.append(MessageFormat.format(nextPageLabel,new Object[] {jsFunction,Integer.toString(lastPageNo)}));
+                sb.append(MessageFormat.format(lastPageLabel,new Object[] {jsFunction,Integer.toString(lastPageNo)}));
             }
         }
         

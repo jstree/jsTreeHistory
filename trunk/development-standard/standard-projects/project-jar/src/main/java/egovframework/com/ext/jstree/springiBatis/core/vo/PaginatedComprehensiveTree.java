@@ -15,6 +15,8 @@
  */
 package egovframework.com.ext.jstree.springiBatis.core.vo;
 
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+
 /**
  * Modification Information
  * 
@@ -37,40 +39,58 @@ package egovframework.com.ext.jstree.springiBatis.core.vo;
  */
 public class PaginatedComprehensiveTree extends ComprehensiveTree {
 
-    private int currentPage = 1;
-    private int rowCountPerPage = 10;
-    private int beginningRowOfRange;
-    private int endRowOfRange;
+    private int page = 1;
+    private int rowCount = 10;
+    private int pageCount = 10;
     
-    public int getCurrentPage() {
-        return currentPage;
+    private int beginningRow;
+    private int endRow;
+    
+    /** 전정부 페이지네이터 */
+    private PaginationInfo paginationInfo;
+    /** 페이지 번호 클릭 시 처리될 자바스크립트 콜백 함수 */
+    private String jsFunction;
+    
+    public int getPage() {
+        return page;
     }
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
+    public void setPage(int page) {
+        this.page = page;
     }
-
-    public int getRowCountPerPage() {
-        return rowCountPerPage;
+    public int getRowCount() {
+        return rowCount;
     }
-
-    public void setRowCountPerPage(int rowCountPerPage) {
-        this.rowCountPerPage = rowCountPerPage;
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
     }
-
-    public int getBeginningRowOfRange() {
-        return beginningRowOfRange;
+    public int getPageCount() {
+        return pageCount;
     }
-
-    public void setBeginningRowOfRange(int beginningRowOfRange) {
-        this.beginningRowOfRange = beginningRowOfRange;
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
     }
-
-    public int getEndRowOfRange() {
-        return endRowOfRange;
+    public int getBeginningRow() {
+        return beginningRow;
     }
-
-    public void setEndRowOfRange(int endRowOfRange) {
-        this.endRowOfRange = endRowOfRange;
+    public void setBeginningRow(int beginningRow) {
+        this.beginningRow = beginningRow;
+    }
+    public int getEndRow() {
+        return endRow;
+    }
+    public void setEndRow(int endRow) {
+        this.endRow = endRow;
+    }
+    public PaginationInfo getPaginationInfo() {
+        return paginationInfo;
+    }
+    public String getJsFunction() {
+        return jsFunction;
+    }
+    public void setJsFunction(String jsFunction) {
+        this.jsFunction = jsFunction;
+    }
+    public void setPaginationInfo(PaginationInfo paginationInfo) {
+        this.paginationInfo = paginationInfo;
     }
 }

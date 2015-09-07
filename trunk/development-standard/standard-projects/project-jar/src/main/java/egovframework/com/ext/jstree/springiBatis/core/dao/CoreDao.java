@@ -3,7 +3,6 @@ package egovframework.com.ext.jstree.springiBatis.core.dao;
 import java.util.List;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
-import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
 
 public interface CoreDao {
 
@@ -59,5 +58,5 @@ public interface CoreDao {
 	 * @param comprehensiveTree
 	 * @return
 	 */
-    public <T extends PaginatedComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree);
+    public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree);
 }
