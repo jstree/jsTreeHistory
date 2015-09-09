@@ -36,7 +36,7 @@ select {
     display : none;
 }
 .divButtons {
-    float : right;
+    text-align : right;
 }
 </style>
 <script type="text/javascript" id="script">
@@ -274,6 +274,8 @@ var userInfo = {
 };
 
 $(document).ready(function() {
+    $('#tabs').tabs();
+    
     userInfo.init();
 });
 </script>
@@ -290,74 +292,89 @@ $(document).ready(function() {
     <article>
         <div class="clearfix">
             <div class="container bm-remove">
-            <form id="frmUserInfo" action="${pageContext.request.contextPath}/user/info/modify.do" method="post">
-                <div>
-                    <label>
-                                           이메일 주소<span class="essential">*</span>
-                        <input name="emailAccount" type="text" value="${user.emailAccount}" readonly="readonly" style="width:210px" />@
-                        <input name="emailHost" type="text" value="${user.emailHost}" readonly="readonly" style="width:220px" />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                                           현재 비밀번호<span class="essential">*</span>
-                        <input name="currentPassword" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                                           새 비밀번호
-                        <input name="password" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                                           새 비밀번호 확인
-                        <input name="passwordConfirm" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                                         비밀번호 찾기 질문<span class="essential">*</span>
-                       <select name="pwdFindQuestionCd">
-                    <c:forEach var="passwordFindQuestion" items="${passwordFindQuestions}" varStatus="status">
-                        <option value="${passwordFindQuestion.c_id}" <c:if test="${passwordFindQuestion.c_id == user.pwdFindQuestionCd}">selected="selected"</c:if>>${passwordFindQuestion.c_title}</option>
-                    </c:forEach>
-                    </select>
-                    </label>
-                </div>
-                <div>
-                    <labe>
-                                           비밀번호 찾기 답변<span class="essential">*</span>
-                        <input name="pwdFindAnswer" type="text" value="${user.pwdFindAnswer}" style="width:240px" />
-                    </labe>
-                </div>
-                <div>
-                    <label>
-                                           닉네임<span class="essential">*</span>
-                        <input name="c_title" type="text" value="${user.c_title}" style="width:200px" />
-                    </label>
-                    <button id="btnNicknameDuplicationCheck" type="button" class="compact hidden">중복체크</button>
-                </div>
-                <div>
-                    <label>
-                                           메일링 서비스 설정
-                        <label><input name="mailingServiceUseFl" type="radio" value="1" <c:if test="${user.mailingServiceUseFl == 1}">checked="checked"</c:if> />예</label>
-                        <label><input name="mailingServiceUseFl" type="radio" value="0" <c:if test="${user.mailingServiceUseFl == 0}">checked="checked"</c:if> />아니오</label>
-                    </label>
-                </div>
-                <div>
-                    <label>
-                                           정보공개 설정
-                        <label><input name="indiInfoOpenFl" type="radio" value="1" <c:if test="${user.indiInfoOpenFl == 1}">checked="checked"</c:if> />전체공개</label>
-                        <label><input name="indiInfoOpenFl" type="radio" value="0" <c:if test="${user.indiInfoOpenFl == 0}">checked="checked"</c:if> />거부</label>
-                    </label>
-                </div>
-                <div class="divButtons">
-                    <button type="submit" class="compact">수정하기</button>
-                </div>
-                <input name="c_id" type="hidden" value="${user.c_id}" />
-            </form>
+                <div id="tabs">
+			        <ul>
+			            <li><a href="#tabUserInfo">회원정보 수정</a></li>
+			            <li><a href="#tabWHAT">쪽지함</a></li>
+			            <li><a href="#tabWHAT">포인트</a></li>
+			        </ul>
+			        <div id="tabUserInfo">
+						<form id="frmUserInfo" action="${pageContext.request.contextPath}/user/info/modify.do" method="post">
+						    <div>
+						        <label>
+						                      이메일 주소<span class="essential">*</span>
+						            <input name="emailAccount" type="text" value="${user.emailAccount}" readonly="readonly" style="width:210px" />@
+						            <input name="emailHost" type="text" value="${user.emailHost}" readonly="readonly" style="width:220px" />
+						        </label>
+						    </div>
+						    <div>
+						        <label>
+						                      현재 비밀번호<span class="essential">*</span>
+						            <input name="currentPassword" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
+						        </label>
+						    </div>
+						    <div>
+						        <label>
+						                      새 비밀번호
+						            <input name="password" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
+						        </label>
+						    </div>
+						    <div>
+						        <label>
+						                      새 비밀번호 확인
+						            <input name="passwordConfirm" type="password" placeholder="${generalSetting.passwordSecurityLevel}" style="width:335px" />
+						        </label>
+						    </div>
+						    <div>
+						        <label>
+						                      비밀번호 찾기 질문<span class="essential">*</span>
+					                <select name="pwdFindQuestionCd">
+						            <c:forEach var="passwordFindQuestion" items="${passwordFindQuestions}" varStatus="status">
+						                <option value="${passwordFindQuestion.c_id}" <c:if test="${passwordFindQuestion.c_id == user.pwdFindQuestionCd}">selected="selected"</c:if>>${passwordFindQuestion.c_title}</option>
+						            </c:forEach>
+						            </select>
+						        </label>
+						    </div>
+						    <div>
+						        <labe>
+						                      비밀번호 찾기 답변<span class="essential">*</span>
+						            <input name="pwdFindAnswer" type="text" value="${user.pwdFindAnswer}" style="width:240px" />
+						        </labe>
+						    </div>
+						    <div>
+						        <label>
+						                      닉네임<span class="essential">*</span>
+						            <input name="c_title" type="text" value="${user.c_title}" style="width:200px" />
+						        </label>
+						        <button id="btnNicknameDuplicationCheck" type="button" class="compact hidden">중복체크</button>
+						    </div>
+						    <div>
+						        <label>
+						                      메일링 서비스 설정
+						            <label><input name="mailingServiceUseFl" type="radio" value="1" <c:if test="${user.mailingServiceUseFl == 1}">checked="checked"</c:if> />예</label>
+						            <label><input name="mailingServiceUseFl" type="radio" value="0" <c:if test="${user.mailingServiceUseFl == 0}">checked="checked"</c:if> />아니오</label>
+						        </label>
+						    </div>
+						    <div>
+						        <label>
+						                      정보공개 설정
+						            <label><input name="indiInfoOpenFl" type="radio" value="1" <c:if test="${user.indiInfoOpenFl == 1}">checked="checked"</c:if> />전체공개</label>
+						            <label><input name="indiInfoOpenFl" type="radio" value="0" <c:if test="${user.indiInfoOpenFl == 0}">checked="checked"</c:if> />거부</label>
+						        </label>
+						    </div>
+						    <div class="divButtons">
+						        <button type="submit" class="compact">수정하기</button>
+						    </div>
+						    <input name="c_id" type="hidden" value="${user.c_id}" />
+						</form>
+			        </div>
+			        <div id="tabWHAT">
+			            
+			        </div>
+			        <div id="tabWHAT">
+			            
+			        </div>
+			    </div>
             </div>
         </div>
     </article>
