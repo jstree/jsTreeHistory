@@ -58,9 +58,8 @@ public class CommentManageController {
 		pagingInfo.setPageSize(commentManageVo.getPageSize());
 		pagingInfo.setRecordCountPerPage(commentManageVo.getRecordsPerPage());
 		pagingInfo.setTotalRecordCount(commentManageService.getCommentTotalCnt(commentManageVo));
-		defaultSettingVo.setC_id(1);
+		defaultSettingVo.setC_id(2);
 		List<DefaultSettingVO> list = defaultSettingService.getChildNode(defaultSettingVo);
-		System.out.println(list.size());
 		modelMap.put("boardInfo", list);
 		modelMap.put("list", commentManageService.getComment(commentManageVo));
 		modelMap.put("paginationInfo", pagingInfo);
