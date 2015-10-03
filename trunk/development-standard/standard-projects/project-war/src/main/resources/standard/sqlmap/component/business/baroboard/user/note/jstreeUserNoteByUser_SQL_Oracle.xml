@@ -75,11 +75,77 @@
 		FROM
 		T_USER_NOTE_BY_USER
 		WHERE C_LEFT &gt;= #c_left#
-		AND C_RIGHT &lt;=
-		#c_right#
+		AND C_RIGHT &lt;= #c_right#
 		ORDER BY C_LEFT ASC
 	</select>
 
+ 	<select id="selectCountOfUser" parameterClass="java.util.Map" resultClass="int">
+        SELECT COUNT(A.C_ID)
+          FROM T_USER_NOTE_BY_USER A
+         WHERE A.C_USER_ID = #user.userId#
+           AND A.C_NOTE_TYPE_CODE = #user.noteTypeCode#
+    </select>
+
+	<select id="selectUserListPaginated" parameterClass="java.util.Map" resultClass="UserNoteByUser">
+        SELECT *
+        FROM
+        (
+            SELECT ROWNUM AS RN
+                 , DATA.*
+            FROM
+            (
+	            SELECT B.c_id
+				, B.c_parentid
+				, B.c_position
+				, B.c_left
+				, B.c_right
+				, B.c_level
+				, B.c_title
+				, B.c_type
+				
+				/* user filed add point*/
+				,A.C_ID AS receId
+				,B.C_USER_ID AS userId
+				,C.C_TITLE AS userNm
+		        ,A.C_NOTE_DETAIL_ID AS noteDetailId
+		        ,A.C_NOTE_TYPE_CODE AS noteTypeCode
+		        ,A.C_RECE_DISP_DT AS receDispDt
+		        FROM T_USER_NOTE_BY_USER A
+		            ,T_USER_NOTE_BY_USER B
+		            ,T_USER_INFO C
+		        WHERE A.C_USER_ID = #user.userId#
+			      AND A.C_NOTE_TYPE_CODE = #user.noteTypeCode#
+			      AND A.C_NOTE_DETAIL_ID = B.C_NOTE_DETAIL_ID
+			      AND B.C_NOTE_TYPE_CODE = CASE WHEN #user.noteTypeCode# IN (3,5) THEN 4
+			                                    ELSE 3
+			                               END
+			      AND B.C_USER_ID = C.C_ID
+			    <isNotEmpty prepend="AND" property="user.inqStartYmd">
+			    	A.C_RECE_DISP_DT BETWEEN REPLACE(#user.inqStartYmd#, '-', '')||'000000' AND NVL(REPLACE(#user.inqEndYmd#, '-', ''), '99991231')||'235959'
+			    </isNotEmpty>
+				<isNotEmpty prepend="AND" property="user.c_title">
+			    	A.C_TITLE LIKE '%'||#user.c_title#||'%'
+			    </isNotEmpty>
+			    <isNotEmpty prepend="AND" property="user.userNm"> 
+			    	EXISTS (SELECT 1 
+			      	          FROM T_USER_NOTE_BY_USER SUB_A
+			      	              ,T_USER_INFO SUB_B
+			      	         WHERE SUB_A.C_NOTE_DETAIL_ID = A.C_NOTE_DETAIL_ID
+			      	           AND SUB_A.C_NOTE_TYPE_CODE = '4'
+			      	           AND SUB_A.C_USER_ID = SUB_B.C_ID
+			      	           AND SUB_B.C_TITLE = #user.userNm#)
+			    </isNotEmpty>
+			    <isNotEmpty prepend="AND" property="user.content">
+			      	EXISTS (SELECT 1 
+			      	          FROM T_USER_NOTE_DETAIL SUB_A 
+			      	         WHERE SUB_A.C_CONTENT LIKE '%'||#user.content#||'%'
+			      	           AND SUB_A.C_ID = A.C_NOTE_DETAIL_ID)
+			    </isNotEmpty>
+				ORDER BY A.C_RECE_DISP_DT DESC
+            ) DATA
+        )
+        WHERE RN BETWEEN (#firstRecordIndex# + 1) AND #lastRecordIndex#
+    </select>
 
 	<select id="searchNodeByString" parameterClass="UserNoteByUser"
 		resultClass="UserNoteByUser">
@@ -132,14 +198,17 @@
 		, A.C_TITLE
 		, A.C_TYPE
 		, A.C_USER_ID AS userId
+		, C.C_TITLE AS userNm
 		, A.C_NOTE_DETAIL_ID AS noteDetailId
 		, A.C_NOTE_TYPE_CODE AS noteTypeCode
 		, A.C_RECE_DISP_DT AS receDispDt
 		, B.C_CONTENT AS content
 		FROM T_USER_NOTE_BY_USER A
 		, T_USER_NOTE_DETAIL B
+		, T_USER_INFO C
 		WHERE A.C_ID = #c_id#
 		  AND A.C_NOTE_DETAIL_ID = B.C_ID
+		  AND A.C_USER_ID = C.C_ID
 	</select>
 
 

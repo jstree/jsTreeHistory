@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,11 +38,15 @@ import standard.mvc.component.business.baroboard.user.note.vo.UserNoteDetail;
 import standard.mvc.component.business.baroboard.user.service.UserService;
 import standard.mvc.component.business.baroboard.user.vo.User;
 
+import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.manager.mvc.tags.ui.pagination.AsyncPaginationTextRenderer;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
 import egovframework.com.ext.jstree.support.util.DateUtils;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
-@RequestMapping("/user/manage/note")
+@RequestMapping("/user/note")
 public class UserNoteController extends GenericAbstractController {
 
 	@Autowired
@@ -48,6 +54,12 @@ public class UserNoteController extends GenericAbstractController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Resource(name = "CoreService")
+    private CoreService coreService;
+	
+	@Autowired
+    private AsyncPaginationTextRenderer asyncPaginaionTexRenderer;
 	
 	@Resource(name = "fileUploadProperties")
 	private Properties fileUploadProperties;
@@ -60,13 +72,21 @@ public class UserNoteController extends GenericAbstractController {
 		
 		model.addAttribute("inqStartYmd", receDispDt);
 		model.addAttribute("inqEndYmd"  , receDispDt);
-        return "/jsp/user/manage/note/index";
+        return "/jsp/user/note/index";
     }
 	
-	@RequestMapping(value="/noteSendPopup.do", method=RequestMethod.GET)
-    public String noteSendPopup(HttpServletRequest request, ModelMap model) throws Exception {
+	@RequestMapping(value="/noteSendPopup.do", method={RequestMethod.GET, RequestMethod.POST})
+    public String noteSendPopup(@RequestParam(required = false, defaultValue = "0") int userId
+    		, ModelMap model) throws Exception {
 		
-        return "/jsp/user/manage/note/noteSendPopup";
+		if(userId != 0){
+			User user = new User();
+			user.setC_id(userId);
+			user = coreService.getNode(user);
+			
+			model.addAttribute("userInfo", user);
+		}
+        return "/jsp/user/note/noteSendPopup";
     }
 	
 	@RequestMapping(value="/noteDetailPopup.do", method=RequestMethod.GET)
@@ -76,17 +96,37 @@ public class UserNoteController extends GenericAbstractController {
 		
 		model.addAttribute("userNoteByUser", userNoteService.inquiryNoteDetail(userNoteByUser));
 		
-        return "/jsp/user/manage/note/noteDetailPopup";
+        return "/jsp/user/note/noteDetailPopup";
     }
 
 	@RequestMapping(value="/inquiryNoteList.do", method={RequestMethod.GET, RequestMethod.POST})
-	public @ResponseBody List<UserNoteByUser> inquiryNoteList(UserNoteByUser userNoteByUser) throws Exception {
-		userNoteByUser.setUserId(104); // 로그인자의 ID를 셋팅해야 한다. 현재 미구현 상태(2015.06.19)
+	public @ResponseBody Map<String, Object> inquiryNoteList(UserNoteByUser userNoteByUser
+			, @RequestParam(required = false, defaultValue = "1") int currentPageNo
+            , @RequestParam(required = false, defaultValue = "10") int recordCountPerPage
+            , @RequestParam(required = false, defaultValue = "10") int pageSize
+            , @RequestParam(required = false, defaultValue = "fnGetList") String jsFunction) throws Exception {
+		
+		PaginationInfo paginationInfo = new PaginationInfo();
+        paginationInfo.setCurrentPageNo(currentPageNo);
+        paginationInfo.setRecordCountPerPage(recordCountPerPage);
+        paginationInfo.setPageSize(pageSize);
+		
+		userNoteByUser.setUserId(this.getLoginedUserID()); // 로그인자의 ID를 셋팅해야 한다. 현재 미구현 상태(2015.06.19)
 		userNoteByUser.setNoteTypeCode(3); //3:수신, 4:발신, 5:보관
 		
-		List<UserNoteByUser> userNoteByUserList = userNoteService.inquiryNoteList(userNoteByUser);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("firstRecordIndex", paginationInfo.getFirstRecordIndex());
+        paramMap.put("lastRecordIndex", paginationInfo.getLastRecordIndex());
+        paramMap.put("user", userNoteByUser);
 		
-		return userNoteByUserList;
+        paginationInfo.setTotalRecordCount( userNoteService.getCountOfUser(paramMap) );
+        List<UserNoteByUser> userNoteByUserList = userNoteService.getUserListPaginated(paramMap);        
+		
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        returnMap.put("noteList", userNoteByUserList);
+        returnMap.put("pageList", asyncPaginaionTexRenderer.renderPagination(paginationInfo, jsFunction));
+        
+		return returnMap;
 	}
 	
 	@RequestMapping(value="/inquiryUserNickname.do", method=RequestMethod.POST)
@@ -136,7 +176,7 @@ public class UserNoteController extends GenericAbstractController {
 				if (!"".equals(file.getOriginalFilename())) {
 					addUserNoteAttachFile = new UserNoteAttachFile();
 					
-					storeFileNm = "USER_NOTE" + "c_id" + System.currentTimeMillis(); //c_id 추후 로그인자 ID 셋팅
+					storeFileNm = "USER_NOTE" + this.getLoginedUserID() + System.currentTimeMillis(); //c_id 추후 로그인자 ID 셋팅
 					
 					filePath = uploadPath + storeFileNm;
 					addUserNoteAttachFile.setC_title(file.getOriginalFilename());
@@ -188,6 +228,20 @@ public class UserNoteController extends GenericAbstractController {
 		return "{}";
 	}
 	
+	private int getLoginedUserID() throws Exception {
+		int loginedUserID;
+		
+		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(user instanceof String) { // 익명 사용자
+			return 3;//throw new Exception("로그인후 사용");
+			
+		} else {	// 로그인 사용자
+			SecureUserLogin loginedUser = (SecureUserLogin) user;
+			loginedUserID = loginedUser.getId();
+		}
+		
+		return loginedUserID;
+	}
 	
 	@Override
 	public Map<String, Map<String, Object>> bindTypes() {

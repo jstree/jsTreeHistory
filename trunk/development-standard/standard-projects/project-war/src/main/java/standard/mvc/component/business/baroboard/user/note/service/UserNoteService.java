@@ -1,11 +1,13 @@
 package standard.mvc.component.business.baroboard.user.note.service;
 
 import java.util.List;
+import java.util.Map;
 
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteByUser;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteDetail;
 import standard.mvc.component.business.baroboard.user.note.vo.UserNoteTypeCode;
+import standard.mvc.component.business.baroboard.user.vo.User;
 
 
 
@@ -89,4 +91,21 @@ public interface UserNoteService {
      * @throws Exception
      */
 	public void deleteNote(UserNoteByUser userNoteByUser) throws Exception;
+	
+	/**
+	 * 페이징 처리를 위한 회원별 쪽지 총 수를 구한다.
+	 * @param paramMap
+	 * @return
+	 * @throws Exception
+	 */
+	int getCountOfUser(Map<String, Object> paramMap) throws Exception;
+	
+	/**
+     * 페이징 처리된, 검색 조건에 부합하는 회원 목록을 조회한다.
+     * 
+     * @param paramMap
+     * @return
+     * @throws Exception
+     */
+    List<UserNoteByUser> getUserListPaginated(Map<String, Object> paramMap) throws Exception;
 }
