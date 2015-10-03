@@ -35,29 +35,20 @@ import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
 @Repository
 public class BoardDaoImpl extends EgovComAbstractDAO implements BoardDao {
 
-	private static final String TABLE_PREFIX = "T_BOARD_";
-	
-	private void makeTableNameByBoardID(Article article){
-		article.setBoardID(TABLE_PREFIX+article.getBoardID());
-	}
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Article> getArticleListByPage(Article article) throws Exception {
-		makeTableNameByBoardID(article);
 		return list(article.getSqlMapSelector() + "." + "getArticleListByPage", article);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Article> getAnnounceList(Article article) throws Exception {
-		makeTableNameByBoardID(article);
 		return list(article.getSqlMapSelector() + "." + "getAnnounceList", article);
 	}
 
 	@Override
 	public int getOpenArticleCnt(Article article) throws Exception {
-		makeTableNameByBoardID(article);
 		return (int)selectByPk(article.getSqlMapSelector() + "." + "getOpenArticleCnt", article);
 	}
 

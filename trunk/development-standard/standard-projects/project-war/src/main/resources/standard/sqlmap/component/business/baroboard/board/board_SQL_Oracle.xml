@@ -41,11 +41,11 @@
 			/* user fields */
 			<include refid="getInlineChildCount" />
 			/* inline table from filed*/
-			FROM T_BOARD_TEST B
+			FROM T_BOARD_$boardID$ B
 			<include refid="getInlineChildCountAfterFrom" />
 			/* table from filed*/
 			, #boardID# as boardID
-			FROM T_BOARD_TEST A
+			FROM T_BOARD_$boardID$ A
 			<include refid="getAfterFrom" />
 		</dynamic>
 	</select>
@@ -62,7 +62,7 @@
 			, C_LEVEL
 			, C_TITLE
 			, C_TYPE
-		FROM T_BOARD_TEST
+		FROM T_BOARD_$boardID$
 		WHERE C_LEFT &gt;= #c_left#
 			AND C_RIGHT &lt;= #c_right#
 		ORDER BY C_LEFT ASC
@@ -74,7 +74,7 @@
 		/* searchNodeByString */
 		SELECT c_left
 			, c_right
-		FROM T_BOARD_TEST
+		FROM T_BOARD_$boardID$
 		WHERE C_TITLE LIKE '%'||#searchStr#||'%'
 	</select>
 
@@ -83,7 +83,7 @@
 		resultClass="String">
 		/* searchNodeByPosition */
 		SELECT DISTINCT C_ID
-		FROM T_BOARD_TEST
+		FROM T_BOARD_$boardID$
 		WHERE 1=1
 		<iterate prepend="AND" open="(" close=")" conjunction="OR">
 			( C_LEFT
@@ -94,7 +94,7 @@
 
 	<update id="alterNode" parameterClass="Article">
 		/* alterNode */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_TYPE = #c_type#
 			, C_TITLE = #c_title#
 			, C_ROOT_ARTICLE_ID = #rootArticleID#
@@ -108,9 +108,6 @@
 			, C_ANNOUNCEMENT_FL = #announcementFL# 	
 			, C_VIEW_CNT = #viewCnt# 			
 			, C_IS_DELETED_FL = #isDeletedFL#	
-			, C_IS_GUEST_FL = #isGuestFL#
-			, C_GUEST_NICKNAME = #guestNickName#
-			, C_GUEST_PW = #guestPW#
 			, C_REG_DT = #regDt# 				
 			, C_MOD_DT = #modDt# 			
 		WHERE C_ID = #c_id#
@@ -133,12 +130,9 @@
 			, A.C_ANNOUNCEMENT_FL as announcementFL 	
 			, A.C_VIEW_CNT as viewCnt 			
 			, A.C_IS_DELETED_FL as isDeletedFL		
-			, A.C_IS_GUEST_FL as isGuestFL
-			, A.C_GUEST_NICKNAME as guestNickName
-			, A.C_GUEST_PW as guestPW
 			, A.C_REG_DT as regDt 				
 			, A.C_MOD_DT as modDt 
-		FROM T_BOARD_TEST A
+		FROM T_BOARD_$boardID$ A
 		WHERE C_ID = #c_id#
 		</dynamic>
 	</select>
@@ -159,12 +153,9 @@
 			, A.C_ANNOUNCEMENT_FL 	
 			, A.C_VIEW_CNT 					
 			, A.C_IS_DELETED_FL				
-			, A.C_IS_GUEST_FL as isGuestFL
-			, A.C_GUEST_NICKNAME as guestNickName
-			, A.C_GUEST_PW as guestPW
 			, A.C_REG_DT 						
 			, A.C_MOD_DT 
-		FROM T_BOARD_TEST A
+		FROM T_BOARD_$boardID$ A
 		WHERE C_ID = #ref#
 		</dynamic>
 	</select>
@@ -173,7 +164,7 @@
 	<delete id="removeNode" parameterClass="Article">
 		/* removeNode */
 		DELETE
-		FROM T_BOARD_TEST
+		FROM T_BOARD_$boardID$
 		WHERE C_LEFT &gt;= #c_left#
 			AND C_RIGHT	&lt;= #c_right#
 	</delete>
@@ -181,7 +172,7 @@
 
 	<update id="removedAfterLeftFix" parameterClass="Article">
 		/* removedAfterLeftFix */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
@@ -189,7 +180,7 @@
 
 	<update id="removedAfterRightFix" parameterClass="Article">
 		/* removedAfterRightFix */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 	</update>
@@ -197,7 +188,7 @@
 
 	<update id="removedAfterPositionFix" parameterClass="Article">
 		/* removedAfterPositionFix */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET	C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
 			AND	C_POSITION &gt; #c_position#
@@ -207,14 +198,14 @@
 	<select id="analyzeRootNode" resultClass="Article">
 		/* searchNodeByString */
 		SELECT C_LEFT
-		FROM T_BOARD_TEST
+		FROM T_BOARD_$boardID$
 		WHERE C_PARENTID = 0
 	</select>
 
 
 	<update id="cutMyselfPositionFix" parameterClass="Article">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
 			AND C_POSITION &gt;	#c_position#
@@ -223,7 +214,7 @@
 
 	<update id="cutMyselfLeftFix" parameterClass="Article">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
@@ -231,7 +222,7 @@
 
 	<update id="cutMyselfRightFix" parameterClass="Article">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
@@ -243,7 +234,7 @@
 
 	<update id="stretchPositionForMyself" parameterClass="Article">
 		/* stretchPositionForMyselfFromJstree */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_POSITION = C_POSITION + 1
 		WHERE C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
 		<isEqual property="copy" compareValue="0">
@@ -262,7 +253,7 @@
 
 	<update id="stretchLeftForMyselfFromJstree" parameterClass="Article">
 		/* stretchLeftForMyselfFromJstree */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
 		WHERE C_LEFT &gt;= #rightPositionFromNodeByRef#
 		<isEqual property="copy" compareValue="0">
@@ -278,7 +269,7 @@
 
 	<update id="stretchRightForMyselfFromJstree" parameterClass="Article">
 		/* stretchRightForMyselfFromJstree */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
 		WHERE C_RIGHT &gt;= #rightPositionFromNodeByRef#
 		<isEqual property="copy" compareValue="0">
@@ -294,11 +285,11 @@
 
 	<insert id="pasteMyselfFromJstree" parameterClass="Article">
 		/* pasteMyselfFromJstree */
-		INSERT INTO T_BOARD_TEST (
+		INSERT INTO T_BOARD_$boardID$ (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
 		)
-		SELECT S_BOARD_TEST.NEXTVAL AS C_ID
+		SELECT S_BOARD_$boardID$.NEXTVAL AS C_ID
 		, A.*
 		FROM (
 			SELECT
@@ -309,7 +300,7 @@
 			, C_LEVEL - #ldif# AS C_LEVEL
 			, C_TITLE
 			, C_TYPE
-			FROM T_BOARD_TEST
+			FROM T_BOARD_$boardID$
 			<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
 				open="(" close=")" conjunction=",">
 				#c_idsByChildNodeFromNodeById[]#
@@ -318,7 +309,7 @@
 		) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-			SELECT S_BOARD_TEST.CURRVAL AS SEQ
+			SELECT S_BOARD_$boardID$.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -326,7 +317,7 @@
 
 	<update id="enterMyselfFixPosition" parameterClass="Article">
 		/* enterMyselfFixPosition */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET	C_PARENTID = #ref#
 			, C_POSITION = #c_position#
 		WHERE C_ID = #c_id#
@@ -335,7 +326,7 @@
 
 	<update id="enterMyselfFixLeftRight" parameterClass="Article">
 		/* enterMyselfFixLeftRight */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET	C_LEFT = C_LEFT - (#idif#)
 			, C_RIGHT = C_RIGHT - (#idif#)
 			, C_LEVEL =
@@ -349,15 +340,15 @@
 
 	<insert id="addMyselfFromJstree" parameterClass="Article">
 		/* addMyselfFromJstree */
-		INSERT INTO T_BOARD_TEST (
+		INSERT INTO T_BOARD_$boardID$ (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL )
 		VALUES (
-		S_BOARD_TEST.NEXTVAL, #c_parentid#, #c_position#,
+		S_BOARD_$boardID$.NEXTVAL, #c_parentid#, #c_position#,
 		#c_left#, #c_right#, #c_level# )
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
-			SELECT S_BOARD_TEST.CURRVAL AS SEQ
+			SELECT S_BOARD_$boardID$.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -365,7 +356,7 @@
 
 	<update id="alterNodeType" parameterClass="Article">
 		/* alterNodeType */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_TYPE = #c_type#
 		WHERE C_ID = #c_id#
 	</update>
@@ -373,7 +364,7 @@
 
 	<update id="fixCopyIF" parameterClass="Article">
 		/* fixCopyIF */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_POSITION = #fixCopyPosition#
 		WHERE C_ID = #fixCopyId#
 	</update>
@@ -381,7 +372,7 @@
 
 	<update id="fixCopy" parameterClass="Article">
 		/* fixCopy */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_PARENTID = #fixCopyId#
 		WHERE C_ID = #c_id#
 	</update>
@@ -399,14 +390,11 @@
 				, A.C_ANNOUNCEMENT_FL as announcementFL 	
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
-				, A.C_IS_GUEST_FL as isGuestFL
-				, A.C_GUEST_NICKNAME as guestNickName
-				, A.C_GUEST_PW as guestPW
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
 				, B.C_TITLE as regNickName
-				, (SELECT COUNT(*) FROM T_BOARD_COMMENT_TEST C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt			
-				, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
+				, (SELECT COUNT(*) FROM T_BOARD_$boardID$_COMMENT C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt			
+				, (SELECT COUNT(*) FROM T_BOARD_$boardID$_LIKE D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
 				, A.totCnt as totCnt
 			/* 페이징 처리 */	
 			FROM (
@@ -414,7 +402,7 @@
 					SELECT 
 						 Y.*
 						,COUNT(*) OVER() AS totCnt
-					FROM T_BOARD_TEST Y
+					FROM T_BOARD_$boardID$ Y
 					WHERE 1=1
 			      	    AND Y.C_ANNOUNCEMENT_FL = '0'   
 			        ORDER BY C_ROOT_ARTICLE_ID DESC, C_LEFT ASC  
@@ -439,15 +427,12 @@
 				, A.C_ANNOUNCEMENT_FL as announcementFL 	
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
-				, A.C_IS_GUEST_FL as isGuestFL
-				, A.C_GUEST_NICKNAME as guestNickName
-				, A.C_GUEST_PW as guestPW
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
 				, B.C_TITLE as regNickName	
-				, (SELECT COUNT(*) FROM T_BOARD_COMMENT_TEST C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt		
-				, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
-			FROM T_BOARD_TEST A LEFT OUTER JOIN T_USER_INFO B ON A.C_REG_ID = B.C_ID 
+				, (SELECT COUNT(*) FROM T_BOARD_$boardID$_COMMENT C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt		
+				, (SELECT COUNT(*) FROM T_BOARD_$boardID$_LIKE D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
+			FROM T_BOARD_$boardID$ A LEFT OUTER JOIN T_USER_INFO B ON A.C_REG_ID = B.C_ID 
 			WHERE 1=1
 				AND A.C_ANNOUNCEMENT_FL = '1'
 				AND A.C_OPEN_ARTICLE_FL = '1'
@@ -458,7 +443,7 @@
 	
 	<select id="getOpenArticleCnt" parameterClass="Article" resultClass="int">
 		SELECT COUNT(1) 
-		FROM T_BOARD_TEST 
+		FROM T_BOARD_$boardID$ 
 		WHERE 1=1
 			AND C_OPEN_ARTICLE_FL = '1'
 		 	AND C_LEVEL = 2
@@ -479,15 +464,12 @@
 				, A.C_ANNOUNCEMENT_FL as announcementFL 	
 				, A.C_VIEW_CNT as viewCnt 			
 				, A.C_IS_DELETED_FL as isDeletedFL		
-				, A.C_IS_GUEST_FL as isGuestFL
-				, A.C_GUEST_NICKNAME as guestNickName
-				, A.C_GUEST_PW as guestPW
 				, A.C_REG_DT as regDt 				
 				, A.C_MOD_DT as modDt 	
 				, (SELECT B.C_TITLE FROM T_USER_INFO B WHERE A.C_REG_ID = B.C_ID) as regNickName
 				, (	CASE WHEN 
 						(SELECT COUNT(*) 
-						 FROM T_BOARD_LIKE_TEST D 
+						 FROM T_BOARD_$boardID$_LIKE D 
 						 WHERE 1=1
 						 	AND A.C_ID = D.C_ARTICLE_ID
 						    AND D.C_REG_ID = #userID#
@@ -495,17 +477,17 @@
 						THEN 0
           			ELSE 1 END
           		   ) as likeFL	
-          		, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt	
+          		, (SELECT COUNT(*) FROM T_BOARD_$boardID$_LIKE D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt	
           		, (	CASE WHEN 
 						(SELECT COUNT(*) 
-						 FROM T_BOARD_FILE_TEST E
+						 FROM T_BOARD_$boardID$_FILE E
 						 WHERE 1=1
 						 	AND A.C_ID = E.C_ARTICLE_ID
 						 ) = 0 
 						THEN 0
           			ELSE 1 END
           		   ) as hasAttachedFileFL	
-			FROM T_BOARD_TEST A 
+			FROM T_BOARD_$boardID$ A 
 			WHERE 1=1
 				AND A.C_ID = #c_id#
 		</dynamic>
@@ -531,16 +513,13 @@
 						, A.C_ANNOUNCEMENT_FL as announcementFL 	
 						, A.C_VIEW_CNT as viewCnt 			
 						, A.C_IS_DELETED_FL as isDeletedFL		
-						, A.C_IS_GUEST_FL as isGuestFL
-						, A.C_GUEST_NICKNAME as guestNickName
-						, A.C_GUEST_PW as guestPW
 						, A.C_REG_DT as regDt 				
 						, A.C_MOD_DT as modDt 	
 						, B.C_TITLE as regNickName			
-						, (SELECT COUNT(*) FROM T_BOARD_COMMENT_TEST C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt
-						, (SELECT COUNT(*) FROM T_BOARD_LIKE_TEST D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
+						, (SELECT COUNT(*) FROM T_BOARD_$boardID$_COMMENT C WHERE A.C_ID = C.C_ARTICLE_ID) as commentCnt
+						, (SELECT COUNT(*) FROM T_BOARD_$boardID$_LIKE D WHERE A.C_ID = D.C_ARTICLE_ID) as likeCnt
 						, COUNT(*) OVER() AS totCnt
-					FROM T_BOARD_TEST A LEFT OUTER JOIN T_USER_INFO B ON A.C_REG_ID = B.C_ID 
+					FROM T_BOARD_$boardID$ A LEFT OUTER JOIN T_USER_INFO B ON A.C_REG_ID = B.C_ID 
 					WHERE 1=1
 						AND A.C_OPEN_ARTICLE_FL = '1'
 						AND ( A.C_IS_DELETED_FL IS NULL OR  A.C_IS_DELETED_FL =  '0' )
@@ -573,21 +552,21 @@
 	
 	<update id="countUpViewCnt" parameterClass="Article">
 		/* countUpViewCnt */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_VIEW_CNT = C_VIEW_CNT + 1
 		WHERE C_ID = #c_id#
 	</update>
 	
 	<update id="updateRootArticleID" parameterClass="Article">
 		/* updateRootArticleID */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET C_ROOT_ARTICLE_ID = C_ID
 		WHERE C_ID = #c_id#
 	</update>
 	
 	<update id="modifyArticle" parameterClass="Article">
 		/* modifyArticle */
-		UPDATE T_BOARD_TEST
+		UPDATE T_BOARD_$boardID$
 		SET	  C_TITLE = #c_title#
 			, C_CONTENT = #content# 
 			, C_ALLOW_TRACKBACK_FL = #allowTrackbackFL#			

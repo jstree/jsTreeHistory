@@ -119,7 +119,7 @@ $(document).ready(function(){
 											<c:forEach var="announce" items="${announceList}" varStatus="status">
 												<tr>
 													<td class="dt-center font-bold">공지</td>
-													<td class="font-bold"><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${announce.c_id}">${announce.c_title} &nbsp; (${announce.commentCnt})</a></td>
+													<td class="font-bold"><a href="${pageContext.request.contextPath}/board/readArticle.do?boardID=${boardID}c_id=${announce.c_id}">${announce.c_title} &nbsp; (${announce.commentCnt})</a></td>
 													<td class="dt-center">${announce.regNickName}</td>
 													<fmt:parseDate value="${announce.regDt}" var="announceDateFmt" pattern="yyyyMMddHHmmss"/>
 													<td class="dt-center"><fmt:formatDate value="${announceDateFmt}" pattern="yyyy-MM-dd"/></td>
@@ -148,7 +148,7 @@ $(document).ready(function(){
 																			<td><i style="padding: 0  5px 0 ${ (article.c_level - 2) * 10 }px" class="fa fa-chevron-right"></i>비공개 글입니다</td>
 																		</c:when>	
 																		<c:otherwise>
-																			<td><a href="${pageContext.request.contextPath}/board/readArticle.do?c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
+																			<td><a href="${pageContext.request.contextPath}/board/readArticle.do?boardID=${boardID}&c_id=${article.c_id}">${article.c_title} &nbsp; (${article.commentCnt})</a></td>
 																		</c:otherwise>
 																	</c:choose>
 																</c:otherwise>
@@ -161,18 +161,11 @@ $(document).ready(function(){
 													</c:choose>
 													
 													<c:choose>
-														<c:when test="${article.isGuestFL == '1'}">
-															<td class="dt-center">${article.guestNickName}</td>
+														<c:when test="${empty article.regNickName}">
+															<td class="dt-center font-abnormal">탈퇴 사용자</td>
 														</c:when>
 														<c:otherwise>
-															<c:choose>
-																<c:when test="${empty article.regNickName}">
-																	<td class="dt-center font-abnormal">탈퇴 사용자</td>
-																</c:when>
-																<c:otherwise>
-																	<td class="dt-center"><a class="user-context" data-id="${article.regID}">${article.regNickName}</a></td>
-																</c:otherwise>
-															</c:choose>
+															<td class="dt-center"><a class="user-context" data-id="${article.regID}">${article.regNickName}</a></td>
 														</c:otherwise>
 													</c:choose>
 													<fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss"/>

@@ -42,10 +42,10 @@
 			/* user filed */
 			<include refid="getInlineChildCount" />
 			/* inline table from filed*/
-			FROM T_BOARD_LIKE_TEST B
+			FROM T_BOARD_$boardID$_LIKE B
 			<include refid="getInlineChildCountAfterFrom" />
 			/* table from filed*/
-			FROM T_BOARD_LIKE_TEST A
+			FROM T_BOARD_$boardID$_LIKE A
 			<include refid="getAfterFrom" />
 		</dynamic>
 	</select>
@@ -56,15 +56,14 @@
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		, C_PARENTID
-		,
-		C_POSITION
+		, C_POSITION
 		, C_LEFT
 		, C_RIGHT
 		, C_LEVEL
 		, C_TITLE
 		, C_TYPE
 		FROM
-		T_BOARD_LIKE_TEST
+		T_BOARD_$boardID$_LIKE
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT &lt;=
 		#c_right#
@@ -78,7 +77,7 @@
 		SELECT c_left
 		, c_right
 		FROM
-		T_BOARD_LIKE_TEST
+		T_BOARD_$boardID$_LIKE
 		WHERE C_TITLE LIKE '%'||#searchStr#||'%'
 	</select>
 
@@ -88,7 +87,7 @@
 		/* searchNodeByPosition */
 		SELECT DISTINCT C_ID
 		FROM
-		T_BOARD_LIKE_TEST
+		T_BOARD_$boardID$_LIKE
 		WHERE 1=1
 		<iterate prepend="AND" open="(" close=")" conjunction="OR">
 			( C_LEFT
@@ -100,7 +99,7 @@
 	<update id="alterNode" parameterClass="Like">
 		/* alterNode */
 		UPDATE
-		T_BOARD_LIKE_TEST
+		T_BOARD_$boardID$_LIKE
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
 		, C_ARTICLE_ID = #articleID#
@@ -124,7 +123,7 @@
 		, C_ARTICLE_ID as articleID
 		, C_REG_ID as regID
 		, C_REG_DT as regDT
-		FROM T_BOARD_LIKE_TEST
+		FROM T_BOARD_$boardID$_LIKE
 		WHERE
 		C_ID = #c_id#
 	</select>
@@ -142,7 +141,7 @@
 		, C_TITLE
 		, C_TYPE
 		FROM
-		T_BOARD_LIKE_TEST
+		T_BOARD_$boardID$_LIKE
 		WHERE C_ID = #ref#
 	</select>
 
@@ -150,7 +149,7 @@
 	<delete id="removeNode" parameterClass="Like">
 		/* removeNode */
 		DELETE
-		FROM T_BOARD_LIKE_TEST
+		FROM T_BOARD_$boardID$_LIKE
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT
 		&lt;= #c_right#
@@ -160,7 +159,7 @@
 	<update id="removedAfterLeftFix" parameterClass="Like">
 		/*
 		removedAfterLeftFix */
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET C_LEFT =
 		C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
@@ -170,7 +169,7 @@
 	<update id="removedAfterRightFix" parameterClass="Like">
 		/*
 		removedAfterRightFix */
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET C_RIGHT =
 		C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
@@ -180,7 +179,7 @@
 	<update id="removedAfterPositionFix" parameterClass="Like">
 		/*
 		removedAfterPositionFix */
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET
 		C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
@@ -193,14 +192,14 @@
 		/* searchNodeByString
 		*/
 		SELECT C_LEFT
-		FROM T_BOARD_LIKE_TEST
+		FROM T_BOARD_$boardID$_LIKE
 		WHERE C_PARENTID = 0
 	</select>
 
 
 	<update id="cutMyselfPositionFix" parameterClass="Like">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET C_POSITION
 		= C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
@@ -211,7 +210,7 @@
 
 	<update id="cutMyselfLeftFix" parameterClass="Like">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
@@ -219,7 +218,7 @@
 
 	<update id="cutMyselfRightFix" parameterClass="Like">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
@@ -232,7 +231,7 @@
 	<update id="stretchPositionForMyself" parameterClass="Like">
 		/* stretchPositionForMyselfFromJstree */
 		UPDATE
-		T_BOARD_LIKE_TEST
+		T_BOARD_$boardID$_LIKE
 		SET C_POSITION = C_POSITION + 1
 		WHERE
 		C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
@@ -253,7 +252,7 @@
 
 	<update id="stretchLeftForMyselfFromJstree" parameterClass="Like">
 		/* stretchLeftForMyselfFromJstree */
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
 		WHERE C_LEFT &gt;=
 		#rightPositionFromNodeByRef#
@@ -270,7 +269,7 @@
 
 	<update id="stretchRightForMyselfFromJstree" parameterClass="Like">
 		/* stretchRightForMyselfFromJstree */
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
 		WHERE C_RIGHT &gt;=
 		#rightPositionFromNodeByRef#
@@ -287,11 +286,11 @@
 
 	<insert id="pasteMyselfFromJstree" parameterClass="Like">
 		/* pasteMyselfFromJstree */
-		INSERT INTO T_BOARD_LIKE_TEST (
+		INSERT INTO T_BOARD_$boardID$_LIKE (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
 		)
-		SELECT S_BOARD_LIKE_TEST.NEXTVAL AS C_ID
+		SELECT S_BOARD_LIKE_$boardID$.NEXTVAL AS C_ID
 		, A.*
 		FROM (
 		SELECT
@@ -304,7 +303,7 @@
 		, C_LEVEL - #ldif# AS C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		FROM T_BOARD_LIKE_TEST
+		FROM T_BOARD_$boardID$_LIKE
 		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
 			open="(" close=")" conjunction=",">
 			#c_idsByChildNodeFromNodeById[]#
@@ -313,7 +312,7 @@
 		) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-			SELECT S_BOARD_LIKE_TEST.CURRVAL AS SEQ
+			SELECT S_BOARD_LIKE_$boardID$.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -322,7 +321,7 @@
 	<update id="enterMyselfFixPosition" parameterClass="Like">
 		/*
 		enterMyselfFixPosition */
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET
 		C_PARENTID = #ref#
 		, C_POSITION = #c_position#
@@ -332,7 +331,7 @@
 
 	<update id="enterMyselfFixLeftRight" parameterClass="Like">
 		/* enterMyselfFixLeftRight */
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET
 		C_LEFT = C_LEFT - (#idif#)
 		, C_RIGHT = C_RIGHT - (#idif#)
@@ -347,16 +346,16 @@
 
 	<insert id="addMyselfFromJstree" parameterClass="Like">
 		/* addMyselfFromJstree */
-		INSERT INTO T_BOARD_LIKE_TEST (
+		INSERT INTO T_BOARD_$boardID$_LIKE (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL )
 		VALUES (
-		S_BOARD_LIKE_TEST.NEXTVAL, #c_parentid#, #c_position#,
+		S_BOARD_LIKE_$boardID$.NEXTVAL, #c_parentid#, #c_position#,
 		#c_left#, #c_right#, #c_level# )
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
-			S_BOARD_LIKE_TEST.CURRVAL AS SEQ
+			S_BOARD_LIKE_$boardID$.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -364,7 +363,7 @@
 
 	<update id="alterNodeType" parameterClass="Like">
 		/* alterNodeType */
-		UPDATE T_BOARD_LIKE_TEST
+		UPDATE T_BOARD_$boardID$_LIKE
 		SET C_TYPE = #c_type#
 		WHERE C_ID =
 		#c_id#
@@ -374,7 +373,7 @@
 	<update id="fixCopyIF" parameterClass="Like">
 		/* fixCopyIF */
 		UPDATE
-		T_BOARD_LIKE_TEST
+		T_BOARD_$boardID$_LIKE
 		SET C_POSITION = #fixCopyPosition#
 		WHERE C_ID
 		= #fixCopyId#
@@ -384,7 +383,7 @@
 	<update id="fixCopy" parameterClass="Like">
 		/* fixCopy */
 		UPDATE
-		T_BOARD_LIKE_TEST
+		T_BOARD_$boardID$_LIKE
 		SET C_PARENTID = #fixCopyId#
 		WHERE C_ID =
 		#c_id#
@@ -393,7 +392,7 @@
 	<select id="getLikeByArticleIDAndRegID" parameterClass="Like" resultClass="Like">
 		/* getLikeByArticleIDAndRegID */
 		SELECT C_ID
-		FROM T_BOARD_LIKE_TEST
+		FROM T_BOARD_$boardID$_LIKE
 		WHERE 1=1
 			AND C_ARTICLE_ID = #articleID#
 			AND C_REG_ID = #regID#

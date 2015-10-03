@@ -24,6 +24,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -180,13 +181,6 @@ public class BoardController extends GenericAbstractController {
 			modelMap.addAttribute("endPageNum", endPageNum);
 			modelMap.addAttribute("currentPageNum", searchArticle.getPageNum());
 			
-			logger.debug("--- JKH ---");
-			logger.debug("startPageNum "+ startPageNum);
-			logger.debug("endPageNum "+ endPageNum);
-			logger.debug("currentPageNum "+ searchArticle.getPageNum());
-			logger.debug("totCnt "+ totPages);
-			
-			
 			// 우측 화살표
 			if(totPages > ((searchArticle.getPageNum() - 1) / searchArticle.getPageSize() + 1) * 10) {
 				int rightPage = ((searchArticle.getPageNum() - 1) / searchArticle.getPageSize() + 1) * 10 + 1;
@@ -194,8 +188,6 @@ public class BoardController extends GenericAbstractController {
 			}
 			
 		}
-		
-		
 		
 		modelMap.addAttribute("reqSearchArticle", searchArticle);
 		modelMap.addAttribute("articleList", searchedArticleList);
@@ -223,21 +215,19 @@ public class BoardController extends GenericAbstractController {
 		}
 		
 		Article targetArticle = boardService.readArticle(article);
-		Comment comment = new Comment();
+		Comment comment = new Comment(article.getBoardID());
 		comment.setArticleID(article.getC_id());
 		List<Comment> commentList = boardService.getCommentList(comment);
-		
-		
-		
 		
 		modelMap.addAttribute("isGuestUser", isGuestUser);
 		modelMap.addAttribute("article", targetArticle);
 		modelMap.addAttribute("commentList", commentList);
+		modelMap.addAttribute("boardID", article.getBoardID());
 		return "/jsp/board/readArticle";
 	}
 
 	@RequestMapping(value = "/newArticle.do")
-	public String newArticle(ModelMap modelMap) throws Exception {
+	public String newArticle(ModelMap modelMap, @RequestParam("boardID") String boardID) throws Exception {
 		String jspView = "";
 		
 		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -256,6 +246,7 @@ public class BoardController extends GenericAbstractController {
 			logger.debug("일반사용자");
 		}
 		
+		modelMap.addAttribute("boardID", boardID);
 		return jspView;
 	}
 	
@@ -281,6 +272,7 @@ public class BoardController extends GenericAbstractController {
 		}
 		
 		modelMap.addAttribute("parentArticle", parentArticle);
+		modelMap.addAttribute("boardID", article.getBoardID());
 		return jspView;
 	}
 	
@@ -418,7 +410,7 @@ public class BoardController extends GenericAbstractController {
 					} else {
 						logger.debug("------ DEBUG 1 -------");
 						logger.debug("FILE ADDED : "+ file.getOriginalFilename() );
-						AttachedFile attachedFile = new AttachedFile();
+						AttachedFile attachedFile = new AttachedFile(article.getBoardID());
 						attachedFile.setFile(file);
 						attachedFiles.add(attachedFile);
 					}

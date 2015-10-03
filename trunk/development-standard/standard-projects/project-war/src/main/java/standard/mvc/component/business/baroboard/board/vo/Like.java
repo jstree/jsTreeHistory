@@ -1,6 +1,5 @@
 package standard.mvc.component.business.baroboard.board.vo;
 
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
  * Modification Information
@@ -22,7 +21,13 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 
-public class Like extends ComprehensiveTree {
+public class Like extends BoardComprehensiveTree {
+	
+	public Like() {}
+	
+	public Like(String boardID) {
+		super(boardID);
+	}
 	
 	private int articleID;
 	private int regID;

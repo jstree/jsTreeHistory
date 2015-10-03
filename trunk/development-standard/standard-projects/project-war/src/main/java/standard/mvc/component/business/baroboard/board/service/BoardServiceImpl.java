@@ -1,7 +1,6 @@
 package standard.mvc.component.business.baroboard.board.service;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -96,7 +95,7 @@ public class BoardServiceImpl implements BoardService {
 	public Article getArticleById(Article paramArticle) throws Exception {
 		Article article = boardDao.getArticleById(paramArticle);
 		if(article.getHasAttachedFileFL() != null && article.getHasAttachedFileFL().equals("1")) {
-			article.setAttachedFiles(this.getAttachedFilesInfoByArticleID(article));
+			article.setAttachedFiles(this.getAttachedFilesInfoByArticleID(paramArticle));
 		}
 		return article;
 	}
@@ -109,19 +108,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Article addArticle(Article article) throws Exception {
 		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		if(article.getIsGuestFL().equals("0")) {	// 일반 사용자
-			SecureUserLogin userLogin = (SecureUserLogin) user;
-			article.setRegID(userLogin.getId());
-			
-		} else {									// 게스트 사용자
-			if(user instanceof String) {
-				String userStr = (String)user;
-				if(! userStr.equals("anonymousUser")) {
-					throw new Exception("허가되지 않은 사용자입니다.");
-				} 
-			}
-		}
+		SecureUserLogin userLogin = (SecureUserLogin) user;
+		article.setRegID(userLogin.getId());
 		/* 1. 파일업로드, 2.게시글 업로드, 3.파일update(게시글ID) 
 		 * 파일 업로드 실패 및 DB insert 실패시, 파일 삭제 및 DB 삭제 
 		 * */
@@ -229,19 +217,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Article addReplyArticle(Article article) throws Exception {
 		Object user = (Object)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		if(article.getIsGuestFL().equals("0")) {	// 일반 사용자
-			SecureUserLogin userLogin = (SecureUserLogin) user;
-			article.setRegID(userLogin.getId());
+		SecureUserLogin userLogin = (SecureUserLogin) user;
+		article.setRegID(userLogin.getId());
 			
-		} else {									// 게스트 사용자
-			if(user instanceof String) {
-				String userStr = (String)user;
-				if(! userStr.equals("anonymousUser")) {
-					throw new Exception("허가되지 않은 사용자입니다.");
-				} 
-			}
-		}
 		this.setupArticleParameters(article);
 		
 		Article insertedArticle = coreService.addNode(article);
@@ -280,7 +258,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	private List<AttachedFile> getAttachedFilesInfoByArticleID(Article article) throws Exception {
-		AttachedFile input = new AttachedFile();
+		AttachedFile input = new AttachedFile(article.getBoardID());
 		input.setArticleID(article.getC_id());
 		return boardDao.getAttachedFilesInfoByArticleID(input);
 	}
@@ -366,7 +344,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	/* TOTAL ARTICLE vo 파라미터 설정 */
 	private TotalArticle setTotalArticleByArticle(Article article) {
-		TotalArticle totalArticle = new TotalArticle();
+		TotalArticle totalArticle = new TotalArticle(article.getBoardID());
 		
 		totalArticle.setRef(2);
 		totalArticle.setC_title(article.getC_title());

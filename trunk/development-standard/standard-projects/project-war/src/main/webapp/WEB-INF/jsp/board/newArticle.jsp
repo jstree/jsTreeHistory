@@ -80,8 +80,7 @@ div#titleDiv > div input {
 											</c:choose>
 										</span>
 									</div>
-									<input id="boardID" name="boardID" type="hidden" value="test" />
-									<input id="isGuestFL" name="isGuestFL" type="hidden" value="${isGuestFL}" />
+									<input id="boardID" name="boardID" type="hidden" value="${boardID}" />
 								</div>
 								<div>
 									<textarea name="content" id="editor" rows="10" cols="80"></textarea>

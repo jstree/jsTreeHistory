@@ -43,10 +43,10 @@
 			/* user filed */
 			<include refid="getInlineChildCount" />
 			/* inline table from filed*/
-			FROM T_BOARD_COMMENT_TEST B
+			FROM T_BOARD_$boardID$_COMMENT B
 			<include refid="getInlineChildCountAfterFrom" />
 			/* table from filed*/
-			FROM T_BOARD_COMMENT_TEST A
+			FROM T_BOARD_$boardID$_COMMENT A
 			<include refid="getAfterFrom" />
 		</dynamic>
 	</select>
@@ -65,7 +65,7 @@
 		, C_TITLE
 		, C_TYPE
 		FROM
-		T_BOARD_COMMENT_TEST
+		T_BOARD_$boardID$_COMMENT
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT &lt;=
 		#c_right#
@@ -79,7 +79,7 @@
 		SELECT c_left
 		, c_right
 		FROM
-		T_BOARD_COMMENT_TEST
+		T_BOARD_$boardID$_COMMENT
 		WHERE C_TITLE LIKE '%'||#searchStr#||'%'
 	</select>
 
@@ -89,7 +89,7 @@
 		/* searchNodeByPosition */
 		SELECT DISTINCT C_ID
 		FROM
-		T_BOARD_COMMENT_TEST
+		T_BOARD_$boardID$_COMMENT
 		WHERE 1=1
 		<iterate prepend="AND" open="(" close=")" conjunction="OR">
 			( C_LEFT
@@ -101,7 +101,7 @@
 	<update id="alterNode" parameterClass="Comment">
 		/* alterNode */
 		UPDATE
-		T_BOARD_COMMENT_TEST
+		T_BOARD_$boardID$_COMMENT
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
 		, C_ARTICLE_ID = #articleID#
@@ -133,7 +133,7 @@
 		, C_IS_DELETED_FL as isDeletedFL
 		, C_REG_DT as regDT
 		, C_MOD_DT as modDT
-		FROM T_BOARD_COMMENT_TEST
+		FROM T_BOARD_$boardID$_COMMENT
 		WHERE
 		C_ID = #c_id#
 	</select>
@@ -151,7 +151,7 @@
 		, C_TITLE
 		, C_TYPE
 		FROM
-		T_BOARD_COMMENT_TEST
+		T_BOARD_$boardID$_COMMENT
 		WHERE C_ID = #ref#
 	</select>
 
@@ -159,7 +159,7 @@
 	<delete id="removeNode" parameterClass="Comment">
 		/* removeNode */
 		DELETE
-		FROM T_BOARD_COMMENT_TEST
+		FROM T_BOARD_$boardID$_COMMENT
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT
 		&lt;= #c_right#
@@ -169,7 +169,7 @@
 	<update id="removedAfterLeftFix" parameterClass="Comment">
 		/*
 		removedAfterLeftFix */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET C_LEFT =
 		C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
@@ -179,7 +179,7 @@
 	<update id="removedAfterRightFix" parameterClass="Comment">
 		/*
 		removedAfterRightFix */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET C_RIGHT =
 		C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
@@ -189,7 +189,7 @@
 	<update id="removedAfterPositionFix" parameterClass="Comment">
 		/*
 		removedAfterPositionFix */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET
 		C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
@@ -202,14 +202,14 @@
 		/* searchNodeByString
 		*/
 		SELECT C_LEFT
-		FROM T_BOARD_COMMENT_TEST
+		FROM T_BOARD_$boardID$_COMMENT
 		WHERE C_PARENTID = 0
 	</select>
 
 
 	<update id="cutMyselfPositionFix" parameterClass="Comment">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET C_POSITION
 		= C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
@@ -220,7 +220,7 @@
 
 	<update id="cutMyselfLeftFix" parameterClass="Comment">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
@@ -228,7 +228,7 @@
 
 	<update id="cutMyselfRightFix" parameterClass="Comment">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
@@ -241,7 +241,7 @@
 	<update id="stretchPositionForMyself" parameterClass="Comment">
 		/* stretchPositionForMyselfFromJstree */
 		UPDATE
-		T_BOARD_COMMENT_TEST
+		T_BOARD_$boardID$_COMMENT
 		SET C_POSITION = C_POSITION + 1
 		WHERE
 		C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
@@ -262,7 +262,7 @@
 
 	<update id="stretchLeftForMyselfFromJstree" parameterClass="Comment">
 		/* stretchLeftForMyselfFromJstree */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
 		WHERE C_LEFT &gt;=
 		#rightPositionFromNodeByRef#
@@ -279,7 +279,7 @@
 
 	<update id="stretchRightForMyselfFromJstree" parameterClass="Comment">
 		/* stretchRightForMyselfFromJstree */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
 		WHERE C_RIGHT &gt;=
 		#rightPositionFromNodeByRef#
@@ -296,11 +296,11 @@
 
 	<insert id="pasteMyselfFromJstree" parameterClass="Comment">
 		/* pasteMyselfFromJstree */
-		INSERT INTO T_BOARD_COMMENT_TEST (
+		INSERT INTO T_BOARD_$boardID$_COMMENT (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
 		)
-		SELECT S_BOARD_COMMENT_TEST.NEXTVAL AS C_ID
+		SELECT S_BOARD_COMMENT_$boardID$.NEXTVAL AS C_ID
 		, A.*
 		FROM (
 		SELECT
@@ -313,7 +313,7 @@
 		, C_LEVEL - #ldif# AS C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		FROM T_BOARD_COMMENT_TEST
+		FROM T_BOARD_$boardID$_COMMENT
 		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
 			open="(" close=")" conjunction=",">
 			#c_idsByChildNodeFromNodeById[]#
@@ -322,7 +322,7 @@
 		) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-			SELECT S_BOARD_COMMENT_TEST.CURRVAL AS SEQ
+			SELECT S_BOARD_COMMENT_$boardID$.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -331,7 +331,7 @@
 	<update id="enterMyselfFixPosition" parameterClass="Comment">
 		/*
 		enterMyselfFixPosition */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET
 		C_PARENTID = #ref#
 		, C_POSITION = #c_position#
@@ -341,7 +341,7 @@
 
 	<update id="enterMyselfFixLeftRight" parameterClass="Comment">
 		/* enterMyselfFixLeftRight */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET
 		C_LEFT = C_LEFT - (#idif#)
 		, C_RIGHT = C_RIGHT - (#idif#)
@@ -356,16 +356,16 @@
 
 	<insert id="addMyselfFromJstree" parameterClass="Comment">
 		/* addMyselfFromJstree */
-		INSERT INTO T_BOARD_COMMENT_TEST (
+		INSERT INTO T_BOARD_$boardID$_COMMENT (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL )
 		VALUES (
-		S_BOARD_COMMENT_TEST.NEXTVAL, #c_parentid#, #c_position#,
+		S_BOARD_COMMENT_$boardID$.NEXTVAL, #c_parentid#, #c_position#,
 		#c_left#, #c_right#, #c_level# )
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
-			S_BOARD_COMMENT_TEST.CURRVAL AS SEQ
+			S_BOARD_COMMENT_$boardID$.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -373,7 +373,7 @@
 
 	<update id="alterNodeType" parameterClass="Comment">
 		/* alterNodeType */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET C_TYPE = #c_type#
 		WHERE C_ID =
 		#c_id#
@@ -383,7 +383,7 @@
 	<update id="fixCopyIF" parameterClass="Comment">
 		/* fixCopyIF */
 		UPDATE
-		T_BOARD_COMMENT_TEST
+		T_BOARD_$boardID$_COMMENT
 		SET C_POSITION = #fixCopyPosition#
 		WHERE C_ID
 		= #fixCopyId#
@@ -393,7 +393,7 @@
 	<update id="fixCopy" parameterClass="Comment">
 		/* fixCopy */
 		UPDATE
-		T_BOARD_COMMENT_TEST
+		T_BOARD_$boardID$_COMMENT
 		SET C_PARENTID = #fixCopyId#
 		WHERE C_ID =
 		#c_id#
@@ -402,7 +402,7 @@
 	<update id="updateCommentRootID" parameterClass="Comment">
 		/* updateCommentRootID */
 		UPDATE	
-		T_BOARD_COMMENT_TEST
+		T_BOARD_$boardID$_COMMENT
 		SET C_ROOT_COMMENT_ID = C_ID
 		WHERE C_ID = #c_id#
 	</update>
@@ -419,7 +419,7 @@
 			, A.C_REG_DT as regDT
 			, A.C_MOD_DT as modDT
 			, B.C_TITLE as regNickName
-		FROM T_BOARD_COMMENT_TEST A, T_USER_INFO B
+		FROM T_BOARD_$boardID$_COMMENT A, T_USER_INFO B
 		WHERE 1=1
 			AND A.C_ARTICLE_ID = #articleID#
 			AND A.C_REG_ID = B.C_ID
@@ -430,7 +430,7 @@
 	
 	<update id="deleteComment" parameterClass="Comment" >
 		/* deleteComment */
-		UPDATE T_BOARD_COMMENT_TEST
+		UPDATE T_BOARD_$boardID$_COMMENT
 		SET C_IS_DELETED_FL = '1'
 		WHERE C_ID = #c_id#
 	</update>

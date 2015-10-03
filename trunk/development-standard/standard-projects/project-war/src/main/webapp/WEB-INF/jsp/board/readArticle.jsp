@@ -62,6 +62,12 @@ function modifyThisArticle(c_id, isGuestUser) {
 	 form.setAttribute('method', 'post');
 	 form.setAttribute('action', '${pageContext.request.contextPath}/board/modifyArticle.do');
 	 
+	 var boardIDInput = document.createElement('input');
+	 boardIDInput.setAttribute('type', 'hidden');
+	 boardIDInput.setAttribute('name', 'boardID');
+	 boardIDInput.setAttribute('value', '${boardID}');
+	 form.appendChild(boardIDInput);
+	 
 	 var idInput = document.createElement('input');
 	 idInput.setAttribute('type', 'hidden');
 	 idInput.setAttribute('name', 'c_id');
@@ -89,6 +95,7 @@ function modifyThisArticle(c_id, isGuestUser) {
 
 function deleteThisArticle(c_id, isGuestUser) {
 	var obj = {};
+	obj.boardID = '${boardID}';
 	obj.c_id = c_id;
 	
 	 if($('#isGuestFL').val() == '1') { // 게스트사용자
@@ -123,6 +130,7 @@ function deleteThisArticle(c_id, isGuestUser) {
 
 function likeArticle(articleID) {
 	var obj = {};
+	obj.boardID = '${boardID}';
 	obj.articleID = articleID;
 	$.ajax({
    		  url: '${pageContext.request.contextPath}/board/likeArticle.do',
@@ -140,6 +148,7 @@ function likeArticle(articleID) {
 
 function cancelLikeArticle(articleID) {
 	var obj = {};
+	obj.boardID = '${boardID}';
 	obj.articleID = articleID;
 	$.ajax({
    		  url: '${pageContext.request.contextPath}/board/cancelLikeArticle.do',
@@ -158,6 +167,7 @@ function cancelLikeArticle(articleID) {
 function deleteThisReply(btn, c_id){
 	if(confirm("코멘트를 삭제하시겠습니까?") == true){
 		var obj = {};
+		obj.boardID = '${boardID}';
 		obj.c_id = $(btn).parent('div').closest('.write-comment').attr('data-id');
 
 		$.ajax({
@@ -199,6 +209,7 @@ function addComment(btn, ref) {
 	var c_title = $(commentDiv).find('.write-comment-input').val();
 	var articleID = $('#articleID').val();
 	var obj = {
+			boardID: '${boardID}',
 			articleID: articleID,
 			viewOnlyRegIDFL: viewOnlyRegIDFL,
 			c_title: c_title
@@ -231,7 +242,7 @@ function addComment(btn, ref) {
    		  data: obj,
    		}).done(function(data){
    			alert('저장되었습니다.');
-			window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?c_id='+ articleID;
+			window.location.href = '${pageContext.request.contextPath}/board/readArticle.do?boardID=${boardID}&c_id='+ articleID;
    		}).fail(function(data){
    			alert('저장에 실패하였습니다.');
    			console.log(data); 
@@ -239,7 +250,7 @@ function addComment(btn, ref) {
 }
 
 function fileDown(c_id) {
-	var fileUrl = '${pageContext.request.contextPath}/board/downloadAttachedFile.do?boardID=${article.boardID}&c_id='+c_id;
+	var fileUrl = '${pageContext.request.contextPath}/board/downloadAttachedFile.do?boardID=${boardID}&c_id='+c_id;
 	var downATag = $('#hiddenFileDown');
 	$(downATag).attr('href', fileUrl);
 	downATag[0].click();
@@ -309,15 +320,17 @@ $(document).ready(function(){
 							<div class="tablet-mobile alpha bm-remove last">
 								<!-- 제목 날짜 첨부 -->
 								<div id="articleHeader" class="">
-									<input id="articleID" type="hidden" value="${article.c_id}" /> <input id="isGuestFL" type="hidden" value="${article.isGuestFL}" /> <span id="articleTitle"><h3>${article.c_title}</h3></span> <span id="articleInfo"> <span id="firstInfoRow"> <c:choose>
-												<c:when test="${article.isGuestFL == '1'}">
-													<span>${article.guestNickName}</span>
-												</c:when>
-												<c:otherwise>
-													<span><a class="user-context">${article.regNickName}</a></span>
-												</c:otherwise>
-											</c:choose> <fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss" /> <span id="articleDt"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
-									</span> <span id="secondInfoRow"> <span>조회수: ${article.viewCnt}</span> <span>추천수: ${article.likeCnt}</span> <c:choose>
+									<input id="articleID" type="hidden" value="${article.c_id}" /> 
+									<span id="articleTitle"><h3>${article.c_title}</h3></span> 
+									<span id="articleInfo"> 
+										<span id="firstInfoRow">
+											<span><a class="user-context">${article.regNickName}</a></span>
+											<fmt:parseDate value="${article.regDt}" var="articleDateFmt" pattern="yyyyMMddHHmmss" /> <span id="articleDt"><fmt:formatDate value="${articleDateFmt}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
+										</span> 
+										<span id="secondInfoRow"> 
+											<span>조회수: ${article.viewCnt}</span> 
+											<span>추천수: ${article.likeCnt}</span>
+											<c:choose>
 												<c:when test="${empty article.attachedFiles}">
 													<span id="articleAttachment"><a id="">첨부 (0)</a></span>
 												</c:when>
@@ -326,7 +339,7 @@ $(document).ready(function(){
 													<a id="hiddenFileDown" hidden="hidden" href=""></a>
 												</c:otherwise>
 											</c:choose>
-									</span>
+										</span>
 									</span>
 								</div>
 								<!-- 내용 -->
@@ -414,29 +427,18 @@ $(document).ready(function(){
 													<a onclick="cancelLikeArticle(${article.c_id})">좋아요 취소</a>
 												</c:otherwise>
 											</c:choose>
-										</c:if> <%-- 수정/삭제 --%> <c:choose>
-											<%-- TODO : 게스트사용자 기능 임시 삭제 --%>
-											<c:when test="${article.isGuestFL eq '1'}">
-												<%--
-												<input type="password" name="guestPassword" id="guestPassword" name="guestPassword" placeholder="게스트 글 비밀번호" />
-												<a onclick="modifyThisArticle(${article.c_id}, 1)">수정</a>
-												<a onclick="deleteT4hisArticle(${article.c_id}, 1)">삭제</a> 
-												 --%>
-											</c:when>
-											<%-- 일반글 --%>
-											<c:otherwise>
-												<%-- TODO : 일반 사용자만 글 수정/삭제 가능 --%>
-												<c:if test="${isGuestUser eq '0'}">
-													<c:if test="${loginedUserID eq article.regID}">
-														<a onclick="modifyThisArticle(${article.c_id}, 0)">수정</a>
-														<a onclick="deleteThisArticle(${article.c_id}, 0)">삭제</a>
-													</c:if>
-													<a onclick="addScrap(${article.c_id}, 0)">스크랩 등록</a>
-												</c:if>
-											</c:otherwise>
-										</c:choose> <%-- TODO : 답글가능여부 체크, 일반 사용자만 답글 달기 가능 --%> <c:if test="${isGuestUser eq '0'}">
-											<a href="${pageContext.request.contextPath}/board/newReplyArticle.do?c_id=${article.c_id}">답글쓰기</a>
-										</c:if> <a href="${pageContext.request.contextPath}/board/index.do">목록가기</a>
+										</c:if> 
+										<%-- 수정/삭제 --%> 
+										<c:if test="${loginedUserID eq article.regID}">
+											<a onclick="modifyThisArticle(${article.c_id}, 0)">수정</a>
+											<a onclick="deleteThisArticle(${article.c_id}, 0)">삭제</a>
+										</c:if>
+										<a onclick="addScrap(${article.c_id}, 0)">스크랩 등록</a>
+										<%-- TODO : 답글가능여부 체크, 일반 사용자만 답글 달기 가능 --%> 
+										<c:if test="${isGuestUser eq '0'}">
+											<a href="${pageContext.request.contextPath}/board/newReplyArticle.do?boardID=${boardID}&c_id=${article.c_id}">답글쓰기</a>
+										</c:if> 
+										<a href="${pageContext.request.contextPath}/board/index.do?boardID=${boardID}">목록가기</a>
 									</span>
 								</div>
 							</div>

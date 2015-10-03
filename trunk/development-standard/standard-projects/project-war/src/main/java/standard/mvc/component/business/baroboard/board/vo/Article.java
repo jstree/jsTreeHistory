@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
-
 /**
  * Modification Information
  * 
@@ -28,8 +26,14 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  */
 
 @JsonIgnoreProperties({"attachedFiles"})
-public class Article extends ComprehensiveTree {
+public class Article extends BoardComprehensiveTree {
 
+	public Article() {}
+	
+	public Article(String boardID) {
+		super(boardID);
+	}
+	
 	/* 루트글 번호 */
 	private int rootArticleID;
 	
@@ -63,15 +67,6 @@ public class Article extends ComprehensiveTree {
 	/* 삭제여부 */
 	private String isDeletedFL = "0";
 
-	/* 게스트글 여부 */
-	private String isGuestFL;
-	
-	/* 게스트 글 닉네임 */
-	private String guestNickName;
-	
-	/* 게스트 글 비밀번호 */
-	private String guestPW;
-	
 	/* 생성일시 */
 	private String regDt;
 
@@ -79,10 +74,6 @@ public class Article extends ComprehensiveTree {
 	private String modDt;
 	
 	/* 테이블에는 없지만 DTO로서 필요한 필드 */
-
-	/* 게시판 ID */
-	//	TODO : private String boardID; 
-	private String boardID = "test"; 
 
 	/* 페이지 */
 	private int pageNum = 1;
@@ -211,30 +202,6 @@ public class Article extends ComprehensiveTree {
 		this.totCnt = totCnt;
 	}
 
-	public String getIsGuestFL() {
-		return isGuestFL;
-	}
-
-	public void setIsGuestFL(String isGuestFL) {
-		this.isGuestFL = isGuestFL;
-	}
-
-	public String getGuestNickName() {
-		return guestNickName;
-	}
-
-	public void setGuestNickName(String guestNickName) {
-		this.guestNickName = guestNickName;
-	}
-
-	public String getGuestPW() {
-		return guestPW;
-	}
-
-	public void setGuestPW(String guestPW) {
-		this.guestPW = guestPW;
-	}
-
 	public int getLikeCnt() {
 		return likeCnt;
 	}
@@ -354,14 +321,6 @@ public class Article extends ComprehensiveTree {
 
 	public void setModDt(String modDt) {
 		this.modDt = modDt;
-	}
-
-	public String getBoardID() {
-		return boardID;
-	}
-
-	public void setBoardID(String boardID) {
-		this.boardID = boardID;
 	}
 
 	public int getPageNum() {

@@ -1,6 +1,5 @@
 package standard.mvc.component.business.baroboard.board.vo;
 
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 /**
  * Modification Information
@@ -23,8 +22,14 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 
-public class TotalArticle extends ComprehensiveTree {
+public class TotalArticle extends BoardComprehensiveTree {
 
+	public TotalArticle() {}
+	
+	public TotalArticle(String boardID) {
+		super(boardID);
+	}
+	
 	/* DB Columns */
 	
 	private String boardID;

@@ -2,8 +2,6 @@ package standard.mvc.component.business.baroboard.board.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
-
 /**
  * Modification Information
  * 
@@ -24,8 +22,14 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 
-public class AttachedFile extends ComprehensiveTree {
-	
+public class AttachedFile extends BoardComprehensiveTree {
+
+	public AttachedFile() {}
+
+	public AttachedFile(String boardID) {
+		super(boardID);
+	}
+
 	/** DB Table Fields */
 	private int articleID;
 	private String savedFileNM;
@@ -34,19 +38,11 @@ public class AttachedFile extends ComprehensiveTree {
 	private String regDt;
 
 	/* Non DB-Column */
-	private String boardID;
 	private MultipartFile file; 
 	
 	@Override
 	public String getSqlMapSelector() {
 		return "attachedFile";
-	}
-	
-	public String getBoardID() {
-		return boardID;
-	}
-	public void setBoardID(String boardID) {
-		this.boardID = boardID;
 	}
 	
 	public int getArticleID() {
