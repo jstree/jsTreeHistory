@@ -31,8 +31,6 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 @Repository("CoreDao")
 public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
     
-//    private ComprehensiveTree core = new ComprehensiveTree();
-    
 	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree ) throws Exception{
 		
