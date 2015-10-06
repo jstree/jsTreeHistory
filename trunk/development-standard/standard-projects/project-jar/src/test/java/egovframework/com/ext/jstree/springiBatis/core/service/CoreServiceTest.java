@@ -128,7 +128,7 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
     }
     
     @ExpectedDatabase(value = "CoreServiceTest_addNewLeafNodeToRootNode.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
-    @Test
+    //@Test
     public void addNewLeafNodeToFirstChildNode() throws Exception {
         
         //ComprehensiveTree firstChildNode = coreService.getChildNode( getRootNode() ).get(0);

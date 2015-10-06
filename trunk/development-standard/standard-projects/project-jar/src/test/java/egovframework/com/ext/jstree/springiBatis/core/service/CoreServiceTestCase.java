@@ -186,7 +186,7 @@ public class CoreServiceTestCase
 		assertThat(l_StoredStrings.size()).isEqualTo(4);
 	}
 
-	@Test
+	//@Test
 	@ExpectedDatabase(value = "CoreServiceTestCase_AddNode_ExpectedDataset.xml", assertionMode = DatabaseAssertionMode.NON_STRICT )
 	public void testAddFirstChildNode() throws Exception
 	{
