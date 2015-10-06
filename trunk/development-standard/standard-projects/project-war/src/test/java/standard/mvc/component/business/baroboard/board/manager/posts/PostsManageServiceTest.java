@@ -36,7 +36,6 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
     DirtiesContextTestExecutionListener.class,
     TransactionalTestExecutionListener.class,
     DbUnitTestExecutionListener.class })
-@Ignore("TEST 실패 작성자 고칠것.")
 public class PostsManageServiceTest {
 
 	@Autowired

@@ -28,7 +28,6 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 
 import egovframework.com.ext.jstree.support.manager.config.WebApplicationContextConfig;
 import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
-@Ignore("TEST 실패 작성자 고칠것. 서버에서 빌드시 깨지는 원인이 있음.")
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ActiveProfiles("test")
