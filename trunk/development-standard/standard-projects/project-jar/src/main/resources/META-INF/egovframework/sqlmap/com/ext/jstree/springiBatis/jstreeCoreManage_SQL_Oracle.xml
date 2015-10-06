@@ -53,6 +53,14 @@
         </dynamic>
     </select>
 
+    <select id="getChildCountByParentId" parameterClass="ComprehensiveTree"
+        resultClass="int">
+        /* getChildCountByParentId */
+        SELECT COUNT(*) AS CHILDCOUNTBYPARENTID
+        FROM T_COMPREHENSIVETREE_SPRING
+        WHERE C_PARENTID = #c_id#
+    </select>
+
 
     <select id="getChildNodeByLeftRight" parameterClass="ComprehensiveTree"
         resultClass="ComprehensiveTree">

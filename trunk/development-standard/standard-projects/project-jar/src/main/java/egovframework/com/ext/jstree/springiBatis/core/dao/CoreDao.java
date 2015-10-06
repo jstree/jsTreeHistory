@@ -22,6 +22,8 @@ public interface CoreDao {
 	
 	public <T extends ComprehensiveTree> T getNodeByRef( T comprehensiveTree ) throws Exception;
 	
+	public <T extends ComprehensiveTree> int getChildCountByParentId( T comprehensiveTree ) throws Exception;
+	
 	public <T extends ComprehensiveTree> void cutMyself(T p_OnlyCutMyselfFromJstree) throws Exception;
 	
 	public <T extends ComprehensiveTree> void stretchPositionForMyselfFromJstree( T comprehensiveTree ) throws Exception;

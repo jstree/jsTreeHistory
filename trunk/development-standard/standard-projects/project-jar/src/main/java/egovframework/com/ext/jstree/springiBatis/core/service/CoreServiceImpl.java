@@ -98,7 +98,6 @@ public class CoreServiceImpl implements CoreService
      * getChildNode
      * (egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree)
      */
-    @SuppressWarnings("unchecked")
     public <T extends ComprehensiveTree> List<T> getChildNode(T comprehensiveTree) throws Exception
     {
         List<T> childNode = null;
@@ -281,9 +280,10 @@ public class CoreServiceImpl implements CoreService
         
         T t_ComprehensiveTree = newInstance(comprehensiveTree);
         
+        //성능 이슈로 인한 코드 튜닝.
         //List<T> childNodesFromRef = ((List<T>) coreDao.getChildNode(nodeByRef));
         //final int lastPosiotionOfNodeByRef = childNodesFromRef.size();
-        final int lastPosiotionOfNodeByRef = (nodeByRef.getC_right() - nodeByRef.getC_left() + 1)/2;
+        final int lastPosiotionOfNodeByRef = coreDao.getChildCountByParentId(nodeByRef);
         
         t_ComprehensiveTree.setC_position(lastPosiotionOfNodeByRef);
         comprehensiveTree.setC_position(lastPosiotionOfNodeByRef);

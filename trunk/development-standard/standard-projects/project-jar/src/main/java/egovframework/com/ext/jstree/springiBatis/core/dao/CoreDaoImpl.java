@@ -36,6 +36,13 @@ public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 		
 		return list(comprehensiveTree.getSqlMapSelector() + "." + "getChildNode", comprehensiveTree );
 	}
+
+	@SuppressWarnings("deprecation")
+	public <T extends ComprehensiveTree> int getChildCountByParentId( T comprehensiveTree ) throws Exception{
+		
+		return (int) getSqlMapClientTemplate().queryForObject(
+                comprehensiveTree.getSqlMapSelector() + ".getChildCountByParentId", comprehensiveTree);
+	}
 	
 	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree> List<T> searchNodeByString( T comprehensiveTree ) throws Exception{
