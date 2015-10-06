@@ -281,9 +281,9 @@ public class CoreServiceImpl implements CoreService
         
         T t_ComprehensiveTree = newInstance(comprehensiveTree);
         
-        List<T> childNodesFromRef = ((List<T>) coreDao.getChildNode(nodeByRef));
-
-        final int lastPosiotionOfNodeByRef = childNodesFromRef.size();
+        //List<T> childNodesFromRef = ((List<T>) coreDao.getChildNode(nodeByRef));
+        //final int lastPosiotionOfNodeByRef = childNodesFromRef.size();
+        final int lastPosiotionOfNodeByRef = (nodeByRef.getC_right() - nodeByRef.getC_left() + 1)/2;
         
         t_ComprehensiveTree.setC_position(lastPosiotionOfNodeByRef);
         comprehensiveTree.setC_position(lastPosiotionOfNodeByRef);
