@@ -48,7 +48,7 @@ public class BTRV_Importer
     public static String storeStartDate = "N/A";
     public static String storePropertiesDate = "N/A";
     
-    @Scheduled(cron = "0 59 16 28 08 ?")
+    @Scheduled(cron = "0 45 12 9 10 ?")
     public void execute()
     {
         //여기서 스톱.
@@ -464,13 +464,13 @@ public class BTRV_Importer
             //정상인 상태.
             filterOldBTDelimiterStr = StringUtils.substring(filterOldBTstr, checkPointOldBTDelimiter);
         }
-        System.out.println("returnStr = " + filterOldBTDelimiterStr);
+        //System.out.println("returnStr = " + filterOldBTDelimiterStr);
         
         //BT와 구분자가 있더라도 잘 닫았는지.
         int checkPointOldBTDivid = matchPointWithSoftCheck(filterOldBTDelimiterStr, "]", "start");
         String filterDividOldBTStr = StringUtils.substring(filterOldBTDelimiterStr, 1, checkPointOldBTDivid-1);
         String filterTrimOldBTDividStr = filterDividOldBTStr.trim();
-        System.out.println("patternDelimiterReturnStr = " + filterTrimOldBTDividStr);
+        //System.out.println("patternDelimiterReturnStr = " + filterTrimOldBTDividStr);
         
         if(filterTrimOldBTDividStr.isEmpty()){
             //BT 포맷이 있는지.
@@ -479,7 +479,7 @@ public class BTRV_Importer
             
             int checkPointBTDivid = matchPointWithHardCheck(ltrim(filterBTstr), " ", "end");
             
-            String filterBTDividStr = StringUtils.substring(filterBTstr, 1, checkPointBTDivid);
+            String filterBTDividStr = StringUtils.substring(filterBTstr, 0, checkPointBTDivid);
             String filterBTTrimDividStr = filterBTDividStr.trim();
             
             int checkPointBTMarkDivid = matchPointWithSoftCheck(filterBTTrimDividStr, "RV]", "start");
@@ -500,7 +500,18 @@ public class BTRV_Importer
             
             //전위 이슈를 정규표현식으로 검증
             //if(regMatch("^[_0-9a-zA-Z-]+-[0-9]*$", filterPointMuiltiIssueTrimStr)){
-            csvDataMap.put("BT", filterBTMarkTrimDividStr.toUpperCase());
+            
+            String naTestStr= StringUtils.substring(filterBTstr, 0, 5);
+            if(matchPointWithOnlyCheck(filterBTMarkTrimDividStr, "N/A") || matchPointWithOnlyCheck(filterBTMarkTrimDividStr, "NA")){
+            	csvDataMap.put("BT", "N/A");
+            }else if(filterBTMarkTrimDividStr.isEmpty()){
+            	csvDataMap.put("BT", "N/A");
+            }else if(matchPointWithOnlyCheck(naTestStr, "N/A") || matchPointWithOnlyCheck(filterBTMarkTrimDividStr, "NA")){
+            	csvDataMap.put("BT", "N/A");
+            }else{
+            	csvDataMap.put("BT", filterBTMarkTrimDividStr.toUpperCase());
+            }
+            
             //}else{
             //    csvDataMap.put("BT", "N/A");
             //}
@@ -510,6 +521,13 @@ public class BTRV_Importer
         }
         return csvDataMap;
     }
+    
+    //public static Map<String, Object> checkRV2(String commentText, Map<String, Object> csvDataMap)
+    //{
+    	//1. [rv], [RV] 가 있는지 찾는다.
+    	// 2. 이후 N/A 가 있는지 찾는다. ( na 도 같이 찾는다 )
+    	// 3. 못찾으면 리턴해버린다.
+    //}
 
     public static Map<String, Object> checkRV(String commentText, Map<String, Object> csvDataMap)
     {
@@ -520,14 +538,22 @@ public class BTRV_Importer
         
         //RV가 있더라도 : 구분자가 있는지
         int checkPointOldRVDelimiter = matchPointWithSoftCheck(filterOldRVstr, ":", "start");
-        String filterOldRVDelimiterStr = StringUtils.substring(filterOldRVstr, checkPointOldRVDelimiter);
-        System.out.println("returnStr = " + filterOldRVDelimiterStr);
+        int checkPointOldRVDelimiterreverseChecker = matchPointWithSoftCheck(filterOldRVstr, "]", "start");
+        String filterOldRVDelimiterStr = "";
+        if(checkPointOldRVDelimiter > checkPointOldRVDelimiterreverseChecker){
+            //뒤집어진 상태
+        }else{
+            //정상인 상태.
+        	filterOldRVDelimiterStr = StringUtils.substring(filterOldRVstr, checkPointOldRVDelimiter);
+        }
+        
+        //System.out.println("returnStr = " + filterOldRVDelimiterStr);
         
         //RV와 구분자가 있더라도 잘 닫았는지.
         int checkPointOldRVDivid = matchPointWithSoftCheck(filterOldRVDelimiterStr, "]", "start");
         String filterOldRVDividStr = StringUtils.substring(filterOldRVDelimiterStr, 1, checkPointOldRVDivid);
         String filterOldRVTrimDividStr = filterOldRVDividStr.trim();
-        System.out.println("patternDelimiterReturnStr = " + filterOldRVTrimDividStr);
+        //System.out.println("patternDelimiterReturnStr = " + filterOldRVTrimDividStr);
         
         if(filterOldRVDelimiterStr.isEmpty()){
             //RV 포맷이 있는지.
@@ -541,13 +567,13 @@ public class BTRV_Importer
             int checkPointRVMarkDivid = matchPointWithSoftCheck(ltrim(filterRVstr), " ", "start");
             
             if(ltrim(filterRVstr).length() == checkPointRVMarkDivid){
-                filterRVDividStr = StringUtils.substring(filterRVstr, 1, filterRVstr.length());
+                filterRVDividStr = StringUtils.substring(filterRVstr, 0, filterRVstr.length());
                 filterRVTrimDividStr = filterRVDividStr.trim();
             }else if(matchPointWithOnlyCheck(filterRVstr, "N/A") || matchPointWithOnlyCheck(filterRVstr, "NA")){
                 filterRVTrimDividStr = "N/A";
             }else{
                 int checkPointRVDivid = matchPointWithHardCheck(ltrim(filterRVstr), " ", "end");
-                filterRVDividStr = StringUtils.substring(filterRVstr, 1, checkPointRVDivid);
+                filterRVDividStr = StringUtils.substring(filterRVstr, 0, checkPointRVDivid);
                 filterRVTrimDividStr = filterRVDividStr.trim();
             }
             
@@ -584,7 +610,8 @@ public class BTRV_Importer
         {
             checkPointValue = (matchPoint.equals("end"))?matcherObj.end():matcherObj.start();
         }else{
-            throw new RuntimeException();
+            //throw new RuntimeException();
+        	checkPointValue = lowerStr.length();
         }
         return checkPointValue;
     }
@@ -608,6 +635,9 @@ public class BTRV_Importer
     public static boolean matchPointWithOnlyCheck(String originStr, String checkStr)
     {
         String lowerStr = originStr.toLowerCase();
+        if ( lowerStr.length() > 5){
+        	lowerStr = lowerStr.substring(0 , 5);
+        }
         Pattern patternObj = Pattern.compile(checkStr, Pattern.CASE_INSENSITIVE);
         Matcher matcherObj = patternObj.matcher(lowerStr);
         if (matcherObj.find())
@@ -626,12 +656,21 @@ public class BTRV_Importer
     public static String ltrim(String s) 
     {
             char[] val = s.toCharArray();           
-            int st  = 0;
+            int st  = 1;
             int len = s.length();
             while (st < len && val[st] <= ' ') 
             {
                     st++;
             }
-            return s.substring(st, len);
+            
+            String returnStr = "";
+            try {
+            	returnStr =  s.substring(st, len);
+			} catch (Exception e) {
+				returnStr = s;
+				return returnStr;
+			}
+            return returnStr;
+            
     }
 }
