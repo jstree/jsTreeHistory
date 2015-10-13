@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="totalArticle">
+	<typeAlias alias="TotalArticle" type="standard.mvc.component.business.baroboard.board.vo.TotalArticle" />
+	
+	<sql id="getMetaField">
+		/* getChildNode */
+		SELECT A.c_id
+		, A.c_parentid
+		, A.c_position
+		, A.c_left
+		, A.c_right
+		, A.c_level
+		, A.c_title
+		, A.c_type
+		/* user filed add point*/
+	</sql>
+	<sql id="getInlineChildCount">
+		, ( SELECT CASE
+		WHEN COUNT(*) &gt; 0 THEN 'InChild'
+		ELSE
+		'NoChild'
+		END AS YesNo
+		/* inline table from filed add point*/
+	</sql>
+	<sql id="getInlineChildCountAfterFrom">
+		WHERE B.C_PARENTID = A.C_ID
+		) AS childcount
+		/* table from
+		filed add point*/
+	</sql>
+	<sql id="getAfterFrom">
+		WHERE A.C_PARENTID = #c_id#
+		ORDER BY A.C_POSITION ASC
+	</sql>
+	
+	<select id="getChildNode" parameterClass="TotalArticle"	resultClass="TotalArticle">
+		<dynamic>
+			<include refid="getMetaField" />
+			/* user filed */
+			<include refid="getInlineChildCount" />
+			/* inline table from filed*/
+			FROM T_BOARD_TOTAL_ARTICLE B
+			<include refid="getInlineChildCountAfterFrom" />
+			/* table from filed*/
+			FROM T_BOARD_TOTAL_ARTICLE A
+			<include refid="getAfterFrom" />
+		</dynamic>
+	</select>
+
+
+	<select id="getChildNodeByLeftRight" parameterClass="TotalArticle"
+		resultClass="TotalArticle">
+		/* getChildNodeByLeftRight */
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		, C_LEFT
+		, C_RIGHT
+		, C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		FROM
+		T_BOARD_TOTAL_ARTICLE
+		WHERE C_LEFT &gt;= #c_left#
+		AND C_RIGHT &lt;=
+		#c_right#
+		ORDER BY C_LEFT ASC
+	</select>
+
+
+	<select id="searchNodeByString" parameterClass="TotalArticle"
+		resultClass="TotalArticle">
+		/* searchNodeByString */
+		SELECT c_left
+		, c_right
+		FROM
+		T_BOARD_TOTAL_ARTICLE
+		WHERE C_TITLE TotalArticle '%'||#searchStr#||'%'
+	</select>
+
+
+	<select id="searchNodeByPosition" parameterClass="java.util.List"
+		resultClass="String">
+		/* searchNodeByPosition */
+		SELECT DISTINCT C_ID
+		FROM
+		T_BOARD_TOTAL_ARTICLE
+		WHERE 1=1
+		<iterate prepend="AND" open="(" close=")" conjunction="OR">
+			( C_LEFT
+			&lt;= #[].c_left# AND C_RIGHT &gt;= #[].c_right# )
+		</iterate>
+	</select>
+
+
+	<update id="alterNode" parameterClass="TotalArticle">
+		/* alterNode */
+		UPDATE
+		T_BOARD_TOTAL_ARTICLE
+		SET C_TYPE = #c_type#
+		 , C_TITLE = #c_title#
+		, C_BOARD_ID = #boardID#
+		, C_ARTICLE_ID = #articleID#
+		, C_REG_ID = #regID#
+		, C_IS_DELETED_FL = #isDeletedFL#
+		, C_REG_DT = #regDt#
+		WHERE C_ID = #c_id#
+	</update>
+
+
+	<select id="getNode" parameterClass="TotalArticle"
+		resultClass="TotalArticle">
+		/* getNode */
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		, C_LEFT
+		, C_RIGHT
+		, C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		, C_ARTICLE_ID as articleID
+		, C_REG_ID as regID
+		, C_IS_DELETED_FL as isDeletedFL
+		, C_REG_DT as regDt
+		FROM T_BOARD_TOTAL_ARTICLE
+		WHERE
+		C_ID = #c_id#
+	</select>
+
+
+	<select id="getNodeByRef" parameterClass="TotalArticle"
+		resultClass="TotalArticle">
+		/* getNodeByRef */
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		, C_LEFT
+		, C_RIGHT
+		, C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		FROM
+		T_BOARD_TOTAL_ARTICLE
+		WHERE C_ID = #ref#
+	</select>
+
+
+	<delete id="removeNode" parameterClass="TotalArticle">
+		/* removeNode */
+		DELETE
+		FROM T_BOARD_TOTAL_ARTICLE
+		WHERE C_LEFT &gt;= #c_left#
+		AND C_RIGHT
+		&lt;= #c_right#
+	</delete>
+
+
+	<update id="removedAfterLeftFix" parameterClass="TotalArticle">
+		/*
+		removedAfterLeftFix */
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET C_LEFT =
+		C_LEFT - #spaceOfTargetNode#
+		WHERE C_LEFT &gt; #c_right#
+	</update>
+
+
+	<update id="removedAfterRightFix" parameterClass="TotalArticle">
+		/*
+		removedAfterRightFix */
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET C_RIGHT =
+		C_RIGHT - #spaceOfTargetNode#
+		WHERE C_RIGHT &gt; #c_left#
+	</update>
+
+
+	<update id="removedAfterPositionFix" parameterClass="TotalArticle">
+		/*
+		removedAfterPositionFix */
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET
+		C_POSITION = C_POSITION - 1
+		WHERE C_PARENTID = #c_parentid#
+		AND
+		C_POSITION &gt; #c_position#
+	</update>
+
+
+	<select id="analyzeRootNode" resultClass="TotalArticle">
+		/* searchNodeByString
+		*/
+		SELECT C_LEFT
+		FROM T_BOARD_TOTAL_ARTICLE
+		WHERE C_PARENTID = 0
+	</select>
+
+
+	<update id="cutMyselfPositionFix" parameterClass="TotalArticle">
+		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET C_POSITION
+		= C_POSITION - 1
+		WHERE C_PARENTID = #c_parentid#
+		AND C_POSITION &gt;
+		#c_position#
+	</update>
+
+
+	<update id="cutMyselfLeftFix" parameterClass="TotalArticle">
+		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
+		WHERE C_LEFT &gt; #c_right#
+	</update>
+
+
+	<update id="cutMyselfRightFix" parameterClass="TotalArticle">
+		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
+		WHERE C_RIGHT &gt; #c_left#
+		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+			open="(" close=")" conjunction=",">
+			#c_idsByChildNodeFromNodeById[]#
+		</iterate>
+	</update>
+
+
+	<update id="stretchPositionForMyself" parameterClass="TotalArticle">
+		/* stretchPositionForMyselfFromJstree */
+		UPDATE
+		T_BOARD_TOTAL_ARTICLE
+		SET C_POSITION = C_POSITION + 1
+		WHERE
+		C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
+		<isEqual property="copy" compareValue="0">
+			AND C_ID NOT IN
+			<isEmpty property="c_idsByChildNodeFromNodeById">
+				(-1)
+			</isEmpty>
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate property="c_idsByChildNodeFromNodeById" open="("
+					close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="TotalArticle">
+		/* stretchLeftForMyselfFromJstree */
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
+		WHERE C_LEFT &gt;=
+		#rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<update id="stretchRightForMyselfFromJstree" parameterClass="TotalArticle">
+		/* stretchRightForMyselfFromJstree */
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
+		WHERE C_RIGHT &gt;=
+		#rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<insert id="pasteMyselfFromJstree" parameterClass="TotalArticle">
+		/* pasteMyselfFromJstree */
+		INSERT INTO T_BOARD_TOTAL_ARTICLE (
+		C_ID, C_PARENTID, C_POSITION,
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
+		)
+		SELECT S_BOARD_TOTAL_ARTICLE.NEXTVAL AS C_ID
+		, A.*
+		FROM (
+		SELECT
+		#ref# AS C_PARENTID
+		, C_POSITION
+		, C_LEFT - #idifLeft# AS C_LEFT
+		,
+		C_RIGHT -
+		#idifRight# AS C_RIGHT
+		, C_LEVEL - #ldif# AS C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		FROM T_BOARD_TOTAL_ARTICLE
+		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
+			open="(" close=")" conjunction=",">
+			#c_idsByChildNodeFromNodeById[]#
+		</iterate>
+		ORDER BY C_LEVEL DESC
+		) A
+		<selectKey resultClass="java.lang.Integer">
+			/* pasteMyselfFromJstree SEQ */
+			SELECT S_BOARD_TOTAL_ARTICLE.CURRVAL AS SEQ
+			FROM DUAL
+		</selectKey>
+	</insert>
+
+
+	<update id="enterMyselfFixPosition" parameterClass="TotalArticle">
+		/*
+		enterMyselfFixPosition */
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET
+		C_PARENTID = #ref#
+		, C_POSITION = #c_position#
+		WHERE C_ID = #c_id#
+	</update>
+
+
+	<update id="enterMyselfFixLeftRight" parameterClass="TotalArticle">
+		/* enterMyselfFixLeftRight */
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET
+		C_LEFT = C_LEFT - (#idif#)
+		, C_RIGHT = C_RIGHT - (#idif#)
+		, C_LEVEL =
+		C_LEVEL - (#ldif#)
+		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
+			open="(" close=")" conjunction=",">
+			#c_idsByChildNodeFromNodeById[]#
+		</iterate>
+	</update>
+
+
+	<insert id="addMyselfFromJstree" parameterClass="TotalArticle">
+		/* addMyselfFromJstree */
+		INSERT INTO T_BOARD_TOTAL_ARTICLE (
+		C_ID, C_PARENTID, C_POSITION,
+		C_LEFT, C_RIGHT, C_LEVEL )
+		VALUES (
+		S_BOARD_TOTAL_ARTICLE.NEXTVAL, #c_parentid#, #c_position#,
+		#c_left#, #c_right#, #c_level# )
+		<selectKey resultClass="java.lang.Integer">
+			/* addMyselfFromJstree SEQ */
+			SELECT
+			S_BOARD_TOTAL_ARTICLE.CURRVAL AS SEQ
+			FROM DUAL
+		</selectKey>
+	</insert>
+
+
+	<update id="alterNodeType" parameterClass="TotalArticle">
+		/* alterNodeType */
+		UPDATE T_BOARD_TOTAL_ARTICLE
+		SET C_TYPE = #c_type#
+		WHERE C_ID =
+		#c_id#
+	</update>
+
+
+	<update id="fixCopyIF" parameterClass="TotalArticle">
+		/* fixCopyIF */
+		UPDATE
+		T_BOARD_TOTAL_ARTICLE
+		SET C_POSITION = #fixCopyPosition#
+		WHERE C_ID
+		= #fixCopyId#
+	</update>
+
+
+	<update id="fixCopy" parameterClass="TotalArticle">
+		/* fixCopy */
+		UPDATE
+		T_BOARD_TOTAL_ARTICLE
+		SET C_PARENTID = #fixCopyId#
+		WHERE C_ID =
+		#c_id#
+	</update>
+	
+	
+	<select id="getTotalArticlesByBoardID" parameterClass="TotalArticle" resultClass="TotalArticle">
+			/* getTotalArticlesByBoardID */
+			<include refid="getMetaField" />
+				, A.C_TITLE as c_title
+				, A.C_BOARD_ID as boardID
+				, A.C_ARTICLE_ID as articleID
+				, A.C_REG_ID as regID 			
+				, A.C_IS_DELETED_FL as isDeletedFL 			
+				, A.C_REG_DT as regDt 			
+			FROM T_BOARD_TOTAL_ARTICLE A 
+			WHERE 1=1
+				AND A.C_BOARD_ID = #boardID#
+			ORDER BY A.C_ID DESC
+	</select>
+	
+	<select id="getArticlesByRegIDAndPage" parameterClass="TotalArticle" resultClass="TotalArticle">
+			/* getArticlesByRegIDAndPage */
+			<include refid="getMetaField" />
+				, A.C_TITLE as c_title
+				, A.C_BOARD_ID as boardID
+				, A.C_ARTICLE_ID as articleID
+				, A.C_REG_ID as regID 			
+				, A.C_IS_DELETED_FL as isDeletedFL 			
+				, A.C_REG_DT as regDt 			
+			/* 페이징 처리 */	
+			FROM (
+				SELECT ROWNUM AS RNUM, Z.* FROM (
+					SELECT * 
+					FROM T_BOARD_TOTAL_ARTICLE Y
+					WHERE 1=1
+			      	    AND Y.C_REG_ID = #regID#   
+			        ORDER BY C_ID DESC
+				) Z WHERE ROWNUM &lt;= (#pageNum# * #pageSize#)
+			) A  
+			WHERE 1=1 
+				AND A.RNUM &gt;= (1 + ((#pageNum# - 1) * #pageSize#))
+	</select>
+	
+	<update id="updateTitleByBoardIdAndArticleID" parameterClass="TotalArticle">
+		/* updateTitleByBoardIdAndRegID */
+		UPDATE
+		T_BOARD_TOTAL_ARTICLE
+		SET C_TITLE = #c_title#
+		WHERE 1=1
+			AND C_BOARD_ID     = #boardID#
+			AND C_ARTICLE_ID   = #articleID#
+	</update>
+	<update id="updateIsDeletedFLByBoardIdAndArticleID" parameterClass="TotalArticle">
+		/* updateIsDeletedFLByBoardIdAndRegID */
+		UPDATE
+		T_BOARD_TOTAL_ARTICLE
+		SET C_IS_DELETED_FL = #isDeletedFL#
+		WHERE 1=1
+			AND C_BOARD_ID    = #boardID#
+			AND C_ARTICLE_ID  = #articleID#
+	</update>
+	
+	<select id="getTotalArticleCountByRegID" parameterClass="TotalArticle" resultClass="int">
+			/* getTotalArticleCountByRegID */
+			SELECT COUNT(*) 			
+			FROM T_BOARD_TOTAL_ARTICLE A 
+			WHERE 1=1
+				AND A.C_REG_ID = #regID#
+	</select>
+	
+</sqlMap>

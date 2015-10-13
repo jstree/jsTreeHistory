@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="log">
+	<select id="log.getUrlLog" resultClass="String">
+		SELECT URL 
+		FROM T_MENUCOMPREHENSIVETREE 
+		WHERE C_ID ='8093'
+	</select>
+</sqlMap>

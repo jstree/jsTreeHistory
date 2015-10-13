@@ -1,0 +1,70 @@
+/*	Shopify QuickLook v1.0, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+//	========================================================================================= */
+
+/*	Table of Contents
+//	==================================================
+//		#Default
+
+
+/*	#Default
+//	================================================== */
+
+	body.no-scroll { overflow: hidden; }
+
+	.shopify-quick-look-overlay,
+	.shopify-quick-look-overlay > * {
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	.shopify-quick-look-overlay {
+		display: none;
+		min-width: 280px;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 99999;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+	.shopify-quick-look-overlay .shopify-quick-look-close {
+		width: 40px;
+		height: 40px;
+		background: url('../images/shopify-quick-look-close.png') no-repeat center;
+		opacity: .7;
+		position: fixed;
+		top: 20px;
+		right: 25px;
+	}
+
+	.shopify-quick-look-overlay .shopify-quick-look-close:hover {
+		opacity: 1;
+		cursor: pointer;
+	}
+
+	.shopify-quick-look-container {
+		display: none;
+		margin: 40px auto;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		padding: 20px;
+		background: #FFF;
+		position: relative;
+		top: -200px;
+	}
+
+	.shopify-quick-look-container:after {
+		display: block;
+		width: 0;
+		height: 0;
+		overflow: hidden;
+		clear: both;
+		visibility: hidden;
+		content: " ";
+	}

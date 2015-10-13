@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="menuMng">
+	<typeAlias alias="MenuComprehensiveTree" type="standard.mvc.component.business.community.menu.vo.MenuComprehensiveTree"/>
+	
+	<select id="menuMng.getEgovUpperMenu" resultClass="MenuComprehensiveTree">
+	  SELECT *
+		    FROM T_MenuComprehensiveTree
+		   WHERE C_PARENTID = '7423'
+		ORDER BY C_POSITION
+	</select>
+	
+	<select id="menuMng.getEgovLeftMenu" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
+		SELECT *
+		    FROM T_MenuComprehensiveTree
+		   WHERE C_PARENTID = #c_parentid#
+		ORDER BY C_POSITION
+	</select>
+	
+	<select id="menuMng.getCommunityMenu" parameterClass="MenuComprehensiveTree" resultClass="MenuComprehensiveTree">
+		  SELECT *
+		    FROM T_MenuComprehensiveTree
+		  START WITH C_PARENTID = '7453'
+		  CONNECT BY PRIOR C_ID = C_PARENTID
+		  ORDER SIBLINGS BY C_PARENTID, C_POSITION
+	 </select>
+</sqlMap>

@@ -1,0 +1,426 @@
+<%@ page isELIgnored="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+
+<%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
+<!DOCTYPE html> 
+<!--[if lt IE 7 ]> <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie6 older"> <![endif]-->
+<!--[if IE 7 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie7 older"> <![endif]-->
+<!--[if IE 8 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="ko-KR">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Language" content="ko" >
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+<title>뉴스레터 관리</title>
+<style type="text/css">
+</style>
+<!-- jQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+<script src='http://code.jquery.com/jquery-migrate-1.2.1.js' type="text/javascript"></script>
+		
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="/js/community/jsTreeAlg/jstreeDemo/jnotify_v2.1/jquery/jNotify.jquery.css" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/assets/js/debug.js"></script>
+<![endif]-->
+<!-- JSTREE -->
+<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/jquery.jstree.js"></customTags:assetsJsExtendNas>
+<!-- JavaScript -->
+<script type="text/javascript" src="/assets/js/ajax.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/community/jsTreeAlg/jstreeDemo/jnotify_v2.1/jquery/jNotify.jquery.min.js" charset="UTF-8"></script>
+<link href="<c:url value='/'/>css/common.css" rel="stylesheet" type="text/css" >
+</head>
+<body>
+<!-- 전체 레이어 시작 -->
+<div id="wrap">
+	<!-- header 시작 -->
+    <div id="header_mainsize"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncHeader" /></div>
+    <div id="topnavi"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncTopnav" /></div>     
+    <!-- //header 끝 -->
+	<!-- container 시작 -->
+	<div id="container">
+		<!-- 좌측메뉴 시작 -->
+		<div id="leftmenu"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncLeftmenu" /></div>
+		<div id="content">
+			<div id="cur_loc">
+				<div id="cur_loc_align">
+					<ul>
+						<li>HOME</li>
+						<li>&gt;</li>
+						<li>사이트관리</li>
+						<li>&gt;</li>
+						<li><strong>뉴스레터 관리</strong></li>
+					</ul>
+				</div>
+			</div>
+            <DIV id="content2" style="width:100%;height:100%;">
+				<div id="search_field">
+					<div id="search_field_loc"><h2><strong>뉴스레터 관리</strong></h2></div>
+				</div>
+				<div id="jstreeSearch" class="asideSectionSearchHeight">
+					<table class="logoAsideWidth asideSectionSearchHeight">
+						<tr>
+							<td class="jstreeSearchLeft">
+								<input id="inp_search" type="text" placeholder="찾을 노드 이름 입력" />
+							</td>
+							<td class="jstreeSearchMiddle">
+								<input id="btn_searchNode" type="button" value="검색" />
+							</td>
+							<td class="jstreeSearchRight">
+								<input id="btn_clearSearch" type="button" value="초기화" />
+							</td>
+						</tr>
+					</table>
+				</div>
+	            <div id="demo" class="asideSectionMenuHeight">
+		        </div>
+			</DIV>
+		</div>
+	</div>
+	<!-- //container 끝 -->
+	<!-- footer 시작 -->
+    <div id="footer"><c:import url="/EgovPageLink.do?link=/jsp/main/inc/EgovIncFooter" /></div>
+    <!-- //footer 끝 -->
+</div>
+<!-- JavaScript neccessary for the tree -->
+<script type="text/javascript">
+$(function () {
+	
+$("#demo")
+	.bind("before.jstree", function (e, data) {
+		$("li:not([rel='drive']).jstree-open > a > .jstree-icon").css('background-image','url(/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/toolbar_open.png)');
+		$("li:not([rel='drive']).jstree-closed > a > .jstree-icon").css('background-image','url(/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/ic_explorer.png)');
+	})
+	.jstree({ 
+		// List of active plugins
+    	"plugins" : [ 
+			"themes","json_data","ui","crrm","cookies","dnd","search","types","hotkeys","contextmenu"
+		],
+		//contextmenu
+		"contextmenu" : 
+		{         
+			items : 
+			{ // Could be a function that should return an object like this one             
+				"create" : 
+				{                 
+					"separator_before"  : true,                  
+					"separator_after"   : true,                 
+					"label"             : "Create",                 
+					"action"            : false,                 
+					"submenu" :
+					{                     
+						"create_file" :  
+						{                         
+							"seperator_before" : false,                         
+							"seperator_after" : false,                         
+							"label" : "Email",                         
+							action : function (obj) 
+							{
+								this.create(obj, "last", {"attr" : {"rel" : "default"}});
+							}                     
+						},                     
+						"create_folder" :  
+						{                         
+							"seperator_before" : false,                         
+							"seperator_after" : false,                         
+							"label" : "Category",                          
+							action : function (obj)  
+							{
+								this.create(obj, "last", {"attr" : { "rel" : "folder"}});                         
+							}                      
+						}
+						
+					}             
+				},
+				"ccp" :  
+				{                 
+					"separator_before"  : false,                 
+					"separator_after"   : true,                 
+					"label"             : "Edit",                 
+					"action"            : false,                 
+					"submenu" :
+					{                     
+						"cut" :  
+						{                         
+							"seperator_before" : false,                         
+							"seperator_after" : false,                         
+							"label" : "Cut",                         
+							action : function (obj) 
+							{
+							  	console.log("[cut]");
+							  	console.log(obj);
+								this.cut(obj, "last", {"attr" : {"rel" : "default"}});                         
+							}                     
+						},                     
+						"paste" :  
+						{                         
+							"seperator_before" : false,                         
+							"seperator_after" : false,                         
+							"label" : "Paste",                          
+							action : function (obj)  
+							{
+							  	console.log("[paste]");
+						  		console.log(obj);
+								this.paste(obj, "last", {"attr" : { "rel" : "folder"}});                         
+							}                      
+						},
+						"changeType" :  
+						{                         
+							"seperator_before" : false,                         
+							"seperator_after" : false,                         
+							"label" : "Change Type",             
+							"submenu" :
+							{
+								"toFile" :  
+								{                         
+									"seperator_before" : false,                         
+									"seperator_after" : false,                         
+									"label" : "toEmail",                         
+									action : function (obj) 
+									{   
+										this.set_type("default", obj);                     
+									}                     
+								},                     
+								"toFolder" :  
+								{                         
+									"seperator_before" : false,                         
+									"seperator_after" : false,                         
+									"label" : "toCategory",                          
+									action : function (obj)  
+									{
+										this.set_type("folder", obj);
+									}                      
+								}
+							}                 
+						}
+					}             
+				}				
+			}     
+		}, 
+		// Using types - most of the time this is an overkill
+		// read the docs carefully to decide whether you need types	
+		"types" : {
+			// I set both options to -2, as I do not need depth and children count checking
+			// Those two checks may slow jstree a lot, so use only when needed
+			"max_depth" : -2,
+			"max_children" : -2,
+			// I want only `drive` nodes to be root nodes 
+			// This will prevent moving or creating any other type as a root node
+			"valid_children" : [ "drive" ],
+			"types" : {
+				// The default type
+				"default" : {
+					// I want this type to have no children (so only leaf nodes)
+					// In my case - those are files
+					"valid_children" : "none",
+					// If we specify an icon for the default type it WILL OVERRIDE the theme icons
+					"icon" : {
+						"image" : "/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/themes/fileIcon/HTML.png"
+					}
+				},
+				// The `folder` type
+				"folder" : {
+					// can have files and other folders inside of it, but NOT `drive` nodes
+					"valid_children" : [ "default", "folder" ],
+					"icon" : {
+						"image" : "/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/ic_explorer.png"
+						//Design/icon/miniCon/313/toolbar_open.png
+					}
+				},
+				// The `drive` nodes 
+				"drive" : {
+					// can have files and folders inside, but NOT other `drive` nodes
+					"valid_children" : [ "default", "folder" ],
+					"icon" : {
+						"image" : "/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/Database-Search.png"
+						//Design/icon/IconSet/Aeon/PNG/Misc/Misc-Stuff.png
+						//Component/jsp/community/jstree-v.pre1.0/db.png
+					},
+					// those prevent the functions with the same name to be used on `drive` nodes
+					// internally the `before` event is used
+					"start_drag" : false,
+					"move_node" : false,
+					"delete_node" : false,
+					"remove" : false
+				}
+			}
+		},
+		// UI & core - the nodes to initially select and open will be overwritten by the cookie plugin
+
+		// the UI plugin - it handles selecting/deselecting/hovering nodes
+		"ui" : {
+			// this makes the node with ID node_3 selected onload
+			"initially_select" : [ "node_3" ]
+		},
+		// the core plugin - not many options here
+		"core" : { 
+			// just open those two nodes up
+			// as this is an AJAX enabled tree, both will be downloaded from the server
+			"initially_open" : [ "node_2" , "node_3" ] 
+		},
+		// I usually configure the plugin that handles the data first
+		// This example uses JSON as it is most common
+		"json_data" : { 
+			// This tree is ajax enabled - as this is most common, and maybe a bit more complex
+			// All the options are almost the same as jQuery's AJAX (read the docs)
+			"ajax" : {
+				// the URL to fetch the data
+				"url" : "${pageContext.request.contextPath}/newsletterAdmin/getEmailList.do",
+				// the `data` function is executed in the instance's scope
+				// the parameter is the node being loaded 
+				// (may be -1, 0, or undefined when loading the root nodes)
+				"data" : function (n) { 
+					// the result is fed to the AJAX request `data` option
+					return { 
+						"c_id" : n.attr ? n.attr("id").replace("node_", "").replace("copy_", "") : 1 ,
+						"r" : getTimestamp()
+					}; 
+				}
+			}
+		},
+		// Configuring the search plugin
+		"search" : {
+			// As this has been a common question - async search
+			// Same as above - the `ajax` config option is actually jQuery's AJAX object
+			"ajax" : {
+				"url" : "${pageContext.request.contextPath}/newsletterAdmin/searchEmail.do",
+				// You get the search string as a parameter
+				"data" : function (str) {
+					return {
+						"searchString" : str
+					}; 
+				}
+			}
+		}
+	})
+	.bind("create.jstree", function (e, data) {
+	  	
+		$.post(
+			"${pageContext.request.contextPath}/newsletterAdmin/addEmail.do", 
+			{ 
+				"ref" : data.rslt.parent.attr("id").replace("node_", "").replace("copy_", ""), 
+				"c_position" : data.rslt.position,
+				"c_title" : data.rslt.name,
+				"c_type" : data.rslt.obj.attr("rel")
+			}, 
+			function (r) {
+				if (r.status) {
+					$(data.rslt.obj).attr("id", "node_" + r.id);
+				}
+				else {
+					$.jstree.rollback(data.rlbk);
+				}
+			}
+		);
+	})
+	.bind("remove.jstree", function (e, data) {
+	  
+		data.rslt.obj.each(function () {
+			$.ajax({
+				async : false,
+				type: 'POST',
+				url: "${pageContext.request.contextPath}/newsletterAdmin/removeEmail.do", 
+				data : { 
+					"c_id" : this.id.replace("node_", "").replace("copy_", "")
+				}, 
+				success : function (r) {
+				}
+			});
+		});
+	})
+	.bind("rename.jstree", function (e, data) {
+	  
+		$.post(
+			"${pageContext.request.contextPath}/newsletterAdmin/renameEmail.do", 
+			{ 
+					"c_id" : data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
+					"c_title" : data.rslt.new_name,
+					"c_type" : data.rslt.obj.attr("rel")
+			}, 
+			function (r) {
+				if (!r.status) {
+					$.jstree.rollback(data.rlbk);
+				}
+			}
+		);
+	})
+	.bind("set_type.jstree", function (e, data) {
+	  
+		$.post(
+			"${pageContext.request.contextPath}/newsletterAdmin/alterNodeType.do", 
+			{ 
+					"c_id" : data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
+					"c_title" : $.trim( data.rslt.obj.children("a").text() ),
+					"c_type" : data.rslt.obj.attr("rel")
+			}, 
+			function (r) {
+				if (!r.status) {
+					$.jstree.rollback(data.rlbk);
+				}
+			}
+		);
+	})
+	.bind("move_node.jstree", function (e, data) {
+	  	console.log("[move_node]");
+	  	console.log(data);
+	  	
+		data.rslt.o.each(function (i) {
+			$.ajax({
+				async : false,
+				type: "POST",
+				url: "${pageContext.request.contextPath}/newsletterAdmin/moveEmail.do",
+				data : { 
+					"c_id" : $(this).attr("id").replace("node_", "").replace("copy_", ""), 
+					"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_", "").replace("copy_", ""), 
+					"c_position" : data.rslt.cp + i,
+					"c_title" : data.rslt.name, 
+					"copy" : data.rslt.cy ? 1 : 0,
+					"multiCounter" : i
+				},
+				success : function (r) {
+				  	console.log(r);
+				  
+					if (r.status) {
+						$.jstree.rollback(data.rlbk);
+					}
+					else {
+						$(data.rslt.oc).attr("id", "node_" + r.id);
+						if (data.rslt.cy && $(data.rslt.oc).children("ul").length) {
+							data.inst.refresh(data.inst._get_parent(data.rslt.oc));
+						}
+					}
+				}
+			});
+		});
+	});
+
+	$("#btn_searchNode").click(function() {
+	  	$("#demo").jstree("search", $("#inp_search").val());
+	});
+	$("#btn_clearSearch").click(function() {
+	  $("#inp_search").val("");
+  		$("#demo").jstree("clear_search");
+	});
+});
+		
+function getTimestamp() {
+	return Math.floor(new Date().getTime());
+}
+</script>
+<!-- //전체 레이어 끝 -->
+</body>
+</html>

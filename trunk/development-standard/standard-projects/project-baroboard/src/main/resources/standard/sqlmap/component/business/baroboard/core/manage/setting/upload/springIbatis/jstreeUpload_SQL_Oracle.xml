@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="upload">
+	<typeAlias alias="uploadVO"
+		type="standard.mvc.component.business.baroboard.core.manage.setting.upload.vo.UploadVO" />
+	<sql id="getMetaField">
+		/* getChildNode */
+		SELECT A.c_id
+		, A.c_parentid
+		, A.c_position
+		, A.c_left
+		, A.c_right
+		, A.c_level
+		, A.c_title
+		, A.c_type
+		/* user filed add
+		point*/
+	</sql>
+	<sql id="getInlineChildCount">
+		, ( SELECT CASE
+		WHEN COUNT(*) &gt; 0 THEN 'InChild'
+		ELSE
+		'NoChild'
+		END AS YesNo
+		/* inline table from filed add point*/
+	</sql>
+	<sql id="getInlineChildCountAfterFrom">
+		WHERE B.C_PARENTID = A.C_ID
+		) AS childcount
+		/* table from
+		filed add point*/
+	</sql>
+	<sql id="getAfterFrom">
+		WHERE A.C_PARENTID = #c_id#
+		ORDER BY A.C_POSITION ASC
+	</sql>
+
+	<select id="getChildNode" parameterClass="uploadVO" resultClass="uploadVO">
+		<dynamic>
+			<include refid="getMetaField" />
+			/* user filed */
+			, C_FILE_SIZE_LIMIT AS fileSizeLimit
+			,
+			C_DOC_SIZE_LIMIT AS docSizeLimit
+			, C_FILE_EXT_LIMIT AS fileExtLimit
+			,
+			C_EXTNL_LNK_FL AS extnlLnkFl
+			, C_EXTNL_LNK_ALLOWED_EXT AS
+			extnlLnkAllowedExt
+			, C_EXTNL_LNK_ALLOWED_SITE AS extnlLnkAllowedSite
+			<include refid="getInlineChildCount" />
+			/* inline table from filed*/
+			FROM T_CORE_SET_UPLOAD B
+			<include refid="getInlineChildCountAfterFrom" />
+			/* table from filed*/
+			FROM T_CORE_SET_UPLOAD A
+			<include refid="getAfterFrom" />
+		</dynamic>
+	</select>
+
+	<select id="getNode" parameterClass="uploadVO" resultClass="uploadVO">
+		/*
+		getNode */
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		, C_LEFT
+		, C_RIGHT
+		,
+		C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		, C_FILE_SIZE_LIMIT AS fileSizeLimit
+		,
+		C_DOC_SIZE_LIMIT AS docSizeLimit
+		, C_FILE_EXT_LIMIT AS fileExtLimit
+		,
+		C_EXTNL_LNK_FL AS extnlLnkFl
+		, C_EXTNL_LNK_ALLOWED_EXT AS
+		extnlLnkAllowedExt
+		, C_EXTNL_LNK_ALLOWED_SITE AS extnlLnkAllowedSite
+		FROM T_CORE_SET_UPLOAD
+		WHERE C_ID = #c_id#
+	</select>
+
+	<update id="alterNode" parameterClass="uploadVO">
+		/* alterNode */
+		UPDATE
+		T_CORE_SET_UPLOAD
+		SET C_FILE_SIZE_LIMIT = #fileSizeLimit#
+		, C_DOC_SIZE_LIMIT = #docSizeLimit#
+		, C_FILE_EXT_LIMIT = #fileExtLimit#
+		, C_EXTNL_LNK_FL = #extnlLnkFl#
+		, C_EXTNL_LNK_ALLOWED_EXT = #extnlLnkAllowedExt#
+		, C_EXTNL_LNK_ALLOWED_SITE = #extnlLnkAllowedSite#
+		WHERE C_ID = #c_id#
+	</update>
+
+</sqlMap>

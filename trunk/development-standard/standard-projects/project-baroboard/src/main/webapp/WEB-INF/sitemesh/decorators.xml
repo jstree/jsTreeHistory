@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<decorators defaultdir="/WEB-INF/sitemesh">
+	<!-- Any urls that are excluded will never be decorated by Sitemesh -->
+	<excludes>
+		<pattern>/exclude.jsp</pattern>
+		<pattern>/exclude/*</pattern>
+<!-- 		committerSchedule ajax call -->
+		<pattern>/sub/*</pattern>
+<!-- 		login back-end -->
+		<pattern>/uat/*</pattern>
+<!-- 		freeBoard ajax call -->		
+		<pattern>/cop/*</pattern>
+<!-- 		jstree 테스트용 페이지 -->		
+		<pattern>/jsp/community/index/index.do</pattern>		
+		<!--	egov 관리자 페이지 -->		
+		<pattern>/cmm/*</pattern>
+		<pattern>/EgovPageLink.do?*</pattern>
+		<pattern>/analyzeNode.action?*</pattern>
+		<pattern>/monitoring</pattern>
+		<pattern>/monitoring?*</pattern>
+		<!-- 일정관리 등록에 달력 팝업사용 다른화면에 영향이있을까봐 일단 아래처럼 셋팅 추후 excludes 정리가 필요함 -->
+		<pattern>/sym/cmm/EgovselectNormalCalendar.do</pattern>
+		<!-- 에러페이지는 exclude 처리 후 해당 JSP에서 page:applyDecorator 로 적용한다. -->
+		<pattern>/common/*error.do</pattern>
+		<!-- 팝업 제외 -->
+		<pattern>/**/*Popup.do*</pattern>
+	</excludes>
+	
+	<decorator name="popup" page="popupDeco.jsp">
+		<pattern>/**/popup.do</pattern>
+		<pattern>/user/manage/user/add/popup.do</pattern>
+		<pattern>**/popup.do</pattern>
+	</decorator>
+	
+	<!-- 바로보드 관리자 페이지 -->
+	<decorator name="admin" page="adminDeco.jsp">
+		<pattern>/core/manage/*</pattern>
+		<pattern>/user/manage/*</pattern>
+		<pattern>/board/manage/*</pattern>
+		<pattern>/board/manager/*</pattern>
+	</decorator>
+	
+	<decorator name="default" page="defaultDeco.jsp">
+		<pattern>/*</pattern>
+	</decorator>	
+
+	<decorator name="headPanel" page="headPanel.jsp" />
+
+	<decorator name="bodyPanel" page="bodyPanel.jsp" />
+
+</decorators>

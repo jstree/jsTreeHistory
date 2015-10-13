@@ -1,0 +1,52 @@
+/* Logo Image Center Align */
+#header-logo img {
+	/* 
+	display: block;
+	margin: 0 auto;
+	 */
+	vertical-align: middle;
+}
+
+.div_center {
+	text-align: center;
+}
+
+
+/* section */
+div.center-image {
+	text-align: center;
+}
+
+
+
+/* Footer */
+#validation {
+	padding : 35px 0;
+	line-height: 30px;
+}
+
+#validation img {
+	/* height : 30px; */
+	vertical-align: middle;
+	padding-right : 20px;
+	opacity: 0.6;
+}
+
+#validation img:HOVER {
+	opacity: 1;
+}
+
+
+@media only screen and (max-width: 980px){
+	#validation {
+		text-align : center;
+	}	
+}
+
+footer p {
+	font-size : 12px;
+}
+
+#newsletter > div > form {
+	margin-top : 15px;
+}

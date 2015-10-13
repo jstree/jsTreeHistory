@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="boardManagement">
+	<typeAlias alias="BoardManagement" type="standard.mvc.component.business.baroboard.board.manager.boardmanagement.vo.BoardManagementVO" />
+	
+	<update id="alterNode" parameterClass="BoardManagement">
+		/* alterNode for BoardManagement */
+		UPDATE T_BOARD_INDI_SETTING 
+		   SET C_TITLE = #c_title#
+		     , C_WRITING_CNT_PER_PAGE = #writingCntPerPage#
+             , C_LEVEL_FOR_VIEW_LIST = #levelForViewList#
+             , C_LEVEL_FOR_READ_CONTENT = #levelForReadContent#
+             , C_LEVEL_FOR_WRITING = #levelForWriting#
+             , C_LEVEL_FOR_REPLY = #levelForReply#
+             , C_LEVEL_FOR_COMMENT = #levelForComment#
+             , C_LEVEL_FOR_CLIPPING = #levelForClipping#
+             , C_LEVEL_FOR_FILE_UPLOAD = #levelForFileUpload#
+             , C_LEVEL_FOR_FILE_DOWNLOAD = #levelForFileDownload#
+             , C_COMMENT_CNT_FOR_BAN_DELETION = #commentCntForBanDeletion#
+             , C_COMMENT_CNT_FOR_BAN_EDITING = #commentCntForBanEditing#
+             , C_USE_ANONYM_FL = #useAnonymFl#
+		 WHERE C_ID = #c_id#
+	</update>
+	
+	
+	<select id="getNode" parameterClass="BoardManagement" resultClass="BoardManagement">
+		/* getNode for BoardManagement */
+        SELECT C_ID
+             , C_PARENTID
+             , C_POSITION
+             , C_LEFT
+             , C_RIGHT
+             , C_LEVEL
+             , C_TITLE
+             , C_TYPE
+             , C_BOARD_TABLE_NAME AS boardTableName
+             , C_WRITING_CNT_PER_PAGE AS writingCntPerPage
+             , C_LEVEL_FOR_VIEW_LIST AS levelForViewList
+             , C_LEVEL_FOR_READ_CONTENT AS levelForReadContent
+             , C_LEVEL_FOR_WRITING AS levelForWriting
+             , C_LEVEL_FOR_REPLY AS levelForReply
+             , C_LEVEL_FOR_COMMENT AS levelForComment
+             , C_LEVEL_FOR_CLIPPING AS levelForClipping
+             , C_LEVEL_FOR_FILE_UPLOAD AS levelForFileUpload
+             , C_LEVEL_FOR_FILE_DOWNLOAD AS levelForFileDownload
+             , C_COMMENT_CNT_FOR_BAN_DELETION AS commentCntForBanDeletion
+             , C_COMMENT_CNT_FOR_BAN_EDITING AS commentCntForBanEditing
+             , C_USE_ANONYM_FL AS useAnonymFl
+          FROM T_BOARD_INDI_SETTING 
+         WHERE C_ID = #c_id#
+    </select>
+    
+    
+    <select id="getChildNode" parameterClass="BoardManagement" resultClass="BoardManagement">
+        /* getChildNode for BoardManagement */
+        SELECT C_ID
+             , C_PARENTID
+             , C_POSITION
+             , C_LEFT
+             , C_RIGHT
+             , C_LEVEL
+             , C_TITLE
+             , C_TYPE
+             , C_BOARD_TABLE_NAME AS boardTableName   
+             , C_USE_ANONYM_FL AS useAnonymFl
+             , C_REG_DT AS regDt
+          FROM T_BOARD_INDI_SETTING
+         WHERE C_PARENTID = #c_id#
+      ORDER BY C_ID DESC
+    </select>
+    
+    
+    <select id="getNodeByRef" parameterClass="BoardManagement" resultClass="BoardManagement">
+		/* getNodeByRef */
+		SELECT C_ID
+		     , C_PARENTID
+		     , C_POSITION
+			 , C_LEFT
+		     , C_RIGHT
+		     , C_LEVEL
+		     , C_TITLE
+		     , C_TYPE
+		FROM T_BOARD_INDI_SETTING
+	   WHERE C_ID = #ref#
+	</select>
+	
+	
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="BoardManagement">
+		/* stretchLeftForMyselfFromJstree */
+		UPDATE T_BOARD_INDI_SETTING
+		   SET C_LEFT = C_LEFT + #spaceOfTargetNode#
+		 WHERE C_LEFT &gt;=	#rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+	
+	
+	<update id="stretchRightForMyselfFromJstree" parameterClass="BoardManagement">
+		/* stretchRightForMyselfFromJstree */
+		UPDATE T_BOARD_INDI_SETTING
+		   SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
+		 WHERE C_RIGHT &gt;= #rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+	
+	
+	<insert id="addMyselfFromJstree" parameterClass="BoardManagement">
+		/* addMyselfFromJstree */
+		INSERT INTO T_BOARD_INDI_SETTING ( C_ID
+		                                 , C_PARENTID
+		                                 , C_POSITION
+		                                 , C_LEFT
+		                                 , C_RIGHT
+		                                 , C_LEVEL
+		                                 , C_TYPE
+		                                 , C_REG_DT
+		                                 , C_BOARD_TABLE_NAME )
+		                          VALUES ( S_BOARD_INDI_SETTING.NEXTVAL
+		                                 , #c_parentid#
+		                                 , #c_position#
+		                                 , #c_left#
+		                                 , #c_right#
+		                                 , #c_level#
+		                                 , #c_type#
+		                                 , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		                                 , #boardTableName# )
+		<selectKey resultClass="java.lang.Integer">
+			/* addMyselfFromJstree SEQ */
+			SELECT S_BOARD_INDI_SETTING.CURRVAL AS SEQ
+			  FROM DUAL
+		</selectKey>
+	</insert>
+    
+    
+    <select id="getTableSeq" resultClass="int">
+        /* getTableSeq */
+        SELECT S_BOARD_CREATE.NEXTVAL
+          FROM DUAL
+    </select>
+    
+    
+    <statement id="createBoardTable" parameterClass="BoardManagement">
+        /* createBoardTable for BoardManagement */
+        CREATE TABLE T_$boardTableName$ (
+            C_ID NUMBER NOT NULL,
+            C_PARENTID NUMBER NOT NULL,
+		    C_POSITION NUMBER NOT NULL,
+		    C_LEFT NUMBER NOT NULL,
+		    C_RIGHT NUMBER NOT NULL,
+		    C_LEVEL NUMBER NOT NULL,
+		    C_TITLE VARCHAR2(4000),
+		    C_TYPE VARCHAR2(4000),
+		    C_REG_ID NUMBER,
+		    C_CONTENT CLOB,
+		    C_ALLOW_COMMENT_FL CHAR(1),
+		    C_ALLOW_REPLY_FL CHAR(1),
+		    C_ALLOW_TRACKBACK_FL CHAR(1),
+		    C_ALERT_RESPONSE_FL CHAR(1),
+		    C_OPEN_ARTICLE_FL CHAR(1),
+		    C_ANNOUNCEMENT_FL CHAR(1),
+		    C_VIEW_CNT NUMBER,
+		    C_IS_DELETED_FL CHAR(1),
+		    C_REG_DT VARCHAR2(14)
+        )
+    </statement>
+    
+    
+    <statement id="createLogTable" parameterClass="BoardManagement">
+        /* createLogTable for BoardManagement */
+        CREATE TABLE T_$boardTableName$_LOG (
+            C_ID NUMBER NOT NULL, 
+            C_PARENTID NUMBER NOT NULL, 
+            C_POSITION NUMBER NOT NULL, 
+            C_LEFT NUMBER NOT NULL, 
+            C_RIGHT NUMBER NOT NULL, 
+            C_LEVEL NUMBER NOT NULL, 
+            C_TITLE VARCHAR2(4000 BYTE), 
+            C_TYPE VARCHAR2(4000 BYTE), 
+            C_METHOD VARCHAR2(4000 BYTE), 
+            C_STATE VARCHAR2(4000 BYTE), 
+            C_DATE DATE NOT NULL ENABLE
+        )
+    </statement>
+    
+    
+    <statement id="createLikeTable" parameterClass="BoardManagement">
+        /* createLikeTable for BoardManagement */
+        CREATE TABLE T_$boardTableName$ (
+            C_ID NUMBER NOT NULL, 
+            C_PARENTID NUMBER NOT NULL, 
+            C_POSITION NUMBER NOT NULL, 
+            C_LEFT NUMBER NOT NULL, 
+            C_RIGHT NUMBER NOT NULL, 
+            C_LEVEL NUMBER NOT NULL, 
+            C_TITLE VARCHAR2(4000 BYTE), 
+            C_TYPE VARCHAR2(4000 BYTE), 
+            C_ARTICLE_ID NUMBER,
+            C_REG_ID NUMBER,
+            C_REG_DT VARCHAR2(14)
+        )
+    </statement>
+    
+    
+    <statement id="createCommentTable" parameterClass="BoardManagement">
+        /* createCommentTable for BoardManagement */
+        CREATE TABLE T_$boardTableName$ (
+            C_ID NUMBER NOT NULL, 
+            C_PARENTID NUMBER NOT NULL, 
+            C_POSITION NUMBER NOT NULL, 
+            C_LEFT NUMBER NOT NULL, 
+            C_RIGHT NUMBER NOT NULL, 
+            C_LEVEL NUMBER NOT NULL, 
+            C_TITLE VARCHAR2(4000 BYTE), 
+            C_TYPE VARCHAR2(4000 BYTE), 
+            C_ARTICLE_ID NUMBER,
+            C_REG_ID NUMBER,
+            C_VIEW_ONLY_REG_ID_FL CHAR(1),
+            C_REG_DT VARCHAR2(14)
+        )
+    </statement>
+    
+    
+    <statement id="createFileTable" parameterClass="BoardManagement">
+        /* createFileTable for BoardManagement */
+        CREATE TABLE T_$boardTableName$ (
+            C_ID NUMBER NOT NULL, 
+            C_PARENTID NUMBER NOT NULL, 
+            C_POSITION NUMBER NOT NULL, 
+            C_LEFT NUMBER NOT NULL, 
+            C_RIGHT NUMBER NOT NULL,
+            C_LEVEL NUMBER NOT NULL,
+            C_TITLE VARCHAR2(4000 BYTE), 
+            C_TYPE VARCHAR2(4000 BYTE), 
+            C_ARTICLE_ID NUMBER,
+            C_SAVED_FILE_NM VARCHAR2(50),
+            C_EXTENSION NUMBER,
+            C_ATTACH_FILE NUMBER,
+            C_REG_DT VARCHAR2(14)
+        )
+    </statement>
+    
+    
+    <procedure id="createTrigger" parameterClass="BoardManagement">
+        /* createTrigger for BoardManagement */
+        { call P_LINK_LOGTABLE( #boardTableName# ) }
+    </procedure>
+    
+    
+    <statement id="createSequence" parameterClass="BoardManagement">
+        /* createSequence for BoardManagement */
+        CREATE SEQUENCE S_$boardTableName$
+               MINVALUE 0
+               MAXVALUE 999999999999999999999999999
+           INCREMENT BY 1
+             START WITH 3
+                  CACHE 20
+                NOORDER
+                NOCYCLE 
+    </statement>
+    
+    
+    <insert id="setRootNode" parameterClass="BoardManagement">
+        /* setRootNode */
+        INSERT INTO T_$boardTableName$( C_ID
+                                      , C_PARENTID
+                                      , C_POSITION
+                                      , C_LEFT
+                                      , C_RIGHT
+                                      , C_LEVEL
+                                      , C_TITLE
+                                      , C_TYPE
+                                      )
+                                VALUES( '1', '0', '0', '1', '4', '0', 'Root Node', 'root' )
+    </insert>
+    
+    
+    <insert id="setDriveNode" parameterClass="BoardManagement">
+        /* "setDriveNode" */
+        INSERT INTO T_$boardTableName$( C_ID
+                                      , C_PARENTID
+                                      , C_POSITION
+                                      , C_LEFT
+                                      , C_RIGHT
+                                      , C_LEVEL
+                                      , C_TITLE
+                                      , C_TYPE
+                                      )
+                                VALUES( '2', '1', '0', '2', '3', '1', 'First Child', 'drive' )
+    </insert>
+</sqlMap>

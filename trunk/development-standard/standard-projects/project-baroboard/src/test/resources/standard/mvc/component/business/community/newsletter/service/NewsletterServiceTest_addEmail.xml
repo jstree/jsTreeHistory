@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+  <T_NEWSLETTER_COMPREHENSIVETREE 
+  C_ID="1" C_PARENTID="0" C_POSITION="0" C_LEFT="1" C_RIGHT="8" C_LEVEL="0" C_TITLE="Root Node" C_TYPE="root" />
+  
+  <T_NEWSLETTER_COMPREHENSIVETREE 
+  C_ID="2" C_PARENTID="1" C_POSITION="0" C_LEFT="2" C_RIGHT="7" C_LEVEL="1" C_TITLE="Newsletter" C_TYPE="drive" />
+
+  <T_NEWSLETTER_COMPREHENSIVETREE
+  C_ID="3" C_PARENTID="2" C_POSITION="0" C_LEFT="3" C_RIGHT="6" C_LEVEL="2" C_TITLE="Anonymous Users" C_TYPE="folder" />
+  
+  <T_NEWSLETTER_COMPREHENSIVETREE
+  C_ID="4" C_PARENTID="3" C_POSITION="0" C_LEFT="4" C_RIGHT="5" C_LEVEL="3" C_TITLE="test1@test.com" C_TYPE="default" />
+</dataset>

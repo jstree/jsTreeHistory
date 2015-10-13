@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile">
+	<typeAlias alias="UserNoteAttachFile"
+		type="standard.mvc.component.business.baroboard.user.note.vo.UserNoteAttachFile" />
+
+	<sql id="getMetaField">
+		/* getChildNode */
+		SELECT A.c_id
+		, A.c_parentid
+		, A.c_position
+		, A.c_left
+		, A.c_right
+		, A.c_level
+		, A.c_title
+		, A.c_type
+		/* user filed add point*/
+		, A.C_NOTE_DETAIL_ID AS noteDetailId
+		, A.C_STORE_FILE_NM AS storeFileNm
+	</sql>
+	<sql id="getInlineChildCount">
+		, ( SELECT CASE
+		WHEN COUNT(*) &gt; 0 THEN 'InChild'
+		ELSE
+		'NoChild'
+		END AS YesNo
+		/* inline table from filed add point*/
+	</sql>
+	<sql id="getInlineChildCountAfterFrom">
+		WHERE B.C_PARENTID = A.C_ID
+		) AS childcount
+		/* table from
+		filed add point*/
+	</sql>
+	<sql id="getAfterFrom">
+		WHERE A.C_NOTE_DETAIL_ID = #noteDetailId# 
+		ORDER BY A.C_POSITION ASC
+	</sql>
+	
+	<select id="getChildNode" parameterClass="UserNoteAttachFile"
+		resultClass="UserNoteAttachFile">
+		<dynamic>
+			<include refid="getMetaField" />
+			/* user filed */
+			<include refid="getInlineChildCount" />
+			/* inline table from filed*/
+			FROM T_USER_NOTE_ATTACH_FILE B
+			<include refid="getInlineChildCountAfterFrom" />
+			/* table from filed*/
+			FROM T_USER_NOTE_ATTACH_FILE A
+			<include refid="getAfterFrom" />
+		</dynamic>
+	</select>
+
+
+	<select id="getChildNodeByLeftRight" parameterClass="UserNoteAttachFile"
+		resultClass="UserNoteAttachFile">
+		/* getChildNodeByLeftRight */
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		, C_LEFT
+		, C_RIGHT
+		, C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		, C_NOTE_DETAIL_ID
+		, C_STORE_FILE_NM
+		, C_NOTE_DETAIL_ID AS noteDetailId
+		, C_STORE_FILE_NM AS storeFileNm
+		FROM
+		T_USER_NOTE_ATTACH_FILE
+		WHERE C_LEFT &gt;= #c_left#
+		AND C_RIGHT &lt;=
+		#c_right#
+		ORDER BY C_LEFT ASC
+	</select>
+
+
+	<select id="searchNodeByString" parameterClass="UserNoteAttachFile"
+		resultClass="UserNoteAttachFile">
+		/* searchNodeByString */
+		SELECT c_left
+		, c_right
+		FROM
+		T_USER_NOTE_ATTACH_FILE
+		WHERE C_TITLE LIKE '%'||#searchStr#||'%'
+	</select>
+
+
+	<select id="searchNodeByPosition" parameterClass="java.util.List"
+		resultClass="String">
+		/* searchNodeByPosition */
+		SELECT DISTINCT C_ID
+		FROM
+		T_USER_NOTE_ATTACH_FILE
+		WHERE 1=1
+		<iterate prepend="AND" open="(" close=")" conjunction="OR">
+			( C_LEFT
+			&lt;= #[].c_left# AND C_RIGHT &gt;= #[].c_right# )
+		</iterate>
+	</select>
+
+
+	<update id="alterNode" parameterClass="UserNoteAttachFile">
+		/* alterNode */
+		UPDATE
+		T_USER_NOTE_ATTACH_FILE
+		SET C_TYPE = #c_type#
+		, C_TITLE = #c_title#
+        , C_NOTE_DETAIL_ID = #noteDetailId#
+        , C_STORE_FILE_NM = #storeFileNm#
+		WHERE C_ID = #c_id#
+	</update>
+
+
+	<select id="getNode" parameterClass="UserNoteAttachFile"
+		resultClass="UserNoteAttachFile">
+		/* getNode */
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		, C_LEFT
+		, C_RIGHT
+		, C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		, C_NOTE_DETAIL_ID AS noteDetailId
+		, C_STORE_FILE_NM AS storeFileNm
+		FROM T_USER_NOTE_ATTACH_FILE
+		WHERE
+		C_ID = #c_id#
+	</select>
+
+
+	<select id="getNodeByRef" parameterClass="UserNoteAttachFile"
+		resultClass="UserNoteAttachFile">
+		/* getNodeByRef */
+		SELECT C_ID
+		, C_PARENTID
+		, C_POSITION
+		, C_LEFT
+		, C_RIGHT
+		, C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		, C_NOTE_DETAIL_ID AS noteDetailId
+		, C_STORE_FILE_NM AS storeFileNm
+		FROM
+		T_USER_NOTE_ATTACH_FILE
+		WHERE C_ID = #ref#
+	</select>
+
+
+	<delete id="removeNode" parameterClass="UserNoteAttachFile">
+		/* removeNode */
+		DELETE
+		FROM T_USER_NOTE_ATTACH_FILE
+		WHERE C_LEFT &gt;= #c_left#
+		AND C_RIGHT
+		&lt;= #c_right#
+	</delete>
+
+
+	<update id="removedAfterLeftFix" parameterClass="UserNoteAttachFile">
+		/*
+		removedAfterLeftFix */
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET C_LEFT =
+		C_LEFT - #spaceOfTargetNode#
+		WHERE C_LEFT &gt; #c_right#
+	</update>
+
+
+	<update id="removedAfterRightFix" parameterClass="UserNoteAttachFile">
+		/*
+		removedAfterRightFix */
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET C_RIGHT =
+		C_RIGHT - #spaceOfTargetNode#
+		WHERE C_RIGHT &gt; #c_left#
+	</update>
+
+
+	<update id="removedAfterPositionFix" parameterClass="UserNoteAttachFile">
+		/*
+		removedAfterPositionFix */
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET
+		C_POSITION = C_POSITION - 1
+		WHERE C_PARENTID = #c_parentid#
+		AND
+		C_POSITION &gt; #c_position#
+	</update>
+
+
+	<select id="analyzeRootNode" resultClass="UserNoteAttachFile">
+		/* searchNodeByString
+		*/
+		SELECT C_LEFT
+		FROM T_USER_NOTE_ATTACH_FILE
+		WHERE C_PARENTID = 0
+	</select>
+
+
+	<update id="cutMyselfPositionFix" parameterClass="UserNoteAttachFile">
+		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET C_POSITION
+		= C_POSITION - 1
+		WHERE C_PARENTID = #c_parentid#
+		AND C_POSITION &gt;
+		#c_position#
+	</update>
+
+
+	<update id="cutMyselfLeftFix" parameterClass="UserNoteAttachFile">
+		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
+		WHERE C_LEFT &gt; #c_right#
+	</update>
+
+
+	<update id="cutMyselfRightFix" parameterClass="UserNoteAttachFile">
+		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
+		WHERE C_RIGHT &gt; #c_left#
+		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+			open="(" close=")" conjunction=",">
+			#c_idsByChildNodeFromNodeById[]#
+		</iterate>
+	</update>
+
+
+	<update id="stretchPositionForMyself" parameterClass="UserNoteAttachFile">
+		/* stretchPositionForMyselfFromJstree */
+		UPDATE
+		T_USER_NOTE_ATTACH_FILE
+		SET C_POSITION = C_POSITION + 1
+		WHERE
+		C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
+		<isEqual property="copy" compareValue="0">
+			AND C_ID NOT IN
+			<isEmpty property="c_idsByChildNodeFromNodeById">
+				(-1)
+			</isEmpty>
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate property="c_idsByChildNodeFromNodeById" open="("
+					close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="UserNoteAttachFile">
+		/* stretchLeftForMyselfFromJstree */
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
+		WHERE C_LEFT &gt;=
+		#rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<update id="stretchRightForMyselfFromJstree" parameterClass="UserNoteAttachFile">
+		/* stretchRightForMyselfFromJstree */
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
+		WHERE C_RIGHT &gt;=
+		#rightPositionFromNodeByRef#
+		<isEqual property="copy" compareValue="0">
+			<isNotEmpty property="c_idsByChildNodeFromNodeById">
+				<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
+					open="(" close=")" conjunction=",">
+					#c_idsByChildNodeFromNodeById[]#
+				</iterate>
+			</isNotEmpty>
+		</isEqual>
+	</update>
+
+
+	<insert id="pasteMyselfFromJstree" parameterClass="UserNoteAttachFile">
+		/* pasteMyselfFromJstree */
+		INSERT INTO T_USER_NOTE_ATTACH_FILE (
+		C_ID, C_PARENTID, C_POSITION,
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
+		)
+		SELECT S_USER_NOTE_ATTACH_FILE.NEXTVAL AS C_ID
+		, A.*
+		FROM (
+		SELECT
+		#ref# AS C_PARENTID
+		, C_POSITION
+		, C_LEFT - #idifLeft# AS C_LEFT
+		,
+		C_RIGHT -
+		#idifRight# AS C_RIGHT
+		, C_LEVEL - #ldif# AS C_LEVEL
+		, C_TITLE
+		, C_TYPE
+		FROM T_USER_NOTE_ATTACH_FILE
+		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
+			open="(" close=")" conjunction=",">
+			#c_idsByChildNodeFromNodeById[]#
+		</iterate>
+		ORDER BY C_LEVEL DESC
+		) A
+		<selectKey resultClass="java.lang.Integer">
+			/* pasteMyselfFromJstree SEQ */
+			SELECT S_USER_NOTE_ATTACH_FILE.CURRVAL AS SEQ
+			FROM DUAL
+		</selectKey>
+	</insert>
+
+
+	<update id="enterMyselfFixPosition" parameterClass="UserNoteAttachFile">
+		/*
+		enterMyselfFixPosition */
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET
+		C_PARENTID = #ref#
+		, C_POSITION = #c_position#
+		WHERE C_ID = #c_id#
+	</update>
+
+
+	<update id="enterMyselfFixLeftRight" parameterClass="UserNoteAttachFile">
+		/* enterMyselfFixLeftRight */
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET
+		C_LEFT = C_LEFT - (#idif#)
+		, C_RIGHT = C_RIGHT - (#idif#)
+		, C_LEVEL =
+		C_LEVEL - (#ldif#)
+		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
+			open="(" close=")" conjunction=",">
+			#c_idsByChildNodeFromNodeById[]#
+		</iterate>
+	</update>
+
+
+	<insert id="addMyselfFromJstree" parameterClass="UserNoteAttachFile">
+		/* addMyselfFromJstree */
+		INSERT INTO T_USER_NOTE_ATTACH_FILE (
+		C_ID, C_PARENTID, C_POSITION,
+		C_LEFT, C_RIGHT, C_LEVEL )
+		VALUES (
+		S_USER_NOTE_ATTACH_FILE.NEXTVAL, #c_parentid#, #c_position#,
+		#c_left#, #c_right#, #c_level# )
+		<selectKey resultClass="java.lang.Integer">
+			/* addMyselfFromJstree SEQ */
+			SELECT
+			S_USER_NOTE_ATTACH_FILE.CURRVAL AS SEQ
+			FROM DUAL
+		</selectKey>
+	</insert>
+
+
+	<update id="alterNodeType" parameterClass="UserNoteAttachFile">
+		/* alterNodeType */
+		UPDATE T_USER_NOTE_ATTACH_FILE
+		SET C_TYPE = #c_type#
+		WHERE C_ID =
+		#c_id#
+	</update>
+
+
+	<update id="fixCopyIF" parameterClass="UserNoteAttachFile">
+		/* fixCopyIF */
+		UPDATE
+		T_USER_NOTE_ATTACH_FILE
+		SET C_POSITION = #fixCopyPosition#
+		WHERE C_ID
+		= #fixCopyId#
+	</update>
+
+
+	<update id="fixCopy" parameterClass="UserNoteAttachFile">
+		/* fixCopy */
+		UPDATE
+		T_USER_NOTE_ATTACH_FILE
+		SET C_PARENTID = #fixCopyId#
+		WHERE C_ID =
+		#c_id#
+	</update>
+</sqlMap>
