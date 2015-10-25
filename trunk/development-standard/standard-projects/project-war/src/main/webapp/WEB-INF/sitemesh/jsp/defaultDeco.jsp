@@ -21,8 +21,8 @@
 			</c:otherwise>
 		</c:choose>
 		<title><decorator:title default="JsTree 아키텍쳐, 바로보드 Java 설치형 게시판 솔루션, 오픈소스 313 자바 개발자 그룹 커뮤니티" /></title>	
-		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/style.jsp"/>
-		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/script.jsp"/>
+		<page:applyDecorator name="headPanel" page="/WEB-INF/sitemesh/jsp/style.jsp"/>
+		<page:applyDecorator name="headPanel" page="/WEB-INF/sitemesh/jsp/script.jsp"/>
 		<decorator:head/>
 		<!-- CSS Setting -->
 		<link rel="icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/favicon.ico" type="image/x-icon" />
@@ -37,11 +37,11 @@
 	</head>
 	<body class="template-index">
 		<div class="page-border clearfix">
-			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/header.jsp"/>
-			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/navigation.jsp"/>
+			<page:applyDecorator name="bodyPanel" page="/WEB-INF/sitemesh/jsp/header.jsp"/>
+			<page:applyDecorator name="bodyPanel" page="/WEB-INF/sitemesh/jsp/navigation.jsp"/>
 			<decorator:body/>
-			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/no-display.jsp"/>
-			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/footer.jsp"/>
+			<page:applyDecorator name="bodyPanel" page="/WEB-INF/sitemesh/jsp/no-display.jsp"/>
+			<page:applyDecorator name="bodyPanel" page="/WEB-INF/sitemesh/jsp/footer.jsp"/>
 		</div>
 		<!-- ANALYTICS START -->
 		<!-- https://www.google.com/analytics/settings/home?scid=18527803 web log Analyzer  -->

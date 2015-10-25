@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<decorators defaultdir="/WEB-INF/sitemesh">
+<decorators defaultdir="/WEB-INF/sitemesh/jsp">
 	<!-- Any urls that are excluded will never be decorated by Sitemesh -->
 	<excludes>
 		<pattern>/exclude.jsp</pattern>
 		<pattern>/exclude/*</pattern>
-<!-- 		committerSchedule ajax call -->
-		<pattern>/sub/*</pattern>
-<!-- 		login back-end -->
-		<pattern>/uat/*</pattern>
-<!-- 		freeBoard ajax call -->		
-		<pattern>/cop/*</pattern>
+
 <!-- 		jstree 테스트용 페이지 -->		
 		<pattern>/jsp/community/index/index.do</pattern>		
 		<!--	egov 관리자 페이지 -->		

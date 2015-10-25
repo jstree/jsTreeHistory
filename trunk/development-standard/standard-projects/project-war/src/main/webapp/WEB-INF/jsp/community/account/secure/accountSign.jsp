@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<!DOCTYPE html>
-<html lang="ko" class="no-js">
-<!--<![endif]-->
-	<head></head>
-	<body>
+
 		<section class="clearfix" >
 			<div class="container bm-medium">
 				<nav>
@@ -91,5 +87,3 @@
 				</div>
 			</div>
 		</section>
-	</body>
-</html>

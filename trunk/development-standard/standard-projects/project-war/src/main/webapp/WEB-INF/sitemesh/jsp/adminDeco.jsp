@@ -21,22 +21,21 @@
 			</c:otherwise>
 		</c:choose>
 		<title><decorator:title default="바로보드 Admin" /></title>	
-		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/style.jsp"/>
-		<page:applyDecorator name="headPanel" page="/WEB-INF/jsp/sitemesh/script.jsp"/>
+		<page:applyDecorator name="headPanel" page="/WEB-INF/sitemesh/jsp/style.jsp"/>
 		<decorator:head/>
 		<!-- CSS Setting -->
 		<link href="${pageContext.request.contextPath}/assets/css/admin.css" rel="stylesheet" type="text/css" media="all" />
 	</head>
 	<body class="template-index">
 		<div class="page-border clearfix">
-			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/adminHeader.jsp"/>
+			<page:applyDecorator name="bodyPanel" page="/WEB-INF/sitemesh/jsp/adminHeader.jsp"/>
 			<div class="clearfix">
 				<div class="container bm-remove">
-					<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/adminNavigation.jsp"/>
+					<page:applyDecorator name="bodyPanel" page="/WEB-INF/sitemesh/jsp/adminNavigation.jsp"/>
 					<decorator:body/>
 				</div>
 			</div>
-			<page:applyDecorator name="bodyPanel" page="/WEB-INF/jsp/sitemesh/adminFooter.jsp"/>
+			<page:applyDecorator name="bodyPanel" page="/WEB-INF/sitemesh/jsp/adminFooter.jsp"/>
 		</div>
 	</body>
 </html>
