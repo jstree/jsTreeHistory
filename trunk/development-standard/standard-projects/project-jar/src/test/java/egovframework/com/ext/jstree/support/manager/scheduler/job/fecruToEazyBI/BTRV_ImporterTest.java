@@ -284,8 +284,8 @@ public class BTRV_ImporterTest
         }else{
             csvDataMap.put("RV", "N/A");
         }
-        assertThat(csvDataMap.get("BT")).isEqualTo("ORKS:TZ-3340");
-        assertThat(csvDataMap.get("RV")).isEqualTo("유현");
+        assertThat(csvDataMap.get("BT")).isEqualTo("WORKS:TZ-3340");
+        assertThat(csvDataMap.get("RV")).isEqualTo("김유현");
     }
     
 
