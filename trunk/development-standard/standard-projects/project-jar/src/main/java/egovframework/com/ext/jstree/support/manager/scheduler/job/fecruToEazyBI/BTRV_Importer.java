@@ -26,7 +26,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import egovframework.com.cmm.EgovMessageSource;
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreAddService;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.util.DateUtils;
 import egovframework.com.ext.jstree.support.util.StringUtils;
@@ -39,9 +38,6 @@ public class BTRV_Importer
     
     @Resource(name = "CoreService")
     CoreService coreService;
-    
-    @Resource(name = "CoreAddService")
-    CoreAddService coreAddService;
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
