@@ -88,6 +88,7 @@ public class CommunityController {
 	
 	@RequestMapping(value = "/menuMgr.do")
 	public String menuMgr(ModelMap model) throws Exception {
+		System.out.println("test");
 		return "/jsp/cop/com/EgovMenuMgr";
 	}
 }
