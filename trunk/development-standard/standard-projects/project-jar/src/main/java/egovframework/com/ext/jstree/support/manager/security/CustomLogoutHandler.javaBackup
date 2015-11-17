@@ -1,6 +1,0 @@
-package egovframework.com.ext.jstree.support.manager.security;
-
-public class CustomLogoutHandler
-{
-    
-}

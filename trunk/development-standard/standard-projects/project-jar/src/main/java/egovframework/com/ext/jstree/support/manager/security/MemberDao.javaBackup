@@ -1,9 +1,0 @@
-package egovframework.com.ext.jstree.support.manager.security;
-
-import org.springframework.stereotype.Repository;
-
-@Repository
-public class MemberDao
-{
-    
-}
