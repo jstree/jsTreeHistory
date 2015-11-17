@@ -21,8 +21,8 @@
 		설정 : 주석 3. Spring Security 로그인/로그아웃 설정을 위한 필터 설정 : 사용 4. 2.7 version security 
 		-> 3.0.1 version security 로 변경 ************************************************************************************************ -->
 
-	<display-name>Standard Development - Baro Community Project</display-name>
-	<description>Standard Development - Baro Community Project</description>
+	<display-name>Standard Development</display-name>
+	<description>Standard Development</description>
 
 	<welcome-file-list>
 		<welcome-file>index.do</welcome-file>
