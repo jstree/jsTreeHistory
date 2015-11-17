@@ -7,15 +7,6 @@
 		2011.09.07 서준식 로그인 체크 인터셉터 추가 2011.09.29 이기하 에러페이지 경로수정 2013.05.30 이기하 IP정보기록 
 		로직 추가 -->
 
-	<context:component-scan base-package="egovframework">
-		<context:include-filter expression="org.springframework.stereotype.Controller"
-			type="annotation" />
-		<context:exclude-filter expression="org.springframework.stereotype.Service"
-			type="annotation" />
-		<context:exclude-filter expression="org.springframework.stereotype.Repository"
-			type="annotation" />
-	</context:component-scan>
-
 	<!-- For Pagination Tag -->
 	<bean class="egovframework.com.cmm.ImagePaginationRenderer" id="imageRenderer" />
 

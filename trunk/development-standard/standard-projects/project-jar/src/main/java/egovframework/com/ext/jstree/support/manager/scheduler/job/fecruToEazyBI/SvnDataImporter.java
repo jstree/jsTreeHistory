@@ -86,15 +86,6 @@ public class SvnDataImporter {
 					@SuppressWarnings("unchecked")
 					List<Element> repositorys = root.getChildren("repository");
 					for (Element repository : repositorys) {
-						// logger.info("----------------------------- 레파지토리 반복 ---------------------------------");
-						// logger.info(repository.getText() +
-						// repository.getAttributeValue("repositoryState"));
-						// logger.info(repository.getText() +
-						// repository.getAttributeValue("name"));
-						// logger.info(repository.getText() +
-						// repository.getAttributeValue("finishedFullSlurp"));
-						// logger.info(repository.getText() +
-						// repository.getAttributeValue("enabled"));
 
 						String startDate = egovMessageSource.getMessage("ahnlab.fisheye.start.date");
 						// logger.info(" 초기 설정 프로퍼티를 가져옵니다. =" + startDate);

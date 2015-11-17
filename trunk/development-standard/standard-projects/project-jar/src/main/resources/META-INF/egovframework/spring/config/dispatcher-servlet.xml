@@ -10,16 +10,6 @@
 
 	<context:property-placeholder
 		location="classpath:/META-INF/egovframework/egovProps/globals.properties" />
-	<!-- - The controllers are autodetected POJOs labeled with the @Controller 
-		annotation. -->
-	<context:component-scan base-package="egovframework, standard.mvc">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Service" />
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Repository" />
-	</context:component-scan>
 
 	<!-- - The form-based controllers within this application provide @RequestMapping 
 		- annotations at the type level for path mapping URLs and @RequestMapping 
