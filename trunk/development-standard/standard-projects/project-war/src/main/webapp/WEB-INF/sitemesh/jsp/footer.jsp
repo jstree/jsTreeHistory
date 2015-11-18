@@ -61,9 +61,7 @@
 											<span class="tip-t-fade" data-tooltip="Facebook"><a	href="https://www.facebook.com/groups/313devgroup/" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></span>
 											<span class="tip-t-fade" data-tooltip="Twitter"><a href="https://twitter.com/313DevGroup" target="_blank"><i	class="fa fa-twitter fa-fw"></i></a></span>
 											<span class="tip-t-fade" data-tooltip="Google+"><a href="https://plus.google.com/communities/116550874214546756994" target="_blank"><i class="fa fa-google-plus fa-fw"></i></a></span>
-											<span class="tip-t-fade" data-tooltip="Google+"><a href="https://plus.google.com/communities/116550874214546756994" target="_blank"><%= com.jcabi.manifests.Manifests.read("Manifest-Version") %></a></span>
-											<span class="tip-t-fade" data-tooltip="Google+"><a href="https://plus.google.com/communities/116550874214546756994" target="_blank"><%= com.jcabi.manifests.Manifests.read("Build-ETC") %></a></span>
-											<span class="tip-t-fade" data-tooltip="Google+"><a href="https://plus.google.com/communities/116550874214546756994" target="_blank"><%= com.jcabi.manifests.Manifests.read("Build-Label") %></a></span>
+											<span class="tip-t-fade" data-tooltip="Google+"><a href="https://plus.google.com/communities/116550874214546756994" target="_blank"><%= com.jcabi.manifests.Manifests.read("Build-Time") %></a></span>
 										</div>
 									</div>
 								</div>
