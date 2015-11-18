@@ -33,7 +33,11 @@ import java.util.ArrayList;
  */
 public class EgovOe1SmsComBeanVO extends EgovOe1SmsComDefaultVO {
 
-    private String beanNm; // 빈 명
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3149376554220503400L;
+	private String beanNm; // 빈 명
     private String beanClassNm; // 빈 클래스 명
     private String destroyMethodNm; // 빈 디스트로이 메소드 명
     private int beanCount; // 빈 갯수

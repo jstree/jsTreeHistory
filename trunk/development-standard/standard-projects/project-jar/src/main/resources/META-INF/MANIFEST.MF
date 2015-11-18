@@ -4,7 +4,7 @@ Built-By: Administrator
 Build-Jdk: 1.7.0_51
 Created-By: Apache Maven 3.0.5
 key: value
-url: http://www.313.co.kr/standard-projects/project-jar
+url: http://www.313.co.kr
 mode: development
 Archiver-Version: Plexus Archiver
 

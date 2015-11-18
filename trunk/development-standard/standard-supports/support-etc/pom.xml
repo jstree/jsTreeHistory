@@ -42,11 +42,16 @@
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 		</dependency>
+		<!-- MENIFEST.MF file read -->
+		<dependency>
+			<groupId>com.jcabi</groupId>
+			<artifactId>jcabi-manifests</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- 미분류된 라이브러리 -->
 			<!-- WEB Common Dependency -->
 			<dependency>
 				<groupId>cglib</groupId>
@@ -62,10 +67,10 @@
 
 			<!-- TokenStream -->
 			<dependency>
-	<groupId>antlr</groupId>
-	<artifactId>antlr</artifactId>
-	<version>2.7.7</version>
-</dependency>
+				<groupId>antlr</groupId>
+				<artifactId>antlr</artifactId>
+				<version>2.7.7</version>
+			</dependency>
 
 
 			<dependency>
@@ -73,13 +78,20 @@
 				<artifactId>icu4j</artifactId>
 				<version>4.8</version>
 			</dependency>
-		
+
 			<!-- JSR-303 & Hibernate Validator -->
 			<dependency>
 				<groupId>javax.validation</groupId>
 				<artifactId>validation-api</artifactId>
 				<version>1.0.0.GA</version>
 			</dependency>
+			<!-- MENIFEST.MF file read -->
+			<dependency>
+				<groupId>com.jcabi</groupId>
+				<artifactId>jcabi-manifests</artifactId>
+				<version>1.1</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 </project>
