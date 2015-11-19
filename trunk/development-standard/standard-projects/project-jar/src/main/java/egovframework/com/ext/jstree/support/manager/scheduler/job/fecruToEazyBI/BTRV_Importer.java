@@ -546,10 +546,6 @@ public class BTRV_Importer
         //System.out.println("returnStr = " + filterOldRVDelimiterStr);
         
         //RV와 구분자가 있더라도 잘 닫았는지.
-        int checkPointOldRVDivid = matchPointWithSoftCheck(filterOldRVDelimiterStr, "]", "start");
-        String filterOldRVDividStr = StringUtils.substring(filterOldRVDelimiterStr, 1, checkPointOldRVDivid);
-        String filterOldRVTrimDividStr = filterOldRVDividStr.trim();
-        //System.out.println("patternDelimiterReturnStr = " + filterOldRVTrimDividStr);
         
         if(filterOldRVDelimiterStr.isEmpty()){
             //RV 포맷이 있는지.
