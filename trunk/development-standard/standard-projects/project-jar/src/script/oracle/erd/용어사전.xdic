@@ -11,4 +11,12 @@
   <term name="명" physicalName="NAME" physicalDescription="Name"/>
   <term name="권한" physicalName="AUTH" physicalDescription="Authority"/>
   <term name="아이디" physicalName="ID" physicalDescription="Identity, Identification"/>
+  <term name="로그인" physicalName="LOGIN" physicalDescription="Login"/>
+  <term name="로그아웃" physicalName="LOGOUT" physicalDescription="Logout"/>
+  <term name="지속" physicalName="PSSTC" physicalDescription="Persistence"/>
+  <term name="리멤버미" physicalName="REMB_ME" physicalDescription="Remember me"/>
+  <term name="시리즈" physicalName="SERIES" physicalDescription="Series"/>
+  <term name="토큰" physicalName="TOKEN" physicalDescription="Token"/>
+  <term name="마지막" physicalName="LAST" physicalDescription="Last"/>
+  <term name="일시" physicalName="DT" physicalDescription="Date Time"/>
 </tm:TermDictionary>
