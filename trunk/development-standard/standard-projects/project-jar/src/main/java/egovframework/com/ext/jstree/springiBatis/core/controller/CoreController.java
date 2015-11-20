@@ -168,6 +168,7 @@ public class CoreController extends GenericAbstractController {
 			throw new RuntimeException();
 
 		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
+		
 		comprehensiveTree.setStatus(coreService.alterNode(comprehensiveTree));
 
 		return comprehensiveTree;

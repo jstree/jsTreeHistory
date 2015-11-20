@@ -385,7 +385,7 @@ public class ComprehensiveTree {
 	}
 	
     public String getSqlMapSelector() {
-		if (sqlMapSelector == null || sqlMapSelector.isEmpty()) {
+		if (this.sqlMapSelector == null || this.sqlMapSelector.isEmpty() || sqlMapSelector.equals("null")) {
 			return "core";
 		} else {
 			return sqlMapSelector;
