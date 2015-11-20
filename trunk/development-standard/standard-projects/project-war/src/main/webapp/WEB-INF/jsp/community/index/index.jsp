@@ -4,7 +4,7 @@
 	<head>
 		<style type="text/css">
 			p strong {
-				font-size: 13pt;
+				font-size: 11pt;
 			}			
 		</style>
  

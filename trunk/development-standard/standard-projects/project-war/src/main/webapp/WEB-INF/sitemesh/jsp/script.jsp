@@ -12,7 +12,6 @@
 	<head data-placeholder-focus="false" data-placeholder-live="false">
 		<script type="text/javascript">
 			var console = window.console || { log : function() {} };
-			
 			function getContextPath() {
 			  return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 			}
@@ -53,11 +52,12 @@
 		<script src="${pageContext.request.contextPath}/assets/js/option_selection.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/api.jquery.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/jNotify.jquery.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/dataTables.responsive.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/jquery-ui.js" type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.js" type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/dataTables.responsive.js" type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery-ui.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/ajax.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/common.js" type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/lnb.js" type="text/javascript"></script>
 		<style type="text/css">
 			html {
 			margin-top: 40px;
@@ -66,65 +66,6 @@
 			position: relative;
 			}
 		</style>
-		<!-- 시간이 없어서 우선 붙이고 차후 찾아서 올리던지 아니면 별도로 JS파일로 대체예정 -->
-		<script type="text/javascript">
-			$(document).ready(function() {
-				var _openedMenu=""
-				//responsive menu icon click//
-				$("#responsive-menu").click(function(){
-					$("#responsive-admin-menu #menu").slideToggle()
-				})
-				//responsive menu icon click//
-				
-				//responsive remove style
-				$(window).resize(function(){
-					$("#responsive-admin-menu #menu").removeAttr("style")
-				})
-				//responsive remove style
-				
-				
-				//sub menu open / close	
-				$("#menu a.submenu").click(function(){
-					if(_openedMenu!=""){	$("#" + _openedMenu).prev("a").removeClass("downarrow");	$("#" + _openedMenu).slideUp("fast");}
-					if(_openedMenu==$(this).attr("name")){
-						$("#" + $(this).attr("name")).slideUp("fast")
-				        $(this).removeClass("downarrow")
-				        _openedMenu=""
-					}else{		
-						$("#" + $(this).attr("name")).slideDown("fast")
-						_openedMenu=$(this).attr("name")
-				        $(this).addClass("downarrow")
-					}
-					return false;
-				})
-				//sub menu open / close
-
-				// window 로드, 리사이징시 margin left 조절
-				var quickMenu = $("#responsive-admin-menu");
-				$(window).on('resize load', function() {
-					var quickWidth = quickMenu.outerWidth();
-					( $(this).width() < 980 )
-						? $(".page-border").css('marginLeft', '0')
-					    : $(".page-border").css('marginLeft', quickWidth);
-				});
-			});
-		</script>
-		<!-- 2015-06-22 : 네비 스크롤 -->
-		<script>
-			$(document).ready(function () {
-				mobileAdminNavHeight()
-			});
-			function mobileAdminNavHeight(){
-				$('#responsive-admin-menu').css('max-height',$(window).height())
-				$('#responsive-admin-menu').on('mouseover', function(){
-					$(this).focus();
-				});
-				$('#responsive-admin-menu').on('mouseout', function(){
-					$(this).blur();
-				});
-			}
-			// 마우스 올리면 현재 스크롤중인거를 멈추어야 함, 그러나 스크롤 다 끝나고 hover 이벤트가 적용 되어 스크롤 중일 때는 포커스 이벤트가 먹지 않음. (console.log 는 먹음) 
-		</script>
 	</head>
 	<body></body>
 </html>

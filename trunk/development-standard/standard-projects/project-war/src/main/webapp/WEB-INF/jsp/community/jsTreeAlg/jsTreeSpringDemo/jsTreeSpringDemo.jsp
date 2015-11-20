@@ -36,7 +36,8 @@
 	#demo {
 		overflow:auto;
 		max-height:469px;
-		float: left;background:#fff;
+		float: left;
+		background:#fff;
 	}
 
 	.NFText{
@@ -99,7 +100,6 @@
 	.demo_con table tbody tr.child td{text-align:left;}
 	.dataTables_filter, .dataTables_length{display:none}
 
-	table.dataTable.dtr-inline.collapsed tbody td:first-child:before, table.dataTable.dtr-inline.collapsed tbody th:first-child:before {top:50%;margin-top:-10px;}
 
 	@media only screen and (max-width: 768px){ 
 		.btn_wrap01{width:100%}

@@ -1,4 +1,4 @@
-<%@ tag language="java" pageEncoding="UTF-8" isELIgnored="false" body-content="scriptless" description="jstree client"%>
+<%@ tag language="java" pageEncoding="UTF-8" isELIgnored="false" body-content="scriptless" trimDirectiveWhitespaces="true" description="jstree client"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
