@@ -237,12 +237,6 @@ public class MenuController extends GenericAbstractController {
     	return menuComprehensiveTree;
     }
     
-    @RequestMapping("/index/index.do")
-	public String index() {
-
-		return "/jsp/community/unused.index/index";
-	}
-    
     @RequestMapping("/index/menuManage.do")
 	public String menuManage() {
 

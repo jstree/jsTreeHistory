@@ -218,7 +218,6 @@ public class CoreController extends GenericAbstractController {
 		return comprehensiveTree;
 	}
 
-	// 뭔지 알 수가 없다.
 	@RequestMapping("/analyzeNode.do")
 	public String getChildNode(ModelMap model) {
 		model.addAttribute("analyzeResult", "");
