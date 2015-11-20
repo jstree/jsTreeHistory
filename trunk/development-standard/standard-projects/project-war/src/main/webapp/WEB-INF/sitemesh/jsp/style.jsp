@@ -69,14 +69,14 @@
 			@media (min-width: 1200px) and (max-width: 1600px) { 
 				.container { width: 1000px; }
 				.container .one-third { width: 318px; }
-				#secondary-navigation { height: 100px; }
+				#secondary-navigation { height: 50px; }
 			}
 			@media (min-width: 980px) and (max-width: 1200px) { 
 				.page-border { width: auto; /*min-width: 980px;*/ }
 				.container { width: 100%; padding: 0px 1px 0px 1px; }
 				.container .one-third { float: left; width: 32%; }
 				.container .one-third.last { float: right; width: 30%; }
-				#secondary-navigation { height: 100px; }
+				#secondary-navigation { height: 50px; }
 			}
 			@media only screen and (max-width: 980px) { 
 				.page-border { min-width: 100%; margin-left: 0 !important; margin-top: 50px; }

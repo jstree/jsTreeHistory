@@ -239,7 +239,7 @@ public class MenuController extends GenericAbstractController {
     
     @RequestMapping("/index/menuManage.do")
 	public String menuManage() {
-
+    	
 		return "/jsp/community/index/menuManage";
 	}
 }

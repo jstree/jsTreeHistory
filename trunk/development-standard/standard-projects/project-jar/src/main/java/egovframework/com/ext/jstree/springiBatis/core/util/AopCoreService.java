@@ -57,7 +57,7 @@ public class AopCoreService {
 			Object ret = thisJoinPoint.proceed();
 			return ret;
 		} finally {
-			System.out.println("****");
+			logger.info("@Around executed finally phase");
 		}
 	}
 
