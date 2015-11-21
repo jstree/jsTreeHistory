@@ -65,7 +65,7 @@ public class MenuController extends GenericAbstractController {
 	 */
 	@ResponseBody
 	@RequestMapping("/largeMenu/middleMenu/smallMenu/menu/invokeSelect.do")
-	public List<MenuComprehensiveTree> getChildNode(MenuComprehensiveTree menuComprehensiveTree)
+	public List<MenuComprehensiveTree> getMenuList(MenuComprehensiveTree menuComprehensiveTree)
 			 throws Exception {
 
 		if (menuComprehensiveTree.getC_id() == 0) {

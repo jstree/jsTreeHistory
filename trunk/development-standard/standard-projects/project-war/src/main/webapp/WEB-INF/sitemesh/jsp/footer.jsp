@@ -46,6 +46,8 @@
 											<li><a href="mailto:313@313.co.kr" target="_self"><i class="fa fa-envelope-o fw"></i><span>Mail to Admin</span></a></li>
 											<li><a href="tel:010-5093-7313" target="_self"><i class="fa fa-phone fw"></i><span>010-5093-7313</span></a></li>
 											<li><a href="#" target="_self"><i class="fa fa-map-marker fw"></i><span>서울시 용산구 동부이촌동 퀸즈빌 7층</span></a></li>
+											<li><a href="#" target="_self"><i class="fa fa-map-marker fw"></i><span>Build-Date : <%= com.jcabi.manifests.Manifests.read("Build-Date") %></span></a></li>
+											<li><a href="#" target="_self"><i class="fa fa-map-marker fw"></i><span>Built-Date : <%= com.jcabi.manifests.Manifests.read("Built-Date") %></span></a></li>
 										</ul>
 									</div>
 								</div>
@@ -58,10 +60,10 @@
 									<div class="content">
 										<p class="text"></p>
 										<div id="social-icons">
-											<span class="tip-t-fade" data-tooltip="Facebook"><a	href="https://www.facebook.com/groups/313devgroup/" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></span>
-											<span class="tip-t-fade" data-tooltip="Twitter"><a href="https://twitter.com/313DevGroup" target="_blank"><i	class="fa fa-twitter fa-fw"></i></a></span>
+											<span class="tip-t-fade" data-tooltip="Facebook"><a href="https://www.facebook.com/groups/313devgroup/" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></span>
+											<span class="tip-t-fade" data-tooltip="Twitter"><a href="https://twitter.com/313DevGroup" target="_blank"><i class="fa fa-twitter fa-fw"></i></a></span>
 											<span class="tip-t-fade" data-tooltip="Google+"><a href="https://plus.google.com/communities/116550874214546756994" target="_blank"><i class="fa fa-google-plus fa-fw"></i></a></span>
-											<span class="tip-t-fade" data-tooltip="Google+"><a href="https://plus.google.com/communities/116550874214546756994" target="_blank"><%= com.jcabi.manifests.Manifests.read("Build-Time") %></a></span>
+											<span class="tip-t-fade" data-tooltip="buildTime"><a href="http://www.313.co.kr/bamboo" target="_blank"><%= com.jcabi.manifests.Manifests.read("Build-Time") %></a></span>
 										</div>
 									</div>
 								</div>
