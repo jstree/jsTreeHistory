@@ -339,7 +339,7 @@ $("${target}")
 				}
 				//$("#analyze").click();
 				$("span.ui-icon-refresh").click();
-				<c:if test="${ dataTableReload  == 'true'}"> tataa 
+				<c:if test="${ dataTableReload  == 'true'}">
 					jstreeDataTableReload();
 				</c:if>
 			}
@@ -357,7 +357,7 @@ $("${target}")
 				success : function (r) {
 					//$("#analyze").click();
 					$("span.ui-icon-refresh").click();
-					<c:if test="${ dataTableReload  == 'true'}"> tataa 
+					<c:if test="${ dataTableReload  == 'true'}">
 						jstreeDataTableReload();
 					</c:if>
 				}
@@ -378,7 +378,7 @@ $("${target}")
 				}
 				//$("#analyze").click();
 				$("span.ui-icon-refresh").click();
-				<c:if test="${ dataTableReload  == 'true'}"> tataa 
+				<c:if test="${ dataTableReload  == 'true'}">
 					jstreeDataTableReload();
 				</c:if>
 			}
@@ -395,7 +395,7 @@ $("${target}")
 			function (r) {
 				//$("#analyze").click();
 				$("span.ui-icon-refresh").click();
-				<c:if test="${ dataTableReload  == 'true'}"> tataa 
+				<c:if test="${ dataTableReload  == 'true'}">
 					jstreeDataTableReload();
 				</c:if>
 			}
@@ -427,7 +427,7 @@ $("${target}")
 					}
 					//$("#analyze").click();
 					$("span.ui-icon-refresh").click();
-					<c:if test="${ dataTableReload  == 'true'}"> tataa 
+					<c:if test="${ dataTableReload  == 'true'}">
 						jstreeDataTableReload();
 					</c:if>
 				}
