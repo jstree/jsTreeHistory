@@ -64,7 +64,7 @@
                 <div class="usquare_module_shade"></div>
                 <!-- section 1 -->
                 <div class="usquare_block">
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/LDM.jpeg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/LDM.jpeg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg1">
                         <div class="usquare_square_text_wrapper">
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
@@ -113,7 +113,7 @@
                 <!-- usquare_block -->
                 <!-- section 2 -->
                 <div class="usquare_block">
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/LCY.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/LCY.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg2">
                         <div class="usquare_square_text_wrapper">
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
@@ -159,7 +159,7 @@
                 <!-- usquare_block -->
                 <!-- section 3 -->
                 <div class="usquare_block">
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/ESM.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/ESM.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg3">
                         <div class="usquare_square_text_wrapper">
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
@@ -216,7 +216,7 @@
                         <!-- usquare_square_wrapper -->
                     </div>
                     <!--div    usquare_square -->
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/YBT.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/YBT.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg4">
                         <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
@@ -265,7 +265,7 @@
                         <!-- usquare_square_wrapper -->
                     </div>
                     <!--div    usquare_square -->
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/LHJ.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/LHJ.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg5">
                         <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
@@ -325,7 +325,7 @@
                         <!-- usquare_square_wrapper -->
                     </div>
                     <!--div    usquare_square -->
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/YHS.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/YHS.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg6">
                         <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
@@ -378,7 +378,7 @@
                 <!-- usquare_block -->
                 <!-- section 7 -->
                 <div class="usquare_block">
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/PJK.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/PJK.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg7">
                         <div class="usquare_square_text_wrapper">
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow usquare_arrow" alt="arrow" />
@@ -440,7 +440,7 @@
                 <!-- usquare_block -->
                 <!-- section 8 -->
                 <div class="usquare_block">
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/CKS.jpg" class="usquare_square" alt="" /> 
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/CKS.jpg" class="usquare_square" alt="" /> 
                     <div class="usquare_square usquare_square_bg8">
                         <div class="usquare_square_text_wrapper">
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
@@ -503,7 +503,7 @@
 
                 <!-- section 9 -->
                 <div class="usquare_block">
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/LEC.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/LEC.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg9">
                         <div class="usquare_square_text_wrapper">
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
@@ -577,7 +577,7 @@
                         <!-- usquare_square_wrapper -->
                     </div>
                     <!--div    usquare_square -->
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/KHJ.jpeg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/KHJ.jpeg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg4">
                         <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
@@ -638,7 +638,7 @@
                         <!-- usquare_square_wrapper -->
                     </div>
                     <!--div    usquare_square -->
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/JJH.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/JJH.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg5">
                         <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
@@ -700,7 +700,7 @@
                         <!-- usquare_square_wrapper -->
                     </div>
                     <!--div    usquare_square -->
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/JOH.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/JOH.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg6">
                         <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
@@ -750,7 +750,7 @@
                 <!-- usquare_block -->
                 <!-- section 13 -->
                 <div class="usquare_block">
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/KBR.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/KBR.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg1">
                         <div class="usquare_square_text_wrapper">
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
@@ -812,7 +812,7 @@
                 <!-- usquare_block -->
                 <!-- section 14 -->
                 <div class="usquare_block">
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/CYJ.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/CYJ.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg2">
                         <div class="usquare_square_text_wrapper">
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
@@ -874,7 +874,7 @@
                 <!-- usquare_block -->
                 <!-- section 15 -->
                 <div class="usquare_block">
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/YJW.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/YJW.jpg" class="usquare_square" alt="" />
                     <div class="usquare_square usquare_square_bg3">
                         <div class="usquare_square_text_wrapper">
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow.png" class="usquare_arrow" alt="arrow" />
@@ -948,7 +948,7 @@
                         <!-- usquare_square_wrapper -->
                     </div>
                     <!--div    usquare_square -->
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/JJS.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/JJS.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg4">
                         <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
@@ -1011,7 +1011,7 @@
                         <!-- usquare_square_wrapper -->
                     </div>
                     <!--div    usquare_square -->
-                    <img src="${pageContext.request.contextPath}/images/frontEnd/profile/LSH.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/LSH.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg5">
                         <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
