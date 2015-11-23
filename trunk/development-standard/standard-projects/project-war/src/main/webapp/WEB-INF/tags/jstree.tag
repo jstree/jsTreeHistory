@@ -449,7 +449,7 @@ $(function () {
 			case "search":
 				$("${target}").jstree("search", document.getElementById("text").value);
 				//$("#jstreeTable_filter").find('input[type="search"]').val();
-				<c:if test="${ dataTableReload  == 'true'}"> tataa 
+				<c:if test="${ dataTableReload  == 'true'}">
 					$('${jstreeTable}').DataTable().column(6).search(document.getElementById("text").value).draw();;
 				</c:if>
 				break;
