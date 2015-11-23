@@ -180,7 +180,7 @@ $("${target}")
 					"valid_children" : "none",
 					// If we specify an icon for the default type it WILL OVERRIDE the theme icons
 					"icon" : {
-						"image" : "${pageContext.request.contextPath}/assets/js/jstree-v.pre1.0/themes/16.png"
+						"image" : "${pageContext.request.contextPath}/assets/js/jstree-v.pre1.0/themes/attibutes.png"
 					}
 				},
 				// The `folder` type
@@ -196,7 +196,7 @@ $("${target}")
 					// can have files and folders inside, but NOT other `drive` nodes
 					"valid_children" : [ "default", "folder" ],
 					"icon" : {
-						"image" : "${pageContext.request.contextPath}/assets/js/jstree-v.pre1.0/themes/loading/loading125.gif"
+						"image" : "${pageContext.request.contextPath}/assets/js/jstree-v.pre1.0/themes/home.png"
 					},
 					// those prevent the functions with the same name to be used on `drive` nodes
 					// internally the `before` event is used

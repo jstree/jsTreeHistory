@@ -36,7 +36,8 @@
 	#demo {
 		overflow:auto;
 		max-height:469px;
-		float: left;background:#fff;
+		float: left;
+		background:#fff;
 	}
 
 	.NFText{
@@ -202,6 +203,16 @@
 								</div>
 								<div id='alog' style="float:left; border:1px solid gray; padding:5px; height:150px; margin-top:15px; overflow:auto; width: 100%;max-width:1180px;"></div>
 
+								<customTags:jstree 
+									target="#demo"
+									getChildNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/getChildNode.action"
+									searchNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/searchNode.action"
+									addNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/addNode.action"
+									removeNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/removeNode.action"
+									alterNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/alterNode.action"
+									alterNodeType="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action"
+									moveNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/moveNode.action">
+								</customTags:jstree>
 								<!-- JavaScript neccessary for the tree -->
 								<script type="text/javascript">
 								function jstreeDataTableReload() {
@@ -248,15 +259,6 @@
 								} );
 								});
 								</script>
-								<customTags:jstree 
-									target="#demo"
-									getChildNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/getChildNode.action"
-									searchNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/searchNode.action"
-									addNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/addNode.action"
-									removeNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/removeNode.action"
-									alterNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/alterNode.action"
-									alterNodeType="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/alterNodeType.action"
-									moveNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/moveNode.action"></customTags:jstree>
 							</div>
 					</div>
 				</div>
