@@ -5,7 +5,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 
+<%@ attribute name="createId" %>
+<%@ attribute name="createClass" %>
 <%@ attribute name="target" %>
+<%@ attribute name="dataTableReload" %>
+<%@ attribute name="dataTable" %>
 <%@ attribute name="getChildNode" %>
 <%@ attribute name="searchNode" %>
 <%@ attribute name="addNode" %>
@@ -13,12 +17,108 @@
 <%@ attribute name="alterNode" %>
 <%@ attribute name="alterNodeType" %>
 <%@ attribute name="moveNode" %>
+<!-- Style Setting --> 
+<style type="text/css">
+	input[type="button"] {
+		display: inline-block;
+		min-width: 100px;
+		min-height: 30px;
+		margin: 5px 0 5px 5px;
+		outline: none;
+		border: 1px solid #f45b4f;
+		border-top-width: 0px;
+		border-right-width: 0px;
+		border-bottom-width: 0px;
+		border-left-width: 0px;
+		-webkit-border-top-left-radius: 0px;
+		-webkit-border-top-right-radius: 0px;
+		-webkit-border-bottom-right-radius: 0px;
+		-webkit-border-bottom-left-radius: 0px;
+		-moz-border-top-left-radius: 0px;
+		-moz-border-top-right-radius: 0px;
+		-moz-border-bottom-right-radius: 0px;
+		-moz-border-bottom-left-radius: 0px;
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border-bottom-left-radius: 0px;
+		padding: 10px;
+		background: #f45b4f;
+		color: #fff;
+		font-family: Oxygen,sans-serif;
+		font-size: 1em;
+		font-weight: 400;
+		font-variant: normal;
+		text-align: center;
+		text-transform: uppercase;
+		letter-spacing: 0em;
+		line-height: normal;
+		-webkit-transition: all 0.2s ease-in-out;
+		-moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-ms-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+	}
+	button{text-transform:capitalize;}
+	.btn_wrap01{overflow:hidden;width:74%;float:left;} 
+	.btn_wrap01 button{display;block;float:left;margin:0;padding:0;width:14%;min-width:0;border-left:1px solid #fff;}
+	.btn_wrap01 button:first-child{border-left:0;}
+	.btn_wrap02{width:26%;float:right;}
+	.btn_wrap02 .textInputVerticalCenter{width:69%;float:left;}
+	.btn_wrap02 button{display;block;float:left;margin:0;padding:0;;min-width:0;width:15%;border-left:1px solid #fff;}
+	.btn_wrap02 input[type="text"]{width:100%}
 
+	@media only screen and (max-width: 768px){ 
+		.btn_wrap01{width:100%}
+		.btn_wrap01 button{border-bottom:1px solid #fff;}
+		.btn_wrap01 button:first-child{width:100%;}
+		.btn_wrap02{width:100%;margin-top:10px}
+	}
+	@media only screen and (min-width:481px) and (max-width: 768px){
+		.btn_wrap01 button{width:33.33%;}
+		.btn_wrap01 button:nth-child(3n-1){border-left:0;}
+	}
+	@media only screen and (max-width: 480px) {
+		.btn_wrap01 button{width:50%;}
+		.btn_wrap01 button:nth-child(2n){border-left:0;}
+	}
+</style>
+<div id="mmenu" style="clear:both;" class="clearfix">
+	<form class="niceform">
+		<div class="desktop-tablet alpha boxed bm-remove btn_wrap01">
+			<button type="button" id="add_folder"><i class="fa fa-plus"></i> add folder</button>
+			<button type="button" id="add_default"><i class="fa fa-plus"></i> add file</button>
+			<button type="button" id="rename"><i class="fa fa-eraser"></i> rename</button>
+			<button type="button" id="remove"><i class="fa fa-minus"></i> remove</button>
+			<button type="button" id="cut"><i class="fa fa-cut"></i> cut</button>
+			<button type="button" id="copy"><i class="fa fa-copy"></i> copy</button>
+			<button type="button" id="paste"><i class="fa fa-paste"></i> paste</button>
+		</div>
+		<div class="desktop-tablet alpha bm-remove boxed last btn_wrap02">
+			<div class="textInputVerticalCenter">
+				<input type="text" id="text" placeholder="찾을 노드 이름 입력" class="inline-block bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search"/>
+			</div>
+			<button type="button" id="search" title="Search"><i class="fa fa-search"></i></button>
+			<button type="button" id="clear_search" title="Clear"><i class="fa fa-eraser"></i></button>
+		</div>
+	</form>
+</div>
+<!-- 
+<div class="clearfix">
+	<button type="button" id="reconstruct" value="reconstruct" onclick="javascript:alert('not supprt')" />
+	<button type="button"  id="analyze" value="analyze" onclick="$('#alog').load('${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/analyzeNode.action');" />
+	<button type="button" id="refresh" value="refresh" onclick="$('${target}').jstree('refresh',-1);" />
+</div>
+<div id='alog' style="float:left; border:1px solid gray; padding:5px; height:150px; margin-top:15px; overflow:auto; width: 100%;max-width:1180px;">
+</div>
+-->
+<div id="${createId}" class="${createClass}">
+</div>
 <script type="text/javascript">
 $(function () {
 $("${target}")
 .bind("before.jstree", function (e, data) {
-	$("#alog").append(data.func + "<br />");
+	//$("#alog").append(data.func + "<br />");
 	$("li:not([rel='drive']).jstree-open > a > .jstree-icon").css('background-image','url(${pageContext.request.contextPath}/assets/js/jstree-v.pre1.0/themes/toolbar_open.png)');
 	$("li:not([rel='drive']).jstree-closed > a > .jstree-icon").css('background-image','url(${pageContext.request.contextPath}/assets/js/jstree-v.pre1.0/themes/ic_explorer.png)');
 })
@@ -237,9 +337,11 @@ $("${target}")
 				else {
 					$.jstree.rollback(data.rlbk);
 				}
-				$("#analyze").click();
+				//$("#analyze").click();
 				$("span.ui-icon-refresh").click();
-				jstreeDataTableReload();
+				<c:if test="${ dataTableReload  == 'true'}"> tataa 
+					jstreeDataTableReload();
+				</c:if>
 			}
 		);
 	})
@@ -253,9 +355,11 @@ $("${target}")
 					"c_id" : this.id.replace("node_","").replace("copy_","")
 				}, 
 				success : function (r) {
-					$("#analyze").click();
+					//$("#analyze").click();
 					$("span.ui-icon-refresh").click();
-					jstreeDataTableReload();
+					<c:if test="${ dataTableReload  == 'true'}"> tataa 
+						jstreeDataTableReload();
+					</c:if>
 				}
 			});
 		});
@@ -272,9 +376,11 @@ $("${target}")
 				if(!r.status) {
 					$.jstree.rollback(data.rlbk);
 				}
-				$("#analyze").click();
+				//$("#analyze").click();
 				$("span.ui-icon-refresh").click();
-				jstreeDataTableReload();
+				<c:if test="${ dataTableReload  == 'true'}"> tataa 
+					jstreeDataTableReload();
+				</c:if>
 			}
 		);
 	})
@@ -287,9 +393,11 @@ $("${target}")
 					"c_type" : data.rslt.obj.attr("rel")
 			}, 
 			function (r) {
-				$("#analyze").click();
+				//$("#analyze").click();
 				$("span.ui-icon-refresh").click();
-				jstreeDataTableReload();
+				<c:if test="${ dataTableReload  == 'true'}"> tataa 
+					jstreeDataTableReload();
+				</c:if>
 			}
 		);
 	})
@@ -317,9 +425,11 @@ $("${target}")
 							data.inst.refresh(data.inst._get_parent(data.rslt.oc));
 						}
 					}
-					$("#analyze").click();
+					//$("#analyze").click();
 					$("span.ui-icon-refresh").click();
-					jstreeDataTableReload();
+					<c:if test="${ dataTableReload  == 'true'}"> tataa 
+						jstreeDataTableReload();
+					</c:if>
 				}
 			});
 		});
@@ -339,7 +449,9 @@ $(function () {
 			case "search":
 				$("${target}").jstree("search", document.getElementById("text").value);
 				//$("#jstreeTable_filter").find('input[type="search"]').val();
-				$('#jstreeTable').DataTable().column(6).search(document.getElementById("text").value).draw();;
+				<c:if test="${ dataTableReload  == 'true'}"> tataa 
+					$('${jstreeTable}').DataTable().column(6).search(document.getElementById("text").value).draw();;
+				</c:if>
 				break;
 			case "text": break;
 			default:
