@@ -33,7 +33,7 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
-import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
+import egovframework.com.ext.jstree.support.test.DbUnitTest;
 import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 
 /**
