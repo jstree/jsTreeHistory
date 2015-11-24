@@ -35,7 +35,7 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
-import egovframework.com.ext.jstree.support.manager.test.DbUnitTest;
+import egovframework.com.ext.jstree.support.test.DbUnitTest;
 import egovframework.com.ext.jstree.support.util.test.DatabaseOperations;
 
 /**
