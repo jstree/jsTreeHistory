@@ -172,4 +172,5 @@ public abstract class DbUnitTest<T> {
         
         return (T) coreDao.getNode( getFirstChildNode() );
     }
+    
 }
