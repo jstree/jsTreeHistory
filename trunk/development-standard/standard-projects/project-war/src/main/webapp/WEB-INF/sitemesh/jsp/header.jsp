@@ -22,7 +22,7 @@
 				<div id="header-logo" class="one-third bm-remove">
 					<a href="${pageContext.request.contextPath}/" target="_self">
 						<c:set var="logPath" value="${logUrl}" />
-						<img src="${pageContext.request.contextPath}${logPath}" alt="313 developer group logo">
+						<img src="${pageContext.request.contextPath}/assets/images/logo.jpg" alt="313 developer group logo">
 					</a>
 				</div>
 				<div id="header-cart" class="one-third bm-remove last">
