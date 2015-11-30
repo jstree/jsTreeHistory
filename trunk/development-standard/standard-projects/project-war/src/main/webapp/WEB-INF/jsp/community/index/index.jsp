@@ -147,19 +147,6 @@
 				</div>
 			</div>
 		</section>
-		<style>
-		.one-whole .part-4{width:25%;padding:20px 0px 20px 20px;float:left}
-		.one-whole .part-4:first-child{padding-left:0px}
-		.one-whole > .part-4 .one-quarter.product-item{width:100%;margin:0px}
-		#footer .container .one-quarter{width:25%;padding-right:20px;margin-right:0px;}
-		#footer .container .one-quarter.last{padding-right:0px;}
-		@media (max-width:768px){
-			.one-whole > .part-4{width:100%;padding:20px 0px 0px;}
-			#footer .container .one-quarter{width:100%;padding-right:0px;}
-		}
-		
-		</style>
-		<!-- //2015-07-08 : 수정 -->
 		</main>
 			
 		<script>

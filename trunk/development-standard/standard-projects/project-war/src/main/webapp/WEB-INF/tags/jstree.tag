@@ -8,8 +8,10 @@
 <%@ attribute name="createId" %>
 <%@ attribute name="createClass" %>
 <%@ attribute name="target" %>
+<%@ attribute name="dataTableUse" %>
 <%@ attribute name="dataTableReload" %>
 <%@ attribute name="dataTable" %>
+<%@ attribute name="button" %>
 <%@ attribute name="getChildNode" %>
 <%@ attribute name="searchNode" %>
 <%@ attribute name="addNode" %>
@@ -17,6 +19,8 @@
 <%@ attribute name="alterNode" %>
 <%@ attribute name="alterNodeType" %>
 <%@ attribute name="moveNode" %>
+
+<c:if test="${ button  == 'enable'}">
 <!-- Style Setting --> 
 <style type="text/css">
 	input[type="button"] {
@@ -103,6 +107,33 @@
 		</div>
 	</form>
 </div>
+<script type="text/javascript">
+// Code for the menu buttons
+$(function () { 
+	$("#mmenu input, #mmenu button").click(function () {
+		switch(this.id) {
+			case "add_default":
+			case "add_folder":
+				$("${target}").jstree("create", null, "last", { "attr" : { "rel" : this.id.toString().replace("add_", "") } });
+				break;
+			case "search":
+				$("${target}").jstree("search", document.getElementById("text").value);
+				//$("#jstreeTable_filter").find('input[type="search"]').val();
+				<c:if test="${ dataTableUse  == 'yes'}">
+					<c:if test="${ dataTableReload  == 'true'}">
+						$('${jstreeTable}').DataTable().column(6).search(document.getElementById("text").value).draw();;
+					</c:if>
+				</c:if>
+				break;
+			case "text": break;
+			default:
+				$("${target}").jstree(this.id);
+				break;
+		}
+	});
+});
+</script>
+</c:if>
 <!-- 
 <div class="clearfix">
 	<button type="button" id="reconstruct" value="reconstruct" onclick="javascript:alert('not supprt')" />
@@ -339,8 +370,10 @@ $("${target}")
 				}
 				//$("#analyze").click();
 				$("span.ui-icon-refresh").click();
-				<c:if test="${ dataTableReload  == 'true'}">
-					jstreeDataTableReload();
+				<c:if test="${ dataTableUse  == 'yes'}">
+					<c:if test="${ dataTableReload  == 'true'}">
+						jstreeDataTableReload();
+					</c:if>
 				</c:if>
 			}
 		);
@@ -357,8 +390,10 @@ $("${target}")
 				success : function (r) {
 					//$("#analyze").click();
 					$("span.ui-icon-refresh").click();
-					<c:if test="${ dataTableReload  == 'true'}">
-						jstreeDataTableReload();
+					<c:if test="${ dataTableUse  == 'yes'}">
+						<c:if test="${ dataTableReload  == 'true'}">
+							jstreeDataTableReload();
+						</c:if>
 					</c:if>
 				}
 			});
@@ -378,8 +413,10 @@ $("${target}")
 				}
 				//$("#analyze").click();
 				$("span.ui-icon-refresh").click();
-				<c:if test="${ dataTableReload  == 'true'}">
-					jstreeDataTableReload();
+				<c:if test="${ dataTableUse  == 'yes'}">
+					<c:if test="${ dataTableReload  == 'true'}">
+						jstreeDataTableReload();
+					</c:if>
 				</c:if>
 			}
 		);
@@ -395,8 +432,10 @@ $("${target}")
 			function (r) {
 				//$("#analyze").click();
 				$("span.ui-icon-refresh").click();
-				<c:if test="${ dataTableReload  == 'true'}">
-					jstreeDataTableReload();
+				<c:if test="${ dataTableUse  == 'yes'}">
+					<c:if test="${ dataTableReload  == 'true'}">
+						jstreeDataTableReload();
+					</c:if>
 				</c:if>
 			}
 		);
@@ -427,37 +466,15 @@ $("${target}")
 					}
 					//$("#analyze").click();
 					$("span.ui-icon-refresh").click();
-					<c:if test="${ dataTableReload  == 'true'}">
-						jstreeDataTableReload();
+					<c:if test="${ dataTableUse  == 'yes'}">
+						<c:if test="${ dataTableReload  == 'true'}">
+							jstreeDataTableReload();
+						</c:if>
 					</c:if>
 				}
 			});
 		});
 	});
 
-});
-</script>
-<script type="text/javascript">
-// Code for the menu buttons
-$(function () { 
-	$("#mmenu input, #mmenu button").click(function () {
-		switch(this.id) {
-			case "add_default":
-			case "add_folder":
-				$("${target}").jstree("create", null, "last", { "attr" : { "rel" : this.id.toString().replace("add_", "") } });
-				break;
-			case "search":
-				$("${target}").jstree("search", document.getElementById("text").value);
-				//$("#jstreeTable_filter").find('input[type="search"]').val();
-				<c:if test="${ dataTableReload  == 'true'}">
-					$('${jstreeTable}').DataTable().column(6).search(document.getElementById("text").value).draw();;
-				</c:if>
-				break;
-			case "text": break;
-			default:
-				$("${target}").jstree(this.id);
-				break;
-		}
-	});
 });
 </script>

@@ -10,7 +10,11 @@
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <!DOCTYPE html>
-<html lang="ko" class="no-js">
+<!--[if lt IE 7 ]> <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie6 older"> <![endif]-->
+<!--[if IE 7 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie7 older"> <![endif]-->
+<!--[if IE 8 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]>	<html lang="ko" class="no-js"> <![endif]-->
 	<head data-placeholder-focus="false" data-placeholder-live="false">
 		<c:choose>
 			<c:when test="${pageContext.request.serverName=='localhost'||pageContext.request.serverName=='127.0.0.1'}">
@@ -24,9 +28,6 @@
 		<page:applyDecorator name="headPanel" page="/WEB-INF/sitemesh/jsp/style.jsp"/>
 		<page:applyDecorator name="headPanel" page="/WEB-INF/sitemesh/jsp/script.jsp"/>
 		<decorator:head/>
-		<!-- CSS Setting -->
-		<link rel="icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/favicon.ico" type="image/x-icon" />
-		<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/favicon.ico" type="image/x-icon" />
 		<script type="text/javascript">
 		// <![CDATA[
 		$(document).ready(function($){

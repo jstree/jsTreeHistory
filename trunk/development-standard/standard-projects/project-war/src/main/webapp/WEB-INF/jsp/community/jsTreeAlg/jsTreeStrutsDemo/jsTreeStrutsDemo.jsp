@@ -10,44 +10,37 @@
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 
-<!DOCTYPE html> 
-<!--[if lt IE 7 ]> <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie6 older"> <![endif]-->
-<!--[if IE 7 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie7 older"> <![endif]-->
-<!--[if IE 8 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html lang="ko-KR">
-<!--<![endif]-->
+<html>
 <head>
-<!-- JSTREE -->
-<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:assetsJsExtendNas>
-<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:assetsJsExtendNas>
-<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/jquery.jstree.js"></customTags:assetsJsExtendNas>
+	<!-- JSTREE -->
+	<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/_lib/jquery.cookie.js"></customTags:assetsJsExtendNas>
+	<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/_lib/jquery.hotkeys.js"></customTags:assetsJsExtendNas>
+	<customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/jquery.jstree.js"></customTags:assetsJsExtendNas>
 
-<!-- dataTable -->
-<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.4/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
-<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.4/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
-
-<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.4/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
-<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.4/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
-<style type="text/css">
-	#demo{
-		overflow:auto;
-		max-height:469px;
-		float: left;
-		background:#fff;
-	}
+	<!-- dataTable -->
+	<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.4/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
+	<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.4/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
 	
-	.demo_side{width:30%;margin:30px 0;border-top:1px solid #000;}
-	.dataTables_filter, .dataTables_length{display:none}
-	.demo_con{width:68%;float:right;margin:30px 0;border-top:1px solid #000;} 
-	.demo_con table tbody tr td{text-align:center;}
-	.demo_con table tbody tr.child td{text-align:left;}
-	@media only screen and (max-width: 768px){ 
-		.demo_side{width:100%;}
-		.demo_con{width:100%;}
-	}
-</style>
+	<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.4/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
+	<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.4/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
+	<style type="text/css">
+		#demo{
+			overflow:auto;
+			max-height:469px;
+			float: left;
+			background:#fff;
+		}
+		
+		.demo_side{width:30%;margin:30px 0;border-top:1px solid #000;}
+		.dataTables_filter, .dataTables_length{display:none}
+		.demo_con{width:68%;float:right;margin:30px 0;border-top:1px solid #000;} 
+		.demo_con table tbody tr td{text-align:center;}
+		.demo_con table tbody tr.child td{text-align:left;}
+		@media only screen and (max-width: 768px){ 
+			.demo_side{width:100%;}
+			.demo_con{width:100%;}
+		}
+	</style>
 </head> 
 
 <body id="demo_body">
@@ -87,8 +80,10 @@
 										createId="demo"
 										createClass="demo demo_side"
 										target="#demo"
+										dataTableUse="yes"
 										dataTableReload="true"
 										dataTable="jstreeTable"
+										button="enable"
 										getChildNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/getChildNode.action"
 										searchNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/searchNode.action"
 										addNode="${pageContext.request.contextPath}/egovframework/com/ext/jstree/strutsiBatis/addNode.action"
