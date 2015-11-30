@@ -157,7 +157,6 @@
 		</noscript>	
 		
 		
-		<!-- 우선급한대로 붙였음 차후 별도 파일로 관리 혹은 처리예정  -->
 		<div id="responsive-lnb">
 			<!--responsive-admin-menu-->
 			<div id="responsive-admin-menu" class="responsiveLnb">
