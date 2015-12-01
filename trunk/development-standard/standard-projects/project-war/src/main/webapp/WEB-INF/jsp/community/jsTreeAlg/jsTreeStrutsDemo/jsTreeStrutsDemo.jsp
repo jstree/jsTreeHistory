@@ -109,8 +109,6 @@
 										</table>
 									</div>
 								</div>
-
-
 								<!-- JavaScript neccessary for the tree -->
 								<script type="text/javascript">
 								function jstreeDataTableReload() {
