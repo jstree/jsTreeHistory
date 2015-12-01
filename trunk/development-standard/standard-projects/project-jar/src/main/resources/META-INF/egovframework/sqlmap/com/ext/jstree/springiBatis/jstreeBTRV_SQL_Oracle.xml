@@ -45,6 +45,22 @@
 		ORDER BY A.C_POSITION ASC
 	</sql>
 	
+	<select id="getNodeIDs" parameterClass="BTRV_ComprehensiveTree"
+		resultClass="BTRV_ComprehensiveTree">
+		/* getNodeIDs */
+		SELECT C_ID
+		FROM
+		T_BTRV_ComprehensiveTree
+		WHERE c_commitdate like '%'||'2014-'||'%'
+	</select>
+	
+	<update id="alterNodeBT" parameterClass="BTRV_ComprehensiveTree">
+		/* alterNodeType */
+		UPDATE T_BTRV_ComprehensiveTree
+		SET C_BT = #c_bt#
+		WHERE C_ID = #c_id#
+	</update>
+	
 	<select id="getChildNode" parameterClass="BTRV_ComprehensiveTree"
 		resultClass="BTRV_ComprehensiveTree">
 		<dynamic>

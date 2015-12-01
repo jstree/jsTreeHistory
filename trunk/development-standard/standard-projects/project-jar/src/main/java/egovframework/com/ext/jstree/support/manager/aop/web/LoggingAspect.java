@@ -17,22 +17,22 @@ public class LoggingAspect
     public void logBefore(JoinPoint joinPoint)
     {
         
-        logger.info("*** logBefore() is running!");
-        logger.info("*** hijacked : " + joinPoint.getSignature().getName());
+       // logger.info("*** logBefore() is running!");
+        //logger.info("*** hijacked : " + joinPoint.getSignature().getName());
     }
     
     public void logAfter(JoinPoint joinPoint)
     {
         
-        logger.info("*** logAfter() is running!");
-        logger.info("*** hijacked : " + joinPoint.getSignature().getName());
+        //logger.info("*** logAfter() is running!");
+       // logger.info("*** hijacked : " + joinPoint.getSignature().getName());
     }
     
     public void logAfterThrowing(JoinPoint joinPoint, Throwable ex)
     {
         
-        logger.info("*** logAfterThrowing() is running!");
-        logger.info("ex message : " + ex.toString());
+       // logger.info("*** logAfterThrowing() is running!");
+      //  logger.info("ex message : " + ex.toString());
     }
     
     public void logAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable
