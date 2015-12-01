@@ -30,8 +30,8 @@
 		<link href="${pageContext.request.contextPath}/assets/css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/lnb.css" rel="stylesheet" type="text/css" media="all" />
 		<!-- favicon -->
-		<link rel="icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/313icon.ico" type="image/x-icon" />
-		<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/313icon.ico" type="image/x-icon" />
+		<link rel="icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/favicon.ico" type="image/x-icon" />
 		<style>
 			.one-whole .part-4{width:25%;padding:20px 0px 20px 20px;float:left}
 			.one-whole .part-4:first-child{padding-left:0px}
