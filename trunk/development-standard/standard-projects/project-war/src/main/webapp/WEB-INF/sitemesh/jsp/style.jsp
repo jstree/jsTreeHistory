@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 	<head data-placeholder-focus="false" data-placeholder-live="false">
-		<link href="${pageContext.request.contextPath}/assets/images/fav-icon.png?20" relROOT="icon" />
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/normalize.min.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/edge-alerts.css?20" rel="stylesheet" type="text/css" media="all" />
@@ -31,8 +30,8 @@
 		<link href="${pageContext.request.contextPath}/assets/css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/lnb.css" rel="stylesheet" type="text/css" media="all" />
 		<!-- favicon -->
-		<link rel="icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/favicon.ico" type="image/x-icon" />
-		<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/favicon.ico" type="image/x-icon" />
+		<link rel="icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/313icon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/community/common/favicon/313icon.ico" type="image/x-icon" />
 		<style>
 			.one-whole .part-4{width:25%;padding:20px 0px 20px 20px;float:left}
 			.one-whole .part-4:first-child{padding-left:0px}
