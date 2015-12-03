@@ -11,11 +11,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import standard.mvc.component.business.community.menu.service.MenuService;
 import standard.mvc.component.business.community.menu.vo.MenuComprehensiveTree;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.springiBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
@@ -54,7 +54,7 @@ public class MenuController extends GenericAbstractController {
     }
     
     @Resource(name = "MenuService")
-	CoreService menuService;
+    MenuService menuService;
 
 	/**
 	 * 자식노드를 요청한다.

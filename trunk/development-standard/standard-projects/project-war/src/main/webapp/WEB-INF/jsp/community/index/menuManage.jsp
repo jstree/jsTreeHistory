@@ -371,7 +371,7 @@ $("#demo")
 					"valid_children" : "none",
 					// If we specify an icon for the default type it WILL OVERRIDE the theme icons
 					"icon" : {
-						"image" : "${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_demo/file.png"
+						"image" : "${pageContext.request.contextPath}/assets/js/jstree-v.pre1.0/themes/attibutes.png"
 					}
 				},
 				// The `folder` type
@@ -379,7 +379,7 @@ $("#demo")
 					// can have files and other folders inside of it, but NOT `drive` nodes
 					"valid_children" : [ "default", "folder" ],
 					"icon" : {
-						"image" : "${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_demo/folder.png"
+						"image" : "${pageContext.request.contextPath}/assets/js/jstree-v.pre1.0/themes/ic_explorer.png"
 						//Design/icon/miniCon/313/toolbar_open.png
 					}
 				},
@@ -388,7 +388,7 @@ $("#demo")
 					// can have files and folders inside, but NOT other `drive` nodes
 					"valid_children" : [ "default", "folder" ],
 					"icon" : {
-						"image" : "${pageContext.request.contextPath}/js/community/jsTreeAlg/jstreeDemo/jstree-v.pre1.0/_demo/root.png"
+						"image" : "${pageContext.request.contextPath}/assets/js/jstree-v.pre1.0/themes/home.png"
 						//Design/icon/IconSet/Aeon/PNG/Misc/Misc-Stuff.png
 						//Component/jsp/community/jstree-v.pre1.0/db.png
 					},

@@ -9,8 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import standard.mvc.component.business.community.menu.service.MenuMngSerivce;
-
+import standard.mvc.component.business.community.menu.service.MenuService;
 import standard.mvc.component.business.community.log.service.LogUrlSerivce;
 
 /**
@@ -43,8 +42,8 @@ public class CommunityController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Resource(name = "menuMngService")
-	private MenuMngSerivce menuMngService;
+	@Resource(name = "MenuService")
+	private MenuService menuService;
 	
 	@Resource(name = "logUrlService")
 	private LogUrlSerivce logUrlService;
@@ -62,14 +61,14 @@ public class CommunityController {
 		sb.append(minor);
 
 		logger.info("path : {}", new Object[] { sb });
-		model.addAttribute("menuList", menuMngService.getCommunityMenu());
+		model.addAttribute("menuList", menuService.getMenuList());
 		model.addAttribute("logUrl", logUrlService.getLogUrl());
 		return sb.toString();
 	}
 
 	@RequestMapping(value = "/index.do")
 	public String execute(ModelMap model) throws Exception {
-		model.addAttribute("menuList", menuMngService.getCommunityMenu());
+		model.addAttribute("menuList", menuService.getMenuList());
 		model.addAttribute("logUrl", logUrlService.getLogUrl());
 		return "/jsp/community/index/index";
 	}
@@ -81,7 +80,7 @@ public class CommunityController {
 	
 	@RequestMapping(value = "/common/404error.do")
 	public String handle404Error(ModelMap model) throws Exception {
-		model.addAttribute("menuList", menuMngService.getCommunityMenu());
+		model.addAttribute("menuList", menuService.getMenuList());
 		model.addAttribute("logUrl", logUrlService.getLogUrl());
 		return "/jsp/community/common/404error";
 	}

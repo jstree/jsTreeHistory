@@ -18,22 +18,22 @@
 					<!-- For PC Menu -->
 					<div id="click-nav" class="clearfix">
 						<c:forEach items="${menuList }" var = "result" varStatus="status">
-								<c:if test="${result.c_level == '2' }">
-									<c:choose>
-										<c:when test="${result.c_type == 'default' }">
-											<c:set var="cssValue" value="first active" />
-										</c:when>
-										<c:otherwise>
-											<c:set var="cssValue" value="has-dropdown" />
-										</c:otherwise>
-									</c:choose>
-									<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="nav-item ${cssValue }" data-sub-nav="nav-links-${result.c_id}"> ${result.c_title } 
-										<c:if test="${result.c_type == 'folder' }">
-											<span class="has-dropdown-icon">+</span>
-										</c:if>
-									</a>
-								</c:if>
-							</c:forEach>
+							<c:if test="${result.c_level == '2' }">
+								<c:choose>
+									<c:when test="${result.c_type == 'default' }">
+										<c:set var="subMenulayer" value="first active" />
+									</c:when>
+									<c:otherwise>
+										<c:set var="subMenulayer" value="has-dropdown" />
+									</c:otherwise>
+								</c:choose>
+								<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="nav-item ${subMenulayer }" data-sub-nav="nav-links-${result.c_id}"> ${result.c_title } 
+									<c:if test="${result.c_type == 'folder' }">
+										<span class="has-dropdown-icon">+</span>
+									</c:if>
+								</a>
+							</c:if>
+						</c:forEach>
 					</div>
 					
 					<!-- For Mobile Menu -->
@@ -53,61 +53,44 @@
 							</div>
 							<hr class="bm-smaller tm-small" />
 							<ul class="nav unstyled bm-remove clearfix">
-								<c:set var = "count" value = "1" />
-									<c:forEach items = "${menuList }" var = "result" varStatus="status">
-										<c:choose>
+								<c:forEach items = "${menuList }" var = "result" varStatus="status">
+									<c:choose>
 										<c:when test="${status.first}">
-											<c:set var="cssValue" value="first active" />
-											<c:set var="cssValue2" value="parent-link" />
+											<c:set var="isFirst" value="first active" />
+											<c:set var="isSubMenu" value="first active" />
 										</c:when>
 										<c:otherwise>
-											<c:set var="cssValue" value="has-dropdown" />
-											<c:set var="cssValue2" value="parent-link" />
+											<c:set var="isFirst" value="has-dropdown" />
+											<c:set var="isSubMenu" value="parent-link" />
 										</c:otherwise>
-										</c:choose>
-										<c:choose>
-											<c:when test="${result.c_level == '2' }">
-												<c:if test = "${count ne '1' }" >
-													<c:if test = "${count ne '0' }">
-													</ul>
-													</c:if>
-													</li>
-												</c:if>
-												<c:set var="subCssCount" value="0" />
-												<c:if test = "${cssValue == 'has-dropdown'}">
-												<hr class="bm-smaller" />
-												</c:if>
-												<li class="nav-item  ${cssValue }">
-													<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${cssValue2 }"> ${result.c_title }
-														<c:if test="${result.c_type == 'folder' }">
-															<span class="has-dropdown-icon float-right">+</span>
-														</c:if>
-													</a>
-													<c:if test="${result.c_type == 'folder' }">
-													<ul class="sub-nav unstyled bm-remove">
-													</c:if>
-													<c:set var="subCssCount" value="0" />
-													<c:set var = "count" value = "0" />
-											</c:when>
-											<c:otherwise>
-												<c:choose>
-												<c:when test = "${subCssCount == 0}">
-													<c:set var = "subCssValue" value = " first active" />
-												</c:when>
-												<c:otherwise>
-													<c:set var = "subCssValue" value = "" />
-												</c:otherwise>
-												</c:choose>
-													<li class="sub-nav-item${subCssValue }">
-														<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${subCssValue }">&raquo; &nbsp;${result.c_title }</a>
-													</li>
-												<c:set var="subCssCount" value="${ subCssCount +1}" />
-												<c:set var = "count" value = "${count +2 }" />
-											</c:otherwise>
-										</c:choose>
+									</c:choose>
+									<c:if test="${result.c_level == '2' }" >
+										<li class="nav-item  ${isFirst }">
+											<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${isSubMenu }"> ${result.c_title }
+											<c:if test="${ result.c_right - result.c_left > 1}" >
+												<span class="has-dropdown-icon float-right">+</span>
+											</c:if>
+											</a>
+									</c:if>
+									<c:set var="isSubMenuFirst" value="true" />
+									<c:forEach items = "${menuList }" var = "subMenu" varStatus="subMenuStatus">
+										<c:if test="${result.c_id == subMenu.c_parentid }">
+											<c:if test="${isSubMenuFirst}">
+												<ul class="sub-nav unstyled bm-remove">
+											</c:if>
+												<li class="sub-nav-item<c:if test="${isSubMenuFirst}"> first active</c:if>">
+													<a href="${pageContext.request.contextPath}${subMenu.url }" target="_self" class="<c:if test="${isSubMenuFirst}">first active</c:if>"> ${subMenu.c_title }</a>
+												</li>
+											<c:set var="isSubMenuFirst" value="false" />
+										</c:if>
+										<c:if test="${subMenuStatus.last && not isSubMenuFirst}">
+											</ul>
+										</c:if>
 									</c:forEach>
-									</ul>
-									</li>
+									<c:if test="${result.c_level == '2' }" >
+										</li>
+									</c:if>
+								</c:forEach>
 							</ul>
 						</div>
 					</div>
@@ -115,28 +98,25 @@
 				
 				<!-- PC Version Submenus -->
 				<div id="secondary-navigation" class="clearfix">
-					<c:set var="count" value="1" />
 						<c:forEach items="${menuList }" var = "result" varStatus="status">
-							<c:choose>
-								<c:when test = "${result.c_level == 2 }">
-									<c:if test = "${count ne '1' }" >
-									</div>
+								<c:if test = "${result.c_type == 'folder' && result.c_level == 2}">
+									<div id="nav-links-${result.c_id}" class="sub-nav">		
+								</c:if>
+								<c:forEach items="${menuList }" var = "subMenus" varStatus="status">
+									<c:if test = "${subMenus.c_type == 'default' && subMenus.c_level > 2 && result.c_id == subMenus.c_parentid}">
+										<c:choose>
+											<c:when test = "${subMenus.c_position == '0'}" >
+													<a href="${pageContext.request.contextPath}${subMenus.url }" target="_self" class="sub-nav-item first active">${subMenus.c_title }</a>
+											</c:when>
+											<c:otherwise>
+												<a href="${pageContext.request.contextPath}${subMenus.url }" target="_self" class="sub-nav-item">${subMenus.c_title }</a>
+											</c:otherwise>
+										</c:choose>
 									</c:if>
-									<c:set var="count" value="0" />
-									<div id="nav-links-${result.c_id}" class="sub-nav">
-								</c:when>
-							<c:otherwise>
-							<c:choose>
-							<c:when test = "${result.c_position == '0' }" >
-									<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="sub-nav-item first active">${result.c_title }</a>
-							</c:when>
-							<c:otherwise>
-								<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="sub-nav-item">${result.c_title }</a>
-							</c:otherwise>
-							</c:choose>
-							<c:set var="count" value="${count } +1" />
-							</c:otherwise>
-							</c:choose>
+								</c:forEach>
+							<c:if test="${result.c_type == 'folder' && result.c_level == 2}">
+								</div>
+							</c:if>
 						</c:forEach>
 				</div>
 			</div>
