@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:security="http://www.springframework.org/schema/security"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
           			  http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
           			  http://www.springframework.org/schema/security
           			  http://www.springframework.org/schema/security/spring-security-3.2.xsd">
-          			  
-    <security:http pattern="/assets/**" security="none"/>
-	<security:http pattern="/index.do" security="none"/>
-	<security:http pattern="/user/login/index.do" security="none"/>
-	
+
+	<security:http pattern="/assets/**" security="none" />
+	<security:http pattern="/index.do" security="none" />
+	<security:http pattern="/user/login/index.do" security="none" />
+
 	<security:http auto-config="true" use-expressions="true">
-	
-		<security:intercept-url pattern="/**" access="permitAll"/>
-		
-		<security:form-login login-page="/user/login/index.do"
-		                     login-processing-url="/user/login/loginProcess.do"
-		                     username-parameter="email"
-							 password-parameter="password"
-		                     default-target-url="/index.do"
-		                     authentication-failure-url="/user/login/index.do"
-		                     authentication-success-handler-ref="secureUserLoginSuccessHandler"
-		                     authentication-failure-handler-ref="secureUserLoginFailureHandler"
-		                     />
-		                     
-		<security:logout invalidate-session="true" 
-					 	 logout-success-url="/index.do" 
-					 	 logout-url="/user/login/logout.do" />
-	
-		<security:access-denied-handler	error-page="/error/404.do" />
-		
-		<security:session-management invalid-session-url="/user/login/index.do">
-			<security:concurrency-control max-sessions="1" expired-url="/user/login/index.do"/>
+
+		<security:intercept-url pattern="/**" access="permitAll" />
+
+		<security:form-login login-page="/account/accountSign.do"
+			login-processing-url="/user/login/loginProcess.do"
+			username-parameter="email" password-parameter="password"
+			default-target-url="/index.do" authentication-failure-url="/account/accountSign.do"
+			authentication-success-handler-ref="secureUserLoginSuccessHandler"
+			authentication-failure-handler-ref="secureUserLoginFailureHandler" />
+
+		<security:logout invalidate-session="true"
+			logout-success-url="/index.do" logout-url="/user/login/logout.do" />
+
+		<security:access-denied-handler
+			error-page="/error/404.do" />
+
+		<security:session-management
+			invalid-session-url="/account/accountSign.do">
+			<security:concurrency-control
+				max-sessions="1" expired-url="/account/accountSign.do" />
 		</security:session-management>
-		
+
 	</security:http>
-    
+
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider user-service-ref="secureUserLoginServiceImpl">
-			<security:password-encoder hash="sha-256"/>
+		<security:authentication-provider
+			user-service-ref="secureUserLoginServiceImpl">
+			<security:password-encoder hash="sha-256" />
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
+
 </beans>
