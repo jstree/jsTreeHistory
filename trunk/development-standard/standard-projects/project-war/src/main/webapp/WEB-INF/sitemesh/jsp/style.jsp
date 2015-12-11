@@ -9,6 +9,7 @@
 <html lang="ko" class="no-js">
 	<head data-placeholder-focus="false" data-placeholder-live="false">
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${pageContext.request.contextPath}/assets/css/common-font.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/normalize.min.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/edge-alerts.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/tipsy.css?20" rel="stylesheet" type="text/css" media="all" />
@@ -23,7 +24,6 @@
 		<link href="${pageContext.request.contextPath}/assets/css/shopify-quick-look.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/backbone.scss.css?20" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/section_common.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="${pageContext.request.contextPath}/assets/css/common-font.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/jNotify.jquery.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="${pageContext.request.contextPath}/assets/css/jquery.dataTables.css" rel="stylesheet" type="text/css" media="all">
 		<link href="${pageContext.request.contextPath}/assets/css/dataTables.responsive.css" rel="stylesheet" type="text/css" media="all" />
