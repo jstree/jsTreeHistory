@@ -2,6 +2,7 @@ package egovframework.com.ext.jstree.springiBatis.core.dao;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
@@ -29,6 +30,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 @Repository("CoreDao")
+@Qualifier("CoreDao")
 public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
     
 	@SuppressWarnings("unchecked")
