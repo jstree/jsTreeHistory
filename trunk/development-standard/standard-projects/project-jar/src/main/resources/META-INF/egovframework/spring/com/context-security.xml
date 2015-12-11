@@ -7,13 +7,15 @@
           			  http://www.springframework.org/schema/security
           			  http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http pattern="/assets/**" security="none" />
 	<security:http pattern="/index.do" security="none" />
-	<security:http pattern="/user/login/index.do" security="none" />
+	<security:http pattern="/assets/**" security="none" />
+	<security:http pattern="/jsTreeAlg/**" security="none" />
+	<security:http pattern="/aboutUs/**" security="none" />
+	<security:http pattern="/account/accountSign.do" security="none" />
 
-	<security:http auto-config="true" use-expressions="true">
+	<security:http auto-config="true" use-expressions="true" access-decision-manager-ref="">
 
-		<security:intercept-url pattern="/**" access="permitAll" />
+		<security:intercept-url pattern="/*" access="hasRole('ROLE_USER')" />
 
 		<security:form-login login-page="/account/accountSign.do"
 			login-processing-url="/user/login/loginProcess.do"
