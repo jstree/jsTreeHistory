@@ -18,8 +18,8 @@ body {
     padding: 0;
     background: #fff;
     color: #474747;
-    font-family: sans-serif;
-    font-size: 0.8em;
+    font-family: Nanum Gothic;
+    font-size: 12px;
     font-weight: 400;
     line-height: 1.8em;
     letter-spacing: 0;
@@ -629,7 +629,7 @@ hr.double {
 
 h1 {
     color: #f45b4f;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 2em;
     font-weight: 400;
     font-variant: normal;
@@ -671,7 +671,7 @@ h1 span.lighter {
 
 h2 {
     color: #f45b4f;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 1.8em;
     font-weight: 400;
     font-variant: normal;
@@ -713,7 +713,7 @@ h2 span.lighter {
 
 h3 {
     color: #f45b4f;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 1.6em;
     font-weight: 400;
     font-variant: normal;
@@ -755,7 +755,7 @@ h3 span.lighter {
 
 h4 {
     color: #f45b4f;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 1.4em;
     font-weight: 400;
     font-variant: normal;
@@ -797,7 +797,7 @@ h4 span.lighter {
 
 h5 {
     color: #f45b4f;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 1.2em;
     font-weight: 400;
     font-variant: normal;
@@ -839,7 +839,7 @@ h5 span.lighter {
 
 h6 {
     color: #f45b4f;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 1.1em;
     font-weight: 400;
     font-variant: normal;
@@ -1149,7 +1149,7 @@ input[type="text"],input[type="password"],input[type="email"],input[type="search
     padding: 6px;
     background: #fff;
     color: #999;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 1em;
     font-weight: 400;
     font-variant: normal;
@@ -1262,7 +1262,7 @@ textarea {
 }
 
 textarea.mono {
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
 }
 
 textarea.no-resize {
@@ -1309,7 +1309,7 @@ input[type="checkbox"],input[type="radio"] {
     border-bottom-left-radius: 0px;
     background: #fff;
     color: #999;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 1em;
     font-weight: 400;
     font-variant: normal;
@@ -1433,7 +1433,7 @@ button,.button,a.button,input[type="submit"],input[type="reset"],input[type="but
     padding: 10px;
     background: #f45b4f;
     color: #fff;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 1em;
     font-weight: 400;
     font-variant: normal;
@@ -2152,7 +2152,7 @@ span.font-xx-large {
 
 .special-header {
     color: #f45b4f;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 2em;
     font-weight: 400;
     text-align: center;
@@ -2180,7 +2180,7 @@ span.font-xx-large {
 
 #header #header-logo {
     height: 160px;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 2em;
     font-weight: 400;
     text-align: center;
@@ -3486,7 +3486,7 @@ span.font-xx-large {
 
 #footer #columns .title {
     color: #f45b4f;
-    font-family: sans-serif;
+    font-family: Nanum Gothic;
     font-size: 1.8;
     font-weight: 400;
 }
