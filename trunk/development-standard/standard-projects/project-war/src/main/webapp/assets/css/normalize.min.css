@@ -19,6 +19,7 @@ audio:not ([controls] ){
 
 html {
 	font-family: sans-serif;
+	font-size: 15px;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%
 }

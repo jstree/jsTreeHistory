@@ -28,9 +28,7 @@
 				<div id="header-cart" class="one-third bm-remove last">
 					<c:choose>
 						<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == null}">
-						  	<a  href="${joinUrl}" target="_self" >회원가입</a>
-							<span>|</span>
-							<a href="${loginUrl}" target="_self">로그인</a>
+						  	<a  href="${joinUrl}" target="_self" >Full Stack Developer Group</a>
 						</c:when>
 						<c:otherwise>
 							<a id="userInfo" target="_self"style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nickName}</a>
