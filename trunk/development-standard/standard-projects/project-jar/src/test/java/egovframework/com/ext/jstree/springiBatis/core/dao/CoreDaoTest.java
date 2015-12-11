@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -59,8 +60,7 @@ import egovframework.com.ext.jstree.support.manager.config.WebMvcConfig;
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
 public class CoreDaoTest
 {
-	@Autowired 
-	@Qualifier("CoreDao")
+	@Resource(name="CoreDao")
 	private CoreDao dao;
 
 	private ComprehensiveTree comprehensiveTree;
