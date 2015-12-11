@@ -78,7 +78,7 @@ public abstract class DbUnitTest<T> {
     @Resource(name = "CoreService")
     protected CoreService coreService;
     
-    @Autowired
+    @Resource(name = "CoreDao")
     protected CoreDao coreDao;
     
     @Resource(name = "dataSource-${Globals.DbType}")
