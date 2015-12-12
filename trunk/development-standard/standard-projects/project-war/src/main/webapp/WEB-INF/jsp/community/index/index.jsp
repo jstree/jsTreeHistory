@@ -51,8 +51,8 @@
 				</div>
 			</div>
 
-</div>
-		<div class="container">
+			</div>
+			<div class="container">
 				<div class="one-whole clearfix" data-anim-type="fade-in" data-anim-delay="fade-in">
 					
 					<div class="one-whole boxed p-twenty">
@@ -61,16 +61,17 @@
 
 							<div class="rte">
 							<p style="text-align: center;">
-								일관되고, 정형화된 서비스 프레임워크를 제공하여 개발 방식을 단순하게 유지할 수 있게 돕습니다. <br>
+								일관되고, 정형화된 JsTree: Service Framework Engine을 제공하여 개발 방식을 단순하게 유지할 수 있게 돕습니다. <br>
 								또한, 비기능적 요구사항과 기능적 요구사항을 하나의 포인트에서 구현할 수 있게 확장 포인트를 제공하여 <br>
-								보다 월활하고 쉽게 적용할 수 있는 JsTree Service Framework 를 통해 <br>
-								개발자의 야근을 줄여주고 <strong>칼퇴</strong>를 할 수 있도록 지원합니다.
+								보다 일관되고, 유지보수성을 줄이고, Safety 와 Performance를 제공하여 빠르게 개발을 이어갈 수 있는 방법을 제시합니다.<br>
+								프로젝트의 표준을 제시하고, 전자정부 프레임워크와 AnyFramework를 포괄하는 아키텍쳐에 <br>
+								Struts, Spring, iBatis, Hibernate 등의 레거시부터 최신화된 기술을 탑재하여 지속적으로 확장하는 Core Engine을 제공합니다.<br> 
 							</p>
 								
 							</div>
 						
 					</div>
-			</div>
+				</div>
 			</div> 
 		<!-- 2015-07-08 : 수정 -->
 		<section class="clearfix" >
@@ -81,7 +82,7 @@
 							<div class="image-and-overlay-container bm-small">
 								<div class="image">
 									<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self">
-									<img src="http://dummyimage.com/500/ffffff/f45a4f.png&text= We&nbsp;" alt=""  />
+									<img src="http://dummyimage.com/400/ffffff/f45a4f.png&text= We" alt=""  />
 									</a>
 								</div>
 								<a href="${pageContext.request.contextPath}/aboutUs/committer.do" target="_self" class="overlay"></a>
@@ -106,7 +107,7 @@
 							</div>
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/devTool/313DevALMCI.do" target="_self"><strong>Environment</strong></a><br />
-								우리는 ALM, CI에 대한 고민을 지속적으로 해왔습니다. 다양한 tool을 사용하고 테스트 해보며, 현재의 시스템을 구축하였습니다.
+								우리는 ALM, CI에 대한 고민을 지속적으로 해왔습니다. 최적의 프로세스와 자동화된 산출물, 개발환경 ~ 빌드에서 배포까지의 시스템을 구축하였습니다.
 							</p>
 						</div>
 					</div>
@@ -123,7 +124,7 @@
 							</div>
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/jsTreeAlg/jsTreeOverView.do" target="_self"><strong>JsTree</strong></a><br />
-								'확장이 다양하게 가능하며, 단시간에 쉽게 개발이 가능한 모듈을 만들 수 있을까?' JsTree는 이 문제를 해결할 우리의 솔루션입니다.
+								JsTree: Service Framework Engine '단일 아키텍쳐 프레임워크 엔진이 제공하는 누적되는 기능, 비기능 Function의 확장, 단시간에 개발이 가능한 방법'
 							</p>
 						</div>
 					</div>
@@ -140,7 +141,7 @@
 							</div>
 							<p class="bm-remove">
 								<a href="${pageContext.request.contextPath}/baroBoard/baroBoardOverView.do" target="_self"><strong>BaroBoard</strong></a><br />
-								이제 우리는 모든 준비를 마치고 바로보드 개발을 시작합니다. Java 기반 설치형 범용 게시판 솔루션, 우리가 만들어 내겠습니다.
+								이제 우리는 모든 준비를 마치고 Service Framework Engine을 통해 이세상의 유일한 OpenSource Java Version 설치형 게시판을 배포합니다.
 							</p>
 						</div>
 					</div>

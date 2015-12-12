@@ -14,9 +14,11 @@
 										<span>313 Developer Group</span>
 									</h4>
 									<div class="content rte">
-										<p class="text bm-remove">313 개발자 그룹은 2010년 자바스터디로 시작되었습니다. <br />
-										그후 2013년 게시판 오픈소스 프로젝트를 구상하게 되었고, 바로보드라는 결실을 맺게 되었습니다. <br />
-										더욱더 발전할 313 개발자 그룹을 지켜봐 주십시오.</p>
+										<p class="text bm-remove">우리는 Full Stack Developer Group이다.
+										                                  우리는 Vision 을 공유하고, 매주 OffLine
+										                                  스터디 모임을 유지하고 있습니다.
+										                                  현업에서 사용할 기술을 기준으로 학습을
+										                                  유지하고 있으며, 여전히 당신을 기다리고 있습니다.
 									</div>
 								</div>
 							</div>
