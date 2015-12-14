@@ -114,7 +114,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		this.loginpasswdname = "j_password";
 		this.loginredirectname = "loginRedirect";
 		this.exceptionmsgname = "securityexceptionmsg";
-		this.defaultFailureUrl = "/login.do";
+		this.defaultFailureUrl = "loginFail";
 	}
 	
 	@Override
