@@ -52,6 +52,10 @@
 		<location>/common/404error.do</location>
 	</error-page>
 	<error-page>
+		<error-code>401</error-code>
+		<location>/common/401error.do</location>
+	</error-page>
+	<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/jsp/community/common/error.jsp</location>
 	</error-page>

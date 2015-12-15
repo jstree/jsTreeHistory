@@ -32,7 +32,7 @@
 						<div class="one-half-percent desktop-tablet alpha boxed bm-remove">
 							<h1 class="bm-small text-center">Sign In</h1>
 							<div id="customer-login-form">
-								<form accept-charset="UTF-8" action="${pageContext.request.contextPath}/uat/uia/actionLogin.do" id="customer_login" method="post">
+								<form accept-charset="UTF-8" action="${pageContext.request.contextPath}/account/accountLoginProcess.do" id="security_login" method="post">
 									<input type="hidden" name="userSe"  value="USR"/>
 									<input name="form_type" type="hidden" value="customer_login" /><input name="utf8" type="hidden" value="✓" />
 									<script>
@@ -40,14 +40,12 @@
 											$('#customer_login').attr('novalidate', '');
 										});
 									</script>
-									<input type="text" name="id" id="id" class="w-full" placeholder="ID or Email" value="" />
+									<input type="text" name="email" id="email" class="w-full" placeholder="ID or Email" value="" />
 									<input type="text" class="w-full fake-password" placeholder="Password" />
 									<input type="password" name="password" id="password" class="w-full true-password no-display" />
-									<!-- 
 									<div class="text-left">
 										<a href="#" target="_self" id="recover-show">Forgot your password?</a>
 									</div>
-									 -->
 									<div class="text-right">
 										<button type="submit" class="inline-block bm-remove">Sign in</button>
 									</div>
