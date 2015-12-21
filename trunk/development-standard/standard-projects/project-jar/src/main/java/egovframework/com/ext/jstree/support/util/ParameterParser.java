@@ -695,7 +695,6 @@ public class ParameterParser
         return list;
     }
     
-    @SuppressWarnings("unchecked")
     public String toString()
     {
         StringBuffer sbf = new StringBuffer();
@@ -735,7 +734,6 @@ public class ParameterParser
         return sbf.toString();
     }
     
-    @SuppressWarnings("unchecked")
     public String paramDebug()
     {
         StringBuffer sbf = new StringBuffer();

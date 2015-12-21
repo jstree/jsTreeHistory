@@ -98,7 +98,8 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
         return leafNode;
     }
     
-    private ComprehensiveTree getInitialLeafNodeStored() throws Exception {
+    @SuppressWarnings("unused")
+	private ComprehensiveTree getInitialLeafNodeStored() throws Exception {
         
         return coreService.getNode( getInitialLeafNode() );
     }
@@ -111,7 +112,8 @@ public class CoreServiceTest extends DbUnitTest<ComprehensiveTree> {
         return branchNode;
     }
     
-    private ComprehensiveTree getInitialBranchNodeStored() throws Exception {
+    @SuppressWarnings("unused")
+	private ComprehensiveTree getInitialBranchNodeStored() throws Exception {
         
         return coreService.getNode( getInitialBranchNode() );
     }
