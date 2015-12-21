@@ -188,16 +188,16 @@
 			<url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
 		</repository>
 		<repository>
-        <id>central</id>
-        <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-        </snapshots>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <url>https://m2proxy.atlassian.com/repository/public</url>
-    </repository>
+			<id>atlassian</id>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<url>https://m2proxy.atlassian.com/repository/public</url>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -233,16 +233,16 @@
 			<url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
 		</pluginRepository>
 		<pluginRepository>
-        <id>central</id>
-        <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-        </snapshots>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <url>https://m2proxy.atlassian.com/repository/public</url>
-    </pluginRepository>
+			<id>atlassian</id>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<url>https://m2proxy.atlassian.com/repository/public</url>
+		</pluginRepository>
 	</pluginRepositories>
 
 	<distributionManagement>
