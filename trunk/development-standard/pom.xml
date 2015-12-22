@@ -292,13 +292,24 @@
 			</plugin>
 			<!-- Generating Java Source in HTML -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.3</version>
 				<configuration>
 					<inputEncoding>${encoding}</inputEncoding>
 					<outputEncoding>${encoding}</outputEncoding>
 					<linkJavadoc>true</linkJavadoc>
 					<javadocDir>apidocs</javadocDir>
 				</configuration>
+				<reportSets>
+					<reportSet>
+						<id>aggregate</id>
+						<inherited>false</inherited>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 
 			<plugin>
