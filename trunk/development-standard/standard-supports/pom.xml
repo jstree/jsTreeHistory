@@ -20,7 +20,6 @@
 		<module>support-ajax</module>
 		<module>support-aop</module>
 		<module>support-apache</module>
-		<module>support-atlassian</module>
 		<module>support-cache</module>
 		<module>support-chart</module>
 		<module>support-driver</module>
