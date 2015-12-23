@@ -17,16 +17,23 @@
 	<description>아틀라시안 플러그인 API 라이브러리</description>
 
 	<dependencies>
-
+			<dependency>
+				<groupId>com.atlassian.jira</groupId>
+				<artifactId>jira-rest-java-client-api</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>com.atlassian.jira</groupId>
+				<artifactId>jira-rest-java-client-core</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>com.atlassian.jira</groupId>
+				<artifactId>jira-rest-java-client-parent</artifactId>
+				<type>pom</type>
+			</dependency>
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>com.atlassian.jira</groupId>
-				<artifactId>jira-rest-java-client</artifactId>
-				<version>1.2-m01</version>
-			</dependency>
 			<dependency>
 				<groupId>com.atlassian.jira</groupId>
 				<artifactId>jira-rest-java-client-api</artifactId>
@@ -36,6 +43,12 @@
 				<groupId>com.atlassian.jira</groupId>
 				<artifactId>jira-rest-java-client-core</artifactId>
 				<version>3.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.atlassian.jira</groupId>
+				<artifactId>jira-rest-java-client-parent</artifactId>
+				<version>3.0.0</version>
+				<type>pom</type>
 			</dependency>
 
 			<dependency>

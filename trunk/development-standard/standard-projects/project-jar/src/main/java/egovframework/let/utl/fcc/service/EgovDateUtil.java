@@ -522,13 +522,12 @@ public class EgovDateUtil {
      * @param sDate 양력일자
      * @return 음력일자
      */
-    @SuppressWarnings("unchecked")
-	public static HashMap toLunar(String sDate) {
+	public static HashMap<String,String> toLunar(String sDate) {
     	String dateStr = validChkDate(sDate);
 
-		HashMap hm = new HashMap();
+		HashMap<String,String> hm = new HashMap<String,String>();
 		hm.put("day", "");
-		hm.put("leap", 0);
+		hm.put("leap", "");
 
 		if(dateStr.length() != 8) {
 			return hm;
