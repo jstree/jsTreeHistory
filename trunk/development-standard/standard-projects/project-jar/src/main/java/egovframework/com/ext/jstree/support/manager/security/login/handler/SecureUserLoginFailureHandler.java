@@ -5,20 +5,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
 
 import com.sun.star.uno.RuntimeException;
 
+import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.ext.jstree.support.manager.security.login.dao.SecureUserLoginDao;
 import egovframework.com.ext.jstree.support.manager.security.login.service.SecureGeneralSettingService;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureGeneralSetting;
@@ -56,14 +55,16 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 	@Autowired
 	private SecureGeneralSettingService secureGeneralSettingService;
 	
+    @Resource(name="egovMessageSource")
+    EgovMessageSource egovMessageSource;
+	
 	private static final int JOIN_COMPLETE = 4;
-	private static final int ACCOUNT_ADMIN = 3;
 	
 	SecureGeneralSetting secureGeneralSetting;
 	SecureUser secureLoggedInUser;
 	
-	ThreadLocal<SecureGeneralSetting> currentSecureGeneralSetting = new ThreadLocal<SecureGeneralSetting>();
-	ThreadLocal<SecureUser> currentSecureLoggedInUser 			  = new ThreadLocal<SecureUser>();
+	ThreadLocal<SecureGeneralSetting> localSecureGeneralSetting = new ThreadLocal<SecureGeneralSetting>();
+	ThreadLocal<SecureUser> localSecureLoggedInUser 			  = new ThreadLocal<SecureUser>();
 	
 	private String loginidname;			// 로그인 id값이 들어오는 input 태그 name
 	private String loginpasswdname;		// 로그인 password 값이 들어오는 input 태그 name
@@ -119,7 +120,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		this.defaultFailureUrl = "loginFail";
 		
 		secureGeneralSetting = this.secureGeneralSettingService.getGeneralSetting();
-		this.currentSecureGeneralSetting.set(secureGeneralSetting);
+		this.localSecureGeneralSetting.set(secureGeneralSetting);
 	}
 	
 	@Override
@@ -132,33 +133,33 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		secureLogInUser.setPassword( request.getParameter("password") );
 		
 		secureLoggedInUser = secureUserLoginDao.getUserInfoByEmail( secureLogInUser );
-		this.currentSecureLoggedInUser.set(secureLoggedInUser);
+		this.localSecureLoggedInUser.set(secureLoggedInUser);
 		
 		String errMsg = "";
 		
-		if ( this.currentSecureLoggedInUser.get() == null ) 
+		if ( this.localSecureLoggedInUser.get() == null ) 
 		{
-			errMsg = "정확한 이메일 주소를 입력하세요.";
+			errMsg = egovMessageSource.getMessage("bb.user.error.002"); 
 		}
-		else if( this.currentSecureLoggedInUser.get().getJoinStateCd() != JOIN_COMPLETE )
+		else if( this.localSecureLoggedInUser.get().getJoinStateCd() != JOIN_COMPLETE )
 		{
-			errMsg = "회원 가입완료 상태가 아닙니다.";
+			errMsg = egovMessageSource.getMessage("bb.user.error.011");
 		}
 		else if( this.getJoinTargetDate().after(new Date()) == true )
 		{
-			errMsg = "로그인 제한일수가 지나지 않았습니다.";
+			errMsg = egovMessageSource.getMessage("bb.user.error.013");
 		} 
 		else 
 		{
-			if( this.currentSecureLoggedInUser.get().getLoginFailureCnt() == secureGeneralSetting.getLoginFailureLimitCnt() )
+			if( this.localSecureLoggedInUser.get().getLoginFailureCnt() == secureGeneralSetting.getLoginFailureLimitCnt() )
 			{
-				this.secureUserLoginDao.setUserLoginJoinStateCd(this.currentSecureLoggedInUser.get());
-				errMsg = "로그인 실패 제한횟수가 되었습니다.";
+				this.secureUserLoginDao.setUserLoginJoinStateCd(this.localSecureLoggedInUser.get());
+				errMsg = egovMessageSource.getMessage("bb.user.error.012");
 			}
 			else
 			{
-				secureUserLoginDao.setUserLoginFailureCntIncrease( this.currentSecureLoggedInUser.get() );
-				errMsg = "비밀번호 실패 횟수 : "+ String.valueOf(this.currentSecureLoggedInUser.get().getLoginFailureCnt()+1) +" 회.";
+				secureUserLoginDao.setUserLoginFailureCntIncrease( this.localSecureLoggedInUser.get() );
+				errMsg = egovMessageSource.getMessage("bb.user.error.003", new String[]{String.valueOf(this.localSecureLoggedInUser.get().getLoginFailureCnt()+1)});
 			}
 		}
 		
@@ -171,10 +172,10 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date joinTargetDate = null;
 		try {
-			if (this.currentSecureLoggedInUser.get() != null) 
+			if (this.localSecureLoggedInUser.get() != null) 
 			{
-				Date joinDt = sdf.parse(this.currentSecureLoggedInUser.get().getJoinDt());
-				int loginLimitDcnt = this.currentSecureGeneralSetting.get().getLoginLimitDcnt();
+				Date joinDt = sdf.parse(this.localSecureLoggedInUser.get().getJoinDt());
+				int loginLimitDcnt = this.localSecureGeneralSetting.get().getLoginLimitDcnt();
 				joinTargetDate =   DateUtils.addDays(joinDt, loginLimitDcnt);
 			} else {
 				joinTargetDate =  sdf.parse("00000000000000");
