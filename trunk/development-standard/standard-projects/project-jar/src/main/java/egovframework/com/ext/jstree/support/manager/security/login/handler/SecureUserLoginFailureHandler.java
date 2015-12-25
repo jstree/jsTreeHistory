@@ -1,6 +1,7 @@
 package egovframework.com.ext.jstree.support.manager.security.login.handler;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,6 +15,9 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
+
+import com.sun.star.uno.RuntimeException;
 
 import egovframework.com.ext.jstree.support.manager.security.login.dao.SecureUserLoginDao;
 import egovframework.com.ext.jstree.support.manager.security.login.service.SecureGeneralSettingService;
@@ -50,7 +54,16 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
     private SecureUserLoginDao secureUserLoginDao;
 	
 	@Autowired
-	private SecureGeneralSettingService secureGeneralSettingService; 
+	private SecureGeneralSettingService secureGeneralSettingService;
+	
+	private static final int JOIN_COMPLETE = 4;
+	private static final int ACCOUNT_ADMIN = 3;
+	
+	SecureGeneralSetting secureGeneralSetting;
+	SecureUser secureLoggedInUser;
+	
+	ThreadLocal<SecureGeneralSetting> currentSecureGeneralSetting = new ThreadLocal<SecureGeneralSetting>();
+	ThreadLocal<SecureUser> currentSecureLoggedInUser 			  = new ThreadLocal<SecureUser>();
 	
 	private String loginidname;			// 로그인 id값이 들어오는 input 태그 name
 	private String loginpasswdname;		// 로그인 password 값이 들어오는 input 태그 name
@@ -98,81 +111,77 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		this.defaultFailureUrl = defaultFailureUrl;
 	}
 	
-	public SecureUserLoginFailureHandler(){
+	public SecureUserLoginFailureHandler() throws Exception {
 		this.loginidname = "j_username";
 		this.loginpasswdname = "j_password";
 		this.loginredirectname = "loginRedirect";
 		this.exceptionmsgname = "securityexceptionmsg";
 		this.defaultFailureUrl = "loginFail";
+		
+		secureGeneralSetting = this.secureGeneralSettingService.getGeneralSetting();
+		this.currentSecureGeneralSetting.set(secureGeneralSetting);
 	}
 	
 	@Override
 	public void onAuthenticationFailure( HttpServletRequest request, HttpServletResponse response, AuthenticationException exception ) throws IOException, ServletException
 	{
+		super.setDefaultFailureUrl(this.defaultFailureUrl);
+		
 		SecureUser secureLogInUser = new SecureUser();
 		secureLogInUser.setEmail( request.getParameter("email") );
 		secureLogInUser.setPassword( request.getParameter("password") );
 		
-		final int JOINCOMPLETE = 4;
-		super.setDefaultFailureUrl(this.defaultFailureUrl);
+		secureLoggedInUser = secureUserLoginDao.getUserInfoByEmail( secureLogInUser );
+		this.currentSecureLoggedInUser.set(secureLoggedInUser);
 		
-		//TODO:L
-		//logManager.invokeFailLog();
-		//accountLimitManager.invokeExcute();
-		try
+		String errMsg = "";
+		
+		if ( this.currentSecureLoggedInUser.get() == null ) 
 		{
-			SecureUser secureLoggedInUser = secureUserLoginDao.getUserInfoByEmail( secureLogInUser );
-			SecureGeneralSetting secureGeneralSetting = this.secureGeneralSettingService.getGeneralSetting();
-			
-			ShaPasswordEncoder encoder=new ShaPasswordEncoder(256);
-			String secureLogInUserPassword = encoder.encodePassword(secureLogInUser.getPassword(), null);
-			
-			Date joinTargetDate = null;
-			if ( secureLoggedInUser != null ) 
-			{
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-				Date joinDt = sdf.parse(secureLoggedInUser.getJoinDt());
-				int loginLimitDcnt = secureGeneralSetting.getLoginLimitDcnt();
-				joinTargetDate = DateUtils.addDays(joinDt, loginLimitDcnt);
-			}
-			
-			if ( secureLoggedInUser == null ) 
-			{
-				request.getSession().setAttribute("errorCode", "1");
-			}
-			else if ( StringUtils.equals(secureLoggedInUser.getPassword(), secureLogInUserPassword) == false ) 
-			{
-				secureUserLoginDao.setUserLoginFailureCntIncrease( secureLoggedInUser );
-				secureLoggedInUser = secureUserLoginDao.getUserInfoByEmail( secureLoggedInUser );
-				if( secureLoggedInUser.getLoginFailureCnt() == secureGeneralSetting.getLoginFailureLimitCnt() )
-				{
-					final int ACCOUNTADMIN = 3;
-					SecureUser secureUser = new SecureUser();
-					secureUser.setC_id( ACCOUNTADMIN );
-					this.secureUserLoginDao.setUserLoginJoinStateCd(secureUser);
-					
-					request.getSession().setAttribute("errorCode", "2");
-				}
-				else
-				{
-					request.getSession().setAttribute("errorCode", "3");
-					request.getSession().setAttribute("loginFailureCnt", String.valueOf(secureLoggedInUser.getLoginFailureCnt()));
-				}
-			}
-			else if( secureLoggedInUser.getJoinStateCd() != JOINCOMPLETE )
-			{
-				request.getSession().setAttribute("errorCode", "2");
-			}
-			else if( joinTargetDate.after(new Date()) == true )
-			{
-				request.getSession().setAttribute("errorCode", "4");
-			}
+			errMsg = "정확한 이메일 주소를 입력하세요.";
+		}
+		else if( this.currentSecureLoggedInUser.get().getJoinStateCd() != JOIN_COMPLETE )
+		{
+			errMsg = "회원 가입완료 상태가 아닙니다.";
+		}
+		else if( this.getJoinTargetDate().after(new Date()) == true )
+		{
+			errMsg = "로그인 제한일수가 지나지 않았습니다.";
 		} 
-		catch ( Exception e )
+		else 
 		{
-			throw new RuntimeException( e.getMessage() );
+			if( this.currentSecureLoggedInUser.get().getLoginFailureCnt() == secureGeneralSetting.getLoginFailureLimitCnt() )
+			{
+				this.secureUserLoginDao.setUserLoginJoinStateCd(this.currentSecureLoggedInUser.get());
+				errMsg = "로그인 실패 제한횟수가 되었습니다.";
+			}
+			else
+			{
+				secureUserLoginDao.setUserLoginFailureCntIncrease( this.currentSecureLoggedInUser.get() );
+				errMsg = "비밀번호 실패 횟수 : "+ String.valueOf(this.currentSecureLoggedInUser.get().getLoginFailureCnt()+1) +" 회.";
+			}
 		}
 		
+		request.getSession().setAttribute("errorMsg", errMsg);
+			
 		super.onAuthenticationFailure( request, response, exception );
+	}
+
+	private Date getJoinTargetDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		Date joinTargetDate = null;
+		try {
+			if (this.currentSecureLoggedInUser.get() != null) 
+			{
+				Date joinDt = sdf.parse(this.currentSecureLoggedInUser.get().getJoinDt());
+				int loginLimitDcnt = this.currentSecureGeneralSetting.get().getLoginLimitDcnt();
+				joinTargetDate =   DateUtils.addDays(joinDt, loginLimitDcnt);
+			} else {
+				joinTargetDate =  sdf.parse("00000000000000");
+			}
+		} catch (ParseException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return joinTargetDate;
 	}
 }
