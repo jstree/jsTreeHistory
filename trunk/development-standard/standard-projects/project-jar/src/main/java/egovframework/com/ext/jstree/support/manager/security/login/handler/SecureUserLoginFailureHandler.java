@@ -65,7 +65,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 	SecureUser secureLoggedInUser;
 	
 	ThreadLocal<SecureGeneralSetting> localSecureGeneralSetting = new ThreadLocal<SecureGeneralSetting>();
-	ThreadLocal<SecureUser> localSecureLoggedInUser 			  = new ThreadLocal<SecureUser>();
+	ThreadLocal<SecureUser> localSecureLoggedInUser 		    = new ThreadLocal<SecureUser>();
 	
 	private String loginidname;			// 로그인 id값이 들어오는 input 태그 name
 	private String loginpasswdname;		// 로그인 password 값이 들어오는 input 태그 name
@@ -128,8 +128,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 	}
 	
 	@Override
-	public void onAuthenticationFailure( HttpServletRequest request, HttpServletResponse response, AuthenticationException exception ) throws IOException, ServletException
-	{
+	public void onAuthenticationFailure( HttpServletRequest request, HttpServletResponse response, AuthenticationException exception ) throws IOException, ServletException	{
 		super.setDefaultFailureUrl(this.defaultFailureUrl);
 		
 		SecureUser secureLogInUser = new SecureUser();
@@ -172,21 +171,22 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		super.onAuthenticationFailure( request, response, exception );
 	}
 
-	private Date getJoinTargetDate() {
+	private Date getJoinTargetDate() 
+	{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		Date joinTargetDate = null;
-		try {
-			if (this.localSecureLoggedInUser.get() != null) 
-			{
-				Date joinDt = sdf.parse(this.localSecureLoggedInUser.get().getJoinDt());
-				int loginLimitDcnt = this.localSecureGeneralSetting.get().getLoginLimitDcnt();
-				joinTargetDate =   DateUtils.addDays(joinDt, loginLimitDcnt);
-			} else {
-				joinTargetDate =  sdf.parse("00000000000000");
-			}
-		} catch (ParseException e) {
+		Date joinTargetDate  = null;
+		
+		try 
+		{
+			Date joinDt = sdf.parse(this.localSecureLoggedInUser.get().getJoinDt());
+			int loginLimitDcnt = this.localSecureGeneralSetting.get().getLoginLimitDcnt();
+			joinTargetDate = DateUtils.addDays(joinDt, loginLimitDcnt);
+		} 
+		catch (ParseException e) 
+		{
 			throw new RuntimeException(e.getMessage());
 		}
+		
 		return joinTargetDate;
 	}
 }
