@@ -1,20 +1,24 @@
 package egovframework.com.ext.jstree.support.manager.security.login.handler;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
+import com.sun.star.uno.RuntimeException;
+
+import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.ext.jstree.support.manager.security.login.dao.SecureUserLoginDao;
 import egovframework.com.ext.jstree.support.manager.security.login.service.SecureGeneralSettingService;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureGeneralSetting;
@@ -50,7 +54,18 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
     private SecureUserLoginDao secureUserLoginDao;
 	
 	@Autowired
-	private SecureGeneralSettingService secureGeneralSettingService; 
+	private SecureGeneralSettingService secureGeneralSettingService;
+	
+    @Resource(name="egovMessageSource")
+    EgovMessageSource egovMessageSource;
+	
+	private static final int JOIN_COMPLETE = 4;
+	
+	SecureGeneralSetting secureGeneralSetting;
+	SecureUser secureLoggedInUser;
+	
+	ThreadLocal<SecureGeneralSetting> localSecureGeneralSetting = new ThreadLocal<SecureGeneralSetting>();
+	ThreadLocal<SecureUser> localSecureLoggedInUser 			  = new ThreadLocal<SecureUser>();
 	
 	private String loginidname;			// 로그인 id값이 들어오는 input 태그 name
 	private String loginpasswdname;		// 로그인 password 값이 들어오는 input 태그 name
@@ -98,7 +113,7 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		this.defaultFailureUrl = defaultFailureUrl;
 	}
 	
-	public SecureUserLoginFailureHandler(){
+	public SecureUserLoginFailureHandler() {
 		this.loginidname = "j_username";
 		this.loginpasswdname = "j_password";
 		this.loginredirectname = "loginRedirect";
@@ -106,73 +121,72 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		this.defaultFailureUrl = "loginFail";
 	}
 	
+	@PostConstruct
+	public void initSecureGeneralSetting() throws Exception {
+		secureGeneralSetting = this.secureGeneralSettingService.getGeneralSetting();
+		this.localSecureGeneralSetting.set(secureGeneralSetting);
+	}
+	
 	@Override
 	public void onAuthenticationFailure( HttpServletRequest request, HttpServletResponse response, AuthenticationException exception ) throws IOException, ServletException
 	{
+		super.setDefaultFailureUrl(this.defaultFailureUrl);
+		
 		SecureUser secureLogInUser = new SecureUser();
 		secureLogInUser.setEmail( request.getParameter("email") );
 		secureLogInUser.setPassword( request.getParameter("password") );
 		
-		final int JOINCOMPLETE = 4;
-		super.setDefaultFailureUrl(this.defaultFailureUrl);
+		secureLoggedInUser = secureUserLoginDao.getUserInfoByEmail( secureLogInUser );
+		this.localSecureLoggedInUser.set(secureLoggedInUser);
 		
-		//TODO:L
-		//logManager.invokeFailLog();
-		//accountLimitManager.invokeExcute();
-		try
+		String errMsg = "";
+		
+		if ( this.localSecureLoggedInUser.get() == null ) 
 		{
-			SecureUser secureLoggedInUser = secureUserLoginDao.getUserInfoByEmail( secureLogInUser );
-			SecureGeneralSetting secureGeneralSetting = this.secureGeneralSettingService.getGeneralSetting();
-			
-			ShaPasswordEncoder encoder=new ShaPasswordEncoder(256);
-			String secureLogInUserPassword = encoder.encodePassword(secureLogInUser.getPassword(), null);
-			
-			Date joinTargetDate = null;
-			if ( secureLoggedInUser != null ) 
-			{
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-				Date joinDt = sdf.parse(secureLoggedInUser.getJoinDt());
-				int loginLimitDcnt = secureGeneralSetting.getLoginLimitDcnt();
-				joinTargetDate = DateUtils.addDays(joinDt, loginLimitDcnt);
-			}
-			
-			if ( secureLoggedInUser == null ) 
-			{
-				request.getSession().setAttribute("errorCode", "1");
-			}
-			else if ( StringUtils.equals(secureLoggedInUser.getPassword(), secureLogInUserPassword) == false ) 
-			{
-				secureUserLoginDao.setUserLoginFailureCntIncrease( secureLoggedInUser );
-				secureLoggedInUser = secureUserLoginDao.getUserInfoByEmail( secureLoggedInUser );
-				if( secureLoggedInUser.getLoginFailureCnt() == secureGeneralSetting.getLoginFailureLimitCnt() )
-				{
-					final int ACCOUNTADMIN = 3;
-					SecureUser secureUser = new SecureUser();
-					secureUser.setC_id( ACCOUNTADMIN );
-					this.secureUserLoginDao.setUserLoginJoinStateCd(secureUser);
-					
-					request.getSession().setAttribute("errorCode", "2");
-				}
-				else
-				{
-					request.getSession().setAttribute("errorCode", "3");
-					request.getSession().setAttribute("loginFailureCnt", String.valueOf(secureLoggedInUser.getLoginFailureCnt()));
-				}
-			}
-			else if( secureLoggedInUser.getJoinStateCd() != JOINCOMPLETE )
-			{
-				request.getSession().setAttribute("errorCode", "2");
-			}
-			else if( joinTargetDate.after(new Date()) == true )
-			{
-				request.getSession().setAttribute("errorCode", "4");
-			}
+			errMsg = egovMessageSource.getMessage("bb.user.error.002"); 
+		}
+		else if( this.localSecureLoggedInUser.get().getJoinStateCd() != JOIN_COMPLETE )
+		{
+			errMsg = egovMessageSource.getMessage("bb.user.error.011");
+		}
+		else if( this.getJoinTargetDate().after(new Date()) == true )
+		{
+			errMsg = egovMessageSource.getMessage("bb.user.error.013");
 		} 
-		catch ( Exception e )
+		else 
 		{
-			throw new RuntimeException( e.getMessage() );
+			if( this.localSecureLoggedInUser.get().getLoginFailureCnt() == secureGeneralSetting.getLoginFailureLimitCnt() )
+			{
+				this.secureUserLoginDao.setUserLoginJoinStateCd(this.localSecureLoggedInUser.get());
+				errMsg = egovMessageSource.getMessage("bb.user.error.012");
+			}
+			else
+			{
+				secureUserLoginDao.setUserLoginFailureCntIncrease( this.localSecureLoggedInUser.get() );
+				errMsg = egovMessageSource.getMessage("bb.user.error.003", new String[]{String.valueOf(this.localSecureLoggedInUser.get().getLoginFailureCnt()+1)});
+			}
 		}
 		
+		request.getSession().setAttribute("errorMsg", errMsg);
+			
 		super.onAuthenticationFailure( request, response, exception );
+	}
+
+	private Date getJoinTargetDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		Date joinTargetDate = null;
+		try {
+			if (this.localSecureLoggedInUser.get() != null) 
+			{
+				Date joinDt = sdf.parse(this.localSecureLoggedInUser.get().getJoinDt());
+				int loginLimitDcnt = this.localSecureGeneralSetting.get().getLoginLimitDcnt();
+				joinTargetDate =   DateUtils.addDays(joinDt, loginLimitDcnt);
+			} else {
+				joinTargetDate =  sdf.parse("00000000000000");
+			}
+		} catch (ParseException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return joinTargetDate;
 	}
 }
