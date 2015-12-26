@@ -140,7 +140,7 @@
 		<div id="responsive-lnb">
 			<!--responsive-admin-menu-->
 			<div id="responsive-admin-menu" class="responsiveLnb">
-				<div id="responsive-menu">Dwsee Responsive Admin Menu
+				<div id="responsive-menu">313 DEV GRP TOOLS
 					<div class="menuicon">≡</div>
 				</div>
 				
@@ -183,10 +183,10 @@
 						<div id="Build-sub">
 							<a href="http://www.313.co.kr/nexus" target="_blank" title="Nexus"><i class="icon-film"></i>
 							<span>Nexus</span></a>
-							<a href="http://www.313.co.kr/jenkins" target="_blank" title="Jenkins"><i class="icon-film"></i>
-							<span>Jenkins</span></a>
 							<a href="http://www.313.co.kr/bamboo" target="_blank" title="Bamboo"><i class="icon-film"></i>
 							<span>Bamboo</span></a>
+							<a href="http://www.313.co.kr/hudson" target="_blank" title="Jenkins"><i class="icon-film"></i>
+							<span>Hudson</span></a>
 						</div>
 					
 					<a title="Analysis" class="submenu" name="Analysis-sub"><i class="icon-eye-open"></i>
@@ -209,6 +209,12 @@
 							<span>Mysql</span></a>
 							<a href="http://www.313.co.kr:8888/phppgadmin/" target="_blank" title="phppPgAdmin"><i class="icon-film"></i>
 							<span>Postgres</span></a>
+						</div>
+						
+					<a title="Database" class="submenu" name="Database-sub"><i class="icon-eye-open"></i>
+						<span>Network</span>
+					</a>
+						<div id="Database-sub">
 							<a href="http://www.313.co.kr:8808" target="_blank" title="EFM Networks ipTIME A3004NS"><i class="icon-film"></i>
 							<span>Router</span></a>
 						</div>
@@ -219,8 +225,6 @@
 						<div id="Monitoring-sub">
 							<a href="http://313.co.kr:8088" target="_blank" title="PRTG"><i class="icon-list"></i>
 							<span>PRTG</span></a>
-							<a href="http://www.313.co.kr/piwik" target="_blank" title="Piwik"><i class="icon-list"></i>
-							<span>Piwik</span></a>
 							<a href="http://analytics.naver.com/" target="_blank" title="Naver analytics"><i class="icon-list"></i>
 							<span>Naver<br/>&nbsp;analytics</span></a>
 							<a href="http://www.google.com/intl/ko/analytics" target="_blank" title="Google analytics"><i class="icon-list"></i>
@@ -229,8 +233,6 @@
 							<span>ServerMon</span></a>
 							<a href="http://www.313.co.kr/probe" target="_blank" title="Probe"><i class="icon-film"></i>
 							<span>Probe</span></a>
-							<a href="http://www.313.co.kr/php/eXtplorer_2.1.0RC3" target="_blank" title="eXtplorer_2.1.0RC3"><i class="icon-film"></i>
-							<span>EXtplorer</span></a>
 						</div>
 				</div>
 				<!--//Menu-->
