@@ -6,7 +6,10 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -15,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -66,31 +71,14 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 	{
 		SecureUserLogin secureUserLogin = (SecureUserLogin) authentication.getPrincipal();
 		
-		try
-		{
+		try {
 			this.setPasswordChangePage(secureUserLogin);
-		} 
-		catch( Exception e )
-		{
-			throw new RuntimeException( "setPasswordChangePage");
-		}
-		
-		try {
 			this.setUserLastLoginDt(secureUserLogin);
-			
-		} catch (Exception e) {
-			throw new RuntimeException( "setUserLastLoginDt");
-		}
-		try {
 			this.setUserLoginFailureCntZero(secureUserLogin);
-	       
+			this.addUserLoginState(request, secureUserLogin);
+			this.setUserAuthorities(secureUserLogin);
 		} catch (Exception e) {
-			throw new RuntimeException( "setUserLoginFailureCntZero");
-		}
-		try {
-			 this.addUserLoginState(request, secureUserLogin);
-		} catch (Exception e) {
-			throw new RuntimeException( "addUserLoginState" );
+			throw new RuntimeException( e.getMessage() );
 		}
 		
 		request.getSession().setAttribute("secureUserLogin", secureUserLogin);
@@ -98,107 +86,129 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 
-	private void setPasswordChangePage(SecureUserLogin secureUserlogin) throws Exception
-	{
-		SecureGeneralSetting secureGeneralSetting = secureGeneralSettingService.getGeneralSetting();
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		Date passwordChangeDt = sdf.parse(secureUserlogin.getPasswordChangeDt());
-		int passwordChangeDcont = secureGeneralSetting.getPasswordChangeDcnt();
-		Date passwordTargetDate = DateUtils.addDays(passwordChangeDt, passwordChangeDcont);
-		
-		if ( passwordTargetDate.before(new Date()) == true )
+		private void setPasswordChangePage(SecureUserLogin secureUserlogin) throws Exception
 		{
-			final String passwordChangePage = "/user/login/redirectUserInfoIndex.do";
-			super.setDefaultTargetUrl(passwordChangePage);
-		}
-	}
-
-	private void setUserLastLoginDt( SecureUserLogin secureUserlogin ) throws Exception
-	{
-		Date currentDay = DateUtils.getCurrentDay();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String currentDate = sdf.format(currentDay);
-		
-		SecureUser user = new SecureUser();
-		user.setC_id(secureUserlogin.getId());
-		user.setLoginDt(currentDate);
-		
-		this.secureUserLoginDao.setUserLastLoginDt(user);
-	}
-
-	private void setUserLoginFailureCntZero( SecureUserLogin secureUserlogin ) throws Exception
-	{
-		SecureUser user = new SecureUser();
-		user.setC_id(secureUserlogin.getId());
-		
-		this.secureUserLoginDao.setUserLoginFailureCntZero(user);
-	}
-
-	private void addUserLoginState(HttpServletRequest request, SecureUserLogin secureUserlogin ) throws Exception
-	{
-		Date currentDay      = DateUtils.getCurrentDay();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String currentDate = sdf.format(currentDay);
-		SecureUserLoginState userLoginState = new SecureUserLoginState();
-		userLoginState.setRef(2);
-		userLoginState.setC_type("default");
-		userLoginState.setC_title("로그인");
-		userLoginState.setUserId(secureUserlogin.getId());
-		userLoginState.setIpAddress(getIPV6ConvertToIPV4(request.getRemoteAddr()));
-		userLoginState.setMacAddress(getMacAddress(getIPV6ConvertToIPV4(request.getRemoteAddr())));
-		userLoginState.setLoginDt(currentDate);
-		
-		
-		
-		this.coreService.addNode(userLoginState);
-	}
-	
-	private String getIPV6ConvertToIPV4(String ipAddr){
-		if(ipAddr == "0:0:0:0:0:0:0:1" || ipAddr.equals("0:0:0:0:0:0:0:1") ){
-			return "127.0.0.1"; 
-		}
-		return ipAddr;
-	}
-		
-	private String getMacAddress(String ip)
-	{
-		StringBuilder sb = new StringBuilder();
-		final String defaultMacAddress = "0A-1B-2C-3D-4E-5F";
-		sb.append(defaultMacAddress);
-		try 
-		{
-			InetAddress address = InetAddress.getByName(ip);
+			SecureGeneralSetting secureGeneralSetting = secureGeneralSettingService.getGeneralSetting();
 			
-			NetworkInterface network = NetworkInterface.getByInetAddress(address);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			Date passwordChangeDt = sdf.parse(secureUserlogin.getPasswordChangeDt());
+			int passwordChangeDcont = secureGeneralSetting.getPasswordChangeDcnt();
+			Date passwordTargetDate = DateUtils.addDays(passwordChangeDt, passwordChangeDcont);
 			
-			if ( network != null )
+			if ( passwordTargetDate.before(new Date()) == true )
 			{
-				byte[] mac = network.getHardwareAddress();
-				
-				if ( mac.length > 0 )
-				{
-					sb = new StringBuilder();
-					
-					for (int i = 0; i < mac.length; i++) 
-					{
-						sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));		
-					}	
+				final String passwordChangePage = "/user/login/redirectUserInfoIndex.do";
+				super.setDefaultTargetUrl(passwordChangePage);
+			}
+		}
+	
+		private void setUserLastLoginDt( SecureUserLogin secureUserlogin ) throws Exception
+		{
+			Date currentDay = DateUtils.getCurrentDay();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String currentDate = sdf.format(currentDay);
+			
+			SecureUser user = new SecureUser();
+			user.setC_id(secureUserlogin.getId());
+			user.setLoginDt(currentDate);
+			
+			this.secureUserLoginDao.setUserLastLoginDt(user);
+		}
+	
+		private void setUserLoginFailureCntZero( SecureUserLogin secureUserlogin ) throws Exception
+		{
+			SecureUser user = new SecureUser();
+			user.setC_id(secureUserlogin.getId());
+			
+			this.secureUserLoginDao.setUserLoginFailureCntZero(user);
+		}
+	
+		private void addUserLoginState(HttpServletRequest request, SecureUserLogin secureUserlogin ) throws Exception
+		{
+			Date currentDay      = DateUtils.getCurrentDay();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String currentDate 	 = sdf.format(currentDay);
+			SecureUserLoginState userLoginState = new SecureUserLoginState();
+			
+			userLoginState.setRef(2);
+			userLoginState.setC_type("default");
+			userLoginState.setC_title("로그인");
+			userLoginState.setUserId(secureUserlogin.getId());
+			userLoginState.setIpAddress(getIPV6ConvertToIPV4(request.getRemoteAddr()));
+			userLoginState.setMacAddress(getMacAddress(getIPV6ConvertToIPV4(request.getRemoteAddr())));
+			userLoginState.setLoginDt(currentDate);
+			
+			this.coreService.addNode(userLoginState);
+		}
+		
+		private void setUserAuthorities(SecureUserLogin secureUserlogin)
+		{
+			SecureUser user = new SecureUser();
+			user.setC_id(secureUserlogin.getId());
+			user.setGroupId(this.secureUserLoginDao.getUserGroupId(user));
+			
+			@SuppressWarnings("unchecked")
+			List<Set<String>> userAuthorities = (List<Set<String>>) this.secureUserLoginDao.getUserAuthorities(user);
+			
+			List<GrantedAuthority> grantedAuthoritys = new ArrayList<GrantedAuthority>();
+			
+			for (Set<String> authorities : userAuthorities) {
+				for (String authoritie : authorities) {
+					grantedAuthoritys.add(new SimpleGrantedAuthority(authoritie));
 				}
 			}
-		} 
-		catch (UnknownHostException e) 
-		{
-			return sb.toString();
-		} 
-		catch (SocketException e)
-		{
-			return sb.toString();
-		}
-		catch (Exception e){
-			return sb.toString();
+			
+			secureUserlogin.setAuthorities(grantedAuthoritys);
 		}
 		
-		return sb.toString();
-    }
+			private String getIPV6ConvertToIPV4(String ipAddr) 
+			{
+				if(ipAddr == "0:0:0:0:0:0:0:1" || ipAddr.equals("0:0:0:0:0:0:0:1") ) 
+				{
+					return "127.0.0.1"; 
+				}
+				
+				return ipAddr;
+			}
+				
+			private String getMacAddress(String ip)
+			{
+				StringBuilder sb = new StringBuilder();
+				final String defaultMacAddress = "0A-1B-2C-3D-4E-5F";
+				sb.append(defaultMacAddress);
+				try 
+				{
+					InetAddress address = InetAddress.getByName(ip);
+					
+					NetworkInterface network = NetworkInterface.getByInetAddress(address);
+					
+					if ( network != null )
+					{
+						byte[] mac = network.getHardwareAddress();
+						
+						if ( mac.length > 0 )
+						{
+							sb = new StringBuilder();
+							
+							for (int i = 0; i < mac.length; i++) 
+							{
+								sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));		
+							}	
+						}
+					}
+				} 
+				catch (UnknownHostException e) 
+				{
+					return sb.toString();
+				} 
+				catch (SocketException e)
+				{
+					return sb.toString();
+				}
+				catch (Exception e){
+					return sb.toString();
+				}
+				
+				return sb.toString();
+		    }
 }
