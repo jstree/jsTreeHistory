@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -56,6 +55,8 @@ public class SecureUserLogin implements UserDetails
 	private String nickName;
 	private String email;
 	private String username;
+	
+	List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
 	public int getId()
 	{
@@ -131,11 +132,13 @@ public class SecureUserLogin implements UserDetails
 		this.username = email;
 	}
 
+	public void setAuthorities(List<GrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities()
 	{
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return authorities;
 	}
 
