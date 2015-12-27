@@ -15,6 +15,8 @@
  */
 package egovframework.com.ext.jstree.support.manager.security.login.dao;
 
+import java.util.List;
+
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
 
 /**
@@ -50,4 +52,8 @@ public interface SecureUserLoginDao
 	int setUserLoginFailureCntIncrease(SecureUser secureUser);
 	
 	int setUserLoginJoinStateCd(SecureUser secureUser);
+
+	int getUserGroupId(SecureUser user);
+
+	List<?> getUserAuthorities(SecureUser user);
 }

@@ -15,6 +15,8 @@
  */
 package egovframework.com.ext.jstree.support.manager.security.login.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
@@ -73,5 +75,15 @@ public class SecureUserLoginDaoImpl extends EgovComAbstractDAO implements Secure
 	public int setUserLoginJoinStateCd(SecureUser secureUser)
 	{
 		return update("secureUser.setUserLoginJoinStateCd", secureUser);
+	}
+
+	@Override
+	public int getUserGroupId(SecureUser secureUser) {
+		return (int)selectByPk("secureUser.getUserGroupId", secureUser);
+	}
+
+	@Override
+	public List<?> getUserAuthorities(SecureUser secureUser) {
+		return  list("constraintMonitor.getUserAuthorities", secureUser);
 	}
 }
