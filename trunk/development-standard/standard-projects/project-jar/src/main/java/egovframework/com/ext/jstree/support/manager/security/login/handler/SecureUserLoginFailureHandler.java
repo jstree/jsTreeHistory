@@ -142,27 +142,32 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 		
 		if ( this.localSecureLoggedInUser.get() == null ) 
 		{
-			errMsg = egovMessageSource.getMessage("bb.user.error.002"); 
+			errMsg = "정확한 이메일 주소를 입력하세요.";
+			//errMsg = egovMessageSource.getMessage("bb.user.error.002"); 
 		}
 		else if( this.localSecureLoggedInUser.get().getJoinStateCd() != JOIN_COMPLETE )
 		{
-			errMsg = egovMessageSource.getMessage("bb.user.error.011");
+			errMsg = "회원 가입완료 상태가 아닙니다.";
+			//errMsg = egovMessageSource.getMessage("bb.user.error.011");
 		}
 		else if( this.getJoinTargetDate().after(new Date()) == true )
 		{
-			errMsg = egovMessageSource.getMessage("bb.user.error.013");
+			errMsg = "로그인 제한일수가 지나지 않았습니다.";
+			//errMsg = egovMessageSource.getMessage("bb.user.error.013");
 		} 
 		else 
 		{
 			if( this.localSecureLoggedInUser.get().getLoginFailureCnt() == secureGeneralSetting.getLoginFailureLimitCnt() )
 			{
 				this.secureUserLoginDao.setUserLoginJoinStateCd(this.localSecureLoggedInUser.get());
-				errMsg = egovMessageSource.getMessage("bb.user.error.012");
+				errMsg = "로그인 실패 제한횟수가 되었습니다.";
+				//errMsg = egovMessageSource.getMessage("bb.user.error.012");
 			}
 			else
 			{
 				secureUserLoginDao.setUserLoginFailureCntIncrease( this.localSecureLoggedInUser.get() );
-				errMsg = egovMessageSource.getMessage("bb.user.error.003", new String[]{String.valueOf(this.localSecureLoggedInUser.get().getLoginFailureCnt()+1)});
+				errMsg = " 비밀번호 실패 횟수 : " + String.valueOf(this.localSecureLoggedInUser.get().getLoginFailureCnt()+1) +"회.";
+				//errMsg = egovMessageSource.getMessage("bb.user.error.003", new String[]{String.valueOf(this.localSecureLoggedInUser.get().getLoginFailureCnt()+1)});
 			}
 		}
 		
