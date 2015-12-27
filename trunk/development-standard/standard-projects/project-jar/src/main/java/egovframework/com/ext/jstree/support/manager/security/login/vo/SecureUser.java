@@ -132,7 +132,10 @@ public class SecureUser extends ComprehensiveTree {
     /** 마지막로그인일자 */
     private String lastLoginDe;
     
-    public int getPwdFindQuestionCd()
+    /** 그룹id */
+    private int groupId;
+
+	public int getPwdFindQuestionCd()
 	{
 		return pwdFindQuestionCd;
 	}
@@ -377,6 +380,14 @@ public class SecureUser extends ComprehensiveTree {
     public void setJoinState(String joinState) {
         this.joinState = joinState;
     }
+    
+    public int getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
 
     @Override
     public String getSqlMapSelector() {
