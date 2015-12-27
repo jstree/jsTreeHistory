@@ -511,4 +511,16 @@
    		 WHERE C_ID = #c_id# 
 	</update>
 	
+	<select id="getUserGroupId" parameterClass="SecureUser" resultClass="Int">
+		SELECT AUTH 
+		  FROM T_SECU_GROUP_USER
+		 WHERE USER_ID =#c_id# 
+	</select>
+	
+	<select id="getUserAuthorities" parameterClass="SecureUser" resultClass="java.util.Set">
+		SELECT AUTH 
+		  FROM T_SECU_GROUP_AUTH
+		 WHERE GROUP_ID =#groupId# 
+	</select>
+	
 </sqlMap>
