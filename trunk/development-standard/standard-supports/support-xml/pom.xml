@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<name>support-xml</name>
-	<description>아파치 커먼 라이브러리</description>
+	<description>XML, Json 관련 라이브러리</description>
 
 	<dependencies>
 		<!-- ******************************************* XML ******************************************* -->

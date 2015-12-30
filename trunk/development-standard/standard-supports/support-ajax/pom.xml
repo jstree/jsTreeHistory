@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<name>support-ajax</name>
-	<description>코맷 라이브러리</description>
+	<description>코맷 및 DWR 라이브러리</description>
 
 	<properties>
 		<cometd.maven.artifact.version>2.4.3</cometd.maven.artifact.version>

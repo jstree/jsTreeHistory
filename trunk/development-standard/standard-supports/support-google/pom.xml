@@ -14,7 +14,6 @@
 	<packaging>pom</packaging>
 
 	<name>support-google</name>
-	<description>전자정부 프레임워크 라이브러리</description>
 
 	<dependencies>
 		<dependency>
@@ -53,4 +52,5 @@
 
 		</dependencies>
 	</dependencyManagement>
+	<description>구글 관련 라이브러리</description>
 </project>

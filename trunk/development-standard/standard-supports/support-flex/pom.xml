@@ -15,7 +15,7 @@
 	<packaging>pom</packaging>
 
 	<name>support-flex</name>
-	<description>아파치 커먼 라이브러리</description>
+	<description>어도비 플렉스 라이브러리</description>
 	
 
 </project>

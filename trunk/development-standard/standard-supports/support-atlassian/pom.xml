@@ -17,27 +17,27 @@
 	<description>아틀라시안 플러그인 API 라이브러리</description>
 
 	<dependencies>
-			<dependency>
-				<groupId>com.atlassian.jira</groupId>
-				<artifactId>jira-rest-java-client-api</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>com.atlassian.jira</groupId>
-				<artifactId>jira-rest-java-client-core</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>com.atlassian.jira</groupId>
-				<artifactId>jira-rest-java-client-parent</artifactId>
-				<type>pom</type>
-			</dependency>
-			<dependency>
-				<groupId>com.atlassian.confluence</groupId>
-				<artifactId>confluence-java-api</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>com.atlassian.crowd</groupId>
-				<artifactId>crowd-integration-client-rest</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>com.atlassian.jira</groupId>
+			<artifactId>jira-rest-java-client-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.atlassian.jira</groupId>
+			<artifactId>jira-rest-java-client-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.atlassian.jira</groupId>
+			<artifactId>jira-rest-java-client-parent</artifactId>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.atlassian.confluence</groupId>
+			<artifactId>confluence-java-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.atlassian.crowd</groupId>
+			<artifactId>crowd-integration-client-rest</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -65,18 +65,7 @@
 				<version>5.8.8</version>
 			</dependency>
 
-			<dependency>
-				<groupId>com.atlassian.fisheye</groupId>
-				<artifactId>atlassian-fisheye-api</artifactId>
-				<version>3.6.1-20141030150539</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.atlassian.bamboo</groupId>
-				<artifactId>atlassian-bamboo-api</artifactId>
-				<version>5.9.4</version>
-			</dependency>
-
+			<!-- https://bitbucket.org/teamcascade/bamboo-rest-java-client -->
 			<dependency>
 				<groupId>com.atlassian.crowd</groupId>
 				<artifactId>crowd-integration-client-rest</artifactId>

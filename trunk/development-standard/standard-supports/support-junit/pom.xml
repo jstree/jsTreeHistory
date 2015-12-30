@@ -14,7 +14,6 @@
 	<packaging>pom</packaging>
 
 	<name>support-junit</name>
-	<description>아파치 커먼 라이브러리</description>
 
 	<dependencies>
 		<dependency>
@@ -134,4 +133,5 @@
 
 		</dependencies>
 	</dependencyManagement>
+	<description>유닛테스트 관련 라이브러리</description>
 </project>

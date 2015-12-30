@@ -14,7 +14,6 @@
 	<packaging>pom</packaging>
 
 	<name>support-hibernate</name>
-	<description>아파치 커먼 라이브러리</description>
 
 	<properties>
 		<org.hibernate.hibernate_version>3.6.8.Final</org.hibernate.hibernate_version>
@@ -184,4 +183,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<description>하이버네이트 관련 라이브러리</description>
 </project>
