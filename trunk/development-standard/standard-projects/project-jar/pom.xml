@@ -31,12 +31,6 @@
 		</dependency>
 		<dependency>
 			<groupId>development</groupId>
-			<artifactId>support-atlassian</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
 			<artifactId>support-apache</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
