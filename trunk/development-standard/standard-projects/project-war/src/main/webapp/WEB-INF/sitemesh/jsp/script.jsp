@@ -52,9 +52,6 @@
 		<script src="${pageContext.request.contextPath}/assets/js/option_selection.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/api.jquery.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/jNotify.jquery.js" type="text/javascript"></script>
-		<script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.js" type="text/javascript"></script>
-		<script src="${pageContext.request.contextPath}/assets/js/dataTables.responsive.js" type="text/javascript"></script>
-		<script src="${pageContext.request.contextPath}/assets/js/jquery-ui.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/ajax.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/common.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/lnb.js" type="text/javascript"></script>

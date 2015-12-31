@@ -25,11 +25,11 @@
 <customTags:assetsJsExtendNas theRestOfFileName="/js/jstree-v.pre1.0/jquery.jstree.js"></customTags:assetsJsExtendNas>
 
 <!-- dataTable -->
-<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.4/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
-<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.4/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
+<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
+<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
 
-<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.4/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
-<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.4/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
 
 <!-- 메뉴관리 jquery ui dialog 임시로 추가 -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
