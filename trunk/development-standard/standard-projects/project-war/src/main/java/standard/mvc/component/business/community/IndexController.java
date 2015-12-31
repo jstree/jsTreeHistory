@@ -1,4 +1,4 @@
-package standard.mvc.component.business.community.index;
+package standard.mvc.component.business.community;
 
 import java.util.Map;
 
@@ -40,7 +40,7 @@ import standard.mvc.component.business.community.menu.service.MenuService;
  * </pre>
  */
 @Controller
-public class CommunityController extends GenericAbstractController{
+public class IndexController extends GenericAbstractController{
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
