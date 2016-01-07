@@ -15,9 +15,6 @@
  */
 package egovframework.com.ext.jstree.support.manager.security.login.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +24,8 @@ import org.springframework.stereotype.Service;
 
 import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.ext.jstree.support.manager.security.login.dao.SecureUserLoginDao;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureGeneralSetting;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
-import egovframework.com.ext.jstree.support.util.DateUtils;
 
 /**
  * Modification Information
@@ -60,9 +55,6 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
 	@Autowired
     private SecureUserLoginDao secureUserLoginDao;
 	
-	@Autowired
-	private SecureGeneralSettingService secureGeneralSettingService; 
-
 	@Resource(name="egovMessageSource")
     EgovMessageSource egovMessageSource;
 	
@@ -81,28 +73,6 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
 				throw new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.010") );
 			}
 			
-			final int JOINCOMPLETE = 4;
-			if ( secureLogInUser.getJoinStateCd() !=  JOINCOMPLETE)
-			{
-				throw new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.011") );
-			}
-			
-			SecureGeneralSetting secureGeneralSetting = secureGeneralSettingService.getGeneralSetting();
-			
-			if ( secureLogInUser.getLoginFailureCnt() == secureGeneralSetting.getLoginFailureLimitCnt() )
-			{
-				throw new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.012") );
-			}
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			Date joinDt = sdf.parse(secureLogInUser.getJoinDt());
-			int loginLimitDcnt = secureGeneralSetting.getLoginLimitDcnt();
-			Date joinTargetDate = DateUtils.addDays(joinDt, loginLimitDcnt);
-			
-			if( joinTargetDate.after(new Date()) == true )
-			{
-				throw new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.013") );
-			}
 		} 
 		catch (Exception e) 
 		{
