@@ -41,7 +41,7 @@ public class MenuServiceImpl implements MenuService
     public List<MenuComprehensiveTree> getMenuList() throws Exception
     {
         MenuComprehensiveTree menuComprehensiveTree = new MenuComprehensiveTree();
-        menuComprehensiveTree.setC_id(7453);
+        menuComprehensiveTree.setC_id(2);
         List<MenuComprehensiveTree> list = new ArrayList<MenuComprehensiveTree>();
         findChildNode(menuComprehensiveTree, list);
         return list;

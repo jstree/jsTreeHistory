@@ -240,6 +240,6 @@ public class MenuController extends GenericAbstractController {
     @RequestMapping("/index/menuManage.do")
 	public String menuManage() {
     	
-		return "/jsp/community/index/menuManage";
+		return "/jsp/community/layout/header/menu/admin";
 	}
 }
