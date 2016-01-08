@@ -13,7 +13,7 @@
 				<div id="header-search" class="one-third bm-remove">
 					<form action="${pageContext.request.contextPath}/" method="get" class="clearfix" novalidate>
 						<input type="hidden" name="type" value="product">
-						<input type="text" name="q" class="inline-block w-small bm-remove tip-r-fade" placeholder="KEYWORD SEARCH" autocomplete="off" value="" data-tooltip="Press Enter To Search" />
+						<input type="text" name="q" class="inline-block w-small bm-remove tip-r-fade" placeholder="Keyword Search" autocomplete="off" value="" data-tooltip="Press Enter To Search" />
 						<button type="submit" class="tablet-mobile bm-remove tip-r-fade" data-tooltip="Search">
 						<i class="fa fa-search"></i>
 						</button>
