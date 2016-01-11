@@ -7,24 +7,17 @@
           			  http://www.springframework.org/schema/security
           			  http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
+	<security:http pattern="/" security="none" />
+	<security:http pattern="/index.do" security="none" />
+	<security:http pattern="/assets/**" security="none" />
+	<security:http pattern="/jsTreeAlg/**" security="none" />
+	<security:http pattern="/aboutUs/**" security="none" />
+	<security:http pattern="/common/**" security="none" />
+
 	<security:http auto-config="true" use-expressions="true">
 
-		<security:intercept-url pattern="/favicon.ico"
-			access="permitAll" />
-		<security:intercept-url pattern="/index.do"
-			access="permitAll" />
-		<security:intercept-url pattern="/assets/**"
-			access="permitAll" />
-		<security:intercept-url pattern="/jsTreeAlg/**"
-			access="permitAll" />
-		<security:intercept-url pattern="/aboutUs/**"
-			access="permitAll" />
-		<security:intercept-url pattern="/common/**"
-			access="permitAll" />
-		<security:intercept-url pattern="/account/accountSign.do"
-			access="permitAll" />
 		<security:intercept-url pattern="/account/accountLogoutProcess.do"
-			access="hasRole('ROLE_USER')" />
+		access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/**/admin/*"
 			access="hasRole('ROLE_USER')" />
 
@@ -47,10 +40,14 @@
 		</security:session-management>
 
 	</security:http>
-	<!-- <beans:bean id="secureUserLoginSuccessHandler" class="egovframework.com.ext.jstree.support.manager.security.login.handler.SecureUserLoginSuccessHandler"> 
-		<beans:property name="targetUrlParameter" value="loginRedirect" /> <beans:property 
-		name="useReferer" value="false" /> <beans:property name="defaultUrl" value="/main.do" 
-		/> </beans:bean> -->
+<!-- 
+	<beans:bean id="secureUserLoginSuccessHandler"
+		class="egovframework.com.ext.jstree.support.manager.security.login.handler.SecureUserLoginSuccessHandler">
+		<beans:property name="targetUrlParameter" value="loginRedirect" />
+		<beans:property name="useReferer" value="false" />
+		<beans:property name="defaultUrl" value="/main.do" />
+	</beans:bean>
+ -->
 	<bean id="secureUserLoginFailureHandler"
 		class="egovframework.com.ext.jstree.support.manager.security.login.handler.SecureUserLoginFailureHandler">
 		<property name="loginidname" value="email" />
