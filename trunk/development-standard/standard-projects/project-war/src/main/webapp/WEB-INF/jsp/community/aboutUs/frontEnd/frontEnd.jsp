@@ -318,14 +318,14 @@
                         <div class="usquare_square_text_wrapper">
                             <img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/arrow_r.png" class="usquare_arrow usquare_arrow_r" alt="arrow" />
                             <div class="clear"></div>
-                            <h2 class="usquare_r">양희성</h2>
+                            <h2 class="usquare_r">전진홍</h2>
                             <span class="usquare_r">Java Developer</span>
                             <div class="clear"></div>
                         </div>
                         <!-- usquare_square_wrapper -->
                     </div>
                     <!--div    usquare_square -->
-                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/YHS.jpg" class="usquare_square" alt="" />
+                    <img src="${pageContext.request.contextPath}/assets/images/community/frontendProfile/JJH.jpg" class="usquare_square" alt="" />
                     <div style="display:none;" class="usquare_block_extended usquare_square_bg6">
                         <a href="" class="close close_left_side"><img src="${pageContext.request.contextPath}/assets/js/usquare_jquery/images/close.png" alt="close" /></a>
 
