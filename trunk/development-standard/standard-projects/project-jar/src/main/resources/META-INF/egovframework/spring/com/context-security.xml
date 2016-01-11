@@ -13,6 +13,7 @@
 	<security:http pattern="/jsTreeAlg/**" security="none" />
 	<security:http pattern="/aboutUs/**" security="none" />
 	<security:http pattern="/common/**" security="none" />
+	<security:http pattern="/board/**" security="none" />
 
 	<security:http auto-config="true" use-expressions="true">
 

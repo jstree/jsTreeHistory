@@ -20,7 +20,7 @@
 
 <!-- dataTable -->
 <customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
-<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
+<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/css/responsive.dataTables.css"></customTags:assetsCssExtendNas>
 
 <customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
 <customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>

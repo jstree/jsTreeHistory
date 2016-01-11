@@ -15,13 +15,17 @@
 <head>
 <!-- dataTable -->
 <customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
-<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/css/dataTables.responsive.css"></customTags:assetsCssExtendNas>
+<customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/css/responsive.dataTables.css"></customTags:assetsCssExtendNas>
 
 <customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
 <customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
 
 <!-- Style Setting --> 
 <style type="text/css">
+	.NFText{
+		width: 200px;
+	}
+
 	input[type="button"] {
 		display: inline-block;
 		min-width: 100px;
@@ -132,9 +136,12 @@
 											<table id="jstreeTable" class="display responsive no-wrap" cellspacing="0" width="100%">
 												<thead>
 													<tr>
-														<th>글 번호</th>
+											            <th rowspan="2">글 번호</th>
+											            <th colspan="2">글 정보</th>
+											            <th rowspan="2">글 쓴이</th>
+											        </tr>
+													<tr>
 														<th>제 목</th>
-														<th>글 쓴이</th>
 														<th>글 조회</th>
 													</tr>
 												</thead>
@@ -147,16 +154,16 @@
 										function jstreeDataTableReload() {
 											var jstreeDataTable = $('#jstreeTable').dataTable( {
 												"ajax": {
-													"url": "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/monitor/list.do",
-													"dataSrc": "rows"
+													"url": "${pageContext.request.contextPath}/assets/json/community/board/list.json",
+													"dataSrc": "OUTPUT.rows"
 												},
 												"processing": true,
 												"responsive": true,
 												"columns": [
-													{ "data": "cell.0" },
-													{ "data": "cell.1" },
-													{ "data": "cell.2" },
-													{ "data": "cell.3" }
+													{ "data": "articleNum" },
+													{ "data": "articleTitle" },
+													{ "data": "articleRead" },
+													{ "data": "articleWriter" }
 												]
 											} );
 											jstreeDataTable.api().ajax.reload();
@@ -165,16 +172,16 @@
 										$(function () {
 											var jstreeDataTable = $('#jstreeTable').dataTable( {
 												"ajax": {
-													"url": "${pageContext.request.contextPath}/egovframework/com/etc/jstree/springiBatis/monitor/list.do",
-													"dataSrc": "rows"
+													"url": "${pageContext.request.contextPath}/assets/json/community/board/list.json",
+													"dataSrc": "OUTPUT.rows"
 												},
 												"processing": true,
 												"responsive": true,
 												"columns": [
-													{ "data": "cell.0" },
-													{ "data": "cell.1" },
-													{ "data": "cell.2" },
-													{ "data": "cell.3" }
+													{ "data": "articleNum" },
+													{ "data": "articleTitle" },
+													{ "data": "articleRead" },
+													{ "data": "articleWriter" }
 												]
 											});
 										});
