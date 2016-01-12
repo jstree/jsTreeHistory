@@ -8,7 +8,7 @@
         <link href="${pageContext.request.contextPath}/assets/js/usquare_jquery/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/assets/js/usquare_jquery/css/jcarousel.css" rel="stylesheet" type="text/css" />
 
-        <link href="${pageContext.request.contextPath}/assets/js/usquare_jquery/style.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/assets/js/usquare_jquery/css/style.css" rel="stylesheet" type="text/css" />
 
         <script src="${pageContext.request.contextPath}/assets/js/jquery-ui-1.11.2/jquery-ui.min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/usquare_jquery/scripts/jquery.mousewheel.min.js"></script>
