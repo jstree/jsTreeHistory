@@ -211,10 +211,10 @@
 							<span>Postgres</span></a>
 						</div>
 						
-					<a title="Database" class="submenu" name="Database-sub"><i class="icon-eye-open"></i>
+					<a title="Network" class="submenu" name="Network-sub"><i class="icon-eye-open"></i>
 						<span>Network</span>
 					</a>
-						<div id="Database-sub">
+						<div id="Network-sub">
 							<a href="http://www.313.co.kr:8808" target="_blank" title="EFM Networks ipTIME A3004NS"><i class="icon-film"></i>
 							<span>Router</span></a>
 						</div>
