@@ -125,6 +125,7 @@
 				</div>
 			</nav>
 
+
 			<article>
 				<div class="clearfix">
 					<div class="container bm-remove">
@@ -150,7 +151,7 @@
 												<thead>
 													<tr>
 											            <th rowspan="2">글 번호</th>
-											            <th colspan="2">글 정보</th>
+											            <th colspan="2">자유 게시판 ( 비회원 게시판 )</th>
 											            <th rowspan="2">글 쓴이</th>
 											        </tr>
 													<tr>
@@ -159,6 +160,17 @@
 													</tr>
 												</thead>
 											</table>
+										</div>
+									</div>
+									
+									<div class="clearfix" data-anim-type="fade-in" data-anim-delay="0">
+										<div class="pagination">
+											<span class="page-links text-center">
+												<a href="/collections/all?page=1" target="_self" class="page-link prev tip-t-fade" data-tooltip="Previous"><i class="fa fa-angle-double-left"></i></a>
+													<a href="/collections/all?page=1" target="_self" class="page-link tip-t-fade" data-tooltip="Page 1" original-title="">1</a>
+													<a href="" target="_self" class="page-link active tip-t-fade" data-tooltip="Current Page" original-title="">2</a>
+												<span class="page-link void-link next"><i class="fa fa-angle-double-right"></i></span>
+											</span>
 										</div>
 									</div>
 			
