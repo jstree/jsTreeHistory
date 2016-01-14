@@ -17,7 +17,7 @@
 <customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
 <customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/css/responsive.dataTables.css"></customTags:assetsCssExtendNas>
 
-<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/jquery.dataTables.test.js"></customTags:assetsJsExtendNas>
 <customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
 
 <!-- Style Setting --> 
@@ -133,6 +133,11 @@
 							<div class="article-body rte" itemprop="articleBody">
 								<div id="description">
 									<div class="clearfix">
+									
+										<a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket">
+										test
+										</a>
+									
 										<div id="jstreeTable_length" class="desktop-tablet alpha boxed bm-remove btn_wrap01">
 											<label>Show 
 												<select name="jstreeTable_length" aria-controls="jstreeTable" id="jstreeTable_length" class="inline-block bm-remove w-small tip-r-fade clearfix" data-tooltip="Sort By" data-anim-type="fade-in" data-anim-delay="0" original-title="">
@@ -163,41 +168,22 @@
 										</div>
 									</div>
 									
-									<div class="clearfix" data-anim-type="fade-in" data-anim-delay="0">
-										<div class="pagination">
-											<span class="page-links text-center">
-												<a href="/collections/all?page=1" target="_self" class="page-link prev tip-t-fade" data-tooltip="Previous"><i class="fa fa-angle-double-left"></i></a>
-													<a href="/collections/all?page=1" target="_self" class="page-link tip-t-fade" data-tooltip="Page 1" original-title="">1</a>
-													<a href="" target="_self" class="page-link active tip-t-fade" data-tooltip="Current Page" original-title="">2</a>
-												<span class="page-link void-link next"><i class="fa fa-angle-double-right"></i></span>
-											</span>
-										</div>
-									</div>
-			
 									<!-- JavaScript neccessary for the tree -->
 									<script type="text/javascript">
+										var jstreeDataTableModule = {};
+									
 										function jstreeDataTableReload() {
-											var jstreeDataTable = $('#jstreeTable').dataTable( {
-												"ajax": {
-													"url": "${pageContext.request.contextPath}/assets/json/community/board/list.json",
-													"dataSrc": "OUTPUT.rows"
-												},
-												"processing": true,
-												"responsive": true,
-												"pagingType": "full_numbers",
-												"lengthMenu": [[1, 10, 25, 50],[1, 10, 25, 50]],
-												"columns": [
-													{ "data": "articleNum" },
-													{ "data": "articleTitle" },
-													{ "data": "articleRead" },
-													{ "data": "articleWriter" }
-												]
-											} );
-											jstreeDataTable.api().ajax.reload();
+											jstreeDataTableModule.ajax.reload();
 										}
 						
-										$(function () {
-											var jstreeDataTable = $('#jstreeTable').DataTable( {
+										$(document).ready(function () {
+											dataTableSetup();
+											domSetup();
+										});
+										
+										function dataTableSetup() {
+											
+											jstreeDataTableModule = $('#jstreeTable').DataTable( {
 												"ajax": {
 													"url": "${pageContext.request.contextPath}/assets/json/community/board/list.json",
 													"dataSrc": "OUTPUT.rows"
@@ -205,6 +191,14 @@
 												"processing": true,
 												"responsive": true,
 												"pagingType": "full_numbers",
+												"columnDefs": [ 
+												                	{ "width": "70%", "targets": 1 }
+												                ],
+								                "createdRow": function ( row, data, index ) {
+								                        $('td', row).eq(1).addClass('quick-look');
+								                        $('td', row).eq(1).text('');
+								                        $('td', row).eq(1).append( '<a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket">'+data.articleTitle+'</a>' );
+								                },
 												"columns": [
 													{ "data": "articleNum" },
 													{ "data": "articleTitle" },
@@ -213,11 +207,18 @@
 												]
 											});
 											
+											
 											$('#jstreeTable tbody').on('click', 'tr', function () {
-										        var data = jstreeDataTable.row( this ).data();
-										        alert( 'You clicked on '+data.articleNum+'\'s row' );
+												
 										    } );
-										});
+											
+											
+											
+										}
+										
+										function domSetup(){
+											
+										}
 									</script>
 								</div>
 							</div>

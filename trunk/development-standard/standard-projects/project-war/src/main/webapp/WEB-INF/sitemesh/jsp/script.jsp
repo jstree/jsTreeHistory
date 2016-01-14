@@ -51,10 +51,12 @@
 		<script src="${pageContext.request.contextPath}/assets/js/backbone.js?20" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/option_selection.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/api.jquery.js" type="text/javascript"></script>
-		<script src="${pageContext.request.contextPath}/assets/js/jNotify.jquery.js" type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/jnotify_v2.1/jquery/jNotify.jquery.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/ajax.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/common.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/lnb.js" type="text/javascript"></script>
+
+		<script src="${pageContext.request.contextPath}/assets/js/JQuery-Snowfall-master/dist/snowfall.jquery.min.js" type="text/javascript"></script>
 		<style type="text/css">
 			html {
 			margin-top: 40px;
