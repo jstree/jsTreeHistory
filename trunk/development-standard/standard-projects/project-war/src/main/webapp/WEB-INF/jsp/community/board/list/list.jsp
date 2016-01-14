@@ -17,15 +17,10 @@
 <customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/css/jquery.dataTables.css"></customTags:assetsCssExtendNas>
 <customTags:assetsCssExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/css/responsive.dataTables.css"></customTags:assetsCssExtendNas>
 
-<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/jquery.dataTables.test.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
 <customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
-
 <!-- Style Setting --> 
 <style type="text/css">
-	.NFText{
-		width: 200px;
-	}
-
 	input[type="button"] {
 		display: inline-block;
 		min-width: 100px;
@@ -98,7 +93,69 @@
 		.btn_wrap01 button:nth-child(2n){border-left:0;}
 		
 	}
-	</style>
+	
+	.dataTable-quick-look {
+		color: black !important;
+	}
+</style>
+
+<!-- JavaScript neccessary for the tree -->
+<script type="text/javascript">
+	var jstreeDataTableModule = {};
+
+	function jstreeDataTableReload() {
+		jstreeDataTableModule.ajax.reload();
+	}
+
+	$(document).ready(function () {
+		dataTableSetup();
+		$(window).load(function() {
+	        // this code will run after all other $(document).ready() scripts
+	        // have completely finished, AND all page elements are fully loaded.
+			$('.dataTable-quick-look').shopifyQuickLook();
+	    });
+	});
+	
+	function dataTableSetup() {
+		
+		jstreeDataTableModule = $('#jstreeTable').DataTable( {
+			"ajax": {
+				"url": "${pageContext.request.contextPath}/assets/json/community/board/list.json",
+				"dataSrc": "OUTPUT.rows"
+			},
+			"processing": true,
+			"responsive": true,
+			"pagingType": "full_numbers",
+			"columnDefs": [ 
+			                	{ 	
+			                		"targets": 1,
+			                		"width": "70%", 
+			                        'searchable': true,
+			                        'orderable': false,
+			                        'className': 'dt-body-center',
+			                        'render': function (data, type, row){
+			                        	return '<a href="#" target="_self" class="dataTable-quick-look" data-quick-look-handle="${pageContext.request.contextPath}/assets/json/community/board/' + row.articleNum + '">' + data + '</a>';
+			                        }
+			                	}
+			                ],
+               "createdRow": function ( row, data, index ) {
+                       $('td', row).eq(1).addClass('quick-look');
+               },
+				"columns": [
+					{ "data": "articleNum" },
+					{ "data": "articleTitle" },
+					{ "data": "articleRead" },
+					{ "data": "articleWriter" }
+				]
+		});
+		
+		
+		$('#jstreeTable tbody').on('click', 'tr', function () {
+			
+	    } );
+		
+	}
+</script>
 </head> 
 
 <body id="demo_body">
@@ -167,59 +224,6 @@
 											</table>
 										</div>
 									</div>
-									
-									<!-- JavaScript neccessary for the tree -->
-									<script type="text/javascript">
-										var jstreeDataTableModule = {};
-									
-										function jstreeDataTableReload() {
-											jstreeDataTableModule.ajax.reload();
-										}
-						
-										$(document).ready(function () {
-											dataTableSetup();
-											domSetup();
-										});
-										
-										function dataTableSetup() {
-											
-											jstreeDataTableModule = $('#jstreeTable').DataTable( {
-												"ajax": {
-													"url": "${pageContext.request.contextPath}/assets/json/community/board/list.json",
-													"dataSrc": "OUTPUT.rows"
-												},
-												"processing": true,
-												"responsive": true,
-												"pagingType": "full_numbers",
-												"columnDefs": [ 
-												                	{ "width": "70%", "targets": 1 }
-												                ],
-								                "createdRow": function ( row, data, index ) {
-								                        $('td', row).eq(1).addClass('quick-look');
-								                        $('td', row).eq(1).text('');
-								                        $('td', row).eq(1).append( '<a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket">'+data.articleTitle+'</a>' );
-								                },
-												"columns": [
-													{ "data": "articleNum" },
-													{ "data": "articleTitle" },
-													{ "data": "articleRead" },
-													{ "data": "articleWriter" }
-												]
-											});
-											
-											
-											$('#jstreeTable tbody').on('click', 'tr', function () {
-												
-										    } );
-											
-											
-											
-										}
-										
-										function domSetup(){
-											
-										}
-									</script>
 								</div>
 							</div>
 						</div>

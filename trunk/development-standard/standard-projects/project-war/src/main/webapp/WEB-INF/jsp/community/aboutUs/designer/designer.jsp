@@ -29,9 +29,9 @@
 		#d_title #d_list li a:hover{ color:#f32d20;}
 
 		#intro{ height:1284px; widows:1180px;}
-		/*cha*/
-		.leftD{ height:246px; border-bottom:7px solid #f32d20;}
-		.leftD #cha{ width:360px; height:253px; float:left; z-index:5;}
+		/*1/3*/
+		.leftD{ height:252px; border-bottom:7px solid #f32d20; margin-bottom:27px;}
+		.leftD #cha{ width:360px; height:253px; float:left; z-index:1;}
 		.leftD .liw{ float:left;}
 		.leftD #cha_sns li a{ width:36px; height:36px; margin:4px;}
 		.liw .d_n{ float:left; width:386px;}
@@ -41,7 +41,21 @@
 		.liw .careerW{ float:left;}
 		.liw .careerW .info{display:block; width:76px; height:24px; float:left; font-size:24px; color:#f32d20; margin-top:94px;}
 		.liw .careerW .career{ float:left; display:block; width:306px; font-size:15px; color:#575757; margin-top:61px;}
-
+	    
+	    
+	    /*2/4*/
+	    .rightD{ height:252px; border-bottom:7px solid #f32d20; margin-bottom:27px;}
+	    .rightD .riw{ float:left; width:820px; height:245px; background-color:#575757;}
+	    .rightD #kim{float:right; z-index:1; height:253px; width:360px;}
+	    
+	    
+	    /*.riw .carrerW2{width:556px; float: left; }
+	    .riw .carrerW2 #sns2{}
+	    .riw .carrerW2 .info2{display:block; width:76px; height:24px; float:left; font-size:24px; color:#f32d20; margin-top:94px;}
+	    .riw .carrerW2 .info2 .career2{ float:left; display:block; width:306px; font-size:15px; color:#575757; margin-top:61px;}
+	    .riw .d_n{ float:left; width:386px;}/*
+	    
+		
 		</style>	
 	</head>
 	<body>
@@ -82,12 +96,42 @@
             </div><!--//liw-->
             <div id="sns1">
                     <ul id="cha_sns">
-                        <li><a href="#"><img src="img/mail.png" alt="이메일"/></a></li>
-                        <li><a href="#"><img src="img/facebook.png" alt="페이스북"/></a></li>
-                        <li><a href="#"><img src="img/twt.png" alt="트위터"/></a></li>
+                        <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/mail.png" alt="이메일"/></a></li>
+                        <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/facebook.png" alt="페이스북"/></a></li>
+                        <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/twt.png" alt="트위터"/></a></li>
                     </ul>
                 </div><!--//sns1-->
         </div><!--//leftD-->
+        
+        
+        <div class="rightD">
+            <div class="riw">
+            	<div class="careerW2">
+            		<div id="sns2">
+                    	<ul id="kim_sns">
+                    	   <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/mail.png" alt="이메일"/></a></li>
+                    	   <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/facebook.png" alt="페이스북"/></a></li>
+                    	   <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/twt.png" alt="트위터"/></a></li>
+                	 </ul>
+            		</div><!--//sns2-->
+                    <h2 class="info2">Info</h2>
+                    <ol class="career2">
+                        <li>96 - 98  &nbsp;르노삼성 디자인팀</li>
+                        <li>98 - 03  &nbsp;동화 삽화 디자인</li>
+                        <li>03 - 07  &nbsp;롯데제과 패키지 디자인</li>
+                        <li>07 - 11  &nbsp;네이버 웹디자인</li>
+                        <li>12- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;313웹 디자인</li>
+                    </ol>
+                </div><!--//carrerW-->
+                <div class="d_n">
+                	<div class="dsn">
+                    	<h2 class="designer">Designer</h2>
+                    	<h3 class="dName">Kim hyunjoo</h3>
+                    </div><!--//dsn-->
+                </div><!--//d_n-->
+            </div><!--//riw-->
+            <span id="kim"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/kim.jpg" alt="김현주 디자이너"/></span>
+        </div><!--//rightD-->
         
         
         

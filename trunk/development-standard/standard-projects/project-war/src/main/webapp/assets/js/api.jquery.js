@@ -241,7 +241,7 @@ Shopify.getCartShippingRatesForDestination = function(shipping_address, callback
 // GET products/<product-handle>.js returns the product in JSON.
 // ---------------------------------------------------------
 Shopify.getProduct = function(handle, callback) {
-  jQuery.getJSON('/assets/article/' + handle + '.json', function (product, textStatus) {
+  jQuery.getJSON(handle + '.json', function (product, textStatus) {
     if ((typeof callback) === 'function') {
       callback(product);
     }
