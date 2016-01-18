@@ -15,6 +15,9 @@
  */
 package egovframework.com.ext.jstree.support.manager.security.login.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,7 @@ import org.springframework.stereotype.Service;
 
 import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.ext.jstree.support.manager.security.login.dao.SecureUserLoginDao;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.Role;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
 
 /**
@@ -50,44 +53,31 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
  */
 
 @Service
-public class SecureUserLoginServiceImpl implements UserDetailsService 
-{
+public class SecureUserLoginServiceImpl implements UserDetailsService {
 	@Autowired
-    private SecureUserLoginDao secureUserLoginDao;
-	
-	@Resource(name="egovMessageSource")
-    EgovMessageSource egovMessageSource;
-	
+	private SecureUserLoginDao secureUserLoginDao;
+
+	@Resource(name = "egovMessageSource")
+	EgovMessageSource egovMessageSource;
+
 	@Override
-	public UserDetails loadUserByUsername(String email) throws RuntimeException
-	{
-		SecureUser secureLogInUser = new SecureUser();
+	public UserDetails loadUserByUsername(String email) throws RuntimeException {
+		SecureUserLogin secureLogInUser = new SecureUserLogin();
 		secureLogInUser.setEmail(email);
+
+		secureLogInUser = secureUserLoginDao.getUserInfoByEmail(secureLogInUser);
 		
-		try 
-		{
-			secureLogInUser = secureUserLoginDao.getUserInfoByEmail(secureLogInUser);
-			
-			if ( secureLogInUser == null )
-			{
-				throw new RuntimeException( this.egovMessageSource.getMessage("bb.login.error.010") );
-			}
-			
-		} 
-		catch (Exception e) 
-		{
-			throw new RuntimeException(e.getMessage());
+		if(secureLogInUser != null){
+			setRoles(secureLogInUser);
 		}
-		
-		SecureUserLogin secureLoggedInUser = new SecureUserLogin();
-		
-		secureLoggedInUser.setId(secureLogInUser.getC_id());
-		secureLoggedInUser.setEmail(secureLogInUser.getEmail());
-		secureLoggedInUser.setPassword(secureLogInUser.getPassword());
-		secureLoggedInUser.setPasswordChangeDt(secureLogInUser.getPasswordChangeDt());
-		secureLoggedInUser.setUserGradeCd(secureLogInUser.getUserGradeCd());
-		secureLoggedInUser.setNickName(secureLogInUser.getC_title());
-		
-		return secureLoggedInUser;
+		return secureLogInUser;
+	}
+	
+	private void setRoles(SecureUserLogin secureUserLogin){
+		Role role = new Role();
+		role.setName("ROLE_USER");
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(role);
+		secureUserLogin.setAuthorities(roles);
 	}
 }

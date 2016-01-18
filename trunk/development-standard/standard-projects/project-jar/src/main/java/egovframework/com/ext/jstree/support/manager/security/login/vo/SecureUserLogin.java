@@ -22,6 +22,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+
 /**
  * Modification Information
  * 
@@ -44,125 +46,54 @@ import org.springframework.security.core.userdetails.UserDetails;
  * </pre>
  */
 
-public class SecureUserLogin implements UserDetails
+public class SecureUserLogin extends ComprehensiveTree implements UserDetails
 {
 	private static final long serialVersionUID = -6673037937422246017L;
 	
-	private int id;
 	private String password;
-	private String passwordChangeDt;
-	private int userGradeCd;
-	private String nickName;
 	private String email;
-	private String username;
+	List<Role> authorities;
 	
-	List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-
-	public int getId()
-	{
-		return id;
-	}
-
-	public void setId(int id)
-	{
-		this.id = id;
-	}
-
-	@Override
-	public String getUsername()
-	{
-		return this.username;
-	}
-	
-	public void setUsername(String username)
-	{
-		 this.email = username;
-		 this.username = username;
-	}
-
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
-
-	@Override
-	public String getPassword()
-	{
-		return this.password;
-	}
-	
-	public String getPasswordChangeDt()
-	{
-		return passwordChangeDt;
-	}
-
-	public void setPasswordChangeDt(String passwordChangeDt)
-	{
-		this.passwordChangeDt = passwordChangeDt;
-	}
-	
-    public int getUserGradeCd()
-	{
-		return userGradeCd;
-	}
-
-	public void setUserGradeCd(int userGradeCd)
-	{
-		this.userGradeCd = userGradeCd;
-	}
-	
-	public String getNickName()
-	{
-		return nickName;
-	}
-
-	public void setNickName(String nickName)
-	{
-		this.nickName = nickName;
-	}
-
-	public String getEmail()
-	{
+	public String getEmail() {
 		return email;
 	}
-
-	public void setEmail(String email)
-	{
+	public void setEmail(String email) {
 		this.email = email;
-		this.username = email;
 	}
 
-	public void setAuthorities(List<GrantedAuthority> authorities) {
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public void setAuthorities(List<Role> authorities) {
 		this.authorities = authorities;
 	}
-
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities()
-	{
+	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
-
 	@Override
-	public boolean isAccountNonExpired()
-	{
+	public String getPassword() {
+		return password;
+	}
+	@Override
+	public String getUsername() {
+		return email;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
 		return true;
 	}
-
 	@Override
-	public boolean isAccountNonLocked()
-	{
+	public boolean isAccountNonLocked() {
 		return true;
 	}
-
 	@Override
-	public boolean isCredentialsNonExpired()
-	{
+	public boolean isCredentialsNonExpired() {
 		return true;
 	}
-
 	@Override
-	public boolean isEnabled()
-	{
+	public boolean isEnabled() {
 		return true;
 	}
+	
 }

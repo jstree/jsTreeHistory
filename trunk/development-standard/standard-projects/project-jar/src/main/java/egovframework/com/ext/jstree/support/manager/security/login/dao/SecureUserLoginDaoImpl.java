@@ -20,7 +20,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
 
 /**
  * Modification Information
@@ -48,42 +48,8 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
 public class SecureUserLoginDaoImpl extends EgovComAbstractDAO implements SecureUserLoginDao
 {
 	@Override
-	public SecureUser getUserInfoByEmail(SecureUser secureUser) 
+	public SecureUserLogin getUserInfoByEmail(SecureUserLogin secureUser) 
 	{
-		return (SecureUser)selectByPk("secureUser.getUserInfoByEmail", secureUser);
-	}
-
-	@Override
-	public int setUserLoginFailureCntZero(SecureUser secureUser)
-	{
-		return update("secureUser.setUserLoginFailureCntZero", secureUser);
-	}
-
-	@Override
-	public int setUserLastLoginDt(SecureUser secureUser)
-	{
-		return update("secureUser.setUserLastLoginDt", secureUser);
-	}
-
-	@Override
-	public int setUserLoginFailureCntIncrease(SecureUser secureUser)
-	{
-		return update("secureUser.setUserLoginFailureCntIncrease", secureUser);
-	}
-
-	@Override
-	public int setUserLoginJoinStateCd(SecureUser secureUser)
-	{
-		return update("secureUser.setUserLoginJoinStateCd", secureUser);
-	}
-
-	@Override
-	public int getUserGroupId(SecureUser secureUser) {
-		return (int)selectByPk("secureUser.getUserGroupId", secureUser);
-	}
-
-	@Override
-	public List<?> getUserAuthorities(SecureUser secureUser) {
-		return  list("constraintMonitor.getUserAuthorities", secureUser);
+		return (SecureUserLogin)selectByPk("secureUser.getUserInfoByEmail", secureUser);
 	}
 }
