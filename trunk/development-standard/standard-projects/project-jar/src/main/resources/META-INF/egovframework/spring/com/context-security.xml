@@ -61,7 +61,7 @@
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider
 			user-service-ref="secureUserLoginServiceImpl">
-			<!-- <security:password-encoder hash="sha-256" /> -->
+			<security:password-encoder hash="sha-256" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 
