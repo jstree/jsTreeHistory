@@ -3,7 +3,7 @@
 <c:url value="${pageContext.request.contextPath}/user/join/agreement/index.do" var="joinUrl" />
 <c:url value="${pageContext.request.contextPath}/user/login/index.do" var="loginUrl" />
 <c:url value="${pageContext.request.contextPath}/user/info/index.do" var="userInfo" />
-<c:url value="${pageContext.request.contextPath}/user/login/logout.do" var="logoutUrl" />
+<c:url value="${pageContext.request.contextPath}/account/accountLogoutProcess.do" var="logoutUrl" />
 <!DOCTYPE html>
 <html lang="ko" class="no-js">
 	<head></head>
