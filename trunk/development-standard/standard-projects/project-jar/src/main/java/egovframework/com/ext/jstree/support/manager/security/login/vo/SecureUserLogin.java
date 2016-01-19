@@ -52,7 +52,7 @@ public class SecureUserLogin extends ComprehensiveTree implements UserDetails
 	
 	private String password;
 	private String email;
-	List<Role> authorities;
+	private List<Role> authorities;
 	
 	public String getEmail() {
 		return email;
