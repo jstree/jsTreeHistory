@@ -15,8 +15,6 @@
  */
 package egovframework.com.ext.jstree.support.manager.security.login.dao;
 
-import java.util.List;
-
 import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
 
 /**

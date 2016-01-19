@@ -17,6 +17,9 @@
 		/* user filed add point*/
 		, A.C_PASSWORD AS password
 		, A.C_EMAIL AS email
+		, A.C_LOGIN_FAILURE_CNT AS loginFailureCnt
+		, A.C_JOIN_DT AS joinDt
+		, A.C_LAST_LOGIN_DT AS lastLoginDt
 	</sql>
 	<sql id="getInlineChildCount">
 		, ( SELECT CASE
@@ -66,6 +69,9 @@
 		, C_TYPE
 		, C_PASSWORD AS password
 		, C_EMAIL AS email
+		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
+		, C_JOIN_DT AS joinDt
+		, C_LAST_LOGIN_DT AS lastLoginDt
 		FROM
 		T_USER_INFO
 		WHERE C_LEFT &gt;= #c_left#
@@ -108,6 +114,9 @@
 		, C_TITLE = #c_title#
 		, C_PASSWORD = #password#
 		, C_EMAIL = #email#
+		, C_LOGIN_FAILURE_CNT = #loginFailureCnt#
+		, C_JOIN_DT = #joinDt#
+		, C_LAST_LOGIN_DT = #lastLoginDt#
 		WHERE C_ID = #c_id#
 	</update>
 
@@ -125,6 +134,9 @@
 			 , C_TYPE
 			 , C_PASSWORD AS password
 			 , C_EMAIL AS email
+			 , C_LOGIN_FAILURE_CNT AS loginFailureCnt
+ 			 , C_JOIN_DT AS joinDt
+ 			 , C_LAST_LOGIN_DT AS lastLoginDt
 		  FROM T_USER_INFO
 		 WHERE C_ID = #c_id#
 	</select>
@@ -143,6 +155,9 @@
 		, C_TYPE
 		, C_PASSWORD AS password
 		, C_EMAIL AS email
+		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
+		, C_JOIN_DT AS joinDt
+		, C_LAST_LOGIN_DT AS lastLoginDt
 		FROM
 		T_USER_INFO
 		WHERE C_ID = #ref#
@@ -347,10 +362,10 @@
 		/* addMyselfFromJstree */
 		INSERT INTO T_USER_INFO (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_PASSWORD, C_EMAIL )
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_JOIN_DT, C_LAST_LOGIN_DT )
 		VALUES (
 		S_USER_INFO.NEXTVAL, #c_parentid#, #c_position#, 
-		#c_left#, #c_right#, #c_level#, #c_title#, #password#, #email#)
+		#c_left#, #c_right#, #c_level#, #c_title#, #password#, #email#, #loginFailureCnt#, #joinDt#, #lastLoginDt#)
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
@@ -358,7 +373,6 @@
 			FROM DUAL
 		</selectKey>
 	</insert>
-
 
 	<update id="alterNodeType" parameterClass="SecureUserLogin">
 		/* alterNodeType */

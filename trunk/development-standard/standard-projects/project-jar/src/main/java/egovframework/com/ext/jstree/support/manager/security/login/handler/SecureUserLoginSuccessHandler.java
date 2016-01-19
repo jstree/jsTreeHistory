@@ -6,9 +6,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+
+import egovframework.com.ext.jstree.support.manager.security.login.service.UserInfoService;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
+import egovframework.com.ext.jstree.support.util.DateUtils;
 
 /**
  * Modification Information
@@ -35,10 +41,28 @@ import org.springframework.stereotype.Component;
 @Component
 public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler
 {
-	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException
-	{
-		
-		super.onAuthenticationSuccess(request, response, authentication);
-	}
+    @Autowired
+    UserDetailsService userDetailsService;
+    
+    @Autowired
+    UserInfoService userInfoService;
+    
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+            Authentication authentication) throws ServletException, IOException
+    {
+        SecureUserLogin secureUserLogin = (SecureUserLogin) authentication.getPrincipal();
+        secureUserLogin = (SecureUserLogin) userDetailsService
+                .loadUserByUsername(secureUserLogin.getUsername());
+        secureUserLogin.setLastLoginDt(DateUtils.format("yyyyMMddHHmmss", DateUtils.getCurrentDay()));
+        try
+        {
+            userInfoService.updateInfo(secureUserLogin);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException();
+        }
+        super.onAuthenticationSuccess(request, response, authentication);
+    }
 }
