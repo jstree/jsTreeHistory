@@ -54,9 +54,10 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
         SecureUserLogin secureUserLogin = (SecureUserLogin) authentication.getPrincipal();
         secureUserLogin = (SecureUserLogin) userDetailsService
                 .loadUserByUsername(secureUserLogin.getUsername());
-        secureUserLogin.setLastLoginDt(DateUtils.format("yyyyMMddHHmmss", DateUtils.getCurrentDay()));
         try
         {
+            secureUserLogin.setLastLoginDt(DateUtils.format("yyyyMMddHHmmss", DateUtils.getCurrentDay()));
+            secureUserLogin.setLoginFailureCnt(0);
             userInfoService.updateUserInfo(secureUserLogin);
         }
         catch (Exception e)

@@ -31,7 +31,7 @@
 						  	<a  href="${joinUrl}" target="_self" >Full Stack Developer Group</a>
 						</c:when>
 						<c:otherwise>
-							<a id="userInfo" target="_self"style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}</a>
+							<a id="userInfo" target="_self"style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.c_title}</a>
 							<span>|</span>
 							<a href="${logoutUrl}" target="_self">로그아웃</a>
 						</c:otherwise>
