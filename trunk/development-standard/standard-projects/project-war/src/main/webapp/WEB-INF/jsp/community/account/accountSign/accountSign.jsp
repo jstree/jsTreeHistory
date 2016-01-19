@@ -4,6 +4,15 @@
 <!--<![endif]-->
 	<head></head>
 	<body>
+	<script>
+		$(document).ready(function(){
+			var errMsg = '${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}';
+			if(errMsg != ''){
+				alert(errMsg);
+				return;
+			}
+		});
+	</script>
 		<section class="clearfix" >
 			<div class="container bm-medium">
 				<nav>
