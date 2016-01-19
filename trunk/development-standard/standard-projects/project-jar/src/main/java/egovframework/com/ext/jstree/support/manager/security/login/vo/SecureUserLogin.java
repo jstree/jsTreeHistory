@@ -138,7 +138,7 @@ public class SecureUserLogin extends ComprehensiveTree implements UserDetails
     @Override
     public boolean isAccountNonLocked()
     {
-        return loginFailureCnt < 3;
+        return loginFailureCnt < 4;
     }
     
     @Override

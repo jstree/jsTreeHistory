@@ -4,5 +4,5 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
 
 public interface UserInfoService
 {
-    void updateInfo(SecureUserLogin secureUserLogin) throws Exception;
+    void updateUserInfo(SecureUserLogin secureUserLogin) throws Exception;
 }

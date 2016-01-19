@@ -19,10 +19,8 @@ public class UserInfoServiceImpl implements UserInfoService
     @Resource(name="CoreService")
     CoreService coreService;
     @Override
-    public void updateInfo(SecureUserLogin secureUserLogin) throws Exception
+    public void updateUserInfo(SecureUserLogin secureUserLogin) throws Exception
     {
         coreService.alterNode(secureUserLogin);
     }
-    
-    
 }
