@@ -50,7 +50,7 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
 		SecureUser secureUser = (SecureUser) authentication.getPrincipal();
-		secureUser = (SecureUser) userDetailsService.loadUserByUsername(secureUser.getUsername());
+		
 		try {
 			secureUser.setLastLoginDt(DateUtils.format("yyyyMMddHHmmss", DateUtils.getCurrentDay()));
 			secureUser.setLoginFailureCnt(0);
