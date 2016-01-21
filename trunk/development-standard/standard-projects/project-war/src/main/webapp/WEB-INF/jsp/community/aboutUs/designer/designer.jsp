@@ -18,7 +18,7 @@
 		a { text-decoration:none;}
 
 		/*album*/
-		#page_wrap{width:1180px; height:1372px; padding-top:40px; margin:0 auto;}
+		#page_wrap{width:1180px; height:1322px; padding-top:30px; margin:0 auto;}
 
 		#header{ width:1180px; height:151px;}
 		#d_title{ width:171px; height:65px; margin:0 auto;}
@@ -29,37 +29,39 @@
 		#d_title #d_list li a:hover{ color:#f32d20;}
 
 		#intro{ height:1284px; widows:1180px;}
-		/*1/3*/
-		.leftD{ height:252px; border-bottom:7px solid #f32d20; margin-bottom:27px;}
-		.leftD #cha{ width:360px; height:253px; float:left; z-index:1;}
-		.leftD .liw{ float:left;}
-		.leftD #cha_sns li a{ width:36px; height:36px; margin:4px;}
-		.liw .d_n{ float:left; width:386px;}
-		.liw .d_n .dsn{ width:211px; height:68px; margin:75px auto 0;}
-		.liw .d_n .dsn .designer{ display:block; width:106px; height:24px; font-size:24px; color:#f32d20; margin:0 auto 4px;}
-		.liw .d_n .dsn .dName{ display:block; width:200px; height:28px; font-size:28px; color:#575757; margin:0 auto;}
-		.liw .careerW{ float:left;}
-		.liw .careerW .info{display:block; width:76px; height:24px; float:left; font-size:24px; color:#f32d20; margin-top:94px;}
-		.liw .careerW .career{ float:left; display:block; width:306px; font-size:15px; color:#575757; margin-top:61px;}
+		
+		/*1/3*/	
+		#leftD{ width:1180px; height:252px; border-bottom:7px solid #f32d20; margin-bottom:27px}
+		#leftD p img{ float:left;}
+		#leftD .dwrap{ width:362px; height:245px; float:left;}
+		#leftD .dwrap #designer{display:block; width:106px; height:24px; font-size:24px; color:#f32d20; position:relative; top:85px; left:140px;}
+		#leftD .dwrap #name{display:block; width:200px; height:28px; font-size:28px; position:relative; top:104px; left:85px;}
+		#leftD .dwrap #name2{display:block; width:200px; height:28px; font-size:28px; position:relative; top:104px; left:105px;}
+		#leftD .infowrap{ width:449px; height:245px; float:left;}
+		#leftD .infowrap #info{font-size:24px; color:#f32d20; display:block; position:relative; top:95px; left:55px;}
+		#leftD .infowrap .career{font-size:15px; color:#575757; position:relative; top:40px; left:150px;}
+		#leftD .infowrap #cha_sns{  width:126px; height:36px; margin:0; position:relative; top:70px; left:330px;}
+		#leftD .infowrap #cha_sns li{float:right; width:36px; height:36px; margin-right:6px;}
 	    
 	    
 	    /*2/4*/
-	    .rightD{ height:252px; border-bottom:7px solid #f32d20; margin-bottom:27px;}
-	    .rightD .riw{ float:left; width:820px; height:245px; background-color:#575757;}
-	    .rightD #kim{float:right; z-index:1; height:253px; width:360px;}
-	    
-	    
-	    /*.riw .carrerW2{width:556px; float: left; }
-	    .riw .carrerW2 #sns2{}
-	    .riw .carrerW2 .info2{display:block; width:76px; height:24px; float:left; font-size:24px; color:#f32d20; margin-top:94px;}
-	    .riw .carrerW2 .info2 .career2{ float:left; display:block; width:306px; font-size:15px; color:#575757; margin-top:61px;}
-	    .riw .d_n{ float:left; width:386px;}/*
-	    
+	    #rightD{ width:1180px; height:252px; border-bottom:7px solid #f32d20; margin-bottom:27px;}
+		#rightD .infowrap{ width:467px; height:246px; float:left;}
+		#rightD .infowrap #kim_sns{ position:relative; top:200px; left:13px; width:126px; height:36px;}
+		#rightD .infowrap #kim_sns li{float:left; width:36px; height:36px; margin-right:6px;}
+		#rightD .infowrap #info{font-size:24px; color:#f32d20; display:block; position:relative; top:75px; left:126px;}
+		#rightD .infowrap .career{font-size:15px; color:#575757; position:relative; top:25px; left:214px;}
+		#rightD .infowrap .career span{margin-right:30px;}
+		#rightD .dwrap{ width:352px; height:253px; float:left;}
+		#rightD .dwrap #designer{display:block; width:106px; height:24px; font-size:24px; color:#f32d20; position:relative; top:85px; left:128px;}
+		#rightD .dwrap #name{display:block; width:200px; height:28px; font-size:28px; color:#575757; position:relative; top:104px; left:90px;}
+		#rightD .dwrap #name3{display:block; width:200px; height:28px; font-size:28px; color:#575757; position:relative; top:104px; left:100px;}
+		#rightD p img{ float:left; z-index:5;}
 		
 		</style>	
 	</head>
 	<body>
-		<div id="page_wrap">
+	<div id="page_wrap">
 
 	<div id="header">
 		<div id="d_title">
@@ -74,65 +76,101 @@
     
     
     <div id="intro">
-    	<div class="leftD">
-            <span id="cha"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/cha.jpg" alt="차승원 디자이너"/></span>
-            <div class="liw">
-                <div class="d_n">
-                	<div class="dsn">
-                    	<h2 class="designer">Designer</h2>
-                    	<h3 class="dName">Cha Seungwon</h3>
-                    </div><!--//dsn-->
-                </div><!--//d_n-->
-                <div class="careerW">
-                    <h2 class="info">Info</h2>
-                    <ol class="career">
-                        <li>96 - 98  &nbsp;르노삼성 디자인팀</li>
-                        <li>98 - 03  &nbsp;동화 삽화 디자인</li>
-                        <li>03 - 07  &nbsp;롯데제과 패키지 디자인</li>
-                        <li>07 - 11  &nbsp;네이버 웹디자인</li>
-                        <li>12- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;313웹 디자인</li>
-                    </ol>
-                </div><!--//carrerW-->
-            </div><!--//liw-->
-            <div id="sns1">
-                    <ul id="cha_sns">
-                        <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/mail.png" alt="이메일"/></a></li>
-                        <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/facebook.png" alt="페이스북"/></a></li>
-                        <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/twt.png" alt="트위터"/></a></li>
-                    </ul>
-                </div><!--//sns1-->
-        </div><!--//leftD-->
+    	<div id="leftD">
+			<p><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/cha.jpg" alt="차승원 디자이너"/></p>
+		    <div class="dwrap">
+		    	<span id="designer">Designer</span>
+        		<span id="name">Cha Seungwon</span>
+    		</div><!--//dwrap-->
+			<div class="infowrap">
+    			<span id="info">Info</span>
+        		<ul class="career">
+        			<li>91-96 현대 자동차 디자인팀</li>
+					<li>97-00 구몬 웹 디자인팀</li>
+					<li>01-04 롯데 시네마 디자인팀</li>
+					<li>04-08 다음 디자인팀</li>
+					<li>09-12 이재석 디자인 연구소</li>
+					<li>13-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;313 웹디자인 소속</li>
+    			</ul>
+    			<ul id="cha_sns">
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/mail.png" alt="이메일"/></a></li>
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/facebook.png" alt="페이스북"/></a></li>
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/twt.png" alt="트위터"/></a></li>
+   	 			</ul>
+    		</div><!--//infowrap-->
+		</div><!--//leftD-->
         
-        
-        <div class="rightD">
-            <div class="riw">
-            	<div class="careerW2">
-            		<div id="sns2">
-                    	<ul id="kim_sns">
-                    	   <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/mail.png" alt="이메일"/></a></li>
-                    	   <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/facebook.png" alt="페이스북"/></a></li>
-                    	   <li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/twt.png" alt="트위터"/></a></li>
-                	 </ul>
-            		</div><!--//sns2-->
-                    <h2 class="info2">Info</h2>
-                    <ol class="career2">
-                        <li>96 - 98  &nbsp;르노삼성 디자인팀</li>
-                        <li>98 - 03  &nbsp;동화 삽화 디자인</li>
-                        <li>03 - 07  &nbsp;롯데제과 패키지 디자인</li>
-                        <li>07 - 11  &nbsp;네이버 웹디자인</li>
-                        <li>12- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;313웹 디자인</li>
-                    </ol>
-                </div><!--//carrerW-->
-                <div class="d_n">
-                	<div class="dsn">
-                    	<h2 class="designer">Designer</h2>
-                    	<h3 class="dName">Kim hyunjoo</h3>
-                    </div><!--//dsn-->
-                </div><!--//d_n-->
-            </div><!--//riw-->
-            <span id="kim"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/kim.jpg" alt="김현주 디자이너"/></span>
-        </div><!--//rightD-->
-        
+        <div id="rightD">
+			<div class="infowrap">
+    			<ul id="kim_sns">
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/mail.png" alt="이메일"/></a></li>
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/facebook.png" alt="페이스북"/></a></li>
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/twt.png" alt="트위터"/></a></li>
+   	 			</ul>
+    			<span id="info">Info</span>
+    		    <ul class="career">
+        			<li>91-96 현대 자동차 디자인팀</li>
+					<li>97-00 구몬 웹 디자인팀</li>
+					<li>01-04 롯데 시네마 디자인팀</li>
+					<li>04-08 다음 디자인팀</li>
+					<li>09-12 이재석 디자인 연구소</li>
+					<li>13-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;313 웹디자인 소속</li>
+    		    </ul>
+			</div><!--//infowrap-->
+    		<div class="dwrap">
+    			<span id="designer">Designer</span>
+	    	    <span id="name">Kim hyunjoo</span>
+    		</div><!--//dwrap-->
+    		<p><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/kim.jpg" alt="김현주 디자이너"/></p>
+		</div><!--//rightD-->
+		
+		<div id="leftD">
+			<p><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/an.jpg" alt="안재홍 디자이너"/></p>
+		    <div class="dwrap">
+		    	<span id="designer">Designer</span>
+        		<span id="name2">An Jaehong</span>
+    		</div><!--//dwrap-->
+			<div class="infowrap">
+    			<span id="info">Info</span>
+        		<ul class="career">
+        			<li>91-96 현대 자동차 디자인팀</li>
+					<li>97-00 구몬 웹 디자인팀</li>
+					<li>01-04 롯데 시네마 디자인팀</li>
+					<li>04-08 다음 디자인팀</li>
+					<li>09-12 이재석 디자인 연구소</li>
+					<li>13-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;313 웹디자인 소속</li>
+    			</ul>
+    			<ul id="cha_sns">
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/mail.png" alt="이메일"/></a></li>
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/facebook.png" alt="페이스북"/></a></li>
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/twt.png" alt="트위터"/></a></li>
+   	 			</ul>
+    		</div><!--//infowrap-->
+		</div><!--//leftD-->
+		
+		<div id="rightD">
+			<div class="infowrap">
+    			<ul id="kim_sns">
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/mail.png" alt="이메일"/></a></li>
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/facebook.png" alt="페이스북"/></a></li>
+					<li><a href="#"><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/twt.png" alt="트위터"/></a></li>
+   	 			</ul>
+    			<span id="info">Info</span>
+    		    <ul class="career">
+        			<li>91-96 현대 자동차 디자인팀</li>
+					<li>97-00 구몬 웹 디자인팀</li>
+					<li>01-04 롯데 시네마 디자인팀</li>
+					<li>04-08 다음 디자인팀</li>
+					<li>09-12 이재석 디자인 연구소</li>
+					<li>13-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;313 웹디자인 소속</li>
+    		    </ul>
+			</div><!--//infowrap-->
+    		<div class="dwrap">
+    			<span id="designer">Designer</span>
+	    	    <span id="name3">Park Haejin</span>
+    		</div><!--//dwrap-->
+    		<p><img src="http://nas.313.co.kr:5002/Component/jsp/community/aboutUs/designer/img/park.jpg" alt="박해진 디자이너"/></p>
+		</div><!--//rightD-->
         
         
     </div><!--//intro-->

@@ -2,7 +2,6 @@ package egovframework.com.ext.jstree.support.manager.scheduler.job.jiraToCrowd;
 
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.springframework.stereotype.Component;
