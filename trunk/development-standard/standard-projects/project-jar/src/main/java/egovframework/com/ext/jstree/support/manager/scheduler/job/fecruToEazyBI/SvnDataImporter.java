@@ -43,7 +43,7 @@ public class SvnDataImporter {
 	public static String storeStartDate = "N/A";
 	public static String storePropertiesDate = "N/A";
 
-	@Scheduled(cron = "0 10 01 03 * ?")
+	//@Scheduled(cron = "0 10 01 03 * ?")
 	public void execute() {
 		// 여기서 스톱.
 		if (storePropertiesDate.equals(egovMessageSource.getMessage("ahnlab.fisheye.start.date"))) {

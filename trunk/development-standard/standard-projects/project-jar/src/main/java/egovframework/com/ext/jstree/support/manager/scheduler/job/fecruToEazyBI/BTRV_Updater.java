@@ -28,7 +28,7 @@ public class BTRV_Updater {
 	private BTRV_ComprehensiveTree btrvSearchNode;
     
 	//@Scheduled(cron = "0 15 23 01 12 ?")
-	@Scheduled(fixedDelay=10000000)
+	//@Scheduled(fixedDelay=10000000)
     public void execute()
     {
     	btrvSearchNode = new BTRV_ComprehensiveTree();

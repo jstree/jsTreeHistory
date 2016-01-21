@@ -26,9 +26,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import egovframework.com.cmm.EgovMessageSource;
-import egovframework.com.ext.jstree.support.manager.security.login.dao.SecureUserLoginDao;
+import egovframework.com.ext.jstree.support.manager.security.login.dao.SecureUserDao;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.Role;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
 
 /**
  * Modification Information
@@ -55,14 +55,14 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
 @Service
 public class SecureUserLoginServiceImpl implements UserDetailsService {
 	@Autowired
-	private SecureUserLoginDao secureUserLoginDao;
+	private SecureUserDao secureUserLoginDao;
 
 	@Resource(name = "egovMessageSource")
 	EgovMessageSource egovMessageSource;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws RuntimeException {
-		SecureUserLogin secureLogInUser = new SecureUserLogin();
+		SecureUser secureLogInUser = new SecureUser();
 		secureLogInUser.setEmail(email);
 
 		secureLogInUser = secureUserLoginDao.getUserInfoByEmail(secureLogInUser);
@@ -73,7 +73,7 @@ public class SecureUserLoginServiceImpl implements UserDetailsService {
 		return secureLogInUser;
 	}
 	
-	private void setRoles(SecureUserLogin secureUserLogin){
+	private void setRoles(SecureUser secureUserLogin){
 		Role role = new Role();
 		role.setName("ROLE_USER");
 		List<Role> roles = new ArrayList<Role>();

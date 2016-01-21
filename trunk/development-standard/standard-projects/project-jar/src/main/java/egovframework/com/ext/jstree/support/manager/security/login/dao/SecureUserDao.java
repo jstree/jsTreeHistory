@@ -15,7 +15,7 @@
  */
 package egovframework.com.ext.jstree.support.manager.security.login.dao;
 
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
 
 /**
  * Modification Information
@@ -39,7 +39,7 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
  * </pre>
  */
 
-public interface SecureUserLoginDao 
+public interface SecureUserDao 
 {
-	SecureUserLogin getUserInfoByEmail(SecureUserLogin secureUser);
+	SecureUser getUserInfoByEmail(SecureUser secureUser);
 }

@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.stereotype.Component;
 
 import egovframework.com.ext.jstree.support.manager.security.login.service.UserInfoService;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
 import egovframework.com.ext.jstree.support.util.DateUtils;
 
 /**
@@ -39,31 +39,25 @@ import egovframework.com.ext.jstree.support.util.DateUtils;
  */
 
 @Component
-public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler
-{
-    @Autowired
-    UserDetailsService userDetailsService;
-    
-    @Autowired
-    UserInfoService userInfoService;
-    
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-            Authentication authentication) throws ServletException, IOException
-    {
-        SecureUserLogin secureUserLogin = (SecureUserLogin) authentication.getPrincipal();
-        secureUserLogin = (SecureUserLogin) userDetailsService
-                .loadUserByUsername(secureUserLogin.getUsername());
-        try
-        {
-            secureUserLogin.setLastLoginDt(DateUtils.format("yyyyMMddHHmmss", DateUtils.getCurrentDay()));
-            secureUserLogin.setLoginFailureCnt(0);
-            userInfoService.updateUserInfo(secureUserLogin);
-        }
-        catch (Exception e)
-        {
-            throw new RuntimeException();
-        }
-        super.onAuthenticationSuccess(request, response, authentication);
-    }
+public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+	@Autowired
+	UserDetailsService userDetailsService;
+
+	@Autowired
+	UserInfoService userInfoService;
+
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws ServletException, IOException {
+		SecureUser secureUser = (SecureUser) authentication.getPrincipal();
+		secureUser = (SecureUser) userDetailsService.loadUserByUsername(secureUser.getUsername());
+		try {
+			secureUser.setLastLoginDt(DateUtils.format("yyyyMMddHHmmss", DateUtils.getCurrentDay()));
+			secureUser.setLoginFailureCnt(0);
+			userInfoService.updateUserInfo(secureUser);
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
+		super.onAuthenticationSuccess(request, response, authentication);
+	}
 }

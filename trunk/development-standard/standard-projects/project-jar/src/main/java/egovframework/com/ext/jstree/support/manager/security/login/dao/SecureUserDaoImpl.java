@@ -15,12 +15,10 @@
  */
 package egovframework.com.ext.jstree.support.manager.security.login.dao;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
 
 /**
  * Modification Information
@@ -45,11 +43,11 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
  */
 
 @Repository
-public class SecureUserLoginDaoImpl extends EgovComAbstractDAO implements SecureUserLoginDao
+public class SecureUserDaoImpl extends EgovComAbstractDAO implements SecureUserDao
 {
 	@Override
-	public SecureUserLogin getUserInfoByEmail(SecureUserLogin secureUser) 
+	public SecureUser getUserInfoByEmail(SecureUser secureUser) 
 	{
-		return (SecureUserLogin)selectByPk("secureUser.getUserInfoByEmail", secureUser);
+		return (SecureUser)selectByPk("secureUser.getUserInfoByEmail", secureUser);
 	}
 }

@@ -45,7 +45,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 
-public class SecureUserLogin extends ComprehensiveTree implements UserDetails
+public class SecureUser extends ComprehensiveTree implements UserDetails
 {
     private static final long serialVersionUID = -6673037937422246017L;
     

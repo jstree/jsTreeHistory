@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="secureUser">
-	<typeAlias alias="SecureUserLogin"
-		type="egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUserLogin" />
+	<typeAlias alias="SecureUser"
+		type="egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser" />
 		
 	<sql id="getMetaField">
 		/* getChildNode */
@@ -40,8 +40,8 @@
 		ORDER BY A.C_POSITION ASC
 	</sql>
 	
-	<select id="getChildNode" parameterClass="SecureUserLogin"
-		resultClass="SecureUserLogin">
+	<select id="getChildNode" parameterClass="SecureUser"
+		resultClass="SecureUser">
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user filed */
@@ -56,8 +56,8 @@
 	</select>
      
     
-	<select id="getChildNodeByLeftRight" parameterClass="SecureUserLogin"
-		resultClass="SecureUserLogin">
+	<select id="getChildNodeByLeftRight" parameterClass="SecureUser"
+		resultClass="SecureUser">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		, C_PARENTID
@@ -81,8 +81,8 @@
 	</select>
 
 
-	<select id="searchNodeByString" parameterClass="SecureUserLogin"
-		resultClass="SecureUserLogin">
+	<select id="searchNodeByString" parameterClass="SecureUser"
+		resultClass="SecureUser">
 		/* searchNodeByString */
 		SELECT c_left
 		, c_right
@@ -106,7 +106,7 @@
 	</select>
 
 
-	<update id="alterNode" parameterClass="SecureUserLogin">
+	<update id="alterNode" parameterClass="SecureUser">
 		/* alterNode */
 		UPDATE
 		T_USER_INFO
@@ -121,8 +121,8 @@
 	</update>
 
 
-	<select id="getNode" parameterClass="SecureUserLogin"
-		resultClass="SecureUserLogin">
+	<select id="getNode" parameterClass="SecureUser"
+		resultClass="SecureUser">
 		/* getNode */
 		SELECT C_ID
 			 , C_PARENTID
@@ -142,8 +142,8 @@
 	</select>
 
 
-	<select id="getNodeByRef" parameterClass="SecureUserLogin"
-		resultClass="SecureUserLogin">
+	<select id="getNodeByRef" parameterClass="SecureUser"
+		resultClass="SecureUser">
 		/* getNodeByRef */
 		SELECT C_ID
 		, C_PARENTID
@@ -164,7 +164,7 @@
 	</select>
 
 
-	<delete id="removeNode" parameterClass="SecureUserLogin">
+	<delete id="removeNode" parameterClass="SecureUser">
 		/* removeNode */
 		DELETE
 		FROM T_USER_INFO
@@ -174,7 +174,7 @@
 	</delete>
 
 
-	<update id="removedAfterLeftFix" parameterClass="SecureUserLogin">
+	<update id="removedAfterLeftFix" parameterClass="SecureUser">
 		/*
 		removedAfterLeftFix */
 		UPDATE T_USER_INFO
@@ -184,7 +184,7 @@
 	</update>
 
 
-	<update id="removedAfterRightFix" parameterClass="SecureUserLogin">
+	<update id="removedAfterRightFix" parameterClass="SecureUser">
 		/*
 		removedAfterRightFix */
 		UPDATE T_USER_INFO
@@ -194,7 +194,7 @@
 	</update>
 
 
-	<update id="removedAfterPositionFix" parameterClass="SecureUserLogin">
+	<update id="removedAfterPositionFix" parameterClass="SecureUser">
 		/*
 		removedAfterPositionFix */
 		UPDATE T_USER_INFO
@@ -206,7 +206,7 @@
 	</update>
 
 
-	<select id="analyzeRootNode" resultClass="SecureUserLogin">
+	<select id="analyzeRootNode" resultClass="SecureUser">
 		/* searchNodeByString
 		*/
 		SELECT C_LEFT
@@ -215,7 +215,7 @@
 	</select>
 
 
-	<update id="cutMyselfPositionFix" parameterClass="SecureUserLogin">
+	<update id="cutMyselfPositionFix" parameterClass="SecureUser">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_USER_INFO
 		SET C_POSITION = C_POSITION - 1
@@ -225,7 +225,7 @@
 	</update>
 
 
-	<update id="cutMyselfLeftFix" parameterClass="SecureUserLogin">
+	<update id="cutMyselfLeftFix" parameterClass="SecureUser">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_USER_INFO
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
@@ -233,7 +233,7 @@
 	</update>
 
 
-	<update id="cutMyselfRightFix" parameterClass="SecureUserLogin">
+	<update id="cutMyselfRightFix" parameterClass="SecureUser">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_USER_INFO
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
@@ -245,7 +245,7 @@
 	</update>
 
 
-	<update id="stretchPositionForMyself" parameterClass="SecureUserLogin">
+	<update id="stretchPositionForMyself" parameterClass="SecureUser">
 		/* stretchPositionForMyselfFromJstree */
 		UPDATE
 		T_USER_INFO
@@ -267,7 +267,7 @@
 	</update>
 
 
-	<update id="stretchLeftForMyselfFromJstree" parameterClass="SecureUserLogin">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="SecureUser">
 		/* stretchLeftForMyselfFromJstree */
 		UPDATE T_USER_INFO
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
@@ -284,7 +284,7 @@
 	</update>
 
 
-	<update id="stretchRightForMyselfFromJstree" parameterClass="SecureUserLogin">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="SecureUser">
 		/* stretchRightForMyselfFromJstree */
 		UPDATE T_USER_INFO
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
@@ -301,7 +301,7 @@
 	</update>
 
 
-	<insert id="pasteMyselfFromJstree" parameterClass="SecureUserLogin">
+	<insert id="pasteMyselfFromJstree" parameterClass="SecureUser">
 		/* pasteMyselfFromJstree */
 		INSERT INTO T_USER_INFO (
 		C_ID, C_PARENTID, C_POSITION,
@@ -333,7 +333,7 @@
 	</insert>
 
 
-	<update id="enterMyselfFixPosition" parameterClass="SecureUserLogin">
+	<update id="enterMyselfFixPosition" parameterClass="SecureUser">
 		/*
 		enterMyselfFixPosition */
 		UPDATE T_USER_INFO
@@ -344,7 +344,7 @@
 	</update>
 
 
-	<update id="enterMyselfFixLeftRight" parameterClass="SecureUserLogin">
+	<update id="enterMyselfFixLeftRight" parameterClass="SecureUser">
 		/* enterMyselfFixLeftRight */
 		UPDATE T_USER_INFO
 		SET
@@ -358,7 +358,7 @@
 		</iterate>
 	</update>
 
-	<insert id="addMyselfFromJstree" parameterClass="SecureUserLogin">
+	<insert id="addMyselfFromJstree" parameterClass="SecureUser">
 		/* addMyselfFromJstree */
 		INSERT INTO T_USER_INFO (
 		C_ID, C_PARENTID, C_POSITION,
@@ -374,7 +374,7 @@
 		</selectKey>
 	</insert>
 
-	<update id="alterNodeType" parameterClass="SecureUserLogin">
+	<update id="alterNodeType" parameterClass="SecureUser">
 		/* alterNodeType */
 		UPDATE T_USER_INFO
 		SET C_TYPE = #c_type#
@@ -382,7 +382,7 @@
 	</update>
 
 
-	<update id="fixCopyIF" parameterClass="SecureUserLogin">
+	<update id="fixCopyIF" parameterClass="SecureUser">
 		/* fixCopyIF */
 		UPDATE
 		T_USER_INFO
@@ -392,7 +392,7 @@
 	</update>
 
 
-	<update id="fixCopy" parameterClass="SecureUserLogin">
+	<update id="fixCopy" parameterClass="SecureUser">
 		/* fixCopy */
 		UPDATE
 		T_USER_INFO
@@ -401,7 +401,7 @@
 		#c_id#
 	</update>
 	
-	<select id="getUserInfo" parameterClass="String" resultClass="SecureUserLogin">
+	<select id="getUserInfo" parameterClass="String" resultClass="SecureUser">
 		<dynamic>
 			<include refid="getMetaField" />
 			FROM T_USER_INFO A
@@ -415,7 +415,7 @@
 		WHERE C_TITLE = #title#
 	</select>
 	
-	<select id="getUserInfoByEmail" parameterClass="SecureUserLogin" resultClass="SecureUserLogin">
+	<select id="getUserInfoByEmail" parameterClass="SecureUser" resultClass="SecureUser">
 		<dynamic>
 			<include refid="getMetaField" />
 			FROM T_USER_INFO A
