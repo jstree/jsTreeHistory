@@ -47,10 +47,10 @@
 			/* user filed */
 			<include refid="getInlineChildCount" />
 			/* inline table from filed*/
-			FROM T_USER_INFO B
+			FROM T_SECURE_USER B
 			<include refid="getInlineChildCountAfterFrom" />
 			/* table from filed*/
-			FROM T_USER_INFO A
+			FROM T_SECURE_USER A
 			<include refid="getAfterFrom" />
 		</dynamic>
 	</select>
@@ -73,7 +73,7 @@
 		, C_JOIN_DT AS joinDt
 		, C_LAST_LOGIN_DT AS lastLoginDt
 		FROM
-		T_USER_INFO
+		T_SECURE_USER
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT &lt;=
 		#c_right#
@@ -87,7 +87,7 @@
 		SELECT c_left
 		, c_right
 		FROM
-		T_USER_INFO
+		T_SECURE_USER
 		WHERE C_TITLE LIKE '%'||#searchStr#||'%'
 	</select>
 
@@ -97,7 +97,7 @@
 		/* searchNodeByPosition */
 		SELECT DISTINCT C_ID
 		FROM
-		T_USER_INFO
+		T_SECURE_USER
 		WHERE 1=1
 		<iterate prepend="AND" open="(" close=")" conjunction="OR">
 			( C_LEFT
@@ -109,7 +109,7 @@
 	<update id="alterNode" parameterClass="SecureUser">
 		/* alterNode */
 		UPDATE
-		T_USER_INFO
+		T_SECURE_USER
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
 		, C_PASSWORD = #password#
@@ -137,7 +137,7 @@
 			 , C_LOGIN_FAILURE_CNT AS loginFailureCnt
  			 , C_JOIN_DT AS joinDt
  			 , C_LAST_LOGIN_DT AS lastLoginDt
-		  FROM T_USER_INFO
+		  FROM T_SECURE_USER
 		 WHERE C_ID = #c_id#
 	</select>
 
@@ -159,7 +159,7 @@
 		, C_JOIN_DT AS joinDt
 		, C_LAST_LOGIN_DT AS lastLoginDt
 		FROM
-		T_USER_INFO
+		T_SECURE_USER
 		WHERE C_ID = #ref#
 	</select>
 
@@ -167,7 +167,7 @@
 	<delete id="removeNode" parameterClass="SecureUser">
 		/* removeNode */
 		DELETE
-		FROM T_USER_INFO
+		FROM T_SECURE_USER
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT
 		&lt;= #c_right#
@@ -177,7 +177,7 @@
 	<update id="removedAfterLeftFix" parameterClass="SecureUser">
 		/*
 		removedAfterLeftFix */
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET C_LEFT =
 		C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
@@ -187,7 +187,7 @@
 	<update id="removedAfterRightFix" parameterClass="SecureUser">
 		/*
 		removedAfterRightFix */
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET C_RIGHT =
 		C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
@@ -197,7 +197,7 @@
 	<update id="removedAfterPositionFix" parameterClass="SecureUser">
 		/*
 		removedAfterPositionFix */
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET
 		C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
@@ -210,14 +210,14 @@
 		/* searchNodeByString
 		*/
 		SELECT C_LEFT
-		FROM T_USER_INFO
+		FROM T_SECURE_USER
 		WHERE C_PARENTID = 0
 	</select>
 
 
 	<update id="cutMyselfPositionFix" parameterClass="SecureUser">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
 		AND C_POSITION &gt;
@@ -227,7 +227,7 @@
 
 	<update id="cutMyselfLeftFix" parameterClass="SecureUser">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
@@ -235,7 +235,7 @@
 
 	<update id="cutMyselfRightFix" parameterClass="SecureUser">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
@@ -248,7 +248,7 @@
 	<update id="stretchPositionForMyself" parameterClass="SecureUser">
 		/* stretchPositionForMyselfFromJstree */
 		UPDATE
-		T_USER_INFO
+		T_SECURE_USER
 		SET C_POSITION = C_POSITION + 1
 		WHERE
 		C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
@@ -269,7 +269,7 @@
 
 	<update id="stretchLeftForMyselfFromJstree" parameterClass="SecureUser">
 		/* stretchLeftForMyselfFromJstree */
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
 		WHERE C_LEFT &gt;=
 		#rightPositionFromNodeByRef#
@@ -286,7 +286,7 @@
 
 	<update id="stretchRightForMyselfFromJstree" parameterClass="SecureUser">
 		/* stretchRightForMyselfFromJstree */
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
 		WHERE C_RIGHT &gt;=
 		#rightPositionFromNodeByRef#
@@ -303,7 +303,7 @@
 
 	<insert id="pasteMyselfFromJstree" parameterClass="SecureUser">
 		/* pasteMyselfFromJstree */
-		INSERT INTO T_USER_INFO (
+		INSERT INTO T_SECURE_USER (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
 		)
@@ -318,7 +318,7 @@
 		, C_LEVEL - #ldif# AS C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		FROM T_USER_INFO
+		FROM T_SECURE_USER
 		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
 			open="(" close=")" conjunction=",">
 			#c_idsByChildNodeFromNodeById[]#
@@ -336,7 +336,7 @@
 	<update id="enterMyselfFixPosition" parameterClass="SecureUser">
 		/*
 		enterMyselfFixPosition */
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET
 		C_PARENTID = #ref#
 		, C_POSITION = #c_position#
@@ -346,7 +346,7 @@
 
 	<update id="enterMyselfFixLeftRight" parameterClass="SecureUser">
 		/* enterMyselfFixLeftRight */
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET
 		C_LEFT = C_LEFT - (#idif#)
 		, C_RIGHT = C_RIGHT - (#idif#)
@@ -360,7 +360,7 @@
 
 	<insert id="addMyselfFromJstree" parameterClass="SecureUser">
 		/* addMyselfFromJstree */
-		INSERT INTO T_USER_INFO (
+		INSERT INTO T_SECURE_USER (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_JOIN_DT, C_LAST_LOGIN_DT )
 		VALUES (
@@ -376,7 +376,7 @@
 
 	<update id="alterNodeType" parameterClass="SecureUser">
 		/* alterNodeType */
-		UPDATE T_USER_INFO
+		UPDATE T_SECURE_USER
 		SET C_TYPE = #c_type#
 		WHERE C_ID = #c_id#
 	</update>
@@ -385,7 +385,7 @@
 	<update id="fixCopyIF" parameterClass="SecureUser">
 		/* fixCopyIF */
 		UPDATE
-		T_USER_INFO
+		T_SECURE_USER
 		SET C_POSITION = #fixCopyPosition#
 		WHERE C_ID
 		= #fixCopyId#
@@ -395,7 +395,7 @@
 	<update id="fixCopy" parameterClass="SecureUser">
 		/* fixCopy */
 		UPDATE
-		T_USER_INFO
+		T_SECURE_USER
 		SET C_PARENTID = #fixCopyId#
 		WHERE C_ID =
 		#c_id#
@@ -404,21 +404,21 @@
 	<select id="getUserInfo" parameterClass="String" resultClass="SecureUser">
 		<dynamic>
 			<include refid="getMetaField" />
-			FROM T_USER_INFO A
+			FROM T_SECURE_USER A
 			WHERE C_TITLE = #title# 
 		</dynamic>
 	</select>
 	
 	<select id="getNickNameUseFl" parameterClass="String" resultClass="Int">
 		SELECT COUNT(C_ID) 
-		FROM T_USER_INFO
+		FROM T_SECURE_USER
 		WHERE C_TITLE = #title#
 	</select>
 	
 	<select id="getUserInfoByEmail" parameterClass="SecureUser" resultClass="SecureUser">
 		<dynamic>
 			<include refid="getMetaField" />
-			FROM T_USER_INFO A
+			FROM T_SECURE_USER A
 			WHERE C_EMAIL = #email# 
 		</dynamic>
 	</select>
