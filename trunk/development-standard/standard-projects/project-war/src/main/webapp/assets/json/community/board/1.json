@@ -1,6 +1,6 @@
 {
-				"articleNum" :1,
-				"articleTitle" :"자유 게시판을 만들기 시작했습니다.",
-				"articleWriter" :"이동민",
-				"articleRead" :313
-			}
+	"articleNum" :1,
+	"title" :"자유 게시판을 만들기 시작했습니다.",
+	"articleWriter" :"이동민",
+	"articleRead" :313
+}
