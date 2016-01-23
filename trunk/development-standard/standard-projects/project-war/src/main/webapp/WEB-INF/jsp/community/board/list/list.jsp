@@ -97,6 +97,33 @@
 	.dataTable-quick-look {
 		color: black !important;
 	}
+	
+	.content_title {
+		color: black;
+	}
+	
+	.title_info{
+		padding-right: 10px;
+	}
+	
+	.content_info{
+		padding-right: 20px;
+	}
+	
+	.write_table, input{
+		width: 100%;
+	}
+		.write_table th{
+			width : 20%;
+		}
+		
+		.write_table td{
+			width : 80%;
+		}
+	textarea {
+		max-width: 100%;
+		width:100%;
+	}
 </style>
 
 <!-- JavaScript neccessary for the tree -->
@@ -112,8 +139,66 @@
 		$(window).load(function() {
 	        // this code will run after all other $(document).ready() scripts
 	        // have completely finished, AND all page elements are fully loaded.
-			$('.dataTable-quick-look').shopifyQuickLook();
+			$('.dataTable-quick-look').shopifyQuickLook({
+				render : function(serverData){
+					var data = serverData.OUTPUT;	
+					
+					var content = $("<div/>").html(data.articleContent),
+						title = $("<h1/>").addClass("content_title").html(data.articleTitle),
+						info = $("<div/>"),
+						btn = $("<div/>").addClass("float-right");
+					
+					var infoTitle = $("<strong>").addClass("title_info");
+					var infoContent = $("<span>").addClass("content_info");
+					
+					
+					info.append(infoTitle.clone(true).html("작성자"))
+						.append(infoContent.clone(true).html(data.articleWriter))
+						.append(infoTitle.clone(true).html("작성일"))
+						.append(infoContent.clone(true).html(data.articleWriteDate))
+						.append(infoTitle.clone(true).html("조회수"))
+						.append(infoContent.clone(true).html(data.articleRead));
+					
+					
+					var closeBtn = $("<button/>").html("닫기").on("click",function(){
+							//TODO close 이벤트 찾기
+							$(".shopify-quick-look-overlay").click();
+						}),
+						delBtn = $("<button/>").html("삭제");
+						
+					btn.append(closeBtn);	
+						
+					return $("<div/>").append(title).append(info).append(content).append(btn);
+				}
+			});
 	    });
+		
+		$('#write').shopifyQuickLook({
+			render :function(){
+				
+				var writeTable = $("<table/>").addClass("write_table"),
+					title = $("<tr/>")
+							.append($("<th/>").html("제목"))
+							.append($("<td/>")
+									.append($("<input/>"))
+							),
+					content = $("<tr/>")
+							.append($("<th/>").html("내용"))
+							.append($("<td/>")
+									.append($("<textarea/>"))
+							),
+					btn = $("<div/>")
+							.addClass("float-right")
+							.append($("<button/>").html("저장"))
+							.append("&nbsp;")
+							.append($("<button/>").html("닫기"));
+					
+				writeTable.append(title).append(content);
+				return $("<div/>").append(writeTable).append(btn);
+			}
+		});
+		
+		
 	});
 	
 	function dataTableSetup() {
@@ -134,7 +219,7 @@
 			                        'orderable': false,
 			                        'className': 'dt-body-center',
 			                        'render': function (data, type, row){
-			                        	return '<a href="#" target="_self" class="dataTable-quick-look" data-quick-look-handle="${pageContext.request.contextPath}/assets/json/community/board/' + row.articleNum + '">' + data + '</a>';
+			                        	return '<a href="#" target="_self" class="dataTable-quick-look" data-quick-look-handle="${pageContext.request.contextPath}/assets/json/community/board/articleDetail/' + row.articleNum + '">' + data + '</a>';
 			                        }
 			                	}
 			                ],
@@ -222,6 +307,9 @@
 													</tr>
 												</thead>
 											</table>
+											<div class="float-right">
+												<button id="write">글등록</button>
+											</div>
 										</div>
 									</div>
 								</div>
