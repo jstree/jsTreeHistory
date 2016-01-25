@@ -19,6 +19,7 @@
 
 <customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
 <customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/jQuery313Plugin/CustomQuickLook.js"></customTags:assetsJsExtendNas>
 <!-- Style Setting --> 
 <style type="text/css">
 	input[type="button"] {
@@ -139,7 +140,7 @@
 		$(window).load(function() {
 	        // this code will run after all other $(document).ready() scripts
 	        // have completely finished, AND all page elements are fully loaded.
-			$('.dataTable-quick-look').shopifyQuickLook({
+			$('.dataTable-quick-look').customQuickLook({
 				render : function(serverData){
 					var data = serverData.OUTPUT;	
 					
@@ -173,7 +174,7 @@
 			});
 	    });
 		
-		$('#write').shopifyQuickLook({
+		$('#write').customQuickLook({
 			render :function(){
 				
 				var writeTable = $("<table/>").addClass("write_table"),
