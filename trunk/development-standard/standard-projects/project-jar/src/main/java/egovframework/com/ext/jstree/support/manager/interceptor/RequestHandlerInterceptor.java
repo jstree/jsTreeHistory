@@ -29,7 +29,7 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
     {
         //setLogging(request, true);
         //setUrlVariable(request, new ModelAndView(), true);
-        //setSearchSupport(request);
+        setSearchSupport(request);
         return true;
     }
     
@@ -173,7 +173,6 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter
      * @param request
      * @param parameterParser
      */
-    @SuppressWarnings("unused")
     private void setSearchSupport(HttpServletRequest request)
     {
         ParameterParser parameterParser = new ParameterParser(request);

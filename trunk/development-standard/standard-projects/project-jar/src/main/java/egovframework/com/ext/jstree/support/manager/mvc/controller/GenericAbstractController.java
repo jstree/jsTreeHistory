@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springmodules.validation.commons.DefaultBeanValidator;
@@ -21,7 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import egovframework.com.cmm.EgovMessageSource;
-import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupport;
+import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.com.ext.jstree.support.util.StringUtils;
 
 public abstract class GenericAbstractController {
@@ -32,6 +31,10 @@ public abstract class GenericAbstractController {
 	private DefaultBeanValidator defaultBeanValidator;
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	public ParameterParser getParameterParser(HttpServletRequest request){
+		return new ParameterParser(request);
+	}
 
 	public <T> T invokeBeanValidate(T clazz, BindingResult bindingResult) {
 		defaultBeanValidator.validate(clazz, bindingResult);
@@ -40,22 +43,6 @@ public abstract class GenericAbstractController {
 			return clazz;
 		}
 		return clazz;
-	}
-
-	public abstract Map<String, Map<String, Object>> bindTypes();
-
-	protected String getView(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
-			HttpServletResponse response, BindingResult bindingResult, Object parameterBean) {
-		invokeBeanValidate(parameterBean, bindingResult);
-		modelMap.addAllAttributes(bindTypes());
-
-		String viewResolver = (String) request.getAttribute("viewResolver");
-		String siteName = (String) request.getAttribute("siteCode");
-		String componentName = (String) request.getAttribute("componentCode");
-		String action = (String) request.getAttribute("actionCode");
-
-		// templateEngine not use external view url.
-		return "/" + viewResolver + "/" + siteName + "/" + componentName + "/" + action;
 	}
 
 	@ExceptionHandler(Exception.class)

@@ -1,11 +1,9 @@
 package egovframework.com.ext.jstree.springiBatis.core.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,8 +25,6 @@ import egovframework.com.ext.jstree.springiBatis.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
-import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericInterfaceController;
-import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupport;
 
 /**
  * Modification Information
@@ -53,7 +49,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupp
  */
 @Controller
 @RequestMapping(value = { "/egovframework/com/etc/jstree/springiBatis/core" })
-public class CoreController extends GenericAbstractController implements GenericInterfaceController<ComprehensiveTree>{
+public class CoreController extends GenericAbstractController{
 	@Resource(name = "CoreService")
 	CoreService coreService;
 
@@ -239,38 +235,5 @@ public class CoreController extends GenericAbstractController implements Generic
 		return "/jsp/egovframework/com/ext/jstree/jstreeSolutionSpringVersion";
 	}
 
-	@Override
-	public Map<String, Map<String, Object>> bindTypes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String invokeSelect(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
-			HttpServletResponse response, BindingResult bindingResult, ComprehensiveTree parameterBean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String invokeInsert(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
-			HttpServletResponse response, BindingResult bindingResult, ComprehensiveTree parameterBean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String invokeUpdate(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
-			HttpServletResponse response, BindingResult bindingResult, ComprehensiveTree parameterBean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String invokeDelete(SearchSupport searchSupport, ModelMap modelMap, HttpServletRequest request,
-			HttpServletResponse response, BindingResult bindingResult, ComprehensiveTree parameterBean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
