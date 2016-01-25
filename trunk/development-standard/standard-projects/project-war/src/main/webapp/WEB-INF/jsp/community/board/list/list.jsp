@@ -19,7 +19,24 @@
 
 <customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/media/js/jquery.dataTables.js"></customTags:assetsJsExtendNas>
 <customTags:assetsJsExtendNas theRestOfFileName="/js/DataTables-1.10.10/extensions/Responsive/js/dataTables.responsive.js"></customTags:assetsJsExtendNas>
-<customTags:assetsJsExtendNas theRestOfFileName="/js/jQuery313Plugin/CustomQuickLook.js"></customTags:assetsJsExtendNas>
+
+<!-- Add mousewheel plugin (this is optional) -->
+<customTags:assetsJsExtendNas theRestOfFileName="/js/fancyBox-2.1.5/lib/jquery.mousewheel-3.0.6.pack.js"></customTags:assetsJsExtendNas>
+
+<!-- Add fancyBox main JS and CSS files -->
+<customTags:assetsJsExtendNas theRestOfFileName="/js/fancyBox-2.1.5/source/jquery.fancybox.js?v=2.1.5"></customTags:assetsJsExtendNas>
+<customTags:assetsCssExtendNas theRestOfFileName="/js/fancyBox-2.1.5/source/jquery.fancybox.css?v=2.1.5"></customTags:assetsCssExtendNas>
+
+<!-- Add Button helper (this is optional) -->
+<customTags:assetsCssExtendNas theRestOfFileName="/js/fancyBox-2.1.5/source/helpers/jquery.fancybox-buttons.css?v=1.0.5"></customTags:assetsCssExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/fancyBox-2.1.5/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></customTags:assetsJsExtendNas>
+
+<!-- Add Thumbnail helper (this is optional) -->
+<customTags:assetsCssExtendNas theRestOfFileName="/js/fancyBox-2.1.5/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7"></customTags:assetsCssExtendNas>
+<customTags:assetsJsExtendNas theRestOfFileName="/js/fancyBox-2.1.5/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></customTags:assetsJsExtendNas>
+
+<!-- Add Media helper (this is optional) -->
+<customTags:assetsJsExtendNas theRestOfFileName="/js/fancyBox-2.1.5/source/helpers/jquery.fancybox-media.js?v=1.0.6"></customTags:assetsJsExtendNas>
 <!-- Style Setting --> 
 <style type="text/css">
 	input[type="button"] {
@@ -137,69 +154,10 @@
 
 	$(document).ready(function () {
 		dataTableSetup();
+		$('.fancybox').fancybox();
 		$(window).load(function() {
-	        // this code will run after all other $(document).ready() scripts
-	        // have completely finished, AND all page elements are fully loaded.
-			$('.dataTable-quick-look').customQuickLook({
-				render : function(serverData){
-					var data = serverData.OUTPUT;	
-					
-					var content = $("<div/>").html(data.articleContent),
-						title = $("<h1/>").addClass("content_title").html(data.articleTitle),
-						info = $("<div/>"),
-						btn = $("<div/>").addClass("float-right");
-					
-					var infoTitle = $("<strong>").addClass("title_info");
-					var infoContent = $("<span>").addClass("content_info");
-					
-					
-					info.append(infoTitle.clone(true).html("작성자"))
-						.append(infoContent.clone(true).html(data.articleWriter))
-						.append(infoTitle.clone(true).html("작성일"))
-						.append(infoContent.clone(true).html(data.articleWriteDate))
-						.append(infoTitle.clone(true).html("조회수"))
-						.append(infoContent.clone(true).html(data.articleRead));
-					
-					
-					var closeBtn = $("<button/>").html("닫기").on("click",function(){
-							//TODO close 이벤트 찾기
-							$(".shopify-quick-look-overlay").click();
-						}),
-						delBtn = $("<button/>").html("삭제");
-						
-					btn.append(closeBtn);	
-						
-					return $("<div/>").append(title).append(info).append(content).append(btn);
-				}
-			});
+			
 	    });
-		
-		$('#write').customQuickLook({
-			render :function(){
-				
-				var writeTable = $("<table/>").addClass("write_table"),
-					title = $("<tr/>")
-							.append($("<th/>").html("제목"))
-							.append($("<td/>")
-									.append($("<input/>"))
-							),
-					content = $("<tr/>")
-							.append($("<th/>").html("내용"))
-							.append($("<td/>")
-									.append($("<textarea/>"))
-							),
-					btn = $("<div/>")
-							.addClass("float-right")
-							.append($("<button/>").html("저장"))
-							.append("&nbsp;")
-							.append($("<button/>").html("닫기"));
-					
-				writeTable.append(title).append(content);
-				return $("<div/>").append(writeTable).append(btn);
-			}
-		});
-		
-		
 	});
 	
 	function dataTableSetup() {
@@ -220,7 +178,7 @@
 			                        'orderable': false,
 			                        'className': 'dt-body-center',
 			                        'render': function (data, type, row){
-			                        	return '<a href="#" target="_self" class="dataTable-quick-look" data-quick-look-handle="${pageContext.request.contextPath}/assets/json/community/board/articleDetail/' + row.articleNum + '">' + data + '</a>';
+			                        	return '<a href="view.jsp?viewArticle=' + row.articleNum + '" class="fancybox fancybox.ajax">' + data + '</a>';
 			                        }
 			                	}
 			                ],
