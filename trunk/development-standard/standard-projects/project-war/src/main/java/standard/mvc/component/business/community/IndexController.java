@@ -1,18 +1,20 @@
 package standard.mvc.component.business.community;
 
-import java.util.Map;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import standard.mvc.component.business.community.menu.service.MenuService;
+import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.manager.mvc.dao.hibernate.SearchSupport;
 
 /**
  * Modification Information
@@ -47,19 +49,21 @@ public class IndexController extends GenericAbstractController{
 	@Resource(name = "MenuService")
 	private MenuService menuService;
 	
-	@RequestMapping(value = { "/{major}/{minor}.do" })
-	public String execute(ModelMap model, @PathVariable("major") String major,
-			@PathVariable("minor") String minor) throws Exception {
+	@RequestMapping(value = { "/{component}/{action}.do" })
+	public String execute(ModelMap model, @PathVariable("component") String component,
+			@PathVariable("action") String action, SearchSupport searchSupport, HttpServletRequest request,
+			HttpServletResponse response, BindingResult bindingResult) throws Exception {
 		StringBuffer sb = new StringBuffer("/jsp/community");
 		sb.append("/");
-		sb.append(major);
+		sb.append(component);
 		sb.append("/");
-		sb.append(minor);
+		sb.append(action);
 		sb.append("/");
-		sb.append(minor);
+		sb.append(action);
 
 		logger.info("path : {}", new Object[] { sb });
 		model.addAttribute("menuList", menuService.getMenuList());
+		model.addAttribute("actionTarget", getParameterParser(request).get("actionTarget"));
 		return sb.toString();
 	}
 
@@ -79,11 +83,4 @@ public class IndexController extends GenericAbstractController{
 		model.addAttribute("menuList", menuService.getMenuList());
 		return "/jsp/community/common/404error";
 	}
-
-	@Override
-	public Map<String, Map<String, Object>> bindTypes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

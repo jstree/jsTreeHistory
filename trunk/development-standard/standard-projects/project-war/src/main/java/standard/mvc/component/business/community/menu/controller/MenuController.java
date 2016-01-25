@@ -1,7 +1,6 @@
 package standard.mvc.component.business.community.menu.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -47,12 +46,6 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
 @RequestMapping(value = { "**/**/community" })
 public class MenuController extends GenericAbstractController {
 	
-    @Override
-    public Map<String, Map<String, Object>> bindTypes() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
     @Resource(name = "MenuService")
     MenuService menuService;
 
