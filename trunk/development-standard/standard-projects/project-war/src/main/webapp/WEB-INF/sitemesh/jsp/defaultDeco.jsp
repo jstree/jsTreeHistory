@@ -31,10 +31,6 @@
 		<script type="text/javascript">
 		// <![CDATA[
 		$(document).ready(function($){
-			document.body.className  = "lightBg";
-            $('.collectonme').hide();
-            $(document).snowfall('clear');
-            $(document).snowfall({shadow : true, flakeCount:50}); // add shadows
 		});
 		// ]]>
 		</script>				

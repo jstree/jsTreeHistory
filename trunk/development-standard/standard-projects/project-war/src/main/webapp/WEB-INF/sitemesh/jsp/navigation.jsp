@@ -53,7 +53,7 @@
 							</div>
 							<hr class="bm-smaller tm-small" />
 							<ul class="nav unstyled bm-remove clearfix">
-								<c:forEach items = "${menuList }" var = "result" varStatus="status">
+								<c:forEach items = "${menuList}" var = "result" varStatus="status">
 									<c:choose>
 										<c:when test="${status.first}">
 											<c:set var="isFirst" value="first active" />
@@ -66,7 +66,7 @@
 									</c:choose>
 									<c:if test="${result.c_level == '2' }" >
 										<li class="nav-item  ${isFirst }">
-											<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${isSubMenu }"> ${result.c_title }
+											<a href="${pageContext.request.contextPath}${result.url }" target="_self" class="${isSubMenu}"> ${result.c_title }
 											<c:if test="${ result.c_right - result.c_left > 1}" >
 												<span class="has-dropdown-icon float-right">+</span>
 											</c:if>
@@ -79,7 +79,7 @@
 												<ul class="sub-nav unstyled bm-remove">
 											</c:if>
 												<li class="sub-nav-item<c:if test="${isSubMenuFirst}"> first active</c:if>">
-													<a href="${pageContext.request.contextPath}${subMenu.url }" target="_self" class="<c:if test="${isSubMenuFirst}">first active</c:if>"> ${subMenu.c_title }</a>
+													<a href="${pageContext.request.contextPath}${subMenu.url}" target="_self" class="<c:if test="${isSubMenuFirst}">first active</c:if>"> ${subMenu.c_title }</a>
 												</li>
 											<c:set var="isSubMenuFirst" value="false" />
 										</c:if>
