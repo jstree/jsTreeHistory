@@ -1,7 +1,8 @@
 {
 	"INPUT" : {
 		"board_id" : 1,
-		"pageing_num" : 1
+		"pageing_num" : 1,
+		"articleNum" : 1
 	},
 	"OUTPUT" : {
 				"articleNum" :1,
@@ -9,6 +10,8 @@
 				"articleContent" : "열심히",
 				"articleWriter" :"이동민",
 				"articleWriteDate" :"16-01-22 16:55",
-				"articleRead" :313
+				"articleRead" :313,
+				"articleNext" :2,
+				"articlePrev" :-1
 	}
 } 

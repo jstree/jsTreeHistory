@@ -113,28 +113,6 @@
 		color: black !important;
 	}
 	
-	.title_info{
-		padding-right: 10px;
-	}
-	
-	.content_info{
-		padding-right: 20px;
-	}
-	
-	.write_table, input{
-		width: 100%;
-	}
-		.write_table th{
-			width : 20%;
-		}
-		
-		.write_table td{
-			width : 80%;
-		}
-	textarea {
-		max-width: 100%;
-		width:100%;
-	}
 </style>
 
 <!-- JavaScript neccessary for the tree -->
@@ -142,7 +120,11 @@
 
 	$(document).ready(function () {
 		dataTableSetup();
-		$('.fancybox').fancybox();
+		$('.fancybox').fancybox({
+			'width':600,
+            'height':600,
+            'autoSize' : false
+            });
 		
 		$("#add_default").click(function() {
 			$.fancybox.open({
