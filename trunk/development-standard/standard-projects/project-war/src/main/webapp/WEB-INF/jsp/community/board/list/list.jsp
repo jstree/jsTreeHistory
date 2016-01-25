@@ -65,12 +65,10 @@
 		padding: 10px;
 		background: #f45b4f;
 		color: #fff;
-		font-family: Oxygen,sans-serif;
 		font-size: 1em;
 		font-weight: 400;
 		font-variant: normal;
 		text-align: center;
-		text-transform: uppercase;
 		letter-spacing: 0em;
 		line-height: normal;
 		-webkit-transition: all 0.2s ease-in-out;
@@ -79,11 +77,10 @@
 		-ms-transition: all 0.2s ease-in-out;
 		transition: all 0.2s ease-in-out;
 	}
-	button{text-transform:capitalize;}
-	.btn_wrap01{overflow:hidden;width:74%;float:left;} 
+	.btn_wrap01{overflow:hidden;width:50%;float:left;} 
 	.btn_wrap01 button{display;block;float:left;margin:0;padding:0;width:14%;min-width:0;border-left:1px solid #fff;}
 	.btn_wrap01 button:first-child{border-left:0;}
-	.btn_wrap02{width:26%;float:right;}
+	.btn_wrap02{width:50%;float:right;}
 	.btn_wrap02 .textInputVerticalCenter{width:69%;float:left;}
 	.btn_wrap02 button{display;block;float:left;margin:0;padding:0;;min-width:0;width:15%;border-left:1px solid #fff;}
 	.btn_wrap02 input[type="text"]{width:100%}
@@ -112,12 +109,8 @@
 		
 	}
 	
-	.dataTable-quick-look {
+	#dataTableTitle{
 		color: black !important;
-	}
-	
-	.content_title {
-		color: black;
 	}
 	
 	.title_info{
@@ -146,18 +139,23 @@
 
 <!-- JavaScript neccessary for the tree -->
 <script type="text/javascript">
-	var jstreeDataTableModule = {};
-
-	function jstreeDataTableReload() {
-		jstreeDataTableModule.ajax.reload();
-	}
 
 	$(document).ready(function () {
 		dataTableSetup();
 		$('.fancybox').fancybox();
+		
+		$("#add_default").click(function() {
+			$.fancybox.open({
+				href : 'addArticlePopup.do',
+				type : 'ajax',
+				padding : 5
+			});
+		});
+		
 		$(window).load(function() {
 			
 	    });
+		
 	});
 	
 	function dataTableSetup() {
@@ -178,7 +176,7 @@
 			                        'orderable': false,
 			                        'className': 'dt-body-center',
 			                        'render': function (data, type, row){
-			                        	return '<a href="view.jsp?viewArticle=' + row.articleNum + '" class="fancybox fancybox.ajax">' + data + '</a>';
+			                        	return '<a href="viewPopup.do?actionTarget=' + row.articleNum + '" id="dataTableTitle" class="fancybox fancybox.ajax">' + data + '</a>';
 			                        }
 			                	}
 			                ],
@@ -235,23 +233,26 @@
 								<div id="description">
 									<div class="clearfix">
 									
-										<a href="#" target="_self" class="quick-look" data-quick-look-handle="cropped-brown-leather-jacket">
-										test
-										</a>
-									
-										<div id="jstreeTable_length" class="desktop-tablet alpha boxed bm-remove btn_wrap01">
-											<label>Show 
-												<select name="jstreeTable_length" aria-controls="jstreeTable" id="jstreeTable_length" class="inline-block bm-remove w-small tip-r-fade clearfix" data-tooltip="Sort By" data-anim-type="fade-in" data-anim-delay="0" original-title="">
-													<option value="10">10</option>
-													<option value="25">25</option>
-													<option value="50">50</option>
-													<option value="100">100</option>
-												</select>
-											</label>
+										<div id="mmenu" style="clear:both;" class="clearfix">
+												<div class="desktop-tablet alpha boxed bm-remove btn_wrap01">
+														<button type="button" id="blank"><i class="fa fa-list-ol"></i> Show</button>
+														<select name="jstreeTable_length" aria-controls="jstreeTable" id="jstreeTable_length" class="inline-block bm-remove w-small tip-r-fade clearfix" data-tooltip="Sort By" data-anim-type="fade-in" data-anim-delay="0" original-title="">
+															<option value="10">10</option>
+															<option value="25">25</option>
+															<option value="50">50</option>
+															<option value="100">100</option>
+														</select>
+														
+												</div>
+												<div class="desktop-tablet alpha bm-remove boxed last btn_wrap02">
+													<div class="textInputVerticalCenter">
+														<input type="text" id="text" placeholder="찾을 노드 이름 입력" class="inline-block bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search">
+													</div>
+													<button type="button" id="search" title="Search"><i class="fa fa-search"></i></button>
+													<button type="button" id="add_default"><i class="fa fa-plus"></i> 글 쓰기</button>
+												</div>
 										</div>
-										<div class="desktop-tablet alpha boxed bm-remove btn_wrap02">
-											<input type="text" id="text" placeholder="검색" class="inline-block bm-remove tip-r-fade" data-tooltip="Press Enter To Node To Search" original-title="">
-										</div>
+										
 										<div class="demo_con">
 											<table id="jstreeTable" class="display responsive no-wrap" cellspacing="0" width="100%">
 												<thead>
@@ -266,9 +267,6 @@
 													</tr>
 												</thead>
 											</table>
-											<div class="float-right">
-												<button id="write">글등록</button>
-											</div>
 										</div>
 									</div>
 								</div>
