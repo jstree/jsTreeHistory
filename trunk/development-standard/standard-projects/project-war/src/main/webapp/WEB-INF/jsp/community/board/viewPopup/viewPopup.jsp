@@ -42,7 +42,6 @@
 						url : '${pageContext.request.contextPath}/assets/json/community/board/articleDetail/'+articleNum+'.json'
 				}).done(function(serverData) {
 					var data = serverData.OUTPUT;
-					console.log(data);
 					$("#title").html(data.articleTitle);
 					$("#writer").html(data.articleWriter);
 					$("#writeDate").html(data.articleWriteDate);
