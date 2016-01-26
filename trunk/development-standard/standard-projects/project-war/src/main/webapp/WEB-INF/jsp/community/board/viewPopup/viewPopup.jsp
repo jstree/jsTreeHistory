@@ -24,6 +24,19 @@
 	.content_info{
 		padding-right: 20px;
 	}
+	
+	.bottom{
+		position: absolute;
+		bottom: 10px;
+		width: 100%;
+	}
+		.bottom .bottom_move_detail{
+			width: 50%;
+		}
+		
+		.bottom .bottom_btn{
+		
+		}
 </style>
 
 <!-- JavaScript neccessary for the tree -->
@@ -41,17 +54,20 @@
 				$.ajax({dataType : 'json',
 						url : '${pageContext.request.contextPath}/assets/json/community/board/articleDetail/'+articleNum+'.json'
 				}).done(function(serverData) {
-					var data = serverData.OUTPUT;
-					$("#title").html(data.articleTitle);
-					$("#writer").html(data.articleWriter);
-					$("#writeDate").html(data.articleWriteDate);
-					$("#read").html(data.articleRead);
-					$("#content").html(data.articleContent);
-					$("#articleNum").val(data.articleNum);
-					
-					next = data.articleNext;
-					prev = data.articlePrev;
-					
+					if(serverData){
+						var data = serverData.OUTPUT;
+						$("#title").html(data.articleTitle);
+						$("#writer").html(data.articleWriter);
+						$("#writeDate").html(data.articleWriteDate);
+						$("#read").html(data.articleRead);
+						$("#content").html(data.articleContent);
+						$("#articleNum").val(data.articleNum);
+						
+						next = data.articleNext;
+						prev = data.articlePrev;
+					}else{
+						alert("게시물이 없습니다.");
+					}
 				});
 			}else{
 				alert(msg);
@@ -68,6 +84,10 @@
 		$("#next").click(function(){
 			getArticleDetail(next,"다음 글은 없습니다.");
 		});
+		
+		$("#articleNum").change(function(){
+			getArticleDetail($(this).val());
+		});
 	});
 	// ]]>
 </script>
@@ -75,14 +95,14 @@
 
 <body id="demo_body">
 	<div class="quick-look-markup">
-		<div class="two-third-percent omega bm-remove">
-			<h3 class="quick-look-title bm-small" id="title">
+		<div>
+			<h3 class="quick-look-title" id="title">
 			</h3>
 		</div>
 		<hr>
 
 		<div class="clearfix">
-			<div class="two-third-percent alpha bm-remove last">
+			<div class="alpha bm-remove last">
 				<div class="quick-look-description bm-medium">
 					<strong class="title_info">글 쓴이</strong>
 					<span id="writer" class="content_info"></span>
@@ -95,23 +115,21 @@
 				
 				</div>
 
-				<div class="quick-look-available clearfix last">
-
-					<div class="two-third-percent bm-remove alpha last">
-						<div class="input-quantity-container clearfix">
-							<a href="#" id="prev" target="_self" class="input-quantity-minus tip-t-fade" data-tooltip="prev">
-								<i class="fa fa-minus fa-fw"></i>
-							</a>
-							<input type="text" id="articleNum" class="input-quantity"> 
-							<a href="#" id="next" target="_self" class="input-quantity-plus tip-t-fade" data-tooltip="next">
-								<i class="fa fa-plus fa-fw"></i>
-							</a>
-						</div>
+				<div class="bottom">
+					<div class="input-quantity-container bottom_move_detail float-left">
+						<a href="#" id="prev" target="_self" class="input-quantity-minus tip-t-fade" data-tooltip="prev">
+							<i class="fa fa-minus fa-fw"></i>
+						</a>
+						<input type="text" id="articleNum" class="input-quantity"> 
+						<a href="#" id="next" target="_self" class="input-quantity-plus tip-t-fade" data-tooltip="next">
+							<i class="fa fa-plus fa-fw"></i>
+						</a>
 					</div>
-
-					<button type="button" class="bm-remove float-right">
-						닫기
-					</button>
+					<div class="float-right bottom_btn">
+						<button type="button" class="bm-remove">
+							수정
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
