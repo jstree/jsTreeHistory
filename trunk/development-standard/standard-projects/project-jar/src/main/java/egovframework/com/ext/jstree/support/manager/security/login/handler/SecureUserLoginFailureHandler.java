@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.stereotype.Component;
 
 import egovframework.com.ext.jstree.support.manager.security.login.service.UserInfoService;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
 
 /**
  * Modification Information
@@ -38,7 +38,6 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
  * </pre>
  */
 
-@Component
 public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 	private String loginidname;
 
@@ -107,16 +106,16 @@ public class SecureUserLoginFailureHandler extends SimpleUrlAuthenticationFailur
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
-		SecureUser secureUser = null;
+		UserInfo userInfo = null;
 
 		String userName = StringUtils.defaultString(request.getParameter(loginidname), null);
 		if (userName != null)
-			secureUser = (SecureUser) userDetailsService.loadUserByUsername(userName);
+		    userInfo = (UserInfo) userDetailsService.loadUserByUsername(userName);
 
 		try {
-			if (secureUser != null) {
-				secureUser.setLoginFailureCnt(secureUser.getLoginFailureCnt() + 1);
-				userInfoService.updateUserInfo(secureUser);
+			if (userInfo != null) {
+			    userInfo.setLoginFailureCnt(userInfo.getLoginFailureCnt() + 1);
+				userInfoService.updateUserInfo(userInfo);
 			}
 		} catch (Exception e) {
 			throw new RuntimeException();

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="userInfo">
-	<typeAlias alias="SecureUser"
-		type="egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo" />
+<sqlMap namespace="userRole">
+	<typeAlias alias="UserRole"
+		type="egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole" />
 		
 	<sql id="getMetaField">
 		/* getChildNode */
@@ -15,11 +15,8 @@
 		, A.C_TITLE
 		, A.C_TYPE
 		/* user filed add point*/
-		, A.C_PASSWORD AS password
 		, A.C_EMAIL AS email
-		, A.C_LOGIN_FAILURE_CNT AS loginFailureCnt
-		, A.C_JOIN_DT AS joinDt
-		, A.C_LAST_LOGIN_DT AS lastLoginDt
+		, A.C_ROLE AS role
 	</sql>
 	<sql id="getInlineChildCount">
 		, ( SELECT CASE
@@ -40,24 +37,24 @@
 		ORDER BY A.C_POSITION ASC
 	</sql>
 	
-	<select id="getChildNode" parameterClass="SecureUser"
-		resultClass="SecureUser">
+	<select id="getChildNode" parameterClass="UserRole"
+		resultClass="UserRole">
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user filed */
 			<include refid="getInlineChildCount" />
 			/* inline table from filed*/
-			FROM T_SECURE_USER B
+			FROM T_USER_ROLE B
 			<include refid="getInlineChildCountAfterFrom" />
 			/* table from filed*/
-			FROM T_SECURE_USER A
+			FROM T_USER_ROLE A
 			<include refid="getAfterFrom" />
 		</dynamic>
 	</select>
      
     
-	<select id="getChildNodeByLeftRight" parameterClass="SecureUser"
-		resultClass="SecureUser">
+	<select id="getChildNodeByLeftRight" parameterClass="UserRole"
+		resultClass="UserRole">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		, C_PARENTID
@@ -67,13 +64,10 @@
 		, C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		, C_PASSWORD AS password
 		, C_EMAIL AS email
-		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
-		, C_JOIN_DT AS joinDt
-		, C_LAST_LOGIN_DT AS lastLoginDt
+		, C_ROLE AS role
 		FROM
-		T_SECURE_USER
+		T_USER_ROLE
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT &lt;=
 		#c_right#
@@ -81,13 +75,13 @@
 	</select>
 
 
-	<select id="searchNodeByString" parameterClass="SecureUser"
-		resultClass="SecureUser">
+	<select id="searchNodeByString" parameterClass="UserRole"
+		resultClass="UserRole">
 		/* searchNodeByString */
 		SELECT c_left
 		, c_right
 		FROM
-		T_SECURE_USER
+		T_USER_ROLE
 		WHERE C_TITLE LIKE '%'||#searchStr#||'%'
 	</select>
 
@@ -97,7 +91,7 @@
 		/* searchNodeByPosition */
 		SELECT DISTINCT C_ID
 		FROM
-		T_SECURE_USER
+		T_USER_ROLE
 		WHERE 1=1
 		<iterate prepend="AND" open="(" close=")" conjunction="OR">
 			( C_LEFT
@@ -106,23 +100,20 @@
 	</select>
 
 
-	<update id="alterNode" parameterClass="SecureUser">
+	<update id="alterNode" parameterClass="UserRole">
 		/* alterNode */
 		UPDATE
-		T_SECURE_USER
+		T_USER_ROLE
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
-		, C_PASSWORD = #password#
 		, C_EMAIL = #email#
-		, C_LOGIN_FAILURE_CNT = #loginFailureCnt#
-		, C_JOIN_DT = #joinDt#
-		, C_LAST_LOGIN_DT = #lastLoginDt#
+		, C_ROLE = #role#
 		WHERE C_ID = #c_id#
 	</update>
 
 
-	<select id="getNode" parameterClass="SecureUser"
-		resultClass="SecureUser">
+	<select id="getNode" parameterClass="UserRole"
+		resultClass="UserRole">
 		/* getNode */
 		SELECT C_ID
 			 , C_PARENTID
@@ -132,18 +123,15 @@
 			 , C_LEVEL
 			 , C_TITLE
 			 , C_TYPE
-			 , C_PASSWORD AS password
 			 , C_EMAIL AS email
-			 , C_LOGIN_FAILURE_CNT AS loginFailureCnt
- 			 , C_JOIN_DT AS joinDt
- 			 , C_LAST_LOGIN_DT AS lastLoginDt
-		  FROM T_SECURE_USER
+			 , C_ROLE AS role
+		  FROM T_USER_ROLE
 		 WHERE C_ID = #c_id#
 	</select>
 
 
-	<select id="getNodeByRef" parameterClass="SecureUser"
-		resultClass="SecureUser">
+	<select id="getNodeByRef" parameterClass="UserRole"
+		resultClass="UserRole">
 		/* getNodeByRef */
 		SELECT C_ID
 		, C_PARENTID
@@ -153,51 +141,48 @@
 		, C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		, C_PASSWORD AS password
 		, C_EMAIL AS email
-		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
-		, C_JOIN_DT AS joinDt
-		, C_LAST_LOGIN_DT AS lastLoginDt
+		, C_ROLE AS role
 		FROM
-		T_SECURE_USER
+		T_USER_ROLE
 		WHERE C_ID = #ref#
 	</select>
 
 
-	<delete id="removeNode" parameterClass="SecureUser">
+	<delete id="removeNode" parameterClass="UserRole">
 		/* removeNode */
 		DELETE
-		FROM T_SECURE_USER
+		FROM T_USER_ROLE
 		WHERE C_LEFT &gt;= #c_left#
 		AND C_RIGHT
 		&lt;= #c_right#
 	</delete>
 
 
-	<update id="removedAfterLeftFix" parameterClass="SecureUser">
+	<update id="removedAfterLeftFix" parameterClass="UserRole">
 		/*
 		removedAfterLeftFix */
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET C_LEFT =
 		C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
 
 
-	<update id="removedAfterRightFix" parameterClass="SecureUser">
+	<update id="removedAfterRightFix" parameterClass="UserRole">
 		/*
 		removedAfterRightFix */
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET C_RIGHT =
 		C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 	</update>
 
 
-	<update id="removedAfterPositionFix" parameterClass="SecureUser">
+	<update id="removedAfterPositionFix" parameterClass="UserRole">
 		/*
 		removedAfterPositionFix */
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET
 		C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
@@ -206,18 +191,18 @@
 	</update>
 
 
-	<select id="analyzeRootNode" resultClass="SecureUser">
+	<select id="analyzeRootNode" resultClass="UserRole">
 		/* searchNodeByString
 		*/
 		SELECT C_LEFT
-		FROM T_SECURE_USER
+		FROM T_USER_ROLE
 		WHERE C_PARENTID = 0
 	</select>
 
 
-	<update id="cutMyselfPositionFix" parameterClass="SecureUser">
+	<update id="cutMyselfPositionFix" parameterClass="UserRole">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET C_POSITION = C_POSITION - 1
 		WHERE C_PARENTID = #c_parentid#
 		AND C_POSITION &gt;
@@ -225,17 +210,17 @@
 	</update>
 
 
-	<update id="cutMyselfLeftFix" parameterClass="SecureUser">
+	<update id="cutMyselfLeftFix" parameterClass="UserRole">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
 		WHERE C_LEFT &gt; #c_right#
 	</update>
 
 
-	<update id="cutMyselfRightFix" parameterClass="SecureUser">
+	<update id="cutMyselfRightFix" parameterClass="UserRole">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
 		WHERE C_RIGHT &gt; #c_left#
 		<iterate prepend="AND C_ID NOT IN" property="c_idsByChildNodeFromNodeById"
@@ -245,10 +230,10 @@
 	</update>
 
 
-	<update id="stretchPositionForMyself" parameterClass="SecureUser">
+	<update id="stretchPositionForMyself" parameterClass="UserRole">
 		/* stretchPositionForMyselfFromJstree */
 		UPDATE
-		T_SECURE_USER
+		T_USER_ROLE
 		SET C_POSITION = C_POSITION + 1
 		WHERE
 		C_PARENTID = #ref# AND C_POSITION &gt;= #c_position#
@@ -267,9 +252,9 @@
 	</update>
 
 
-	<update id="stretchLeftForMyselfFromJstree" parameterClass="SecureUser">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="UserRole">
 		/* stretchLeftForMyselfFromJstree */
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
 		WHERE C_LEFT &gt;=
 		#rightPositionFromNodeByRef#
@@ -284,9 +269,9 @@
 	</update>
 
 
-	<update id="stretchRightForMyselfFromJstree" parameterClass="SecureUser">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="UserRole">
 		/* stretchRightForMyselfFromJstree */
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
 		WHERE C_RIGHT &gt;=
 		#rightPositionFromNodeByRef#
@@ -301,13 +286,13 @@
 	</update>
 
 
-	<insert id="pasteMyselfFromJstree" parameterClass="SecureUser">
+	<insert id="pasteMyselfFromJstree" parameterClass="UserRole">
 		/* pasteMyselfFromJstree */
-		INSERT INTO T_SECURE_USER (
+		INSERT INTO T_USER_ROLE (
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
 		)
-		SELECT S_USER_INFO.NEXTVAL AS C_ID
+		SELECT S_USER_ROLE.NEXTVAL AS C_ID
 		, A.*
 		FROM (
 		SELECT
@@ -318,7 +303,7 @@
 		, C_LEVEL - #ldif# AS C_LEVEL
 		, C_TITLE
 		, C_TYPE
-		FROM T_SECURE_USER
+		FROM T_USER_ROLE
 		<iterate prepend="WHERE C_ID IN" property="c_idsByChildNodeFromNodeById"
 			open="(" close=")" conjunction=",">
 			#c_idsByChildNodeFromNodeById[]#
@@ -327,16 +312,16 @@
 		) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-			SELECT S_USER_INFO.CURRVAL AS SEQ
+			SELECT S_USER_ROLE.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
 
 
-	<update id="enterMyselfFixPosition" parameterClass="SecureUser">
+	<update id="enterMyselfFixPosition" parameterClass="UserRole">
 		/*
 		enterMyselfFixPosition */
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET
 		C_PARENTID = #ref#
 		, C_POSITION = #c_position#
@@ -344,9 +329,9 @@
 	</update>
 
 
-	<update id="enterMyselfFixLeftRight" parameterClass="SecureUser">
+	<update id="enterMyselfFixLeftRight" parameterClass="UserRole">
 		/* enterMyselfFixLeftRight */
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET
 		C_LEFT = C_LEFT - (#idif#)
 		, C_RIGHT = C_RIGHT - (#idif#)
@@ -358,53 +343,53 @@
 		</iterate>
 	</update>
 
-	<insert id="addMyselfFromJstree" parameterClass="SecureUser">
+	<insert id="addMyselfFromJstree" parameterClass="UserRole">
 		/* addMyselfFromJstree */
-		INSERT INTO T_SECURE_USER (
+		INSERT INTO T_USER_ROLE (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_JOIN_DT, C_LAST_LOGIN_DT )
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_EMAIL )
 		VALUES (
-		S_USER_INFO.NEXTVAL, #c_parentid#, #c_position#, 
-		#c_left#, #c_right#, #c_level#, #c_title#, #password#, #email#, #loginFailureCnt#, #joinDt#, #lastLoginDt#)
+		S_USER_ROLE.NEXTVAL, #c_parentid#, #c_position#, 
+		#c_left#, #c_right#, #c_level#, #c_title#, #email#, #role#)
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
-			S_USER_INFO.CURRVAL AS SEQ
+			S_USER_ROLE.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
 
-	<update id="alterNodeType" parameterClass="SecureUser">
+	<update id="alterNodeType" parameterClass="UserRole">
 		/* alterNodeType */
-		UPDATE T_SECURE_USER
+		UPDATE T_USER_ROLE
 		SET C_TYPE = #c_type#
 		WHERE C_ID = #c_id#
 	</update>
 
 
-	<update id="fixCopyIF" parameterClass="SecureUser">
+	<update id="fixCopyIF" parameterClass="UserRole">
 		/* fixCopyIF */
 		UPDATE
-		T_SECURE_USER
+		T_USER_ROLE
 		SET C_POSITION = #fixCopyPosition#
 		WHERE C_ID
 		= #fixCopyId#
 	</update>
 
 
-	<update id="fixCopy" parameterClass="SecureUser">
+	<update id="fixCopy" parameterClass="UserRole">
 		/* fixCopy */
 		UPDATE
-		T_SECURE_USER
+		T_USER_ROLE
 		SET C_PARENTID = #fixCopyId#
 		WHERE C_ID =
 		#c_id#
 	</update>
 	
-	<select id="loadUserByUsername" parameterClass="SecureUser" resultClass="SecureUser">
+	<select id="getUserRole" parameterClass="UserRole" resultClass="UserRole">
 		<dynamic>
 			<include refid="getMetaField" />
-			FROM T_SECURE_USER A
+			FROM T_USER_ROLE A
 			WHERE C_EMAIL = #email# 
 		</dynamic>
 	</select>

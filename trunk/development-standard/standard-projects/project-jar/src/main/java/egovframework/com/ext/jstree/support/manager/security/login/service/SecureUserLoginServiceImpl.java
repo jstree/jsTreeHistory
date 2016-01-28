@@ -26,9 +26,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import egovframework.com.cmm.EgovMessageSource;
-import egovframework.com.ext.jstree.support.manager.security.login.dao.SecureUserDao;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.Role;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
+import egovframework.com.ext.jstree.support.manager.security.login.dao.UserInfoDao;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
 
 /**
  * Modification Information
@@ -53,31 +53,46 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser
  */
 
 @Service
-public class SecureUserLoginServiceImpl implements UserDetailsService {
-	@Autowired
-	private SecureUserDao secureUserLoginDao;
-
-	@Resource(name = "egovMessageSource")
-	EgovMessageSource egovMessageSource;
-
-	@Override
-	public UserDetails loadUserByUsername(String email) throws RuntimeException {
-		SecureUser secureLogInUser = new SecureUser();
-		secureLogInUser.setEmail(email);
-
-		secureLogInUser = secureUserLoginDao.getUserInfoByEmail(secureLogInUser);
-		
-		if(secureLogInUser != null){
-			setRoles(secureLogInUser);
-		}
-		return secureLogInUser;
-	}
-	
-	private void setRoles(SecureUser secureUserLogin){
-		Role role = new Role();
-		role.setName("ROLE_USER");
-		List<Role> roles = new ArrayList<Role>();
-		roles.add(role);
-		secureUserLogin.setAuthorities(roles);
-	}
+public class SecureUserLoginServiceImpl implements UserDetailsService
+{
+    @Autowired
+    private UserInfoDao userInfoDao;
+    
+    @Autowired
+    private UserInfoService userInfoService;
+    
+    @Resource(name = "egovMessageSource")
+    EgovMessageSource egovMessageSource;
+    
+    @Override
+    public UserDetails loadUserByUsername(String email) throws RuntimeException
+    {
+        UserInfo secureLogInUser = new UserInfo();
+        secureLogInUser.setEmail(email);
+        
+        secureLogInUser = userInfoDao.loadUserByUsername(secureLogInUser);
+        
+        if (secureLogInUser != null)
+        {
+            setRoles(secureLogInUser);
+        }
+        return secureLogInUser;
+    }
+    
+    private void setRoles(UserInfo userInfo)
+    {
+        UserRole role = null;
+        try
+        {
+            role = userInfoService.getUserRole(userInfo);
+        }
+        catch (Exception e)
+        {
+            role = new UserRole();
+            role.setRole("ROLE_ANONYMOUS");
+        }
+        List<UserRole> roles = new ArrayList<UserRole>();
+        roles.add(role);
+        userInfo.setAuthorities(roles);
+    }
 }

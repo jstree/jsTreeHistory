@@ -15,31 +15,46 @@
  */
 package egovframework.com.ext.jstree.support.manager.security.login.dao;
 
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
+import org.springframework.stereotype.Repository;
+
+import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
 
 /**
  * Modification Information
  * 
  * @ author 김형채
  * 
- * @since 2015. 6. 12.
+ * @since 2015. 6. 13.
  * @version 1.0
  * @see <pre>
- * Class Name   : UserLoginDao.java
- * Description  : 로그인- 로그인 Dao interface 
- * Information  : 로그인- 로그인 Dao interface
+ * Class Name   : UserLoginDaoImpl.java
+ * Description  : 로그인- 로그인 Dao Implements Class 
+ * Information  : 로그인- 로그인 Dao Implements Class
  * 
  * << 개정이력(Modification Information) >>
  * 
  * 수정일                 수정자                     수정내용
  * -----------   ------------  -----------------------
- * 2015. 06.10.  김형채 		      최초 생성
+ * 2015. 06.13.  김형채 		      최초 생성
  * 
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
 
-public interface SecureUserDao 
+@Repository
+public class UserInfoDaoImpl extends EgovComAbstractDAO implements UserInfoDao
 {
-	SecureUser getUserInfoByEmail(SecureUser secureUser);
+    @Override
+    public UserInfo loadUserByUsername(UserInfo userInfo)
+    {
+        return (UserInfo) selectByPk("userInfo.loadUserByUsername", userInfo);
+    }
+    
+    @Override
+    public UserRole getUserRole(UserRole userRole) throws Exception
+    {
+        return (UserRole) selectByPk("userRole.getUserRole", userRole);
+    }
 }

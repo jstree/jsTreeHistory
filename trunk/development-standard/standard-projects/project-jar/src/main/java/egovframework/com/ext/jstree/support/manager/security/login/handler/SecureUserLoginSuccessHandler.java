@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.stereotype.Component;
 
 import egovframework.com.ext.jstree.support.manager.security.login.service.UserInfoService;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.SecureUser;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
 import egovframework.com.ext.jstree.support.util.DateUtils;
 
 /**
@@ -49,12 +49,12 @@ public class SecureUserLoginSuccessHandler extends SavedRequestAwareAuthenticati
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
-		SecureUser secureUser = (SecureUser) authentication.getPrincipal();
+		UserInfo userInfo = (UserInfo) authentication.getPrincipal();
 		
 		try {
-			secureUser.setLastLoginDt(DateUtils.format("yyyyMMddHHmmss", DateUtils.getCurrentDay()));
-			secureUser.setLoginFailureCnt(0);
-			userInfoService.updateUserInfo(secureUser);
+		    userInfo.setLastLoginDt(DateUtils.format("yyyyMMddHHmmss", DateUtils.getCurrentDay()));
+		    userInfo.setLoginFailureCnt(0);
+			userInfoService.updateUserInfo(userInfo);
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}

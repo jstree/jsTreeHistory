@@ -31,7 +31,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * @since 2015. 6. 12.
  * @version 1.0
  * @see <pre>
- * Class Name  : SecureUserLogin.java
+ * Class Name  : UserInfo.java
  * Description : 로그인- 로그인 Vo 
  * Information  : 로그인- 로그인 Vo
  * 
@@ -45,7 +45,7 @@ import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
  * </pre>
  */
 
-public class SecureUser extends ComprehensiveTree implements UserDetails
+public class UserInfo extends ComprehensiveTree implements UserDetails
 {
     private static final long serialVersionUID = -6673037937422246017L;
     
@@ -59,7 +59,7 @@ public class SecureUser extends ComprehensiveTree implements UserDetails
     
     private String lastLoginDt;
     
-    private List<Role> authorities;
+    private List<UserRole> authorities;
     
     public String getEmail()
     {
@@ -106,7 +106,7 @@ public class SecureUser extends ComprehensiveTree implements UserDetails
         this.lastLoginDt = lastLoginDt;
     }
     
-    public void setAuthorities(List<Role> authorities)
+    public void setAuthorities(List<UserRole> authorities)
     {
         this.authorities = authorities;
     }
@@ -156,6 +156,6 @@ public class SecureUser extends ComprehensiveTree implements UserDetails
     @Override
     public String getSqlMapSelector()
     {
-        return "secureUser";
+        return "userInfo";
     }
 }
