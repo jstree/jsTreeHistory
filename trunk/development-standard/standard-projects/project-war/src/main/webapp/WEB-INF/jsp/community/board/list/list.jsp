@@ -121,8 +121,8 @@
 	$(document).ready(function () {
 		dataTableSetup();
 		$('.fancybox').fancybox({
-			'width':600,
-            'height':600,
+			'width':900,
+            'height':900,
             'autoSize' : false
             });
 		

@@ -25,18 +25,83 @@
 		padding-right: 20px;
 	}
 	
-	.bottom{
-		position: absolute;
-		bottom: 10px;
-		width: 100%;
+	.content{
+		min-height: 200px;
+	
 	}
-		.bottom .bottom_move_detail{
-			width: 50%;
+	
+	.comment_area{
+		border: 1px solid black;
+		background: ##eaeaea;
+		padding: 20px 20px 10px;
+		margin-bottom: 10px;
+	}
+	
+	.comment_div{
+		border-top: 1px solid black;
+		padding: 10px;
+		margin-bottom: 10px;
+	}
+		.comment_div string{
+			margin-right: 5px;
 		}
 		
-		.bottom .bottom_btn{
-		
+		.comment_div span{
+			margin-right: 5px;
 		}
+	
+	.comment_write{
+	
+	}
+	
+	.comment_write table{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	
+		.comment_write table th{
+			border: 1px solid black;
+			border-left:0;
+			background: #eaeaea;
+			text-align: left;
+			padding: 10px;
+		}
+		
+		.comment_write table td{
+			border-top: 1px solid black;
+			border-bottom: 1px solid black;
+			background: white;
+			padding: 10px;
+		}
+		
+		.comment_write table input{
+			margin: 0;
+		}
+		
+		.comment_write table textarea{
+			margin: 0;
+			width: 100%;
+			max-width: 100%;
+		}
+	.top_btn{
+		min-height: 50px;
+		margin-bottom: 10px;
+	}
+		.top_btn ul{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+			.top_btn ul li{
+				float: left;
+				margin-right: 5px;
+			}
+	.top_btn a{
+		display: inline-block;
+		padding: 7px;
+		border: 1px solid black;
+		vertical-align: middle;
+	}
 </style>
 
 <!-- JavaScript neccessary for the tree -->
@@ -63,6 +128,33 @@
 						$("#content").html(data.articleContent);
 						$("#articleNum").val(data.articleNum);
 						
+						
+						
+						var commentDiv = $("<div/>").addClass("comment_div"),
+							commentInfo = $("<div/>")
+								.append($("<string/>"))
+								.append($("<span/>").html("작성일"))
+								.append($("<span/>").addClass("commentWriteDate")),
+							comment = $("<div/>").addClass("comment")
+							
+						commentDiv
+							.append(commentInfo)
+							.append(comment);
+						
+						for(var i in data.articleComment){
+							
+							var copyCommentDiv = commentDiv.clone(true);
+							
+							copyCommentDiv.find("string").html(data.articleComment[i].commentWriter);
+							copyCommentDiv.find(".commentWriteDate").html(data.articleComment[i].commentWriteDate);
+							copyCommentDiv.find(".comment").html(data.articleComment[i].comment);
+							
+							
+							$("#comment").append(copyCommentDiv);
+						}
+						
+						
+						
 						next = data.articleNext;
 						prev = data.articlePrev;
 					}else{
@@ -85,54 +177,114 @@
 			getArticleDetail(next,"다음 글은 없습니다.");
 		});
 		
-		$("#articleNum").change(function(){
-			getArticleDetail($(this).val());
-		});
 	});
 	// ]]>
 </script>
 </head>
 
 <body id="demo_body">
-	<div class="quick-look-markup">
+	<div>
 		<div>
 			<h3 class="quick-look-title" id="title">
 			</h3>
 		</div>
+		<div class="quick-look-description bm-medium">
+			<strong class="title_info">글 쓴이</strong>
+			<span id="writer" class="content_info"></span>
+			<strong class="title_info">작성시간</strong>
+			<span id="writeDate" class="content_info"></span>
+			<strong class="title_info">글 조회</strong>
+			<span id="read" class="content_info"></span>
+		</div>
+
 		<hr>
 
-		<div class="clearfix">
-			<div class="alpha bm-remove last">
-				<div class="quick-look-description bm-medium">
-					<strong class="title_info">글 쓴이</strong>
-					<span id="writer" class="content_info"></span>
-					<strong class="title_info">작성시간</strong>
-					<span id="writeDate" class="content_info"></span>
-					<strong class="title_info">글 조회</strong>
-					<span id="read" class="content_info"></span>
+		<div>
+				<div class="top_btn">
+					<ul class="float-left">
+						<li>
+							<a>이전글</a>
+						</li>
+						<li>
+							<a>다음글</a>
+						</li>
+					</ul>
+					
+					<ul class="float-right">
+						<li>
+							<a>수정</a>
+						</li>
+						<li>
+							<a>삭제</a>
+						</li>
+						<li>
+							<a>목록</a>
+						</li>
+						<li>
+							<a>답변</a>
+						</li>
+						<li>
+							<a>글쓰기</a>
+						</li>
+						
+					</ul>
 				</div>
-				<div id="content">
 				
+				
+				<div class="content">
+					<h2>내용</h2>
+				
+					<div id="content">
+				
+					</div>
 				</div>
-
-				<div class="bottom">
-					<div class="input-quantity-container bottom_move_detail float-left">
-						<a href="#" id="prev" target="_self" class="input-quantity-minus tip-t-fade" data-tooltip="prev">
-							<i class="fa fa-minus fa-fw"></i>
-						</a>
-						<input type="text" id="articleNum" class="input-quantity"> 
-						<a href="#" id="next" target="_self" class="input-quantity-plus tip-t-fade" data-tooltip="next">
-							<i class="fa fa-plus fa-fw"></i>
-						</a>
-					</div>
-					<div class="float-right bottom_btn">
-						<button type="button" class="bm-remove">
-							수정
-						</button>
-					</div>
+				<div class="comment_area" id="comment">
+					<h2>댓글목록</h2>
+				</div>
+				
+				<div class="comment_write">
+					<form action="">
+						<table>
+							<tr>
+								<th>이름</th>
+								<td>
+									<input type="text">
+								</td>
+							</tr>
+							<tr>
+								<th>비밀번호</th>
+								<td>
+									<input type="text">
+								</td>
+							</tr>
+							<tr>
+								<th>비밀글사용</th>
+								<td>
+									<input type="checkbox">
+								</td>
+							</tr>
+							<tr>
+								<th>자동등록방지</th>
+								<td>
+								
+								</td>
+							</tr>
+							<tr>
+								<th>내용</th>
+								<td>
+									<textarea rows="" cols="">
+									</textarea>
+								</td>
+							</tr>
+						</table>
+						<div>
+							<button>
+								댓글등록
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
-		</div>
 	</div>
 </body>
 </html>

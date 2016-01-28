@@ -12,6 +12,28 @@
 				"articleWriteDate" :"16-01-22 16:55",
 				"articleRead" :313,
 				"articleNext" :2,
-				"articlePrev" :-1
+				"articlePrev" :-1,
+				"articleComment":[
+					{
+						"articleNum" : 1,
+						"commentDepth" : 1,
+						"commentNum" : 1,
+						"commentSecret" : false,
+						"commentParentNum" : 0,
+						"commentWriter" : "자비스",
+						"commentWriteDate" : "16-01-25 12:44",
+						"comment" : "댓글입니다."
+					},
+					{
+						"articleNum" : 1,
+						"commentDepth" : 1,
+						"commentNum" : 2,
+						"commentSecret" : false,
+						"commentParentNum" : 0,
+						"commentWriter" : "아이언맨",
+						"commentWriteDate" : "16-01-25 17:24",
+						"comment" : "댓글입니다2."
+					}
+				]
 	}
 } 
