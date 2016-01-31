@@ -121,22 +121,25 @@
 	$(document).ready(function () {
 		dataTableSetup();
 		$('.fancybox').fancybox({
-			'width':900,
-            'height':900,
-            'autoSize' : false
-            });
+			width:900,
+			height:900,
+			autoSize : false
+		});
 		
 		$("#add_default").click(function() {
 			$.fancybox.open({
 				href : 'addArticlePopup.do',
 				type : 'ajax',
-				padding : 5
+				padding : 5,
+				width:900,
+				height:900,
+				autoSize : false
 			});
 		});
 		
 		$(window).load(function() {
 			
-	    });
+		});
 		
 	});
 	

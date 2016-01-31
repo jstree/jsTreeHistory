@@ -12,6 +12,7 @@
 				"articleWriteDate" :"16-01-22 16:55",
 				"articleRead" :313,
 				"articleNext" :2,
+				"articlePrev" :-1,
 				"articleComment":[
 					{
 						"articleNum" : 1,

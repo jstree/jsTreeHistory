@@ -20,12 +20,13 @@
 	a{
 		cursor: pointer;
 	}
-
-	.title_info{
+	
+	
+	.title_wrap div strong{
 		padding-right: 10px;
 	}
 	
-	.content_info{
+	.title_wrap div span{
 		padding-right: 20px;
 	}
 	
@@ -34,41 +35,41 @@
 	
 	}
 	
-	.comment_area{
+	.comment_con{
 		border: 1px solid #d8d8d8;
 		background: ##eaeaea;
 		padding: 20px 20px 10px;
 		margin-bottom: 10px;
 	}
 	
-	.comment_div{
+	.comment_wrap{
 		border-top: 1px solid #d8d8d8;
 		padding: 10px;
 		margin-bottom: 10px;
 	}
-		.comment_div strong{
+		.comment_wrap strong{
 			margin-right: 5px;
 		}
 		
-		.comment_div span{
+		.comment_wrap span{
 			margin-right: 5px;
 		}
 		
-		.comment_div ul{
+		.comment_wrap ul{
 			list-style: none;
 			padding: 0;
 			margin: 0;
 		}
 		
-			.comment_div ul li{
+			.comment_wrap ul li{
 				float: left;
 				margin-right: 5px;
 			}
-		.comment_div .comment_footer{
+		.comment_wrap .comment_footer{
 			float: right;
 		}
 	
-		.comment_div .comment_empty{
+		.comment_wrap .comment_empty{
 			text-align: center;
 		}	
 		
@@ -144,20 +145,20 @@
 					$(div).children().not("h3").remove();
 				},
 				getTag : function(){
-					return "<div class='comment_div'>"+
+					return "<div class='comment_wrap'>"+
 							 	"<div class='comment_info'>"+
-						 		"<strong></strong>"+
-						 		"<span>작성일</span>"+
-						 		"<time class='comment_write_date'></time>"+
-						 	"<div/>"+
-						 	"<div class='comment'></div>"+
-						 	"<div class='comment_footer'>"+
-						 		"<ul>"+
-							 		"<li class='inner_comment_write'><a>답변</a></li>"+
-							 		"<li class='comment_delete'><a>삭제</a></li>"+
-						 		"</ul>"+
-						 	"</div>"+
-						"<div/>";
+							 		"<strong></strong>"+
+							 		"<span>작성일</span>"+
+							 		"<time class='comment_write_date'></time>"+
+							 	"<div/>"+
+							 	"<div class='comment'></div>"+
+							 	"<div class='comment_footer'>"+
+							 		"<ul>"+
+								 		"<li class='inner_comment_write'><a>답변</a></li>"+
+								 		"<li class='comment_delete'><a>삭제</a></li>"+
+							 		"</ul>"+
+							 	"</div>"+
+							"<div/>";
 				},
 				depthMargin : function(div, depth){
 					div.css("margin-left",(depth * 10)-10);
@@ -171,6 +172,7 @@
 				}
 				
 		}
+		
 		function createComment(data){
 			var id = "#comment";
 			
@@ -194,7 +196,7 @@
 					commentDiv.find(".comment_write_date").html(commentData.commentWriteDate);
 					commentDiv.find(".comment").html(commentData.comment);
 					commentDiv.on("click",".inner_comment_write > a",function(){
-						$(this).parents(".comment_div").append($(".comment_write"));
+						$(this).parents(".comment_wrap").append($(".comment_write"));
 					});
 					
 					$(id).append(commentDiv);
@@ -258,17 +260,17 @@
 
 <body id="demo_body">
 	<div>
-		<div>
-			<h3 class="quick-look-title" id="title">
+		<div class="title_wrap">
+			<h3 id="title">
 			</h3>
-		</div>
-		<div class="quick-look-description bm-medium">
-			<strong class="title_info">글 쓴이</strong>
-			<span id="writer" class="content_info"></span>
-			<strong class="title_info">작성시간</strong>
-			<span id="writeDate" class="content_info"></span>
-			<strong class="title_info">글 조회</strong>
-			<span id="read" class="content_info"></span>
+			<div>
+				<strong>글 쓴이</strong>
+				<span id="writer"></span>
+				<strong>작성시간</strong>
+				<span id="writeDate"></span>
+				<strong>글 조회</strong>
+				<span id="read"></span>
+			</div>
 		</div>
 
 		<hr>
@@ -310,7 +312,7 @@
 			
 				</div>
 			</div>
-			<div class="comment_area" id="comment">
+			<div class="comment_con" id="comment">
 				<h3>댓글목록</h3>
 			</div>
 			
@@ -321,19 +323,19 @@
 							<tr>
 								<th scope="row">이름</th>
 								<td>
-									<input type="text">
+									<input type="text" title="이름">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">비밀번호</th>
 								<td>
-									<input type="text">
+									<input type="text" title="비밀번호">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">비밀글사용</th>
 								<td>
-									<input type="checkbox">
+									<input type="checkbox" title="비밀글사용">
 								</td>
 							</tr>
 							<tr>
@@ -345,7 +347,7 @@
 							<tr>
 								<th scope="row">내용</th>
 								<td>
-									<textarea>
+									<textarea title="내용">
 									</textarea>
 								</td>
 							</tr>

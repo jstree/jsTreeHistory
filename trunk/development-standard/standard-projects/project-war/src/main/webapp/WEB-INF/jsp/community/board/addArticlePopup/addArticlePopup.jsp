@@ -17,47 +17,138 @@
 <script type="text/javascript">
 	// <![CDATA[
 	$(document).ready(function($) {
-		if (CKEDITOR.instances['content']) { 
-			delete CKEDITOR.instances['content'] 
-		};
-		
-		CKEDITOR.replace('content');
 	});
 	// ]]>
 </script>
 <style>
 <!--
+	textarea{
+		margin: 0;
+		width: 100%;
+		max-width: 100%;
+	}
+	
+	input[type="text"],
+	input[type="email"],
+	input[type="password"],
+	input[type="file"]{
+		margin: 0;
+	}
+
 	.bottom_btn{
-		padding-top: 10px;
+		
+		text-align: center;
+	}
+	
+	.write th{
+			border: 1px solid #d8d8d8;
+			border-left:0;
+			background: #eaeaea;
+			text-align: left;
+			padding: 10px;
+	}
+	
+	.write td{
+			border-top: 1px solid #d8d8d8;
+			border-bottom: 1px solid #d8d8d8;
+			background: white;
+			padding: 10px;
+	}
+	
+	.write {
+		width: 100%;
+	}
+	
+	.form_wrap{
+		padding: 10px;
 	}
 -->
 </style>
 </head>
 
 <body id="demo_body">
-	<div class="spr-container">
-		<div class="spr-header">
-			<h2 class="spr-header-title">글 쓰기</h2>
-		</div>
-
-		<div class="spr-content">
-			<div class="spr-form">
-				<form method="post" action="" id="" class="new-review-form">
-
-					<fieldset class="spr-form-review">
-						<div class="spr-form-review-title">
-							<input class="spr-form-input spr-form-input-text" id="title" type="text" name="title" placeholder="제목을 입력 해주세요.">
-						</div>
-						<div>
-							<textarea id="content" name="content"></textarea>
-						</div>
-						<div class="bottom_btn float-right">
-							<input type="submit"value="저장">
-						</div>
-					</fieldset>
-				</form>
+	<div>
+		<h2>글 쓰기</h2>
+	</div>
+	
+	<hr>
+	
+	<div class="form_wrap">
+		<form method="post" action="">
+			<table class="write">
+				<tbody>
+					<tr>
+						<th scope="row">
+							이름
+						</th>
+						<td>
+							<input type="text" title="이름">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							비밀번호
+						</th>
+						<td>
+							<input type="password" title="비밀번호">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							이메일
+						</th>
+						<td>
+							<input type="email" title="이메일">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							제목
+						</th>
+						<td>
+							<input type="text" title="제목">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							내용
+						</th>
+						<td>
+							<textarea>
+							</textarea>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							파일1
+						</th>
+						<td>
+							<input type="file" title="파일1">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							파일2
+						</th>
+						<td>
+							<input type="file" title="파일2">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							자동등록방지
+						</th>
+						<td>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="bottom_btn">
+				<input type="button" title="작성완료" value="작성완료">
+				<input type="button" title="취소" value="취소">
 			</div>
-		</div>
+		</form>
 	</div>
 </body>
 </html>
