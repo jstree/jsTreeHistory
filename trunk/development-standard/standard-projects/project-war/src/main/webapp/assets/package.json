@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/start-angular/sb-admin-angular"
+    "url": "git+https://github.com/start-angular/sb-admin-angular.git"
   },
   "dependencies": {},
   "devDependencies": {
@@ -43,5 +43,16 @@
     "start": "grunt serve",
     "dist": "grunt serve:dist",
     "postinstall": "bower install"
-  }
+  },
+  "description": "[![Join the chat at https://gitter.im/start-angular/sb-admin-angular](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/start-angular/sb-admin-angular?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)",
+  "bugs": {
+    "url": "https://github.com/start-angular/sb-admin-angular/issues"
+  },
+  "homepage": "https://github.com/start-angular/sb-admin-angular#readme",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
 }
