@@ -70,7 +70,7 @@ public class IndexController extends GenericAbstractController{
 	@RequestMapping(value = "/index.do")
 	public String execute(ModelMap model) throws Exception {
 		model.addAttribute("menuList", menuService.getMenuList());
-		return "/jsp/community/index/index";
+		return ":index";
 	}
 
 	@RequestMapping(value = "/common/error.do")

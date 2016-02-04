@@ -12,6 +12,7 @@ import egovframework.com.ext.jstree.support.manager.viewResolver.specialPurposeV
 import egovframework.com.ext.jstree.support.manager.viewResolver.specialPurposeView.ExitView;
 import egovframework.com.ext.jstree.support.manager.viewResolver.specialPurposeView.FileDownloadView;
 import egovframework.com.ext.jstree.support.manager.viewResolver.specialPurposeView.ImageView;
+import egovframework.com.ext.jstree.support.manager.viewResolver.specialPurposeView.IndexRedirect;
 import egovframework.com.ext.jstree.support.manager.viewResolver.specialPurposeView.JSONView;
 import egovframework.com.ext.jstree.support.manager.viewResolver.specialPurposeView.MessageShowView;
 import egovframework.com.ext.jstree.support.manager.viewResolver.specialPurposeView.NullView;
@@ -23,7 +24,11 @@ public class SpecialPurposeViewResolver extends AbstractCachingViewResolver impl
     @Override
     protected View loadView(String viewName, Locale locale) throws Exception {
         
-        if (":json".equals(viewName)) {
+    	if (":index".equals(viewName)) {
+            IndexRedirect view = new IndexRedirect();
+            view.setApplicationContext(getApplicationContext());
+            return view;
+        } else if (":json".equals(viewName)) {
             JSONView view = new JSONView();
             view.setApplicationContext(getApplicationContext());
             return view;

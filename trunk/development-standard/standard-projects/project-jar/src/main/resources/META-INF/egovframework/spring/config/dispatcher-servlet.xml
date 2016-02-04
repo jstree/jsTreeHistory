@@ -55,7 +55,6 @@
 	<!-- - This bean configures the 'prefix' and 'suffix' properties of - InternalResourceViewResolver, 
 		which resolves logical view names - returned by Controllers. For example, 
 		a logical view name of "vets" - will be mapped to "/WEB-INF/jsp/vets.jsp". -->
-
 	<bean id="specialPurposeViewResolver"
 		class="egovframework.com.ext.jstree.support.manager.viewResolver.SpecialPurposeViewResolver">
 		<property name="order" value="2"></property>
@@ -69,7 +68,6 @@
 		class="egovframework.com.ext.jstree.support.manager.viewResolver.CustomEgovUrlBasedViewResolver"
 		p:order="0" p:viewClass="org.springframework.web.servlet.view.JstlView"
 		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
-
 	<!-- - Message source for this context, loaded from localized "messages_xx" 
 		files. - Could also reside in the root application context, as it is generic, 
 		- but is currently just used within Application's web tier. <bean id="messageSource" 
