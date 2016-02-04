@@ -27,10 +27,11 @@
                 <!-- /.nav-second-level -->
             </li>
             <li ng-class="{active: collapseVar==2}">
-                <a href="" ng-click="check(2)"><i class="fa fa-wrench fa-fw"></i> Dev Support Tools<span class="fa arrow"></span></a>
+                <a href="" ng-click="check(2)"><i class="fa fa-wrench fa-fw"></i> Dev Support Tools1<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=2">
                 	<li ui-sref-active="active">
                         <a ui-sref="dashboard.panels-wells">jsTree Software Development</a>
+                    </li>
                 </ul>
                 <ul class="nav nav-second-level" collapse="collapseVar!=2">
                     <li ng-init="third=!third" ng-class="{active: multiCollapseVar==21}">
@@ -108,6 +109,9 @@
                             <li>
                                 <a href="">Switch Router</a>
                             </li>
+                            <li>
+                                <a href="">Mail</a>
+                            </li>
                         </ul>
                         <!-- /.nav-third-level -->
                     </li>
@@ -164,7 +168,7 @@
                     </li>
                     <li ng-init="third=!third" ng-class="{active: multiCollapseVar==3131}">
                         <a href="" ng-click="multiCheck(3131)">Detail Component <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=3131">
+                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=3131"> 
                             <li ui-sref-active="active">
 				                <a ui-sref="dashboard.home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 				            </li>
