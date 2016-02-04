@@ -68,9 +68,15 @@ public class IndexController extends GenericAbstractController{
 	}
 
 	@RequestMapping(value = "/index.do")
-	public String execute(ModelMap model) throws Exception {
+	public String index(ModelMap model) throws Exception {
 		model.addAttribute("menuList", menuService.getMenuList());
 		return ":index";
+	}
+	
+	@RequestMapping(value = "/oldIndex.do")
+	public String oldIndex(ModelMap model) throws Exception {
+		model.addAttribute("menuList", menuService.getMenuList());
+		return "/jsp/community/index/index";
 	}
 
 	@RequestMapping(value = "/common/error.do")
