@@ -2,21 +2,48 @@
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav in" id="side-menu">
             <sidebar-search></sidebar-search>
+            <li ng-class="{active: collapseVar==1}">{{dropDown}}
+                <a href="" ng-click="check(1)"><i class="fa fa-sitemap fa-fw"></i> jsTree SFE<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=1">
+                	<li ui-sref-active="active">
+                        <a ui-sref="dashboard.panels-wells">jsTree SFE Concept</a>
+                    </li>
+                	<li ui-sref-active="active">
+                        <a ui-sref="dashboard.panels-wells">Service Framework Engine?</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.panels-wells">Struts iBatis Version</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.buttons">Spring Mybatis Version</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.notifications">Spring Hibernate Version</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
             <li ng-class="{active: collapseVar==2}">
-                <a href="" ng-click="check(2)"><i class="fa fa-sitemap fa-fw"></i> jsTree SFE<span
-                        class="fa arrow"></span></a>
+                <a href="" ng-click="check(2)"><i class="fa fa-wrench fa-fw"></i> Dev Support Tools<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=1">
+                	<li ui-sref-active="active">
+                        <a ui-sref="dashboard.panels-wells">jsTree Software Development</a>
+                </ul>
                 <ul class="nav nav-second-level" collapse="collapseVar!=2">
-                    <li ng-init="third=!third" ng-class="{active: multiCollapseVar==3}">
-                        <a href="" ng-click="multiCheck(3)">Service Framework Engine <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=3">
+                    <li ng-init="third=!third" ng-class="{active: multiCollapseVar==21}">
+                        <a href="" ng-click="multiCheck(21)">Document <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=21">
                             <li>
-                                <a href="">Struts iBatis Version</a>
+                                <a href="">Confluence</a>
                             </li>
+                        </ul>
+                        <!-- /.nav-third-level -->
+                    </li>
+                    <li ng-init="third=!third" ng-class="{active: multiCollapseVar==31}">
+                        <a href="" ng-click="multiCheck(31)">Issue Tracker <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=31">
                             <li>
-                                <a href="">Spring Mybatis Version</a>
-                            </li>
-                            <li>
-                                <a href="">Spring Hibernate Version</a>
+                                <a href="">Jira</a>
                             </li>
                         </ul>
                         <!-- /.nav-third-level -->
@@ -24,44 +51,20 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li ng-class="{active: collapseVar==1}">{{dropDown}}
-                <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> Dev Support Tools<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=1">
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.panels-wells">Doc Confluence</a>
+            <li ng-class="{active: collapseVar==3}">{{dropDown}}
+                <a href="" ng-click="check(3)"><i class="fa fa-group fa-fw"></i> About US<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=3">
+                	<li ui-sref-active="active">
+                        <a ui-sref="dashboard.panels-wells">WEB Designer</a>
+                    </li>
+                	<li ui-sref-active="active">
+                        <a ui-sref="dashboard.panels-wells">Front End Developers</a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.buttons">Issue Jira</a>
+                        <a ui-sref="dashboard.panels-wells">Back End Developers</a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.notifications">Review Fecru</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.typography">Nas Synology</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.icons">Artifactory Nexus</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.icons">Build Bamboo</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.grid">Analysis Hudson</a>
-                    </li>
-                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.grid">Maven Reports</a>
-                    </li>
-                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.grid">Sonar Reports</a>
-                    </li>
-                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.grid">DB OracleEM</a>
-                    </li>
-                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.grid">DB Mysql</a>
-                    </li>
-                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.grid">Switch Router</a>
+                        <a ui-sref="dashboard.buttons">Project Manager</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
