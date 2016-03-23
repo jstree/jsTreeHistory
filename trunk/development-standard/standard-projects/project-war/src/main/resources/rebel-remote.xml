@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rebel-remote>
+<rebel-remote xmlns="http://www.zeroturnaround.com/rebel/remote">
     <id>project-war</id>
-    <publicKey>30818902818100829f5f338fa913cf9bffe6f3cf1bcf2cbdc04176f0572a851e8baf4505d4cfb2e30c90b8a3ab502beec10026c033ad7af77f060fd4591d7fa35479a9c15d6c6a1be4cd01f82d74dc52b61109d9d184b131d21bb3ae9cb59e66b476c9e7ef6b8bac9916ecfa9d02fc667fb41125a1d7673c857c812eb4e9393759b43f623184c70203010001</publicKey>
 </rebel-remote>
