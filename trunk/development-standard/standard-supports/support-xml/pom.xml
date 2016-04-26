@@ -39,6 +39,7 @@
 			</dependency>
 
 
+
 			<!-- 자바빈을 xml 로 변환 -->
 			<dependency>
 				<groupId>commons-betwixt</groupId>
@@ -154,7 +155,7 @@
 			<dependency>
 				<groupId>com.fasterxml.jackson.datatype</groupId>
 				<artifactId>jackson-datatype-joda</artifactId>
-				<version>2.3.0</version>
+				<version>2.2.4</version>
 			</dependency>
 
 			<dependency>
