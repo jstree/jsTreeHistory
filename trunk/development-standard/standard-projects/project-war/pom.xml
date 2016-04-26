@@ -36,7 +36,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>war</finalName>
+		<finalName>ROOT</finalName>
 
 		<plugins>
 			<plugin>

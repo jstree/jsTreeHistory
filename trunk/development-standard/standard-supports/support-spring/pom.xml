@@ -105,7 +105,12 @@
 			<artifactId>spring-data-redis</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.springtestdbunit</groupId>
+			<artifactId>spring-test-dbunit</artifactId>
+		</dependency>
 		<!-- Spring Boot -->
+		<!-- 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot</artifactId>
@@ -141,11 +146,7 @@
 			<version>1.2.5.RELEASE</version>
 			<scope>import</scope>
 		</dependency>
-	
-		<dependency>
-			<groupId>com.github.springtestdbunit</groupId>
-			<artifactId>spring-test-dbunit</artifactId>
-		</dependency>
+	 	-->
 		<!-- spring security 라이브러리 시작 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
