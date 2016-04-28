@@ -13,9 +13,9 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 
 //1. spring.pom 파일 spring-boot 활성화
 //2. 본 자바 파일 확장자 변경.
-@SpringBootApplication
-@EnableScheduling
-@EnableWebMvcSecurity
+//@SpringBootApplication
+//@EnableScheduling
+//@EnableWebMvcSecurity
 public class SpringBootapplication{
 
     private static Log logger = LogFactory.getLog(SpringBootapplication.class);
@@ -38,8 +38,8 @@ public class SpringBootapplication{
     }
 
     public static void main(String[] args) throws Exception { 
-        System.out.println("=== www.313.co.kr spring boot started ===");    
-    	SpringApplication.run(SpringBootapplication.class, args);
+       // System.out.println("=== www.313.co.kr spring boot started ===");    
+    	//SpringApplication.run(SpringBootapplication.class, args);
     }
     
 }
