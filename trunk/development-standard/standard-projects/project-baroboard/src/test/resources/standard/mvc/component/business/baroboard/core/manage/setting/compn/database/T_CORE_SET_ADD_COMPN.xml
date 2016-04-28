@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dataset>
-	<T_CORE_SET_ADD_COMPN C_ID="1" C_PARENTID="0" C_POSITION="0" C_LEFT="1" C_RIGHT="8" C_LEVEL="0" C_TITLE="root" C_TYPE="[null]" C_COMPN_TITLE="[null]" C_COMPN_VERSION="[null]" C_COMPN_AUTHOR="[null]" C_COMPN_PATH="[null]" />
-	<T_CORE_SET_ADD_COMPN C_ID="2" C_PARENTID="1" C_POSITION="0" C_LEFT="2" C_RIGHT="7" C_LEVEL="1" C_TITLE="Core" C_TYPE="drive" C_COMPN_TITLE="[null]" C_COMPN_VERSION="[null]" C_COMPN_AUTHOR="[null]" C_COMPN_PATH="[null]" />
-	<T_CORE_SET_ADD_COMPN C_ID="3" C_PARENTID="2" C_POSITION="0" C_LEFT="3" C_RIGHT="6" C_LEVEL="2" C_TITLE="고급설정" C_TYPE="folder" C_COMPN_TITLE="[null]" C_COMPN_VERSION="[null]" C_COMPN_AUTHOR="[null]" C_COMPN_PATH="[null]" />
-	<T_CORE_SET_ADD_COMPN C_ID="4" C_PARENTID="3" C_POSITION="0" C_LEFT="4" C_RIGHT="5" C_LEVEL="3" C_TITLE="설치프로그램 관리" C_TYPE="default" C_COMPN_TITLE="애드온 - 애드온을 등록하거나 사용/미사용을 설정합니다" C_COMPN_VERSION="1.0.0" C_COMPN_AUTHOR="313DEVGRP" C_COMPN_PATH="./modules/addon/" />
-</dataset>

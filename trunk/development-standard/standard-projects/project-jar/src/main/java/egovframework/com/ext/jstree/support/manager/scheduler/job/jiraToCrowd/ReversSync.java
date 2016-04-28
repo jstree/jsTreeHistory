@@ -24,53 +24,65 @@ public class ReversSync {
 		//JIRA Conf
 		final AsynchronousJiraRestClientFactory factory = new AsynchronousJiraRestClientFactory();
 		URI jiraServerUri = new URI("https://works.ahnlab.com:8080");
-		final JiraRestClient restClient = factory.createWithBasicHttpAuthentication(jiraServerUri, "admin", "1"
+		final JiraRestClient jiraRestClient = factory.createWithBasicHttpAuthentication(jiraServerUri, "admin", "1"
 				+ "Rose)(*");
 		
 		//CROWD Conf
-		String appUsername = "crowd";
-		String password = "!crowd098";
-		String hosturl = "crowd.ahnlab.com";
-		int port = 8095;
-		String protocol = "https";
+		String crowdUsername = "crowd";
+		String crowdpassword = "!crowd098";
+		String crowdHosturl = "crowd.ahnlab.com";
+		int crowdPort = 8095;
+		String crowdProtocol = "https";
 		CrowdSvcImpl crowdSvc = null;
 		try {
-			crowdSvc = new CrowdSvcImpl(appUsername, password, hosturl, port, protocol);
+			crowdSvc = new CrowdSvcImpl(crowdUsername, crowdpassword, crowdHosturl, crowdPort, crowdProtocol);
 		} catch (Exception ex) {
 			throw ex;
 		}
 
+		Iterable<BasicProject> jiraProjects = jiraRestClient.getProjectClient().getAllProjects().get(60, TimeUnit.SECONDS);
 		
-		
-        for (BasicProject project : restClient.getProjectClient().getAllProjects().get(1000000, TimeUnit.SECONDS)) {
-            //System.out.println(project.getKey() + ": " + project.getName());
+        for (BasicProject jiraProject : jiraProjects) {
             
-            Iterable<ProjectRole> roleList = restClient.getProjectRolesRestClient().getRoles(project.getSelf()).claim();
-            for (ProjectRole projectRole : roleList) {
-				//System.out.println(projectRole.getName() + ":" + projectRole.getId());
-				
-				//TODO : 프로젝트 그룹이 존재하는지 확인.
-				JsonNode jsonGroup = crowdSvc.pullBasicGroupInfo(StringUtils.deleteWhitespace(projectRole.getName()));
-				System.out.println(jsonGroup.toString());
-				//TODO : 존재하면
-					
-				//TODO : 존재하지 않으면
-				
-				Iterable<RoleActor> actors = projectRole.getActors();
-				for (RoleActor roleActor : actors) {
-					
-					//System.out.println(roleActor.getName() + "=" + roleActor.getType() + "=" + roleActor.getId());
-					//System.out.println("============ crowd search ===============");
-					
-					String trimString = StringUtils.deleteWhitespace(roleActor.getName());
-					JsonNode jsonUser = crowdSvc.pullBasicUserInfo(trimString);
-					//System.out.println(jsonUser.toString());
-				}
+        	System.out.println("check jiraProject Key : Name " + jiraProject.getKey() + ": " + jiraProject.getName());
+        	//TODO : 프로젝트 그룹이 존재하는지 확인.
+        	String DevProject = "Dev_" + jiraProject.getKey();
+			JsonNode DevJiraCrowdSyncGroupNode = crowdSvc.pullBasicGroupInfo(StringUtils.deleteWhitespace(DevProject));
+			if(DevJiraCrowdSyncGroupNode.has("reason")){
+				//reason 노드가 존재함. ( 404 )
+				//crowd에 입력을 요함.
+				System.out.println("404 need crowd input");
+			}else{
+				// 이미 존재함. 확인하고 그냥 넘어갈것.
+				System.out.println("200 = " + DevJiraCrowdSyncGroupNode.toString());
 			}
-            
         }
+	}
 
-
+	private void imsi(final JiraRestClient jiraRestClient, CrowdSvcImpl crowdSvc, BasicProject project)
+			throws Exception {
+		Iterable<ProjectRole> roleList = jiraRestClient.getProjectRolesRestClient().getRoles(project.getSelf()).claim();
+		for (ProjectRole projectRole : roleList) {
+			//System.out.println(projectRole.getName() + ":" + projectRole.getId());
+			
+			//TODO : 프로젝트 그룹이 존재하는지 확인.
+			JsonNode jsonGroup = crowdSvc.pullBasicGroupInfo(StringUtils.deleteWhitespace(projectRole.getName()));
+			System.out.println(jsonGroup.toString());
+			//TODO : 존재하면
+				
+			//TODO : 존재하지 않으면
+			
+			Iterable<RoleActor> actors = projectRole.getActors();
+			for (RoleActor roleActor : actors) {
+				
+				//System.out.println(roleActor.getName() + "=" + roleActor.getType() + "=" + roleActor.getId());
+				//System.out.println("============ crowd search ===============");
+				
+				String trimString = StringUtils.deleteWhitespace(roleActor.getName());
+				JsonNode jsonUser = crowdSvc.pullBasicUserInfo(trimString);
+				//System.out.println(jsonUser.toString());
+			}
+		}
 	}
 	
 }
