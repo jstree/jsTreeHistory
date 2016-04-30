@@ -17,6 +17,8 @@
 		/* user filed add point*/
 		, A.C_PASSWORD AS password
 		, A.C_EMAIL AS email
+		, A.C_UUID AS uuid
+		, A.C_USE_YN AS useYN
 		, A.C_LOGIN_FAILURE_CNT AS loginFailureCnt
 		, A.C_JOIN_DT AS joinDt
 		, A.C_LAST_LOGIN_DT AS lastLoginDt
@@ -54,6 +56,14 @@
 			<include refid="getAfterFrom" />
 		</dynamic>
 	</select>
+	
+    <select id="getChildCountByParentId" parameterClass="SecureUser"
+        resultClass="int">
+        /* getChildCountByParentId */
+        SELECT COUNT(*) AS CHILDCOUNTBYPARENTID
+        FROM T_SECURE_USER
+        WHERE C_PARENTID = #c_id#
+    </select>
      
     
 	<select id="getChildNodeByLeftRight" parameterClass="SecureUser"
@@ -69,6 +79,8 @@
 		, C_TYPE
 		, C_PASSWORD AS password
 		, C_EMAIL AS email
+		, C_UUID AS uuid
+		, C_USE_YN AS useYN
 		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
 		, C_JOIN_DT AS joinDt
 		, C_LAST_LOGIN_DT AS lastLoginDt
@@ -114,8 +126,10 @@
 		, C_TITLE = #c_title#
 		, C_PASSWORD = #password#
 		, C_EMAIL = #email#
+		, C_UUID = #uuid#
+		, C_USE_YN = #useYN#
 		, C_LOGIN_FAILURE_CNT = #loginFailureCnt#
-		, C_JOIN_DT = #joinDt#
+		, C_JOIN_DT = TO_CHAR(SYSDATE,'yyyymmddhh24miss')
 		, C_LAST_LOGIN_DT = #lastLoginDt#
 		WHERE C_ID = #c_id#
 	</update>
@@ -134,6 +148,8 @@
 			 , C_TYPE
 			 , C_PASSWORD AS password
 			 , C_EMAIL AS email
+			 , C_UUID AS uuid
+			 , C_USE_YN AS useYN
 			 , C_LOGIN_FAILURE_CNT AS loginFailureCnt
  			 , C_JOIN_DT AS joinDt
  			 , C_LAST_LOGIN_DT AS lastLoginDt
@@ -155,6 +171,8 @@
 		, C_TYPE
 		, C_PASSWORD AS password
 		, C_EMAIL AS email
+		, C_UUID AS uuid
+		, C_USE_YN AS useYN
 		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
 		, C_JOIN_DT AS joinDt
 		, C_LAST_LOGIN_DT AS lastLoginDt
@@ -307,7 +325,7 @@
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE
 		)
-		SELECT S_USER_INFO.NEXTVAL AS C_ID
+		SELECT S_SECURE_USER.NEXTVAL AS C_ID
 		, A.*
 		FROM (
 		SELECT
@@ -327,7 +345,7 @@
 		) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-			SELECT S_USER_INFO.CURRVAL AS SEQ
+			SELECT S_SECURE_USER.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -362,14 +380,14 @@
 		/* addMyselfFromJstree */
 		INSERT INTO T_SECURE_USER (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_PASSWORD, C_EMAIL, C_LOGIN_FAILURE_CNT, C_JOIN_DT, C_LAST_LOGIN_DT )
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_PASSWORD, C_EMAIL, C_UUID, C_LOGIN_FAILURE_CNT, C_JOIN_DT, C_LAST_LOGIN_DT )
 		VALUES (
-		S_USER_INFO.NEXTVAL, #c_parentid#, #c_position#, 
-		#c_left#, #c_right#, #c_level#, #c_title#, #password#, #email#, #loginFailureCnt#, #joinDt#, #lastLoginDt#)
+		S_SECURE_USER.NEXTVAL, #c_parentid#, #c_position#, 
+		#c_left#, #c_right#, #c_level#, #c_title#, #password#, #email#, #uuid#, #loginFailureCnt#, TO_CHAR(SYSDATE,'yyyymmddhh24miss'), #lastLoginDt#)
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
-			S_USER_INFO.CURRVAL AS SEQ
+			S_SECURE_USER.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -408,5 +426,25 @@
 			WHERE C_EMAIL = #email# 
 		</dynamic>
 	</select>
+	
+	<select id="getUserByUuid" parameterClass="SecureUser" resultClass="SecureUser">
+		<dynamic>
+			<include refid="getMetaField" />
+			FROM T_SECURE_USER A
+			WHERE C_UUID = #uuid# 
+		</dynamic>
+	</select>
+	
+	<update id="updateUseYnByUuid" parameterClass="SecureUser">
+		UPDATE T_SECURE_USER
+		SET C_USE_YN = 'Y'
+		WHERE C_UUID = #uuid#
+	</update>
+	
+	<update id="updatePassword" parameterClass="SecureUser">
+		UPDATE T_SECURE_USER
+		SET C_PASSWORD = #newPassword#
+		WHERE C_PASSWORD = #oldPassword#
+	</update>
 	
 </sqlMap>
