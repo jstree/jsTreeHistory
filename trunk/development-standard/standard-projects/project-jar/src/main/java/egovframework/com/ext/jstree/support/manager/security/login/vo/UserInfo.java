@@ -51,7 +51,15 @@ public class UserInfo extends ComprehensiveTree implements UserDetails
     
     private String password;
     
-    private String email;
+    private String oldPassword;
+    
+    private String newPassword;
+
+	private String email;
+    
+    private String uuid;
+    
+	private String useYN;
     
     private int loginFailureCnt;
     
@@ -71,11 +79,43 @@ public class UserInfo extends ComprehensiveTree implements UserDetails
         this.email = email;
     }
     
+    public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getUseYN() {
+		return useYN;
+	}
+
+	public void setUseYN(String useYN) {
+		this.useYN = useYN;
+	}
+    
     public void setPassword(String password)
     {
         this.password = password;
     }
     
+    public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	
     public int getLoginFailureCnt()
     {
         return loginFailureCnt;
