@@ -45,4 +45,11 @@ public interface UserInfoDao
 	UserInfo loadUserByUsername(UserInfo userInfo);
 	
 	UserRole getUserRole(UserRole userRole) throws Exception;
+	
+	UserInfo getUserByUuid(UserInfo userInfo) throws Exception;
+	
+	void updateUseYnByUuid(UserInfo userInfo) throws Exception;
+	
+	void updatePassword(UserInfo userInfo) throws Exception;
+	
 }

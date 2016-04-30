@@ -57,4 +57,19 @@ public class UserInfoDaoImpl extends EgovComAbstractDAO implements UserInfoDao
     {
         return (UserRole) selectByPk("userRole.getUserRole", userRole);
     }
+
+	@Override
+	public UserInfo getUserByUuid(UserInfo userInfo) {
+		return (UserInfo) selectByPk("userInfo.getUserByUuid", userInfo);
+	}
+
+	@Override
+	public void updateUseYnByUuid(UserInfo userInfo) throws Exception {
+		update("userInfo.updateUseYnByUuid", userInfo);
+	}
+
+	@Override
+	public void updatePassword(UserInfo userInfo) throws Exception {
+		update("userInfo.updatePassword", userInfo);
+	}
 }
