@@ -16,9 +16,10 @@
 	<security:http pattern="/board/**" security="none" />
 
 	<security:http auto-config="true" use-expressions="true">
-
+		<security:custom-filter before="FILTER_SECURITY_INTERCEPTOR"
+			ref="urlPatchMatcherFilter" />
 		<security:intercept-url pattern="/account/accountLogoutProcess.do"
-		access="hasRole('ROLE_USER')" />
+			access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/**/admin/*"
 			access="hasRole('ROLE_USER')" />
 
@@ -41,14 +42,9 @@
 		</security:session-management>
 
 	</security:http>
-<!-- 
-	<beans:bean id="secureUserLoginSuccessHandler"
-		class="egovframework.com.ext.jstree.support.manager.security.login.handler.SecureUserLoginSuccessHandler">
-		<beans:property name="targetUrlParameter" value="loginRedirect" />
-		<beans:property name="useReferer" value="false" />
-		<beans:property name="defaultUrl" value="/main.do" />
-	</beans:bean>
- -->
+	<!-- <bean id="secureUserLoginSuccessHandler" class="egovframework.com.ext.jstree.support.manager.security.login.handler.SecureUserLoginSuccessHandler"> 
+		<property name="targetUrlParameter" value="loginRedirect" /> <property name="useReferer" 
+		value="false" /> <property name="defaultUrl" value="/main.do" /> </bean> -->
 	<bean id="secureUserLoginFailureHandler"
 		class="egovframework.com.ext.jstree.support.manager.security.login.handler.SecureUserLoginFailureHandler">
 		<property name="loginidname" value="email" />
@@ -65,4 +61,124 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
+	<!-- 접근 권한 Voter -->
+	<!-- AffirmativeBased : 접근을 승인하는 voter 가 하나라도 존재하면 이전의 접근 거부사실과 관계없이 바로 
+		접근이 승인된다. -->
+	<!-- ConsensusBased : 다득표 여부가 AccessDecisionManager 의 접근 승인여부를 결정한다. 동률 
+		또는 무효표에 처리에 대해서는 설정 가능하다. -->
+	<!-- UnanimouseBased : 모든 voter 가 접근을 승인해야 최종적인 접근이 승인된다. -->
+
+	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+		<property name="allowIfAllAbstainDecisions" value="false" />
+		<property name="decisionVoters">
+			<list>
+				<bean class="org.springframework.security.access.vote.RoleVoter">
+					<!-- Default : ROLE_ -->
+					<property name="rolePrefix" value="ROLE_" />
+				</bean>
+				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 권한 상속관계  필요 없지 않나 -->
+	<!-- <bean id="roleHierarchy"
+		class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+		<property name="hierarchy">
+			<value>
+				ROLE_ADMIN > ROLE_USER
+				ROLE_USER > ROLE_RESTRICTED
+				ROLE_RESTRICTED > IS_AUTHENTICATED_FULLY
+				IS_AUTHENTICATED_REMEMBERED
+				> IS_AUTHENTICATED_ANONYMOUSLY
+			</value>
+		</property>
+		DB 사용 <beans:property name="hierarchy" ref="hierarchyStrings"/>
+	</bean> 
+
+	<bean id="hierarchyStrings"
+		class="egovframework.rte.fdl.security.userdetails.hierarchicalroles.HierarchyStringsFactoryBean"
+		init-method="init">
+		<property name="securedObjectService" ref="securedObjectService" />
+	</bean>
+	-->
+
+	<!-- Resource 공통  -->
+	
+	<bean id = "securedObjectService" class= "egovframework.com.ext.jstree.support.manager.security.roles.service.impl.SecuredObjectServiceImpl">
+		<property name="requestMatcherType" value="ant" />
+		<property name="securedObjectDao" ref="securedObjectDao" />
+	</bean>
+	
+	<bean id = "securedObjectDao" class="egovframework.com.ext.jstree.support.manager.security.roles.dao.impl.SecuredObjectDaoImpl" />
+	
+	<!-- URL 매핑 -->
+	<bean id="urlPatchMatcherFilter"
+		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="accessDecisionManager" ref="accessDecisionManager" />
+		<property name="securityMetadataSource" ref="customFilterInvocationSecurityMetadataSource" />
+	</bean>
+
+	<bean name="customFilterInvocationSecurityMetadataSource"
+		class="egovframework.com.ext.jstree.support.manager.security.interceptor.CustomFilterInvocationSecurityMetadataSource">
+		<constructor-arg ref = "urlResourceMap" />
+	</bean>
+	
+	<bean id = "urlResourceMap" class = "egovframework.com.ext.jstree.support.manager.security.factory.UrlResourceMapFactoryBean" init-method="init"/>
+	
+	<!-- Method -->
+	<bean id="methodSecurityMetadataSourceAdvisor"
+		class="org.springframework.security.access.intercept.aopalliance.MethodSecurityMetadataSourceAdvisor">
+		<constructor-arg value="methodSecurityInterceptor" />
+		<constructor-arg ref="delegatingMethodSecurityMetadataSource" />
+		<constructor-arg value="delegatingMethodSecurityMetadataSource" />
+	</bean>
+
+	<bean id="methodSecurityInterceptor"
+		class="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor">
+		<property name="validateConfigAttributes" value="false" />
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="accessDecisionManager" ref="accessDecisionManager" />
+		<property name="securityMetadataSource" ref="delegatingMethodSecurityMetadataSource" />
+	</bean>
+
+	<bean id="delegatingMethodSecurityMetadataSource"
+		class="org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource">
+		<constructor-arg>
+			<list>
+				<ref bean="methodSecurityMetadataSources" />
+				<bean
+					class="org.springframework.security.access.annotation.SecuredAnnotationSecurityMetadataSource" />
+				<bean
+					class="org.springframework.security.access.annotation.Jsr250MethodSecurityMetadataSource" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="methodSecurityMetadataSources"
+		class="org.springframework.security.access.method.MapBasedMethodSecurityMetadataSource">
+		<constructor-arg ref="methodMap" />
+	</bean>
+
+	<bean id="methodMap"
+		class="egovframework.com.ext.jstree.support.manager.security.factory.MethodResourceMapFactoryBean"
+		init-method="init" />
+
+
+	<!-- point cut -->
+<!-- 
+	<bean id="protectPointcutPostProcessor"
+		class="org.springframework.security.config.method.ProtectPointcutPostProcessor">
+		<constructor-arg ref="methodSecurityMetadataSources" />
+		<property name="pointcutMap" ref="pointcutMap" />
+	</bean>
+
+	<bean id="pointcutMap"
+		class="egovframework.rte.fdl.security.intercept.MethodResourcesMapFactoryBean"
+		init-method="init">
+		<property name="securedObjectService" ref="securedObjectService" />
+		<property name="resourceType" value="pointcut" />
+	</bean>
+	 -->
 </beans>
