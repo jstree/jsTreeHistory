@@ -81,28 +81,6 @@
 		</property>
 	</bean>
 
-	<!-- 권한 상속관계  필요 없지 않나 -->
-	<!-- <bean id="roleHierarchy"
-		class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
-		<property name="hierarchy">
-			<value>
-				ROLE_ADMIN > ROLE_USER
-				ROLE_USER > ROLE_RESTRICTED
-				ROLE_RESTRICTED > IS_AUTHENTICATED_FULLY
-				IS_AUTHENTICATED_REMEMBERED
-				> IS_AUTHENTICATED_ANONYMOUSLY
-			</value>
-		</property>
-		DB 사용 <beans:property name="hierarchy" ref="hierarchyStrings"/>
-	</bean> 
-
-	<bean id="hierarchyStrings"
-		class="egovframework.rte.fdl.security.userdetails.hierarchicalroles.HierarchyStringsFactoryBean"
-		init-method="init">
-		<property name="securedObjectService" ref="securedObjectService" />
-	</bean>
-	-->
-
 	<!-- Resource 공통  -->
 	
 	<bean id = "securedObjectService" class= "egovframework.com.ext.jstree.support.manager.security.roles.service.impl.SecuredObjectServiceImpl">
@@ -167,7 +145,7 @@
 
 
 	<!-- point cut -->
-<!-- 
+	<!--
 	<bean id="protectPointcutPostProcessor"
 		class="org.springframework.security.config.method.ProtectPointcutPostProcessor">
 		<constructor-arg ref="methodSecurityMetadataSources" />
@@ -175,10 +153,8 @@
 	</bean>
 
 	<bean id="pointcutMap"
-		class="egovframework.rte.fdl.security.intercept.MethodResourcesMapFactoryBean"
+		class="egovframework.com.ext.jstree.support.manager.security.factory.PointCutResourceMapFactoryBean"
 		init-method="init">
-		<property name="securedObjectService" ref="securedObjectService" />
-		<property name="resourceType" value="pointcut" />
 	</bean>
-	 -->
+	-->
 </beans>

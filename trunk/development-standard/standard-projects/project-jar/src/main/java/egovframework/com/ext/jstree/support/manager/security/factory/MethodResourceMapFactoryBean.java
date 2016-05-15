@@ -14,20 +14,21 @@ import egovframework.com.ext.jstree.support.manager.security.roles.service.Secur
 public class MethodResourceMapFactoryBean implements FactoryBean<LinkedHashMap<String, List<ConfigAttribute>>>
 {
     
-	@Resource
+    @Resource
     SecuredObjectService securedObjectService;
     
-    public void setSecuredObjectService(SecuredObjectService securedObjectService) {
-		this.securedObjectService = securedObjectService;
-	}
-
-	private LinkedHashMap<String, List<ConfigAttribute>> resultMap;
+    public void setSecuredObjectService(SecuredObjectService securedObjectService)
+    {
+        this.securedObjectService = securedObjectService;
+    }
     
+    private LinkedHashMap<String, List<ConfigAttribute>> resultMap;
     
     @Override
     public LinkedHashMap<String, List<ConfigAttribute>> getObject() throws Exception
     {
-        if(resultMap == null){
+        if (resultMap == null)
+        {
             init();
         }
         return resultMap;
