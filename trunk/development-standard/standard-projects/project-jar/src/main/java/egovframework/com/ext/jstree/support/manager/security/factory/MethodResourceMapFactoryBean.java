@@ -11,45 +11,35 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import egovframework.com.ext.jstree.support.manager.security.roles.service.SecuredObjectService;
 
-public class MethodResourceMapFactoryBean implements FactoryBean<LinkedHashMap<String, List<ConfigAttribute>>>
-{
-    
-    @Resource
-    SecuredObjectService securedObjectService;
-    
-    public void setSecuredObjectService(SecuredObjectService securedObjectService)
-    {
-        this.securedObjectService = securedObjectService;
-    }
-    
-    private LinkedHashMap<String, List<ConfigAttribute>> resultMap;
-    
-    @Override
-    public LinkedHashMap<String, List<ConfigAttribute>> getObject() throws Exception
-    {
-        if (resultMap == null)
-        {
-            init();
-        }
-        return resultMap;
-    }
-    
-    @Override
-    public Class<?> getObjectType()
-    {
-        return LinkedHashMap.class;
-    }
-    
-    @Override
-    public boolean isSingleton()
-    {
-        return true;
-    }
-    
-    public void init() throws Exception
-    {
-        resultMap = securedObjectService.getRolesAndMethod();
-        
-    }
-    
+public class MethodResourceMapFactoryBean implements
+		FactoryBean<LinkedHashMap<String, List<ConfigAttribute>>> {
+
+	@Resource(name = "methodResourceMapService")
+	private SecuredObjectService<String, List<ConfigAttribute>> methodResourceMapService;
+
+	private LinkedHashMap<String, List<ConfigAttribute>> resultMap;
+
+	@Override
+	public LinkedHashMap<String, List<ConfigAttribute>> getObject()
+			throws Exception {
+		if (resultMap == null) {
+			init();
+		}
+		return resultMap;
+	}
+
+	@Override
+	public Class<?> getObjectType() {
+		return LinkedHashMap.class;
+	}
+
+	@Override
+	public boolean isSingleton() {
+		return true;
+	}
+
+	public void init() throws Exception {
+		resultMap = methodResourceMapService.getResourceMap();
+	}
+
 }

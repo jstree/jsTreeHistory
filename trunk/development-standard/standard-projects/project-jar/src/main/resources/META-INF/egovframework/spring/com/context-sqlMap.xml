@@ -23,7 +23,7 @@
 		<property name="mappingLocations">
         <list>
             <value>classpath:/META-INF/egovframework/sqlmap/com/**/*_Oracle.xml</value>
-            <value>classpath:/egovframework/sqlmap/let/**/*_Oracle.xml</value>
+            <!-- <value>classpath:/egovframework/sqlmap/let/**/*_Oracle.xml</value> -->
             <value>classpath:/standard/sqlmap/**/*_Oracle.xml</value>
         </list>
     </property>

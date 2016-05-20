@@ -14,8 +14,8 @@ import egovframework.com.ext.jstree.support.manager.security.roles.service.Secur
 public class PointCutResourceMapFactoryBean implements FactoryBean<LinkedHashMap<String, List<ConfigAttribute>>>
 {
     
-    @Resource
-    SecuredObjectService securedObjectService;
+    @Resource(name="pointcutResourceMapService")
+    SecuredObjectService<String, List<ConfigAttribute>> pointcutResourceMapService;
     
     private LinkedHashMap<String, List<ConfigAttribute>> resultMap;
     
@@ -43,8 +43,7 @@ public class PointCutResourceMapFactoryBean implements FactoryBean<LinkedHashMap
     
     public void init() throws Exception
     {
-        resultMap = securedObjectService.getRolesAndPointcut();
-        
+        resultMap = pointcutResourceMapService.getResourceMap();
     }
     
 }
