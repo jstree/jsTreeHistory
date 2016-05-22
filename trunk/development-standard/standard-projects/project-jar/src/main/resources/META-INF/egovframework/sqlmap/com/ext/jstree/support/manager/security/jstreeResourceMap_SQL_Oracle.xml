@@ -6,7 +6,7 @@
 		
 	<select id="getRolesAndUrl" parameterClass="SecuredObject" resultClass="SecuredObject">
 			  SELECT A.C_PATTERN PATTERN, C.C_AUTHORITY AUTHORITY
-                FROM T_SECURE_RESOURCE A, T_SECURE_ROLES_RESOURCES B, T_SECURE_ROLES C
+                FROM T_RESOURCES A, T_ROLES_RESOURCES B, T_ROLES C
                WHERE     A.C_ID = B.C_RESOURCES_ID
                      AND B.C_ROLES_ID = C.C_ID
                      AND A.C_RESOURCE_TYPE = 'URL'
@@ -15,7 +15,7 @@
 	
 	<select id="getRolesAndMethod" parameterClass="SecuredObject" resultClass="SecuredObject">
 		SELECT A.C_PATTERN PATTERN, C.C_AUTHORITY AUTHORITY
-                FROM T_SECURE_RESOURCE A, T_SECURE_ROLES_RESOURCES B, T_SECURE_ROLES C
+                FROM T_RESOURCES A, T_ROLES_RESOURCES B, T_ROLES C
                WHERE     A.C_ID = B.C_RESOURCES_ID
                      AND B.C_ROLES_ID = C.C_ID
                      AND A.C_RESOURCE_TYPE = 'METHOD'
@@ -24,7 +24,7 @@
 	
 	<select id="getRolesAndPointcut" parameterClass="SecuredObject" resultClass="SecuredObject">
 		SELECT A.C_PATTERN PATTERN, C.C_AUTHORITY AUTHORITY
-                FROM T_SECURE_RESOURCE A, T_SECURE_ROLES_RESOURCES B, T_SECURE_ROLES C
+                FROM T_RESOURCES A, T_ROLES_RESOURCES B, T_ROLES C
                WHERE     A.C_ID = B.C_RESOURCES_ID
                      AND B.C_ROLES_ID = C.C_ID
                      AND A.C_RESOURCE_TYPE = 'POINTCUT'

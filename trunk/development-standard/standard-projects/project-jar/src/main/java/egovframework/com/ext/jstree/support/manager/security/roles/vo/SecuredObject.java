@@ -9,7 +9,7 @@ public class SecuredObject extends ComprehensiveTree {
 
 	private String pattern;
 	
-	private String descrption;
+	private String description;
 	
 	private String resourceType;
 	
@@ -33,12 +33,12 @@ public class SecuredObject extends ComprehensiveTree {
 		this.pattern = pattern;
 	}
 
-	public String getDescrption() {
-		return descrption;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescrption(String descrption) {
-		this.descrption = descrption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getResourceType() {
