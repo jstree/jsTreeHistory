@@ -1,30 +1,39 @@
 package egovframework.com.ext.jstree.support.manager.scheduler.job.jiraToCrowd;
+import java.util.List;
 
+import javax.naming.AuthenticationException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
+import org.apache.http.NameValuePair;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientHandlerException;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.Base64;
 
 public class CrowdSvcImpl {
 
@@ -111,7 +120,33 @@ public class CrowdSvcImpl {
 			httpclient.close();
 		}
 	}
+	
+	public String invokePutMethod( String data) throws AuthenticationException, ClientHandlerException {
+		Client client = Client.create();
+		WebResource webResource = client.resource(baseJsonURL+ "group");
+		String auth = new String(Base64.encode("integration:!ahnlab098"));
+		ClientResponse response = webResource.header("Authorization", "Basic " + auth).type("application/json")
+				.accept("application/json").put(ClientResponse.class, data);
+		int statusCode = response.getStatus();
+		if (statusCode == 401) {
+			throw new AuthenticationException("Invalid Username or Password");
+		}
+		return response.getEntity(String.class);
+	}
 
+	public String invokeDeleteMethod(String data) throws AuthenticationException, ClientHandlerException {
+		Client client = Client.create();
+		WebResource webResource = client.resource(baseJsonURL + "group?groupname=" + data);
+		String auth = new String(Base64.encode("integration:!ahnlab098"));
+		ClientResponse response = webResource.header("Authorization", "Basic " + auth).type("application/json")
+				.accept("application/json").delete(ClientResponse.class);
+		int statusCode = response.getStatus();
+		if (statusCode == 401) {
+			throw new AuthenticationException("Invalid Username or Password");
+		}
+		return response.getEntity(String.class);
+	}
+	
 	public JsonNode executePost(String url, JsonNode body) throws Exception, CrowdPostException {
 		log.trace("executePost");
 
@@ -119,31 +154,44 @@ public class CrowdSvcImpl {
 		HttpPost httppost = new HttpPost(url);
 		CloseableHttpClient httpclient = null;
 		try {
+			
 			HttpClientContext localContext = buildLocalContext(false);
 			httpclient = buildClient();
 
-			log.debug("URL to access:" + url);
-			log.debug("Body to send to url as post:" + body.toString());
-			httppost.setHeader("Content-Type", "application/json");
+			System.out.println("URL to access:" + url);
+			System.out.println("Body to send to url as post:" + body.toString());
+			
+			String auth = new String(Base64.encode("integration:!ahnlab098"));
+			httppost.setHeader("Authorization", "Basic " + auth);
+			httppost.setHeader("Content-Type", "application/json; charset=UTF-8");
 			httppost.setHeader("Accept", "application/json");
-			httppost.setEntity(new StringEntity(body.toString()));
+			httppost.setHeader("X-Atlassian-Token", "nocheck");
+			httppost.setHeader("Cache-Control", "no-cache");
+            // Add your data
+			
+			httppost.setEntity(new StringEntity(body.toString(), ContentType.APPLICATION_JSON ));
 
 			CloseableHttpResponse response = httpclient.execute(targetHost, httppost, localContext);
-
+			log.info(response.toString());
+			
 			// create an ObjectMapper instance.
 			ObjectMapper mapper = new ObjectMapper();
 			// use the ObjectMapper to read the json string and create a tree
 			JsonNode node = null;
 			try {
 				HttpEntity entity = response.getEntity();
-				log.debug(response.getStatusLine().toString());
+				log.info(response.getStatusLine().toString());
 				if (entity != null) {
-					log.debug("Response content length: " + entity.getContentLength());
+					log.info("Response content length: " + entity.getContentLength());
 					node = mapper.readTree(entity.getContent());
 				}
-				EntityUtils.consume(entity);
-				log.debug("Full JSON returned:" + node.toString());
+				//EntityUtils.consume(entity);
+				log.info("Full JSON returned:" + node.toString());
 				if (response.getStatusLine().getStatusCode() != 200) {
+					log.warn("Response from Crowd server was some type of error:" + response.getStatusLine().toString());
+					throw new CrowdPostException(response.getStatusLine().getStatusCode(), node, response
+							.getStatusLine().toString());
+				}else if (response.getStatusLine().getStatusCode() != 404) {
 					log.warn("Response from Crowd server was some type of error:" + response.getStatusLine().toString());
 					throw new CrowdPostException(response.getStatusLine().getStatusCode(), node, response
 							.getStatusLine().toString());
@@ -158,6 +206,19 @@ public class CrowdSvcImpl {
 			httpclient.close();
 		}
 	}
+	
+	public JsonNode pushGroup(JsonNode body) throws Exception {
+		log.trace("pullLastBuild");
+		JsonNode node = executePost(baseJsonURL + "group" , body);
+		return node;
+	}
+	
+	public JsonNode pushUser(JsonNode body) throws Exception {
+		log.trace("pullLastBuild");
+		System.out.println(body.toString());
+		JsonNode node = executePost(baseJsonURL + "user" , body);
+		return node;
+	}
 
 	public JsonNode pullBasicUserInfo(String username) throws Exception {
 		log.trace("pullLastBuild");
@@ -170,43 +231,13 @@ public class CrowdSvcImpl {
 		JsonNode node = executeGet(baseJsonURL + "group?groupname=" + groupname);
 		return node;
 	}
-
-	/**
-	 * Authenticate a user against crowd and return basic information
-	 * 
-	 * @param username
-	 *            crowd username
-	 * @param password
-	 *            crowd password
-	 * @return JsonNode representing the return message
-	 * @throws Exception
-	 *             Thrown due to server or internal error
-	 * @throws CrowdUserAuthException
-	 *             Thrown if the user authentication fails due to incorrect
-	 *             username/password
-	 */
-	public JsonNode authenticateUser(String username, String password) throws Exception, CrowdUserAuthException {
+	
+	public JsonNode getAllCrowdProject() throws Exception {
 		log.trace("pullLastBuild");
-		JsonNodeFactory factory = JsonNodeFactory.instance;
-		ObjectNode passwordNode = factory.objectNode().put("value", password);
-		JsonNode node = null;
-		try {
-			node = executePost(baseJsonURL + "authentication?username=" + username, passwordNode);
-		} catch (CrowdPostException pex) {
-			log.error("Unable to authenticate user due to authentication failure:" + username, pex);
-			if (pex.getStatusCode() == 400) {
-				// build CrowdUserAuthException with reason for auth failure
-				String reasonString = pex.getJsonBody().get("reason").asText();
-				String messageString = pex.getJsonBody().get("message").asText();
-				throw new CrowdUserAuthException(reasonString, messageString, pex);
-			}
-			throw pex;
-		} catch (Exception ex) {
-			log.error("Unable to authenticate user due server exception", ex);
-			throw ex;
-		}
+		JsonNode node = executeGet(baseJsonURL + "search?entity-type=group");
 		return node;
 	}
+
 
 	/**
 	 * Convert a json message representing a crowd user into our CrowdUser model

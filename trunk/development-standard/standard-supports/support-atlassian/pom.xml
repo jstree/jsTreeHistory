@@ -41,10 +41,12 @@
 			<groupId>com.atlassian.jira</groupId>
 			<artifactId>jira-rest-java-client-core</artifactId>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>com.atlassian.confluence</groupId>
 			<artifactId>confluence-java-api</artifactId>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>com.atlassian.crowd</groupId>
 			<artifactId>crowd-integration-client-rest</artifactId>
