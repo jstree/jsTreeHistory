@@ -34,7 +34,7 @@ public class SpringBootapplication{
     }
 
     public static void main(String[] args) throws Exception { 
-       // System.out.println("=== www.313.co.kr spring boot started ===");    
+    	System.out.println("=== www.313.co.kr spring boot started ===");    
     	//SpringApplication.run(SpringBootapplication.class, args);
     }
     

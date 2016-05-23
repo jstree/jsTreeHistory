@@ -1,16 +1,12 @@
 package egovframework.com.ext.jstree.support.manager.scheduler.job.jiraToCrowd;
-import java.util.List;
-
 import javax.naming.AuthenticationException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
-import org.apache.http.NameValuePair;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -22,18 +18,20 @@ import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.Base64;
+
+import egovframework.com.ext.jstree.support.util.StringUtils;
 
 public class CrowdSvcImpl {
 
@@ -83,44 +81,58 @@ public class CrowdSvcImpl {
 	 *             Thrown if the call fails
 	 */
 	public JsonNode executeGet(String url) throws Exception {
-		log.trace("executeGet");
+		log.info("executeGet");
 
 		// Build URL to execute
 		HttpGet httpget = new HttpGet(url);
 		CloseableHttpClient httpclient = null;
+		HttpClientContext localContext = buildLocalContext(false);
+		httpclient = buildClient();
+		
+		System.out.println("URL to get access:" + url);
+		String auth = new String(Base64.encode("integration:!ahnlab098"));
+		httpget.setHeader("Authorization", "Basic " + auth);
+		httpget.setHeader("Content-Type", "application/json; charset=UTF-8");
+		httpget.setHeader("Accept", "application/json");
+		httpget.setHeader("X-Atlassian-Token", "nocheck");
+		httpget.setHeader("Cache-Control", "no-cache");
+		
+		CloseableHttpResponse response = httpclient.execute(targetHost, httpget, localContext);
+		// create an ObjectMapper instance.
+		ObjectMapper mapper = new ObjectMapper();
+		// use the ObjectMapper to read the json string and create a tree
+		JsonNode node = null;
 		try {
-			HttpClientContext localContext = buildLocalContext(false);
-			httpclient = buildClient();
-
-			System.out.println("URL to access:" + url);
-			httpget.setHeader("Content-type", "application/json");
-			httpget.setHeader("Accept", "application/json");
-			CloseableHttpResponse response = httpclient.execute(targetHost, httpget, localContext);
-
-			// create an ObjectMapper instance.
-			ObjectMapper mapper = new ObjectMapper();
-			// use the ObjectMapper to read the json string and create a tree
-			JsonNode node = null;
-			try {
-				HttpEntity entity = response.getEntity();
-				//System.out.println(response.getStatusLine().toString());
-				if (entity != null) {
-					//System.out.println("Response content length: " + entity.getContentLength());
-					node = mapper.readTree(entity.getContent());
-				}
-				EntityUtils.consume(entity);
-			} finally {
-				response.close();
+			HttpEntity entity = response.getEntity();
+			System.out.println(response.getStatusLine().toString());
+			if (entity != null) {
+				System.out.println("Response content length: " + entity.getContentLength());
+				node = mapper.readTree(entity.getContent());
 			}
+			EntityUtils.consume(entity);
 
 			log.debug("Full JSON returned:" + node.toString());
 			return node;
 
 		} finally {
+			response.close();
 			httpclient.close();
 		}
 	}
 	
+	public String invokeGetMethod( String data) throws AuthenticationException, ClientHandlerException {
+		Client client = Client.create();
+		WebResource webResource = client.resource(baseJsonURL+ "group?groupname="+data);
+		String auth = new String(Base64.encode("integration:!ahnlab098"));
+		ClientResponse response = webResource.header("Authorization", "Basic " + auth).type("application/json")
+				.accept("application/json").get(ClientResponse.class);
+		int statusCode = response.getStatus();
+		if (statusCode == 401) {
+			throw new AuthenticationException("Invalid Username or Password");
+		}
+		return response.getEntity(String.class);
+	}
+
 	public String invokePutMethod( String data) throws AuthenticationException, ClientHandlerException {
 		Client client = Client.create();
 		WebResource webResource = client.resource(baseJsonURL+ "group");
@@ -148,93 +160,117 @@ public class CrowdSvcImpl {
 	}
 	
 	public JsonNode executePost(String url, JsonNode body) throws Exception, CrowdPostException {
-		log.trace("executePost");
+		log.info("executePost");
 
 		// Build URL to execute
 		HttpPost httppost = new HttpPost(url);
 		CloseableHttpClient httpclient = null;
+		HttpClientContext localContext = buildLocalContext(false);
+		httpclient = buildClient();
+		
+		System.out.println("URL to access:" + url);
+		System.out.println("Body to send to url as post:" + body.toString());
+		
+		String auth = new String(Base64.encode("integration:!ahnlab098"));
+		httppost.setHeader("Authorization", "Basic " + auth);
+		httppost.setHeader("Content-Type", "application/json; charset=UTF-8");
+		httppost.setHeader("Accept", "application/json");
+		httppost.setHeader("X-Atlassian-Token", "nocheck");
+		httppost.setHeader("Cache-Control", "no-cache");
+		// Add your data
+		
+		httppost.setEntity(new StringEntity(body.toString(), ContentType.APPLICATION_JSON ));
+		
+		CloseableHttpResponse response = httpclient.execute(targetHost, httppost, localContext);
 		try {
 			
-			HttpClientContext localContext = buildLocalContext(false);
-			httpclient = buildClient();
-
-			System.out.println("URL to access:" + url);
-			System.out.println("Body to send to url as post:" + body.toString());
-			
-			String auth = new String(Base64.encode("integration:!ahnlab098"));
-			httppost.setHeader("Authorization", "Basic " + auth);
-			httppost.setHeader("Content-Type", "application/json; charset=UTF-8");
-			httppost.setHeader("Accept", "application/json");
-			httppost.setHeader("X-Atlassian-Token", "nocheck");
-			httppost.setHeader("Cache-Control", "no-cache");
-            // Add your data
-			
-			httppost.setEntity(new StringEntity(body.toString(), ContentType.APPLICATION_JSON ));
-
-			CloseableHttpResponse response = httpclient.execute(targetHost, httppost, localContext);
 			log.info(response.toString());
-			
+			JsonNode node = null;
 			// create an ObjectMapper instance.
 			ObjectMapper mapper = new ObjectMapper();
 			// use the ObjectMapper to read the json string and create a tree
-			JsonNode node = null;
-			try {
-				HttpEntity entity = response.getEntity();
-				log.info(response.getStatusLine().toString());
-				if (entity != null) {
-					log.info("Response content length: " + entity.getContentLength());
+			HttpEntity entity = response.getEntity();
+			log.info(response.getStatusLine().toString());
+			if (entity != null) {
+				log.info("Response content length: " + entity.getContentLength());
+				
+				
+				
+				if(entity.getContentLength() > 0){
 					node = mapper.readTree(entity.getContent());
+				}else{
+					ObjectMapper blankMapper = new ObjectMapper();
+					ObjectNode blankNode = blankMapper.getNodeFactory().objectNode();
+					blankNode.put("result", "fail");
+					JsonNode blankJsonNode = mapper.readValue(mapper.writeValueAsString(node), JsonNode.class);
+					return blankJsonNode;
 				}
-				//EntityUtils.consume(entity);
-				log.info("Full JSON returned:" + node.toString());
-				if (response.getStatusLine().getStatusCode() != 200) {
-					log.warn("Response from Crowd server was some type of error:" + response.getStatusLine().toString());
-					throw new CrowdPostException(response.getStatusLine().getStatusCode(), node, response
-							.getStatusLine().toString());
-				}else if (response.getStatusLine().getStatusCode() != 404) {
-					log.warn("Response from Crowd server was some type of error:" + response.getStatusLine().toString());
-					throw new CrowdPostException(response.getStatusLine().getStatusCode(), node, response
-							.getStatusLine().toString());
-				}
-			} finally {
-				response.close();
 			}
-
+			EntityUtils.consume(entity);
+			log.info("Full JSON returned:" + node.toString());
+			/*
+			if (response.getStatusLine().getStatusCode() != 200) {
+				log.warn("Response from Crowd server was some type of error:" + response.getStatusLine().toString());
+				throw new CrowdPostException(response.getStatusLine().getStatusCode(), node, response
+						.getStatusLine().toString());
+			}else if (response.getStatusLine().getStatusCode() != 404) {
+				log.warn("Response from Crowd server was some type of error:" + response.getStatusLine().toString());
+				throw new CrowdPostException(response.getStatusLine().getStatusCode(), node, response
+						.getStatusLine().toString());
+			}
+			*/
 			return node;
 
 		} finally {
+			response.close();
 			httpclient.close();
 		}
 	}
 	
 	public JsonNode pushGroup(JsonNode body) throws Exception {
-		log.trace("pullLastBuild");
+		log.info("pushGroup");
 		JsonNode node = executePost(baseJsonURL + "group" , body);
 		return node;
 	}
 	
-	public JsonNode pushUser(JsonNode body) throws Exception {
-		log.trace("pullLastBuild");
+	public JsonNode pushNestedGroup(JsonNode body, String parentGroupName) throws Exception {
+		log.info("pushNestedGroup");
+		
+		JsonNode aa = this.pullBasicGroupInfo(parentGroupName);
+		System.out.println(aa.asText());
+		
+		JsonNode node = executePost(baseJsonURL + "group/child-group/direct?groupname=" + StringUtils.replace(parentGroupName, " ", "+") , body);
+		return node;
+	}
+	
+	public JsonNode pushUser(JsonNode body, String userName) throws Exception {
+		log.info("pushUser");
 		System.out.println(body.toString());
-		JsonNode node = executePost(baseJsonURL + "user" , body);
+		JsonNode node = executePost(baseJsonURL + "user/group/direct?username=" + userName , body);
 		return node;
 	}
 
 	public JsonNode pullBasicUserInfo(String username) throws Exception {
-		log.trace("pullLastBuild");
+		log.info("pullBasicUserInfo  =  " + username);
 		JsonNode node = executeGet(baseJsonURL + "user?username=" + username);
 		return node;
 	}
 
 	public JsonNode pullBasicGroupInfo(String groupname) throws Exception {
-		log.trace("pullLastBuild");
-		JsonNode node = executeGet(baseJsonURL + "group?groupname=" + groupname);
+		log.info("pullBasicGroupInfo  =  " + groupname);
+		JsonNode node = executeGet(baseJsonURL + "group?groupname=" + StringUtils.replace(groupname, " ", "+"));
 		return node;
 	}
 	
 	public JsonNode getAllCrowdProject() throws Exception {
-		log.trace("pullLastBuild");
+		log.info("getAllCrowdProject");
 		JsonNode node = executeGet(baseJsonURL + "search?entity-type=group");
+		return node;
+	}
+
+	public JsonNode getAllCrowdEntity() throws Exception {
+		log.info("getAllCrowdProject");
+		JsonNode node = executeGet(baseJsonURL + "group/membership");
 		return node;
 	}
 
