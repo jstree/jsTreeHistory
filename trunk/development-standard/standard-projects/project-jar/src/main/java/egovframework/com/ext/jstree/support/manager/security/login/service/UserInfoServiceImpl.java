@@ -9,10 +9,10 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.support.manager.mail.service.SndngMailService;
 import egovframework.com.ext.jstree.support.manager.security.login.dao.UserInfoDao;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
-import egovframework.cop.ems.service.SndngMailService;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService
