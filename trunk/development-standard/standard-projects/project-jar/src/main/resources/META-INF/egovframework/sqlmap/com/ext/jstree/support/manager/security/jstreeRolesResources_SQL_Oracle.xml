@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="rolesResources">
-	<typeAlias alias="SecuredObjectMapping"
-		type="egovframework.com.ext.jstree.support.manager.security.roles.vo.SecuredObjectMapping" />
+	<typeAlias alias="ResourcesRolesManageVo"
+		type="egovframework.com.ext.jstree.support.manager.security.manage.role.vo.ResourcesRolesManageVo" />
 		
 	<sql id="getMetaField">
 		/* getChildNode */
@@ -37,8 +37,8 @@
 		ORDER BY A.C_POSITION ASC
 	</sql>
 	
-	<select id="getChildNode" parameterClass="SecuredObjectMapping"
-		resultClass="SecuredObjectMapping">
+	<select id="getChildNode" parameterClass="ResourcesRolesManageVo"
+		resultClass="ResourcesRolesManageVo">
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user filed */
@@ -53,8 +53,8 @@
 	</select>
      
     
-	<select id="getChildNodeByLeftRight" parameterClass="SecuredObjectMapping"
-		resultClass="SecuredObjectMapping">
+	<select id="getChildNodeByLeftRight" parameterClass="ResourcesRolesManageVo"
+		resultClass="ResourcesRolesManageVo">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		, C_PARENTID
@@ -75,8 +75,8 @@
 	</select>
 
 
-	<select id="searchNodeByString" parameterClass="SecuredObjectMapping"
-		resultClass="SecuredObjectMapping">
+	<select id="searchNodeByString" parameterClass="ResourcesRolesManageVo"
+		resultClass="ResourcesRolesManageVo">
 		/* searchNodeByString */
 		SELECT c_left
 		, c_right
@@ -100,7 +100,7 @@
 	</select>
 
 
-	<update id="alterNode" parameterClass="SecuredObjectMapping">
+	<update id="alterNode" parameterClass="ResourcesRolesManageVo">
 		/* alterNode */
 		UPDATE
 		T_ROLES_RESOURCES
@@ -112,8 +112,8 @@
 	</update>
 
 
-	<select id="getNode" parameterClass="SecuredObjectMapping"
-		resultClass="SecuredObjectMapping">
+	<select id="getNode" parameterClass="ResourcesRolesManageVo"
+		resultClass="ResourcesRolesManageVo">
 		/* getNode */
 		SELECT C_ID
 			 , C_PARENTID
@@ -129,9 +129,16 @@
 		 WHERE C_ID = #c_id#
 	</select>
 
-
-	<select id="getNodeByRef" parameterClass="SecuredObjectMapping"
-		resultClass="SecuredObjectMapping">
+	<select id="getChildCountByParentId" parameterClass="ComprehensiveTree"
+        resultClass="int">
+        /* getChildCountByParentId */
+        SELECT COUNT(*) AS CHILDCOUNTBYPARENTID
+        FROM T_COMPREHENSIVETREE_SPRING
+        WHERE C_PARENTID = #c_id#
+    </select>
+    
+	<select id="getNodeByRef" parameterClass="ResourcesRolesManageVo"
+		resultClass="ResourcesRolesManageVo">
 		/* getNodeByRef */
 		SELECT C_ID
 		, C_PARENTID
@@ -149,7 +156,7 @@
 	</select>
 
 
-	<delete id="removeNode" parameterClass="SecuredObjectMapping">
+	<delete id="removeNode" parameterClass="ResourcesRolesManageVo">
 		/* removeNode */
 		DELETE
 		FROM T_ROLES_RESOURCES
@@ -159,7 +166,7 @@
 	</delete>
 
 
-	<update id="removedAfterLeftFix" parameterClass="SecuredObjectMapping">
+	<update id="removedAfterLeftFix" parameterClass="ResourcesRolesManageVo">
 		/*
 		removedAfterLeftFix */
 		UPDATE T_ROLES_RESOURCES
@@ -169,7 +176,7 @@
 	</update>
 
 
-	<update id="removedAfterRightFix" parameterClass="SecuredObjectMapping">
+	<update id="removedAfterRightFix" parameterClass="ResourcesRolesManageVo">
 		/*
 		removedAfterRightFix */
 		UPDATE T_ROLES_RESOURCES
@@ -179,7 +186,7 @@
 	</update>
 
 
-	<update id="removedAfterPositionFix" parameterClass="SecuredObjectMapping">
+	<update id="removedAfterPositionFix" parameterClass="ResourcesRolesManageVo">
 		/*
 		removedAfterPositionFix */
 		UPDATE T_ROLES_RESOURCES
@@ -191,7 +198,7 @@
 	</update>
 
 
-	<select id="analyzeRootNode" resultClass="SecuredObjectMapping">
+	<select id="analyzeRootNode" resultClass="ResourcesRolesManageVo">
 		/* searchNodeByString
 		*/
 		SELECT C_LEFT
@@ -200,7 +207,7 @@
 	</select>
 
 
-	<update id="cutMyselfPositionFix" parameterClass="SecuredObjectMapping">
+	<update id="cutMyselfPositionFix" parameterClass="ResourcesRolesManageVo">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_ROLES_RESOURCES
 		SET C_POSITION = C_POSITION - 1
@@ -210,7 +217,7 @@
 	</update>
 
 
-	<update id="cutMyselfLeftFix" parameterClass="SecuredObjectMapping">
+	<update id="cutMyselfLeftFix" parameterClass="ResourcesRolesManageVo">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_ROLES_RESOURCES
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
@@ -218,7 +225,7 @@
 	</update>
 
 
-	<update id="cutMyselfRightFix" parameterClass="SecuredObjectMapping">
+	<update id="cutMyselfRightFix" parameterClass="ResourcesRolesManageVo">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_ROLES_RESOURCES
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
@@ -230,7 +237,7 @@
 	</update>
 
 
-	<update id="stretchPositionForMyself" parameterClass="SecuredObjectMapping">
+	<update id="stretchPositionForMyself" parameterClass="ResourcesRolesManageVo">
 		/* stretchPositionForMyselfFromJstree */
 		UPDATE
 		T_ROLES_RESOURCES
@@ -252,7 +259,7 @@
 	</update>
 
 
-	<update id="stretchLeftForMyselfFromJstree" parameterClass="SecuredObjectMapping">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="ResourcesRolesManageVo">
 		/* stretchLeftForMyselfFromJstree */
 		UPDATE T_ROLES_RESOURCES
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
@@ -269,7 +276,7 @@
 	</update>
 
 
-	<update id="stretchRightForMyselfFromJstree" parameterClass="SecuredObjectMapping">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="ResourcesRolesManageVo">
 		/* stretchRightForMyselfFromJstree */
 		UPDATE T_ROLES_RESOURCES
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
@@ -286,7 +293,7 @@
 	</update>
 
 
-	<insert id="pasteMyselfFromJstree" parameterClass="SecuredObjectMapping">
+	<insert id="pasteMyselfFromJstree" parameterClass="ResourcesRolesManageVo">
 		/* pasteMyselfFromJstree */
 		INSERT INTO T_ROLES_RESOURCES (
 		C_ID, C_PARENTID, C_POSITION,
@@ -320,7 +327,7 @@
 	</insert>
 
 
-	<update id="enterMyselfFixPosition" parameterClass="SecuredObjectMapping">
+	<update id="enterMyselfFixPosition" parameterClass="ResourcesRolesManageVo">
 		/*
 		enterMyselfFixPosition */
 		UPDATE T_ROLES_RESOURCES
@@ -331,7 +338,7 @@
 	</update>
 
 
-	<update id="enterMyselfFixLeftRight" parameterClass="SecuredObjectMapping">
+	<update id="enterMyselfFixLeftRight" parameterClass="ResourcesRolesManageVo">
 		/* enterMyselfFixLeftRight */
 		UPDATE T_ROLES_RESOURCES
 		SET
@@ -345,7 +352,7 @@
 		</iterate>
 	</update>
 
-	<insert id="addMyselfFromJstree" parameterClass="SecuredObjectMapping">
+	<insert id="addMyselfFromJstree" parameterClass="ResourcesRolesManageVo">
 		/* addMyselfFromJstree */
 		INSERT INTO T_ROLES_RESOURCES (
 		C_ID, C_PARENTID, C_POSITION,
@@ -361,7 +368,7 @@
 		</selectKey>
 	</insert>
 
-	<update id="alterNodeType" parameterClass="SecuredObjectMapping">
+	<update id="alterNodeType" parameterClass="ResourcesRolesManageVo">
 		/* alterNodeType */
 		UPDATE T_ROLES_RESOURCES
 		SET C_TYPE = #c_type#
@@ -369,7 +376,7 @@
 	</update>
 
 
-	<update id="fixCopyIF" parameterClass="SecuredObjectMapping">
+	<update id="fixCopyIF" parameterClass="ResourcesRolesManageVo">
 		/* fixCopyIF */
 		UPDATE
 		T_ROLES_RESOURCES
@@ -379,7 +386,7 @@
 	</update>
 
 
-	<update id="fixCopy" parameterClass="SecuredObjectMapping">
+	<update id="fixCopy" parameterClass="ResourcesRolesManageVo">
 		/* fixCopy */
 		UPDATE
 		T_ROLES_RESOURCES
@@ -388,4 +395,20 @@
 		#c_id#
 	</update>
 	
+	<select id="getNodeByRoleId" parameterClass="ResourcesRolesManageVo"
+		resultClass="ResourcesRolesManageVo">
+		/* getNode */
+		SELECT C_ID
+			 , C_PARENTID
+			 , C_POSITION
+			 , C_LEFT
+			 , C_RIGHT
+			 , C_LEVEL
+			 , C_TITLE
+			 , C_TYPE
+			 , C_RESOURCES_ID AS resourcesId
+			 , C_ROLES_ID AS rolesId
+		  FROM T_ROLES_RESOURCES
+		 WHERE C_ID = #c_id#
+	</select>
 </sqlMap>

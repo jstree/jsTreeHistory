@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="roles">
-	<typeAlias alias="SecuredObject"
-		type="egovframework.com.ext.jstree.support.manager.security.roles.vo.SecuredObject" />
+	<typeAlias alias="RolesManageVo"
+		type="egovframework.com.ext.jstree.support.manager.security.manage.role.vo.RolesManageVo" />
 		
 	<sql id="getMetaField">
 		/* getChildNode */
@@ -41,8 +41,8 @@
 		ORDER BY A.C_POSITION ASC
 	</sql>
 	
-	<select id="getChildNode" parameterClass="SecuredObject"
-		resultClass="SecuredObject">
+	<select id="getChildNode" parameterClass="RolesManageVo"
+		resultClass="RolesManageVo">
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user filed */
@@ -57,8 +57,8 @@
 	</select>
      
     
-	<select id="getChildNodeByLeftRight" parameterClass="SecuredObject"
-		resultClass="SecuredObject">
+	<select id="getChildNodeByLeftRight" parameterClass="RolesManageVo"
+		resultClass="RolesManageVo">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		, C_PARENTID
@@ -83,8 +83,8 @@
 	</select>
 
 
-	<select id="searchNodeByString" parameterClass="SecuredObject"
-		resultClass="SecuredObject">
+	<select id="searchNodeByString" parameterClass="RolesManageVo"
+		resultClass="RolesManageVo">
 		/* searchNodeByString */
 		SELECT c_left
 		, c_right
@@ -107,8 +107,15 @@
 		</iterate>
 	</select>
 
+    <select id="getChildCountByParentId" parameterClass="ComprehensiveTree"
+        resultClass="int">
+        /* getChildCountByParentId */
+        SELECT COUNT(*) AS CHILDCOUNTBYPARENTID
+        FROM T_COMPREHENSIVETREE_SPRING
+        WHERE C_PARENTID = #c_id#
+    </select>
 
-	<update id="alterNode" parameterClass="SecuredObject">
+	<update id="alterNode" parameterClass="RolesManageVo">
 		/* alterNode */
 		UPDATE
 		T_ROLES
@@ -116,16 +123,14 @@
 		, C_TITLE = #c_title#
 		, C_AUTHORITY = #authority#
 		, C_DESCRIPTION = #description#
-		, C_REG_DT = #regDt#
-		, C_REG_ID = #regId#
 		, C_MOD_DT = #modDt#
 		, C_MOD_ID = #modId#
 		WHERE C_ID = #c_id#
 	</update>
 
 
-	<select id="getNode" parameterClass="SecuredObject"
-		resultClass="SecuredObject">
+	<select id="getNode" parameterClass="RolesManageVo"
+		resultClass="RolesManageVo">
 		/* getNode */
 		SELECT C_ID
 			 , C_PARENTID
@@ -146,8 +151,8 @@
 	</select>
 
 
-	<select id="getNodeByRef" parameterClass="SecuredObject"
-		resultClass="SecuredObject">
+	<select id="getNodeByRef" parameterClass="RolesManageVo"
+		resultClass="RolesManageVo">
 		/* getNodeByRef */
 		SELECT C_ID
 		, C_PARENTID
@@ -169,7 +174,7 @@
 	</select>
 
 
-	<delete id="removeNode" parameterClass="SecuredObject">
+	<delete id="removeNode" parameterClass="RolesManageVo">
 		/* removeNode */
 		DELETE
 		FROM T_ROLES
@@ -179,7 +184,7 @@
 	</delete>
 
 
-	<update id="removedAfterLeftFix" parameterClass="SecuredObject">
+	<update id="removedAfterLeftFix" parameterClass="RolesManageVo">
 		/*
 		removedAfterLeftFix */
 		UPDATE T_ROLES
@@ -189,7 +194,7 @@
 	</update>
 
 
-	<update id="removedAfterRightFix" parameterClass="SecuredObject">
+	<update id="removedAfterRightFix" parameterClass="RolesManageVo">
 		/*
 		removedAfterRightFix */
 		UPDATE T_ROLES
@@ -199,7 +204,7 @@
 	</update>
 
 
-	<update id="removedAfterPositionFix" parameterClass="SecuredObject">
+	<update id="removedAfterPositionFix" parameterClass="RolesManageVo">
 		/*
 		removedAfterPositionFix */
 		UPDATE T_ROLES
@@ -211,7 +216,7 @@
 	</update>
 
 
-	<select id="analyzeRootNode" resultClass="SecuredObject">
+	<select id="analyzeRootNode" resultClass="RolesManageVo">
 		/* searchNodeByString
 		*/
 		SELECT C_LEFT
@@ -220,7 +225,7 @@
 	</select>
 
 
-	<update id="cutMyselfPositionFix" parameterClass="SecuredObject">
+	<update id="cutMyselfPositionFix" parameterClass="RolesManageVo">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_ROLES
 		SET C_POSITION = C_POSITION - 1
@@ -230,7 +235,7 @@
 	</update>
 
 
-	<update id="cutMyselfLeftFix" parameterClass="SecuredObject">
+	<update id="cutMyselfLeftFix" parameterClass="RolesManageVo">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_ROLES
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
@@ -238,7 +243,7 @@
 	</update>
 
 
-	<update id="cutMyselfRightFix" parameterClass="SecuredObject">
+	<update id="cutMyselfRightFix" parameterClass="RolesManageVo">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_ROLES
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
@@ -250,7 +255,7 @@
 	</update>
 
 
-	<update id="stretchPositionForMyself" parameterClass="SecuredObject">
+	<update id="stretchPositionForMyself" parameterClass="RolesManageVo">
 		/* stretchPositionForMyselfFromJstree */
 		UPDATE
 		T_ROLES
@@ -272,7 +277,7 @@
 	</update>
 
 
-	<update id="stretchLeftForMyselfFromJstree" parameterClass="SecuredObject">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="RolesManageVo">
 		/* stretchLeftForMyselfFromJstree */
 		UPDATE T_ROLES
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
@@ -289,7 +294,7 @@
 	</update>
 
 
-	<update id="stretchRightForMyselfFromJstree" parameterClass="SecuredObject">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="RolesManageVo">
 		/* stretchRightForMyselfFromJstree */
 		UPDATE T_ROLES
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
@@ -305,7 +310,7 @@
 		</isEqual>
 	</update>
 
-	<insert id="pasteMyselfFromJstree" parameterClass="SecuredObject">
+	<insert id="pasteMyselfFromJstree" parameterClass="RolesManageVo">
 		/* pasteMyselfFromJstree */
 		INSERT INTO T_ROLES (
 		C_ID, C_PARENTID, C_POSITION,
@@ -344,7 +349,7 @@
 	</insert>
 
 
-	<update id="enterMyselfFixPosition" parameterClass="SecuredObject">
+	<update id="enterMyselfFixPosition" parameterClass="RolesManageVo">
 		/*
 		enterMyselfFixPosition */
 		UPDATE T_ROLES
@@ -355,7 +360,7 @@
 	</update>
 
 
-	<update id="enterMyselfFixLeftRight" parameterClass="SecuredObject">
+	<update id="enterMyselfFixLeftRight" parameterClass="RolesManageVo">
 		/* enterMyselfFixLeftRight */
 		UPDATE T_ROLES
 		SET
@@ -369,7 +374,7 @@
 		</iterate>
 	</update>
 
-	<insert id="addMyselfFromJstree" parameterClass="SecuredObject">
+	<insert id="addMyselfFromJstree" parameterClass="RolesManageVo">
 		/* addMyselfFromJstree */
 		INSERT INTO T_ROLES (
 		C_ID, C_PARENTID, C_POSITION,
@@ -387,7 +392,7 @@
 		</selectKey>
 	</insert>
 
-	<update id="alterNodeType" parameterClass="SecuredObject">
+	<update id="alterNodeType" parameterClass="RolesManageVo">
 		/* alterNodeType */
 		UPDATE T_ROLES
 		SET C_TYPE = #c_type#
@@ -395,7 +400,7 @@
 	</update>
 
 
-	<update id="fixCopyIF" parameterClass="SecuredObject">
+	<update id="fixCopyIF" parameterClass="RolesManageVo">
 		/* fixCopyIF */
 		UPDATE
 		T_ROLES
@@ -405,7 +410,7 @@
 	</update>
 
 
-	<update id="fixCopy" parameterClass="SecuredObject">
+	<update id="fixCopy" parameterClass="RolesManageVo">
 		/* fixCopy */
 		UPDATE
 		T_ROLES

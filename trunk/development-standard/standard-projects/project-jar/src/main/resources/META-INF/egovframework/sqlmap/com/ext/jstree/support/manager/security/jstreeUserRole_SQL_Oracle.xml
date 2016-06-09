@@ -16,7 +16,7 @@
 		, A.C_TYPE
 		/* user filed add point*/
 		, A.C_EMAIL AS email
-		, A.C_ROLE AS role
+		, (SELECT C_AUTHORITY FROM T_ROLES B WHERE A.C_ROLE = B.C_ID) AS role
 	</sql>
 	<sql id="getInlineChildCount">
 		, ( SELECT CASE
@@ -124,7 +124,7 @@
 			 , C_TITLE
 			 , C_TYPE
 			 , C_EMAIL AS email
-			 , C_ROLE AS role
+			 , (SELECT C_AUTHORITY FROM T_ROLES B WHERE A.C_ROLE = B.C_ID) AS role
 		  FROM T_USER_ROLE
 		 WHERE C_ID = #c_id#
 	</select>

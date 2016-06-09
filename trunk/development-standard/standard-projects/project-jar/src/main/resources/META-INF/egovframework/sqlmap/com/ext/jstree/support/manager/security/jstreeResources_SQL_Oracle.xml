@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="resources">
-	<typeAlias alias="SecuredObject"
-		type="egovframework.com.ext.jstree.support.manager.security.roles.vo.SecuredObject" />
+	<typeAlias alias="ResourcesManageVo"
+		type="egovframework.com.ext.jstree.support.manager.security.manage.resource.vo.ResourcesManageVo" />
 		
 	<sql id="getMetaField">
 		/* getChildNode */
@@ -43,8 +43,8 @@
 		ORDER BY A.C_POSITION ASC
 	</sql>
 	
-	<select id="getChildNode" parameterClass="SecuredObject"
-		resultClass="SecuredObject">
+	<select id="getChildNode" parameterClass="ResourcesManageVo"
+		resultClass="ResourcesManageVo">
 		<dynamic>
 			<include refid="getMetaField" />
 			/* user filed */
@@ -59,8 +59,8 @@
 	</select>
      
     
-	<select id="getChildNodeByLeftRight" parameterClass="SecuredObject"
-		resultClass="SecuredObject">
+	<select id="getChildNodeByLeftRight" parameterClass="ResourcesManageVo"
+		resultClass="ResourcesManageVo">
 		/* getChildNodeByLeftRight */
 		SELECT C_ID
 		, C_PARENTID
@@ -87,8 +87,8 @@
 	</select>
 
 
-	<select id="searchNodeByString" parameterClass="SecuredObject"
-		resultClass="SecuredObject">
+	<select id="searchNodeByString" parameterClass="ResourcesManageVo"
+		resultClass="ResourcesManageVo">
 		/* searchNodeByString */
 		SELECT c_left
 		, c_right
@@ -112,7 +112,7 @@
 	</select>
 
 
-	<update id="alterNode" parameterClass="SecuredObject">
+	<update id="alterNode" parameterClass="ResourcesManageVo">
 		/* alterNode */
 		UPDATE
 		T_RESOURCES
@@ -121,18 +121,15 @@
 		, C_PATTERN = #pattern#
 		, C_RESOURCE_TYPE = #resourceType#
 		, C_SORT = #sort#
-		, C_AUTHORITY = #authority#
 		, C_DESCRIPTION = #description#
-		, C_REG_DT = #regDt#
-		, C_REG_ID = #regId#
 		, C_MOD_DT = #modDt#
 		, C_MOD_ID = #modId#
 		WHERE C_ID = #c_id#
 	</update>
 
 
-	<select id="getNode" parameterClass="SecuredObject"
-		resultClass="SecuredObject">
+	<select id="getNode" parameterClass="ResourcesManageVo"
+		resultClass="ResourcesManageVo">
 		/* getNode */
 		SELECT C_ID
 			 , C_PARENTID
@@ -154,8 +151,8 @@
 	</select>
 
 
-	<select id="getNodeByRef" parameterClass="SecuredObject"
-		resultClass="SecuredObject">
+	<select id="getNodeByRef" parameterClass="ResourcesManageVo"
+		resultClass="ResourcesManageVo">
 		/* getNodeByRef */
 		SELECT C_ID
 		, C_PARENTID
@@ -179,7 +176,7 @@
 	</select>
 
 
-	<delete id="removeNode" parameterClass="SecuredObject">
+	<delete id="removeNode" parameterClass="ResourcesManageVo">
 		/* removeNode */
 		DELETE
 		FROM T_RESOURCES
@@ -188,8 +185,15 @@
 		&lt;= #c_right#
 	</delete>
 
+	<select id="getChildCountByParentId" parameterClass="ComprehensiveTree"
+        resultClass="int">
+        /* getChildCountByParentId */
+        SELECT COUNT(*) AS CHILDCOUNTBYPARENTID
+        FROM T_COMPREHENSIVETREE_SPRING
+        WHERE C_PARENTID = #c_id#
+    </select>
 
-	<update id="removedAfterLeftFix" parameterClass="SecuredObject">
+	<update id="removedAfterLeftFix" parameterClass="ResourcesManageVo">
 		/*
 		removedAfterLeftFix */
 		UPDATE T_RESOURCES
@@ -199,7 +203,7 @@
 	</update>
 
 
-	<update id="removedAfterRightFix" parameterClass="SecuredObject">
+	<update id="removedAfterRightFix" parameterClass="ResourcesManageVo">
 		/*
 		removedAfterRightFix */
 		UPDATE T_RESOURCES
@@ -209,7 +213,7 @@
 	</update>
 
 
-	<update id="removedAfterPositionFix" parameterClass="SecuredObject">
+	<update id="removedAfterPositionFix" parameterClass="ResourcesManageVo">
 		/*
 		removedAfterPositionFix */
 		UPDATE T_RESOURCES
@@ -221,7 +225,7 @@
 	</update>
 
 
-	<select id="analyzeRootNode" resultClass="SecuredObject">
+	<select id="analyzeRootNode" resultClass="ResourcesManageVo">
 		/* searchNodeByString
 		*/
 		SELECT C_LEFT
@@ -230,7 +234,7 @@
 	</select>
 
 
-	<update id="cutMyselfPositionFix" parameterClass="SecuredObject">
+	<update id="cutMyselfPositionFix" parameterClass="ResourcesManageVo">
 		/* cutMyselfPositionFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_RESOURCES
 		SET C_POSITION = C_POSITION - 1
@@ -240,7 +244,7 @@
 	</update>
 
 
-	<update id="cutMyselfLeftFix" parameterClass="SecuredObject">
+	<update id="cutMyselfLeftFix" parameterClass="ResourcesManageVo">
 		/* cutMyselfLeftFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_RESOURCES
 		SET C_LEFT = C_LEFT - #spaceOfTargetNode#
@@ -248,7 +252,7 @@
 	</update>
 
 
-	<update id="cutMyselfRightFix" parameterClass="SecuredObject">
+	<update id="cutMyselfRightFix" parameterClass="ResourcesManageVo">
 		/* cutMyselfRightFix moveNode case. parameterClass is nodeById*/
 		UPDATE T_RESOURCES
 		SET C_RIGHT = C_RIGHT - #spaceOfTargetNode#
@@ -260,7 +264,7 @@
 	</update>
 
 
-	<update id="stretchPositionForMyself" parameterClass="SecuredObject">
+	<update id="stretchPositionForMyself" parameterClass="ResourcesManageVo">
 		/* stretchPositionForMyselfFromJstree */
 		UPDATE
 		T_RESOURCES
@@ -282,7 +286,7 @@
 	</update>
 
 
-	<update id="stretchLeftForMyselfFromJstree" parameterClass="SecuredObject">
+	<update id="stretchLeftForMyselfFromJstree" parameterClass="ResourcesManageVo">
 		/* stretchLeftForMyselfFromJstree */
 		UPDATE T_RESOURCES
 		SET C_LEFT = C_LEFT + #spaceOfTargetNode#
@@ -299,7 +303,7 @@
 	</update>
 
 
-	<update id="stretchRightForMyselfFromJstree" parameterClass="SecuredObject">
+	<update id="stretchRightForMyselfFromJstree" parameterClass="ResourcesManageVo">
 		/* stretchRightForMyselfFromJstree */
 		UPDATE T_RESOURCES
 		SET C_RIGHT = C_RIGHT + #spaceOfTargetNode#
@@ -315,7 +319,7 @@
 		</isEqual>
 	</update>
 
-	<insert id="pasteMyselfFromJstree" parameterClass="SecuredObject">
+	<insert id="pasteMyselfFromJstree" parameterClass="ResourcesManageVo">
 		/* pasteMyselfFromJstree */
 		INSERT INTO T_RESOURCES (
 		C_ID, C_PARENTID, C_POSITION,
@@ -356,7 +360,7 @@
 	</insert>
 
 
-	<update id="enterMyselfFixPosition" parameterClass="SecuredObject">
+	<update id="enterMyselfFixPosition" parameterClass="ResourcesManageVo">
 		/*
 		enterMyselfFixPosition */
 		UPDATE T_RESOURCES
@@ -367,7 +371,7 @@
 	</update>
 
 
-	<update id="enterMyselfFixLeftRight" parameterClass="SecuredObject">
+	<update id="enterMyselfFixLeftRight" parameterClass="ResourcesManageVo">
 		/* enterMyselfFixLeftRight */
 		UPDATE T_RESOURCES
 		SET
@@ -381,7 +385,7 @@
 		</iterate>
 	</update>
 		
-	<insert id="addMyselfFromJstree" parameterClass="SecuredObject">
+	<insert id="addMyselfFromJstree" parameterClass="ResourcesManageVo">
 		/* addMyselfFromJstree */
 		INSERT INTO T_RESOURCES (
 		C_ID, C_PARENTID, C_POSITION,
@@ -399,7 +403,7 @@
 		</selectKey>
 	</insert>
 
-	<update id="alterNodeType" parameterClass="SecuredObject">
+	<update id="alterNodeType" parameterClass="ResourcesManageVo">
 		/* alterNodeType */
 		UPDATE T_RESOURCES
 		SET C_TYPE = #c_type#
@@ -407,7 +411,7 @@
 	</update>
 
 
-	<update id="fixCopyIF" parameterClass="SecuredObject">
+	<update id="fixCopyIF" parameterClass="ResourcesManageVo">
 		/* fixCopyIF */
 		UPDATE
 		T_RESOURCES
@@ -417,7 +421,7 @@
 	</update>
 
 
-	<update id="fixCopy" parameterClass="SecuredObject">
+	<update id="fixCopy" parameterClass="ResourcesManageVo">
 		/* fixCopy */
 		UPDATE
 		T_RESOURCES
@@ -426,4 +430,14 @@
 		#c_id#
 	</update>
 	
+	<select id="getRoleInResoures" parameterClass="ResourcesManageVo"
+	resultClass="ResourcesManageVo">
+		<dynamic>
+			<include refid="getMetaField" />
+			,  B.C_ROLES_ID AS ROLEID
+			  FROM T_RESOURCES A, T_ROLES_RESOURCES B
+			 WHERE A.C_ID = B.C_RESOURCES_ID(+)
+			   AND A.C_PARENTID = #c_parentid#
+		</dynamic>
+	</select>
 </sqlMap>
