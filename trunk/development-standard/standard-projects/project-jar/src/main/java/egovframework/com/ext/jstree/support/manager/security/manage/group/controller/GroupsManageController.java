@@ -8,6 +8,9 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.security.login.service.UserInfoService;
@@ -28,6 +31,8 @@ public class GroupsManageController extends GenericAbstractController
     @Resource(name = "rolesManageService")
     RolesManageService rolesManageService;
     
+    @ResponseBody
+    @RequestMapping(value="/getResourceInfo", method=RequestMethod.GET)
     public Map<String, Object> getUserRoleInfo(ModelMap map) throws Exception
     {
         Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -38,8 +43,8 @@ public class GroupsManageController extends GenericAbstractController
         return resultMap;
     }
     
-    
-    
+    @ResponseBody
+    @RequestMapping(value="/mergeGroupsInfo", method=RequestMethod.POST)
     public UserRole mergeGroupsInfo(UserRole userRole) throws Exception
     {
         groupsManageService.mergeGroupsInfo(userRole);
