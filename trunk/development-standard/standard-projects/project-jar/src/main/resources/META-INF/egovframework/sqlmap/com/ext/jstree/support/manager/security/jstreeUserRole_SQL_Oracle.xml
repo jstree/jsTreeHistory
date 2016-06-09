@@ -17,6 +17,7 @@
 		/* user filed add point*/
 		, A.C_EMAIL AS email
 		, (SELECT C_AUTHORITY FROM T_ROLES B WHERE A.C_ROLE = B.C_ID) AS role
+		, A.C_ROLE AS ROLEID
 	</sql>
 	<sql id="getInlineChildCount">
 		, ( SELECT CASE
@@ -65,7 +66,7 @@
 		, C_TITLE
 		, C_TYPE
 		, C_EMAIL AS email
-		, C_ROLE AS role
+		, C_ROLE AS roleId
 		FROM
 		T_USER_ROLE
 		WHERE C_LEFT &gt;= #c_left#
@@ -107,7 +108,7 @@
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
 		, C_EMAIL = #email#
-		, C_ROLE = #role#
+		, C_ROLE = #roleId#
 		WHERE C_ID = #c_id#
 	</update>
 
@@ -125,6 +126,7 @@
 			 , C_TYPE
 			 , C_EMAIL AS email
 			 , (SELECT C_AUTHORITY FROM T_ROLES B WHERE A.C_ROLE = B.C_ID) AS role
+			 , A.C_ROLE AS ROLEID
 		  FROM T_USER_ROLE
 		 WHERE C_ID = #c_id#
 	</select>
@@ -142,7 +144,7 @@
 		, C_TITLE
 		, C_TYPE
 		, C_EMAIL AS email
-		, C_ROLE AS role
+		, C_ROLE AS roleId
 		FROM
 		T_USER_ROLE
 		WHERE C_ID = #ref#
@@ -168,6 +170,13 @@
 		WHERE C_LEFT &gt; #c_right#
 	</update>
 
+	<select id="getChildCountByParentId" parameterClass="ComprehensiveTree"
+        resultClass="int">
+        /* getChildCountByParentId */
+        SELECT COUNT(*) AS CHILDCOUNTBYPARENTID
+        FROM T_COMPREHENSIVETREE_SPRING
+        WHERE C_PARENTID = #c_id#
+    </select>
 
 	<update id="removedAfterRightFix" parameterClass="UserRole">
 		/*
@@ -347,10 +356,10 @@
 		/* addMyselfFromJstree */
 		INSERT INTO T_USER_ROLE (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_EMAIL )
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_EMAIL, C_ROLE )
 		VALUES (
 		S_USER_ROLE.NEXTVAL, #c_parentid#, #c_position#, 
-		#c_left#, #c_right#, #c_level#, #c_title#, #email#, #role#)
+		#c_left#, #c_right#, #c_level#, #c_title#, #email#, #roleId#)
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT

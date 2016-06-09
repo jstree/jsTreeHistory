@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.service.ResourcesManageService;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.vo.ResourcesManageVo;
 
 @Controller
 @RequestMapping(value="/admin/manage/resource")
-public class ResourcesManageController
+public class ResourcesManageController extends GenericAbstractController
 {
     
     @Resource(name="resourcesManageService")

@@ -15,6 +15,8 @@
  */
 package egovframework.com.ext.jstree.support.manager.security.login.dao;
 
+import java.util.List;
+
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
 
@@ -51,5 +53,8 @@ public interface UserInfoDao
 	void updateUseYnByUuid(UserInfo userInfo) throws Exception;
 	
 	void updatePassword(UserInfo userInfo) throws Exception;
+	
+	List<UserRole> getUserRoleInfo() throws Exception;
+	
 	
 }

@@ -1,16 +1,17 @@
 package egovframework.com.ext.jstree.support.manager.security.manage.group.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
-import egovframework.com.ext.jstree.support.manager.aop.util.DateUtils;
+import egovframework.com.ext.jstree.support.manager.security.login.service.UserInfoService;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
 import egovframework.com.ext.jstree.support.manager.security.manage.group.service.GroupsManageService;
-import egovframework.com.ext.jstree.support.manager.security.roles.vo.SecuredObject;
 
 @Service(value="groupsManageService")
 public class GroupsManageServiceImpl implements GroupsManageService
@@ -19,31 +20,36 @@ public class GroupsManageServiceImpl implements GroupsManageService
     @Resource(name = "CoreService")
     private CoreService coreService;
     
+    @Autowired
+    UserInfoService userInfoService;
+    
     @Override
-    public List<SecuredObject> getGroupsInfo(SecuredObject securedObject) throws Exception
+    public List<UserRole> getGroupsInfo(UserRole userRole) throws Exception
     {
-        return coreService.getChildNode(securedObject);
+        return coreService.getChildNode(userRole);
     }
 
     @Override
-    public SecuredObject insertGroupsInfo(SecuredObject securedObject) throws Exception
+    public int deleteGroupsInfo(UserRole userRole) throws Exception
     {
-        securedObject.setRegDt(DateUtils.dateToString("yyyyMMddHHmmss", new Date()));
-        securedObject.setModDt(" ");
-        securedObject.setModId(" ");
-        return coreService.addNode(securedObject);
+        return coreService.removeNode(userRole);
     }
-
-    @Override
-    public int updateGroupsInfo(SecuredObject securedObject) throws Exception
+    
+    public int mergeGroupsInfo(UserRole userRole) throws Exception
     {
-        securedObject.setModDt(DateUtils.dateToString("yyyyMMddHHmmss", new Date()));
-        return coreService.alterNode(securedObject);
-    }
-
-    @Override
-    public int deleteGroupsInfo(SecuredObject securedObject) throws Exception
-    {
-        return coreService.removeNode(securedObject);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setC_id(userRole.getEmail());
+        UserRole resultVo = userInfoService.getUserRole(userInfo);
+        if (resultVo == null)
+        {
+            coreService.addNode(userRole);
+        }
+        else
+        {
+            resultVo.setEmail(userRole.getEmail());
+            resultVo.setRoleId(userRole.getRoleId());
+            coreService.alterNode(resultVo);
+        }
+        return 1;
     }
 }

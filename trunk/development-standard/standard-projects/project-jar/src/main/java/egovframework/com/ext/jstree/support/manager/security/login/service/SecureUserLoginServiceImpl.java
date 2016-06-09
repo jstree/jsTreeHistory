@@ -85,6 +85,9 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
         try
         {
             role = userInfoService.getUserRole(userInfo);
+            if(role == null){
+                throw new Exception();
+            }
         }
         catch (Exception e)
         {

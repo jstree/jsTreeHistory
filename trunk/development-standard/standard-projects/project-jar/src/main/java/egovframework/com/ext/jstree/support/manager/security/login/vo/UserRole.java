@@ -13,6 +13,8 @@ public class UserRole extends ComprehensiveTree implements GrantedAuthority
     
     private String role;
     
+    private int roleId;
+    
     public int getEmail()
     {
         return email;
@@ -33,6 +35,16 @@ public class UserRole extends ComprehensiveTree implements GrantedAuthority
         this.role = role;
     }
     
+    public int getRoleId()
+    {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId)
+    {
+        this.roleId = roleId;
+    }
+
     @Override
     public String getAuthority()
     {

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.service.ResourcesManageService;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.vo.ResourcesManageVo;
 import egovframework.com.ext.jstree.support.manager.security.manage.role.service.ResourcesRolesManageService;
@@ -17,7 +18,7 @@ import egovframework.com.ext.jstree.support.manager.security.manage.role.vo.Reso
 import egovframework.com.ext.jstree.support.manager.security.manage.role.vo.RolesManageVo;
 
 @Controller
-public class RolesManageController
+public class RolesManageController extends GenericAbstractController
 {
     @Resource(name = "rolesManageService")
     private RolesManageService rolesManageService;

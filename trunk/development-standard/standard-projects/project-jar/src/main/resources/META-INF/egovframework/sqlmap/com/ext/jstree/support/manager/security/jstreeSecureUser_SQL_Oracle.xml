@@ -447,4 +447,15 @@
 		WHERE C_PASSWORD = #oldPassword#
 	</update>
 	
+	<select id="getUserRoleInfo" resultClass="SecureUser">
+		<dynamic>
+			<include refid="getMetaField" />
+			, (SELECT C_ROLE
+          FROM T_USER_ROLE B
+         WHERE A.C_ID = B.C_EMAIL) AS AUTHORITY
+			FROM T_SECURE_USER A
+			WHERE C_USE_YN = 'Y'
+			  AND C_PARENTID = 2 
+		</dynamic>
+	</select>
 </sqlMap>
