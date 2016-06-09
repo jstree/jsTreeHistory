@@ -56,14 +56,21 @@ public abstract class GenericAbstractController {
 		response.setHeader("Cache-Control", "must-revalidate, no-store, no-cache");
 		response.addHeader("Cache-Control", "post-check=0, pre-check=0");
 		response.setHeader("Pragma", "no-cache");
-
+		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-
-		if (StringUtils.equals(request.getHeader("customHeader"), "ajax")) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", 0);
+		Gson gson = new GsonBuilder().serializeNulls().create();
+                out.println(gson.toJson(map));
+                out.flush();
+                out.close();
+                return;
+/*		if (StringUtils.equals(request.getHeader("customHeader"), "ajax")) {
 			response.setContentType("application/json; charset=UTF-8");
 
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("result", false);
+			map.put("status", 0);
 			// map.put("message",
 			// egovMessageSource.getMessage(ex.getMessage(),
 			// ex.getStackTrace(), "", request));
@@ -93,7 +100,7 @@ public abstract class GenericAbstractController {
 				out.println("parent.warning(getMessage(\"" + ex.getMessage() + "\"))");
 				out.println("</script></body></html>");
 			}
-		}
+		}*/
 
 	}
 
@@ -108,10 +115,17 @@ public abstract class GenericAbstractController {
 		response.setHeader("Cache-Control", "must-revalidate, no-store, no-cache");
 		response.addHeader("Cache-Control", "post-check=0, pre-check=0");
 		response.setHeader("Pragma", "no-cache");
+                response.setContentType("application/json; charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("status", 0);
+                Gson gson = new GsonBuilder().serializeNulls().create();
+                out.println(gson.toJson(map));
+                out.flush();
+                out.close();
+                return;
 
-		PrintWriter out = response.getWriter();
-
-		if (StringUtils.equals(request.getHeader("customHeader"), "ajax")) {
+		/*if (StringUtils.equals(request.getHeader("customHeader"), "ajax")) {
 
 			response.setContentType("application/json; charset=UTF-8");
 
@@ -140,7 +154,7 @@ public abstract class GenericAbstractController {
 			out.println("alert('fail system command : " + StringUtils.remove(ex.getMessage(), "'") + "');");
 
 			out.println("</script></body></html>");
-		}
+		}*/
 	}
 
 }
