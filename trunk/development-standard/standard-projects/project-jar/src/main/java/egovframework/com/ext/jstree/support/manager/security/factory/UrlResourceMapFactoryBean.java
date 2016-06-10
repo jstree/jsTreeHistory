@@ -15,7 +15,7 @@ public class UrlResourceMapFactoryBean implements
 		FactoryBean<LinkedHashMap<RequestMatcher, List<ConfigAttribute>>> {
 
 	@Resource(name = "urlResourceMapService")
-	SecuredObjectService<RequestMatcher, List<ConfigAttribute>> urlResourceMapService;
+	private SecuredObjectService<RequestMatcher, List<ConfigAttribute>> urlResourceMapService;
 
 	private LinkedHashMap<RequestMatcher, List<ConfigAttribute>> resultMap;
 
