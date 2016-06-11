@@ -45,15 +45,23 @@ public class ResourcesManageController extends GenericAbstractController
     
     @ResponseBody
     @RequestMapping(value="/updateResourceInfo", method=RequestMethod.POST)
-    public int updateResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception
+    public ResourcesManageVo updateResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception
     {
-        return resourceManageService.updateResourceInfo(resourcesManageVo);
+        resourceManageService.updateResourceInfo(resourcesManageVo);
+        
+        ResourcesManageVo result = new ResourcesManageVo();
+        result.setStatus(1);
+        return result;
     }
     
     @ResponseBody
     @RequestMapping(value="/deleteResourceInfo", method=RequestMethod.POST)
-    public int deleteResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception
+    public ResourcesManageVo deleteResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception
     {
-        return resourceManageService.deleteResourceInfo(resourcesManageVo);
+        resourceManageService.deleteResourceInfo(resourcesManageVo);
+        
+        ResourcesManageVo result = new ResourcesManageVo();
+        result.setStatus(1);
+        return result;
     }
 }

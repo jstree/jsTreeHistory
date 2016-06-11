@@ -52,17 +52,24 @@ public class RolesManageController extends GenericAbstractController
     
     @ResponseBody
     @RequestMapping(value = "/updateRolesInfo", method = RequestMethod.POST)
-    public int updateRolesInfo(RolesManageVo rolesManageVo) throws Exception
+    public RolesManageVo updateRolesInfo(RolesManageVo rolesManageVo) throws Exception
     {
-        return rolesManageService.updateRolesInfo(rolesManageVo);
+        rolesManageService.updateRolesInfo(rolesManageVo);
+        
+        RolesManageVo result = new RolesManageVo();
+        result.setStatus(1);
+        return result;
     }
     
     @ResponseBody
     @RequestMapping(value = "/deleteRolesInfo", method = RequestMethod.POST)
-    public int deleteRolesInfo(RolesManageVo rolesManageVo) throws Exception
+    public RolesManageVo deleteRolesInfo(RolesManageVo rolesManageVo) throws Exception
     {
-        rolesManageVo.setSqlMapSelector("roles");
-        return rolesManageService.deleteRolesInfo(rolesManageVo);
+        rolesManageService.deleteRolesInfo(rolesManageVo);
+
+        RolesManageVo result = new RolesManageVo();
+        result.setStatus(1);
+        return result;
     }
     
     @ResponseBody
@@ -78,8 +85,9 @@ public class RolesManageController extends GenericAbstractController
     public ResourcesRolesManageVo updateRoleInResources(List<ResourcesRolesManageVo> resourcesRolesManageList) throws Exception
     {
         resourcesRolesManageService.updateRoleInResources(resourcesRolesManageList);
-        ResourcesRolesManageVo resourcesRolesManageVo = new ResourcesRolesManageVo();
-        resourcesRolesManageVo.setStatus(1);
-        return resourcesRolesManageVo;
+        
+        ResourcesRolesManageVo result = new ResourcesRolesManageVo();
+        result.setStatus(1);
+        return result;
     }
 }
