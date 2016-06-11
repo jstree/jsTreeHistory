@@ -299,7 +299,7 @@
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_RESOURCES_ID, ROLES_ID
 		)
-		SELECT S_USER_ROLE.NEXTVAL AS C_ID
+		SELECT S_ROLES_RESOURCES.NEXTVAL AS C_ID
 		, A.*
 		FROM (
 		SELECT
@@ -321,7 +321,7 @@
 		) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-			SELECT S_USER_ROLE.CURRVAL AS SEQ
+			SELECT S_ROLES_RESOURCES.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -358,12 +358,12 @@
 		C_ID, C_PARENTID, C_POSITION,
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_RESOURCES_ID, C_ROLES_ID )
 		VALUES (
-		S_USER_ROLE.NEXTVAL, #c_parentid#, #c_position#, 
+		S_ROLES_RESOURCES.NEXTVAL, #c_parentid#, #c_position#, 
 		#c_left#, #c_right#, #c_level#, #c_title#, #resourcesId#, #rolesId#)
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
-			S_USER_ROLE.CURRVAL AS SEQ
+			S_ROLES_RESOURCES.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>

@@ -326,7 +326,7 @@
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_PATTERN, C_DESCRIPTION,
 		C_RESOURCE_TYPE, C_SORT, C_REG_DT, C_REG_ID, C_MOD_DT, C_MOD_ID
 		)
-		SELECT S_USER_ROLE.NEXTVAL AS C_ID
+		SELECT S_RESOURCES.NEXTVAL AS C_ID
 		, A.*
 		FROM (
 		SELECT
@@ -354,7 +354,7 @@
 		) A
 		<selectKey resultClass="java.lang.Integer">
 			/* pasteMyselfFromJstree SEQ */
-			SELECT S_USER_ROLE.CURRVAL AS SEQ
+			SELECT S_RESOURCES.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
@@ -392,13 +392,13 @@
 		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_PATTERN, C_DESCRIPTION,
 		C_RESOURCE_TYPE, C_SORT, C_REG_DT, C_REG_ID, C_MOD_DT, C_MOD_ID )
 		VALUES (
-		S_USER_ROLE.NEXTVAL, #c_parentid#, #c_position#, 
+		S_RESOURCES.NEXTVAL, #c_parentid#, #c_position#, 
 		#c_left#, #c_right#, #c_level#, #c_title#, #pattern#, #description#,
 		#resourceType#, #sort#, #regDt#, #regId#, #modDt#, #modId#)
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
-			S_USER_ROLE.CURRVAL AS SEQ
+			S_RESOURCES.CURRVAL AS SEQ
 			FROM DUAL
 		</selectKey>
 	</insert>
