@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
+import egovframework.com.ext.jstree.support.manager.security.interceptor.CustomFilterInvocationSecurityMetadataSource;
 import egovframework.com.ext.jstree.support.manager.security.login.service.UserInfoService;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
@@ -24,6 +25,9 @@ public class GroupsManageServiceImpl implements GroupsManageService
     
     @Autowired
     UserInfoService userInfoService;
+    
+    @Autowired
+    CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
     
     @Override
     public List<UserInfo> getGroupsInfo(UserInfo userInfo) throws Exception
@@ -41,6 +45,8 @@ public class GroupsManageServiceImpl implements GroupsManageService
         }
         userInfo.setRoles(StringUtils.join(result, ","));
         userInfoService.updateGroupsInfo(userInfo);
+        
+        customFilterInvocationSecurityMetadataSource.reload();
         return 1;
     }
 }
