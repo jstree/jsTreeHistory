@@ -13,7 +13,6 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.mail.service.SndngMailService;
 import egovframework.com.ext.jstree.support.manager.security.login.dao.UserInfoDao;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
-import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService
@@ -49,14 +48,6 @@ public class UserInfoServiceImpl implements UserInfoService
     }
     
     @Override
-    public UserRole getUserRole(UserInfo userInfo) throws Exception
-    {
-        UserRole role = new UserRole();
-        role.setEmail(userInfo.getC_id());
-        return userInfoDao.getUserRole(role);
-    }
-    
-    @Override
     public String updatePassword(UserInfo userInfo) throws Exception
     {
         String status = "";
@@ -88,9 +79,15 @@ public class UserInfoServiceImpl implements UserInfoService
         userInfoDao.updateUseYnByUuid(userInfo);
     }
     
-    @Override
-    public List<UserRole> getUserRoleInfo() throws Exception
+    public int updateGroupsInfo(UserInfo userInfo) throws Exception
     {
-        return userInfoDao.getUserRoleInfo();
+        UserInfo vo = coreService.getNode(userInfo);
+        vo.setRoles(userInfo.getRoles());
+        return coreService.alterNode(vo);
+    }
+    
+    public List<UserInfo> getChildNode(UserInfo userInfo) throws Exception
+    {
+        return coreService.getChildNode(userInfo);
     }
 }

@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -79,23 +80,25 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
         return secureLogInUser;
     }
     
-    private void setRoles(UserInfo userInfo)
+    private void setRoles(UserInfo userInfo) throws RuntimeException
     {
-        UserRole role = null;
-        try
+        List<UserRole> roles = new ArrayList<UserRole>();
+        String[] roleArr = StringUtils.split(userInfo.getRoles(), ",");
+        
+        if (roleArr != null && roleArr.length != 0)
         {
-            role = userInfoService.getUserRole(userInfo);
-            if(role == null){
-                throw new Exception();
+            for (String role : roleArr)
+            {
+                UserRole userRole = new UserRole();
+                userRole.setRole(role);
+                roles.add(userRole);
             }
         }
-        catch (Exception e)
+        else
         {
-            role = new UserRole();
-            role.setRole("ROLE_ANONYMOUS");
+            UserRole userRole = new UserRole();
+            userRole.setRole("ROLE_ANONYMOUS");
+            roles.add(userRole);
         }
-        List<UserRole> roles = new ArrayList<UserRole>();
-        roles.add(role);
-        userInfo.setAuthorities(roles);
     }
 }

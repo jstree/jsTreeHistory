@@ -11,14 +11,14 @@ public interface UserInfoService
     
     public void updateUserInfo(UserInfo userInfo) throws Exception;
     
-    public UserRole getUserRole(UserInfo userInfo) throws Exception;
-    
     public String updatePassword(UserInfo userInfo) throws Exception;
     
     public UserInfo getUserByUuid(UserInfo userInfo) throws Exception;
     
     void updateUseYnByUuid(UserInfo userInfo) throws Exception;
     
-    List<UserRole> getUserRoleInfo() throws Exception;
+    public int updateGroupsInfo(UserInfo userInfo) throws Exception;
+    
+    public List<UserInfo> getChildNode(UserInfo userInfo) throws Exception;
     
 }

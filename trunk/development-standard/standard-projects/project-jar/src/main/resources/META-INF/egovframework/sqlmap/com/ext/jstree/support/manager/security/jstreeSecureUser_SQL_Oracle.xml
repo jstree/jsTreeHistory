@@ -19,6 +19,7 @@
 		, A.C_EMAIL AS email
 		, A.C_UUID AS uuid
 		, A.C_USE_YN AS useYN
+		, A.C_ROLES AS roles
 		, A.C_LOGIN_FAILURE_CNT AS loginFailureCnt
 		, A.C_JOIN_DT AS joinDt
 		, A.C_LAST_LOGIN_DT AS lastLoginDt
@@ -81,6 +82,7 @@
 		, C_EMAIL AS email
 		, C_UUID AS uuid
 		, C_USE_YN AS useYN
+		, C_ROLES AS roles
 		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
 		, C_JOIN_DT AS joinDt
 		, C_LAST_LOGIN_DT AS lastLoginDt
@@ -128,6 +130,7 @@
 		, C_EMAIL = #email#
 		, C_UUID = #uuid#
 		, C_USE_YN = #useYN#
+		, C_ROLES = #roles#
 		, C_LOGIN_FAILURE_CNT = #loginFailureCnt#
 		, C_JOIN_DT = TO_CHAR(SYSDATE,'yyyymmddhh24miss')
 		, C_LAST_LOGIN_DT = #lastLoginDt#
@@ -150,6 +153,7 @@
 			 , C_EMAIL AS email
 			 , C_UUID AS uuid
 			 , C_USE_YN AS useYN
+			 , C_ROLES AS roles
 			 , C_LOGIN_FAILURE_CNT AS loginFailureCnt
  			 , C_JOIN_DT AS joinDt
  			 , C_LAST_LOGIN_DT AS lastLoginDt
@@ -173,6 +177,7 @@
 		, C_EMAIL AS email
 		, C_UUID AS uuid
 		, C_USE_YN AS useYN
+		, C_ROLES AS roles
 		, C_LOGIN_FAILURE_CNT AS loginFailureCnt
 		, C_JOIN_DT AS joinDt
 		, C_LAST_LOGIN_DT AS lastLoginDt
@@ -380,10 +385,10 @@
 		/* addMyselfFromJstree */
 		INSERT INTO T_SECURE_USER (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_PASSWORD, C_EMAIL, C_UUID, C_LOGIN_FAILURE_CNT, C_JOIN_DT, C_LAST_LOGIN_DT )
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_PASSWORD, C_EMAIL, , C_UUID, C_LOGIN_FAILURE_CNT, C_JOIN_DT, C_LAST_LOGIN_DT, C_ROLES )
 		VALUES (
 		S_SECURE_USER.NEXTVAL, #c_parentid#, #c_position#, 
-		#c_left#, #c_right#, #c_level#, #c_title#, #password#, #email#, #uuid#, #loginFailureCnt#, TO_CHAR(SYSDATE,'yyyymmddhh24miss'), #lastLoginDt#)
+		#c_left#, #c_right#, #c_level#, #c_title#, #password#, #email#, #uuid#, #loginFailureCnt#, TO_CHAR(SYSDATE,'yyyymmddhh24miss'), #lastLoginDt#, #roles#)
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */
 			SELECT
@@ -447,15 +452,4 @@
 		WHERE C_PASSWORD = #oldPassword#
 	</update>
 	
-	<select id="getUserRoleInfo" resultClass="SecureUser">
-		<dynamic>
-			<include refid="getMetaField" />
-			, (SELECT C_ROLE
-          FROM T_USER_ROLE B
-         WHERE A.C_ID = B.C_EMAIL) AS AUTHORITY
-			FROM T_SECURE_USER A
-			WHERE C_USE_YN = 'Y'
-			  AND C_PARENTID = 2 
-		</dynamic>
-	</select>
 </sqlMap>

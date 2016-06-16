@@ -1,5 +1,7 @@
 package egovframework.com.ext.jstree.support.manager.security.manage.role.vo;
 
+import java.util.List;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -11,6 +13,10 @@ public class RolesManageVo extends ComprehensiveTree
     private String description;
     
     private String authority;
+    
+    private List<String> resources;
+    
+    private String resourcesStr;
     
     private String regId;
     
@@ -78,6 +84,26 @@ public class RolesManageVo extends ComprehensiveTree
     public void setModDt(String modDt)
     {
         this.modDt = modDt;
+    }
+    
+    public List<String> getResources()
+    {
+        return resources;
+    }
+    
+    public void setResources(List<String> resources)
+    {
+        this.resources = resources;
+    }
+    
+    public String getResourcesStr()
+    {
+        return resourcesStr;
+    }
+    
+    public void setResourcesStr(String resourcesStr)
+    {
+        this.resourcesStr = resourcesStr;
     }
     
     @Override

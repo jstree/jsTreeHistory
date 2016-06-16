@@ -2,16 +2,13 @@ package egovframework.com.ext.jstree.support.manager.security.manage.group.servi
 
 import java.util.List;
 
-import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
-import egovframework.com.ext.jstree.support.manager.security.roles.vo.SecuredObject;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
 
 
 public interface GroupsManageService
 {
     
-    public List<UserRole> getGroupsInfo(UserRole userRole) throws Exception;
+    public List<UserInfo> getGroupsInfo(UserInfo userInfo) throws Exception;
     
-    public int deleteGroupsInfo(UserRole userRole) throws Exception;
-    
-    public int mergeGroupsInfo(UserRole userRole) throws Exception;
+    public int updateGroupsInfo(UserInfo userInfo) throws Exception;
 }

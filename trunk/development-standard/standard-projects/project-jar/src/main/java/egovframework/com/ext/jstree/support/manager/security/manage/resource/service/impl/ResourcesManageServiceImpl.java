@@ -12,8 +12,6 @@ import egovframework.com.ext.jstree.support.manager.aop.util.DateUtils;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.dao.ResourcesManageDao;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.service.ResourcesManageService;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.vo.ResourcesManageVo;
-import egovframework.com.ext.jstree.support.manager.security.manage.role.vo.ResourcesRolesManageVo;
-import egovframework.com.ext.jstree.support.manager.security.roles.vo.SecuredObject;
 
 @Service(value="resourcesManageService")
 public class ResourcesManageServiceImpl implements ResourcesManageService

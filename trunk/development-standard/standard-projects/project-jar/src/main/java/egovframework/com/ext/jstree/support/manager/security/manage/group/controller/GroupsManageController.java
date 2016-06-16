@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.security.login.service.UserInfoService;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
 import egovframework.com.ext.jstree.support.manager.security.manage.group.service.GroupsManageService;
 import egovframework.com.ext.jstree.support.manager.security.manage.role.service.RolesManageService;
@@ -37,17 +38,19 @@ public class GroupsManageController extends GenericAbstractController
     {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         RolesManageVo securedObject = new RolesManageVo();
-        resultMap.put("userRoleInfo", userInfoService.getUserRoleInfo());
+        UserInfo userInfo = new UserInfo();
+        userInfo.setC_id(2);
+        resultMap.put("userRoleInfo", userInfoService.getChildNode(userInfo));
         resultMap.put("roleInfo",rolesManageService.getRolesInfo(securedObject));
         
         return resultMap;
     }
     
     @ResponseBody
-    @RequestMapping(value="/mergeGroupsInfo", method=RequestMethod.POST)
-    public UserRole mergeGroupsInfo(UserRole userRole) throws Exception
+    @RequestMapping(value="/updateGroupsInfo", method=RequestMethod.POST)
+    public UserRole mergeGroupsInfo(UserInfo userInfo) throws Exception
     {
-        groupsManageService.mergeGroupsInfo(userRole);
+        groupsManageService.updateGroupsInfo(userInfo);
         UserRole result = new UserRole();
         result.setStatus(1);
         return result;

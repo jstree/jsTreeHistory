@@ -77,10 +77,4 @@ public class UserInfoDaoImpl extends EgovComAbstractDAO implements UserInfoDao
     {
         update("userInfo.updatePassword", userInfo);
     }
-    
-    @Override
-    public List<UserRole> getUserRoleInfo() throws Exception
-    {
-        return list("userInfo.getUserRoleInfo", null);
-    }
 }

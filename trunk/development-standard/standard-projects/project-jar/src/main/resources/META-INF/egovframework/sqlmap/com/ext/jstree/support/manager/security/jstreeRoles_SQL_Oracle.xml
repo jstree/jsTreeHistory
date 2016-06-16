@@ -15,6 +15,7 @@
 		, A.C_TITLE
 		, A.C_TYPE
 		, A.C_AUTHORITY AS authority
+		, A.C_RESOURCES AS resourcesStr
 		, A.C_DESCRIPTION AS description
 		, A.C_REG_DT AS regDt
 		, A.C_REG_ID AS regId
@@ -69,6 +70,7 @@
 		, C_TITLE
 		, C_TYPE
 		, C_AUTHORITY AS authority
+		, C_RESOURCES AS resourcesStr
 		, C_DESCRIPTION AS description
 		, C_REG_DT AS regDt
 		, C_REG_ID AS regId
@@ -122,6 +124,7 @@
 		SET C_TYPE = #c_type#
 		, C_TITLE = #c_title#
 		, C_AUTHORITY = #authority#
+		, C_RESOURCES = #resourcesStr#
 		, C_DESCRIPTION = #description#
 		, C_MOD_DT = #modDt#
 		, C_MOD_ID = #modId#
@@ -141,6 +144,7 @@
 			 , C_TITLE
 			 , C_TYPE
 			 , C_AUTHORITY AS authority
+			 , C_RESOURCES AS resourcesStr
 			 , C_DESCRIPTION AS description
 			 , C_REG_DT AS regDt
 			 , C_REG_ID AS regId
@@ -163,6 +167,7 @@
 		, C_TITLE
 		, C_TYPE
 		, C_AUTHORITY AS authority
+		, C_RESOURCES AS resourcesStr
 		, C_DESCRIPTION AS description
 		, C_REG_DT AS regDt
 		, C_REG_ID AS regId
@@ -314,7 +319,7 @@
 		/* pasteMyselfFromJstree */
 		INSERT INTO T_ROLES (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_AUTHORITY, C_DESCRIPTION,
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_TYPE, C_AUTHORITY, C_RESOURCES, C_DESCRIPTION,
 		C_REG_DT, C_REG_ID, C_MOD_DT, C_MOD_ID
 		)
 		SELECT S_ROLES.NEXTVAL AS C_ID
@@ -329,6 +334,7 @@
 		, C_TITLE
 		, C_TYPE
 		, C_AUTHORITY
+		, C_RESOURCES
 		, C_DESCRIPTION
 		, C_REG_DT
 		, C_REG_ID
@@ -378,11 +384,11 @@
 		/* addMyselfFromJstree */
 		INSERT INTO T_ROLES (
 		C_ID, C_PARENTID, C_POSITION,
-		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_AUTHORITY, C_DESCRIPTION,
+		C_LEFT, C_RIGHT, C_LEVEL, C_TITLE, C_AUTHORITY, C_RESOURCES, C_DESCRIPTION,
 		C_REG_DT, C_REG_ID, C_MOD_DT, C_MOD_ID )
 		VALUES (
 		S_ROLES.NEXTVAL, #c_parentid#, #c_position#, 
-		#c_left#, #c_right#, #c_level#, #c_title#, #authority#, #description#,
+		#c_left#, #c_right#, #c_level#, #c_title#, #authority#, #resourcesStr#, #description#,
 		#regDt#, #regId#, #modDt#, #modId#)
 		<selectKey resultClass="java.lang.Integer">
 			/* addMyselfFromJstree SEQ */

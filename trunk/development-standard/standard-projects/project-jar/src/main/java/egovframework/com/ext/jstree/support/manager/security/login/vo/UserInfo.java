@@ -54,12 +54,12 @@ public class UserInfo extends ComprehensiveTree implements UserDetails
     private String oldPassword;
     
     private String newPassword;
-
-	private String email;
+    
+    private String email;
     
     private String uuid;
     
-	private String useYN;
+    private String useYN;
     
     private int loginFailureCnt;
     
@@ -68,6 +68,8 @@ public class UserInfo extends ComprehensiveTree implements UserDetails
     private String lastLoginDt;
     
     private List<UserRole> authorities;
+    
+    private String roles;
     
     public String getEmail()
     {
@@ -79,43 +81,51 @@ public class UserInfo extends ComprehensiveTree implements UserDetails
         this.email = email;
     }
     
-    public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-
-	public String getUseYN() {
-		return useYN;
-	}
-
-	public void setUseYN(String useYN) {
-		this.useYN = useYN;
-	}
+    public String getUuid()
+    {
+        return uuid;
+    }
+    
+    public void setUuid(String uuid)
+    {
+        this.uuid = uuid;
+    }
+    
+    public String getUseYN()
+    {
+        return useYN;
+    }
+    
+    public void setUseYN(String useYN)
+    {
+        this.useYN = useYN;
+    }
     
     public void setPassword(String password)
     {
         this.password = password;
     }
     
-    public String getOldPassword() {
-		return oldPassword;
-	}
-
-	public void setOldPassword(String oldPassword) {
-		this.oldPassword = oldPassword;
-	}
-
-	public String getNewPassword() {
-		return newPassword;
-	}
-
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
-	
+    public String getOldPassword()
+    {
+        return oldPassword;
+    }
+    
+    public void setOldPassword(String oldPassword)
+    {
+        this.oldPassword = oldPassword;
+    }
+    
+    public String getNewPassword()
+    {
+        return newPassword;
+    }
+    
+    public void setNewPassword(String newPassword)
+    {
+        this.newPassword = newPassword;
+    }
+    
     public int getLoginFailureCnt()
     {
         return loginFailureCnt;
@@ -155,6 +165,16 @@ public class UserInfo extends ComprehensiveTree implements UserDetails
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
         return authorities;
+    }
+    
+    public String getRoles()
+    {
+        return roles;
+    }
+    
+    public void setRoles(String roles)
+    {
+        this.roles = roles;
     }
     
     @Override

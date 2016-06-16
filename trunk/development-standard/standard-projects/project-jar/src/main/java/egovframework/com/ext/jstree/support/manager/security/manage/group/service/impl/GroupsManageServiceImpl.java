@@ -1,9 +1,11 @@
 package egovframework.com.ext.jstree.support.manager.security.manage.group.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,10 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
 import egovframework.com.ext.jstree.support.manager.security.manage.group.service.GroupsManageService;
 
-@Service(value="groupsManageService")
+@Service(value = "groupsManageService")
 public class GroupsManageServiceImpl implements GroupsManageService
 {
- 
+    
     @Resource(name = "CoreService")
     private CoreService coreService;
     
@@ -24,32 +26,21 @@ public class GroupsManageServiceImpl implements GroupsManageService
     UserInfoService userInfoService;
     
     @Override
-    public List<UserRole> getGroupsInfo(UserRole userRole) throws Exception
+    public List<UserInfo> getGroupsInfo(UserInfo userInfo) throws Exception
     {
-        return coreService.getChildNode(userRole);
-    }
-
-    @Override
-    public int deleteGroupsInfo(UserRole userRole) throws Exception
-    {
-        return coreService.removeNode(userRole);
+        return userInfoService.getChildNode(userInfo);
     }
     
-    public int mergeGroupsInfo(UserRole userRole) throws Exception
+    public int updateGroupsInfo(UserInfo userInfo) throws Exception
     {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setC_id(userRole.getEmail());
-        UserRole resultVo = userInfoService.getUserRole(userInfo);
-        if (resultVo == null)
+        List<UserRole> roleList = (List<UserRole>) userInfo.getAuthorities();
+        List<String> result = new ArrayList<String>();
+        for (UserRole userRole : roleList)
         {
-            coreService.addNode(userRole);
+            result.add(userRole.getRole());
         }
-        else
-        {
-            resultVo.setEmail(userRole.getEmail());
-            resultVo.setRoleId(userRole.getRoleId());
-            coreService.alterNode(resultVo);
-        }
+        userInfo.setRoles(StringUtils.join(result, ","));
+        userInfoService.updateGroupsInfo(userInfo);
         return 1;
     }
 }

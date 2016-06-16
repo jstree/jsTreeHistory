@@ -54,7 +54,4 @@ public interface UserInfoDao
 	
 	void updatePassword(UserInfo userInfo) throws Exception;
 	
-	List<UserRole> getUserRoleInfo() throws Exception;
-	
-	
 }

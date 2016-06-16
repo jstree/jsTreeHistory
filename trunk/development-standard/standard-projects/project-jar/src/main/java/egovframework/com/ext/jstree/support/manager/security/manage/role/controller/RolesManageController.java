@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.service.ResourcesManageService;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.vo.ResourcesManageVo;
-import egovframework.com.ext.jstree.support.manager.security.manage.role.service.ResourcesRolesManageService;
 import egovframework.com.ext.jstree.support.manager.security.manage.role.service.RolesManageService;
-import egovframework.com.ext.jstree.support.manager.security.manage.role.vo.ResourcesRolesManageVo;
 import egovframework.com.ext.jstree.support.manager.security.manage.role.vo.RolesManageVo;
 
 @Controller
@@ -22,9 +20,6 @@ public class RolesManageController extends GenericAbstractController
 {
     @Resource(name = "rolesManageService")
     private RolesManageService rolesManageService;
-    
-    @Resource(name = "resourcesRolesManageService")
-    private ResourcesRolesManageService resourcesRolesManageService;
     
     @Resource(name = "resourcesManageService")
     ResourcesManageService resourcesManageService;
@@ -80,14 +75,4 @@ public class RolesManageController extends GenericAbstractController
         return resourcesManageService.getRoleInResoures(resourcesManageVo);
     }
     
-    @ResponseBody
-    @RequestMapping(value = "/updateRoleInResources", method = RequestMethod.GET)
-    public ResourcesRolesManageVo updateRoleInResources(List<ResourcesRolesManageVo> resourcesRolesManageList) throws Exception
-    {
-        resourcesRolesManageService.updateRoleInResources(resourcesRolesManageList);
-        
-        ResourcesRolesManageVo result = new ResourcesRolesManageVo();
-        result.setStatus(1);
-        return result;
-    }
 }
