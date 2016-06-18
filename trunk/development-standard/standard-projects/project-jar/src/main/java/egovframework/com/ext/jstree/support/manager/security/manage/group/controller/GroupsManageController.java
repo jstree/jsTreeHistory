@@ -24,13 +24,13 @@ import egovframework.com.ext.jstree.support.manager.security.manage.role.vo.Role
 public class GroupsManageController extends GenericAbstractController
 {
     @Resource(name = "groupsManageService")
-    GroupsManageService groupsManageService;
+    private GroupsManageService groupsManageService;
     
     @Autowired
-    UserInfoService userInfoService;
+    private UserInfoService userInfoService;
     
     @Resource(name = "rolesManageService")
-    RolesManageService rolesManageService;
+    private RolesManageService rolesManageService;
     
     @ResponseBody
     @RequestMapping(value="/getResourceInfo", method=RequestMethod.GET)
@@ -40,7 +40,7 @@ public class GroupsManageController extends GenericAbstractController
         RolesManageVo securedObject = new RolesManageVo();
         UserInfo userInfo = new UserInfo();
         userInfo.setC_id(2);
-        resultMap.put("userRoleInfo", userInfoService.getChildNode(userInfo));
+        resultMap.put("userRoleInfo", groupsManageService.getGroupsInfo(userInfo));
         resultMap.put("roleInfo",rolesManageService.getRolesInfo(securedObject));
         
         return resultMap;

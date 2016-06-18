@@ -33,7 +33,7 @@ public class RolesManageServiceImpl implements RolesManageService
         List<RolesManageVo> list = coreService.getChildNode(rolesManageVo);
         for (RolesManageVo vo : list)
         {
-            if (CollectionUtils.isNotEmpty(vo.getResources()))
+            if (StringUtils.isNotEmpty(vo.getResourcesStr()))
             {
                 vo.setResources(Arrays.asList(StringUtils.split(vo.getResourcesStr(), ",")));
             }
@@ -45,7 +45,7 @@ public class RolesManageServiceImpl implements RolesManageService
     public RolesManageVo getRolesInfoDetail(RolesManageVo rolesManageVo) throws Exception
     {
         RolesManageVo vo = coreService.getNode(rolesManageVo);
-        if (CollectionUtils.isNotEmpty(vo.getResources()))
+        if (StringUtils.isNotEmpty(vo.getResourcesStr()))
         {
             vo.setResources(Arrays.asList(StringUtils.split(vo.getResourcesStr(), ",")));
         }

@@ -20,7 +20,7 @@ public class ResourcesManageServiceImpl implements ResourcesManageService
     private CoreService coreService;
     
     @Resource(name = "resourcesManageDao")
-    ResourcesManageDao resourcesManageDao;
+    private ResourcesManageDao resourcesManageDao;
     
     public List<ResourcesManageVo> getResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception
     {

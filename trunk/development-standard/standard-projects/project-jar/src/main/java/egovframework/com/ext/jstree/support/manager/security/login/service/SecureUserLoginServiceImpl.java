@@ -30,6 +30,8 @@ import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.ext.jstree.support.manager.security.login.dao.UserInfoDao;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
+import egovframework.com.ext.jstree.support.manager.security.manage.role.service.RolesManageService;
+import egovframework.com.ext.jstree.support.manager.security.manage.role.vo.RolesManageVo;
 
 /**
  * Modification Information
@@ -62,8 +64,11 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
     @Autowired
     private UserInfoService userInfoService;
     
+    @Resource(name = "rolesManageService")
+    private RolesManageService rolesManageService;
+    
     @Resource(name = "egovMessageSource")
-    EgovMessageSource egovMessageSource;
+    private EgovMessageSource egovMessageSource;
     
     @Override
     public UserDetails loadUserByUsername(String email) throws RuntimeException
@@ -73,32 +78,36 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
         
         secureLogInUser = userInfoDao.loadUserByUsername(secureLogInUser);
         
-        if (secureLogInUser != null)
+        try
         {
             setRoles(secureLogInUser);
         }
+        catch (Exception e)
+        {
+            List<UserRole> roles = new ArrayList<UserRole>();
+            UserRole userRole = new UserRole();
+            userRole.setRole("ROLE_ANONYMOUS");
+            roles.add(userRole);
+            secureLogInUser.setAuthorities(roles);
+        }
+        
         return secureLogInUser;
     }
     
-    private void setRoles(UserInfo userInfo) throws RuntimeException
+    private void setRoles(UserInfo userInfo) throws Exception
     {
         List<UserRole> roles = new ArrayList<UserRole>();
         String[] roleArr = StringUtils.split(userInfo.getRoles(), ",");
         
-        if (roleArr != null && roleArr.length != 0)
+        for (String role : roleArr)
         {
-            for (String role : roleArr)
-            {
-                UserRole userRole = new UserRole();
-                userRole.setRole(role);
-                roles.add(userRole);
-            }
-        }
-        else
-        {
+            RolesManageVo param = new RolesManageVo();
+            param.setC_id(Integer.parseInt(role));
+            RolesManageVo result = rolesManageService.getRolesInfoDetail(param);
             UserRole userRole = new UserRole();
-            userRole.setRole("ROLE_ANONYMOUS");
+            userRole.setRole(result.getAuthority());
             roles.add(userRole);
         }
+        userInfo.setAuthorities(roles);
     }
 }

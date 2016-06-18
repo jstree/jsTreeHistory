@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.security.access.ConfigAttribute;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import egovframework.com.ext.jstree.support.manager.security.roles.service.SecuredObjectService;
 
@@ -15,7 +14,7 @@ public class PointCutResourceMapFactoryBean implements FactoryBean<LinkedHashMap
 {
     
     @Resource(name="pointcutResourceMapService")
-    SecuredObjectService<String, List<ConfigAttribute>> pointcutResourceMapService;
+    private SecuredObjectService<String, List<ConfigAttribute>> pointcutResourceMapService;
     
     private LinkedHashMap<String, List<ConfigAttribute>> resultMap;
     

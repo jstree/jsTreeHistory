@@ -21,4 +21,6 @@ public interface UserInfoService
     
     public List<UserInfo> getChildNode(UserInfo userInfo) throws Exception;
     
+    public UserInfo getNode(UserInfo userInfo) throws Exception;
+    
 }

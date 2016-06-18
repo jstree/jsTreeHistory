@@ -1,10 +1,12 @@
 package egovframework.com.ext.jstree.support.manager.security.login.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,18 +15,19 @@ import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.mail.service.SndngMailService;
 import egovframework.com.ext.jstree.support.manager.security.login.dao.UserInfoDao;
 import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
+import egovframework.com.ext.jstree.support.manager.security.login.vo.UserRole;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService
 {
     @Autowired
-    UserInfoDao userInfoDao;
+    private UserInfoDao userInfoDao;
     
     @Resource(name = "CoreService")
-    CoreService coreService;
+    private CoreService coreService;
     
     @Autowired
-    SndngMailService sndngMailService;
+    private SndngMailService sndngMailService;
     
     @Override
     public UserInfo insertUserInfo(UserInfo userInfo) throws Exception
@@ -88,6 +91,28 @@ public class UserInfoServiceImpl implements UserInfoService
     
     public List<UserInfo> getChildNode(UserInfo userInfo) throws Exception
     {
-        return coreService.getChildNode(userInfo);
+        List<UserInfo> result = coreService.getChildNode(userInfo);
+        
+        for (UserInfo vo : result)
+        {
+            String[] roleArr = StringUtils.split(vo.getRoles(), ",");
+            List<UserRole> roleList = new ArrayList<UserRole>();
+            if (roleArr != null)
+            {
+                for (String str : roleArr)
+                {
+                    UserRole userRole = new UserRole();
+                    userRole.setRole(str);
+                    roleList.add(userRole);
+                }
+                vo.setAuthorities(roleList);
+            }
+        }
+        return result;
+    }
+    
+    public UserInfo getNode(UserInfo userInfo) throws Exception
+    {
+        return coreService.getNode(userInfo);
     }
 }

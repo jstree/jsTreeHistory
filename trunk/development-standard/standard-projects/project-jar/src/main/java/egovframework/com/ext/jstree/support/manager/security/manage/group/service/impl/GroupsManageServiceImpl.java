@@ -24,10 +24,10 @@ public class GroupsManageServiceImpl implements GroupsManageService
     private CoreService coreService;
     
     @Autowired
-    UserInfoService userInfoService;
+    private UserInfoService userInfoService;
     
     @Autowired
-    CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
+    private CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
     
     @Override
     public List<UserInfo> getGroupsInfo(UserInfo userInfo) throws Exception
@@ -38,13 +38,15 @@ public class GroupsManageServiceImpl implements GroupsManageService
     public int updateGroupsInfo(UserInfo userInfo) throws Exception
     {
         List<UserRole> roleList = (List<UserRole>) userInfo.getAuthorities();
-        List<String> result = new ArrayList<String>();
+        List<String> roles = new ArrayList<String>();
         for (UserRole userRole : roleList)
         {
-            result.add(userRole.getRole());
+            roles.add(userRole.getRole());
         }
-        userInfo.setRoles(StringUtils.join(result, ","));
-        userInfoService.updateGroupsInfo(userInfo);
+        
+        UserInfo result = userInfoService.getNode(userInfo);
+        result.setRoles(StringUtils.join(roles, ","));
+        userInfoService.updateGroupsInfo(result);
         
         customFilterInvocationSecurityMetadataSource.reload();
         return 1;

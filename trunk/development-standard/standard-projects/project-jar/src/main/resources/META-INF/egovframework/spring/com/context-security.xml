@@ -85,19 +85,11 @@
 	
 	<bean id = "urlResourceMapService" class= "egovframework.com.ext.jstree.support.manager.security.roles.service.impl.UrlResourceMapServiceImpl">
 		<property name="requestMatcherType" value="ant" />
-		<property name="securedObjectDao" ref="securedObjectDao" />
 	</bean>
 	
-	<bean id = "methodResourceMapService" class= "egovframework.com.ext.jstree.support.manager.security.roles.service.impl.MethodResourceMapServiceImpl">
-		<property name="securedObjectDao" ref="securedObjectDao" />
-	</bean>
+	<bean id = "methodResourceMapService" class= "egovframework.com.ext.jstree.support.manager.security.roles.service.impl.MethodResourceMapServiceImpl" />
 	
-	<bean id = "pointcutResourceMapService" class= "egovframework.com.ext.jstree.support.manager.security.roles.service.impl.PointCutResourceMapServiceImpl">
-		<property name="securedObjectDao" ref="securedObjectDao" />
-	</bean>
-	
-	<bean id = "securedObjectDao" class="egovframework.com.ext.jstree.support.manager.security.roles.dao.impl.SecuredObjectDaoImpl" />
-	
+	<bean id = "pointcutResourceMapService" class= "egovframework.com.ext.jstree.support.manager.security.roles.service.impl.PointCutResourceMapServiceImpl" />
 	
 	<!-- URL 매핑 -->
 	<bean id="urlPatchMatcherFilter"
@@ -153,7 +145,7 @@
 		init-method="init" />
 
 
-	<!-- point cut 
+	<!-- point cut  -->
 	<bean id="protectPointcutPostProcessor"
 		class="org.springframework.security.config.method.ProtectPointcutPostProcessor">
 		<constructor-arg ref="methodSecurityMetadataSources" />
@@ -164,5 +156,4 @@
 		class="egovframework.com.ext.jstree.support.manager.security.factory.PointCutResourceMapFactoryBean"
 		init-method="init">
 	</bean>
-	-->
 </beans>
