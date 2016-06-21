@@ -61,13 +61,6 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-	<!-- 접근 권한 Voter -->
-	<!-- AffirmativeBased : 접근을 승인하는 voter 가 하나라도 존재하면 이전의 접근 거부사실과 관계없이 바로 
-		접근이 승인된다. -->
-	<!-- ConsensusBased : 다득표 여부가 AccessDecisionManager 의 접근 승인여부를 결정한다. 동률 
-		또는 무효표에 처리에 대해서는 설정 가능하다. -->
-	<!-- UnanimouseBased : 모든 voter 가 접근을 승인해야 최종적인 접근이 승인된다. -->
-
 	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
 		<property name="allowIfAllAbstainDecisions" value="false" />
 		<property name="decisionVoters">
@@ -87,10 +80,6 @@
 		<property name="requestMatcherType" value="ant" />
 	</bean>
 	
-	<bean id = "methodResourceMapService" class= "egovframework.com.ext.jstree.support.manager.security.roles.service.impl.MethodResourceMapServiceImpl" />
-	
-	<bean id = "pointcutResourceMapService" class= "egovframework.com.ext.jstree.support.manager.security.roles.service.impl.PointCutResourceMapServiceImpl" />
-	
 	<!-- URL 매핑 -->
 	<bean id="urlPatchMatcherFilter"
 		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
@@ -106,54 +95,4 @@
 	
 	<bean id = "urlResourceMap" class = "egovframework.com.ext.jstree.support.manager.security.factory.UrlResourceMapFactoryBean" init-method="init"/>
 	
-	<!-- Method -->
-	<bean id="methodSecurityMetadataSourceAdvisor"
-		class="org.springframework.security.access.intercept.aopalliance.MethodSecurityMetadataSourceAdvisor">
-		<constructor-arg value="methodSecurityInterceptor" />
-		<constructor-arg ref="delegatingMethodSecurityMetadataSource" />
-		<constructor-arg value="delegatingMethodSecurityMetadataSource" />
-	</bean>
-
-	<bean id="methodSecurityInterceptor"
-		class="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor">
-		<property name="validateConfigAttributes" value="false" />
-		<property name="authenticationManager" ref="authenticationManager" />
-		<property name="accessDecisionManager" ref="accessDecisionManager" />
-		<property name="securityMetadataSource" ref="delegatingMethodSecurityMetadataSource" />
-	</bean>
-
-	<bean id="delegatingMethodSecurityMetadataSource"
-		class="org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource">
-		<constructor-arg>
-			<list>
-				<ref bean="methodSecurityMetadataSources" />
-				<bean
-					class="org.springframework.security.access.annotation.SecuredAnnotationSecurityMetadataSource" />
-				<bean
-					class="org.springframework.security.access.annotation.Jsr250MethodSecurityMetadataSource" />
-			</list>
-		</constructor-arg>
-	</bean>
-
-	<bean id="methodSecurityMetadataSources"
-		class="org.springframework.security.access.method.MapBasedMethodSecurityMetadataSource">
-		<constructor-arg ref="methodMap" />
-	</bean>
-
-	<bean id="methodMap"
-		class="egovframework.com.ext.jstree.support.manager.security.factory.MethodResourceMapFactoryBean"
-		init-method="init" />
-
-
-	<!-- point cut  -->
-	<bean id="protectPointcutPostProcessor"
-		class="org.springframework.security.config.method.ProtectPointcutPostProcessor">
-		<constructor-arg ref="methodSecurityMetadataSources" />
-		<property name="pointcutMap" ref="pointcutMap" />
-	</bean>
-
-	<bean id="pointcutMap"
-		class="egovframework.com.ext.jstree.support.manager.security.factory.PointCutResourceMapFactoryBean"
-		init-method="init">
-	</bean>
 </beans>
