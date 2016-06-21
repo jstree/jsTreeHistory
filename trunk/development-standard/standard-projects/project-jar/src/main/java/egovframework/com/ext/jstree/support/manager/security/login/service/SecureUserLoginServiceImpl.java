@@ -103,7 +103,7 @@ public class SecureUserLoginServiceImpl implements UserDetailsService
         {
             RolesManageVo param = new RolesManageVo();
             param.setC_id(Integer.parseInt(role));
-            RolesManageVo result = rolesManageService.getRolesInfoDetail(param);
+            RolesManageVo result = rolesManageService.getRoleInfo(param);
             UserRole userRole = new UserRole();
             userRole.setRole(result.getAuthority());
             roles.add(userRole);

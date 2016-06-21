@@ -10,10 +10,11 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.aop.util.DateUtils;
 import egovframework.com.ext.jstree.support.manager.security.interceptor.CustomFilterInvocationSecurityMetadataSource;
+import egovframework.com.ext.jstree.support.manager.security.manage.resource.service.ResourcesManageService;
+import egovframework.com.ext.jstree.support.manager.security.manage.resource.vo.ResourcesManageVo;
 import egovframework.com.ext.jstree.support.manager.security.manage.role.service.RolesManageService;
 import egovframework.com.ext.jstree.support.manager.security.manage.role.vo.RolesManageVo;
 
@@ -24,6 +25,9 @@ public class RolesManageServiceImpl implements RolesManageService
     @Resource(name = "CoreService")
     private CoreService coreService;
     
+    @Resource(name = "resourcesManageService")
+    ResourcesManageService resourcesManageService;
+    
     @Autowired
     private CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
     
@@ -33,22 +37,16 @@ public class RolesManageServiceImpl implements RolesManageService
         List<RolesManageVo> list = coreService.getChildNode(rolesManageVo);
         for (RolesManageVo vo : list)
         {
-            if (StringUtils.isNotEmpty(vo.getResourcesStr()))
-            {
-                vo.setResources(Arrays.asList(StringUtils.split(vo.getResourcesStr(), ",")));
-            }
+            vo.split();
         }
         return list;
     }
     
     @Override
-    public RolesManageVo getRolesInfoDetail(RolesManageVo rolesManageVo) throws Exception
+    public RolesManageVo getRoleInfo(RolesManageVo rolesManageVo) throws Exception
     {
         RolesManageVo vo = coreService.getNode(rolesManageVo);
-        if (StringUtils.isNotEmpty(vo.getResourcesStr()))
-        {
-            vo.setResources(Arrays.asList(StringUtils.split(vo.getResourcesStr(), ",")));
-        }
+        vo.split();
         return vo;
     }
     
@@ -58,7 +56,7 @@ public class RolesManageServiceImpl implements RolesManageService
         rolesManageVo.setRegDt(DateUtils.dateToString("yyyyMMddHHmmss", new Date()));
         rolesManageVo.setModDt(" ");
         rolesManageVo.setModId(" ");
-        rolesManageVo.setResourcesStr(StringUtils.join(rolesManageVo.getResources(), ","));
+        rolesManageVo.join();
         RolesManageVo result = coreService.addNode(rolesManageVo);
         customFilterInvocationSecurityMetadataSource.reload();
         return result;
@@ -68,7 +66,7 @@ public class RolesManageServiceImpl implements RolesManageService
     public int updateRolesInfo(RolesManageVo rolesManageVo) throws Exception
     {
         rolesManageVo.setModDt(DateUtils.dateToString("yyyyMMddHHmmss", new Date()));
-        rolesManageVo.setResourcesStr(StringUtils.join(rolesManageVo.getResources(), ","));
+        rolesManageVo.join();
         int result = coreService.alterNode(rolesManageVo);
         customFilterInvocationSecurityMetadataSource.reload();
         return result;
@@ -81,6 +79,12 @@ public class RolesManageServiceImpl implements RolesManageService
         int result = coreService.removeNode(rolesManageVo);
         customFilterInvocationSecurityMetadataSource.reload();
         return result;
+    }
+
+    @Override
+    public List<ResourcesManageVo> getRoleInResoures(ResourcesManageVo resourcesManageVo) throws Exception
+    {
+        return resourcesManageService.getRoleInResoures(resourcesManageVo);
     }
     
 }

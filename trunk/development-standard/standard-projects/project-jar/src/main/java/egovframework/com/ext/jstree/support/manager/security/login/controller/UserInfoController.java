@@ -32,7 +32,7 @@ import egovframework.com.ext.jstree.support.manager.security.login.vo.UserInfo;
  * </pre>
  */
 @Controller
-@RequestMapping(value = { "/egovframework/com/etc/jstree/support/manager/security/login" })
+@RequestMapping(value = { "/rest/login" })
 public class UserInfoController {
 	@Autowired
 	UserInfoService userInfoService;
@@ -78,6 +78,6 @@ public class UserInfoController {
     @RequestMapping(value = "/logoutSucceeded.do")
     @ResponseBody
 	public String logoutSucceeded() throws Exception{
-		return "{ \"status\" : \"1\" }";
+		return "{ \"status\" : \"2\" }";
 	}
 }

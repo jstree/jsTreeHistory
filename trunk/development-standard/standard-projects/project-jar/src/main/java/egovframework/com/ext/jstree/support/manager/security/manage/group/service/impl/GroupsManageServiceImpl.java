@@ -30,25 +30,19 @@ public class GroupsManageServiceImpl implements GroupsManageService
     private CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
     
     @Override
-    public List<UserInfo> getGroupsInfo(UserInfo userInfo) throws Exception
+    public List<UserInfo> getWholeUserInfo(UserInfo userInfo) throws Exception
     {
-        return userInfoService.getChildNode(userInfo);
+        return userInfoService.getWholeUserInfo(userInfo);
     }
     
     public int updateGroupsInfo(UserInfo userInfo) throws Exception
     {
-        List<UserRole> roleList = (List<UserRole>) userInfo.getAuthorities();
-        List<String> roles = new ArrayList<String>();
-        for (UserRole userRole : roleList)
-        {
-            roles.add(userRole.getRole());
-        }
-        
-        UserInfo result = userInfoService.getNode(userInfo);
-        result.setRoles(StringUtils.join(roles, ","));
-        userInfoService.updateGroupsInfo(result);
+        userInfo.join();
+        UserInfo user = userInfoService.getUserInfo(userInfo);
+        user.setRoles(userInfo.getRoles());
+        int result = userInfoService.updateGroupsInfo(user);
         
         customFilterInvocationSecurityMetadataSource.reload();
-        return 1;
+        return result;
     }
 }

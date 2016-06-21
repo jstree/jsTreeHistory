@@ -6,15 +6,15 @@ import egovframework.com.ext.jstree.support.manager.security.manage.resource.vo.
 
 public interface ResourcesManageService
 {
-    public List<ResourcesManageVo> getResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception;
+    public List<ResourcesManageVo> getResourcesInfo(ResourcesManageVo resourcesManageVo) throws Exception;
     
-    public ResourcesManageVo getResourceInfoDetail(ResourcesManageVo resourcesManageVo) throws Exception;
+    public ResourcesManageVo getResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception;
     
-    public ResourcesManageVo insertResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception;
+    public ResourcesManageVo insertResourcesInfo(ResourcesManageVo resourcesManageVo) throws Exception;
     
-    public int updateResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception;
+    public int updateResourcesInfo(ResourcesManageVo resourcesManageVo) throws Exception;
     
-    public int deleteResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception;
+    public int deleteResourcesInfo(ResourcesManageVo resourcesManageVo) throws Exception;
     
     public List<ResourcesManageVo> getRoleInResoures(ResourcesManageVo resourcesManageVo) throws Exception;
 }

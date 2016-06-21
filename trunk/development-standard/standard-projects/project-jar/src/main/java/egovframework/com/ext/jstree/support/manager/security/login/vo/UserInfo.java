@@ -15,9 +15,11 @@
  */
 package egovframework.com.ext.jstree.support.manager.security.login.vo;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -218,4 +220,31 @@ public class UserInfo extends ComprehensiveTree implements UserDetails
     {
         return "userInfo";
     }
+    
+    public void split()
+    {
+        String[] roleArr = StringUtils.split(roles, ",");
+        List<UserRole> roleList = new ArrayList<UserRole>();
+        if (roleArr != null)
+        {
+            for (String str : roleArr)
+            {
+                UserRole userRole = new UserRole();
+                userRole.setRole(str);
+                roleList.add(userRole);
+            }
+            authorities = roleList;
+        }
+    }
+    
+    public void join()
+    {
+        List<String> roleList = new ArrayList<String>();
+        for (UserRole userRole : authorities)
+        {
+            roleList.add(userRole.getRole());
+        }
+        roles = StringUtils.join(roleList, ",");
+    }
+    
 }

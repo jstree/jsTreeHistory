@@ -2,9 +2,11 @@ package egovframework.com.ext.jstree.support.manager.security.manage.role.vo;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 
 public class RolesManageVo extends ComprehensiveTree
@@ -116,5 +118,21 @@ public class RolesManageVo extends ComprehensiveTree
     public String toString()
     {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+    
+    public void split()
+    {
+        if (StringUtils.isNotEmpty(resourcesStr))
+        {
+            resources = Arrays.asList(StringUtils.split(resourcesStr, ","));
+        }
+    }
+    
+    public void join()
+    {
+        if (StringUtils.isNotEmpty(resourcesStr))
+        {
+            resourcesStr = StringUtils.join(resources, ",");
+        }
     }
 }

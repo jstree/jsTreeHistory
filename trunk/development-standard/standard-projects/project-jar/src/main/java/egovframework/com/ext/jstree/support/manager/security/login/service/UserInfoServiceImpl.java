@@ -89,29 +89,18 @@ public class UserInfoServiceImpl implements UserInfoService
         return coreService.alterNode(vo);
     }
     
-    public List<UserInfo> getChildNode(UserInfo userInfo) throws Exception
+    public List<UserInfo> getWholeUserInfo(UserInfo userInfo) throws Exception
     {
         List<UserInfo> result = coreService.getChildNode(userInfo);
         
         for (UserInfo vo : result)
         {
-            String[] roleArr = StringUtils.split(vo.getRoles(), ",");
-            List<UserRole> roleList = new ArrayList<UserRole>();
-            if (roleArr != null)
-            {
-                for (String str : roleArr)
-                {
-                    UserRole userRole = new UserRole();
-                    userRole.setRole(str);
-                    roleList.add(userRole);
-                }
-                vo.setAuthorities(roleList);
-            }
+            vo.split();
         }
         return result;
     }
     
-    public UserInfo getNode(UserInfo userInfo) throws Exception
+    public UserInfo getUserInfo(UserInfo userInfo) throws Exception
     {
         return coreService.getNode(userInfo);
     }

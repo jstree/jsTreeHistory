@@ -33,7 +33,7 @@ public class PointCutResourceMapServiceImpl implements SecuredObjectService<Stri
         
         ResourcesManageVo resourcesVo = new ResourcesManageVo();
         resourcesVo.setC_id(2);
-        List<ResourcesManageVo> resources = resourcesManageService.getResourceInfo(resourcesVo);
+        List<ResourcesManageVo> resources = resourcesManageService.getResourcesInfo(resourcesVo);
         
         RolesManageVo rolesVo = new RolesManageVo();
         rolesVo.setC_id(2);
@@ -46,8 +46,8 @@ public class PointCutResourceMapServiceImpl implements SecuredObjectService<Stri
                 List<ConfigAttribute> configList = new LinkedList<ConfigAttribute>();
                 for (RolesManageVo role : roles)
                 {
-                    List<String> list = role.getResources();
-                    if (list.contains(Integer.toString(resource.getC_id())))
+                    List<String> resourceList = role.getResources();
+                    if (resourceList.contains(Integer.toString(resource.getC_id())))
                     {
                         configList.add(new SecurityConfig(role.getAuthority()));
                     }

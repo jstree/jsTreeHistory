@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
 import egovframework.com.ext.jstree.support.manager.aop.util.DateUtils;
+import egovframework.com.ext.jstree.support.manager.security.interceptor.CustomFilterInvocationSecurityMetadataSource;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.dao.ResourcesManageDao;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.service.ResourcesManageService;
 import egovframework.com.ext.jstree.support.manager.security.manage.resource.vo.ResourcesManageVo;
@@ -22,33 +24,40 @@ public class ResourcesManageServiceImpl implements ResourcesManageService
     @Resource(name = "resourcesManageDao")
     private ResourcesManageDao resourcesManageDao;
     
-    public List<ResourcesManageVo> getResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception
+    @Autowired
+    private CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
+    
+    public List<ResourcesManageVo> getResourcesInfo(ResourcesManageVo resourcesManageVo) throws Exception
     {
         return coreService.getChildNode(resourcesManageVo);
     }
     
-    public ResourcesManageVo getResourceInfoDetail(ResourcesManageVo resourcesManageVo) throws Exception
+    public ResourcesManageVo getResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception
     {
         return coreService.getNode(resourcesManageVo);
     }
     
-    public ResourcesManageVo insertResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception
+    public ResourcesManageVo insertResourcesInfo(ResourcesManageVo resourcesManageVo) throws Exception
     {
         resourcesManageVo.setRegDt(DateUtils.dateToString("yyyyMMddHHmmss", new Date()));
         resourcesManageVo.setModDt(" ");
         resourcesManageVo.setModId(" ");
-        return coreService.addNode(resourcesManageVo);
+        ResourcesManageVo result = coreService.addNode(resourcesManageVo);
+        customFilterInvocationSecurityMetadataSource.reload();
+        return result;
     }
     
-    public int updateResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception
+    public int updateResourcesInfo(ResourcesManageVo resourcesManageVo) throws Exception
     {
         resourcesManageVo.setModDt(DateUtils.dateToString("yyyyMMddHHmmss", new Date()));
-        return coreService.alterNode(resourcesManageVo);
+        int result = coreService.alterNode(resourcesManageVo); 
+        return result;
     }
     
-    public int deleteResourceInfo(ResourcesManageVo resourcesManageVo) throws Exception
+    public int deleteResourcesInfo(ResourcesManageVo resourcesManageVo) throws Exception
     {
-        return coreService.removeNode(resourcesManageVo);
+        int result = coreService.removeNode(resourcesManageVo); 
+        return result;
     }
     
     public List<ResourcesManageVo> getRoleInResoures(ResourcesManageVo resourcesManageVo)

@@ -19,8 +19,8 @@ public interface UserInfoService
     
     public int updateGroupsInfo(UserInfo userInfo) throws Exception;
     
-    public List<UserInfo> getChildNode(UserInfo userInfo) throws Exception;
+    public List<UserInfo> getWholeUserInfo(UserInfo userInfo) throws Exception;
     
-    public UserInfo getNode(UserInfo userInfo) throws Exception;
+    public UserInfo getUserInfo(UserInfo userInfo) throws Exception;
     
 }
