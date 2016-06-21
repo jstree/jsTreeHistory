@@ -26,11 +26,11 @@
 		<security:form-login login-page="/account/accountSign.do"
 			login-processing-url="/account/accountLoginProcess.do"
 			username-parameter="email" password-parameter="password"
-			default-target-url="/egovframework/com/etc/jstree/support/manager/security/login/loginSucceeded.do" authentication-success-handler-ref="secureUserLoginSuccessHandler"
+			default-target-url="/rest/login/loginSucceeded.do" authentication-success-handler-ref="secureUserLoginSuccessHandler"
 			authentication-failure-handler-ref="secureUserLoginFailureHandler" />
 
 		<security:logout invalidate-session="true"
-			logout-success-url="/egovframework/com/etc/jstree/support/manager/security/login/logoutSucceeded.do" logout-url="/account/accountLogoutProcess.do" />
+			logout-success-url="/rest/login/logoutSucceeded.do" logout-url="/account/accountLogoutProcess.do" />
 
 		<security:access-denied-handler
 			error-page="/error/404.do" />
@@ -51,7 +51,7 @@
 		<property name="loginpasswdname" value="password" />
 		<property name="loginredirectname" value="loginRedirect" />
 		<property name="exceptionmsgname" value="securityexceptionmsg" />
-		<property name="defaultFailureUrl" value="/egovframework/com/etc/jstree/support/manager/security/login/loginFailed.do" />
+		<property name="defaultFailureUrl" value="/rest/login/loginFailed.do" />
 	</bean>
 
 	<security:authentication-manager alias="authenticationManager">
