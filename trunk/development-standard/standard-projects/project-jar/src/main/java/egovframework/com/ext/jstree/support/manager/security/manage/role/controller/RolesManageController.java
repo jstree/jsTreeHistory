@@ -44,7 +44,7 @@ public class RolesManageController extends GenericAbstractController
     }
     
     @ResponseBody
-    @RequestMapping(value = "/insertRoleInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/insertRolesInfo", method = RequestMethod.POST)
     public RolesManageVo insertRolesInfo(@Validated RolesManageVo rolesManageVo, BindingResult bindingResult)
             throws Exception
     {
@@ -54,8 +54,8 @@ public class RolesManageController extends GenericAbstractController
     }
     
     @ResponseBody
-    @RequestMapping(value = "/updateRoleInfo", method = RequestMethod.POST)
-    public RolesManageVo updateRoleInfo(@Validated RolesManageVo rolesManageVo, BindingResult bindingResult)
+    @RequestMapping(value = "/updateRolesInfo", method = RequestMethod.POST)
+    public RolesManageVo updateRolesInfo(@Validated RolesManageVo rolesManageVo, BindingResult bindingResult)
             throws Exception
     {
         if (bindingResult.hasErrors()) throw new RuntimeException();
@@ -66,7 +66,7 @@ public class RolesManageController extends GenericAbstractController
     }
     
     @ResponseBody
-    @RequestMapping(value = "/deleteRoleInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteRolesInfo", method = RequestMethod.POST)
     public RolesManageVo deleteRolesInfo(@Validated RolesManageVo rolesManageVo, BindingResult bindingResult)
             throws Exception
     {

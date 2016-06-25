@@ -2,6 +2,7 @@ package egovframework.com.ext.jstree.support.manager.security.manage.role.vo;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -130,7 +131,7 @@ public class RolesManageVo extends ComprehensiveTree
     
     public void join()
     {
-        if (StringUtils.isNotEmpty(resourcesStr))
+        if (CollectionUtils.isNotEmpty(resources))
         {
             resourcesStr = StringUtils.join(resources, ",");
         }

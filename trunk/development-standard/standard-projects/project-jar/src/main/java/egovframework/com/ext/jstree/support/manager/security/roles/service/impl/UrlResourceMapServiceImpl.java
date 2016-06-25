@@ -62,7 +62,7 @@ public class UrlResourceMapServiceImpl implements SecuredObjectService<RequestMa
                 for (RolesManageVo role : roles)
                 {
                     List<String> resourceList = role.getResources();
-                    if (resourceList.contains(Integer.toString(resource.getC_id())))
+                    if (CollectionUtils.isNotEmpty(resourceList) && resourceList.contains(Integer.toString(resource.getC_id())))
                     {
                         if (requestMatcherType.equalsIgnoreCase("regex"))
                         {

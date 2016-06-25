@@ -25,7 +25,7 @@ public class ResourcesManageController extends GenericAbstractController
     
     @ResponseBody
     @RequestMapping(value = "/getResourcesInfo", method = RequestMethod.GET)
-    public List<ResourcesManageVo> getResourceInfo(@Validated ResourcesManageVo resourcesManageVo,
+    public List<ResourcesManageVo> getResourcesInfo(@Validated ResourcesManageVo resourcesManageVo,
             BindingResult bindingResult) throws Exception
     {
         if (bindingResult.hasErrors()) throw new RuntimeException();
@@ -34,8 +34,8 @@ public class ResourcesManageController extends GenericAbstractController
     }
     
     @ResponseBody
-    @RequestMapping(value = "/getResourceInfoDetail", method = RequestMethod.GET)
-    public ResourcesManageVo getResourceInfoDetail(@Validated ResourcesManageVo resourcesManageVo,
+    @RequestMapping(value = "/getResourceInfo", method = RequestMethod.GET)
+    public ResourcesManageVo getResourceInfo(@Validated ResourcesManageVo resourcesManageVo,
             BindingResult bindingResult) throws Exception
     {
         if (bindingResult.hasErrors()) throw new RuntimeException();
