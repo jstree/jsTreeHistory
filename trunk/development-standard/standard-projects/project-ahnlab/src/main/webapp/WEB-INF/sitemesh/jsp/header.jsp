@@ -1,0 +1,57 @@
+<%@ page isELIgnored="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url value="${pageContext.request.contextPath}/user/join/agreement/index.do" var="joinUrl" />
+<c:url value="${pageContext.request.contextPath}/user/login/index.do" var="loginUrl" />
+<c:url value="${pageContext.request.contextPath}/user/info/index.do" var="userInfo" />
+<c:url value="${pageContext.request.contextPath}/account/accountLogoutProcess.do" var="logoutUrl" />
+<!DOCTYPE html>
+<html lang="ko" class="no-js">
+	<head></head>
+	<body>
+		<header class="clearfix">
+			<div id="header" class="container">
+				<div id="header-search" class="one-third bm-remove">
+					<form action="${pageContext.request.contextPath}/" method="get" class="clearfix" novalidate>
+						<input type="hidden" name="type" value="product">
+						<input type="text" name="q" class="inline-block w-small bm-remove tip-r-fade" placeholder="Keyword Search" autocomplete="off" value="" data-tooltip="Press Enter To Search" />
+						<button type="submit" class="tablet-mobile bm-remove tip-r-fade" data-tooltip="Search">
+						<i class="fa fa-search"></i>
+						</button>
+					</form>
+				</div>
+				<div id="header-logo" class="one-third bm-remove">
+					<a href="${pageContext.request.contextPath}/" target="_self">
+						<c:set var="logPath" value="${logUrl}" />
+						<img src="${pageContext.request.contextPath}/assets/images/logo.jpg" alt="313 developer group logo">
+					</a>
+				</div>
+				<div id="header-cart" class="one-third bm-remove last">
+					<c:choose>
+						<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username == null}">
+						  	<a  href="${joinUrl}" target="_self" >Full Stack Developer Group</a>
+						</c:when>
+						<c:otherwise>
+							<a id="userInfo" target="_self"style="cursor: pointer;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.c_title}</a>
+							<span>|</span>
+							<a href="${logoutUrl}" target="_self">로그아웃</a>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
+			<script type="text/javascript">
+			
+				$('#userInfo').on('click', function(event)
+				{
+					event.preventDefault();
+			        var action = '${userInfo}';
+					var params =   { c_id  : '${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}' 
+							       , email : '${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}'
+							       }
+					
+					$.submitDynamicForm(action, params );
+				});
+				
+			</script>
+		</header>
+	</body>
+</html>
