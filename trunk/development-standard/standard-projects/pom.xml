@@ -20,6 +20,7 @@
 	<modules>
 		<module>project-jar</module>
 		<module>project-war</module>
+		<module>project-ahnlab</module>
 	</modules>
 
 	<properties>
