@@ -19,6 +19,19 @@
 	<dependencies>
 		<dependency>
 			<groupId>development</groupId>
+			<artifactId>project-egov</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>project-egov</artifactId>
+			<version>${project.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
 			<artifactId>support-ajax</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
@@ -56,12 +69,6 @@
 		<dependency>
 			<groupId>development</groupId>
 			<artifactId>support-driver</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
-			<artifactId>support-egov</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
@@ -192,12 +199,13 @@
 
 	<dependencyManagement>
 		<dependencies>
-
+			
 			<dependency>
 				<groupId>javax.servlet.jsp</groupId>
 				<artifactId>jsp-api</artifactId>
 				<version>2.1</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
@@ -228,7 +236,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>project-jar</finalName>
+		<finalName>${artifactId}-${version}</finalName>
 
 		<plugins>
 			<plugin>
