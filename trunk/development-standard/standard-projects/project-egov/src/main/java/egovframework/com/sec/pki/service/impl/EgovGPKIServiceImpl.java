@@ -13,7 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
-import com.gpki.gpkiapi_jni;
+//import com.gpki.gpkiapi_jni;
 
 import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.sec.pki.service.EgovGPKIService;
@@ -38,7 +38,7 @@ import egovframework.rte.fdl.cmmn.AbstractServiceImpl;
 @Service("EgovGPKIService")
 public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKIService {
     /** GPKI API JNI */
-    private gpkiapi_jni gpkiAPI = null;
+    //private gpkiapi_jni gpkiAPI = null;
     /** 속성 파일 정보 */
     private String config = null;
     
@@ -66,23 +66,23 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
     */
     
     public void setup() {
-    	synchronized(this) {
-			if (config == null || gpkiAPI == null) {
-			    //--------------------------------
-			    // 속성 정보 얻기
-			    //--------------------------------
-			    config = EgovProperties.getPathProperty("Globals.GPKIConfPath");
-		
-			    //--------------------------------
-			    // GPKI JNI 취득
-			    //--------------------------------
-			    // gpkiapki_jni.jar의 경우는 System Classpath에 추가되어야 함..
-			    // 그렇지 않은 경우는 다음과 같은 오류가 reload시 발생됨
-			    // Native Library C:\WINDOWS\system32\gpkiapi_jni.dll already loaded in another classloader
-			    //--------------------------------
-			    gpkiAPI = new gpkiapi_jni();
-			}
-    	}
+//    	synchronized(this) {
+//			if (config == null || gpkiAPI == null) {
+//			    //--------------------------------
+//			    // 속성 정보 얻기
+//			    //--------------------------------
+//			    config = EgovProperties.getPathProperty("Globals.GPKIConfPath");
+//		
+//			    //--------------------------------
+//			    // GPKI JNI 취득
+//			    //--------------------------------
+//			    // gpkiapki_jni.jar의 경우는 System Classpath에 추가되어야 함..
+//			    // 그렇지 않은 경우는 다음과 같은 오류가 reload시 발생됨
+//			    // Native Library C:\WINDOWS\system32\gpkiapi_jni.dll already loaded in another classloader
+//			    //--------------------------------
+//			    gpkiAPI = new gpkiapi_jni();
+//			}
+//    	}
     }
     
     /**
@@ -92,9 +92,9 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
 	//-----------------------------------------
 	// @PostConstruct 미사용 방식
 	//-----------------------------------------
-	if (config == null || gpkiAPI == null) {
-	    setup();
-	}
+//	if (config == null || gpkiAPI == null) {
+//	    setup();
+//	}
 	////---------------------------------------
 	
 	return EgovProperties.getProperty(config, "gpki.certificate.server");
@@ -112,9 +112,9 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
 	//-----------------------------------------
 	// @PostConstruct 미사용 방식
 	//-----------------------------------------
-	if (config == null || gpkiAPI == null) {
-	    setup();
-	}
+//	if (config == null || gpkiAPI == null) {
+//	    setup();
+//	}
 	////---------------------------------------
 	
 	//--------------------------------
@@ -181,9 +181,9 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
 	//-----------------------------------------
 	// @PostConstruct 미사용 방식
 	//-----------------------------------------
-	if (config == null || gpkiAPI == null) {
-	    setup();
-	}
+//	if (config == null || gpkiAPI == null) {
+//	    setup();
+//	}
 	////---------------------------------------
 	
 	byte[] cert = getCertFromLDAP(target);
@@ -191,28 +191,28 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
 	byte[] encryptedData = null;
 
 	try {
-	    gpkiAPI.API_Init(".");
-	    int returnCode = 0;
-
-	    returnCode = gpkiAPI.API_SetOption(gpkiapi_jni.API_OPT_RSA_ENC_V20);
-	    if (returnCode != 0) {
-		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
-	    }
-
-	    returnCode = gpkiAPI.CMS_MakeEnvelopedData(cert, message, gpkiapi_jni.SYM_ALG_SEED_CBC);
-	    if (returnCode != 0) {
-		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
-	    }
-	    encryptedData = gpkiAPI.baReturnArray;
+//	    gpkiAPI.API_Init(".");
+//	    int returnCode = 0;
+//
+//	    returnCode = gpkiAPI.API_SetOption(gpkiapi_jni.API_OPT_RSA_ENC_V20);
+//	    if (returnCode != 0) {
+//		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
+//	    }
+//
+//	    returnCode = gpkiAPI.CMS_MakeEnvelopedData(cert, message, gpkiapi_jni.SYM_ALG_SEED_CBC);
+//	    if (returnCode != 0) {
+//		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
+//	    }
+//	    encryptedData = gpkiAPI.baReturnArray;
 
 	} catch (Exception ex) {
 	    //System.err.println(ex);
 	    logger.error(ex.getMessage());
 	    throw ex;
 	} finally {
-	    if (gpkiAPI != null) {
-		gpkiAPI.API_Finish();
-	    }
+//	    if (gpkiAPI != null) {
+//		gpkiAPI.API_Finish();
+//	    }
 	}
 
 	return encryptedData;
@@ -227,9 +227,9 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
 	//-----------------------------------------
 	// @PostConstruct 미사용 방식
 	//-----------------------------------------
-	if (config == null || gpkiAPI == null) {
-	    setup();
-	}
+//	if (config == null || gpkiAPI == null) {
+//	    setup();
+//	}
 	////---------------------------------------
 	
 	//----------------------------------
@@ -247,38 +247,38 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
 	byte[] plainData = null;
 
 	try {
-	    gpkiAPI.API_Init(".");
-	    int returnCode = 0;
-
-	    byte[] baPriKey = null;
-	    byte[] certificate = null;
-
-	    returnCode = gpkiAPI.STORAGE_ReadPriKey(gpkiapi_jni.MEDIA_TYPE_FILE_PATH, keyForEnvFile, pinForEnv, gpkiapi_jni.DATA_TYPE_OTHER);
-	    if (returnCode != 0) {
-		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
-	    }
-	    baPriKey = gpkiAPI.baReturnArray;
-
-	    returnCode = gpkiAPI.STORAGE_ReadCert(gpkiapi_jni.MEDIA_TYPE_FILE_PATH, certForEnvFile, gpkiapi_jni.DATA_TYPE_OTHER);
-	    if (returnCode != 0) {
-		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
-	    }
-	    certificate = gpkiAPI.baReturnArray;
-
-	    returnCode = gpkiAPI.CMS_ProcessEnvelopedData(certificate, baPriKey, data);
-	    if (returnCode != 0) {
-		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
-	    }
-	    plainData = gpkiAPI.baReturnArray;
+//	    gpkiAPI.API_Init(".");
+//	    int returnCode = 0;
+//
+//	    byte[] baPriKey = null;
+//	    byte[] certificate = null;
+//
+//	    returnCode = gpkiAPI.STORAGE_ReadPriKey(gpkiapi_jni.MEDIA_TYPE_FILE_PATH, keyForEnvFile, pinForEnv, gpkiapi_jni.DATA_TYPE_OTHER);
+//	    if (returnCode != 0) {
+//		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
+//	    }
+//	    baPriKey = gpkiAPI.baReturnArray;
+//
+//	    returnCode = gpkiAPI.STORAGE_ReadCert(gpkiapi_jni.MEDIA_TYPE_FILE_PATH, certForEnvFile, gpkiapi_jni.DATA_TYPE_OTHER);
+//	    if (returnCode != 0) {
+//		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
+//	    }
+//	    certificate = gpkiAPI.baReturnArray;
+//
+//	    returnCode = gpkiAPI.CMS_ProcessEnvelopedData(certificate, baPriKey, data);
+//	    if (returnCode != 0) {
+//		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
+//	    }
+//	    plainData = gpkiAPI.baReturnArray;
 
 	} catch (Exception ex) {
 	    //System.err.println(ex);
 	    logger.error(ex.getMessage());
 	    throw ex;
 	} finally {
-	    if (gpkiAPI != null) {
-		gpkiAPI.API_Finish();
-	    }
+//	    if (gpkiAPI != null) {
+//		gpkiAPI.API_Finish();
+//	    }
 	}
 
 	return plainData;
@@ -293,9 +293,9 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
 	//-----------------------------------------
 	// @PostConstruct 미사용 방식
 	//-----------------------------------------
-	if (config == null || gpkiAPI == null) {
-	    setup();
-	}
+//	if (config == null || gpkiAPI == null) {
+//	    setup();
+//	}
 	////---------------------------------------
 	
 	//----------------------------------
@@ -315,35 +315,35 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
 	byte[] key = null;
 
 	try {
-	    gpkiAPI.API_Init(".");
-	    int returnCode = 0;
-
-	    returnCode = gpkiAPI.STORAGE_ReadCert(gpkiapi_jni.MEDIA_TYPE_FILE_PATH, certForSignFile, gpkiapi_jni.DATA_TYPE_OTHER);
-	    if (returnCode != 0) {
-		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
-	    }
-	    certificate = gpkiAPI.baReturnArray;
-
-	    returnCode = gpkiAPI.STORAGE_ReadPriKey(gpkiapi_jni.MEDIA_TYPE_FILE_PATH, keyForSignFile, pinForSign, gpkiapi_jni.DATA_TYPE_OTHER);
-	    if (returnCode != 0) {
-		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
-	    }
-	    key = gpkiAPI.baReturnArray;
-
-	    returnCode = gpkiAPI.CMS_MakeSignedData(certificate, key, message, "");
-	    if (returnCode != 0) {
-		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
-	    }
-	    signedData = gpkiAPI.baReturnArray;
+//	    gpkiAPI.API_Init(".");
+//	    int returnCode = 0;
+//
+//	    returnCode = gpkiAPI.STORAGE_ReadCert(gpkiapi_jni.MEDIA_TYPE_FILE_PATH, certForSignFile, gpkiapi_jni.DATA_TYPE_OTHER);
+//	    if (returnCode != 0) {
+//		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
+//	    }
+//	    certificate = gpkiAPI.baReturnArray;
+//
+//	    returnCode = gpkiAPI.STORAGE_ReadPriKey(gpkiapi_jni.MEDIA_TYPE_FILE_PATH, keyForSignFile, pinForSign, gpkiapi_jni.DATA_TYPE_OTHER);
+//	    if (returnCode != 0) {
+//		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
+//	    }
+//	    key = gpkiAPI.baReturnArray;
+//
+//	    returnCode = gpkiAPI.CMS_MakeSignedData(certificate, key, message, "");
+//	    if (returnCode != 0) {
+//		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
+//	    }
+//	    signedData = gpkiAPI.baReturnArray;
 
 	} catch (Exception ex) {
 	    //System.err.println(ex);
 	    logger.error(ex.getMessage());
 	    throw ex;
 	} finally {
-	    if (gpkiAPI != null) {
-		gpkiAPI.API_Finish();
-	    }
+//	    if (gpkiAPI != null) {
+//		gpkiAPI.API_Finish();
+//	    }
 	}
 
 	return signedData;
@@ -358,9 +358,9 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
 	//-----------------------------------------
 	// @PostConstruct 미사용 방식
 	//-----------------------------------------
-	if (config == null || gpkiAPI == null) {
-	    setup();
-	}
+//	if (config == null || gpkiAPI == null) {
+//	    setup();
+//	}
 	////---------------------------------------
 	
 	//----------------------------------
@@ -369,23 +369,23 @@ public class EgovGPKIServiceImpl extends AbstractServiceImpl implements EgovGPKI
 	byte[] plainData = null;
 
 	try {
-	    gpkiAPI.API_Init(".");
-	    int returnCode = 0;
-
-	    returnCode = gpkiAPI.CMS_ProcessSignedData(signedData);
-	    if (returnCode != 0) {
-		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
-	    }
-	    plainData = gpkiAPI.baData;
+//	    gpkiAPI.API_Init(".");
+//	    int returnCode = 0;
+//
+//	    returnCode = gpkiAPI.CMS_ProcessSignedData(signedData);
+//	    if (returnCode != 0) {
+//		throw new IllegalAccessException((new StringBuffer(String.valueOf(returnCode))).toString() + " : " + gpkiAPI.sDetailErrorString);
+//	    }
+//	    plainData = gpkiAPI.baData;
 
 	} catch (Exception ex) {
 	    //System.err.println(ex);
 	    logger.error(ex.getMessage());
 	    throw ex;
 	} finally {
-	    if (gpkiAPI != null) {
-		gpkiAPI.API_Finish();
-	    }
+//	    if (gpkiAPI != null) {
+//		gpkiAPI.API_Finish();
+//	    }
 	}
 
 	return plainData;
