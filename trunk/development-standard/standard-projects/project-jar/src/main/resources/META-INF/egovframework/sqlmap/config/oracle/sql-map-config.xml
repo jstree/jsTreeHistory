@@ -5,7 +5,7 @@
 <sqlMapConfig>
 
 	<settings cacheModelsEnabled="true" enhancementEnabled="true"
-		lazyLoadingEnabled="true" maxRequests="32" maxSessions="16"
+		lazyLoadingEnabled="true" maxRequests="64" maxSessions="32"
 		maxTransactions="16" useStatementNamespaces="true" />
 	<!-- cacheModelsEnabled="true" //캐쉬모델 사용여부. enhancementEnabled="true" //런타임시 
 		바이트 코드 향상. lazyLoadingEnabled="true" //레이지(느린)로딩 가능 여부. maxRequests="32" 
