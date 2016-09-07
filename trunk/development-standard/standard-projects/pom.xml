@@ -18,8 +18,8 @@
 	<description>ROOT Project Repository by 313 DEV GRP</description>
 	
 	<modules>
-		<module>project-jar</module>
 		<module>project-egov</module>
+		<module>project-jar</module>
 		<module>project-war</module>
 	</modules>
 
