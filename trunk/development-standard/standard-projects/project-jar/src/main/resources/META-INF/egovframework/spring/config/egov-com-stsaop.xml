@@ -1,34 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-	<!-- 자료이용현황 통계자료 생성 -->
-	<!-- <aop:config> <aop:aspect id="dtaUseStatsManageAspect" ref="egovDtaUseStatsService"> 
-		<aop:after method="insertDtaUseStats" pointcut="execution(public * egovframework.com.cmm.web.EgovFileDownloadController.cvplFileDownload(..)) 
-		and args(commandMap, ..)" /> </aop:aspect> </aop:config> -->
-
-	<!-- 로거를 bean 으로 셋팅 -->
-	<bean id="logAspect"
-		class="egovframework.com.ext.jstree.support.manager.aop.web.LoggingAspect" />
-
-	<!-- 로거 포인트컷 설정 -->
-	<aop:config>
-		<aop:aspect id="aspectLogggingBefore" ref="logAspect">
-
-			<!-- @Before -->
-			<aop:before method="logBefore"
-				pointcut="execution(* egovframework.com.ext.jstree.spring*..*(..))" />
-		</aop:aspect>
-		<aop:aspect id="aspectLogggingAfter" ref="logAspect">
-			<!-- @After -->
-			<aop:after method="logAfter"
-				pointcut="execution(* egovframework.com.ext.jstree.spring*..*(..))" />
-		</aop:aspect>
-		<!-- @Around <aop:aspect id="aspectLogggingAround" ref="logAspect"> <aop:around 
-			method="logAround" pointcut="execution(* egovframework.com.ext.jstree.spring*..*(..))"/> 
-			</aop:aspect> -->
-	</aop:config>
+	<!--  자료이용현황 통계자료 생성 --> 
+    <aop:config>
+        <aop:aspect id="dtaUseStatsManageAspect" ref="egovDtaUseStatsService">
+            <aop:after method="insertDtaUseStats"
+                 pointcut="execution(public * egovframework.com.cmm.web.EgovFileDownloadController.cvplFileDownload(..)) and args(commandMap, ..)" 
+                  />
+        </aop:aspect>
+    </aop:config>
 
 </beans>

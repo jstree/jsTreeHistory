@@ -54,12 +54,12 @@
 
 	<!-- - This bean configures the 'prefix' and 'suffix' properties of - InternalResourceViewResolver, 
 		which resolves logical view names - returned by Controllers. For example, 
-		a logical view name of "vets" - will be mapped to "/WEB-INF/jsp/vets.jsp". -->
+		a logical view name of "vets" - will be mapped to "/WEB-INF/jsp/vets.jsp".
 	<bean id="specialPurposeViewResolver"
 		class="egovframework.com.ext.jstree.support.manager.viewResolver.SpecialPurposeViewResolver">
 		<property name="order" value="2"></property>
 	</bean>
-
+	-->
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
 		<property name="order" value="1"></property>
