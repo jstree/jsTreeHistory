@@ -37,7 +37,6 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import egovframework.com.ext.jstree.support.manager.viewResolver.CustomInternalResourceViewResolver;
-import egovframework.com.ext.jstree.support.manager.viewResolver.SpecialPurposeViewResolver;
 
 /**
  * Class Name : WebMvcConfig.java Description : 스프링 서블릿 웹 애플리케이션 컨텍스트 설정을 위한 자바
@@ -76,9 +75,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
     private ExceptionHandlerExceptionResolver exceptionHandlerExceptionResolver;
     
     @Autowired
-    private SpecialPurposeViewResolver specialPurpose;
-    
-    @Autowired
     private UrlBasedViewResolver urlBasedViewResolver;
     
     @Override
@@ -96,7 +92,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
         
         List<ViewResolver> viewResolvers = new ArrayList<>();
         
-        viewResolvers.add(specialPurpose);
+        //viewResolvers.add(specialPurpose);
         viewResolvers.add(urlBasedViewResolver);
         viewResolvers.add(internalResourceViewResolver());
         viewResolver.setViewResolvers(viewResolvers);
@@ -106,7 +102,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
         mappingJackson2JsonView.setExtractValueFromSingleKeyModel(true);
         mappingJackson2JsonView.setModelKey("result");
         defaultViews.add(mappingJackson2JsonView);
-        viewResolver.setDefaultViews(defaultViews);
+        //viewResolver.setDefaultViews(defaultViews);
         return viewResolver;
     }
     
@@ -125,7 +121,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
     {
         InternalResourceViewResolver internalResourceViewResolver = new CustomInternalResourceViewResolver();
         internalResourceViewResolver.setViewClass(JstlView.class);
-        internalResourceViewResolver.setPrefix("/WEB-INF");
+        internalResourceViewResolver.setPrefix("/WEB-INF/jsp/");
         internalResourceViewResolver.setSuffix(".jsp");
         return internalResourceViewResolver;
     }

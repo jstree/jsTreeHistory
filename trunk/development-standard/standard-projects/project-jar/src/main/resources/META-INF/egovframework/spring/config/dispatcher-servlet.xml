@@ -11,68 +11,12 @@
 	<context:property-placeholder
 		location="classpath:/META-INF/egovframework/egovProps/globals.properties" />
 
-	<!-- - The form-based controllers within this application provide @RequestMapping 
-		- annotations at the type level for path mapping URLs and @RequestMapping 
-		- at the method level for request type mappings (e.g., GET and POST). - In 
-		contrast, ClinicController - which is not form-based - provides - @RequestMapping 
-		only at the method level for path mapping URLs. - - DefaultAnnotationHandlerMapping 
-		is driven by these annotations and is - enabled by default with Java 5+. -->
-
-	<!-- - This bean processes annotated handler methods, applying Application-specific 
-		PropertyEditors - for request parameter binding. It overrides the default 
-		AnnotationMethodHandlerAdapter. -->
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" p:order="0">
-		<property name="webBindingInitializer">
-			<bean class="egovframework.com.cmm.web.EgovBindingInitializer" />
-		</property>
-		<property name="customArgumentResolvers">
-			<list>
-				<bean class="egovframework.rte.ptl.mvc.bind.CommandMapArgumentResolver"/>
-			</list>
-		</property>
-	</bean>
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-
-	<!-- - This bean resolves specific types of exceptions to corresponding 
-		logical - view names for error views. The default behaviour of DispatcherServlet 
-		- is to propagate all exceptions to the servlet container: this will happen 
-		- here with all other types of exceptions. -->
-	<bean
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="defaultErrorView" value="cmmn/bizError" />
-		<property name="exceptionMappings">
-			<props>
-				<prop key="org.springframework.dao.DataAccessException">cmmn/dataAccessFailure</prop>
-				<prop key="org.springframework.transaction.TransactionException">cmmn/transactionFailure</prop>
-				<prop key="egovframework.rte.fdl.cmmn.exception.EgovBizException">cmmn/bizError</prop>
-				<prop key="org.springframework.security.AccessDeniedException">cmmn/accessDenied</prop>
-			</props>
-		</property>
-	</bean>
-
-	<!-- - This bean configures the 'prefix' and 'suffix' properties of - InternalResourceViewResolver, 
-		which resolves logical view names - returned by Controllers. For example, 
-		a logical view name of "vets" - will be mapped to "/WEB-INF/jsp/vets.jsp".
-	<bean id="specialPurposeViewResolver"
-		class="egovframework.com.ext.jstree.support.manager.viewResolver.SpecialPurposeViewResolver">
-		<property name="order" value="2"></property>
-	</bean>
-	-->
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
 		<property name="order" value="1"></property>
 	</bean>
-	<bean id="urlBasedViewResolver"
-		class="egovframework.com.ext.jstree.support.manager.viewResolver.CustomEgovUrlBasedViewResolver"
-		p:order="0" p:viewClass="org.springframework.web.servlet.view.JstlView"
-		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
-	<!-- - Message source for this context, loaded from localized "messages_xx" 
-		files. - Could also reside in the root application context, as it is generic, 
-		- but is currently just used within Application's web tier. <bean id="messageSource" 
-		class="org.springframework.context.support.ResourceBundleMessageSource" p:basename="messages"/> -->
-
 
 	<!-- For Pagination Tag -->
 	<bean id="imageRenderer"
@@ -91,6 +35,9 @@
 		</property>
 	</bean>
 	<!-- For Pagination Tag -->
+	
+	<!-- IP 정보 기록 -->
+	<bean id="IpObtainInterceptor" class="egovframework.com.cmm.interceptor.IpObtainInterceptor" />
 
 	<!-- 언어 설정 -->
 	<bean id="localeResolver"

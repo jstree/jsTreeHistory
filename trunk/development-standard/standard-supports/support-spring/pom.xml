@@ -17,7 +17,7 @@
 	<description>Spring 라이브러리</description>
 
 	<properties>
-		<spring.maven.artifact.version>4.2.6.RELEASE</spring.maven.artifact.version>
+		<spring.maven.artifact.version>4.2.7.RELEASE</spring.maven.artifact.version>
 		<spring.security.version>3.2.8.RELEASE</spring.security.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>

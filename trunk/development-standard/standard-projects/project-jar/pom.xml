@@ -158,12 +158,6 @@
 		</dependency>
 		<dependency>
 			<groupId>development</groupId>
-			<artifactId>support-template</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
 			<artifactId>support-xml</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>

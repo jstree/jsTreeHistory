@@ -171,7 +171,7 @@ public class BatchScheduler {
         listener.setEgovBatchSchdulService(egovBatchSchdulService);
         listener.setIdgenService(idgenService);
         //sched.addGlobalJobListener(listener);
-        sched.addJobListener(listener);
+        //sched.addJobListener(listener);
 
 		// 스케줄러에 Job, Trigger 등록하기  
 		BatchSchdul target = null;

@@ -9,6 +9,10 @@
 
 	<security:http pattern="/" security="none" />
 	<security:http pattern="/index.do" security="none" />
+	<security:http pattern="/egovIndex.do" security="none" />
+	<security:http pattern="/sym/**" security="none" />
+	<security:http pattern="/utl/**" security="none" />
+	<security:http pattern="/sts/**" security="none" />
 	<security:http pattern="/assets/**" security="none" />
 	<security:http pattern="/jsTreeAlg/**" security="none" />
 	<security:http pattern="/aboutUs/**" security="none" />
