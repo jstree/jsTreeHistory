@@ -169,7 +169,7 @@ public class BackupScheduler {
 		BackupJobListener listener = new BackupJobListener();
         listener.setEgovBackupOpertService(egovBackupOpertService);
         listener.setIdgenService(idgenService);
-        sched.addJobListener(listener);
+        //sched.addJobListener(listener);
 
 		// 스케줄러에 Job, Trigger 등록하기  
         BackupOpert target = null;
