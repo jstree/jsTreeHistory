@@ -191,7 +191,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>ebt_webapp</finalName>
+		<finalName>ahnlab</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
