@@ -1,9 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns:p="http://www.springframework.org/schema/p"
-		xmlns:context="http://www.springframework.org/schema/context"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 							
 <!--
     수정일      수정자                      수정내용
@@ -14,15 +9,15 @@
 -->
 
 	<context:component-scan base-package="egovframework">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+		<context:exclude-filter expression="org.springframework.stereotype.Service" type="annotation"/>
+		<context:exclude-filter expression="org.springframework.stereotype.Repository" type="annotation"/>
 	</context:component-scan>
 
 	<!-- For Pagination Tag -->
-	<bean id="imageRenderer" class="egovframework.com.cmm.ImagePaginationRenderer"/>
+	<bean class="egovframework.com.cmm.ImagePaginationRenderer" id="imageRenderer"/>
 
-	<bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+	<bean class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager" id="paginationManager">
 		<property name="rendererType">
 			<map>
 				<entry key="image" value-ref="imageRenderer"/>
@@ -90,9 +85,7 @@
 		</property>
 	</bean>
 
-	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
-		  p:viewClass="org.springframework.web.servlet.view.JstlView"
-		  p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1" p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" p:viewClass="org.springframework.web.servlet.view.JstlView"/>
 	
 	<!-- for JFile -->	  
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/>
