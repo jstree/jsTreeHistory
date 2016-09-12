@@ -133,12 +133,6 @@
 		</dependency>
 		<dependency>
 			<groupId>development</groupId>
-			<artifactId>support-sns</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
 			<artifactId>support-spring</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
