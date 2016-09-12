@@ -25,13 +25,6 @@
 
 		<dependency>
 			<groupId>development</groupId>
-			<artifactId>project-egov</artifactId>
-			<version>${project.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>development</groupId>
 			<artifactId>support-ajax</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
@@ -135,6 +128,12 @@
 		<dependency>
 			<groupId>development</groupId>
 			<artifactId>support-scheduler</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
+			<artifactId>support-sns</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
