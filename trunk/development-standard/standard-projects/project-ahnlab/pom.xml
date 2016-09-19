@@ -175,7 +175,7 @@
 					<configuration>
 						<charset>UTF-8</charset>
 						<uriEncoding>UTF-8</uriEncoding>
-						<url>http://ubuntu.313.co.kr:58080/manager/text</url>
+						<url>http://ubuntu.313.co.kr:58080/manager/html</url>
 						<server>StandardProject-Snapshot</server>
 						<path>/ahnlab</path>
 					</configuration>
