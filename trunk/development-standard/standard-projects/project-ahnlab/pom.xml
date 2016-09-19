@@ -13,7 +13,7 @@
 	<packaging>war</packaging>
 	<name>project-ahnlab</name>
 	<description>
-		eGov Framework 2.7.1 org. without web resource ( webapp )
+		eGov Framework 2.7.1 org. for ahnlab
 	</description>
 
 	<properties>
