@@ -37,7 +37,7 @@ public class AdressBookDAO extends EgovComAbstractDAO{
      * @throws Exception
      */
     public List<AdressBookVO> selectAdressBookList(AdressBookVO adbkVO) throws Exception {
-        return list("AdressBookDAO.selectAdressBookList", adbkVO);
+        return (List<AdressBookVO>) list("AdressBookDAO.selectAdressBookList", adbkVO);
     }
     
     /**

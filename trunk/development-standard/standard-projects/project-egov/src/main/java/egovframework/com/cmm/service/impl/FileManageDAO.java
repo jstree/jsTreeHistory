@@ -115,7 +115,7 @@ public class FileManageDAO extends EgovComAbstractDAO {
      */
     @SuppressWarnings("unchecked")
     public List<FileVO> selectFileInfs(FileVO vo) throws Exception {
-	return list("FileManageDAO.selectFileList", vo);
+	return (List<FileVO>) list("FileManageDAO.selectFileList", vo);
     }
 
     /**
@@ -159,7 +159,7 @@ public class FileManageDAO extends EgovComAbstractDAO {
      */
     @SuppressWarnings("unchecked")
     public List<FileVO> selectFileListByFileNm(FileVO fvo) throws Exception {
-	return list("FileManageDAO.selectFileListByFileNm", fvo);
+	return (List<FileVO>) list("FileManageDAO.selectFileListByFileNm", fvo);
     }
 
     /**
@@ -182,6 +182,6 @@ public class FileManageDAO extends EgovComAbstractDAO {
      */
     @SuppressWarnings("unchecked")
     public List<FileVO> selectImageFileList(FileVO vo) throws Exception {
-	return list("FileManageDAO.selectImageFileList", vo);
+	return (List<FileVO>) list("FileManageDAO.selectImageFileList", vo);
     }
 }

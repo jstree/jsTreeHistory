@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
@@ -68,7 +69,7 @@ public class EgovCopViewController {
      * @throws Exception
      */
     @RequestMapping("/cop/com/openPopup.do")
-    public String openPopupWindow(Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String openPopupWindow(@RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 	String requestUrl = (String)commandMap.get("requestUrl");
 	String trgetId = (String)commandMap.get("trgetId");

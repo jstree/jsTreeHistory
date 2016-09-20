@@ -2,6 +2,7 @@ package egovframework.com.sym.ccm.zip.service.impl;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.ss.usermodel.Row;
 
 import egovframework.com.sym.ccm.zip.service.Zip;
 import egovframework.rte.fdl.excel.EgovExcelMapping;
@@ -29,8 +30,6 @@ public class EgovCcmExcelZipMapping extends EgovExcelMapping {
 	/**
 	 * 우편번호 엑셀파일 맵핑
 	 */
-	@SuppressWarnings("deprecation")
-	@Override
 	public Object mappingColumn(HSSFRow row) {
 		HSSFCell cell0 = row.getCell((int) 0);
     	HSSFCell cell1 = row.getCell((int) 1);
@@ -55,5 +54,10 @@ public class EgovCcmExcelZipMapping extends EgovExcelMapping {
 		
 		
 		return vo;
+	}
+
+	@Override
+	public Object mappingColumn(Row row) throws Exception {
+		return this.mappingColumn(row);
 	}
 }

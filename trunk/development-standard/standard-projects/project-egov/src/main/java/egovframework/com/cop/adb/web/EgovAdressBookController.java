@@ -300,7 +300,7 @@ public class EgovAdressBookController {
      * @throws Exception
      */
     @RequestMapping("/cop/adb/openPopup.do")
-    public String openPopupWindow(Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String openPopupWindow(@RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
         String requestUrl = (String)commandMap.get("requestUrl");
         String width = (String)commandMap.get("width");
@@ -324,7 +324,7 @@ public class EgovAdressBookController {
      * @throws Exception
      */
     @RequestMapping("/cop/adb/selectManList.do") 
-    public String selectUserList(@ModelAttribute("searchVO") AdressBookUserVO adbkUserVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String selectUserList(@ModelAttribute("searchVO") AdressBookUserVO adbkUserVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
                         
         if(adbkUserVO.getSearchCnd() == null || adbkUserVO.getSearchCnd().equals("")){
             adbkUserVO.setSearchCnd("0");

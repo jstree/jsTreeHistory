@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
@@ -262,7 +263,7 @@ public class EgovClubManageController {
      * @throws Exception
      */
     @RequestMapping("/cop/clb/selectClubInfByCmmntyId.do")
-    public String selectClubInfByCmmntyId(@ModelAttribute("searchVO") ClubVO clubVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String selectClubInfByCmmntyId(@ModelAttribute("searchVO") ClubVO clubVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 	String cmmntyId = (String)commandMap.get("param_cmmntyId");
 	clubVO.setCmmntyId(cmmntyId);
@@ -354,7 +355,7 @@ public class EgovClubManageController {
      * @throws Exception
      */
     @RequestMapping("/cop/cus/ClubMainPage.do")
-    public String selectClubMainPage(@ModelAttribute("searchVO") ClubVO clubVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String selectClubMainPage(@ModelAttribute("searchVO") ClubVO clubVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
@@ -403,7 +404,7 @@ public class EgovClubManageController {
      * @throws Exception
      */
     @RequestMapping("/cop/cus/ClubMainContents.do")
-    public String selectClubMainContents(@ModelAttribute("searchVO") ClubVO clubVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String selectClubMainContents(@ModelAttribute("searchVO") ClubVO clubVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 	@SuppressWarnings("unused")
 	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
@@ -643,7 +644,7 @@ public class EgovClubManageController {
      * @throws Exception
      */
     @RequestMapping("/cop/cus/previewClubMainPage.do")
-    public String preivewClubMainPage(@ModelAttribute("searchVO") ClubVO clubVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String preivewClubMainPage(@ModelAttribute("searchVO") ClubVO clubVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 
@@ -715,7 +716,7 @@ public class EgovClubManageController {
      * @throws Exception
      */
     @RequestMapping("/cop/cus/previewClubMainContents.do")
-    public String previewClubMainContents(@ModelAttribute("searchVO") ClubVO clubVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String previewClubMainContents(@ModelAttribute("searchVO") ClubVO clubVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 	@SuppressWarnings("unused")
 	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();

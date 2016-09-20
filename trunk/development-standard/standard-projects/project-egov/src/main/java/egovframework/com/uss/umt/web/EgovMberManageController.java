@@ -287,7 +287,7 @@ public class EgovMberManageController {
     public String sbscrbMberView(
             @ModelAttribute("userSearchVO") UserDefaultVO userSearchVO,
             @ModelAttribute("mberManageVO") MberManageVO mberManageVO,
-            Map<String, Object> commandMap, 
+            @RequestParam Map<String, Object> commandMap, 
             Model model
             )throws Exception {
         ComDefaultCodeVO vo = new ComDefaultCodeVO();
@@ -376,7 +376,7 @@ public class EgovMberManageController {
      */
     @RequestMapping(value="/uss/umt/EgovMberPasswordUpdt.do")
     public String updatePassword(ModelMap model, 
-    		  					 Map<String, Object> commandMap,
+    		@RequestParam Map<String, Object> commandMap,
     		  					 @ModelAttribute("searchVO") UserDefaultVO userSearchVO,
     		  					 @ModelAttribute("mberManageVO") MberManageVO mberManageVO) 
     							throws Exception {
@@ -432,7 +432,7 @@ public class EgovMberManageController {
      */
     @RequestMapping(value="/uss/umt/EgovMberPasswordUpdtView.do")
     public String updatePasswordView(ModelMap model, 
-    								Map<String, Object> commandMap,
+    		@RequestParam Map<String, Object> commandMap,
     								@ModelAttribute("searchVO") UserDefaultVO userSearchVO,
     								@ModelAttribute("mberManageVO") MberManageVO mberManageVO) throws Exception {
     	String userTyForPassword = (String)commandMap.get("userTyForPassword");

@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
@@ -140,7 +141,7 @@ public class EgovCmyClubManageController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/cop/clb/selectCmmntyClubList.do")
-	public String selectCmmntyClubList(@ModelAttribute("searchVO") ClubVO clubVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+	public String selectCmmntyClubList(@ModelAttribute("searchVO") ClubVO clubVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 	checkAuthority(clubVO);	// server-side 권한 확인
 	
 	clubVO.setPageUnit(propertyService.getInt("pageUnit"));

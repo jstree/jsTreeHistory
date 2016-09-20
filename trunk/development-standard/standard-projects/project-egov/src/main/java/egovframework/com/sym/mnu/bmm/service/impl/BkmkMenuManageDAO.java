@@ -73,7 +73,7 @@ public class BkmkMenuManageDAO extends EgovComAbstractDAO{
      */
     public List<BkmkMenuManageVO> selectBkmkMenuManageList(BkmkMenuManageVO bkmkMenuManageVO)
             throws Exception {
-        return list("BkmkMenuManageDAO.selectBkmkMenuManageList", bkmkMenuManageVO);
+        return (List<BkmkMenuManageVO>) list("BkmkMenuManageDAO.selectBkmkMenuManageList", bkmkMenuManageVO);
     }    
     
     /**
@@ -96,7 +96,7 @@ public class BkmkMenuManageDAO extends EgovComAbstractDAO{
      */
     public List<BkmkMenuManageVO> selectBkmkMenuList(BkmkMenuManageVO bkmkMenuManageVO)
             throws Exception {
-        return list("BkmkMenuManageDAO.selectBkmkMenuList", bkmkMenuManageVO);
+        return (List<BkmkMenuManageVO>) list("BkmkMenuManageDAO.selectBkmkMenuList", bkmkMenuManageVO);
     }    
 
     /**
@@ -119,7 +119,7 @@ public class BkmkMenuManageDAO extends EgovComAbstractDAO{
      */
     public List<MenuManageVO> selectBkmkPreview(BkmkMenuManageVO bkmkMenuManageVO)
             throws Exception {       
-        return list("BkmkMenuManageDAO.selectBkmkPreview", bkmkMenuManageVO);
+        return (List<MenuManageVO>) list("BkmkMenuManageDAO.selectBkmkPreview", bkmkMenuManageVO);
     }
     
     /**

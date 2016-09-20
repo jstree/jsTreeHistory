@@ -48,7 +48,7 @@ public class EgovRlnmManageController {
      * @exception Exception
      */
     @RequestMapping("/sec/rnc/EgovRlnmCnfirm.do")
-    public String rlnmCnfirm(Model model, Map<String, Object> commandMap) throws Exception {
+    public String rlnmCnfirm(Model model, @RequestParam Map<String, Object> commandMap) throws Exception {
     	
     	model.addAttribute("ihidnum",     (String)commandMap.get("ihidnum"));     //주민번호
     	model.addAttribute("realname",    (String)commandMap.get("realname"));    //사용자이름
@@ -95,7 +95,7 @@ public class EgovRlnmManageController {
      * @exception Exception
      */
     @RequestMapping("/sec/rnc/EgovRlnmPinCnfirm.do")
-    public String rlnmPinCnfirm(Model model, Map<String, Object> commandMap, HttpServletRequest request) throws Exception {
+    public String rlnmPinCnfirm(Model model, @RequestParam Map<String, Object> commandMap, HttpServletRequest request) throws Exception {
         model.addAttribute("sbscrbTy", 		(String)commandMap.get("sbscrbTy"));     //사용자유형
     	model.addAttribute("nextUrlName", (String)commandMap.get("nextUrlName")); //다음단계버튼명(이동할 URL에 따른)
     	model.addAttribute("nextUrl",     (String)commandMap.get("nextUrl"));     //다음단계로 이동할 URL
@@ -130,7 +130,7 @@ log.debug("realName:"+realName);
      * @exception Exception
      */
     @RequestMapping("/sec/rnc/EgovGPinCall.do")
-    public String gpinCall(Model model, Map<String, Object> commandMap) throws Exception {
+    public String gpinCall(Model model, @RequestParam Map<String, Object> commandMap) throws Exception {
         model.addAttribute("gpinId",        (String)commandMap.get("gpinId"));       //GPIN 아이디
         model.addAttribute("gpinPassword",  (String)commandMap.get("gpinPassword")); //GPIN 패스워드
         model.addAttribute("sbscrbTy", 		(String)commandMap.get("sbscrbTy"));     //사용자유형

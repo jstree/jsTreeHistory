@@ -178,7 +178,7 @@ public class EgovBkmkMenuManageController {
      * @throws Exception
      */ 
     @RequestMapping("/sym/mnu/bmm/openPopup.do")
-    public String openPopupWindow(Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String openPopupWindow(@RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
           
         String requestUrl = (String)commandMap.get("requestUrl");
         requestUrl = requestUrl.replaceAll("&", "&amp;");
@@ -201,7 +201,7 @@ public class EgovBkmkMenuManageController {
      * @throws Exception
      */ 
     @RequestMapping("/sym/mnu/bmm/selectMenuList.do") 
-    public String selectMenuList(@ModelAttribute("bkmkMenuManageVO") BkmkMenuManageVO bkmkMenuManageVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String selectMenuList(@ModelAttribute("bkmkMenuManageVO") BkmkMenuManageVO bkmkMenuManageVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
         String popFlag = (String)commandMap.get("PopFlag");
              
         

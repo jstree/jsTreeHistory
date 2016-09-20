@@ -55,7 +55,7 @@ public class EgovFileMngController {
      * @throws Exception
      */
     @RequestMapping("/cmm/fms/selectFileInfs.do")
-    public String selectFileInfs(@ModelAttribute("searchVO") FileVO fileVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String selectFileInfs(@ModelAttribute("searchVO") FileVO fileVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 	String atchFileId = (String)commandMap.get("param_atchFileId");
 
 	fileVO.setAtchFileId(atchFileId);
@@ -80,7 +80,7 @@ public class EgovFileMngController {
      * @throws Exception
      */
     @RequestMapping("/cmm/fms/selectFileInfsForUpdate.do")
-    public String selectFileInfsForUpdate(@ModelAttribute("searchVO") FileVO fileVO, Map<String, Object> commandMap,
+    public String selectFileInfsForUpdate(@ModelAttribute("searchVO") FileVO fileVO, @RequestParam Map<String, Object> commandMap,
 	    //SessionVO sessionVO,
 	    ModelMap model) throws Exception {
 
@@ -149,7 +149,7 @@ public class EgovFileMngController {
      * @throws Exception
      */
     @RequestMapping("/cmm/fms/selectImageFileInfs.do")
-    public String selectImageFileInfs(@ModelAttribute("searchVO") FileVO fileVO, Map<String, Object> commandMap,
+    public String selectImageFileInfs(@ModelAttribute("searchVO") FileVO fileVO, @RequestParam Map<String, Object> commandMap,
 	    //SessionVO sessionVO,
 	    ModelMap model) throws Exception {
 

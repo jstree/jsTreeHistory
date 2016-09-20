@@ -314,7 +314,7 @@ public class EgovUserManageController {
      */
     @RequestMapping(value="/uss/umt/EgovIdDplctCnfirm.do")
     public String checkIdDplct(
-    		Map<String, Object> commandMap,
+    		@RequestParam Map<String, Object> commandMap,
             ModelMap model
             )throws Exception {
         
@@ -341,7 +341,7 @@ public class EgovUserManageController {
      */
     @RequestMapping(value="/uss/umt/EgovUserPasswordUpdt.do")
     public String updatePassword(ModelMap model, 
-    		  					 Map<String, Object> commandMap,
+    		@RequestParam Map<String, Object> commandMap,
     		  					 @ModelAttribute("searchVO") UserDefaultVO userSearchVO,
     		  					 @ModelAttribute("userManageVO") UserManageVO userManageVO) 
     							throws Exception {
@@ -397,7 +397,7 @@ public class EgovUserManageController {
      */
     @RequestMapping(value="/uss/umt/EgovUserPasswordUpdtView.do")
     public String updatePasswordView(ModelMap model, 
-    								Map<String, Object> commandMap,
+    		@RequestParam Map<String, Object> commandMap,
     								@ModelAttribute("searchVO") UserDefaultVO userSearchVO,
     								@ModelAttribute("userManageVO") UserManageVO userManageVO) throws Exception {
     	String userTyForPassword = (String)commandMap.get("userTyForPassword");

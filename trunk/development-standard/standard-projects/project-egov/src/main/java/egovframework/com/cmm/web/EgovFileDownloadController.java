@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import egovframework.com.cmm.service.EgovFileMngService;
 import egovframework.com.cmm.service.FileVO;
@@ -120,7 +121,7 @@ public class EgovFileDownloadController {
      * @throws Exception
      */
     @RequestMapping(value = "/cmm/fms/FileDown.do")    
-    public void cvplFileDownload(Map<String, Object> commandMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void cvplFileDownload(@RequestParam Map<String, Object> commandMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     	String atchFileId = (String)commandMap.get("atchFileId");
 		String fileSn = (String)commandMap.get("fileSn");

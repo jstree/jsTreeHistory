@@ -336,7 +336,7 @@ public class EgovMenuManageServiceImpl extends AbstractServiceImpl implements Eg
 	    	if(progrmManageDAO.selectProgrmListTotCnt()>0){ return requestValue = "99";} //프로그램목록테이블 데이타 존재오류.
 	    	if(menuManageDAO.selectMenuListTotCnt()>0){ return requestValue = "99";} //메뉴정보테이블 데이타 존재오류.
 
-	    	HSSFWorkbook hssfWB = excelZipService.loadWorkbook(inputStream);
+	    	HSSFWorkbook hssfWB = (HSSFWorkbook) excelZipService.loadWorkbook(inputStream);
             // 엑셀 파일 시트 갯수 확인 sheet = 2  첫번째시트 = 프로그램목록  두번째시트 = 메뉴목록
             if(hssfWB.getNumberOfSheets()== 2)
             {

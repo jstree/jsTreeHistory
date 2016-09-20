@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
@@ -181,7 +182,7 @@ public class EgovCmyBBSAttributeManageController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/cop/bbs/SelectBBSMasterInfByTrget.do")
-	public String selectBBSMasterInfByTrget(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, Map<String, Object> commandMap, ModelMap model)
+	public String selectBBSMasterInfByTrget(@ModelAttribute("searchVO") BoardMasterVO boardMasterVO, @RequestParam Map<String, Object> commandMap, ModelMap model)
 	    throws Exception {
 	
 	checkAuthority(boardMasterVO);	// server-side 권한 확인
@@ -396,7 +397,7 @@ public class EgovCmyBBSAttributeManageController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/cop/bbs/selectAllBdMstrByTrget.do")
-	public String selectAllBdMstrByTrget(Map<String, Object> commandMap, ModelMap model) throws Exception {
+	public String selectAllBdMstrByTrget(@RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 	String trgetId = (String)commandMap.get("param_trgetId");
 	BoardMasterVO vo = new BoardMasterVO();
 	

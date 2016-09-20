@@ -25,7 +25,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.support.lob.LobCreator;
 import org.springframework.jdbc.support.lob.LobHandler;
-import org.springframework.orm.ibatis.support.AbstractLobTypeHandler;
+
+import egovframework.rte.psl.orm.ibatis.support.AbstractLobTypeHandler;
 
 /**
  * iBATIS TypeHandler implementation for Strings that get mapped to CLOBs.

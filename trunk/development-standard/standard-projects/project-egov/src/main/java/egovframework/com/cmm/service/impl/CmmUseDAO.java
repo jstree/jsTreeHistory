@@ -34,7 +34,7 @@ public class CmmUseDAO extends EgovComAbstractDAO {
      */
     @SuppressWarnings("unchecked")
     public List<CmmnDetailCode> selectCmmCodeDetail(ComDefaultCodeVO vo) throws Exception {
-	return list("CmmUseDAO.selectCmmCodeDetail", vo);
+	return (List<CmmnDetailCode>) list("CmmUseDAO.selectCmmCodeDetail", vo);
     }
 
     /**
@@ -46,7 +46,7 @@ public class CmmUseDAO extends EgovComAbstractDAO {
      */
     @SuppressWarnings("unchecked")
     public List<CmmnDetailCode> selectOgrnztIdDetail(ComDefaultCodeVO vo) throws Exception {
-	return list("CmmUseDAO.selectOgrnztIdDetail", vo);
+	return (List<CmmnDetailCode>) list("CmmUseDAO.selectOgrnztIdDetail", vo);
     }
 
     /**
@@ -58,6 +58,6 @@ public class CmmUseDAO extends EgovComAbstractDAO {
      */
     @SuppressWarnings("unchecked")
     public List<CmmnDetailCode> selectGroupIdDetail(ComDefaultCodeVO vo) throws Exception {
-	return list("CmmUseDAO.selectGroupIdDetail", vo);
+	return (List<CmmnDetailCode>) list("CmmUseDAO.selectGroupIdDetail", vo);
     }
 }

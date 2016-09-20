@@ -297,7 +297,7 @@ public class EgovEntrprsManageController {
     public String sbscrbEntrprsMberView(
     		@ModelAttribute("userSearchVO") UserDefaultVO userSearchVO, 
     		@ModelAttribute("entrprsManageVO") EntrprsManageVO entrprsManageVO,
-    		Map<String, Object> commandMap, 
+    		@RequestParam Map<String, Object> commandMap, 
     		Model model
     		)throws Exception {
         ComDefaultCodeVO vo = new ComDefaultCodeVO();
@@ -385,7 +385,7 @@ public class EgovEntrprsManageController {
     @RequestMapping(value="/uss/umt/EgovEntrprsPasswordUpdt.do")
     public String updatePassword(
     		ModelMap model, 
-    		Map<String, Object> commandMap,
+    		@RequestParam Map<String, Object> commandMap,
     		@ModelAttribute("searchVO") UserDefaultVO userSearchVO,
     		@ModelAttribute("entrprsManageVO") EntrprsManageVO entrprsManageVO
     		)throws Exception {
@@ -442,7 +442,7 @@ public class EgovEntrprsManageController {
     @RequestMapping(value="/uss/umt/EgovEntrprsPasswordUpdtView.do")
     public String updatePasswordView(
     		ModelMap model, 
-    		Map<String, Object> commandMap,
+    		@RequestParam Map<String, Object> commandMap,
     		@ModelAttribute("searchVO") UserDefaultVO userSearchVO,
     		@ModelAttribute("entrprsManageVO") EntrprsManageVO entrprsManageVO
     		) throws Exception {

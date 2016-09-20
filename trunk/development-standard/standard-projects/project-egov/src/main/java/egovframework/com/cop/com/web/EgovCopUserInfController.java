@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import egovframework.com.cop.com.service.EgovUserInfManageService;
 import egovframework.com.cop.com.service.UserInfVO;
@@ -56,7 +57,7 @@ public class EgovCopUserInfController {
      * @throws Exception
      */
     @RequestMapping("/cop/com/selectUserList.do")
-    public String selectUserList(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String selectUserList(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 	String popFlag = (String)commandMap.get("PopFlag");
 	String returnUrl = "egovframework/com/cop/com/EgovUserList";
 	

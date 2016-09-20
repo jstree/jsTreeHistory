@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
@@ -117,7 +118,7 @@ public class EgovCmyUserInfController {
      * @throws Exception
      */
     @RequestMapping("/cop/com/selectCmmntyUserList.do")
-    public String selectCmmntyUserList(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String selectCmmntyUserList(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 	String popFlag = (String)commandMap.get("PopFlag");
 	String returnUrl = "egovframework/com/cop/com/EgovUserList";
@@ -170,7 +171,7 @@ public class EgovCmyUserInfController {
      * @throws Exception
      */
     @RequestMapping("/cop/com/selectCmmntyMngrList.do")
-    public String selectCmmntyMngrList(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String selectCmmntyMngrList(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 	String popFlag = (String)commandMap.get("PopFlag");
 	String returnUrl = "egovframework/com/cop/com/EgovUserList";
@@ -220,7 +221,7 @@ public class EgovCmyUserInfController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/cop/com/selectClubOprtrList.do")
-	public String selectClubOprtrList(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+	public String selectClubOprtrList(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 	
 	String popFlag = (String)commandMap.get("PopFlag");
 	String returnUrl = "egovframework/com/cop/com/EgovUserList";
@@ -270,7 +271,7 @@ public class EgovCmyUserInfController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/cop/com/selectClubUserList.do")
-	public String selectClubUserList(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+	public String selectClubUserList(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 	
 	String popFlag = (String)commandMap.get("PopFlag");
 	String returnUrl = "egovframework/com/cop/com/EgovUserList";
@@ -325,7 +326,7 @@ public class EgovCmyUserInfController {
      * @throws Exception
      */
     @RequestMapping("/cop/com/deleteCmmntyUser.do")
-    public String deleteCmmntyUser(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String deleteCmmntyUser(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 	checkAuthority(userVO);	// server-side 권한 확인
 	
@@ -360,7 +361,7 @@ public class EgovCmyUserInfController {
      * @throws Exception
      */
     @RequestMapping("/cop/com/reRegistCmmntyUser.do")
-    public String reRegisterCmmntyUser(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String reRegisterCmmntyUser(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 	checkAuthority(userVO);	// server-side 권한 확인
 	
@@ -396,7 +397,7 @@ public class EgovCmyUserInfController {
      * @throws Exception
      */
     @RequestMapping("/cop/com/registCmmntyManager.do")
-    public String registCmmntyManager(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String registCmmntyManager(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 	checkAuthority(userVO);	// server-side 권한 확인
 	
@@ -431,7 +432,7 @@ public class EgovCmyUserInfController {
      * @throws Exception
      */
     @RequestMapping("/cop/com/deleteClbUser.do")
-    public String deleteClbUser(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String deleteClbUser(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 	checkAuthority(userVO);	// server-side 권한 확인
 	
@@ -465,7 +466,7 @@ public class EgovCmyUserInfController {
      * @throws Exception
      */
     @RequestMapping("/cop/com/reRegistClbUser.do")
-    public String reRegistClbUser(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String reRegistClbUser(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 	checkAuthority(userVO);	// server-side 권한 확인
 	
@@ -499,7 +500,7 @@ public class EgovCmyUserInfController {
      * @throws Exception
      */
     @RequestMapping("/cop/com/registClbOprtr.do")
-    public String registClbOprtr(@ModelAttribute("searchVO") UserInfVO userVO, Map<String, Object> commandMap, ModelMap model) throws Exception {
+    public String registClbOprtr(@ModelAttribute("searchVO") UserInfVO userVO, @RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 	checkAuthority(userVO);	// server-side 권한 확인
 	

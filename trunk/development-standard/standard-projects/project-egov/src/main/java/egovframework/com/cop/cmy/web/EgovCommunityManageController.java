@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
@@ -208,7 +209,7 @@ public class EgovCommunityManageController {
      * @throws Exception
      */
     @RequestMapping("/cop/cmy/forUpdateCmmntyInf.do")
-    public String forUpdateCmmntyInf(@ModelAttribute("searchVO") CommunityVO cmmntyVO, Map<String, Object> commandMap, ModelMap model)
+    public String forUpdateCmmntyInf(@ModelAttribute("searchVO") CommunityVO cmmntyVO, @RequestParam Map<String, Object> commandMap, ModelMap model)
 	    throws Exception {
 
 	String cmmntyId = (String)commandMap.get("param_cmmntyId");
