@@ -61,6 +61,10 @@
 			<groupId>egovframework.rte</groupId>
 			<artifactId>egovframework.rte.fdl.logging</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.bat.core</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>egovframework.com.ems</groupId>
@@ -132,10 +136,15 @@
 				<version>2.0.0</version>
 			</dependency>
 			<dependency>
-			<groupId>egovframework.rte</groupId>
-			<artifactId>egovframework.rte.fdl.logging</artifactId>
-			<version>${egovframework.rte.version}</version>
-		</dependency>
+				<groupId>egovframework.rte</groupId>
+				<artifactId>egovframework.rte.bat.core</artifactId>
+				<version>${egovframework.rte.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>egovframework.rte</groupId>
+				<artifactId>egovframework.rte.fdl.logging</artifactId>
+				<version>${egovframework.rte.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>egovframework.com.ems</groupId>

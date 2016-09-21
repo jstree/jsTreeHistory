@@ -14,6 +14,6 @@ public class ResourcesManageDaoImpl extends EgovAbstractDAO implements Resources
     @Override
     public List<ResourcesManageVo> getRoleInResoures(ResourcesManageVo resourcesManageVo) throws Exception
     {
-        return list("resources.getRoleInResoures", resourcesManageVo);
+        return (List<ResourcesManageVo>) list("resources.getRoleInResoures", resourcesManageVo);
     }
 }
