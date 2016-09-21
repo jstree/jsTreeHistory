@@ -71,8 +71,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
     @Autowired
     private ApplicationContext applicationContext;
     
-    @Autowired
-    private ExceptionHandlerExceptionResolver exceptionHandlerExceptionResolver;
     
     @Autowired
     private UrlBasedViewResolver urlBasedViewResolver;
@@ -92,7 +90,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
         
         List<ViewResolver> viewResolvers = new ArrayList<>();
         
-        //viewResolvers.add(specialPurpose);
         viewResolvers.add(urlBasedViewResolver);
         viewResolvers.add(internalResourceViewResolver());
         viewResolver.setViewResolvers(viewResolvers);
@@ -102,7 +99,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
         mappingJackson2JsonView.setExtractValueFromSingleKeyModel(true);
         mappingJackson2JsonView.setModelKey("result");
         defaultViews.add(mappingJackson2JsonView);
-        //viewResolver.setDefaultViews(defaultViews);
         return viewResolver;
     }
     

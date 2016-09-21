@@ -36,7 +36,7 @@ public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree> List<T> getChildNode( T comprehensiveTree ) throws Exception{
 		
-		return list(comprehensiveTree.getSqlMapSelector() + "." + "getChildNode", comprehensiveTree );
+		return (List<T>) list(comprehensiveTree.getSqlMapSelector() + "." + "getChildNode", comprehensiveTree );
 	}
 
 	@SuppressWarnings("deprecation")
@@ -49,13 +49,13 @@ public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree> List<T> searchNodeByString( T comprehensiveTree ) throws Exception{
 		
-		return list(comprehensiveTree.getSqlMapSelector() + "." + "searchNodeByString", comprehensiveTree );
+		return (List<T>) list(comprehensiveTree.getSqlMapSelector() + "." + "searchNodeByString", comprehensiveTree );
 	}
 	
 	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree>List<String> searchNodeByPosition(List<T> searchNodeByPositions) throws Exception{
 		//TODO: searchNodeByPositions 는 최소 1개 이상이어야 한다.
-		return list(searchNodeByPositions.get(0).getSqlMapSelector() + "." + "searchNodeByPosition", searchNodeByPositions );
+		return (List<String>) list(searchNodeByPositions.get(0).getSqlMapSelector() + "." + "searchNodeByPosition", searchNodeByPositions );
 	}
 	
 	
@@ -91,7 +91,7 @@ public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
 	@SuppressWarnings("unchecked")
 	public <T extends ComprehensiveTree> List<T> getChildNodeByLeftRight( T comprehensiveTree ) throws Exception{
 		
-		return list(comprehensiveTree.getSqlMapSelector() + "." + "getChildNodeByLeftRight", comprehensiveTree );
+		return (List<T>) list(comprehensiveTree.getSqlMapSelector() + "." + "getChildNodeByLeftRight", comprehensiveTree );
 	}
 	
 	public <T extends ComprehensiveTree> void fixCopy( T comprehensiveTree) throws Exception{
@@ -146,6 +146,6 @@ public class CoreDaoImpl extends EgovComAbstractDAO implements CoreDao{
     @SuppressWarnings("unchecked")
     public <T extends ComprehensiveTree> List<T> getDescendantNodesPaginated(T comprehensiveTree) {
         
-        return list(comprehensiveTree.getSqlMapSelector() + ".getDescendantNodesPaginated", comprehensiveTree);
+        return (List<T>) list(comprehensiveTree.getSqlMapSelector() + ".getDescendantNodesPaginated", comprehensiveTree);
     }
 }

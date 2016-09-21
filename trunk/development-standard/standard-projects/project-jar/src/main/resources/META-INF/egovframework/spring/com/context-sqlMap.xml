@@ -14,7 +14,7 @@
 	<bean id="egov.lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
 
 	<!-- SqlMap setup for iBATIS Database Layer -->
-	<bean id="egov.sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+	<bean id="egov.sqlMapClient" class="egovframework.rte.psl.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocations">
 			<list>
 				<value>classpath:/META-INF/egovframework/sqlmap/config/${Globals.DbType}/sql-map-config.xml</value>

@@ -16,9 +16,10 @@ public class MonitorServiceImpl implements MonitorService {
 	@Resource(name="MonitorDAO")
 	private MonitorDAO monitorDAO;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T_JqGridCellData> getJqGridCellData(P_JqGrid p_JqGrid) {
 		// TODO Auto-generated method stub
-		return monitorDAO.getJqGridCellData(p_JqGrid);
+		return (List<T_JqGridCellData>) monitorDAO.getJqGridCellData(p_JqGrid);
 	}
 }
