@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	
 	<!-- Integration Apache Commons Validator by Spring Modules -->				
 	<bean id="beanValidator" class="org.springmodules.validation.commons.DefaultBeanValidator">
@@ -11,7 +11,9 @@
 		<property name="validationConfigLocations">
 			<list>
 				<!-- 공통기술 -->
-		        <value>classpath:egovframework/validator/**/*.xml</value>
+				<value>classpath:/egovframework/validator/com-rules.xml</value>
+		        <value>classpath:/egovframework/validator/validator-rules.xml</value>
+		        <value>classpath:/egovframework/validator/**/*.xml</value>
 		        <value>classpath:/META-INF/egovframework/validator/**/*.xml</value>
 			</list>
 		</property>

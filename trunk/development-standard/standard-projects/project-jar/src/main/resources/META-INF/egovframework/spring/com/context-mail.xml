@@ -11,8 +11,6 @@
     --> 
     
     <!-- 메일 연동 인터페이스에서 첨부파일 미사용 -->
-    
-    <!-- 
     <bean id="EMSMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" 
         p:host="STMP서버주소" 
         p:port="465"  
@@ -27,7 +25,6 @@
             </props> 
         </property> 
     </bean>
-     -->
      
     <!-- 메일 연동 인터페이스에서 첨부파일 사용 -->
 	<bean id="egovMultiPartEmail" class="egovframework.com.cop.ems.service.EgovMultiPartEmail"
@@ -39,7 +36,7 @@
 		p:emailAddress="아이디@mail.com" />
 	  
     <!-- 모니터링 서비스에서 사용 gmail, hanmail 용 -->
-     <bean id="mntrngMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" 
+    <bean id="mntrngMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" 
         p:host="smtp.gmail.com" 
         p:port="465"  
         p:protocol="smtps" 
@@ -58,6 +55,5 @@
         p:from="SYSTEM &lt; 아이디@gmail.com &gt;"   
         p:subject="{모니터링종류} 상태통보." 
         p:text="* {모니터링종류}  상태통보.&#13;{에러내용}"/> 
-    
 
 </beans> 
