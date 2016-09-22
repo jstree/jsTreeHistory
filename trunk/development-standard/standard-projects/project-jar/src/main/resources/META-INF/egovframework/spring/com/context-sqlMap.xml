@@ -32,7 +32,7 @@
 	</bean>
 	
 	<!-- SqlMap setup for iBATIS Database Layer -->
-	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+	<bean id="sqlMapClient" class="egovframework.rte.psl.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocations">
             <list>
                 <value>classpath:/META-INF/egovframework/sqlmap/config/${Globals.DbType}/sql-map-config.xml</value>

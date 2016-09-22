@@ -18,10 +18,7 @@
 	<description>ROOT Project Repository by 313 DEV GRP</description>
 	
 	<modules>
-		<module>project-egov</module>
-		<module>project-jar</module>
-		<module>project-war</module>
-		<module>project-ahnlab</module>
+		<module>server</module>
 	</modules>
 
 	<properties>

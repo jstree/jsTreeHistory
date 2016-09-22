@@ -19,8 +19,7 @@
 	</bean>
 
 	<!-- For Pagination Tag -->
-	<bean id="imageRenderer"
-		class="egovframework.com.cmm.web.EgovImgPaginationRenderer" />
+	<bean id="imageRenderer" class="egovframework.com.cmm.ImagePaginationRenderer"/>
 	
 	<bean id="asyncPaginationTextRenderer"
 		class="egovframework.com.ext.jstree.support.manager.mvc.tags.ui.pagination.AsyncPaginationTextRenderer" />

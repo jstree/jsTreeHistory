@@ -62,7 +62,7 @@ import egovframework.com.ext.jstree.support.manager.viewResolver.CustomInternalR
 @EnableWebMvc
 @ComponentScan(basePackages = "egovframework, standard.mvc", excludeFilters = @Filter(Configuration.class))
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@ImportResource({ "classpath:/META-INF/egovframework/spring/config/*.xml" })
+@ImportResource({ "classpath:/META-INF/egovframework/spring/config/**/*.xml" })
 public class WebMvcConfig extends WebMvcConfigurerAdapter
 {
     @Value("#{systemProperties['spring.profiles.active']}")

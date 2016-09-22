@@ -20,6 +20,17 @@
 	<bean id="requestHandlerInterceptor"
 		class="egovframework.com.ext.jstree.support.manager.interceptor.RequestHandlerInterceptor">
 	</bean>
+	
+	<bean id="egovWebLogInterceptor" class="egovframework.com.sym.log.wlg.web.EgovWebLogInterceptor" />
+
+	<bean id="webLogMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="egovWebLogInterceptor" />
+			</list>
+		</property>
+	</bean>
+	
 
 
 	<mvc:interceptors>

@@ -67,6 +67,12 @@
 		</dependency>
 		<dependency>
 			<groupId>development</groupId>
+			<artifactId>support-egov</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
 			<artifactId>support-encryption</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
@@ -139,6 +145,12 @@
 		</dependency>
 		<dependency>
 			<groupId>development</groupId>
+			<artifactId>support-sns</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>development</groupId>
 			<artifactId>support-struts</artifactId>
 			<version>${project.version}</version>
 			<type>pom</type>
@@ -149,7 +161,7 @@
 			<version>${project.version}</version>
 			<type>pom</type>
 		</dependency>
-
+		<!-- 공통컴포넌트 끝 -->
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -176,17 +188,28 @@
 			<artifactId>standard</artifactId>
 		</dependency>
 
+		<!-- Cross-Site Scripting -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
-			
+
 			<dependency>
 				<groupId>javax.servlet.jsp</groupId>
 				<artifactId>jsp-api</artifactId>
 				<version>2.1</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
@@ -209,6 +232,19 @@
 				<groupId>taglibs</groupId>
 				<artifactId>standard</artifactId>
 				<version>1.1.2</version>
+			</dependency>
+
+			<!-- Cross-Site Scripting -->
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>javax.servlet.jsp-api</artifactId>
+				<version>2.3.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>1.4.180</version>
 			</dependency>
 
 		</dependencies>

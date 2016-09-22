@@ -10,7 +10,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 
 @Configuration
-@ImportResource({ "classpath*:/META-INF/egovframework/spring/com/context-*.xml" })
+@ImportResource({ "classpath*:/META-INF/egovframework/spring/com/**/context-*.xml" })
 public class WebApplicationContextConfig
 {
     

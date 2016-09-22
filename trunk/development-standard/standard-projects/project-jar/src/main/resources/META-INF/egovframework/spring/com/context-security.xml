@@ -14,6 +14,13 @@
 2014.06.13		Vincent Han		표준프레임워크 3.0 적용 (간소화 설정 사용)
 -->
 
+	<security:http pattern="/" security="none" />
+	<security:http pattern="/index.do" security="none" />
+	<security:http pattern="/egovIndex.do" security="none" />
+	
+<!-- 	etc/jstree/springiBatis/core
+	ext/jstree/strutsiBatis -->
+	
 	<security:http pattern="/css/**" security="none"/>
 	<security:http pattern="/html/**" security="none"/>
     <security:http pattern="/images/**" security="none"/>

@@ -96,9 +96,8 @@
 		<filter-name>HTMLTagFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	<!-- <filter> <filter-name>sitemesh</filter-name> <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class> 
-		</filter> <filter-mapping> <filter-name>sitemesh</filter-name> <url-pattern>*.do</url-pattern> 
-		<dispatcher>FORWARD</dispatcher> <dispatcher>REQUEST</dispatcher> </filter-mapping> -->
+
+    <!-- struts2 -->
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
