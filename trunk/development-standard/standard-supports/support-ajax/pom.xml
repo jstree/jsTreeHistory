@@ -51,6 +51,11 @@
 			<groupId>net.sourceforge.ajaxtags</groupId>
 			<artifactId>ajaxtags</artifactId>
 		</dependency>
+		<!-- Ajax -->
+		<dependency>
+			<groupId>net.sourceforge.ajaxtags</groupId>
+			<artifactId>ajaxtags-resources</artifactId>
+		</dependency>
 
 		<!--DWR -->
 		<dependency>
@@ -99,6 +104,12 @@
 				<groupId>net.sourceforge.ajaxtags</groupId>
 				<artifactId>ajaxtags</artifactId>
 				<version>1.5-beta-0.2</version>
+			</dependency>
+			<!-- Ajax -->
+			<dependency>
+				<groupId>net.sourceforge.ajaxtags</groupId>
+				<artifactId>ajaxtags-resources</artifactId>
+				<version>1.5.7</version>
 			</dependency>
 
 			<!--DWR -->

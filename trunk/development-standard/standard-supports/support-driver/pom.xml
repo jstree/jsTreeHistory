@@ -137,6 +137,7 @@
 				</exclusions>
 			</dependency>
 
+			<!-- LDAP SDK -->
 			<dependency>
 				<groupId>ldapsdk</groupId>
 				<artifactId>ldapsdk</artifactId>

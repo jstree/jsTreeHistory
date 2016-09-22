@@ -15,12 +15,12 @@
 
 	<name>support-encryption</name>
 	<description>암호화 라이브러리</description>
-	
+
 	<dependencies>
-			<dependency>
-				<groupId>org.jasypt</groupId>
-				<artifactId>jasypt</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -28,7 +28,7 @@
 			<dependency>
 				<groupId>org.jasypt</groupId>
 				<artifactId>jasypt</artifactId>
-				<version>1.7</version>
+				<version>1.9.2</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
