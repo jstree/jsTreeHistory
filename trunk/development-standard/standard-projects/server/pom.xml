@@ -185,7 +185,7 @@
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr</artifactId>
-			<version>3.5.2</version>
+			<version>3.0.1</version>
 		</dependency>
 
 		<!-- 우편번호를 위한 라이브러리 -->
