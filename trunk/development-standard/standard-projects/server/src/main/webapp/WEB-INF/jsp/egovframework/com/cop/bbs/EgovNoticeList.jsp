@@ -72,12 +72,12 @@
 		document.frm.submit();
 	}
 
-	function fn_egov_inqire_notice(i, nttId, bbsId) {
+	function fn_egov_inqire_notice(nttId, bbsId) {
 		 if(bbsId == "") return false; //20150508
-		document.subForm.nttId.value = nttId;
-		document.subForm.bbsId.value = bbsId;
-		document.subForm.action = "<c:url value='/cop/bbs${prefix}/selectBoardArticle.do'/>";
-		document.subForm.submit();
+		 document.submitParam.nttId.value = nttId;
+		 document.submitParam.bbsId.value = bbsId;
+		 document.submitParam.action = "<c:url value='/cop/bbs${prefix}/selectBoardArticle.do'/>";
+		 document.submitParam.submit();
 	}
 //-->
 </script>
@@ -155,6 +155,10 @@
  </thead>
 
  <tbody>
+ 	<form name="submitParam" method="post">
+	 	<input type="hidden" name="bbsId"  />
+		<input type="hidden" name="nttId"  />
+ 	</form>
 	 <c:forEach var="result" items="${resultList}" varStatus="status">
 	  <tr>
 	    <!--td class="lt_text3" nowrap><input type="checkbox" name="check1" class="check2"></td-->
@@ -172,8 +176,6 @@
 	    		</c:when>
 	    		<c:otherwise>
 		    		<form name="subForm" method="post" action="<c:url value='/cop/bbs${prefix}/selectBoardArticle.do'/>">
-						<input type="hidden" name="bbsId" value="<c:out value='${result.bbsId}'/>" />
-						<input type="hidden" name="nttId"  value="<c:out value="${result.nttId}"/>" />
 						<input type="hidden" name="bbsTyCode" value="<c:out value='${brdMstrVO.bbsTyCode}'/>" />
 						<input type="hidden" name="bbsAttrbCode" value="<c:out value='${brdMstrVO.bbsAttrbCode}'/>" />
 						<input type="hidden" name="authFlag" value="<c:out value='${brdMstrVO.authFlag}'/>" />
@@ -185,7 +187,7 @@
 				    		<img src="<c:url value='/images/egovframework/com/cmm/icon/reply_arrow.gif'/>" alt="reply arrow">
 				    	</c:if>
 			    		<span class="link">
-			    			<a href="#"  onclick="fn_egov_inqire_notice();"><c:out value="${result.nttSj}"/></a>
+			    			<a href="#"  onclick="fn_egov_inqire_notice('${result.nttId}', '${result.bbsId }');"><c:out value="${result.nttSj}"/></a>
 			    		</span>
 			    	</form>
 	    		</c:otherwise>

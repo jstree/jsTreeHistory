@@ -18,10 +18,10 @@
 			<field property="nttCn" depends="required">
         		<arg0 key="cop.nttCn" />
 			</field> 
-			<field property="ntceBgnde" depends="required">
+			<field property="ntceBgndeView" depends="required">
         		<arg0 key="cop.ntceBgnde" />
 			</field>
-			<field property="ntceEndde" depends="required">
+			<field property="ntceEnddeView" depends="required">
         		<arg0 key="cop.ntceEndde" />
 			</field>
 			<field property="ntcrNm" depends="required">

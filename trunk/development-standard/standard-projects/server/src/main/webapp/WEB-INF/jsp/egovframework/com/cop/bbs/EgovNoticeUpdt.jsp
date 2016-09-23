@@ -18,6 +18,7 @@
   * @ -------        --------    ---------------------------
   * @ 2009.03.19   이삼섭          최초 생성
   *   2011.09.15   서준식          유효기간 시작일이 종료일보다 빠른지 체크하는 로직 추가
+  *   2015.08.28   김연호		   Validation 오류 및 익명게시판 오류 수정
   *  @author 공통서비스 개발팀 이삼섭
   *  @since 2009.03.19
   *  @version 1.0
@@ -143,10 +144,16 @@ _editor_url = "<c:url value='/html/egovframework/com/cmm/utl/htmlarea3.0/'/>";
 
 <input type="hidden" name="cal_url" value="<c:url value='/sym/cal/EgovNormalCalPopup.do'/>" />
 
-<c:if test="${anonymous != 'true'}">
-<input type="hidden" name="ntcrNm" value="dummy">	<!-- validator 처리를 위해 지정 -->
-<input type="hidden" name="password" value="dummy">	<!-- validator 처리를 위해 지정 -->
-</c:if>
+<c:choose>
+	<c:when test="${anonymous}">
+	<input type="hidden" name="ntcrNm" value="dummy">	<!-- validator 처리를 위해 지정 -->
+<!-- 	<input type="hidden" name="password" value="dummy">	validator 처리를 위해 지정 -->
+	</c:when>
+	<c:otherwise>
+	<input type="hidden" name="ntcrNm" value="${user.name}">	
+	<input type="hidden" name="password" value="dummy">	<!-- validator 처리를 위해 지정 -->
+	</c:otherwise>
+</c:choose>
 
 <c:if test="${bdMstr.bbsAttrbCode != 'BBSA01'}">
    <input id="ntceBgnde" name="ntceBgnde" type="hidden" value="10000101">
@@ -183,7 +190,8 @@ _editor_url = "<c:url value='/html/egovframework/com/cmm/utl/htmlarea3.0/'/>";
 	     </table>
 	    </td>
 	  </tr>
-	  <c:if test="${bdMstr.bbsAttrbCode == 'BBSA01'}">
+	  <c:choose>
+	  <c:when test="${bdMstr.bbsAttrbCode == 'BBSA01'}">
 		  <tr>
 		    <th height="23" class="emphasisRight"><spring:message code="cop.noticeTerm" />
 		    <img src="<c:url value='/images/egovframework/com/cmm/icon/required.gif' />" width="15" height="15" alt="필수입력표시"></th>
@@ -208,16 +216,21 @@ _editor_url = "<c:url value='/html/egovframework/com/cmm/utl/htmlarea3.0/'/>";
 				 <br/><form:errors path="ntceEnddeView" />
 		    </td>
 		  </tr>
-	  </c:if>
+	  </c:when>
+	  <c:otherwise>
+	  		<input name="ntceBgndeView" type="hidden" size="10" value="9999-12-31"  readOnly/>
+			<input name="ntceEnddeView" type="hidden" size="10" value="9999-12-31"  readOnly/>
+	  </c:otherwise>
+	  </c:choose>
 	  <c:if test="${anonymous == 'true'}">
-		  <tr>
-		    <th height="23" class="emphasisRight"><spring:message code="cop.ntcrNm" />
-		    <img src="<c:url value='/images/egovframework/com/cmm/icon/required.gif' />" width="15" height="15" alt="필수입력표시"></th>
-		    <td colspan="3">
-		      <input name="ntcrNm" type="text" size="20" value='<c:out value="${result.ntcrNm}" />'  maxlength="10" title="작성자이름">
-		    </td>
+<!-- 		  <tr> -->
+<%-- 		    <th height="23" class="emphasisRight"><spring:message code="cop.ntcrNm" /> --%>
+<%-- 		    <img src="<c:url value='/images/egovframework/com/cmm/icon/required.gif' />" width="15" height="15" alt="필수입력표시"></th> --%>
+<!-- 		    <td colspan="3"> -->
+<%-- 		      <input name="ntcrNm" type="text" size="20" value='<c:out value="${result.ntcrNm}" />'  maxlength="10" title="작성자이름"> --%>
+<!-- 		    </td> -->
 
-		  </tr>
+<!-- 		  </tr> -->
 		  <tr>
 		    <th height="23" class="emphasisRight"><spring:message code="cop.password" />
 		    <img src="<c:url value='/images/egovframework/com/cmm/icon/required.gif' />" width="15" height="15" alt="필수입력표시"></th>

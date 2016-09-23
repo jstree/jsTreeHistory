@@ -53,7 +53,8 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
  *   2009.06.29	한성곤			2단계 기능 추가 (댓글관리, 만족도조사)
  *   2011.07.01 안민정		 	댓글, 스크랩, 만족도 조사 기능의 종속성 제거
  *   2011.8.26	정진오			IncludedInfo annotation 추가
- *   2011.09.07 서준식           유효 게시판 게시일 지나도 게시물이 조회되던 오류 수정
+ *   2011.09.07 서준식          유효 게시판 게시일 지나도 게시물이 조회되던 오류 수정
+ *   2015.08.28 김연호			게시판 CRUD 오류 수정
  * </pre>
  */
 
@@ -310,7 +311,7 @@ public class EgovBBSManageController {
 	if (bdMstr.getTmplatCours() == null || bdMstr.getTmplatCours().equals("")) {
 	    bdMstr.setTmplatCours("/css/egovframework/com/cop/tpl/egovBaseTemplate.css");
 	}
-
+	model.addAttribute("user", user);
 	model.addAttribute("brdMstrVO", bdMstr);
 	////-----------------------------
 
@@ -421,7 +422,7 @@ public class EgovBBSManageController {
 	if (master.getTmplatCours() == null || master.getTmplatCours().equals("")) {
 	    master.setTmplatCours("/css/egovframework/com/cop/tpl/egovBaseTemplate.css");
 	}
-
+	model.addAttribute("user", user);
 	model.addAttribute("brdMstrVO", master);
 	////-----------------------------
 
@@ -545,7 +546,7 @@ public class EgovBBSManageController {
 	if (bmvo.getTmplatCours() == null || bmvo.getTmplatCours().equals("")) {
 	    bmvo.setTmplatCours("/css/egovframework/com/cop/tpl/egovBaseTemplate.css");
 	}
-
+	model.addAttribute("user", user);
 	model.addAttribute("brdMstrVO", bmvo);
 	////-----------------------------
 	
@@ -713,6 +714,7 @@ public class EgovBBSManageController {
 	
 	paginationInfo.setTotalRecordCount(totCnt);
 
+	model.addAttribute("user", user);
 	model.addAttribute("resultList", map.get("resultList"));
 	model.addAttribute("resultCnt", map.get("resultCnt"));
 	model.addAttribute("brdMstrVO", mstrVO);
