@@ -11,7 +11,7 @@
 
 	<artifactId>standard-server</artifactId>
 	<packaging>war</packaging>
-	<name>server</name>
+	<name>standard-server</name>
 	<description>
 		server by 313 DEV GRP
 	</description>
@@ -510,7 +510,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>server</finalName>
+		<finalName>standard-server</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
