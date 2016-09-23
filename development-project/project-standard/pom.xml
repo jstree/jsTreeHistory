@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>development</groupId>
+		<artifactId>development-standard</artifactId>
+		<version>${project.version}</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	
+	<artifactId>standard-projects</artifactId>
+	<packaging>pom</packaging>
+
+	<name>standard-projects</name>
+	<description>ROOT Project Repository by 313 DEV GRP</description>
+	
+	<modules>
+		<module>server</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>live</id>
+		</profile>
+	</profiles>
+	
+</project>
