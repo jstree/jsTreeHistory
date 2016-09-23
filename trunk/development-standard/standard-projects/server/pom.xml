@@ -479,6 +479,33 @@
 		</dependency>
 
 		<!-- 공통컴포넌트 끝 -->
+
+		<!-- jstree service engine 라이브러리 시작 -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.collections</groupId>
+			<artifactId>collections-generic</artifactId>
+			<version>4.01</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.2.4.Final</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<defaultGoal>install</defaultGoal>
@@ -490,12 +517,47 @@
 					<groupId>org.apache.tomcat.maven</groupId>
 					<artifactId>tomcat7-maven-plugin</artifactId>
 					<version>2.2</version>
+					<executions>
+						<execution>
+							<phase>deploy</phase>
+							<goals>
+								<goal>redeploy</goal>
+							</goals>
+						</execution>
+					</executions>
 					<configuration>
-						<port>80</port>
+						<charset>UTF-8</charset>
+						<uriEncoding>UTF-8</uriEncoding>
+						<url>http://ubuntu.313.co.kr:8080/manager/text</url>
+						<server>StandardProject-Snapshot</server>
 						<path>/</path>
 						<systemProperties>
-							<JAVA_OPTS>-Xms256m -Xmx768m -XX:MaxPermSize=256m</JAVA_OPTS>
+							<JAVA_OPTS>-Xms512m -Xmx1024m -XX:MaxPermSize=384m</JAVA_OPTS>
 						</systemProperties>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+						<archive>
+							<manifest>
+								<addClasspath>false</addClasspath>
+							</manifest>
+							<manifestEntries>
+								<Build-Time>${maven.build.timestamp}</Build-Time>
+								<Build-Host>${agent.name}</Build-Host>
+								<Build-User>${user.name}</Build-User>
+								<Build-Maven>Maven ${maven.version}</Build-Maven>
+								<Build-Java>${java.version}</Build-Java>
+								<Build-OS>${os.name}</Build-OS>
+								<Build-Label>${project.version}</Build-Label>
+								<Build-Path>${basedir}</Build-Path>
+								<Build-ETC>${bamboo.buildKey} - ${bamboo.planKey}</Build-ETC>
+							</manifestEntries>
+						</archive>
 					</configuration>
 				</plugin>
 				<plugin>
