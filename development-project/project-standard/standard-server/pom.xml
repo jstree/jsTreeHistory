@@ -4,12 +4,12 @@
 
 	<parent>
 		<groupId>development</groupId>
-		<artifactId>standard-projects</artifactId>
+		<artifactId>project-standard</artifactId>
 		<version>${project.version}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>server</artifactId>
+	<artifactId>standard-server</artifactId>
 	<packaging>war</packaging>
 	<name>server</name>
 	<description>

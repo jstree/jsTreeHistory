@@ -6,19 +6,19 @@
 
 	<parent>
 		<groupId>development</groupId>
-		<artifactId>development-standard</artifactId>
+		<artifactId>development-project</artifactId>
 		<version>${project.version}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
-	<artifactId>standard-projects</artifactId>
+	<artifactId>project-standard</artifactId>
 	<packaging>pom</packaging>
 
-	<name>standard-projects</name>
+	<name>project-standard</name>
 	<description>ROOT Project Repository by 313 DEV GRP</description>
 	
 	<modules>
-		<module>server</module>
+		<module>standard-server</module>
 	</modules>
 
 	<properties>
