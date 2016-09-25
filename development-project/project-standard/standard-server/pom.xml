@@ -531,9 +531,6 @@
 						<url>http://ubuntu.313.co.kr:8080/manager/text</url>
 						<server>StandardProject-Snapshot</server>
 						<path>/</path>
-						<systemProperties>
-							<JAVA_OPTS>-Xms512m -Xmx1024m -XX:MaxPermSize=384m</JAVA_OPTS>
-						</systemProperties>
 					</configuration>
 				</plugin>
 				<plugin>
