@@ -59,7 +59,7 @@ public class CoreController extends GenericAbstractController{
 	 * 
 	 * @return String jstreeSolutionSpringVersion 페이지를
 	 */
-	@IncludedInfo(name = "JSTREE", listUrl = "/jstree/getTree.do", order = 7313, gid = 313)
+	@IncludedInfo(name = "jsTree", listUrl = "/jstree/getTree.do", order = 7313, gid = 313)
 	@RequestMapping("/getTree.do")
 	public String jsTreeCoreIndex() {
 		return "/jsp/egovframework/com/ext/jstree/jstreeSolutionSpringVersion";
