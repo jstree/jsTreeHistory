@@ -18,12 +18,12 @@
 			<field property="nttCn" depends="required">
         		<arg0 key="cop.nttCn" />
 			</field> 
-			<field property="ntceBgndeView" depends="required">
+			<!-- <field property="ntceBgndeView" depends="required">
         		<arg0 key="cop.ntceBgnde" />
 			</field>
 			<field property="ntceEnddeView" depends="required">
         		<arg0 key="cop.ntceEndde" />
-			</field>
+			</field> -->
 			<field property="ntcrNm" depends="required">
         		<arg0 key="cop.ntcrNm" />
 			</field>
