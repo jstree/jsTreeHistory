@@ -3,6 +3,10 @@
     "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 
 <sqlMapConfig>
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" maxRequests="64" maxSessions="32"
+		maxTransactions="16" useStatementNamespaces="true" />
+		
 	<sqlMap resource="egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeCoreManage_SQL_Oracle.xml"/>
 	<sqlMap resource="egovframework/sqlmap/com/ext/jstree/springiBatis/jstreeMonitorManage_SQL_Oracle.xml"/>
 </sqlMapConfig>

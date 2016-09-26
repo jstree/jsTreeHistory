@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -48,7 +49,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * </pre>
  */
 @Controller
-@RequestMapping(value = { "/egovframework/com/etc/jstree/springiBatis/core" })
+@RequestMapping(value = { "/com/ext/jstree/springiBatis/core" })
 public class CoreController extends GenericAbstractController{
 	@Resource(name = "CoreService")
 	CoreService coreService;
@@ -75,13 +76,14 @@ public class CoreController extends GenericAbstractController{
 	 */
 	@ResponseBody
 	@RequestMapping("/getChildNode.do")
-	public List<ComprehensiveTree> getChildNode(ComprehensiveTree comprehensiveTree, ModelMap model,
+	public ModelAndView getChildNode(ComprehensiveTree comprehensiveTree, ModelMap model,
 			HttpServletRequest request) throws Exception {
 		if (comprehensiveTree.getC_id() <= 0) {
 			throw new RuntimeException();
 		}
-
-		return coreService.getChildNode(comprehensiveTree);
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", coreService.getChildNode(comprehensiveTree));
+		return modelAndView;
 	}
 
 	/**
