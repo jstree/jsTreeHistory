@@ -82,7 +82,7 @@ public class CoreController extends GenericAbstractController{
 			throw new RuntimeException();
 		}
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
-		modelAndView.addObject("result", coreService.getChildNode(comprehensiveTree));
+		modelAndView.addObject(coreService.getChildNode(comprehensiveTree));
 		return modelAndView;
 	}
 
