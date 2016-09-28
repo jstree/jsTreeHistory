@@ -284,7 +284,7 @@
 			<!-- logo -->
 			<p class="logo">
 				<a href="/">
-					<img src="//image.ahnlab.com/img_upload/kr/site/images2/common/img_logo.gif" alt="AhnLab">
+					<img src="/css/ahnlab/img_logo.gif" alt="AhnLab">
 				</a>
 			</p>
 			<!-- logo -->
