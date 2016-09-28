@@ -27,15 +27,25 @@ package egovframework.ahnlab;
  * </pre>
  */
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,6 +54,9 @@ import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.cmm.service.EgovFileMngService;
 import egovframework.com.cmm.service.EgovFileMngUtil;
 import egovframework.com.cmm.service.FileVO;
+import egovframework.com.cmm.util.EgovBasicLogger;
+import egovframework.com.cmm.util.EgovResourceCloseHelper;
+import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.com.cop.bbs.service.BoardMasterVO;
 import egovframework.com.cop.bbs.service.BoardVO;
 import egovframework.com.cop.bbs.service.EgovBBSAttributeManageService;
@@ -107,7 +120,7 @@ public class IndexController {
 
 		return "ahnlab/fileList";
 	}
-	
+
 	@RequestMapping("/ahnlab/selectFileInfsDetail.do")
 	public String selectFileInfsDetail(@ModelAttribute("searchVO") FileVO fileVO,
 			@RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
@@ -294,88 +307,225 @@ public class IndexController {
 
 		return "ahnlab/article";
 	}
-	
+
 	/**
-     * 익명게시물에 대한 상세 정보를 조회한다.
-     * 
-     * @param boardVO
-     * @param sessionVO
-     * @param model
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("/ahnlab/selectBoardArticleDetail.do")
-    public String selectAnonymousBoardArticle(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
-	//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+	 * 익명게시물에 대한 상세 정보를 조회한다.
+	 * 
+	 * @param boardVO
+	 * @param sessionVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/ahnlab/selectBoardArticleDetail.do")
+	public String selectAnonymousBoardArticle(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model)
+			throws Exception {
+		// LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 
-	// 조회수 증가 여부 지정
-	boardVO.setPlusCount(true);
-	
-	//---------------------------------
-	// 2009.06.29 : 2단계 기능 추가
-	//---------------------------------
-	if (!boardVO.getSubPageIndex().equals("")) {
-	    boardVO.setPlusCount(false);
+		// 조회수 증가 여부 지정
+		boardVO.setPlusCount(true);
+
+		// ---------------------------------
+		// 2009.06.29 : 2단계 기능 추가
+		// ---------------------------------
+		if (!boardVO.getSubPageIndex().equals("")) {
+			boardVO.setPlusCount(false);
+		}
+		// //-------------------------------
+
+		boardVO.setLastUpdusrId("ANONYMOUS");
+		BoardVO vo = bbsMngService.selectBoardArticle(boardVO);
+
+		model.addAttribute("result", vo);
+		// CommandMap의 형태로 개선????
+
+		model.addAttribute("sessionUniqId", "ANONYMOUS");
+
+		// ----------------------------
+		// template 처리 (기본 BBS template 지정 포함)
+		// ----------------------------
+		BoardMasterVO master = new BoardMasterVO();
+
+		master.setBbsId(boardVO.getBbsId());
+		master.setUniqId("ANONYMOUS");
+
+		BoardMasterVO masterVo = bbsAttrbService.selectBBSMasterInf(master);
+
+		// -------------------------------
+		// 익명게시판이 아니면.. 원래 게시판 URL로 forward
+		// -------------------------------
+		if (!masterVo.getBbsTyCode().equals("BBST02")) {
+			return "forward:/cop/bbs/selectBoardArticle.do";
+		}
+		// //-----------------------------
+
+		if (masterVo.getTmplatCours() == null || masterVo.getTmplatCours().equals("")) {
+			masterVo.setTmplatCours("/css/egovframework/com/cop/tpl/egovBaseTemplate.css");
+		}
+
+		model.addAttribute("brdMstrVO", masterVo);
+		// //-----------------------------
+
+		model.addAttribute("anonymous", "true");
+
+		// ----------------------------
+		// 2009.06.29 : 2단계 기능 추가
+		// 2011.07.01 : 댓글, 스크랩, 만족도 조사 기능의 종속성 제거
+		// ----------------------------
+		if (bbsCommentService != null) {
+			if (bbsCommentService.canUseComment(boardVO.getBbsId())) {
+				model.addAttribute("useComment", "true");
+			}
+		}
+		if (bbsSatisfactionService != null) {
+			if (bbsSatisfactionService.canUseSatisfaction(boardVO.getBbsId())) {
+				model.addAttribute("useSatisfaction", "true");
+			}
+		}
+		if (bbsScrapService != null) {
+			if (bbsScrapService.canUseScrap()) {
+				model.addAttribute("useScrap", "true");
+			}
+		}
+		// //--------------------------
+
+		return "ahnlab/articleDetail";
 	}
-	////-------------------------------
 
-	boardVO.setLastUpdusrId("ANONYMOUS");
-	BoardVO vo = bbsMngService.selectBoardArticle(boardVO);
+	/**
+	 * 첨부파일로 등록된 파일에 대하여 다운로드를 제공한다.
+	 *
+	 * @param commandMap
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/ahnlab/FileDown.do")
+	public void cvplFileDownload(@RequestParam Map<String, Object> commandMap, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-	model.addAttribute("result", vo);
-	//CommandMap의 형태로 개선????
+		String atchFileId = (String) commandMap.get("atchFileId");
+		String fileSn = (String) commandMap.get("fileSn");
 
-	model.addAttribute("sessionUniqId", "ANONYMOUS");
+		FileVO fileVO = new FileVO();
+		fileVO.setAtchFileId(atchFileId);
+		fileVO.setFileSn(fileSn);
+		FileVO fvo = fileService.selectFileInf(fileVO);
 
-	//----------------------------
-	// template 처리 (기본 BBS template 지정  포함)
-	//----------------------------
-	BoardMasterVO master = new BoardMasterVO();
-	
-	master.setBbsId(boardVO.getBbsId());
-	master.setUniqId("ANONYMOUS");
-	
-	BoardMasterVO masterVo = bbsAttrbService.selectBBSMasterInf(master);
-	
-	//-------------------------------
-	// 익명게시판이 아니면.. 원래 게시판 URL로 forward
-	//-------------------------------
-	if (!masterVo.getBbsTyCode().equals("BBST02")) {
-	    return "forward:/cop/bbs/selectBoardArticle.do";
-	}
-	////-----------------------------
+		File uFile = new File(fvo.getFileStreCours(), fvo.getStreFileNm());
+		long fSize = uFile.length();
 
-	if (masterVo.getTmplatCours() == null || masterVo.getTmplatCours().equals("")) {
-	    masterVo.setTmplatCours("/css/egovframework/com/cop/tpl/egovBaseTemplate.css");
-	}
+		if (fSize > 0) {
+			String mimetype = "application/x-msdownload";
 
-	model.addAttribute("brdMstrVO", masterVo);
-	////-----------------------------
-	
-	model.addAttribute("anonymous", "true");
-	
-	//----------------------------
-	// 2009.06.29 : 2단계 기능 추가
-	// 2011.07.01 : 댓글, 스크랩, 만족도 조사 기능의 종속성 제거
-	//----------------------------
-	if (bbsCommentService != null){
-		if (bbsCommentService.canUseComment(boardVO.getBbsId())) {
-		    model.addAttribute("useComment", "true");
+			// response.setBufferSize(fSize); // OutOfMemeory 발생
+			response.setContentType(mimetype);
+			// response.setHeader("Content-Disposition",
+			// "attachment; filename=\"" +
+			// URLEncoder.encode(fvo.getOrignlFileNm(), "utf-8") + "\"");
+			setDisposition(fvo.getOrignlFileNm(), request, response);
+			// response.setContentLength(fSize);
+
+			/*
+			 * FileCopyUtils.copy(in, response.getOutputStream()); in.close();
+			 * response.getOutputStream().flush();
+			 * response.getOutputStream().close();
+			 */
+			BufferedInputStream in = null;
+			BufferedOutputStream out = null;
+
+			try {
+				in = new BufferedInputStream(new FileInputStream(uFile));
+				out = new BufferedOutputStream(response.getOutputStream());
+
+				FileCopyUtils.copy(in, out);
+				out.flush();
+			} catch (IOException ex) {
+				// 다음 Exception 무시 처리
+				// Connection reset by peer: socket write error
+				EgovBasicLogger.ignore("IO Exception", ex);
+			} finally {
+				EgovResourceCloseHelper.close(in, out);
+			}
+
+		} else {
+			response.setContentType("application/x-msdownload");
+
+			PrintWriter printwriter = response.getWriter();
+
+			printwriter.println("<html>");
+			printwriter.println("<br><br><br><h2>Could not get file name:<br>" + fvo.getOrignlFileNm() + "</h2>");
+			printwriter.println("<br><br><br><center><h3><a href='javascript: history.go(-1)'>Back</a></h3></center>");
+			printwriter.println("<br><br><br>&copy; webAccess");
+			printwriter.println("</html>");
+
+			printwriter.flush();
+			printwriter.close();
 		}
 	}
-	if (bbsSatisfactionService != null){		
-		if (bbsSatisfactionService.canUseSatisfaction(boardVO.getBbsId())) {
-		    model.addAttribute("useSatisfaction", "true");
-		}
-	}
-	if (bbsScrapService != null){
-		if (bbsScrapService.canUseScrap()) {
-		    model.addAttribute("useScrap", "true");
-		}
-	}
-	////--------------------------
 
-	return "ahnlab/articleDetail";
-    }
+	/**
+	 * Disposition 지정하기.
+	 *
+	 * @param filename
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	private void setDisposition(String filename, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String browser = getBrowser(request);
+
+		String dispositionPrefix = "attachment; filename=";
+		String encodedFilename = null;
+
+		if (browser.equals("MSIE")) {
+			encodedFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+		} else if (browser.equals("Trident")) { // IE11 문자열 깨짐 방지
+			encodedFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+		} else if (browser.equals("Firefox")) {
+			encodedFilename = "\"" + new String(filename.getBytes("UTF-8"), "8859_1") + "\"";
+		} else if (browser.equals("Opera")) {
+			encodedFilename = "\"" + new String(filename.getBytes("UTF-8"), "8859_1") + "\"";
+		} else if (browser.equals("Chrome")) {
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < filename.length(); i++) {
+				char c = filename.charAt(i);
+				if (c > '~') {
+					sb.append(URLEncoder.encode("" + c, "UTF-8"));
+				} else {
+					sb.append(c);
+				}
+			}
+			encodedFilename = sb.toString();
+		} else {
+			throw new IOException("Not supported browser");
+		}
+
+		response.setHeader("Content-Disposition", dispositionPrefix + encodedFilename);
+
+		if ("Opera".equals(browser)) {
+			response.setContentType("application/octet-stream;charset=UTF-8");
+		}
+	}
+
+	/**
+	 * 브라우저 구분 얻기.
+	 *
+	 * @param request
+	 * @return
+	 */
+	private String getBrowser(HttpServletRequest request) {
+		String header = request.getHeader("User-Agent");
+		if (header.indexOf("MSIE") > -1) {
+			return "MSIE";
+		} else if (header.indexOf("Trident") > -1) { // IE11 문자열 깨짐 방지
+			return "Trident";
+		} else if (header.indexOf("Chrome") > -1) {
+			return "Chrome";
+		} else if (header.indexOf("Opera") > -1) {
+			return "Opera";
+		}
+		return "Firefox";
+	}
 
 }
