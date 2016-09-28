@@ -313,7 +313,7 @@ caption {
 					</a>
 				</li>
 				<li>
-					<a href="https://www.ahnlab.com/kr/site/login/loginForm.do" class="link">로그인</a>
+					<a href="/ahnlab/login.do" class="link">로그인</a>
 				</li>
 
 				<li>
