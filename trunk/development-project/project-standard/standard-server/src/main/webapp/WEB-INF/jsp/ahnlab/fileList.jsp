@@ -77,7 +77,7 @@
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:fn_egov_downFile('<c:out value="${fileVO.atchFileId}"/>','<c:out value="${fileVO.fileSn}"/>')">
-					<c:out value="${fileVO.orignlFileNm}" />
+					[다운로드]
 				</a>
 			</c:otherwise>
 		</c:choose>
