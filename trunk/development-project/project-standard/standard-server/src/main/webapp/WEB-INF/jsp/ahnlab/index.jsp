@@ -298,7 +298,7 @@ caption {
 			<!-- logo -->
 			<p class="logo">
 				<a href="/">
-					<img src="//image.ahnlab.com/img_upload/kr/site/images2/common/img_logo.gif" alt="AhnLab">
+					<img src="/css/ahnlab/img_logo.gif" alt="AhnLab">
 				</a>
 			</p>
 			<!-- logo -->
@@ -394,34 +394,18 @@ caption {
 
 					<div class="visWrap">
 						<button type="button" class="cir">
-							<span class="hide">안랩 MDS 10000 출시보기</span>
+							<span class="hide">안랩 Opensource 공개 시스템</span>
 						</button>
 						<!-- onmouseover 가 되면 button 클래스에 over 클래스 추가 ex)<button type="button" class="cir on"> -->
 						<div class="pic"
-							style="left: 0%; background-color: #ececec; background-image: url('//image.ahnlab.com/event/event_main_banner/banner_497.jpg');">&nbsp;</div>
-						<div class="txtWrap" style="left: 0%;">
-							<div class="txt">
-
-								<a href="/kr/site/securityinfo/secunews/secuNewsView.do?seq=25297" target="_self">
-									<img src="//image.ahnlab.com/event/event_main_banner/text_banner_497.png" alt="안랩 MDS 10000 출시" />
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="visWrap">
-						<button type="button" class="cir">
-							<span class="hide">보안 위협 2016년 상반기 결산 및 하반기 전망보기</span>
-						</button>
-						<!-- onmouseover 가 되면 button 클래스에 over 클래스 추가 ex)<button type="button" class="cir on"> -->
-						<div class="pic"
-							style="left: 100%; background-color: #2e3b43; background-image: url('//image.ahnlab.com/event/event_main_banner/banner_498.jpg');">&nbsp;</div>
+							style="left: 100%; background-color: #2e3b43; background-image: url('/css/ahnlab/banner_498.jpg');">&nbsp;</div>
 						<div class="txtWrap" style="left: 100%;">
 							<div class="txt">
 
-								<a href="/kr/site/securityinfo/secunews/secuNewsView.do?seq=25300" target="_self">
-									<img src="//image.ahnlab.com/event/event_main_banner/text_banner_498.png" alt="보안 위협 2016년 상반기 결산 및 하반기 전망" />
-								</a>
+								안랩 Opensource 공개 시스템 ( 이미지 추가 부분 )
+								<!-- <a href="/kr/site/securityinfo/ransomware/index.do" target="_self">
+									<img src="/css/ahnlab/text_banner_471.png" alt="안랩 랜섬웨어 보안센터" />
+								</a> -->
 							</div>
 						</div>
 					</div>
@@ -432,30 +416,11 @@ caption {
 						</button>
 						<!-- onmouseover 가 되면 button 클래스에 over 클래스 추가 ex)<button type="button" class="cir on"> -->
 						<div class="pic"
-							style="left: 200%; background-color: #091a2c; background-image: url('//image.ahnlab.com/event/event_main_banner/banner_471.jpg');">&nbsp;</div>
+							style="left: 200%; background-color: #091a2c; background-image: url('/css/ahnlab/banner_471.jpg');">&nbsp;</div>
 						<div class="txtWrap" style="left: 200%;">
 							<div class="txt">
 
-								<a href="/kr/site/securityinfo/ransomware/index.do" target="_self">
-									<img src="//image.ahnlab.com/event/event_main_banner/text_banner_471.png" alt="안랩 랜섬웨어 보안센터" />
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="visWrap">
-						<button type="button" class="cir">
-							<span class="hide">AhnLab EPS, ICS 기술 혁신상 수상보기</span>
-						</button>
-						<!-- onmouseover 가 되면 button 클래스에 over 클래스 추가 ex)<button type="button" class="cir on"> -->
-						<div class="pic"
-							style="left: 300%; background-color: #20234c; background-image: url('//image.ahnlab.com/event/event_main_banner/banner_422.jpg');">&nbsp;</div>
-						<div class="txtWrap" style="left: 300%;">
-							<div class="txt">
-
-								<a href="/kr/site/securityinfo/secunews/secuNewsView.do?menu_dist=2&amp;seq=25191" target="_self">
-									<img src="//image.ahnlab.com/event/event_main_banner/text_banner_422.png" alt="AhnLab EPS, ICS 기술 혁신상 수상" />
-								</a>
+								안랩 Opensource 공개 시스템 ( 이미지 추가 부분 )
 							</div>
 						</div>
 					</div>
@@ -466,12 +431,10 @@ caption {
 						</button>
 						<!-- onmouseover 가 되면 button 클래스에 over 클래스 추가 ex)<button type="button" class="cir on"> -->
 						<div class="pic"
-							style="left: 400%; background-color: #423d39; background-image: url('//image.ahnlab.com/event/event_main_banner/banner_468.jpg');">&nbsp;</div>
+							style="left: 400%; background-color: #423d39; background-image: url('/css/ahnlab/banner_468.jpg');">&nbsp;</div>
 						<div class="txtWrap" style="left: 400%;">
 							<div class="txt">
-								<a href="/kr/tv/about.do?playlistId=1416245864001&amp;playerVideoId=4714590288001" target="_blank">
-									<img src="//image.ahnlab.com/event/event_main_banner/text_banner_468.png" alt="안전해서 더욱 자유로운 세상" />
-								</a>
+								안랩 Opensource 공개 시스템 ( 이미지 추가 부분 )
 							</div>
 						</div>
 					</div>

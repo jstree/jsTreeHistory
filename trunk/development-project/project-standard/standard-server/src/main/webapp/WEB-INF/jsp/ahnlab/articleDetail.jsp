@@ -403,7 +403,7 @@
 						<!-- //게시판 view 제목 영역 -->
 
 						<!-- 게시판 view 내용 영역 -->
-						<div class="bbsViewCont">
+						<div class="bbsViewCont" style="background:url('/css/ahnlab/ci.gif') no-repeat 50% 50%;">
 
 							<c:out value="${result.nttCn}" escapeXml="false" />
 							
