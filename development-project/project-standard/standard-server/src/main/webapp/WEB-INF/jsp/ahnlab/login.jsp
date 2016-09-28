@@ -54,10 +54,6 @@
 <script type="text/javascript" src="/js/ahnlab/jquery.js"></script>
 <script type="text/javascript" src="/js/ahnlab/site.js"></script>
 <script type="text/javascript" src="/js/ahnlab/jquery.placeholder.js"></script>
-<script type="text/javascript" src="<c:url value='/js/egovframework/com/cop/bbs/EgovBBSMng.js' />"></script>
-<c:if test="${anonymous == 'true'}">
-	<c:set var="prefix" value="/anonymous" />
-</c:if>
 <script type="text/javascript">
 <!--
   $(document)
@@ -198,93 +194,37 @@
   fbq('init', '989681144413577');
   fbq('track', "PageView");
 </script>
-<script type="text/javascript">
-  function onloading() {
-    if ("<c:out value='${msg}'/>" != "") {
-      alert("<c:out value='${msg}'/>");
-    }
-  }
-
-  function fn_egov_select_noticeList(pageNo) {
-    document.frm.pageIndex.value = pageNo;
-    document.frm.action = "<c:url value='/'/>";
-    document.frm.submit();
-  }
-
-  function fn_egov_delete_notice() {
-    if ("<c:out value='${anonymous}'/>" == "true"
-            && document.frm.password.value == '') {
-      alert('등록시 사용한 패스워드를 입력해 주세요.');
-      document.frm.password.focus();
-      return;
-    }
-
-    if (confirm('<spring:message code="common.delete.msg" />')) {
-      document.frm.action = "<c:url value='/cop/bbs${prefix}/deleteBoardArticle.do'/>";
-      document.frm.submit();
-    }
-  }
-
-  function fn_egov_moveUpdt_notice() {
-    if ("<c:out value='${anonymous}'/>" == "true"
-            && document.frm.password.value == '') {
-      alert('등록시 사용한 패스워드를 입력해 주세요.');
-      document.frm.password.focus();
-      return;
-    }
-
-    document.frm.action = "<c:url value='/cop/bbs${prefix}/forUpdateBoardArticle.do'/>";
-    document.frm.submit();
-  }
-
-  function fn_egov_addReply() {
-    document.frm.action = "<c:url value='/cop/bbs${prefix}/addReplyBoardArticle.do'/>";
-    document.frm.submit();
-  }
-</script>
-<!-- 2009.06.29 : 2단계 기능 추가  -->
-<c:if test="${useComment == 'true'}">
-	<c:import url="/cop/cmt/selectCommentList.do" charEncoding="utf-8">
-		<c:param name="type" value="head" />
-	</c:import>
-</c:if>
-<c:if test="${useSatisfaction == 'true'}">
-	<c:import url="/cop/stf/selectSatisfactionList.do" charEncoding="utf-8">
-		<c:param name="type" value="head" />
-	</c:import>
-</c:if>
-<c:if test="${useScrap == 'true'}">
-	<script type="text/javascript">
-    function fn_egov_addScrap() {
-      document.frm.action = "<c:url value='/cop/scp/addScrap.do'/>";
-      document.frm.submit();
-    }
-  </script>
-</c:if>
-<!-- 2009.06.29 : 2단계 기능 추가  -->
 <noscript>&lt;img height="1" width="1" style="display:none"
 	src="https://www.facebook.com/tr?id=989681144413577&amp;ev=PageView&amp;noscript=1" /&gt;</noscript>
 <!-- End Facebook Pixel Code -->
 
 
 </head>
-<body onload="onloading();">
-<form name="frm" method="post" action="">
-<input type="hidden" name="pageIndex" value="<c:out value='${searchVO.pageIndex}'/>">
-<input type="hidden" name="bbsId" value="<c:out value='${result.bbsId}'/>" >
-<input type="hidden" name="nttId" value="<c:out value='${result.nttId}'/>" >
-<input type="hidden" name="parnts" value="<c:out value='${result.parnts}'/>" >
-<input type="hidden" name="sortOrdr" value="<c:out value='${result.sortOrdr}'/>" >
-<input type="hidden" name="replyLc" value="<c:out value='${result.replyLc}'/>" >
-<input type="hidden" name="nttSj" value="<c:out value='${result.nttSj}'/>" >
+<body>
 	<div class="wrap">
+		<nav id="skipNavi">skip navigation
+		<ul>
+			<li>
+				<a href="https://www.ahnlab.com/kr/site/login/loginForm.do#naviMenu">메뉴</a>
+			</li>
+			<li>
+				<a href="https://www.ahnlab.com/kr/site/login/loginForm.do#naviUtill">회원메뉴</a>
+			</li>
+			<li>
+				<a href="https://www.ahnlab.com/kr/site/login/loginForm.do#container">본문</a>
+			</li>
+			<li>
+				<a href="https://www.ahnlab.com/kr/site/login/loginForm.do#footer">하단 정보(링크)</a>
+			</li>
+		</ul>
+		</nav>
 
 		<header class="htop">
 		<div class="htopWrap">
 			<!-- logo -->
 			<p class="logo">
 				<a href="/">
-					<img src="//image.ahnlab.com/img_upload/kr/site/images2/common/img_logo.gif" alt="AhnLab">
+					<img src="/css/ahnlab/img_logo.gif" alt="AhnLab">
 				</a>
 			</p>
 			<!-- logo -->
@@ -303,7 +243,7 @@
 				</li>
 
 				<li>
-					<a href="mailto:opensource@ahnlab.com">Contact US</a> 
+					<a href="mailto:opensource@ahnlab.com">Contact US</a>
 				</li>
 				<li class="familySite">
 					<a href="#" class="link comboLink" title="패밀리 사이트 목록 보기">
@@ -370,128 +310,138 @@
 		<div id="container">
 
 
+			<!-- 대타이틀 -->
+			<div class="topTitWrap">
+				<!-- title -->
+				<h1 class="topTit">로그인</h1>
+				<!-- //title -->
+			</div>
+			<!-- //대타이틀 -->
+
 			<!-- contents -->
 			<div class="contents">
+				<form method="post" name="loginForm" id="loginForm">
+					<input type="hidden" name="URL" id="URL" value="https://www.ahnlab.com/kr/site/login/userLogin.do">
+					<input type="hidden" name="from_url" id="from_url" value="">
+					<!-- login -->
+					<div class="loginWrap">
 
-				<!-- 서브카피 -->
-				<div class="descCopy">
-					<p>AhnLab은 저작권법, 특허법, 디자인보호법, 상표법 등 지식 재산에 관한 법규를 준수합니다.</p>
-					<p>AhnLab은 오픈소스 라이선스를 준수하고, 의무 사항을 성실히 이행합니다.</p>
-				</div>
-				<!-- //서브카피 -->
-				<form method="post" name="form" id="form">
-					<input type="hidden" id="curPage" name="curPage" value="">
-					<input type="hidden" name="boardSeq" id="boardSeq" value="50124190">
-					<input type="hidden" id="searchText" name="searchText" value="">
-					<input type="hidden" id="searchType" name="searchType" value="02">
-					<input type="hidden" id="category" name="category" value="">
-					<input type="hidden" id="quizYn" name="quizYn" value="">
-					<!-- 게시판 -->
-					<div class="bbsView mt35">
-						<!-- 게시판 view 제목 영역 -->
-						<div class="bbsViewTit">
-							<h1 class="tit">
-								[제품명]
-								<c:out value="${result.nttSj}" />
-							</h1>
-							<ul class="viewInfo">
-								<c:import url="/ahnlab/selectFileInfsDetail.do" charEncoding="utf-8">
-									<c:param name="param_atchFileId" value="${result.atchFileId}" />
-								</c:import>
-							</ul>
-						</div>
-						<!-- //게시판 view 제목 영역 -->
 
-						<!-- 게시판 view 내용 영역 -->
-						<div class="bbsViewCont" style="background:url('/css/ahnlab/ci.gif') no-repeat 50% 50%;">
 
-							<c:out value="${result.nttCn}" escapeXml="false" />
-							
-						</div>
-						<!-- //게시판 view 내용 영역 -->
+						<p class="welcome">
+							<img src="/css/ahnlab/img_logo.gif" alt="AhnLab">
+							에 오신 것을 환영합니다.
+						</p>
 
-						<!-- button -->
-						<div class="btnWrap clfix">
-							<div class="flRight">
-								<a href="javascript:fn_egov_select_noticeList('1')" class="btnCommon"><span class="btnTxt">목록보기</span></a>
+
+						<!-- login info -->
+						<div class="boxLogin">
+							<p class="txt">아이디 / 비밀번호를 입력하세요.</p>
+							<input type="text" name="userId" id="userid" class="inputEm" value="" maxlength="16" title="아이디를 입력하세요" placeholder="아이디"
+								onkeyup="javascript:if(event.keyCode == 13){ login(); }">
+							<input type="password" name="passwd" id="passwd" class="inputEm" value="" title="비밀번호를 입력하세요" placeholder="비밀번호"
+								autocomplete="off" onkeyup="javascript:if(event.keyCode == 13){ login(); }">
+
+							<div class="button">
+								<a href="https://www.ahnlab.com/kr/site/login/loginForm.do#" class="btnEmBlue">
+									<span class="btnTxt">로그인</span>
+								</a>
 							</div>
+
 						</div>
-						<!-- //button -->
+						<!-- //login info -->
+
+
+						<ul class="txt_desc">
+							<li class="blGrayDot">본 사이트는 회원 가입을 지원하지 않습니다.</li>
+							<li class="blGrayDot">본 페이지는 사이트 관리자에게만 로그인이 허가됩니다.</li>
+						</ul>
 					</div>
-					<!-- //게시판 -->
+					<!-- //login -->
 				</form>
 			</div>
-
+			<!-- //contents -->
 			<script type="text/javascript">
       <!--
-        $(document).ready(function() {
-          $(".preList").on('click', function() {
-            getNotice($("#preListSeq").val());
-          });
-          $(".nextList").on('click', function() {
-            getNotice($("#nextListSeq").val());
-          });
-        });
-        function getNotice(boardSeq) {
-          $("#boardSeq").val(boardSeq);
-          $("#form").attr("action",
-                  "http://www.ahnlab.com/kr/site/support/notice/noticeView.do");
-          $("#form").attr("target", "_self");
-          $("#form").submit();
-        }
-        function getList() {
-          if ($("#quizYn").val() == "Y") {
-            $("#form")
-                    .attr("action",
-                            "http://www.ahnlab.com/kr/site/securityinfo/newsletter/secuPrizeList.do");
-          } else {
-            $("#form")
-                    .attr("action",
-                            "http://www.ahnlab.com/kr/site/support/notice/noticeList.do");
+        $(document)
+                .ready(
+                        function() {
+
+                          setFocus();
+
+                          $(".linkTLine")
+                                  .click(
+                                          function() {
+                                            POPUP
+                                                    .open(
+                                                            'https://www.ahnlab.com/kr/site/login/popAosMain.do',
+                                                            'popAosMain', {
+                                                              width: 600,
+                                                              height: 654
+                                                            });
+                                          });
+
+                          $(".btnEmBlue").click(function() {
+                            login();
+                          });
+
+                          $("#userid").focus();
+                        });
+        function getCookie(cname) {
+          var name = cname + "=";
+          var ca = document.cookie.split(';');
+          for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ')
+              c = c.substring(1);
+            if (c.indexOf(name) != -1)
+              return c.substring(name.length, c.length);
           }
-          $("#form").attr("target", "_self");
-          $("#form").submit();
+          return "";
+        }
+        function setCookie(name, value, expiredays) {
+          var todayDate = new Date();
+          todayDate.setDate(todayDate.getDate() + expiredays);
+          document.cookie = name + "=" + escape(value) + "; path=/; expires="
+                  + todayDate.toGMTString() + ";";
+        }
+        //AOS
+        function setFocus() {
+          /* if(aos_isrunning('e5')){
+          	 startMK();
+                 $("#userid").focus();
+          } */
+          if (getCookie('aos') == "activating") {
+            startMK();
+            $("#userid").focus();
+          }
+        }
+        function runningmkd(Input) {
+          if (aosak_loaded() == true) {
+            var text = aos_get_text2(Input);
+          }
+        }
+        function startMK() {
+          if (aos_loaded() == false || aosak_loaded() == false) {
+            aos_set_authinfo("aosmgr_v3webhard.html"); // 인증파일 설정
+            aos_set_subclsid("40", "59B0298B-A7B5-4045-A34E-377EDF7BCB8E"); // 키보드보안 subclass id 설정
+            aos_set_submimetype("40", "application/ahnlab/asp/npmkd25aos"); // 키보드보안 mime type 설정
+            aos_set_option("uimode", true); // 설정하지 않으면, ui를 보이게 함
+            aos_set_option("asyncmode", true); // 설정하지 않으면, async로 동작함
+            aos_write_object(); // activex 등록
+            aos_start_ex(); // AOS 실행
+
+            $(".linkTLine").text("ON");
+
+            setCookie('aos', 'activating', '365');
+          }
+          return true;
         }
       //-->
       </script>
 
 		</div>
 		<!-- footer -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 		<script type="text/javascript">
       var domain = location.href;
@@ -544,10 +494,9 @@
     </script>
 		<footer id="footer">
 		<div class="footerWrap">
-			<p class="copyright">© AhnLab, Inc. All rights reserved.</p>
+			<p class="copyright">&copy; AhnLab, Inc. All rights reserved.</p>
 		</div>
 		</footer>
-
 		<form id="mobileFrm" name="mobileFrm" method="post">
 			<input type="hidden" id="mobileParam" name="mobileParam" value="1">
 		</form>
@@ -593,6 +542,39 @@
       })();
     </script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<!-- This script is for AceCounter START -->
 		<script type="text/javascript">
       var _mk = '';
@@ -630,7 +612,7 @@
                 .writeln("<scr"+"ipt language='javascript' src='/kr/site/js/acecounter_V70.js'></scr"+"ipt>");
       }
     </script>
-		<script language="javascript" src="./공지사항 _ AhnLab_files/acecounter_V70.js.다운로드"></script>
+		<script language="javascript" src="./로그인 _ AhnLab_files/acecounter_V70.js.다운로드"></script>
 
 		<noscript>&lt;img src='http://acounter.ahnlab.com:80/?uid=2&amp;je=n&amp;' border=0 width=0 height=0 alt=""/&gt;</noscript>
 		<!-- AceCounter Log Gathering Script End -->
@@ -641,6 +623,5 @@
 
 	<div id="ui-datepicker-div"
 		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all ui-helper-hidden-accessible"></div>
-		</form>
 </body>
 </html>
