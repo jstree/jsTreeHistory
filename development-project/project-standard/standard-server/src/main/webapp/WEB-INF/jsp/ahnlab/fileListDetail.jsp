@@ -26,7 +26,7 @@
 
 <script type="text/javascript">
   function fn_egov_downFile(atchFileId, fileSn) {
-    window.open("<c:url value='/cmm/fms/FileDown.do?atchFileId=" + atchFileId
+    window.open("<c:url value='/ahnlab/FileDown.do?atchFileId=" + atchFileId
             + "&fileSn=" + fileSn + "'/>");
   }
 

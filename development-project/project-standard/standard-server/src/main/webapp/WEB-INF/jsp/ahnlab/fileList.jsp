@@ -26,7 +26,7 @@
 
 <script type="text/javascript">
   function fn_egov_downFile(atchFileId, fileSn) {
-    window.open("<c:url value='/cmm/fms/FileDown.do?atchFileId=" + atchFileId
+    window.open("<c:url value='/ahnlab/FileDown.do?atchFileId=" + atchFileId
             + "&fileSn=" + fileSn + "'/>");
   }
 
@@ -72,12 +72,19 @@
 		<c:choose>
 			<c:when test="${updateFlag=='Y'}">
 				<c:out value="${fileVO.orignlFileNm}" />
-					<img src="<c:url value='/images/egovframework/com/cmm/fms/icon/bu5_close.gif' />" width="19" height="18"
+				<img src="<c:url value='/images/egovframework/com/cmm/fms/icon/bu5_close.gif' />" width="19" height="18"
 					onClick="fn_egov_deleteFile('<c:out value="${fileVO.atchFileId}"/>','<c:out value="${fileVO.fileSn}"/>');" alt="파일삭제">
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:fn_egov_downFile('<c:out value="${fileVO.atchFileId}"/>','<c:out value="${fileVO.fileSn}"/>')">
-					[다운로드]
+					<c:choose>
+						<c:when test="${status.index==0}">
+							<img src="/css/ahnlab/ico_manual.png" alt="AhnLab">
+						</c:when>
+						<c:otherwise>
+							<img src="/css/ahnlab/ico_download.png" alt="AhnLab">
+						</c:otherwise>
+					</c:choose>
 				</a>
 			</c:otherwise>
 		</c:choose>
