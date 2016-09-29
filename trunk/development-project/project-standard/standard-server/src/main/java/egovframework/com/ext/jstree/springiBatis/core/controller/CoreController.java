@@ -1,7 +1,5 @@
 package egovframework.com.ext.jstree.springiBatis.core.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -97,7 +95,7 @@ public class CoreController extends GenericAbstractController{
 	 */
 	@ResponseBody
 	@RequestMapping("/searchNode.do")
-	public List<String> searchNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
+	public ModelAndView searchNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws Exception {
 		if (!StringUtils.hasText(request.getParameter("searchString"))) {
 			throw new RuntimeException();
@@ -105,7 +103,9 @@ public class CoreController extends GenericAbstractController{
 
 		comprehensiveTree.setSearchStr(request.getParameter("searchString"));
 
-		return coreService.searchNode(comprehensiveTree);
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", coreService.searchNode(comprehensiveTree));
+		return modelAndView;
 	}
 
 	/**
@@ -121,14 +121,16 @@ public class CoreController extends GenericAbstractController{
 	 */
 	@ResponseBody
 	@RequestMapping("/addNode.do")
-	public ComprehensiveTree addNode(@Validated(value = AddNode.class) ComprehensiveTree comprehensiveTree,
+	public ModelAndView addNode(@Validated(value = AddNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
 			throw new RuntimeException();
 
 		comprehensiveTree.setC_title(Util_TitleChecker.StringReplace(comprehensiveTree.getC_title()));
 
-		return coreService.addNode(comprehensiveTree);
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", coreService.addNode(comprehensiveTree));
+		return modelAndView;
 	}
 
 	/**
@@ -142,14 +144,16 @@ public class CoreController extends GenericAbstractController{
 	 */
 	@ResponseBody
 	@RequestMapping("/removeNode.do")
-	public ComprehensiveTree removeNode(@Validated(value = RemoveNode.class) ComprehensiveTree comprehensiveTree,
+	public ModelAndView removeNode(@Validated(value = RemoveNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
 			throw new RuntimeException();
 
 		comprehensiveTree.setStatus(coreService.removeNode(comprehensiveTree));
 
-		return comprehensiveTree;
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", comprehensiveTree);
+		return modelAndView;
 	}
 
 	/**
@@ -163,7 +167,7 @@ public class CoreController extends GenericAbstractController{
 	 */
 	@ResponseBody
 	@RequestMapping("/alterNode.do")
-	public ComprehensiveTree alterNode(@Validated(value = AlterNode.class) ComprehensiveTree comprehensiveTree,
+	public ModelAndView alterNode(@Validated(value = AlterNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
 			throw new RuntimeException();
@@ -172,7 +176,9 @@ public class CoreController extends GenericAbstractController{
 		
 		comprehensiveTree.setStatus(coreService.alterNode(comprehensiveTree));
 
-		return comprehensiveTree;
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", comprehensiveTree);
+		return modelAndView;
 	}
 
 	/**
@@ -186,14 +192,16 @@ public class CoreController extends GenericAbstractController{
 	 */
 	@ResponseBody
 	@RequestMapping("/alterNodeType.do")
-	public ComprehensiveTree alterNodeType(@Validated(value = AlterNodeType.class) ComprehensiveTree comprehensiveTree,
+	public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
 			throw new RuntimeException();
 
 		coreService.alterNodeType(comprehensiveTree);
 
-		return comprehensiveTree;
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", comprehensiveTree);
+		return modelAndView;
 	}
 
 	/**
@@ -210,14 +218,16 @@ public class CoreController extends GenericAbstractController{
 	 */
 	@ResponseBody
 	@RequestMapping("/moveNode.do")
-	public ComprehensiveTree moveNode(@Validated(value = MoveNode.class) ComprehensiveTree comprehensiveTree,
+	public ModelAndView moveNode(@Validated(value = MoveNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
 		if (bindingResult.hasErrors())
 			throw new RuntimeException();
 
 		coreService.moveNode(comprehensiveTree, request);
 
-		return comprehensiveTree;
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", comprehensiveTree);
+		return modelAndView;
 	}
 
 	@RequestMapping("/analyzeNode.do")
@@ -226,16 +236,5 @@ public class CoreController extends GenericAbstractController{
 
 		return "jsp/community/jsTreeAlg/jsTreeSpringDemo/analyzeResult";
 	}
-
-	/**
-	 * TODO description methods.
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/mainTest.do")
-	public String jstreeMain() {
-		return "/jsp/egovframework/com/ext/jstree/jstreeSolutionSpringVersion";
-	}
-
 
 }
