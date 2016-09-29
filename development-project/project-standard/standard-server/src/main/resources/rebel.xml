@@ -10,11 +10,6 @@
 
 	<web>
 		<link target="/">
-			<dir name="C:/DEV/workspace/steady/development-project/project-standard/standard-server/target/m2e-wtp/web-resources">
-				<exclude name="/"/>
-			</dir>
-		</link>
-		<link target="/">
 			<dir name="C:/DEV/workspace/steady/development-project/project-standard/standard-server/src/main/webapp">
 			</dir>
 		</link>
