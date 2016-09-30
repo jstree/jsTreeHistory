@@ -27,6 +27,7 @@
 		<spring.maven.artifact.version>4.0.9.RELEASE</spring.maven.artifact.version>
 		<egovframework.rte.version>3.5.0</egovframework.rte.version>
 		<spring.security.version>3.2.9.RELEASE</spring.security.version>
+		<struts.maven.artifact.version>2.3.20</struts.maven.artifact.version>
 	</properties>
 
 
@@ -526,6 +527,33 @@
 			<artifactId>gson</artifactId>
 			<version>2.6.2</version>
 		</dependency>
+
+		<!-- Struts 2(s) -->
+		<dependency>
+			<groupId>ognl</groupId>
+			<artifactId>ognl</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>${struts.maven.artifact.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-dojo-plugin</artifactId>
+			<version>${struts.maven.artifact.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
+			<version>${struts.maven.artifact.version}</version>
+		</dependency>
+
+		<!-- Struts 2(e) -->
 
 	</dependencies>
 	<build>
