@@ -25,17 +25,6 @@
 		<default-interceptor-ref name="defaultStack" />
 		<default-action-ref name="www313cokrStrutsDefaultAction" />
 
-		<!-- <global-results> <result name="error">/jsp/commonUtils/errors/500.jsp</result> 
-			</global-results> <global-exception-mappings> <exception-mapping exception="SQLException" 
-			result="error"/> <exception-mapping exception="RuntimeException" result="error"/> 
-			</global-exception-mappings> -->
-
-		<action name="getJsTreeView">
-			<interceptor-ref name="myStack" />
-			<result>/WEB-INF/jsp/community/jsTreeAlg/jstreeDemo/jstreeSolutionStrutsVersion.jsp
-			</result>
-		</action>
-
 		<action name="getChildNode"
 			class="egovframework.com.ext.jstree.strutsiBatis.core.actionController.C_GetChildNode">
 			<interceptor-ref name="defaultStack" />
