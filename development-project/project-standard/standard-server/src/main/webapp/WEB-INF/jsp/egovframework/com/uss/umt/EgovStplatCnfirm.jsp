@@ -56,7 +56,7 @@ function fnAgree(){
     
     //실명인증 기본페이지는 주민번호 실명확인으로 한다.
     //패키지 변경 document.stplatForm.action = "<c:url value='/uss/umt/EgovRlnmCnfirm.do'/>";
-    document.stplatForm.action = "<c:url value='/sec/rnc/EgovRlnmCnfirm.do'/>";
+    document.stplatForm.action = "<c:url value='/uss/umt/EgovMberInsertView.do'/>";
     document.stplatForm.submit();
 }
 
