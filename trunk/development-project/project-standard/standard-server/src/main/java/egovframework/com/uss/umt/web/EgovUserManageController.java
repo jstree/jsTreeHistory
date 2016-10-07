@@ -78,7 +78,7 @@ public class EgovUserManageController {
 
 		// 미인증 사용자에 대한 보안처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-		if (isAuthenticated) {
+		if (!isAuthenticated) {
 			return "index";
 		}
 
@@ -126,7 +126,7 @@ public class EgovUserManageController {
 
 		// 미인증 사용자에 대한 보안처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-		if (isAuthenticated) {
+		if (!isAuthenticated) {
 			return "index";
 		}
 
@@ -174,7 +174,7 @@ public class EgovUserManageController {
 
 		// 미인증 사용자에 대한 보안처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-		if (isAuthenticated) {
+		if (!isAuthenticated) {
 			return "index";
 		}
 
@@ -208,7 +208,7 @@ public class EgovUserManageController {
 
 		// 미인증 사용자에 대한 보안처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-		if (isAuthenticated) {
+		if (!isAuthenticated) {
 			return "index";
 		}
 
@@ -261,7 +261,7 @@ public class EgovUserManageController {
 
 		// 미인증 사용자에 대한 보안처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-		if (isAuthenticated) {
+		if (!isAuthenticated) {
 			return "index";
 		}
 
@@ -297,7 +297,7 @@ public class EgovUserManageController {
 
 		// 미인증 사용자에 대한 보안처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-		if (isAuthenticated) {
+		if (!isAuthenticated) {
 			return "index";
 		}
 
@@ -318,7 +318,7 @@ public class EgovUserManageController {
 
 		// 미인증 사용자에 대한 보안처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-		if (isAuthenticated) {
+		if (!isAuthenticated) {
 			return "index";
 		}
 
@@ -339,7 +339,7 @@ public class EgovUserManageController {
 
 		// 미인증 사용자에 대한 보안처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-		if (isAuthenticated) {
+		if (!isAuthenticated) {
 			return "index";
 		}
 
@@ -371,7 +371,7 @@ public class EgovUserManageController {
 
 		// 미인증 사용자에 대한 보안처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-		if (isAuthenticated) {
+		if (!isAuthenticated) {
 			return "index";
 		}
 
@@ -431,7 +431,7 @@ public class EgovUserManageController {
 
 		// 미인증 사용자에 대한 보안처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-		if (isAuthenticated) {
+		if (!isAuthenticated) {
 			return "index";
 		}
 
