@@ -44,7 +44,7 @@ public class S_GetJstreeMonitor implements I_S_GetJstreeMonitor {
 		String returnStr = "";
 		if (request
 				.getRequestURI()
-				.equals("/war/struts/www313cokr/index/menu/jstreeMonitor/getJstreeMonitor.action")) {
+				.equals("/com/ext/jstree/strutsiBatis/jstreeMonitor/getJstreeMonitor.action")) {
 			returnStr = "jstreeMonitor.getJstreeMonitor";
 		} else {
 			logger.debug(request.getRequestURI());
