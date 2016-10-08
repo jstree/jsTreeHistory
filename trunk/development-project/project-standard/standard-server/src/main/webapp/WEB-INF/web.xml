@@ -119,15 +119,17 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:egovframework/spring/com/**/context-*.xml</param-value>
+        <param-value>
+        	classpath*:egovframework/spring/com/**/context-*.xml
+        </param-value>
     </context-param>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <servlet>
-        <servlet-name>action</servlet-name>
+ <servlet>
+        <servlet-name>spring</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -136,8 +138,8 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>action</servlet-name>
-        <url-pattern>/</url-pattern>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
     
     <filter>

@@ -21,12 +21,6 @@
 		<default-interceptor-ref name="defaultStack" />
 		<default-action-ref name="www313cokrMenuJstreeMonitorStrutsDefaultAction" />
 
-		<action name="getJstreeMonitorView">
-			<interceptor-ref name="myStack" />
-			<result>/WEB-INF/jsp/community/jsTreeAlg/jstreeDemo/jsTreeMonitor.jsp
-			</result>
-		</action>
-
 		<action name="getJstreeMonitor"
 			class="egovframework.com.ext.jstree.strutsiBatis.monitor.actionController.C_GetJstreeMonitor">
 			<interceptor-ref name="defaultStack" />

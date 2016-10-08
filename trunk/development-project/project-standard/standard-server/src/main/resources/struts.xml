@@ -30,8 +30,6 @@
 
 	<!-- www.313.co.kr -->
 	<include file="/egovframework/struts/com/ext/jstree/actionMapping.xml" />
-
-	<include
-		file="/egovframework/struts/com/ext/jstree/jstreeMonitor/jstreeMonitor.xml" />
+	<include file="/egovframework/struts/com/ext/jstree/jstreeMonitor.xml" />
 
 </struts>

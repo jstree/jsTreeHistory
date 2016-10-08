@@ -556,6 +556,13 @@
 			<version>${struts.maven.artifact.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-spring-plugin -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-spring-plugin</artifactId>
+			<version>${struts.maven.artifact.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-dojo-plugin</artifactId>
