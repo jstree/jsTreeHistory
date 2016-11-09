@@ -110,7 +110,7 @@ public class S_AlterNodeType implements I_S_AlterNodeType {
 		// TODO : 리퀘스트에 따라서 DB 설정파일을 불러와서 선택적 리턴을 해야 함.
 		String returnStr = "";
 		if (request.getRequestURI().equals(
-				"/com/ext/jstree/strutsiBatis/alterNodeType.action")) {
+				"/com/ext/jstree/strutsiBatis/core/alterNodeType.action")) {
 			returnStr = "jstreeStrutsiBatis.alterNodeType";
 		} else {
 			logger.debug(request.getRequestURI());

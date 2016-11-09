@@ -92,27 +92,27 @@ public class S_GetChildNode implements I_S_GetChildNode {
 		// TODO : 리퀘스트에 따라서 DB 설정파일을 불러와서 선택적 리턴을 해야 함.
 		String returnStr = "";
 		if (request.getRequestURI().equals(
-				"/com/ext/jstree/strutsiBatis/getChildNode.action")
+				"/com/ext/jstree/strutsiBatis/core/getChildNode.action")
 				&& flag.equals("byID")) {
 			returnStr = "jstreeStrutsiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
-				"/com/ext/jstree/strutsiBatis/alterNodeType.action")
+				"/com/ext/jstree/strutsiBatis/core/alterNodeType.action")
 				&& flag.equals("byID")) {
 			returnStr = "jstreeStrutsiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
-				"/com/ext/jstree/strutsiBatis/moveNode.action")
+				"/com/ext/jstree/strutsiBatis/core/moveNode.action")
 				&& flag.equals("byID")) {
 			returnStr = "jstreeStrutsiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
-				"/com/ext/jstree/strutsiBatis/moveNode.action")
+				"/com/ext/jstree/strutsiBatis/core/moveNode.action")
 				&& flag.equals("byLeftRight")) {
 			returnStr = "jstreeStrutsiBatis.getChildNodeByLeftRight";
 		} else if (request.getRequestURI().equals(
-				"/com/ext/jstree/strutsiBatis/addNode.action")
+				"/com/ext/jstree/strutsiBatis/core/addNode.action")
 				&& flag.equals("byID")) {
 			returnStr = "jstreeStrutsiBatis.getChildNode";
 		} else if (request.getRequestURI().equals(
-				"/com/ext/jstree/strutsiBatis/addNode.action")
+				"/com/ext/jstree/strutsiBatis/core/addNode.action")
 				&& flag.equals("byLeftRight")) {
 			returnStr = "jstreeStrutsiBatis.getChildNodeByLeftRight";
 		} else {
