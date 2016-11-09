@@ -231,6 +231,7 @@
       }, function(r) {
         if (r.status) {
           $(data.rslt.obj).attr("id", "node_" + r.id);
+          jNotify('Notification : <strong>Add Node</strong>, Complete !');
         } else {
           $.jstree.rollback(data.rlbk);
         }
@@ -250,6 +251,7 @@
           success: function(r) {
             $("#analyze").click();
             $("span.ui-icon-refresh").click();
+            jNotify('Notification : <strong>Remove Node</strong>, Complete !');
             jstreeDataTableReload();
           }
         });
@@ -263,6 +265,7 @@
         if (!r.status) {
           $.jstree.rollback(data.rlbk);
         }
+        jSuccess('Rename Node Complete');
         $("#analyze").click();
         $("span.ui-icon-refresh").click();
         jstreeDataTableReload();
@@ -275,6 +278,7 @@
       }, function(r) {
         $("#analyze").click();
         $("span.ui-icon-refresh").click();
+        jSuccess('Node Type Change');
         jstreeDataTableReload();
       });
     }).bind("move_node.jstree", function(e, data) {
@@ -299,6 +303,7 @@
               if (data.rslt.cy && $(data.rslt.oc).children("UL").length) {
                 data.inst.refresh(data.inst._get_parent(data.rslt.oc));
               }
+              jNotify('Notification : <strong>Move Node</strong> Complete !');
             }
             $("#analyze").click();
             $("span.ui-icon-refresh").click();
