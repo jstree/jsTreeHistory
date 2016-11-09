@@ -53,13 +53,24 @@ public class CoreController extends GenericAbstractController{
 	CoreService coreService;
 
 	/**
-	 * jstree Spring + iBatis 버전의 첫페이지를 요청한다.
+	 * jstree Struts + iBatis 버전의 첫페이지를 요청한다.
+	 * 
+	 * @return String jstreeSolutionStrutsVersion 페이지를
+	 */
+	@IncludedInfo(name = "jsTree Struts-iBatis", listUrl = "/com/ext/jstree/strutsiBatis/core/getJsTreeView.action", order = 3300, gid = 313)
+	@RequestMapping("/strutsiBatis.do")
+	public String jsTreeStrutsiBatis() {
+		return "for struts iBatis annotation instead of controller";
+	}
+	
+	/**
+	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
 	 * 
 	 * @return String jstreeSolutionSpringVersion 페이지를
 	 */
-	@IncludedInfo(name = "jsTree SpringmyBatis v", listUrl = "/com/ext/jstree/springmyBatis/core/springmyBatis.do", order = 3300, gid = 313)
-	@RequestMapping("/springmyBatis.do")
-	public String jsTreeCoreIndex() {
+	@IncludedInfo(name = "jsTree Spring-myBatis", listUrl = "/com/ext/jstree/springmyBatis/core/getJsTreeView.do", order = 3310, gid = 313)
+	@RequestMapping("/getJsTreeView.do")
+	public String jsTreeSpringmyBatis() {
 		return "egovframework/com/ext/jstree/springmyBatisVersion";
 	}
 

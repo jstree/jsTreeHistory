@@ -322,7 +322,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 										</div>
 									</div>
 
-									<div id='alog' style="float: left; border: 1px solid gray; padding: 5px; height: 150px; margin-top: 15px; overflow: auto; width: 100%;"></div>
+									<div id='alog' style="float: left; border: 1px solid gray; padding: 5px; height: 150px; margin-top: 15px; overflow: auto; width: 98%;">분석 결과</div>
 
 									<!-- JavaScript neccessary for the tree -->
 									<script type="text/javascript">

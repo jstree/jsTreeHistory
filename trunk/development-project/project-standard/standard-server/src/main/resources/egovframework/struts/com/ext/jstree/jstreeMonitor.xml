@@ -2,7 +2,7 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 
-	<package name="www313cokrJstreeMonitor" namespace="/com/ext/jstree/strutsiBatis/jstreeMonitor"
+	<package name="www313cokrJstreeMonitor" namespace="/com/ext/jstree/strutsiBatis/core/monitor"
 		extends="www313cokrDefaultPkg">
 
 		<interceptors>
@@ -21,7 +21,7 @@
 		<default-interceptor-ref name="defaultStack" />
 		<default-action-ref name="www313cokrMenuJstreeMonitorStrutsDefaultAction" />
 
-		<action name="getJstreeMonitor"
+		<action name="list"
 			class="egovframework.com.ext.jstree.strutsiBatis.monitor.actionController.C_GetJstreeMonitor">
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="myStack" />
