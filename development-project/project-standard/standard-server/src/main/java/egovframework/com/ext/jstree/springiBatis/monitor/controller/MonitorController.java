@@ -26,7 +26,7 @@ public class MonitorController {
 	MonitorService monitorService;
 	
 	@ResponseBody
-	@RequestMapping("/com/ext/jstree/springiBatis/monitor/list.do")
+	@RequestMapping("/com/ext/jstree/springmyBatis/core/monitor/list.do")
 	public ModelAndView list( ModelMap model ) throws JsonProcessingException {
 		
 		T_JqgridJson t_JqgridJson = new T_JqgridJson();

@@ -47,7 +47,7 @@ import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstra
  * </pre>
  */
 @Controller
-@RequestMapping(value = { "/com/ext/jstree/springiBatis/core" })
+@RequestMapping(value = { "/com/ext/jstree/springmyBatis/core" })
 public class CoreController extends GenericAbstractController{
 	@Resource(name = "CoreService")
 	CoreService coreService;
@@ -57,10 +57,10 @@ public class CoreController extends GenericAbstractController{
 	 * 
 	 * @return String jstreeSolutionSpringVersion 페이지를
 	 */
-	@IncludedInfo(name = "jsTree", listUrl = "/jstree/getTree.do", order = 7313, gid = 313)
-	@RequestMapping("/getTree.do")
+	@IncludedInfo(name = "jsTree SpringmyBatis v", listUrl = "/com/ext/jstree/springmyBatis/core/springmyBatis.do", order = 3300, gid = 313)
+	@RequestMapping("/springmyBatis.do")
 	public String jsTreeCoreIndex() {
-		return "/jsp/egovframework/com/ext/jstree/jstreeSolutionSpringVersion";
+		return "egovframework/com/ext/jstree/springmyBatisVersion";
 	}
 
 	/**
