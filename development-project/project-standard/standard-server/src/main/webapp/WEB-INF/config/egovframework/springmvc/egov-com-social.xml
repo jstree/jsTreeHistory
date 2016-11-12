@@ -13,10 +13,9 @@
     <bean id="disconnectController" class="org.springframework.social.facebook.web.DisconnectController" 
         c:_0-ref="usersConnectionRepository" c:_1="${facebook.appSecret}" />
         
-     <bean class="org.springframework.social.connect.web.ProviderSignInController" autowire="constructor" />
-
+<!--      <bean class="org.springframework.social.connect.web.ProviderSignInController" autowire="constructor" />
+ -->
     <!-- facebook 연동시  -->
-    <!-- 
     <mvc:default-servlet-handler />
     <bean class="org.springframework.social.connect.web.ProviderSignInController">
         <constructor-arg ref="connectionFactoryLocator" />
@@ -40,6 +39,5 @@
     <mvc:view-controller path="/uss/ion/fbk/facebook.do" view-name="egovframework/com/uss/ion/fbk/EgovFacebookHome" />
     <mvc:view-controller path="/uss/ion/fbk/facebookSignin.do" view-name="egovframework/com/uss/ion/fbk/EgovFacebookSignin" />
     <mvc:view-controller path="/uss/ion/fbk/facebookSignout.do" view-name="egovframework/com/uss/ion/fbk/EgovFacebookHome" />
-     -->
 
 </beans>
