@@ -275,15 +275,14 @@ public class EgovLoginController {
 	@RequestMapping(value = "/uat/uia/actionLogout.do")
 	public String actionLogout(HttpServletRequest request, ModelMap model) throws Exception {
 
-		/*String userIp = EgovClntInfo.getClntIP(request);
-
-		// 1. Security 연동
-		return "redirect:/j_spring_security_logout";*/
+		//String userIp = EgovClntInfo.getClntIP(request);
 
 		request.getSession().setAttribute("loginVO", null);
 
 		//return "redirect:/egovDevIndex.jsp";
-		return "redirect:/EgovContent.do";
+		//return "redirect:/EgovContent.do";
+		// 1. Security 연동
+		return "redirect:/j_spring_security_logout";
 	}
 
 	/**
