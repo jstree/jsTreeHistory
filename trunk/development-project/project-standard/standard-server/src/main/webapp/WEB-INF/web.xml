@@ -25,9 +25,14 @@
 		경우는 JSP의 <c:out /> 등을 사용하지 못하는 특수한 상황에서 사용하시면 됩니다. (<c:out />의 경우 뷰단에서 데이터 
 		출력시 XSS 방지 처리가 됨) 부득히 HTMLTagFilter를 사용하셔야 하는 경우는 web.xml 상에 다음과 같이 CertProcessFilter(GPKI 
 		인증 처리 오류 해결) 등록해 주시면 됩니다. -->
-	<!-- <filter> <filter-name>HTMLTagFilter</filter-name> <filter-class>egovframework.com.cmm.filter.HTMLTagFilter</filter-class> 
-		</filter> <filter-mapping> <filter-name>HTMLTagFilter</filter-name> <url-pattern>*.do</url-pattern> 
-		</filter-mapping> -->
+	<!-- <filter>
+		<filter-name>HTMLTagFilter</filter-name>
+		<filter-class>egovframework.com.cmm.filter.HTMLTagFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HTMLTagFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping> -->
 	<!-- for CKEditor Image Upload -->
 	<filter>
 		<filter-name>CKFilter</filter-name>
