@@ -54,7 +54,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>hiddenHttpMethodFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/facebook/*</url-pattern>
 	</filter-mapping>
 
 	<!-- UrlRewriteFilter -->
@@ -125,9 +125,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
-		<!-- <url-pattern>*.do</url-pattern> -->
-		<!-- OAuth 사용시 / 로 변경 -->
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
 	<filter>
