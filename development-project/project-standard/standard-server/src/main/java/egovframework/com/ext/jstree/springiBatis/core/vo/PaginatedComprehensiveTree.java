@@ -15,7 +15,7 @@
  */
 package egovframework.com.ext.jstree.springiBatis.core.vo;
 
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Modification Information
@@ -37,60 +37,152 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
  * Copyright (C) 2015 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-public class PaginatedComprehensiveTree extends ComprehensiveTree {
+public class PaginatedComprehensiveTree extends ComprehensiveTree{
 
-    private int page = 1;
-    private int rowCount = 10;
-    private int pageCount = 10;
+	/**
+	 * egovframework.com.cmm.ComDefaultVO 객체를 적용함.
+	 */
+	private static final long serialVersionUID = -6524053887601733438L;
+	
+	/** 검색조건 */
+    private String searchCondition = "";
     
-    private int beginningRow;
-    private int endRow;
+    /** 검색Keyword */
+    private String searchKeyword = "";
     
-    /** 전정부 페이지네이터 */
-    private PaginationInfo paginationInfo;
-    /** 페이지 번호 클릭 시 처리될 자바스크립트 콜백 함수 */
-    private String jsFunction;
+    /** 검색사용여부 */
+    private String searchUseYn = "";
     
-    public int getPage() {
-        return page;
+    /** 현재페이지 */
+    private int pageIndex = 1;
+    
+    /** 페이지갯수 */
+    private int pageUnit = 10;
+    
+    /** 페이지사이즈 */
+    private int pageSize = 10;
+
+    /** firstIndex */
+    private int firstIndex = 1;
+
+    /** lastIndex */
+    private int lastIndex = 1;
+
+    /** recordCountPerPage */
+    private int recordCountPerPage = 10;
+    
+    /** 검색KeywordFrom */
+    private String searchKeywordFrom = "";    
+
+	/** 검색KeywordTo */
+    private String searchKeywordTo = "";  
+    
+	public int getFirstIndex() {
+		return firstIndex;
+	}
+
+	public void setFirstIndex(int firstIndex) {
+		this.firstIndex = firstIndex;
+	}
+
+	public int getLastIndex() {
+		return lastIndex;
+	}
+
+	public void setLastIndex(int lastIndex) {
+		this.lastIndex = lastIndex;
+	}
+
+	public int getRecordCountPerPage() {
+		return recordCountPerPage;
+	}
+
+	public void setRecordCountPerPage(int recordCountPerPage) {
+		this.recordCountPerPage = recordCountPerPage;
+	}
+
+	public String getSearchCondition() {
+        return searchCondition;
     }
-    public void setPage(int page) {
-        this.page = page;
+
+    public void setSearchCondition(String searchCondition) {
+        this.searchCondition = searchCondition;
     }
-    public int getRowCount() {
-        return rowCount;
+
+    public String getSearchKeyword() {
+        return searchKeyword;
     }
-    public void setRowCount(int rowCount) {
-        this.rowCount = rowCount;
+
+    public void setSearchKeyword(String searchKeyword) {
+        this.searchKeyword = searchKeyword;
     }
-    public int getPageCount() {
-        return pageCount;
+
+    public String getSearchUseYn() {
+        return searchUseYn;
     }
-    public void setPageCount(int pageCount) {
-        this.pageCount = pageCount;
+
+    public void setSearchUseYn(String searchUseYn) {
+        this.searchUseYn = searchUseYn;
     }
-    public int getBeginningRow() {
-        return beginningRow;
+
+    public int getPageIndex() {
+        return pageIndex;
     }
-    public void setBeginningRow(int beginningRow) {
-        this.beginningRow = beginningRow;
+
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
     }
-    public int getEndRow() {
-        return endRow;
+
+    public int getPageUnit() {
+        return pageUnit;
     }
-    public void setEndRow(int endRow) {
-        this.endRow = endRow;
+
+    public void setPageUnit(int pageUnit) {
+        this.pageUnit = pageUnit;
     }
-    public PaginationInfo getPaginationInfo() {
-        return paginationInfo;
+
+    public int getPageSize() {
+        return pageSize;
     }
-    public String getJsFunction() {
-        return jsFunction;
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
-    public void setJsFunction(String jsFunction) {
-        this.jsFunction = jsFunction;
+
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
-    public void setPaginationInfo(PaginationInfo paginationInfo) {
-        this.paginationInfo = paginationInfo;
-    }
+
+    
+    /**
+	 * searchKeywordFrom attribute를 리턴한다.
+	 * @return String
+	 */
+	public String getSearchKeywordFrom() {
+		return searchKeywordFrom;
+	}
+
+	/**
+	 * searchKeywordFrom attribute 값을 설정한다.
+	 * @param searchKeywordFrom String
+	 */
+	public void setSearchKeywordFrom(String searchKeywordFrom) {
+		this.searchKeywordFrom = searchKeywordFrom;
+	}
+
+	/**
+	 * searchKeywordTo attribute를 리턴한다.
+	 * @return String
+	 */
+	public String getSearchKeywordTo() {
+		return searchKeywordTo;
+	}
+
+	/**
+	 * searchKeywordTo attribute 값을 설정한다.
+	 * @param searchKeywordTo String
+	 */
+	public void setSearchKeywordTo(String searchKeywordTo) {
+		this.searchKeywordTo = searchKeywordTo;
+	}
 }

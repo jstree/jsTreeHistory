@@ -1,5 +1,7 @@
 package egovframework.com.ext.jstree.springiBatis.core.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,7 +25,9 @@ import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
 import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 /**
  * Modification Information
@@ -92,6 +96,32 @@ public class CoreController extends GenericAbstractController{
 		}
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
 		modelAndView.addObject("result", coreService.getChildNode(comprehensiveTree));
+		return modelAndView;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getPaginatedChildNode.do")
+	public ModelAndView getPaginatedChildNode(PaginatedComprehensiveTree paginatedComprehensiveTree, ModelMap model,
+			HttpServletRequest request) throws Exception {
+		if (paginatedComprehensiveTree.getC_id() <= 0) {
+			throw new RuntimeException();
+		}
+		/** paging */
+    	PaginationInfo paginationInfo = new PaginationInfo();
+	    paginationInfo.setCurrentPageNo(paginatedComprehensiveTree.getPageIndex());
+	    paginationInfo.setRecordCountPerPage(paginatedComprehensiveTree.getPageUnit());
+	    paginationInfo.setPageSize(paginatedComprehensiveTree.getPageSize());
+	    
+	    paginatedComprehensiveTree.setFirstIndex(paginationInfo.getFirstRecordIndex());
+	    paginatedComprehensiveTree.setLastIndex(paginationInfo.getLastRecordIndex());
+	    paginatedComprehensiveTree.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+	    
+	    List<PaginatedComprehensiveTree> resultChildNodes = coreService.getChildNode(paginatedComprehensiveTree);
+	    paginationInfo.setTotalRecordCount(resultChildNodes.size());
+	    
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("paginationInfo", paginationInfo);
+		modelAndView.addObject("result", resultChildNodes);
 		return modelAndView;
 	}
 

@@ -421,7 +421,7 @@
     <sql id="paginationEnd">
             ) DATA
         )
-        WHERE RN BETWEEN (#beginningRow# + 1) AND #endRow#
+        WHERE RN BETWEEN #firstIndex# + 1 AND #firstIndex# + #recordCountPerPage#
     </sql>
     
     <sql id="getDescendantNodes">
@@ -429,7 +429,7 @@
         FROM T_COMPREHENSIVETREE_SPRING A
        WHERE C_LEFT &gt; #c_left#
          AND C_RIGHT &lt; #c_right#
-         AND C_LEVEL &lt;= #c_level#
+         AND C_LEVEL = #c_level#
     </sql>
     
     <select id="getCountOfDescendantNodes" parameterClass="ComprehensiveTree" resultClass="int">
