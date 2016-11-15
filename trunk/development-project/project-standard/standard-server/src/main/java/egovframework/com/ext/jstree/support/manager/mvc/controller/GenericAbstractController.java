@@ -21,7 +21,6 @@ import com.google.gson.GsonBuilder;
 
 import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
-import egovframework.com.ext.jstree.support.util.StringUtils;
 
 public abstract class GenericAbstractController {
 

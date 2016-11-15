@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import egovframework.com.ext.jstree.springiBatis.core.dao.CoreDao;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 /**
  * Modification Information
@@ -106,31 +105,11 @@ public class CoreServiceImpl implements CoreService
         {
             PaginatedComprehensiveTree paginatedComprehensiveTree = (PaginatedComprehensiveTree) comprehensiveTree;
             
-            if (paginatedComprehensiveTree.getC_level() < 1) {
-                throw new RuntimeException("The c_level property value is not valid.");
-            }
-            if (paginatedComprehensiveTree.getPage() < 1) {
-                throw new RuntimeException("The page property value is not valid.");
-            }
-            if (paginatedComprehensiveTree.getRowCount() < 1) {
-                throw new RuntimeException("The rowCount property value is not valid.");
-            }
-            
-            PaginationInfo paginationInfo = new PaginationInfo();
-            paginationInfo.setCurrentPageNo(paginatedComprehensiveTree.getPage());
-            paginationInfo.setRecordCountPerPage(paginatedComprehensiveTree.getRowCount());
-            paginationInfo.setPageSize(paginatedComprehensiveTree.getPageCount());
-            
-            paginatedComprehensiveTree.setBeginningRow(paginationInfo.getFirstRecordIndex());
-            paginatedComprehensiveTree.setEndRow(paginationInfo.getLastRecordIndex());
-            
-            ComprehensiveTree node = coreDao.getNode(paginatedComprehensiveTree);
-            paginatedComprehensiveTree.setC_left(node.getC_left());
-            paginatedComprehensiveTree.setC_right(node.getC_right());
-            
-            paginationInfo.setTotalRecordCount( coreDao.getCountOfDescendantNodes(comprehensiveTree) );
-            
-            paginatedComprehensiveTree.setPaginationInfo(paginationInfo);
+            //베이스 노드 하위의 차일드 노드를 페이징 처리하는 것이라서.
+            ComprehensiveTree baseLineNode = coreDao.getNode(paginatedComprehensiveTree);
+            paginatedComprehensiveTree.setC_left(baseLineNode.getC_left());
+            paginatedComprehensiveTree.setC_right(baseLineNode.getC_right());
+            paginatedComprehensiveTree.setC_level(baseLineNode.getC_level()+1);
             
             childNode = (List<T>) coreDao.getDescendantNodesPaginated(comprehensiveTree);
         } 

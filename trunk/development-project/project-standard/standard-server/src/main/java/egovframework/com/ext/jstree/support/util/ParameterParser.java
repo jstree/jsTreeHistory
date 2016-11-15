@@ -1,8 +1,10 @@
 package egovframework.com.ext.jstree.support.util;
 
 import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
@@ -699,7 +701,8 @@ public class ParameterParser
     {
         StringBuffer sbf = new StringBuffer();
         sbf.append('{');
-        Enumeration<String> en = req.getParameterNames();
+        @SuppressWarnings("unchecked")
+		Enumeration<String> en = req.getParameterNames();
         String name = null;
         String[] value = null;
         int i = 0;
@@ -738,7 +741,8 @@ public class ParameterParser
     {
         StringBuffer sbf = new StringBuffer();
         sbf.append('{');
-        Enumeration<String> en = req.getParameterNames();
+        @SuppressWarnings("unchecked")
+		Enumeration<String> en = req.getParameterNames();
         String name = null;
         String[] value = null;
         int i = 0;

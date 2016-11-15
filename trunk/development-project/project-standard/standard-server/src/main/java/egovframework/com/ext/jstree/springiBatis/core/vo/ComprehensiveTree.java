@@ -1,5 +1,6 @@
 package egovframework.com.ext.jstree.springiBatis.core.vo;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -45,7 +46,12 @@ import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNod
  *  Copyright (C) 2014 by 313 DeveloperGroup  All right reserved.
  * </pre>
  */
-public class ComprehensiveTree {
+public class ComprehensiveTree implements Serializable{
+
+	/**
+	 * 직렬화
+	 */
+	private static final long serialVersionUID = -7345016667815629074L;
 
 	/** 노드의 고유 id, 1부터 시작(Root Node) */
 	@Min(value = 2, groups = { RemoveNode.class, AlterNode.class, 
