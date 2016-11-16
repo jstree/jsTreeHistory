@@ -8,7 +8,7 @@
 	<!-- <bean class="egovframework.com.ext.jfile.aspect.MultipartResolverDisablingAspect" /> -->
 	
 	<bean id="jfileDownload" class="egovframework.com.ext.jfile.view.JfileDownloadView" />
-	<bean id="jsonView" class="egovframework.com.ext.jfile.view.JSonView" />
+	<!-- <bean id="jsonView" class="egovframework.com.ext.jfile.view.JSonView" /> -->
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
