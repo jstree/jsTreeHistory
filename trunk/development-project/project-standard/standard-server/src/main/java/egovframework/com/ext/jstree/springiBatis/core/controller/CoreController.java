@@ -1,5 +1,6 @@
 package egovframework.com.ext.jstree.springiBatis.core.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.collect.Maps;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springiBatis.core.service.CoreService;
@@ -120,8 +122,10 @@ public class CoreController extends GenericAbstractController{
 	    paginationInfo.setTotalRecordCount(resultChildNodes.size());
 	    
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
-		modelAndView.addObject("paginationInfo", paginationInfo);
-		modelAndView.addObject("result", resultChildNodes);
+		HashMap<String, Object> resultMap = Maps.newHashMap();
+		resultMap.put("paginationInfo", paginationInfo);
+		resultMap.put("result", resultChildNodes);
+		modelAndView.addObject("result", resultMap);
 		return modelAndView;
 	}
 
