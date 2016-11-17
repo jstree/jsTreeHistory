@@ -342,7 +342,7 @@ public class EgovMenuManageController {
     	List<?> list_menulist = menuManageService.selectMenuList();
     	resultMsg = egovMessageSource.getMessage("success.common.select");
         model.addAttribute("list_menulist", list_menulist);
-//        model.addAttribute("resultMsg", resultMsg);
+        model.addAttribute("resultMsg", resultMsg);
       	return  "egovframework/com/sym/mnu/mpm/EgovMenuList";
     }
 
