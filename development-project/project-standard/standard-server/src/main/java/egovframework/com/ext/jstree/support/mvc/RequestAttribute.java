@@ -1,4 +1,4 @@
-package egovframework.com.ext.jstree.support.manager.mvc.controller;
+package egovframework.com.ext.jstree.support.mvc;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

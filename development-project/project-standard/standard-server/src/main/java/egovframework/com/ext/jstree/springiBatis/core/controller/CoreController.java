@@ -28,7 +28,7 @@ import egovframework.com.ext.jstree.springiBatis.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNode;
 import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
 import egovframework.com.ext.jstree.springiBatis.core.vo.PaginatedComprehensiveTree;
-import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 /**

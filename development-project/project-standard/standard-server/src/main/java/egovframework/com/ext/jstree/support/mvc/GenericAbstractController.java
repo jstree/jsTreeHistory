@@ -1,4 +1,4 @@
-package egovframework.com.ext.jstree.support.manager.mvc.controller;
+package egovframework.com.ext.jstree.support.mvc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
