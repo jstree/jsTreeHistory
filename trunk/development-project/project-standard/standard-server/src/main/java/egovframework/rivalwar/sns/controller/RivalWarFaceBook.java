@@ -9,7 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.ext.jstree.support.manager.mvc.controller.GenericAbstractController;
+import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 
 @Controller
 @RequestMapping(value = { "/api/sns/facebook" })
