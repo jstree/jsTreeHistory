@@ -86,6 +86,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>15.0</version>
@@ -271,76 +277,6 @@
 			<version>1.7</version>
 		</dependency>
 
-		<!-- oauth -->
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-facebook-web</artifactId>
-			<version>1.1.1.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-twitter</artifactId>
-			<version>1.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.3.4</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.180</version>
-		</dependency>
-
-		<!-- facebook 연동시 추가 -->
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-security</artifactId>
-			<version>1.1.0.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-security-web</artifactId>
-					<groupId>org.springframework.security</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- LDAP조직도관리 관련 라이브러리 -->
-		<dependency>
-			<groupId>org.springframework.ldap</groupId>
-			<artifactId>spring-ldap-core</artifactId>
-			<version>2.0.2.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-tx</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>jcl-over-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.json</artifactId>
@@ -452,8 +388,8 @@
 			<version>4.01</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
 
+		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -472,14 +408,7 @@
 			<version>4.3.2.Final</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.6.2</version>
-		</dependency>
-
-		<!-- Struts 2(s) -->
+		<!-- ******************************************* Struts ******************************************* -->
 		<dependency>
 			<groupId>ognl</groupId>
 			<artifactId>ognl</artifactId>
@@ -492,7 +421,6 @@
 			<version>${struts.maven.artifact.version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-spring-plugin -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
@@ -510,10 +438,8 @@
 			<artifactId>struts2-json-plugin</artifactId>
 			<version>${struts.maven.artifact.version}</version>
 		</dependency>
-		<!-- Struts 2(e) -->
 
 		<!-- ******************************************* Spring ******************************************* -->
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -600,12 +526,80 @@
 		</dependency>
 		<!-- spring security 라이브러리 끝 -->
 		<!-- sns login -->
-		<!-- <dependency> <groupId>org.springframework.session</groupId> <artifactId>spring-session</artifactId> <version>1.0.2.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.social</groupId> 
-			<artifactId>spring-social-core</artifactId> <version>1.1.4.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.social</groupId> <artifactId>spring-social-facebook</artifactId> 
-			<version>2.0.3.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.social</groupId> <artifactId>spring-social-twitter</artifactId> <version>1.1.2.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.social</groupId> <artifactId>spring-social-linkedin</artifactId> <version>1.0.2.RELEASE</version> </dependency> <dependency> 
-			<groupId>org.springframework.social</groupId> <artifactId>spring-social-google</artifactId> <version>1.0.0.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.social</groupId> 
-			<artifactId>spring-social-github</artifactId> <version>1.0.0.M4</version> </dependency> <dependency> <groupId>com.github.kstyrc</groupId> <artifactId>embedded-redis</artifactId> <version>0.6</version> 
-			</dependency> -->
+		<dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-facebook-web</artifactId>
+            <version>1.1.1.RELEASE</version>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-twitter</artifactId>
+			<version>1.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.4</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.180</version>
+		</dependency>
+
+		<!-- facebook 연동시 추가 -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-security</artifactId>
+			<version>1.1.0.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-security-web</artifactId>
+					<groupId>org.springframework.security</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+ 
+		<!-- LDAP조직도관리 관련 라이브러리 -->
+		<dependency>
+			<groupId>org.springframework.ldap</groupId>
+			<artifactId>spring-ldap-core</artifactId>
+			<version>2.0.2.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-tx</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jcl-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- 보안 코드 -->
+		<dependency>
+			<groupId>com.navercorp.lucy</groupId>
+			<artifactId>lucy-xss-servlet</artifactId>
+			<version>2.0.0</version>
+		</dependency>
 	</dependencies>
 </project>
