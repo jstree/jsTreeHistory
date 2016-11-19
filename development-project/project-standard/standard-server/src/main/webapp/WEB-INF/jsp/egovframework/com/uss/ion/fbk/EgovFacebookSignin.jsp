@@ -31,7 +31,7 @@
     <div id="border" style="width:730px">
 		<form action="<c:url value="/signin/facebook" />" method="POST" target="_top">
 		    <button type="submit">Sign in with Facebook</button>
-		    <input type="hidden" name="scope" value="public_profile,email,publish_actions,user_photos" />
+		    <input type="hidden" name="scope" value="public_profile,email" />
 		</form>
     </div>
 </body>
