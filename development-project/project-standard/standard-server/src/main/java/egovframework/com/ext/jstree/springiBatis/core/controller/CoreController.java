@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -90,7 +91,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/getChildNode.do")
+	@RequestMapping(value="/getChildNode.do", method=RequestMethod.GET)
 	public ModelAndView getChildNode(ComprehensiveTree comprehensiveTree, ModelMap model,
 			HttpServletRequest request) throws Exception {
 		if (comprehensiveTree.getC_id() <= 0) {
@@ -102,7 +103,7 @@ public class CoreController extends GenericAbstractController{
 	}
 	
 	@ResponseBody
-	@RequestMapping("/getPaginatedChildNode.do")
+	@RequestMapping(value="/getPaginatedChildNode.do", method=RequestMethod.GET)
 	public ModelAndView getPaginatedChildNode(PaginatedComprehensiveTree paginatedComprehensiveTree, ModelMap model,
 			HttpServletRequest request) throws Exception {
 		if (paginatedComprehensiveTree.getC_id() <= 0) {
@@ -165,7 +166,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws InstantiationException
 	 */
 	@ResponseBody
-	@RequestMapping("/addNode.do")
+	@RequestMapping(value="/addNode.do",method=RequestMethod.POST)
 	public ModelAndView addNode(@Validated(value = AddNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
