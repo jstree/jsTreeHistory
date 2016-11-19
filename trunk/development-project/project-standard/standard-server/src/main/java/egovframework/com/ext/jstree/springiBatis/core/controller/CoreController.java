@@ -140,7 +140,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/searchNode.do")
+	@RequestMapping(value="/searchNode.do",method=RequestMethod.GET)
 	public ModelAndView searchNode(ComprehensiveTree comprehensiveTree, ModelMap model, HttpServletRequest request)
 			throws Exception {
 		if (!StringUtils.hasText(request.getParameter("searchString"))) {
@@ -189,7 +189,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/removeNode.do")
+	@RequestMapping(value="/removeNode.do",method=RequestMethod.DELETE)
 	public ModelAndView removeNode(@Validated(value = RemoveNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
@@ -212,7 +212,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/alterNode.do")
+	@RequestMapping(value="/alterNode.do",method=RequestMethod.PUT)
 	public ModelAndView alterNode(@Validated(value = AlterNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
@@ -237,7 +237,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping("/alterNodeType.do")
+	@RequestMapping(value="/alterNodeType.do",method=RequestMethod.PUT)
 	public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
@@ -263,7 +263,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws InstantiationException
 	 */
 	@ResponseBody
-	@RequestMapping("/moveNode.do")
+	@RequestMapping(value="/moveNode.do",method=RequestMethod.PUT)
 	public ModelAndView moveNode(@Validated(value = MoveNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
 		if (bindingResult.hasErrors())
@@ -276,11 +276,14 @@ public class CoreController extends GenericAbstractController{
 		return modelAndView;
 	}
 
-	@RequestMapping("/analyzeNode.do")
-	public String getChildNode(ModelMap model) {
+	@ResponseBody
+	@RequestMapping(value="/analyzeNode.do",method=RequestMethod.GET)
+	public ModelAndView getChildNode(ModelMap model) {
 		model.addAttribute("analyzeResult", "");
 
-		return "jsp/community/jsTreeAlg/jsTreeSpringDemo/analyzeResult";
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", "ture");
+		return modelAndView;
 	}
 
 }
