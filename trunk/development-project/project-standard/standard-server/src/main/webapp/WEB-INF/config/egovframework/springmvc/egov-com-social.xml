@@ -10,13 +10,13 @@
     <mvc:resources mapping="/js/**" location="/js/" />
     
     <!-- OAuth 컴포넌트 -->
-<!--     <bean id="disconnectController" class="org.springframework.social.facebook.web.DisconnectController" 
+     <bean id="disconnectController" class="org.springframework.social.facebook.web.DisconnectController" 
         c:_0-ref="usersConnectionRepository" c:_1="${facebook.appSecret}" />
         
-     <bean class="org.springframework.social.connect.web.ProviderSignInController" autowire="constructor" /> -->
+     <!-- <bean class="org.springframework.social.connect.web.ProviderSignInController" autowire="constructor" /> -->
 
     <!-- facebook 연동시  -->
-    <mvc:default-servlet-handler />
+    <!-- <mvc:default-servlet-handler /> -->
     <bean class="org.springframework.social.connect.web.ProviderSignInController">
         <constructor-arg ref="connectionFactoryLocator" />
         <constructor-arg ref="usersConnectionRepository" /> 
