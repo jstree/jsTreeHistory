@@ -16,30 +16,6 @@
 
 <script type="text/javascript">
   $(function() {
-    /* Extend jQuery with functions for PUT and DELETE requests. */
-    function _ajax_request(url, data, callback, type, method) {
-        if (jQuery.isFunction(data)) {
-            callback = data;
-            data = {};
-        }
-        return jQuery.ajax({
-            type: method,
-            url: url,
-            data: data,
-            success: callback,
-            dataType: type
-            });
-    }
-
-    jQuery.extend({
-        put: function(url, data, callback, type) {
-            return _ajax_request(url, data, callback, type, 'PUT');
-        },
-        delete_: function(url, data, callback, type) {
-            return _ajax_request(url, data, callback, type, 'DELETE');
-        }
-    });
-    
     $("${target}").bind(
             "before.jstree",
             function(e, data) {
@@ -281,29 +257,48 @@
         });
       });
     }).bind("rename.jstree", function(e, data) {
-      $.put("${alterNode}", {
-        "c_id": data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
-        "c_title": data.rslt.new_name,
-        "c_type": data.rslt.obj.attr("rel")
-      }, function(r) {
-        if (!r.status) {
-          $.jstree.rollback(data.rlbk);
-        }
-        jSuccess('Rename Node Complete');
-        $("#analyze").click();
-        $("span.ui-icon-refresh").click();
-        jstreeDataTableReload();
+      data.rslt.obj.each(function() {
+        $.ajax({
+          async: false,
+          type: 'PUT',
+          url: "${alterNode}",
+          data: {
+            "c_id": data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
+            "c_title": data.rslt.new_name,
+            "c_type": data.rslt.obj.attr("rel")
+          },
+          success: function(r) {
+            if (!r.status) {
+              $.jstree.rollback(data.rlbk);
+            }
+            jSuccess('Rename Node Complete');
+            $("#analyze").click();
+            $("span.ui-icon-refresh").click();
+            jstreeDataTableReload();
+          }
+        });
       });
     }).bind("set_type.jstree", function(e, data) {
-      $.put("${alterNodeType}", {
-        "c_id": data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
-        "c_title": data.rslt.new_name,
-        "c_type": data.rslt.obj.attr("rel")
-      }, function(r) {
-        $("#analyze").click();
-        $("span.ui-icon-refresh").click();
-        jSuccess('Node Type Change');
-        jstreeDataTableReload();
+      data.rslt.obj.each(function() {
+        $.ajax({
+          async: false,
+          type: 'PUT',
+          url: "${alterNodeType}",
+          data: {
+            "c_id": data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
+            "c_title": data.rslt.new_name,
+            "c_type": data.rslt.obj.attr("rel")
+          },
+          success: function(r) {
+            if (!r.status) {
+              $.jstree.rollback(data.rlbk);
+            }
+            $("#analyze").click();
+            $("span.ui-icon-refresh").click();
+            jSuccess('Node Type Change');
+            jstreeDataTableReload();
+          }
+        });
       });
     }).bind("move_node.jstree", function(e, data) {
       data.rslt.o.each(function(i) {
