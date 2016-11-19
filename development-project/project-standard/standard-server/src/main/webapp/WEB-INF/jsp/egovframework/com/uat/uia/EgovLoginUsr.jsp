@@ -351,11 +351,11 @@ function fnInit() {
   </table>
   
   <!-- OAuth -->
-  <%-- <table width="700">
+  <table width="700">
     <tr>
       <td class="title_left"><img src="<c:url value='/images/egovframework/com/cmm/icon/tit_icon.gif'/>" width="16" height="16" hspace="3" align="middle" alt="">&nbsp;OAuth 로그인</td>
     </tr>
-  </table> --%>
+  </table> 
     <!-- TWITTER SIGNIN -->
     <%-- <form id="tw_signin" action="<c:url value="/signin/twitter"/>" method="POST" target="_blank">
         <button type="submit" style="width:151px; height:26px; background-image: url('<c:url value="/images/egovframework/com/ext/oauth/twitter/sign-in-with-twitter-d.png"/>');"/>
@@ -365,14 +365,14 @@ function fnInit() {
         <input type="hidden" name="_method" value="delete" />
     </form> --%>
     <!-- FACEBOOK SIGNIN -->
-    <%-- <form name="fb_signin" id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST" target="_blank">
+    <form name="fb_signin" id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST" target="_blank">
         <input type="hidden" name="scope" value="publish_stream,email,offline_access" />
         <button type="submit" style="width:151px; height:26px; background-image: url('<c:url value="/images/egovframework/com/ext/oauth/facebook/sign-in-with-facebook.png"/>');"/>
     </form>
     <form id="disconnect" action="/connect/facebook" method="post">
         <button type="submit">Disconnect from Facebook</button> 
         <input type="hidden" name="_method" value="delete" />
-    </form> --%>
+    </form> 
   
     <!-- bottom -->
     <div id="new_footer_login">

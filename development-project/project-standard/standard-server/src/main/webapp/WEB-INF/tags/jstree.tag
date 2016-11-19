@@ -16,6 +16,30 @@
 
 <script type="text/javascript">
   $(function() {
+    /* Extend jQuery with functions for PUT and DELETE requests. */
+    function _ajax_request(url, data, callback, type, method) {
+        if (jQuery.isFunction(data)) {
+            callback = data;
+            data = {};
+        }
+        return jQuery.ajax({
+            type: method,
+            url: url,
+            data: data,
+            success: callback,
+            dataType: type
+            });
+    }
+
+    jQuery.extend({
+        put: function(url, data, callback, type) {
+            return _ajax_request(url, data, callback, type, 'PUT');
+        },
+        delete_: function(url, data, callback, type) {
+            return _ajax_request(url, data, callback, type, 'DELETE');
+        }
+    });
+    
     $("${target}").bind(
             "before.jstree",
             function(e, data) {
@@ -243,7 +267,7 @@
       data.rslt.obj.each(function() {
         $.ajax({
           async: false,
-          type: 'POST',
+          type: 'DELETE',
           url: "${removeNode}",
           data: {
             "c_id": this.id.replace("node_", "").replace("copy_", "")
@@ -257,7 +281,7 @@
         });
       });
     }).bind("rename.jstree", function(e, data) {
-      $.post("${alterNode}", {
+      $.put("${alterNode}", {
         "c_id": data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
         "c_title": data.rslt.new_name,
         "c_type": data.rslt.obj.attr("rel")
@@ -271,7 +295,7 @@
         jstreeDataTableReload();
       });
     }).bind("set_type.jstree", function(e, data) {
-      $.post("${alterNodeType}", {
+      $.put("${alterNodeType}", {
         "c_id": data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
         "c_title": data.rslt.new_name,
         "c_type": data.rslt.obj.attr("rel")
@@ -285,7 +309,7 @@
       data.rslt.o.each(function(i) {
         $.ajax({
           async: false,
-          type: 'POST',
+          type: 'PUT',
           url: "${moveNode}",
           data: {
             "c_id": $(this).attr("id").replace("node_", "").replace("copy_", ""),
