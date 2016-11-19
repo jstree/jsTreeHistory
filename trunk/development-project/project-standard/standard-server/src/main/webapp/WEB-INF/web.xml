@@ -61,9 +61,26 @@
 	</filter-mapping>
 
 	<!-- UrlRewriteFilter -->
-	<!-- <filter> <filter-name>UrlRewriteFilter</filter-name> <filter-class>egovframework.com.cmm.util.EgovUrlRewriteFilter</filter-class> <init-param> <param-name>targetURI</param-name> 
-		<param-value>/sample1/, /sample/</param-value> </init-param> <init-param> <param-name>httpPort</param-name> <param-value>8080</param-value> </init-param> <init-param> <param-name>httpsPort</param-name> 
-		<param-value>8181</param-value> </init-param> </filter> <filter-mapping> <filter-name>UrlRewriteFilter</filter-name> <url-pattern>/*</url-pattern> </filter-mapping> -->
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>egovframework.com.cmm.util.EgovUrlRewriteFilter</filter-class>
+		<init-param>
+			<param-name>targetURI</param-name>
+			<param-value>/sample1/, /sample/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>httpPort</param-name>
+			<param-value>8313</param-value>
+		</init-param>
+		<init-param>
+			<param-name>httpsPort</param-name>
+			<param-value>8181</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<!-- Restoration from HTMLTagFilter's action (certification login) -->
 	<filter>

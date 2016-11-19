@@ -366,7 +366,7 @@ function fnInit() {
     </form> --%>
     <!-- FACEBOOK SIGNIN -->
     <form name="fb_signin" id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST" target="_blank">
-        <input type="hidden" name="scope" value="email" />
+        <input type="hidden" name="scope" value="public_profile,email" />
         <button type="submit" style="width:151px; height:26px; background-image: url('<c:url value="/images/egovframework/com/ext/oauth/facebook/sign-in-with-facebook.png"/>');"/>
     </form>
     <form id="disconnect" action="/connect/facebook" method="post">
