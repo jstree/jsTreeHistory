@@ -71,7 +71,10 @@ public class EgovFacebookConfig {
 	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES)
 	public ConnectionFactoryLocator connectionFactoryLocator() {
 		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
-		registry.addConnectionFactory(new FacebookConnectionFactory(facebookId, facebookappSecret));
+		FacebookConnectionFactory facebookConnectionFactory = new FacebookConnectionFactory(facebookId, facebookappSecret);
+	   //this is the important bit 
+		facebookConnectionFactory.setScope("public_profile,email");
+		registry.addConnectionFactory(facebookConnectionFactory);
 		return registry;
 	}
 

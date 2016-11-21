@@ -189,7 +189,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping(value="/removeNode.do",method=RequestMethod.DELETE)
+	@RequestMapping(value="/removeNode.do",method=RequestMethod.POST)
 	public ModelAndView removeNode(@Validated(value = RemoveNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
@@ -212,7 +212,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping(value="/alterNode.do",method=RequestMethod.PUT)
+	@RequestMapping(value="/alterNode.do",method=RequestMethod.POST)
 	public ModelAndView alterNode(@Validated(value = AlterNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
@@ -237,7 +237,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping(value="/alterNodeType.do",method=RequestMethod.PUT)
+	@RequestMapping(value="/alterNodeType.do",method=RequestMethod.POST)
 	public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
@@ -263,7 +263,7 @@ public class CoreController extends GenericAbstractController{
 	 * @throws InstantiationException
 	 */
 	@ResponseBody
-	@RequestMapping(value="/moveNode.do",method=RequestMethod.PUT)
+	@RequestMapping(value="/moveNode.do",method=RequestMethod.POST)
 	public ModelAndView moveNode(@Validated(value = MoveNode.class) ComprehensiveTree comprehensiveTree,
 			BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
 		if (bindingResult.hasErrors())
