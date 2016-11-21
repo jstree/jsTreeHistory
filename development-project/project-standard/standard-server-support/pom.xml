@@ -527,13 +527,18 @@
 		<!-- spring security 라이브러리 끝 -->
 		<!-- sns login -->
 		<dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-facebook-web</artifactId>
-            <version>1.1.1.RELEASE</version>
-        </dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook-web</artifactId>
+			<version>1.1.1.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-twitter</artifactId>
+			<version>1.1.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-web</artifactId>
 			<version>1.1.0.RELEASE</version>
 		</dependency>
 		<dependency>
@@ -565,7 +570,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
- 
+
 		<!-- LDAP조직도관리 관련 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework.ldap</groupId>
@@ -596,7 +601,7 @@
 		</dependency>
 
 		<!-- 보안 코드 -->
- 		<dependency>
+		<dependency>
 			<groupId>com.navercorp.lucy</groupId>
 			<artifactId>lucy-xss-servlet</artifactId>
 			<version>2.0.0</version>

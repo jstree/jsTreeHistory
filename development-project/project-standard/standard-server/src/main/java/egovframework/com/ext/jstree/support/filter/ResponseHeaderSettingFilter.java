@@ -19,7 +19,7 @@ public class ResponseHeaderSettingFilter implements Filter {
 
 		HttpServletResponse response = (HttpServletResponse) res;
 
-		response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS");
+		response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");
 		response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 
