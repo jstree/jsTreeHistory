@@ -58,13 +58,24 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 public class CoreController extends GenericAbstractController{
 	@Resource(name = "CoreService")
 	CoreService coreService;
+	
+	/**
+	 * jstree Struts + iBatis 버전의 첫페이지를 요청한다.
+	 * 
+	 * @return String jstreeSolutionStrutsVersion 페이지를
+	 */
+	@IncludedInfo(name = "jsTree CSRF json", listUrl = "/com/ext/jstree/csrf.do", order = 3300, gid = 313)
+	@RequestMapping("/csrf.do")
+	public String jsTreeCSRFtoJson() {
+		return "egovframework/com/ext/jstree/csrf";
+	}
 
 	/**
 	 * jstree Struts + iBatis 버전의 첫페이지를 요청한다.
 	 * 
 	 * @return String jstreeSolutionStrutsVersion 페이지를
 	 */
-	@IncludedInfo(name = "jsTree Struts-iBatis", listUrl = "/com/ext/jstree/strutsiBatis/core/getJsTreeView.action", order = 3300, gid = 313)
+	@IncludedInfo(name = "jsTree Struts-iBatis", listUrl = "/com/ext/jstree/strutsiBatis/core/getJsTreeView.action", order = 3310, gid = 313)
 	@RequestMapping("/strutsiBatis.do")
 	public String jsTreeStrutsiBatis() {
 		return "for struts iBatis annotation instead of controller";
@@ -75,7 +86,7 @@ public class CoreController extends GenericAbstractController{
 	 * 
 	 * @return String jstreeSolutionSpringVersion 페이지를
 	 */
-	@IncludedInfo(name = "jsTree Spring-myBatis", listUrl = "/com/ext/jstree/springmyBatis/core/getJsTreeView.do", order = 3310, gid = 313)
+	@IncludedInfo(name = "jsTree Spring-myBatis", listUrl = "/com/ext/jstree/springmyBatis/core/getJsTreeView.do", order = 3320, gid = 313)
 	@RequestMapping("/getJsTreeView.do")
 	public String jsTreeSpringmyBatis() {
 		return "egovframework/com/ext/jstree/springmyBatisVersion";

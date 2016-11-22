@@ -1,5 +1,5 @@
 <%@ page isELIgnored="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
@@ -18,6 +18,7 @@
 <!--<![endif]-->
 <head>
 <meta charset="utf-8">
+
 <meta http-equiv="Expire" content="-1" />
 <meta http-equiv="Keywords" content="jsTree Service Engine" />
 <meta http-equiv="Reply-to" content="313@313.co.kr" />
@@ -30,8 +31,6 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta http-equiv="content-Script-type" content="text/javascript" />
 <meta http-equiv="content-Style-type" content="text/css" />
-<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-Remove this if you use the .htaccess -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 <meta name="robots" content="ALL, INDEX, FOLLOW" />
@@ -56,16 +55,16 @@ Remove this if you use the .htaccess -->
 <meta name="title" content="jsTree Service Engine" />
 <meta name="revisit-after" content="7 days" />
 <meta name="siteinfo" content="http://www.313.co.kr/robots.txt" />
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"> -->
-<!-- <meta name="description" content="dongmin.lee" /> -->
-<!-- <meta name="keywords" content="" /> -->
+<meta name="keywords" content="jsTree Service Engine" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="HandheldFriendly" content="True" />
 <meta name="MobileOptimized" content="320" />
+
 <meta property="og:type" content="website">
 <meta property="og:title" content="jsTree Service Engine">
 <meta property="og:url" content="http://www.313.co.kr/">
 <meta property="og:site_name" content="jsTree Service Engine">
+
 <customTags:assetsJsExtendNas theRestOfFileName="/jquery-1.12.4/dist/jquery.min.js"></customTags:assetsJsExtendNas>
 <customTags:assetsJsExtendNas theRestOfFileName="/jquery-migrate-1.4.1.min.js"></customTags:assetsJsExtendNas>
 <customTags:assetsJsExtendNas theRestOfFileName="/jquery-ui-1.12.1/jquery-ui.min.js"></customTags:assetsJsExtendNas>
