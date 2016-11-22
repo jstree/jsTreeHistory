@@ -1,7 +1,8 @@
-<%@ page contentType="text/html; charset=utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
  /**
@@ -181,7 +182,7 @@ function fnInit() {
     <tr>
       <td width="350" height="250">
           <!--일반로그인 테이블 시작-->
-          <form name="loginForm" action ="<c:url value='/uat/uia/actionLogin.do'/>" method="post">
+          <form:form name="loginForm" action ="<c:url value='/uat/uia/actionLogin.do'/>" method="post">
 			<div style="visibility:hidden;display:none;">
 			<input name="iptSubmit1" type="submit" value="전송" title="전송">
 			</div>
@@ -268,18 +269,18 @@ function fnInit() {
             </table>
             <input name="userSe" type="hidden" value="GNR"/>
             <input name="j_username" type="hidden"/>
-        </form>
+        </form:form>
         <!--일반로그인 테이블 끝-->
       </td>
       <td width="350" height="250">
 
         <!--인증서로그인 테이블 시작-->
-        <form name="GpkiLoginForm" action ="<c:url value='/uat/uia/actionCrtfctLogin.do'/>" method="post">
+        <form:form name="GpkiLoginForm" action ="<c:url value='/uat/uia/actionCrtfctLogin.do'/>" method="post">
 		<div style="visibility:hidden;display:none;">
 		<input name="iptSubmit2" type="submit" value="전송" title="전송">
 		</div>
             <table width="303" border="0" cellspacing="8" cellpadding="0">
-              <tr>
+              <tr> 
                 <td width="40%"class="title_left"><img src="<c:url value='/images/egovframework/com/cmm/icon/tit_icon.gif'/>" width="16" height="16" hspace="3" align="middle" alt="gpki_login">&nbsp;인증서 로그인</td>
               </tr>
               <tr>
@@ -330,14 +331,14 @@ function fnInit() {
               </tr>
             </table>
             <input name="userSe" type="hidden" value="GNR">
-        </form>
+        </form:form>
         <!--인증서로그인 테이블 끝-->
         <!-- 팝업 폼 -->
-        <form name="defaultForm" action ="<c:url value='/uat/uia/egovGpkiIssu.do'/>" method="post" target="_blank">
+        <form:form name="defaultForm" action ="<c:url value='/uat/uia/egovGpkiIssu.do'/>" method="post" target="_blank">
    		<div style="visibility:hidden;display:none;">
 		<input name="iptSubmit3" type="submit" value="전송" title="전송">
 		</div>
-        </form>
+        </form:form>
       </td>
     </tr>
   </table>
@@ -357,22 +358,22 @@ function fnInit() {
     </tr>
   </table> 
     <!-- TWITTER SIGNIN -->
-    <%-- <form id="tw_signin" action="<c:url value="/signin/twitter"/>" method="POST" target="_blank">
+    <%-- <form:form id="tw_signin" action="<c:url value="/signin/twitter"/>" method="POST" target="_blank">
         <button type="submit" style="width:151px; height:26px; background-image: url('<c:url value="/images/egovframework/com/ext/oauth/twitter/sign-in-with-twitter-d.png"/>');"/>
-    </form>
-    <form id="disconnect" action="/connect/twitter" method="post">
+    </form:form>
+    <form:form id="disconnect" action="/connect/twitter" method="post">
         <button type="submit">Disconnect from Twitter</button>  
         <input type="hidden" name="_method" value="delete" />
-    </form> --%>
+    </form:form> --%>
     <!-- FACEBOOK SIGNIN -->
-    <form name="fb_signin" id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST" target="_blank">
+    <form:form name="fb_signin" id="fb_signin" action="<c:url value='/signin/facebook'/>" method="POST" target="_blank">
         <input type="hidden" name="scope" value="public_profile,email" />
         <button type="submit" style="width:151px; height:26px; background-image: url('<c:url value="/images/egovframework/com/ext/oauth/facebook/sign-in-with-facebook.png"/>');"/>
-    </form>
-    <form id="disconnect" action="/connect/facebook" method="post">
+    </form:form>
+    <form:form id="disconnect" action="/connect/facebook" method="post">
         <button type="submit">Disconnect from Facebook</button> 
         <input type="hidden" name="_method" value="delete" />
-    </form> 
+    </form:form> 
   
     <!-- bottom -->
     <div id="new_footer_login">

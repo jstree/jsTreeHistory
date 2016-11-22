@@ -52,14 +52,14 @@
 		</dependency>
 		<!-- <dependency> <groupId>egovframework.rte</groupId> <artifactId>spring-modules-validation</artifactId> <version>0.9</version> </dependency> -->
 		<dependency>
-			<groupId>egovframework.rte</groupId>
+			<groupId>egovframework.rte</groupId> 
 			<artifactId>egovframework.rte.fdl.property</artifactId>
 			<version>${egovframework.rte.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>egovframework.rte</groupId>
 			<artifactId>egovframework.rte.fdl.security</artifactId>
-			<version>${egovframework.rte.version}</version>
+			<version>3.5.3</version>
 		</dependency>
 		<dependency>
 			<groupId>egovframework.rte</groupId>

@@ -16,6 +16,19 @@
 
 <script type="text/javascript">
   $(function() {
+    $.ajax({
+      async: false,
+      type: 'GET',
+      url: "${pageContext.request.contextPath}/com/ext/jstree/springmyBatis/core/csrf.do",
+      success: function(r) {
+        var token = r._csrf_token;
+        var header = r._csrf_headerName;
+        $(document).ajaxSend(function(e, xhr, options) {
+        	xhr.setRequestHeader(header, token);
+        });
+      }
+    });
+
     $("${target}").bind(
             "before.jstree",
             function(e, data) {
