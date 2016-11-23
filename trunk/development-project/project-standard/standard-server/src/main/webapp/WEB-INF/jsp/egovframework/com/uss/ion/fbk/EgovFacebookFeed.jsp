@@ -1,7 +1,10 @@
-<%@ page contentType="text/html; charset=utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ page session="false" %>
 <%
 
@@ -33,11 +36,11 @@
     <div id="border" style="width:730px">
         <h3>Your Facebook Feed</h3>
         	
-        <form method="POST" action="<c:url value="/uss/ion/fbk/feed.do" />">
+        <form:form method="POST" action="<c:url value="/uss/ion/fbk/feed.do" />">
         	<p>Post to your Facebook wall:<p>
         	<textarea id="message" name="message" rows="2" cols="60"></textarea><br/>
         	<input type="submit" value="Post" />
-        </form>
+        </form:form>
         
         <div class="feed">
             <ul>

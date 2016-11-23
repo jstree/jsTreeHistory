@@ -1,5 +1,10 @@
-<%@ page contentType="text/html; charset=utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ page session="false" %>
 <%
 
@@ -39,11 +44,11 @@
         	<dt>Email:</dt>
         	<dd><c:out value="${profile.email}"/></dd>
         </dl>
-        
-        <form id="disconnect" action="<c:url value="/uss/ion/fbk/facebookSignout.do"/>" method="post">
+        <c:url var="post_url"  value="/uss/ion/fbk/facebookSignout.do" />
+        <form:form id="disconnect" action="${post_url}" method="post">
         	<button type="submit">Disconnect from Facebook</button>	
         	<input type="hidden" name="_method" value="delete" />
-        </form>
+        </form:form>
     </div>
 </body>
 </html>
