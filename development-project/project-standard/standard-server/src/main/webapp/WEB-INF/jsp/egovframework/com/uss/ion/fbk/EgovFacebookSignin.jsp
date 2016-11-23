@@ -1,6 +1,11 @@
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" autoFlush="true"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ page session="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 
 /**
@@ -29,10 +34,11 @@
 </head>
 <body>
     <div id="border" style="width:730px">
-		<form action="<c:url value="/signin/facebook" />" method="POST" target="_top">
+    	<c:url var="post_url"  value="/signin/facebook" />
+		<form:form action="${post_url}" method="POST" target="_top">
 		    <button type="submit">Sign in with Facebook</button>
 		    <input type="hidden" name="scope" value="public_profile,email" />
-		</form>
+		</form:form>
     </div>
 </body>
 </html>
