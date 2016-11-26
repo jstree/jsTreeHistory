@@ -701,8 +701,7 @@ public class ParameterParser
     {
         StringBuffer sbf = new StringBuffer();
         sbf.append('{');
-        @SuppressWarnings("unchecked")
-		Enumeration<String> en = req.getParameterNames();
+        Enumeration<String> en = req.getParameterNames();
         String name = null;
         String[] value = null;
         int i = 0;
@@ -741,8 +740,7 @@ public class ParameterParser
     {
         StringBuffer sbf = new StringBuffer();
         sbf.append('{');
-        @SuppressWarnings("unchecked")
-		Enumeration<String> en = req.getParameterNames();
+        Enumeration<String> en = req.getParameterNames();
         String name = null;
         String[] value = null;
         int i = 0;
