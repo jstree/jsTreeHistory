@@ -52,14 +52,14 @@
 		</dependency>
 		<!-- <dependency> <groupId>egovframework.rte</groupId> <artifactId>spring-modules-validation</artifactId> <version>0.9</version> </dependency> -->
 		<dependency>
-			<groupId>egovframework.rte</groupId> 
+			<groupId>egovframework.rte</groupId>
 			<artifactId>egovframework.rte.fdl.property</artifactId>
 			<version>${egovframework.rte.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>egovframework.rte</groupId>
 			<artifactId>egovframework.rte.fdl.security</artifactId>
-			<version>3.5.3</version>
+			<version>3.5.4</version> 
 		</dependency>
 		<dependency>
 			<groupId>egovframework.rte</groupId>
@@ -73,6 +73,7 @@
 		</dependency>
 		<!-- 실행환경 라이브러리 끝 -->
 
+		<!-- Google 시작. -->
 		<dependency>
 			<groupId>com.googlecode.log4jdbc</groupId>
 			<artifactId>log4jdbc</artifactId>
@@ -96,6 +97,8 @@
 			<artifactId>guava</artifactId>
 			<version>15.0</version>
 		</dependency>
+		<!-- Google 끝. -->
+
 
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -277,6 +280,15 @@
 			<version>1.7</version>
 		</dependency>
 
+		<!-- ******************************************* DWR ******************************************* -->
+		<dependency>
+            <groupId>org.directwebremoting</groupId>
+            <artifactId>dwr</artifactId>
+            <version>3.0.1-RELEASE</version>
+        </dependency>
+
+
+		<!-- ******************************************* JSON ******************************************* -->
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.json</artifactId>
@@ -313,15 +325,15 @@
 			<version>2.7.7</version>
 		</dependency>
 
+
+		<!-- ******************************************* 3rd party ******************************************* -->
+		<!-- 3rd party 라이브러리로 별도의 설치 필요 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.31</version>
 		</dependency>
 
-		<!-- 3rd party 라이브러리로 별도의 설치 필요 -->
-		<!-- oracle 10g driver -->
-		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
@@ -342,7 +354,7 @@
 		<!-- <dependency> <groupId>cubrid</groupId> <artifactId>cubrid-jdbc</artifactId> <version>8.4</version> <scope>system</scope> <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/cubrid-jdbc-8.4.jar</systemPath> 
 			</dependency> -->
 
-		<!-- EXCEL -->
+		<!-- ******************************************* excel ******************************************* -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -372,7 +384,6 @@
 			<artifactId>poi-contrib</artifactId>
 			<version>3.5-FINAL</version>
 		</dependency>
-
 		<!-- 공통컴포넌트 끝 -->
 
 		<!-- jstree service engine 라이브러리 시작 -->
@@ -388,8 +399,7 @@
 			<version>4.01</version>
 		</dependency>
 
-
-		<!-- Hibernate -->
+		<!-- ******************************************* Hibernate ******************************************* -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -500,7 +510,7 @@
 			<version>${spring.maven.artifact.version}</version>
 		</dependency>
 
-		<!-- spring security 라이브러리 시작 -->
+		<!-- ******************************************* Spring Security ******************************************* -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -524,8 +534,15 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
-		<!-- spring security 라이브러리 끝 -->
-		<!-- sns login -->
+
+		<!-- 보안 코드 라이브러리 추가 XSS -->
+		<dependency>
+			<groupId>com.navercorp.lucy</groupId>
+			<artifactId>lucy-xss-servlet</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+		<!-- ******************************************* Spring Soical 연동 ******************************************* -->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-facebook-web</artifactId>
@@ -600,11 +617,5 @@
 			</exclusions>
 		</dependency>
 
-		<!-- 보안 코드 -->
-		<dependency>
-			<groupId>com.navercorp.lucy</groupId>
-			<artifactId>lucy-xss-servlet</artifactId>
-			<version>2.0.0</version>
-		</dependency>
 	</dependencies>
 </project>
