@@ -243,7 +243,7 @@ Ext.onReady(function() {
 			width : 160,
 			text : '입력 (Ctrl + Enter)',
 			handler : function() {
-				sendMessage();
+			  page.sendMessage();
 			}
 		} ]
 	});
