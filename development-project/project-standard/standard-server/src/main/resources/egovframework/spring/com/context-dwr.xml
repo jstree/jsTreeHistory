@@ -4,15 +4,6 @@
        http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
 
 	<dwr:configuration />
-	<dwr:url-mapping />
-	<dwr:controller id="dwrController" debug="true" />
-	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="alwaysUseFullPath" value="true" />
-		<property name="mappings">
-			<props>
-				<prop key="/dwr/**/*">dwrController</prop>
-			</props>
-		</property>
-	</bean>
-	<dwr:annotation-scan base-package="egovframework.com.ext.jstree.springiBatis.dwr" scanDataTransferObject="true" scanRemoteProxy="true" />
+	<dwr:annotation-config id="dwrAnnotationConfig" />
+	<dwr:annotation-scan base-package="egovframework.com.ext.jstree.springiBatis.dwr.*.*"/>
 </beans>

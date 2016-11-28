@@ -125,6 +125,9 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
 
 	<servlet>
 		<servlet-name>spring</servlet-name>
@@ -133,7 +136,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/config/egovframework/springmvc/egov-com-*.xml</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
@@ -143,56 +146,58 @@
 	</servlet-mapping>
 	
 	<servlet>
-        <servlet-name>dwrServlet</servlet-name>
-        <servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
-        <init-param>
-            <param-name>debug</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <!--
-       <init-param>
-           <param-name>pollAndCometEnabled</param-name>
-           <param-value>true</param-value>
-       </init-param>
-       -->
-        <init-param>
-            <param-name>activeReverseAjaxEnabled</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <init-param>
-            <param-name>initApplicationScopeCreatorsAtStartup</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <!--
-        <init-param>
-            <param-name>org.directwebremoting.extend.ServerLoadMonitor</param-name>
-            <param-value>org.directwebremoting.impl.PollingServerLoadMonitor</param-value>
-        </init-param>
-         -->
-        <!--
-        <init-param>
-            <param-name>disconnectedTime</param-name>
-            <param-value>60000</param-value>
-        </init-param>
-         -->
-        <init-param>
-            <param-name>allowScriptTagRemoting</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <init-param>
-            <param-name>crossDomainSessionSecurity</param-name>
-            <param-value>false</param-value>
-        </init-param>
-        <init-param>
-            <param-name>allowGetForSafariButMakeForgeryEasier</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <load-on-startup>2</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dwrServlet</servlet-name>
-        <url-pattern>/dwr/*</url-pattern>
-    </servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
+		
+		<!-- This should NEVER be present in live -->
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+
+		<!-- Remove this unless you want to use active reverse ajax -->
+		<init-param>
+			<param-name>activeReverseAjaxEnabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+
+		<!-- By default DWR creates application scope objects when they are first 
+			used. This creates them when the app-server is started -->
+		<init-param>
+			<param-name>initApplicationScopeCreatorsAtStartup</param-name>
+			<param-value>false</param-value>
+		</init-param>
+
+		<!-- This enables full streaming mode. It's probably better to leave this 
+			out if you are running across the internet -->
+		<init-param>
+			<param-name>maxWaitAfterWrite</param-name>
+			<param-value>-1</param-value>
+		</init-param>
+
+		<!-- In DWR 3 a JSON/JSONP RESTian API has been added that allows users 
+			to access Java services exposed to DWR via an URL: http://example.com/dwr/jsonp/ClassName/methodName/param1/param2 
+			DWR will reply with a JSON structure containing the result of calling ClassName.methodName("param1", 
+			"param2"); This allows for seamless integration with JavaScript toolkits 
+			(DOJO, ExtJs, jQuery, etc.) while eliminating the need for the developer 
+			to convert the return types of their exposed Java methods into JSON manually 
+			- DWR's server engine handles this. -->
+		<init-param>
+			<param-name>jsonpEnabled</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		
+		<!-- Use Customer ScriptSessionManager -->
+		<init-param>
+			<param-name>org.directwebremoting.extend.ScriptSessionManager</param-name>
+			<param-value>egovframework.com.ext.jstree.springiBatis.dwr.util.ScriptSessionManager</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>struts2</filter-name>
