@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="Development_Project_Standard_Server" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app id="Development_Project_Standard_Server" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
 	<!-- 수정일 수성자 수정내용 ========== ======== ================================================= 2011.9.19 이기하 filter 정리 2013.5.31 이기하 미사용 filter 정리(.mdo, .action) ************************************************************************************************ 
 		0. 로그인 정책 컴포넌트용 필터 : 설정 1. 스프링 시큐리티 설정 : 설정 2. EgovSSO 로그인/로그아웃 설정을 위한 필터 설정 : 설정 3. Spring Security 로그인/로그아웃 설정을 위한 필터 설정 : 설정 ************************************************************************************************ -->
 	<display-name>standard-server</display-name>
@@ -40,7 +40,7 @@
 		<filter-name>CKFilter</filter-name>
 		<url-pattern>/ckupload</url-pattern>
 	</filter-mapping>
-	
+
 	<filter>
 		<filter-name>responseHeaderSettingFilter</filter-name>
 		<filter-class>egovframework.com.ext.jstree.support.filter.ResponseHeaderSettingFilter</filter-class>
@@ -144,11 +144,11 @@
 		<url-pattern>/connect/facebook</url-pattern>
 		<url-pattern>/signin/facebook</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>dwr-invoker</servlet-name>
 		<servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
-		
+
 		<!-- This should NEVER be present in live -->
 		<init-param>
 			<param-name>debug</param-name>
@@ -161,32 +161,26 @@
 			<param-value>true</param-value>
 		</init-param>
 
-		<!-- By default DWR creates application scope objects when they are first 
-			used. This creates them when the app-server is started -->
+		<!-- By default DWR creates application scope objects when they are first used. This creates them when the app-server is started -->
 		<init-param>
 			<param-name>initApplicationScopeCreatorsAtStartup</param-name>
 			<param-value>false</param-value>
 		</init-param>
 
-		<!-- This enables full streaming mode. It's probably better to leave this 
-			out if you are running across the internet -->
+		<!-- This enables full streaming mode. It's probably better to leave this out if you are running across the internet -->
 		<init-param>
 			<param-name>maxWaitAfterWrite</param-name>
 			<param-value>-1</param-value>
 		</init-param>
 
-		<!-- In DWR 3 a JSON/JSONP RESTian API has been added that allows users 
-			to access Java services exposed to DWR via an URL: http://example.com/dwr/jsonp/ClassName/methodName/param1/param2 
-			DWR will reply with a JSON structure containing the result of calling ClassName.methodName("param1", 
-			"param2"); This allows for seamless integration with JavaScript toolkits 
-			(DOJO, ExtJs, jQuery, etc.) while eliminating the need for the developer 
-			to convert the return types of their exposed Java methods into JSON manually 
-			- DWR's server engine handles this. -->
+		<!-- In DWR 3 a JSON/JSONP RESTian API has been added that allows users to access Java services exposed to DWR via an URL: http://example.com/dwr/jsonp/ClassName/methodName/param1/param2 
+			DWR will reply with a JSON structure containing the result of calling ClassName.methodName("param1", "param2"); This allows for seamless integration with JavaScript toolkits (DOJO, 
+			ExtJs, jQuery, etc.) while eliminating the need for the developer to convert the return types of their exposed Java methods into JSON manually - DWR's server engine handles this. -->
 		<init-param>
 			<param-name>jsonpEnabled</param-name>
 			<param-value>false</param-value>
 		</init-param>
-		
+
 		<!-- Use Customer ScriptSessionManager -->
 		<init-param>
 			<param-name>org.directwebremoting.extend.ScriptSessionManager</param-name>
