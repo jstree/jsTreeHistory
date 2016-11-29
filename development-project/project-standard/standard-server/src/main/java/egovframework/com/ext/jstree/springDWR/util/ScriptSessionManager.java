@@ -1,16 +1,9 @@
-package egovframework.com.ext.jstree.springiBatis.dwr.util;
+package egovframework.com.ext.jstree.springDWR.util;
 
 import org.directwebremoting.event.ScriptSessionEvent;
 import org.directwebremoting.event.ScriptSessionListener;
 import org.directwebremoting.impl.DefaultScriptSessionManager;
 
-/**
- * 自己实现 ScriptSessionManager 监听 ScriptSession
- * 
- * @author Cweili
- * @version 2013-5-8 上午11:07:13
- * 
- */
 public class ScriptSessionManager extends DefaultScriptSessionManager {
 
 	public ScriptSessionManager() {
@@ -24,6 +17,7 @@ public class ScriptSessionManager extends DefaultScriptSessionManager {
 
 			@Override
 			public void sessionCreated(ScriptSessionEvent ev) {
+				System.out.println("springDWR Chat Session Create :" + ev.getSession().getAttribute(Global.USERNAME));
 			}
 		});
 	}
