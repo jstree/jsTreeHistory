@@ -5,5 +5,5 @@
 
 	<dwr:configuration />
 	<dwr:annotation-config id="dwrAnnotationConfig" />
-	<dwr:annotation-scan base-package="egovframework.com.ext.jstree.springiBatis.dwr.*.*"/>
+	<dwr:annotation-scan base-package="egovframework.com.ext.jstree.springDWR.*.*"/>
 </beans>

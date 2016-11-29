@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="Development_Project_Standard_Server" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-	<!-- 수정일 수성자 수정내용 ========== ======== ================================================= 2011.9.19 이기하 filter 정리 2013.5.31 이기하 미사용 filter 정리(.mdo, .action) ************************************************************************************************ 
-		0. 로그인 정책 컴포넌트용 필터 : 설정 1. 스프링 시큐리티 설정 : 설정 2. EgovSSO 로그인/로그아웃 설정을 위한 필터 설정 : 설정 3. Spring Security 로그인/로그아웃 설정을 위한 필터 설정 : 설정 ************************************************************************************************ -->
 	<display-name>standard-server</display-name>
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -17,8 +15,6 @@
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 
-	<!-- HTMLTagFilter의 경우는 파라미터에 대하여 XSS 오류 방지를 위한 변환을 처리합니다. 우선 HTMLTagFIlter의 경우는 JSP의 <c:out /> 등을 사용하지 못하는 특수한 상황에서 사용하시면 됩니다. (<c:out />의 경우 뷰단에서 데이터 출력시 XSS 방지 처리가 됨) 부득히 HTMLTagFilter를 
-		사용하셔야 하는 경우는 web.xml 상에 다음과 같이 CertProcessFilter(GPKI 인증 처리 오류 해결) 등록해 주시면 됩니다. -->
 	<filter>
 		<filter-name>HTMLTagFilter</filter-name>
 		<filter-class>egovframework.com.cmm.filter.HTMLTagFilter</filter-class>
@@ -27,7 +23,7 @@
 		<filter-name>HTMLTagFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	<!-- for CKEditor Image Upload -->
+
 	<filter>
 		<filter-name>CKFilter</filter-name>
 		<filter-class>egovframework.com.utl.wed.filter.CkFilter</filter-class>
@@ -59,7 +55,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- OAuth 및 facebook 연동 -->
 	<filter>
 		<filter-name>hiddenHttpMethodFilter</filter-name>
 		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
@@ -69,7 +64,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- UrlRewriteFilter -->
 	<filter>
 		<filter-name>UrlRewriteFilter</filter-name>
 		<filter-class>egovframework.com.cmm.util.EgovUrlRewriteFilter</filter-class>
@@ -91,7 +85,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- Restoration from HTMLTagFilter's action (certification login) -->
 	<filter>
 		<filter-name>CertProcessFilter</filter-name>
 		<filter-class>egovframework.com.utl.sec.filter.CertProcessFilter</filter-class>
@@ -149,49 +142,66 @@
 		<servlet-name>dwr-invoker</servlet-name>
 		<servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
 
-		<!-- This should NEVER be present in live -->
 		<init-param>
 			<param-name>debug</param-name>
 			<param-value>true</param-value>
 		</init-param>
 
-		<!-- Remove this unless you want to use active reverse ajax -->
 		<init-param>
 			<param-name>activeReverseAjaxEnabled</param-name>
 			<param-value>true</param-value>
 		</init-param>
 
-		<!-- By default DWR creates application scope objects when they are first used. This creates them when the app-server is started -->
 		<init-param>
 			<param-name>initApplicationScopeCreatorsAtStartup</param-name>
 			<param-value>false</param-value>
 		</init-param>
 
-		<!-- This enables full streaming mode. It's probably better to leave this out if you are running across the internet -->
 		<init-param>
 			<param-name>maxWaitAfterWrite</param-name>
 			<param-value>-1</param-value>
 		</init-param>
 
-		<!-- In DWR 3 a JSON/JSONP RESTian API has been added that allows users to access Java services exposed to DWR via an URL: http://example.com/dwr/jsonp/ClassName/methodName/param1/param2 
-			DWR will reply with a JSON structure containing the result of calling ClassName.methodName("param1", "param2"); This allows for seamless integration with JavaScript toolkits (DOJO, 
-			ExtJs, jQuery, etc.) while eliminating the need for the developer to convert the return types of their exposed Java methods into JSON manually - DWR's server engine handles this. -->
 		<init-param>
 			<param-name>jsonpEnabled</param-name>
 			<param-value>false</param-value>
 		</init-param>
 
-		<!-- Use Customer ScriptSessionManager -->
 		<init-param>
 			<param-name>org.directwebremoting.extend.ScriptSessionManager</param-name>
-			<param-value>egovframework.com.ext.jstree.springiBatis.dwr.util.ScriptSessionManager</param-value>
+			<param-value>egovframework.com.ext.jstree.springDWR.util.ScriptSessionManager</param-value>
 		</init-param>
+
+		<init-param>
+			<param-name>org.directwebremoting.extend.ServerLoadMonitor</param-name>
+			<param-value>org.directwebremoting.impl.PollingServerLoadMonitor</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>disconnectedTime</param-name>
+			<param-value>60000</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>allowScriptTagRemoting</param-name>
+			<param-value>true</param-value>
+		</init-param>
+
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dwr-invoker</servlet-name>
 		<url-pattern>/dwr/*</url-pattern>
 	</servlet-mapping>
+
+	<filter>
+		<filter-name>ServletContextRequestLogging</filter-name>
+		<filter-class>org.springframework.web.filter.ServletContextRequestLoggingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ServletContextRequestLogging</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<filter>
 		<filter-name>struts2</filter-name>

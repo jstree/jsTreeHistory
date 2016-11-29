@@ -322,7 +322,8 @@ Ext.onReady(function() {
 	})();
 
 	dwr.engine.setActiveReverseAjax(true);
-
 	dwr.engine.setNotifyServerOnPageUnload(true);
-
+	dwr.engine.setErrorHandler(function() {
+	  alert('DWR Error');
+	});
 });
