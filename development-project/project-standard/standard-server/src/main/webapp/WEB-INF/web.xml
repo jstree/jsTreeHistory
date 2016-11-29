@@ -178,11 +178,6 @@
 		</init-param>
 
 		<init-param>
-			<param-name>disconnectedTime</param-name>
-			<param-value>60000</param-value>
-		</init-param>
-
-		<init-param>
 			<param-name>allowScriptTagRemoting</param-name>
 			<param-value>true</param-value>
 		</init-param>
@@ -194,14 +189,14 @@
 		<url-pattern>/dwr/*</url-pattern>
 	</servlet-mapping>
 
-	<filter>
+	<!-- <filter>
 		<filter-name>ServletContextRequestLogging</filter-name>
 		<filter-class>org.springframework.web.filter.ServletContextRequestLoggingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>ServletContextRequestLogging</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 
 	<filter>
 		<filter-name>struts2</filter-name>
