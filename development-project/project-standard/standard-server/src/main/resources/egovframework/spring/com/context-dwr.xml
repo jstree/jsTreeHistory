@@ -3,7 +3,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
 
-	<dwr:configuration />
+	<dwr:configuration>
+		<dwr:convert type="bean" class="egovframework.com.ext.jstree.springDWR.domain.User"></dwr:convert>
+	</dwr:configuration>
 	<dwr:annotation-config id="dwrAnnotationConfig" />
-	<dwr:annotation-scan base-package="egovframework.com.ext.jstree.springDWR.*.*"/>
+	<dwr:annotation-scan base-package="egovframework.com.ext.jstree.springDWR.*.*" scanDataTransferObject="true" scanRemoteProxy="true" />
 </beans>
