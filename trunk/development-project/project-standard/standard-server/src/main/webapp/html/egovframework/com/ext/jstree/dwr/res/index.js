@@ -10,7 +10,6 @@ var viewport = null;
 var loginWindow = null;
 
 function updateOnlineList(onlineList) {
-  console.log("updateOnlineList Call");
   if (onlineList && onlineList.length > 0) {
     onlineListStore.loadData(onlineList);
   }
