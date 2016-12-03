@@ -91,6 +91,28 @@ public class CoreController extends GenericAbstractController{
 	public String jsTreeSpringmyBatis() {
 		return "egovframework/com/ext/jstree/springmyBatisVersion";
 	}
+	
+	/**
+	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
+	 * 
+	 * @return String jstreeSolutionSpringVersion 페이지를
+	 */
+	@IncludedInfo(name = "jsTree DWR-Chat", listUrl = "/html/egovframework/com/ext/jstree/dwr/index.html", order = 3330, gid = 313)
+	@RequestMapping("/getDWRChat.do")
+	public String jsTreeDWRChat() {
+		return "html page not support";
+	}
+	
+	/**
+	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
+	 * 
+	 * @return String jstreeSolutionSpringVersion 페이지를
+	 */
+	@IncludedInfo(name = "jsTree Spring-DWR", listUrl = "/com/ext/jstree/springmyBatis/core/getDWRView.do", order = 3340, gid = 313)
+	@RequestMapping("/getDWRView.do")
+	public String jsTreeSpringDWR() {
+		return "egovframework/com/ext/jstree/springDWRVersion";
+	}
 
 	/**
 	 * 자식노드를 요청한다.

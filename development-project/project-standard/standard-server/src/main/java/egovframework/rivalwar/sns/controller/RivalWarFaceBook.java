@@ -31,7 +31,7 @@ public class RivalWarFaceBook extends GenericAbstractController{
 		return "rivalWar/api/sns/facebook";
 	}
 	
-	@IncludedInfo(name = "jsTree Facebook", listUrl = "/api/sns/facebook/login.do", order = 3400, gid = 313)
+	@IncludedInfo(name = "jsTree Facebook", listUrl = "/api/sns/facebook/login.do", order = 3350, gid = 313)
 	@RequestMapping("/login.do")
 	public String facebookLogin(ModelMap model){
 		return "rivalWar/api/sns/facebookLogin";
