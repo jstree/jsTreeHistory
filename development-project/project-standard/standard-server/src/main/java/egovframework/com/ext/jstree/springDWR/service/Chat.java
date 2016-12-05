@@ -35,7 +35,7 @@ public class Chat {
 		}
 
 		final String time = time();
-		Browser.withCurrentPage(new Runnable() {
+		Browser.withAllSessions(new Runnable() {
 			@Override
 			public void run() {
 				ScriptSessions.addFunctionCall("addMessage", username, time, message);
