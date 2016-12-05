@@ -576,9 +576,6 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                             },
                             "success": function(n) {
                               jSuccess('access good');
-                              Chat.sendMessage("getChildNode", function(data) {
-                                console.log(data);
-                              });
                             }
                           }
                         },
@@ -667,6 +664,9 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           if (r.status) {
                             $(data.rslt.obj).attr("id", "node_" + r.id);
                             jNotify('Notification : <strong>Add Node</strong>, Complete !');
+                            Chat.sendMessage("노드를 추가했습니다. 추가된 노드의 아이디는 " + r.id , function(data) {
+                              console.log(data);
+                            });
                           } else {
                             $.jstree.rollback(data.rlbk);
                           }
@@ -687,6 +687,9 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                               $("#analyze").click();
                               $("span.ui-icon-refresh").click();
                               jNotify('Notification : <strong>Remove Node</strong>, Complete !');
+                              Chat.sendMessage("노드를 삭제했습니다. 삭제된 노드의 아이디는 " + r.c_id , function(data) {
+                                console.log(data);
+                              });
                               jstreeDataTableReload();
                             }
                           });
@@ -700,6 +703,9 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           if (!r.status) {
                             $.jstree.rollback(data.rlbk);
                           }
+                          Chat.sendMessage("노드를 변경했습니다. 변경된 노드의 아이디는 " + r.c_id , function(data) {
+                            console.log(data);
+                          });
                           jSuccess('Rename Node Complete');
                           $("#analyze").click();
                           $("span.ui-icon-refresh").click();
@@ -714,6 +720,9 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           $("#analyze").click();
                           $("span.ui-icon-refresh").click();
                           jSuccess('Node Type Change');
+                          Chat.sendMessage("노드를 변경했습니다. 변경된 노드의 아이디는 " + r.c_id , function(data) {
+                            console.log(data);
+                          });
                           jstreeDataTableReload();
                         });
                       }).bind("move_node.jstree", function(e, data) {
@@ -739,6 +748,9 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                                   data.inst.refresh(data.inst._get_parent(data.rslt.oc));
                                 }
                                 jNotify('Notification : <strong>Move Node</strong> Complete !');
+                                Chat.sendMessage("노드가 이동되었습니다. 이동된 노드의 아이디는 " + r.c_id , function(data) {
+                                  console.log(data);
+                                });
                               }
                               $("#analyze").click();
                               $("span.ui-icon-refresh").click();
