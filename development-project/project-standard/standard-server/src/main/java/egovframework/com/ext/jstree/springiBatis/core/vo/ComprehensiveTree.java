@@ -107,7 +107,6 @@ public class ComprehensiveTree implements Serializable{
 	private String childcount;
 	
 	/** 검색시 Keyword */
-	// TODO : 확인할것
 	private String searchStr;
 	
 	private int idif;
