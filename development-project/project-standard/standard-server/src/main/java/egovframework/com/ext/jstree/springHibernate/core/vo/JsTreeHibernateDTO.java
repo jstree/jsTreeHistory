@@ -8,10 +8,15 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @Table(name = "T_COMPREHENSIVETREE_HIBER", schema = "STANDARD_DB")
-@org.hibernate.annotations.Entity(selectBeforeUpdate = true, dynamicUpdate = true)
+@SelectBeforeUpdate(value=true)
+@DynamicInsert(value=true)
+@DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class JsTreeHibernateDTO extends JsTreeHibernateBaseDTO implements Serializable {
 
