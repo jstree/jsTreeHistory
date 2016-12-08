@@ -25,7 +25,7 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import egovframework.com.ext.jstree.springHibernate.core.util.EventLogManager;
 import egovframework.com.ext.jstree.springHibernate.core.util.LogSupport;
 import egovframework.com.ext.jstree.springHibernate.core.util.LogSupportActionType;
-import egovframework.com.ext.jstree.springHibernate.core.util.SearchSupport;
+import egovframework.com.ext.jstree.support.util.SearchSupport;
 
 
 @SuppressWarnings("unchecked")
