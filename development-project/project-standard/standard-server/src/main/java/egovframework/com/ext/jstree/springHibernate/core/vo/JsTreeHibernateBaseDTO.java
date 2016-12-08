@@ -16,13 +16,13 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.validator.constraints.Range;
 
-import egovframework.com.ext.jstree.springiBatis.core.validation.custom.constraints.Contained;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.AddNode;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNode;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.AlterNodeType;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.MoveNode;
-import egovframework.com.ext.jstree.springiBatis.core.validation.group.RemoveNode;
-import egovframework.com.ext.jstree.springiBatis.core.vo.ComprehensiveTree;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.custom.constraints.Contained;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AddNode;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNode;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNodeType;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.group.MoveNode;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.group.RemoveNode;
+import egovframework.com.ext.jstree.springmyBatis.core.vo.ComprehensiveTree;
 
 @MappedSuperclass
 public abstract class JsTreeHibernateBaseDTO {

@@ -10,7 +10,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name = "T_COMPREHENSIVETREE_HIBERNATE", schema = "STANDARD_DB")
+@Table(name = "T_COMPREHENSIVETREE_HIBER", schema = "STANDARD_DB")
 @org.hibernate.annotations.Entity(selectBeforeUpdate = true, dynamicUpdate = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class JsTreeHibernateDTO extends JsTreeHibernateBaseDTO implements Serializable {
