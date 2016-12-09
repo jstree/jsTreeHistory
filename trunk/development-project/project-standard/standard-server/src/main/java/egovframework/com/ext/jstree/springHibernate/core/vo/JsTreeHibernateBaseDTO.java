@@ -1,5 +1,6 @@
 package egovframework.com.ext.jstree.springHibernate.core.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,7 +26,9 @@ import egovframework.com.ext.jstree.springmyBatis.core.validation.group.RemoveNo
 import egovframework.com.ext.jstree.springmyBatis.core.vo.ComprehensiveTree;
 
 @MappedSuperclass
-public abstract class JsTreeHibernateBaseDTO {
+public abstract class JsTreeHibernateBaseDTO implements Serializable {
+
+	private static final long serialVersionUID = -1686737481473490738L;
 
 	/** 노드의 고유 id, 1부터 시작(Root Node) */
 	@Min(value = 2, groups = { RemoveNode.class, AlterNode.class, AlterNodeType.class, MoveNode.class })
@@ -250,6 +253,20 @@ public abstract class JsTreeHibernateBaseDTO {
 
 	public void setMultiCounter(int multiCounter) {
 		this.multiCounter = multiCounter;
+	}
+	
+	@Transient
+	public String getState() {
+		String returnCode = new String();
+
+		if (getChildcount() == null || getChildcount().equals(" ")) {
+			returnCode = "update status";
+		} else if (getChildcount().equals("InChild")) {
+			returnCode = "closed";
+		} else {
+			returnCode = "leafNode";
+		}
+		return returnCode;
 	}
 
 	@Transient

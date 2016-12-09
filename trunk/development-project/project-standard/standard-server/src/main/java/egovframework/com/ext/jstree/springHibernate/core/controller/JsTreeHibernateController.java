@@ -1,5 +1,6 @@
 package egovframework.com.ext.jstree.springHibernate.core.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateServiceManager;
+import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDaoImpl;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.mvc.RequestAttribute;
@@ -24,10 +25,10 @@ import egovframework.com.ext.jstree.support.util.SearchSupport;
 
 @Controller
 @RequestMapping(value = { "/com/ext/jstree/springHibernate/core" })
-public class JsTreeHibernateController  extends GenericAbstractController{
+public class JsTreeHibernateController extends GenericAbstractController{
 	
 	@Autowired
-	JsTreeHibernateServiceManager jsTreeHibernateServiceManager;
+	private JsTreeHibernateDaoImpl jsTreeHibernateDao; 
 	
 	/**
 	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
@@ -49,6 +50,7 @@ public class JsTreeHibernateController  extends GenericAbstractController{
 	 * @return String
 	 * @throws JsonProcessingException
 	 */
+	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value="/getChildNode.do", method=RequestMethod.GET)
 	public ModelAndView getChildNode(@RequestAttribute("searchSupport") SearchSupport searchSupport, ModelMap model,
@@ -58,13 +60,14 @@ public class JsTreeHibernateController  extends GenericAbstractController{
 		if (parser.getInt("c_id") <= 0) {
 			throw new RuntimeException();
 		}
-		Class<?> clazz = null;
-        clazz = JsTreeHibernateDTO.class;
         
-        List<?> interfaceList = jsTreeHibernateServiceManager.getList(clazz, searchSupport);
-        
+        searchSupport.setWhere("c_parentid", new BigDecimal(parser.get("c_id")));
+        Class<?> clazz = JsTreeHibernateDTO.class;
+        jsTreeHibernateDao.setClazz(clazz);
+         List<JsTreeHibernateDTO> list = jsTreeHibernateDao.getList(searchSupport);
+				
         ModelAndView modelAndView =  new ModelAndView("jsonView");
-		modelAndView.addObject("result", interfaceList);
+		modelAndView.addObject("result", list);
 		return modelAndView;
 	}
 	

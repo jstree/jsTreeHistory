@@ -10,7 +10,7 @@ import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDaoS
 
 
 @Repository
-public class EventLogDao extends JsTreeHibernateDaoSupport<EventLog, Long> {
+public class EventLogDao extends JsTreeHibernateDaoSupport<EventLog> {
     @Resource(name = "sessionFactory")
     public void init(SessionFactory sessionFactory) {
         this.setSessionFactory(sessionFactory);

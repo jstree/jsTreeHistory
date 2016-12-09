@@ -18,11 +18,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class JsTreeHibernateDTO extends JsTreeHibernateBaseDTO implements Serializable {
+public class JsTreeHibernateDTO extends JsTreeHibernatePaginatedDTO implements Serializable {
 
-	/**
-     * 
-     */
 	private static final long serialVersionUID = -6859122566734590165L;
 
 	public JsTreeHibernateDTO() {
@@ -52,20 +49,6 @@ public class JsTreeHibernateDTO extends JsTreeHibernateBaseDTO implements Serial
 
 	public void setCopyBooleanValue(Boolean copyBooleanValue) {
 		this.copyBooleanValue = copyBooleanValue;
-	}
-
-	@Transient
-	public String getState() {
-		String returnCode = new String();
-
-		if (getChildcount() == null || getChildcount().equals(" ")) {
-			returnCode = "update status";
-		} else if (getChildcount().equals("InChild")) {
-			returnCode = "closed";
-		} else {
-			returnCode = "leafNode";
-		}
-		return returnCode;
 	}
 
 }

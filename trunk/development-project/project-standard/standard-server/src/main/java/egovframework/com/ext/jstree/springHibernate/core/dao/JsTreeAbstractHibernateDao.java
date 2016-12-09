@@ -29,10 +29,19 @@ import egovframework.com.ext.jstree.springHibernate.core.util.LogSupportActionTy
 import egovframework.com.ext.jstree.support.util.SearchSupport;
 
 @SuppressWarnings("unchecked")
-public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
+public abstract class JsTreeAbstractHibernateDao<T extends Serializable> extends HibernateDaoSupport {
 
+	private Class<T> clazz;
+	
 	@Autowired
 	private EventLogManager eventLogManager;
+
+	public final void setClazz(Class<T> clazzToSet) {
+		this.clazz = clazzToSet;
+	}
+	public Class<T> getClazz() {
+		return clazz;
+	}
 
 	protected abstract Class<T> getEntityClass();
 
@@ -410,11 +419,12 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 		getHibernateTemplate().refresh(entity);
 	}
 
-	public  Serializable store(T newInstance) {
+	public Serializable store(T newInstance) {
 		if (newInstance instanceof LogSupport) {
 			LogSupport logSupport = (LogSupport) newInstance;
 			eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
 		}
+		
 		return getHibernateTemplate().save(newInstance);
 	}
 
@@ -552,5 +562,4 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 
 		return Long.parseLong(value);
 	}
-
 }
