@@ -26,7 +26,7 @@ public class EventLogManager {
     private static final Logger logger = Logger.getLogger("save");
     
     public EventLog getEventLog(long id) {
-        return eventLogDao.find(id, LockMode.NONE);
+        return null;
     }
     
     public List<EventLog> getList(SearchSupport searchSupport) {

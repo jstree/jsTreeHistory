@@ -6,19 +6,26 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Repository;
 
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateBaseDTO;
-
-@Repository
-public class JsTreeHibernateDao extends JsTreeHibernateDaoSupport<JsTreeHibernateBaseDTO, Long>{
+@Repository("JsTreeHibernateDao")
+public class JsTreeHibernateDaoImpl<T> extends JsTreeHibernateDaoSupport<T>{
+	
+	private Class<T> clazz;
 	
     @Resource(name = "sessionFactory")
     public void init(SessionFactory sessionFactory) {
         this.setSessionFactory(sessionFactory);
     }
     
+    public void setClazz(Class<T> clazzToSet) {
+		this.clazz = clazzToSet;
+	}
+	public Class<T> getClazz() {
+		return clazz;
+	}
+	
     @Override
-    protected Class<JsTreeHibernateBaseDTO> getEntityClass() {
-        return JsTreeHibernateBaseDTO.class;
+    protected Class<T> getEntityClass() {
+        return this.getClazz();
     }
     
     @Override

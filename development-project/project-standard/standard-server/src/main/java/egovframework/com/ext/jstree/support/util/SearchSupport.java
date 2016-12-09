@@ -16,12 +16,9 @@ import org.hibernate.criterion.Restrictions;
 import egovframework.com.ext.jstree.support.util.StringUtils;
 import egovframework.com.ext.jstree.support.util.Text;
 
-/**
- * 검색 관련된 객체
- */
 public class SearchSupport {
     private int pageNo = 1;
-    private int pageSize = 50;
+    private int pageSize = 10;
     private List<Order> order = new ArrayList<>();
     private List<Criterion> criterions = new ArrayList<>();
     private Projection projection;
