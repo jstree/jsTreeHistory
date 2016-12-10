@@ -1,8 +1,8 @@
 package egovframework.com.ext.jstree.springHibernate.core.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,6 @@ import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDaoI
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
 @RequestMapping(value = { "/com/ext/jstree/springHibernate/core" })
@@ -28,7 +27,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 
 	@SuppressWarnings("rawtypes")
 	@Autowired
-	private JsTreeHibernateDaoImpl jsTreeHibernateDao;
+	private JsTreeHibernateDaoImpl jsTreeHibernateDaoImpl;
 
 	/**
 	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
@@ -65,10 +64,10 @@ public class JsTreeHibernateController extends GenericAbstractController {
 			throw new RuntimeException();
 		}
 	    
-		jsTreeHibernateDTO.setWhere("c_parentid", new BigDecimal(parser.get("c_id")));
+		jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
 		Class<?> clazz = JsTreeHibernateDTO.class;
-		jsTreeHibernateDao.setClazz(clazz);
-		List<JsTreeHibernateDTO> list = jsTreeHibernateDao.getList(jsTreeHibernateDTO);
+		jsTreeHibernateDaoImpl.setClazz(clazz);
+		List<JsTreeHibernateDTO> list = jsTreeHibernateDaoImpl.getList(jsTreeHibernateDTO);
 
 		ModelAndView modelAndView = new ModelAndView("jsonView");
 		modelAndView.addObject("result", list);
