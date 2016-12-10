@@ -9,31 +9,13 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+
 @MappedSuperclass
 public abstract class JsTreeHibernatePaginatedDTO extends JsTreeHibernateBaseDTO implements Serializable{
 	
 	private static final long serialVersionUID = 3465234289025484577L;
 
-	public JsTreeHibernatePaginatedDTO() {
-		super();
-	}
-
-	public JsTreeHibernatePaginatedDTO(String searchCondition, String searchKeyword, String searchUseYn, int pageIndex,
-			int pageUnit, int pageSize, int firstIndex, int lastIndex, int recordCountPerPage,
-			String searchKeywordFrom, String searchKeywordTo) {
-		super();
-		this.searchCondition = searchCondition;
-		this.searchKeyword = searchKeyword;
-		this.searchUseYn = searchUseYn;
-		this.pageIndex = pageIndex;
-		this.pageUnit = pageUnit;
-		this.pageSize = pageSize;
-		this.firstIndex = firstIndex;
-		this.lastIndex = lastIndex;
-		this.recordCountPerPage = recordCountPerPage;
-		this.searchKeywordFrom = searchKeywordFrom;
-		this.searchKeywordTo = searchKeywordTo;
-	}
 
 	/** 검색조건 */
 	@JsonIgnore
@@ -78,12 +60,49 @@ public abstract class JsTreeHibernatePaginatedDTO extends JsTreeHibernateBaseDTO
 	/** 검색KeywordTo */
 	@JsonIgnore
     private String searchKeywordTo = "";  
+	
+	@JsonIgnore
+	PaginationInfo paginationInfo = new PaginationInfo();
     
+	public JsTreeHibernatePaginatedDTO() {
+		super();
+    	paginationSetting();
+	}
+	
+	public JsTreeHibernatePaginatedDTO(String searchCondition, String searchKeyword, String searchUseYn, int pageIndex,
+			int pageUnit, int pageSize, int firstIndex, int lastIndex, int recordCountPerPage,
+			String searchKeywordFrom, String searchKeywordTo) {
+		super();
+		this.searchCondition = searchCondition;
+		this.searchKeyword = searchKeyword;
+		this.searchUseYn = searchUseYn;
+		this.pageIndex = pageIndex;
+		this.pageUnit = pageUnit;
+		this.pageSize = pageSize;
+		this.firstIndex = firstIndex;
+		this.lastIndex = lastIndex;
+		this.recordCountPerPage = recordCountPerPage;
+		this.searchKeywordFrom = searchKeywordFrom;
+		this.searchKeywordTo = searchKeywordTo;
+		paginationSetting();
+	}
+
+	private void paginationSetting() {
+		paginationInfo.setCurrentPageNo(getPageIndex());
+	    paginationInfo.setRecordCountPerPage(getPageUnit());
+	    paginationInfo.setPageSize(getPageSize());
+	    
+	    this.setFirstIndex(paginationInfo.getFirstRecordIndex());
+	    this.setLastIndex(paginationInfo.getLastRecordIndex());
+	    this.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+	}
+	
+	
     @Transient
 	public int getFirstIndex() {
 		return firstIndex;
 	}
-
+    
 	public void setFirstIndex(int firstIndex) {
 		this.firstIndex = firstIndex;
 	}
