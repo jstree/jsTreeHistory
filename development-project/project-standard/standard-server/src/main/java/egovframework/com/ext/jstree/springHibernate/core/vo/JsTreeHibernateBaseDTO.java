@@ -1,7 +1,6 @@
 package egovframework.com.ext.jstree.springHibernate.core.vo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -32,23 +31,23 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 
 	/** 노드의 고유 id, 1부터 시작(Root Node) */
 	@Min(value = 2, groups = { RemoveNode.class, AlterNode.class, AlterNodeType.class, MoveNode.class })
-	private BigDecimal c_id;
+	private Long c_id;
 
 	/** 노드의 부모 id, 0부터 시작(Root Node) */
-	private BigDecimal c_parentid;
+	private Long c_parentid;
 
 	/** Parent의 몇 번째 자식인지를 나타냄. 0부터 시작 */
 	@Min(value = 0, groups = { AddNode.class, MoveNode.class })
-	private BigDecimal c_position;
+	private Long c_position;
 
 	/** 노드의 left 위치, 1부터 시작(Root Node) */
-	private BigDecimal c_left;
+	private Long c_left;
 
 	/** 노드의 right 위치, 자식이 없다면 left + 1의 값을 가진다. */
-	private BigDecimal c_right;
+	private Long c_right;
 
 	/** 노드의 depth, 0부터 시작 */
-	private BigDecimal c_level;
+	private Long c_level;
 
 	/** Node 의 title */
 	private String c_title;
@@ -118,8 +117,8 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 		attr = new HashMap<String, String>();
 	}
 
-	public JsTreeHibernateBaseDTO(BigDecimal c_id, BigDecimal c_parentid, BigDecimal c_position, BigDecimal c_left,
-			BigDecimal c_right, BigDecimal c_level, String c_title, String c_type, int ref, int copy, int multiCounter,
+	public JsTreeHibernateBaseDTO(Long c_id, Long c_parentid, Long c_position, Long c_left,
+			Long c_right, Long c_level, String c_title, String c_type, int ref, int copy, int multiCounter,
 			int status, String ajaxMessage, String childcount, String searchStr, int idif, int ldif,
 			int spaceOfTargetNode, Collection<Integer> c_idsByChildNodeFromNodeById, int fixCopyId,
 			int fixCopyPosition, int rightPositionFromNodeByRef, ComprehensiveTree nodeById, int idifLeft,
@@ -157,56 +156,56 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "c_id")
-	public BigDecimal getC_id() {
+	public Long getC_id() {
 		return c_id;
 	}
 
-	public void setC_id(BigDecimal c_id) {
+	public void setC_id(Long c_id) {
 		this.c_id = c_id;
 	}
 
 	@Column(name = "c_parentid")
-	public BigDecimal getC_parentid() {
+	public Long getC_parentid() {
 		return c_parentid;
 	}
 
-	public void setC_parentid(BigDecimal c_parentid) {
+	public void setC_parentid(Long c_parentid) {
 		this.c_parentid = c_parentid;
 	}
 
 	@Column(name = "c_position")
-	public BigDecimal getC_position() {
+	public Long getC_position() {
 		return c_position;
 	}
 
-	public void setC_position(BigDecimal c_position) {
+	public void setC_position(Long c_position) {
 		this.c_position = c_position;
 	}
 
 	@Column(name = "c_left")
-	public BigDecimal getC_left() {
+	public Long getC_left() {
 		return c_left;
 	}
 
-	public void setC_left(BigDecimal c_left) {
+	public void setC_left(Long c_left) {
 		this.c_left = c_left;
 	}
 
 	@Column(name = "c_right")
-	public BigDecimal getC_right() {
+	public Long getC_right() {
 		return c_right;
 	}
 
-	public void setC_right(BigDecimal c_right) {
+	public void setC_right(Long c_right) {
 		this.c_right = c_right;
 	}
 
 	@Column(name = "c_level")
-	public BigDecimal getC_level() {
+	public Long getC_level() {
 		return c_level;
 	}
 
-	public void setC_level(BigDecimal c_level) {
+	public void setC_level(Long c_level) {
 		this.c_level = c_level;
 	}
 

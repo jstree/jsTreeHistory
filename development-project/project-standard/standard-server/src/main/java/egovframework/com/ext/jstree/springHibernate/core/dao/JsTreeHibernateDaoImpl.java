@@ -8,22 +8,14 @@ import org.springframework.stereotype.Repository;
 
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 
-@Repository("JsTreeHibernateDao")
-public class JsTreeHibernateDaoImpl<T extends JsTreeHibernateDTO> extends JsTreeHibernateDaoSupport<T>{
+@Repository
+public class JsTreeHibernateDaoImpl<T extends JsTreeHibernateDTO> extends JsTreeHibernateDaoSupport<T, Long>{
 	
-	private Class<T> clazz;
 	
     @Resource(name = "sessionFactory")
     public void init(SessionFactory sessionFactory) {
         this.setSessionFactory(sessionFactory);
     }
-    
-    public void setClazz(Class<T> clazzToSet) {
-		this.clazz = clazzToSet;
-	}
-	public Class<T> getClazz() {
-		return clazz;
-	}
 	
     @Override
     protected Class<T> getEntityClass() {
@@ -34,5 +26,13 @@ public class JsTreeHibernateDaoImpl<T extends JsTreeHibernateDTO> extends JsTree
     public DetachedCriteria createDetachedCriteria() {
         DetachedCriteria detachedCriteria = super.createDetachedCriteria();
         return detachedCriteria;
+    }
+    
+    private Class<T> clazz;
+    public void setClazz(Class<T> clazzToSet) {
+    	this.clazz = clazzToSet;
+    }
+    public Class<T> getClazz() {
+    	return clazz;
     }
 }
