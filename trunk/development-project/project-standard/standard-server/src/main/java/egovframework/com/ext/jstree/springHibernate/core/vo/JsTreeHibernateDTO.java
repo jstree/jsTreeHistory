@@ -18,7 +18,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class JsTreeHibernateDTO extends JsTreeHibernatePaginatedDTO implements Serializable {
+public class JsTreeHibernateDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
 	private static final long serialVersionUID = -6859122566734590165L;
 

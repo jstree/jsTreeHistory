@@ -9,9 +9,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @MappedSuperclass
-public class JsTreeHibernatePaginatedDTO extends JsTreeHibernateBaseDTO implements Serializable{
+public abstract class JsTreeHibernatePaginatedDTO extends JsTreeHibernateBaseDTO implements Serializable{
 	
 	private static final long serialVersionUID = 3465234289025484577L;
 
@@ -161,6 +160,7 @@ public class JsTreeHibernatePaginatedDTO extends JsTreeHibernateBaseDTO implemen
         this.pageSize = pageSize;
     }
 
+    @Transient
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }

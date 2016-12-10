@@ -19,20 +19,13 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
-import egovframework.com.ext.jstree.springHibernate.core.util.EventLogManager;
-import egovframework.com.ext.jstree.springHibernate.core.util.LogSupport;
-import egovframework.com.ext.jstree.springHibernate.core.util.LogSupportActionType;
-import egovframework.com.ext.jstree.support.util.SearchSupport;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 
 @SuppressWarnings("unchecked")
-public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
-
-	@Autowired
-	private EventLogManager eventLogManager;
+public abstract class JsTreeHibernateDaoSupport<T extends JsTreeHibernateDTO> extends HibernateDaoSupport {
 
 	protected abstract Class<T> getEntityClass();
 
@@ -44,9 +37,8 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 		return DetachedCriteria.forClass(getEntityClass());
 	}
 
-	private DetachedCriteria getCriteria(SearchSupport searchSupport) {
+	private DetachedCriteria getCriteria(T searchSupport) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(getEntityClass());
-
 		for (Criterion criterion : searchSupport.getCriterions()) {
 			criteria.add(criterion);
 		}
@@ -60,73 +52,55 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 	public T getUnique(Criterion criterion) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 		detachedCriteria.add(criterion);
-
 		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
-
 		if (list.isEmpty()) {
 			return null;
 		}
-
 		return (T) list.get(0);
 	}
 
-	public T getUnique(SearchSupport searchSupport) {
-
+	public T getUnique(T searchSupport) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 		for (Criterion c : searchSupport.getCriterions()) {
 			detachedCriteria.add(c);
 		}
-
 		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
-
 		if (list.isEmpty()) {
 			return null;
 		}
-
 		return (T) list.get(0);
 	}
 
 	public T getUnique(Criterion... criterions) {
-
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 		for (Criterion c : criterions) {
 			detachedCriteria.add(c);
 		}
-
 		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
-
 		if (list.isEmpty()) {
 			return null;
 		}
-
 		return (T) list.get(0);
 	}
 
 	public T getUnique(List<Criterion> criterion) {
-
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 		for (Criterion c : criterion) {
 			detachedCriteria.add(c);
 		}
-
 		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
-
 		if (list.isEmpty()) {
 			return null;
 		}
-
 		return (T) list.get(0);
 	}
 
 	public List<T> getList() {
 		DetachedCriteria criteria = DetachedCriteria.forClass(getEntityClass());
-
 		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(criteria);
-
 		if (list.isEmpty()) {
 			return null;
 		}
-
 		return list;
 	}
 
@@ -134,42 +108,34 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 		return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, limit);
 	}
 
-	public List<T> getList(SearchSupport searchSupport) {
+	public List<T> getList(T searchSupport) {
 
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
-
 		for (Order order : searchSupport.getOrder()) {
 			detachedCriteria.addOrder(order);
 		}
-
 		for (Criterion criterion : searchSupport.getCriterions()) {
 			detachedCriteria.add(criterion);
 		}
-
-		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria,
-				searchSupport.getPageSize() * (searchSupport.getPageNo() - 1), searchSupport.getPageSize());
-
+		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, searchSupport.getFirstIndex(),
+				searchSupport.getLastIndex());
 		if (list.isEmpty()) {
 			return new ArrayList<>();
 		}
-
 		return list;
 	}
 
-	public List<T> getList(SearchSupport searchSupport, Criterion... criterion) {
+	public List<T> getList(T searchSupport, Criterion... criterion) {
 
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
-
 		for (Criterion c : criterion) {
 			detachedCriteria.add(c);
 		}
-
 		for (Order order : searchSupport.getOrder()) {
 			detachedCriteria.addOrder(order);
 		}
-
-		return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria,
-				searchSupport.getPageSize() * (searchSupport.getPageNo() - 1), searchSupport.getPageSize());
+		return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, searchSupport.getFirstIndex(),
+				searchSupport.getLastIndex());
 	}
 
 	public List<T> getList(Criterion... criterions) {
@@ -208,7 +174,7 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 		return list;
 	}
 
-	public List<T> getGroupByList(SearchSupport searchSupport, String target) {
+	public List<T> getGroupByList(T searchSupport, String target) {
 
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 
@@ -225,11 +191,11 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 
 		detachedCriteria.setProjection(projectList);
 
-		return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria,
-				searchSupport.getPageSize() * (searchSupport.getPageNo() - 1), searchSupport.getPageSize());
+		return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, searchSupport.getFirstIndex(),
+				searchSupport.getLastIndex());
 	}
 
-	public int getGroupByCount(SearchSupport searchSupport, String tagert) {
+	public int getGroupByCount(T searchSupport, String tagert) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 
 		for (Criterion criterion : searchSupport.getCriterions()) {
@@ -252,7 +218,7 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 		}
 	}
 
-	public Map<String, Long> getGroupByList(SearchSupport searchSupport, String groupProperty, String sumProperty) {
+	public Map<String, Long> getGroupByList(T searchSupport, String groupProperty, String sumProperty) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 		Map<String, Long> result = new HashMap<String, Long>();
 		for (Criterion criterion : searchSupport.getCriterions()) {
@@ -323,7 +289,7 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 		return total.intValue();
 	}
 
-	public int getCount(SearchSupport searchSupport) {
+	public int getCount(T searchSupport) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 
 		for (Criterion c : searchSupport.getCriterions()) {
@@ -342,7 +308,7 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 		return total.intValue();
 	}
 
-	public int getCount(SearchSupport searchSupport, List<Criterion> criterions) {
+	public int getCount(T searchSupport, List<Criterion> criterions) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 
 		for (Criterion c : criterions) {
@@ -391,7 +357,7 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 		return sum != null ? sum.intValue() : 0;
 	}
 
-	public int getSum(SearchSupport searchSupport, String propertyName) {
+	public int getSum(T searchSupport, String propertyName) {
 		DetachedCriteria criteria = getCriteria(searchSupport);
 		criteria.add(Restrictions.isNotNull(propertyName));
 		criteria.setProjection(Projections.sum(propertyName));
@@ -410,79 +376,24 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 		getHibernateTemplate().refresh(entity);
 	}
 
-	public  Serializable store(T newInstance) {
-		if (newInstance instanceof LogSupport) {
-			LogSupport logSupport = (LogSupport) newInstance;
-			eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
-		}
+	public Serializable store(T newInstance) {
 		return getHibernateTemplate().save(newInstance);
 	}
 
 	public void storeOrUpdate(T newInstance) {
-		if (newInstance instanceof LogSupport) {
-			Class<?> clazz = newInstance.getClass();
-			long id = getId(newInstance);
-			LogSupport logSupport = (LogSupport) newInstance;
-			if (id == 0) {
-				eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
-			} else {
-				Session session = getSessionFactory().openSession();
-				Object oldObject = session.get(clazz, id);
-				if (null == oldObject) {
-					eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
-				} else {
-					eventLogManager.writeLog(LogSupportActionType.EDIT, logSupport.getEventLogType(), newInstance,
-							oldObject);
-				}
-				session.close();
-			}
-
-		}
 		getHibernateTemplate().saveOrUpdate(newInstance);
 	}
 
 	public void storeOrUpdateAdvanced(T newInstance, String columId) {
-		if (newInstance instanceof LogSupport) {
-			Class<?> clazz = newInstance.getClass();
-			long id = getId(newInstance, columId);
-			LogSupport logSupport = (LogSupport) newInstance;
-			if (id == 0) {
-				eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
-			} else {
-				Session session = getSessionFactory().openSession();
-				Object oldObject = session.get(clazz, id);
-				if (null == oldObject) {
-					eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), newInstance, null);
-				} else {
-					eventLogManager.writeLog(LogSupportActionType.EDIT, logSupport.getEventLogType(), newInstance,
-							oldObject);
-				}
-				session.close();
-			}
-
-		}
 		getHibernateTemplate().saveOrUpdate(newInstance);
 	}
 
-	public void modify(T transientObject) {
-		if (transientObject instanceof LogSupport) {
+	public void update(T transientObject) {
+		getHibernateTemplate().update(transientObject);
+	}
 
-			Class<?> clazz = transientObject.getClass();
-			long id = getId(transientObject);
-			Session session = getSessionFactory().openSession();
-			Object oldObject = session.get(clazz, id);
-			LogSupport logSupport = (LogSupport) transientObject;
-			if (null == oldObject) {
-				eventLogManager.writeLog(LogSupportActionType.ADD, logSupport.getEventLogType(), transientObject, null);
-			} else {
-				eventLogManager.writeLog(LogSupportActionType.EDIT, logSupport.getEventLogType(), transientObject,
-						oldObject);
-			}
-			session.close();
-			getHibernateTemplate().merge(transientObject);
-		} else {
-			getHibernateTemplate().update(transientObject);
-		}
+	public void merge(T transientObject) {
+		getHibernateTemplate().merge(transientObject);
 	}
 
 	public int bulkUpdate(String queryString, Object... value) {
@@ -490,11 +401,6 @@ public abstract class JsTreeHibernateDaoSupport<T> extends HibernateDaoSupport {
 	}
 
 	public void delete(T persistentObject) {
-		// event log를 남긴다
-		if (persistentObject instanceof LogSupport) {
-			LogSupport logSupport = (LogSupport) persistentObject;
-			eventLogManager.writeLog(LogSupportActionType.DEL, logSupport.getEventLogType(), persistentObject, null);
-		}
 		getHibernateTemplate().delete(persistentObject);
 	}
 
