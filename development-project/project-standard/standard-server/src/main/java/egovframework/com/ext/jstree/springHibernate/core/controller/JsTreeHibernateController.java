@@ -19,28 +19,31 @@ import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDaoImpl;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
-import egovframework.com.ext.jstree.support.mvc.RequestAttribute;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
-import egovframework.com.ext.jstree.support.util.SearchSupport;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
 @RequestMapping(value = { "/com/ext/jstree/springHibernate/core" })
-public class JsTreeHibernateController extends GenericAbstractController{
-	
+public class JsTreeHibernateController extends GenericAbstractController {
+
+	@SuppressWarnings("rawtypes")
 	@Autowired
-	private JsTreeHibernateDaoImpl jsTreeHibernateDao; 
-	
+	private JsTreeHibernateDaoImpl jsTreeHibernateDao;
+
 	/**
 	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
 	 * 
 	 * @return String jstreeSolutionSpringVersion 페이지를
 	 */
-	@IncludedInfo(name = "jsTree Spring-Hibernate", listUrl = "/com/ext/jstree/springHibernate/core/getJsTreeView.do", order = 3360, gid = 313)
+	@IncludedInfo(name = "jsTree Spring-Hibernate",
+			listUrl = "/com/ext/jstree/springHibernate/core/getJsTreeView.do",
+			order = 3360,
+			gid = 313)
 	@RequestMapping("/getJsTreeView.do")
 	public String jsTreeSpringHibernate() {
 		return "egovframework/com/ext/jstree/springHibernateVersion";
 	}
-	
+
 	/**
 	 * 자식노드를 요청한다.
 	 * 
@@ -52,23 +55,33 @@ public class JsTreeHibernateController extends GenericAbstractController{
 	 */
 	@SuppressWarnings("unchecked")
 	@ResponseBody
-	@RequestMapping(value="/getChildNode.do", method=RequestMethod.GET)
-	public ModelAndView getChildNode(@RequestAttribute("searchSupport") SearchSupport searchSupport, ModelMap model,
-			HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "/getChildNode.do", method = RequestMethod.GET)
+	public ModelAndView getChildNode(JsTreeHibernateDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+			throws Exception {
+
 		ParameterParser parser = new ParameterParser(request);
-		
+
 		if (parser.getInt("c_id") <= 0) {
 			throw new RuntimeException();
 		}
-        
-        searchSupport.setWhere("c_parentid", new BigDecimal(parser.get("c_id")));
-        Class<?> clazz = JsTreeHibernateDTO.class;
-        jsTreeHibernateDao.setClazz(clazz);
-         List<JsTreeHibernateDTO> list = jsTreeHibernateDao.getList(searchSupport);
-				
-        ModelAndView modelAndView =  new ModelAndView("jsonView");
+
+		PaginationInfo paginationInfo = new PaginationInfo();
+	    paginationInfo.setCurrentPageNo(jsTreeHibernateDTO.getPageIndex());
+	    paginationInfo.setRecordCountPerPage(jsTreeHibernateDTO.getPageUnit());
+	    paginationInfo.setPageSize(jsTreeHibernateDTO.getPageSize());
+	    
+	    jsTreeHibernateDTO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+	    jsTreeHibernateDTO.setLastIndex(paginationInfo.getLastRecordIndex());
+	    jsTreeHibernateDTO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+	    
+		jsTreeHibernateDTO.setWhere("c_parentid", new BigDecimal(parser.get("c_id")));
+		Class<?> clazz = JsTreeHibernateDTO.class;
+		jsTreeHibernateDao.setClazz(clazz);
+		List<JsTreeHibernateDTO> list = jsTreeHibernateDao.getList(jsTreeHibernateDTO);
+
+		ModelAndView modelAndView = new ModelAndView("jsonView");
 		modelAndView.addObject("result", list);
 		return modelAndView;
 	}
-	
+
 }

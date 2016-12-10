@@ -412,11 +412,13 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	}
 
 	@Override
+	@Transient
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
 	}
 
 	@Override
+	@Transient
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
@@ -485,6 +487,7 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	}
 
 	@Override
+	@Transient
 	public int hashCode() {
 		int result = hashCode;
 

@@ -6,8 +6,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Repository;
 
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
+
 @Repository("JsTreeHibernateDao")
-public class JsTreeHibernateDaoImpl<T> extends JsTreeHibernateDaoSupport<T>{
+public class JsTreeHibernateDaoImpl<T extends JsTreeHibernateDTO> extends JsTreeHibernateDaoSupport<T>{
 	
 	private Class<T> clazz;
 	
