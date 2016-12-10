@@ -64,15 +64,6 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		if (parser.getInt("c_id") <= 0) {
 			throw new RuntimeException();
 		}
-
-		PaginationInfo paginationInfo = new PaginationInfo();
-	    paginationInfo.setCurrentPageNo(jsTreeHibernateDTO.getPageIndex());
-	    paginationInfo.setRecordCountPerPage(jsTreeHibernateDTO.getPageUnit());
-	    paginationInfo.setPageSize(jsTreeHibernateDTO.getPageSize());
-	    
-	    jsTreeHibernateDTO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-	    jsTreeHibernateDTO.setLastIndex(paginationInfo.getLastRecordIndex());
-	    jsTreeHibernateDTO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 	    
 		jsTreeHibernateDTO.setWhere("c_parentid", new BigDecimal(parser.get("c_id")));
 		Class<?> clazz = JsTreeHibernateDTO.class;
