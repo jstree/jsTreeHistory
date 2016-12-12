@@ -9,12 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
@@ -25,11 +28,16 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @SuppressWarnings("unchecked")
-public abstract class JsTreeHibernateDaoSupport<T extends JsTreeHibernateDTO, ID extends Serializable> extends HibernateDaoSupport {
+public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearchDTO, ID extends Serializable> extends HibernateDaoSupport {
 
+	@Resource(name = "sessionFactory")
+    public void init(SessionFactory sessionFactory) {
+        this.setSessionFactory(sessionFactory);
+    }
+	
 	protected abstract Class<T> getEntityClass();
 
 	public DetachedCriteria createDetachedCriteria(Class<?> clazz) {
