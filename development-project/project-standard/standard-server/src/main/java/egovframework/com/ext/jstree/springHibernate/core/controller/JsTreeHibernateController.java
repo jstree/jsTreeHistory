@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDao;
+import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDaoImpl;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
