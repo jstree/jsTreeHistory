@@ -37,8 +37,11 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
     public void init(SessionFactory sessionFactory) {
         this.setSessionFactory(sessionFactory);
     }
-	
 	protected abstract Class<T> getEntityClass();
+	
+	protected Session getCurrentSession() {
+        return getHibernateTemplate().getSessionFactory().getCurrentSession();
+    }
 
 	public DetachedCriteria createDetachedCriteria(Class<?> clazz) {
 		return DetachedCriteria.forClass(clazz);
@@ -48,9 +51,9 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 		return DetachedCriteria.forClass(getEntityClass());
 	}
 
-	private DetachedCriteria getCriteria(T searchSupport) {
+	private DetachedCriteria getCriteria(T extractSearchDTO) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(getEntityClass());
-		for (Criterion criterion : searchSupport.getCriterions()) {
+		for (Criterion criterion : extractSearchDTO.getCriterions()) {
 			criteria.add(criterion);
 		}
 		return criteria;
@@ -70,9 +73,9 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 		return (T) list.get(0);
 	}
 
-	public T getUnique(T searchSupport) {
+	public T getUnique(T extractSearchDTO) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
-		for (Criterion c : searchSupport.getCriterions()) {
+		for (Criterion c : extractSearchDTO.getCriterions()) {
 			detachedCriteria.add(c);
 		}
 		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
@@ -119,32 +122,32 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 		return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, limit);
 	}
 
-	public List<T> getList(T searchSupport) {
+	public List<T> getList(T extractSearchDTO) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
-		for (Order order : searchSupport.getOrder()) {
+		for (Order order : extractSearchDTO.getOrder()) {
 			detachedCriteria.addOrder(order);
 		}
-		for (Criterion criterion : searchSupport.getCriterions()) {
+		for (Criterion criterion : extractSearchDTO.getCriterions()) {
 			detachedCriteria.add(criterion);
 		}
-		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, searchSupport.getFirstIndex(),
-				searchSupport.getLastIndex());
+		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, extractSearchDTO.getFirstIndex(),
+				extractSearchDTO.getLastIndex());
 		if (list.isEmpty()) {
 			return new ArrayList<>();
 		}
 		return list;
 	}
 
-	public List<T> getList(T searchSupport, Criterion... criterion) {
+	public List<T> getList(T extractSearchDTO, Criterion... criterion) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 		for (Criterion c : criterion) {
 			detachedCriteria.add(c);
 		}
-		for (Order order : searchSupport.getOrder()) {
+		for (Order order : extractSearchDTO.getOrder()) {
 			detachedCriteria.addOrder(order);
 		}
-		return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, searchSupport.getFirstIndex(),
-				searchSupport.getLastIndex());
+		return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, extractSearchDTO.getFirstIndex(),
+				extractSearchDTO.getLastIndex());
 	}
 
 	public List<T> getList(Criterion... criterions) {
@@ -174,25 +177,25 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 		return list;
 	}
 
-	public List<T> getGroupByList(T searchSupport, String target) {
+	public List<T> getGroupByList(T extractSearchDTO, String target) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
-		for (Order order : searchSupport.getOrder()) {
+		for (Order order : extractSearchDTO.getOrder()) {
 			detachedCriteria.addOrder(order);
 		}
-		for (Criterion criterion : searchSupport.getCriterions()) {
+		for (Criterion criterion : extractSearchDTO.getCriterions()) {
 			detachedCriteria.add(criterion);
 		}
 		ProjectionList projectList = Projections.projectionList();
 		projectList.add(Projections.groupProperty(target));
 		detachedCriteria.setProjection(projectList);
-		return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, searchSupport.getFirstIndex(),
-				searchSupport.getLastIndex());
+		return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, extractSearchDTO.getFirstIndex(),
+				extractSearchDTO.getLastIndex());
 	}
 	
-	public Map<String, Long> getGroupByList(T searchSupport, String groupProperty, String sumProperty) {
+	public Map<String, Long> getGroupByList(T extractSearchDTO, String groupProperty, String sumProperty) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 		Map<String, Long> result = new HashMap<String, Long>();
-		for (Criterion criterion : searchSupport.getCriterions()) {
+		for (Criterion criterion : extractSearchDTO.getCriterions()) {
 			detachedCriteria.add(criterion);
 		}
 		ProjectionList projectList = Projections.projectionList();
@@ -214,9 +217,9 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 		return result;
 	}
 
-	public int getGroupByCount(T searchSupport, String tagert) {
+	public int getGroupByCount(T extractSearchDTO, String tagert) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
-		for (Criterion criterion : searchSupport.getCriterions()) {
+		for (Criterion criterion : extractSearchDTO.getCriterions()) {
 			detachedCriteria.add(criterion);
 		}
 		ProjectionList projectList = Projections.projectionList();
@@ -271,10 +274,10 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 		return total.intValue();
 	}
 
-	public int getCount(T searchSupport) {
+	public int getCount(T extractSearchDTO) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 
-		for (Criterion c : searchSupport.getCriterions()) {
+		for (Criterion c : extractSearchDTO.getCriterions()) {
 			detachedCriteria.add(c);
 		}
 
@@ -290,7 +293,7 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 		return total.intValue();
 	}
 
-	public int getCount(T searchSupport, List<Criterion> criterions) {
+	public int getCount(T extractSearchDTO, List<Criterion> criterions) {
 		DetachedCriteria detachedCriteria = createDetachedCriteria();
 
 		for (Criterion c : criterions) {
@@ -339,8 +342,8 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 		return sum != null ? sum.intValue() : 0;
 	}
 
-	public int getSum(T searchSupport, String propertyName) {
-		DetachedCriteria criteria = getCriteria(searchSupport);
+	public int getSum(T extractSearchDTO, String propertyName) {
+		DetachedCriteria criteria = getCriteria(extractSearchDTO);
 		criteria.add(Restrictions.isNotNull(propertyName));
 		criteria.setProjection(Projections.sum(propertyName));
 		List<?> l = getHibernateTemplate().findByCriteria(criteria);
@@ -443,7 +446,6 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 		return Long.parseLong(value);
 	}
 
-	// overload
 	@SuppressWarnings("unused")
 	private long getId(Object object, String columId) {
 		String value = "";
@@ -457,13 +459,11 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 	}
 	
 	public T getByID(ID id) {
-        // TODO Select by ID
         return (T) getCurrentSession().get(getEntityClass(), id);
     }
  
     @SuppressWarnings("rawtypes")
 	public List search(Map<String, Object> parameterMap) {
-        // TODO For search purpose
         Criteria criteria = getCurrentSession().createCriteria(getEntityClass());
         Set<String> fieldName = parameterMap.keySet();
         for (String field : fieldName) {
@@ -473,7 +473,6 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
     }
  
     public ID insert(T entity) {
-        // TODO Save to database
         return (ID) getCurrentSession().save(entity);
     }
  
@@ -481,9 +480,4 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
         delete(getByID(id));
     }
  
-    private Session getCurrentSession() {
-        return getHibernateTemplate().getSessionFactory().getCurrentSession();
-    }
- 
-
 }
