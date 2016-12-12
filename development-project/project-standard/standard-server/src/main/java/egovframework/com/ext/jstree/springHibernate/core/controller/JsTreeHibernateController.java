@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDao;
+import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateSerive;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
@@ -26,7 +27,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 
 	@SuppressWarnings("rawtypes")
 	@Autowired
-	private JsTreeHibernateDao jsTreeHibernateDao;
+	private JsTreeHibernateSerive jsTreeHibernateSerive;
 
 	/**
 	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
@@ -51,7 +52,6 @@ public class JsTreeHibernateController extends GenericAbstractController {
 	 * @return String
 	 * @throws JsonProcessingException
 	 */
-	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value = "/getChildNode.do", method = RequestMethod.GET)
 	public ModelAndView getChildNode(JsTreeHibernateDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
@@ -64,8 +64,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		}
 	    
 		jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
-		jsTreeHibernateDao.setClazz(JsTreeHibernateDTO.class);
-		List<JsTreeHibernateDTO> list = jsTreeHibernateDao.getList(jsTreeHibernateDTO);
+		List<JsTreeHibernateDTO> list = jsTreeHibernateSerive.getChildNode(jsTreeHibernateDTO);
 
 		ModelAndView modelAndView = new ModelAndView("jsonView");
 		modelAndView.addObject("result", list);
