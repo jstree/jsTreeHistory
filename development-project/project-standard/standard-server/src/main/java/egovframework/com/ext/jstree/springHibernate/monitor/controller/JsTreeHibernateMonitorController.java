@@ -1,4 +1,4 @@
-package egovframework.com.ext.jstree.springHibernate.core.controller;
+package egovframework.com.ext.jstree.springHibernate.monitor.controller;
 
 import java.util.List;
 
@@ -18,11 +18,10 @@ import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateSerive;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
-import egovframework.com.ext.jstree.support.util.ParameterParser;
 
 @Controller
-@RequestMapping(value = { "/com/ext/jstree/springHibernate/core" })
-public class JsTreeHibernateController extends GenericAbstractController {
+@RequestMapping(value = { "/com/ext/jstree/springHibernate/monitor" })
+public class JsTreeHibernateMonitorController extends GenericAbstractController {
 
 	@Autowired
 	private JsTreeHibernateSerive jsTreeHibernateSerive;
@@ -51,17 +50,10 @@ public class JsTreeHibernateController extends GenericAbstractController {
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getChildNode.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
 	public ModelAndView getChildNode(JsTreeHibernateDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
 			throws Exception {
 
-		ParameterParser parser = new ParameterParser(request);
-
-		if (parser.getInt("c_id") <= 0) {
-			throw new RuntimeException();
-		}
-	    
-		jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
 		List<JsTreeHibernateDTO> list = jsTreeHibernateSerive.getChildNode(jsTreeHibernateDTO);
 
 		ModelAndView modelAndView = new ModelAndView("jsonView");

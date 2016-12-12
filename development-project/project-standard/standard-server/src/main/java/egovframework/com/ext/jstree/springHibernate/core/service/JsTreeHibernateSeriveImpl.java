@@ -25,7 +25,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive{
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends JsTreeHibernateSearchDTO> T getNode(T jsTreeHibernateDTO) throws Exception {
-		
+		logger.info("getNode");
 		jsTreeHibernateDao.setClazz(JsTreeHibernateDTO.class);
 		Object uniqueObj = jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getC_id());
 		return (T) uniqueObj;
