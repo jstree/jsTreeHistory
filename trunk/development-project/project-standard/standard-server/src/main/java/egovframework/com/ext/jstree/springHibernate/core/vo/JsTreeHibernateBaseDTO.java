@@ -226,6 +226,16 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	public void setC_type(String c_type) {
 		this.c_type = c_type;
 	}
+	
+	@Transient
+	public String getData() {
+		return c_title;
+	}
+	
+	@Transient
+	public boolean isCopied() {
+		return this.getCopy() == 1;
+	}
 
 	@Transient
 	public int getRef() {
