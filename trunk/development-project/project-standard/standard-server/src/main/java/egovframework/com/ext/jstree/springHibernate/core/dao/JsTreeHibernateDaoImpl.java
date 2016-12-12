@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
+@SuppressWarnings("unchecked")
 @Repository("jsTreeHibernateDao")
 public class JsTreeHibernateDaoImpl<T extends JsTreeHibernateSearchDTO> extends
 		JsTreeHibernateAbstractDao<T, Serializable> implements JsTreeHibernateDao<T, Serializable>{
