@@ -2,7 +2,6 @@ package egovframework.com.ext.jstree.springHibernate.core.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDaoImpl;
+import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDao;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
@@ -27,7 +26,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 
 	@SuppressWarnings("rawtypes")
 	@Autowired
-	private JsTreeHibernateDaoImpl jsTreeHibernateDaoImpl;
+	private JsTreeHibernateDao jsTreeHibernateDao;
 
 	/**
 	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
@@ -65,9 +64,8 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		}
 	    
 		jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
-		Class<?> clazz = JsTreeHibernateDTO.class;
-		jsTreeHibernateDaoImpl.setClazz(clazz);
-		List<JsTreeHibernateDTO> list = jsTreeHibernateDaoImpl.getList(jsTreeHibernateDTO);
+		jsTreeHibernateDao.setClazz(JsTreeHibernateDTO.class);
+		List<JsTreeHibernateDTO> list = jsTreeHibernateDao.getList(jsTreeHibernateDTO);
 
 		ModelAndView modelAndView = new ModelAndView("jsonView");
 		modelAndView.addObject("result", list);
