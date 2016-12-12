@@ -10,14 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DateUtils extends org.apache.commons.lang.time.DateUtils{
-    private static SimpleCache cache = new SimpleCache(50);
     
     public static DateFormat getDateFormat(String pattern) {
-        DateFormat df = (DateFormat) cache.get(pattern);
-        if (null == df) {
-            df = new SimpleDateFormat(pattern);
-            cache.put(pattern, df);
-        }
+        DateFormat df = new SimpleDateFormat(pattern);
         return df;
     }
     
