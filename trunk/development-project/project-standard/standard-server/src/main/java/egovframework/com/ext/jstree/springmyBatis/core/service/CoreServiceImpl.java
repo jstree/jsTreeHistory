@@ -101,7 +101,7 @@ public class CoreServiceImpl implements CoreService {
 		if (comprehensiveTree instanceof PaginatedComprehensiveTree) {
 			PaginatedComprehensiveTree paginatedComprehensiveTree = (PaginatedComprehensiveTree) comprehensiveTree;
 
-			// 베이스 노드 하위의 차일드 노드를 페이징 처리하는 것이라서.
+			// 베이스 노드 하위의 차일드 노드를 페이징 처리하는 것
 			ComprehensiveTree baseLineNode = coreDao.getNode(paginatedComprehensiveTree);
 			paginatedComprehensiveTree.setC_left(baseLineNode.getC_left());
 			paginatedComprehensiveTree.setC_right(baseLineNode.getC_right());
