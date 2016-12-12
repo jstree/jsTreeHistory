@@ -1,4 +1,4 @@
-package egovframework.com.ext.jstree.springHibernate.core.util;
+package egovframework.com.ext.jstree.support.util;
 
 
 import java.util.Locale;
