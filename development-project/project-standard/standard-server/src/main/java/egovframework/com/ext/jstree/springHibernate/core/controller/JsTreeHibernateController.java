@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +20,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateSerive;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
+import egovframework.com.ext.jstree.springmyBatis.core.util.Util_TitleChecker;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 
@@ -66,6 +71,58 @@ public class JsTreeHibernateController extends GenericAbstractController {
 
 		ModelAndView modelAndView = new ModelAndView("jsonView");
 		modelAndView.addObject("result", list);
+		return modelAndView;
+	}
+	
+	/**
+	 * 노드를 검색한다.
+	 * 
+	 * @param comprehensiveTree
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	@ResponseBody
+	@RequestMapping(value="/searchNode.do",method=RequestMethod.GET)
+	public ModelAndView searchNode(JsTreeHibernateDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+			throws Exception {
+		
+		ParameterParser parser = new ParameterParser(request);
+		
+		if (!StringUtils.hasText(request.getParameter("searchString"))) {
+			throw new RuntimeException();
+		}
+
+		jsTreeHibernateDTO.setWhereLike("c_title", parser.get("parser"));
+
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", jsTreeHibernateSerive.searchNode(jsTreeHibernateDTO));
+		return modelAndView;
+	}
+	
+	/**
+	 * 노드를 추가한다.
+	 * 
+	 * @param comprehensiveTree
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws JsonProcessingException
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 */
+	@ResponseBody
+	@RequestMapping(value="/addNode.do",method=RequestMethod.POST)
+	public ModelAndView addNode(@Validated(value = AddNode.class) JsTreeHibernateDTO jsTreeHibernateDTO,
+			BindingResult bindingResult, ModelMap model) throws Exception {
+		if (bindingResult.hasErrors())
+			throw new RuntimeException();
+
+		jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
+
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", jsTreeHibernateSerive.addNode(jsTreeHibernateDTO));
 		return modelAndView;
 	}
 

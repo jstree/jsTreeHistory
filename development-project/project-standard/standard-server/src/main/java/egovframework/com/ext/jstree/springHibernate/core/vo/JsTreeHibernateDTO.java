@@ -3,6 +3,7 @@ package egovframework.com.ext.jstree.springHibernate.core.vo;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -18,6 +19,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @DynamicInsert(value=true)
 @DynamicUpdate(value=true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@SequenceGenerator(name = "JsTreeSequence", sequenceName = "STANDARD_DB.hibernate_sequence", allocationSize = 1)
 public class JsTreeHibernateDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
 	private static final long serialVersionUID = -6859122566734590165L;

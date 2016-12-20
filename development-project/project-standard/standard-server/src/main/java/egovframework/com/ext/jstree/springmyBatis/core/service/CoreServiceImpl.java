@@ -82,7 +82,6 @@ public class CoreServiceImpl implements CoreService {
 	 * getNode
 	 * (egovframework.com.ext.jstree.springmyBatis.core.vo.ComprehensiveTree)
 	 */
-	@Transactional(readOnly = false, rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends ComprehensiveTree> T getNode(T comprehensiveTree) throws Exception {
 		T getNode = ((T) coreDao.getNode(comprehensiveTree));
 		return getNode;

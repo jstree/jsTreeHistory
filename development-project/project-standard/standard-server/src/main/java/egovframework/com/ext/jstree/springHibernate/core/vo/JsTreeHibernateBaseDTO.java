@@ -10,18 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
-import javax.validation.constraints.Min;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.hibernate.validator.constraints.Range;
 
-import egovframework.com.ext.jstree.springmyBatis.core.validation.custom.constraints.Contained;
-import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AddNode;
-import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNode;
-import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNodeType;
-import egovframework.com.ext.jstree.springmyBatis.core.validation.group.MoveNode;
-import egovframework.com.ext.jstree.springmyBatis.core.validation.group.RemoveNode;
 import egovframework.com.ext.jstree.springmyBatis.core.vo.ComprehensiveTree;
 
 @MappedSuperclass
@@ -30,14 +22,12 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	private static final long serialVersionUID = -1686737481473490738L;
 
 	/** 노드의 고유 id, 1부터 시작(Root Node) */
-	@Min(value = 2, groups = { RemoveNode.class, AlterNode.class, AlterNodeType.class, MoveNode.class })
 	private Long c_id;
 
 	/** 노드의 부모 id, 0부터 시작(Root Node) */
 	private Long c_parentid;
 
 	/** Parent의 몇 번째 자식인지를 나타냄. 0부터 시작 */
-	@Min(value = 0, groups = { AddNode.class, MoveNode.class })
 	private Long c_position;
 
 	/** 노드의 left 위치, 1부터 시작(Root Node) */
@@ -61,25 +51,20 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	 * default : leaf 노드
 	 * </pre>
 	 */
-	@Contained(values = { "folder", "default" }, message = "c_type must be folder or default", groups = {
-			AddNode.class, AlterNode.class, AlterNodeType.class })
 	private String c_type;
 
 	/*
 	 * Common Use Field
 	 */
 	/** 참조하고 있는 노드의 id */
-	@Min(value = 1, groups = { AddNode.class, MoveNode.class })
-	private int ref;
+	private long ref;
 
 	/** copy 시 1의 값을 가짐. */
-	@Range(min = 0, max = 1, groups = { MoveNode.class })
-	private int copy;
+	private long copy;
 
-	@Min(value = 0, groups = { MoveNode.class })
-	private int multiCounter;
+	private long multiCounter;
 
-	private int status;
+	private long status;
 	/** ajax 처리 결과 메시지 */
 	private String ajaxMessage;
 
@@ -88,29 +73,29 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	/** 검색시 Keyword */
 	private String searchStr;
 
-	private int idif;
-	private int ldif;
+	private long idif;
+	private long ldif;
 
 	/** 노드가 차지하는 공간 (right - left + 1) */
-	private int spaceOfTargetNode;
+	private long spaceOfTargetNode;
 
 	/** 임의 노드의 자식 노드들의 id만을 저장하는 컬렉션 */
-	private Collection<Integer> c_idsByChildNodeFromNodeById;
+	private Collection<Long> c_idsByChildNodeFromNodeById;
 
-	private int fixCopyId;
-	private int fixCopyPosition;
+	private long fixCopyId;
+	private long fixCopyPosition;
 
 	/** 참조 노드의 right */
-	private int rightPositionFromNodeByRef;
+	private long rightPositionFromNodeByRef;
 
 	private ComprehensiveTree nodeById;
 
-	private int idifLeft;
-	private int idifRight;
+	private long idifLeft;
+	private long idifRight;
 
-	private int id; // moveNode
+	private long id; // moveNode
 	private final HashMap<String, String> attr;
-	private volatile int hashCode;
+	private volatile long hashCode;
 
 	public JsTreeHibernateBaseDTO() {
 		super();
@@ -118,11 +103,11 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	}
 
 	public JsTreeHibernateBaseDTO(Long c_id, Long c_parentid, Long c_position, Long c_left,
-			Long c_right, Long c_level, String c_title, String c_type, int ref, int copy, int multiCounter,
-			int status, String ajaxMessage, String childcount, String searchStr, int idif, int ldif,
-			int spaceOfTargetNode, Collection<Integer> c_idsByChildNodeFromNodeById, int fixCopyId,
-			int fixCopyPosition, int rightPositionFromNodeByRef, ComprehensiveTree nodeById, int idifLeft,
-			int idifRight, int id) {
+			Long c_right, Long c_level, String c_title, String c_type, long ref, long copy, long multiCounter,
+			long status, String ajaxMessage, String childcount, String searchStr, long idif, long ldif,
+			long spaceOfTargetNode, Collection<Long> c_idsByChildNodeFromNodeById, long fixCopyId,
+			long fixCopyPosition, long rightPositionFromNodeByRef, ComprehensiveTree nodeById, long idifLeft,
+			long idifRight, long id) {
 		super();
 		this.c_id = c_id;
 		this.c_parentid = c_parentid;
@@ -154,7 +139,7 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="JsTreeSequence")
 	@Column(name = "c_id")
 	public Long getC_id() {
 		return c_id;
@@ -238,29 +223,29 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	}
 
 	@Transient
-	public int getRef() {
+	public long getRef() {
 		return ref;
 	}
 
-	public void setRef(int ref) {
+	public void setRef(long ref) {
 		this.ref = ref;
 	}
 
 	@Transient
-	public int getCopy() {
+	public long getCopy() {
 		return copy;
 	}
 
-	public void setCopy(int copy) {
+	public void setCopy(long copy) {
 		this.copy = copy;
 	}
 
 	@Transient
-	public int getMultiCounter() {
+	public long getMultiCounter() {
 		return multiCounter;
 	}
 
-	public void setMultiCounter(int multiCounter) {
+	public void setMultiCounter(long multiCounter) {
 		this.multiCounter = multiCounter;
 	}
 	
@@ -279,17 +264,21 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	}
 
 	@Transient
-	public int getStatus() {
+	public long getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(long status) {
 		this.status = status;
 	}
 
 	@Transient
 	public String getChildcount() {
-		return childcount;
+		if((c_right - c_left)>1){
+			return "InChild";
+		}else{
+			return "NoChild";
+		}
 	}
 
 	public void setChildcount(String childcount) {
@@ -297,11 +286,11 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	}
 
 	@Transient
-	public int getFixCopyId() {
+	public long getFixCopyId() {
 		return fixCopyId;
 	}
 
-	public void setFixCopyId(int fixCopyId) {
+	public void setFixCopyId(long fixCopyId) {
 		this.fixCopyId = fixCopyId;
 	}
 
@@ -324,56 +313,56 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	}
 
 	@Transient
-	public int getIdif() {
+	public long getIdif() {
 		return idif;
 	}
 
-	public void setIdif(int idif) {
+	public void setIdif(long idif) {
 		this.idif = idif;
 	}
 
 	@Transient
-	public int getLdif() {
+	public long getLdif() {
 		return ldif;
 	}
 
-	public void setLdif(int ldif) {
+	public void setLdif(long ldif) {
 		this.ldif = ldif;
 	}
 
 	@Transient
-	public int getSpaceOfTargetNode() {
+	public long getSpaceOfTargetNode() {
 		return spaceOfTargetNode;
 	}
 
-	public void setSpaceOfTargetNode(int spaceOfTargetNode) {
+	public void setSpaceOfTargetNode(long spaceOfTargetNode) {
 		this.spaceOfTargetNode = spaceOfTargetNode;
 	}
 
 	@Transient
-	public Collection<Integer> getC_idsByChildNodeFromNodeById() {
+	public Collection<Long> getC_idsByChildNodeFromNodeById() {
 		return c_idsByChildNodeFromNodeById;
 	}
 
-	public void setC_idsByChildNodeFromNodeById(Collection<Integer> c_idsByChildNodeFromNodeById) {
+	public void setC_idsByChildNodeFromNodeById(Collection<Long> c_idsByChildNodeFromNodeById) {
 		this.c_idsByChildNodeFromNodeById = c_idsByChildNodeFromNodeById;
 	}
 
 	@Transient
-	public int getFixCopyPosition() {
+	public long getFixCopyPosition() {
 		return fixCopyPosition;
 	}
 
-	public void setFixCopyPosition(int fixCopyPosition) {
+	public void setFixCopyPosition(long fixCopyPosition) {
 		this.fixCopyPosition = fixCopyPosition;
 	}
 
 	@Transient
-	public int getRightPositionFromNodeByRef() {
+	public long getRightPositionFromNodeByRef() {
 		return rightPositionFromNodeByRef;
 	}
 
-	public void setRightPositionFromNodeByRef(int rightPositionFromNodeByRef) {
+	public void setRightPositionFromNodeByRef(long rightPositionFromNodeByRef) {
 		this.rightPositionFromNodeByRef = rightPositionFromNodeByRef;
 	}
 
@@ -387,29 +376,29 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	}
 
 	@Transient
-	public int getIdifLeft() {
+	public long getIdifLeft() {
 		return idifLeft;
 	}
 
-	public void setIdifLeft(int idifLeft) {
+	public void setIdifLeft(long idifLeft) {
 		this.idifLeft = idifLeft;
 	}
 
 	@Transient
-	public int getIdifRight() {
+	public long getIdifRight() {
 		return idifRight;
 	}
 
-	public void setIdifRight(int idifRight) {
+	public void setIdifRight(long idifRight) {
 		this.idifRight = idifRight;
 	}
 
 	@Transient
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -495,37 +484,4 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 		return true;
 	}
 
-	@Override
-	@Transient
-	public int hashCode() {
-		int result = hashCode;
-
-		if (result == 0) {
-			int primeNumber = 313;
-			result = primeNumber * result + ref;
-			result = primeNumber * result + copy;
-			result = primeNumber * result + multiCounter;
-			result = primeNumber * result + status;
-			result = primeNumber * result + (c_title != null ? c_title.hashCode() : 0);
-			result = primeNumber * result + (c_type != null ? c_type.hashCode() : 0);
-			result = primeNumber * result + (childcount != null ? childcount.hashCode() : 0);
-			result = primeNumber * result + (searchStr != null ? searchStr.hashCode() : 0);
-			result = primeNumber * result + idif;
-			result = primeNumber * result + ldif;
-			result = primeNumber * result + spaceOfTargetNode;
-			result = primeNumber * result
-					+ (c_idsByChildNodeFromNodeById != null ? c_idsByChildNodeFromNodeById.hashCode() : 0);
-			result = primeNumber * result + fixCopyId;
-			result = primeNumber * result + fixCopyPosition;
-			result = primeNumber * result + rightPositionFromNodeByRef;
-			result = primeNumber * result + (nodeById != null ? nodeById.hashCode() : 0);
-			result = primeNumber * result + idifLeft;
-			result = primeNumber * result + idifRight;
-			result = primeNumber * result + id;
-			result = primeNumber * result + attr.hashCode();
-
-			hashCode = result;
-		}
-		return result;
-	}
 }
