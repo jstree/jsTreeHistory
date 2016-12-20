@@ -11,13 +11,15 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.springframework.orm.hibernate4.HibernateCallback;
 
-public interface JsTreeHibernateDao<T, ID extends Serializable> {
+import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
+
+public interface JsTreeHibernateDao<T extends JsTreeHibernateSearchDTO, ID extends Serializable> {
 	
 	public Class<T> getClazz();
 	public void setClazz(Class<T> clazzToSet);
 	public DetachedCriteria createDetachedCriteria(Class<?> clazz);
 	public DetachedCriteria createDetachedCriteria();
-	public T getUnique(long id);
+	public T getUnique(Long id);
 	public T getUnique(Criterion criterion);
 	public T getUnique(T extractSearchDTO);
 	public T getUnique(Criterion... criterions);

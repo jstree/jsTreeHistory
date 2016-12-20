@@ -59,7 +59,7 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 		return criteria;
 	}
 
-	public T getUnique(long id) {
+	public T getUnique(Long id) {
 		return getHibernateTemplate().get(getEntityClass(), id);
 	}
 
@@ -435,7 +435,7 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 	}
 
 	@SuppressWarnings("unused")
-	private long getId(Object object) {
+	private Long getId(Object object) {
 		String value = "";
 		try {
 			value = BeanUtils.getProperty(object, "id");
@@ -447,7 +447,7 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
 	}
 
 	@SuppressWarnings("unused")
-	private long getId(Object object, String columId) {
+	private Long getId(Object object, String columId) {
 		String value = "";
 		try {
 			value = BeanUtils.getProperty(object, columId);
@@ -473,7 +473,7 @@ public abstract class JsTreeHibernateAbstractDao<T extends JsTreeHibernateSearch
     }
  
     public ID insert(T entity) {
-        return (ID) getCurrentSession().save(entity);
+        return (ID) store(entity);
     }
  
     public void deleteById(ID id) {

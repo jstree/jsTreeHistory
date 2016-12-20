@@ -64,7 +64,7 @@ public class CoreController extends GenericAbstractController{
 	 * 
 	 * @return String jstreeSolutionStrutsVersion 페이지를
 	 */
-	@IncludedInfo(name = "jsTree CSRF json", listUrl = "/com/ext/jstree/csrf.do", order = 3300, gid = 313)
+	@IncludedInfo(name = "jsTree CSRF json", listUrl = "/com/ext/jstree/springmyBatis/core/csrf.do", order = 3300, gid = 313)
 	@RequestMapping("/csrf.do")
 	public String jsTreeCSRFtoJson() {
 		return "egovframework/com/ext/jstree/csrf";
