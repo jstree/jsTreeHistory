@@ -22,6 +22,8 @@ import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernate
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springmyBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AddNode;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNode;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNodeType;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.RemoveNode;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
@@ -144,6 +146,14 @@ public class JsTreeHibernateController extends GenericAbstractController {
 			throw new RuntimeException();
 
 		jsTreeHibernateDTO.setStatus(jsTreeHibernateSerive.removeNode(jsTreeHibernateDTO));
+		setJsonDefaultSetting(jsTreeHibernateDTO);
+		
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", jsTreeHibernateDTO);
+		return modelAndView;
+	}
+
+	private void setJsonDefaultSetting(JsTreeHibernateDTO jsTreeHibernateDTO) {
 		long defaultSettingValue = 0;
 		jsTreeHibernateDTO.setC_parentid(defaultSettingValue);
 		jsTreeHibernateDTO.setC_position(defaultSettingValue);
@@ -151,7 +161,52 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		jsTreeHibernateDTO.setC_right(defaultSettingValue);
 		jsTreeHibernateDTO.setC_level(defaultSettingValue);
 		jsTreeHibernateDTO.setRef(defaultSettingValue);
+	}
+	
+	/**
+	 * 노드를 변경한다.
+	 * 
+	 * @param comprehensiveTree
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	@ResponseBody
+	@RequestMapping(value="/alterNode.do",method=RequestMethod.POST)
+	public ModelAndView alterNode(@Validated(value = AlterNode.class) JsTreeHibernateDTO jsTreeHibernateDTO,
+			BindingResult bindingResult, ModelMap model) throws Exception {
+		if (bindingResult.hasErrors())
+			throw new RuntimeException();
+
+		jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
 		
+		jsTreeHibernateDTO.setStatus(jsTreeHibernateSerive.alterNode(jsTreeHibernateDTO));
+		setJsonDefaultSetting(jsTreeHibernateDTO);
+		
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", jsTreeHibernateDTO);
+		return modelAndView;
+	}
+	
+	/**
+	 * 노드의 타입을 변경한다.
+	 * 
+	 * @param comprehensiveTree
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	@ResponseBody
+	@RequestMapping(value="/alterNodeType.do",method=RequestMethod.POST)
+	public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) JsTreeHibernateDTO jsTreeHibernateDTO,
+			BindingResult bindingResult, ModelMap model) throws Exception {
+		if (bindingResult.hasErrors())
+			throw new RuntimeException();
+
+		jsTreeHibernateSerive.alterNodeType(jsTreeHibernateDTO);
+		setJsonDefaultSetting(jsTreeHibernateDTO);
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
 		modelAndView.addObject("result", jsTreeHibernateDTO);
 		return modelAndView;
