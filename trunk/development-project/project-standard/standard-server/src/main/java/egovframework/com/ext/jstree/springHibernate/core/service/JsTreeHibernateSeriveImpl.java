@@ -222,47 +222,81 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 		Criterion whereRemovedAfterLeftFix = Restrictions.gt("c_left", removeNode.getC_right());
 		detachedRemovedAfterLeftFixCriteria.add(whereRemovedAfterLeftFix);
 		detachedRemovedAfterLeftFixCriteria.addOrder(Order.asc("c_id"));
-		List<JsTreeHibernateDTO> updateRemovedAfterLeftFixtList = jsTreeHibernateDao.getListWithoutPaging(detachedRemovedAfterLeftFixCriteria);
+		List<JsTreeHibernateDTO> updateRemovedAfterLeftFixtList = jsTreeHibernateDao
+				.getListWithoutPaging(detachedRemovedAfterLeftFixCriteria);
 		for (JsTreeHibernateDTO perLeftFixJsTreeHibernateDTO : updateRemovedAfterLeftFixtList) {
 			perLeftFixJsTreeHibernateDTO.setC_left(perLeftFixJsTreeHibernateDTO.getC_left() - spaceOfTargetNode);
 			jsTreeHibernateDao.update(perLeftFixJsTreeHibernateDTO);
 		}
-		
-		DetachedCriteria detachedRemovedAfterRightFixCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
+
+		DetachedCriteria detachedRemovedAfterRightFixCriteria = DetachedCriteria
+				.forClass(jsTreeHibernateDTO.getClass());
 		Criterion whereRemovedAfterRightFix = Restrictions.gt("c_right", removeNode.getC_left());
 		detachedRemovedAfterRightFixCriteria.add(whereRemovedAfterRightFix);
 		detachedRemovedAfterRightFixCriteria.addOrder(Order.asc("c_id"));
-		List<JsTreeHibernateDTO> updateRemovedAfterRightFixtList = jsTreeHibernateDao.getListWithoutPaging(detachedRemovedAfterRightFixCriteria);
+		List<JsTreeHibernateDTO> updateRemovedAfterRightFixtList = jsTreeHibernateDao
+				.getListWithoutPaging(detachedRemovedAfterRightFixCriteria);
 		for (JsTreeHibernateDTO perRightFixJsTreeHibernateDTO : updateRemovedAfterRightFixtList) {
 			perRightFixJsTreeHibernateDTO.setC_right(perRightFixJsTreeHibernateDTO.getC_right() - spaceOfTargetNode);
 			jsTreeHibernateDao.update(perRightFixJsTreeHibernateDTO);
 		}
-		
-		DetachedCriteria detachedRemovedAfterPositionFixCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
+
+		DetachedCriteria detachedRemovedAfterPositionFixCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO
+				.getClass());
 		Criterion whereRemovedAfterPositionFix = Restrictions.eq("c_parentid", removeNode.getC_parentid());
 		detachedRemovedAfterPositionFixCriteria.add(whereRemovedAfterPositionFix);
-		detachedRemovedAfterPositionFixCriteria.add(Restrictions.and(Restrictions.gt("c_position", removeNode.getC_position())));
+		detachedRemovedAfterPositionFixCriteria.add(Restrictions.and(Restrictions.gt("c_position",
+				removeNode.getC_position())));
 		detachedRemovedAfterPositionFixCriteria.addOrder(Order.asc("c_id"));
-		List<JsTreeHibernateDTO> updateRemovedAfterPositionFixtList = jsTreeHibernateDao.getListWithoutPaging(detachedRemovedAfterPositionFixCriteria);
+		List<JsTreeHibernateDTO> updateRemovedAfterPositionFixtList = jsTreeHibernateDao
+				.getListWithoutPaging(detachedRemovedAfterPositionFixCriteria);
 		for (JsTreeHibernateDTO perPositionFixJsTreeHibernateDTO : updateRemovedAfterPositionFixtList) {
-			perPositionFixJsTreeHibernateDTO.setC_position(perPositionFixJsTreeHibernateDTO.getC_position()-1);
+			perPositionFixJsTreeHibernateDTO.setC_position(perPositionFixJsTreeHibernateDTO.getC_position() - 1);
 			jsTreeHibernateDao.update(perPositionFixJsTreeHibernateDTO);
 		}
 		return 0;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends JsTreeHibernateSearchDTO> int alterNode(T jsTreeHibernateDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+
+		jsTreeHibernateDao.setClazz(JsTreeHibernateDTO.class);
+		JsTreeHibernateDTO alterTargetNode = (JsTreeHibernateDTO) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO
+				.getC_id());
+		alterTargetNode.setC_title(jsTreeHibernateDTO.getC_title());
+		// TODO : 기타 추가되는 필드 처리는 어떻게 할 것인가?
+		jsTreeHibernateDao.update(alterTargetNode);
+		return 1;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends JsTreeHibernateSearchDTO> int alterNodeType(T jsTreeHibernateDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+
+		jsTreeHibernateDao.setClazz(JsTreeHibernateDTO.class);
+		JsTreeHibernateDTO nodeById = (JsTreeHibernateDTO) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO
+				.getC_id());
+
+		if (nodeById.getC_type().equals(jsTreeHibernateDTO.getC_type())) {
+			return 1;
+		} else if ("default".equals(jsTreeHibernateDTO.getC_type())) {
+			nodeById.setWhere("c_parentid", nodeById.getC_id());
+			List<JsTreeHibernateDTO> childNodesFromNodeById = jsTreeHibernateDao.getList(nodeById);
+			if (childNodesFromNodeById.size() != 0) {
+				throw new RuntimeException("하위에 노드가 있는데 디폴트로 바꾸려고 함");
+			} else {
+				nodeById.setC_type(jsTreeHibernateDTO.getC_type());
+				jsTreeHibernateDao.update(nodeById);
+			}
+		} else if ("folder".equals(jsTreeHibernateDTO.getC_type())) {
+			nodeById.setC_type(jsTreeHibernateDTO.getC_type());
+			jsTreeHibernateDao.update(nodeById);
+			return 1;
+		}
+		return 1;
 	}
 
 	@Override
