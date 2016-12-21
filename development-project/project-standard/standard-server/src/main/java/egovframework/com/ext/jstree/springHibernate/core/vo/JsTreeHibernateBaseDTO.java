@@ -276,9 +276,8 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	public String getChildcount() {
 		if((c_right - c_left)>1){
 			return "InChild";
-		}else{
-			return "NoChild";
 		}
+			return "NoChild";
 	}
 
 	public void setChildcount(String childcount) {

@@ -22,6 +22,7 @@ import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernate
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springmyBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AddNode;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.group.RemoveNode;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 
@@ -123,6 +124,36 @@ public class JsTreeHibernateController extends GenericAbstractController {
 
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
 		modelAndView.addObject("result", jsTreeHibernateSerive.addNode(jsTreeHibernateDTO));
+		return modelAndView;
+	}
+	
+	/**
+	 * 노드를 삭제한다.
+	 * 
+	 * @param comprehensiveTree
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	@ResponseBody
+	@RequestMapping(value="/removeNode.do",method=RequestMethod.POST)
+	public ModelAndView removeNode(@Validated(value = RemoveNode.class) JsTreeHibernateDTO jsTreeHibernateDTO,
+			BindingResult bindingResult, ModelMap model) throws Exception {
+		if (bindingResult.hasErrors())
+			throw new RuntimeException();
+
+		jsTreeHibernateDTO.setStatus(jsTreeHibernateSerive.removeNode(jsTreeHibernateDTO));
+		long defaultSettingValue = 0;
+		jsTreeHibernateDTO.setC_parentid(defaultSettingValue);
+		jsTreeHibernateDTO.setC_position(defaultSettingValue);
+		jsTreeHibernateDTO.setC_left(defaultSettingValue);
+		jsTreeHibernateDTO.setC_right(defaultSettingValue);
+		jsTreeHibernateDTO.setC_level(defaultSettingValue);
+		jsTreeHibernateDTO.setRef(defaultSettingValue);
+		
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", jsTreeHibernateDTO);
 		return modelAndView;
 	}
 
