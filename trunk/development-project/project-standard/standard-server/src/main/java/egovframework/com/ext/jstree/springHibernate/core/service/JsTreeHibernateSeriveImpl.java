@@ -35,7 +35,8 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 	public <T extends JsTreeHibernateSearchDTO> T getNode(T jsTreeHibernateDTO) throws Exception {
 		logger.info("getNode");
 		jsTreeHibernateDao.setClazz(JsTreeHibernateDTO.class);
-		Object uniqueObj = jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getC_id());
+		jsTreeHibernateDTO.setWhere("c_id", jsTreeHibernateDTO.getC_id());
+		Object uniqueObj = jsTreeHibernateDao.getUnique(jsTreeHibernateDTO);
 		return (T) uniqueObj;
 	}
 
@@ -96,9 +97,10 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 			jsTreeHibernateDTO.setC_level(targetNodeLevel);
 
 			long insertSeqResult = (long) jsTreeHibernateDao.insert(jsTreeHibernateDTO);
-			if(insertSeqResult > 0){
+			if (insertSeqResult > 0) {
 				final long SUCCESS = 1;
 				jsTreeHibernateDTO.setStatus(SUCCESS);
+				jsTreeHibernateDTO.setId(insertSeqResult);
 			} else {
 				throw new RuntimeException("심각한 오류 발생 - 삽입 노드");
 			}
@@ -188,25 +190,83 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 		return target.newInstance();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends JsTreeHibernateSearchDTO> int removeNode(T jsTreeHibernateDTO) throws Exception {
-		// TODO Auto-generated method stub
+
+		jsTreeHibernateDao.setClazz(JsTreeHibernateDTO.class);
+		Criterion whereGetNode = Restrictions.eq("c_id", jsTreeHibernateDTO.getC_id());
+		JsTreeHibernateDTO removeNode = (JsTreeHibernateDTO) jsTreeHibernateDao.getUnique(whereGetNode);
+
+		long spaceOfTargetNode = removeNode.getC_right() - removeNode.getC_left() + 1;
+
+		removeNode.setSpaceOfTargetNode(spaceOfTargetNode);
+
+		DetachedCriteria detachedDeleteCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
+		Criterion where = Restrictions.ge("c_left", removeNode.getC_left());
+		detachedDeleteCriteria.add(where);
+		detachedDeleteCriteria.add(Restrictions.and(Restrictions.le("c_right", removeNode.getC_right())));
+		detachedDeleteCriteria.addOrder(Order.asc("c_id"));
+		try {
+			List<JsTreeHibernateDTO> deleteTargetList = jsTreeHibernateDao.getListWithoutPaging(detachedDeleteCriteria);
+			for (JsTreeHibernateDTO deleteJsTreeHibernateDTO : deleteTargetList) {
+				jsTreeHibernateDao.delete(deleteJsTreeHibernateDTO);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+
+		DetachedCriteria detachedRemovedAfterLeftFixCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
+		Criterion whereRemovedAfterLeftFix = Restrictions.gt("c_left", removeNode.getC_right());
+		detachedRemovedAfterLeftFixCriteria.add(whereRemovedAfterLeftFix);
+		detachedRemovedAfterLeftFixCriteria.addOrder(Order.asc("c_id"));
+		List<JsTreeHibernateDTO> updateRemovedAfterLeftFixtList = jsTreeHibernateDao.getListWithoutPaging(detachedRemovedAfterLeftFixCriteria);
+		for (JsTreeHibernateDTO perLeftFixJsTreeHibernateDTO : updateRemovedAfterLeftFixtList) {
+			perLeftFixJsTreeHibernateDTO.setC_left(perLeftFixJsTreeHibernateDTO.getC_left() - spaceOfTargetNode);
+			jsTreeHibernateDao.update(perLeftFixJsTreeHibernateDTO);
+		}
+		
+		DetachedCriteria detachedRemovedAfterRightFixCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
+		Criterion whereRemovedAfterRightFix = Restrictions.gt("c_right", removeNode.getC_left());
+		detachedRemovedAfterRightFixCriteria.add(whereRemovedAfterRightFix);
+		detachedRemovedAfterRightFixCriteria.addOrder(Order.asc("c_id"));
+		List<JsTreeHibernateDTO> updateRemovedAfterRightFixtList = jsTreeHibernateDao.getListWithoutPaging(detachedRemovedAfterRightFixCriteria);
+		for (JsTreeHibernateDTO perRightFixJsTreeHibernateDTO : updateRemovedAfterRightFixtList) {
+			perRightFixJsTreeHibernateDTO.setC_right(perRightFixJsTreeHibernateDTO.getC_right() - spaceOfTargetNode);
+			jsTreeHibernateDao.update(perRightFixJsTreeHibernateDTO);
+		}
+		
+		DetachedCriteria detachedRemovedAfterPositionFixCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
+		Criterion whereRemovedAfterPositionFix = Restrictions.eq("c_parentid", removeNode.getC_parentid());
+		detachedRemovedAfterPositionFixCriteria.add(whereRemovedAfterPositionFix);
+		detachedRemovedAfterPositionFixCriteria.add(Restrictions.and(Restrictions.gt("c_position", removeNode.getC_position())));
+		detachedRemovedAfterPositionFixCriteria.addOrder(Order.asc("c_id"));
+		List<JsTreeHibernateDTO> updateRemovedAfterPositionFixtList = jsTreeHibernateDao.getListWithoutPaging(detachedRemovedAfterPositionFixCriteria);
+		for (JsTreeHibernateDTO perPositionFixJsTreeHibernateDTO : updateRemovedAfterPositionFixtList) {
+			perPositionFixJsTreeHibernateDTO.setC_position(perPositionFixJsTreeHibernateDTO.getC_position()-1);
+			jsTreeHibernateDao.update(perPositionFixJsTreeHibernateDTO);
+		}
 		return 0;
 	}
 
 	@Override
+	@Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends JsTreeHibernateSearchDTO> int alterNode(T jsTreeHibernateDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
+	@Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends JsTreeHibernateSearchDTO> int alterNodeType(T jsTreeHibernateDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
+	@Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 	public <T extends JsTreeHibernateSearchDTO> T moveNode(T jsTreeHibernateDTO, HttpServletRequest request)
 			throws Exception {
 		// TODO Auto-generated method stub
