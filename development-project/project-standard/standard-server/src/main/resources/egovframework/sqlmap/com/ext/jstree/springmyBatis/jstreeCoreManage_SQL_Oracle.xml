@@ -333,8 +333,7 @@
         SET
         C_PARENTID = #ref#
         , C_POSITION = #c_position#
-        WHERE C_ID = #c_id#
-    </update>
+        WHERE C_ID = #c_id#    </update>
 
 
     <update id="enterMyselfFixLeftRight" parameterClass="ComprehensiveTree">

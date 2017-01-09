@@ -24,6 +24,7 @@ import egovframework.com.ext.jstree.springmyBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AddNode;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNode;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNodeType;
+import egovframework.com.ext.jstree.springmyBatis.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.RemoveNode;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
@@ -98,7 +99,6 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		}
 
 		jsTreeHibernateDTO.setWhereLike("c_title", parser.get("parser"));
-
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
 		modelAndView.addObject("result", jsTreeHibernateSerive.searchNode(jsTreeHibernateDTO));
 		return modelAndView;
@@ -209,6 +209,43 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		setJsonDefaultSetting(jsTreeHibernateDTO);
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
 		modelAndView.addObject("result", jsTreeHibernateDTO);
+		return modelAndView;
+	}
+	
+	/**
+	 * 노드를 이동한다.
+	 * 
+	 * @param comprehensiveTree
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws JsonProcessingException
+	 * @throws ReflectiveOperationException
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 */
+	@ResponseBody
+	@RequestMapping(value="/moveNode.do",method=RequestMethod.POST)
+	public ModelAndView moveNode(@Validated(value = MoveNode.class) JsTreeHibernateDTO jsTreeHibernateDTO,
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) throws Exception {
+		if (bindingResult.hasErrors())
+			throw new RuntimeException();
+
+		jsTreeHibernateSerive.moveNode(jsTreeHibernateDTO, request);
+		setJsonDefaultSetting(jsTreeHibernateDTO);
+		
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", jsTreeHibernateDTO);
+		return modelAndView;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/analyzeNode.do",method=RequestMethod.GET)
+	public ModelAndView getChildNode(ModelMap model) {
+		model.addAttribute("analyzeResult", "");
+
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		modelAndView.addObject("result", "ture");
 		return modelAndView;
 	}
 

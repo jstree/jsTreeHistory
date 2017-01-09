@@ -88,7 +88,7 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	/** 참조 노드의 right */
 	private long rightPositionFromNodeByRef;
 
-	private ComprehensiveTree nodeById;
+	private JsTreeHibernateBaseDTO nodeById;
 
 	private long idifLeft;
 	private long idifRight;
@@ -106,7 +106,7 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 			Long c_right, Long c_level, String c_title, String c_type, long ref, long copy, long multiCounter,
 			long status, String ajaxMessage, String childcount, String searchStr, long idif, long ldif,
 			long spaceOfTargetNode, Collection<Long> c_idsByChildNodeFromNodeById, long fixCopyId,
-			long fixCopyPosition, long rightPositionFromNodeByRef, ComprehensiveTree nodeById, long idifLeft,
+			long fixCopyPosition, long rightPositionFromNodeByRef, JsTreeHibernateBaseDTO nodeById, long idifLeft,
 			long idifRight, long id) {
 		super();
 		this.c_id = c_id;
@@ -366,11 +366,11 @@ public abstract class JsTreeHibernateBaseDTO implements Serializable {
 	}
 
 	@Transient
-	public ComprehensiveTree getNodeById() {
+	public JsTreeHibernateBaseDTO getNodeById() {
 		return nodeById;
 	}
 
-	public void setNodeById(ComprehensiveTree nodeById) {
+	public void setNodeById(JsTreeHibernateBaseDTO nodeById) {
 		this.nodeById = nodeById;
 	}
 

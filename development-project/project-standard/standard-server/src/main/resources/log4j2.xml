@@ -49,6 +49,15 @@
 			<AppenderRef ref="console" />
 		</Logger>
 
+		<Logger name="org.hibernate" level="INFO" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		<Logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		<Logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
 
 		<Root level="ERROR">
 			<AppenderRef ref="console" />
