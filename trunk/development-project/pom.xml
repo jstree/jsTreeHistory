@@ -104,7 +104,7 @@
 			</snapshots>
 		</repository>
 		<repository>
-			<id>StandardProject-Public</id>
+			<id>StandardProject</id>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -148,7 +148,7 @@
 			</snapshots>
 		</pluginRepository>
 		<pluginRepository>
-			<id>StandardProject-Public</id>
+			<id>StandardProject</id>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -181,10 +181,11 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+
 	<distributionManagement>
 		<repository>
-			<id>StandardProject-Public</id>
-			<url>http://www.313.co.kr/nexus/content/repositories/StandardProject-Releases</url>
+			<id>StandardProject</id>
+			<url>http://www.313.co.kr/nexus/content/repositories/StandardProject</url>
 		</repository>
 		<snapshotRepository>
 			<id>StandardProject-Snapshot</id>
