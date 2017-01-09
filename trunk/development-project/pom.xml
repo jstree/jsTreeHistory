@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2008 Marvin Herman Froeder Licensed under the Apache License, 
-	Version 2.0 (the "License"); you may not use this file except in compliance 
-	with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
-	Unless required by applicable law or agreed to in writing, software distributed 
-	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
-	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
-	the specific language governing permissions and limitations under the License. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!-- Copyright 2008 Marvin Herman Froeder Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain 
+	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
+	on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the 
+	License. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<!-- 기본적인 pom Setting -->
 	<modelVersion>4.0.0</modelVersion>
@@ -52,70 +48,6 @@
 				<role>DataBase Admin</role>
 			</roles>
 		</developer>
-		<developer>
-			<name>Oh Gweon Woo</name>
-			<id>OhGweonWoo</id>
-			<email>today226@nate.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<name>Yu Jung Woo</name>
-			<id>JungWooYu</id>
-			<email>aspire_7@naver.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Project Engineer</role>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<name>Jeong Won Gi</name>
-			<id>wgjeong</id>
-			<email>beryu82@naver.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<name>Son Ho Seong</name>
-			<id>sonhoseong</id>
-			<email>pennori@nate.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<name>Ryu Kangha</name>
-			<id>RyuKangha</id>
-			<email>venatus@naver.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<name>Lee Jong Ryul</name>
-			<id>gaia012</id>
-			<email>gaia012@naver.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<name>Lee Tae Kyung</name>
-			<id>taekyung</id>
-			<email>2tk.java@gmail.com</email>
-			<organization>Developer Group</organization>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
 	</developers>
 
 	<issueManagement>
@@ -126,6 +58,11 @@
 		<system>Bamboo</system>
 		<url>http://www.313.co.kr/bamboo</url>
 	</ciManagement>
+	<scm>
+		<connection>scm:svn:http://www.313.co.kr/steady/trunk</connection>
+		<url>http://www.313.co.kr/steady/trunk</url>
+		<developerConnection>scm:svn:http://www.313.co.kr/steady/trunk</developerConnection>
+	</scm>
 
 	<!-- 프로젝트 메일링 리스트 -->
 	<mailingLists>
