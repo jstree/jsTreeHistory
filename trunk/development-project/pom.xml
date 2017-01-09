@@ -94,6 +94,16 @@
 	<!-- repository Server Setting -->
 	<repositories>
 		<repository>
+			<id>central</id>
+			<url>http://www.egovframe.go.kr/maven</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
 			<id>StandardProject</id>
 			<releases>
 				<enabled>true</enabled>
@@ -113,9 +123,30 @@
 			</snapshots>
 			<url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
 		</repository>
+		<repository>
+			<id>atlassian</id>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<url>https://m2proxy.atlassian.com/repository/public</url>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<url>http://www.egovframe.go.kr/maven</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
 		<pluginRepository>
 			<id>StandardProject</id>
 			<releases>
@@ -136,6 +167,17 @@
 				<updatePolicy>always</updatePolicy>
 			</snapshots>
 			<url>http://www.313.co.kr/nexus/content/groups/public-snapshots</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>atlassian</id>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<url>https://m2proxy.atlassian.com/repository/public</url>
 		</pluginRepository>
 	</pluginRepositories>
 
