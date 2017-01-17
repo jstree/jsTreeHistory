@@ -335,7 +335,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 
 		logger.debug("-----------------------childNodesFromNodeByRef 완료-----------------------");
 		DetachedCriteria getNodeByRefCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
-		Criterion whereNodeByRef = Restrictions.ge("c_parentid", nodeByRef.getC_id());
+		Criterion whereNodeByRef = Restrictions.eq("c_parentid", nodeByRef.getC_id());
 		getNodeByRefCriteria.add(whereNodeByRef);
 		List<T> childNodesFromNodeByRef = (List<T>) jsTreeHibernateDao.getListWithoutPaging(getNodeByRefCriteria);
 		
