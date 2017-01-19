@@ -14,8 +14,6 @@ import javax.persistence.Transient;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-import egovframework.com.ext.jstree.springmyBatis.core.vo.ComprehensiveTree;
-
 @MappedSuperclass
 public abstract class JsTreeHibernateBaseDTO implements Serializable {
 
