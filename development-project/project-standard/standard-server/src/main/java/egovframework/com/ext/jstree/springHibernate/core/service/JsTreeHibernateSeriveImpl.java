@@ -528,7 +528,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 		
 		jsTreeHibernateDao.setClazz(nodeById.getClass());
 		
-		T onlyPasteMyselfFromJstree = newInstance(nodeById);
+		T onlyPasteMyselfFromJstree = getNode(nodeById);
 
 		onlyPasteMyselfFromJstree.setRef(ref);
 		onlyPasteMyselfFromJstree.setIdif(idif);
