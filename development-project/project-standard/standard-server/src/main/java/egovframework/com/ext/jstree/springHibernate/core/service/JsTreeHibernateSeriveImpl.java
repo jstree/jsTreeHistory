@@ -157,7 +157,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 	private <T extends JsTreeHibernateSearchDTO> void stretchLeft(long spaceOfTargetNode,
 			long rightPositionFromNodeByRef, long copy, Collection<Long> c_idsByChildNodeFromNodeById,
 			DetachedCriteria detachedCriteria) {
-		
+
 		logger.debug("-----------------------stretchLeft 완료-----------------------");
 		Criterion where = Restrictions.ge("c_left", rightPositionFromNodeByRef);
 		detachedCriteria.add(where);
@@ -330,7 +330,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 		logger.debug("-----------------------nodeByRef 완료-----------------------");
 		T nodeByRef = (T) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getRef());
 		long rightPointFromNodeByRef = nodeByRef.getC_right();
-		
+
 		logger.debug("-----------------------childNodesFromNodeByRef 완료-----------------------");
 		DetachedCriteria getNodeByRefCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
 		Criterion whereNodeByRef = Restrictions.eq("c_parentid", nodeByRef.getC_id());
@@ -364,7 +364,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 		logger.debug("-----------------------calculatePostion 완료-----------------------");
 		this.calculatePostion(jsTreeHibernateDTO, nodeById, childNodesFromNodeByRef, request);
 
-		if(rightPointFromNodeByRef < 1){
+		if (rightPointFromNodeByRef < 1) {
 			rightPointFromNodeByRef = 1;
 		}
 
@@ -421,16 +421,16 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T extends JsTreeHibernateSearchDTO> void enterMyselfFromJstree(long ref, long c_position, long c_id, long idif,
-			long ldif, Collection<Long> c_idsByChildNodeFromNodeById, T jsTreeHibernateDTO) throws Exception {
+	private <T extends JsTreeHibernateSearchDTO> void enterMyselfFromJstree(long ref, long c_position, long c_id,
+			long idif, long ldif, Collection<Long> c_idsByChildNodeFromNodeById, T jsTreeHibernateDTO) throws Exception {
 
 		jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
 		// coreDao.enterMyselfFixPosition(onlyPasteMyselfFromJstree);
 		logger.debug("-----------------------enterMyselfFixPosition-----------------------");
-		
-		 T childEnterMyselfFixPosition = (T) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getC_id());
-		 childEnterMyselfFixPosition.setC_parentid(ref);
-		 childEnterMyselfFixPosition.setC_position(c_position);
+
+		T childEnterMyselfFixPosition = (T) jsTreeHibernateDao.getUnique(jsTreeHibernateDTO.getC_id());
+		childEnterMyselfFixPosition.setC_parentid(ref);
+		childEnterMyselfFixPosition.setC_position(c_position);
 		jsTreeHibernateDao.update(childEnterMyselfFixPosition);
 
 	}
@@ -462,7 +462,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 	@SuppressWarnings("unchecked")
 	private <T extends JsTreeHibernateSearchDTO> void fixPositionParentIdOfCopyNodes(long insertSeqResult,
 			long position, T jsTreeHibernateDTO) throws Exception {
-		
+
 		jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
 		T comprehensiveTree = newInstance(jsTreeHibernateDTO);
 		comprehensiveTree.setC_id(insertSeqResult);
@@ -525,11 +525,11 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 	private <T extends JsTreeHibernateSearchDTO> long pasteMyselfFromJstree(long ref, long idif,
 			long spaceOfTargetNode, long ldif, Collection<Long> c_idsByChildNodeFromNodeById,
 			long rightPositionFromNodeByRef, T nodeById) throws Exception {
-		
-		jsTreeHibernateDao.setClazz(nodeById.getClass());
-		
-		T onlyPasteMyselfFromJstree = getNode(nodeById);
 
+		jsTreeHibernateDao.setClazz(nodeById.getClass());
+
+		T onlyPasteMyselfFromJstree = getNode(nodeById);
+		
 		onlyPasteMyselfFromJstree.setRef(ref);
 		onlyPasteMyselfFromJstree.setIdif(idif);
 		onlyPasteMyselfFromJstree.setSpaceOfTargetNode(spaceOfTargetNode);
@@ -543,13 +543,42 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 		onlyPasteMyselfFromJstree.setIdifRight(idif
 				+ (nodeById.getC_left() >= rightPositionFromNodeByRef ? spaceOfTargetNode : 0));
 
+		// coreDao.pasteMyselfFromJstree(onlyPasteMyselfFromJstree);
+		DetachedCriteria detachedPasteMyselfFromJstreeCriteria = DetachedCriteria.forClass(nodeById
+				.getClass());
+		if (c_idsByChildNodeFromNodeById != null && c_idsByChildNodeFromNodeById.size() > 0) {
+			Criterion wherePasteMyselfFromJstree = Restrictions.in("c_id", c_idsByChildNodeFromNodeById);
+			detachedPasteMyselfFromJstreeCriteria.add(wherePasteMyselfFromJstree);
+			detachedPasteMyselfFromJstreeCriteria.addOrder(Order.desc("c_level"));
+
+			List<T> pasteMyselfFromJstreeList = jsTreeHibernateDao
+					.getListWithoutPaging(detachedPasteMyselfFromJstreeCriteria);
+			for (T perPasteMyselfFromJstree : pasteMyselfFromJstreeList) {
+				logger.debug("------pasteMyselfFromJstree------LOOP---" + perPasteMyselfFromJstree.getC_id());
+				perPasteMyselfFromJstree.setC_id(null);
+				perPasteMyselfFromJstree.setC_parentid(onlyPasteMyselfFromJstree.getRef());
+				perPasteMyselfFromJstree.setC_left(perPasteMyselfFromJstree.getC_left() - onlyPasteMyselfFromJstree.getIdifLeft());
+				perPasteMyselfFromJstree.setC_right(perPasteMyselfFromJstree.getC_right() - onlyPasteMyselfFromJstree.getIdifRight());
+				perPasteMyselfFromJstree.setC_level(perPasteMyselfFromJstree.getC_level() - onlyPasteMyselfFromJstree.getIdif());
+				
+				long insertSeqResult = (long) jsTreeHibernateDao.insert(perPasteMyselfFromJstree);
+				perPasteMyselfFromJstree.setId(insertSeqResult);
+				
+				if (insertSeqResult > 0) {
+					return insertSeqResult;
+				} else {
+					throw new RuntimeException("심각한 오류 발생 - 삽입 노드");
+				}
+			}
+		}
+
 		return 0;
 	}
 
 	@SuppressWarnings("unchecked")
 	private <T extends JsTreeHibernateSearchDTO> void stretchPositionForMyselfFromJstree(
 			Collection<Long> c_idsByChildNodeFromNodeById, T jsTreeHibernateDTO) throws Exception {
-		
+
 		jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
 		jsTreeHibernateDTO.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
 
@@ -708,7 +737,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 	@SuppressWarnings("unchecked")
 	private <T extends JsTreeHibernateSearchDTO> void cutMyself(T nodeById, long spaceOfTargetNode,
 			Collection<Long> c_idsByChildNodeFromNodeById) throws Exception {
-		
+
 		jsTreeHibernateDao.setClazz(nodeById.getClass());
 		nodeById.setSpaceOfTargetNode(spaceOfTargetNode);
 		nodeById.setC_idsByChildNodeFromNodeById(c_idsByChildNodeFromNodeById);
