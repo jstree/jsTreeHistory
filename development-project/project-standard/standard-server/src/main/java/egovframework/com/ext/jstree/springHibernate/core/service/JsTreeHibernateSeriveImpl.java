@@ -318,6 +318,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 		if (nodeById == null) {
 			throw new RuntimeException("nodeById is null");
 		}
+		Long nodeByIdLeft = nodeById.getC_left();
 
 		logger.debug("-----------------------getChildNodeByLeftRight 완료-----------------------");
 		DetachedCriteria getChildNodeByLeftRightCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
@@ -396,7 +397,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 		}
 
 		long targetNodeLevel = nodeById.getC_level() - (nodeByRef.getC_level() + 1);
-		long comparePoint = nodeById.getC_left() - rightPointFromNodeByRef;
+		long comparePoint = nodeByIdLeft - rightPointFromNodeByRef;
 
 		if (logger.isDebugEnabled()) {
 			logger.debug(">>>>>>>>>>>>>>>>>>>>" + comparePoint);
@@ -464,14 +465,12 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 			long position, T jsTreeHibernateDTO) throws Exception {
 
 		jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
-		T comprehensiveTree = newInstance(jsTreeHibernateDTO);
-		comprehensiveTree.setC_id(insertSeqResult);
 
 		// T node = ((T) coreDao.getNode(comprehensiveTree));
-		T node = getNode(comprehensiveTree);
+		T node = (T) jsTreeHibernateDao.getUnique(insertSeqResult);
 
 		// List<T> children = ((List<T>) coreDao.getChildNodeByLeftRight(node));
-		logger.debug("-----------------------getChildNodeByLeftRight 완료-----------------------");
+		logger.debug("-----------------------fixPositionParentIdOfCopyNodes 완료-----------------------");
 		DetachedCriteria getChildNodeByLeftRightCriteria = DetachedCriteria.forClass(jsTreeHibernateDTO.getClass());
 		Criterion whereChildNodeByLeftRight = Restrictions.ge("c_left", node.getC_left());
 		getChildNodeByLeftRightCriteria.add(whereChildNodeByLeftRight);
@@ -483,7 +482,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 
 		for (T child : children) {
 			for (long i = child.getC_left() + 1; i < child.getC_right(); i++) {
-				final long parentId = child.getC_id();
+				long parentId = child.getC_id();
 				parentIds.put(i, parentId);
 			}
 
@@ -495,14 +494,10 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 					logger.debug("C_POSITION = " + position);
 				}
 
-				T onlyFixCopyFromJstree = newInstance(jsTreeHibernateDTO);
-				onlyFixCopyFromJstree.setFixCopyId(insertSeqResult);
-				onlyFixCopyFromJstree.setFixCopyPosition(position);
-				onlyFixCopyFromJstree.setC_id(insertSeqResult);
-				onlyFixCopyFromJstree.setC_position(position);
+				node.setC_position(position);
 
 				// coreDao.fixCopyIF(onlyFixCopyFromJstree);
-				jsTreeHibernateDao.update(onlyFixCopyFromJstree);
+				jsTreeHibernateDao.update(node);
 				continue;
 			}
 
@@ -511,11 +506,12 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 				logger.debug("C_TITLE    = " + child.getC_title());
 				logger.debug("C_ID       = " + child.getC_id());
 				logger.debug("C_POSITION = " + child.getC_position());
+				logger.debug("C_PARENTID = " + child.getC_parentid());
 				logger.debug("부모아이디값 = " + parentIds.get(child.getC_left()));
 			}
 
-			child.setFixCopyId(parentIds.get(child.getC_left()));
 			// coreDao.fixCopy(child);
+			child.setFixCopyId(parentIds.get(child.getC_left()));
 			child.setC_parentid(parentIds.get(child.getC_left()));
 			jsTreeHibernateDao.update(child);
 		}
@@ -555,13 +551,19 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 					.getListWithoutPaging(detachedPasteMyselfFromJstreeCriteria);
 			for (T perPasteMyselfFromJstree : pasteMyselfFromJstreeList) {
 				logger.debug("------pasteMyselfFromJstree------LOOP---" + perPasteMyselfFromJstree.getC_id());
-				perPasteMyselfFromJstree.setC_id(null);
-				perPasteMyselfFromJstree.setC_parentid(onlyPasteMyselfFromJstree.getRef());
-				perPasteMyselfFromJstree.setC_left(perPasteMyselfFromJstree.getC_left() - onlyPasteMyselfFromJstree.getIdifLeft());
-				perPasteMyselfFromJstree.setC_right(perPasteMyselfFromJstree.getC_right() - onlyPasteMyselfFromJstree.getIdifRight());
-				perPasteMyselfFromJstree.setC_level(perPasteMyselfFromJstree.getC_level() - onlyPasteMyselfFromJstree.getIdif());
+				T addTarget = newInstance(perPasteMyselfFromJstree);
 				
-				long insertSeqResult = (long) jsTreeHibernateDao.insert(perPasteMyselfFromJstree);
+				addTarget.setC_parentid(onlyPasteMyselfFromJstree.getRef());
+				addTarget.setC_position(perPasteMyselfFromJstree.getC_position());
+				addTarget.setC_left(perPasteMyselfFromJstree.getC_left() - onlyPasteMyselfFromJstree.getIdifLeft());
+				addTarget.setC_right(perPasteMyselfFromJstree.getC_right() - onlyPasteMyselfFromJstree.getIdifRight());
+				addTarget.setC_level(perPasteMyselfFromJstree.getC_level() - onlyPasteMyselfFromJstree.getLdif());
+				addTarget.setC_title(perPasteMyselfFromJstree.getC_title());
+				addTarget.setC_type(perPasteMyselfFromJstree.getC_type());
+				
+				logger.debug("여기에 추가적으로 확장한 필드에 대한 함수가 들어가야 한다 패턴을 쓰자");
+				
+				long insertSeqResult = (long) jsTreeHibernateDao.insert(addTarget);
 				perPasteMyselfFromJstree.setId(insertSeqResult);
 				
 				if (insertSeqResult > 0) {
