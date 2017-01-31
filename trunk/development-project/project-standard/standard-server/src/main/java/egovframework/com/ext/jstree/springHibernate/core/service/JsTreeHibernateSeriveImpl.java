@@ -416,7 +416,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 			this.enterMyselfFromJstree(jsTreeHibernateDTO.getRef(), jsTreeHibernateDTO.getC_position(),
 					jsTreeHibernateDTO.getC_id(), comparePoint, targetNodeLevel, c_idsByChildNodeFromNodeById,
 					jsTreeHibernateDTO);
-			test(comparePoint, targetNodeLevel, c_idsByChildNodeFromNodeById, jsTreeHibernateDTO);
+			enterMyselfFixLeftRight(comparePoint, targetNodeLevel, c_idsByChildNodeFromNodeById, jsTreeHibernateDTO);
 		}
 		return t_ComprehensiveTree;
 	}
@@ -437,7 +437,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T extends JsTreeHibernateSearchDTO> void test(long idif, long ldif,
+	private <T extends JsTreeHibernateSearchDTO> void enterMyselfFixLeftRight(long idif, long ldif,
 			Collection<Long> c_idsByChildNodeFromNodeById, T jsTreeHibernateDTO) {
 		// coreDao.enterMyselfFixLeftRight(onlyPasteMyselfFromJstree);
 		logger.debug("-----------------------enterMyselfFixLeftRight-----------------------");
