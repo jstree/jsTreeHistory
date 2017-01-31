@@ -553,6 +553,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 				logger.debug("------pasteMyselfFromJstree------LOOP---" + perPasteMyselfFromJstree.getC_id());
 				T addTarget = newInstance(perPasteMyselfFromJstree);
 				
+				//디폴트 셋팅.
 				addTarget.setC_parentid(onlyPasteMyselfFromJstree.getRef());
 				addTarget.setC_position(perPasteMyselfFromJstree.getC_position());
 				addTarget.setC_left(perPasteMyselfFromJstree.getC_left() - onlyPasteMyselfFromJstree.getIdifLeft());
@@ -561,6 +562,7 @@ public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
 				addTarget.setC_title(perPasteMyselfFromJstree.getC_title());
 				addTarget.setC_type(perPasteMyselfFromJstree.getC_type());
 				
+				addTarget.setFieldFromNewInstance(perPasteMyselfFromJstree);
 				logger.debug("여기에 추가적으로 확장한 필드에 대한 함수가 들어가야 한다 패턴을 쓰자");
 				
 				long insertSeqResult = (long) jsTreeHibernateDao.insert(addTarget);

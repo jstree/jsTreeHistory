@@ -48,6 +48,8 @@ public abstract class JsTreeHibernateSearchDTO extends JsTreeHibernatePaginatedD
 		this.whereMap = whereMap;
 		this.whereCount = whereCount;
 	}
+	
+	public abstract <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance);
 
 	@Transient
 	public List<Order> getOrder() {
