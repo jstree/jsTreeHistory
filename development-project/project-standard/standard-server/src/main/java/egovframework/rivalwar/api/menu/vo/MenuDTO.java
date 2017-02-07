@@ -22,7 +22,7 @@ import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearc
 @DynamicInsert(value = true)
 @DynamicUpdate(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SequenceGenerator(name = "JsTreeSequence", sequenceName = "STANDARD_DB.hibernate_sequence", allocationSize = 1)
+@SequenceGenerator(name = "JsTreeSequence", sequenceName = "STANDARD_DB.S_JSTREE_MENU", allocationSize = 1)
 public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
 	/**

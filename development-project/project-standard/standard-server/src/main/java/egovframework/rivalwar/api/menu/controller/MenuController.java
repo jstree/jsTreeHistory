@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
+import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateSerive;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
 import egovframework.rivalwar.api.menu.service.MenuService;
@@ -27,13 +28,16 @@ public class MenuController extends GenericAbstractController {
 	@Autowired
 	private MenuService menuService;
 	
+	@Autowired
+	private JsTreeHibernateSerive jsTreeHibernateSerive;
+	
 	@IncludedInfo(name = "RivalWar Admin Menu",
 			listUrl = "/rivalWar/api/menu/admin/getJsTreeView.do",
 			order = 7000,
 			gid = 3131)
 	@RequestMapping("/admin/getJsTreeView.do")
 	public String jsTreeSpringHibernate() {
-		return "rivalWar/api/menu/admin/JsTreeView";
+		return "egovframework/rivalWar/api/menu/admin/JsTreeView";
 	}
 	
 	/**
