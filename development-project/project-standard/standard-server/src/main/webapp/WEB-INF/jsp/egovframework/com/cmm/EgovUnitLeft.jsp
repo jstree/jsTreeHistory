@@ -20,6 +20,8 @@
 <c:set var="isDam" value="false"/>
 <c:set var="isCom" value="false"/>
 <c:set var="isExt" value="false"/>
+<c:set var="isJsTree" value="false"/>
+<c:set var="isRivalWar" value="false"/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<c:forEach var="result" items="${resultList}" varStatus="status">
 		<c:if test="${isMai == 'false' && result.gid == '0'}">
@@ -109,6 +111,22 @@
 				</td>
 			</tr>
 			<c:set var="isExt" value="true"/>
+		</c:if>
+		<c:if test="${isJsTree == 'false' && result.gid == '313'}">
+			<tr height = "16">
+			    <td align="left" width="100%">
+			    	<br><h1>jsTree Service Framework</h1>
+				</td>
+			</tr>
+			<c:set var="isJsTree" value="true"/>
+		</c:if>
+		<c:if test="${isRivalWar == 'false' && result.gid == '3131'}">
+			<tr height = "16">
+			    <td align="left" width="100%">
+			    	<br><h1>RivalWar Admin</h1>
+				</td>
+			</tr>
+			<c:set var="isRivalWar" value="true"/>
 		</c:if>
 		<tr height = "16">
 		    <td align="left" valign="center" width="100%">
