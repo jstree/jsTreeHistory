@@ -1,4 +1,5 @@
-package egovframework.rivalwar.lnb.category.vo;
+package egovframework.rivalwar.api.menu.vo;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -13,19 +14,21 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
-import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @Entity
 @Table(name = "T_JSTREE_MENU", schema = "STANDARD_DB")
-@SelectBeforeUpdate(value=true)
-@DynamicInsert(value=true)
-@DynamicUpdate(value=true)
+@SelectBeforeUpdate(value = true)
+@DynamicInsert(value = true)
+@DynamicUpdate(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SequenceGenerator(name = "JsTreeSequence", sequenceName = "STANDARD_DB.hibernate_sequence", allocationSize = 1)
 public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
-	private static final long serialVersionUID = -6859122566734590165L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5641929581490357881L;
 
 	public MenuDTO() {
 		super();
@@ -55,10 +58,10 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 	public void setCopyBooleanValue(Boolean copyBooleanValue) {
 		this.copyBooleanValue = copyBooleanValue;
 	}
-	
+
 	private String c_vote_start_date;
 	private String c_vote_end_date;
-	
+
 	@Column(name = "c_vote_start_date")
 	public String getC_vote_start_date() {
 		return c_vote_start_date;
@@ -79,12 +82,10 @@ public class MenuDTO extends JsTreeHibernateSearchDTO implements Serializable {
 
 	@Override
 	public <T extends JsTreeHibernateSearchDTO> void setFieldFromNewInstance(T paramInstance) {
-		
-		if( paramInstance instanceof MenuDTO){
+		if (paramInstance instanceof MenuDTO) {
 			this.setC_vote_start_date(this.getC_vote_start_date());
 			this.setC_vote_end_date(this.getC_vote_end_date());
-			//여기에 추가 필드 셋팅할것.
 		}
 	}
-	
+
 }
