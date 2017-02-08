@@ -129,7 +129,7 @@ public class MenuController extends GenericAbstractController {
 	 * @throws InstantiationException
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/addNode.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/addMenu.do", method = RequestMethod.POST)
 	public ModelAndView addMenu(@Validated(value = AddNode.class) MenuDTO jsTreeHibernateDTO,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
