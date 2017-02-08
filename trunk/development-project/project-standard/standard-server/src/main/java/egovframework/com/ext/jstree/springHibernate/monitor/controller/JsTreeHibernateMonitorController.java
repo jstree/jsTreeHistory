@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateSerive;
+import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 
@@ -24,7 +24,7 @@ import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 public class JsTreeHibernateMonitorController extends GenericAbstractController {
 
 	@Autowired
-	private JsTreeHibernateSerive jsTreeHibernateSerive;
+	private JsTreeHibernateService jsTreeHibernateService;
 
 	/**
 	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
@@ -54,7 +54,7 @@ public class JsTreeHibernateMonitorController extends GenericAbstractController 
 	public ModelAndView getChildNode(JsTreeHibernateDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
 			throws Exception {
 
-		List<JsTreeHibernateDTO> list = jsTreeHibernateSerive.getChildNode(jsTreeHibernateDTO);
+		List<JsTreeHibernateDTO> list = jsTreeHibernateService.getChildNode(jsTreeHibernateDTO);
 
 		ModelAndView modelAndView = new ModelAndView("jsonView");
 		modelAndView.addObject("result", list);
