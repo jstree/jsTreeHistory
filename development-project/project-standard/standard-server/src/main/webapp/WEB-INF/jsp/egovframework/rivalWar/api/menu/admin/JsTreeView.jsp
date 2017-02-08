@@ -478,7 +478,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           // As this has been a common question - async search
                           // Same as above - the `ajax` config option is actually jQuery's AJAX object
                           "ajax": {
-                            "url": "/com/ext/jstree/springHibernate/core/searchNode.do",
+                            "url": "/rivalWar/api/menu/searchMenu.do",
                             // You get the search string as a parameter
                             "data": function(str) {
                               return {
@@ -549,7 +549,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           "initially_open": ["node_2", "node_3"]
                         }
                       }).bind("create.jstree", function(e, data) {
-                        $.post("/com/ext/jstree/springHibernate/core/addNode.do", {
+                        $.post("/rivalWar/api/menu/addMenu.do", {
                           "ref": data.rslt.parent.attr("id").replace("node_", "").replace("copy_", ""),
                           "c_position": data.rslt.position,
                           "c_title": data.rslt.name,
@@ -569,7 +569,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           $.ajax({
                             async: false,
                             type: 'POST',
-                            url: "/com/ext/jstree/springHibernate/core/removeNode.do",
+                            url: "/rivalWar/api/menu/removeMenu.do",
                             data: {
                               "c_id": this.id.replace("node_", "").replace("copy_", "")
                             },
@@ -581,7 +581,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           });
                         });
                       }).bind("rename.jstree", function(e, data) {
-                        $.post("/com/ext/jstree/springHibernate/core/alterNode.do", {
+                        $.post("/rivalWar/api/menu/alterMenu.do", {
                           "c_id": data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
                           "c_title": data.rslt.new_name,
                           "c_type": data.rslt.obj.attr("rel")
@@ -595,7 +595,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 
                         });
                       }).bind("set_type.jstree", function(e, data) {
-                        $.post("/com/ext/jstree/springHibernate/core/alterNodeType.do", {
+                        $.post("/rivalWar/api/menu/alterMenuType.do", {
                           "c_id": data.rslt.obj.attr("id").replace("node_", "").replace("copy_", ""),
                           "c_title": data.rslt.new_name,
                           "c_type": data.rslt.obj.attr("rel")
@@ -609,7 +609,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
                           $.ajax({
                             async: false,
                             type: 'POST',
-                            url: "/com/ext/jstree/springHibernate/core/moveNode.do",
+                            url: "/rivalWar/api/menu/moveMenu.do",
                             data: {
                               "c_id": $(this).attr("id").replace("node_", "").replace("copy_", ""),
                               "ref": data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_", "").replace("copy_", ""),
