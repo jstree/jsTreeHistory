@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
-public interface JsTreeHibernateSerive {
+public interface JsTreeHibernateService {
 	
 	public <T extends JsTreeHibernateSearchDTO> T getNode(T jsTreeHibernateDTO) throws Exception;
 

@@ -27,7 +27,7 @@ import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDao;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
 
 @Service("JsTreeHibernateSerive")
-public class JsTreeHibernateSeriveImpl implements JsTreeHibernateSerive {
+public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateSerive;
+import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateDTO;
 import egovframework.com.ext.jstree.springmyBatis.core.util.Util_TitleChecker;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AddNode;
@@ -34,7 +34,7 @@ import egovframework.com.ext.jstree.support.util.ParameterParser;
 public class JsTreeHibernateController extends GenericAbstractController {
 
 	@Autowired
-	private JsTreeHibernateSerive jsTreeHibernateSerive;
+	private JsTreeHibernateService jsTreeHibernateService;
 
 	/**
 	 * jstree Spring + myBatis 버전의 첫페이지를 요청한다.
@@ -71,7 +71,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		}
 	    
 		jsTreeHibernateDTO.setWhere("c_parentid", new Long(parser.get("c_id")));
-		List<JsTreeHibernateDTO> list = jsTreeHibernateSerive.getChildNode(jsTreeHibernateDTO);
+		List<JsTreeHibernateDTO> list = jsTreeHibernateService.getChildNode(jsTreeHibernateDTO);
 
 		ModelAndView modelAndView = new ModelAndView("jsonView");
 		modelAndView.addObject("result", list);
@@ -100,7 +100,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 
 		jsTreeHibernateDTO.setWhereLike("c_title", parser.get("parser"));
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
-		modelAndView.addObject("result", jsTreeHibernateSerive.searchNode(jsTreeHibernateDTO));
+		modelAndView.addObject("result", jsTreeHibernateService.searchNode(jsTreeHibernateDTO));
 		return modelAndView;
 	}
 	
@@ -125,7 +125,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
 
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
-		modelAndView.addObject("result", jsTreeHibernateSerive.addNode(jsTreeHibernateDTO));
+		modelAndView.addObject("result", jsTreeHibernateService.addNode(jsTreeHibernateDTO));
 		return modelAndView;
 	}
 	
@@ -145,7 +145,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		if (bindingResult.hasErrors())
 			throw new RuntimeException();
 
-		jsTreeHibernateDTO.setStatus(jsTreeHibernateSerive.removeNode(jsTreeHibernateDTO));
+		jsTreeHibernateDTO.setStatus(jsTreeHibernateService.removeNode(jsTreeHibernateDTO));
 		setJsonDefaultSetting(jsTreeHibernateDTO);
 		
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
@@ -181,7 +181,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 
 		jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
 		
-		jsTreeHibernateDTO.setStatus(jsTreeHibernateSerive.alterNode(jsTreeHibernateDTO));
+		jsTreeHibernateDTO.setStatus(jsTreeHibernateService.alterNode(jsTreeHibernateDTO));
 		setJsonDefaultSetting(jsTreeHibernateDTO);
 		
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
@@ -205,7 +205,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		if (bindingResult.hasErrors())
 			throw new RuntimeException();
 
-		jsTreeHibernateSerive.alterNodeType(jsTreeHibernateDTO);
+		jsTreeHibernateService.alterNodeType(jsTreeHibernateDTO);
 		setJsonDefaultSetting(jsTreeHibernateDTO);
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
 		modelAndView.addObject("result", jsTreeHibernateDTO);
@@ -231,7 +231,7 @@ public class JsTreeHibernateController extends GenericAbstractController {
 		if (bindingResult.hasErrors())
 			throw new RuntimeException();
 
-		jsTreeHibernateSerive.moveNode(jsTreeHibernateDTO, request);
+		jsTreeHibernateService.moveNode(jsTreeHibernateDTO, request);
 		setJsonDefaultSetting(jsTreeHibernateDTO);
 		
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
