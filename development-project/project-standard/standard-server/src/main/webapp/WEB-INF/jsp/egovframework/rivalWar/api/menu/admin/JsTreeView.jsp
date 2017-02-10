@@ -243,7 +243,7 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child:before,table.dataTable
 				<div class="container bm-medium">
 					<div class="one-whole">
 						<div class="text-center">
-							<h1 class="bm-remove">jsTree Service Engine Spring myBatis Version Demo</h1>
+							<h1 class="bm-remove">Rival War Menu Controller</h1>
 						</div>
 					</div>
 				</div>
