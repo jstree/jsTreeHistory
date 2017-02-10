@@ -32,7 +32,7 @@
 		<property name="packagesToScan">
 			<list>
 				<value>egovframework.com.ext.jstree.springHibernate.core</value>
-				<value>egovframework.rivalwar.api.menu</value>
+				<value>egovframework.rivalwar.api</value>
 			</list>
 		</property>
 	</bean>
