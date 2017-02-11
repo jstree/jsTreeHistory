@@ -53,6 +53,19 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 		List<T> list = jsTreeHibernateDao.getList(jsTreeHibernateDTO);
 		return list;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildNode(T jsTreeHibernateDTO) throws Exception {
+		
+		jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
+		T uniqueObj = getNode(jsTreeHibernateDTO);
+		uniqueObj.setC_level(uniqueObj.getC_level() + 1);
+		
+		jsTreeHibernateDTO.setOrder(Order.asc("c_position"));
+		List<T> list = jsTreeHibernateDao.getList(jsTreeHibernateDTO);
+		return list;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
