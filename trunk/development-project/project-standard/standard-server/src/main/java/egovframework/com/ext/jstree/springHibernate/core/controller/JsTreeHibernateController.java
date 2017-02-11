@@ -1,5 +1,6 @@
 package egovframework.com.ext.jstree.springHibernate.core.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.collect.Maps;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springHibernate.core.service.JsTreeHibernateService;
@@ -26,8 +28,10 @@ import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNod
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNodeType;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.RemoveNode;
+import egovframework.com.ext.jstree.springmyBatis.core.vo.PaginatedComprehensiveTree;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
 @RequestMapping(value = { "/com/ext/jstree/springHibernate/core" })
@@ -75,6 +79,34 @@ public class JsTreeHibernateController extends GenericAbstractController {
 
 		ModelAndView modelAndView = new ModelAndView("jsonView");
 		modelAndView.addObject("result", list);
+		return modelAndView;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getPaginatedChildNode.do", method=RequestMethod.GET)
+	public ModelAndView getPaginatedChildNode(JsTreeHibernateDTO paginatedJsTreeHibernateDTO, ModelMap model,
+			HttpServletRequest request) throws Exception {
+		if (paginatedJsTreeHibernateDTO.getC_id() <= 0) {
+			throw new RuntimeException();
+		}
+		/** paging */
+    	PaginationInfo paginationInfo = new PaginationInfo();
+	    paginationInfo.setCurrentPageNo(paginatedJsTreeHibernateDTO.getPageIndex());
+	    paginationInfo.setRecordCountPerPage(paginatedJsTreeHibernateDTO.getPageUnit());
+	    paginationInfo.setPageSize(paginatedJsTreeHibernateDTO.getPageSize());
+	    
+	    paginatedJsTreeHibernateDTO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+	    paginatedJsTreeHibernateDTO.setLastIndex(paginationInfo.getLastRecordIndex());
+	    paginatedJsTreeHibernateDTO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+	    
+	    List<JsTreeHibernateDTO> resultChildNodes = jsTreeHibernateService.getChildNode(paginatedJsTreeHibernateDTO);
+	    paginationInfo.setTotalRecordCount(resultChildNodes.size());
+	    
+		ModelAndView modelAndView =  new ModelAndView("jsonView");
+		HashMap<String, Object> resultMap = Maps.newHashMap();
+		resultMap.put("paginationInfo", paginationInfo);
+		resultMap.put("result", resultChildNodes);
+		modelAndView.addObject("result", resultMap);
 		return modelAndView;
 	}
 	

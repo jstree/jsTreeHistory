@@ -20,6 +20,17 @@ public interface JsTreeHibernateService {
 	 * @return List<jsTreeHibernateDTO> 자식 노드들
 	 */
 	public <T extends JsTreeHibernateSearchDTO> List<T> getChildNode(T jsTreeHibernateDTO) throws Exception;
+	
+	/**
+	 * 자식노드를 요청한다.
+	 * 
+	 * @param <T>
+	 * 
+	 * @param jsTreeHibernateDTO
+	 *            - jstree에서 사용되는 tree VO
+	 * @return List<jsTreeHibernateDTO> 자식 노드들
+	 */
+	public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildNode(T jsTreeHibernateDTO) throws Exception;
 
 	/**
 	 * 노드를 검색한다.
