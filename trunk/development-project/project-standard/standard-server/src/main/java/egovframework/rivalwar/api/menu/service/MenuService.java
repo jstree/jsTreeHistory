@@ -12,6 +12,8 @@ public interface MenuService {
 	
 	public <T extends JsTreeHibernateSearchDTO> List<T> getChildMenu(T jsTreeHibernateDTO) throws Exception;
 	
+	public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildMenu(T jsTreeHibernateDTO) throws Exception;
+	
 	public <T extends JsTreeHibernateSearchDTO> List<String> searchMenu(T jsTreeHibernateDTO) throws Exception;
 	
 	public <T extends JsTreeHibernateSearchDTO> T addMenu(T jsTreeHibernateDTO) throws Exception;

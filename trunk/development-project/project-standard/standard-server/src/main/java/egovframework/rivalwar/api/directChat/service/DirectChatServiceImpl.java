@@ -20,6 +20,11 @@ public class DirectChatServiceImpl implements DirectChatService {
 	public <T extends JsTreeHibernateSearchDTO> T getDirectChat(T jsTreeHibernateDTO) throws Exception {
 		return jsTreeHibernateService.getNode(jsTreeHibernateDTO);
 	}
+	
+	@Override
+	public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildDirectChat(T jsTreeHibernateDTO) throws Exception {
+		return jsTreeHibernateService.getPaginatedChildNode(jsTreeHibernateDTO);
+	}
 
 	@Override
 	public <T extends JsTreeHibernateSearchDTO> List<T> getChildDirectChat(T jsTreeHibernateDTO) throws Exception {

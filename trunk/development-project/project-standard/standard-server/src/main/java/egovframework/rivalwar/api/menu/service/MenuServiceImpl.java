@@ -18,13 +18,17 @@ public class MenuServiceImpl implements MenuService {
 	
 	@Override
 	public <T extends JsTreeHibernateSearchDTO> T getMenu(T jsTreeHibernateDTO) throws Exception {
-		T menu = jsTreeHibernateService.getNode(jsTreeHibernateDTO);
-		return menu;
+		return jsTreeHibernateService.getNode(jsTreeHibernateDTO);
 	}
 
 	@Override
 	public <T extends JsTreeHibernateSearchDTO> List<T> getChildMenu(T jsTreeHibernateDTO) throws Exception {
 		return jsTreeHibernateService.getChildNode(jsTreeHibernateDTO);
+	}
+	
+	@Override
+	public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildMenu(T jsTreeHibernateDTO) throws Exception {
+		return jsTreeHibernateService.getPaginatedChildNode(jsTreeHibernateDTO);
 	}
 
 	@Override

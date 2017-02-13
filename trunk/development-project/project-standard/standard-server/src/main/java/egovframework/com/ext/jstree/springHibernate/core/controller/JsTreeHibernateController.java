@@ -28,10 +28,8 @@ import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNod
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.AlterNodeType;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.MoveNode;
 import egovframework.com.ext.jstree.springmyBatis.core.validation.group.RemoveNode;
-import egovframework.com.ext.jstree.springmyBatis.core.vo.PaginatedComprehensiveTree;
 import egovframework.com.ext.jstree.support.mvc.GenericAbstractController;
 import egovframework.com.ext.jstree.support.util.ParameterParser;
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
 @RequestMapping(value = { "/com/ext/jstree/springHibernate/core" })
@@ -86,25 +84,18 @@ public class JsTreeHibernateController extends GenericAbstractController {
 	@RequestMapping(value="/getPaginatedChildNode.do", method=RequestMethod.GET)
 	public ModelAndView getPaginatedChildNode(JsTreeHibernateDTO paginatedJsTreeHibernateDTO, ModelMap model,
 			HttpServletRequest request) throws Exception {
-		if (paginatedJsTreeHibernateDTO.getC_id() <= 0) {
+		
+		if (paginatedJsTreeHibernateDTO.getC_id() <= 0 || paginatedJsTreeHibernateDTO.getPageIndex() <= 0
+				|| paginatedJsTreeHibernateDTO.getPageUnit() <= 0 || paginatedJsTreeHibernateDTO.getPageSize() <= 0) {
 			throw new RuntimeException();
 		}
-		/** paging */
-    	PaginationInfo paginationInfo = new PaginationInfo();
-	    paginationInfo.setCurrentPageNo(paginatedJsTreeHibernateDTO.getPageIndex());
-	    paginationInfo.setRecordCountPerPage(paginatedJsTreeHibernateDTO.getPageUnit());
-	    paginationInfo.setPageSize(paginatedJsTreeHibernateDTO.getPageSize());
-	    
-	    paginatedJsTreeHibernateDTO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-	    paginatedJsTreeHibernateDTO.setLastIndex(paginationInfo.getLastRecordIndex());
-	    paginatedJsTreeHibernateDTO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
-	    
-	    List<JsTreeHibernateDTO> resultChildNodes = jsTreeHibernateService.getChildNode(paginatedJsTreeHibernateDTO);
-	    paginationInfo.setTotalRecordCount(resultChildNodes.size());
+	    paginatedJsTreeHibernateDTO.setWhere("c_parentid", paginatedJsTreeHibernateDTO.getC_id());
+	    List<JsTreeHibernateDTO> resultChildNodes = jsTreeHibernateService.getPaginatedChildNode(paginatedJsTreeHibernateDTO);
+	    paginatedJsTreeHibernateDTO.getPaginationInfo().setTotalRecordCount(resultChildNodes.size());
 	    
 		ModelAndView modelAndView =  new ModelAndView("jsonView");
 		HashMap<String, Object> resultMap = Maps.newHashMap();
-		resultMap.put("paginationInfo", paginationInfo);
+		resultMap.put("paginationInfo", paginatedJsTreeHibernateDTO.getPaginationInfo());
 		resultMap.put("result", resultChildNodes);
 		modelAndView.addObject("result", resultMap);
 		return modelAndView;

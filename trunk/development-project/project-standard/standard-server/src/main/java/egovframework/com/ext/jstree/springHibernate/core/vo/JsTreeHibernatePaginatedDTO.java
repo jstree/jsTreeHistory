@@ -218,4 +218,12 @@ public abstract class JsTreeHibernatePaginatedDTO extends JsTreeHibernateBaseDTO
 	public void setSearchKeywordTo(String searchKeywordTo) {
 		this.searchKeywordTo = searchKeywordTo;
 	}
+
+	public PaginationInfo getPaginationInfo() {
+		return paginationInfo;
+	}
+
+	public void setPaginationInfo(PaginationInfo paginationInfo) {
+		this.paginationInfo = paginationInfo;
+	}
 }
