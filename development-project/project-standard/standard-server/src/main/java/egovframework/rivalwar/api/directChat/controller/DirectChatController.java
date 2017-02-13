@@ -1,5 +1,6 @@
 package egovframework.rivalwar.api.directChat.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.collect.Maps;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
 import egovframework.com.ext.jstree.springmyBatis.core.util.Util_TitleChecker;
@@ -70,6 +72,28 @@ public class DirectChatController extends GenericAbstractController {
 
 		ModelAndView modelAndView = new ModelAndView("jsonView");
 		modelAndView.addObject("result", list);
+		return modelAndView;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getPaginatedChildMenu.do", method = RequestMethod.GET)
+	public ModelAndView getPaginatedChildMenu(DirectChatDTO jsTreeHibernateDTO, ModelMap model, HttpServletRequest request)
+			throws Exception {
+
+		if (jsTreeHibernateDTO.getC_id() <= 0 || jsTreeHibernateDTO.getPageIndex() <= 0
+				|| jsTreeHibernateDTO.getPageUnit() <= 0 || jsTreeHibernateDTO.getPageSize() <= 0) {
+			throw new RuntimeException();
+		}
+		
+		jsTreeHibernateDTO.setWhere("c_parentid", jsTreeHibernateDTO.getC_id());
+		List<DirectChatDTO> list = directChatService.getPaginatedChildDirectChat(jsTreeHibernateDTO);
+		jsTreeHibernateDTO.getPaginationInfo().setTotalRecordCount(list.size());
+
+		ModelAndView modelAndView = new ModelAndView("jsonView");
+		HashMap<String, Object> resultMap = Maps.newHashMap();
+		resultMap.put("paginationInfo", jsTreeHibernateDTO.getPaginationInfo());
+		resultMap.put("result", list);
+		modelAndView.addObject("result", resultMap);
 		return modelAndView;
 	}
 

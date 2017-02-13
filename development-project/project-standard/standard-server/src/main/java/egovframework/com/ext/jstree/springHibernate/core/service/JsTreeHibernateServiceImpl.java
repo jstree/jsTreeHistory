@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import egovframework.com.ext.jstree.springHibernate.core.dao.JsTreeHibernateDao;
 import egovframework.com.ext.jstree.springHibernate.core.vo.JsTreeHibernateSearchDTO;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Service("JsTreeHibernateSerive")
 public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
@@ -58,10 +59,17 @@ public class JsTreeHibernateServiceImpl implements JsTreeHibernateService {
 	@Override
 	public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildNode(T jsTreeHibernateDTO) throws Exception {
 		
+		/** paging */
+    	PaginationInfo paginationInfo = jsTreeHibernateDTO.getPaginationInfo();
+	    paginationInfo.setCurrentPageNo(jsTreeHibernateDTO.getPageIndex());
+	    paginationInfo.setRecordCountPerPage(jsTreeHibernateDTO.getPageUnit());
+	    paginationInfo.setPageSize(jsTreeHibernateDTO.getPageSize());
+	    
+	    jsTreeHibernateDTO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+	    jsTreeHibernateDTO.setLastIndex(paginationInfo.getLastRecordIndex());
+	    jsTreeHibernateDTO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+	    
 		jsTreeHibernateDao.setClazz(jsTreeHibernateDTO.getClass());
-		T uniqueObj = getNode(jsTreeHibernateDTO);
-		uniqueObj.setC_level(uniqueObj.getC_level() + 1);
-		
 		jsTreeHibernateDTO.setOrder(Order.asc("c_position"));
 		List<T> list = jsTreeHibernateDao.getList(jsTreeHibernateDTO);
 		return list;

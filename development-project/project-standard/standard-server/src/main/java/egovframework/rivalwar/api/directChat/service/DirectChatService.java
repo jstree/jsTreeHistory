@@ -12,6 +12,8 @@ public interface DirectChatService {
 	
 	public <T extends JsTreeHibernateSearchDTO> List<T> getChildDirectChat(T jsTreeHibernateDTO) throws Exception;
 	
+	public <T extends JsTreeHibernateSearchDTO> List<T> getPaginatedChildDirectChat(T jsTreeHibernateDTO) throws Exception;
+	
 	public <T extends JsTreeHibernateSearchDTO> List<String> searchDirectChat(T jsTreeHibernateDTO) throws Exception;
 	
 	public <T extends JsTreeHibernateSearchDTO> T addDirectChat(T jsTreeHibernateDTO) throws Exception;
