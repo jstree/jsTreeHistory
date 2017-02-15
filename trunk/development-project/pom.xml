@@ -193,7 +193,7 @@
 		</snapshotRepository>
 		<site>
 			<id>StandardProject-Site-Public</id>
-			<url>ftp://www.313.co.kr</url>
+			<url>ftp://nas.313.co.kr/web/assets/standard-server-report/</url>
 		</site>
 	</distributionManagement>
 
