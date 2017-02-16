@@ -219,6 +219,7 @@ public abstract class JsTreeHibernatePaginatedDTO extends JsTreeHibernateBaseDTO
 		this.searchKeywordTo = searchKeywordTo;
 	}
 
+	@Transient
 	public PaginationInfo getPaginationInfo() {
 		return paginationInfo;
 	}
