@@ -193,7 +193,7 @@
 		</snapshotRepository>
 		<site>
 			<id>StandardProject-Site-Public</id>
-			<url>ftp://nas.313.co.kr/web/assets/standard-server-report/</url>
+			<url>ftp://www.313.co.kr</url>
 		</site>
 	</distributionManagement>
 
@@ -222,19 +222,19 @@
 				<configuration>
 					<minmemory>128m</minmemory>
 					<maxmemory>512m</maxmemory>
-					<encoding>${encoding}</encoding>
-					<docencoding>${encoding}</docencoding>
-					<charset>${encoding}</charset>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<docencoding>${project.build.sourceEncoding}</docencoding>
+					<charset>${project.build.sourceEncoding}</charset>
 				</configuration>
 			</plugin>
 			<!-- Generating Java Source in HTML -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.3</version>
+				<version>2.5</version>
 				<configuration>
-					<inputEncoding>${encoding}</inputEncoding>
-					<outputEncoding>${encoding}</outputEncoding>
+					<inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+					<outputEncoding>${project.build.sourceEncoding}</outputEncoding>
 					<linkJavadoc>true</linkJavadoc>
 					<javadocDir>apidocs</javadocDir>
 				</configuration>
