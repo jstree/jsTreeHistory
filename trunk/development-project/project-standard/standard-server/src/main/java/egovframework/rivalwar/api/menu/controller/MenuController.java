@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,6 +40,9 @@ public class MenuController extends GenericAbstractController {
 	@Autowired
 	private MenuService menuService;
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
 	@IncludedInfo(name = "RivalWar Admin Menu",
 			listUrl = "/rivalWar/api/menu/admin/getJsTreeView.do",
 			order = 7000,
@@ -50,7 +55,7 @@ public class MenuController extends GenericAbstractController {
 	/**
 	 * 자식노드를 요청한다.
 	 * 
-	 * @param comprehensiveTree
+	 * @param jsTreeHibernateDTO
 	 * @param model
 	 * @param request
 	 * @return String
@@ -62,6 +67,8 @@ public class MenuController extends GenericAbstractController {
 			throws Exception {
 
 		ParameterParser parser = new ParameterParser(request);
+
+		logger.info("getChildMenu Call change Great! again seven");
 
 		if (parser.getInt("c_id") <= 0) {
 			throw new RuntimeException();
@@ -118,7 +125,7 @@ public class MenuController extends GenericAbstractController {
 	/**
 	 * 노드를 검색한다.
 	 * 
-	 * @param comprehensiveTree
+	 * @param jsTreeHibernateDTO
 	 * @param model
 	 * @param request
 	 * @return
@@ -144,9 +151,9 @@ public class MenuController extends GenericAbstractController {
 	/**
 	 * 노드를 추가한다.
 	 * 
-	 * @param comprehensiveTree
+	 * @param jsTreeHibernateDTO
 	 * @param model
-	 * @param request
+	 * @param bindingResult
 	 * @return
 	 * @throws JsonProcessingException
 	 * @throws IllegalAccessException
@@ -169,9 +176,9 @@ public class MenuController extends GenericAbstractController {
 	/**
 	 * 노드를 삭제한다.
 	 * 
-	 * @param comprehensiveTree
+	 * @param jsTreeHibernateDTO
 	 * @param model
-	 * @param request
+	 * @param bindingResult
 	 * @return
 	 * @throws JsonProcessingException
 	 */
@@ -203,9 +210,9 @@ public class MenuController extends GenericAbstractController {
 	/**
 	 * 노드를 변경한다.
 	 * 
-	 * @param comprehensiveTree
+	 * @param jsTreeHibernateDTO
 	 * @param model
-	 * @param request
+	 * @param bindingResult
 	 * @return
 	 * @throws JsonProcessingException
 	 */
@@ -229,9 +236,9 @@ public class MenuController extends GenericAbstractController {
 	/**
 	 * 노드의 타입을 변경한다.
 	 * 
-	 * @param comprehensiveTree
+	 * @param jsTreeHibernateDTO
 	 * @param model
-	 * @param request
+	 * @param bindingResult
 	 * @return
 	 * @throws JsonProcessingException
 	 */
@@ -252,7 +259,7 @@ public class MenuController extends GenericAbstractController {
 	/**
 	 * 노드를 이동한다.
 	 * 
-	 * @param comprehensiveTree
+	 * @param jsTreeHibernateDTO
 	 * @param model
 	 * @param request
 	 * @return
