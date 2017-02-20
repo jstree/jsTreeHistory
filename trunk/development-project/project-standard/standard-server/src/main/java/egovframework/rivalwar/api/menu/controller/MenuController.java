@@ -68,7 +68,7 @@ public class MenuController extends GenericAbstractController {
 
 		ParameterParser parser = new ParameterParser(request);
 
-		logger.info("getChildMenu Call change Great! again seven");
+		logger.info("jrebel reload test");
 
 		if (parser.getInt("c_id") <= 0) {
 			throw new RuntimeException();
