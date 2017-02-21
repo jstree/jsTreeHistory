@@ -74,6 +74,10 @@ public class EgovFacebookController {
 	 * facebook 담벼락 목록을 보여준다.
 	 * @return String - 리턴 Url
 	 */
+	@IncludedInfo(name = "RivalWar Admin Facebook Login",
+			listUrl = "/uss/ion/fbk/facebookSignin.do",
+			order = 7002,
+			gid = 3131)
 	@RequestMapping(value="/uss/ion/fbk/feed.do", method=RequestMethod.GET)
 	public String showFeed(Model model) {
 		model.addAttribute("feed", facebook.feedOperations().getFeed());
