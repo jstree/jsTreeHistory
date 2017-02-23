@@ -1,9 +1,15 @@
 package egovframework.rivalwar.api.snsLogin.service;
 
 import egovframework.com.cmm.service.EgovCmmUseService;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 import egovframework.com.uss.umt.service.EgovMberManageService;
 import egovframework.com.uss.umt.service.MberManageVO;
 import egovframework.com.uss.umt.service.UserDefaultVO;
+import egovframework.com.uss.umt.service.impl.EntrprsManageDAO;
+import egovframework.com.uss.umt.service.impl.MberManageDAO;
+import egovframework.com.uss.umt.service.impl.UserManageDAO;
+import egovframework.com.utl.sim.service.EgovFileScrty;
+import egovframework.rte.fdl.idgnr.EgovIdGnrService;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import org.slf4j.Logger;
@@ -21,6 +27,13 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /** mberManageDAO */
+    @Resource(name="mberManageDAO")
+    private MberManageDAO mberManageDAO;
+
+    /** egovUsrCnfrmIdGnrService */
+    @Resource(name="egovUsrCnfrmIdGnrService")
+    private EgovIdGnrService idgenService;
     /**
      * EgovPropertyService
      */
@@ -69,8 +82,6 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
 
         List<?> mberList = mberManageService.selectMberList(userSearchVO);
         if (mberList.isEmpty() == true) {
-
-            logger.info("register process");
             MberManageVO mberManageVO = new MberManageVO();
             mberManageVO.setMberId(facebookProfile.getId());
             mberManageVO.setMberNm(facebookProfile.getId());
@@ -80,35 +91,46 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
             mberManageVO.setAreaNo("010");
             mberManageVO.setMiddleTelno("7313");
             mberManageVO.setEndTelno("7313");
-            mberManageVO.setMberFxnum("facebook"); //소셜 타입 : facebook, google, etc...
+            mberManageVO.setMberFxnum("facebook");
             mberManageVO.setMoblphonNo("01031313131");
             mberManageVO.setMberEmailAdres("noreply@313.co.kr");
             mberManageVO.setZip("100775");
             mberManageVO.setAdres("서울중구무교동한국정보화진흥원");
-            mberManageVO.setDetailAdres("custom field");
+            mberManageVO.setDetailAdres("nickname");
             mberManageVO.setMberSttus("P");
-            //쭉쭉
-            if (mberManageVO.getGroupId().equals("")) {
-                mberManageVO.setGroupId(null);
-            }
-            mberManageService.insertMber(mberManageVO);
-
+            mberManageVO.setGroupId("GROUP_00000000000000");
+            //고유아이디 셋팅
+            String uniqId = idgenService.getNextStringId();
+            mberManageVO.setUniqId(uniqId);
+            //패스워드 암호화
+            String pass = EgovFileScrty.encryptPassword(mberManageVO.getPassword(), mberManageVO.getMberId());
+            mberManageVO.setPassword(pass);
+            mberManageDAO.insertMber(mberManageVO);
+            return 0;
         } else {
             if (mberList.size() == 1) {
                 logger.info("registered statistics process");
-
+                return 1;
             } else {
                 logger.info("what things?");
+                return mberList.size();
             }
         }
-
-        //찾은 경우에 대한 사용자 아이디 리턴.
-        return 313;
     }
 
     @Override
     public boolean getIsNickname(String userId) {
-        return false;
+
+        try {
+            MberManageVO serchVo = mberManageService.selectMber(userId);
+            if(serchVo.getDetailAdres().equals("nickname")|| StringUtils.isEmpty(serchVo.getDetailAdres())){
+                return false;
+            }else{
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

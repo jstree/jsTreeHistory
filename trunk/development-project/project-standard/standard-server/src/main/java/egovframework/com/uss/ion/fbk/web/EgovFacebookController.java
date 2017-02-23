@@ -75,7 +75,7 @@ public class EgovFacebookController {
 	 */
 	@IncludedInfo(name="Facebook 연동",order = 831 ,gid = 50)
 	@RequestMapping(value = "/uss/ion/fbk/facebook.do", method = RequestMethod.GET)
-	public String home() throws Exception {
+	public String home(Model model) throws Exception {
 
 		//original code = return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
 
@@ -89,8 +89,10 @@ public class EgovFacebookController {
 		long userCheck = facebookLoginService.getUserIdByLoginAndRegisterProcess(facebookAccount);
 		if(userCheck == 0){
 			//최초 가입 되었기때문에 닉네임 셋팅 요청
+			return "egovframework/com/uss/ion/fbk/EgovFacebookProfile";
 		}else if(userCheck == 1){
 			if(facebookLoginService.getIsNickname(facebookAccount.getId())){
+				model.addAttribute("profile", connection.getApi().userOperations().getUserProfile());
 				return "egovframework/com/uss/ion/fbk/EgovFacebookProfile";
 			}else{
 				//"plzGiveMeyourNickName";
@@ -99,7 +101,6 @@ public class EgovFacebookController {
 		}else{
 			throw new RuntimeException("login hack!");
 		}
-		return "home";
 	}
 
 	/**
