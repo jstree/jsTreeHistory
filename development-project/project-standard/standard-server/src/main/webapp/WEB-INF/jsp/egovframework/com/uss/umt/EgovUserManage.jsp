@@ -3,6 +3,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
  /**
   * @Class Name : EgovUserManage.jsp
@@ -126,7 +127,7 @@ function fnViewCheck(){
             </tr>
         </table>
         <!-- content start -->
-        <form name="listForm" action="<c:url value='/uss/umt/EgovUserManage.do'/>" method="post">
+        <form:form name="listForm" action="<c:url value='/uss/umt/EgovUserManage.do'/>" method="post">
         <input name="selectedId" type="hidden" />
         <input name="checkedIdForDel" type="hidden" />
         <input name="pageIndex" type="hidden" value="<c:out value='${userSearchVO.pageIndex}'/>"/>
@@ -226,7 +227,7 @@ function fnViewCheck(){
         </table>
         <br/>
         <!--  page end -->
-        </form>
+        </form:form>
         <!-- content end -->
 </body>
 </html>

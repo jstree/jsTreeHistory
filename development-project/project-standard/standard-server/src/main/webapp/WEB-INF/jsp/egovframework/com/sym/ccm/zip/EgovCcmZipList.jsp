@@ -22,6 +22,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html lang="ko">
 <head>
 <title>우편번호 목록</title>
@@ -117,7 +118,7 @@ function fn_egov_list(){
 <body onLoad="fn_egov_list()">
 <noscript class="noScriptTitle">자바스크립트를 지원하지 않는 브라우저에서는 일부 기능을 사용하실 수 없습니다.</noscript>
 <DIV id="content" style="display">
-<form name="listForm" action="<c:url value='/sym/ccm/zip/EgovCcmZipList.do'/>" method="post">
+<form:form name="listForm" action="<c:url value='/sym/ccm/zip/EgovCcmZipList.do'/>" method="post">
 <table width="700" cellpadding="8" class="table-search" border="0">
  <tr>
   <td width="18%"class="title_left"><h1 class="title_left">
@@ -223,14 +224,14 @@ function fn_egov_list(){
 
 <input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
 
-</form>
-<form name="Form" id="Form" method="post" action="">
+</form:form>
+<form:form name="Form" id="Form" method="post" action="">
 	<input type=hidden name="zip">
 	<input type=hidden name="sn" value="0">
 	<input type=hidden name="rdmnCode">
 	<input type=hidden name="searchList">
 	<input type="submit" id="invisible" class="invisible">
-</form>
+</form:form>
 </DIV>
 
 

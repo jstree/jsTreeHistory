@@ -22,6 +22,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html lang="ko">
 <head>
 <title>우편번호 상세조회</title>
@@ -158,12 +159,12 @@ function fn_egov_delete_Zip(){
   <td><span class="button"><input type="submit" value="목록" onclick="fn_egov_list_Zip(); return false;"></span></td>
 </tr>
 </table>
-<form name="Form" id="Form" method="post" action="">
+<form:form name="Form" id="Form" method="post" action="">
 	<input type=hidden name="zip">
 	<input type=hidden name="sn">
 	<input type=hidden name="rdmnCode">
 	<input type=hidden name="searchList" value="${searchList}">
 	<input type="submit" id="invisible" class="invisible">
-</form>
+</form:form>
 </body>
 </html>

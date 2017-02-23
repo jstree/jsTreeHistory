@@ -3,6 +3,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
 
 /**
@@ -161,7 +162,7 @@ function press() {
   <tr>
     <td width="700">
 
-<form name="listForm" action="<c:url value='/uss/umt/dpt/selectBannerList.do'/>" method="post">
+<form:form name="listForm" action="<c:url value='/uss/umt/dpt/selectBannerList.do'/>" method="post">
 <table width="100%" cellpadding="8" class="table-search" border="0">
  <tr>
   <td width="20%"class="title_left">
@@ -181,7 +182,7 @@ function press() {
 <input type="hidden" name="orgnztId">
 <input type="hidden" name="pageIndex" value="<c:if test="${empty deptManageVO.pageIndex }">1</c:if><c:if test="${!empty deptManageVO.pageIndex }"><c:out value='${deptManageVO.pageIndex}'/></c:if>">
 <input type="hidden" name="searchCondition" value="1">
-</form>
+</form:form>
 
 <table width="100%" cellpadding="8" class="table-line" summary="부서에 대한 목록을 제공한다.">
  <thead>

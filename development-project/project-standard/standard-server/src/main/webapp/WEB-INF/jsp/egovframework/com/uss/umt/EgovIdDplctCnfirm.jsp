@@ -3,6 +3,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
  /**
   * @Class Name : EgovIdDplctCnfirm.jsp
@@ -107,7 +108,7 @@ function fnCheck(str){
 </script>
 </head>
 <body>
-    <form name="checkForm" action ="<c:url value='/uss/umt/EgovIdDplctCnfirm.do'/>">
+    <form:form name="checkForm" action ="${pageContext.request.contextPath}/uss/umt/EgovIdDplctCnfirm.do">
 
     <table border="0" cellspacing="0" cellpadding="0" width="300">
         <tr><td height="20" colspan="2"></td></tr>
@@ -166,7 +167,7 @@ function fnCheck(str){
             </tr>
         </table>
 
-    </form>
+    </form:form>
 
 </body>
 </html>

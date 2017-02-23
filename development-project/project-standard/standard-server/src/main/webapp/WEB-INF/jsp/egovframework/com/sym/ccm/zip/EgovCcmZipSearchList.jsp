@@ -24,6 +24,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
@@ -87,7 +88,7 @@ function fn_egov_list(){
 <body onLoad="fn_egov_list()">
 <noscript class="noScriptTitle">자바스크립트를 지원하지 않는 브라우저에서는 일부 기능을 사용하실 수 없습니다.</noscript>
 
-<form name="listForm" action="<c:url value='/sym/ccm/zip/EgovCcmZipSearchList.do'/>" method="post">
+<form:form name="listForm" action="${pageContext.request.contextPath}/sym/ccm/zip/EgovCcmZipSearchList.do" method="post">
 <table style="width:650px;margin:0 auto" cellpadding="8" class="table-search" border="0">
  <tr>
   <td style="width:40%" class="title_left">
@@ -189,7 +190,7 @@ function fn_egov_list(){
 
 <input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>">
 <input type=hidden name="searchList">
-</form>
+</form:form>
 </body>
 </html>
 
