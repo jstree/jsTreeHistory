@@ -20,17 +20,21 @@
 package egovframework.com.uss.ion.fbk.web;
 
 import egovframework.com.cmm.annotation.IncludedInfo;
-
-import javax.inject.Inject;
-
+import egovframework.rivalwar.api.snsLogin.service.FacebookLoginService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.inject.Inject;
 
 /**
  * Facebook을 처리하는 Controller Class 구현
@@ -52,6 +56,9 @@ public class EgovFacebookController {
 
 	private final Facebook facebook;
 
+	@Autowired
+	private FacebookLoginService facebookLoginService;
+
 	@Inject
 	public EgovFacebookController(Facebook facebook) {
 		this.facebook = facebook;
@@ -60,14 +67,39 @@ public class EgovFacebookController {
 	@Inject
 	private ConnectionRepository connectionRepository;
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	/**
 	 * facebook 연동을 위한 목록을 보여준다.
 	 * @return String - 리턴 Url
 	 */
 	@IncludedInfo(name="Facebook 연동",order = 831 ,gid = 50)
 	@RequestMapping(value = "/uss/ion/fbk/facebook.do", method = RequestMethod.GET)
-	public String home() {
-		return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
+	public String home() throws Exception {
+
+		//original code = return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
+
+		logger.info("//below edit by dongmin");
+		Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
+		if (connection == null) {
+			return "redirect:/connect/facebook";
+		}
+
+		FacebookProfile facebookAccount = connection.getApi().userOperations().getUserProfile();
+		long userCheck = facebookLoginService.getUserIdByLoginAndRegisterProcess(facebookAccount);
+		if(userCheck == 0){
+			//최초 가입 되었기때문에 닉네임 셋팅 요청
+		}else if(userCheck == 1){
+			if(facebookLoginService.getIsNickname(facebookAccount.getId())){
+				return "egovframework/com/uss/ion/fbk/EgovFacebookProfile";
+			}else{
+				//"plzGiveMeyourNickName";
+				return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
+			}
+		}else{
+			throw new RuntimeException("login hack!");
+		}
+		return "home";
 	}
 
 	/**

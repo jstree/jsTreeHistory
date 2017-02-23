@@ -52,9 +52,7 @@ function fnUpdate(){
 </head>
 <body>
         <!-- content start -->
-        <form name="passwordChgVO" method="post" 
-              action="<c:url value="${'/uss/umt/EgovEntrprsPasswordUpdt.do'}"/>" 
-              >
+        <form:form name="passwordChgVO" method="post" action="<c:url value="${'/uss/umt/EgovEntrprsPasswordUpdt.do'}"/>">
               <!-- onsubmit="javascript:return FormValidation(document.passwordChgVO);" >  -->
         <!-- 상세정보 사용자 삭제시 prameter 전달용 input -->
         <input name="checkedIdForDel" type="hidden" />
@@ -124,7 +122,7 @@ function fnUpdate(){
 		        </td>
             </tr>
         </table>
-        </form>
+        </form:form>
         <!-- content end -->
 </body>
 </html>

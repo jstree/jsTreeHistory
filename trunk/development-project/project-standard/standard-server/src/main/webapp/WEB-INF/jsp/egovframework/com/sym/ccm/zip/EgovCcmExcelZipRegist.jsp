@@ -22,6 +22,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html lang="ko">
 <head>
 <title>우편번호 엑셀파일 등록</title>
@@ -68,7 +69,7 @@ function fn_egov_regist_ExcelZip(){
 ${sResult}
 <DIV id="content" style="width:712px">
 <!-- 상단타이틀 -->
-<form name="Form" id="Form" action="<c:url value='/sym/ccm/zip/EgovCcmZipRegist.do'/>" method="post" enctype="multipart/form-data" >
+<form:form name="Form" id="Form" action="<c:url value='/sym/ccm/zip/EgovCcmZipRegist.do'/>" method="post" enctype="multipart/form-data" >
 <!-- 상단 타이틀  영역 -->
 <table width="700" cellpadding="8" class="table-search" border="0">
  <tr>
@@ -124,7 +125,7 @@ ${sResult}
 
 <input name="cmd" type="hidden" value="<c:out value='ExcelZipRegist'/>"/>
 <input name="searchList" type="hidden" value="${searchList}"/>
-</form>
+</form:form>
 </DIV>
 </body>
 </html>

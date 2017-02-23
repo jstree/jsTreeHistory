@@ -3,6 +3,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%pageContext.setAttribute("crlf", "\r\n"); %>
 <%
  /**
@@ -69,7 +70,7 @@ function fnDisAgree(){
 </head>
 <body>
         <!-- content start -->
-        <form name="stplatForm" action="<c:url value='/sec/rnc/EgovRlnmCnfirm.do'/>" method="post" >
+        <form:form name="stplatForm" action="<c:url value='/sec/rnc/EgovRlnmCnfirm.do'/>" method="post" >
         <input type="hidden" name="sbscrbTy" value="${sbscrbTy}"/>
         <!-- 실명인증의 기본옵션은 주민번호 실명확인임 : 주민번호 실명인증 으로 가기위한 초기화값 -->
         <input type="hidden" name="ihidnum" value=""/>
@@ -136,7 +137,7 @@ function fnDisAgree(){
 	    </td>
 	    </tr>
 	    </table>
-        </form>
+        </form:form>
         <!-- content end -->
 </body>
 </html>

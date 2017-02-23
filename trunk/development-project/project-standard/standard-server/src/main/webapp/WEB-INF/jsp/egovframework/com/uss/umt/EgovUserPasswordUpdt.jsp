@@ -52,7 +52,7 @@ function fnUpdate(){
 </head>
 <body>
 <!-- content start -->
-        <form name="passwordChgVO" method="post" 
+        <form:form name="passwordChgVO" method="post"
               action="<c:url value="${'/uss/umt/EgovUserPasswordUpdt.do'}"/>" 
               >
               <!-- onsubmit="javascript:return FormValidation(document.passwordChgVO);" >  -->
@@ -123,7 +123,7 @@ function fnUpdate(){
 		        </td>
             </tr>
         </table>
-        </form>
+        </form:form>
         <!-- content end -->
 </body>
 </html>
