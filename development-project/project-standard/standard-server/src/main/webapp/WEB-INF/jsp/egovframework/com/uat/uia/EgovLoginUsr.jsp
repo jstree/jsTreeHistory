@@ -216,7 +216,7 @@ function fnInit() {
                                     <table width="250" border="0" cellpadding="0" cellspacing="0">
                                       <tr>
                                         <td class="required_text" nowrap><label for="id">아이디&nbsp;&nbsp;</label></td>
-                                        <td><input type="text" name="id" id="id" style="height: 16px; width: 85px; border: 1px solid #CCCCCC; margin: 0px; padding: 0px; ime-mode: disabled;" tabindex="4" maxlength="10"/></td>
+                                        <td><input type="text" name="id" id="id" style="height: 16px; width: 85px; border: 1px solid #CCCCCC; margin: 0px; padding: 0px; ime-mode: disabled;" tabindex="4" maxlength="20"/></td>
                                         <td/>
                                       </tr>
                                       <tr>

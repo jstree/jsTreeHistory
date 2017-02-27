@@ -249,7 +249,7 @@
         <init-param>
             <description>로그인 처리 URL설정</description>
             <param-name>loginProcessURL</param-name>
-            <param-value>/uat/uia/actionLogin</param-value>
+            <param-value>/uat/uia/actionLogin.do</param-value>
         </init-param>
     </filter>
     <filter-mapping>

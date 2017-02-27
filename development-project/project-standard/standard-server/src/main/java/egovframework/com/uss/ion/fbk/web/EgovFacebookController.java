@@ -19,8 +19,17 @@
  */
 package egovframework.com.uss.ion.fbk.web;
 
+import egovframework.com.cmm.EgovMessageSource;
+import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.annotation.IncludedInfo;
+import egovframework.com.cmm.service.EgovCmmUseService;
+import egovframework.com.cmm.service.EgovUserDetailsService;
+import egovframework.com.cmm.util.EgovUserDetailsHelper;
+import egovframework.com.ext.jstree.support.util.StringUtils;
+import egovframework.com.uat.uia.service.EgovLoginService;
 import egovframework.rivalwar.api.snsLogin.service.FacebookLoginService;
+import egovframework.rte.fdl.property.EgovPropertyService;
+import egovframework.rte.fdl.security.userdetails.EgovUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +43,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Facebook을 처리하는 Controller Class 구현
@@ -67,6 +78,22 @@ public class EgovFacebookController {
 	@Inject
 	private ConnectionRepository connectionRepository;
 
+	/** EgovLoginService */
+	@Resource(name = "loginService")
+	private EgovLoginService loginService;
+
+	/** EgovMessageSource */
+	@Resource(name = "egovMessageSource")
+	EgovMessageSource egovMessageSource;
+
+	/**
+	 * EgovPropertyService
+	 */
+	@Resource(name = "propertiesService")
+	protected EgovPropertyService propertiesService;
+
+	static EgovUserDetailsService egovUserDetailsService;
+
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
@@ -75,31 +102,48 @@ public class EgovFacebookController {
 	 */
 	@IncludedInfo(name="Facebook 연동",order = 831 ,gid = 50)
 	@RequestMapping(value = "/uss/ion/fbk/facebook.do", method = RequestMethod.GET)
-	public String home(Model model) throws Exception {
+	public String home(HttpServletRequest request, Model model) throws Exception {
 
 		//original code = return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
 
-		logger.info("//below edit by dongmin");
 		Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
 		if (connection == null) {
 			return "redirect:/connect/facebook";
 		}
 
 		FacebookProfile facebookAccount = connection.getApi().userOperations().getUserProfile();
-		long userCheck = facebookLoginService.getUserIdByLoginAndRegisterProcess(facebookAccount);
-		if(userCheck == 0){
+		String resultString = facebookLoginService.getUserIdByLoginAndRegisterProcess(facebookAccount);
+		if(StringUtils.isEmpty(resultString)){
 			//최초 가입 되었기때문에 닉네임 셋팅 요청
-			return "egovframework/com/uss/ion/fbk/EgovFacebookProfile";
-		}else if(userCheck == 1){
-			if(facebookLoginService.getIsNickname(facebookAccount.getId())){
-				model.addAttribute("profile", connection.getApi().userOperations().getUserProfile());
-				return "egovframework/com/uss/ion/fbk/EgovFacebookProfile";
+			logger.info("==================1");
+			throw new RuntimeException("resultString is empty");
+		}else{
+			if(StringUtils.equals(resultString, "joinedAccount")){
+				logger.info("==================2");
+				// 1. 일반 로그인 처리
+				LoginVO loginVO = new LoginVO();
+				loginVO.setUserSe("GNR");
+				loginVO.setId(facebookAccount.getId());
+				loginVO.setPassword(propertiesService.getString("tempPassword"));
+				LoginVO resultVO = loginService.actionLogin(loginVO);
+				logger.info(resultVO.getId() + "<===========");
+				if (resultVO != null && resultVO.getId() != null && !resultVO.getId().equals("")) {
+
+					// 2-1. 로그인 정보를 세션에 저장
+					request.getSession().setAttribute("loginVO", resultVO);
+
+					return "redirect:/uat/uia/actionMain.do";
+				} else {
+					logger.info("==================3");
+					model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
+					return "egovframework/com/uat/uia/EgovLoginUsr";
+				}
+
 			}else{
 				//"plzGiveMeyourNickName";
+				logger.info("==================4");
 				return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
 			}
-		}else{
-			throw new RuntimeException("login hack!");
 		}
 	}
 

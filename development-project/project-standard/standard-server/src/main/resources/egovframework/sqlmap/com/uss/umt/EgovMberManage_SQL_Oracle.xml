@@ -24,7 +24,8 @@ SELECT * FROM ( SELECT rownum rn, TB.* FROM (
         AREA_NO               as "areaNo",
         MIDDLE_TELNO          as "middleTelno",
         END_TELNO             as "endTelno",
-        MBTLNUM           as "moblphonNo",
+        MBTLNUM               as "moblphonNo",
+        DETAIL_ADRES          as "nickname",
         GROUP_ID              as "groupId",
         MBER_STTUS            as "sttus",
         SBSCRB_DE             as "sbscrbDe"
