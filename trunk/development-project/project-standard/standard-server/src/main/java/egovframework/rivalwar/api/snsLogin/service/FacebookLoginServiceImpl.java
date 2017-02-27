@@ -2,6 +2,7 @@ package egovframework.rivalwar.api.snsLogin.service;
 
 import egovframework.com.cmm.service.EgovCmmUseService;
 import egovframework.com.ext.jstree.support.util.StringUtils;
+import egovframework.com.ssi.syi.iis.service.CntcInsttVO;
 import egovframework.com.uss.umt.service.EgovMberManageService;
 import egovframework.com.uss.umt.service.MberManageVO;
 import egovframework.com.uss.umt.service.UserDefaultVO;
@@ -11,6 +12,7 @@ import egovframework.com.uss.umt.service.impl.UserManageDAO;
 import egovframework.com.utl.sim.service.EgovFileScrty;
 import egovframework.rte.fdl.idgnr.EgovIdGnrService;
 import egovframework.rte.fdl.property.EgovPropertyService;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,12 +29,16 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    /** mberManageDAO */
-    @Resource(name="mberManageDAO")
+    /**
+     * mberManageDAO
+     */
+    @Resource(name = "mberManageDAO")
     private MberManageDAO mberManageDAO;
 
-    /** egovUsrCnfrmIdGnrService */
-    @Resource(name="egovUsrCnfrmIdGnrService")
+    /**
+     * egovUsrCnfrmIdGnrService
+     */
+    @Resource(name = "egovUsrCnfrmIdGnrService")
     private EgovIdGnrService idgenService;
     /**
      * EgovPropertyService
@@ -52,12 +58,14 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
     @Resource(name = "EgovCmmUseService")
     private EgovCmmUseService cmmUseService;
 
-    /** DefaultBeanValidator beanValidator */
+    /**
+     * DefaultBeanValidator beanValidator
+     */
     @Autowired
     private DefaultBeanValidator beanValidator;
 
     @Override
-    public long getUserIdByLoginAndRegisterProcess(FacebookProfile facebookProfile) throws Exception {
+    public String getUserIdByLoginAndRegisterProcess(FacebookProfile facebookProfile) throws Exception {
 
         UserDefaultVO userSearchVO = new UserDefaultVO();
         userSearchVO.setSearchKeyword(facebookProfile.getId());
@@ -96,7 +104,7 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
             mberManageVO.setMberEmailAdres("noreply@313.co.kr");
             mberManageVO.setZip("100775");
             mberManageVO.setAdres("서울중구무교동한국정보화진흥원");
-            mberManageVO.setDetailAdres("nickname");
+            mberManageVO.setDetailAdres("");//nickname
             mberManageVO.setMberSttus("P");
             mberManageVO.setGroupId("GROUP_00000000000000");
             //고유아이디 셋팅
@@ -106,30 +114,25 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
             String pass = EgovFileScrty.encryptPassword(mberManageVO.getPassword(), mberManageVO.getMberId());
             mberManageVO.setPassword(pass);
             mberManageDAO.insertMber(mberManageVO);
-            return 0;
+            return uniqId;
         } else {
             if (mberList.size() == 1) {
-                logger.info("registered statistics process");
-                return 1;
+                EgovMap emp = (EgovMap) mberList.get(0);
+                logger.info("-----------------" +  emp.get("nickname").toString());
+                String nickName = emp.get("nickname").toString();
+                if(StringUtils.isEmpty(nickName) || StringUtils.equalsIgnoreCase(nickName, facebookProfile.getId())){
+                    //nickname is not appered
+                    logger.info("--------------------needTheNickname");
+                    return "needTheNickname";
+                }else{
+                    //nickname is apper
+                    logger.info("--------------------joinedAccount");
+                    return "joinedAccount";
+                }
+
             } else {
-                logger.info("what things?");
-                return mberList.size();
+                throw new RuntimeException("duplicate account check" + facebookProfile.getId());
             }
-        }
-    }
-
-    @Override
-    public boolean getIsNickname(String userId) {
-
-        try {
-            MberManageVO serchVo = mberManageService.selectMber(userId);
-            if(serchVo.getDetailAdres().equals("nickname")|| StringUtils.isEmpty(serchVo.getDetailAdres())){
-                return false;
-            }else{
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
         }
     }
 

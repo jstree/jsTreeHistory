@@ -4,7 +4,6 @@ import org.springframework.social.facebook.api.FacebookProfile;
 
 public interface FacebookLoginService {
 
-    public long getUserIdByLoginAndRegisterProcess(FacebookProfile facebookProfile) throws Exception;
+    public String getUserIdByLoginAndRegisterProcess(FacebookProfile facebookProfile) throws Exception;
 
-    public boolean getIsNickname(String userId);
 }
