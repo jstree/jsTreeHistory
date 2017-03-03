@@ -71,15 +71,15 @@
         <filter-class>egovframework.com.cmm.util.EgovUrlRewriteFilter</filter-class>
         <init-param>
             <param-name>targetURI</param-name>
-            <param-value>/sample1/, /sample/</param-value>
+            <param-value>/http/, /https/</param-value>
         </init-param>
         <init-param>
             <param-name>httpPort</param-name>
-            <param-value>8313</param-value>
+            <param-value>8080</param-value>
         </init-param>
         <init-param>
             <param-name>httpsPort</param-name>
-            <param-value>8181</param-value>
+            <param-value>8443</param-value>
         </init-param>
     </filter>
     <filter-mapping>
@@ -286,7 +286,6 @@
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
-        <welcome-file>egovDevIndex.jsp</welcome-file>
     </welcome-file-list>
     <login-config>
         <auth-method>BASIC</auth-method>

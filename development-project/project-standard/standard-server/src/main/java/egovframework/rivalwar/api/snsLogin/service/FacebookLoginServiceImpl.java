@@ -1,14 +1,10 @@
 package egovframework.rivalwar.api.snsLogin.service;
 
-import egovframework.com.cmm.service.EgovCmmUseService;
 import egovframework.com.ext.jstree.support.util.StringUtils;
-import egovframework.com.ssi.syi.iis.service.CntcInsttVO;
 import egovframework.com.uss.umt.service.EgovMberManageService;
 import egovframework.com.uss.umt.service.MberManageVO;
 import egovframework.com.uss.umt.service.UserDefaultVO;
-import egovframework.com.uss.umt.service.impl.EntrprsManageDAO;
 import egovframework.com.uss.umt.service.impl.MberManageDAO;
-import egovframework.com.uss.umt.service.impl.UserManageDAO;
 import egovframework.com.utl.sim.service.EgovFileScrty;
 import egovframework.rte.fdl.idgnr.EgovIdGnrService;
 import egovframework.rte.fdl.property.EgovPropertyService;
@@ -16,10 +12,8 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.stereotype.Service;
-import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -52,17 +46,6 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
     @Resource(name = "mberManageService")
     private EgovMberManageService mberManageService;
 
-    /**
-     * cmmUseService
-     */
-    @Resource(name = "EgovCmmUseService")
-    private EgovCmmUseService cmmUseService;
-
-    /**
-     * DefaultBeanValidator beanValidator
-     */
-    @Autowired
-    private DefaultBeanValidator beanValidator;
 
     @Override
     public String getUserIdByLoginAndRegisterProcess(FacebookProfile facebookProfile) throws Exception {
