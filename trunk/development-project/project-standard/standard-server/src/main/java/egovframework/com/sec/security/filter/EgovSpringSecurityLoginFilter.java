@@ -6,6 +6,7 @@ import java.util.Map;
 import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
+import egovframework.com.ext.jstree.support.util.StringUtils;
 import egovframework.com.uat.uia.service.EgovLoginService;
 
 import javax.servlet.Filter;
@@ -123,7 +124,8 @@ public class EgovSpringSecurityLoginFilter implements Filter {
 				if (requestURL.contains(loginProcessURL)) {
 
 					String password = httpRequest.getParameter("password");
-					
+
+					password = socialLoginPasswordSetting(httpRequest, password);
 					// 보안점검 후속 조치(Password 검증)
 					if (password == null || password.equals("") || password.length() < 8 || password.length() > 20) {
 						httpRequest.setAttribute("message", egovMessageSource.getMessage("fail.common.login.password"));
@@ -201,6 +203,13 @@ public class EgovSpringSecurityLoginFilter implements Filter {
 		}
 
 		chain.doFilter(request, response);
+	}
+
+	private String socialLoginPasswordSetting(HttpServletRequest httpRequest, String password) {
+		if(StringUtils.equals(httpRequest.getParameter("userSe"), "GNR")){
+            password = "rivalWar313";
+        }
+		return password;
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {

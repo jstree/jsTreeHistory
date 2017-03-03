@@ -26,13 +26,24 @@ import egovframework.com.cmm.service.EgovCmmUseService;
 import egovframework.com.cmm.service.EgovUserDetailsService;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.com.ext.jstree.support.util.StringUtils;
+import egovframework.com.sec.security.filter.EgovSpringSecurityLoginFilter;
 import egovframework.com.uat.uia.service.EgovLoginService;
 import egovframework.rivalwar.api.snsLogin.service.FacebookLoginService;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.fdl.security.userdetails.EgovUserDetails;
+import egovframework.rte.fdl.security.userdetails.jdbc.EgovJdbcUserDetailsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
@@ -42,168 +53,162 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.swing.*;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * Facebook을 처리하는 Controller Class 구현
- * @author 표준프레임워크센터
- * @since 2014.11.10
- * @version 1.0
- * @see
  *
- * <pre>
+ * @author 표준프레임워크센터
+ * @version 1.0
+ * @see <pre>
  * << 개정이력(Modification Information) >>
  *
  *   수정일     	수정자          		      수정내용
  *  -----------    --------------------    ---------------------------
  *  2014.11.10		표준프레임워크센터		      최초 생성
  *  </pre>
+ * @since 2014.11.10
  */
 @Controller
 public class EgovFacebookController {
 
-	private final Facebook facebook;
+    private final Facebook facebook;
 
-	@Autowired
-	private FacebookLoginService facebookLoginService;
+    @Autowired
+    private FacebookLoginService facebookLoginService;
 
-	@Inject
-	public EgovFacebookController(Facebook facebook) {
-		this.facebook = facebook;
-	}
+    @Inject
+    public EgovFacebookController(Facebook facebook) {
+        this.facebook = facebook;
+    }
 
-	@Inject
-	private ConnectionRepository connectionRepository;
+    @Inject
+    private ConnectionRepository connectionRepository;
 
-	/** EgovLoginService */
-	@Resource(name = "loginService")
-	private EgovLoginService loginService;
 
-	/** EgovMessageSource */
-	@Resource(name = "egovMessageSource")
-	EgovMessageSource egovMessageSource;
+    /**
+     * EgovMessageSource
+     */
+    @Resource(name = "egovMessageSource")
+    EgovMessageSource egovMessageSource;
 
-	/**
-	 * EgovPropertyService
-	 */
-	@Resource(name = "propertiesService")
-	protected EgovPropertyService propertiesService;
+    /**
+     * EgovPropertyService
+     */
+    @Resource(name = "propertiesService")
+    protected EgovPropertyService propertiesService;
 
-	static EgovUserDetailsService egovUserDetailsService;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    /**
+     * facebook 연동을 위한 목록을 보여준다.
+     *
+     * @return String - 리턴 Url
+     */
+    @IncludedInfo(name = "Facebook 연동", order = 831, gid = 50)
+    @RequestMapping(value = "/uss/ion/fbk/facebook.do", method = RequestMethod.GET)
+    public String home(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
-	/**
-	 * facebook 연동을 위한 목록을 보여준다.
-	 * @return String - 리턴 Url
-	 */
-	@IncludedInfo(name="Facebook 연동",order = 831 ,gid = 50)
-	@RequestMapping(value = "/uss/ion/fbk/facebook.do", method = RequestMethod.GET)
-	public String home(HttpServletRequest request, Model model) throws Exception {
+        //original code = return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
 
-		//original code = return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
+        Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
+        if (connection == null) {
+            return "redirect:/connect/facebook";
+        }
 
-		Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
-		if (connection == null) {
-			return "redirect:/connect/facebook";
-		}
+        FacebookProfile facebookAccount = connection.getApi().userOperations().getUserProfile();
 
-		FacebookProfile facebookAccount = connection.getApi().userOperations().getUserProfile();
-		String resultString = facebookLoginService.getUserIdByLoginAndRegisterProcess(facebookAccount);
-		if(StringUtils.isEmpty(resultString)){
-			//최초 가입 되었기때문에 닉네임 셋팅 요청
-			logger.info("==================1");
-			throw new RuntimeException("resultString is empty");
-		}else{
-			if(StringUtils.equals(resultString, "joinedAccount")){
-				logger.info("==================2");
-				// 1. 일반 로그인 처리
-				LoginVO loginVO = new LoginVO();
-				loginVO.setUserSe("GNR");
-				loginVO.setId(facebookAccount.getId());
-				loginVO.setPassword(propertiesService.getString("tempPassword"));
-				LoginVO resultVO = loginService.actionLogin(loginVO);
-				logger.info(resultVO.getId() + "<===========");
-				if (resultVO != null && resultVO.getId() != null && !resultVO.getId().equals("")) {
+        String resultString = facebookLoginService.getUserIdByLoginAndRegisterProcess(facebookAccount);
+        request.getSession().setAttribute("userSe", "GNR");
+        request.getSession().setAttribute("id", facebookAccount.getId());
+        if (StringUtils.equals(resultString, "needTheNickname")) {
+            logger.info("==================needTheNickname==================");
+            request.getSession().setAttribute("resultString", "needTheNickname");
+            return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
+        } else if (StringUtils.equals(resultString, "joinedAccount")) {
+            logger.info("==================joinedAccount==================");
+            request.getSession().setAttribute("resultString", "joinedAccount");
+            return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
+        } else {
+            throw new RuntimeException("exception facebook account");
+        }
+    }
 
-					// 2-1. 로그인 정보를 세션에 저장
-					request.getSession().setAttribute("loginVO", resultVO);
 
-					return "redirect:/uat/uia/actionMain.do";
-				} else {
-					logger.info("==================3");
-					model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-					return "egovframework/com/uat/uia/EgovLoginUsr";
-				}
+    /**
+     * facebook 담벼락 목록을 보여준다.
+     *
+     * @return String - 리턴 Url
+     */
+    @IncludedInfo(name = "RivalWar Admin Facebook Login",
+            listUrl = "/uss/ion/fbk/facebookSignin.do",
+            order = 7002,
+            gid = 3131)
+    @RequestMapping(value = "/uss/ion/fbk/feed.do", method = RequestMethod.GET)
+    public String showFeed(Model model) {
+        model.addAttribute("feed", facebook.feedOperations().getFeed());
+        return "egovframework/com/uss/ion/fbk/EgovFacebookFeed";
+    }
 
-			}else{
-				//"plzGiveMeyourNickName";
-				logger.info("==================4");
-				return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
-			}
-		}
-	}
+    /**
+     * facebook 담벼락 내용을 입력한다.
+     *
+     * @return String - 리턴 Url
+     */
+    @RequestMapping(value = "/uss/ion/fbk/feed.do", method = RequestMethod.POST)
+    public String postUpdate(String message) {
+        facebook.feedOperations().updateStatus(message);
+        return "redirect:/uss/ion/fbk/feed.do";
+    }
 
-	/**
-	 * facebook 담벼락 목록을 보여준다.
-	 * @return String - 리턴 Url
-	 */
-	@IncludedInfo(name = "RivalWar Admin Facebook Login",
-			listUrl = "/uss/ion/fbk/facebookSignin.do",
-			order = 7002,
-			gid = 3131)
-	@RequestMapping(value="/uss/ion/fbk/feed.do", method=RequestMethod.GET)
-	public String showFeed(Model model) {
-		model.addAttribute("feed", facebook.feedOperations().getFeed());
-		return "egovframework/com/uss/ion/fbk/EgovFacebookFeed";
-	}
+    /**
+     * facebook 앨범 목록을 보여준다.
+     *
+     * @return String - 리턴 Url
+     */
+    @RequestMapping(value = "/uss/ion/fbk/albums.do", method = RequestMethod.GET)
+    public String showAlbums(Model model) {
+        model.addAttribute("albums", facebook.mediaOperations().getAlbums());
+        return "egovframework/com/uss/ion/fbk/EgovFacebookAlbums";
+    }
 
-	/**
-	 * facebook 담벼락 내용을 입력한다.
-	 * @return String - 리턴 Url
-	 */
-	@RequestMapping(value="/uss/ion/fbk/feed.do", method=RequestMethod.POST)
-	public String postUpdate(String message) {
-		facebook.feedOperations().updateStatus(message);
-		return "redirect:/uss/ion/fbk/feed.do";
-	}
+    /**
+     * facebook 앨범을 보여준다.
+     *
+     * @return String - 리턴 Url
+     */
+    @RequestMapping(value = "/uss/ion/fbk/album/{albumId}", method = RequestMethod.GET)
+    public String showAlbum(@PathVariable("albumId") String albumId, Model model) {
+        model.addAttribute("album", facebook.mediaOperations().getAlbum(albumId));
+        model.addAttribute("photos", facebook.mediaOperations().getPhotos(albumId));
+        return "egovframework/com/uss/ion/fbk/EgovFacebookAlbum";
+    }
 
-	/**
-	 * facebook 앨범 목록을 보여준다.
-	 * @return String - 리턴 Url
-	 */
-	@RequestMapping(value="/uss/ion/fbk/albums.do", method=RequestMethod.GET)
-	public String showAlbums(Model model) {
-		model.addAttribute("albums", facebook.mediaOperations().getAlbums());
-		return "egovframework/com/uss/ion/fbk/EgovFacebookAlbums";
-	}
-
-	/**
-	 * facebook 앨범을 보여준다.
-	 * @return String - 리턴 Url
-	 */
-	@RequestMapping(value="/uss/ion/fbk/album/{albumId}", method=RequestMethod.GET)
-	public String showAlbum(@PathVariable("albumId") String albumId, Model model) {
-		model.addAttribute("album", facebook.mediaOperations().getAlbum(albumId));
-		model.addAttribute("photos", facebook.mediaOperations().getPhotos(albumId));
-		return "egovframework/com/uss/ion/fbk/EgovFacebookAlbum";
-	}
-
-	/**
-	 * facebook profile을 보여준다.
-	 * @return String - 리턴 Url
-	 */
-	@RequestMapping(value="/uss/ion/fbk/profile.do", method=RequestMethod.GET)
-	public String profile(Model model) {
-		Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
-		if (connection == null) {
-			return "redirect:/connect/facebook";
-		}
-		model.addAttribute("profile", connection.getApi().userOperations().getUserProfile());
-		return "egovframework/com/uss/ion/fbk/EgovFacebookProfile";
-	}
+    /**
+     * facebook profile을 보여준다.
+     *
+     * @return String - 리턴 Url
+     */
+    @RequestMapping(value = "/uss/ion/fbk/profile.do", method = RequestMethod.GET)
+    public String profile(Model model) {
+        Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
+        if (connection == null) {
+            return "redirect:/connect/facebook";
+        }
+        model.addAttribute("profile", connection.getApi().userOperations().getUserProfile());
+        return "egovframework/com/uss/ion/fbk/EgovFacebookProfile";
+    }
 
 }
