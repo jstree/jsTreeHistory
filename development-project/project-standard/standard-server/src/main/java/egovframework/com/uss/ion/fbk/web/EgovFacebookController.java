@@ -20,52 +20,27 @@
 package egovframework.com.uss.ion.fbk.web;
 
 import egovframework.com.cmm.EgovMessageSource;
-import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.annotation.IncludedInfo;
-import egovframework.com.cmm.service.EgovCmmUseService;
-import egovframework.com.cmm.service.EgovUserDetailsService;
-import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.com.ext.jstree.support.util.StringUtils;
-import egovframework.com.sec.security.filter.EgovSpringSecurityLoginFilter;
-import egovframework.com.uat.uia.service.EgovLoginService;
+import egovframework.com.sec.rgm.service.AuthorGroup;
 import egovframework.rivalwar.api.snsLogin.service.FacebookLoginService;
 import egovframework.rte.fdl.property.EgovPropertyService;
-import egovframework.rte.fdl.security.userdetails.EgovUserDetails;
-import egovframework.rte.fdl.security.userdetails.jdbc.EgovJdbcUserDetailsManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.swing.*;
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * Facebook을 처리하는 Controller Class 구현
@@ -110,7 +85,6 @@ public class EgovFacebookController {
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertiesService;
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * facebook 연동을 위한 목록을 보여준다.
@@ -119,7 +93,7 @@ public class EgovFacebookController {
      */
     @IncludedInfo(name = "Facebook 연동", order = 831, gid = 50)
     @RequestMapping(value = "/uss/ion/fbk/facebook.do", method = RequestMethod.GET)
-    public String home(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+    public String home(HttpServletRequest request, SessionStatus status, @ModelAttribute("authorGroup") AuthorGroup authorGroup) throws Exception {
 
         //original code = return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
 
@@ -129,20 +103,19 @@ public class EgovFacebookController {
         }
 
         FacebookProfile facebookAccount = connection.getApi().userOperations().getUserProfile();
-
-        String resultString = facebookLoginService.getUserIdByLoginAndRegisterProcess(facebookAccount);
+        String resultString = facebookLoginService.getUserIdByLoginAndRegisterProcess(facebookAccount, authorGroup);
+        status.setComplete();
         request.getSession().setAttribute("userSe", "GNR");
         request.getSession().setAttribute("id", facebookAccount.getId());
         if (StringUtils.equals(resultString, "needTheNickname")) {
-            logger.info("==================needTheNickname==================");
             request.getSession().setAttribute("resultString", "needTheNickname");
             return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         } else if (StringUtils.equals(resultString, "joinedAccount")) {
-            logger.info("==================joinedAccount==================");
             request.getSession().setAttribute("resultString", "joinedAccount");
             return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         } else {
-            throw new RuntimeException("exception facebook account");
+            request.getSession().setAttribute("resultString", "insertAccount");
+            return "egovframework/com/uss/ion/fbk/EgovFacebookHome";
         }
     }
 

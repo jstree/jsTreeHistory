@@ -1,6 +1,8 @@
 package egovframework.rivalwar.api.snsLogin.service;
 
 import egovframework.com.ext.jstree.support.util.StringUtils;
+import egovframework.com.sec.rgm.service.AuthorGroup;
+import egovframework.com.sec.rgm.service.EgovAuthorGroupService;
 import egovframework.com.uss.umt.service.EgovMberManageService;
 import egovframework.com.uss.umt.service.MberManageVO;
 import egovframework.com.uss.umt.service.UserDefaultVO;
@@ -46,9 +48,12 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
     @Resource(name = "mberManageService")
     private EgovMberManageService mberManageService;
 
+    @Resource(name = "egovAuthorGroupService")
+    private EgovAuthorGroupService egovAuthorGroupService;
+
 
     @Override
-    public String getUserIdByLoginAndRegisterProcess(FacebookProfile facebookProfile) throws Exception {
+    public String getUserIdByLoginAndRegisterProcess(FacebookProfile facebookProfile, AuthorGroup authorGroup) throws Exception {
 
         UserDefaultVO userSearchVO = new UserDefaultVO();
         userSearchVO.setSearchKeyword(facebookProfile.getId());
@@ -70,9 +75,8 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
         userSearchVO.setPageIndex(1);
         userSearchVO.setSbscrbSttus("0");
         userSearchVO.setSearchCondition("1");
-
         List<?> mberList = mberManageService.selectMberList(userSearchVO);
-        if (mberList.isEmpty() == true) {
+        if (mberList.isEmpty()) {
             MberManageVO mberManageVO = new MberManageVO();
             mberManageVO.setMberId(facebookProfile.getId());
             mberManageVO.setMberNm(facebookProfile.getId());
@@ -87,7 +91,7 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
             mberManageVO.setMberEmailAdres("noreply@313.co.kr");
             mberManageVO.setZip("100775");
             mberManageVO.setAdres("서울중구무교동한국정보화진흥원");
-            mberManageVO.setDetailAdres("");//nickname
+            mberManageVO.setDetailAdres(facebookProfile.getId());//nickname
             mberManageVO.setMberSttus("P");
             mberManageVO.setGroupId("GROUP_00000000000000");
             //고유아이디 셋팅
@@ -97,19 +101,22 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
             String pass = EgovFileScrty.encryptPassword(mberManageVO.getPassword(), mberManageVO.getMberId());
             mberManageVO.setPassword(pass);
             mberManageDAO.insertMber(mberManageVO);
+
+            authorGroup.setUniqId(uniqId);
+            authorGroup.setAuthorCode("ROLE_USER");
+            authorGroup.setMberTyCode("USR01");// 2011.08.04 수정 부분
+            egovAuthorGroupService.insertAuthorGroup(authorGroup);
+
             return uniqId;
         } else {
             if (mberList.size() == 1) {
                 EgovMap emp = (EgovMap) mberList.get(0);
-                logger.info("-----------------" +  emp.get("nickname").toString());
-                String nickName = emp.get("nickname").toString();
-                if(StringUtils.isEmpty(nickName) || StringUtils.equalsIgnoreCase(nickName, facebookProfile.getId())){
+                String nickName = emp.get("detailAdres").toString();
+                if (StringUtils.isEmpty(nickName) || StringUtils.equalsIgnoreCase(nickName, facebookProfile.getId())) {
                     //nickname is not appered
-                    logger.info("--------------------needTheNickname");
                     return "needTheNickname";
-                }else{
+                } else {
                     //nickname is apper
-                    logger.info("--------------------joinedAccount");
                     return "joinedAccount";
                 }
 
