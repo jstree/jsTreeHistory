@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
@@ -9,7 +10,10 @@
 </head>
 <body>
 	<c:if test="${loginVO != null}">
-		${loginVO.name }님 환영합니다. <a href="${pageContext.request.contextPath }/uat/uia/actionLogout.do">로그아웃</a>
+		<form:form action="${pageContext.request.contextPath}/j_spring_security_logout" method="POST">
+			${loginVO.name }님 환영합니다.
+			<input type="submit" value="Logout" />
+		</form:form>
 	</c:if>
 	<c:if test="${loginVO == null }">
 		<jsp:forward page="/uat/uia/egovLoginUsr.do"/>
