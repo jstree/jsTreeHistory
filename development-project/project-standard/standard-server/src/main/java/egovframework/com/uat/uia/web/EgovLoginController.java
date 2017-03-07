@@ -70,7 +70,6 @@ public class EgovLoginController {
 
 	/**
 	 * 로그인 화면으로 들어간다
-	 * @param vo - 로그인후 이동할 URL이 담긴 LoginVO
 	 * @return 로그인 페이지
 	 * @exception Exception
 	 */
@@ -102,7 +101,6 @@ public class EgovLoginController {
 
 	/**
 	 * 일반(세션) 로그인을 처리한다
-	 * @param vo - 아이디, 비밀번호가 담긴 LoginVO
 	 * @param request - 세션처리를 위한 HttpServletRequest
 	 * @return result - 로그인결과(세션정보)
 	 * @exception Exception
@@ -128,7 +126,6 @@ public class EgovLoginController {
 
 	/**
 	 * 인증서 로그인을 처리한다
-	 * @param vo - 주민번호가 담긴 LoginVO
 	 * @return result - 로그인결과(세션정보)
 	 * @exception Exception
 	 */
@@ -280,9 +277,9 @@ public class EgovLoginController {
 		request.getSession().setAttribute("loginVO", null);
 
 		//return "redirect:/egovDevIndex.jsp";
-		//return "redirect:/EgovContent.do";
+		return "redirect:/LogOutJson.do";
 		// 1. Security 연동
-		return "redirect:/j_spring_security_logout";
+		//return "redirect:/j_spring_security_logout";
 	}
 
 	/**
@@ -315,7 +312,6 @@ public class EgovLoginController {
 
 	/**
 	 * 아이디를 찾는다.
-	 * @param vo - 이름, 이메일주소, 사용자구분이 담긴 LoginVO
 	 * @return result - 아이디
 	 * @exception Exception
 	 */
@@ -343,7 +339,6 @@ public class EgovLoginController {
 
 	/**
 	 * 비밀번호를 찾는다.
-	 * @param vo - 아이디, 이름, 이메일주소, 비밀번호 힌트, 비밀번호 정답, 사용자구분이 담긴 LoginVO
 	 * @return result - 임시비밀번호전송결과
 	 * @exception Exception
 	 */

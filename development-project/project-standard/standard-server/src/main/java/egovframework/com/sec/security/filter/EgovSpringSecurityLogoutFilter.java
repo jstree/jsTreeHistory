@@ -49,7 +49,7 @@ public class EgovSpringSecurityLogoutFilter implements Filter{
 		LOGGER.debug(requestURL);
 
 		((HttpServletRequest)request).getSession().setAttribute("loginVO", null);
-		((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath() + "/j_spring_security_logout");
+		((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath() + "/uat/uia/actionLogout.do");
 
 	}
 
