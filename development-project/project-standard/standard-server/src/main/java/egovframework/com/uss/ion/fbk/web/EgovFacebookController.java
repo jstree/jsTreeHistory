@@ -106,6 +106,7 @@ public class EgovFacebookController {
         String resultString = facebookLoginService.getUserIdByLoginAndRegisterProcess(facebookAccount, authorGroup);
         status.setComplete();
         request.getSession().setAttribute("userSe", "GNR");
+        request.getSession().setAttribute("socialLoginType", "facebook");
         request.getSession().setAttribute("id", facebookAccount.getId());
         if (StringUtils.equals(resultString, "needTheNickname")) {
             request.getSession().setAttribute("resultString", "needTheNickname");
@@ -119,7 +120,6 @@ public class EgovFacebookController {
         }
     }
 
-
     /**
      * facebook 담벼락 목록을 보여준다.
      *
@@ -129,6 +129,12 @@ public class EgovFacebookController {
             listUrl = "/uss/ion/fbk/facebookSignin.do",
             order = 7002,
             gid = 3131)
+    @RequestMapping(value = "/uss/ion/fbk/facebookSignin.do", method = RequestMethod.GET)
+    public String facebookSignin(Model model) {
+        return "egovframework/com/uss/ion/fbk/EgovFacebookSignin";
+    }
+
+
     @RequestMapping(value = "/uss/ion/fbk/feed.do", method = RequestMethod.GET)
     public String showFeed(Model model) {
         model.addAttribute("feed", facebook.feedOperations().getFeed());
