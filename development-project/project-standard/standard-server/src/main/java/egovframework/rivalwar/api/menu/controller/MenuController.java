@@ -166,7 +166,7 @@ public class MenuController extends GenericAbstractController {
 		if (bindingResult.hasErrors())
 			throw new RuntimeException();
 
-		jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
+		//jsTreeHibernateDTO.setC_title(Util_TitleChecker.StringReplace(jsTreeHibernateDTO.getC_title()));
 
 		ModelAndView modelAndView = new ModelAndView("jsonView");
 		modelAndView.addObject("result", menuService.addMenu(jsTreeHibernateDTO));
