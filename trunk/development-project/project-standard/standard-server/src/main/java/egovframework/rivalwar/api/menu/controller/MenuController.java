@@ -243,7 +243,7 @@ public class MenuController extends GenericAbstractController {
 	 * @throws JsonProcessingException
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/alterNodeMenu.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/alterMenuType.do", method = RequestMethod.POST)
 	public ModelAndView alterNodeType(@Validated(value = AlterNodeType.class) MenuDTO jsTreeHibernateDTO,
 			BindingResult bindingResult, ModelMap model) throws Exception {
 		if (bindingResult.hasErrors())
