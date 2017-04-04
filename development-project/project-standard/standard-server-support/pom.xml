@@ -622,13 +622,19 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook</artifactId>
+			<version>1.1.1.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-twitter</artifactId>
 			<version>1.1.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-web</artifactId>
-			<version>1.1.0.RELEASE</version>
+			<version>1.1.4.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -651,7 +657,7 @@
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-security</artifactId>
-			<version>1.1.0.RELEASE</version>
+			<version>1.1.4.RELEASE</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>spring-security-web</artifactId>
