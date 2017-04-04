@@ -14,7 +14,7 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.social.facebook.api.FacebookProfile;
+import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -53,7 +53,7 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
 
 
     @Override
-    public String getUserIdByLoginAndRegisterProcess(FacebookProfile facebookProfile, AuthorGroup authorGroup) throws Exception {
+    public String getUserIdByLoginAndRegisterProcess(User facebookProfile, AuthorGroup authorGroup) throws Exception {
 
         UserDefaultVO userSearchVO = new UserDefaultVO();
         userSearchVO.setSearchKeyword(facebookProfile.getId());
