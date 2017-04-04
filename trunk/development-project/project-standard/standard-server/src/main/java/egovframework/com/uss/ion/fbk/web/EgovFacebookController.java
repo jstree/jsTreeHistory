@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.FacebookProfile;
+import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,6 +41,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 /**
  * Facebook을 처리하는 Controller Class 구현
@@ -102,7 +103,10 @@ public class EgovFacebookController {
             return "redirect:/connect/facebook";
         }
 
-        FacebookProfile facebookAccount = connection.getApi().userOperations().getUserProfile();
+        //FacebookProfile facebookAccount = connection.getApi().userOperations().getUserProfile();
+        User facebookAccount = connection.getApi().userOperations().getUserProfile();
+
+        //User facebookAccount = new User("123","123","!23","123", "123", Locale.KOREA);
         String resultString = facebookLoginService.getUserIdByLoginAndRegisterProcess(facebookAccount, authorGroup);
         status.setComplete();
         request.getSession().setAttribute("userSe", "GNR");
