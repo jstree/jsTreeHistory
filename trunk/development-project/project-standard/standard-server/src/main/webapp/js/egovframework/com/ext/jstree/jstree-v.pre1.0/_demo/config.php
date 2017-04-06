@@ -3,7 +3,7 @@
 $db_config = array(
 	"servername"=> "localhost",
 	"username"	=> "root",
-	"password"	=> "love0618",
+	"password"	=> "",
 	"database"	=> "test"
 );
 if(extension_loaded("mysqli")) require_once("_inc/class._database_i.php"); 
