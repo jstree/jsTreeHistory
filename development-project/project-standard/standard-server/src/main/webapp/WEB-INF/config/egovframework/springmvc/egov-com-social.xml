@@ -23,7 +23,7 @@
         <constructor-arg>
             <bean class="egovframework.com.uss.ion.fbk.web.FacebookSimpleSignInAdapter"/>
         </constructor-arg>
-        <property name="signInUrl" value="/uss/ion/fbk/facebookSignin.do"/>
+        <property name="signInUrl" value="/"/>
         <property name="postSignInUrl" value="/uss/ion/fbk/facebook.do"/>
     </bean>
     
